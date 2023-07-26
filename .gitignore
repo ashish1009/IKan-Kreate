@@ -1,0 +1,10 @@
+# Directories
+Build/
+DerivedData/
+
+#Engine Files
+
+# Mac Files
+.DS_Store
+*.xcuserstate
+xcuserdata/
