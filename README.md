@@ -157,6 +157,8 @@ Editor Application using IKan Library to create Games
 #### Output
 
 ## Release Tags
+
+## Upcoming Release Tags
 v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Minor Verision>
 - v1.0.0.0  : IKan    - Core Application and Layer
 - v2.0.0.0  : IKan    - Window and Events 
