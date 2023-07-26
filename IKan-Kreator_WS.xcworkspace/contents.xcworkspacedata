@@ -1,4 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Workspace
    version = "1.0">
+   <FileRef
+      location = "group:README.md">
+   </FileRef>
+   <Group
+      location = "group:Resources"
+      name = "Resources">
+      <Group
+         location = "group:Logo"
+         name = "Logo">
+         <FileRef
+            location = "group:i_kan.png">
+         </FileRef>
+      </Group>
+      <Group
+         location = "group:Documents"
+         name = "Documents">
+         <FileRef
+            location = "group:CodingGuidelines.md">
+         </FileRef>
+      </Group>
+   </Group>
 </Workspace>
