@@ -16,7 +16,7 @@ namespace IKan
   Buffer::Buffer(const Buffer& other)
   : size(other.size)
   {
-    data = new std::byte[size];
+    data = iknew std::byte[size];
     memcpy(data, other.data, size);
     s_allocatedNytes += size;
   }
@@ -69,7 +69,7 @@ namespace IKan
     
     Clear();
     size = allocated_size;
-    data = new std::byte[size];
+    data = iknew std::byte[size];
     
     s_allocatedNytes += size;
   }
@@ -137,6 +137,6 @@ namespace IKan
   void Buffer::Dealocate()
   {
     s_allocatedNytes -= size;
-    delete[] data;
+    ikdelete[] data;
   }
 } // namespace IKan

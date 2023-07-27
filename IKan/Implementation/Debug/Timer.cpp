@@ -89,14 +89,14 @@ namespace IKan
   {
     if (!s_instance)
     {
-      s_instance = new PerformanceProfiler();
+      s_instance = iknew PerformanceProfiler();
     }
     return s_instance;
   }
   
   void PerformanceProfiler::Destroy()
   {
-    delete s_instance;
+    ikdelete s_instance;
   }
 
   // Scope Performance Timer ----------------------------------------------------------------------------------------

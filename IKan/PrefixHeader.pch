@@ -31,6 +31,7 @@
 #include <glm/gtx/quaternion.hpp>
 
 // Engine Files
+#include "Core/IKMemory.hpp"
 #include "Core/Macros.h"
 #include "Core/Common.hpp"
 

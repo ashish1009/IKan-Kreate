@@ -14,6 +14,8 @@
 		B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA402A729256009EED1F /* TimeStep.hpp */; };
 		B21FAA452A7292B3009EED1F /* Buffers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21FAA432A7292B3009EED1F /* Buffers.cpp */; };
 		B21FAA462A7292B3009EED1F /* Buffers.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA442A7292B3009EED1F /* Buffers.hpp */; };
+		B21FAA492A729312009EED1F /* IKMemory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21FAA472A729312009EED1F /* IKMemory.cpp */; };
+		B21FAA4A2A729312009EED1F /* IKMemory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA482A729312009EED1F /* IKMemory.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -36,6 +38,8 @@
 		B21FAA402A729256009EED1F /* TimeStep.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeStep.hpp; sourceTree = "<group>"; };
 		B21FAA432A7292B3009EED1F /* Buffers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Buffers.cpp; sourceTree = "<group>"; };
 		B21FAA442A7292B3009EED1F /* Buffers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Buffers.hpp; sourceTree = "<group>"; };
+		B21FAA472A729312009EED1F /* IKMemory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = IKMemory.cpp; sourceTree = "<group>"; };
+		B21FAA482A729312009EED1F /* IKMemory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IKMemory.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -157,6 +161,7 @@
 				B21FAA322A728EFC009EED1F /* MouseCodes.h */,
 				B21FAA402A729256009EED1F /* TimeStep.hpp */,
 				B21FAA442A7292B3009EED1F /* Buffers.hpp */,
+				B21FAA482A729312009EED1F /* IKMemory.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -167,6 +172,7 @@
 				B24077162A72651400221919 /* Common.cpp */,
 				B21FAA432A7292B3009EED1F /* Buffers.cpp */,
 				B21FAA3F2A729256009EED1F /* TimeStep.cpp */,
+				B21FAA472A729312009EED1F /* IKMemory.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -201,6 +207,7 @@
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
 				B240771F2A72665A00221919 /* Logger.hpp in Headers */,
+				B21FAA4A2A729312009EED1F /* IKMemory.hpp in Headers */,
 				B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */,
 				B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */,
 				B21FAA382A728F4D009EED1F /* Event.h in Headers */,
@@ -269,6 +276,7 @@
 				B24077182A72651400221919 /* Common.cpp in Sources */,
 				B240771E2A72665A00221919 /* Logger.cpp in Sources */,
 				B24077002A72431700221919 /* FileSystem.cpp in Sources */,
+				B21FAA492A729312009EED1F /* IKMemory.cpp in Sources */,
 				B21FAA412A729256009EED1F /* TimeStep.cpp in Sources */,
 				B2B5DE3E2A727C090068EEFB /* Timer.cpp in Sources */,
 				B21FAA452A7292B3009EED1F /* Buffers.cpp in Sources */,

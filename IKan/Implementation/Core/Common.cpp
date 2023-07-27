@@ -58,12 +58,18 @@ void InitializeEngine(int argc, const char * argv[])
   IKan::Log::Inititialize(logDirectoryPath);
 #endif
   
+  // Initialise the Memory Allocator
+  IKan::Allocator::Initialize();
+  
   IK_LOG_INFO(IKan::LogModule::IKan, "Initialized the Engine");
 }
 
 void ShutdownEngine()
 {
   IK_LOG_WARN(IKan::LogModule::IKan, "Shutting down the Engine");
+  
+  // Destroy the Memory Allocator
+  IKan::Allocator::Shutdown();
   
 #ifdef IK_ENABLE_LOG
   // Destroy the IKan Logger
