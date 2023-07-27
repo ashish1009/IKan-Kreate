@@ -35,3 +35,5 @@
 #include <Core/AssertAPIs.h>
 #include <Core/KeyCodes.h>
 #include <Core/MouseCodes.h>
+
+#include <Event/Event.hpp>

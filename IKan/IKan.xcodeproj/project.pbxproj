@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA2F2A728EB9009EED1F /* KeyCodes.h */; };
+		B21FAA382A728F4D009EED1F /* Event.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA362A728F4D009EED1F /* Event.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -22,6 +23,7 @@
 /* Begin PBXFileReference section */
 		B21FAA2F2A728EB9009EED1F /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
 		B21FAA322A728EFC009EED1F /* MouseCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseCodes.h; sourceTree = "<group>"; };
+		B21FAA362A728F4D009EED1F /* Event.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Event.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -49,6 +51,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B21FAA332A728F3C009EED1F /* Event */ = {
+			isa = PBXGroup;
+			children = (
+				B21FAA362A728F4D009EED1F /* Event.hpp */,
+			);
+			path = Event;
+			sourceTree = "<group>";
+		};
 		B24076DC2A72391000221919 = {
 			isa = PBXGroup;
 			children = (
@@ -83,6 +93,7 @@
 				B24077142A72625F00221919 /* IKanEntryPoint.h */,
 				B24076FC2A7242B500221919 /* Utils */,
 				B240771A2A72664900221919 /* Debug */,
+				B21FAA332A728F3C009EED1F /* Event */,
 				B24077022A72437500221919 /* Core */,
 			);
 			path = Interface;
@@ -172,6 +183,7 @@
 				B240771F2A72665A00221919 /* Logger.hpp in Headers */,
 				B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */,
 				B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */,
+				B21FAA382A728F4D009EED1F /* Event.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

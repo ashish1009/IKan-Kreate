@@ -48,10 +48,10 @@ Editor Application using IKan Library to create Games
   - File System Utils
   - Logger and Assert
   - Timer / Profiler
+  - Mouse and Keyboard Codes
 
 ## Upcoming Release Tags
 v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Minor Verision>
-  - Mouse and Keyboard Codes
   - Event Handler Classes
   - Math Library and Utils
   - Time Step
