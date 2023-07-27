@@ -26,6 +26,9 @@ namespace IKan
     {
       std::string name = "iKan";
       Window::Specification windowSpecification;
+
+      bool startMaximized = false;
+      bool resizable = true;
     };
 
     /// This constructor instantiate the IKan Core application. Responsible to create Window, Renderer Context and

@@ -19,6 +19,9 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(int argc, const char** ar
   applicationSpec.windowSpecification.isFullscreen = false;
   applicationSpec.windowSpecification.hideTitleBar = false;
 
+  applicationSpec.resizable = true;
+  applicationSpec.startMaximized = true;
+
   applicationSpec.name = "Kreator";
   return IKan::CreateScope<IKan::Application>(applicationSpec);
 }
