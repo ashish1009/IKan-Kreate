@@ -13,7 +13,7 @@
 		B210481F2A72CA9000FA8CF2 /* MacWindow.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B210481D2A72CA9000FA8CF2 /* MacWindow.hpp */; };
 		B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA2F2A728EB9009EED1F /* KeyCodes.h */; };
 		B21FAA382A728F4D009EED1F /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA362A728F4D009EED1F /* Event.h */; };
-		B21FAA3D2A729078009EED1F /* KeyEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA3B2A729078009EED1F /* KeyEvents.h */; };
+		B21FAA3D2A729078009EED1F /* KeyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA3B2A729078009EED1F /* KeyEvent.h */; };
 		B21FAA412A729256009EED1F /* TimeStep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21FAA3F2A729256009EED1F /* TimeStep.cpp */; };
 		B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA402A729256009EED1F /* TimeStep.hpp */; };
 		B21FAA452A7292B3009EED1F /* Buffers.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21FAA432A7292B3009EED1F /* Buffers.cpp */; };
@@ -22,6 +22,7 @@
 		B21FAA4A2A729312009EED1F /* IKMemory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA482A729312009EED1F /* IKMemory.hpp */; };
 		B21FAA4D2A7297DA009EED1F /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21FAA4B2A7297DA009EED1F /* Application.cpp */; };
 		B21FAA4E2A7297DA009EED1F /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA4C2A7297DA009EED1F /* Application.hpp */; };
+		B23364832A72CC9700BC7B8B /* libGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B21FB3B52A729EBB009EED1F /* libGLFW.a */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -52,7 +53,7 @@
 		B21FAA322A728EFC009EED1F /* MouseCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseCodes.h; sourceTree = "<group>"; };
 		B21FAA362A728F4D009EED1F /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		B21FAA392A729056009EED1F /* ApplicationEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
-		B21FAA3B2A729078009EED1F /* KeyEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyEvents.h; sourceTree = "<group>"; };
+		B21FAA3B2A729078009EED1F /* KeyEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyEvent.h; sourceTree = "<group>"; };
 		B21FAA3E2A72909A009EED1F /* MouseEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
 		B21FAA3F2A729256009EED1F /* TimeStep.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStep.cpp; sourceTree = "<group>"; };
 		B21FAA402A729256009EED1F /* TimeStep.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeStep.hpp; sourceTree = "<group>"; };
@@ -84,6 +85,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23364832A72CC9700BC7B8B /* libGLFW.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -112,7 +114,7 @@
 			children = (
 				B21FAA362A728F4D009EED1F /* Event.h */,
 				B21FAA392A729056009EED1F /* ApplicationEvent.h */,
-				B21FAA3B2A729078009EED1F /* KeyEvents.h */,
+				B21FAA3B2A729078009EED1F /* KeyEvent.h */,
 				B21FAA3E2A72909A009EED1F /* MouseEvent.h */,
 			);
 			path = Event;
@@ -134,6 +136,13 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B23364822A72CC9700BC7B8B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		B24076DC2A72391000221919 = {
 			isa = PBXGroup;
 			children = (
@@ -143,6 +152,7 @@
 				B24076F52A72396900221919 /* Implementation */,
 				B21FAA512A729EA1009EED1F /* Vendors */,
 				B24076E62A72391000221919 /* Products */,
+				B23364822A72CC9700BC7B8B /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -257,7 +267,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
-				B21FAA3D2A729078009EED1F /* KeyEvents.h in Headers */,
+				B21FAA3D2A729078009EED1F /* KeyEvent.h in Headers */,
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
 				B240771F2A72665A00221919 /* Logger.hpp in Headers */,
@@ -420,6 +430,7 @@
 					"${PROJECT_DIR}/interface",
 					"${PROJECT_DIR}/Vendors/SpdLog/include",
 					"${PROJECT_DIR}/Vendors/Glm",
+					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -480,6 +491,7 @@
 					"${PROJECT_DIR}/interface",
 					"${PROJECT_DIR}/Vendors/SpdLog/include",
 					"${PROJECT_DIR}/Vendors/Glm",
+					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
