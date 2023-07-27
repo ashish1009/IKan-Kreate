@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
+		B24077182A72651400221919 /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Base.cpp */; };
+		B24077192A72651400221919 /* Base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24077172A72651400221919 /* Base.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -18,6 +20,9 @@
 		B24076FF2A72431700221919 /* FileSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileSystem.hpp; sourceTree = "<group>"; };
 		B24077032A72438600221919 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		B24077042A7244AB00221919 /* IKanHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKanHeaders.h; sourceTree = "<group>"; };
+		B24077142A72625F00221919 /* IKanEntryPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKanEntryPoint.h; sourceTree = "<group>"; };
+		B24077162A72651400221919 /* Base.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Base.cpp; sourceTree = "<group>"; };
+		B24077172A72651400221919 /* Base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Base.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -62,6 +67,7 @@
 			isa = PBXGroup;
 			children = (
 				B24077042A7244AB00221919 /* IKanHeaders.h */,
+				B24077142A72625F00221919 /* IKanEntryPoint.h */,
 				B24076FC2A7242B500221919 /* Utils */,
 				B24077022A72437500221919 /* Core */,
 			);
@@ -72,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				B24076FD2A72430A00221919 /* Utils */,
+				B24077152A72650600221919 /* Core */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -107,6 +114,15 @@
 			path = Core;
 			sourceTree = "<group>";
 		};
+		B24077152A72650600221919 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B24077162A72651400221919 /* Base.cpp */,
+				B24077172A72651400221919 /* Base.hpp */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -115,6 +131,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
+				B24077192A72651400221919 /* Base.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -175,6 +192,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24077182A72651400221919 /* Base.cpp in Sources */,
 				B24077002A72431700221919 /* FileSystem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
