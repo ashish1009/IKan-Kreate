@@ -37,3 +37,6 @@
 #include <Core/MouseCodes.h>
 
 #include <Event/Event.hpp>
+#include <Event/ApplicationEvent.h>
+#include <Event/MouseEvent.h>
+#include <Event/KeyEvents.h>
