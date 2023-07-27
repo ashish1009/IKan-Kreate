@@ -57,12 +57,12 @@ void InitializeEngine(int argc, const char * argv[])
   IKan::Log::Inititialize(logDirectoryPath);
 #endif
   
-  IK_LOG_TRACE(IKan::LogModule::None, "Initialized the Engine");
+  IK_LOG_INFO(IKan::LogModule::IKan, "Initialized the Engine");
 }
 
 void ShutdownEngine()
 {
-  IK_LOG_WARN(IKan::LogModule::None, "Shutting down the Engine");
+  IK_LOG_WARN(IKan::LogModule::IKan, "Shutting down the Engine");
 #ifdef IK_ENABLE_LOG
   // Initialise the IKan Logger
   IKan::Log::Shutdown();

@@ -50,7 +50,6 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Setup Directory structure
   - File System Utils
   - Logger and Assert
-  - Table
   - Timer / Profiler
   - Mouse and Keyboard Codes
   - Event Handler Classes
