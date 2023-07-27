@@ -52,11 +52,10 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Timer / Profiler
   - Mouse and Keyboard Codes
   - Event Handler Classes
-
-## Upcoming Release Tags
   - Math Library and Utils
   - Time Step
-  - Layer Class
+
+## Upcoming Release Tags
   - Application
   ------------------------------------------------------------------------------------------------------------------
 
@@ -103,9 +102,10 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
  ------------------------------------------------------------------------------------------------------------------  
 
 - v5.0.1.0  : IKan    - ImGui Layer  | Kreator - Render Scene in Viewport
+  - Layer Class
+  - Imgui Layer 
   - Kreator Application
   - Kreator Renderer Layer
-  - Imgui Layer 
   - View port in Kreator and Render Scene 
  ------------------------------------------------------------------------------------------------------------------
    

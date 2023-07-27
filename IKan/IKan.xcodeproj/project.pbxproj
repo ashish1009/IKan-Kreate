@@ -10,6 +10,8 @@
 		B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA2F2A728EB9009EED1F /* KeyCodes.h */; };
 		B21FAA382A728F4D009EED1F /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA362A728F4D009EED1F /* Event.h */; };
 		B21FAA3D2A729078009EED1F /* KeyEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA3B2A729078009EED1F /* KeyEvents.h */; };
+		B21FAA412A729256009EED1F /* TimeStep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21FAA3F2A729256009EED1F /* TimeStep.cpp */; };
+		B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA402A729256009EED1F /* TimeStep.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -28,6 +30,8 @@
 		B21FAA392A729056009EED1F /* ApplicationEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
 		B21FAA3B2A729078009EED1F /* KeyEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyEvents.h; sourceTree = "<group>"; };
 		B21FAA3E2A72909A009EED1F /* MouseEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
+		B21FAA3F2A729256009EED1F /* TimeStep.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStep.cpp; sourceTree = "<group>"; };
+		B21FAA402A729256009EED1F /* TimeStep.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeStep.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -147,6 +151,7 @@
 				B2B5DE392A7272560068EEFB /* AssertAPIs.h */,
 				B21FAA2F2A728EB9009EED1F /* KeyCodes.h */,
 				B21FAA322A728EFC009EED1F /* MouseCodes.h */,
+				B21FAA402A729256009EED1F /* TimeStep.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -155,6 +160,7 @@
 			isa = PBXGroup;
 			children = (
 				B24077162A72651400221919 /* Common.cpp */,
+				B21FAA3F2A729256009EED1F /* TimeStep.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -192,6 +198,7 @@
 				B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */,
 				B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */,
 				B21FAA382A728F4D009EED1F /* Event.h in Headers */,
+				B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -255,6 +262,7 @@
 				B24077182A72651400221919 /* Common.cpp in Sources */,
 				B240771E2A72665A00221919 /* Logger.cpp in Sources */,
 				B24077002A72431700221919 /* FileSystem.cpp in Sources */,
+				B21FAA412A729256009EED1F /* TimeStep.cpp in Sources */,
 				B2B5DE3E2A727C090068EEFB /* Timer.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
