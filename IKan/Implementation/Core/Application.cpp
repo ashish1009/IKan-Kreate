@@ -12,6 +12,8 @@ namespace IKan
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
   {
+    IK_PROFILE();
+
     IK_ASSERT(!s_instance, "Application instance already created");
     // Copy the single instance of application
     s_instance = this;
@@ -25,14 +27,17 @@ namespace IKan
   
   Application::~Application()
   {
+    IK_PROFILE();
     IK_LOG_WARN(LogModule::Application, "Destroying Core Application Instance : {0}", m_specificaion.name);
   }
 
   void Application::Run()
   {
-    // Initialise the client application
-    OnInit();
-    
+    {
+      IKan::ScopedTimer onShutdown("Client Application Initialize()");
+      // Initialise the client application
+      OnInit();
+    }
     // GAME LOOP -----------------------------------------------------------------------------------------------------
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                          Starting Game Loop                              ");
@@ -42,9 +47,12 @@ namespace IKan
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                           Ending Game Loop                               ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
-    
-    // Shutdown the client application
-    OnShutdown();
+
+    {
+      IKan::ScopedTimer onShutdown("Client Application Shutdown()");
+      // Shutdown the client application
+      OnShutdown();
+    }
   }
   
   void Application::HandleEvents(Event &event)

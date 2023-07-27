@@ -52,9 +52,6 @@ namespace IKan
     std::string profilerLogFilePath = logDirectoryPath + "/Profiler.log";
     std::vector<spdlog::sink_ptr> profilerSink =
     {
-#if SHOW_PROFILE_IN_MAIN_LOGS
-      CreateRef<spdlog::sinks::stdout_color_sink_mt>(),
-#endif
       CreateRef<spdlog::sinks::basic_file_sink_mt>(profilerLogFilePath, true /* Truncste the Log file */)
     };
     LoggerUtils::SetSamePatternInSinks(profilerSink, "[%T%e : %v %$");
