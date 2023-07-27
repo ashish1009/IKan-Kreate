@@ -40,7 +40,7 @@ namespace IKan
     
     
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
-    IK_LOG_INFO("", "                            Ending Game Loop                              ");
+    IK_LOG_INFO("", "                           Ending Game Loop                               ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     
     // Shutdown the client application

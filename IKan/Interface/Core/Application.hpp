@@ -87,4 +87,12 @@ namespace IKan
     
     inline static Application* s_instance;
   };
+  
+  /// Defination API for creating application instance.
+  /// - Note: Only defination is defined in core. Declaration should be at client side based on the application they
+  ///         want to create
+  /// - Parameters:
+  ///   - argc: Number of arguments
+  ///   - argv: Arguments
+  Scope<Application> CreateApplication(int argc, const char** argv);
 } // namespace IKan

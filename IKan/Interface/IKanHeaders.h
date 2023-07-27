@@ -46,6 +46,7 @@
 #include <Core/MouseCodes.h>
 #include <Core/TimeStep.hpp>
 #include <Core/Buffers.hpp>
+#include <Core/Application.hpp>
 
 #include <Event/Event.h>
 #include <Event/ApplicationEvent.h>

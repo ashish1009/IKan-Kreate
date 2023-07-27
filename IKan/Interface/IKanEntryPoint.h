@@ -9,6 +9,7 @@
 
 extern void InitializeEngine(int argc, const char * argv[]);
 extern void ShutdownEngine();
+extern IKan::Scope<IKan::Application> CreateApplication(int argc, const char** argv);
 
 /// This function is the core entry point.
 /// - Parameters:
@@ -18,6 +19,13 @@ extern void ShutdownEngine();
 int main(int argc, const char * argv[])
 {
   InitializeEngine(argc, argv);
+  
+  {
+    IKan::Scope<IKan::Application> app = IKan::CreateApplication(argc, argv);
+    app->Run();
+    app.reset();
+  }
+  
   ShutdownEngine();
   return 0;
 }
