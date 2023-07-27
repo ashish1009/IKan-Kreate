@@ -64,8 +64,12 @@ void InitializeEngine(int argc, const char * argv[])
 void ShutdownEngine()
 {
   IK_LOG_WARN(IKan::LogModule::IKan, "Shutting down the Engine");
+  
 #ifdef IK_ENABLE_LOG
-  // Initialise the IKan Logger
+  // Destroy the IKan Logger
   IKan::Log::Shutdown();
 #endif
+  
+  // Destroy the IKan Performance instance
+  IKan::PerformanceProfiler::Destroy();
 }

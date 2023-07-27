@@ -60,7 +60,7 @@ namespace IKan
 
   // Call 'Profile()' in begining of any scope. It will compute the time and print
   // the Profiler result at the end of Scope
-#define PROFILE() \
+#define IK_PROFILE() \
 IKan::ScopedTimer _scopedTimer__LINE__(__PRETTY_FUNCTION__); \
 
   /// This function store the runtime preformance of profiler
@@ -77,7 +77,13 @@ IKan::ScopedTimer _scopedTimer__LINE__(__PRETTY_FUNCTION__); \
     /// This function returs the performance data
     const std::unordered_map<const char*, float>& GetPerFrameData() const;
     
+    /// This function returns the singleton instance of Performance profiler
+    static PerformanceProfiler* Get();
+    /// This function destroy the singleton instance of Performance profiler
+    static void Destroy();
+    
   private:
+    inline static PerformanceProfiler* s_instance;
     std::unordered_map<const char*, float> m_perFrameData;
   };
   
@@ -93,5 +99,11 @@ IKan::ScopedTimer _scopedTimer__LINE__(__PRETTY_FUNCTION__); \
     PerformanceProfiler* m_profiler;
     Timer m_timer;
   };
+
+#define IK_PERFORMANCE(name) \
+IKan::ScopePerfTimer timer__LINE__(name, IKan::PerformanceProfiler::Get());
+  
+#define IK_PERFORMANCE_FUN() \
+IKan::ScopePerfTimer timer__LINE__(__PRETTY_FUNCTION__, IKan::PerformanceProfiler::Get());
 
 } // namespace IKan

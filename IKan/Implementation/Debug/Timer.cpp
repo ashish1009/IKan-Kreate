@@ -84,6 +84,20 @@ namespace IKan
   {
     return m_perFrameData;
   }
+  
+  PerformanceProfiler* PerformanceProfiler::Get()
+  {
+    if (!s_instance)
+    {
+      s_instance = new PerformanceProfiler();
+    }
+    return s_instance;
+  }
+  
+  void PerformanceProfiler::Destroy()
+  {
+    delete s_instance;
+  }
 
   // Scope Performance Timer ----------------------------------------------------------------------------------------
   ScopePerfTimer::ScopePerfTimer(const char* name, PerformanceProfiler* profiler)
