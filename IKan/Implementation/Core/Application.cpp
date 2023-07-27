@@ -20,6 +20,11 @@ namespace IKan
 
     IK_LOG_TRACE(LogModule::Application, "Creating Core Application Instance : {0}", m_specificaion.name);
     
+    // Create Renderer Instance before any GLFW or Renderer Context
+    // NOTE: Creating the Renderer Data Memory in very begining as this will setup the Renderer API to be used to
+    //       create any Renderer Implementation
+    Renderer::CreateRendererData(m_specificaion.renderingApi);
+
     // Create the window
     m_window = Window::Create(m_specificaion.windowSpecification);
     
@@ -33,6 +38,9 @@ namespace IKan
       m_window->Maximize();
     }
 
+    // Initialise the Core Renderer
+    Renderer::Initialize();
+
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialised                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -44,6 +52,9 @@ namespace IKan
 
     // Reset the window
     m_window.reset();
+
+    // Shutdown the Renderer
+    Renderer::Shutdown();
 
     IK_LOG_WARN(LogModule::Application, "Destroying Core Application Instance : {0}", m_specificaion.name);
   }

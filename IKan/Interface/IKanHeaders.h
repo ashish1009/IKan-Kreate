@@ -53,3 +53,5 @@
 #include <Event/ApplicationEvent.h>
 #include <Event/MouseEvent.h>
 #include <Event/KeyEvent.h>
+
+#include <Renderer/Renderer.hpp>

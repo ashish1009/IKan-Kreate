@@ -12,6 +12,9 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(int argc, const char** ar
   // Set up all the applicaiton specification
   IKan::Application::Specification applicationSpec;
  
+  applicationSpec.name = "Kreator";
+  applicationSpec.renderingApi = IKan::Renderer::Api::OpenGl;
+
   // Window Specification
   applicationSpec.windowSpecification.title = "Kreator";
   applicationSpec.windowSpecification.width = 1600;
@@ -22,6 +25,5 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(int argc, const char** ar
   applicationSpec.resizable = true;
   applicationSpec.startMaximized = true;
 
-  applicationSpec.name = "Kreator";
   return IKan::CreateScope<IKan::Application>(applicationSpec);
 }

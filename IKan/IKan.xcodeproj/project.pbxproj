@@ -23,6 +23,8 @@
 		B21FAA4D2A7297DA009EED1F /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21FAA4B2A7297DA009EED1F /* Application.cpp */; };
 		B21FAA4E2A7297DA009EED1F /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA4C2A7297DA009EED1F /* Application.hpp */; };
 		B23364832A72CC9700BC7B8B /* libGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B21FB3B52A729EBB009EED1F /* libGLFW.a */; };
+		B233648E2A72CE7200BC7B8B /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233648C2A72CE7200BC7B8B /* Renderer.cpp */; };
+		B233648F2A72CE7200BC7B8B /* Renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233648D2A72CE7200BC7B8B /* Renderer.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -64,6 +66,8 @@
 		B21FAA4B2A7297DA009EED1F /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B21FAA4C2A7297DA009EED1F /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
 		B21FB3B02A729EBB009EED1F /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = GLFW/GLFW.xcodeproj; sourceTree = "<group>"; };
+		B233648C2A72CE7200BC7B8B /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		B233648D2A72CE7200BC7B8B /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -143,6 +147,38 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		B23364842A72CE4000BC7B8B /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				B23364862A72CE5200BC7B8B /* Graphics */,
+				B233648D2A72CE7200BC7B8B /* Renderer.hpp */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		B23364852A72CE4700BC7B8B /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				B23364872A72CE5700BC7B8B /* Graphics */,
+				B233648C2A72CE7200BC7B8B /* Renderer.cpp */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		B23364862A72CE5200BC7B8B /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
+		B23364872A72CE5700BC7B8B /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
 		B24076DC2A72391000221919 = {
 			isa = PBXGroup;
 			children = (
@@ -180,6 +216,7 @@
 				B240771A2A72664900221919 /* Debug */,
 				B21FAA332A728F3C009EED1F /* Event */,
 				B24077022A72437500221919 /* Core */,
+				B23364842A72CE4000BC7B8B /* Renderer */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -190,6 +227,7 @@
 				B24076FD2A72430A00221919 /* Utils */,
 				B240771B2A72664D00221919 /* Debug */,
 				B24077152A72650600221919 /* Core */,
+				B23364852A72CE4700BC7B8B /* Renderer */,
 				B21048192A72CA6A00FA8CF2 /* Platform */,
 			);
 			path = Implementation;
@@ -267,6 +305,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
+				B233648F2A72CE7200BC7B8B /* Renderer.hpp in Headers */,
 				B21FAA3D2A729078009EED1F /* KeyEvent.h in Headers */,
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
@@ -360,6 +399,7 @@
 				B240771E2A72665A00221919 /* Logger.cpp in Sources */,
 				B24077002A72431700221919 /* FileSystem.cpp in Sources */,
 				B21FAA492A729312009EED1F /* IKMemory.cpp in Sources */,
+				B233648E2A72CE7200BC7B8B /* Renderer.cpp in Sources */,
 				B21048162A72A1BA00FA8CF2 /* CoreWindow.cpp in Sources */,
 				B210481E2A72CA9000FA8CF2 /* MacWindow.cpp in Sources */,
 				B21FAA4D2A7297DA009EED1F /* Application.cpp in Sources */,

@@ -11,6 +11,7 @@
 #include "Event/ApplicationEvent.h"
 #include "Core/TimeStep.hpp"
 #include "Core/CoreWindow.hpp"
+#include "Renderer/Renderer.hpp"
 
 namespace IKan
 {
@@ -25,6 +26,8 @@ namespace IKan
     struct Specification
     {
       std::string name = "iKan";
+
+      Renderer::Api renderingApi = Renderer::Api::None;
       Window::Specification windowSpecification;
 
       bool startMaximized = false;
