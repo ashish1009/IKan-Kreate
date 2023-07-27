@@ -63,4 +63,26 @@ namespace IKan
 #endif
     IK_PROFILE_INFO(LogModule::Timer, "{0}", profilerLog.c_str());
   }
+  
+  // Performance Profiler -------------------------------------------------------------------------------------------
+  void PerformanceProfiler::SetPerFrameTiming(const char* name, float time)
+  {
+    if (m_perFrameData.find(name) == m_perFrameData.end())
+    {
+      m_perFrameData[name] = 0.0f;
+    }
+    
+    m_perFrameData[name] += time;
+  }
+  
+  void PerformanceProfiler::Clear()
+  {
+    m_perFrameData.clear();
+  }
+  
+  const std::unordered_map<const char*, float>& PerformanceProfiler::GetPerFrameData() const
+  {
+    return m_perFrameData;
+  }
+
 } // namespace IKan

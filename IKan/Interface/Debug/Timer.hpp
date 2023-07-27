@@ -63,4 +63,21 @@ namespace IKan
 #define PROFILE() \
 IKan::ScopedTimer _scopedTimer__LINE__(__PRETTY_FUNCTION__); \
 
+  /// This function store the runtime preformance of profiler
+  class PerformanceProfiler
+  {
+  public:
+    /// This function set the frame timing
+    /// - Parameters:
+    ///   - name: function name
+    ///   - time: time
+    void SetPerFrameTiming(const char* name, float time);
+    /// This function clear the profiler
+    void Clear();
+    /// This function returs the performance data
+    const std::unordered_map<const char*, float>& GetPerFrameData() const;
+    
+  private:
+    std::unordered_map<const char*, float> m_perFrameData;
+  };
 } // namespace IKan
