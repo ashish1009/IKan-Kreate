@@ -6,9 +6,18 @@
 	objectVersion = 56;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
+		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
+		B24076FF2A72431700221919 /* FileSystem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileSystem.hpp; sourceTree = "<group>"; };
+		B24077032A72438600221919 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
+		B24077042A7244AB00221919 /* IKanHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKanHeaders.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +61,9 @@
 		B24076F42A72396300221919 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				B24077042A7244AB00221919 /* IKanHeaders.h */,
+				B24076FC2A7242B500221919 /* Utils */,
+				B24077022A72437500221919 /* Core */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -59,6 +71,7 @@
 		B24076F52A72396900221919 /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				B24076FD2A72430A00221919 /* Utils */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -70,6 +83,30 @@
 			path = Vendors;
 			sourceTree = "<group>";
 		};
+		B24076FC2A7242B500221919 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B24076FF2A72431700221919 /* FileSystem.hpp */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B24076FD2A72430A00221919 /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B24076FE2A72431700221919 /* FileSystem.cpp */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B24077022A72437500221919 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B24077032A72438600221919 /* Macros.h */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -77,6 +114,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -137,6 +175,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24077002A72431700221919 /* FileSystem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -149,7 +188,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -195,6 +234,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/implementation",
+					"${PROJECT_DIR}/interface",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -209,7 +252,7 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
-				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CLANG_ENABLE_MODULES = YES;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CLANG_ENABLE_OBJC_WEAK = YES;
@@ -249,9 +292,14 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/implementation",
+					"${PROJECT_DIR}/interface",
+				);
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = macosx;
 			};
 			name = Release;

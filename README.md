@@ -25,19 +25,11 @@ IKan Library can be used separately independent to develop your own Editor/Game
 
 #### Preprocessors
 
-#### Features
-
 #### Known Issues
 
 ## Kreator 
 Editor Application using IKan Library to create Games
 
-#### Features
-
-#### Road Map
-  - UI
-    - Theme Color (Derived)
-    
 #### Known Issues
 
 #### Output

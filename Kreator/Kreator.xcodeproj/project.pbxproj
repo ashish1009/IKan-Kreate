@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		B24076D62A72375000221919 /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076D52A72375000221919 /* EntryPoint.cpp */; };
+		B24077072A72591900221919 /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24077062A72591900221919 /* libIKan.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -26,6 +27,7 @@
 		B24076D22A72375000221919 /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076D52A72375000221919 /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
 		B24076F82A723A6100221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B24077062A72591900221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +35,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B24077072A72591900221919 /* libIKan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -46,6 +49,7 @@
 				B24076F72A72399400221919 /* Resources */,
 				B24076D42A72375000221919 /* Kreator */,
 				B24076D32A72375000221919 /* Products */,
+				B24077052A72591800221919 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -70,6 +74,14 @@
 			children = (
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		B24077052A72591800221919 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B24077062A72591900221919 /* libIKan.a */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -248,11 +260,13 @@
 		B24076DA2A72375000221919 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78KTXZ99TW;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/../IKan/Interface";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -260,11 +274,13 @@
 		B24076DB2A72375000221919 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78KTXZ99TW;
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/PrefixHeader.pch";
+				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/../IKan/Interface";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
