@@ -13,6 +13,7 @@
 		B24077192A72651400221919 /* Common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24077172A72651400221919 /* Common.hpp */; };
 		B240771E2A72665A00221919 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B240771C2A72665A00221919 /* Logger.cpp */; };
 		B240771F2A72665A00221919 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B240771D2A72665A00221919 /* Logger.hpp */; };
+		B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE392A7272560068EEFB /* AssertAPIs.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -27,6 +28,7 @@
 		B24077172A72651400221919 /* Common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Common.hpp; sourceTree = "<group>"; };
 		B240771C2A72665A00221919 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		B240771D2A72665A00221919 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		B2B5DE392A7272560068EEFB /* AssertAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertAPIs.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +120,7 @@
 			children = (
 				B24077172A72651400221919 /* Common.hpp */,
 				B24077032A72438600221919 /* Macros.h */,
+				B2B5DE392A7272560068EEFB /* AssertAPIs.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -155,6 +158,7 @@
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
 				B240771F2A72665A00221919 /* Logger.hpp in Headers */,
+				B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

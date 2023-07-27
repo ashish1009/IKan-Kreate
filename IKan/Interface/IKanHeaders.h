@@ -30,3 +30,5 @@
 #include <Utils/FileSystem.hpp>
 
 #include <Debug/Logger.hpp>
+
+#include <Core/AssertAPIs.h>
