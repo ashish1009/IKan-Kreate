@@ -11,7 +11,14 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(int argc, const char** ar
 {
   // Set up all the applicaiton specification
   IKan::Application::Specification applicationSpec;
-  
+ 
+  // Window Specification
+  applicationSpec.windowSpecification.title = "Kreator";
+  applicationSpec.windowSpecification.width = 1600;
+  applicationSpec.windowSpecification.height = 900;
+  applicationSpec.windowSpecification.isFullscreen = false;
+  applicationSpec.windowSpecification.hideTitleBar = false;
+
   applicationSpec.name = "Kreator";
   return IKan::CreateScope<IKan::Application>(applicationSpec);
 }

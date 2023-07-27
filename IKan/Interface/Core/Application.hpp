@@ -10,6 +10,7 @@
 #include "Event/Event.h"
 #include "Event/ApplicationEvent.h"
 #include "Core/TimeStep.hpp"
+#include "Core/CoreWindow.hpp"
 
 namespace IKan
 {
@@ -24,6 +25,7 @@ namespace IKan
     struct Specification
     {
       std::string name = "iKan";
+      Window::Specification windowSpecification;
     };
 
     /// This constructor instantiate the IKan Core application. Responsible to create Window, Renderer Context and
@@ -66,7 +68,11 @@ namespace IKan
     const Specification& GetSpecification() const;
     /// This function returns the time step of frame
     TimeStep GetTimestep() const;
-    
+    /// This fuinction returns the native pointer Window native as void
+    void* GetWindowPtr() const;
+    /// This fuinction returns the iKan Window Instance as reference
+    Window& GetWindow();
+
     /// This function returns the single instance of application
     static Application& Get();
     
@@ -84,6 +90,7 @@ namespace IKan
     bool m_isRunning = true;
     TimeStep m_timeStep;
     Specification m_specificaion;
+    Ref<Window> m_window;
     
     inline static Application* s_instance;
   };

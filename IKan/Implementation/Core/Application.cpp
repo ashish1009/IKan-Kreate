@@ -20,6 +20,9 @@ namespace IKan
 
     IK_LOG_TRACE(LogModule::Application, "Creating Core Application Instance : {0}", m_specificaion.name);
     
+    // Create the window
+    m_window = Window::Create(m_specificaion.windowSpecification);
+    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialised                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -28,6 +31,10 @@ namespace IKan
   Application::~Application()
   {
     IK_PROFILE();
+
+    // Reset the window
+    m_window.reset();
+
     IK_LOG_WARN(LogModule::Application, "Destroying Core Application Instance : {0}", m_specificaion.name);
   }
 

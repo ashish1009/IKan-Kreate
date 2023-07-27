@@ -47,6 +47,7 @@
 #include <Core/TimeStep.hpp>
 #include <Core/Buffers.hpp>
 #include <Core/Application.hpp>
+#include <Core/CoreWindow.hpp>
 
 #include <Event/Event.h>
 #include <Event/ApplicationEvent.h>
