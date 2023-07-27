@@ -13,7 +13,7 @@ namespace IKan
 {
   /// This enum stores the moule names of IKan Logs (Holds only IKan engine log module names)
 #define LogModule(f) \
-f(None) f(IKan) \
+f(None) f(IKan) f(Timer) \
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)
@@ -27,7 +27,7 @@ f(None) f(IKan) \
     /// This enum stores the type of Logger to be used for spd
     enum class Type : uint8_t
     {
-      Core
+      Core, Profiler
     };
     /// This enum stores the Log level of engine
     enum class Level : uint8_t
@@ -145,7 +145,7 @@ f(None) f(IKan) \
     }
     
     // Static Member Variables ---------------------------------------------------------------------------------------
-    inline static Ref<spdlog::logger> s_coreLogger;
+    inline static Ref<spdlog::logger> s_coreLogger, s_profilerLogger;
     inline static std::map<std::string /* Module Name */, TagDetails> s_tags;
   };
 } // namespace IKan
@@ -169,8 +169,17 @@ f(None) f(IKan) \
 #define IK_LOG_CRITICAL(tag, ...) \
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Critical, tag, __VA_ARGS__); \
 
+// Verify
 #define IK_LOG_VERIFY_MESSAGE_INTERNAL(...)  ::IKan::Log::PrintMessage(::IKan::Log::Type::Client, ::IKan::Log::Level::Debug, "Verify Fail", __VA_ARGS__)
 #define IK_LOG_VERIFY(condition, ...) { if(!(condition)) { IK_LOG_VERIFY_MESSAGE_INTERNAL(__VA_ARGS__); } }
+
+// Profiler
+#define IK_PROFILE_TRACE(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Profiler, ::IKan::Log::Level::Trace, tag, __VA_ARGS__)
+#define IK_PROFILE_DEBUG(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Profiler, ::IKan::Log::Level::Debug, tag, __VA_ARGS__)
+#define IK_PROFILE_INFO(tag, ...)     ::IKan::Log::PrintMessage(::IKan::Log::Type::Profiler, ::IKan::Log::Level::Info, tag, __VA_ARGS__)
+#define IK_PROFILE_WARN(tag, ...)     ::IKan::Log::PrintMessage(::IKan::Log::Type::Profiler, ::IKan::Log::Level::Warning, tag, __VA_ARGS__)
+#define IK_PROFILE_ERROR(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Profiler, ::IKan::Log::Level::Error, tag, __VA_ARGS__)
+#define IK_PROFILE_CRITICAL(tag, ...) ::IKan::Log::PrintMessage(::IKan::Log::Type::Profiler, ::IKan::Log::Level::Critical, tag, __VA_ARGS__)
 
 #else
 
@@ -182,5 +191,12 @@ f(None) f(IKan) \
 #define IK_LOG_CRITICAL(...)
 
 #define IK_LOG_VERIFY(condition, ...)
+
+#define IK_PROFILE_TRACE(tag, ...)    
+#define IK_PROFILE_DEBUG(tag, ...)    
+#define IK_PROFILE_INFO(tag, ...)     
+#define IK_PROFILE_WARN(tag, ...)     
+#define IK_PROFILE_ERROR(tag, ...)    
+#define IK_PROFILE_CRITICAL(tag, ...) 
 
 #endif

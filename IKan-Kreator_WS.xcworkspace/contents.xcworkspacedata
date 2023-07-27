@@ -10,6 +10,9 @@
       <FileRef
          location = "group:IKan.log">
       </FileRef>
+      <FileRef
+         location = "group:Profiler.log">
+      </FileRef>
    </Group>
    <Group
       location = "group:Resources"

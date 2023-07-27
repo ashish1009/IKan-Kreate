@@ -7,6 +7,7 @@
 
 #include "Common.hpp"
 #include "Debug/Logger.hpp"
+#include "Debug/Timer.hpp"
 
 namespace IKan
 {

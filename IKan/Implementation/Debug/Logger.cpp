@@ -9,6 +9,7 @@
 #include <spdlog/sinks/basic_file_sink.h>
 
 #include "Logger.hpp"
+#include "Debug/Timer.hpp"
 
 namespace IKan
 {
@@ -32,10 +33,9 @@ namespace IKan
       Utils::FileSystem::CreateDirectory(logDirectoryPath);
     }
 
+    // Core Logger sink ----------------------------------------------------------------------------------------------
     // Add the file name in the log directory to save logs in file
     std::string logFilePath = logDirectoryPath + "/IKan.log";
-
-    // Core Logger sink ----------------------------------------------------------------------------------------------
     std::vector<spdlog::sink_ptr> coreSink =
     {
       CreateRef<spdlog::sinks::stdout_color_sink_mt>(),
@@ -46,6 +46,22 @@ namespace IKan
     s_coreLogger = CreateRef<spdlog::logger>("IKAN ", coreSink.begin(), coreSink.end());
     s_coreLogger->set_level(spdlog::level::trace);
     s_coreLogger->flush_on(spdlog::level::trace);
+    
+    // Profiler Logger sink -------------------------------------------------------------------------------------------
+    // Store the Profiler results in separate file too
+    std::string profilerLogFilePath = logDirectoryPath + "/Profiler.log";
+    std::vector<spdlog::sink_ptr> profilerSink =
+    {
+#if SHOW_PROFILE_IN_MAIN_LOGS
+      CreateRef<spdlog::sinks::stdout_color_sink_mt>(),
+#endif
+      CreateRef<spdlog::sinks::basic_file_sink_mt>(profilerLogFilePath, true /* Truncste the Log file */)
+    };
+    LoggerUtils::SetSamePatternInSinks(profilerSink, "[%T%e : %v %$");
+
+    s_profilerLogger = CreateRef<spdlog::logger>("PROFILE", profilerSink.begin(), profilerSink.end());
+    s_profilerLogger->set_level(spdlog::level::trace);
+    s_profilerLogger->flush_on(spdlog::level::trace);
   }
   
   void Log::Shutdown()
@@ -58,6 +74,7 @@ namespace IKan
   {
     switch (type) {
       case Type::Core:      return s_coreLogger;
+      case Type::Profiler:  return s_profilerLogger;
       default:
         assert(false);
     }
