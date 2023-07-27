@@ -13,7 +13,7 @@ namespace IKan
 {
   /// Version number of IKan Engine
   ///- Note: To be updated manually
-  static const std::string kVersion = "v1.0.0.0";
+  static const std::string kVersion = "v2.0.0.0";
 } // namespace IKan
 
 /// Options

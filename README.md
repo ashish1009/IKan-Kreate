@@ -59,10 +59,10 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Application
   ------------------------------------------------------------------------------------------------------------------
 
-## Upcoming Release Tags
-
 - v2.0.0.0  : IKan    - Window and Events 
   - Window interface and implementation
+
+## Upcoming Release Tags
   - Renderer Context
   - Input Handler
   ------------------------------------------------------------------------------------------------------------------
