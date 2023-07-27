@@ -7,8 +7,8 @@
 
 #pragma once
 
-#include <GLFW/glfw3.h>
 #include "Core/CoreWindow.hpp"
+#include "Renderer/Graphics/RendererContext.hpp"
 
 namespace IKan
 {
@@ -90,5 +90,6 @@ namespace IKan
     GLFWwindow* m_window;
     Data m_data;
     TimeStep m_timeStep;
+    Scope<RendererContext> m_context;
   };
 } // namespace IKan
