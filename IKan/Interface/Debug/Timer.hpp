@@ -80,4 +80,18 @@ IKan::ScopedTimer _scopedTimer__LINE__(__PRETTY_FUNCTION__); \
   private:
     std::unordered_map<const char*, float> m_perFrameData;
   };
+  
+  /// This function store the preformance of profiler scoped
+  class ScopePerfTimer
+  {
+  public:
+    ScopePerfTimer(const char* name, PerformanceProfiler* profiler);
+    ~ScopePerfTimer();
+    
+  private:
+    const char* m_name;
+    PerformanceProfiler* m_profiler;
+    Timer m_timer;
+  };
+
 } // namespace IKan
