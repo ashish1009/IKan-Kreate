@@ -27,6 +27,7 @@
 		B21FAA362A728F4D009EED1F /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		B21FAA392A729056009EED1F /* ApplicationEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
 		B21FAA3B2A729078009EED1F /* KeyEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyEvents.h; sourceTree = "<group>"; };
+		B21FAA3E2A72909A009EED1F /* MouseEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -60,6 +61,7 @@
 				B21FAA362A728F4D009EED1F /* Event.h */,
 				B21FAA392A729056009EED1F /* ApplicationEvent.h */,
 				B21FAA3B2A729078009EED1F /* KeyEvents.h */,
+				B21FAA3E2A72909A009EED1F /* MouseEvent.h */,
 			);
 			path = Event;
 			sourceTree = "<group>";
