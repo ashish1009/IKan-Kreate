@@ -61,11 +61,11 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
 
 - v2.0.0.0  : IKan    - Window and Events 
   - Window interface and implementation
-
-## Upcoming Release Tags
   - Renderer Context
   - Input Handler
   ------------------------------------------------------------------------------------------------------------------
+
+## Upcoming Release Tags
   
 - v3.0.0.0  : IKan    - Render first Color Quad 
   - Renderer API class
