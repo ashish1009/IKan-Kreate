@@ -319,6 +319,7 @@
 					"${PROJECT_DIR}/implementation",
 					"${PROJECT_DIR}/interface",
 					"${PROJECT_DIR}/Vendors/SpdLog/include",
+					"${PROJECT_DIR}/Vendors/Glm",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
@@ -378,6 +379,7 @@
 					"${PROJECT_DIR}/implementation",
 					"${PROJECT_DIR}/interface",
 					"${PROJECT_DIR}/Vendors/SpdLog/include",
+					"${PROJECT_DIR}/Vendors/Glm",
 				);
 				MACOSX_DEPLOYMENT_TARGET = 13.3;
 				MTL_ENABLE_DEBUG_INFO = NO;

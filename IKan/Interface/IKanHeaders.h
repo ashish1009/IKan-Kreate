@@ -21,6 +21,15 @@
 #include <sstream>
 #include <map>
 
+// glm math library
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
+
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/gtx/quaternion.hpp>
+
 // Engine Files
 /// Shoule be included at top only ----------------------------------------------------------------------------------
 #include <Core/Macros.h>
@@ -36,7 +45,7 @@
 #include <Core/KeyCodes.h>
 #include <Core/MouseCodes.h>
 
-#include <Event/Event.hpp>
+#include <Event/Event.h>
 #include <Event/ApplicationEvent.h>
 #include <Event/MouseEvent.h>
 #include <Event/KeyEvents.h>
