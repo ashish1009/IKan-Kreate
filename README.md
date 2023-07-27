@@ -27,120 +27,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
 
 #### Features
 
-#### Road Map
-  - Debug
-    - Logger
-    - Table
-    - timer
-    
-  - Utils
-    - String Utils
-    - File System Utils
-    - YAML Utils
-    
-  - Events
-    - Event Base class
-    - Keyboard Event Handler
-    - Mouse Event Handler
-    - Application Event Handler
-     
-  - Core
-    - Version
-    - Common
-    - Macros
-    - Settings
-    - Memory
-    - Core Engine Directory Manager
-    - Assert API
-    - Key Codes
-    - Mosue Codes
-    - Buffer
-    - Time Step
-    - Application
-    - Layer
-    - Layer stack
-    - Window
-    - Inputs
-    
-  - Maths
-    - UUID
-    - Maths Utils
-    - Hash Generator
-    - AABB
-    - Ray 
-    
-  - Renderer
-    - Font
-    - Shader
-    - Shader Uniforms
-    - Texture
-    - Frame Buffer
-    - Render Pass
-    - Renderer Buffers
-    - Pipeline
-    - Char Texture
-    - Renderer
-    - Renderer 2D
-    - Text Renderer
-    - Renderer Stats
-    - Scene Renderer (3D)
-    
-  - Camera
-    - Camera Base class
-    - Scene Camera
-    - Editor Camera
-    - Fixed Camera
-    
-  - UI
-    - ImGui Color Base
-    - ImGui Layer
-    - ImGui Utils
-    - ImGui Scoped
-    - ImGui Custom
-    - ImGui Widget
-    - ImGui Property (May be in Kreator)
-    - ImGui Inputs
-    
-  - Scene
-    - Scene
-    - Component
-    - Entity
-    - Scene Serializer
-    
-  - Project
-    - Project Base Class
-    - Project Serializer
-    - User Preferences
-    - Project Setting panel
-    
-  - Editor
-    - Editor Panel class
-    - Panel Manager
-    - Editor Console
-    - Fodler Explorer
-    - Application Settings
-    - CBP
-    - SHP
-    - ECS Debug
-    - Asset Editor
-    
-  - Asset
-    - Asset Type
-    - Asset Base Class
-    - Asset Manager
-    - Asset Metadata
-    - Asset Importer
-    - Asset Serializer
-    - Asset Registry
-    
-  - Physics
-    - 2D
-    - 3D
-    
-  - Material
-  
-  - Light
-  
 #### Known Issues
 
 ## Kreator 
@@ -161,25 +47,127 @@ Editor Application using IKan Library to create Games
 ## Upcoming Release Tags
 v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Minor Verision>
 - v1.0.0.0  : IKan    - Core Application and Layer
+  - Setup Project
+  - Setup Directory structure
+  - File System Utils
+  - Logger and Assert
+  - Table
+  - Timer / Profiler
+  - Mouse and Keyboard Codes
+  - Event Handler Classes
+  - Math Library and Utils
+  - Time Step
+  - Layer Class
+  - Application
+  ------------------------------------------------------------------------------------------------------------------
+
 - v2.0.0.0  : IKan    - Window and Events 
-- v3.0.0.0  : IKan    - Render first Quad
-- v3.1.0.0  : IKan    - Render 2D Scene in Batch
-- v3.2.0.0  : IKan    - Render first Text
+  - Window interface and implementation
+  - Renderer Context
+  - Input Handler
+  ------------------------------------------------------------------------------------------------------------------
+  
+- v3.0.0.0  : IKan    - Render first Color Quad 
+  - Renderer API class
+  - Shader / String Utils
+  - Vertex Buffer / Index Buffer
+  - Pipeline
+  - Camera (Scene / Editor / Fixed)
+  
+------------------------------------------------------------------------------------------------------------------  
+- v3.1.0.0  : IKan    - Render first Texture Quad 
+  - Image File Texture loader  
+  - Sub Texture Loader
+------------------------------------------------------------------------------------------------------------------
+  
+- v3.2.0.0  : IKan    - Render in frame buffer
+  - Full Quad Renderer
+  - Frame Buffer  
+------------------------------------------------------------------------------------------------------------------
+  
+- v3.3.0.0  : IKan    - Render 2D Scene in Batch
+  - Renderer 2D
+  - Full Quad Renderer
+ ------------------------------------------------------------------------------------------------------------------  
+ 
+- v3.4.0.0  : IKan    - Render first Text
+  - Char Texture
+  - Text Renderer
+ ------------------------------------------------------------------------------------------------------------------  
+  
 - v4.0.0.0  : IKan    - entt::entity sysntem (ECS)
+  - Entity / Scene / Component classes
+ ------------------------------------------------------------------------------------------------------------------  
+  
 - v4.1.0.0  : IKan    - Scene Serializer
-- v5.0.1.0  : IKan    - ImGui Layer 
-              Kreator - Render Scene in Viewport
-- v5.1.1.1  : IKan    - ImGui Color and API
-              Kreator - UI Theme (Font and Color)
-- v6.0.2.0  : IKan    - Project and Assets
-              Kreator - User Prederence for Start Application
+  - SceneSerializer class (YAML Utils)
+ ------------------------------------------------------------------------------------------------------------------  
+
+- v5.0.1.0  : IKan    - ImGui Layer  | Kreator - Render Scene in Viewport
+  - Kreator Application
+  - Kreator Renderer Layer
+  - Imgui Layer 
+  - View port in Kreator and Render Scene 
+ ------------------------------------------------------------------------------------------------------------------
+   
+- v5.1.1.1  : IKan    - ImGui Color and API | Kreator - UI Theme (Font and Color)
+  - ImGui Base Theme class
+  - ImGui font loader
+  - Decorate the Kreator
+ ------------------------------------------------------------------------------------------------------------------
+  
+- v6.0.2.0  : IKan    - Project and Assets | Kreator - User Prederence for Start Application
+  - Get Directory from user.
+  - User Preferences
+  - Project Class / Manager
+  - Asset class / Manaager
+ ------------------------------------------------------------------------------------------------------------------
+  
 - v6.0.2.1  : Kreator - Kreator Title Bar
-- v6.1.2.2  : IKan    - Content Browser Panel Class
-              Kreator - Content Browser Panel Usage
-- v6.2.2.3  : IKan    - Editor Console, Project Setting, Folder explorer
-              Kreator - All Project, Scene, Log, Setting ... panels 
-- v6.3.2.3  : IKan    - Scene Hierarchy panel
-- v6.3.3.0  : Kreator - Mouse Selected Entity            
-- v7.0.3.1  : IKan    - Imguizmo Module
-            : Kreator - Imguizmo Toolbar and usage
-- 
+  - Kreator Title bar
+ ------------------------------------------------------------------------------------------------------------------
+  
+- v6.1.2.2  : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
+  - Entire Content Browser Panel
+  - Asset Editor Panel 
+  - Folder Explorer
+
+- v6.1.2.3  : Kreator - Scene Playe Pause Simulation Tool bar
+  - Scene Play and Pause
+  
+ ------------------------------------------------------------------------------------------------------------------
+
+- v6.2.2.4  : IKan    - Editor Console, Project Setting | Kreator - All Project, Scene, Log, Setting ... panels
+  - Editor Consol for logs
+  - Project Setting
+  - Application Settings
+  - New/Open/Save Project and Scene popups
+  - About and Welcome sceen popups
+ ------------------------------------------------------------------------------------------------------------------
+
+- v6.3.2.5  : IKan    - Scene Hierarchy panel
+  - Scene Hierarchy Panel
+  - ECS Debug panel
+ ------------------------------------------------------------------------------------------------------------------
+
+- v7.0.3.0  : Kreator - Guizmo and Mouse Selected Entity
+  - Mouse Selectable entity 
+  - Imguizmo Toolbar and usage
+ ------------------------------------------------------------------------------------------------------------------
+
+- v7.1.3.0  : IKan    - Sub texture in quad component
+  - Quad Componentn GUI Update for Subtexture
+ ------------------------------------------------------------------------------------------------------------------
+
+- v8.0.3.0  : IKan    - Script Integration
+ ------------------------------------------------------------------------------------------------------------------
+
+- v9.0.3.0  : IKan    - Physics 2D (Base classes)
+  - Component for Physics
+  - Scene Handle Physics
+
+- v10.0.3.0  : IKan   - Mesh
+ ------------------------------------------------------------------------------------------------------------------
+
+- v11.0.3.0  : IKan   - Light
+ ------------------------------------------------------------------------------------------------------------------
