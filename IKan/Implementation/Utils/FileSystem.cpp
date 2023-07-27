@@ -5,6 +5,7 @@
 //  Created by Ashish . on 27/07/23.
 //
 
+#include <spdlog/spdlog.h>
 #include "FileSystem.hpp"
 
 namespace IKan::Utils
@@ -71,11 +72,10 @@ namespace IKan::Utils
   
   bool FileSystem::RenameFilename(const std::filesystem::path& oldFilepath, const std::string& newName)
   {
-    std::filesystem::path newPath = "";
-//    fmt::format("{0}/{1}{2}",
-//                                                oldFilepath.parent_path().string().c_str(), // Parent Directory
-//                                                newName, // File Name
-//                                                oldFilepath.extension().c_str()); // Extension
+    std::filesystem::path newPath = fmt::format("{0}/{1}{2}",
+                                                oldFilepath.parent_path().string().c_str(), // Parent Directory
+                                                newName, // File Name
+                                                oldFilepath.extension().c_str()); // Extension
     return Rename(oldFilepath, newPath);
   }
   
