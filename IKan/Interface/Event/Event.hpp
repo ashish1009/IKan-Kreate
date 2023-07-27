@@ -72,5 +72,46 @@ return category; \
   public:
     bool m_isHandled = false;
   };
+
+  /// This class is for dispatching the events dynamically at runtime. Event type to be checked with current event of
+  /// Dispatcher and performs the functionality passed as function pointer
+  class EventDispatcher
+  {
+  public:
+    /// Constructor that store the event reference in the dispatcher
+    ///  - Parameter event: Event reference triggered from window callback:
+    EventDispatcher(Event& event)
+    : m_event(event)
+    {
+      
+    }
+    /// This is default Event dispatcher destructor
+    ~EventDispatcher() = default;
+    
+    /// This function Dispatches the event dynamically
+    ///  - Once an event callback triggered, it check the triggered event's type( with base calss 'Even') with the
+    ///    explicit event type 'T'. If same then executes  the Function F (Function pointer passed to Dispatcher)
+    ///  - Parameter func: Function pointer to be triggered when even dispatches:
+    ///  - Important: Event Should be Dispached using this function only. All Event handler takes only base Instance of
+    ///               Event. This Dispatcher dispatches the function binded to a specific Event. So checked all the
+    ///               triggered events at same time and return the calling on Function Binded as Funciton pointer <F>
+    template<typename T, typename F> bool Dispatch(const F& func)
+    {
+      if (m_event.GetType() == T::GetStaticType())
+      {
+        m_event.m_isHandled |= func(static_cast<T&>(m_event));
+        return true;
+      }
+      return false;
+    }
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(EventDispatcher);
+    
+  private:
+    Event& m_event;
+  };
   
+  // Using Typedefs
+  using EventCallbackFn = std::function<void(Event&)>;
+
 } // namespace IKan
