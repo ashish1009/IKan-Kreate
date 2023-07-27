@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA2F2A728EB9009EED1F /* KeyCodes.h */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -19,6 +20,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B21FAA2F2A728EB9009EED1F /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -124,6 +126,7 @@
 				B24077172A72651400221919 /* Common.hpp */,
 				B24077032A72438600221919 /* Macros.h */,
 				B2B5DE392A7272560068EEFB /* AssertAPIs.h */,
+				B21FAA2F2A728EB9009EED1F /* KeyCodes.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -162,6 +165,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
+				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
 				B240771F2A72665A00221919 /* Logger.hpp in Headers */,
 				B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */,
