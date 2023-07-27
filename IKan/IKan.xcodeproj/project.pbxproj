@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
-		B24077182A72651400221919 /* Base.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Base.cpp */; };
-		B24077192A72651400221919 /* Base.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24077172A72651400221919 /* Base.hpp */; };
+		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
+		B24077192A72651400221919 /* Common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24077172A72651400221919 /* Common.hpp */; };
+		B240771E2A72665A00221919 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B240771C2A72665A00221919 /* Logger.cpp */; };
+		B240771F2A72665A00221919 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B240771D2A72665A00221919 /* Logger.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,8 +23,10 @@
 		B24077032A72438600221919 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
 		B24077042A7244AB00221919 /* IKanHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKanHeaders.h; sourceTree = "<group>"; };
 		B24077142A72625F00221919 /* IKanEntryPoint.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKanEntryPoint.h; sourceTree = "<group>"; };
-		B24077162A72651400221919 /* Base.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Base.cpp; sourceTree = "<group>"; };
-		B24077172A72651400221919 /* Base.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Base.hpp; sourceTree = "<group>"; };
+		B24077162A72651400221919 /* Common.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Common.cpp; sourceTree = "<group>"; };
+		B24077172A72651400221919 /* Common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Common.hpp; sourceTree = "<group>"; };
+		B240771C2A72665A00221919 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		B240771D2A72665A00221919 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +73,7 @@
 				B24077042A7244AB00221919 /* IKanHeaders.h */,
 				B24077142A72625F00221919 /* IKanEntryPoint.h */,
 				B24076FC2A7242B500221919 /* Utils */,
+				B240771A2A72664900221919 /* Debug */,
 				B24077022A72437500221919 /* Core */,
 			);
 			path = Interface;
@@ -78,6 +83,7 @@
 			isa = PBXGroup;
 			children = (
 				B24076FD2A72430A00221919 /* Utils */,
+				B240771B2A72664D00221919 /* Debug */,
 				B24077152A72650600221919 /* Core */,
 			);
 			path = Implementation;
@@ -102,6 +108,7 @@
 			isa = PBXGroup;
 			children = (
 				B24076FE2A72431700221919 /* FileSystem.cpp */,
+				B240771C2A72665A00221919 /* Logger.cpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -109,6 +116,7 @@
 		B24077022A72437500221919 /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				B24077172A72651400221919 /* Common.hpp */,
 				B24077032A72438600221919 /* Macros.h */,
 			);
 			path = Core;
@@ -117,10 +125,24 @@
 		B24077152A72650600221919 /* Core */ = {
 			isa = PBXGroup;
 			children = (
-				B24077162A72651400221919 /* Base.cpp */,
-				B24077172A72651400221919 /* Base.hpp */,
+				B24077162A72651400221919 /* Common.cpp */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		B240771A2A72664900221919 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				B240771D2A72665A00221919 /* Logger.hpp */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		B240771B2A72664D00221919 /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Debug;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -131,7 +153,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
-				B24077192A72651400221919 /* Base.hpp in Headers */,
+				B24077192A72651400221919 /* Common.hpp in Headers */,
+				B240771F2A72665A00221919 /* Logger.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -192,7 +215,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				B24077182A72651400221919 /* Base.cpp in Sources */,
+				B24077182A72651400221919 /* Common.cpp in Sources */,
+				B240771E2A72665A00221919 /* Logger.cpp in Sources */,
 				B24077002A72431700221919 /* FileSystem.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -245,6 +269,7 @@
 				GCC_PREPROCESSOR_DEFINITIONS = (
 					"DEBUG=1",
 					"$(inherited)",
+					IK_ENABLE_LOG,
 				);
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
 				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;

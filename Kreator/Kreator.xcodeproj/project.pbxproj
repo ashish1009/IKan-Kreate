@@ -266,6 +266,11 @@
 				ENABLE_HARDENED_RUNTIME = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/PrefixHeader.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+					IK_ENABLE_LOG,
+				);
 				HEADER_SEARCH_PATHS = (
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",

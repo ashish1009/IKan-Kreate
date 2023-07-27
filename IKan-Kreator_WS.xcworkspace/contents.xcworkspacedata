@@ -5,6 +5,10 @@
       location = "group:README.md">
    </FileRef>
    <Group
+      location = "group:Build/Products/Debug/Log"
+      name = "Log">
+   </Group>
+   <Group
       location = "group:Resources"
       name = "Resources">
       <Group

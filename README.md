@@ -30,6 +30,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
 #### Library Search Paths
 
 #### Preprocessors
+- IK_ENABLE_LOG     : For Enable Logs
 
 #### Known Issues
 

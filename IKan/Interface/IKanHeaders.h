@@ -24,6 +24,9 @@
 // Engine Files
 /// Shoule be included at top only ----------------------------------------------------------------------------------
 #include <Core/Macros.h>
+#include <Core/Common.hpp>
 /// -----------------------------------------------------------------------------------------------------------------
 
 #include <Utils/FileSystem.hpp>
+
+#include <Debug/Logger.hpp>
