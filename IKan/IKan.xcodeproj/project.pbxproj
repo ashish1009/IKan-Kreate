@@ -29,6 +29,16 @@
 		B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE3D2A727C090068EEFB /* Timer.hpp */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		B21FB3B42A729EBB009EED1F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B21FB3B02A729EBB009EED1F /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B21FB3A22A729EBB009EED1F;
+			remoteInfo = GLFW;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		B21FAA2F2A728EB9009EED1F /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
 		B21FAA322A728EFC009EED1F /* MouseCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseCodes.h; sourceTree = "<group>"; };
@@ -44,6 +54,7 @@
 		B21FAA482A729312009EED1F /* IKMemory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = IKMemory.hpp; sourceTree = "<group>"; };
 		B21FAA4B2A7297DA009EED1F /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B21FAA4C2A7297DA009EED1F /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
+		B21FB3B02A729EBB009EED1F /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = GLFW/GLFW.xcodeproj; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -82,14 +93,30 @@
 			path = Event;
 			sourceTree = "<group>";
 		};
+		B21FAA512A729EA1009EED1F /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				B21FB3B02A729EBB009EED1F /* GLFW.xcodeproj */,
+			);
+			path = Vendors;
+			sourceTree = "<group>";
+		};
+		B21FB3B12A729EBB009EED1F /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B21FB3B52A729EBB009EED1F /* libGLFW.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B24076DC2A72391000221919 = {
 			isa = PBXGroup;
 			children = (
 				B24076F92A723A6C00221919 /* PrefixHeader.pch */,
-				B24076F62A72397C00221919 /* Vendors */,
 				B24076F32A72394900221919 /* Assets */,
 				B24076F42A72396300221919 /* Interface */,
 				B24076F52A72396900221919 /* Implementation */,
+				B21FAA512A729EA1009EED1F /* Vendors */,
 				B24076E62A72391000221919 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -130,13 +157,6 @@
 				B24077152A72650600221919 /* Core */,
 			);
 			path = Implementation;
-			sourceTree = "<group>";
-		};
-		B24076F62A72397C00221919 /* Vendors */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Vendors;
 			sourceTree = "<group>";
 		};
 		B24076FC2A7242B500221919 /* Utils */ = {
@@ -268,12 +288,28 @@
 			mainGroup = B24076DC2A72391000221919;
 			productRefGroup = B24076E62A72391000221919 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B21FB3B12A729EBB009EED1F /* Products */;
+					ProjectRef = B21FB3B02A729EBB009EED1F /* GLFW.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B24076E42A72391000221919 /* IKan */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B21FB3B52A729EBB009EED1F /* libGLFW.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGLFW.a;
+			remoteRef = B21FB3B42A729EBB009EED1F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B24076E22A72391000221919 /* Sources */ = {

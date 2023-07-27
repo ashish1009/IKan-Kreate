@@ -4,3 +4,6 @@
 [submodule "IKan/Vendors/Glm"]
 	path = IKan/Vendors/Glm
 	url = https://github.com/g-truc/glm
+[submodule "IKan/Vendors/GLFW/GLFW"]
+	path = IKan/Vendors/GLFW/GLFW
+	url = https://github.com/glfw/glfw
