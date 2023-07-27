@@ -13,6 +13,7 @@ namespace IKan
   OpenGLRendererContext::OpenGLRendererContext(GLFWwindow* window_ptr)
   : m_window(window_ptr)
   {
+    IK_PROFILE();
     IK_ASSERT(m_window, "Window pointer is NULL !!!");
     IK_LOG_TRACE(LogModule::GraphicsContext, "Creating Open GL Renderer Context ");
     
@@ -29,6 +30,7 @@ namespace IKan
   
   OpenGLRendererContext::~OpenGLRendererContext()
   {
+    IK_PROFILE();
     IK_LOG_WARN(LogModule::GraphicsContext, "Destroying Open GL Renderer Context ");
   }
   
