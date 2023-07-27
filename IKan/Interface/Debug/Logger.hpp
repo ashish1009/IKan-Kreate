@@ -15,7 +15,7 @@ namespace IKan
 #define LogModule(f) \
 f(None) f(IKan) f(Timer) \
 f(Application) f(Window) \
-f(Renderer)
+f(Renderer) f(GraphicsContext)
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)

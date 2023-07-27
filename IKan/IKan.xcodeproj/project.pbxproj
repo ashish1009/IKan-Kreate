@@ -27,6 +27,8 @@
 		B233648F2A72CE7200BC7B8B /* Renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233648D2A72CE7200BC7B8B /* Renderer.hpp */; };
 		B23364B92A72D14800BC7B8B /* RendererContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23364B72A72D14800BC7B8B /* RendererContext.cpp */; };
 		B23364BA2A72D14800BC7B8B /* RendererContext.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23364B82A72D14800BC7B8B /* RendererContext.hpp */; };
+		B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23364C02A72D1E300BC7B8B /* OpenGLRendererContext.cpp */; };
+		B23364C32A72D1E300BC7B8B /* OpenGLRendererContext.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23364C12A72D1E300BC7B8B /* OpenGLRendererContext.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -80,6 +82,8 @@
 		B23364A72A72D0CC00BC7B8B /* Glad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Glad.xcodeproj; path = Glad/Glad.xcodeproj; sourceTree = "<group>"; };
 		B23364B72A72D14800BC7B8B /* RendererContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererContext.cpp; sourceTree = "<group>"; };
 		B23364B82A72D14800BC7B8B /* RendererContext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererContext.hpp; sourceTree = "<group>"; };
+		B23364C02A72D1E300BC7B8B /* OpenGLRendererContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRendererContext.cpp; sourceTree = "<group>"; };
+		B23364C12A72D1E300BC7B8B /* OpenGLRendererContext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLRendererContext.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -111,6 +115,7 @@
 		B21048192A72CA6A00FA8CF2 /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				B23364BD2A72D1D900BC7B8B /* OpenGL */,
 				B210481B2A72CA7D00FA8CF2 /* MacOS */,
 			);
 			path = Platform;
@@ -200,6 +205,15 @@
 				B23364AC2A72D0CC00BC7B8B /* libGlad.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B23364BD2A72D1D900BC7B8B /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				B23364C02A72D1E300BC7B8B /* OpenGLRendererContext.cpp */,
+				B23364C12A72D1E300BC7B8B /* OpenGLRendererContext.hpp */,
+			);
+			path = OpenGL;
 			sourceTree = "<group>";
 		};
 		B24076DC2A72391000221919 = {
@@ -343,6 +357,7 @@
 				B21FAA462A7292B3009EED1F /* Buffers.hpp in Headers */,
 				B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */,
 				B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */,
+				B23364C32A72D1E300BC7B8B /* OpenGLRendererContext.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -430,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B24077182A72651400221919 /* Common.cpp in Sources */,
 				B240771E2A72665A00221919 /* Logger.cpp in Sources */,
 				B24077002A72431700221919 /* FileSystem.cpp in Sources */,
