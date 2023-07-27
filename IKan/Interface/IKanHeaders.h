@@ -44,6 +44,8 @@
 #include <Core/AssertAPIs.h>
 #include <Core/KeyCodes.h>
 #include <Core/MouseCodes.h>
+#include <Core/TimeStep.hpp>
+#include <Core/Buffers.hpp>
 
 #include <Event/Event.h>
 #include <Event/ApplicationEvent.h>
