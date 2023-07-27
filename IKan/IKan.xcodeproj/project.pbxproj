@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA2F2A728EB9009EED1F /* KeyCodes.h */; };
 		B21FAA382A728F4D009EED1F /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA362A728F4D009EED1F /* Event.h */; };
+		B21FAA3D2A729078009EED1F /* KeyEvents.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA3B2A729078009EED1F /* KeyEvents.h */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -25,6 +26,7 @@
 		B21FAA322A728EFC009EED1F /* MouseCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseCodes.h; sourceTree = "<group>"; };
 		B21FAA362A728F4D009EED1F /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
 		B21FAA392A729056009EED1F /* ApplicationEvent.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
+		B21FAA3B2A729078009EED1F /* KeyEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyEvents.h; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -57,6 +59,7 @@
 			children = (
 				B21FAA362A728F4D009EED1F /* Event.h */,
 				B21FAA392A729056009EED1F /* ApplicationEvent.h */,
+				B21FAA3B2A729078009EED1F /* KeyEvents.h */,
 			);
 			path = Event;
 			sourceTree = "<group>";
@@ -180,6 +183,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
+				B21FAA3D2A729078009EED1F /* KeyEvents.h in Headers */,
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
 				B240771F2A72665A00221919 /* Logger.hpp in Headers */,
