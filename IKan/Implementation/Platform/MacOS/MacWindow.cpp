@@ -209,5 +209,112 @@ namespace IKan
      data.eventCallbackFunction(event);
    });
   }
+  
+  void MacWindow::Update()
+  {
+    IK_PERFORMANCE("MacWindow::Update");
+    
+    glfwPollEvents();
+    
+    float currentFrameTime = static_cast<float>(glfwGetTime());
+    m_timeStep = currentFrameTime - m_lastFrameTime;
+    m_lastFrameTime = currentFrameTime;
+  }
 
+  void MacWindow::Maximize() const
+  {
+    glfwMaximizeWindow(m_window);
+  }
+  
+  void MacWindow::Restore() const
+  {
+    glfwRestoreWindow(m_window);
+  }
+  
+  void MacWindow::Iconify() const
+  {
+    glfwIconifyWindow(m_window);
+  }
+  
+  void MacWindow::SetAtCenter() const
+  {
+    const GLFWvidmode* videMode = glfwGetVideoMode(glfwGetPrimaryMonitor());
+    
+    const Window::Specification& spec = m_data.specification;
+    int32_t x = (videMode->width / 2) - (static_cast<int32_t>(spec.width) / 2);
+    int32_t y = (videMode->height / 2) - (static_cast<int32_t>(spec.height) / 2);
+    glfwSetWindowPos(m_window, x, y);
+  }
+  void MacWindow::SetPosition(const glm::vec2& pos) const
+  {
+    glfwSetWindowPos(m_window, pos.x, pos.y);
+  }
+  
+  void MacWindow::SetResizable(bool resizable) const
+  {
+    std::string canCannotString = resizable ? "can" : "cannot";
+    IK_LOG_TRACE(LogModule::Window, "Window {0} be resized", canCannotString.c_str());
+    glfwSetWindowAttrib(m_window, GLFW_RESIZABLE, resizable ? GLFW_TRUE : GLFW_FALSE );
+  }
+  
+  void MacWindow::SetTitle(const std::string& title)
+  {
+    IK_LOG_TRACE(LogModule::Window, "New MAC Window Title is : {0}", title.c_str());
+    IK_LOG_TRACE(LogModule::Window,
+                  "(WARNING: Window specificaiton instance in Application Spceification might have older Window name..)");
+    
+    m_data.specification.title = title;
+    glfwSetWindowTitle(m_window, m_data.specification.title.c_str());
+  }
+  
+  void MacWindow::SetEventFunction(const EventCallbackFn& eventCallbackFunction)
+  {
+    m_data.eventCallbackFunction = eventCallbackFunction;
+  }
+  
+  // Getters ---------------------------------------------------------------------------------------------------------
+  bool MacWindow::IsActive() const
+  {
+    return !glfwWindowShouldClose(m_window);
+  }
+  
+  bool MacWindow::IsMaximized() const
+  {
+    return static_cast<bool>(glfwGetWindowAttrib(m_window, GLFW_MAXIMIZED));
+  }
+  
+  bool MacWindow::IsTitleBarHidden() const
+  {
+    return m_data.specification.hideTitleBar;
+  }
+  
+  bool MacWindow::IsFullscreen() const
+  {
+    return m_data.specification.isFullscreen;
+  }
+  
+  uint32_t MacWindow::GetWidth() const
+  {
+    return m_data.specification.width;
+  }
+  
+  uint32_t MacWindow::GetHeight() const
+  {
+    return m_data.specification.height;
+  }
+  
+  std::string MacWindow::GetTitle() const
+  {
+    return m_data.specification.title;
+  }
+  
+  TimeStep MacWindow::GetTimestep() const
+  {
+    return m_timeStep;
+  }
+  
+  void* MacWindow::GetNativeWindow() const
+  {
+    return static_cast<void*>(m_window);
+  }
 } // namespace IKan
