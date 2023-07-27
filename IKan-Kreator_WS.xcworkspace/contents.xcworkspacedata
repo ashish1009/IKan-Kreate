@@ -7,6 +7,9 @@
    <Group
       location = "group:Build/Products/Debug/Log"
       name = "Log">
+      <FileRef
+         location = "group:IKan.log">
+      </FileRef>
    </Group>
    <Group
       location = "group:Resources"

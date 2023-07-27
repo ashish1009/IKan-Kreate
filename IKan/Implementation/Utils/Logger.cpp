@@ -41,7 +41,7 @@ namespace IKan
       CreateRef<spdlog::sinks::stdout_color_sink_mt>(),
       CreateRef<spdlog::sinks::basic_file_sink_mt>(logFilePath, true /* Truncste the Log file */)
     };
-    LoggerUtils::SetSamePatternInSinks(coreSink, "[%T | %-8l | %-4n: %v%$");
+    LoggerUtils::SetSamePatternInSinks(coreSink, "[%T%e : %-8l : %v%$");
 
     s_coreLogger = CreateRef<spdlog::logger>("IKAN ", coreSink.begin(), coreSink.end());
     s_coreLogger->set_level(spdlog::level::trace);
@@ -53,4 +53,39 @@ namespace IKan
     s_coreLogger.reset();
     spdlog::drop_all();
   }
+  
+  Ref<spdlog::logger> Log::GetLogger(Type type)
+  {
+    switch (type) {
+      case Type::Core:      return s_coreLogger;
+      default:
+        assert(false);
+    }
+  }
+  
+  std::string Log::GetModuleName(LogModule tag)
+  {
+    return LogModuleString[static_cast<size_t>(tag)];
+  }
+  
+  std::string Log::GetModuleName(const std::string_view& tag)
+  {
+    return static_cast<std::string>(tag);
+  }
+  
+  const Log::TagDetails& Log::GetTagDetails(const std::string moduleName)
+  {
+    return (HasTag(moduleName)) ? s_tags.at(moduleName) : s_tags[static_cast<std::string>(moduleName)];
+  }
+  
+  bool Log::HasTag(const std::string &moduleName)
+  {
+    return s_tags.find(moduleName) != s_tags.end();
+  }
+  
+  std::map<std::string, Log::TagDetails>& Log::EnabledTags()
+  {
+    return s_tags;
+  }
+
 } // namespace IKan

@@ -6,6 +6,7 @@
 //
 
 #include "Common.hpp"
+#include "Debug/Logger.hpp"
 
 namespace IKan
 {
@@ -55,10 +56,13 @@ void InitializeEngine(int argc, const char * argv[])
   // Initialise the IKan Logger
   IKan::Log::Inititialize(logDirectoryPath);
 #endif
+  
+  IK_LOG_TRACE(IKan::LogModule::None, "Initialized the Engine");
 }
 
 void ShutdownEngine()
 {
+  IK_LOG_WARN(IKan::LogModule::None, "Shutting down the Engine");
 #ifdef IK_ENABLE_LOG
   // Initialise the IKan Logger
   IKan::Log::Shutdown();
