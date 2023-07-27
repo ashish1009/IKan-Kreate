@@ -47,6 +47,10 @@ namespace IKan
     /// any Graphics API.
     static void Shutdown();
 
+    // Getters ------------------------------------------------------------------------------------------------------
+    /// This function returns the current API supported
+    static Api GetApi();
+
     MAKE_PURE_STATIC(Renderer);
   };
 } // namespace IKan

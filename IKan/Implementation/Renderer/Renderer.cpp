@@ -54,4 +54,12 @@ namespace IKan
   {
     s_rendererData.reset();
   }
+  
+  // Getters ---------------------------------------------------------------------------------------------------------
+  Renderer::Api Renderer::GetApi()
+  {
+    IK_ASSERT(s_rendererData, "Renderer Data didnt initialised");
+    return s_rendererData->api;
+  }
+
 } // namespace IKan
