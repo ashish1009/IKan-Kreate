@@ -11,6 +11,30 @@
 
 namespace IKan
 {
+  /// This is the implementation class for creating Renmderer Vertex Buffer
+  class OpenGLVertexBuffer : public VertexBuffer
+  {
+  public:
+    /// This Constructor creates the vertex buffer. Buffer data is passed and stored as static in GPU
+    /// - Parameters:
+    ///   - data: Data of vertex Buffer
+    ///   - size: Size of vertex Buffer
+    OpenGLVertexBuffer(void* data, uint32_t size);
+    /// This Constructor creates the vertex buffer. Buffer size is passed to reserve the memory in GPU. Data to passed
+    /// later dynamically
+    /// - Parameter size: Size of vertex buffer
+    OpenGLVertexBuffer(uint32_t size);
+    
+    /// This is the default destructor for Open GL Vertex Buffer
+    ~OpenGLVertexBuffer();
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLVertexBuffer);
+    
+  private:
+    RendererID m_rendererID;
+    uint32_t m_size = 0;
+  };
+
   /// This is the implementation class to create Index Buffer
   class OpenGLIndexBuffer : public IndexBuffer
   {

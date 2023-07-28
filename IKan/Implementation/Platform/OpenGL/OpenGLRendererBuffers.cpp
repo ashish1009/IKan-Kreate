@@ -11,6 +11,20 @@
 
 namespace IKan
 {
+  OpenGLVertexBuffer::OpenGLVertexBuffer(void *data, uint32_t size)
+  : m_size(size)
+  {
+  }
+  
+  OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
+  : m_size(size)
+  {
+  }
+  
+  OpenGLVertexBuffer::~OpenGLVertexBuffer()
+  {
+  }
+
   OpenGLIndexBuffer::OpenGLIndexBuffer(void *data, uint32_t size)
   : m_size(size)
   {
