@@ -16,7 +16,7 @@ namespace IKan
   
   std::string CoreDirectory::GetAssetBasePath()
   {
-    return s_engineBasePath + "/CoreAssets/";
+    return s_engineBasePath + "/Assets/";
   }
   
   std::string CoreDirectory::RelativeEnginePath(const std::string &path)

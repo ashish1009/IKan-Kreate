@@ -57,3 +57,5 @@
 #include <Event/KeyEvent.h>
 
 #include <Renderer/Renderer.hpp>
+
+#include <Renderer/Graphics/Shader.hpp>

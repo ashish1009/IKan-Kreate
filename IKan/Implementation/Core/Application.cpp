@@ -7,8 +7,13 @@
 
 #include "Application.hpp"
 
+// TODO: To Move rendere layer later
+#include "Shader.hpp"
+
 namespace IKan
 {
+  static Ref<Shader> m_Shader;
+  
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
   {
@@ -43,6 +48,11 @@ namespace IKan
 
     // Initialise the Core Renderer
     Renderer::Initialize();
+    
+    // TODO: To Move Renderer Layer later
+    {
+      m_Shader = Shader::Create(CoreAssetPath("Shaders/pbr_static_shader.glsl"));
+    }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialised                         ");
