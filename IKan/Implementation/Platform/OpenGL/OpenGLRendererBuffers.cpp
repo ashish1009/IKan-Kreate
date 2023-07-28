@@ -55,6 +55,32 @@ namespace IKan
     
     glDeleteBuffers(1, &m_rendererID);
   }
+  
+  void OpenGLVertexBuffer::SetData(void* data, uint32_t size)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+    glBufferSubData(GL_ARRAY_BUFFER, 0, size, data);
+  }
+  
+  void OpenGLVertexBuffer::Bind() const
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+  }
+  
+  void OpenGLVertexBuffer::Unbind() const
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+  }
+  
+  RendererID OpenGLVertexBuffer::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  uint32_t OpenGLVertexBuffer::GetSize() const
+  {
+    return m_size;
+  }
 
   OpenGLIndexBuffer::OpenGLIndexBuffer(void *data, uint32_t size)
   : m_size(size)
