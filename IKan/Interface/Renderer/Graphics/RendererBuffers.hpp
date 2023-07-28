@@ -40,6 +40,37 @@ namespace IKan
     BufferElement(const std::string& name, ShaderDataType type, bool normalized = false);
   };
   
+  // Buffer Layout ---------------------------------------------------------------------------------------------------
+  /// This class stores the layout of vertex Buffer in a vector (stores each elements)
+  class BufferLayout
+  {
+  public:
+    /// This is the default constructor
+    BufferLayout() = default;
+    /// This Costructor initialize the vector of layout elements with initializer list
+    BufferLayout(const std::initializer_list<BufferElement>& elements);
+    
+    /// This function returns the elements vector
+    const std::vector<BufferElement> GetElements() const;
+    /// This function returns the stride value
+    uint32_t GetStride() const;
+    
+    // Iterators
+    std::vector<BufferElement>::iterator begin();
+    std::vector<BufferElement>::iterator end();
+    std::vector<BufferElement>::const_iterator begin() const;
+    std::vector<BufferElement>::const_iterator end() const;
+    
+    DEFINE_COPY_MOVE_CONSTRUCTORS(BufferLayout);
+    
+  private:
+    /// This function calculates the offset of element and update the stride value
+    void CalculateOffsetAndStride();
+    
+    std::vector<BufferElement> m_elements;
+    uint32_t m_stride = 0;
+  };
+
   // Fixed size of single indices
   static constexpr uint32_t SizeOfSingleIndices = sizeof(uint32_t);
   
