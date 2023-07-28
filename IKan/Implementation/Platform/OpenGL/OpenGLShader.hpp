@@ -31,11 +31,37 @@ namespace IKan
     void PreprocessShader(const std::string& sourceString);
     /// This functions compiles all the shader codes and store their ID in Program ID (renderer_id).
     void Compile();
+    /// This function reads and parse the shader code and extracts the structure and uniforms and store them in data
+    void Parse();
+    /// This function resolves all the uniform present in the shader
+    void ResolveUniforms();
+    
+    /// This function parses the Uniforms that are structure in shader. It will just store the structures only
+    /// - Parameters:
+    ///   - block: block code of shader
+    ///   - domain: type of shader
+    void ParseUniformStruct(const std::string& block, ShaderDomain domain);
+    /// This function parses the Uniform that are fundamental types (Not struct)
+    /// - Parameters:
+    ///   - statement: block fo code of shader
+    ///   - domain domain of shader
+    void ParseUniform(const std::string& statement, ShaderDomain domain);
+    
+    /// This function finds the structure stored in shader
+    /// - Parameter name: Name of structure
+    ShaderStruct* FindStruct(const std::string& name);
 
     // Member Variables ---------------------------------------------------------------------------------------------
     RendererID m_rendererID;
     std::string m_filePath;
     std::string m_name;
     std::unordered_map<GLenum /* GL Shader type */, std::string /* Shader code  */> m_shaderSourceCodeMap;
+    
+    std::vector<ShaderStruct*> m_structs; // Stores the structure in the shader
+    std::vector<ShaderResourceDeclaration*> m_resources; // Stores the resources of shader like sampler 2D
+    
+    Ref<OpenGLShaderUniformBufferDeclaration> m_vsMaterialUniformBuffer; // Uniform data buffer of vertex shader
+    Ref<OpenGLShaderUniformBufferDeclaration> m_fsMaterialUniformBuffer; // Uniform data buffer of pixel shader
+    Ref<OpenGLShaderUniformBufferDeclaration> m_gsMaterialUniformBuffer; // Uniform data buffer of geometry shader
   };
 } // namespace IKan
