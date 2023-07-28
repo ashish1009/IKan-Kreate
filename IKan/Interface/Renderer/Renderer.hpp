@@ -34,6 +34,16 @@ namespace IKan
       // Add other supported API with time
     };
     
+    /// Stores the capability of renderer
+    struct Capabilities
+    {
+      std::string vendor;
+      std::string renderer;
+      std::string version;
+      
+      static Capabilities& Get();
+    };
+    
     // Fundamentals---------------------------------------------------------------------------------------------------
     /// This function Creates memory for rendere Data.
     /// - Note: To be called before initializing any Open GL or GLFW instances

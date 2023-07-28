@@ -62,4 +62,10 @@ namespace IKan
     return s_rendererData->api;
   }
 
+  // Renderer Capabilities -------------------------------------------------------------------------------------------
+  Renderer::Capabilities& Renderer::Capabilities::Get()
+  {
+    static Capabilities capabilities;
+    return capabilities;
+  }
 } // namespace IKan
