@@ -1,5 +1,5 @@
 //
-//  ShaderUnitoform.hpp
+//  ShaderUniform.hpp
 //  IKan
 //
 //  Created by Ashish . on 28/07/23.
