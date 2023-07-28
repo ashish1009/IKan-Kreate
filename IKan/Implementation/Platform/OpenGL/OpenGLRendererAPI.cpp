@@ -14,6 +14,7 @@ namespace IKan
   OpenGLRendererAPI::OpenGLRendererAPI()
   {
     IK_LOG_TRACE(LogModule::Renderer, "Creating Open GL Renderer API");
+    IK_LOG_TRACE(LogModule::Renderer, "-----------------------------");
     
     glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
     glEnable(GL_MULTISAMPLE);

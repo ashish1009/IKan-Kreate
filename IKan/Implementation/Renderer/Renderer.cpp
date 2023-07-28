@@ -6,6 +6,7 @@
 //
 
 #include "Renderer.hpp"
+#include "Renderer/Graphics/RendererAPI.hpp"
 
 namespace IKan
 {
@@ -25,7 +26,8 @@ namespace IKan
   struct RendererData
   {
     Renderer::Api api = Renderer::Api::None;
-    
+    Scope<RendererAPI> rendererApiInstance;
+
     RendererData(Renderer::Api newApi)
     : api(newApi)
     {
@@ -34,6 +36,7 @@ namespace IKan
     }
     ~RendererData()
     {
+      rendererApiInstance.reset();
       IK_LOG_WARN(LogModule::Renderer, "Destroying Renderer Data as {0} ", RendererUtils::GetRendererApiName(api));
     }
   };
@@ -48,10 +51,12 @@ namespace IKan
   void Renderer::Initialize()
   {
     IK_PROFILE();
+    s_rendererData->rendererApiInstance = RendererAPI::Create();
   }
   
   void Renderer::Shutdown()
   {
+    IK_PROFILE();
     s_rendererData.reset();
   }
   
