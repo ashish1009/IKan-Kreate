@@ -68,9 +68,9 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
 - v3.0.0.0  : IKan    - Render first Color Quad 
   - Renderer API class
   - Shader / String Utils
+  - Vertex Buffer / Index Buffer
 
 ## Upcoming Release Tags  
-  - Vertex Buffer / Index Buffer
   - Pipeline
   - Camera (Scene / Editor / Fixed)
   
