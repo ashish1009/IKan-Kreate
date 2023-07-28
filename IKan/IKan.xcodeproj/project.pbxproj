@@ -64,6 +64,8 @@
 		B233652F2A74410F00BC7B8B /* SceneCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233652D2A74410F00BC7B8B /* SceneCamera.hpp */; };
 		B23365322A74416700BC7B8B /* EditorCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365302A74416700BC7B8B /* EditorCamera.cpp */; };
 		B23365332A74416700BC7B8B /* EditorCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365312A74416700BC7B8B /* EditorCamera.hpp */; };
+		B23365362A74422800BC7B8B /* FixedCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365342A74422800BC7B8B /* FixedCamera.cpp */; };
+		B23365372A74422800BC7B8B /* FixedCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365352A74422800BC7B8B /* FixedCamera.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -154,6 +156,8 @@
 		B233652D2A74410F00BC7B8B /* SceneCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneCamera.hpp; sourceTree = "<group>"; };
 		B23365302A74416700BC7B8B /* EditorCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorCamera.cpp; sourceTree = "<group>"; };
 		B23365312A74416700BC7B8B /* EditorCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorCamera.hpp; sourceTree = "<group>"; };
+		B23365342A74422800BC7B8B /* FixedCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FixedCamera.cpp; sourceTree = "<group>"; };
+		B23365352A74422800BC7B8B /* FixedCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedCamera.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -324,6 +328,7 @@
 				B23365292A7440CD00BC7B8B /* Camera.hpp */,
 				B233652D2A74410F00BC7B8B /* SceneCamera.hpp */,
 				B23365312A74416700BC7B8B /* EditorCamera.hpp */,
+				B23365352A74422800BC7B8B /* FixedCamera.hpp */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -334,6 +339,7 @@
 				B23365282A7440CD00BC7B8B /* Camera.cpp */,
 				B233652C2A74410F00BC7B8B /* SceneCamera.cpp */,
 				B23365302A74416700BC7B8B /* EditorCamera.cpp */,
+				B23365342A74422800BC7B8B /* FixedCamera.cpp */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -499,6 +505,7 @@
 				B233651D2A743D0E00BC7B8B /* Pipeline.hpp in Headers */,
 				B23364DD2A74259600BC7B8B /* OpenGLRendererAPI.hpp in Headers */,
 				B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */,
+				B23365372A74422800BC7B8B /* FixedCamera.hpp in Headers */,
 				B23364C72A72D2D300BC7B8B /* Input.hpp in Headers */,
 				B23365192A7438FA00BC7B8B /* RendererStats.hpp in Headers */,
 				B23365232A743E8500BC7B8B /* OpenGLPipeline.hpp in Headers */,
@@ -595,6 +602,7 @@
 				B23364EA2A74294400BC7B8B /* StringUtils.cpp in Sources */,
 				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B23364D82A74253900BC7B8B /* RendererAPI.cpp in Sources */,
+				B23365362A74422800BC7B8B /* FixedCamera.cpp in Sources */,
 				B233651C2A743D0E00BC7B8B /* Pipeline.cpp in Sources */,
 				B24077182A72651400221919 /* Common.cpp in Sources */,
 				B233652E2A74410F00BC7B8B /* SceneCamera.cpp in Sources */,

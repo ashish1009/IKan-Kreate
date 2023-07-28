@@ -70,10 +70,9 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Shader / String Utils
   - Vertex Buffer / Index Buffer
   - Pipeline
-
-## Upcoming Release Tags  
   - Camera (Scene / Editor / Fixed)
-  
+
+## Upcoming Release Tags    
 ------------------------------------------------------------------------------------------------------------------  
 - v3.1.0.0  : IKan    - Render first Texture Quad 
   - Image File Texture loader  
