@@ -74,6 +74,7 @@ namespace IKan
 
     // TODO: To Move Renderer Layer later
     {
+      m_indexBuffer.reset();
       m_Shader.reset();
     }
 

@@ -6,6 +6,7 @@
 //
 
 #include "RendererBuffers.hpp"
+#include "Platform/OpenGL/OpenGLRendererBuffers.hpp"
 
 namespace IKan
 {
@@ -13,7 +14,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLIndexBuffer>(data, size);
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Invalid Renderer API (None)"); break;
@@ -24,7 +25,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLIndexBuffer>(data, count * SizeOfSingleIndices);
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Invalid Renderer API (None)"); break;
