@@ -61,6 +61,45 @@ namespace IKan
     /// any Graphics API.
     static void Shutdown();
 
+    // Renderer Controller -------------------------------------------------------------------------------------------
+    /// This funciton Clears all the Renderer Bits and set the Clear color to new color
+    /// - Parameter color: New color of renderer Clear color
+    static void Clear(const glm::vec4& color);
+    /// This function Sets the Clear color to new color
+    /// - Parameter color: New color of renderer Clear color
+    static void SetClearColor(const glm::vec4& color);
+    /// This function Clears all the Renderer Bits
+    static void ClearBits();
+    /// This function Clears Depth Bit
+    static void ClearDepthBit();
+    /// This function Clears Color Biut
+    static void ClearColorBit();
+    /// This function Clears Stensil Bit
+    static void ClearStencilBit();
+    
+    /// This funciton Enables or disables Depth Field
+    /// - Parameter state: flag to be set as Depth
+    static void Depth(bool state);
+    /// This funciton Enables or disables Blend Field
+    /// - Parameter state: flag to be set as Blend
+    static void Blend(bool state);
+    /// This funciton Enables or disables MultiSample Field
+    /// - Parameter state: flag to be set as MultiSample
+    static void MultiSample(bool state);
+    
+    /// This function update the renderer viewport size
+    /// - Parameters:
+    ///   - width: new width of renderer viewport
+    ///   - height: new height of renderer viewport
+    static void SetViewport(uint32_t width, uint32_t height);
+    /// This function returns the the Pixel ID from Viewport
+    /// - Parameters:
+    ///   - mx: x pixel
+    ///   - my: y pixel
+    ///   - pixelIDIndex: pixell index in fb
+    ///   - pixeldData: piixel value
+    static void GetEntityIdFromPixels(int32_t mx, int32_t my, uint32_t pixelIDIndex, int32_t& pixeldData);
+    
     // Renderer Stats API ---------------------------------------------------------------------------------------------
     /// This function resets the renderer Stats each frame
     /// - Note: Only those stats will be reset that need to be reset each frame

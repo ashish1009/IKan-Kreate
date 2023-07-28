@@ -67,6 +67,53 @@ namespace IKan
     s_rendererData.reset();
   }
   
+  // Renderer Controller -------------------------------------------------------------------------------------------
+  void Renderer::Clear(const glm::vec4& color)
+  {
+    s_rendererData->rendererApiInstance->SetClearColor(color);
+    s_rendererData->rendererApiInstance->ClearBits();
+  }
+  void Renderer::SetClearColor(const glm::vec4& color)
+  {
+    s_rendererData->rendererApiInstance->SetClearColor(color);
+  }
+  void Renderer::ClearBits()
+  {
+    s_rendererData->rendererApiInstance->ClearBits();
+  }
+  void Renderer::ClearDepthBit()
+  {
+    s_rendererData->rendererApiInstance->ClearDepthBit();
+  }
+  void Renderer::ClearColorBit()
+  {
+    s_rendererData->rendererApiInstance->ClearColorBit();
+  }
+  void Renderer::ClearStencilBit()
+  {
+    s_rendererData->rendererApiInstance->ClearStencilBit();
+  }
+  void Renderer::Depth(bool state)
+  {
+    s_rendererData->rendererApiInstance->Depth(state);
+  }
+  void Renderer::Blend(bool state)
+  {
+    s_rendererData->rendererApiInstance->Blend(state);
+  }
+  void Renderer::MultiSample(bool state)
+  {
+    s_rendererData->rendererApiInstance->MultiSample(state);
+  }
+  void Renderer::SetViewport(uint32_t width, uint32_t height)
+  {
+    s_rendererData->rendererApiInstance->SetViewport(width, height);
+  }
+  void Renderer::GetEntityIdFromPixels(int32_t mx, int32_t my, uint32_t pixelIDIndex, int32_t& pixelData)
+  {
+    s_rendererData->rendererApiInstance->GetEntityIdFromPixels(mx, my, pixelIDIndex, pixelData);
+  }
+  
   // Renderer Stats API ---------------------------------------------------------------------------------------------
   void Renderer::ResetStatsEachFrame()
   {
