@@ -20,7 +20,22 @@ namespace IKan
     OpenGLPipeline(const Specification& spec);
     /// This is the Open GL Pipeline destructor
     ~OpenGLPipeline();
-        
+
+    /// Bind the current pipeline to the GPU
+    void Bind() const override;
+    /// Unbind the current pipeline to the GPU
+    void Unbind() const override;
+    
+    /// This function returns the renderer ID of Vertex Buffer
+    RendererID GetRendererID() const override;
+    
+    /// This function returns the specificaion reference
+    Specification& GetSpecification() override;
+    /// This function returns the const specificaion
+    const Specification& GetSpecification() const override;
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLPipeline);
+
   private:
     /// This function invalidates the pipeline with new specificaion
     void Invalidate();

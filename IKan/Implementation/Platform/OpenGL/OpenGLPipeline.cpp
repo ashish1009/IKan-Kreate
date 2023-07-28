@@ -139,4 +139,29 @@ namespace IKan
       } // switch (element.Type)
     } // For each elements
   }
+  
+  void OpenGLPipeline::Bind() const
+  {
+    glBindVertexArray(m_rendererID);
+  }
+  
+  void OpenGLPipeline::Unbind() const
+  {
+    glBindVertexArray(0);
+  }
+  
+  RendererID OpenGLPipeline::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  OpenGLPipeline::Specification& OpenGLPipeline::GetSpecification()
+  {
+    return m_specification;
+  }
+  
+  const OpenGLPipeline::Specification& OpenGLPipeline::GetSpecification() const
+  {
+    return m_specification;
+  };
 } // namespace IKan
