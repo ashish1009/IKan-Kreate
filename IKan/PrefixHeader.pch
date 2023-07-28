@@ -35,6 +35,7 @@
 #include "Core/Macros.h"
 #include "Core/Common.hpp"
 #include "Core/EngineDirectoryManager.hpp"
+#include "Core/Buffers.hpp"
 
 #include "Utils/FileSystem.hpp"
 #include "Utils/StringUtils.hpp"
