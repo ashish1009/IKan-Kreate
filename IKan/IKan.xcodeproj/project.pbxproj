@@ -121,6 +121,7 @@
 		B23364F42A742A4200BC7B8B /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
 		B23364FF2A742C0600BC7B8B /* OpenGLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
 		B23365002A742C0600BC7B8B /* OpenGLShader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLShader.hpp; sourceTree = "<group>"; };
+		B23365052A7430D400BC7B8B /* QuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = QuadShader.glsl; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -270,6 +271,7 @@
 		B23364F72A742A4F00BC7B8B /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
+				B23365052A7430D400BC7B8B /* QuadShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";

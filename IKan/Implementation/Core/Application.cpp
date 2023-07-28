@@ -51,7 +51,7 @@ namespace IKan
     
     // TODO: To Move Renderer Layer later
     {
-      m_Shader = Shader::Create(CoreAssetPath("Shaders/pbr_static_shader.glsl"));
+      m_Shader = Shader::Create(CoreAssetPath("Shaders/QuadShader.glsl"));
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
