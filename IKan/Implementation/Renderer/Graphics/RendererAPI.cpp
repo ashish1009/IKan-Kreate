@@ -7,6 +7,7 @@
 
 #include "RendererAPI.hpp"
 #include "Renderer/Renderer.hpp"
+#include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 
 namespace IKan
 {
@@ -14,7 +15,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateScope<OpenGLRendererAPI>();
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Render API not Supporting");
