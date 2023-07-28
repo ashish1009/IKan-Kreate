@@ -6,6 +6,7 @@
 //
 
 #include "Shader.hpp"
+#include "Platform/OpenGL/OpenGLShader.hpp"
 
 namespace IKan
 {
@@ -13,7 +14,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLShader>(shaderFilePath);
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Invalid Renderer API");
