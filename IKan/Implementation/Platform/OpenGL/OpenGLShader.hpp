@@ -22,5 +22,11 @@ namespace IKan
     OpenGLShader(const std::string& shaderFilePath);
     /// This is the default Open GL Shader Destructor
     ~OpenGLShader();
+    
+  private:
+    // Member Variables ---------------------------------------------------------------------------------------------
+    RendererID m_rendererID;
+    std::string m_filePath;
+    std::string m_name;
   };
 } // namespace IKan
