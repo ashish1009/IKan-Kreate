@@ -11,11 +11,8 @@
 
 /// Version number of IKan Engine
 ///- Note: To be updated manually
-std::string IKanVersion = "v2.0.0.0";
+std::string IKanVersion = "v3.0.0.0";
 
-/// Options
-/// - core <Engine Install path (Relative to Binary)>
-/// - log <Save Log Direcgtory Path Path>
 void InitializeEngine(const std::string logDirectoryPath)
 {    
 #ifdef IK_ENABLE_LOG

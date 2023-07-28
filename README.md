@@ -65,10 +65,11 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Input Handler
   ------------------------------------------------------------------------------------------------------------------
 
-## Upcoming Release Tags
-  
 - v3.0.0.0  : IKan    - Render first Color Quad 
   - Renderer API class
+
+## Upcoming Release Tags
+  
   - Shader / String Utils
   - Vertex Buffer / Index Buffer
   - Pipeline

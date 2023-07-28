@@ -17,6 +17,9 @@ extern std::string IKanVersion;
 ///   - argc: num arguments
 ///   - argv: arguments
 /// - Note: There should not be any other entry point if this file is included in the client
+/// - Options
+/// - core <Engine Install path (Relative to Binary)>
+/// - log <Save Log Direcgtory Path Path>
 int main(int argc, const char * argv[])
 {
 #ifdef IK_ENABLE_LOG
