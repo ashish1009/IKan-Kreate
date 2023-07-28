@@ -145,7 +145,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLVertexBuffer>(data, size);
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Invalid Renderer API (None)"); break;
@@ -156,7 +156,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLVertexBuffer>(size);
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Invalid Renderer API (None)"); break;

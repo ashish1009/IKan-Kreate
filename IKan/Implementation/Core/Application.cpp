@@ -16,6 +16,7 @@ namespace IKan
   // TODO: To Move rendere layer later
   static Ref<Shader> m_Shader;
   static Ref<IndexBuffer> m_indexBuffer;
+  static Ref<VertexBuffer> m_vertexBuffer;
   
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
@@ -59,8 +60,15 @@ namespace IKan
       uint32_t indices[] = {
         0, 1, 2, 2, 3, 0
       };
-      
       m_indexBuffer = IndexBuffer::CreateWithSize(indices, sizeof(indices));
+      
+      float vertices[] = {
+        -0.5f, -0.5,
+         0.5f, -0.5,
+         0.5f,  0.5,
+        -0.5f,  0.5
+      };
+      m_vertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -74,6 +82,7 @@ namespace IKan
 
     // TODO: To Move Renderer Layer later
     {
+      m_vertexBuffer.reset();
       m_indexBuffer.reset();
       m_Shader.reset();
     }
