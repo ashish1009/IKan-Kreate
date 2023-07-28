@@ -42,6 +42,8 @@
 		B23364E12A74270000BC7B8B /* ShaderUniform.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23364DF2A74270000BC7B8B /* ShaderUniform.hpp */; };
 		B23364E42A7427C300BC7B8B /* OpenGLShaderUniform.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23364E22A7427C300BC7B8B /* OpenGLShaderUniform.cpp */; };
 		B23364E52A7427C300BC7B8B /* OpenGLShaderUniform.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23364E32A7427C300BC7B8B /* OpenGLShaderUniform.hpp */; };
+		B23364EA2A74294400BC7B8B /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23364E82A74294400BC7B8B /* StringUtils.cpp */; settings = {COMPILER_FLAGS = "-Wno-deprecated-declarations"; }; };
+		B23364EB2A74294400BC7B8B /* StringUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23364E92A74294400BC7B8B /* StringUtils.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -109,6 +111,8 @@
 		B23364DF2A74270000BC7B8B /* ShaderUniform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderUniform.hpp; sourceTree = "<group>"; };
 		B23364E22A7427C300BC7B8B /* OpenGLShaderUniform.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShaderUniform.cpp; sourceTree = "<group>"; };
 		B23364E32A7427C300BC7B8B /* OpenGLShaderUniform.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLShaderUniform.hpp; sourceTree = "<group>"; };
+		B23364E82A74294400BC7B8B /* StringUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
+		B23364E92A74294400BC7B8B /* StringUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StringUtils.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -309,6 +313,7 @@
 			isa = PBXGroup;
 			children = (
 				B24076FF2A72431700221919 /* FileSystem.hpp */,
+				B23364E92A74294400BC7B8B /* StringUtils.hpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -317,6 +322,7 @@
 			isa = PBXGroup;
 			children = (
 				B24076FE2A72431700221919 /* FileSystem.cpp */,
+				B23364E82A74294400BC7B8B /* StringUtils.cpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -400,6 +406,7 @@
 				B23364DD2A74259600BC7B8B /* OpenGLRendererAPI.hpp in Headers */,
 				B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */,
 				B23364C72A72D2D300BC7B8B /* Input.hpp in Headers */,
+				B23364EB2A74294400BC7B8B /* StringUtils.hpp in Headers */,
 				B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */,
 				B23364C32A72D1E300BC7B8B /* OpenGLRendererContext.hpp in Headers */,
 			);
@@ -489,6 +496,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23364EA2A74294400BC7B8B /* StringUtils.cpp in Sources */,
 				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B23364D82A74253900BC7B8B /* RendererAPI.cpp in Sources */,
 				B24077182A72651400221919 /* Common.cpp in Sources */,

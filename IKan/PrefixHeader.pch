@@ -37,6 +37,7 @@
 #include "Core/EngineDirectoryManager.hpp"
 
 #include "Utils/FileSystem.hpp"
+#include "Utils/StringUtils.hpp"
 
 #include "Debug/Logger.hpp"
 #include "Debug/Timer.hpp"
