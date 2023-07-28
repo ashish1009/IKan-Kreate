@@ -57,16 +57,11 @@ namespace IKan
     
     // TODO: To Move Renderer Layer later
     {
-      uint32_t indices[] = {
-        0, 1, 2, 2, 3, 0
-      };
-      m_indexBuffer = IndexBuffer::CreateWithSize(indices, sizeof(indices));
-      
       float vertices[] = {
-        -0.5f, -0.5,
-         0.5f, -0.5,
-         0.5f,  0.5,
-        -0.5f,  0.5
+        -0.5f, -0.5, 0.0,
+         0.5f, -0.5, 0.0,
+         0.5f,  0.5, 0.0,
+        -0.5f,  0.5, 0.0
       };
       m_vertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
       
@@ -76,16 +71,15 @@ namespace IKan
       pipelineSpec.layout =
       {
         { "a_Position",     ShaderDataType::Float3 },
-        { "a_Color",        ShaderDataType::Float4 },
-        { "a_TexCoords",    ShaderDataType::Float2 },
-        { "a_TexIndex",     ShaderDataType::Float },
-        { "a_TilingFactor", ShaderDataType::Float },
-        { "a_ObjectID",     ShaderDataType::Int },
       };
 
       // Create the Pipeline instnace
       m_pipeline = Pipeline::Create(pipelineSpec);
 
+      uint32_t indices[] = {
+        0, 1, 2, 2, 3, 0
+      };
+      m_indexBuffer = IndexBuffer::CreateWithSize(indices, sizeof(indices));
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -133,6 +127,16 @@ namespace IKan
       // Store the frame time difference
       m_timeStep = m_window->GetTimestep();
 
+      // TODO: To Move Renderer Layer later
+      {
+        Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
+        m_pipeline->GetSpecification().shader->Bind();
+        m_pipeline->GetSpecification().shader->SetUniformMat4("u_ViewProjection", glm::mat4(1.0f));
+        
+        m_pipeline->Bind();
+        Renderer::DrawIndexed(m_pipeline, 6);
+      }
+      
       // Update the client application
       OnUpdate(m_timeStep);
       
