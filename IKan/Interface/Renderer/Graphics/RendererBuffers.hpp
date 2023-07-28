@@ -105,4 +105,24 @@ namespace IKan
     /// - Note: Size of single indices is taken as size of uint32_t (4)
     [[nodiscard]] static Ref<IndexBuffer> CreateWithCount(void* data, uint32_t count);    
   };
+  
+  // Vertex Buffer ---------------------------------------------------------------------------------------------------
+  /// This is the interface class for creating renderer Vertex Buffer
+  class VertexBuffer
+  {
+  public:
+    /// This is the default virtual destuctor for vertex buffer
+    virtual ~VertexBuffer() = default;
+
+    /// This function creates the vertex buffer. Buffer data is passed and stored as static in GPU
+    /// - Parameters:
+    ///   - data: Data of vertex Buffer
+    ///   - size: Size of vertex Buffer
+    [[nodiscard]] static Ref<VertexBuffer> Create(void* data, uint32_t size);
+    /// This function creates the vertex buffer. Buffer size is passed to reserve the memory in GPU. Data to passed
+    /// later dynamically
+    /// - Parameter size: Size of vertex buffer
+    [[nodiscard]] static Ref<VertexBuffer> Create(uint32_t size);
+  };
+
 } // namespace IKan

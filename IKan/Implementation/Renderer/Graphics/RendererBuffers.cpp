@@ -67,6 +67,103 @@ namespace IKan
     
   }
 
+  // Buffer Layout ---------------------------------------------------------------------------------------------------
+  BufferLayout::BufferLayout(const std::initializer_list<BufferElement>& elements)
+  : m_elements(elements)
+  {
+    CalculateOffsetAndStride();
+  }
+  
+  void BufferLayout::CalculateOffsetAndStride()
+  {
+    size_t offset = 0;
+    m_stride = 0;
+    for (auto& element : m_elements)
+    {
+      element.offset = offset;
+      offset += element.size;
+      m_stride += element.size;
+    }
+  }
+  
+  const std::vector<BufferElement> BufferLayout::GetElements() const
+  {
+    return m_elements;
+  }
+  uint32_t BufferLayout::GetStride() const
+  {
+    return m_stride;
+  }
+  std::vector<BufferElement>::iterator BufferLayout::begin()
+  {
+    return m_elements.begin();
+  }
+  std::vector<BufferElement>::iterator BufferLayout::end()
+  {
+    return m_elements.end();
+  }
+  std::vector<BufferElement>::const_iterator BufferLayout::begin() const
+  {
+    return m_elements.begin();
+  }
+  std::vector<BufferElement>::const_iterator BufferLayout::end() const
+  {
+    return m_elements.end();
+  }
+  
+  BufferLayout::BufferLayout(const BufferLayout& other)
+  : m_stride(other.m_stride)
+  {
+    for (const auto& elem : other.m_elements)
+    {
+      m_elements.emplace_back(elem);
+    }
+  }
+  BufferLayout& BufferLayout::operator=(const BufferLayout& other)
+  {
+    m_stride = other.m_stride;
+    m_elements.clear();
+    for (const auto& elem : other.m_elements)
+    {
+      m_elements.emplace_back(elem);
+    }
+    return *this;
+  }
+  BufferLayout& BufferLayout::operator=(BufferLayout&& other)
+  {
+    m_stride = other.m_stride;
+    m_elements.clear();
+    for (const auto& elem : other.m_elements)
+    {
+      m_elements.emplace_back(elem);
+    }
+    return *this;
+  }
+  
+  // Vertex Buffer ---------------------------------------------------------------------------------------------------
+  Ref<VertexBuffer> VertexBuffer::Create(void *data, uint32_t size)
+  {
+    switch (Renderer::GetApi())
+    {
+      case Renderer::Api::OpenGl:
+      case Renderer::Api::None:
+      default:
+        IK_ASSERT(false, "Invalid Renderer API (None)"); break;
+    }
+  }
+  
+  Ref<VertexBuffer> VertexBuffer::Create(uint32_t size)
+  {
+    switch (Renderer::GetApi())
+    {
+      case Renderer::Api::OpenGl:
+      case Renderer::Api::None:
+      default:
+        IK_ASSERT(false, "Invalid Renderer API (None)"); break;
+    }
+  }
+
+  // Index Buffer ---------------------------------------------------------------------------------------------------
   Ref<IndexBuffer> IndexBuffer::CreateWithSize(void *data, uint32_t size)
   {
     switch (Renderer::GetApi())
