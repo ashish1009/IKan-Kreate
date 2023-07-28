@@ -13,22 +13,37 @@ namespace IKan
   OpenGLIndexBuffer::OpenGLIndexBuffer(void *data, uint32_t size)
   : m_size(size)
   {
-
+    glGenBuffers(1, &m_rendererID);
+    
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_rendererID);
+    glBufferData(GL_ELEMENT_ARRAY_BUFFER, m_size, data, GL_STATIC_DRAW);
+    
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "Creating Open GL Index Buffer ");
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "------------------------------");
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "  Renderer ID            {0}", m_rendererID);
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "  Size of single Indices {0} B", SizeOfSingleIndices);
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "  Size                   {0} B", m_size);
   }
   
   OpenGLIndexBuffer::~OpenGLIndexBuffer()
   {
-
+    glDeleteBuffers(1, &m_rendererID);
+    
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "Destroying Open GL Index Buffer ");
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "--------------------------------");
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "  Renderer ID            {0}", m_rendererID);
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "  Size of single Indices {0} B", SizeOfSingleIndices);
+    IK_LOG_DEBUG(LogModule::IndexBuffer, "  Size                   {0} B", m_size);
   }
   
   void OpenGLIndexBuffer::Bind() const
   {
-
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_rendererID);
   }
   
   void OpenGLIndexBuffer::Unbind() const
   {
-
+    glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
   }
   
   RendererID OpenGLIndexBuffer::GetRendererID() const
