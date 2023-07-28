@@ -22,17 +22,14 @@ extern std::string IKanVersion;
 /// - log <Save Log Direcgtory Path Path>
 int main(int argc, const char * argv[])
 {
-#ifdef IK_ENABLE_LOG
   // Log File Path. If External arguments are not given then logs to be saved at binary dir
   std::filesystem::path logDirectoryPath = "Log";
-#endif
   std::filesystem::path engineInstallPath = "";
 
   if (argc > 1)
   {
     for (int32_t i = 1; i < argc; i++)
     {
-#ifdef IK_ENABLE_LOG
       // Save the log at Dir
       if (strcmp(argv[i], "-log") == 0)
       {
@@ -42,7 +39,6 @@ int main(int argc, const char * argv[])
       {
         engineInstallPath = argv[++i];
       }
-#endif
     }
   }
   
@@ -62,8 +58,8 @@ int main(int argc, const char * argv[])
   std::cout << "      Date and Time                       : " << timeAsString;
 #ifdef IK_ENABLE_LOG
   std::cout << "      Saving Logs at (Relative to Binary) : " << logDirectoryPath.c_str() << std::endl;
-  std::cout << "      Engine Install Path                 : " << engineInstallPath.c_str() << std::endl;
 #endif
+  std::cout << "      Engine Install Path                 : " << engineInstallPath.c_str() << std::endl;
   std::cout << " ------------------------------------------------------------------------------------------------ \n";
 
   InitializeEngine(logDirectoryPath.string());
