@@ -9,10 +9,13 @@
 
 // TODO: To Move rendere layer later
 #include "Shader.hpp"
+#include "RendererBuffers.hpp"
 
 namespace IKan
 {
+  // TODO: To Move rendere layer later
   static Ref<Shader> m_Shader;
+  static Ref<IndexBuffer> m_indexBuffer;
   
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
@@ -52,6 +55,12 @@ namespace IKan
     // TODO: To Move Renderer Layer later
     {
       m_Shader = Shader::Create(CoreAssetPath("Shaders/QuadShader.glsl"));
+      
+      uint32_t indices[] = {
+        0, 1, 2, 2, 3, 0
+      };
+      
+      m_indexBuffer = IndexBuffer::CreateWithSize(indices, sizeof(indices));
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
