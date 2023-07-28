@@ -24,6 +24,13 @@ namespace IKan
       std::string debugName;
       Ref<Shader> shader;
       BufferLayout layout;
-    };    
+    };
+    
+    /// This is the virtual default destructor for Pipeline
+    virtual ~Pipeline() = default;
+
+    /// This function creates the instance of Pipeline based on the renderer
+    /// - Parameter spec: Pipeline specificaions
+    [[nodiscard]] static Ref<Pipeline> Create(const Specification& spec);
   };
 } // namespace IKan
