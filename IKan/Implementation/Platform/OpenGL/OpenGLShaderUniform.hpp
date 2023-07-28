@@ -86,4 +86,47 @@ namespace IKan
     friend class OpenGLShader;
     friend class OpenGLShaderUniformBufferDeclaration;
   };
+  
+  /// Store all the Uniform in a vector
+  class OpenGLShaderUniformBufferDeclaration : public ShaderUniformBufferDeclaration
+  {
+  public:
+    /// This constructor create the Unfirm buffer declaration with name and domain
+    /// - Parameters:
+    ///   - name: name of uniform
+    ///   - domain: domain of uniform
+    OpenGLShaderUniformBufferDeclaration(const std::string& name, ShaderDomain domain);
+    /// Default destructor that delete the buffer
+    virtual ~OpenGLShaderUniformBufferDeclaration();
+    
+    /// This function finds the uniform declaretion by name
+    /// - Parameter name: name of uniform
+    ShaderUniformDeclaration* FindUniform(const std::string& name) override;
+    /// This function pushes the unifom in vector
+    /// - Parameter uniform: uniform pointer to be pushed
+    void PushUniform(OpenGLShaderUniformDeclaration* uniform);
+    
+    /// This function returns the name of buffer
+    const std::string& GetName() const override;
+    /// This function returns the register of buffer
+    uint32_t GetRegister() const override;
+    /// This function returns the size of buffer
+    uint32_t GetSize() const override;
+    /// This function returns all the declaration in buffer
+    const std::vector<ShaderUniformDeclaration*>& GetUniformDeclarations() const override;
+    /// This function return the domain of shader
+    ShaderDomain GetDomain() const;
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLShaderUniformBufferDeclaration)
+    
+  private:
+    std::string m_name;
+    uint32_t m_register, m_size;
+    std::vector<ShaderUniformDeclaration*> m_uniforms;
+    ShaderDomain m_domain;
+    
+    friend class Shader;
+    friend class OpenGLShader;
+  };
+
 } // namespace IKan
