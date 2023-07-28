@@ -6,6 +6,7 @@
 //
 
 #include "Pipeline.hpp"
+#include "Platform/OpenGL/OpenGLPipeline.hpp"
 
 namespace IKan
 {
@@ -13,7 +14,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLPipeline>(spec);
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Invalid Renderer API (None)"); break;
