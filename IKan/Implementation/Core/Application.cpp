@@ -63,6 +63,11 @@ namespace IKan
   {
     IK_PROFILE();
 
+    // TODO: To Move Renderer Layer later
+    {
+      m_Shader.reset();
+    }
+
     // Reset the window
     m_window.reset();
 

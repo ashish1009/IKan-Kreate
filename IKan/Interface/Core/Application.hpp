@@ -94,7 +94,7 @@ namespace IKan
     void ImguiRender();
 
     // Member Variables ----------------------------------------------------------------------------------------------
-    bool m_isRunning = true;
+    bool m_isRunning = false;
     TimeStep m_timeStep;
     Specification m_specificaion;
     Ref<Window> m_window;
