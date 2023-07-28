@@ -6,6 +6,7 @@
 //
 
 #include "Renderer.hpp"
+#include "Renderer/RendererStats.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
@@ -64,6 +65,16 @@ namespace IKan
     Shader::ResetLibrary();
 
     s_rendererData.reset();
+  }
+  
+  // Renderer Stats API ---------------------------------------------------------------------------------------------
+  void Renderer::ResetStatsEachFrame()
+  {
+    RendererStatistics::Get().ResetEachFrame();
+  }
+  void Renderer::ResetStats()
+  {
+    RendererStatistics::Get().ResetAll();
   }
   
   // Getters ---------------------------------------------------------------------------------------------------------

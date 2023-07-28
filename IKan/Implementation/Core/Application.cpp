@@ -6,6 +6,7 @@
 //
 
 #include "Application.hpp"
+#include "Renderer/RendererStats.hpp"
 
 // TODO: To Move rendere layer later
 #include "Shader.hpp"
@@ -140,6 +141,9 @@ namespace IKan
       
       // Clear Runtime Performance profiler
       PerformanceProfiler::Get()->Clear();
+      
+      // Reset Statistics each frame
+      RendererStatistics::Get().ResetEachFrame();
     }
     
     IK_LOG_INFO("", "--------------------------------------------------------------------------");

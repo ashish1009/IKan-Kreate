@@ -61,6 +61,13 @@ namespace IKan
     /// any Graphics API.
     static void Shutdown();
 
+    // Renderer Stats API ---------------------------------------------------------------------------------------------
+    /// This function resets the renderer Stats each frame
+    /// - Note: Only those stats will be reset that need to be reset each frame
+    static void ResetStatsEachFrame();
+    /// This function resets all the renderer stats
+    static void ResetStats();
+
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns the current API supported
     static Api GetApi();
