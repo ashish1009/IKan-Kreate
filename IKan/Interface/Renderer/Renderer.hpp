@@ -9,6 +9,10 @@
 
 namespace IKan
 {
+  // Forward Declaration
+  class Shader;
+  class Pipeline;
+
   /// All renderer ID type
   using RendererID = uint32_t;
 
@@ -60,6 +64,23 @@ namespace IKan
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns the current API supported
     static Api GetApi();
+    
+    // Draw Calls ---------------------------------------------------------------------------------------------------
+    /// This API draws a quad with pipeline and indexed count
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    static void DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count);
+    /// This API draws Lines Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - vertexCount: number of Indices
+    static void DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount);
+    /// This API draws Indexed Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    static void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count);
 
     MAKE_PURE_STATIC(Renderer);
   };

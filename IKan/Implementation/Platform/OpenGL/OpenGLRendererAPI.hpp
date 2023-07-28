@@ -54,5 +54,22 @@ namespace IKan
     ///   - pixelIDIndex: pixel index
     ///   - pixelData: pixel value
     void GetEntityIdFromPixels(int32_t mx, int32_t my, uint32_t pixelIDIndex, int32_t& pixelData) const override;
+    
+    /// This API draws a quad with pipeline and indexed count
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    void DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count) const override;
+    /// This API draws Lines Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - vertexCount: number of Indices (if 0 then use index buffer of Vertex array)
+    void DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount) const override;
+    /// This API draws Indexed Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const override;
+
   };
 } // namespace IKan

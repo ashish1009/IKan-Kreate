@@ -8,6 +8,7 @@
 #include "Renderer.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
 
 namespace IKan
 {
@@ -72,6 +73,22 @@ namespace IKan
     return s_rendererData->api;
   }
 
+  // Draw Calls -----------------------------------------------------------------------------------------------------
+  void Renderer::DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count)
+  {
+    s_rendererData->rendererApiInstance->DrawIndexed(pipeline, count);
+  }
+  
+  void Renderer::DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount)
+  {
+    s_rendererData->rendererApiInstance->DrawLines(pipeline, vertexCount);
+  }
+  
+  void Renderer::DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count)
+  {
+    s_rendererData->rendererApiInstance->DrawArrays(pipeline, count);
+  }
+  
   // Renderer Capabilities -------------------------------------------------------------------------------------------
   Renderer::Capabilities& Renderer::Capabilities::Get()
   {

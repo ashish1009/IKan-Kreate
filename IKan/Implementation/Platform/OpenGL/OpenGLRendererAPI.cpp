@@ -8,6 +8,8 @@
 #include <glad/glad.h>
 #include "OpenGLRendererAPI.hpp"
 #include "Renderer/Renderer.hpp"
+#include "Renderer/RendererStats.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
 
 namespace IKan
 {
@@ -93,4 +95,34 @@ namespace IKan
     glReadBuffer(GL_COLOR_ATTACHMENT0 + pixelIDIndex);
     glReadPixels(mx, my, 1, 1, GL_RED_INTEGER, GL_INT, &pixelData);
   }
+  
+  void OpenGLRendererAPI::DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count) const
+  {
+    pipeline->Bind();
+    glDrawElements(GL_TRIANGLES, (GLsizei)count, GL_UNSIGNED_INT, nullptr);
+    
+    // Unbinding Textures and va
+    glBindTexture(GL_TEXTURE_2D, 0);
+    pipeline->Unbind();
+    
+    RendererStatistics::Get().drawCalls++;
+  }
+  void OpenGLRendererAPI::DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount) const {
+    pipeline->Bind();
+    glDrawArrays(GL_LINES, 0, /* Vertex Offset */ (GLsizei)vertexCount);
+    
+    // Unbinding Textures and va
+    glBindTexture(GL_TEXTURE_2D, 0);
+    RendererStatistics::Get().drawCalls++;
+    pipeline->Unbind();
+  }
+  
+  void OpenGLRendererAPI::DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const
+  {
+    pipeline->Bind();
+    glDrawArrays(GL_TRIANGLES, 0, (GLsizei)count);
+    RendererStatistics::Get().drawCalls++;
+    pipeline->Unbind();
+  }
+
 } // namespace IKan
