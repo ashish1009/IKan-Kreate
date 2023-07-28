@@ -26,6 +26,7 @@ namespace IKan
     struct Specification
     {
       std::string name = "iKan";
+      std::string engineInstallPath;
 
       Renderer::Api renderingApi = Renderer::Api::None;
       Window::Specification windowSpecification;
@@ -101,11 +102,14 @@ namespace IKan
     inline static Application* s_instance;
   };
   
+  struct ApplicationData
+  {
+    std::string engineInstallPath;
+  };
+  
   /// Defination API for creating application instance.
   /// - Note: Only defination is defined in core. Declaration should be at client side based on the application they
   ///         want to create
-  /// - Parameters:
-  ///   - argc: Number of arguments
-  ///   - argv: Arguments
-  Scope<Application> CreateApplication(int argc, const char** argv);
+  /// - Parameter appData: Applcication Start Data
+  Scope<Application> CreateApplication(const ApplicationData& appData);
 } // namespace IKan

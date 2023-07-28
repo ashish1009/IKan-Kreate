@@ -25,6 +25,9 @@ namespace IKan
     //       create any Renderer Implementation
     Renderer::CreateRendererData(m_specificaion.renderingApi);
 
+    // Update the core engine directory path
+    CoreDirectory::SetPath(m_specificaion.engineInstallPath);
+
     // Create the window
     m_window = Window::Create(m_specificaion.windowSpecification);
     

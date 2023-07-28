@@ -5,13 +5,13 @@
       location = "group:README.md">
    </FileRef>
    <Group
-      location = "group:Build/Products/Debug/Log"
+      location = "group:Log"
       name = "Log">
       <FileRef
-         location = "group:IKan.log">
+         location = "group:Profiler.log">
       </FileRef>
       <FileRef
-         location = "group:Profiler.log">
+         location = "group:IKan.log">
       </FileRef>
    </Group>
    <Group

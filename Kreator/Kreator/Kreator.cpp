@@ -7,12 +7,13 @@
 
 #include <IKanEntryPoint.h>
 
-IKan::Scope<IKan::Application> IKan::CreateApplication(int argc, const char** argv)
+IKan::Scope<IKan::Application> IKan::CreateApplication(const ApplicationData& appData)
 {
   // Set up all the applicaiton specification
   IKan::Application::Specification applicationSpec;
  
   applicationSpec.name = "Kreator";
+  applicationSpec.engineInstallPath = appData.engineInstallPath;
   applicationSpec.renderingApi = IKan::Renderer::Api::OpenGl;
 
   // Window Specification
