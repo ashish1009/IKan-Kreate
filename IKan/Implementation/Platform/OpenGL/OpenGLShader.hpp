@@ -13,6 +13,11 @@
 
 namespace IKan
 {
+  // Maximum Texture slot supported by Senderer Shader Current Open GL Version 4.1 supports only 16 Texture slot in Shader
+  static constexpr uint32_t MaxTextureSlotsInShader = 16;
+  // Max Supported Shaders
+  static constexpr uint32_t MaxShaderSupported = 3;
+
   /// This is the Implementation class for Shader compiler for Open GL
   class OpenGLShader : public Shader
   {
@@ -51,12 +56,30 @@ namespace IKan
     /// - Parameter name: Name of structure
     ShaderStruct* FindStruct(const std::string& name);
 
+    /// This function returns the location of attribute in the shader
+    /// - Parameter name: attribute name
+    int32_t GetUniformLocation(const std::string& name);
+
+    // Attributes ---------------------------------------------------------------------------------------------------
+    /// This functions uploads the Int value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - value: Value of Uniform
+    void SetUniformInt1(const std::string& name, int32_t value);
+    /// This functions uploads the Int Array value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - values: Values of Uniform
+    ///   - count: Size of array
+    void SetIntArray(const std::string& name, int32_t* values, uint32_t count);
+
     // Member Variables ---------------------------------------------------------------------------------------------
     RendererID m_rendererID;
     std::string m_filePath;
     std::string m_name;
     std::unordered_map<GLenum /* GL Shader type */, std::string /* Shader code  */> m_shaderSourceCodeMap;
-    
+    std::unordered_map<std::string /* Attribute name */, int32_t /* Attribute location */> m_locationMap;
+
     std::vector<ShaderStruct*> m_structs; // Stores the structure in the shader
     std::vector<ShaderResourceDeclaration*> m_resources; // Stores the resources of shader like sampler 2D
     

@@ -101,6 +101,9 @@ namespace IKan
 
     // Parse shader and Store all the structures and uniforms in Shader class
     Parse();
+    
+    // Resolve the location of all uniforms
+    ResolveUniforms();
   }
   OpenGLShader::~OpenGLShader()
   {
@@ -422,4 +425,146 @@ namespace IKan
     return nullptr;
   }
 
+  void OpenGLShader::ResolveUniforms()
+  {
+    SHADER_LOG("  Resolving Uniform locations for '{0}'", m_name);
+    
+    // Uniform samplers for textures, cubemaps etc
+    SHADER_LOG("    Resolving Uniforms for Samplers...");
+    // Setting location of sampler uniform
+    uint32_t sampler = 0;
+    for (size_t i = 0; i < m_resources.size(); i++)
+    {
+      OpenGLShaderResourceDeclaration* resource = (OpenGLShaderResourceDeclaration*)m_resources[i];
+      int32_t location = GetUniformLocation(resource->m_name);
+      
+      // For single samplers
+      if (resource->GetCount() == 1)
+      {
+        resource->m_register = sampler;
+        if (location != -1)
+        {
+          SHADER_LOG("      Location : {0} for {1}[{2}]", sampler, resource->m_name, resource->GetCount());
+          SetUniformInt1(resource->m_name, (int32_t)sampler);
+        }
+        sampler++;
+      }
+      // For arrya of samplers
+      else if (resource->GetCount() > 1)
+      {
+        resource->m_register = 0;
+        
+        uint32_t count = resource->GetCount();
+        int32_t* samplers = iknew int32_t[count];
+        
+        for (uint32_t s = 0; s < count; s++)
+        {
+          samplers[s] = (int32_t)s;
+        }
+        SHADER_LOG("      Location : {0} to {1} for {2}[{3}]", 0, count, resource->GetName(), resource->GetCount());
+        SetIntArray(resource->GetName(), samplers, count);
+        ikdelete[] samplers;
+      }
+    } // for (size_t i = 0; i < resources_.size(); i++)
+    
+    // Unifrom resources of structors or fundamentals
+    std::shared_ptr<OpenGLShaderUniformBufferDeclaration> decls[3] =
+    {
+      m_vsMaterialUniformBuffer,
+      m_fsMaterialUniformBuffer,
+      m_gsMaterialUniformBuffer
+    };
+    
+    for (uint8_t shaderIdx = 0; shaderIdx < MaxShaderSupported; shaderIdx++)
+    {
+      auto decl = decls[shaderIdx];
+      if (!decl)
+      {
+        continue;
+      }
+      
+      SHADER_LOG("    Resolving Uniforms for Datatypes of '{0}' Shader...",
+                 ShaderUtils::ShaderNameFromInternalType((ShaderDomain)(shaderIdx + 1)));
+      
+      const std::vector<ShaderUniformDeclaration*>& uniforms = decl->GetUniformDeclarations();
+      for (size_t j = 0; j < uniforms.size(); j++)
+      {
+        OpenGLShaderUniformDeclaration* uniform = (OpenGLShaderUniformDeclaration*)uniforms[j];
+        
+        // Uniform Structures
+        if (uniform->GetType() == OpenGLShaderUniformDeclaration::Type::Struct)
+        {
+          const ShaderStruct& s = uniform->GetShaderUniformStruct();
+          const auto& fields = s.GetFields();
+          
+          // If Array of Structure
+          if (uniform->GetCount() > 1)
+          {
+            for (size_t l = 0; l < uniform->GetCount(); l++)
+            {
+              for (size_t k = 0; k < fields.size(); k++)
+              {
+                OpenGLShaderUniformDeclaration* field = (OpenGLShaderUniformDeclaration*)fields[k];
+                std::string uniformName = uniform->m_name + "[" + std::to_string(l) + "]." + field->m_name;
+                uint32_t location = (uint32_t)GetUniformLocation(uniformName);
+                field->m_locations.emplace_back(location);
+                SHADER_LOG("      Location : {0} for {1}[{3}].{2}", location, s.GetName(), field->GetName(), l);
+              } // for (size_t k = 0; k < fields.size(); k++)
+            } // for (size_t l = 0; l < uniform->GetCount(); l++)
+          }
+          else
+          { // if (uniform->GetCount() > 1)
+            // Single struct uniform
+            for (size_t k = 0; k < fields.size(); k++)
+            {
+              OpenGLShaderUniformDeclaration* field = (OpenGLShaderUniformDeclaration*)fields[k];
+              uint32_t location = (uint32_t)GetUniformLocation(uniform->m_name + "." + field->m_name);
+              field->m_locations.emplace_back(location);
+              SHADER_LOG("      Location : {0} for {1}.{2} [{3}]", location, s.GetName(), field->GetName(), field->GetCount());
+            }
+          } // else : if (uniform->GetCount() > 1)
+        }
+        else
+        { // if (uniform->GetType() == OpenGLShaderUniformDeclaration::Type::kStruct)
+          // Fundamental uniforms
+          uint32_t location = (uint32_t)GetUniformLocation(uniform->m_name);
+          uniform->m_locations.emplace_back(location);
+          SHADER_LOG("      Location : {0} for {1}[{2}]", location, uniform->GetName(), uniform->GetCount());
+        }
+      } // for (size_t j = 0; j < uniforms.size(); j++)
+    } // for (uint8_t shaderIdx = 0; shaderIdx < MaxShaderSupported; shaderIdx++)
+  }
+  
+  int32_t OpenGLShader::GetUniformLocation(const std::string& name)
+  {
+    if (m_locationMap.find(name) != m_locationMap.end())
+    {
+      return m_locationMap.at(name);
+    }
+    
+    int32_t location = glGetUniformLocation(m_rendererID, name.c_str());
+    if (-1 == location)
+    {
+      SHADER_LOG("Warning: uniform '{0}' doesnt exist", name);
+    }
+    m_locationMap[name] = location;
+    return location;
+  }
+
+  // Uniforms with name ----------------------------------------------------------------------------------------------
+  void OpenGLShader::SetUniformInt1(const std::string& name, int32_t value)
+  {
+    glUseProgram(m_rendererID);
+    glUniform1i(GetUniformLocation(name), value);
+  }
+  
+  void OpenGLShader::SetIntArray(const std::string& name, int32_t* values, uint32_t count)
+  {
+    glUseProgram(m_rendererID);
+    int32_t* textureArraySlotData = iknew int32_t[count];
+    memcpy(textureArraySlotData, values, count * sizeof(int32_t));
+    
+    glUniform1iv(GetUniformLocation(name), (GLsizei)count, textureArraySlotData);
+    ikdelete[] textureArraySlotData;
+  }
 } // namespace IKan
