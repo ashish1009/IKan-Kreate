@@ -114,5 +114,11 @@ namespace IKan
     /// This function creates the shader instance based on the renderer API supported by IKan
     /// - Parameter shaderFilePath: Shader file full path
     [[nodiscard]] static Ref<Shader> Create(const std::string& shaderFilePath);
+    
+    /// This function deletes all the Texture present int the map
+    static void ResetLibrary();
+
+  private:
+    inline static std::unordered_map<std::string /* File Path */, Ref<Shader>> s_shaders;
   };
 } // namespace IKan

@@ -7,6 +7,7 @@
 
 #include "Renderer.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
+#include "Renderer/Graphics/Shader.hpp"
 
 namespace IKan
 {
@@ -57,6 +58,10 @@ namespace IKan
   void Renderer::Shutdown()
   {
     IK_PROFILE();
+    
+    // Reset Shader Library
+    Shader::ResetLibrary();
+
     s_rendererData.reset();
   }
   
