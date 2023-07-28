@@ -61,3 +61,5 @@
 #include <Renderer/Graphics/Shader.hpp>
 #include <Renderer/Graphics/RendererBuffers.hpp>
 #include <Renderer/Graphics/Pipeline.hpp>
+
+#include <Camera/Camera.hpp>
