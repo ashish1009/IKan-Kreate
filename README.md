@@ -69,9 +69,9 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Renderer API class
   - Shader / String Utils
   - Vertex Buffer / Index Buffer
+  - Pipeline
 
 ## Upcoming Release Tags  
-  - Pipeline
   - Camera (Scene / Editor / Fixed)
   
 ------------------------------------------------------------------------------------------------------------------  

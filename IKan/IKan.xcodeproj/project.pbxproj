@@ -58,6 +58,8 @@
 		B233651D2A743D0E00BC7B8B /* Pipeline.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233651B2A743D0E00BC7B8B /* Pipeline.hpp */; };
 		B23365222A743E8500BC7B8B /* OpenGLPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365202A743E8500BC7B8B /* OpenGLPipeline.cpp */; };
 		B23365232A743E8500BC7B8B /* OpenGLPipeline.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365212A743E8500BC7B8B /* OpenGLPipeline.hpp */; };
+		B233652A2A7440CD00BC7B8B /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365282A7440CD00BC7B8B /* Camera.cpp */; };
+		B233652B2A7440CD00BC7B8B /* Camera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365292A7440CD00BC7B8B /* Camera.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -142,6 +144,8 @@
 		B233651B2A743D0E00BC7B8B /* Pipeline.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Pipeline.hpp; sourceTree = "<group>"; };
 		B23365202A743E8500BC7B8B /* OpenGLPipeline.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLPipeline.cpp; sourceTree = "<group>"; };
 		B23365212A743E8500BC7B8B /* OpenGLPipeline.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLPipeline.hpp; sourceTree = "<group>"; };
+		B23365282A7440CD00BC7B8B /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		B23365292A7440CD00BC7B8B /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -306,6 +310,22 @@
 			path = Shaders;
 			sourceTree = "<group>";
 		};
+		B23365262A7440BC00BC7B8B /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B23365292A7440CD00BC7B8B /* Camera.hpp */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		B23365272A7440C300BC7B8B /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B23365282A7440CD00BC7B8B /* Camera.cpp */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		B24076DC2A72391000221919 = {
 			isa = PBXGroup;
 			children = (
@@ -345,6 +365,7 @@
 				B21FAA332A728F3C009EED1F /* Event */,
 				B24077022A72437500221919 /* Core */,
 				B23364842A72CE4000BC7B8B /* Renderer */,
+				B23365262A7440BC00BC7B8B /* Camera */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -356,6 +377,7 @@
 				B240771B2A72664D00221919 /* Debug */,
 				B24077152A72650600221919 /* Core */,
 				B23364852A72CE4700BC7B8B /* Renderer */,
+				B23365272A7440C300BC7B8B /* Camera */,
 				B21048192A72CA6A00FA8CF2 /* Platform */,
 			);
 			path = Implementation;
@@ -446,6 +468,7 @@
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B23364E12A74270000BC7B8B /* ShaderUniform.hpp in Headers */,
 				B23365152A74381300BC7B8B /* OpenGLRendererBuffers.hpp in Headers */,
+				B233652B2A7440CD00BC7B8B /* Camera.hpp in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
 				B23364BA2A72D14800BC7B8B /* RendererContext.hpp in Headers */,
 				B23364E52A7427C300BC7B8B /* OpenGLShaderUniform.hpp in Headers */,
@@ -571,6 +594,7 @@
 				B23365142A74381300BC7B8B /* OpenGLRendererBuffers.cpp in Sources */,
 				B210481E2A72CA9000FA8CF2 /* MacWindow.cpp in Sources */,
 				B21FAA4D2A7297DA009EED1F /* Application.cpp in Sources */,
+				B233652A2A7440CD00BC7B8B /* Camera.cpp in Sources */,
 				B23364B92A72D14800BC7B8B /* RendererContext.cpp in Sources */,
 				B23365102A74370700BC7B8B /* RendererBuffers.cpp in Sources */,
 				B23364C62A72D2D300BC7B8B /* MacInput.cpp in Sources */,
