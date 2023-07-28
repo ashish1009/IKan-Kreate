@@ -22,6 +22,9 @@ namespace IKan
     ~OpenGLPipeline();
         
   private:
+    /// This function invalidates the pipeline with new specificaion
+    void Invalidate();
+    
     RendererID m_rendererID;
     Specification m_specification;
   };

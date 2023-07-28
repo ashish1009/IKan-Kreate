@@ -16,7 +16,7 @@ namespace IKan
 f(None) f(IKan) f(Timer) f(StringUtils)\
 f(Application) f(Window) \
 f(Renderer) \
-f(GraphicsContext) f(Shader) f(IndexBuffer) f(VertexBuffer)
+f(GraphicsContext) f(Shader) f(IndexBuffer) f(VertexBuffer) f(Pipeline)
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)

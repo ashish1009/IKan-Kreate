@@ -10,13 +10,14 @@
 // TODO: To Move rendere layer later
 #include "Shader.hpp"
 #include "RendererBuffers.hpp"
+#include "Pipeline.hpp"
 
 namespace IKan
 {
   // TODO: To Move rendere layer later
-  static Ref<Shader> m_Shader;
   static Ref<IndexBuffer> m_indexBuffer;
   static Ref<VertexBuffer> m_vertexBuffer;
+  static Ref<Pipeline> m_pipeline;
   
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
@@ -55,8 +56,6 @@ namespace IKan
     
     // TODO: To Move Renderer Layer later
     {
-      m_Shader = Shader::Create(CoreAssetPath("Shaders/QuadShader.glsl"));
-      
       uint32_t indices[] = {
         0, 1, 2, 2, 3, 0
       };
@@ -69,6 +68,23 @@ namespace IKan
         -0.5f,  0.5
       };
       m_vertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
+      
+      Pipeline::Specification pipelineSpec;
+      pipelineSpec.debugName = "Quad Renderer";
+      pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/QuadShader.glsl"));
+      pipelineSpec.layout =
+      {
+        { "a_Position",     ShaderDataType::Float3 },
+        { "a_Color",        ShaderDataType::Float4 },
+        { "a_TexCoords",    ShaderDataType::Float2 },
+        { "a_TexIndex",     ShaderDataType::Float },
+        { "a_TilingFactor", ShaderDataType::Float },
+        { "a_ObjectID",     ShaderDataType::Int },
+      };
+
+      // Create the Pipeline instnace
+      m_pipeline = Pipeline::Create(pipelineSpec);
+
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -82,9 +98,9 @@ namespace IKan
 
     // TODO: To Move Renderer Layer later
     {
+      m_pipeline.reset();
       m_vertexBuffer.reset();
       m_indexBuffer.reset();
-      m_Shader.reset();
     }
 
     // Reset the window
