@@ -11,6 +11,40 @@
 
 namespace IKan
 {
+  enum class TextureFormat
+  {
+    None = 0,
+    RGBA8, RGBA, RED,
+    R32I, RED_INTEGER,
+    DEPTH_COMPONENT
+  };
+  
+  enum class TextureType
+  {
+    None = 0,
+    Texture2D,
+  };
+  
+  enum class TextureFilter
+  {
+    None = 0,
+    Linear,
+    Nearest,
+  };
+  
+  enum class TextureWrap
+  {
+    None = 0,
+    Clamp,
+    Repeat
+  };
+  
+  enum class TextureAttachment
+  {
+    None = 0,
+    Color, Depth
+  };
+
   class Image
   {
   public:
