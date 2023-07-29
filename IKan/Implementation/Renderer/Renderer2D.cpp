@@ -98,6 +98,38 @@ namespace IKan
   };
   static Scope<Renderer2DData> s_commonData;
 
+  
+  /// This structure holds the common batch renderer data for Quads, circle and lines
+  struct CommonBatchData
+  {
+    // Lambda to load the camera data to shdaer
+    const std::function<void(Ref<Shader>, const glm::mat4&)> loadCamToShader = [](Ref<Shader> shader,
+                                                                                  const glm::mat4& camViewProjMat)
+    {
+      shader->Bind();
+      shader->SetUniformMat4("u_ViewProjection", camViewProjMat);
+      shader->Unbind();
+    };
+    
+    // Max element and vertex to be rendered in single batch
+    uint32_t maxElement = 0;
+    uint32_t maxVertices = 0;
+    
+    Ref<Pipeline> pipeline;
+    Ref<VertexBuffer> vertexBuffer;
+    Ref<IndexBuffer> indexBuffer;
+    Ref<Shader> shader;
+    
+    /// Common Batch Data Destructor
+    virtual ~CommonBatchData()
+    {
+      pipeline.reset();
+      vertexBuffer.reset();
+      indexBuffer.reset();
+      shader.reset();
+    }
+  };
+  
   void Renderer2D::Initialise()
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
