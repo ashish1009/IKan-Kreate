@@ -7,6 +7,7 @@
 
 #include "Renderer2D.hpp"
 #include "Renderer/Renderer.hpp"
+#include "Renderer/TextRenderer.hpp"
 #include "Renderer/RendererStats.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Texture.hpp"
@@ -707,11 +708,14 @@ namespace IKan
     {
       s_lineData->StartBatch(camViewProjMat);
     }
+    
+    TextRenderer::BeginBatch(camViewProjMat);
   }
   
   void Renderer2D::EndBatch()
   {
     Flush();
+    TextRenderer::EndBatch();
   }
 
   void Renderer2D::Flush() {

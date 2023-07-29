@@ -115,4 +115,39 @@ namespace IKan
     
     s_textData.reset();
   }
+  
+  void TextRenderer::BeginBatch(const glm::mat4 &camViewProjMat)
+  {
+    // Update camera to shader
+    s_textData->shader->Bind();
+    s_textData->shader->SetUniformMat4("v_Projection", camViewProjMat);
+    
+    NextBatch();
+  }
+  
+  void TextRenderer::EndBatch()
+  {
+    uint32_t dataSize = (uint32_t)((uint8_t*)s_textData->vertexBufferPtr - (uint8_t*)s_textData->vertexBufferBasePtr);
+    s_textData->vertexBuffer->SetData( s_textData->vertexBufferBasePtr, dataSize);
+    
+    // Render the Scene
+    s_textData->shader->Bind();
+    for (int j = 0; j < s_textData->numSlotsUsed; j ++)
+    {
+      s_textData->charTextures[j]->Bind(j);
+    }
+    Renderer::DrawArrays(s_textData->pipeline, 6 * s_textData->numSlotsUsed);
+  }
+  
+  void TextRenderer::NextBatch()
+  {
+    s_textData->vertexBufferPtr = s_textData->vertexBufferBasePtr;
+    s_textData->numSlotsUsed = 0;
+  }
+  
+  void TextRenderer::Flush() {
+    EndBatch();
+    NextBatch();
+  }
+
 }
