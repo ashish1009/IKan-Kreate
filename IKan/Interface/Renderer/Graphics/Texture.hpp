@@ -102,7 +102,7 @@ namespace IKan
     ///   - spriteSize: number of blocks to be taken at one time from sprite
     ///   - cellSize: size of block in pixel to be used for 1 block
     Sprite(const Ref<Image>& image,const glm::vec2& min,const glm::vec2& max, const glm::vec2& coords = {0.0f, 0.0f},
-               const glm::vec2& spriteSize = {1.0f, 1.0f}, const glm::vec2& cellSize = {16.0f, 16.0f});
+           const glm::vec2& spriteSize = {1.0f, 1.0f}, const glm::vec2& cellSize = {16.0f, 16.0f});
     
     /// Default destructor
     ~Sprite() = default;
@@ -138,4 +138,26 @@ namespace IKan
     glm::vec2 m_coords;
   };
 
+  /// This is the interface class to create the Texture
+  class Texture
+  {
+  public:
+    /// This is the NON Image Texture specification
+    struct Specification
+    {
+      bool debugLog = true;
+      
+      int32_t width = 1600;
+      int32_t height = 900;
+      
+      TextureFormat internalFormat = TextureFormat::RGBA8;
+      TextureFormat dataFormat = TextureFormat::RGBA;
+      TextureType type = TextureType::Texture2D;
+      TextureWrap wrap = TextureWrap::Clamp;
+      TextureFilter filter = TextureFilter::Linear;
+      
+      void* data = nullptr;
+      uint32_t size = 0;
+    };
+  };
 } // namespace IKan
