@@ -7,6 +7,7 @@
 
 #include "RenderPass.hpp"
 #include "Renderer/Renderer.hpp"
+#include "Platform/OpenGL/OpenGLRenderPass.hpp"
 
 namespace IKan
 {
@@ -14,7 +15,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLRenderPass>(spec);
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Invalid Renderer API (None)"); break;

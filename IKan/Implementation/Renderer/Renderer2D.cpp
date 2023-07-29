@@ -35,8 +35,6 @@ namespace IKan
     /// This function initilaise the full screen quad data
     FullScreenQuad()
     {
-      IK_LOG_TRACE(LogModule::Renderer, "Initialising Full Screen Quad Data");
-      
       // Create vertes Buffer
       vertexBuffer = VertexBuffer::Create((void*)&vertices, sizeof(vertices));
       
@@ -72,17 +70,17 @@ namespace IKan
       // Create white texture
       whiteTexture = Texture::Create(textureSpec);
       
-      IK_LOG_TRACE(LogModule::Renderer, "Initialized Fullscreen Quad Data ");
-      IK_LOG_TRACE(LogModule::Renderer, "-----------------------------------------");
-      IK_LOG_TRACE(LogModule::Renderer, "  Vertex Buffer used               {0} B", sizeof(vertices));
-      IK_LOG_TRACE(LogModule::Renderer, "  Shader used                      {0}", pipelineSpec.shader->GetName());
+      IK_LOG_TRACE(LogModule::Renderer2D, "Initialized Fullscreen Quad Data ");
+      IK_LOG_TRACE(LogModule::Renderer2D, "-----------------------------------------");
+      IK_LOG_TRACE(LogModule::Renderer2D, "  Vertex Buffer used               {0} B", sizeof(vertices));
+      IK_LOG_TRACE(LogModule::Renderer2D, "  Shader used                      {0}", pipelineSpec.shader->GetName());
     }
   };
   static Scope<FullScreenQuad> s_fullscreenQuadData;
   
-#define BATCH_INFO(...) IK_CORE_INFO(LogModule::Renderer2D, __VA_ARGS__)
-#define BATCH_TRACE(...) IK_CORE_TRACE(LogModule::Renderer2D, __VA_ARGS__)
-#define BATCH_WARN(...) IK_CORE_WARN(LogModule::Renderer2D, __VA_ARGS__)
+#define BATCH_INFO(...) IK_LOG_INFO(LogModule::Renderer2D, __VA_ARGS__)
+#define BATCH_TRACE(...) IK_LOG_TRACE(LogModule::Renderer2D, __VA_ARGS__)
+#define BATCH_WARN(...) IK_LOG_WARN(LogModule::Renderer2D, __VA_ARGS__)
   
   static constexpr glm::vec2 TextureCoords[] =
   {
@@ -367,13 +365,44 @@ namespace IKan
   };
   static Scope<LineData> s_lineData;
   
-  void Renderer2D::Initialise()
+  void Renderer2D::Initialise(uint32_t maxQuads, uint32_t maxCirlces, uint32_t maxLines)
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
+
+    BATCH_INFO("Initialising the Batch Renderer 2D ");
+    BATCH_INFO("-----------------------------------");
+    
+    if (!s_commonData)
+    {
+      s_commonData = CreateScope<Renderer2DData>();
+      
+      // Create the Render pass
+      RenderPass::Specification rendererPassSpec;
+      rendererPassSpec.debugName = "Renderer 2D";
+      
+      // Create Framebuffer for Render Pass
+      FrameBuffer::Specification fbSpec;
+      fbSpec.attachments =
+      {
+        FrameBuffer::Attachments::TextureFormat::RGBA8,
+        FrameBuffer::Attachments::TextureFormat::R32I,
+        FrameBuffer::Attachments::TextureFormat::Depth24Stencil
+      };
+      
+      rendererPassSpec.targetFramebuffer = FrameBuffer::Create(fbSpec);
+      s_commonData->renderPass = RenderPass::Create(rendererPassSpec);
+    }
   }
   
   void Renderer2D::Shutdown()
   {
+    // Destroy the Render Pass for Renderer 2D
+    if (s_commonData)
+    {
+      s_commonData.reset();
+    }
+    
+    // Destroy Full screen data
     s_fullscreenQuadData.reset();
   }
   

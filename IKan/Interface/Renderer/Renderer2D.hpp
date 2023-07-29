@@ -17,7 +17,11 @@ namespace IKan
   {
   public:
     /// This function initialzes the Batch renderer. Create All buffers needed to store Data (Both Renderer and CPU)
-    static void Initialise();
+    /// - Parameters:
+    ///   - maxQuads: Max Quad to render in one batch
+    ///   - maxCirlces: Max Circles to render in one batch
+    ///   - maxLines: Max Lines to render in one batch
+    static void Initialise(uint32_t maxQuads, uint32_t maxCirlces, uint32_t maxLines);
     /// This functio dhutdown the batch renderer and destoy all the buffer reserved on initialize
     static void Shutdown();
     

@@ -58,7 +58,7 @@ namespace IKan
     IK_PROFILE();
     s_rendererData->rendererApiInstance = RendererAPI::Create();
     
-    Renderer2D::Initialise();
+    Renderer2D::Initialise(10, 10, 10);
   }
   
   void Renderer::Shutdown()
