@@ -41,4 +41,14 @@ namespace IKan
     { ".ttf", AssetType::Font },
   };
 
+  namespace AssetUtils
+  {
+    /// This function return the asset type from string
+    /// - Parameter assetType: asset type as string
+    AssetType AssetTypeFromString(const std::string& assetType);
+    /// This function retutns the asset type as string
+    /// - Parameter assetType: Asset type
+    const char* AssetTypeToString(AssetType assetType);
+  } // namespace AssetUtils
+
 } // namespace IKan
