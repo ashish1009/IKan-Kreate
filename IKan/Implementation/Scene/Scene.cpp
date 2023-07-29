@@ -6,23 +6,33 @@
 //
 
 #include "Scene.hpp"
+#include "Scene/Entity.hpp"
 
 namespace IKan
 {
-  Scene::Scene()
+  /// This function resize/reserve the registry capcity
+  template<typename... Component>
+  static void ReserveRegistry(ComponentGroup<Component...>, entt::registry& registry, int32_t capacity)
+  {
+    registry.reserve<Component...>(capacity);
+  }
+
+  Ref<Scene> Scene::Create(uint32_t maxEntityCapacity)
+  {
+    return CreateRef<Scene>(maxEntityCapacity);
+  }
+
+  Scene::Scene(uint32_t maxEntityCapacity)
+  : m_registryCapacity(maxEntityCapacity)
   {
     IK_PROFILE();
-    IK_LOG_TRACE(LogModule::Scene, "Creating Scene ...");  }
+    IK_LOG_TRACE(LogModule::Scene, "Creating Scene ...");
+    ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
+  }
 
   Scene::~Scene()
   {
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Scene, "Destroying Scene!!!");
-  }
-  
-  /// This function creates the instance of EnTT Scene
-  Ref<Scene> Scene::Create()
-  {
-    return CreateRef<Scene>();
   }
 } // namespace IKan

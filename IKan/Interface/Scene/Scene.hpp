@@ -13,19 +13,26 @@
 
 namespace IKan
 {
+  class Entity;
+  
   class Scene
   {
   public:
     /// This is the default constructor of EnTT Scene
-    Scene();
+    /// - Parameters:
+    ///   - maxEntityCapacity: Max Entity capacity to reserve
+    Scene(uint32_t maxEntityCapacity = 200000);
     /// This is the default destructor of EnTT Scene
     ~Scene();
     
     /// This function creates the instance of EnTT Scene
-    static Ref<Scene> Create();
+    /// - Parameters:
+    ///   - maxEntityCapacity: Max Entity capacity to reserve
+    static Ref<Scene> Create(uint32_t maxEntityCapacity = 200000);
     
   private:
     entt::registry m_registry;
+    uint32_t m_registryCapacity = 0;
 
     friend class Entity;
   };
