@@ -23,6 +23,14 @@ namespace IKan
     OpenGLImage(const std::string& filePath, bool linear);
     /// Default destructor that delete the texture
     virtual ~OpenGLImage();
+    
+  private:
+    RendererID m_rendererID = 0;
+    int32_t m_width = 1600;
+    int32_t m_height = 900;
+    int32_t m_channel = 0;
+    uint32_t m_size = 0;
+    std::string m_filePath = "", m_name = "";
   };
   
   namespace TextureUtils

@@ -5,7 +5,9 @@
 //  Created by Ashish . on 29/07/23.
 //
 
+#include <stb_image.h>
 #include "OpenGLTexture.hpp"
+#include "Renderer/RendererStats.hpp"
 
 namespace IKan
 {
@@ -157,8 +159,83 @@ namespace IKan
   } // namespace textureUtils
   
   OpenGLImage::OpenGLImage(const std::string& filePath, bool linear)
+  : m_filePath(filePath), m_name(Utils::String::GetFileNameFromPath(filePath))
   {
+    // Invert the texture. as by default open gl load inverted vertically
+    stbi_set_flip_vertically_on_load(1);
     
+    // Load the file with stb image API
+    void* data = stbi_load(m_filePath.c_str(), &m_width, &m_height, &m_channel, 0 /* desired_channels */);
+    
+    // If file loaded successfullY
+    if (data)
+    {
+      TextureFormat internalFormat = TextureFormat::RGBA8;
+      TextureFormat dataFormat = TextureFormat::RGBA;
+      
+      switch (m_channel)
+      {
+        case 4 :
+          internalFormat = TextureUtils::OpenGLFormatToIkanFormat(GL_RGBA8);
+          dataFormat     = TextureUtils::OpenGLFormatToIkanFormat(GL_RGBA);
+          break;
+        case 3 :
+          internalFormat = TextureUtils::OpenGLFormatToIkanFormat(GL_RGB8);
+          dataFormat     = TextureUtils::OpenGLFormatToIkanFormat(GL_RGB);
+          break;
+        case 2 :
+        case 1 :
+          internalFormat = TextureUtils::OpenGLFormatToIkanFormat(GL_RED);
+          dataFormat     = TextureUtils::OpenGLFormatToIkanFormat(GL_RED);
+          break;
+          
+        default:
+          IK_ASSERT(false, "Invalid Format ");
+      }
+      
+      glGenTextures(1, &m_rendererID);
+      glBindTexture(GL_TEXTURE_2D, m_rendererID);
+      
+      TextureType type = TextureType::Texture2D;
+      TextureWrap wrap = TextureWrap::Repeat;
+      TextureFilter filter = (linear) ? TextureFilter::Linear : TextureFilter::Nearest;
+
+      // Setup min and Mag filter
+      glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(type), GL_TEXTURE_MIN_FILTER, TextureUtils::OpenGLFilterFromIKanFilter(filter));
+      glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(type), GL_TEXTURE_MAG_FILTER, TextureUtils::OpenGLFilterFromIKanFilter(filter));
+      
+      // Texuter Flags
+      glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(type), GL_TEXTURE_WRAP_R, TextureUtils::OpenGLWrapFromIKanFilter(wrap));
+      glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(type), GL_TEXTURE_WRAP_S, TextureUtils::OpenGLWrapFromIKanFilter(wrap));
+      glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(type), GL_TEXTURE_WRAP_T, TextureUtils::OpenGLWrapFromIKanFilter(wrap));
+      
+      // Create texture in the renderer Buffer
+      GLint glInternalFormat = TextureUtils::OpenGLFormatFromIKanFormat(internalFormat);
+      GLint glDataFormat = TextureUtils::OpenGLFormatFromIKanFormat(dataFormat);
+      
+      glTexImage2D(GL_TEXTURE_2D, 0, /* Level */ glInternalFormat, m_width, m_height,
+                   0, /* Border */ glDataFormat, TextureUtils::GetTextureType(glInternalFormat), data);
+      
+      // Store the size of texture in Data
+      m_size = (uint32_t)m_width * (uint32_t)m_height * (uint32_t)m_channel;
+      
+      // Increment the size in stats
+      RendererStatistics::Get().textureBufferSize += m_size;
+      
+      // Delete the data as we have already loaded in graphics
+      delete (stbi_uc*)data;
+      
+      IK_LOG_DEBUG(LogModule::Texture, "Creating Open GL Image Texture ");
+      IK_LOG_DEBUG(LogModule::Texture, "------------------------------ ");
+      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}  ", m_rendererID);
+      IK_LOG_DEBUG(LogModule::Texture, "  Size            {0} B ({1} x {2})", m_size, m_width, m_height);
+      IK_LOG_DEBUG(LogModule::Texture, "  Channels        {0}", m_channel);
+      IK_LOG_DEBUG(LogModule::Texture, "  Internal Format {0}", TextureUtils::IKanFormatName(internalFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Data Format     {0}", TextureUtils::IKanFormatName(dataFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Type            {0}", TextureUtils::IKanTypeName(type));
+      IK_LOG_DEBUG(LogModule::Texture, "  Wrap            {0}", TextureUtils::IKanWrapName(wrap));
+      IK_LOG_DEBUG(LogModule::Texture, "  Filter          {0}", TextureUtils::IKanFilterName(filter));
+    }
   }
   
   OpenGLImage::~OpenGLImage()
