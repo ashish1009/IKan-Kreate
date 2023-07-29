@@ -27,11 +27,6 @@ namespace IKan
     /// This is the default destructor of EnTT Scene
     ~Scene();
     
-    /// This function creates the instance of EnTT Scene
-    /// - Parameters:
-    ///   - maxEntityCapacity: Max Entity capacity to reserve
-    static Ref<Scene> Create(uint32_t maxEntityCapacity = 200000);
-    
     // Entity Manager ------------------------------------------------------------------------------------------------
     /// This function creates an unique entity with UUID
     /// - Parameter name: Name of entity
@@ -73,10 +68,32 @@ namespace IKan
     /// - Parameter entity: enitty handle
     TransformComponent GetWorldSpaceTransform(Entity entity);
 
+    // Setters -----------------------------------------------------------------------------------------------------
+    /// This function set the entity deletion callback
+    /// - Parameter callback: callback funtion
+    void SetEntityDestroyedCallback(const std::function<void(Entity)>& callback);
+
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function return entity with id as specified. entity is expected to exist (runtime error if it doesn't)
     /// - Parameter id: UUID for entity
     Entity GetEntityWithUUID(UUID id) const;
+    /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
+    /// - Parameter entityHandle: handle for entity
+    Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
+
+    /// This function returns the max ID given to entity
+    uint32_t GetMaxEntityId() const;
+
+    /// This function creates the instance of EnTT Scene
+    /// - Parameters:
+    ///   - maxEntityCapacity: Max Entity capacity to reserve
+    static Ref<Scene> Create(uint32_t maxEntityCapacity = 200000);
+    
+    /// This funcrion returns all the components of type Components
+    template<typename... Components> auto GetAllEntitiesWith()
+    {
+      return m_registry.view<Components...>();
+    }
 
   private:
     entt::registry m_registry;
@@ -84,6 +101,8 @@ namespace IKan
     uint32_t m_numEntities = 0;
     int32_t m_maxEntityID = -1;
     EntityMap m_entityIDMap;
+
+    std::function<void(Entity)> m_onEntityDestroyedCallback;
 
     friend class Entity;
   };

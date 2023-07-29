@@ -232,11 +232,26 @@ namespace IKan
     
     return transformComponent;
   }
+  
+  void Scene::SetEntityDestroyedCallback(const std::function<void(Entity)>& callback)
+  {
+    m_onEntityDestroyedCallback = callback;
+  }
 
   Entity Scene::GetEntityWithUUID(UUID id) const
   {
     IK_LOG_VERIFY(m_entityIDMap.find(id) != m_entityIDMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
     return m_entityIDMap.at(id);
+  }
+
+  Entity Scene::GetEntityWithEntityHandle(int32_t entityHandle) const
+  {
+    auto& ID = m_registry.get<IDComponent>(static_cast<entt::entity>(entityHandle)).ID;
+    return GetEntityWithUUID(ID);
+  }
+  uint32_t Scene::GetMaxEntityId() const
+  {
+    return m_maxEntityID;
   }
 
 } // namespace IKan
