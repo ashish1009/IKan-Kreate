@@ -775,6 +775,13 @@ namespace IKan
     auto transform  = Utils::Math::GetTransformMatrix(position, rotation, scale);
     DrawTextureQuad(transform, nullptr, TextureCoords, 1.0f /* tiling factor */, color, objectID);
   }
+
+  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation,
+                            const Ref<Image>& texture, const glm::vec4& color, int32_t objectID)
+  {
+    auto transform  = Utils::Math::GetTransformMatrix(position, rotation, scale);
+    DrawTextureQuad(transform, texture, TextureCoords, 1.0f /* tiling factor */, color, objectID);
+  }
   void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor,
                             float tilingFactor, int32_t objectID)
   {

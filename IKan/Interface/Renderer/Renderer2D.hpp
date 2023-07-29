@@ -73,6 +73,18 @@ namespace IKan
     static void DrawQuad(const glm::vec3& position, const glm::vec3& scale = glm::vec3(1.0f),
                          const glm::vec3& rotation = glm::vec3(0.0f), const glm::vec4& color = glm::vec4(1.0f),
                          int32_t objectID = -1 );
+    /// This function draws Quad with color
+    /// - Parameters:
+    ///   - position: position of the quad
+    ///   - scale: scale of the quad
+    ///   - rotation: rotation of the quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - color: Color of Quad
+    ///   - objectID: Pixel ID of Quad
+    /// - Note: High Cycle API
+    static void DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation,
+                         const Ref<Image>& texture, const glm::vec4& color = glm::vec4(1.0f), int32_t objectID = -1 );
+    
     /// This function draws Quad with texture
     /// - Parameters:
     ///   - transform: Transformation matrix of Quad
