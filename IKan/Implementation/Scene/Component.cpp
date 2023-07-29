@@ -98,11 +98,15 @@ return *this; \
     return tag;
   }
   
-  // Relation Component --------------------------------------------------------------------------------------------------
+  // Relation Component ----------------------------------------------------------------------------------------------
+  RelationshipComponent::RelationshipComponent()
+  {
+    COMP_LOG("Creating Relationship Component");
+  }
   RelationshipComponent::RelationshipComponent(UUID parent)
   : parentHandle(parent)
   {
-    COMP_LOG("Creating Relationship Component");
+    COMP_LOG("Creating Relationship Component with parent {}", (uint64_t)parent);
   }
   RelationshipComponent::~RelationshipComponent()
   {

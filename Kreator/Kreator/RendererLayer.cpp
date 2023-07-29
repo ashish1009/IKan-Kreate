@@ -30,8 +30,12 @@ namespace Kreator
     
     // TODO: Temp
     {
-      m_editorScene = Scene::Create();
       m_image = Image::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Textures/checkerboard.png");
+      m_editorScene = Scene::Create();
+      [[maybe_unused]] auto quad = m_editorScene->CreateEntity("Quad");
+      [[maybe_unused]] auto circle = m_editorScene->CreateEntity("Circle");
+      [[maybe_unused]] auto text = m_editorScene->CreateEntity("Text");
+      [[maybe_unused]] auto camera = m_editorScene->CreateEntity("Camera");
     }
   }
   

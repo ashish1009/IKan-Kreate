@@ -45,7 +45,7 @@ namespace IKan
     
     void Copy(const RelationshipComponent& other);
     
-    RelationshipComponent() = default;
+    RelationshipComponent();
     RelationshipComponent(UUID parent);
     ~RelationshipComponent();
     DEFINE_COPY_MOVE_CONSTRUCTORS(RelationshipComponent);

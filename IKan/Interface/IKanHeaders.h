@@ -80,4 +80,6 @@
 #include <Camera/EditorCamera.hpp>
 #include <Camera/FixedCamera.hpp>
 
+#include <Scene/Entity.hpp>
+#include <Scene/Component.hpp>
 #include <Scene/Scene.hpp>
