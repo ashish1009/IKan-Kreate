@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <glad/glad.h>
 #include "Renderer/Graphics/Texture.hpp"
 
 namespace IKan
@@ -23,4 +24,12 @@ namespace IKan
     /// Default destructor that delete the texture
     virtual ~OpenGLImage();
   };
+  
+  namespace TextureUtils
+  {
+    /// This function returns the Format name from Enum
+    /// - Parameter format: enum taken as uint
+    std::string IKanFormatName(TextureFormat format);
+  } // namespace TextureUtils
+
 } // namespace IKan
