@@ -13,6 +13,7 @@ namespace IKan
   class Texture;
   class Sprite;
   class RenderPass;
+  class Font;
 
   /// This is the batch renderer for 2D Renderering
   class Renderer2D
@@ -180,6 +181,27 @@ namespace IKan
     ///   - color: Color of line
     static void DrawRect(const glm::mat4& transform, const glm::vec4& color);
     
+    /// This functions renders the Text in Window using postition and sclae
+    /// - Parameters:
+    ///   - text: Text to be rendereed
+    ///   - font: Font data
+    ///   - position: Text Poistion
+    ///   - scale: Text Poistion
+    ///   - color: Color of text
+    ///   - objectID: Pixel ID of Circle
+    static void RenderFixedViewText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+                                    const glm::vec4& color, int32_t objectID);
+    /// This functions renders the Text in Window using postition and sclae
+    /// - Parameters:
+    ///   - text: Text to be rendereed
+    ///   - font: Font data
+    ///   - position: Text Poistion
+    ///   - scale: Text Poistion
+    ///   - color: Color of text
+    ///   - objectID: Pixel ID of Circle
+    static void RenderText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+                           const glm::vec4& color, int32_t objectID);
+
     MAKE_PURE_STATIC(Renderer2D);
     
   private:

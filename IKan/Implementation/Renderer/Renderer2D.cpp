@@ -8,6 +8,7 @@
 #include "Renderer2D.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Renderer/TextRenderer.hpp"
+#include "Renderer/UI/Font.hpp"
 #include "Renderer/RendererStats.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Texture.hpp"
@@ -1030,4 +1031,15 @@ namespace IKan
     DrawLine(line_vertices[3], line_vertices[0], color);
   }
 
+  void Renderer2D::RenderFixedViewText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+                                       const glm::vec4& color, int32_t objectID)
+  {
+    TextRenderer::RenderFixedViewText(text, font, position, scale, color, objectID);
+  }
+  
+  void Renderer2D::RenderText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+                              const glm::vec4& color, int32_t objectID)
+  {
+    TextRenderer::RenderText(text, font, position, scale, color, objectID);
+  }
 } // namespace IKan

@@ -40,6 +40,7 @@ namespace IKan
     std::string m_filePath;
     std::map<char, Ref<CharTexture>> m_charTextureMap;
     inline static Ref<Font> s_defaultFont;
+    friend class TextRenderer;
   };
 } // namespace IKan
 
