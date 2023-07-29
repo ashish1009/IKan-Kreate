@@ -711,7 +711,33 @@ namespace IKan
   
   void Renderer2D::EndBatch()
   {
+    Flush();
+  }
 
+  void Renderer2D::Flush() {
+    if (s_quadData and s_quadData->indexCount)
+    {
+      uint32_t dataSize = (uint32_t)((uint8_t*)s_quadData->vertexBufferPtr - (uint8_t*)s_quadData->vertexBufferBasePtr);
+      s_quadData->vertexBuffer->SetData(s_quadData->vertexBufferBasePtr, dataSize);
+      s_quadData->Flush();
+    }
+    
+    if (s_circleData and s_circleData->indexCount)
+    {
+      uint32_t dataSize = (uint32_t)((uint8_t*)s_circleData->vertexBufferPtr - (uint8_t*)s_circleData->vertexBufferBasePtr);
+      s_circleData->vertexBuffer->SetData(s_circleData->vertexBufferBasePtr, dataSize);
+      s_circleData->Flush();
+    }
+    
+    if (s_lineData and s_lineData->vertexCount)
+    {
+      uint32_t dataSize = (uint32_t)((uint8_t*)s_lineData->vertexBufferPtr - (uint8_t*)s_lineData->vertexBufferBasePtr);
+      s_lineData->vertexBuffer->SetData(s_lineData->vertexBufferBasePtr, dataSize);
+      
+      s_lineData->shader->Bind();
+      // Render the Scene
+      Renderer::DrawLines(s_lineData->pipeline, s_lineData->vertexCount);
+    }
   }
 
   void Renderer2D::DrawFullscreenQuad(const Ref<Image>& image, uint32_t slot, bool overrideShader)

@@ -61,5 +61,11 @@ namespace IKan
     ///   - overrideShader: Override shader flag. if false then deafult shader is used
     /// - Note: If true then bind your own shader
     static void DrawFullscreenQuad(const Ref<Texture>& texture = nullptr, uint32_t slot = 0, bool overrideShader = false);
+    
+    MAKE_PURE_STATIC(Renderer2D);
+    
+  private:
+    /// This function flsh a single batch
+    static void Flush();
   };
 } // namespace IKan
