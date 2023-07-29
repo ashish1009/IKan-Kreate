@@ -14,6 +14,8 @@ namespace IKan
 #define FB_LOG(...) IK_LOG_DEBUG(LogModule::FrameBuffer, __VA_ARGS__);
 #define GET_FORMAT_NAME(name) TextureUtils::IKanFormatName(name)
 
+  static GLint s_rendererViewport[4];
+
   namespace FramebufferUtils
   {
     /// This function checks is the specification format is depth or not
@@ -228,4 +230,62 @@ namespace IKan
     }
     glBindFramebuffer(GL_FRAMEBUFFER, 0);
   }
+  
+  void OpenGLFrameBuffer::Bind() const
+  {
+    glGetIntegerv(GL_VIEWPORT, s_rendererViewport);
+    glBindFramebuffer(GL_FRAMEBUFFER, m_rendererID);
+    Renderer::SetViewport(m_specification.width, m_specification.height);
+  }
+  
+  void OpenGLFrameBuffer::Unbind() const
+  {
+    glBindFramebuffer(GL_FRAMEBUFFER, 0);
+    glViewport(s_rendererViewport[0], s_rendererViewport[1], (GLsizei)s_rendererViewport[2], (GLsizei)s_rendererViewport[3]);
+  }
+  
+  void OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)
+  {
+    glGetIntegerv(GL_VIEWPORT, s_rendererViewport);
+    
+    m_specification.width  = width;
+    m_specification.height = height;
+    
+    FB_LOG("Resizing the Framebuffer {0} x {1}", m_specification.width, m_specification.height);
+    Invalidate(false);
+    
+    Renderer::SetViewport(m_specification.width, m_specification.height);
+    glViewport(s_rendererViewport[0], s_rendererViewport[1], (GLsizei)s_rendererViewport[2], (GLsizei)s_rendererViewport[3]);
+  }
+  
+  void OpenGLFrameBuffer::UpdateSpecificationColor(const glm::vec4& color)
+  {
+    m_specification.color = color;
+  }
+  
+  const FrameBuffer::Specification& OpenGLFrameBuffer::GetSpecification() const
+  {
+    return m_specification;
+  }
+  
+  RendererID OpenGLFrameBuffer::GetRendererId() const
+  {
+    return m_rendererID;
+  }
+  
+  Ref<Texture> OpenGLFrameBuffer::GetDepthAttachment() const
+  {
+    return m_depthAttachment;
+  }
+  
+  const std::vector<Ref<Texture>>& OpenGLFrameBuffer::GetColorAttachments() const
+  {
+    return m_colorAttachments;
+  }
+  
+  uint32_t OpenGLFrameBuffer::GetPixelIdIndex() const
+  {
+    return m_pixelIDIndex;
+  }
+
 } // namespace IKan
