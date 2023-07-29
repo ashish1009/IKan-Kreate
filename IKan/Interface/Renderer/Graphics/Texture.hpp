@@ -76,5 +76,14 @@ namespace IKan
     ///         somewhere). This API will Load the texture again and new memory will be creted. So to avoid duplicate
     ///         memory for same texture use Renderer::GetTexture()
     [[nodiscard]] static Ref<Image> Create(const std::string& filePath, bool linear = true);
+    
+    /// This function deletes all the Texture present int the map
+    static void ResetLibrary();
+    
+  private:
+    // Array of 2 to keep both linear and nearest min and mag flags
+    // 0 -> Linear Filter
+    // 1 -> Nearest Filter
+    inline static std::unordered_map<std::string /* File Path */, std::array<Ref<Image>, 2>> s_textureLibrary;
   };
 } // namespace IKan

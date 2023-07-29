@@ -219,8 +219,8 @@ namespace IKan
       GLint glInternalFormat = TextureUtils::OpenGLFormatFromIKanFormat(internalFormat);
       GLint glDataFormat = TextureUtils::OpenGLFormatFromIKanFormat(dataFormat);
       
-      glTexImage2D(GL_TEXTURE_2D, 0, /* Level */ glInternalFormat, m_width, m_height,
-                   0, /* Border */ glDataFormat, TextureUtils::GetTextureType(glInternalFormat), data);
+      glTexImage2D(GL_TEXTURE_2D, 0, /* Level */ glInternalFormat, m_width, m_height, 0, /* Border */ glDataFormat,
+                   TextureUtils::GetTextureType(glInternalFormat), data);
       
       // Store the size of texture in Data
       m_size = (uint32_t)m_width * (uint32_t)m_height * (uint32_t)m_channel;

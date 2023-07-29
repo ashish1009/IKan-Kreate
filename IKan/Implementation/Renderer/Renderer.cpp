@@ -9,6 +9,7 @@
 #include "Renderer/RendererStats.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
+#include "Renderer/Graphics/Texture.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
 
 namespace IKan
@@ -61,8 +62,9 @@ namespace IKan
   {
     IK_PROFILE();
     
-    // Reset Shader Library
+    // Reset Libraries
     Shader::ResetLibrary();
+    Image::ResetLibrary();
 
     s_rendererData.reset();
   }
