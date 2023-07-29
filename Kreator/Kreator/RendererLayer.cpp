@@ -81,7 +81,6 @@ namespace Kreator
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::Begin("Viewport");
         
-    auto viewportOffset = ImGui::GetCursorPos(); // includes tab bar
     auto viewportSize = ImGui::GetContentRegionAvail();
         
     // Render viewport image
