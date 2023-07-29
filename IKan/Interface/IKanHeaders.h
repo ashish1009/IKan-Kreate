@@ -52,6 +52,7 @@
 #include <Core/Application.hpp>
 #include <Core/CoreWindow.hpp>
 #include <Core/Input.hpp>
+#include <Core/Layer.hpp>
 
 #include <Event/Event.h>
 #include <Event/ApplicationEvent.h>
