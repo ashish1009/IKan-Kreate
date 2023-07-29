@@ -103,7 +103,7 @@ namespace IKan
     }
     else
     {
-//      s_fullscreenQuadData->whiteTexture->Bind();
+      s_fullscreenQuadData->whiteTexture->Bind();
     }
     Renderer::DrawQuad(s_fullscreenQuadData->pipeline);
     

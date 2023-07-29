@@ -63,6 +63,19 @@ namespace IKan
     /// Default destructor that delete the texture
     virtual ~OpenGLTexture();
     
+    /// This function binds the texture at slot
+    /// - Parameter slot: shader slot where this texture to be binded
+    void Bind(uint32_t slot = 0) const override;
+    /// This function unbinds the texture
+    void Unbind() const override;
+    
+    /// This function returns width of texture
+    uint32_t GetWidth() const override;
+    /// This function returns height of texture
+    uint32_t GetHeight() const override;
+    /// This function returns renderer ID of texture
+    RendererID GetRendererID() const override;
+
   private:
     RendererID m_rendererID = 0;
     Specification m_specification;

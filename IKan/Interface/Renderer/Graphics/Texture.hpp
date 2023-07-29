@@ -161,6 +161,19 @@ namespace IKan
     /// This is default virtual destructor for Texture
     virtual ~Texture() = default;
 
+    /// This function binds the Current Texture to a slot of shader
+    /// - Parameter slot: Slot of shader
+    virtual void Bind(uint32_t slot = 0) const = 0;
+    /// This function unbinds the Current Texture from shader slot
+    virtual void Unbind() const = 0;
+
+    /// This function returns the Renderer ID of Texture
+    virtual RendererID GetRendererID() const = 0;
+    /// This function returns the Width of Texture
+    virtual uint32_t GetWidth() const = 0;
+    /// This function returns the Height of Texture
+    virtual uint32_t GetHeight() const = 0;
+
     /// This API creates the Texture instance based on the Renderer API
     /// - Parameter spec: Texture Specificaion
     [[nodiscard]] static Ref<Texture> Create(const Specification& spec);

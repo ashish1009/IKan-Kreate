@@ -364,4 +364,30 @@ namespace IKan
       IK_LOG_DEBUG(LogModule::Texture, "  Filter          {0}", TextureUtils::IKanFilterName(m_specification.filter));
     }
   }
+  
+  void OpenGLTexture::Bind(uint32_t slot) const
+  {
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(GL_TEXTURE_2D, m_rendererID);
+  }
+  
+  void OpenGLTexture::Unbind() const
+  {
+    glBindTexture(GL_TEXTURE_2D, 0);
+  }
+
+  uint32_t OpenGLTexture::GetWidth() const
+  {
+    return m_specification.width;
+  }
+  
+  uint32_t OpenGLTexture::GetHeight() const
+  {
+    return m_specification.height;
+  }
+  
+  RendererID OpenGLTexture::GetRendererID() const
+  {
+    return m_rendererID;
+  }
 } // namespace IKan
