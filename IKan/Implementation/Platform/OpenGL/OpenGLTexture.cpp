@@ -9,14 +9,13 @@
 
 namespace IKan
 {
-  Ref<Image> Image::Create(const std::string& filePath, bool linear)
+  OpenGLImage::OpenGLImage(const std::string& filePath, bool linear)
   {
-    switch (Renderer::GetApi())
-    {
-      case Renderer::Api::OpenGl:
-      case Renderer::Api::None:
-      default:
-        IK_ASSERT(false, "Invalid Renderer API"); break;
-    }
+    
   }
-} // namespace IKan
+  
+  OpenGLImage::~OpenGLImage()
+  {
+    
+  }
+}

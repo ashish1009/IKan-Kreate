@@ -7,23 +7,20 @@
 
 #pragma once
 
-#include "Renderer/Renderer.hpp"
+#include "Renderer/Graphics/Texture.hpp"
 
 namespace IKan
 {
-  class Image
+  /// This is the Open GL Implementation class for Creating texture
+  class OpenGLImage : public Image
   {
   public:
-    /// This is default virtual destructor for Texture
-    virtual ~Image() = default;
-    
-    /// This static functions creates the Texture from image file
+    /// This constructor creates the texture using image file path
     /// - Parameters:
-    ///   - filePath: path of texture file
-    ///   - linear: min linear flag
-    /// - Note: Use Renderer::GetTexture() to reuse already loaded texture (if following texture is already used
-    ///         somewhere). This API will Load the texture again and new memory will be creted. So to avoid duplicate
-    ///         memory for same texture use Renderer::GetTexture()
-    [[nodiscard]] static Ref<Image> Create(const std::string& filePath, bool linear = true);
+    ///   - filePath: Texture image file path (absolute)
+    ///   - linear: min linear filter
+    OpenGLImage(const std::string& filePath, bool linear);
+    /// Default destructor that delete the texture
+    virtual ~OpenGLImage();
   };
 } // namespace IKan
