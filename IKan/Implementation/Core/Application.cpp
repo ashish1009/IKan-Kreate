@@ -12,6 +12,7 @@
 #include "Renderer2D.hpp"
 #include "Texture.hpp"
 #include "EditorCamera.hpp"
+#include "Font.hpp"
 
 namespace IKan
 {
@@ -112,9 +113,12 @@ namespace IKan
         Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
 
         Renderer2D::BeginBatch(m_camera->GetUnReversedViewProjection());
+
         Renderer2D::DrawQuad({1, 1, 0}, {1, 1, 1}, {0, 0, 0}, m_image);
         Renderer2D::DrawCircle({0, 0, 0});
         Renderer2D::DrawRect({0, 0, 0}, {4, 4}, {1, 0, 0.5, 1});
+        Renderer2D::RenderText("Sample Test Text", Font::GetDefaultFont(), {0, -1, 0}, {1, 1}, {1, 1, 1, 1}, -1);
+
         Renderer2D::EndBatch();
         Renderer2D::EndRenderPass();
         
