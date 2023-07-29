@@ -15,6 +15,9 @@
 #define VAL(name) name ,
 #define STRING(name) #name,
 
+// This MACRO Cast uint32_t into void pointer
+#define INT2VOIDP(i)    (void*)(uintptr_t)(i)
+
 /// This MACRO Creates enum also store all the element as string in an array
 /// e.g. if Name is passed as "Test" then enum would be "enum class Test" and
 /// the Array that stores the enum element as string is "TestString[]", just

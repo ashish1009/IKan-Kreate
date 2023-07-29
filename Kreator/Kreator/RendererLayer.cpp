@@ -66,8 +66,6 @@ namespace Kreator
       
       Renderer2D::EndBatch();
       Renderer2D::EndRenderPass();
-      
-      Renderer2D::DrawFullscreenQuad(Renderer2D::GetFinalImage());
     }
   }
   
@@ -79,5 +77,18 @@ namespace Kreator
   void RendererLayer::OnImguiRender()
   {
     IK_PERFORMANCE("RendererLayer::OnImguiRender");
+    
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    ImGui::Begin("Viewport");
+        
+    auto viewportOffset = ImGui::GetCursorPos(); // includes tab bar
+    auto viewportSize = ImGui::GetContentRegionAvail();
+        
+    // Render viewport image
+    ImGui::Image(INT2VOIDP(Renderer2D::GetFinalImage()->GetRendererID()), viewportSize);
+    
+    ImGui::End();
+    ImGui::PopStyleVar();
+
   }
 } // namespace Kreator
