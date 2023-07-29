@@ -99,6 +99,8 @@
 		B23367122A75396800BC7B8B /* ImGuiLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23367102A75396800BC7B8B /* ImGuiLayer.cpp */; };
 		B23367132A75396800BC7B8B /* ImGuiLayer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23367112A75396800BC7B8B /* ImGuiLayer.hpp */; };
 		B23367142A753AAB00BC7B8B /* libUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B23365B32A75386C00BC7B8B /* libUI.a */; };
+		B23367192A75405B00BC7B8B /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23367172A75405B00BC7B8B /* Scene.cpp */; };
+		B233671A2A75405B00BC7B8B /* Scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23367182A75405B00BC7B8B /* Scene.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -235,6 +237,8 @@
 		B233670C2A75394300BC7B8B /* ImGuiBuild.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiBuild.cpp; sourceTree = "<group>"; };
 		B23367102A75396800BC7B8B /* ImGuiLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiLayer.cpp; sourceTree = "<group>"; };
 		B23367112A75396800BC7B8B /* ImGuiLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiLayer.hpp; sourceTree = "<group>"; };
+		B23367172A75405B00BC7B8B /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
+		B23367182A75405B00BC7B8B /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -503,6 +507,7 @@
 		B23367152A753FEB00BC7B8B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				B23367182A75405B00BC7B8B /* Scene.hpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -510,6 +515,7 @@
 		B23367162A75401A00BC7B8B /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				B23367172A75405B00BC7B8B /* Scene.cpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -670,6 +676,7 @@
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B23365862A75303E00BC7B8B /* TextRenderer.hpp in Headers */,
 				B23364E12A74270000BC7B8B /* ShaderUniform.hpp in Headers */,
+				B233671A2A75405B00BC7B8B /* Scene.hpp in Headers */,
 				B233658D2A75345D00BC7B8B /* Layer.hpp in Headers */,
 				B233654F2A7502BA00BC7B8B /* FrameBuffer.hpp in Headers */,
 				B23365432A74D76C00BC7B8B /* stb_image.h in Headers */,
@@ -828,6 +835,7 @@
 				B233653A2A74D48B00BC7B8B /* Texture.cpp in Sources */,
 				B23365642A751DE500BC7B8B /* OpenGLRenderPass.cpp in Sources */,
 				B233648E2A72CE7200BC7B8B /* Renderer.cpp in Sources */,
+				B23367192A75405B00BC7B8B /* Scene.cpp in Sources */,
 				B21048162A72A1BA00FA8CF2 /* CoreWindow.cpp in Sources */,
 				B23365142A74381300BC7B8B /* OpenGLRendererBuffers.cpp in Sources */,
 				B23365472A74E6D300BC7B8B /* Renderer2D.cpp in Sources */,
@@ -1004,6 +1012,7 @@
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
+					"${PROJECT_DIR}/Vendors/EnTT",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1032,6 +1041,7 @@
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
+					"${PROJECT_DIR}/Vendors/EnTT",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
