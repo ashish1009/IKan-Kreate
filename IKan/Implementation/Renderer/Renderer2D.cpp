@@ -323,6 +323,50 @@ namespace IKan
   };
   static Scope<CircleData> s_circleData;
   
+  /// Batch Data to Rendering Lines
+  struct LineData : CommonBatchData
+  {
+    // Constants
+    static constexpr uint32_t VertexForSingleLine = 2;
+    
+    /// Single vertex of a Circle
+    struct Vertex
+    {
+      glm::vec3 position;       // Position of a Quad
+      glm::vec4 color;          // Color of a Quad
+    };
+    
+    /// Count of Indices to be renderer in Single Batch
+    uint32_t vertexCount = 0;
+    
+    /// Base pointer of Vertex Data. This is start of Batch data for single draw call
+    Vertex* vertexBufferBasePtr = nullptr;
+    /// Incrememntal Vetrtex Data Pointer to store all the batch data in Buffer
+    Vertex* vertexBufferPtr = nullptr;
+    
+    // Member function
+    /// This function starts the batch for Lines
+    /// - Parameter camViewProjMat: camera projection matrix
+    void StartBatch(const glm::mat4& camViewProjMat) {
+      loadCamToShader(shader, camViewProjMat);
+      StartInternalBatch();
+    }
+    
+    void StartInternalBatch()
+    {
+      vertexCount = 0;
+      vertexBufferPtr = vertexBufferBasePtr;
+    }
+    
+    /// Liene Data Desdtructor
+    virtual ~LineData()
+    {
+      ikdelete [] vertexBufferBasePtr;
+      vertexBufferBasePtr = nullptr;
+    }
+  };
+  static Scope<LineData> s_lineData;
+  
   void Renderer2D::Initialise()
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
