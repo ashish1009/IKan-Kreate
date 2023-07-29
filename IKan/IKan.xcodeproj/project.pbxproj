@@ -86,6 +86,8 @@
 		B23365652A751DE500BC7B8B /* OpenGLRenderPass.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365632A751DE500BC7B8B /* OpenGLRenderPass.hpp */; };
 		B233656C2A75231700BC7B8B /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233656A2A75231700BC7B8B /* MathUtils.cpp */; };
 		B233656D2A75231700BC7B8B /* MathUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233656B2A75231700BC7B8B /* MathUtils.hpp */; };
+		B23365762A752E0A00BC7B8B /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365742A752E0A00BC7B8B /* Font.cpp */; };
+		B23365772A752E0A00BC7B8B /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365752A752E0A00BC7B8B /* Font.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -201,6 +203,8 @@
 		B23365692A7521EB00BC7B8B /* LineShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = LineShader.glsl; sourceTree = "<group>"; };
 		B233656A2A75231700BC7B8B /* MathUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtils.cpp; sourceTree = "<group>"; };
 		B233656B2A75231700BC7B8B /* MathUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MathUtils.hpp; sourceTree = "<group>"; };
+		B23365742A752E0A00BC7B8B /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
+		B23365752A752E0A00BC7B8B /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -288,6 +292,7 @@
 		B23364842A72CE4000BC7B8B /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				B23365732A752E0300BC7B8B /* UI */,
 				B23364862A72CE5200BC7B8B /* Graphics */,
 				B233648D2A72CE7200BC7B8B /* Renderer.hpp */,
 				B23365172A7438FA00BC7B8B /* RendererStats.hpp */,
@@ -299,6 +304,7 @@
 		B23364852A72CE4700BC7B8B /* Renderer */ = {
 			isa = PBXGroup;
 			children = (
+				B23365782A752E1000BC7B8B /* UI */,
 				B23364872A72CE5700BC7B8B /* Graphics */,
 				B233648C2A72CE7200BC7B8B /* Renderer.cpp */,
 				B23365162A7438FA00BC7B8B /* RendererStats.cpp */,
@@ -412,6 +418,22 @@
 				B23365422A74D76C00BC7B8B /* stb_image.cpp */,
 			);
 			path = StbImage;
+			sourceTree = "<group>";
+		};
+		B23365732A752E0300BC7B8B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B23365752A752E0A00BC7B8B /* Font.hpp */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		B23365782A752E1000BC7B8B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B23365742A752E0A00BC7B8B /* Font.cpp */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 		B24076DC2A72391000221919 = {
@@ -596,6 +618,7 @@
 				B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */,
 				B23365652A751DE500BC7B8B /* OpenGLRenderPass.hpp in Headers */,
 				B23364C32A72D1E300BC7B8B /* OpenGLRendererContext.hpp in Headers */,
+				B23365772A752E0A00BC7B8B /* Font.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -689,6 +712,7 @@
 				B23365562A7503CA00BC7B8B /* OpenGLFrameBuffer.cpp in Sources */,
 				B23365362A74422800BC7B8B /* FixedCamera.cpp in Sources */,
 				B233651C2A743D0E00BC7B8B /* Pipeline.cpp in Sources */,
+				B23365762A752E0A00BC7B8B /* Font.cpp in Sources */,
 				B23365602A751D6B00BC7B8B /* RenderPass.cpp in Sources */,
 				B24077182A72651400221919 /* Common.cpp in Sources */,
 				B233652E2A74410F00BC7B8B /* SceneCamera.cpp in Sources */,

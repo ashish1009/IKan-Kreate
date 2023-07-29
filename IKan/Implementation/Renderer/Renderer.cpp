@@ -8,6 +8,7 @@
 #include "Renderer.hpp"
 #include "Renderer/RendererStats.hpp"
 #include "Renderer/Renderer2D.hpp"
+#include "Renderer/UI/Font.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Texture.hpp"
@@ -59,6 +60,7 @@ namespace IKan
     s_rendererData->rendererApiInstance = RendererAPI::Create();
     
     Renderer2D::Initialise(10, 10, 10);
+    Font::Initialise();
   }
   
   void Renderer::Shutdown()
@@ -67,6 +69,7 @@ namespace IKan
     
     // Shutdown All renderer
     Renderer2D::Shutdown();
+    Font::Shutdown();
     
     // Reset Libraries
     Shader::ResetLibrary();
