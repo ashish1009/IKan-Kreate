@@ -108,6 +108,7 @@ namespace IKan
         m_camera->SetActive(true);
         m_camera->OnUpdate(m_timeStep);
         
+        Renderer2D::BeginRenderPass();
         Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
 
         Renderer2D::BeginBatch(m_camera->GetUnReversedViewProjection());
@@ -115,6 +116,9 @@ namespace IKan
         Renderer2D::DrawCircle({0, 0, 0});
         Renderer2D::DrawRect({0, 0, 0}, {4, 4}, {1, 0, 0.5, 1});
         Renderer2D::EndBatch();
+        Renderer2D::EndRenderPass();
+        
+        Renderer2D::DrawFullscreenQuad(Renderer2D::GetFinalImage());
       }
       
       // Update the client application

@@ -740,6 +740,32 @@ namespace IKan
     }
   }
 
+  void Renderer2D::BeginRenderPass()
+  {
+    s_commonData->renderPass->Begin();
+  }
+  
+  void Renderer2D::EndRenderPass()
+  {
+    s_commonData->renderPass->End();
+  }
+  
+  Ref<RenderPass> Renderer2D::GetRenderPass()
+  {
+    return s_commonData->renderPass;
+  }
+  
+  Ref<Texture> Renderer2D::GetFinalImage()
+  {
+    // FIXME: (IKan) Use Final Image ID in Render Pass Specificaion. For now by deafult its 0 in all shaders
+    return s_commonData->renderPass->GetSpecification().targetFramebuffer->GetColorAttachments().at(0);
+  }
+  
+  void Renderer2D::GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData)
+  {
+    Renderer::GetEntityIdFromPixels(mx, my, s_commonData->renderPass->GetSpecification().targetFramebuffer->GetPixelIdIndex(), pixeldData);
+  }
+  
   void Renderer2D::DrawFullscreenQuad(const Ref<Texture>& texture, uint32_t slot, bool overrideShader)
   {
     // Bind the default Shader

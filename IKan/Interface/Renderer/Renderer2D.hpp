@@ -12,6 +12,7 @@ namespace IKan
   class Image;
   class Texture;
   class Sprite;
+  class RenderPass;
 
   /// This is the batch renderer for 2D Renderering
   class Renderer2D
@@ -47,6 +48,23 @@ namespace IKan
     static void BeginBatch(const glm::mat4& camViewProjMat);
     /// This function Ends the current batch by rendering all the vertex
     static void EndBatch();
+
+    /// This function begins the Current Render Pass
+    static void BeginRenderPass();
+    /// This function ends the Current Render Pass
+    static void EndRenderPass();
+    
+    /// This function returns the Render pass for 2D Renderer
+    static Ref<RenderPass> GetRenderPass();
+    /// This fucntion returns the final Renderer Image of Taget framebuffer of Current Render Pass
+    static Ref<Texture> GetFinalImage();
+    
+    /// This function returns the the Pixel ID from Viewport
+    /// - Parameters:
+    ///   - mx: x pixel
+    ///   - my: y pixel
+    ///   - pixeldData: piixel value
+    static void GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData);
 
     /// This function render the fullscreen quad
     /// - Parameters:
