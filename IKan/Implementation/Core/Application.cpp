@@ -167,6 +167,7 @@ namespace IKan
         m_frameBuffer->Bind();
         Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
 
+        Renderer2D::BeginBatch(m_camera->GetUnReversedViewProjection());
         m_pipeline->GetSpecification().shader->Bind();
         m_pipeline->GetSpecification().shader->SetUniformMat4("u_ViewProjection", m_camera->GetUnReversedViewProjection());
         
@@ -174,6 +175,7 @@ namespace IKan
         m_image->Bind();
         Renderer::DrawIndexed(m_pipeline, 6);
         
+        Renderer2D::EndBatch();
         m_frameBuffer->Unbind();
         
         Renderer2D::DrawFullscreenQuad(m_frameBuffer->GetColorAttachments().at(0));

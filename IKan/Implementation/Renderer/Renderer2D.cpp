@@ -684,6 +684,35 @@ namespace IKan
       s_commonData->needResize = false;
     }
   }
+  
+  void Renderer2D::BeginBatch(const glm::mat4 &camViewProjMat)
+  {
+    if (s_commonData->needResize)
+    {
+      // Resize the framebuffer
+      s_commonData->renderPass->Resize(s_commonData->viewportWidth, s_commonData->viewportHeight);
+    }
+    
+    if (s_quadData)
+    {
+      s_quadData->StartBatch(camViewProjMat);
+    }
+    
+    if (s_circleData)
+    {
+      s_circleData->StartBatch(camViewProjMat);
+    }
+    
+    if (s_lineData)
+    {
+      s_lineData->StartBatch(camViewProjMat);
+    }
+  }
+  
+  void Renderer2D::EndBatch()
+  {
+
+  }
 
   void Renderer2D::DrawFullscreenQuad(const Ref<Image>& image, uint32_t slot, bool overrideShader)
   {

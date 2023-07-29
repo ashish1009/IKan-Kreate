@@ -41,6 +41,12 @@ namespace IKan
     ///   - height: new height of viewport
     static void SetViewport(uint32_t width, uint32_t height);
 
+    /// This function begins the Batch for 2D Rendere (to be called each frame)
+    /// - Parameter camViewProjMat: Camera View projection Matrix
+    static void BeginBatch(const glm::mat4& camViewProjMat);
+    /// This function Ends the current batch by rendering all the vertex
+    static void EndBatch();
+
     /// This function render the fullscreen quad
     /// - Parameters:
     ///   - texture: Texture to be loaded
