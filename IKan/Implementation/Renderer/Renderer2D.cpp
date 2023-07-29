@@ -938,4 +938,66 @@ namespace IKan
     RendererStatistics::Get().vertexCount += Shape2DCommonData::VertexForSingleElement;
     RendererStatistics::Get()._2d.circles++;
   }
+  
+  void Renderer2D::DrawLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color)
+  {
+    // If number of indices increase in batch then start new batch
+    if (s_lineData->vertexCount >= s_lineData->maxVertices)
+    {
+      BATCH_INFO("Starts the new batch as number of vertices ({0}) increases in the previous batch", s_lineData->vertexCount);
+      EndBatch();
+      s_lineData->StartInternalBatch();
+    }
+    
+    s_lineData->vertexBufferPtr->position = p0;
+    s_lineData->vertexBufferPtr->color = color;
+    s_lineData->vertexBufferPtr++;
+    
+    s_lineData->vertexBufferPtr->position = p1;
+    s_lineData->vertexBufferPtr->color = color;
+    s_lineData->vertexBufferPtr++;
+    
+    s_lineData->vertexCount += LineData::VertexForSingleLine;
+    RendererStatistics::Get().vertexCount += LineData::VertexForSingleLine;
+    RendererStatistics::Get()._2d.lines++;
+  }
+  
+  void Renderer2D::DrawRect(const glm::vec3& p0, const glm::vec3& p2, const glm::vec4& color)
+  {
+    glm::vec3 p1 = glm::vec3(p2.x, p0.y, p0.z);
+    glm::vec3 p3 = glm::vec3(p0.x, p2.y, p2.z);
+    
+    DrawLine(p0, p1, color);
+    DrawLine(p1, p2, color);
+    DrawLine(p2, p3, color);
+    DrawLine(p3, p0, color);
+  }
+  
+  void Renderer2D::DrawRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+  {
+    glm::vec3 p0 = glm::vec3(position.x - size.x * 0.5f, position.y - size.y * 0.5f, position.z);
+    glm::vec3 p1 = glm::vec3(position.x + size.x * 0.5f, position.y - size.y * 0.5f, position.z);
+    glm::vec3 p2 = glm::vec3(position.x + size.x * 0.5f, position.y + size.y * 0.5f, position.z);
+    glm::vec3 p3 = glm::vec3(position.x - size.x * 0.5f, position.y + size.y * 0.5f, position.z);
+    
+    DrawLine(p0, p1, color);
+    DrawLine(p1, p2, color);
+    DrawLine(p2, p3, color);
+    DrawLine(p3, p0, color);
+  }
+  
+  void Renderer2D::DrawRect(const glm::mat4& transform, const glm::vec4& color)
+  {
+    glm::vec3 line_vertices[4];
+    for (size_t i = 0; i < 4; i++)
+    {
+      line_vertices[i] = transform * s_quadData->vertexBasePosition[i];
+    }
+    
+    DrawLine(line_vertices[0], line_vertices[1], color);
+    DrawLine(line_vertices[1], line_vertices[2], color);
+    DrawLine(line_vertices[2], line_vertices[3], color);
+    DrawLine(line_vertices[3], line_vertices[0], color);
+  }
+
 } // namespace IKan
