@@ -41,6 +41,7 @@
 
 #include <Debug/Logger.hpp>
 #include <Debug/Timer.hpp>
+#include <Debug/Table.hpp>
 
 #include <Core/AssertAPIs.h>
 #include <Core/KeyCodes.h>

@@ -117,6 +117,7 @@ namespace IKan
 
     // TODO: To Move Renderer Layer later
     {
+      m_frameBuffer.reset();
       m_image.reset();
       m_pipeline.reset();
       m_vertexBuffer.reset();
