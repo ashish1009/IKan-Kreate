@@ -70,6 +70,8 @@
 		B233653B2A74D48B00BC7B8B /* Texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365392A74D48B00BC7B8B /* Texture.hpp */; };
 		B233653E2A74D49600BC7B8B /* OpenGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233653C2A74D49600BC7B8B /* OpenGLTexture.cpp */; };
 		B233653F2A74D49600BC7B8B /* OpenGLTexture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233653D2A74D49600BC7B8B /* OpenGLTexture.hpp */; };
+		B23365432A74D76C00BC7B8B /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = B23365412A74D76C00BC7B8B /* stb_image.h */; };
+		B23365442A74D76C00BC7B8B /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365422A74D76C00BC7B8B /* stb_image.cpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -166,6 +168,8 @@
 		B23365392A74D48B00BC7B8B /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
 		B233653C2A74D49600BC7B8B /* OpenGLTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTexture.cpp; sourceTree = "<group>"; };
 		B233653D2A74D49600BC7B8B /* OpenGLTexture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLTexture.hpp; sourceTree = "<group>"; };
+		B23365412A74D76C00BC7B8B /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		B23365422A74D76C00BC7B8B /* stb_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -228,6 +232,7 @@
 		B21FAA512A729EA1009EED1F /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				B23365402A74D76C00BC7B8B /* StbImage */,
 				B23364A72A72D0CC00BC7B8B /* Glad.xcodeproj */,
 				B21FB3B02A729EBB009EED1F /* GLFW.xcodeproj */,
 			);
@@ -354,6 +359,15 @@
 				B23365342A74422800BC7B8B /* FixedCamera.cpp */,
 			);
 			path = Camera;
+			sourceTree = "<group>";
+		};
+		B23365402A74D76C00BC7B8B /* StbImage */ = {
+			isa = PBXGroup;
+			children = (
+				B23365412A74D76C00BC7B8B /* stb_image.h */,
+				B23365422A74D76C00BC7B8B /* stb_image.cpp */,
+			);
+			path = StbImage;
 			sourceTree = "<group>";
 		};
 		B24076DC2A72391000221919 = {
@@ -499,6 +513,7 @@
 				B233652F2A74410F00BC7B8B /* SceneCamera.hpp in Headers */,
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B23364E12A74270000BC7B8B /* ShaderUniform.hpp in Headers */,
+				B23365432A74D76C00BC7B8B /* stb_image.h in Headers */,
 				B23365152A74381300BC7B8B /* OpenGLRendererBuffers.hpp in Headers */,
 				B233652B2A7440CD00BC7B8B /* Camera.hpp in Headers */,
 				B233653F2A74D49600BC7B8B /* OpenGLTexture.hpp in Headers */,
@@ -620,6 +635,7 @@
 				B233651C2A743D0E00BC7B8B /* Pipeline.cpp in Sources */,
 				B24077182A72651400221919 /* Common.cpp in Sources */,
 				B233652E2A74410F00BC7B8B /* SceneCamera.cpp in Sources */,
+				B23365442A74D76C00BC7B8B /* stb_image.cpp in Sources */,
 				B23364F52A742A4200BC7B8B /* Shader.cpp in Sources */,
 				B240771E2A72665A00221919 /* Logger.cpp in Sources */,
 				B23365182A7438FA00BC7B8B /* RendererStats.cpp in Sources */,
