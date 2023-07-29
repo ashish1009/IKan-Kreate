@@ -13,6 +13,7 @@
 #include "Core/CoreWindow.hpp"
 #include "Core/LayerStack.hpp"
 #include "Renderer/Renderer.hpp"
+#include "UI/ImGuiLayer.hpp"
 
 namespace IKan
 {
@@ -28,6 +29,7 @@ namespace IKan
     {
       std::string name = "iKan";
       std::string engineInstallPath;
+      std::string iniPath = "ikan.ini";
 
       Renderer::Api renderingApi = Renderer::Api::None;
       Window::Specification windowSpecification;
@@ -89,6 +91,8 @@ namespace IKan
     void* GetWindowPtr() const;
     /// This fuinction returns the iKan Window Instance as reference
     Window& GetWindow();
+    /// This fuinction returns the Imgui Layer pointer Reference
+    UI::ImguiLayer& GetImGuiLayer() const;
 
     /// This function returns the single instance of application
     static Application& Get();
@@ -109,6 +113,7 @@ namespace IKan
     Specification m_specificaion;
     Ref<Window> m_window;
     Scope<LayerStack> m_layers;
+    Ref<UI::ImguiLayer> m_imguiLayer;
 
     inline static Application* s_instance;
   };

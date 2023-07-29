@@ -98,6 +98,7 @@
 		B233670E2A75394300BC7B8B /* ImGuiBuild.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233670C2A75394300BC7B8B /* ImGuiBuild.cpp */; };
 		B23367122A75396800BC7B8B /* ImGuiLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23367102A75396800BC7B8B /* ImGuiLayer.cpp */; };
 		B23367132A75396800BC7B8B /* ImGuiLayer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23367112A75396800BC7B8B /* ImGuiLayer.hpp */; };
+		B23367142A753AAB00BC7B8B /* libUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B23365B32A75386C00BC7B8B /* libUI.a */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -255,6 +256,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23367142A753AAB00BC7B8B /* libUI.a in Frameworks */,
 				B23365822A752FF000BC7B8B /* libpng16.a in Frameworks */,
 				B233657A2A752F9700BC7B8B /* libfreetype.a in Frameworks */,
 				B23364C82A72D30100BC7B8B /* libGlad.a in Frameworks */,

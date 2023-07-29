@@ -42,6 +42,11 @@ namespace IKan
       m_window->Maximize();
     }
 
+    // Initialize the Imgui Layer if GUI is enabled
+    m_imguiLayer = CreateRef<UI::ImguiLayer>(m_window);
+    m_layers->PushOverlay(m_imguiLayer);
+    m_imguiLayer->SetIniFilePath(m_specificaion.iniPath);
+
     // Initialise the Core Renderer
     Renderer::Initialize();
     
@@ -142,6 +147,8 @@ namespace IKan
   
   void Application::ImguiRender()
   {
+    m_imguiLayer->Begin();
+    
     // Updating all the attached layer
     for (auto& layer : *(m_layers.get()))
     {
@@ -150,6 +157,8 @@ namespace IKan
 
     // Rendering Imgui for Client
     OnImguiRender();
+
+    m_imguiLayer->End();
   }
   
   void Application::PushLayer(const Ref<Layer> &layer)
@@ -170,6 +179,11 @@ namespace IKan
   Window& Application::GetWindow()
   {
     return *(m_window.get());
+  }
+
+  ImguiLayer& Application::GetImGuiLayer() const
+  {
+    return *m_imguiLayer.get();
   }
 
   Application& Application::Get()
