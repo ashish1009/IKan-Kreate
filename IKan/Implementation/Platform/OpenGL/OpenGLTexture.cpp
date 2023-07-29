@@ -375,6 +375,15 @@ namespace IKan
   {
     glBindTexture(GL_TEXTURE_2D, 0);
   }
+  
+  void OpenGLTexture::AttachToFramebuffer(TextureAttachment attachmentType, uint32_t id) const
+  {
+    glFramebufferTexture2D(GL_FRAMEBUFFER, /* target */
+                           TextureUtils::IkanAttachmentToOpenGL(attachmentType, id),
+                           GL_TEXTURE_2D,
+                           m_rendererID,
+                           0 /* level */ );
+  }
 
   uint32_t OpenGLTexture::GetWidth() const
   {

@@ -166,6 +166,11 @@ namespace IKan
     virtual void Bind(uint32_t slot = 0) const = 0;
     /// This function unbinds the Current Texture from shader slot
     virtual void Unbind() const = 0;
+    /// This function attach the current Image to Framebuffer
+    /// - Parameters:
+    ///   - id : Color Attaachment ID to Framebuffer
+    ///   - attachmentType: attachment type of texture
+    virtual void AttachToFramebuffer(TextureAttachment attachmentType, uint32_t id = 0) const = 0;
 
     /// This function returns the Renderer ID of Texture
     virtual RendererID GetRendererID() const = 0;

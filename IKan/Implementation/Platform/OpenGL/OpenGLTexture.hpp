@@ -69,6 +69,12 @@ namespace IKan
     /// This function unbinds the texture
     void Unbind() const override;
     
+    /// This function attach the current Image to Framebuffer
+    /// - Parameters:
+    ///   - id : Color Attaachment ID to Framebuffer
+    ///   - attachmentType: attachment type of texture
+    void AttachToFramebuffer(TextureAttachment attachmentType, uint32_t id = 0) const override;
+
     /// This function returns width of texture
     uint32_t GetWidth() const override;
     /// This function returns height of texture
