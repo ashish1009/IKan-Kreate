@@ -43,6 +43,7 @@
 #include <Utils/FileSystem.hpp>
 #include <Utils/StringUtils.hpp>
 #include <Utils/MathUtils.hpp>
+#include <Utils/YAMLSerializerHelper.h>
 
 #include <Debug/Logger.hpp>
 #include <Debug/Timer.hpp>

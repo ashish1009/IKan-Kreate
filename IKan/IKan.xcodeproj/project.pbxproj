@@ -271,6 +271,7 @@
 		B233674E2A7592C000BC7B8B /* AssetMedata.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetMedata.cpp; sourceTree = "<group>"; };
 		B233674F2A7592C000BC7B8B /* AssetMedata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMedata.hpp; sourceTree = "<group>"; };
 		B23367832A75930700BC7B8B /* Yaml.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Yaml.xcodeproj; path = Yaml/Yaml.xcodeproj; sourceTree = "<group>"; };
+		B2336A462A7593BE00BC7B8B /* YAMLSerializerHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YAMLSerializerHelper.h; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -654,6 +655,7 @@
 				B24076FF2A72431700221919 /* FileSystem.hpp */,
 				B23364E92A74294400BC7B8B /* StringUtils.hpp */,
 				B233656B2A75231700BC7B8B /* MathUtils.hpp */,
+				B2336A462A7593BE00BC7B8B /* YAMLSerializerHelper.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1105,6 +1107,7 @@
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/EnTT",
+					"${PROJECT_DIR}/Vendors/Yaml/Yaml/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1134,6 +1137,7 @@
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/EnTT",
+					"${PROJECT_DIR}/Vendors/Yaml/Yaml/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

@@ -30,8 +30,13 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - {...}/Vendors/GLFW/GLFW/include
 - {...}/Vendors/Freetype/include
 - {...}/Vendors/UI/ImGui
+- {...}/Vendors/EnTT
+- {...}/Vendors/Yaml/Yaml
 
 #### Library Search Paths
+Add the following header search paths 
+- libz.tbd
+- libbz2.1.0.8
 
 #### Preprocessors
 - IK_ENABLE_LOG     : For Enable Logs
