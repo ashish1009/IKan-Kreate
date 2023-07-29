@@ -105,6 +105,8 @@
 		B233671E2A75420600BC7B8B /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233671C2A75420600BC7B8B /* Entity.hpp */; };
 		B23367212A7548F200BC7B8B /* Component.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233671F2A7548F200BC7B8B /* Component.cpp */; };
 		B23367222A7548F200BC7B8B /* Component.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23367202A7548F200BC7B8B /* Component.hpp */; };
+		B23367252A75495000BC7B8B /* UUID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23367232A75495000BC7B8B /* UUID.cpp */; };
+		B23367262A75495000BC7B8B /* UUID.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23367242A75495000BC7B8B /* UUID.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -247,6 +249,8 @@
 		B233671C2A75420600BC7B8B /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		B233671F2A7548F200BC7B8B /* Component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
 		B23367202A7548F200BC7B8B /* Component.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Component.hpp; sourceTree = "<group>"; };
+		B23367232A75495000BC7B8B /* UUID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UUID.cpp; sourceTree = "<group>"; };
+		B23367242A75495000BC7B8B /* UUID.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UUID.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -629,6 +633,7 @@
 				B23364C52A72D2D300BC7B8B /* Input.hpp */,
 				B233658B2A75345D00BC7B8B /* Layer.hpp */,
 				B23365912A75348800BC7B8B /* LayerStack.hpp */,
+				B23367242A75495000BC7B8B /* UUID.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -645,6 +650,7 @@
 				B23364CC2A741CE100BC7B8B /* EngineDirectoryManager.cpp */,
 				B23364CD2A741CE100BC7B8B /* EngineDirectoryManager.hpp */,
 				B23365902A75348800BC7B8B /* LayerStack.cpp */,
+				B23367232A75495000BC7B8B /* UUID.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -707,6 +713,7 @@
 				B21FAA4A2A729312009EED1F /* IKMemory.hpp in Headers */,
 				B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */,
 				B23365482A74E6D300BC7B8B /* Renderer2D.hpp in Headers */,
+				B23367262A75495000BC7B8B /* UUID.hpp in Headers */,
 				B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */,
 				B21FAA382A728F4D009EED1F /* Event.h in Headers */,
 				B210481F2A72CA9000FA8CF2 /* MacWindow.hpp in Headers */,
@@ -851,6 +858,7 @@
 				B233648E2A72CE7200BC7B8B /* Renderer.cpp in Sources */,
 				B23367192A75405B00BC7B8B /* Scene.cpp in Sources */,
 				B21048162A72A1BA00FA8CF2 /* CoreWindow.cpp in Sources */,
+				B23367252A75495000BC7B8B /* UUID.cpp in Sources */,
 				B23365142A74381300BC7B8B /* OpenGLRendererBuffers.cpp in Sources */,
 				B23365472A74E6D300BC7B8B /* Renderer2D.cpp in Sources */,
 				B210481E2A72CA9000FA8CF2 /* MacWindow.cpp in Sources */,

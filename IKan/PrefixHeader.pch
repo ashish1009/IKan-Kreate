@@ -40,6 +40,7 @@
 #include "Core/Common.hpp"
 #include "Core/EngineDirectoryManager.hpp"
 #include "Core/Buffers.hpp"
+#include "Core/UUID.hpp"
 
 #include "Utils/FileSystem.hpp"
 #include "Utils/StringUtils.hpp"
