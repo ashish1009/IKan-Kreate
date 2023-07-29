@@ -258,4 +258,40 @@ namespace IKan
     IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", m_filePath);
     IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID        {0}", m_rendererID);
   }
+  
+  void OpenGLImage::Bind(uint32_t slot) const
+  {
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(GL_TEXTURE_2D, m_rendererID);
+  }
+  
+  void OpenGLImage::Unbind() const
+  {
+    glBindTexture(GL_TEXTURE_2D, 0);
+  }
+  
+  uint32_t OpenGLImage::GetWidth() const
+  {
+    return m_width;
+  }
+  
+  uint32_t OpenGLImage::GetHeight() const
+  {
+    return m_height;
+  }
+  
+  RendererID OpenGLImage::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  const std::string& OpenGLImage::GetfilePath() const
+  {
+    return m_filePath;
+  }
+  
+  const std::string& OpenGLImage::GetName() const
+  {
+    return m_name;
+  }
 }
