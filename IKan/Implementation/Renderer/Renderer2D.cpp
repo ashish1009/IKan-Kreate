@@ -392,6 +392,8 @@ namespace IKan
       rendererPassSpec.targetFramebuffer = FrameBuffer::Create(fbSpec);
       s_commonData->renderPass = RenderPass::Create(rendererPassSpec);
     }
+    
+    AddQuadData(maxQuads);
   }
   
   void Renderer2D::Shutdown()
@@ -455,4 +457,85 @@ namespace IKan
       s_fullscreenQuadData->pipeline->GetSpecification().shader->Unbind();
     }
   }
+  
+  void Renderer2D::AddQuadData(uint32_t maxElement)
+  {
+    if (maxElement == 0)
+    {
+      return;
+    }
+    
+    Scope<QuadData>& data = s_quadData;
+    
+    // If data have already created then append the data to previous one
+    if (data)
+    {
+      maxElement += data->maxElement;
+      data.reset();
+    }
+    
+    // Allocate memory for Quad Data
+    data = CreateScope<QuadData>();
+    
+    // Initialize the data for Common shape
+    data->Init(maxElement);
+    
+    // Allocating the memory for vertex Buffer Pointer
+    data->vertexBufferBasePtr = new QuadData::Vertex[data->maxVertices];
+    
+    // Create vertes Buffer
+    data->vertexBuffer = VertexBuffer::Create(data->maxVertices * sizeof(QuadData::Vertex));
+    
+    // Create Pipeline specification
+    Pipeline::Specification pipelineSpec;
+    pipelineSpec.debugName = "Quad Renderer";
+    pipelineSpec.shader = Renderer::GetShader(CoreAssetPath("Shaders/QuadShader.glsl"));
+    pipelineSpec.layout =
+    {
+      { "a_Position",     ShaderDataType::Float3 },
+      { "a_Color",        ShaderDataType::Float4 },
+      { "a_TexCoords",    ShaderDataType::Float2 },
+      { "a_TexIndex",     ShaderDataType::Float },
+      { "a_TilingFactor", ShaderDataType::Float },
+      { "a_ObjectID",     ShaderDataType::Int },
+    };
+    pipelineSpec.randerPass = s_commonData->renderPass;
+    
+    // Create the Pipeline instnace
+    data->pipeline = Pipeline::Create(pipelineSpec);
+    
+    // Create Index Buffer
+    uint32_t* indices = iknew uint32_t[data->maxIndices];
+    uint32_t offset = 0;
+    for (size_t i = 0; i < data->maxIndices; i += Shape2DCommonData::IndicesForSingleElement)
+    {
+      indices[i + 0] = offset + 0;
+      indices[i + 1] = offset + 1;
+      indices[i + 2] = offset + 2;
+      
+      indices[i + 3] = offset + 2;
+      indices[i + 4] = offset + 3;
+      indices[i + 5] = offset + 0;
+      
+      offset += 4;
+    }
+    
+    // Create Index Buffer in GPU for storing Indices. Once stores the date in GPU, we do not Need this Buffer
+    data->indexBuffer = IndexBuffer::CreateWithCount(indices, data->maxIndices);
+    ikdelete[] indices;
+    
+    // Setup the Quad Shader. Copy the Same shader refernce which is stored in the Pipeline
+    data->shader = data->pipeline->GetSpecification().shader;
+    
+    RendererStatistics::Get()._2d.maxQuads = data->maxElement;
+    
+    BATCH_INFO("Initialized Batch Renderer for Quad Data ");
+    BATCH_INFO("-----------------------------------------");
+    BATCH_INFO("  Max Quads per Batch              {0}", data->maxElement);
+    BATCH_INFO("  Max Texture Slots per Batch      {0}", MaxTextureSlotsInShader);
+    BATCH_INFO("  Vertex Buffer used               {0} B", data->maxVertices * sizeof(QuadData::Vertex));
+    BATCH_INFO("  Index Buffer used                {0} B", data->maxIndices * sizeof(uint32_t));
+    BATCH_INFO("  Shader Used                      {0}", data->shader->GetName());
+  }
+
 } // namespace IKan

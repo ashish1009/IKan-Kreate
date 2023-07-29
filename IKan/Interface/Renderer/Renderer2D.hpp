@@ -24,7 +24,17 @@ namespace IKan
     static void Initialise(uint32_t maxQuads, uint32_t maxCirlces, uint32_t maxLines);
     /// This functio dhutdown the batch renderer and destoy all the buffer reserved on initialize
     static void Shutdown();
-    
+
+    /// This funcition Adds the quads renderer data to prev allocaged data
+    /// - Parameter maxQuads: max quad to be renderered in single batch
+    static void AddQuadData(uint32_t maxQuads);
+    /// This funcition Adds the circle renderer data to prev allocaged data
+    /// - Parameter maxCirlces: max circle to be renderered in single batch
+    static void AddCircleData(uint32_t maxCirlces);
+    /// This funcition Adds the lines renderer data to prev allocaged data
+    /// - Parameter maxLines: max circle to be renderered in single batch
+    static void AddLineData(uint32_t maxLines);
+
     /// This function render the fullscreen quad
     /// - Parameters:
     ///   - texture: Texture to be loaded
