@@ -41,5 +41,11 @@ namespace IKan
       Attachments attachments;
     };
 
+    /// Default virtual destructor
+    virtual ~FrameBuffer() = default;
+    
+    /// This static function creates the Framebuffer instance based on the current Supported API
+    /// - Parameter spec: Frame buffer specification
+    [[nodiscard]] static Ref<FrameBuffer> Create(const Specification& spec);
   };
 } // namespace IKan
