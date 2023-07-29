@@ -500,6 +500,20 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		B23367152A753FEB00BC7B8B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		B23367162A75401A00BC7B8B /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		B24076DC2A72391000221919 = {
 			isa = PBXGroup;
 			children = (
@@ -541,6 +555,7 @@
 				B23364842A72CE4000BC7B8B /* Renderer */,
 				B23365262A7440BC00BC7B8B /* Camera */,
 				B233670A2A75391D00BC7B8B /* UI */,
+				B23367152A753FEB00BC7B8B /* Scene */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -553,8 +568,9 @@
 				B24077152A72650600221919 /* Core */,
 				B23364852A72CE4700BC7B8B /* Renderer */,
 				B23365272A7440C300BC7B8B /* Camera */,
-				B21048192A72CA6A00FA8CF2 /* Platform */,
 				B233670B2A75392400BC7B8B /* UI */,
+				B23367162A75401A00BC7B8B /* Scene */,
+				B21048192A72CA6A00FA8CF2 /* Platform */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
