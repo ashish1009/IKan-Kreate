@@ -154,7 +154,12 @@ namespace IKan
   {
     s_rendererData->rendererApiInstance->DrawArrays(pipeline, count);
   }
-  
+
+  void Renderer::DrawQuad(const Ref<Pipeline>& pipeline)
+  {
+    s_rendererData->rendererApiInstance->DrawQuad(pipeline);
+  }
+
   // Renderer Capabilities -------------------------------------------------------------------------------------------
   Renderer::Capabilities& Renderer::Capabilities::Get()
   {

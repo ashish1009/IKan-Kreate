@@ -6,6 +6,7 @@
 //
 
 #include "Renderer2D.hpp"
+#include "Renderer/Renderer.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
@@ -66,5 +67,30 @@ namespace IKan
   void Renderer2D::Shutdown()
   {
     s_fullscreenQuadData.reset();
+  }
+  
+  void Renderer2D::DrawFullscreenQuad(const Ref<Image>& image, uint32_t slot, bool overrideShader)
+  {
+    // Bind the default Shader
+    if (!overrideShader)
+    {
+      s_fullscreenQuadData->pipeline->GetSpecification().shader->Bind();
+    }
+    
+    if (image)
+    {
+      image->Bind(slot);
+    }
+    else
+    {
+//      s_fullscreenQuadData->whiteTexture->Bind();
+    }
+    Renderer::DrawQuad(s_fullscreenQuadData->pipeline);
+    
+    // Unbind the default Shader
+    if (!overrideShader)
+    {
+      s_fullscreenQuadData->pipeline->GetSpecification().shader->Unbind();
+    }
   }
 } // namespace IKan

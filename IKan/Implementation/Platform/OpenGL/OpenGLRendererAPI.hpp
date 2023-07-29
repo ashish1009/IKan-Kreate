@@ -70,6 +70,8 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer and index buffer
     ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
     void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const override;
-
+    /// This API draws Quad
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer
+    void DrawQuad(const Ref<Pipeline>& pipeline) const override;
   };
 } // namespace IKan

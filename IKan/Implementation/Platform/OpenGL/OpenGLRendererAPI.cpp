@@ -124,5 +124,13 @@ namespace IKan
     RendererStatistics::Get().drawCalls++;
     pipeline->Unbind();
   }
-
+  
+  void OpenGLRendererAPI::DrawQuad(const Ref<Pipeline>& pipeline) const
+  {
+    pipeline->Bind();
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    pipeline->Unbind();
+    
+    RendererStatistics::Get().drawCalls++;
+  }
 } // namespace IKan

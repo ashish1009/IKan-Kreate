@@ -69,6 +69,9 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer and index buffer
     ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
     virtual void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const = 0;
+    /// This API draws Quad
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer
+    virtual void DrawQuad(const Ref<Pipeline>& pipeline) const = 0;
 
     /// This function creates the Renderer API instance based on the Supported APIs
     [[nodiscard]] static Scope<RendererAPI> Create();

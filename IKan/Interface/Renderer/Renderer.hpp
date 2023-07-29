@@ -127,6 +127,9 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer and index buffer
     ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
     static void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count);
+    /// This function render the fullscreen quad
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer
+    static void DrawQuad(const Ref<Pipeline>& pipeline);
 
     MAKE_PURE_STATIC(Renderer);
   };
