@@ -95,6 +95,9 @@
 		B233658D2A75345D00BC7B8B /* Layer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233658B2A75345D00BC7B8B /* Layer.hpp */; };
 		B23365922A75348800BC7B8B /* LayerStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365902A75348800BC7B8B /* LayerStack.cpp */; };
 		B23365932A75348800BC7B8B /* LayerStack.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365912A75348800BC7B8B /* LayerStack.hpp */; };
+		B233670E2A75394300BC7B8B /* ImGuiBuild.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233670C2A75394300BC7B8B /* ImGuiBuild.cpp */; };
+		B23367122A75396800BC7B8B /* ImGuiLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23367102A75396800BC7B8B /* ImGuiLayer.cpp */; };
+		B23367132A75396800BC7B8B /* ImGuiLayer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23367112A75396800BC7B8B /* ImGuiLayer.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -228,6 +231,9 @@
 		B23365902A75348800BC7B8B /* LayerStack.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LayerStack.cpp; sourceTree = "<group>"; };
 		B23365912A75348800BC7B8B /* LayerStack.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LayerStack.hpp; sourceTree = "<group>"; };
 		B23365AE2A75386B00BC7B8B /* UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UI.xcodeproj; path = UI/UI.xcodeproj; sourceTree = "<group>"; };
+		B233670C2A75394300BC7B8B /* ImGuiBuild.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiBuild.cpp; sourceTree = "<group>"; };
+		B23367102A75396800BC7B8B /* ImGuiLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiLayer.cpp; sourceTree = "<group>"; };
+		B23367112A75396800BC7B8B /* ImGuiLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiLayer.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -475,6 +481,23 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B233670A2A75391D00BC7B8B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B23367112A75396800BC7B8B /* ImGuiLayer.hpp */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		B233670B2A75392400BC7B8B /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B233670C2A75394300BC7B8B /* ImGuiBuild.cpp */,
+				B23367102A75396800BC7B8B /* ImGuiLayer.cpp */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		B24076DC2A72391000221919 = {
 			isa = PBXGroup;
 			children = (
@@ -515,6 +538,7 @@
 				B24077022A72437500221919 /* Core */,
 				B23364842A72CE4000BC7B8B /* Renderer */,
 				B23365262A7440BC00BC7B8B /* Camera */,
+				B233670A2A75391D00BC7B8B /* UI */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -528,6 +552,7 @@
 				B23364852A72CE4700BC7B8B /* Renderer */,
 				B23365272A7440C300BC7B8B /* Camera */,
 				B21048192A72CA6A00FA8CF2 /* Platform */,
+				B233670B2A75392400BC7B8B /* UI */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -653,6 +678,7 @@
 				B233656D2A75231700BC7B8B /* MathUtils.hpp in Headers */,
 				B23365612A751D6B00BC7B8B /* RenderPass.hpp in Headers */,
 				B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */,
+				B23367132A75396800BC7B8B /* ImGuiLayer.hpp in Headers */,
 				B23365372A74422800BC7B8B /* FixedCamera.hpp in Headers */,
 				B23364C72A72D2D300BC7B8B /* Input.hpp in Headers */,
 				B23365192A7438FA00BC7B8B /* RendererStats.hpp in Headers */,
@@ -789,6 +815,7 @@
 				B23365472A74E6D300BC7B8B /* Renderer2D.cpp in Sources */,
 				B210481E2A72CA9000FA8CF2 /* MacWindow.cpp in Sources */,
 				B21FAA4D2A7297DA009EED1F /* Application.cpp in Sources */,
+				B23367122A75396800BC7B8B /* ImGuiLayer.cpp in Sources */,
 				B23365322A74416700BC7B8B /* EditorCamera.cpp in Sources */,
 				B23365852A75303E00BC7B8B /* TextRenderer.cpp in Sources */,
 				B233652A2A7440CD00BC7B8B /* Camera.cpp in Sources */,
@@ -805,6 +832,7 @@
 				B2B5DE3E2A727C090068EEFB /* Timer.cpp in Sources */,
 				B23364E02A74270000BC7B8B /* ShaderUniform.cpp in Sources */,
 				B23364E42A7427C300BC7B8B /* OpenGLShaderUniform.cpp in Sources */,
+				B233670E2A75394300BC7B8B /* ImGuiBuild.cpp in Sources */,
 				B21FAA452A7292B3009EED1F /* Buffers.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
