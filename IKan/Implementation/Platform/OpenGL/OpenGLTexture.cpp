@@ -296,12 +296,72 @@ namespace IKan
   }
   
   OpenGLTexture::OpenGLTexture(const Specification& spec)
+  : m_specification(spec)
   {
+    glGenTextures(1, &m_rendererID);
+    glBindTexture(GL_TEXTURE_2D, m_rendererID);
     
+    // Check the channel of Image data if data is non zero
+    if (m_specification.data)
+    {
+      m_channel = m_specification.dataFormat == TextureFormat::RGBA ? 4 : 3;
+      IK_ASSERT((m_specification.size == (uint32_t)m_specification.width * (uint32_t)m_specification.height * m_channel),
+                "Data must be entire texture");
+    }
+    
+    // Create texture in the renderer Buffer
+    GLint internalFormat = TextureUtils::OpenGLFormatFromIKanFormat(m_specification.internalFormat);
+    GLint dataFormat = TextureUtils::OpenGLFormatFromIKanFormat(m_specification.dataFormat);
+    
+    // Create the GL texture from data
+    glTexImage2D(GL_TEXTURE_2D, 0, /* Level */ (GLint)internalFormat, m_specification.width, m_specification.height,
+                 0 /* Border */, dataFormat, TextureUtils::GetTextureType(internalFormat), m_specification.data);
+    
+    // Set the Texture parametes
+    glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(m_specification.type),
+                    GL_TEXTURE_MIN_FILTER, TextureUtils::OpenGLFilterFromIKanFilter(m_specification.filter));
+    glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(m_specification.type),
+                    GL_TEXTURE_MAG_FILTER, TextureUtils::OpenGLFilterFromIKanFilter(m_specification.filter));
+    
+    glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(m_specification.type),
+                    GL_TEXTURE_WRAP_R, TextureUtils::OpenGLWrapFromIKanFilter(m_specification.wrap));
+    glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(m_specification.type),
+                    GL_TEXTURE_WRAP_S, TextureUtils::OpenGLWrapFromIKanFilter(m_specification.wrap));
+    glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(m_specification.type),
+                    GL_TEXTURE_WRAP_T, TextureUtils::OpenGLWrapFromIKanFilter(m_specification.wrap));
+    
+    // Increment the size in stats
+    RendererStatistics::Get().textureBufferSize += m_specification.size;
+    
+    if (m_specification.data)
+    {
+      IK_LOG_DEBUG(LogModule::Texture, "Creating Open GL Image Texture ");
+      IK_LOG_DEBUG(LogModule::Texture, "------------------------------ ");
+      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}  ", m_rendererID);
+      IK_LOG_DEBUG(LogModule::Texture, "  Size            {0} B", m_specification.size);
+      IK_LOG_DEBUG(LogModule::Texture, "  Channels        {0}", m_channel);
+      IK_LOG_DEBUG(LogModule::Texture, "  Internal Format {0}", TextureUtils::IKanFormatName(m_specification.internalFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Data Format     {0}", TextureUtils::IKanFormatName(m_specification.dataFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Type            {0}", TextureUtils::IKanTypeName(m_specification.type));
+      IK_LOG_DEBUG(LogModule::Texture, "  Wrap            {0}", TextureUtils::IKanWrapName(m_specification.wrap));
+      IK_LOG_DEBUG(LogModule::Texture, "  Filter          {0}", TextureUtils::IKanFilterName(m_specification.filter));
+    }
   }
   
   OpenGLTexture::~OpenGLTexture()
   {
-    
+    if (m_specification.data)
+    {
+      IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Image Texture ");
+      IK_LOG_DEBUG(LogModule::Texture, "------------------------------ ");
+      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}  ", m_rendererID);
+      IK_LOG_DEBUG(LogModule::Texture, "  Size            {0} B", m_specification.size);
+      IK_LOG_DEBUG(LogModule::Texture, "  Channels        {0}", m_channel);
+      IK_LOG_DEBUG(LogModule::Texture, "  Internal Format {0}", TextureUtils::IKanFormatName(m_specification.internalFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Data Format     {0}", TextureUtils::IKanFormatName(m_specification.dataFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Type            {0}", TextureUtils::IKanTypeName(m_specification.type));
+      IK_LOG_DEBUG(LogModule::Texture, "  Wrap            {0}", TextureUtils::IKanWrapName(m_specification.wrap));
+      IK_LOG_DEBUG(LogModule::Texture, "  Filter          {0}", TextureUtils::IKanFilterName(m_specification.filter));
+    }
   }
 } // namespace IKan

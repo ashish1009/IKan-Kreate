@@ -62,6 +62,11 @@ namespace IKan
     
     /// Default destructor that delete the texture
     virtual ~OpenGLTexture();
+    
+  private:
+    RendererID m_rendererID = 0;
+    Specification m_specification;
+    int32_t m_channel = 0;
   };
   
   namespace TextureUtils

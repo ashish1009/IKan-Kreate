@@ -145,8 +145,6 @@ namespace IKan
     /// This is the NON Image Texture specification
     struct Specification
     {
-      bool debugLog = true;
-      
       int32_t width = 1600;
       int32_t height = 900;
       
