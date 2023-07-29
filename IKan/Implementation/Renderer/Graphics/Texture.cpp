@@ -104,4 +104,16 @@ namespace IKan
   {
     return m_coords;
   }
+  
+  Ref<Texture> Texture::Create(const Specification& spec)
+  {
+    switch (Renderer::GetApi())
+    {
+      case Renderer::Api::OpenGl:
+      case Renderer::Api::None:
+      default:
+        IK_ASSERT(false, "Invalid Renderer API");
+    }
+  }
+
 } // namespace IKan

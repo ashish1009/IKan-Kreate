@@ -159,5 +159,12 @@ namespace IKan
       void* data = nullptr;
       uint32_t size = 0;
     };
+    
+    /// This is default virtual destructor for Texture
+    virtual ~Texture() = default;
+
+    /// This API creates the Texture instance based on the Renderer API
+    /// - Parameter spec: Texture Specificaion
+    [[nodiscard]] static Ref<Texture> Create(const Specification& spec);
   };
 } // namespace IKan
