@@ -10,7 +10,8 @@
 namespace IKan
 {
   class Image;
-  
+  class Texture;
+
   /// This is the batch renderer for 2D Renderering
   class Renderer2D
   {
@@ -27,5 +28,12 @@ namespace IKan
     ///   - overrideShader: Override shader flag. if false then deafult shader is used
     /// - Note: If true then bind your own shader
     static void DrawFullscreenQuad(const Ref<Image>& texture = nullptr, uint32_t slot = 0, bool overrideShader = false);
+    /// This function render the fullscreen quad
+    /// - Parameters:
+    ///   - texture: Texture to be loaded
+    ///   - slot: Slot to be load the texture
+    ///   - overrideShader: Override shader flag. if false then deafult shader is used
+    /// - Note: If true then bind your own shader
+    static void DrawFullscreenQuad(const Ref<Texture>& texture = nullptr, uint32_t slot = 0, bool overrideShader = false);
   };
 } // namespace IKan

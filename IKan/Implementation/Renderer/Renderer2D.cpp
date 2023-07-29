@@ -113,4 +113,29 @@ namespace IKan
       s_fullscreenQuadData->pipeline->GetSpecification().shader->Unbind();
     }
   }
+  
+  void Renderer2D::DrawFullscreenQuad(const Ref<Texture>& texture, uint32_t slot, bool overrideShader)
+  {
+    // Bind the default Shader
+    if (!overrideShader)
+    {
+      s_fullscreenQuadData->pipeline->GetSpecification().shader->Bind();
+    }
+    
+    if (texture)
+    {
+      texture->Bind(slot);
+    }
+    else
+    {
+      s_fullscreenQuadData->whiteTexture->Bind();
+    }
+    Renderer::DrawQuad(s_fullscreenQuadData->pipeline);
+    
+    // Unbind the default Shader
+    if (!overrideShader)
+    {
+      s_fullscreenQuadData->pipeline->GetSpecification().shader->Unbind();
+    }
+  }
 } // namespace IKan
