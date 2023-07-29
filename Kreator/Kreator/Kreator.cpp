@@ -6,6 +6,7 @@
 //
 
 #include <IKanEntryPoint.h>
+#include "RendererLayer.hpp"
 
 namespace Kreator
 {
@@ -27,13 +28,21 @@ namespace Kreator
     
     void OnInit() override
     {
- 
+      // Create the Rendere Layer
+      m_rendereLayer = CreateRef<RendererLayer>();
+      
+      // Push the renderer Layer in Application
+      PushLayer(m_rendereLayer);
     }
     
     void OnShutdown() override
     {
-      
+      PopLayer(m_rendereLayer);
+      m_rendereLayer.reset();
     }
+    
+  private:
+    Ref<Layer> m_rendereLayer;
   };
 } // namespace Kreator
 

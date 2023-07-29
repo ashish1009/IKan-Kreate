@@ -9,6 +9,10 @@
 
 namespace Kreator
 {
+  // TODO: Temp
+  static Ref<Image> m_image;
+  static Ref<EditorCamera> m_camera;
+  
   RendererLayer::RendererLayer()
   : Layer("Kreator Renderer")
   {
@@ -24,21 +28,57 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
+    
+    // TODO: Temp
+    {
+      m_image = Image::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Textures/checkerboard.png");
+      m_camera = CreateRef<EditorCamera>(45, 1600, 900);
+    }
   }
   
   void RendererLayer::OnDetach()
   {
+    IK_PROFILE();
     IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
+    
+    // TODO: Temp
+    {
+      m_image.reset();
+    }
   }
   
   void RendererLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
+    
+    // TODO: Temp
+    {
+      m_camera->SetActive(true);
+      m_camera->OnUpdate(ts);
+      
+      Renderer2D::BeginRenderPass();
+      Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
+      
+      Renderer2D::BeginBatch(m_camera->GetUnReversedViewProjection());
+      
+      Renderer2D::DrawQuad({1, 1, 0}, {1, 1, 1}, {0, 0, 0}, m_image);
+      Renderer2D::DrawCircle({0, 0, 0});
+      Renderer2D::DrawRect({0, 0, 0}, {4, 4}, {1, 0, 0.5, 1});
+      Renderer2D::RenderText("Sample Test Text", Font::GetDefaultFont(), {0, -1, 0}, {1, 1}, {1, 1, 1, 1}, -1);
+      
+      Renderer2D::EndBatch();
+      Renderer2D::EndRenderPass();
+      
+      Renderer2D::DrawFullscreenQuad(Renderer2D::GetFinalImage());
+    }
   }
   
   void RendererLayer::OnEvent(Event& event)
   {
-    
+    // TODO: Temp
+    {
+      m_camera->OnEvent(event);
+    }
   }
   
   void RendererLayer::OnImguiRender()

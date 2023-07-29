@@ -8,18 +8,8 @@
 #include "Application.hpp"
 #include "Renderer/RendererStats.hpp"
 
-// TODO: To Move rendere layer later
-#include "Renderer2D.hpp"
-#include "Texture.hpp"
-#include "EditorCamera.hpp"
-#include "Font.hpp"
-
 namespace IKan
 {
-  // TODO: To Move rendere layer later
-  static Ref<Image> m_image;
-  static Ref<EditorCamera> m_camera;
-  
   Application::Application(const Specification& spec)
   : m_specificaion(spec), m_layers(CreateScope<LayerStack>())
   {
@@ -55,12 +45,6 @@ namespace IKan
     // Initialise the Core Renderer
     Renderer::Initialize();
     
-    // TODO: To Move Renderer Layer later
-    {
-      m_image = Image::Create(CoreAssetPath("Textures/Default/NoTexture.png"));
-      m_camera = CreateRef<EditorCamera>(45, 1600, 900);
-    }
-
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialised                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -69,11 +53,6 @@ namespace IKan
   Application::~Application()
   {
     IK_PROFILE();
-
-    // TODO: To Move Renderer Layer later
-    {
-      m_image.reset();
-    }
 
     // Reset the window
     m_window.reset();
@@ -110,27 +89,6 @@ namespace IKan
         layer->OnUpdate(m_timeStep);
       }
 
-      // TODO: To Move Renderer Layer later
-      {
-        m_camera->SetActive(true);
-        m_camera->OnUpdate(m_timeStep);
-        
-        Renderer2D::BeginRenderPass();
-        Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
-
-        Renderer2D::BeginBatch(m_camera->GetUnReversedViewProjection());
-
-        Renderer2D::DrawQuad({1, 1, 0}, {1, 1, 1}, {0, 0, 0}, m_image);
-        Renderer2D::DrawCircle({0, 0, 0});
-        Renderer2D::DrawRect({0, 0, 0}, {4, 4}, {1, 0, 0.5, 1});
-        Renderer2D::RenderText("Sample Test Text", Font::GetDefaultFont(), {0, -1, 0}, {1, 1}, {1, 1, 1, 1}, -1);
-
-        Renderer2D::EndBatch();
-        Renderer2D::EndRenderPass();
-        
-        Renderer2D::DrawFullscreenQuad(Renderer2D::GetFinalImage());
-      }
-      
       // Update the client application
       OnUpdate(m_timeStep);
       
@@ -167,12 +125,7 @@ namespace IKan
     }
     
     // Client side event handler funciton
-    OnEvent(event);
-    
-    // TODO: To Move Renderer Layer later
-    {
-      m_camera->OnEvent(event);
-    }
+    OnEvent(event);    
   }
   
   bool Application::WindowClose([[maybe_unused]] WindowCloseEvent& window_close_event)
@@ -197,6 +150,16 @@ namespace IKan
 
     // Rendering Imgui for Client
     OnImguiRender();
+  }
+  
+  void Application::PushLayer(const Ref<Layer> &layer)
+  {
+    m_layers->PushLayer(layer);
+  }
+  
+  void Application::PopLayer(const Ref<Layer> &layer)
+  {
+    m_layers->PopLayer(layer);
   }
 
   void* Application::GetWindowPtr() const
