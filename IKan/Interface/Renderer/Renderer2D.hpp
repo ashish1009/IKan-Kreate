@@ -103,6 +103,40 @@ namespace IKan
     static void DrawQuad(const glm::mat4& transform, const Ref<Sprite>& subTexture, const glm::vec4& tintColor = glm::vec4(1.0f),
                          int32_t objectID = -1);
     
+    /// This function draws circle with color
+    /// - Parameters:
+    ///   - position: Center Circle
+    ///   - radius: radius
+    ///   - rotation: rotation
+    ///   - tintColor: Color of Circle
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void DrawCircle(const glm::vec3& position, const glm::vec3& radius = glm::vec3(1.0f),
+                           const glm::vec3& rotation = glm::vec3(0.0f), const glm::vec4& tintColor = glm::vec4(1.0f),
+                           float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1);
+    
+    /// This function draws circle with color
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Circle
+    ///   - color: Color of Circle
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void DrawCircle(const glm::mat4& transform, const glm::vec4& color, float thickness = 1.0f, float fade = (float)0.005,
+                           int32_t objectID = -1);
+    /// This function draws circle with texture
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Circle
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - tintColor: Color of Quad
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void DrawCircle(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor = glm::vec4(1.0f),
+                           float tilingFactor = 1.0f, float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1 );
+    
     MAKE_PURE_STATIC(Renderer2D);
     
   private:
@@ -120,5 +154,16 @@ namespace IKan
     static void DrawTextureQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec2* textureCoords,
                                 float tilingFactor, const glm::vec4& tintColor, int32_t objectID);
 
+    /// This function is the helper function to rendere the circle
+    /// - Parameters:
+    ///   - transform: transform matrix of circle
+    ///   - texture: texture to be binded in circle
+    ///   - tilingFactor: tiling factor of texture
+    ///   - tintColor: color of circle
+    ///   - thickness: thickness of circle
+    ///   - fade: cirlce face
+    ///   - objectID: object/pixel id
+    static void DrawTextureCircle(const glm::mat4& transform, const Ref<Image>& texture, float tilingFactor,
+                                  const glm::vec4& tintColor, float thickness, float fade, int32_t objectID);
   };
 } // namespace IKan

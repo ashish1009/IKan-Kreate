@@ -176,6 +176,7 @@ namespace IKan
 
         Renderer2D::BeginBatch(m_camera->GetUnReversedViewProjection());
         Renderer2D::DrawQuad({1, 1, 0}, {1, 1, 1}, {0, 0, 0}, m_image);
+        Renderer2D::DrawCircle({2, 1, 0});
         Renderer2D::EndBatch();
 
         m_frameBuffer->Unbind();

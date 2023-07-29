@@ -857,4 +857,85 @@ namespace IKan
     RendererStatistics::Get()._2d.quads++;
   }
 
+  void Renderer2D::DrawCircle(const glm::vec3& position, const glm::vec3& radius, const glm::vec3& rotation, const glm::vec4& color,
+                              float thickness, float fade, int32_t objectID)
+  {
+    auto transform = Utils::Math::GetTransformMatrix(position, rotation, radius);
+    DrawTextureCircle(transform, nullptr, 1.0f /* tiling factor */, color, thickness, fade, objectID);
+  }
+  
+  void Renderer2D::DrawCircle(const glm::mat4& transform, const glm::vec4& color, float thickness, float fade, int32_t objectID)
+  {
+    DrawTextureCircle(transform, nullptr, 1.0f /* tiling factor */, color, thickness, fade, objectID);
+  }
+  void Renderer2D::DrawCircle(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor,
+                              float tilingFactor, float thickness, float fade, int32_t objectID)
+  {
+    DrawTextureCircle(transform, texture, tilingFactor, tintColor, thickness, fade, objectID);
+  }
+  
+  void Renderer2D::DrawTextureCircle(const glm::mat4& transform, const Ref<Image>& texture, float tilingFactor,
+                                     const glm::vec4& tintColor, float thickness, float fade, int32_t objectID)
+  {
+    // If number of indices increase in batch then start new batch
+    if (s_circleData->indexCount >= s_circleData->maxIndices)
+    {
+      BATCH_INFO("Starts the new batch as number of indices ({0}) increases in the previous batch", s_circleData->indexCount);
+      EndBatch();
+      s_circleData->StartInternalBatch();
+    }
+    
+    float textureIndex = 0.0f;
+    if (texture)
+    {
+      // Find if texture is already loaded in current batch
+      for (size_t i = 1; i < s_circleData->textureSlotIndex; i++)
+      {
+        if (s_circleData->textureSlots[i].get() == texture.get())
+        {
+          // Found the current textue in the batch
+          textureIndex = (float)i;
+          break;
+        }
+      }
+      
+      // If current texture slot is not pre loaded then load the texture in proper slot
+      if (textureIndex == 0.0f)
+      {
+        // If number of slots increases max then start new batch
+        if (s_circleData->textureSlotIndex >= MaxTextureSlotsInShader)
+        {
+          BATCH_INFO("Starts the new batch as number of texture slot ({0}) increases in the previous batch",
+                     s_circleData->textureSlotIndex);
+          EndBatch();
+          s_circleData->StartInternalBatch();
+        }
+        
+        // Loading the current texture in the first free slot slot
+        textureIndex = (float)s_circleData->textureSlotIndex;
+        s_circleData->textureSlots[s_circleData->textureSlotIndex] = texture;
+        s_circleData->textureSlotIndex++;
+      }
+    }
+    
+    for (size_t i = 0; i < Shape2DCommonData::VertexForSingleElement; i++)
+    {
+      s_circleData->vertexBufferPtr->position        = transform * s_circleData->vertexBasePosition[i];
+      s_circleData->vertexBufferPtr->color           = tintColor;
+      s_circleData->vertexBufferPtr->textureCoords   = 2.0f * s_circleData->vertexBasePosition[i];
+      s_circleData->vertexBufferPtr->textureIndex    = textureIndex;
+      s_circleData->vertexBufferPtr->tilingFactor    = tilingFactor;
+      s_circleData->vertexBufferPtr->localPosition   = 2.0f * s_circleData->vertexBasePosition[i];
+      s_circleData->vertexBufferPtr->thickness       = thickness;
+      s_circleData->vertexBufferPtr->fade            = fade;
+      s_circleData->vertexBufferPtr->pixelID         = objectID;
+      s_circleData->vertexBufferPtr++;
+    }
+    
+    s_circleData->indexCount += Shape2DCommonData::IndicesForSingleElement;
+    
+    RendererStatistics::Get().indexCount += Shape2DCommonData::IndicesForSingleElement;
+    RendererStatistics::Get().vertexCount += Shape2DCommonData::VertexForSingleElement;
+    RendererStatistics::Get()._2d.circles++;
+  }
 } // namespace IKan
