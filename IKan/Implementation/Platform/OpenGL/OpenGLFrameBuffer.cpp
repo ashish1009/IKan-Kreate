@@ -12,6 +12,7 @@
 namespace IKan
 {
 #define FB_LOG(...) IK_LOG_DEBUG(LogModule::FrameBuffer, __VA_ARGS__);
+#define GET_FORMAT_NAME(name) TextureUtils::IKanFormatName(name)
 
   namespace FramebufferUtils
   {
@@ -86,7 +87,19 @@ namespace IKan
     // Generate the frame buffer to renderer ID
     glGenFramebuffers(1, &m_rendererID);
     glBindFramebuffer(GL_FRAMEBUFFER, m_rendererID);
-        
+
+#ifdef IK_ENABLE_LOG
+    // Store the vertex attribute
+    Table::Data tableData;
+    tableData.title = "Framebuffer Attachments with Renderer ID " + std::to_string(m_rendererID);
+    tableData.numColumns = 3;
+    tableData.columnHeaders =
+    {
+      "Internal Format", "Data Format", "ID"
+    };
+    Table fbTable(tableData);
+#endif
+    
     Texture::Specification spec;
     spec.width  = m_specification.width;
     spec.height = m_specification.height;
@@ -114,6 +127,11 @@ namespace IKan
             
             // Attach Image to Framebuffer
             m_colorAttachments[i]->AttachToFramebuffer(TextureAttachment::Color, (uint32_t)i);
+
+#ifdef IK_ENABLE_LOG
+            const RendererID& id = m_colorAttachments[i]->GetRendererID();
+            fbTable.AddRow({GET_FORMAT_NAME(spec.internalFormat), GET_FORMAT_NAME(spec.dataFormat), std::to_string(id)});
+#endif
             break;
           }
           case FrameBuffer::Attachments::TextureFormat::R32I:
@@ -128,6 +146,12 @@ namespace IKan
             
             // Stores the Index of Color attachment used to store the Pixel ID
             m_pixelIDIndex = (uint32_t)i;
+            
+#ifdef IK_ENABLE_LOG
+            const RendererID& id = m_colorAttachments[i]->GetRendererID();
+            fbTable.AddRow({GET_FORMAT_NAME(spec.internalFormat), GET_FORMAT_NAME(spec.dataFormat), std::to_string(id)});
+#endif
+
             break;
           }
         }
@@ -153,11 +177,25 @@ namespace IKan
           
           // Attach Image to Framebuffer
           m_depthAttachment->AttachToFramebuffer(TextureAttachment::Depth);
+          
+#ifdef IK_ENABLE_LOG
+          const RendererID& id = m_depthAttachment->GetRendererID();
+          fbTable.AddRow({GET_FORMAT_NAME(spec.internalFormat), GET_FORMAT_NAME(spec.dataFormat), std::to_string(id)});
+#endif
           break;
         }
       };
     } // Depth Attachment
     
+#ifdef IK_ENABLE_LOG
+    // Log the Framebuffer attachment if there is any
+    if (debugLogs and
+        (m_colorAttachments.size() > 0 or m_depthSpecification != FrameBuffer::Attachments::TextureFormat::None))
+    {
+      fbTable.Dump(Log::Level::Debug, Log::GetModuleName(LogModule::FrameBuffer));
+    }
+#endif
+
     // Error check
     if (m_colorAttachments.size() >= 1)
     {
