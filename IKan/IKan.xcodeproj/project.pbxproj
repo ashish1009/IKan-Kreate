@@ -957,6 +957,7 @@
 					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
+					"${PROJECT_DIR}/Vendors/UI/ImGui",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -984,6 +985,7 @@
 					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
+					"${PROJECT_DIR}/Vendors/UI/ImGui",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

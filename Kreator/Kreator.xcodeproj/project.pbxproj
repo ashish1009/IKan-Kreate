@@ -293,6 +293,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
 					"${PROJECT_DIR}/../IKan/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/../IKan/Vendors/Freetype/include",
+					"${PROJECT_DIR}/../IKan/Vendors/UI/ImGui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -313,6 +314,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
 					"${PROJECT_DIR}/../IKan/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/../IKan/Vendors/Freetype/include",
+					"${PROJECT_DIR}/../IKan/Vendors/UI/ImGui",
 				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";

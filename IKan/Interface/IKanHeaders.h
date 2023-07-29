@@ -30,6 +30,10 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
+// Imgui files
+#include <imgui.h>
+#include <imgui_internal.h>
+
 // Engine Files
 /// Shoule be included at top only ----------------------------------------------------------------------------------
 #include <Core/Macros.h>
