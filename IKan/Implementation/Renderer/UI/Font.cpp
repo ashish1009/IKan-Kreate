@@ -77,4 +77,10 @@ namespace IKan
   {
     m_charTextureMap.clear();
   }
+  
+  const std::string& Font::GetFilePath() const
+  {
+    return m_filePath;
+  }
+
 } // namespace IKan

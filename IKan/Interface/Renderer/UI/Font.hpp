@@ -21,6 +21,9 @@ namespace IKan
     /// This function destroy the font
     ~Font();
     
+    /// This function returns the font file path
+    const std::string& GetFilePath() const;
+
     /// This function initialise tha static data for fonts
     static void Initialise();
     /// This function shutdown tha static data for fonts
