@@ -243,6 +243,44 @@ namespace IKan
     }
   };
 
+  /// Batch Data to Rendering Quads
+  struct QuadData : Shape2DCommonData
+  {
+    /// Single vertex of a Quad
+    struct Vertex : CommonVertex
+    {
+      int32_t pixelID;
+    };
+    
+    /// Base pointer of Vertex Data. This is start of Batch data for single draw call
+    Vertex* vertexBufferBasePtr = nullptr;
+    /// Incrememntal Vetrtex Data Pointer to store all the batch data in Buffer
+    Vertex* vertexBufferPtr = nullptr;
+    
+    // Member functions
+    /// This function starts the batch for Lines
+    /// - Parameter camViewProjMat: camera projection matrix
+    void StartBatch(const glm::mat4& camViewProjMat)
+    {
+      StartCommonBatch(camViewProjMat);
+      StartInternalBatch();
+    }
+    
+    void StartInternalBatch()
+    {
+      StartCommonBatchWithoutCam();
+      vertexBufferPtr = vertexBufferBasePtr;
+    }
+    
+    /// Quad Data Destructor
+    virtual ~QuadData()
+    {
+      ikdelete [] vertexBufferBasePtr;
+      vertexBufferBasePtr = nullptr;
+    }
+  };
+  static Scope<QuadData> s_quadData;
+
   void Renderer2D::Initialise()
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
