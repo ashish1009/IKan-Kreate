@@ -130,6 +130,119 @@ namespace IKan
     }
   };
   
+  /// This structure holds the common batch renderer data for Quads and circle
+  struct Shape2DCommonData : CommonBatchData
+  {
+    /// Single vertex for a Quad or Circle
+    struct CommonVertex
+    {
+      glm::vec3 position;
+      glm::vec4 color;
+      glm::vec2 textureCoords;
+      
+      float textureIndex;
+      float tilingFactor;
+    };
+    
+    // Constants
+    static constexpr uint32_t VertexForSingleElement = 4;
+    static constexpr uint32_t IndicesForSingleElement = 6;
+    
+    /// Store the Vertex and Indices size
+    uint32_t maxIndices = 0;
+    /// Count of Indices to be renderer in Single Batch
+    uint32_t indexCount = 0;
+    
+    /// Stores all the 16 Texture in array so that there is no need to load texture each frame
+    /// NOTE: Load only if new texture is added or older replaced with new
+    std::array<Ref<Texture>, MaxTextureSlotsInShader> textureSlots;
+    
+    /// Texture Slot index sent to Shader to render a specific Texture from slots
+    /// NOTE: Slot 0 is reserved for white texture (No Image only color)
+    uint32_t textureSlotIndex = 1; // 0 = white texture
+    
+    /// Basic vertex of quad (Vertex of circle is taken as Quad only)
+    glm::vec4 vertexBasePosition[4];
+    
+    // Member Functions
+    /// Initialise common shape data
+    /// - Parameter maxElement: max elements
+    void Init(uint32_t maxElement)
+    {
+      // Initialise the common data for all batch
+      CommonBatchData::maxElement = maxElement;
+      maxVertices = maxElement * VertexForSingleElement;
+      
+      // Update the Max Indices for each Batch
+      maxIndices = CommonBatchData::maxElement * IndicesForSingleElement;
+      
+      // Creating white texture for colorful quads witout any image file
+      if (!textureSlots[0])
+      {
+        // White data
+        uint32_t whiteTextureData = 0xffffffff;
+        
+        // Texture specificaion
+        Texture::Specification textureSpec;
+        textureSpec.type = TextureType::Texture2D;
+        textureSpec.internalFormat = TextureFormat::RGBA8;
+        textureSpec.dataFormat = TextureFormat::RGBA;
+        textureSpec.wrap = TextureWrap::Clamp;
+        textureSpec.filter = TextureFilter::Linear;
+        textureSpec.width = 1;
+        textureSpec.height = 1;
+        textureSpec.data = &whiteTextureData;
+        textureSpec.size = sizeof(uint32_t);
+        
+        // Create white texture
+        textureSlots[0] = Texture::Create(textureSpec);
+      }
+      
+      // Setting basic Vertex point of quad
+      vertexBasePosition[0] = { -0.5f, -0.5f, 0.0f, 1.0f };
+      vertexBasePosition[1] = {  0.5f, -0.5f, 0.0f, 1.0f };
+      vertexBasePosition[2] = {  0.5f,  0.5f, 0.0f, 1.0f };
+      vertexBasePosition[3] = { -0.5f,  0.5f, 0.0f, 1.0f };
+    }
+    
+    /// This function starts the common shape batch
+    /// - Parameter camViewProjMat: camera view projection matrix
+    void StartCommonBatch(const glm::mat4& camViewProjMat)
+    {
+      loadCamToShader(shader, camViewProjMat);
+      StartCommonBatchWithoutCam();
+    }
+    
+    /// This is common batch init
+    void StartCommonBatchWithoutCam()
+    {
+      indexCount = 0;
+      textureSlotIndex = 1;
+    }
+    
+    // This funciton flush the shape batch
+    void Flush() {
+      shader->Bind();
+      
+      for (uint32_t i = 0; i < textureSlotIndex; i++)
+      {
+        textureSlots[i]->Bind(i);
+      }
+      
+      // Render the Scene
+      Renderer::DrawIndexed(pipeline, indexCount);
+    }
+    
+    /// Shape 2D Destructor
+    virtual ~Shape2DCommonData()
+    {
+      for(auto texture : textureSlots)
+      {
+        texture.reset();
+      }
+    }
+  };
+
   void Renderer2D::Initialise()
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();

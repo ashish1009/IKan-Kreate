@@ -11,6 +11,13 @@
 
 namespace IKan
 {
+#ifdef __APPLE__
+  /// Maximum Texture slot supported by Senderer Shader Current Open GL Version 4.1 supports only 16 Texture slot in Shader
+  static constexpr uint32_t MaxTextureSlotsInShader = 16;
+#else
+  static constexpr uint32_t MaxTextureSlotsInShader = 0;
+#endif
+
   // Forward Declaration
   class ShaderUniformBufferDeclaration;
   class ShaderResourceDeclaration;

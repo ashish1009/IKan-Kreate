@@ -13,8 +13,6 @@
 
 namespace IKan
 {
-  // Maximum Texture slot supported by Senderer Shader Current Open GL Version 4.1 supports only 16 Texture slot in Shader
-  static constexpr uint32_t MaxTextureSlotsInShader = 16;
   // Max Supported Shaders
   static constexpr uint32_t MaxShaderSupported = 3;
 
