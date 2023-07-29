@@ -51,6 +51,18 @@ namespace IKan
     uint32_t m_size = 0;
     std::string m_filePath = "", m_name = "";
   };
+
+  /// This is the Open GL Implementation class for Creating texture
+  class OpenGLTexture : public Texture
+  {
+  public:
+    /// Default Open GL Image Constructor
+    /// - Parameter spec: Open GL Image Specification
+    OpenGLTexture(const Specification& spec);
+    
+    /// Default destructor that delete the texture
+    virtual ~OpenGLTexture();
+  };
   
   namespace TextureUtils
   {

@@ -294,4 +294,14 @@ namespace IKan
   {
     return m_name;
   }
-}
+  
+  OpenGLTexture::OpenGLTexture(const Specification& spec)
+  {
+    
+  }
+  
+  OpenGLTexture::~OpenGLTexture()
+  {
+    
+  }
+} // namespace IKan
