@@ -396,16 +396,11 @@ namespace IKan
     
     AddQuadData(maxQuads);
     AddCircleData(maxCirlces);
+    AddLineData(maxLines);
   }
   
   void Renderer2D::Shutdown()
   {
-    // Destroy the Render Pass for Renderer 2D
-    if (s_commonData)
-    {
-      s_commonData.reset();
-    }
-    
     BATCH_WARN("Shutting Down the Batch Renderer 2D ");
     BATCH_WARN("------------------------------------");
     
@@ -437,6 +432,25 @@ namespace IKan
       RendererStatistics::Get()._2d.maxCircles = s_circleData->maxElement;
       
       s_circleData.reset();
+    }
+    
+    if (s_lineData)
+    {
+      BATCH_WARN("Destroying Batch Renderer for Line Data ");
+      BATCH_WARN("-----------------------------------------");
+      BATCH_WARN("  Max Lines per Batch              {0}", s_lineData->maxElement);
+      BATCH_WARN("  Vertex Buffer used               {0} B", s_lineData->maxVertices * sizeof(LineData::Vertex));
+      BATCH_WARN("  Shader Used                      {0}", s_lineData->shader->GetName());
+      
+      RendererStatistics::Get()._2d.maxLines = s_lineData->maxElement;
+      
+      s_lineData.reset();
+    }
+
+    // Destroy the Render Pass for Renderer 2D
+    if (s_commonData)
+    {
+      s_commonData.reset();
     }
     
     // Destroy Full screen data
@@ -603,6 +617,60 @@ namespace IKan
     BATCH_INFO("  Shader Used                      {0}", data->shader->GetName());
   }
   
+  void Renderer2D::AddLineData(uint32_t maxElement)
+  {
+    if (maxElement == 0)
+    {
+      return;
+    }
+    
+    Scope<LineData>& data = s_lineData;
+    
+    // If data have already created then append the data to previous one
+    if (data)
+    {
+      maxElement += data->maxElement;
+      data.reset();
+    }
+    
+    // Allocate memory for Line Data
+    data = CreateScope<LineData>();
+    
+    // Initialize the data for Common shape
+    data->maxElement = maxElement;
+    data->maxVertices = data->maxElement * LineData::VertexForSingleLine;
+    
+    // Allocating the memory for vertex Buffer Pointer
+    data->vertexBufferBasePtr = iknew LineData::Vertex[data->maxVertices];
+    
+    // Create vertes Buffer
+    data->vertexBuffer = VertexBuffer::Create(data->maxVertices * sizeof(LineData::Vertex));
+    
+    // Create Pipeline
+    Pipeline::Specification pipelineSpec;
+    pipelineSpec.debugName = "Line Renderer";
+    pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/LineShader.glsl"));
+    pipelineSpec.layout =
+    {
+      { "a_Position", ShaderDataType::Float3 },
+      { "a_Color",    ShaderDataType::Float4 },
+    };
+    
+    // Create the Pipeline instnace
+    data->pipeline = Pipeline::Create(pipelineSpec);
+    
+    // Setup the Quad Shader
+    data->shader = data->pipeline->GetSpecification().shader;
+    
+    RendererStatistics::Get()._2d.maxLines = data->maxElement;
+    
+    BATCH_INFO("Initialized Batch Renderer for Line Data ");
+    BATCH_INFO("-----------------------------------------");
+    BATCH_INFO("  Max Lines per Batch              {0}", data->maxElement);
+    BATCH_INFO("  Vertex Buffer used               {0} B", data->maxVertices * sizeof(LineData::Vertex));
+    BATCH_INFO("  Shader Used                      {0}", data->shader->GetName());
+  }
+
   void Renderer2D::DrawFullscreenQuad(const Ref<Image>& image, uint32_t slot, bool overrideShader)
   {
     // Bind the default Shader
