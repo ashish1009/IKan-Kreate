@@ -14,7 +14,7 @@ namespace IKan
   enum class TextureFormat
   {
     None = 0,
-    RGBA8, RGBA, RED,
+    RGBA8, RGBA, RGB8, RGB, RED,
     R32I, RED_INTEGER,
     DEPTH_COMPONENT
   };

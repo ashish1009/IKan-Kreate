@@ -12,6 +12,7 @@
 #include "Shader.hpp"
 #include "RendererBuffers.hpp"
 #include "Pipeline.hpp"
+#include "Texture.hpp"
 
 namespace IKan
 {
@@ -19,6 +20,7 @@ namespace IKan
   static Ref<IndexBuffer> m_indexBuffer;
   static Ref<VertexBuffer> m_vertexBuffer;
   static Ref<Pipeline> m_pipeline;
+  static Ref<Image> m_image;
   
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
@@ -80,6 +82,8 @@ namespace IKan
         0, 1, 2, 2, 3, 0
       };
       m_indexBuffer = IndexBuffer::CreateWithSize(indices, sizeof(indices));
+      
+      m_image = Image::Create(CoreAssetPath("Textures/Default/NoTexture.png"));
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");

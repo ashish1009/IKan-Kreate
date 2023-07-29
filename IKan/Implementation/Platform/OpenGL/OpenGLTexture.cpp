@@ -19,6 +19,8 @@ namespace IKan
       {
         case TextureFormat::RGBA8 :           return "GL_RGBA8";
         case TextureFormat::RGBA :            return "GL_RGBA";
+        case TextureFormat::RGB8 :            return "GL_RGB8";
+        case TextureFormat::RGB :             return "GL_RGB";
         case TextureFormat::R32I :            return "GL_R32I";
         case TextureFormat::RED_INTEGER :     return "GL_RED_INTEGER";
         case TextureFormat::DEPTH_COMPONENT : return "GL_DEPTH_COMPONENT";
@@ -64,6 +66,8 @@ namespace IKan
       {
         case TextureFormat::RGBA8           : return GL_RGBA8;
         case TextureFormat::RGBA            : return GL_RGBA;
+        case TextureFormat::RGB8            : return GL_RGB8;
+        case TextureFormat::RGB             : return GL_RGB;
         case TextureFormat::R32I            : return GL_R32I;
         case TextureFormat::RED             : return GL_RED;
         case TextureFormat::RED_INTEGER     : return GL_RED_INTEGER;
@@ -137,8 +141,10 @@ namespace IKan
     {
       if (format == GL_RGBA8)     return TextureFormat::RGBA8;
       else if (format == GL_RGBA) return TextureFormat::RGBA;
+      else if (format == GL_RGB8) return TextureFormat::RGB8;
+      else if (format == GL_RGB)  return TextureFormat::RGB;
       else if (format == GL_RED)  return TextureFormat::RED;
-      
+
       IK_ASSERT(false, "Invalid Format");
     }
     
@@ -199,7 +205,7 @@ namespace IKan
       TextureType type = TextureType::Texture2D;
       TextureWrap wrap = TextureWrap::Repeat;
       TextureFilter filter = (linear) ? TextureFilter::Linear : TextureFilter::Nearest;
-
+      
       // Setup min and Mag filter
       glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(type), GL_TEXTURE_MIN_FILTER, TextureUtils::OpenGLFilterFromIKanFilter(filter));
       glTexParameteri(TextureUtils::OpenGLTypeFromIKanType(type), GL_TEXTURE_MAG_FILTER, TextureUtils::OpenGLFilterFromIKanFilter(filter));
@@ -225,21 +231,31 @@ namespace IKan
       // Delete the data as we have already loaded in graphics
       delete (stbi_uc*)data;
       
-      IK_LOG_DEBUG(LogModule::Texture, "Creating Open GL Image Texture ");
-      IK_LOG_DEBUG(LogModule::Texture, "------------------------------ ");
-      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}  ", m_rendererID);
-      IK_LOG_DEBUG(LogModule::Texture, "  Size            {0} B ({1} x {2})", m_size, m_width, m_height);
-      IK_LOG_DEBUG(LogModule::Texture, "  Channels        {0}", m_channel);
-      IK_LOG_DEBUG(LogModule::Texture, "  Internal Format {0}", TextureUtils::IKanFormatName(internalFormat));
-      IK_LOG_DEBUG(LogModule::Texture, "  Data Format     {0}", TextureUtils::IKanFormatName(dataFormat));
-      IK_LOG_DEBUG(LogModule::Texture, "  Type            {0}", TextureUtils::IKanTypeName(type));
-      IK_LOG_DEBUG(LogModule::Texture, "  Wrap            {0}", TextureUtils::IKanWrapName(wrap));
-      IK_LOG_DEBUG(LogModule::Texture, "  Filter          {0}", TextureUtils::IKanFilterName(filter));
+      IK_LOG_DEBUG(LogModule::Texture, "Creating Open GL Texture from File ... ");
+      IK_LOG_DEBUG(LogModule::Texture, "-------------------------------------- ");
+      IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", m_filePath);
+      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID        {0}", m_rendererID);
+      IK_LOG_DEBUG(LogModule::Texture, "  Width              {0}", m_width);
+      IK_LOG_DEBUG(LogModule::Texture, "  Height             {0}", m_height);
+      IK_LOG_DEBUG(LogModule::Texture, "  Size               {0} B", m_size);
+      IK_LOG_DEBUG(LogModule::Texture, "  Number of Channel  {0}", m_channel);
+      IK_LOG_DEBUG(LogModule::Texture, "  Internal Format    {0}", TextureUtils::IKanFormatName(internalFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Data Format        {0}", TextureUtils::IKanFormatName(dataFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Type               {0}", TextureUtils::IKanTypeName(type));
+      IK_LOG_DEBUG(LogModule::Texture, "  Wrap               {0}", TextureUtils::IKanWrapName(wrap));
+      IK_LOG_DEBUG(LogModule::Texture, "  Filter             {0}", TextureUtils::IKanFilterName(filter));
+    }
+    else
+    {
+      IK_ASSERT(false, "Failed to load stbi Image. Check the path from Logs");
     }
   }
   
   OpenGLImage::~OpenGLImage()
   {
-    
+    IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Image Texture ");
+    IK_LOG_DEBUG(LogModule::Texture, "-------------------------------- ");
+    IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", m_filePath);
+    IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID        {0}", m_rendererID);
   }
 }
