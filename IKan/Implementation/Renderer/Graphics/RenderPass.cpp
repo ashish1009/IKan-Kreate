@@ -7,7 +7,6 @@
 
 #include "RenderPass.hpp"
 #include "Renderer/Renderer.hpp"
-#include "Platform/OpenGL/OpenGLRenderPass.hpp"
 
 namespace IKan
 {
