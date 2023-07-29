@@ -74,6 +74,8 @@
 		B23365442A74D76C00BC7B8B /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365422A74D76C00BC7B8B /* stb_image.cpp */; };
 		B23365472A74E6D300BC7B8B /* Renderer2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365452A74E6D300BC7B8B /* Renderer2D.cpp */; };
 		B23365482A74E6D300BC7B8B /* Renderer2D.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365462A74E6D300BC7B8B /* Renderer2D.hpp */; };
+		B233654E2A7502BA00BC7B8B /* FrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233654C2A7502BA00BC7B8B /* FrameBuffer.cpp */; };
+		B233654F2A7502BA00BC7B8B /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233654D2A7502BA00BC7B8B /* FrameBuffer.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -175,6 +177,8 @@
 		B23365452A74E6D300BC7B8B /* Renderer2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer2D.cpp; sourceTree = "<group>"; };
 		B23365462A74E6D300BC7B8B /* Renderer2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer2D.hpp; sourceTree = "<group>"; };
 		B23365492A74E8CD00BC7B8B /* FSQuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FSQuadShader.glsl; sourceTree = "<group>"; };
+		B233654C2A7502BA00BC7B8B /* FrameBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
+		B233654D2A7502BA00BC7B8B /* FrameBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FrameBuffer.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -288,6 +292,7 @@
 				B233650F2A74370700BC7B8B /* RendererBuffers.hpp */,
 				B233651B2A743D0E00BC7B8B /* Pipeline.hpp */,
 				B23365392A74D48B00BC7B8B /* Texture.hpp */,
+				B233654D2A7502BA00BC7B8B /* FrameBuffer.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -305,6 +310,7 @@
 				B233650E2A74370700BC7B8B /* RendererBuffers.cpp */,
 				B233651A2A743D0E00BC7B8B /* Pipeline.cpp */,
 				B23365382A74D48B00BC7B8B /* Texture.cpp */,
+				B233654C2A7502BA00BC7B8B /* FrameBuffer.cpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -521,6 +527,7 @@
 				B233652F2A74410F00BC7B8B /* SceneCamera.hpp in Headers */,
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
 				B23364E12A74270000BC7B8B /* ShaderUniform.hpp in Headers */,
+				B233654F2A7502BA00BC7B8B /* FrameBuffer.hpp in Headers */,
 				B23365432A74D76C00BC7B8B /* stb_image.h in Headers */,
 				B23365152A74381300BC7B8B /* OpenGLRendererBuffers.hpp in Headers */,
 				B233652B2A7440CD00BC7B8B /* Camera.hpp in Headers */,
@@ -662,6 +669,7 @@
 				B233652A2A7440CD00BC7B8B /* Camera.cpp in Sources */,
 				B233653E2A74D49600BC7B8B /* OpenGLTexture.cpp in Sources */,
 				B23364B92A72D14800BC7B8B /* RendererContext.cpp in Sources */,
+				B233654E2A7502BA00BC7B8B /* FrameBuffer.cpp in Sources */,
 				B23365102A74370700BC7B8B /* RendererBuffers.cpp in Sources */,
 				B23364C62A72D2D300BC7B8B /* MacInput.cpp in Sources */,
 				B23365222A743E8500BC7B8B /* OpenGLPipeline.cpp in Sources */,

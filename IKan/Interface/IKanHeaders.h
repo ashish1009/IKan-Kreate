@@ -63,6 +63,7 @@
 #include <Renderer/Graphics/RendererBuffers.hpp>
 #include <Renderer/Graphics/Pipeline.hpp>
 #include <Renderer/Graphics/Texture.hpp>
+#include <Renderer/Graphics/FrameBuffer.hpp>
 
 #include <Camera/Camera.hpp>
 #include <Camera/SceneCamera.hpp>
