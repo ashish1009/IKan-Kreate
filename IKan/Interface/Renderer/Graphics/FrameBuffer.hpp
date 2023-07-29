@@ -32,5 +32,14 @@ namespace IKan
       Attachments(std::initializer_list<TextureFormat> attachments);
       std::vector<TextureFormat> textureFormats;
     };
+    
+    /// This structure stores the Framebuffer specification
+    struct Specification
+    {
+      uint32_t width = 2100, height = 900;
+      glm::vec4 color = { 0.1f, 0.1f, 0.1f, 1.0f };
+      Attachments attachments;
+    };
+
   };
 } // namespace IKan
