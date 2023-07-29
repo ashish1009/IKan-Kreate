@@ -281,6 +281,48 @@ namespace IKan
   };
   static Scope<QuadData> s_quadData;
 
+  /// Batch Data to Rendering Circles
+  struct CircleData : Shape2DCommonData
+  {
+    /// Single vertex of a Circle
+    struct Vertex : CommonVertex
+    {
+      glm::vec3 localPosition;
+      float thickness;
+      float fade;
+      
+      int32_t pixelID;
+    };
+    
+    /// Base pointer of Vertex Data. This is start of Batch data for single draw call
+    Vertex* vertexBufferBasePtr = nullptr;
+    /// Incrememntal Vetrtex Data Pointer to store all the batch data in Buffer
+    Vertex* vertexBufferPtr = nullptr;
+    
+    // Member functions
+    /// This function starts the batch for Lines
+    /// - Parameter camViewProjMat: camera projection matrix
+    void StartBatch(const glm::mat4& camViewProjMat)
+    {
+      StartCommonBatch(camViewProjMat);
+      StartInternalBatch();
+    }
+    
+    void StartInternalBatch()
+    {
+      StartCommonBatchWithoutCam();
+      vertexBufferPtr = vertexBufferBasePtr;
+    }
+    
+    /// Circle Data Destructor
+    virtual ~CircleData()
+    {
+      ikdelete [] vertexBufferBasePtr;
+      vertexBufferBasePtr = nullptr;
+    }
+  };
+  static Scope<CircleData> s_circleData;
+  
   void Renderer2D::Initialise()
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
