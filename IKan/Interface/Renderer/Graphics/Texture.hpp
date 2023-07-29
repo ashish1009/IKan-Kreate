@@ -86,4 +86,56 @@ namespace IKan
     // 1 -> Nearest Filter
     inline static std::unordered_map<std::string /* File Path */, std::array<Ref<Image>, 2>> s_textureLibrary;
   };
+  
+  /// Wrepper class to load texture and render as sprite
+  class Sprite
+  {
+  public:
+    /// This Funtion create the subtexture instance with texture reference pointer and following params
+    /// - Parameters:
+    ///   - image: sprite_image
+    ///   - min: min bound of sub texture
+    ///   - max: mxn bound of sub texture
+    ///   - coords: coordinate sof sub image from sprite image with reference to the cell Size.
+    ///             e.g {1, 2} -> from top left corner of image use the block of size 'cell size'
+    ///             from 16th pixel frol eft and 32nd pixled from top (using 16 assuming cell size is {16, 17})
+    ///   - spriteSize: number of blocks to be taken at one time from sprite
+    ///   - cellSize: size of block in pixel to be used for 1 block
+    Sprite(const Ref<Image>& image,const glm::vec2& min,const glm::vec2& max, const glm::vec2& coords = {0.0f, 0.0f},
+               const glm::vec2& spriteSize = {1.0f, 1.0f}, const glm::vec2& cellSize = {16.0f, 16.0f});
+    
+    /// Default destructor
+    ~Sprite() = default;
+    
+    /// This function returns the texture reference of sprite
+    Ref<Image> GetImage();
+    /// This function returns Texture coordinates of Subtexture
+    const glm::vec2* GetTexCoord() const;
+    /// This function returns Sprite size of Subtexture
+    glm::vec2& GetSpriteSize();
+    /// This function returns Cell Size of Subtexture
+    glm::vec2& GetCellSize();
+    /// This function returnsCoordinates of Subtexture
+    glm::vec2& GetCoords();
+    
+    /// This Funtion create the subtexture instance with texture reference pointer and following params
+    /// - Parameters:
+    ///   - spriteImage: sprite_image
+    ///   - coords: coordinate sof sub image from sprite image with reference to the cell Size.
+    ///             e.g {1, 2} -> from top left corner of image use the block of size 'cell size'
+    ///             from 16th pixel frol eft and 32nd pixled from top (using 16 assuming cell size is {16, 17})
+    ///   - spriteSize: number of blocks to be taken at one time from sprite
+    ///   - cellSize: size of block in pixel to be used for 1 block
+    [[nodiscard]] static Ref<Sprite> Create(const Ref<Image>& spriteImage, const glm::vec2& coords,
+                                            const glm::vec2& spriteSize = {1.0f, 1.0f},
+                                            const glm::vec2& cellSize = {16.0f, 16.0f});
+    
+  private:
+    Ref<Image> m_spriteImage;
+    glm::vec2 m_textureCoord[4];
+    glm::vec2 m_spriteSize;
+    glm::vec2 m_cellSize;
+    glm::vec2 m_coords;
+  };
+
 } // namespace IKan

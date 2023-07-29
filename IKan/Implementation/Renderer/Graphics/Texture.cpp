@@ -50,4 +50,58 @@ namespace IKan
     }
   }
 
+  Sprite::Sprite(const Ref<Image>& spriteImage, const glm::vec2& min, const glm::vec2& max, const glm::vec2& coords,
+                 const glm::vec2& spriteSize, const glm::vec2& cellSize)
+  : m_spriteImage(spriteImage), m_spriteSize(spriteSize), m_cellSize(cellSize), m_coords(coords)
+  {
+    m_textureCoord[0] = {min.x, min.y};
+    m_textureCoord[1] = {max.x, min.y};
+    m_textureCoord[2] = {max.x, max.y};
+    m_textureCoord[3] = {min.x, max.y};
+  }
+  
+  Ref<Sprite> Sprite::Create(const Ref<Image>& spriteImage, const glm::vec2& coords, const glm::vec2& spriteSize,
+                             const glm::vec2& cellSize) {
+    glm::vec2 min =
+    {
+      (coords.x * cellSize.x) / spriteImage->GetWidth(),
+      (coords.y * cellSize.y) / spriteImage->GetHeight()
+    };
+    glm::vec2 max =
+    {
+      ((coords.x + spriteSize.x) * cellSize.x) / spriteImage->GetWidth(),
+      ((coords.y + spriteSize.y) * cellSize.y) / spriteImage->GetHeight()
+    };
+    
+    IK_LOG_TRACE(LogModule::SubTexture, "Creating Sub Texture with following Data ");
+    IK_LOG_TRACE(LogModule::SubTexture, "  Sprite Image  {0}", spriteImage->GetName());
+    IK_LOG_TRACE(LogModule::SubTexture, "  Coordinates   {0} : {1}", coords.x, coords.y);
+    IK_LOG_TRACE(LogModule::SubTexture, "  Sprite Size   {0} : {1}", spriteSize.x, spriteSize.y);
+    IK_LOG_TRACE(LogModule::SubTexture, "  Cell Size     {0} : {1}", cellSize.x, cellSize.y);
+    IK_LOG_TRACE(LogModule::SubTexture, "  Min Bound     {0} : {1}", min.x, min.y);
+    IK_LOG_TRACE(LogModule::SubTexture, "  Max Bound     {0} : {1}", max.x, max.y);
+    
+    return CreateRef<Sprite>(spriteImage, min, max, coords, spriteSize, cellSize);
+  }
+  
+  Ref<Image> Sprite::GetImage()
+  {
+    return m_spriteImage;
+  }
+  const glm::vec2* Sprite::GetTexCoord() const
+  {
+    return m_textureCoord;
+  }
+  glm::vec2& Sprite::GetSpriteSize()
+  {
+    return m_spriteSize;
+  }
+  glm::vec2& Sprite::GetCellSize()
+  {
+    return m_cellSize;
+  }
+  glm::vec2& Sprite::GetCoords()
+  {
+    return m_coords;
+  }
 } // namespace IKan
