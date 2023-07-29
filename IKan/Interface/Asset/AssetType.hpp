@@ -25,4 +25,20 @@ namespace IKan
     Font,
     Scene
   };
+  
+  /// Map to store the asset with its Extension
+  inline static std::unordered_map<std::string, AssetType> s_assetExtensionMap =
+  {
+    // Textures
+    { ".png", AssetType::Texture },
+    { ".jpg", AssetType::Texture },
+    { ".jpeg", AssetType::Texture },
+    
+    // Scene
+    { ".ikscene", AssetType::Scene },
+    
+    // Fonts
+    { ".ttf", AssetType::Font },
+  };
+
 } // namespace IKan
