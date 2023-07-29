@@ -93,6 +93,8 @@
 		B23365852A75303E00BC7B8B /* TextRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365832A75303E00BC7B8B /* TextRenderer.cpp */; };
 		B23365862A75303E00BC7B8B /* TextRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365842A75303E00BC7B8B /* TextRenderer.hpp */; };
 		B233658D2A75345D00BC7B8B /* Layer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233658B2A75345D00BC7B8B /* Layer.hpp */; };
+		B23365922A75348800BC7B8B /* LayerStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365902A75348800BC7B8B /* LayerStack.cpp */; };
+		B23365932A75348800BC7B8B /* LayerStack.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365912A75348800BC7B8B /* LayerStack.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -216,6 +218,8 @@
 		B23365842A75303E00BC7B8B /* TextRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextRenderer.hpp; sourceTree = "<group>"; };
 		B23365872A7530A600BC7B8B /* TextShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TextShader.glsl; sourceTree = "<group>"; };
 		B233658B2A75345D00BC7B8B /* Layer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Layer.hpp; sourceTree = "<group>"; };
+		B23365902A75348800BC7B8B /* LayerStack.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LayerStack.cpp; sourceTree = "<group>"; };
+		B23365912A75348800BC7B8B /* LayerStack.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LayerStack.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -546,6 +550,7 @@
 				B21048152A72A1BA00FA8CF2 /* CoreWindow.hpp */,
 				B23364C52A72D2D300BC7B8B /* Input.hpp */,
 				B233658B2A75345D00BC7B8B /* Layer.hpp */,
+				B23365912A75348800BC7B8B /* LayerStack.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -561,6 +566,7 @@
 				B21048142A72A1BA00FA8CF2 /* CoreWindow.cpp */,
 				B23364CC2A741CE100BC7B8B /* EngineDirectoryManager.cpp */,
 				B23364CD2A741CE100BC7B8B /* EngineDirectoryManager.hpp */,
+				B23365902A75348800BC7B8B /* LayerStack.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -635,6 +641,7 @@
 				B23365192A7438FA00BC7B8B /* RendererStats.hpp in Headers */,
 				B23365232A743E8500BC7B8B /* OpenGLPipeline.hpp in Headers */,
 				B23364EB2A74294400BC7B8B /* StringUtils.hpp in Headers */,
+				B23365932A75348800BC7B8B /* LayerStack.hpp in Headers */,
 				B233655D2A7506F700BC7B8B /* Table.hpp in Headers */,
 				B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */,
 				B23365652A751DE500BC7B8B /* OpenGLRenderPass.hpp in Headers */,
@@ -745,6 +752,7 @@
 				B23365012A742C0600BC7B8B /* OpenGLShader.cpp in Sources */,
 				B233656C2A75231700BC7B8B /* MathUtils.cpp in Sources */,
 				B21FAA492A729312009EED1F /* IKMemory.cpp in Sources */,
+				B23365922A75348800BC7B8B /* LayerStack.cpp in Sources */,
 				B233653A2A74D48B00BC7B8B /* Texture.cpp in Sources */,
 				B23365642A751DE500BC7B8B /* OpenGLRenderPass.cpp in Sources */,
 				B233648E2A72CE7200BC7B8B /* Renderer.cpp in Sources */,

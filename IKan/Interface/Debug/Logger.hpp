@@ -14,7 +14,7 @@ namespace IKan
   /// This enum stores the moule names of IKan Logs (Holds only IKan engine log module names)
 #define LogModule(f) \
 f(None) f(IKan) f(Timer) f(StringUtils)\
-f(Application) f(Window) \
+f(Application) f(Window) f(LayerStack)\
 f(Renderer) f(Renderer2D) f(Font) f(TextRenderer)\
 f(GraphicsContext) f(Shader) f(IndexBuffer) f(VertexBuffer) f(Pipeline) f(Texture) f(SubTexture) f(FrameBuffer)\
 f(RenderPass) f(CharTexture)\
