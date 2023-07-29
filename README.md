@@ -89,11 +89,10 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Frame Buffer  
 ------------------------------------------------------------------------------------------------------------------
 
-## Upcoming Release Tags    
 - v3.5.0.0  : IKan    - Render 2D Scene in Batch
-  - Renderer 2D
-  - Full Quad Renderer
  ------------------------------------------------------------------------------------------------------------------  
+
+## Upcoming Release Tags    
  
 - v3.6.0.0  : IKan    - Render first Text
   - Char Texture
