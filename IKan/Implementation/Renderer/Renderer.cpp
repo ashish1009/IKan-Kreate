@@ -7,6 +7,7 @@
 
 #include "Renderer.hpp"
 #include "Renderer/RendererStats.hpp"
+#include "Renderer/Renderer2D.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Texture.hpp"
@@ -56,11 +57,16 @@ namespace IKan
   {
     IK_PROFILE();
     s_rendererData->rendererApiInstance = RendererAPI::Create();
+    
+    Renderer2D::Initialise();
   }
   
   void Renderer::Shutdown()
   {
     IK_PROFILE();
+    
+    // Shutdown All renderer
+    Renderer2D::Shutdown();
     
     // Reset Libraries
     Shader::ResetLibrary();
