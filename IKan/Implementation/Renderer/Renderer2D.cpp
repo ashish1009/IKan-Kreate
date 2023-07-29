@@ -32,7 +32,28 @@ namespace IKan
     /// This function initilaise the full screen quad data
     FullScreenQuad()
     {
-
+      IK_LOG_TRACE(LogModule::Renderer, "Initialising Full Screen Quad Data");
+      
+      // Create vertes Buffer
+      vertexBuffer = VertexBuffer::Create((void*)&vertices, sizeof(vertices));
+      
+      // Create Pipeline specification
+      Pipeline::Specification pipelineSpec;
+      pipelineSpec.debugName = "Full Screen Quad Renderer";
+      pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/FSQuadShader.glsl"));
+      pipelineSpec.layout =
+      {
+        { "a_Position", ShaderDataType::Float3 },
+        { "a_TexCoord", ShaderDataType::Float2 },
+      };
+      
+      // Create the Pipeline instnace for full screen quad
+      pipeline = Pipeline::Create(pipelineSpec);
+      
+      IK_LOG_TRACE(LogModule::Renderer, "Initialized Fullscreen Quad Data ");
+      IK_LOG_TRACE(LogModule::Renderer, "-----------------------------------------");
+      IK_LOG_TRACE(LogModule::Renderer, "  Vertex Buffer used               {0} B", sizeof(vertices));
+      IK_LOG_TRACE(LogModule::Renderer, "  Shader used                      {0}", pipelineSpec.shader->GetName());
     }
   };
   static Scope<FullScreenQuad> s_fullscreenQuadData;
