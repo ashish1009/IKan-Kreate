@@ -88,6 +88,8 @@
 		B233656D2A75231700BC7B8B /* MathUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233656B2A75231700BC7B8B /* MathUtils.hpp */; };
 		B23365762A752E0A00BC7B8B /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365742A752E0A00BC7B8B /* Font.cpp */; };
 		B23365772A752E0A00BC7B8B /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23365752A752E0A00BC7B8B /* Font.hpp */; };
+		B233657A2A752F9700BC7B8B /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B23365792A752F9700BC7B8B /* libfreetype.a */; };
+		B23365822A752FF000BC7B8B /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B23365812A752FF000BC7B8B /* libpng16.a */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -205,6 +207,8 @@
 		B233656B2A75231700BC7B8B /* MathUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MathUtils.hpp; sourceTree = "<group>"; };
 		B23365742A752E0A00BC7B8B /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B23365752A752E0A00BC7B8B /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
+		B23365792A752F9700BC7B8B /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = Vendors/Freetype/lib/libfreetype.a; sourceTree = "<group>"; };
+		B23365812A752FF000BC7B8B /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = Vendors/Freetype/libpng/1.6.39/lib/libpng16.a; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -226,6 +230,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23365822A752FF000BC7B8B /* libpng16.a in Frameworks */,
+				B233657A2A752F9700BC7B8B /* libfreetype.a in Frameworks */,
 				B23364C82A72D30100BC7B8B /* libGlad.a in Frameworks */,
 				B23364832A72CC9700BC7B8B /* libGLFW.a in Frameworks */,
 			);
@@ -285,6 +291,8 @@
 		B23364822A72CC9700BC7B8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B23365812A752FF000BC7B8B /* libpng16.a */,
+				B23365792A752F9700BC7B8B /* libfreetype.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -900,6 +908,11 @@
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendors/Freetype/lib",
+					"$(PROJECT_DIR)/Vendors/Freetype/libpng/1.6.39/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -921,6 +934,11 @@
 					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendors/Freetype/lib",
+					"$(PROJECT_DIR)/Vendors/Freetype/libpng/1.6.39/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

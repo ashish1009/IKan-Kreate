@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B233657C2A752FB900BC7B8B /* libbz2.1.0.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B233657B2A752FB900BC7B8B /* libbz2.1.0.8.tbd */; };
+		B23365802A752FC900BC7B8B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B233657F2A752FC900BC7B8B /* libz.tbd */; };
 		B24076D62A72375000221919 /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076D52A72375000221919 /* Kreator.cpp */; };
 		B24077072A72591900221919 /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24077062A72591900221919 /* libIKan.a */; };
 /* End PBXBuildFile section */
@@ -24,6 +26,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B233657B2A752FB900BC7B8B /* libbz2.1.0.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.8.tbd; path = usr/lib/libbz2.1.0.8.tbd; sourceTree = SDKROOT; };
+		B233657D2A752FC000BC7B8B /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
+		B233657F2A752FC900BC7B8B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B24076D22A72375000221919 /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076D52A72375000221919 /* Kreator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Kreator.cpp; sourceTree = "<group>"; };
 		B24076F82A723A6100221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
@@ -35,6 +40,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23365802A752FC900BC7B8B /* libz.tbd in Frameworks */,
+				B233657C2A752FB900BC7B8B /* libbz2.1.0.8.tbd in Frameworks */,
 				B24077072A72591900221919 /* libIKan.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -79,6 +86,9 @@
 		B24077052A72591800221919 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B233657F2A752FC900BC7B8B /* libz.tbd */,
+				B233657D2A752FC000BC7B8B /* libz.1.tbd */,
+				B233657B2A752FB900BC7B8B /* libbz2.1.0.8.tbd */,
 				B24077062A72591900221919 /* libIKan.a */,
 			);
 			name = Frameworks;

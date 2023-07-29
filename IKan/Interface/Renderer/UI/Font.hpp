@@ -25,11 +25,17 @@ namespace IKan
     static void Initialise();
     /// This function shutdown tha static data for fonts
     static void Shutdown();
+
+    /// This function returns the default font
+    static Ref<Font> GetDefaultFont();
+
     /// This function creates a font instance
     /// - Parameter filePath: font file path
     static Ref<Font> Create(const std::string& filePath);
     
   private:
+    std::string m_filePath;
+    std::map<char, Ref<CharTexture>> m_charTextureMap;
     inline static Ref<Font> s_defaultFont;
   };
 } // namespace IKan
