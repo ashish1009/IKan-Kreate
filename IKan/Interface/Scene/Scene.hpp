@@ -23,5 +23,10 @@ namespace IKan
     
     /// This function creates the instance of EnTT Scene
     static Ref<Scene> Create();
+    
+  private:
+    entt::registry m_registry;
+
+    friend class Entity;
   };
 } // namespace IKan
