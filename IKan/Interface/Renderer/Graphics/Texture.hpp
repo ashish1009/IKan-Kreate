@@ -205,6 +205,25 @@ namespace IKan
     /// Default virtual destructor
     virtual ~CharTexture() = default;
     
+    /// This function binds the Current Texture to a slot of shader
+    /// - Parameter slot: Slot of shader
+    virtual void Bind(uint32_t slot = 0) const = 0;
+    /// This function unbinds the Current Texture from shader slot
+    virtual void Unbind() const = 0;
+    
+    /// This function returns the Renderer ID of Texture
+    virtual RendererID GetRendererID() const = 0;
+    /// This function returns the Width of Texture
+    virtual uint32_t GetWidth() const = 0;
+    /// This function returns the Height of Texture
+    virtual uint32_t GetHeight() const = 0;
+    /// This function returns the Size of Freetpe face
+    virtual glm::ivec2 GetSize() const = 0;
+    /// This function returns the Bearing of Freetpe face
+    virtual glm::ivec2 GetBearing() const = 0;
+    /// This function returns the Advance of Freetpe face
+    virtual uint32_t GetAdvance() const = 0;
+
     /// This function creates Emptry Texture with user Defined Data of size height and Width
     /// - Parameters:
     ///   - face: face of char

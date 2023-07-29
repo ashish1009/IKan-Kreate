@@ -435,4 +435,40 @@ namespace IKan
     glDeleteTextures(1, &m_rendererID);
     RendererStatistics::Get().textureBufferSize -= m_dataSize;
   }
+  
+  void OpenGLCharTexture::Bind(uint32_t slot) const
+  {
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(GL_TEXTURE_2D, m_rendererID);
+  }
+  void OpenGLCharTexture::Unbind() const
+  {
+    glBindTexture(GL_TEXTURE_2D, 0);
+  }
+  
+  RendererID OpenGLCharTexture::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  uint32_t OpenGLCharTexture::GetWidth() const
+  {
+    return m_width;
+  }
+  uint32_t OpenGLCharTexture::GetHeight() const
+  {
+    return m_height;
+  }
+  glm::ivec2 OpenGLCharTexture::GetSize() const
+  {
+    return m_size;
+  }
+  glm::ivec2 OpenGLCharTexture::GetBearing() const
+  {
+    return m_bearing;
+  }
+  uint32_t OpenGLCharTexture::GetAdvance() const
+  {
+    return m_advance;
+  }
+
 } // namespace IKan

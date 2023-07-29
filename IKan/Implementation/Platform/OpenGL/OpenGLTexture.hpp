@@ -103,6 +103,24 @@ namespace IKan
     /// This is the default Open GL Char Texture destructor
     virtual ~OpenGLCharTexture();
     
+    /// This function binds the texture
+    void Bind(uint32_t slot) const override;
+    /// This function unbinds the texture
+    void Unbind() const  override;
+    
+    /// This function returns the Renderer ID
+    RendererID GetRendererID() const override;
+    /// This function returns width of texture
+    uint32_t GetWidth() const override;
+    /// This function returns height of texture
+    uint32_t GetHeight() const override;
+    /// This function returns the size
+    glm::ivec2 GetSize() const override;
+    /// This function returns the bearing
+    glm::ivec2 GetBearing() const override;
+    /// This function returns the advance
+    uint32_t GetAdvance() const override;
+
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLCharTexture);
     
   private:
