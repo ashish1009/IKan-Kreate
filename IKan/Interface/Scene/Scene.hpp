@@ -10,6 +10,7 @@
 #include <entt/entt.hpp>
 #include "Core/TimeStep.hpp"
 #include "Camera/EditorCamera.hpp"
+#include "Scene/Component.hpp"
 
 namespace IKan
 {
@@ -57,6 +58,20 @@ namespace IKan
     /// This function removes the parent relation
     /// - Parameter entity: parent entity
     void UnparentEntity(Entity entity, bool convertToWorldSpace = true);
+
+    /// This function convert the entity to local space
+    /// - Parameter entity: Entity handle
+    void ConvertToLocalSpace(Entity entity);
+    /// This function convert the entity to world space
+    /// - Parameter entity: Entity handle
+    void ConvertToWorldSpace(Entity entity);
+    
+    /// This function return the world transform from entity
+    /// - Parameter entity: enitty handle
+    glm::mat4 GetWorldSpaceTransformMatrix(Entity entity);
+    /// This function return the world transform component
+    /// - Parameter entity: enitty handle
+    TransformComponent GetWorldSpaceTransform(Entity entity);
 
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function return entity with id as specified. entity is expected to exist (runtime error if it doesn't)

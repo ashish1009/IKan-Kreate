@@ -107,4 +107,136 @@ namespace IKan
     return Entity{};
   }
 
+  void Scene::ParentEntity(Entity entity, Entity parent)
+  {
+    // If new parent is already child of 'entity'
+    if (parent.IsDescendantOf(entity))
+    {
+      // Unparent the 'parent' first
+      UnparentEntity(parent);
+      
+      // If Current 'entity' already have some parent
+      Entity newParent = TryGetEntityWithUUID(entity.GetParentUUID());
+      if (newParent)
+      {
+        // Unperent current entity
+        UnparentEntity(entity);
+        
+        // Set the 'newParent' as parent of 'parent' which was child of 'entity'
+        ParentEntity(parent, newParent);
+      }
+    }
+    else
+    {
+      // Get the previous parent of 'entity'
+      Entity previousParent = TryGetEntityWithUUID(entity.GetParentUUID());
+      
+      // If Current 'entity' already have some parent
+      if (previousParent)
+      {
+        // Unperent current entity
+        UnparentEntity(entity);
+      }
+    }
+    
+    // Update parent UUID of 'entity'
+    entity.SetParentUUID(parent.GetUUID());
+    // Update children of 'parent'
+    parent.Children().push_back(entity.GetUUID());
+    
+    // Update local space of 'entity'
+    ConvertToLocalSpace(entity);
+  }
+  
+  void Scene::UnparentEntity(Entity entity, bool convertToWorldSpace)
+  {
+    // Get the previous parent of 'entity'
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    if (!parent)
+    {
+      return;
+    }
+    
+    // Get the children of 'parent'
+    auto& parentChildren = parent.Children();
+    parentChildren.erase(std::remove(parentChildren.begin(), parentChildren.end(), entity.GetUUID()), parentChildren.end());
+    
+    if (convertToWorldSpace)
+    {
+      ConvertToWorldSpace(entity);
+    }
+    
+    entity.SetParentUUID(0);
+  }
+  
+  void Scene::ConvertToLocalSpace(Entity entity)
+  {
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    
+    if (!parent)
+    {
+      return;
+    }
+    auto& transform = entity.Transform();
+    glm::mat4 parentTransform = GetWorldSpaceTransformMatrix(parent);
+    glm::mat4 localTransform = glm::inverse(parentTransform) * transform.Transform();
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(localTransform, position, rotation, scale);
+    transform.UpdatePosition(position);
+    transform.UpdateScale(scale);
+    transform.UpdateRotation(rotation);
+  }
+  
+  void Scene::ConvertToWorldSpace(Entity entity)
+  {
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    
+    if (!parent)
+    {
+      return;
+    }
+    
+    glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
+    auto& entityTransform = entity.Transform();
+    
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    entityTransform.UpdatePosition(position);
+    entityTransform.UpdateScale(scale);
+    entityTransform.UpdateRotation(rotation);
+  }
+  
+  glm::mat4 Scene::GetWorldSpaceTransformMatrix(Entity entity)
+  {
+    glm::mat4 transform(1.0f);
+    
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    if (parent)
+    {
+      transform = GetWorldSpaceTransformMatrix(parent);
+    }
+    return transform * entity.Transform().Transform();
+  }
+  
+  // TODO: Definitely cache this at some point
+  TransformComponent Scene::GetWorldSpaceTransform(Entity entity)
+  {
+    glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
+    TransformComponent transformComponent;
+    
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    transformComponent.UpdatePosition(position);
+    transformComponent.UpdateScale(scale);
+    transformComponent.UpdateRotation(rotation);
+    
+    return transformComponent;
+  }
+
+  Entity Scene::GetEntityWithUUID(UUID id) const
+  {
+    IK_LOG_VERIFY(m_entityIDMap.find(id) != m_entityIDMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+    return m_entityIDMap.at(id);
+  }
+
 } // namespace IKan

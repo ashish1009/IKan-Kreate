@@ -177,7 +177,7 @@ f(Scene) f(Component)\
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Critical, tag, __VA_ARGS__); \
 
 // Verify
-#define IK_LOG_VERIFY_MESSAGE_INTERNAL(...)  ::IKan::Log::PrintMessage(::IKan::Log::Type::Client, ::IKan::Log::Level::Debug, "Verify Fail", __VA_ARGS__)
+#define IK_LOG_VERIFY_MESSAGE_INTERNAL(...)  ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Debug, "Verify Fail", __VA_ARGS__)
 #define IK_LOG_VERIFY(condition, ...) { if(!(condition)) { IK_LOG_VERIFY_MESSAGE_INTERNAL(__VA_ARGS__); } }
 
 // Profiler

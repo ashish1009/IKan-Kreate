@@ -54,6 +54,40 @@ namespace IKan
     }
     return false;
   }
+  
+  bool Entity::IsAncesterOf(Entity entity)
+  {
+    const auto& children = Children();
+    
+    if (children.empty())
+    {
+      return false;
+    }
+    
+    for (UUID child : children)
+    {
+      if (child == entity.GetUUID())
+      {
+        return true;
+      }
+    }
+    
+    for (UUID child : children)
+    {
+      if (m_scene->GetEntityWithUUID(child).IsAncesterOf(entity))
+      {
+        return true;
+      }
+    }
+    
+    return false;
+  }
+  
+  bool Entity::IsDescendantOf(Entity entity)
+  {
+    return entity.IsAncesterOf(*this);
+  }
+
   void Entity::SetParentUUID(UUID parent)
   {
     GetComponent<RelationshipComponent>().parentHandle = parent;
