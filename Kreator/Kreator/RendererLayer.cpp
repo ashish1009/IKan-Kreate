@@ -11,10 +11,9 @@ namespace Kreator
 {
   // TODO: Temp
   static Ref<Image> m_image;
-  static Ref<EditorCamera> m_camera;
   
   RendererLayer::RendererLayer()
-  : Layer("Kreator Renderer")
+  : Layer("Kreator Renderer"), m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
   }
@@ -32,7 +31,6 @@ namespace Kreator
     // TODO: Temp
     {
       m_image = Image::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Textures/checkerboard.png");
-      m_camera = CreateRef<EditorCamera>(45, 1600, 900);
     }
   }
   
@@ -53,13 +51,13 @@ namespace Kreator
     
     // TODO: Temp
     {
-      m_camera->SetActive(true);
-      m_camera->OnUpdate(ts);
-      
+      m_editorCamera.SetActive(true);
+      m_editorCamera.OnUpdate(ts);
+
       Renderer2D::BeginRenderPass();
       Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
       
-      Renderer2D::BeginBatch(m_camera->GetUnReversedViewProjection());
+      Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection());
       
       Renderer2D::DrawQuad({1, 1, 0}, {1, 1, 1}, {0, 0, 0}, m_image);
       Renderer2D::DrawCircle({0, 0, 0});
@@ -75,10 +73,7 @@ namespace Kreator
   
   void RendererLayer::OnEvent(Event& event)
   {
-    // TODO: Temp
-    {
-      m_camera->OnEvent(event);
-    }
+    m_editorCamera.OnEvent(event);
   }
   
   void RendererLayer::OnImguiRender()

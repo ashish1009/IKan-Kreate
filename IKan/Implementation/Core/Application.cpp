@@ -181,7 +181,7 @@ namespace IKan
     return *(m_window.get());
   }
 
-  ImguiLayer& Application::GetImGuiLayer() const
+  UI::ImguiLayer& Application::GetImGuiLayer() const
   {
     return *m_imguiLayer.get();
   }

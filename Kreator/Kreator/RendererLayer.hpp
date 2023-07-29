@@ -36,5 +36,8 @@ namespace Kreator
     /// - Note Core Application is taking care to call the EventHandler(event) API for all Layers
     /// - Parameter event: Event (Base class) intance. Dispatch event from Event Dispatcher
     void OnEvent(Event& event) override;
+    
+  private:
+    EditorCamera m_editorCamera;
   };
 } // namespace Kreator
