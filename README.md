@@ -80,20 +80,22 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Sub Texture Loader
 ------------------------------------------------------------------------------------------------------------------
 
-- v3.2.0.0  : IKan    - Render Scene with camera 
+- v3.2.0.0  : IKan    - Full Screen quad
+  - Full Quad Renderer
+
+- v3.3.0.0  : IKan    - Render Scene with camera 
 ------------------------------------------------------------------------------------------------------------------
   
 - v3.3.0.0  : IKan    - Render in frame buffer
-  - Full Quad Renderer
   - Frame Buffer  
 ------------------------------------------------------------------------------------------------------------------
   
-- v3.4.0.0  : IKan    - Render 2D Scene in Batch
+- v3.5.0.0  : IKan    - Render 2D Scene in Batch
   - Renderer 2D
   - Full Quad Renderer
  ------------------------------------------------------------------------------------------------------------------  
  
-- v3.5.0.0  : IKan    - Render first Text
+- v3.6.0.0  : IKan    - Render first Text
   - Char Texture
   - Text Renderer
  ------------------------------------------------------------------------------------------------------------------  
