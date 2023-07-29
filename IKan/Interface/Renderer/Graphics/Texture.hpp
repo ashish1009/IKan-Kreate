@@ -11,6 +11,7 @@
 #include FT_FREETYPE_H
 
 #include "Renderer/Renderer.hpp"
+#include "Asset/Asset.hpp"
 
 namespace IKan
 {
@@ -115,7 +116,7 @@ namespace IKan
     [[nodiscard]] static Ref<Texture2D> Create(const TextureSpecification& spec);
   };
   
-  class Image : public Texture
+  class Image : public Texture, Asset
   {
   public:
     /// This is default virtual destructor for Texture
@@ -137,6 +138,8 @@ namespace IKan
     
     /// This function deletes all the Texture present int the map
     static void ResetLibrary();
+    
+    ASSET_TYPE(Image);
     
   private:
     // Array of 2 to keep both linear and nearest min and mag flags

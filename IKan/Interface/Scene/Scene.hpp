@@ -11,13 +11,14 @@
 #include "Core/TimeStep.hpp"
 #include "Camera/EditorCamera.hpp"
 #include "Scene/Component.hpp"
+#include "Asset/Asset.hpp"
 
 namespace IKan
 {
   class Entity;
   using EntityMap = std::unordered_map<UUID, Entity>;
 
-  class Scene
+  class Scene : public Asset
   {
   public:
     /// This is the default constructor of EnTT Scene
@@ -102,6 +103,8 @@ namespace IKan
       return m_registry.view<Components...>();
     }
 
+    ASSET_TYPE(Scene);
+    
   private:
     entt::registry m_registry;
     uint32_t m_registryCapacity = 0;

@@ -14,7 +14,7 @@ namespace IKan
     AssetType AssetTypeFromString(const std::string& assetType)
     {
       if (assetType == "None")                return AssetType::None;
-      if (assetType == "Texture")             return AssetType::Texture;
+      if (assetType == "Image")               return AssetType::Image;
       if (assetType == "Font")                return AssetType::Font;
       if (assetType == "Scene")               return AssetType::Scene;
       IK_ASSERT(false, "Unknown Asset Type");
@@ -26,7 +26,7 @@ namespace IKan
       switch (assetType)
       {
         case AssetType::None:                  return "None";
-        case AssetType::Texture:               return "Texture";
+        case AssetType::Image:                return "Image";
         case AssetType::Font:                  return "Font";
         case AssetType::Scene:                 return "Scene";
       }

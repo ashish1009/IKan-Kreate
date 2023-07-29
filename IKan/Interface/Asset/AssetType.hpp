@@ -21,7 +21,7 @@ namespace IKan
   enum class AssetType : uint16_t
   {
     None = 0,
-    Texture,
+    Image,
     Font,
     Scene
   };
@@ -30,9 +30,9 @@ namespace IKan
   inline static std::unordered_map<std::string, AssetType> s_assetExtensionMap =
   {
     // Textures
-    { ".png", AssetType::Texture },
-    { ".jpg", AssetType::Texture },
-    { ".jpeg", AssetType::Texture },
+    { ".png", AssetType::Image },
+    { ".jpg", AssetType::Image },
+    { ".jpeg", AssetType::Image },
     
     // Scene
     { ".ikscene", AssetType::Scene },
