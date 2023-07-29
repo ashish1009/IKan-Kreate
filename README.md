@@ -98,27 +98,25 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - Text Renderer
  ------------------------------------------------------------------------------------------------------------------  
 
-## Upcoming Release Tags
 - v4.0.0.0  : IKan    - Layer
   - Kreator App and Layer
  ------------------------------------------------------------------------------------------------------------------  
 
-
-- v5.0.0.0  : IKan    - entt::entity sysntem (ECS)
-  - Entity / Scene / Component classes
- ------------------------------------------------------------------------------------------------------------------  
-  
-- v5.1.0.0  : IKan    - Scene Serializer
-  - SceneSerializer class (YAML Utils)
- ------------------------------------------------------------------------------------------------------------------  
-
-- v6.0.1.0  : IKan    - ImGui Layer  | Kreator - Render Scene in Viewport
-  - Layer Class
+## Upcoming Release Tags
+- v5.0.1.0  : IKan    - ImGui Layer  | Kreator - Render Scene in Viewport
   - Imgui Layer 
   - Kreator Application
   - Kreator Renderer Layer
   - View port in Kreator and Render Scene 
  ------------------------------------------------------------------------------------------------------------------
+
+- v6.0.1.0  : IKan    - entt::entity sysntem (ECS)
+  - Entity / Scene / Component classes
+ ------------------------------------------------------------------------------------------------------------------  
+  
+- v6.1.1.0  : IKan    - Scene Serializer
+  - SceneSerializer class (YAML Utils)
+ ------------------------------------------------------------------------------------------------------------------  
    
 - v7.1.1.1  : IKan    - ImGui Color and API | Kreator - UI Theme (Font and Color)
   - ImGui Base Theme class
