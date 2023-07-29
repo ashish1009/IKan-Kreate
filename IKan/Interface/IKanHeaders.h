@@ -85,3 +85,4 @@
 #include <Scene/Scene.hpp>
 
 #include <Asset/AssetType.hpp>
+#include <Asset/Asset.hpp>
