@@ -68,6 +68,13 @@ namespace IKan
     /// This function returns the chidlenrs of entity
     std::vector<UUID>& Children();
 
+    /// This function checks is entity is ancestor
+    /// - Parameter entity: entity
+    bool IsAncesterOf(Entity entity);
+    /// This function checks is entity is decendor
+    /// - Parameter entity: entity
+    bool IsDescendantOf(Entity entity);
+
     // Component Manager --------------------------------------------------------------------------------------------
     /// This function adds component in Current Entity
     /// - Parameter args: Arguments needed to construct the component NOTE : T is type of component

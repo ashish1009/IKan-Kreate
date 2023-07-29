@@ -49,6 +49,20 @@ namespace IKan
     // This function returns entity with id as specified, or empty entity if cannot be found - caller must check
     Entity TryGetEntityWithUUID(UUID id) const;
 
+    /// This function parent set the parent of entity
+    /// - Parameters:
+    ///   - entity: Current entity
+    ///   - parent: parent entity
+    void ParentEntity(Entity entity, Entity parent);
+    /// This function removes the parent relation
+    /// - Parameter entity: parent entity
+    void UnparentEntity(Entity entity, bool convertToWorldSpace = true);
+
+    // Getters -----------------------------------------------------------------------------------------------------
+    /// This function return entity with id as specified. entity is expected to exist (runtime error if it doesn't)
+    /// - Parameter id: UUID for entity
+    Entity GetEntityWithUUID(UUID id) const;
+
   private:
     entt::registry m_registry;
     uint32_t m_registryCapacity = 0;
