@@ -29,6 +29,7 @@ namespace IKan
     /// Pipelne to render full screen quad
     Ref<Pipeline> pipeline;
     Ref<VertexBuffer> vertexBuffer;
+    Ref<Texture> whiteTexture;
     
     /// This function initilaise the full screen quad data
     FullScreenQuad()
@@ -50,6 +51,25 @@ namespace IKan
       
       // Create the Pipeline instnace for full screen quad
       pipeline = Pipeline::Create(pipelineSpec);
+      
+      
+      // White data
+      static uint32_t whiteTextureData = 0xffffffff;
+      
+      // Texture specificaion
+      Texture::Specification textureSpec;
+      textureSpec.type = TextureType::Texture2D;
+      textureSpec.internalFormat = TextureFormat::RGBA8;
+      textureSpec.dataFormat = TextureFormat::RGBA;
+      textureSpec.wrap = TextureWrap::Clamp;
+      textureSpec.filter = TextureFilter::Linear;
+      textureSpec.width = 1;
+      textureSpec.height = 1;
+      textureSpec.data = &whiteTextureData;
+      textureSpec.size = sizeof(uint32_t);
+      
+      // Create white texture
+      whiteTexture = Texture::Create(textureSpec);
       
       IK_LOG_TRACE(LogModule::Renderer, "Initialized Fullscreen Quad Data ");
       IK_LOG_TRACE(LogModule::Renderer, "-----------------------------------------");

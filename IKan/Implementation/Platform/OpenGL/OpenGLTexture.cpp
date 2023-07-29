@@ -337,7 +337,7 @@ namespace IKan
     {
       IK_LOG_DEBUG(LogModule::Texture, "Creating Open GL Image Texture ");
       IK_LOG_DEBUG(LogModule::Texture, "------------------------------ ");
-      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}  ", m_rendererID);
+      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}", m_rendererID);
       IK_LOG_DEBUG(LogModule::Texture, "  Size            {0} B", m_specification.size);
       IK_LOG_DEBUG(LogModule::Texture, "  Channels        {0}", m_channel);
       IK_LOG_DEBUG(LogModule::Texture, "  Internal Format {0}", TextureUtils::IKanFormatName(m_specification.internalFormat));
@@ -354,7 +354,7 @@ namespace IKan
     {
       IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Image Texture ");
       IK_LOG_DEBUG(LogModule::Texture, "------------------------------ ");
-      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}  ", m_rendererID);
+      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}", m_rendererID);
       IK_LOG_DEBUG(LogModule::Texture, "  Size            {0} B", m_specification.size);
       IK_LOG_DEBUG(LogModule::Texture, "  Channels        {0}", m_channel);
       IK_LOG_DEBUG(LogModule::Texture, "  Internal Format {0}", TextureUtils::IKanFormatName(m_specification.internalFormat));
