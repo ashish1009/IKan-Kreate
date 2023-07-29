@@ -18,6 +18,15 @@ namespace IKan
     uint32_t vertexCount  = 0, indexCount = 0;
     uint32_t drawCalls = 0;
     
+    struct _2D
+    {
+      uint32_t maxQuads = 0, maxCircles = 0, maxLines = 0;
+      uint32_t quads = 0, circles = 0, lines = 0, chars = 0;
+    };
+    
+    // Stores the 2D Specific data
+    _2D _2d;
+
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This function resets only those stats that need to be reset each frame
     void ResetEachFrame();

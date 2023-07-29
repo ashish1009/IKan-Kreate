@@ -7,6 +7,7 @@
 
 #include "Renderer2D.hpp"
 #include "Renderer/Renderer.hpp"
+#include "Renderer/RendererStats.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"

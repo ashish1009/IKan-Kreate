@@ -14,6 +14,11 @@ namespace IKan
     drawCalls = 0;
     indexCount = 0;
     vertexCount = 0;
+
+    _2d.quads = 0;
+    _2d.circles = 0;
+    _2d.lines = 0;
+    _2d.chars = 0;
   }
   
   void RendererStatistics::ResetAll()
@@ -23,6 +28,10 @@ namespace IKan
     vertexBufferSize = 0;
     indexBufferSize = 0;
     textureBufferSize = 0;
+
+    _2d.maxQuads = 0;
+    _2d.maxCircles = 0;
+    _2d.maxLines = 0;
   }
   
   RendererStatistics& RendererStatistics::Get()
