@@ -98,6 +98,39 @@ namespace IKan
     return entity;
   }
   
+  void Scene::DestroyEntity(Entity entity, bool excludeChildren, bool first)
+  {
+    if (m_onEntityDestroyedCallback)
+    {
+      m_onEntityDestroyedCallback(entity);
+    }
+    
+    if (!excludeChildren)
+    {
+      // NOTE: don't make this a foreach loop because entt will move the children
+      //       vector in memory as entities/components get deleted
+      for (size_t i = 0; i < entity.Children().size(); i++)
+      {
+        auto childId = entity.Children()[i];
+        Entity child = GetEntityWithUUID(childId);
+        DestroyEntity(child, excludeChildren, false);
+      }
+    }
+    
+    if (first)
+    {
+      if (auto parent = entity.GetParent(); parent)
+      {
+        parent.RemoveChild(entity);
+      }
+    }
+    
+    m_entityIDMap.erase(entity.GetUUID());
+    m_registry.destroy(entity.m_entityHandle);
+    
+    --m_numEntities;
+  }
+  
   Entity Scene::TryGetEntityWithUUID(UUID id) const
   {
     if (const auto iter = m_entityIDMap.find(id); iter != m_entityIDMap.end())

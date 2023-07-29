@@ -42,6 +42,10 @@ namespace IKan
     ///   - name: Name of entity
     [[nodiscard]] Entity CreateEntityWithID(UUID uuid, const std::string& name = "");
 
+    /// This function destriy the entity
+    /// - Parameter entity: entity handle
+    void DestroyEntity(Entity entity, bool excludeChildren = false, bool first = true);
+
     // This function returns entity with id as specified, or empty entity if cannot be found - caller must check
     Entity TryGetEntityWithUUID(UUID id) const;
 
