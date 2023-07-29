@@ -10,22 +10,14 @@
 
 // TODO: To Move rendere layer later
 #include "Renderer2D.hpp"
-#include "Shader.hpp"
-#include "RendererBuffers.hpp"
-#include "Pipeline.hpp"
 #include "Texture.hpp"
 #include "EditorCamera.hpp"
-#include "FrameBuffer.hpp"
 
 namespace IKan
 {
   // TODO: To Move rendere layer later
-  static Ref<IndexBuffer> m_indexBuffer;
-  static Ref<VertexBuffer> m_vertexBuffer;
-  static Ref<Pipeline> m_pipeline;
   static Ref<Image> m_image;
   static Ref<EditorCamera> m_camera;
-  static Ref<FrameBuffer> m_frameBuffer;
   
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
@@ -64,46 +56,8 @@ namespace IKan
     
     // TODO: To Move Renderer Layer later
     {
-      float vertices[] = {
-        -0.5f, -0.5, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,
-         0.5f, -0.5, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0,
-         0.5f,  0.5, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0,
-        -0.5f,  0.5, 0.0, 0.4, 0.6, 0.9, 1.0, 0.0, 1.0
-      };
-      m_vertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
-      
-      Pipeline::Specification pipelineSpec;
-      pipelineSpec.debugName = "Quad Renderer";
-      pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/QuadShader.glsl"));
-      pipelineSpec.layout =
-      {
-        { "a_Position",     ShaderDataType::Float3 },
-        { "a_Color",        ShaderDataType::Float4 },
-        { "a_TexCoords",    ShaderDataType::Float2 },
-      };
-
-      // Create the Pipeline instnace
-      m_pipeline = Pipeline::Create(pipelineSpec);
-
-      uint32_t indices[] = {
-        0, 1, 2, 2, 3, 0
-      };
-      m_indexBuffer = IndexBuffer::CreateWithSize(indices, sizeof(indices));
-      
       m_image = Image::Create(CoreAssetPath("Textures/Default/NoTexture.png"));
-      
       m_camera = CreateRef<EditorCamera>(45, 1600, 900);
-      
-      // Create Framebuffer for Render Pass
-      FrameBuffer::Specification fbSpec;
-      fbSpec.attachments =
-      {
-        FrameBuffer::Attachments::TextureFormat::RGBA8,
-        FrameBuffer::Attachments::TextureFormat::R32I,
-        FrameBuffer::Attachments::TextureFormat::Depth24Stencil
-      };
-      
-      m_frameBuffer = FrameBuffer::Create(fbSpec);
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -117,11 +71,7 @@ namespace IKan
 
     // TODO: To Move Renderer Layer later
     {
-      m_frameBuffer.reset();
       m_image.reset();
-      m_pipeline.reset();
-      m_vertexBuffer.reset();
-      m_indexBuffer.reset();
     }
 
     // Reset the window
@@ -155,34 +105,16 @@ namespace IKan
 
       // TODO: To Move Renderer Layer later
       {
-        if (m_window->GetWidth() != m_frameBuffer->GetSpecification().width or m_window->GetHeight() != m_frameBuffer->GetSpecification().height)
-        {
-          m_frameBuffer->Resize(m_window->GetWidth(), m_window->GetHeight());
-          m_camera->SetViewportSize(m_window->GetWidth(), m_window->GetHeight());
-        }
-        
         m_camera->SetActive(true);
         m_camera->OnUpdate(m_timeStep);
         
-        m_frameBuffer->Bind();
         Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
-
-        m_pipeline->GetSpecification().shader->Bind();
-        m_pipeline->GetSpecification().shader->SetUniformMat4("u_ViewProjection", m_camera->GetUnReversedViewProjection());
-        
-        m_pipeline->Bind();
-        m_image->Bind();
-        Renderer::DrawIndexed(m_pipeline, 6);
 
         Renderer2D::BeginBatch(m_camera->GetUnReversedViewProjection());
         Renderer2D::DrawQuad({1, 1, 0}, {1, 1, 1}, {0, 0, 0}, m_image);
-        Renderer2D::DrawCircle({2, 1, 0});
+        Renderer2D::DrawCircle({0, 0, 0});
         Renderer2D::DrawRect({0, 0, 0}, {4, 4}, {1, 0, 0.5, 1});
         Renderer2D::EndBatch();
-
-        m_frameBuffer->Unbind();
-        
-        Renderer2D::DrawFullscreenQuad(m_frameBuffer->GetColorAttachments().at(0));
       }
       
       // Update the client application
