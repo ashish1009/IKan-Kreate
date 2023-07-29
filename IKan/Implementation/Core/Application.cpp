@@ -21,7 +21,7 @@ namespace IKan
   static Ref<EditorCamera> m_camera;
   
   Application::Application(const Specification& spec)
-  : m_specificaion(spec)
+  : m_specificaion(spec), m_layers(CreateScope<LayerStack>())
   {
     IK_PROFILE();
 
@@ -104,6 +104,12 @@ namespace IKan
       // Store the frame time difference
       m_timeStep = m_window->GetTimestep();
 
+      // Updating all the attached layer
+      for (auto& layer : *(m_layers.get()))
+      {
+        layer->OnUpdate(m_timeStep);
+      }
+
       // TODO: To Move Renderer Layer later
       {
         m_camera->SetActive(true);
@@ -154,6 +160,12 @@ namespace IKan
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<WindowCloseEvent>(IK_BIND_EVENT_FN(Application::WindowClose));
         
+    // Event Handler for all layers
+    for (auto& layer : *(m_layers.get()))
+    {
+      layer->OnEvent(event);
+    }
+    
     // Client side event handler funciton
     OnEvent(event);
     
@@ -177,6 +189,12 @@ namespace IKan
   
   void Application::ImguiRender()
   {
+    // Updating all the attached layer
+    for (auto& layer : *(m_layers.get()))
+    {
+      layer->OnImguiRender();
+    }
+
     // Rendering Imgui for Client
     OnImguiRender();
   }

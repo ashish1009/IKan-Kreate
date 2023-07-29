@@ -11,6 +11,7 @@
 #include "Event/ApplicationEvent.h"
 #include "Core/TimeStep.hpp"
 #include "Core/CoreWindow.hpp"
+#include "Core/LayerStack.hpp"
 #include "Renderer/Renderer.hpp"
 
 namespace IKan
@@ -58,6 +59,15 @@ namespace IKan
     /// This Function responsible for closing the current applciation (IKan::Applciation) adn ends the game loop
     void Close();
 
+    /// This function Push the layer of type IKan::Layer in Core Application layer stack.
+    /// - Note: Also attach the layer (initialise it)
+    /// - Parameter layer: Layer Reference pointer to be added
+    void PushLayer(const Ref<Layer>& layer);
+    /// This function Pop the layer of type IKan::Layer from Core Application layer stack.
+    /// - Note: Also detach the layer (destroy it)
+    /// - Parameter layer: Layer Reference pointer to be removed
+    void PopLayer(const Ref<Layer>& layer);
+
     // Virtual APIs --------------------------------------------------------------------------------------------------
     /// This function calls before game loop
     virtual void OnInit() {}
@@ -98,7 +108,8 @@ namespace IKan
     TimeStep m_timeStep;
     Specification m_specificaion;
     Ref<Window> m_window;
-    
+    Scope<LayerStack> m_layers;
+
     inline static Application* s_instance;
   };
   
