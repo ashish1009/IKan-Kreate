@@ -93,22 +93,26 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
 - v3.5.0.0  : IKan    - Render 2D Scene in Batch
  ------------------------------------------------------------------------------------------------------------------  
 
-## Upcoming Release Tags    
- 
 - v3.6.0.0  : IKan    - Render first Text
   - Char Texture
   - Text Renderer
  ------------------------------------------------------------------------------------------------------------------  
-  
-- v4.0.0.0  : IKan    - entt::entity sysntem (ECS)
+
+## Upcoming Release Tags
+- v4.0.0.0  : IKan    - Layer
+  - Kreator App and Layer
+ ------------------------------------------------------------------------------------------------------------------  
+
+
+- v5.0.0.0  : IKan    - entt::entity sysntem (ECS)
   - Entity / Scene / Component classes
  ------------------------------------------------------------------------------------------------------------------  
   
-- v4.1.0.0  : IKan    - Scene Serializer
+- v5.1.0.0  : IKan    - Scene Serializer
   - SceneSerializer class (YAML Utils)
  ------------------------------------------------------------------------------------------------------------------  
 
-- v5.0.1.0  : IKan    - ImGui Layer  | Kreator - Render Scene in Viewport
+- v6.0.1.0  : IKan    - ImGui Layer  | Kreator - Render Scene in Viewport
   - Layer Class
   - Imgui Layer 
   - Kreator Application
@@ -116,34 +120,34 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - View port in Kreator and Render Scene 
  ------------------------------------------------------------------------------------------------------------------
    
-- v5.1.1.1  : IKan    - ImGui Color and API | Kreator - UI Theme (Font and Color)
+- v7.1.1.1  : IKan    - ImGui Color and API | Kreator - UI Theme (Font and Color)
   - ImGui Base Theme class
   - ImGui font loader
   - Decorate the Kreator
  ------------------------------------------------------------------------------------------------------------------
   
-- v6.0.2.0  : IKan    - Project and Assets | Kreator - User Prederence for Start Application
+- v7.1.2.0  : IKan    - Project and Assets | Kreator - User Prederence for Start Application
   - Get Directory from user.
   - User Preferences
   - Project Class / Manager
   - Asset class / Manaager
  ------------------------------------------------------------------------------------------------------------------
   
-- v6.0.2.1  : Kreator - Kreator Title Bar
+- v7.1.2.1  : Kreator - Kreator Title Bar
   - Kreator Title bar
  ------------------------------------------------------------------------------------------------------------------
   
-- v6.1.2.2  : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
+- v7.1.2.2  : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
   - Entire Content Browser Panel
   - Asset Editor Panel 
   - Folder Explorer
 
-- v6.1.2.3  : Kreator - Scene Playe Pause Simulation Tool bar
+- v7.1.2.3  : Kreator - Scene Playe Pause Simulation Tool bar
   - Scene Play and Pause
   
  ------------------------------------------------------------------------------------------------------------------
 
-- v6.2.2.4  : IKan    - Editor Console, Project Setting | Kreator - All Project, Scene, Log, Setting ... panels
+- v7.2.2.4  : IKan    - Editor Console, Project Setting | Kreator - All Project, Scene, Log, Setting ... panels
   - Editor Consol for logs
   - Project Setting
   - Application Settings
@@ -151,29 +155,29 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - About and Welcome sceen popups
  ------------------------------------------------------------------------------------------------------------------
 
-- v6.3.2.5  : IKan    - Scene Hierarchy panel
+- v7.3.2.5  : IKan    - Scene Hierarchy panel
   - Scene Hierarchy Panel
   - ECS Debug panel
  ------------------------------------------------------------------------------------------------------------------
 
-- v7.0.3.0  : Kreator - Guizmo and Mouse Selected Entity
+- v.8.0.3.0  : Kreator - Guizmo and Mouse Selected Entity
   - Mouse Selectable entity 
   - Imguizmo Toolbar and usage
  ------------------------------------------------------------------------------------------------------------------
 
-- v7.1.3.0  : IKan    - Sub texture in quad component
+- v8.1.3.0  : IKan    - Sub texture in quad component
   - Quad Componentn GUI Update for Subtexture
  ------------------------------------------------------------------------------------------------------------------
 
-- v8.0.3.0  : IKan    - Script Integration
+- v9.0.3.0  : IKan    - Script Integration
  ------------------------------------------------------------------------------------------------------------------
 
-- v9.0.3.0  : IKan    - Physics 2D (Base classes)
+- v10.0.3.0  : IKan    - Physics 2D (Base classes)
   - Component for Physics
   - Scene Handle Physics
 
-- v10.0.3.0  : IKan   - Mesh
+- v11.0.3.0  : IKan   - Mesh
  ------------------------------------------------------------------------------------------------------------------
 
-- v11.0.3.0  : IKan   - Light
+- v12.0.3.0  : IKan   - Light
  ------------------------------------------------------------------------------------------------------------------
