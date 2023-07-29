@@ -17,6 +17,39 @@ namespace IKan
     registry.reserve<Component...>(capacity);
   }
 
+  template<typename T>
+  static void CopyComponent(entt::registry& dstRegistry, entt::registry& srcRegistry, const std::unordered_map<UUID, entt::entity>& enttMap)
+  {
+    auto srcEntities = srcRegistry.view<T>();
+    for (auto srcEntity : srcEntities)
+    {
+      entt::entity destEntity = enttMap.at(srcRegistry.get<IDComponent>(srcEntity).ID);
+      
+      auto& srcComponent = srcRegistry.get<T>(srcEntity);
+      auto& destComponent = dstRegistry.emplace_or_replace<T>(destEntity, srcComponent);
+    }
+  }
+  
+  template<typename T>
+  static void CopyComponentIfExists(entt::entity dst, entt::entity src, entt::registry& registry)
+  {
+    if (registry.has<T>(src))
+    {
+      auto& srcComponent = registry.get<T>(src);
+      registry.emplace_or_replace<T>(dst, srcComponent);
+    }
+  }
+  
+  template<typename T>
+  static void CopyComponentIfExists(entt::entity dst, entt::registry& dstRegistry, entt::entity src, entt::registry& srcRegistry)
+  {
+    if (srcRegistry.has<T>(src))
+    {
+      auto& srcComponent = srcRegistry.get<T>(src);
+      dstRegistry.emplace_or_replace<T>(dst, srcComponent);
+    }
+  }
+
   Ref<Scene> Scene::Create(uint32_t maxEntityCapacity)
   {
     return CreateRef<Scene>(maxEntityCapacity);
@@ -129,6 +162,46 @@ namespace IKan
     m_registry.destroy(entity.m_entityHandle);
     
     --m_numEntities;
+  }
+  
+  Entity Scene::DuplicateEntity(Entity entity)
+  {
+    auto parentNewEntity = [&entity, scene = this](Entity newEntity)
+    {
+      if (auto parent = entity.GetParent(); parent)
+      {
+        newEntity.SetParentUUID(parent.GetUUID());
+        parent.Children().push_back(newEntity.GetUUID());
+      }
+    };
+    
+    Entity newEntity;
+    if (entity.HasComponent<TagComponent>())
+    {
+      newEntity = CreateEntity(entity.GetComponent<TagComponent>().tag);
+    }
+    else
+    {
+      newEntity = CreateEntity();
+    }
+    
+    CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    
+    auto childIds = entity.Children(); // need to take a copy of children here, because the collection is mutated below
+    for (auto childId : childIds)
+    {
+      Entity childDuplicate = DuplicateEntity(GetEntityWithUUID(childId));
+      
+      // At this point childDuplicate is a child of entity, we need to remove it from that entity
+      UnparentEntity(childDuplicate, false);
+      
+      childDuplicate.SetParentUUID(newEntity.GetUUID());
+      newEntity.Children().push_back(childDuplicate.GetUUID());
+    }
+    
+    parentNewEntity(newEntity);
+        
+    return newEntity;
   }
   
   Entity Scene::TryGetEntityWithUUID(UUID id) const

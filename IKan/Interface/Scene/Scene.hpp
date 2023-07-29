@@ -45,6 +45,9 @@ namespace IKan
     /// This function destriy the entity
     /// - Parameter entity: entity handle
     void DestroyEntity(Entity entity, bool excludeChildren = false, bool first = true);
+    /// This function duplicate the entity
+    /// - Parameter entity: entity to be duplicated
+    Entity DuplicateEntity(Entity entity);
 
     // This function returns entity with id as specified, or empty entity if cannot be found - caller must check
     Entity TryGetEntityWithUUID(UUID id) const;
