@@ -65,3 +65,6 @@
 #include <Renderer/Graphics/Texture.hpp>
 
 #include <Camera/Camera.hpp>
+#include <Camera/SceneCamera.hpp>
+#include <Camera/EditorCamera.hpp>
+#include <Camera/FixedCamera.hpp>

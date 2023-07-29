@@ -33,7 +33,8 @@ namespace IKan
     ///   - height: Camera Height
     ///   - nearP: Camera Near plane
     ///   - farP: Camera Far Plane
-    EditorCamera(const float degFov, const float width, const float height, const float nearP, const float farP);
+    EditorCamera(const float degFov, const float width, const float height,
+                 const float nearP = 0.0001, const float farP = 10000.0f);
     
     /// This function initialise the camera
     void Init();

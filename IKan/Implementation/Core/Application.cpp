@@ -14,6 +14,7 @@
 #include "RendererBuffers.hpp"
 #include "Pipeline.hpp"
 #include "Texture.hpp"
+#include "EditorCamera.hpp"
 
 namespace IKan
 {
@@ -22,6 +23,7 @@ namespace IKan
   static Ref<VertexBuffer> m_vertexBuffer;
   static Ref<Pipeline> m_pipeline;
   static Ref<Image> m_image;
+  static Ref<EditorCamera> m_camera;
   
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
@@ -87,6 +89,8 @@ namespace IKan
       m_indexBuffer = IndexBuffer::CreateWithSize(indices, sizeof(indices));
       
       m_image = Image::Create(CoreAssetPath("Textures/Default/NoTexture.png"));
+      
+      m_camera = CreateRef<EditorCamera>(45, 1600, 900);
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -137,16 +141,17 @@ namespace IKan
 
       // TODO: To Move Renderer Layer later
       {
+        m_camera->SetActive(true);
+        m_camera->OnUpdate(m_timeStep);
+        
         Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});\
-                
+
         m_pipeline->GetSpecification().shader->Bind();
-        m_pipeline->GetSpecification().shader->SetUniformMat4("u_ViewProjection", glm::mat4(1.0f));
+        m_pipeline->GetSpecification().shader->SetUniformMat4("u_ViewProjection", m_camera->GetUnReversedViewProjection());
         
         m_pipeline->Bind();
         m_image->Bind();
         Renderer::DrawIndexed(m_pipeline, 6);
-        
-        Renderer2D::DrawFullscreenQuad();
       }
       
       // Update the client application
@@ -180,6 +185,11 @@ namespace IKan
         
     // Client side event handler funciton
     OnEvent(event);
+    
+    // TODO: To Move Renderer Layer later
+    {
+      m_camera->OnEvent(event);
+    }
   }
   
   bool Application::WindowClose([[maybe_unused]] WindowCloseEvent& window_close_event)
@@ -200,4 +210,19 @@ namespace IKan
     OnImguiRender();
   }
 
+  void* Application::GetWindowPtr() const
+  {
+    return m_window->GetNativeWindow();
+  }
+  
+  Window& Application::GetWindow()
+  {
+    return *(m_window.get());
+  }
+
+  Application& Application::Get()
+  {
+    return *s_instance;
+  }
+  
 } // namespace IKan
