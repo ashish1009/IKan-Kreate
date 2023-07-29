@@ -670,6 +670,20 @@ namespace IKan
     BATCH_INFO("  Vertex Buffer used               {0} B", data->maxVertices * sizeof(LineData::Vertex));
     BATCH_INFO("  Shader Used                      {0}", data->shader->GetName());
   }
+  
+  void Renderer2D::SetViewport(uint32_t width, uint32_t height)
+  {
+    if (s_commonData->viewportWidth != width or s_commonData->viewportHeight != height)
+    {
+      s_commonData->needResize = true;
+      s_commonData->viewportWidth = width;
+      s_commonData->viewportHeight = height;
+    }
+    else
+    {
+      s_commonData->needResize = false;
+    }
+  }
 
   void Renderer2D::DrawFullscreenQuad(const Ref<Image>& image, uint32_t slot, bool overrideShader)
   {

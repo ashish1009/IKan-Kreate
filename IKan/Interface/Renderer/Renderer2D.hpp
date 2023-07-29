@@ -34,6 +34,12 @@ namespace IKan
     /// This funcition Adds the lines renderer data to prev allocaged data
     /// - Parameter maxLines: max circle to be renderered in single batch
     static void AddLineData(uint32_t maxLines);
+    
+    /// This function updates the viewport size for 2D Renderer
+    /// - Parameters:
+    ///   - width: new width of viewport
+    ///   - height: new height of viewport
+    static void SetViewport(uint32_t width, uint32_t height);
 
     /// This function render the fullscreen quad
     /// - Parameters:
