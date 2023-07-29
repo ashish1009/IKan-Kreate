@@ -102,6 +102,16 @@ namespace IKan
                       uint32_t advance, [[maybe_unused]] char charVal);
     /// This is the default Open GL Char Texture destructor
     virtual ~OpenGLCharTexture();
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLCharTexture);
+    
+  private:
+    RendererID m_rendererID;
+    glm::ivec2 m_size;
+    glm::ivec2 m_bearing;
+    uint32_t m_advance = 0;
+    uint32_t m_dataSize = 0;
+    uint32_t m_width = 0, m_height = 0;
   };
   
   namespace TextureUtils

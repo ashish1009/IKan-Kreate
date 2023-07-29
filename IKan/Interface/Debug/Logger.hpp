@@ -17,7 +17,7 @@ f(None) f(IKan) f(Timer) f(StringUtils)\
 f(Application) f(Window) \
 f(Renderer) f(Renderer2D) \
 f(GraphicsContext) f(Shader) f(IndexBuffer) f(VertexBuffer) f(Pipeline) f(Texture) f(SubTexture) f(FrameBuffer)\
-f(RenderPass) \
+f(RenderPass) f(CharTexture)\
 f(SceneCamera) f(EditorCamera)\
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
