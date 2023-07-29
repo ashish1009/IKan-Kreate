@@ -47,11 +47,11 @@ namespace IKan
     m_layers->PushOverlay(m_imguiLayer);
     m_imguiLayer->SetIniFilePath(m_specificaion.iniPath);
 
-    // Initialise the Core Renderer
+    // Initialize the Core Renderer
     Renderer::Initialize();
     
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
-    IK_LOG_INFO("", "                     Core Application Initialised                         ");
+    IK_LOG_INFO("", "                     Core Application Initialized                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
   }
   
@@ -72,7 +72,7 @@ namespace IKan
   {
     {
       IKan::ScopedTimer onShutdown("Client Application Initialize()");
-      // Initialise the client application
+      // Initialize the client application
       OnInit();
     }
     // GAME LOOP -----------------------------------------------------------------------------------------------------

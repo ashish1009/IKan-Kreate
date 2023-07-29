@@ -166,11 +166,11 @@ namespace IKan
     glm::vec4 vertexBasePosition[4];
     
     // Member Functions
-    /// Initialise common shape data
+    /// Initialize common shape data
     /// - Parameter maxElement: max elements
-    void Init(uint32_t maxElement)
+    void Inititialize(uint32_t maxElement)
     {
-      // Initialise the common data for all batch
+      // Initialize the common data for all batch
       CommonBatchData::maxElement = maxElement;
       maxVertices = maxElement * VertexForSingleElement;
       
@@ -368,7 +368,7 @@ namespace IKan
   };
   static Scope<LineData> s_lineData;
   
-  void Renderer2D::Initialise(uint32_t maxQuads, uint32_t maxCirlces, uint32_t maxLines)
+  void Renderer2D::Initialize(uint32_t maxQuads, uint32_t maxCirlces, uint32_t maxLines)
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
 
@@ -479,7 +479,7 @@ namespace IKan
     data = CreateScope<QuadData>();
     
     // Initialize the data for Common shape
-    data->Init(maxElement);
+    data->Inititialize(maxElement);
     
     // Allocating the memory for vertex Buffer Pointer
     data->vertexBufferBasePtr = new QuadData::Vertex[data->maxVertices];
@@ -557,7 +557,7 @@ namespace IKan
     data = CreateScope<CircleData>();
     
     // Initialize the data for Common shape
-    data->Init(maxElement);
+    data->Inititialize(maxElement);
     
     // Allocating the memory for vertex Buffer Pointer
     data->vertexBufferBasePtr = iknew CircleData::Vertex[data->maxVertices];

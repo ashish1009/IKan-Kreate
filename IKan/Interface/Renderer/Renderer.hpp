@@ -19,7 +19,7 @@ namespace IKan
   /// This is the wrapper class to interact with all renderer modules and Engine/Client
   /// Major responsibilities for Renderer is
   /// - Create Renderer API based on the renderer supported by the engine
-  /// - Initialise and shutdown all the user defined renderers.
+  /// - Initialize and shutdown all the user defined renderers.
   /// - Manage Shader and Texture library to store the pre loaded shader an textures
   /// - Note: Apis to be called in the following orders
   ///     1. CreateRendererDate(Api)

@@ -58,7 +58,7 @@ namespace IKan
   };
   static Scope<TextData> s_textData;
   
-  void TextRenderer::Initialise()
+  void TextRenderer::Initialize()
   {
     IK_LOG_TRACE(LogModule::TextRenderer, "Initialising the Text Renderer ");
     IK_LOG_TRACE(LogModule::TextRenderer, "-------------------------------");
@@ -98,7 +98,7 @@ namespace IKan
     s_textData->baseTextureCoords[4] = { 1.0f, 1.0f };
     s_textData->baseTextureCoords[5] = { 1.0f, 0.0f };
     
-    IK_LOG_TRACE(LogModule::TextRenderer, "Initialised the Text Renderer ");
+    IK_LOG_TRACE(LogModule::TextRenderer, "Initialized the Text Renderer ");
     IK_LOG_TRACE(LogModule::TextRenderer, "------------------------------");
     IK_LOG_TRACE(LogModule::TextRenderer, "  Vertex Buffer Used  {0} B",
                  TextData::VertexForSingleChar * sizeof(TextData::Vertex) * MaxTextureSlotsInShader);

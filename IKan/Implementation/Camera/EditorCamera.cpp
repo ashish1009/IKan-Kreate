@@ -29,10 +29,10 @@ namespace IKan
   m_focalPoint(0.0f), m_verticalFOV(glm::radians(degFov)), m_nearClip(nearP), m_farClip(farP)
   {
     IK_LOG_TRACE(LogModule::EditorCamera, "Creating Editor Camera");
-    Init();
+    Initialize();
   }
   
-  void EditorCamera::Init()
+  void EditorCamera::Initialize()
   {
     constexpr glm::vec3 position = { -5, 5, 5 };
     m_distance = glm::distance(position, m_focalPoint);

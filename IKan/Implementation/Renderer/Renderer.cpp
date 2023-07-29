@@ -60,9 +60,9 @@ namespace IKan
     IK_PROFILE();
     s_rendererData->rendererApiInstance = RendererAPI::Create();
     
-    Renderer2D::Initialise(10, 10, 10);
-    TextRenderer::Initialise();
-    Font::Initialise();
+    Renderer2D::Initialize(10, 10, 10);
+    TextRenderer::Initialize();
+    Font::Initialize();
   }
   
   void Renderer::Shutdown()

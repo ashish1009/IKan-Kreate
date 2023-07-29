@@ -15,7 +15,7 @@ namespace IKan
     return CreateRef<Font>(filePath);
   }
   
-  void Font::Initialise()
+  void Font::Initialize()
   {
     // Default Font
     std::string defaultFontFilePath = CoreAssetPath("Fonts/HfMonorita/Regular.ttf");

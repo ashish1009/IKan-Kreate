@@ -37,7 +37,7 @@ namespace IKan
                  const float nearP = 0.0001, const float farP = 10000.0f);
     
     /// This function initialise the camera
-    void Init();
+    void Initialize();
     
     /// This function focus the camera at focal point
     /// - Parameter focusPoint: camera focal point

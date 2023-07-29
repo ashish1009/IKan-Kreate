@@ -16,11 +16,11 @@ std::string IKanVersion = "v4.0.1.0";
 void InitializeEngine(const std::string logDirectoryPath)
 {    
 #ifdef IK_ENABLE_LOG
-  // Initialise the IKan Logger
+  // Initialize the IKan Logger
   IKan::Log::Inititialize(logDirectoryPath);
 #endif
   
-  // Initialise the Memory Allocator
+  // Initialize the Memory Allocator
   IKan::Allocator::Initialize();
   
   IK_LOG_INFO(IKan::LogModule::IKan, "Initialized the Engine");

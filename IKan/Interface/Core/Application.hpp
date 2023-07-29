@@ -39,7 +39,7 @@ namespace IKan
     };
 
     /// This constructor instantiate the IKan Core application. Responsible to create Window, Renderer Context and
-    /// Initialise all the Renderer. Also add the Imgui Layer for GUI Rendering
+    /// Initialize all the Renderer. Also add the Imgui Layer for GUI Rendering
     /// - Parameter spec: Application specifications
     Application(const Specification& spec);
     /// This destructor destroy the Application instance and shutdown all the Renderers and Window

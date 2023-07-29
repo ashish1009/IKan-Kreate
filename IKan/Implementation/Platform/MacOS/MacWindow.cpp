@@ -20,9 +20,9 @@ namespace IKan
     // Copy the specificaiton to the window data
     m_data.specification = specification;
 
-    // Initialise the GLFW Library
-    bool glfwInitialised = GLFW_TRUE == glfwInit();
-    IK_ASSERT(glfwInitialised, "Can not initialise the GLFW library");
+    // Initialize the GLFW Library
+    bool glfwInitialized = GLFW_TRUE == glfwInit();
+    IK_ASSERT(glfwInitialized, "Can not initialise the GLFW library");
     
     // Configure the GLFW Context Version
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
