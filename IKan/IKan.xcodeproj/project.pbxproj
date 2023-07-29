@@ -213,6 +213,7 @@
 		B23365812A752FF000BC7B8B /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = Vendors/Freetype/libpng/1.6.39/lib/libpng16.a; sourceTree = "<group>"; };
 		B23365832A75303E00BC7B8B /* TextRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextRenderer.cpp; sourceTree = "<group>"; };
 		B23365842A75303E00BC7B8B /* TextRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextRenderer.hpp; sourceTree = "<group>"; };
+		B23365872A7530A600BC7B8B /* TextShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = TextShader.glsl; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -399,6 +400,7 @@
 				B23365682A7521EB00BC7B8B /* FSQuadShader.glsl */,
 				B23365692A7521EB00BC7B8B /* LineShader.glsl */,
 				B23365662A7521EB00BC7B8B /* QuadShader.glsl */,
+				B23365872A7530A600BC7B8B /* TextShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";

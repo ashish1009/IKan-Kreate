@@ -57,4 +57,62 @@ namespace IKan
     }
   };
   static Scope<TextData> s_textData;
+  
+  void TextRenderer::Initialise()
+  {
+    IK_LOG_TRACE(LogModule::TextRenderer, "Initialising the Text Renderer ");
+    IK_LOG_TRACE(LogModule::TextRenderer, "-------------------------------");
+    
+    s_textData = CreateScope<TextData>();
+    
+    // Allocating the memory for vertex Buffer Pointer
+    s_textData->vertexBufferBasePtr = iknew TextData::Vertex[TextData::VertexForSingleChar * MaxTextureSlotsInShader];
+    
+    // Create vertes Buffer
+    s_textData->vertexBuffer = VertexBuffer::Create(sizeof(TextData::Vertex) * TextData::VertexForSingleChar * MaxTextureSlotsInShader);
+    
+    // Create Pipeline specification
+    Pipeline::Specification pipelineSpec;
+    pipelineSpec.debugName = "Text Renderer";
+    pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/TextShader.glsl"));
+    pipelineSpec.layout =
+    {
+      { "a_Position",  ShaderDataType::Float3 },
+      { "a_Color",     ShaderDataType::Float4 },
+      { "a_TexCoords", ShaderDataType::Float2 },
+      { "a_TexIndex",  ShaderDataType::Float },
+      { "a_ObjectID",  ShaderDataType::Int },
+    };
+    
+    // Create the Pipeline instnace
+    s_textData->pipeline = Pipeline::Create(pipelineSpec);
+    
+    // Setup the Quad Shader. Copy the Same shader refernce which is stored in the Pipeline
+    s_textData->shader = s_textData->pipeline->GetSpecification().shader;
+    
+    // Base Texture coordinate for Char rendering
+    s_textData->baseTextureCoords[0] = { 0.0f, 0.0f };
+    s_textData->baseTextureCoords[1] = { 0.0f, 1.0f };
+    s_textData->baseTextureCoords[2] = { 1.0f, 1.0f };
+    s_textData->baseTextureCoords[3] = { 0.0f, 0.0f };
+    s_textData->baseTextureCoords[4] = { 1.0f, 1.0f };
+    s_textData->baseTextureCoords[5] = { 1.0f, 0.0f };
+    
+    IK_LOG_TRACE(LogModule::TextRenderer, "Initialised the Text Renderer ");
+    IK_LOG_TRACE(LogModule::TextRenderer, "------------------------------");
+    IK_LOG_TRACE(LogModule::TextRenderer, "  Vertex Buffer Used  {0} B",
+                 TextData::VertexForSingleChar * sizeof(TextData::Vertex) * MaxTextureSlotsInShader);
+    IK_LOG_TRACE(LogModule::TextRenderer, "  Shader used         {0}", s_textData->shader->GetName());
+  }
+  
+  void TextRenderer::Shutdown()
+  {
+    IK_LOG_WARN(LogModule::TextRenderer, "Shutting down the Text Renderer ");
+    IK_LOG_WARN(LogModule::TextRenderer, "--------------------------------");
+    IK_LOG_WARN(LogModule::TextRenderer, "  Vertex Buffer Used  {0} B",
+                TextData::VertexForSingleChar * sizeof(TextData::Vertex) * MaxTextureSlotsInShader);
+    IK_LOG_WARN(LogModule::TextRenderer, "  Shader used         {0}", s_textData->shader->GetName());
+    
+    s_textData.reset();
+  }
 }
