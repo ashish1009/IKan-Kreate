@@ -11,6 +11,7 @@ namespace IKan
 {
   class Image;
   class Texture;
+  class Sprite;
 
   /// This is the batch renderer for 2D Renderering
   class Renderer2D
@@ -53,19 +54,59 @@ namespace IKan
     ///   - slot: Slot to be load the texture
     ///   - overrideShader: Override shader flag. if false then deafult shader is used
     /// - Note: If true then bind your own shader
-    static void DrawFullscreenQuad(const Ref<Image>& texture = nullptr, uint32_t slot = 0, bool overrideShader = false);
-    /// This function render the fullscreen quad
-    /// - Parameters:
-    ///   - texture: Texture to be loaded
-    ///   - slot: Slot to be load the texture
-    ///   - overrideShader: Override shader flag. if false then deafult shader is used
-    /// - Note: If true then bind your own shader
     static void DrawFullscreenQuad(const Ref<Texture>& texture = nullptr, uint32_t slot = 0, bool overrideShader = false);
+    
+    /// This function draws Quad with color
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Quad
+    ///   - color: Color of Quad
+    ///   - objectID: Pixel ID of Quad
+    static void DrawQuad(const glm::mat4& transform, const glm::vec4& color, int32_t objectID = -1 );
+    /// This function draws Quad with color
+    /// - Parameters:
+    ///   - position: position of the quad
+    ///   - scale: scale of the quad
+    ///   - rotation: rotation of the quad
+    ///   - color: Color of Quad
+    ///   - objectID: Pixel ID of Quad
+    /// - Note: High Cycle API
+    static void DrawQuad(const glm::vec3& position, const glm::vec3& scale = glm::vec3(1.0f),
+                         const glm::vec3& rotation = glm::vec3(0.0f), const glm::vec4& color = glm::vec4(1.0f),
+                         int32_t objectID = -1 );
+    /// This function draws Quad with texture
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - objectID: Pixel ID of Quad
+    static void DrawQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor = glm::vec4(1.0f),
+                         float tilingFactor = 1.0f, int32_t objectID = -1 );
+    
+    /// This function draws Quad with Subtexture sprite
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Quad
+    ///   - sub_texture: Subtexture component
+    ///   - object_id: entity ID of Quad
+    static void DrawQuad(const glm::mat4& transform, const Ref<Sprite>& subTexture, const glm::vec4& tintColor = glm::vec4(1.0f),
+                         int32_t objectID = -1);
     
     MAKE_PURE_STATIC(Renderer2D);
     
   private:
     /// This function flsh a single batch
     static void Flush();
+    
+    /// This function is the helper function to rendere the quad
+    /// - Parameters:
+    ///   - transform: transform matrix of quad
+    ///   - texture: texture to be binded in quad
+    ///   - textureCoords: texture coordinates
+    ///   - tilingFactor: tiling factor of texture
+    ///   - tintColor: color of quad
+    ///   - objectID: object/pixel id
+    static void DrawTextureQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec2* textureCoords,
+                                float tilingFactor, const glm::vec4& tintColor, int32_t objectID);
+
   };
 } // namespace IKan

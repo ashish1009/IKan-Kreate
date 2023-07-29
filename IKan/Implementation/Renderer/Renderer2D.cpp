@@ -57,7 +57,7 @@ namespace IKan
       static uint32_t whiteTextureData = 0xffffffff;
       
       // Texture specificaion
-      Texture::Specification textureSpec;
+      TextureSpecification textureSpec;
       textureSpec.type = TextureType::Texture2D;
       textureSpec.internalFormat = TextureFormat::RGBA8;
       textureSpec.dataFormat = TextureFormat::RGBA;
@@ -182,7 +182,7 @@ namespace IKan
         uint32_t whiteTextureData = 0xffffffff;
         
         // Texture specificaion
-        Texture::Specification textureSpec;
+        TextureSpecification textureSpec;
         textureSpec.type = TextureType::Texture2D;
         textureSpec.internalFormat = TextureFormat::RGBA8;
         textureSpec.dataFormat = TextureFormat::RGBA;
@@ -740,31 +740,6 @@ namespace IKan
     }
   }
 
-  void Renderer2D::DrawFullscreenQuad(const Ref<Image>& image, uint32_t slot, bool overrideShader)
-  {
-    // Bind the default Shader
-    if (!overrideShader)
-    {
-      s_fullscreenQuadData->pipeline->GetSpecification().shader->Bind();
-    }
-    
-    if (image)
-    {
-      image->Bind(slot);
-    }
-    else
-    {
-      s_fullscreenQuadData->whiteTexture->Bind();
-    }
-    Renderer::DrawQuad(s_fullscreenQuadData->pipeline);
-    
-    // Unbind the default Shader
-    if (!overrideShader)
-    {
-      s_fullscreenQuadData->pipeline->GetSpecification().shader->Unbind();
-    }
-  }
-  
   void Renderer2D::DrawFullscreenQuad(const Ref<Texture>& texture, uint32_t slot, bool overrideShader)
   {
     // Bind the default Shader
@@ -789,4 +764,90 @@ namespace IKan
       s_fullscreenQuadData->pipeline->GetSpecification().shader->Unbind();
     }
   }
+  
+  void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& color, int32_t objectID)
+  {
+    DrawTextureQuad(transform, nullptr, TextureCoords, 1.0f /* tiling factor */, color, objectID);
+  }
+  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation,
+                            const glm::vec4& color, int32_t objectID)
+  {
+    auto transform  = Utils::Math::GetTransformMatrix(position, rotation, scale);
+    DrawTextureQuad(transform, nullptr, TextureCoords, 1.0f /* tiling factor */, color, objectID);
+  }
+  void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor,
+                            float tilingFactor, int32_t objectID)
+  {
+    DrawTextureQuad(transform, texture ? texture : nullptr, TextureCoords, tilingFactor, tintColor, objectID );
+  }
+  void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Sprite>& subTexture, const glm::vec4& tintColor,
+                            int32_t objectID)
+  {
+    const glm::vec2* textureCoords = subTexture->GetTexCoord();
+    DrawTextureQuad(transform, (subTexture) ? subTexture->GetImage() : nullptr,
+                    (subTexture) ? textureCoords : TextureCoords, 1.0f, tintColor, objectID);
+  }
+  
+  void Renderer2D::DrawTextureQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec2* textureCoords,
+                                   float tilingFactor, const glm::vec4& tintColor, int32_t objectID)
+  {
+    // If number of indices increase in batch then start new batch
+    if (s_quadData->indexCount >= s_quadData->maxIndices)
+    {
+      BATCH_WARN("Starts the new batch as number of indices ({0}) increases in the previous batch", s_quadData->indexCount);
+      EndBatch();
+      s_quadData->StartInternalBatch();
+    }
+    
+    float textureIndex = 0.0f;
+    if (texture)
+    {
+      // Find if texture is already loaded in current batch
+      for (size_t i = 1; i < s_quadData->textureSlotIndex; i++)
+      {
+        if (s_quadData->textureSlots[i].get() == texture.get())
+        {
+          // Found the current textue in the batch
+          textureIndex = (float)i;
+          break;
+        }
+      }
+      
+      // If current texture slot is not pre loaded then load the texture in proper slot
+      if (textureIndex == 0.0f)
+      {
+        // If number of slots increases max then start new batch
+        if (s_quadData->textureSlotIndex >= MaxTextureSlotsInShader)
+        {
+          BATCH_WARN("Starts the new batch as number of texture slot ({0}) increases in the previous batch", s_quadData->textureSlotIndex);
+          EndBatch();
+          s_quadData->StartInternalBatch();
+        }
+        
+        // Loading the current texture in the first free slot slot
+        textureIndex = (float)s_quadData->textureSlotIndex;
+        s_quadData->textureSlots[s_quadData->textureSlotIndex] = texture;
+        s_quadData->textureSlotIndex++;
+      }
+    }
+    
+    for (size_t i = 0; i < Shape2DCommonData::VertexForSingleElement; i++)
+    {
+      s_quadData->vertexBufferPtr->position        = transform * s_quadData->vertexBasePosition[i];
+      s_quadData->vertexBufferPtr->color           = tintColor;
+      s_quadData->vertexBufferPtr->textureCoords   = textureCoords[i];
+      s_quadData->vertexBufferPtr->textureIndex    = textureIndex;
+      s_quadData->vertexBufferPtr->tilingFactor    = tilingFactor;
+      s_quadData->vertexBufferPtr->pixelID         = objectID;
+      s_quadData->vertexBufferPtr++;
+    }
+    
+    s_quadData->indexCount += Shape2DCommonData::IndicesForSingleElement;
+    
+    // Update Stats
+    RendererStatistics::Get().indexCount += Shape2DCommonData::IndicesForSingleElement;
+    RendererStatistics::Get().vertexCount += Shape2DCommonData::VertexForSingleElement;
+    RendererStatistics::Get()._2d.quads++;
+  }
+
 } // namespace IKan
