@@ -157,7 +157,6 @@
 		B23364F42A742A4200BC7B8B /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
 		B23364FF2A742C0600BC7B8B /* OpenGLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
 		B23365002A742C0600BC7B8B /* OpenGLShader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLShader.hpp; sourceTree = "<group>"; };
-		B23365052A7430D400BC7B8B /* QuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = QuadShader.glsl; sourceTree = "<group>"; };
 		B233650E2A74370700BC7B8B /* RendererBuffers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererBuffers.cpp; sourceTree = "<group>"; };
 		B233650F2A74370700BC7B8B /* RendererBuffers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererBuffers.hpp; sourceTree = "<group>"; };
 		B23365122A74381300BC7B8B /* OpenGLRendererBuffers.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRendererBuffers.cpp; sourceTree = "<group>"; };
@@ -184,7 +183,6 @@
 		B23365422A74D76C00BC7B8B /* stb_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 		B23365452A74E6D300BC7B8B /* Renderer2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer2D.cpp; sourceTree = "<group>"; };
 		B23365462A74E6D300BC7B8B /* Renderer2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer2D.hpp; sourceTree = "<group>"; };
-		B23365492A74E8CD00BC7B8B /* FSQuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FSQuadShader.glsl; sourceTree = "<group>"; };
 		B233654C2A7502BA00BC7B8B /* FrameBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FrameBuffer.cpp; sourceTree = "<group>"; };
 		B233654D2A7502BA00BC7B8B /* FrameBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FrameBuffer.hpp; sourceTree = "<group>"; };
 		B23365542A7503CA00BC7B8B /* OpenGLFrameBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLFrameBuffer.cpp; sourceTree = "<group>"; };
@@ -195,6 +193,10 @@
 		B233655F2A751D6B00BC7B8B /* RenderPass.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderPass.hpp; sourceTree = "<group>"; };
 		B23365622A751DE500BC7B8B /* OpenGLRenderPass.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRenderPass.cpp; sourceTree = "<group>"; };
 		B23365632A751DE500BC7B8B /* OpenGLRenderPass.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLRenderPass.hpp; sourceTree = "<group>"; };
+		B23365662A7521EB00BC7B8B /* QuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = QuadShader.glsl; sourceTree = "<group>"; };
+		B23365672A7521EB00BC7B8B /* CircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = CircleShader.glsl; sourceTree = "<group>"; };
+		B23365682A7521EB00BC7B8B /* FSQuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FSQuadShader.glsl; sourceTree = "<group>"; };
+		B23365692A7521EB00BC7B8B /* LineShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = LineShader.glsl; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -369,8 +371,10 @@
 		B23364F72A742A4F00BC7B8B /* Shaders */ = {
 			isa = PBXGroup;
 			children = (
-				B23365052A7430D400BC7B8B /* QuadShader.glsl */,
-				B23365492A74E8CD00BC7B8B /* FSQuadShader.glsl */,
+				B23365672A7521EB00BC7B8B /* CircleShader.glsl */,
+				B23365682A7521EB00BC7B8B /* FSQuadShader.glsl */,
+				B23365692A7521EB00BC7B8B /* LineShader.glsl */,
+				B23365662A7521EB00BC7B8B /* QuadShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
