@@ -84,7 +84,8 @@ namespace Kreator
     auto viewportSize = ImGui::GetContentRegionAvail();
         
     // Render viewport image
-    ImGui::Image(INT2VOIDP(Renderer2D::GetFinalImage()->GetRendererID()), viewportSize);
+    ImGui::Image(INT2VOIDP(Renderer2D::GetFinalImage()->GetRendererID()), viewportSize,
+                 {0, 1}, {1, 0});
     
     ImGui::End();
     ImGui::PopStyleVar();
