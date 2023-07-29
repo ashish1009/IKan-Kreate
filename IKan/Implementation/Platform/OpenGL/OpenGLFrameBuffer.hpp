@@ -23,7 +23,12 @@ namespace IKan
     ~OpenGLFrameBuffer();
     
   private:
-    // Member Variables
+    // Member Function -----------------------------------------------------------------------------------------------
+    /// This function invalidate the frame buffer on creation on resize
+    /// - Parameter debugLogs : Shows the resilze texture logs
+    void Invalidate(bool debugLogs = true);
+    
+    // Member Variables ----------------------------------------------------------------------------------------------
     RendererID m_rendererID = 0;
     Specification m_specification;
     
