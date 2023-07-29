@@ -60,10 +60,10 @@ namespace IKan
     // TODO: To Move Renderer Layer later
     {
       float vertices[] = {
-        -0.5f, -0.5, 0.0,
-         0.5f, -0.5, 0.0,
-         0.5f,  0.5, 0.0,
-        -0.5f,  0.5, 0.0
+        -0.5f, -0.5, 0.0, 1.0, 0.0, 0.0, 1.0, 0.0, 0.0,
+         0.5f, -0.5, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0, 0.0,
+         0.5f,  0.5, 0.0, 0.0, 0.0, 1.0, 1.0, 1.0, 1.0,
+        -0.5f,  0.5, 0.0, 0.4, 0.6, 0.9, 1.0, 0.0, 1.0
       };
       m_vertexBuffer = VertexBuffer::Create(vertices, sizeof(vertices));
       
@@ -73,6 +73,8 @@ namespace IKan
       pipelineSpec.layout =
       {
         { "a_Position",     ShaderDataType::Float3 },
+        { "a_Color",        ShaderDataType::Float4 },
+        { "a_TexCoords",    ShaderDataType::Float2 },
       };
 
       // Create the Pipeline instnace
@@ -97,6 +99,7 @@ namespace IKan
 
     // TODO: To Move Renderer Layer later
     {
+      m_image.reset();
       m_pipeline.reset();
       m_vertexBuffer.reset();
       m_indexBuffer.reset();

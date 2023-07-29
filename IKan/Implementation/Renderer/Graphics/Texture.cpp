@@ -21,7 +21,7 @@ namespace IKan
           s_textureLibrary[filePath][linear] = CreateRef<OpenGLImage>(filePath, linear);
           IK_LOG_DEBUG(LogModule::Texture, "Adding Texture '{0}' to Texture Library",
                        Utils::String::GetFileNameFromPath(filePath));
-          IK_LOG_DEBUG(LogModule::Texture, "Number of Textures loaded yet {0}",
+          IK_LOG_DEBUG(LogModule::Texture, "Number of Textures loaded {0}",
                        s_textureLibrary.size());
         }
         else
