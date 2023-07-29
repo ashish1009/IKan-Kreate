@@ -141,6 +141,7 @@ namespace IKan
         m_pipeline->GetSpecification().shader->SetUniformMat4("u_ViewProjection", glm::mat4(1.0f));
         
         m_pipeline->Bind();
+        m_image->Bind();
         Renderer::DrawIndexed(m_pipeline, 6);
       }
       
