@@ -39,5 +39,6 @@ namespace Kreator
     
   private:
     EditorCamera m_editorCamera;
+    Ref<Scene> m_editorScene;
   };
 } // namespace Kreator

@@ -30,6 +30,7 @@ namespace Kreator
     
     // TODO: Temp
     {
+      m_editorScene = Scene::Create();
       m_image = Image::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Textures/checkerboard.png");
     }
   }
