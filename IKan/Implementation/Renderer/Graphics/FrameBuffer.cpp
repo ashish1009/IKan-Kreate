@@ -6,6 +6,7 @@
 //
 
 #include "FrameBuffer.hpp"
+#include "Platform/OpenGL/OpenGLFrameBuffer.hpp"
 
 namespace IKan
 {
@@ -19,7 +20,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLFrameBuffer>(spec);
       case Renderer::Api::None:
       default: IK_ASSERT(false, "Invalid Renderer API (None)"); break;
     }

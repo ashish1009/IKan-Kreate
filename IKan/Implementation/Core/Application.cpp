@@ -15,6 +15,7 @@
 #include "Pipeline.hpp"
 #include "Texture.hpp"
 #include "EditorCamera.hpp"
+#include "FrameBuffer.hpp"
 
 namespace IKan
 {
@@ -24,6 +25,7 @@ namespace IKan
   static Ref<Pipeline> m_pipeline;
   static Ref<Image> m_image;
   static Ref<EditorCamera> m_camera;
+  static Ref<FrameBuffer> m_frameBuffer;
   
   Application::Application(const Specification& spec)
   : m_specificaion(spec)
@@ -91,6 +93,17 @@ namespace IKan
       m_image = Image::Create(CoreAssetPath("Textures/Default/NoTexture.png"));
       
       m_camera = CreateRef<EditorCamera>(45, 1600, 900);
+      
+      // Create Framebuffer for Render Pass
+      FrameBuffer::Specification fbSpec;
+      fbSpec.attachments =
+      {
+        FrameBuffer::Attachments::TextureFormat::RGBA8,
+        FrameBuffer::Attachments::TextureFormat::R32I,
+        FrameBuffer::Attachments::TextureFormat::Depth24Stencil
+      };
+      
+      m_frameBuffer = FrameBuffer::Create(fbSpec);
     }
 
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
