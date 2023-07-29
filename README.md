@@ -83,13 +83,13 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
 ------------------------------------------------------------------------------------------------------------------
 
 - v3.3.0.0  : IKan    - Render Scene with camera 
+------------------------------------------------------------------------------------------------------------------
 
-## Upcoming Release Tags    
-  
-- v3.3.0.0  : IKan    - Render in frame buffer
+- v3.4.0.0  : IKan    - Render in frame buffer
   - Frame Buffer  
 ------------------------------------------------------------------------------------------------------------------
-  
+
+## Upcoming Release Tags    
 - v3.5.0.0  : IKan    - Render 2D Scene in Batch
   - Renderer 2D
   - Full Quad Renderer
