@@ -10,12 +10,12 @@
 namespace IKan
 {
   
-#define TABLE_TRACE(...)    IK_CORE_TRACE(moduleName.c_str(), __VA_ARGS__);
-#define TABLE_DEBUG(...)    IK_CORE_DEBUG(moduleName.c_str(), __VA_ARGS__);
-#define TABLE_INFO(...)     IK_CORE_INFO(moduleName.c_str(), __VA_ARGS__);
-#define TABLE_WARN(...)     IK_CORE_WARN(moduleName.c_str(), __VA_ARGS__);
-#define TABLE_ERROR(...)    IK_CORE_ERROR(moduleName.c_str(), __VA_ARGS__);
-#define TABLE_CRITICAL(...) IK_CORE_CRITICAL(moduleName.c_str(), __VA_ARGS__);
+#define TABLE_TRACE(...)    IK_LOG_TRACE(moduleName.c_str(), __VA_ARGS__);
+#define TABLE_DEBUG(...)    IK_LOG_DEBUG(moduleName.c_str(), __VA_ARGS__);
+#define TABLE_INFO(...)     IK_LOG_INFO(moduleName.c_str(), __VA_ARGS__);
+#define TABLE_WARN(...)     IK_LOG_WARN(moduleName.c_str(), __VA_ARGS__);
+#define TABLE_ERROR(...)    IK_LOG_ERROR(moduleName.c_str(), __VA_ARGS__);
+#define TABLE_CRITICAL(...) IK_LOG_CRITICAL(moduleName.c_str(), __VA_ARGS__);
   
 #define TABLE_LOG(x) LogTable(level, moduleName, x);
   
@@ -55,7 +55,7 @@ namespace IKan
     // Add the headers as first row if header data is provided
     if (m_data.columnHeaders.size() > 0)
     {
-      IK_CORE_ASSERT(m_data.numColumns == m_data.columnHeaders.size());
+      IK_ASSERT(m_data.numColumns == m_data.columnHeaders.size());
       AddRow(m_data.columnHeaders);
     }
   }

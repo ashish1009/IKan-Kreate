@@ -84,12 +84,28 @@ namespace IKan
     // Bind the Pipeline Vertex Array
     glBindVertexArray(m_rendererID);
     
+#ifdef IK_ENABLE_LOG
+    // Store the vertex attribute
+    Table::Data tableData;
+    tableData.title = "Vertex Attributes in Pipeline (Stride : " + std::to_string(layout.GetStride()) + ")";
+    tableData.numColumns = 4;
+    tableData.columnHeaders =
+    {
+      "Name", "Type", "Offset", "Size"
+    };
+    Table verticesData(tableData);
+#endif
+
     uint32_t index = 0;
-    PIPELINE_LOG("  Vertex Attributes");
-    PIPELINE_LOG("  -----------------");
     for (const auto& element : layout.GetElements())
     {
-      PIPELINE_LOG("  {0} | {1}", ShaderDataTypeToString(element.type), element.name);
+#ifdef IK_ENABLE_LOG
+      verticesData.AddRow({
+                            element.name, ShaderDataTypeToString(element.type),
+                            std::to_string(element.offset),
+                            std::to_string(element.size)
+                          });
+#endif
 
       switch (element.type)
       {
@@ -138,6 +154,9 @@ namespace IKan
         }
       } // switch (element.Type)
     } // For each elements
+#ifdef IK_ENABLE_LOG
+    verticesData.Dump(Log::Level::Debug, "Pipeline");
+#endif
   }
   
   void OpenGLPipeline::Bind() const
