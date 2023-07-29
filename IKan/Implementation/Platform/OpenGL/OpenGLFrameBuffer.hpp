@@ -42,9 +42,9 @@ namespace IKan
     /// This function returns the Renderer ID
     RendererID GetRendererId() const override;
     /// This function returns the Depth Attachment ID
-    Ref<Texture> GetDepthAttachment() const override;
+    Ref<Texture2D> GetDepthAttachment() const override;
     /// This function returns the Color Attachment iDs
-    const std::vector<Ref<Texture>>& GetColorAttachments() const override;
+    const std::vector<Ref<Texture2D>>& GetColorAttachments() const override;
     /// This function returns the pixel id (RED_ID) index stored in fremebuffer
     uint32_t GetPixelIdIndex() const override;
     
@@ -65,8 +65,8 @@ namespace IKan
     Attachments::TextureFormat m_depthSpecification = Attachments::TextureFormat::None;
     
     // Stores the attachment ID for both color and depth
-    std::vector<Ref<Texture>> m_colorAttachments;
-    Ref<Texture> m_depthAttachment = 0;
+    std::vector<Ref<Texture2D>> m_colorAttachments;
+    Ref<Texture2D> m_depthAttachment = 0;
     
     uint32_t m_pixelIDIndex = 0;
   };

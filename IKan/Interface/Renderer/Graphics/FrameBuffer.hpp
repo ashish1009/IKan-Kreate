@@ -11,7 +11,7 @@
 
 namespace IKan
 {
-  class Texture;
+  class Texture2D;
   
   /// Interface class for storing Framebuffer
   class FrameBuffer
@@ -65,9 +65,9 @@ namespace IKan
     /// This function returns the Renderer ID
     virtual RendererID GetRendererId() const = 0;
     /// This function returns the Depth Attachment ID
-    virtual Ref<Texture> GetDepthAttachment() const = 0;
+    virtual Ref<Texture2D> GetDepthAttachment() const = 0;
     /// This function returns the Color Attachment iDs
-    virtual const std::vector<Ref<Texture>>& GetColorAttachments() const = 0;
+    virtual const std::vector<Ref<Texture2D>>& GetColorAttachments() const = 0;
     /// This function returns the pixel id (RED_ID) index stored in fremebuffer
     virtual uint32_t GetPixelIdIndex() const = 0;
 

@@ -295,7 +295,7 @@ namespace IKan
     return m_name;
   }
   
-  OpenGLTexture::OpenGLTexture(const Specification& spec)
+  OpenGLTexture::OpenGLTexture(const TextureSpecification& spec)
   : m_specification(spec)
   {
     glGenTextures(1, &m_rendererID);

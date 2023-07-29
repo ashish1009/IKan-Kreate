@@ -102,7 +102,7 @@ namespace IKan
     Table fbTable(tableData);
 #endif
     
-    Texture::Specification spec;
+    TextureSpecification spec;
     spec.width  = m_specification.width;
     spec.height = m_specification.height;
     
@@ -125,7 +125,7 @@ namespace IKan
             // Create the Color Image from the specification
             spec.internalFormat   = TextureFormat::RGBA8;
             spec.dataFormat       = TextureFormat::RGBA;
-            m_colorAttachments[i] = Texture::Create(spec);
+            m_colorAttachments[i] = Texture2D::Create(spec);
             
             // Attach Image to Framebuffer
             m_colorAttachments[i]->AttachToFramebuffer(TextureAttachment::Color, (uint32_t)i);
@@ -141,7 +141,7 @@ namespace IKan
             // Create the Color Image from the specification
             spec.internalFormat   = TextureFormat::R32I;
             spec.dataFormat       = TextureFormat::RED_INTEGER;
-            m_colorAttachments[i] = Texture::Create(spec);
+            m_colorAttachments[i] = Texture2D::Create(spec);
             
             // Attach Image to Framebuffer
             m_colorAttachments[i]->AttachToFramebuffer(TextureAttachment::Color, (uint32_t)i);
@@ -175,7 +175,7 @@ namespace IKan
           // Create the Depth Image from the specification
           spec.internalFormat = TextureFormat::DEPTH_COMPONENT;
           spec.dataFormat     = TextureFormat::DEPTH_COMPONENT;
-          m_depthAttachment   = Texture::Create(spec);
+          m_depthAttachment   = Texture2D::Create(spec);
           
           // Attach Image to Framebuffer
           m_depthAttachment->AttachToFramebuffer(TextureAttachment::Depth);
@@ -273,12 +273,12 @@ namespace IKan
     return m_rendererID;
   }
   
-  Ref<Texture> OpenGLFrameBuffer::GetDepthAttachment() const
+  Ref<Texture2D> OpenGLFrameBuffer::GetDepthAttachment() const
   {
     return m_depthAttachment;
   }
   
-  const std::vector<Ref<Texture>>& OpenGLFrameBuffer::GetColorAttachments() const
+  const std::vector<Ref<Texture2D>>& OpenGLFrameBuffer::GetColorAttachments() const
   {
     return m_colorAttachments;
   }

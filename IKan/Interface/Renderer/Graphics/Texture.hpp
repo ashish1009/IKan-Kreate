@@ -45,24 +45,79 @@ namespace IKan
     Color, Depth
   };
 
-  class Image
+  /// This is the NON Image Texture specification
+  struct TextureSpecification
+  {
+    int32_t width = 1600;
+    int32_t height = 900;
+    
+    TextureFormat internalFormat = TextureFormat::RGBA8;
+    TextureFormat dataFormat = TextureFormat::RGBA;
+    TextureType type = TextureType::Texture2D;
+    TextureWrap wrap = TextureWrap::Clamp;
+    TextureFilter filter = TextureFilter::Linear;
+    
+    void* data = nullptr;
+    uint32_t size = 0;
+  };
+  
+  /// This is the interface class to create the Texture
+  class Texture
   {
   public:
     /// This is default virtual destructor for Texture
-    virtual ~Image() = default;
+    virtual ~Texture() = default;
     
     /// This function binds the Current Texture to a slot of shader
     /// - Parameter slot: Slot of shader
     virtual void Bind(uint32_t slot = 0) const = 0;
     /// This function unbinds the Current Texture from shader slot
     virtual void Unbind() const = 0;
-
+    
     /// This function returns the Renderer ID of Texture
     virtual RendererID GetRendererID() const = 0;
     /// This function returns the Width of Texture
     virtual uint32_t GetWidth() const = 0;
     /// This function returns the Height of Texture
     virtual uint32_t GetHeight() const = 0;
+    
+    /// This API creates the Texture instance based on the Renderer API
+    /// - Parameter spec: Texture Specificaion
+    [[nodiscard]] static Ref<Texture> Create(const TextureSpecification& spec);
+    /// This static functions creates the Texture from image file
+    /// - Parameters:
+    ///   - filePath: path of texture file
+    ///   - linear: min linear flag
+    /// - Note: Use Renderer::GetTexture() to reuse already loaded texture (if following texture is already used
+    ///         somewhere). This API will Load the texture again and new memory will be creted. So to avoid duplicate
+    ///         memory for same texture use Renderer::GetTexture()
+    [[nodiscard]] static Ref<Texture> Create(const std::string& filePath, bool linear = true);
+  };
+  
+  /// This is the interface class to create the Texture
+  class Texture2D : public Texture
+  {
+  public:
+    /// This is default virtual destructor for Texture
+    virtual ~Texture2D() = default;
+    
+    /// This function attach the current Image to Framebuffer
+    /// - Parameters:
+    ///   - id : Color Attaachment ID to Framebuffer
+    ///   - attachmentType: attachment type of texture
+    virtual void AttachToFramebuffer(TextureAttachment attachmentType, uint32_t id = 0) const = 0;
+    
+    /// This API creates the Texture instance based on the Renderer API
+    /// - Parameter spec: Texture Specificaion
+    [[nodiscard]] static Ref<Texture2D> Create(const TextureSpecification& spec);
+  };
+  
+  class Image : public Texture
+  {
+  public:
+    /// This is default virtual destructor for Texture
+    virtual ~Image() = default;
+    
     /// This function returns the File Path of Texture NOTE: Return "" for white texture
     virtual const std::string& GetfilePath() const = 0;
     /// This function returns name of texture
@@ -136,51 +191,5 @@ namespace IKan
     glm::vec2 m_spriteSize;
     glm::vec2 m_cellSize;
     glm::vec2 m_coords;
-  };
-
-  /// This is the interface class to create the Texture
-  class Texture
-  {
-  public:
-    /// This is the NON Image Texture specification
-    struct Specification
-    {
-      int32_t width = 1600;
-      int32_t height = 900;
-      
-      TextureFormat internalFormat = TextureFormat::RGBA8;
-      TextureFormat dataFormat = TextureFormat::RGBA;
-      TextureType type = TextureType::Texture2D;
-      TextureWrap wrap = TextureWrap::Clamp;
-      TextureFilter filter = TextureFilter::Linear;
-      
-      void* data = nullptr;
-      uint32_t size = 0;
-    };
-    
-    /// This is default virtual destructor for Texture
-    virtual ~Texture() = default;
-
-    /// This function binds the Current Texture to a slot of shader
-    /// - Parameter slot: Slot of shader
-    virtual void Bind(uint32_t slot = 0) const = 0;
-    /// This function unbinds the Current Texture from shader slot
-    virtual void Unbind() const = 0;
-    /// This function attach the current Image to Framebuffer
-    /// - Parameters:
-    ///   - id : Color Attaachment ID to Framebuffer
-    ///   - attachmentType: attachment type of texture
-    virtual void AttachToFramebuffer(TextureAttachment attachmentType, uint32_t id = 0) const = 0;
-
-    /// This function returns the Renderer ID of Texture
-    virtual RendererID GetRendererID() const = 0;
-    /// This function returns the Width of Texture
-    virtual uint32_t GetWidth() const = 0;
-    /// This function returns the Height of Texture
-    virtual uint32_t GetHeight() const = 0;
-
-    /// This API creates the Texture instance based on the Renderer API
-    /// - Parameter spec: Texture Specificaion
-    [[nodiscard]] static Ref<Texture> Create(const Specification& spec);
   };
 } // namespace IKan

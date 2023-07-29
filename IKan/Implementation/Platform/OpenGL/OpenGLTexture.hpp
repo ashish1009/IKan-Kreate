@@ -53,12 +53,12 @@ namespace IKan
   };
 
   /// This is the Open GL Implementation class for Creating texture
-  class OpenGLTexture : public Texture
+  class OpenGLTexture : public Texture2D
   {
   public:
     /// Default Open GL Image Constructor
     /// - Parameter spec: Open GL Image Specification
-    OpenGLTexture(const Specification& spec);
+    OpenGLTexture(const TextureSpecification& spec);
     
     /// Default destructor that delete the texture
     virtual ~OpenGLTexture();
@@ -84,7 +84,7 @@ namespace IKan
 
   private:
     RendererID m_rendererID = 0;
-    Specification m_specification;
+    TextureSpecification m_specification;
     int32_t m_channel = 0;
   };
   

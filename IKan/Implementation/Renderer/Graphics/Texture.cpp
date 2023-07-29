@@ -10,6 +10,28 @@
 
 namespace IKan
 {
+  
+  Ref<Texture> Texture::Create(const TextureSpecification& spec)
+  {
+    return Texture2D::Create(spec);
+  }
+  
+  Ref<Texture> Texture::Create(const std::string& filePath, bool linear)
+  {
+    return Image::Create(filePath, linear);
+  }
+  
+  Ref<Texture2D> Texture2D::Create(const TextureSpecification& spec)
+  {
+    switch (Renderer::GetApi())
+    {
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLTexture>(spec);
+      case Renderer::Api::None:
+      default:
+        IK_ASSERT(false, "Invalid Renderer API");
+    }
+  }
+
   Ref<Image> Image::Create(const std::string& filePath, bool linear)
   {
     switch (Renderer::GetApi())
@@ -103,17 +125,6 @@ namespace IKan
   glm::vec2& Sprite::GetCoords()
   {
     return m_coords;
-  }
-  
-  Ref<Texture> Texture::Create(const Specification& spec)
-  {
-    switch (Renderer::GetApi())
-    {
-      case Renderer::Api::OpenGl: return CreateRef<OpenGLTexture>(spec);
-      case Renderer::Api::None:
-      default:
-        IK_ASSERT(false, "Invalid Renderer API");
-    }
   }
 
 } // namespace IKan
