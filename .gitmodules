@@ -7,3 +7,6 @@
 [submodule "IKan/Vendors/GLFW/GLFW"]
 	path = IKan/Vendors/GLFW/GLFW
 	url = https://github.com/glfw/glfw
+[submodule "IKan/Vendors/Yaml/Yaml"]
+	path = IKan/Vendors/Yaml/Yaml
+	url = https://github.com/ashish1009/yaml-cpp
