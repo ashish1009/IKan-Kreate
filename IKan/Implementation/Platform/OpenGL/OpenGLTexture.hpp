@@ -88,6 +88,22 @@ namespace IKan
     int32_t m_channel = 0;
   };
   
+  class OpenGLCharTexture : public CharTexture
+  {
+  public:
+    /// This constructor creates the Open GL Texture for rendering char
+    /// - Parameters:
+    ///   - face: face of char
+    ///   - size: size of char
+    ///   - bearing: bearing
+    ///   - advance: advance
+    ///   - charVal: character value
+    OpenGLCharTexture(const FT_Face& face, const glm::ivec2& size, const glm::ivec2& bearing,
+                      uint32_t advance, [[maybe_unused]] char charVal);
+    /// This is the default Open GL Char Texture destructor
+    virtual ~OpenGLCharTexture();
+  };
+  
   namespace TextureUtils
   {
     /// This function returns the Format name from Enum

@@ -399,4 +399,15 @@ namespace IKan
   {
     return m_rendererID;
   }
+  
+  OpenGLCharTexture::OpenGLCharTexture(const FT_Face& face, const glm::ivec2& size, const glm::ivec2& bearing,
+                                       uint32_t advance, [[maybe_unused]] char charVal)
+  {
+    
+  }
+  
+  OpenGLCharTexture::~OpenGLCharTexture()
+  {
+    
+  }
 } // namespace IKan
