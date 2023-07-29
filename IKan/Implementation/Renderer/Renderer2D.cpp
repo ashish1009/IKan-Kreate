@@ -395,6 +395,7 @@ namespace IKan
     }
     
     AddQuadData(maxQuads);
+    AddCircleData(maxCirlces);
   }
   
   void Renderer2D::Shutdown()
@@ -403,6 +404,39 @@ namespace IKan
     if (s_commonData)
     {
       s_commonData.reset();
+    }
+    
+    BATCH_WARN("Shutting Down the Batch Renderer 2D ");
+    BATCH_WARN("------------------------------------");
+    
+    if (s_quadData)
+    {
+      BATCH_WARN("Destrying Batch Renderer for Quad Data ");
+      BATCH_WARN("-----------------------------------------");
+      BATCH_WARN("  Max Quads per Batch              {0}", s_quadData->maxElement);
+      BATCH_WARN("  Max Texture Slots per Batch      {0}", MaxTextureSlotsInShader);
+      BATCH_WARN("  Vertex Buffer used               {0} B", s_quadData->maxVertices * sizeof(QuadData::Vertex));
+      BATCH_WARN("  Index Buffer used                {0} B", s_quadData->maxIndices * sizeof(uint32_t));
+      BATCH_WARN("  Shader Used                      {0}", s_quadData->shader->GetName());
+      
+      RendererStatistics::Get()._2d.maxQuads = s_quadData->maxElement;
+      
+      s_quadData.reset();
+    }
+    
+    if (s_circleData)
+    {
+      BATCH_WARN("Destroying Batch Renderer for Circle Data ");
+      BATCH_WARN("-------------------------------------------");
+      BATCH_WARN("  Max Circles per Batch            {0}", s_circleData->maxElement);
+      BATCH_WARN("  Max Texture Slots per Batch      {0}", MaxTextureSlotsInShader);
+      BATCH_WARN("  Vertex Buffer used               {0} B", s_circleData->maxVertices * sizeof(CircleData::Vertex));
+      BATCH_WARN("  Index Buffer used                {0} B", s_circleData->maxIndices * sizeof(uint32_t));
+      BATCH_WARN("  Shader Used                      {0}", s_circleData->shader->GetName());
+      
+      RendererStatistics::Get()._2d.maxCircles = s_circleData->maxElement;
+      
+      s_circleData.reset();
     }
     
     // Destroy Full screen data
@@ -488,6 +522,87 @@ namespace IKan
     BATCH_INFO("  Shader Used                      {0}", data->shader->GetName());
   }
 
+  void Renderer2D::AddCircleData(uint32_t maxElement)
+  {
+    if (maxElement == 0)
+    {
+      return;
+    }
+    Scope<CircleData>& data = s_circleData;
+    
+    // If data have already created then append the data to previous one
+    if (data)
+    {
+      maxElement += data->maxElement;
+      data.reset();
+    }
+    
+    // Allocate memory for Circle Data
+    data = CreateScope<CircleData>();
+    
+    // Initialize the data for Common shape
+    data->Init(maxElement);
+    
+    // Allocating the memory for vertex Buffer Pointer
+    data->vertexBufferBasePtr = iknew CircleData::Vertex[data->maxVertices];
+    
+    // Create vertes Buffer
+    data->vertexBuffer = VertexBuffer::Create(data->maxVertices * sizeof(CircleData::Vertex));
+    
+    // Create Pipeline
+    Pipeline::Specification pipelineSpec;
+    pipelineSpec.debugName = "Circle Renderer";
+    pipelineSpec.shader = Shader::Create (CoreAssetPath("Shaders/CircleShader.glsl"));
+    pipelineSpec.layout =
+    {
+      { "a_Position",     ShaderDataType::Float3 },
+      { "a_Color",        ShaderDataType::Float4 },
+      { "a_TexCoords",    ShaderDataType::Float2 },
+      { "a_TexIndex",     ShaderDataType::Float },
+      { "a_TilingFactor", ShaderDataType::Float },
+      { "a_LocalPosition",ShaderDataType::Float3 },
+      { "a_Thickness",    ShaderDataType::Float },
+      { "a_Fade",         ShaderDataType::Float },
+      { "a_ObjectID",     ShaderDataType::Int },
+    };
+    
+    // Create the Pipeline instnace
+    data->pipeline = Pipeline::Create(pipelineSpec);
+    
+    // Create Index Buffer
+    uint32_t* indices = iknew uint32_t[data->maxIndices];
+    uint32_t offset = 0;
+    for (size_t i = 0; i < data->maxIndices; i += Shape2DCommonData::IndicesForSingleElement)
+    {
+      indices[i + 0] = offset + 0;
+      indices[i + 1] = offset + 1;
+      indices[i + 2] = offset + 2;
+      
+      indices[i + 3] = offset + 2;
+      indices[i + 4] = offset + 3;
+      indices[i + 5] = offset + 0;
+      
+      offset += 4;
+    }
+    
+    // Create Index Buffer in GPU for storing Indices. Once stores the date in GPU, we do not Need this Buffer
+    data->indexBuffer = IndexBuffer::CreateWithCount(indices, data->maxIndices);
+    ikdelete[] indices;
+    
+    // Setup the Quad Shader
+    data->shader = data->pipeline->GetSpecification().shader;
+    
+    RendererStatistics::Get()._2d.maxCircles = data->maxElement;
+    
+    BATCH_INFO("Initialized Batch Renderer for Circle Data ");
+    BATCH_INFO("-------------------------------------------");
+    BATCH_INFO("  Max Circles per Batch            {0}", data->maxElement);
+    BATCH_INFO("  Max Texture Slots per Batch      {0}", MaxTextureSlotsInShader);
+    BATCH_INFO("  Vertex Buffer used               {0} B", data->maxVertices * sizeof(CircleData::Vertex));
+    BATCH_INFO("  Index Buffer used                {0} B", data->maxIndices * sizeof(uint32_t));
+    BATCH_INFO("  Shader Used                      {0}", data->shader->GetName());
+  }
+  
   void Renderer2D::DrawFullscreenQuad(const Ref<Image>& image, uint32_t slot, bool overrideShader)
   {
     // Bind the default Shader
