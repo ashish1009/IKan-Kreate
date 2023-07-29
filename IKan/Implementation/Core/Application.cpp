@@ -9,6 +9,7 @@
 #include "Renderer/RendererStats.hpp"
 
 // TODO: To Move rendere layer later
+#include "Renderer2D.hpp"
 #include "Shader.hpp"
 #include "RendererBuffers.hpp"
 #include "Pipeline.hpp"
@@ -136,13 +137,16 @@ namespace IKan
 
       // TODO: To Move Renderer Layer later
       {
-        Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
+        Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});\
+                
         m_pipeline->GetSpecification().shader->Bind();
         m_pipeline->GetSpecification().shader->SetUniformMat4("u_ViewProjection", glm::mat4(1.0f));
         
         m_pipeline->Bind();
         m_image->Bind();
         Renderer::DrawIndexed(m_pipeline, 6);
+        
+        Renderer2D::DrawFullscreenQuad();
       }
       
       // Update the client application

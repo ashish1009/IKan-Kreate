@@ -109,7 +109,7 @@ namespace IKan
   {
     switch (Renderer::GetApi())
     {
-      case Renderer::Api::OpenGl:
+      case Renderer::Api::OpenGl: return CreateRef<OpenGLTexture>(spec);
       case Renderer::Api::None:
       default:
         IK_ASSERT(false, "Invalid Renderer API");
