@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Camera/SceneCamera.hpp"
+
 namespace IKan
 {
   // ADDING A NEW COMPONENT
@@ -87,6 +89,22 @@ namespace IKan
     glm::mat4 transform;
     glm::vec3 position{0.0f}, rotation{0.0f}, scale{1.0f};
   };
+  
+  struct CameraComponent
+  {
+    SceneCamera camera;
+    bool primary = true;
+    
+    CameraComponent();
+    ~CameraComponent();
+    
+    void Copy(const CameraComponent& other);
+    
+    operator SceneCamera& ();
+    operator const SceneCamera& () const;
+    
+    DEFINE_COPY_MOVE_CONSTRUCTORS(CameraComponent);
+  };
 
   template<typename... Component>
   struct ComponentGroup
@@ -94,7 +112,7 @@ namespace IKan
     
   };
   
-#define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent
+#define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent
   
   // Stores all the components present in Engine
   using AllComponents =

@@ -36,6 +36,7 @@ namespace Kreator
       [[maybe_unused]] auto circle = m_editorScene->CreateEntity("Circle");
       [[maybe_unused]] auto text = m_editorScene->CreateEntity("Text");
       [[maybe_unused]] auto camera = m_editorScene->CreateEntity("Camera");
+      camera.AddComponent<SceneCamera>();
     }
   }
   

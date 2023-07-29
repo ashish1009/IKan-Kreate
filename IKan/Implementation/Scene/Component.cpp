@@ -207,4 +207,30 @@ return *this; \
   {
     ADD_TRANSFORM(scale)
   }
+  
+  // Camera Component -----------------------------------------------------------------------------------------------
+  CameraComponent::CameraComponent()
+  {
+    COMP_LOG("Creating Camera Component");
+  }
+  CameraComponent::~CameraComponent()
+  {
+    COMP_LOG("Destroying Camera Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(CameraComponent);
+  
+  void CameraComponent::Copy(const CameraComponent &other)
+  {
+    primary = other.primary;
+    camera = other.camera;
+  }
+  CameraComponent::operator SceneCamera& ()
+  {
+    return camera;
+  }
+  CameraComponent::operator const SceneCamera& () const
+  {
+    return camera;
+  }
+
 } // namespace IKan
