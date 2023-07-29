@@ -10,6 +10,7 @@
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
+#include "Renderer/Graphics/RenderPass.hpp"
 
 namespace IKan
 {
@@ -79,6 +80,24 @@ namespace IKan
   };
   static Scope<FullScreenQuad> s_fullscreenQuadData;
   
+#define BATCH_INFO(...) IK_CORE_INFO(LogModule::Renderer2D, __VA_ARGS__)
+#define BATCH_TRACE(...) IK_CORE_TRACE(LogModule::Renderer2D, __VA_ARGS__)
+#define BATCH_WARN(...) IK_CORE_WARN(LogModule::Renderer2D, __VA_ARGS__)
+  
+  static constexpr glm::vec2 TextureCoords[] =
+  {
+    { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f }
+  };
+  
+  /// This structure stores the common data for Batch 2D Renderer
+  struct Renderer2DData
+  {
+    bool needResize = false;
+    uint32_t viewportWidth, viewportHeight;
+    Ref<RenderPass> renderPass;
+  };
+  static Scope<Renderer2DData> s_commonData;
+
   void Renderer2D::Initialise()
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
