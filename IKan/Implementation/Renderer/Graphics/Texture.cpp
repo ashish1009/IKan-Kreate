@@ -127,4 +127,16 @@ namespace IKan
     return m_coords;
   }
 
+  Ref<CharTexture> CharTexture::Create(const FT_Face &face, const glm::ivec2 &size, const glm::ivec2 &bearing,
+                                       uint32_t advance, [[maybe_unused]] char charVal)
+  {
+    switch (Renderer::GetApi())
+    {
+      case Renderer::Api::OpenGl:
+      case Renderer::Api::None:
+      default:
+        IK_ASSERT(false, "Invalid Renderer API (None)"); break;
+    }
+  }
+
 } // namespace IKan

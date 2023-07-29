@@ -28,6 +28,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - {...}/Vendors/SpdLog/include
 - {...}/Vendors/Glm
 - {...}/Vendors/GLFW/GLFW/include
+- {...}/Vendors/Freetype/include
 
 #### Library Search Paths
 

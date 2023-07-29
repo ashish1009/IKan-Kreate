@@ -7,6 +7,9 @@
 
 #pragma once
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include "Renderer/Renderer.hpp"
 
 namespace IKan
@@ -191,5 +194,25 @@ namespace IKan
     glm::vec2 m_spriteSize;
     glm::vec2 m_cellSize;
     glm::vec2 m_coords;
+  };
+  
+#define CHAR_TEXTURE_LOG 0
+    
+  /// This is the interface class to store the texture for a character to be typed
+  class CharTexture
+  {
+  public:
+    /// Default virtual destructor
+    virtual ~CharTexture() = default;
+    
+    /// This function creates Emptry Texture with user Defined Data of size height and Width
+    /// - Parameters:
+    ///   - face: face of char
+    ///   - size: size of char
+    ///   - bearing: bearing
+    ///   - advance: advance
+    ///   - charVal: character value
+    static Ref<CharTexture> Create(const FT_Face& face, const glm::ivec2& size, const glm::ivec2& bearing,
+                                   uint32_t advance, [[maybe_unused]] char charVal);
   };
 } // namespace IKan
