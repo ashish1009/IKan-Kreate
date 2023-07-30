@@ -121,6 +121,8 @@
 		B2336A5B2A763B1400BC7B8B /* AssetRegistry.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A592A763B1400BC7B8B /* AssetRegistry.hpp */; };
 		B2336A5E2A763B4300BC7B8B /* HashGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2336A5C2A763B4300BC7B8B /* HashGenerator.cpp */; };
 		B2336A5F2A763B4300BC7B8B /* HashGenerator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */; };
+		B2336A642A763D9600BC7B8B /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2336A622A763D9600BC7B8B /* Project.cpp */; };
+		B2336A652A763D9600BC7B8B /* Project.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A632A763D9600BC7B8B /* Project.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -289,6 +291,8 @@
 		B2336A592A763B1400BC7B8B /* AssetRegistry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetRegistry.hpp; sourceTree = "<group>"; };
 		B2336A5C2A763B4300BC7B8B /* HashGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HashGenerator.cpp; sourceTree = "<group>"; };
 		B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashGenerator.hpp; sourceTree = "<group>"; };
+		B2336A622A763D9600BC7B8B /* Project.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Project.cpp; sourceTree = "<group>"; };
+		B2336A632A763D9600BC7B8B /* Project.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Project.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -609,6 +613,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B2336A602A763D8100BC7B8B /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				B2336A632A763D9600BC7B8B /* Project.hpp */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		B2336A612A763D8900BC7B8B /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				B2336A622A763D9600BC7B8B /* Project.cpp */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
 		B24076DC2A72391000221919 = {
 			isa = PBXGroup;
 			children = (
@@ -652,6 +672,7 @@
 				B233670A2A75391D00BC7B8B /* UI */,
 				B23367152A753FEB00BC7B8B /* Scene */,
 				B23367352A75903000BC7B8B /* Asset */,
+				B2336A602A763D8100BC7B8B /* Project */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -667,6 +688,7 @@
 				B233670B2A75392400BC7B8B /* UI */,
 				B23367162A75401A00BC7B8B /* Scene */,
 				B23367392A75903700BC7B8B /* Asset */,
+				B2336A612A763D8900BC7B8B /* Project */,
 				B21048192A72CA6A00FA8CF2 /* Platform */,
 			);
 			path = Implementation;
@@ -805,6 +827,7 @@
 				B23364DD2A74259600BC7B8B /* OpenGLRendererAPI.hpp in Headers */,
 				B233656D2A75231700BC7B8B /* MathUtils.hpp in Headers */,
 				B23367442A75911100BC7B8B /* Asset.hpp in Headers */,
+				B2336A652A763D9600BC7B8B /* Project.hpp in Headers */,
 				B23365612A751D6B00BC7B8B /* RenderPass.hpp in Headers */,
 				B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */,
 				B23367132A75396800BC7B8B /* ImGuiLayer.hpp in Headers */,
@@ -958,6 +981,7 @@
 				B23367192A75405B00BC7B8B /* Scene.cpp in Sources */,
 				B21048162A72A1BA00FA8CF2 /* CoreWindow.cpp in Sources */,
 				B23367252A75495000BC7B8B /* UUID.cpp in Sources */,
+				B2336A642A763D9600BC7B8B /* Project.cpp in Sources */,
 				B2336A5A2A763B1400BC7B8B /* AssetRegistry.cpp in Sources */,
 				B23365142A74381300BC7B8B /* OpenGLRendererBuffers.cpp in Sources */,
 				B23365472A74E6D300BC7B8B /* Renderer2D.cpp in Sources */,
