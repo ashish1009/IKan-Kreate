@@ -9,6 +9,9 @@
 
 namespace Kreator
 {
+  // Project Path Name Length
+#define MAX_PROJECT_NAME_LENGTH 255
+#define MAX_PROJECT_FILEPATH_LENGTH 512
   using namespace IKan;
   
   class RendererLayer : public Layer
@@ -40,6 +43,22 @@ namespace Kreator
     void OnEvent(Event& event) override;
     
   private:
+    // Member Functions ----------------------------------------------------------------------------------------------
+    // Project API --------------------------------------
+    /// This function Creates new project
+    /// - Parameter projectPath: Project File path
+    void CreateProject(const std::filesystem::path& projectPath);
+    /// This function Closed the current active project
+    /// - Parameter unloadProject: flag to unload the project
+    void CloseProject(bool unloadProject = true);
+    /// This function saves the Project
+    void SaveProject();
+    /// This function opens the Project from file path
+    /// - Parameter filepath: project file path
+    void OpenProject(const std::string& filepath);
+    /// This function Opens the project from popup
+    void OpenProject();
+
     // Member Variables ----------------------------------------------------------------------------------------------
     std::filesystem::path m_clientDirPath;
     
@@ -51,5 +70,7 @@ namespace Kreator
     
     // Project Data --------------------------------------
     Ref<UserPreferences> m_userPreferences;
+    char* m_projectNameBuffer = nullptr;
+    char* m_projectFilePathBuffer = nullptr;
   };
 } // namespace Kreator

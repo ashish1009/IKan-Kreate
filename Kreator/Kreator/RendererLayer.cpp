@@ -20,10 +20,16 @@ namespace Kreator
   , m_userPreferences(userPreference), m_clientDirPath(clientDirPath)
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
+    
+    m_projectNameBuffer = iknew char[MAX_PROJECT_NAME_LENGTH];
+    m_projectFilePathBuffer = iknew char[MAX_PROJECT_FILEPATH_LENGTH];
   }
   
   RendererLayer::~RendererLayer()
   {
+    ikdelete m_projectNameBuffer;
+    ikdelete m_projectFilePathBuffer;
+    
     IK_LOG_WARN("Kreator Layer", "Destroying Kreator Renderer Layer instance");
   }
   
@@ -32,6 +38,20 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
     
+    // Open or Create Project
+    if (Utils::FileSystem::Exists(m_userPreferences->startupProject))
+    {
+      OpenProject(m_userPreferences->startupProject);
+    }
+    else
+    {
+      auto projName = Utils::String::GetFileNameFromPath(m_userPreferences->startupProject);
+      auto projDir = Utils::String::GetDirectoryFromPath(m_userPreferences->startupProject);
+      
+      memcpy(m_projectNameBuffer, projName.c_str(), projName.size());
+      CreateProject(projDir);
+    }
+
     // TODO: Temp
     {
       m_image = Image::Create(KreatorResourcePath("Textures/checkerboard.png"));
@@ -99,6 +119,30 @@ namespace Kreator
     
     ImGui::End();
     ImGui::PopStyleVar();
-
+  }
+  
+  void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void RendererLayer::OpenProject(const std::string &filepath)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void RendererLayer::OpenProject()
+  {
+    IK_ASSERT(false);
+  }
+  
+  void RendererLayer::CloseProject(bool unloadProject)
+  {
+    SaveProject();
+  }
+  
+  void RendererLayer::SaveProject()
+  {
+    IK_ASSERT(false);
   }
 } // namespace Kreator
