@@ -95,3 +95,4 @@
 
 #include <Project/Project.hpp>
 #include <Project/UserPreference.hpp>
+#include <Project/ProjectSerializer.hpp>

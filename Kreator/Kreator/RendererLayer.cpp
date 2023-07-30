@@ -123,7 +123,13 @@ namespace Kreator
   
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
   {
-    IK_ASSERT(false);
+    IK_LOG_TRACE("Kreator Layer", "Creating Project {0} at ", projectDir.string().c_str());
+    
+    // Close the current Project
+    if (Project::GetActive())
+    {
+      CloseProject();
+    }
   }
   
   void RendererLayer::OpenProject(const std::string &filepath)
@@ -143,6 +149,14 @@ namespace Kreator
   
   void RendererLayer::SaveProject()
   {
-    IK_ASSERT(false);
+    if (!Project::GetActive())
+    {
+      // FIXME: (Kreator) Fix Later
+      IK_ASSERT(false);
+    }
+    
+    Ref<Project> project = Project::GetActive();
+    ProjectSerializer serializer(project);
+    serializer.Serialize(project->GetConfig().projectDirectory + "/" + project->GetConfig().projectFileName);
   }
 } // namespace Kreator
