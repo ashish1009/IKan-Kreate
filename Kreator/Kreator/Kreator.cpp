@@ -67,11 +67,34 @@ namespace Kreator
       
       // Project
       {
-        
+        // Update the project Path
+        if (m_projectPath.empty())
+        {
+          if (m_userPreference->startupProject.empty())
+          {
+            // If There is no startup project and no project is given by argument
+            // Create Projects Directory
+            auto sandboxProjectDir = projectDir / "SandboxProject";
+            m_projectPath = sandboxProjectDir / "Sandbox.ikproj";
+            m_userPreference->startupProject = m_projectPath;
+          }
+          else
+          {
+            IK_ASSERT(false);
+          }
+        }
+        else
+        {
+          IK_ASSERT(false);
+        }
       }
       
+      IK_LOG_TRACE("Kreator App", "  Application Path           : {0}", m_clientDirectory.string().c_str());
+      IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", m_persistenceStoragePath.string().c_str());
+      IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", m_projectPath.string().c_str());
+
       // Create the Rendere Layer
-      m_rendereLayer = CreateRef<RendererLayer>();
+      m_rendereLayer = CreateRef<RendererLayer>(m_userPreference);
       
       // Push the renderer Layer in Application
       PushLayer(m_rendereLayer);

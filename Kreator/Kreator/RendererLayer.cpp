@@ -12,8 +12,8 @@ namespace Kreator
   // TODO: Temp
   static Ref<Image> m_image;
   
-  RendererLayer::RendererLayer()
-  : Layer("Kreator Renderer"), m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
+  RendererLayer::RendererLayer(Ref<UserPreferences> userPreference)
+  : Layer("Kreator Renderer"), m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f), m_userPreferences(userPreference)
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
   }

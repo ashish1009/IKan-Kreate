@@ -15,7 +15,9 @@ namespace Kreator
   {
   public:
     /// This is Renderer Layer's Default Constructor
-    RendererLayer();
+    /// - Parameters:
+    ///   - userPreferences: User preference from Client
+    RendererLayer(Ref<UserPreferences> userPreferences);
     /// Default Destructor
     virtual ~RendererLayer();
     
@@ -45,5 +47,8 @@ namespace Kreator
 
     // Scene Data ----------------------------------------
     Ref<Scene> m_editorScene;
+    
+    // Project Data --------------------------------------
+    Ref<UserPreferences> m_userPreferences;
   };
 } // namespace Kreator
