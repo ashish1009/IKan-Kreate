@@ -32,5 +32,25 @@ namespace IKan
     std::string filePath;
   };
   
-  
+  /// This class serialise and deserialise the user preference
+  class UserPreferencesSerializer
+  {
+  public:
+    /// Project User preference Serializer constructor
+    /// - Parameter preferences: user preference
+    UserPreferencesSerializer(const Ref<UserPreferences>& preferences);
+    /// Project User preference Serializer Destructor
+    ~UserPreferencesSerializer() = default;
+    
+    /// This function serialize the User prefernce data in file
+    /// - Parameter filepath: file path
+    void Serialize(const std::filesystem::path& filepath);
+    /// This function deserialize the User prefernce data in file
+    /// - Parameter filepath: file path
+    void Deserialize(const std::filesystem::path& filepath);
+    
+  private:
+    Ref<UserPreferences> m_preferences;
+  };
+
 } // namespace IKan
