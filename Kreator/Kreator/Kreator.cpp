@@ -122,6 +122,7 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const ApplicationData& ap
  
   applicationSpec.name = "Kreator";
   applicationSpec.engineInstallPath = appData.engineInstallPath;
+  applicationSpec.iniPath = appData.clientDirectoryPath + "/Kreator.ini";
   applicationSpec.renderingApi = IKan::Renderer::Api::OpenGl;
 
   // Window Specification

@@ -6,6 +6,7 @@
 //
 
 #include "AssetRegistry.hpp"
+#include "Project/Project.hpp"
 
 namespace IKan
 {
@@ -18,7 +19,12 @@ namespace IKan
   
   std::filesystem::path AssetRegistry::GetPathKey(const std::filesystem::path& path) const
   {
-    IK_ASSERT(false);
+    auto key = std::filesystem::relative(path, Project::GetAssetDirectory());
+    if (key.empty())
+    {
+      key = path.lexically_normal();
+    }
+    return key;
   }
   
   AssetMetadata& AssetRegistry::operator[](const std::filesystem::path& path)
