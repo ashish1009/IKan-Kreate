@@ -117,6 +117,9 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
  ------------------------------------------------------------------------------------------------------------------
 - v5.0.1.0  : IKan    - entt::entity sysntem (ECS)
   - Entity / Scene / Component classes
+  
+- v5.1.1.0  : IKan    - Asset Base class and Serializer
+
  ------------------------------------------------------------------------------------------------------------------  
   
 ## Upcoming Release Tags
