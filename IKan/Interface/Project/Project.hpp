@@ -27,5 +27,30 @@ namespace IKan
       std::string projectFileName;
       std::string projectDirectory;
     };
+    
+    /// This funciton retusns the current project config
+    const Config& GetConfig() const;
+    
+    /// This function returns the active project
+    static Ref<Project> GetActive();
+    /// This function updates the active project instance
+    /// - Parameter project: Active project
+    static void SetActive(Ref<Project> project);
+    
+    /// This function returns the project name
+    static const std::string& GetProjectName();
+    /// This function returns the project directory path
+    static std::filesystem::path GetProjectDirectory();
+    /// This function returns the project asset path
+    static std::filesystem::path GetAssetDirectory();
+    /// This function returns the project asset
+    static std::filesystem::path GetAssetRegistryPath();
+    /// This function returns the absolute file path of asset
+    /// - Parameter assetRelativePath: asset raltive path
+    static std::filesystem::path GetAssetPath(const std::string& assetRelativePath);
+    
+  private:
+    Config m_config;
+    inline static Ref<Project> s_activeProject;
   };
 } // namespace IKan
