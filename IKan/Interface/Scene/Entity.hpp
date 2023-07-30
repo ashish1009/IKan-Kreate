@@ -135,4 +135,4 @@ namespace IKan
     Scene* m_scene = nullptr;    
     friend class Scene;
   };
-}
+} // namespace IKan

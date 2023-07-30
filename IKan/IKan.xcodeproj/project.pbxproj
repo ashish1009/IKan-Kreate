@@ -112,7 +112,9 @@
 		B23367432A75911100BC7B8B /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23367412A75911100BC7B8B /* Asset.cpp */; };
 		B23367442A75911100BC7B8B /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23367422A75911100BC7B8B /* Asset.hpp */; };
 		B23367502A7592C000BC7B8B /* AssetMedata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233674E2A7592C000BC7B8B /* AssetMedata.cpp */; };
-		B23367512A7592C000BC7B8B /* AssetMedata.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233674F2A7592C000BC7B8B /* AssetMedata.hpp */; };
+		B23367512A7592C000BC7B8B /* AssetMetadata.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233674F2A7592C000BC7B8B /* AssetMetadata.hpp */; };
+		B2336A4A2A76399200BC7B8B /* AssertSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2336A482A76399200BC7B8B /* AssertSerializer.cpp */; };
+		B2336A4B2A76399200BC7B8B /* AssertSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A492A76399200BC7B8B /* AssertSerializer.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -269,10 +271,12 @@
 		B23367412A75911100BC7B8B /* Asset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Asset.cpp; sourceTree = "<group>"; };
 		B23367422A75911100BC7B8B /* Asset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Asset.hpp; sourceTree = "<group>"; };
 		B233674E2A7592C000BC7B8B /* AssetMedata.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetMedata.cpp; sourceTree = "<group>"; };
-		B233674F2A7592C000BC7B8B /* AssetMedata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMedata.hpp; sourceTree = "<group>"; };
+		B233674F2A7592C000BC7B8B /* AssetMetadata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMetadata.hpp; sourceTree = "<group>"; };
 		B23367832A75930700BC7B8B /* Yaml.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Yaml.xcodeproj; path = Yaml/Yaml.xcodeproj; sourceTree = "<group>"; };
 		B2336A462A7593BE00BC7B8B /* YAMLSerializerHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YAMLSerializerHelper.h; sourceTree = "<group>"; };
 		B2336A472A7596D500BC7B8B /* SerializeMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SerializeMacro.h; sourceTree = "<group>"; };
+		B2336A482A76399200BC7B8B /* AssertSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssertSerializer.cpp; sourceTree = "<group>"; };
+		B2336A492A76399200BC7B8B /* AssertSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssertSerializer.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -564,7 +568,8 @@
 			children = (
 				B233673B2A75905100BC7B8B /* AssetType.hpp */,
 				B23367422A75911100BC7B8B /* Asset.hpp */,
-				B233674F2A7592C000BC7B8B /* AssetMedata.hpp */,
+				B233674F2A7592C000BC7B8B /* AssetMetadata.hpp */,
+				B2336A492A76399200BC7B8B /* AssertSerializer.hpp */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -575,6 +580,7 @@
 				B233673A2A75905100BC7B8B /* AssetType.cpp */,
 				B23367412A75911100BC7B8B /* Asset.cpp */,
 				B233674E2A7592C000BC7B8B /* AssetMedata.cpp */,
+				B2336A482A76399200BC7B8B /* AssertSerializer.cpp */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -742,7 +748,7 @@
 				B233648F2A72CE7200BC7B8B /* Renderer.hpp in Headers */,
 				B23365022A742C0600BC7B8B /* OpenGLShader.hpp in Headers */,
 				B23364D92A74253900BC7B8B /* RendererAPI.hpp in Headers */,
-				B23367512A7592C000BC7B8B /* AssetMedata.hpp in Headers */,
+				B23367512A7592C000BC7B8B /* AssetMetadata.hpp in Headers */,
 				B23365112A74370700BC7B8B /* RendererBuffers.hpp in Headers */,
 				B21FAA3D2A729078009EED1F /* KeyEvent.h in Headers */,
 				B233653B2A74D48B00BC7B8B /* Texture.hpp in Headers */,
@@ -763,6 +769,7 @@
 				B23364E52A7427C300BC7B8B /* OpenGLShaderUniform.hpp in Headers */,
 				B23365332A74416700BC7B8B /* EditorCamera.hpp in Headers */,
 				B23364F62A742A4200BC7B8B /* Shader.hpp in Headers */,
+				B2336A4B2A76399200BC7B8B /* AssertSerializer.hpp in Headers */,
 				B240771F2A72665A00221919 /* Logger.hpp in Headers */,
 				B23364CF2A741CE100BC7B8B /* EngineDirectoryManager.hpp in Headers */,
 				B21FAA4E2A7297DA009EED1F /* Application.hpp in Headers */,
@@ -934,6 +941,7 @@
 				B23365472A74E6D300BC7B8B /* Renderer2D.cpp in Sources */,
 				B210481E2A72CA9000FA8CF2 /* MacWindow.cpp in Sources */,
 				B21FAA4D2A7297DA009EED1F /* Application.cpp in Sources */,
+				B2336A4A2A76399200BC7B8B /* AssertSerializer.cpp in Sources */,
 				B23367122A75396800BC7B8B /* ImGuiLayer.cpp in Sources */,
 				B23365322A74416700BC7B8B /* EditorCamera.cpp in Sources */,
 				B23367212A7548F200BC7B8B /* Component.cpp in Sources */,
