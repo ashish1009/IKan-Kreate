@@ -16,4 +16,21 @@ namespace IKan
     std::string filePath;
     time_t lastOpened;
   };
+  
+  /// This structure stores the project user preference for Application
+  struct UserPreferences
+  {
+    bool showWelcomeScreen = true;
+    std::string startupProject;
+    std::map<time_t, RecentProject, std::greater<time_t>> recentProjects;
+    
+    // Theme ...
+    // .....
+    // Some Settings ?
+    
+    // Not Serialized
+    std::string filePath;
+  };
+  
+  
 } // namespace IKan
