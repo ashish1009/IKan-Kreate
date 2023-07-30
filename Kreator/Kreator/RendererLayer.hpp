@@ -38,7 +38,12 @@ namespace Kreator
     void OnEvent(Event& event) override;
     
   private:
+    // Member Variables ----------------------------------------------------------------------------------------------
+
+    // Camera Data ---------------------------------------
     EditorCamera m_editorCamera;
+
+    // Scene Data ----------------------------------------
     Ref<Scene> m_editorScene;
   };
 } // namespace Kreator

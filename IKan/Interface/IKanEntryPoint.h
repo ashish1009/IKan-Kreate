@@ -25,6 +25,7 @@ int main(int argc, const char * argv[])
   // Log File Path. If External arguments are not given then logs to be saved at binary dir
   std::filesystem::path logDirectoryPath = "Log";
   std::filesystem::path engineInstallPath = "";
+  std::filesystem::path clientDirPath = "";
 
   if (argc > 1)
   {
@@ -38,6 +39,10 @@ int main(int argc, const char * argv[])
       else if (strcmp(argv[i], "-core") == 0)
       {
         engineInstallPath = argv[++i];
+      }
+      else if (strcmp(argv[i], "-client") == 0)
+      {
+        clientDirPath = argv[++i];
       }
     }
   }
@@ -65,7 +70,7 @@ int main(int argc, const char * argv[])
   InitializeEngine(logDirectoryPath.string());
   
   {
-    IKan::Scope<IKan::Application> app = IKan::CreateApplication({engineInstallPath});
+    IKan::Scope<IKan::Application> app = IKan::CreateApplication({engineInstallPath, clientDirPath});
     app->Run();
     app.reset();
   }

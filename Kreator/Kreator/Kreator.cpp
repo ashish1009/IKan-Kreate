@@ -15,11 +15,20 @@ namespace Kreator
   class KreatorApp : public Application
   {
   public:
-    KreatorApp(const Application::Specification& appSpec)
+    KreatorApp(const Application::Specification& appSpec, const std::string& clientDirectory)
     : Application(appSpec)
     {
       IK_LOG_TRACE("Kreator App", "Creating Kreator Application");
-    }
+      
+      // Check Client Path is valid
+      IK_LOG_TRACE("Kreator App", "Setting Client Directory {0}", Utils::FileSystem::Absolute(clientDirectory));
+      bool exist = Utils::FileSystem::Exists(clientDirectory);
+      bool kreator = Utils::FileSystem::Exists(clientDirectory + "/Kreator");
+      bool resources = Utils::FileSystem::Exists(clientDirectory + "/Resources");
+      
+      IK_ASSERT(exist and kreator and resources, "Invalid Client Directory");
+      m_clientDirectory = clientDirectory;
+   }
     
     ~KreatorApp()
     {
@@ -43,6 +52,7 @@ namespace Kreator
     
   private:
     Ref<Layer> m_rendereLayer;
+    std::filesystem::path m_clientDirectory;
   };
 } // namespace Kreator
 
@@ -65,5 +75,5 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const ApplicationData& ap
   applicationSpec.resizable = true;
   applicationSpec.startMaximized = true;
 
-  return IKan::CreateScope<Kreator::KreatorApp>(applicationSpec);
+  return IKan::CreateScope<Kreator::KreatorApp>(applicationSpec, appData.clientDirectoryPath);
 }

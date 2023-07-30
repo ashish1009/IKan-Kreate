@@ -121,6 +121,7 @@ namespace IKan
   struct ApplicationData
   {
     std::string engineInstallPath;
+    std::string clientDirectoryPath;
   };
   
   /// Defination API for creating application instance.

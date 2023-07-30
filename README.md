@@ -123,42 +123,45 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
  ------------------------------------------------------------------------------------------------------------------  
   
 ## Upcoming Release Tags
-
-- v5.1.1.0  : IKan    - Render Scene With ECS
+- v6.0.2.9  : IKan    - Project Classes
+            : Kreator - Create New Project
  ------------------------------------------------------------------------------------------------------------------  
 
-- v5.2.1.0  : IKan    - Scene Serializer
+-   : IKan    - Render Scene With ECS
+ ------------------------------------------------------------------------------------------------------------------  
+
+-   : IKan    - Scene Serializer
   - SceneSerializer class (YAML Utils)
  ------------------------------------------------------------------------------------------------------------------  
    
-- v6.0.1.1  : IKan    - ImGui Color and API | Kreator - UI Theme (Font and Color)
+-  : IKan    - ImGui Color and API | Kreator - UI Theme (Font and Color)
   - ImGui Base Theme class
   - ImGui font loader
   - Decorate the Kreator
  ------------------------------------------------------------------------------------------------------------------
   
-- v6.1.2.0  : IKan    - Project and Assets | Kreator - User Prederence for Start Application
+-   : IKan    - Project and Assets | Kreator - User Prederence for Start Application
   - Get Directory from user.
   - User Preferences
   - Project Class / Manager
   - Asset class / Manaager
  ------------------------------------------------------------------------------------------------------------------
   
-- v6.1.2.1  : Kreator - Kreator Title Bar
+-   : Kreator - Kreator Title Bar
   - Kreator Title bar
  ------------------------------------------------------------------------------------------------------------------
   
-- v6.1.2.2  : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
+-   : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
   - Entire Content Browser Panel
   - Asset Editor Panel 
   - Folder Explorer
 
-- v6.1.2.3  : Kreator - Scene Playe Pause Simulation Tool bar
+-   : Kreator - Scene Playe Pause Simulation Tool bar
   - Scene Play and Pause
   
  ------------------------------------------------------------------------------------------------------------------
 
-- v6.2.2.4  : IKan    - Editor Console, Project Setting | Kreator - All Project, Scene, Log, Setting ... panels
+-   : IKan    - Editor Console, Project Setting | Kreator - All Project, Scene, Log, Setting ... panels
   - Editor Consol for logs
   - Project Setting
   - Application Settings
@@ -166,29 +169,29 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
   - About and Welcome sceen popups
  ------------------------------------------------------------------------------------------------------------------
 
-- v6.3.2.5  : IKan    - Scene Hierarchy panel
+-   : IKan    - Scene Hierarchy panel
   - Scene Hierarchy Panel
   - ECS Debug panel
  ------------------------------------------------------------------------------------------------------------------
 
-- v7.0.3.0  : Kreator - Guizmo and Mouse Selected Entity
+-   : Kreator - Guizmo and Mouse Selected Entity
   - Mouse Selectable entity 
   - Imguizmo Toolbar and usage
  ------------------------------------------------------------------------------------------------------------------
 
-- v7.1.3.0  : IKan    - Sub texture in quad component
+-   : IKan    - Sub texture in quad component
   - Quad Componentn GUI Update for Subtexture
  ------------------------------------------------------------------------------------------------------------------
 
-- v8.0.3.0  : IKan    - Script Integration
+-   : IKan    - Script Integration
  ------------------------------------------------------------------------------------------------------------------
 
-- v9.0.3.0  : IKan    - Physics 2D (Base classes)
+-   : IKan    - Physics 2D (Base classes)
   - Component for Physics
   - Scene Handle Physics
 
-- v10.0.3.0  : IKan   - Mesh
+-   : IKan   - Mesh
  ------------------------------------------------------------------------------------------------------------------
 
-- v11.0.3.0  : IKan   - Light
+-   : IKan   - Light
  ------------------------------------------------------------------------------------------------------------------

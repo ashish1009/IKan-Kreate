@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-core ../../../IKan -log ../../../Log"
+            argument = "-core ../../../IKan -log ../../../Log -client ../../../Kreator"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

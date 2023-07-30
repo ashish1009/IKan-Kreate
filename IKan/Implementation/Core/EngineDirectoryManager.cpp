@@ -31,7 +31,7 @@ namespace IKan
   
   void CoreDirectory::SetPath(const std::string &enginePath)
   {
-    IK_LOG_INFO(LogModule::IKan, "Engine is Instal path is {0}", enginePath.c_str());
+    IK_LOG_INFO(LogModule::IKan, "Engine is Instal path is {0}", Utils::FileSystem::Absolute(enginePath.c_str()));
     
     bool exist = Utils::FileSystem::Exists(enginePath);
     bool assets = Utils::FileSystem::Exists(enginePath + "/Assets");

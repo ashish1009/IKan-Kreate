@@ -91,3 +91,5 @@
 #include <Asset/AssetMetadata.hpp>
 #include <Asset/AssetImporter.hpp>
 #include <Asset/AssetSerializer.hpp>
+
+#include <Project/Project.hpp>
