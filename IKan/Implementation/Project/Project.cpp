@@ -6,6 +6,7 @@
 //
 
 #include "Project.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
@@ -22,11 +23,14 @@ namespace IKan
     if (s_activeProject)
     {
       // Shutdown all asset
+      AssetManager::Shutdown();
     }
     
     // Set new project and initialise the asset manager
     s_activeProject = project;
+
     // Initialize the assets
+    AssetManager::Init();
   }
   
   const Project::Config& Project::GetConfig() const

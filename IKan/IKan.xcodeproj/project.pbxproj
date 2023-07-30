@@ -137,6 +137,8 @@
 		B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE392A7272560068EEFB /* AssertAPIs.h */; };
 		B2B5DE3E2A727C090068EEFB /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B5DE3C2A727C090068EEFB /* Timer.cpp */; };
 		B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE3D2A727C090068EEFB /* Timer.hpp */; };
+		B2D161592A76949A00DD1678 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D161572A76949A00DD1678 /* AssetManager.cpp */; };
+		B2D1615A2A76949A00DD1678 /* AssetManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D161582A76949A00DD1678 /* AssetManager.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -316,6 +318,8 @@
 		B2B5DE392A7272560068EEFB /* AssertAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertAPIs.h; sourceTree = "<group>"; };
 		B2B5DE3C2A727C090068EEFB /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		B2B5DE3D2A727C090068EEFB /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
+		B2D161572A76949A00DD1678 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		B2D161582A76949A00DD1678 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -598,6 +602,7 @@
 				B2336A492A76399200BC7B8B /* AssetSerializer.hpp */,
 				B2336A512A763A4C00BC7B8B /* AssetImporter.hpp */,
 				B2336A592A763B1400BC7B8B /* AssetRegistry.hpp */,
+				B2D161582A76949A00DD1678 /* AssetManager.hpp */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -611,6 +616,7 @@
 				B2336A482A76399200BC7B8B /* AssetSerializer.cpp */,
 				B2336A502A763A4C00BC7B8B /* AssetImporter.cpp */,
 				B2336A582A763B1400BC7B8B /* AssetRegistry.cpp */,
+				B2D161572A76949A00DD1678 /* AssetManager.cpp */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -798,6 +804,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2336A532A763A4C00BC7B8B /* AssetImporter.hpp in Headers */,
+				B2D1615A2A76949A00DD1678 /* AssetManager.hpp in Headers */,
 				B23365572A7503CA00BC7B8B /* OpenGLFrameBuffer.hpp in Headers */,
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
 				B233648F2A72CE7200BC7B8B /* Renderer.hpp in Headers */,
@@ -1008,6 +1015,7 @@
 				B23367122A75396800BC7B8B /* ImGuiLayer.cpp in Sources */,
 				B23365322A74416700BC7B8B /* EditorCamera.cpp in Sources */,
 				B23367212A7548F200BC7B8B /* Component.cpp in Sources */,
+				B2D161592A76949A00DD1678 /* AssetManager.cpp in Sources */,
 				B23365852A75303E00BC7B8B /* TextRenderer.cpp in Sources */,
 				B233652A2A7440CD00BC7B8B /* Camera.cpp in Sources */,
 				B233653E2A74D49600BC7B8B /* OpenGLTexture.cpp in Sources */,
