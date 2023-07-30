@@ -123,6 +123,8 @@
 		B2336A5F2A763B4300BC7B8B /* HashGenerator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */; };
 		B2336A642A763D9600BC7B8B /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2336A622A763D9600BC7B8B /* Project.cpp */; };
 		B2336A652A763D9600BC7B8B /* Project.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A632A763D9600BC7B8B /* Project.hpp */; };
+		B2336A6C2A7642AA00BC7B8B /* UserPreference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2336A6A2A7642AA00BC7B8B /* UserPreference.cpp */; };
+		B2336A6D2A7642AA00BC7B8B /* UserPreference.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A6B2A7642AA00BC7B8B /* UserPreference.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -293,6 +295,8 @@
 		B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashGenerator.hpp; sourceTree = "<group>"; };
 		B2336A622A763D9600BC7B8B /* Project.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Project.cpp; sourceTree = "<group>"; };
 		B2336A632A763D9600BC7B8B /* Project.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Project.hpp; sourceTree = "<group>"; };
+		B2336A6A2A7642AA00BC7B8B /* UserPreference.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UserPreference.cpp; sourceTree = "<group>"; };
+		B2336A6B2A7642AA00BC7B8B /* UserPreference.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UserPreference.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -617,6 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				B2336A632A763D9600BC7B8B /* Project.hpp */,
+				B2336A6B2A7642AA00BC7B8B /* UserPreference.hpp */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -625,6 +630,7 @@
 			isa = PBXGroup;
 			children = (
 				B2336A622A763D9600BC7B8B /* Project.cpp */,
+				B2336A6A2A7642AA00BC7B8B /* UserPreference.cpp */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -816,6 +822,7 @@
 				B23364CF2A741CE100BC7B8B /* EngineDirectoryManager.hpp in Headers */,
 				B21FAA4E2A7297DA009EED1F /* Application.hpp in Headers */,
 				B21FAA4A2A729312009EED1F /* IKMemory.hpp in Headers */,
+				B2336A6D2A7642AA00BC7B8B /* UserPreference.hpp in Headers */,
 				B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */,
 				B23365482A74E6D300BC7B8B /* Renderer2D.hpp in Headers */,
 				B23367262A75495000BC7B8B /* UUID.hpp in Headers */,
@@ -1002,6 +1009,7 @@
 				B233655C2A7506F700BC7B8B /* Table.cpp in Sources */,
 				B2336A522A763A4C00BC7B8B /* AssetImporter.cpp in Sources */,
 				B2336A5E2A763B4300BC7B8B /* HashGenerator.cpp in Sources */,
+				B2336A6C2A7642AA00BC7B8B /* UserPreference.cpp in Sources */,
 				B23364CE2A741CE100BC7B8B /* EngineDirectoryManager.cpp in Sources */,
 				B233673C2A75905100BC7B8B /* AssetType.cpp in Sources */,
 				B233671D2A75420600BC7B8B /* Entity.cpp in Sources */,
