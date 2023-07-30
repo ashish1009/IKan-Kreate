@@ -9,6 +9,8 @@
 
 namespace IKan
 {
+  static const std::string ProjectExtension = ".ikproj";
+
   class Project
   {
   public:

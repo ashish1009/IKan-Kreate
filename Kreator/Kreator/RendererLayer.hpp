@@ -69,6 +69,7 @@ namespace Kreator
     Ref<Scene> m_editorScene;
     
     // Project Data --------------------------------------
+    std::filesystem::path m_templateProjectDir;
     Ref<UserPreferences> m_userPreferences;
     char* m_projectNameBuffer = nullptr;
     char* m_projectFilePathBuffer = nullptr;

@@ -15,6 +15,24 @@ namespace Kreator
   // Kretor Resource Path
 #define KreatorResourcePath(path) m_clientDirPath / "Resources" / path
 
+  namespace KreatorUtils
+  {
+    /// This function replace the project name
+    /// - Parameters:
+    ///   - str: Project file content
+    ///   - projectName: New project name
+    static void ReplaceProjectName(std::string& str, const std::string& projectName)
+    {
+      static const char* projectNameToken = "$PROJECT_NAME$";
+      size_t pos = 0;
+      while ((pos = str.find(projectNameToken, pos)) != std::string::npos)
+      {
+        str.replace(pos, strlen(projectNameToken), projectName);
+        pos += strlen(projectNameToken);
+      }
+    }
+  } // namespace Utils
+
   RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientDirPath)
   : Layer("Kreator Renderer"), m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
   , m_userPreferences(userPreference), m_clientDirPath(clientDirPath)
@@ -23,6 +41,8 @@ namespace Kreator
     
     m_projectNameBuffer = iknew char[MAX_PROJECT_NAME_LENGTH];
     m_projectFilePathBuffer = iknew char[MAX_PROJECT_FILEPATH_LENGTH];
+    
+    m_templateProjectDir = m_clientDirPath / "Resources/TemplateProject";
   }
   
   RendererLayer::~RendererLayer()
@@ -130,6 +150,33 @@ namespace Kreator
     {
       CloseProject();
     }
+    
+    // Copy the template files
+    Utils::FileSystem::Copy(m_templateProjectDir, projectDir);
+    
+    // Open Template Project file
+    std::ifstream stream(projectDir / "TemplateProject.ikproj");
+    std::stringstream ss;
+    ss << stream.rdbuf();
+    stream.close();
+
+    // Rename the Project name in file
+    std::string str = ss.str();
+    KreatorUtils::ReplaceProjectName(str, m_projectNameBuffer);
+    
+    // Open Projecy file again
+    std::ofstream ostream(projectDir / "TemplateProject.ikproj");
+    ostream << str;
+    ostream.close();
+
+    // Rename the file name
+    std::string newProjectFileName = std::string(m_projectNameBuffer) + ProjectExtension;
+    Utils::FileSystem::Rename(projectDir / "TemplateProject.ikproj", projectDir / newProjectFileName);
+    
+    // Create Required Direcotries
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Textures");
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Fonts");
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Scenes");
   }
   
   void RendererLayer::OpenProject(const std::string &filepath)
