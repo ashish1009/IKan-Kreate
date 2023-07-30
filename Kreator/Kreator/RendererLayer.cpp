@@ -181,7 +181,34 @@ namespace Kreator
   
   void RendererLayer::OpenProject(const std::string &filepath)
   {
-    IK_ASSERT(false);
+    IK_LOG_TRACE("Kreator Layer", "Opening Project {0}", filepath.c_str());
+
+    // Reset Project Name and directory
+    memset(m_projectNameBuffer, 0, MAX_PROJECT_NAME_LENGTH);
+    memset(m_projectFilePathBuffer, 0, MAX_PROJECT_FILEPATH_LENGTH);
+    
+    // Check if File exists
+    if (!Utils::FileSystem::Exists(filepath))
+    {
+      IK_LOG_ERROR("Kreator Layer", "Tried to open a project that doesn't exist. Project path: {0}", filepath);
+      
+      // TODO: Remove Assert after testing. may be this will never hit just precaution check
+      IK_ASSERT(false);
+      return;
+    }
+
+    // Close the current Project
+    if (Project::GetActive())
+    {
+      CloseProject();
+    }
+
+    // Create new project fill the config with file data
+    Ref<Project> project = CreateRef<Project>();
+    ProjectSerializer serializer(project);
+    serializer.Deserialize(filepath);
+    
+    Project::SetActive(project);
   }
   
   void RendererLayer::OpenProject()
