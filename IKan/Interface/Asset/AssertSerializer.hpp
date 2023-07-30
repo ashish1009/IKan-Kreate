@@ -28,4 +28,32 @@ namespace IKan
     ///   - asset: Asset instance
     virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const = 0;
   };
+  
+  class TextureSerializer : public AssetSerializer
+  {
+  public:
+    /// @see: AssetSerializer
+    virtual void Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
+    /// @see: AssetSerializer
+    virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const override{ IK_ASSERT(false);}
+  };
+  
+  class FontSerializer : public AssetSerializer
+  {
+  public:
+    /// @see: AssetSerializer
+    virtual void Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const override {IK_ASSERT(false);}
+    /// @see: AssetSerializer
+    virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const override{ IK_ASSERT(false);}
+  };
+  
+  class SceneAssetSerializer : public AssetSerializer
+  {
+  public:
+    /// @see: AssetSerializer
+    virtual void Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
+    /// @see: AssetSerializer
+    virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const override{ IK_ASSERT(false);}
+  };
+
 } // namespace IKan
