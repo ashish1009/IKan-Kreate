@@ -16,7 +16,7 @@ namespace Kreator
   {
   public:
     KreatorApp(const Application::Specification& appSpec, const std::string& clientDirectory)
-    : Application(appSpec)
+    : Application(appSpec), m_userPreference(CreateRef<UserPreferences>())
     {
       IK_LOG_TRACE("Kreator App", "Creating Kreator Application");
       
@@ -37,6 +37,34 @@ namespace Kreator
     
     void OnInit() override
     {
+      // Create Persistance Directory
+      m_persistenceStoragePath = m_clientDirectory / "PrsistenceStorage";
+      if (!Utils::FileSystem::Exists(m_persistenceStoragePath))
+      {
+        Utils::FileSystem::CreateDirectory(m_persistenceStoragePath);
+      }
+
+      // Create projects Dir
+      auto projectDir = m_clientDirectory / "Projects";
+      if (!Utils::FileSystem::Exists(projectDir))
+      {
+        Utils::FileSystem::CreateDirectory(projectDir);
+      }
+
+      // User Preferences
+      {
+        UserPreferencesSerializer serializer(m_userPreference);
+        std::filesystem::path userPreferenceFile = m_persistenceStoragePath / "UserPreferences.yaml";
+        if (!Utils::FileSystem::Exists(userPreferenceFile))
+        {
+          serializer.Serialize(userPreferenceFile);
+        }
+        else
+        {
+          serializer.Deserialize(userPreferenceFile);
+        }
+      } // User Preferences
+      
       // Create the Rendere Layer
       m_rendereLayer = CreateRef<RendererLayer>();
       
@@ -53,6 +81,8 @@ namespace Kreator
   private:
     Ref<Layer> m_rendereLayer;
     std::filesystem::path m_clientDirectory;
+    std::filesystem::path m_persistenceStoragePath;
+    Ref<UserPreferences> m_userPreference;
   };
 } // namespace Kreator
 

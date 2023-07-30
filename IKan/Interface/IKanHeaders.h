@@ -93,3 +93,4 @@
 #include <Asset/AssetSerializer.hpp>
 
 #include <Project/Project.hpp>
+#include <Project/UserPreference.hpp>
