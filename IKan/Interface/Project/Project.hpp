@@ -52,5 +52,6 @@ namespace IKan
   private:
     Config m_config;
     inline static Ref<Project> s_activeProject;
+    friend class ProjectSerializer;
   };
 } // namespace IKan

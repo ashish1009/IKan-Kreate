@@ -132,6 +132,8 @@
 		B24077192A72651400221919 /* Common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24077172A72651400221919 /* Common.hpp */; };
 		B240771E2A72665A00221919 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B240771C2A72665A00221919 /* Logger.cpp */; };
 		B240771F2A72665A00221919 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B240771D2A72665A00221919 /* Logger.hpp */; };
+		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
+		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
 		B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE392A7272560068EEFB /* AssertAPIs.h */; };
 		B2B5DE3E2A727C090068EEFB /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B5DE3C2A727C090068EEFB /* Timer.cpp */; };
 		B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE3D2A727C090068EEFB /* Timer.hpp */; };
@@ -309,6 +311,8 @@
 		B24077172A72651400221919 /* Common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Common.hpp; sourceTree = "<group>"; };
 		B240771C2A72665A00221919 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		B240771D2A72665A00221919 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
+		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2B5DE392A7272560068EEFB /* AssertAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertAPIs.h; sourceTree = "<group>"; };
 		B2B5DE3C2A727C090068EEFB /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		B2B5DE3D2A727C090068EEFB /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
@@ -624,6 +628,7 @@
 			children = (
 				B2336A632A763D9600BC7B8B /* Project.hpp */,
 				B2336A6B2A7642AA00BC7B8B /* UserPreference.hpp */,
+				B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -633,6 +638,7 @@
 			children = (
 				B2336A622A763D9600BC7B8B /* Project.cpp */,
 				B2336A6A2A7642AA00BC7B8B /* UserPreference.cpp */,
+				B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */,
 			);
 			path = Project;
 			sourceTree = "<group>";
@@ -851,6 +857,7 @@
 				B233655D2A7506F700BC7B8B /* Table.hpp in Headers */,
 				B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */,
 				B23365652A751DE500BC7B8B /* OpenGLRenderPass.hpp in Headers */,
+				B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */,
 				B233671E2A75420600BC7B8B /* Entity.hpp in Headers */,
 				B23364C32A72D1E300BC7B8B /* OpenGLRendererContext.hpp in Headers */,
 				B23365772A752E0A00BC7B8B /* Font.hpp in Headers */,
@@ -982,6 +989,7 @@
 				B23365012A742C0600BC7B8B /* OpenGLShader.cpp in Sources */,
 				B233656C2A75231700BC7B8B /* MathUtils.cpp in Sources */,
 				B21FAA492A729312009EED1F /* IKMemory.cpp in Sources */,
+				B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */,
 				B23365922A75348800BC7B8B /* LayerStack.cpp in Sources */,
 				B233653A2A74D48B00BC7B8B /* Texture.cpp in Sources */,
 				B23365642A751DE500BC7B8B /* OpenGLRenderPass.cpp in Sources */,
