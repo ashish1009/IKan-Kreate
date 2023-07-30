@@ -17,7 +17,7 @@ namespace Kreator
     /// This is Renderer Layer's Default Constructor
     /// - Parameters:
     ///   - userPreferences: User preference from Client
-    RendererLayer(Ref<UserPreferences> userPreferences);
+    RendererLayer(Ref<UserPreferences> userPreferences, const std::filesystem::path& clientDirPath);
     /// Default Destructor
     virtual ~RendererLayer();
     
@@ -41,7 +41,8 @@ namespace Kreator
     
   private:
     // Member Variables ----------------------------------------------------------------------------------------------
-
+    std::filesystem::path m_clientDirPath;
+    
     // Camera Data ---------------------------------------
     EditorCamera m_editorCamera;
 

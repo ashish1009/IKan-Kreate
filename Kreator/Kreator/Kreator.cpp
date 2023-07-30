@@ -94,7 +94,7 @@ namespace Kreator
       IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", m_projectPath.string().c_str());
 
       // Create the Rendere Layer
-      m_rendereLayer = CreateRef<RendererLayer>(m_userPreference);
+      m_rendereLayer = CreateRef<RendererLayer>(m_userPreference, m_clientDirectory);
       
       // Push the renderer Layer in Application
       PushLayer(m_rendereLayer);
