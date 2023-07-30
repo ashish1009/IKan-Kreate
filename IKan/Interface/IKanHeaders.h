@@ -87,3 +87,6 @@
 
 #include <Asset/AssetType.hpp>
 #include <Asset/Asset.hpp>
+#include <Asset/AssetMetadata.hpp>
+#include <Asset/AssetImporter.hpp>
+#include <Asset/AssetSerializer.hpp>

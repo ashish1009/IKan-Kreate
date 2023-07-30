@@ -1,5 +1,5 @@
 //
-//  AssertSerializer.hpp
+//  AssetSerializer.hpp
 //  IKan
 //
 //  Created by Ashish . on 30/07/23.
@@ -29,7 +29,7 @@ namespace IKan
     virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const = 0;
   };
   
-  class TextureSerializer : public AssetSerializer
+  class ImageSerializer : public AssetSerializer
   {
   public:
     /// @see: AssetSerializer
