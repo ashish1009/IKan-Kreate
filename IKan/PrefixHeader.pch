@@ -42,6 +42,7 @@
 #include "Core/Buffers.hpp"
 #include "Core/UUID.hpp"
 #include "Core/AssertAPIs.h"
+#include "Core/HashGenerator.hpp"
 
 #include "Debug/Logger.hpp"
 #include "Debug/Timer.hpp"

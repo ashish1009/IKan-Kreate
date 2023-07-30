@@ -119,6 +119,8 @@
 		B2336A532A763A4C00BC7B8B /* AssetImporter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A512A763A4C00BC7B8B /* AssetImporter.hpp */; };
 		B2336A5A2A763B1400BC7B8B /* AssetRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2336A582A763B1400BC7B8B /* AssetRegistry.cpp */; };
 		B2336A5B2A763B1400BC7B8B /* AssetRegistry.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A592A763B1400BC7B8B /* AssetRegistry.hpp */; };
+		B2336A5E2A763B4300BC7B8B /* HashGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2336A5C2A763B4300BC7B8B /* HashGenerator.cpp */; };
+		B2336A5F2A763B4300BC7B8B /* HashGenerator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */; };
 		B24077002A72431700221919 /* FileSystem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076FE2A72431700221919 /* FileSystem.cpp */; };
 		B24077012A72431700221919 /* FileSystem.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24076FF2A72431700221919 /* FileSystem.hpp */; };
 		B24077182A72651400221919 /* Common.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24077162A72651400221919 /* Common.cpp */; };
@@ -285,6 +287,8 @@
 		B2336A512A763A4C00BC7B8B /* AssetImporter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetImporter.hpp; sourceTree = "<group>"; };
 		B2336A582A763B1400BC7B8B /* AssetRegistry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetRegistry.cpp; sourceTree = "<group>"; };
 		B2336A592A763B1400BC7B8B /* AssetRegistry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetRegistry.hpp; sourceTree = "<group>"; };
+		B2336A5C2A763B4300BC7B8B /* HashGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HashGenerator.cpp; sourceTree = "<group>"; };
+		B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashGenerator.hpp; sourceTree = "<group>"; };
 		B24076E52A72391000221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24076F92A723A6C00221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24076FE2A72431700221919 /* FileSystem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystem.cpp; sourceTree = "<group>"; };
@@ -707,6 +711,7 @@
 				B233658B2A75345D00BC7B8B /* Layer.hpp */,
 				B23365912A75348800BC7B8B /* LayerStack.hpp */,
 				B23367242A75495000BC7B8B /* UUID.hpp */,
+				B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -724,6 +729,7 @@
 				B23364CD2A741CE100BC7B8B /* EngineDirectoryManager.hpp */,
 				B23365902A75348800BC7B8B /* LayerStack.cpp */,
 				B23367232A75495000BC7B8B /* UUID.cpp */,
+				B2336A5C2A763B4300BC7B8B /* HashGenerator.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -775,6 +781,7 @@
 				B233654F2A7502BA00BC7B8B /* FrameBuffer.hpp in Headers */,
 				B23365432A74D76C00BC7B8B /* stb_image.h in Headers */,
 				B23365152A74381300BC7B8B /* OpenGLRendererBuffers.hpp in Headers */,
+				B2336A5F2A763B4300BC7B8B /* HashGenerator.hpp in Headers */,
 				B233652B2A7440CD00BC7B8B /* Camera.hpp in Headers */,
 				B233653F2A74D49600BC7B8B /* OpenGLTexture.hpp in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
@@ -970,6 +977,7 @@
 				B23365222A743E8500BC7B8B /* OpenGLPipeline.cpp in Sources */,
 				B233655C2A7506F700BC7B8B /* Table.cpp in Sources */,
 				B2336A522A763A4C00BC7B8B /* AssetImporter.cpp in Sources */,
+				B2336A5E2A763B4300BC7B8B /* HashGenerator.cpp in Sources */,
 				B23364CE2A741CE100BC7B8B /* EngineDirectoryManager.cpp in Sources */,
 				B233673C2A75905100BC7B8B /* AssetType.cpp in Sources */,
 				B233671D2A75420600BC7B8B /* Entity.cpp in Sources */,
