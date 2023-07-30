@@ -15,8 +15,8 @@ namespace Kreator
   class KreatorApp : public Application
   {
   public:
-    KreatorApp(const Application::Specification& appSpec, const std::string& clientDirectory)
-    : Application(appSpec), m_userPreference(CreateRef<UserPreferences>())
+    KreatorApp(const Application::Specification& appSpec, const std::string& clientDirectory, const std::string& startProject)
+    : Application(appSpec), m_userPreference(CreateRef<UserPreferences>()), m_projectPath(startProject)
     {
       IK_LOG_TRACE("Kreator App", "Creating Kreator Application");
       
@@ -65,6 +65,11 @@ namespace Kreator
         }
       } // User Preferences
       
+      // Project
+      {
+        
+      }
+      
       // Create the Rendere Layer
       m_rendereLayer = CreateRef<RendererLayer>();
       
@@ -82,6 +87,7 @@ namespace Kreator
     Ref<Layer> m_rendereLayer;
     std::filesystem::path m_clientDirectory;
     std::filesystem::path m_persistenceStoragePath;
+    std::filesystem::path m_projectPath;
     Ref<UserPreferences> m_userPreference;
   };
 } // namespace Kreator
@@ -105,5 +111,5 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const ApplicationData& ap
   applicationSpec.resizable = true;
   applicationSpec.startMaximized = true;
 
-  return IKan::CreateScope<Kreator::KreatorApp>(applicationSpec, appData.clientDirectoryPath);
+  return IKan::CreateScope<Kreator::KreatorApp>(applicationSpec, appData.clientDirectoryPath, appData.startupProject);
 }

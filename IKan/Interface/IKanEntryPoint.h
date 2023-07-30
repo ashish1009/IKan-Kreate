@@ -26,6 +26,7 @@ int main(int argc, const char * argv[])
   std::filesystem::path logDirectoryPath = "Log";
   std::filesystem::path engineInstallPath = "";
   std::filesystem::path clientDirPath = "";
+  std::filesystem::path startupProject = "";
 
   if (argc > 1)
   {
@@ -41,6 +42,10 @@ int main(int argc, const char * argv[])
         engineInstallPath = argv[++i];
       }
       else if (strcmp(argv[i], "-client") == 0)
+      {
+        clientDirPath = argv[++i];
+      }
+      else if (strcmp(argv[i], "-project") == 0)
       {
         clientDirPath = argv[++i];
       }
@@ -70,7 +75,7 @@ int main(int argc, const char * argv[])
   InitializeEngine(logDirectoryPath.string());
   
   {
-    IKan::Scope<IKan::Application> app = IKan::CreateApplication({engineInstallPath, clientDirPath});
+    IKan::Scope<IKan::Application> app = IKan::CreateApplication({engineInstallPath, clientDirPath, startupProject});
     app->Run();
     app.reset();
   }

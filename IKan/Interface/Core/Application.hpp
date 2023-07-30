@@ -122,6 +122,7 @@ namespace IKan
   {
     std::string engineInstallPath;
     std::string clientDirectoryPath;
+    std::string startupProject;
   };
   
   /// Defination API for creating application instance.
