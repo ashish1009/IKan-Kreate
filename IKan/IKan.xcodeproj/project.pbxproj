@@ -139,6 +139,8 @@
 		B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE3D2A727C090068EEFB /* Timer.hpp */; };
 		B2B63F212A779E820056ED4E /* ImGuiTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B63F1F2A779E820056ED4E /* ImGuiTheme.cpp */; };
 		B2B63F222A779E820056ED4E /* ImGuiTheme.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */; };
+		B2CF83132A77D03C006B2D54 /* ImGuiUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2CF83112A77D03C006B2D54 /* ImGuiUtils.cpp */; };
+		B2CF83142A77D03C006B2D54 /* ImGuiUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2CF83122A77D03C006B2D54 /* ImGuiUtils.hpp */; };
 		B2D161592A76949A00DD1678 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D161572A76949A00DD1678 /* AssetManager.cpp */; };
 		B2D1615A2A76949A00DD1678 /* AssetManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D161582A76949A00DD1678 /* AssetManager.hpp */; };
 		B2D161652A77752B00DD1678 /* SceneSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D161632A77752B00DD1678 /* SceneSerializer.cpp */; };
@@ -324,6 +326,8 @@
 		B2B5DE3D2A727C090068EEFB /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
 		B2B63F1F2A779E820056ED4E /* ImGuiTheme.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiTheme.cpp; sourceTree = "<group>"; };
 		B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiTheme.hpp; sourceTree = "<group>"; };
+		B2CF83112A77D03C006B2D54 /* ImGuiUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiUtils.cpp; sourceTree = "<group>"; };
+		B2CF83122A77D03C006B2D54 /* ImGuiUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiUtils.hpp; sourceTree = "<group>"; };
 		B2D161572A76949A00DD1678 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		B2D161582A76949A00DD1678 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
 		B2D161632A77752B00DD1678 /* SceneSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSerializer.cpp; sourceTree = "<group>"; };
@@ -569,6 +573,7 @@
 			children = (
 				B23367112A75396800BC7B8B /* ImGuiLayer.hpp */,
 				B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */,
+				B2CF83122A77D03C006B2D54 /* ImGuiUtils.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -579,6 +584,7 @@
 				B233670C2A75394300BC7B8B /* ImGuiBuild.cpp */,
 				B23367102A75396800BC7B8B /* ImGuiLayer.cpp */,
 				B2B63F1F2A779E820056ED4E /* ImGuiTheme.cpp */,
+				B2CF83112A77D03C006B2D54 /* ImGuiUtils.cpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -859,6 +865,7 @@
 				B21FAA382A728F4D009EED1F /* Event.h in Headers */,
 				B210481F2A72CA9000FA8CF2 /* MacWindow.hpp in Headers */,
 				B21FAA462A7292B3009EED1F /* Buffers.hpp in Headers */,
+				B2CF83142A77D03C006B2D54 /* ImGuiUtils.hpp in Headers */,
 				B233651D2A743D0E00BC7B8B /* Pipeline.hpp in Headers */,
 				B23364DD2A74259600BC7B8B /* OpenGLRendererAPI.hpp in Headers */,
 				B233656D2A75231700BC7B8B /* MathUtils.hpp in Headers */,
@@ -1034,6 +1041,7 @@
 				B23365852A75303E00BC7B8B /* TextRenderer.cpp in Sources */,
 				B233652A2A7440CD00BC7B8B /* Camera.cpp in Sources */,
 				B233653E2A74D49600BC7B8B /* OpenGLTexture.cpp in Sources */,
+				B2CF83132A77D03C006B2D54 /* ImGuiUtils.cpp in Sources */,
 				B23364B92A72D14800BC7B8B /* RendererContext.cpp in Sources */,
 				B233654E2A7502BA00BC7B8B /* FrameBuffer.cpp in Sources */,
 				B23365102A74370700BC7B8B /* RendererBuffers.cpp in Sources */,

@@ -11,6 +11,7 @@ namespace Kreator
 {
   void SetDarkTheme()
   {
+    IK_ASSERT(false);
   }
 
 } // namespace Kreator

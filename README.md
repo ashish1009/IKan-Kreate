@@ -131,24 +131,15 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 - v6.2.2.0  : IKan    - Scene Serializer
   - SceneSerializer class (YAML Utils)
  ------------------------------------------------------------------------------------------------------------------  
+- v7.0.2.0  : IKan    - ImGui Theme
 
 ## Upcoming Release Tags
--  : IKan    - ImGui Color and API | Kreator - UI Theme (Font and Color)
-  - ImGui Base Theme class
-  - ImGui font loader
-  - Decorate the Kreator
- ------------------------------------------------------------------------------------------------------------------
-  
--   : IKan    - Project and Assets | Kreator - User Prederence for Start Application
-  - Get Directory from user.
-  - User Preferences
-  - Project Class / Manager
-  - Asset class / Manaager
- ------------------------------------------------------------------------------------------------------------------
-  
 -   : Kreator - Kreator Title Bar
   - Kreator Title bar
+  
  ------------------------------------------------------------------------------------------------------------------
+-   : Kreator - User Preference for Start Application
+ ------------------------------------------------------------------------------------------------------------------  
   
 -   : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
   - Entire Content Browser Panel
