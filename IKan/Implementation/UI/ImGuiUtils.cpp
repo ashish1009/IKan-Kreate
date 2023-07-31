@@ -6,6 +6,8 @@
 //
 
 #include "ImGuiUtils.hpp"
+#include "UI/ImGuiScoped.hpp"
+#include "UI/ImGuiTheme.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 
 namespace IKan::UI
@@ -118,6 +120,15 @@ namespace IKan::UI
     return g.NavJustMovedToId == g.LastItemData.ID;
   }
   
+  void SetTooltip(std::string_view text)
+  {
+    if (IsItemHovered())
+    {
+      UI::ScopedColor textCol(ImGuiCol_Text, UI::Theme::Color::TextBrighter);
+      ImGui::SetTooltip(text.data());
+    }
+  }
+
   // Begin End -------------------------------------------------------------------------------------------------------
   bool BeginMenuBar(const ImRect& barRectangle)
   {
@@ -362,4 +373,50 @@ namespace IKan::UI
   {
     DrawButtonImage(image, image, image, tintNormal, tintHovered, tintPressed, ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
   }
+  
+  void DrawBorder(const ImVec4& borderColor, float thickness, float offsetX, float offsetY)
+  {
+    DrawBorder(ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), borderColor, thickness, offsetX, offsetY);
+  }
+  void DrawBorder(float thickness, float offsetX, float offsetY)
+  {
+    DrawBorder(ImGui::GetStyleColorVec4(ImGuiCol_Border), thickness, offsetX, offsetY);
+  }
+  void DrawBorder(ImVec2 rectMin, ImVec2 rectMax, float thickness, float offsetX, float offsetY)
+  {
+    DrawBorder(rectMin, rectMax, ImGui::GetStyleColorVec4(ImGuiCol_Border), thickness, offsetX, offsetY);
+  }
+  void DrawBorder(ImVec2 rectMin, ImVec2 rectMax, const ImVec4& borderColor, float thickness, float offsetX, float offsetY)
+  {
+    auto min = rectMin;
+    min.x -= thickness;
+    min.y -= thickness;
+    min.x += offsetX;
+    min.y += offsetY;
+    auto max = rectMax;
+    max.x += thickness;
+    max.y += thickness;
+    max.x += offsetX;
+    max.y += offsetY;
+    
+    auto* drawList = ImGui::GetWindowDrawList();
+    drawList->AddRect(min, max, ImGui::ColorConvertFloat4ToU32(borderColor), 0.0f, 0, thickness);
+  };
+  void DrawBorder(ImRect rect, float thickness, float rounding, float offsetX, float offsetY)
+  {
+    auto min = rect.Min;
+    min.x -= thickness;
+    min.y -= thickness;
+    min.x += offsetX;
+    min.y += offsetY;
+    auto max = rect.Max;
+    max.x += thickness;
+    max.y += thickness;
+    max.x += offsetX;
+    max.y += offsetY;
+    
+    auto* drawList = ImGui::GetWindowDrawList();
+    drawList->AddRect(min, max, ImGui::ColorConvertFloat4ToU32(ImGui::GetStyleColorVec4(ImGuiCol_Border)), rounding, 0, thickness);
+  }
+  
 } // namespace IKan::UI

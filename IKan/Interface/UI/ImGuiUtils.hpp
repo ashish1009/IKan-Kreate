@@ -74,7 +74,10 @@ namespace IKan::UI
   
   /// This function Check if navigated to current item, e.g. with arrow keys
   bool NavigatedTo();
-  
+  /// This function show the tooltip messge
+  /// - Parameter text: message
+  void SetTooltip(std::string_view text);
+
   // Begin End -------------------------------------------------------------------------------------------------------
   /// This function draws MenuBar which allows you to specify its rectangle
   bool BeginMenuBar(const ImRect& barRectangle);
@@ -196,4 +199,27 @@ namespace IKan::UI
   ///   - tintHovered: tint hovered
   ///   - tintPressed: tint pressed
   void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed);
+  
+  /// This function draw the Border as rectangle
+  /// - Parameters:
+  ///   - rectMin: min bound
+  ///   - rectMax: max Bound
+  ///   - borderColor: border color
+  void DrawBorder(ImVec2 rectMin, ImVec2 rectMax, const ImVec4& border_color, float thickness = 1.0f,
+                  float offsetX = 0.0f, float offsetY = 0.0f);
+  /// This function draw the Border as rectangle
+  /// - Parameter borderColor: border color
+  void DrawBorder(const ImVec4& borderColor, float thickness = 1.0f, float offsetX = 0.0f, float offsetY = 0.0f);
+  /// This function draw the Border as rectangle
+  void DrawBorder(float thickness = 1.0f, float offsetX = 0.0f, float offsetY = 0.0f);
+  /// This function draw the Border as rectangle
+  /// - Parameters:
+  ///   - rectMin: min bound
+  ///   - rectMax: max Bound
+  void DrawBorder(ImVec2 rectMin, ImVec2 rectMax, float thickness = 1.0f, float offsetX = 0.0f, float offsetY = 0.0f);
+  /// This function draw the Border as rectangle
+  /// - Parameter rect: rect vertex
+  void DrawBorder(ImRect rect, float thickness = 1.0f, float rounding = 0.0f, float offsetX = 0.0f, float offsetY = 0.0f);
+  
+
 } //  namespace IKan::UI

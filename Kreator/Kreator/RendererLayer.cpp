@@ -524,6 +524,26 @@ namespace Kreator
     UI::SetCursorPos(ImVec2(logoOffsetX, 4.0f));
     
     UI_MenuBar();
+    // Variable to store the ending of Menu Bar
+    const float menuBarRight = ImGui::GetItemRectMax().x - ImGui::GetCurrentWindow()->Pos.x;
+    
+    // Project name --------------------------------------------------------------------
+    UI::ScopedColor textColor(ImGuiCol_Text, UI::Theme::Color::TextDarker);
+    UI::ScopedColor border(ImGuiCol_Border, IM_COL32(100, 100, 100, 255));
+    
+    const std::string title = Project::GetActive()->GetConfig().name;
+    const ImVec2 textSize = ImGui::CalcTextSize(title.c_str());
+    const float rightOffset = ImGui::GetWindowWidth() / 5.0f;
+    UI::SameLine();
+    UI::SetCursorPosX(ImGui::GetWindowWidth() - rightOffset - textSize.x);
+    UI::ShiftCursorY(1.0f + windowPadding.y);
+    
+    {
+      UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
+      ImGui::Text(title.c_str());
+    }
+    UI::SetTooltip("Current project (" + Project::GetActive()->GetConfig().projectFileName + ")");
+    UI::DrawBorder(UI::RectExpanded(UI::GetItemRect(), 24.0f, 68.0f), 1.0f, 3.0f, 0.0f, -60.0f);
 
     // Render the Window Buttons
     UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
