@@ -133,9 +133,9 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
  ------------------------------------------------------------------------------------------------------------------  
 - v7.0.2.0  : IKan    - ImGui Theme
 
+- v7.0.3.0  : Kreator - Kreator Title Bar
+
 ## Upcoming Release Tags
--   : Kreator - Kreator Title Bar
-  - Kreator Title bar
   
  ------------------------------------------------------------------------------------------------------------------
 -   : Kreator - User Preference for Start Application
