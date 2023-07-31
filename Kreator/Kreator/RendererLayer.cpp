@@ -30,6 +30,34 @@ namespace Kreator
     }
   } // namespace Utils
 
+  void Viewport::UpdateMousePos()
+  {
+    auto [mx, my] = ImGui::GetMousePos();
+    mx -= bounds[0].x;
+    my -= bounds[0].y;
+    
+    my = height - my;
+    
+    mousePosX = (int32_t)mx;
+    mousePosY = (int32_t)my;
+  }
+  
+  std::pair<float, float> Viewport::GetMouseSpace()
+  {
+    auto [mx, my] = ImGui::GetMousePos();
+    mx -= bounds[0].x;
+    my -= bounds[0].y;
+    auto viewportWidth = bounds[1].x - bounds[0].x;
+    auto viewportHeight = bounds[1].y - bounds[0].y;
+    
+    return { (mx / viewportWidth) * 2.0f - 1.0f, ((my / viewportHeight) * 2.0f - 1.0f) * -1.0f };
+  }
+  
+  std::pair<float, float> Viewport::GetMousePos()
+  {
+    return { mousePosX, mousePosY };
+  }
+
   RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientDirPath)
   : Layer("Kreator Renderer"), m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
   , m_userPreferences(userPreference), m_clientDirPath(clientDirPath)
@@ -79,7 +107,8 @@ namespace Kreator
   void RendererLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
-    
+    m_viewport.UpdateMousePos();
+
     m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
     m_editorCamera.OnUpdate(ts);
 
@@ -98,7 +127,10 @@ namespace Kreator
     dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnKeyPressedEvent));
     dispatcher.Dispatch<MouseButtonPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnMouseButtonPressed));
 
-    m_editorCamera.OnEvent(event);
+    if (m_viewport.panelMouseHover)
+    {
+      m_editorCamera.OnEvent(event);
+    }
   }
   
   bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
@@ -121,31 +153,21 @@ namespace Kreator
     return false;
   }
   
+  void RendererLayer::UpdateViewportSize()
+  {
+    Renderer2D::SetViewport(m_viewport.width, m_viewport.height);
+    m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
+  }
+
   void RendererLayer::OnImguiRender()
   {
     IK_PERFORMANCE("RendererLayer::OnImguiRender");
     
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
-    ImGui::Begin("Viewport");
-        
-    auto viewportOffset = ImGui::GetCursorPos(); // includes tab bar
-    auto viewportSize = ImGui::GetContentRegionAvail();
-
-    // Render viewport image
-    ImGui::Image(INT2VOIDP(Renderer2D::GetFinalImage()->GetRendererID()), viewportSize,
-                 {0, 1}, {1, 0});
+    UI_StartMainWindowDocking();
     
-    auto windowSize = ImGui::GetWindowSize();
-    ImVec2 minBound = ImGui::GetWindowPos();
-    minBound.x += viewportOffset.x;
-    minBound.y += viewportOffset.y;
+    UI_Viewport();
     
-    ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
-
-    m_allowViewportCameraEvents = ImGui::IsMouseHoveringRect(minBound, maxBound);
-
-    ImGui::End();
-    ImGui::PopStyleVar();
+    UI_EndMainWindowDocking();
   }
   
   void RendererLayer::UpdateWindowTitle(const std::string& sceneName)
@@ -291,4 +313,108 @@ namespace Kreator
     UpdateWindowTitle(path.filename().string());
   }
 
+  // UI APIS ---------------------------------------------------------------------------------------------------------
+  void RendererLayer::UI_StartMainWindowDocking()
+  {
+    static bool optFullscreenPersistant = true;
+    static ImGuiDockNodeFlags optFlags = ImGuiDockNodeFlags_None;
+    bool optFullscreen = optFullscreenPersistant;
+    
+    // ImGui Input Output Fonts
+    ImGuiIO& io = ImGui::GetIO();
+    ImGuiStyle& style = ImGui::GetStyle();
+    
+    io.ConfigWindowsResizeFromEdges = io.BackendFlags & ImGuiBackendFlags_HasMouseCursors;
+    
+    // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
+    // because it would be confusing to have two docking targets within each others.
+    ImGuiWindowFlags windowFlags = /* ImGuiWindowFlags_MenuBar |*/ ImGuiWindowFlags_NoDocking;
+    if (optFullscreen)
+    {
+      ImGuiViewport* viewport = ImGui::GetMainViewport();
+      ImGui::SetNextWindowPos(viewport->Pos);
+      ImGui::SetNextWindowSize(viewport->Size);
+      ImGui::SetNextWindowViewport(viewport->ID);
+      ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+      ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+      windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse;
+      windowFlags |= ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+      windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+    }
+    
+    // When using ImGuiDockNodeFlags_PassthruDockspace, DockSpace() will render our background and handle
+    // the pass-thru hole, so we ask Begin() to not render a background.
+#if 0
+    if (optFlags & ImGuiDockNodeFlags_PassthruCentralNode)
+    {
+      windowFlags |= ImGuiWindowFlags_NoBackground;
+    }
+#endif
+    
+    const Window& window = Application::Get().GetWindow();
+    bool isMaximized = window.IsMaximized();
+    
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 3.0f);
+    ImGui::PushStyleColor(ImGuiCol_MenuBarBg, ImVec4{ 0.0f, 0.0f, 0.0f, 0.0f });
+    ImGui::Begin("DockSpace Demo", nullptr, windowFlags);
+    ImGui::PopStyleColor(); // MenuBarBg
+    ImGui::PopStyleVar(2);
+    
+    if (optFullscreen)
+    {
+      ImGui::PopStyleVar(2);
+    }
+    
+    // Dockspace
+    float minWinSizeX = style.WindowMinSize.x;
+    style.WindowMinSize.x = 300.0f;
+    if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
+    {
+      ImGuiID dockspaceID = ImGui::GetID("MyDockspace");
+      ImGui::DockSpace(dockspaceID, ImVec2(0.0f, 0.0f), optFlags);
+    }
+    style.WindowMinSize.x = minWinSizeX;
+  }
+  
+  void RendererLayer::UI_EndMainWindowDocking()
+  {
+    ImGui::End();
+  }
+  
+  void RendererLayer::UI_Viewport()
+  {
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    ImGui::Begin("Viewport");
+    
+    m_viewport.panelMouseHover = ImGui::IsWindowHovered();
+    m_viewport.panelFocused = ImGui::IsWindowFocused();
+    
+    auto viewportOffset = ImGui::GetCursorPos(); // includes tab bar
+    auto viewportSize = ImGui::GetContentRegionAvail();
+    
+    // Updating the View port size
+    m_viewport.width = viewportSize.x;
+    m_viewport.height = viewportSize.y;
+    
+    // Set Viewport of Kreator Data
+    UpdateViewportSize();
+    
+    // Render viewport image
+    ImGui::Image(INT2VOIDP(Renderer2D::GetFinalImage()->GetRendererID()), viewportSize, {0, 1}, {1, 0});
+
+    auto windowSize = ImGui::GetWindowSize();
+    ImVec2 minBound = ImGui::GetWindowPos();
+    minBound.x += viewportOffset.x;
+    minBound.y += viewportOffset.y;
+    
+    ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
+    m_viewport.bounds[0] = { minBound.x, minBound.y };
+    m_viewport.bounds[1] = { maxBound.x, maxBound.y };
+    
+    m_allowViewportCameraEvents = ImGui::IsMouseHoveringRect(minBound, maxBound);
+    
+    ImGui::End();
+    ImGui::PopStyleVar();
+  }
 } // namespace Kreator

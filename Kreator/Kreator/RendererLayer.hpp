@@ -13,7 +13,22 @@ namespace Kreator
 #define MAX_PROJECT_NAME_LENGTH 255
 #define MAX_PROJECT_FILEPATH_LENGTH 512
   using namespace IKan;
-  
+
+  /// Stores the Viewport Data
+  struct Viewport
+  {
+    bool panelMouseHover;
+    bool panelFocused;
+    uint32_t width, height;
+    glm::vec2 bounds[2];
+    int32_t mousePosX = -1;
+    int32_t mousePosY = -1;
+    
+    void UpdateMousePos();
+    std::pair<float, float> GetMouseSpace();
+    std::pair<float, float> GetMousePos();
+  };
+
   class RendererLayer : public Layer
   {
   public:
@@ -54,6 +69,8 @@ namespace Kreator
     /// This function updates the name of window tile
     /// - Parameter sceneName: scene name
     void UpdateWindowTitle(const std::string& sceneName);
+    /// This function Updates the viewports of all Kreator Data
+    void UpdateViewportSize();
 
     // Project API --------------------------------------
     /// This function Creates new project
@@ -78,6 +95,14 @@ namespace Kreator
     /// - Parameter filepath: Scene filepath
     void OpenScene(const std::string& filepath);
 
+    // UI API --------------------------------------------
+    /// This functions shows primary Viewport
+    void UI_Viewport();
+    /// This function Creates main ImGui Window with Docking
+    void UI_StartMainWindowDocking();
+    /// This function Ends Main ImGui window with Docking
+    void UI_EndMainWindowDocking();
+
     // Member Variables ----------------------------------------------------------------------------------------------
     std::filesystem::path m_clientDirPath;
     
@@ -94,5 +119,8 @@ namespace Kreator
     Ref<UserPreferences> m_userPreferences;
     char* m_projectNameBuffer = nullptr;
     char* m_projectFilePathBuffer = nullptr;
+    
+    // View port Data ------------------------------------
+    Viewport m_viewport;
   };
 } // namespace Kreator
