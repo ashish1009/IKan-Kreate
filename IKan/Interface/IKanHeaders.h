@@ -98,3 +98,5 @@
 #include <Project/Project.hpp>
 #include <Project/UserPreference.hpp>
 #include <Project/ProjectSerializer.hpp>
+
+#include <UI/ImGuiTheme.hpp>

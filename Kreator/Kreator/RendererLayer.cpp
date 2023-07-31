@@ -82,7 +82,7 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
-        
+
     // Open or Create Project
     if (Utils::FileSystem::Exists(m_userPreferences->startupProject))
     {
@@ -352,9 +352,7 @@ namespace Kreator
       windowFlags |= ImGuiWindowFlags_NoBackground;
     }
 #endif
-    
-    const Window& window = Application::Get().GetWindow();
-    
+
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 3.0f);
     ImGui::PushStyleColor(ImGuiCol_MenuBarBg, ImVec4{ 0.0f, 0.0f, 0.0f, 0.0f });

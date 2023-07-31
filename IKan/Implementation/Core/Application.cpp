@@ -52,9 +52,6 @@ namespace IKan
     // Initialize the Core Renderer
     Renderer::Initialize();
     
-    // Update Default Theme
-    UI::Theme::Color::Update();
-    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialized                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
