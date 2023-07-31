@@ -7,6 +7,7 @@
 
 #include "Application.hpp"
 #include "Renderer/RendererStats.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
@@ -59,6 +60,9 @@ namespace IKan
   {
     IK_PROFILE();
 
+    // Shutdown asset manager to destory all memory
+    AssetManager::Shutdown();
+    
     // Reset the window
     m_window.reset();
 

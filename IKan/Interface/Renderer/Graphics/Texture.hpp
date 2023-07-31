@@ -116,7 +116,7 @@ namespace IKan
     [[nodiscard]] static Ref<Texture2D> Create(const TextureSpecification& spec);
   };
   
-  class Image : public Texture, Asset
+  class Image : public Texture, public Asset
   {
   public:
     /// This is default virtual destructor for Texture

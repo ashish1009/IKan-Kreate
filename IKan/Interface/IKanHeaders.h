@@ -92,6 +92,7 @@
 #include <Asset/AssetMetadata.hpp>
 #include <Asset/AssetImporter.hpp>
 #include <Asset/AssetSerializer.hpp>
+#include <Asset/AssetManager.hpp>
 
 #include <Project/Project.hpp>
 #include <Project/UserPreference.hpp>

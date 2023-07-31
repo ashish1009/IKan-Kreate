@@ -7,6 +7,10 @@
 
 #include "Scene.hpp"
 #include "Scene/Entity.hpp"
+#include "Renderer/UI/Font.hpp"
+#include "Renderer/Renderer2D.hpp"
+#include "Renderer/Graphics/Texture.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
@@ -67,6 +71,81 @@ namespace IKan
   {
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Scene, "Destroying Scene!!!");
+  }
+  
+  void Scene::OnUpdateEditor(TimeStep ts)
+  {
+    
+  }
+  
+  void Scene::OnRenderEditor(const EditorCamera &editorCamera)
+  {
+    Render2DEntities(editorCamera.GetUnReversedViewProjection());
+  }
+  
+  void Scene::Render2DEntities(const glm::mat4& viewProjection)
+  {
+    Renderer2D::BeginBatch(viewProjection);
+    
+    // Render All Quad Entities
+    {
+      auto view = m_registry.view<TransformComponent, QuadComponent>();
+      for (const auto& entity : view)
+      {
+        const auto& [transformComp, quadComp] = view.get<TransformComponent, QuadComponent>(entity);
+        if (quadComp.texture == 0)
+        {
+          Renderer2D::DrawQuad(transformComp.Transform(), quadComp.color, (int32_t)entity);
+        }
+        else
+        {
+          Ref<Image> texture = AssetManager::GetAsset<Image>(quadComp.texture);
+          Renderer2D::DrawQuad(transformComp.Transform(), texture, quadComp.color, quadComp.tilingFactor, (int32_t)entity);
+        }
+      } // For each Quad Entity
+    }
+    
+    // Render All Circle Entities
+    {
+      auto view = m_registry.view<TransformComponent, CircleComponent>();
+      for (const auto& entity : view)
+      {
+        const auto& [transformComp, circleComp] = view.get<TransformComponent, CircleComponent>(entity);
+        if (circleComp.texture == 0)
+        {
+          Renderer2D::DrawCircle(transformComp.Transform(), circleComp.color, circleComp.thickness, circleComp.fade, (int32_t)entity);
+        }
+        else
+        {
+          Ref<Image> texture = AssetManager::GetAsset<Image>(circleComp.texture);
+          Renderer2D::DrawCircle(transformComp.Transform(), texture, circleComp.color, circleComp.thickness, circleComp.fade, (int32_t)entity);
+        }
+      } // For each Quad Entity
+    }
+    
+    // Render All Text Entities
+    {
+      auto view = m_registry.view<TransformComponent, TextComponent>();
+      for (const auto& entity : view)
+      {
+        const auto& [transformComp, textComp] = view.get<TransformComponent, TextComponent>(entity);
+        if (textComp.assetHandle == 0)
+        {
+          Renderer2D::RenderText(textComp.textString, Font::GetDefaultFont(), transformComp.Position(), transformComp.Scale(), textComp.color, (int32_t)entity);
+        }
+        else
+        {
+          Ref<Font> font = AssetManager::GetAsset<Font>(textComp.assetHandle);
+          if (font == nullptr)
+          {
+            font = Font::GetDefaultFont();
+          }
+          Renderer2D::RenderText(textComp.textString, font, transformComp.Position(), transformComp.Scale(), textComp.color, (int32_t)entity);
+        }
+      } // For each Quad Entity
+    }
+    
+    Renderer2D::EndBatch();
   }
   
   Entity Scene::CreateEntity(const std::string& name)

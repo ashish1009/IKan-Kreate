@@ -9,9 +9,6 @@
 
 namespace Kreator
 {
-  // TODO: Temp
-  static Ref<Image> m_image;
-  
   // Kretor Resource Path
 #define KreatorResourcePath(path) m_clientDirPath / "Resources" / path
 
@@ -74,11 +71,21 @@ namespace Kreator
 
     // TODO: Temp
     {
-      m_image = Image::Create(KreatorResourcePath("Textures/checkerboard.png"));
       m_editorScene = Scene::Create();
       [[maybe_unused]] auto quad = m_editorScene->CreateEntity("Quad");
+      quad.AddComponent<QuadComponent>();
+      quad.GetComponent<TransformComponent>().UpdatePosition({1, 1, 0});
+      const auto& textFileName = Project::GetActive()->GetAssetDirectory() / "Textures/checkerboard.png";
+      quad.GetComponent<QuadComponent>().texture = AssetManager::CreateMemoryOnlyAsset<Image>(textFileName, textFileName);
+      
       [[maybe_unused]] auto circle = m_editorScene->CreateEntity("Circle");
+      circle.AddComponent<CircleComponent>();
+      circle.GetComponent<TransformComponent>().UpdatePosition({0, 0, 0});
+      
       [[maybe_unused]] auto text = m_editorScene->CreateEntity("Text");
+      text.AddComponent<TextComponent>();
+      text.GetComponent<TransformComponent>().UpdatePosition({0, -1, 1});
+      
       [[maybe_unused]] auto camera = m_editorScene->CreateEntity("Camera");
       camera.AddComponent<SceneCamera>();
     }
@@ -88,11 +95,6 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
-    
-    // TODO: Temp
-    {
-      m_image.reset();
-    }
   }
   
   void RendererLayer::OnUpdate(TimeStep ts)
@@ -108,13 +110,12 @@ namespace Kreator
       Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
       
       Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection());
-      
-      Renderer2D::DrawQuad({1, 1, 0}, {1, 1, 1}, {0, 0, 0}, m_image);
-      Renderer2D::DrawCircle({0, 0, 0});
       Renderer2D::DrawRect({0, 0, 0}, {4, 4}, {1, 0, 0.5, 1});
-      Renderer2D::RenderText("Sample Test Text", Font::GetDefaultFont(), {0, -1, 0}, {1, 1}, {1, 1, 1, 1}, -1);
-      
       Renderer2D::EndBatch();
+      
+      m_editorScene->OnUpdateEditor(ts);
+      m_editorScene->OnRenderEditor(m_editorCamera);
+      
       Renderer2D::EndRenderPass();
     }
   }

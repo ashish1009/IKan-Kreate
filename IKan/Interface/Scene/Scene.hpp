@@ -28,6 +28,15 @@ namespace IKan
     /// This is the default destructor of EnTT Scene
     ~Scene();
     
+    // Runtime APIs --------------------------------------------------------------------------------------------------
+    /// This functionm updates the scene for editor
+    /// - Parameter ts: time step of 2 frames
+    void OnUpdateEditor(TimeStep ts);
+    
+    /// This functionm renders the scene for editor
+    /// - Parameter editorCamera: Editor Camera
+    void OnRenderEditor(const EditorCamera& editorCamera);
+
     // Entity Manager ------------------------------------------------------------------------------------------------
     /// This function creates an unique entity with UUID
     /// - Parameter name: Name of entity
@@ -106,6 +115,12 @@ namespace IKan
     ASSET_TYPE(Scene);
     
   private:
+    // Member Functions ---------------------------------------------------------------------------------------------
+    /// This function renders the 2D Entities
+    /// - Parameter viewProjection: camera view projection matrix
+    void Render2DEntities(const glm::mat4& viewProjection);
+    
+    // Member Variables ---------------------------------------------------------------------------------------------
     entt::registry m_registry;
     uint32_t m_registryCapacity = 0;
     uint32_t m_numEntities = 0;
