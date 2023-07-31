@@ -101,28 +101,34 @@ namespace Kreator
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
-    // TODO: Temp
-    {
-      m_editorCamera.SetActive(true);
-      m_editorCamera.OnUpdate(ts);
+    m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+    m_editorCamera.OnUpdate(ts);
 
-      Renderer2D::BeginRenderPass();
-      Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
+    Renderer2D::BeginRenderPass();
+    Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
       
-      Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection());
-      Renderer2D::DrawRect({0, 0, 0}, {4, 4}, {1, 0, 0.5, 1});
-      Renderer2D::EndBatch();
-      
-      m_editorScene->OnUpdateEditor(ts);
-      m_editorScene->OnRenderEditor(m_editorCamera);
-      
-      Renderer2D::EndRenderPass();
-    }
+    m_editorScene->OnUpdateEditor(ts);
+    m_editorScene->OnRenderEditor(m_editorCamera);
+
+    Renderer2D::EndRenderPass();
   }
   
   void RendererLayer::OnEvent(Event& event)
   {
+    EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnKeyPressedEvent));
+    dispatcher.Dispatch<MouseButtonPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnMouseButtonPressed));
+
     m_editorCamera.OnEvent(event);
+  }
+  
+  bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
+  {
+    return false;
+  }
+  bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
+  {
+    return false;
   }
   
   void RendererLayer::OnImguiRender()
@@ -132,12 +138,22 @@ namespace Kreator
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::Begin("Viewport");
         
+    auto viewportOffset = ImGui::GetCursorPos(); // includes tab bar
     auto viewportSize = ImGui::GetContentRegionAvail();
-        
+
     // Render viewport image
     ImGui::Image(INT2VOIDP(Renderer2D::GetFinalImage()->GetRendererID()), viewportSize,
                  {0, 1}, {1, 0});
     
+    auto windowSize = ImGui::GetWindowSize();
+    ImVec2 minBound = ImGui::GetWindowPos();
+    minBound.x += viewportOffset.x;
+    minBound.y += viewportOffset.y;
+    
+    ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
+
+    m_allowViewportCameraEvents = ImGui::IsMouseHoveringRect(minBound, maxBound);
+
     ImGui::End();
     ImGui::PopStyleVar();
   }

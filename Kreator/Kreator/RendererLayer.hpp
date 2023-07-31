@@ -44,6 +44,13 @@ namespace Kreator
     
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
+    /// This function handles the key press event
+    /// - Parameter e: key events
+    bool OnKeyPressedEvent(KeyPressedEvent& e);
+    /// This function handles the mouse events
+    /// - Parameter e: Mouse Event
+    bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
+
     // Project API --------------------------------------
     /// This function Creates new project
     /// - Parameter projectPath: Project File path
@@ -63,6 +70,7 @@ namespace Kreator
     std::filesystem::path m_clientDirPath;
     
     // Camera Data ---------------------------------------
+    bool m_allowViewportCameraEvents = false;
     EditorCamera m_editorCamera;
 
     // Scene Data ----------------------------------------
