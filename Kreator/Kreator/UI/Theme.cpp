@@ -20,17 +20,7 @@ namespace Kreator_UI
     IKan::UI::Theme::Color::GroupHeader          = IM_COL32(37, 37, 37, 255);
     IKan::UI::Theme::Color::GroupHeaderHovered   = IM_COL32(32, 32, 32, 255);
     IKan::UI::Theme::Color::GroupHeaderActive    = IM_COL32(30, 30, 30, 255);
-    IKan::UI::Theme::Color::Highlight            = IM_COL32(39, 185, 242, 255);
-    IKan::UI::Theme::Color::Accent               = IM_COL32(236, 158, 36, 255);
-    IKan::UI::Theme::Color::NiceBlue             = IM_COL32(83, 232, 254, 255);
-    IKan::UI::Theme::Color::Compliment           = IM_COL32(78, 151, 166, 255);
     IKan::UI::Theme::Color::TextBrighter         = IM_COL32(210, 210, 210, 255);
-    IKan::UI::Theme::Color::TextDarker           = IM_COL32(128, 128, 128, 255);
-    IKan::UI::Theme::Color::TextError            = IM_COL32(230, 51, 51, 255);
-    IKan::UI::Theme::Color::Muted                = IM_COL32(77, 77, 77, 255);
-    IKan::UI::Theme::Color::Selection            = IM_COL32(191, 177, 155, 255);
-    IKan::UI::Theme::Color::SelectionMuted       = IM_COL32(59, 57, 45, 255);
-    IKan::UI::Theme::Color::HoveredItem          = IM_COL32(0, 0, 0, 80);
     
     ImVec4* colors = ImGui::GetStyle().Colors;
     
@@ -87,7 +77,7 @@ namespace Kreator_UI
     
     // Widget and Column Separator
     colors[ImGuiCol_Separator]              = ImGui::ColorConvertU32ToFloat4(IKan::UI::Theme::Color::BackgroundDark);
-    colors[ImGuiCol_SeparatorActive]        = ImGui::ColorConvertU32ToFloat4(IKan::UI::Theme::Color::Highlight);
+    colors[ImGuiCol_SeparatorActive]        = ImGui::ColorConvertU32ToFloat4(Kreator_UI::Color::Highlight);
     colors[ImGuiCol_SeparatorHovered]       = ImVec4(0.16f, 0.16f, 0.16f, 0.78f);
     
     // Resize
