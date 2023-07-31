@@ -186,7 +186,8 @@ namespace IKan
     }
     
     CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
-    
+    CopyComponentIfExists<SpriteRendererComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+
     auto childIds = entity.Children();
     for (auto childId : childIds)
     {

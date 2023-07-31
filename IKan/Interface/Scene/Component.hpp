@@ -107,13 +107,26 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(CameraComponent);
   };
 
+  struct SpriteRendererComponent
+  {
+    glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
+    AssetHandle texture = AssetHandle(0);
+    float tilingFactor = 1.0f;
+    
+    SpriteRendererComponent();
+    ~SpriteRendererComponent();
+    
+    void Copy(const SpriteRendererComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(SpriteRendererComponent);
+  };
+
   template<typename... Component>
   struct ComponentGroup
   {
     
   };
   
-#define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent
+#define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent
   
   // Stores all the components present in Engine
   using AllComponents =
