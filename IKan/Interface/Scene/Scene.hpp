@@ -23,8 +23,9 @@ namespace IKan
   public:
     /// This is the default constructor of EnTT Scene
     /// - Parameters:
+    ///   - name: Name of Scene
     ///   - maxEntityCapacity: Max Entity capacity to reserve
-    Scene(uint32_t maxEntityCapacity = 200000);
+    Scene(const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
     /// This is the default destructor of EnTT Scene
     ~Scene();
     
@@ -89,6 +90,9 @@ namespace IKan
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion
     void SetEntityDestroyedCallback(const std::function<void(Entity)>& callback);
+    /// This function sets the scene name
+    /// - Parameter name: scene name
+    void SetName(const std::string& name);
 
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function return entity with id as specified. entity is expected to exist (runtime error if it doesn't)
@@ -101,11 +105,15 @@ namespace IKan
     /// This function returns the max ID given to entity
     uint32_t GetMaxEntityId() const;
 
+    /// This function returns the scene name
+    const std::string& GetName() const;
+
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
+    ///   - name: Name of Scene
     ///   - maxEntityCapacity: Max Entity capacity to reserve
-    static Ref<Scene> Create(uint32_t maxEntityCapacity = 200000);
-    
+    static Ref<Scene> Create(const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
+
     /// This funcrion returns all the components of type Components
     template<typename... Components> auto GetAllEntitiesWith()
     {
@@ -127,8 +135,11 @@ namespace IKan
     int32_t m_maxEntityID = -1;
     EntityMap m_entityIDMap;
 
+    std::string m_name = "";
+
     std::function<void(Entity)> m_onEntityDestroyedCallback;
 
     friend class Entity;
+    friend class SceneSerializer;
   };
 } // namespace IKan

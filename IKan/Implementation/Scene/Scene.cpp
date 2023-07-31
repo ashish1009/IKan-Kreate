@@ -54,16 +54,17 @@ namespace IKan
     }
   }
 
-  Ref<Scene> Scene::Create(uint32_t maxEntityCapacity)
+  Ref<Scene> Scene::Create(const std::string& name, uint32_t maxEntityCapacity)
   {
-    return CreateRef<Scene>(maxEntityCapacity);
+    return CreateRef<Scene>(name, maxEntityCapacity);
   }
-
-  Scene::Scene(uint32_t maxEntityCapacity)
-  : m_registryCapacity(maxEntityCapacity)
+  
+  Scene::Scene(const std::string& name, uint32_t maxEntityCapacity)
+  : m_name(name), m_registryCapacity(maxEntityCapacity)
   {
-    IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Creating Scene ...");
+    IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
+    IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
   }
 
@@ -426,6 +427,10 @@ namespace IKan
   {
     m_onEntityDestroyedCallback = callback;
   }
+  void Scene::SetName(const std::string &name)
+  {
+    m_name = name;
+  }
 
   Entity Scene::GetEntityWithUUID(UUID id) const
   {
@@ -442,5 +447,8 @@ namespace IKan
   {
     return m_maxEntityID;
   }
-
+  const std::string& Scene::GetName() const
+  {
+    return m_name;
+  }
 } // namespace IKan
