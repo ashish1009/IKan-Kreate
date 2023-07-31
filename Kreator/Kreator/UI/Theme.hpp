@@ -21,6 +21,7 @@ namespace Kreator_UI
     static ImU32 Selection            = IM_COL32(191, 177, 155, 255);
     static ImU32 SelectionMuted       = IM_COL32(59, 57, 45, 255);
     static ImU32 HoveredItem          = IM_COL32(0, 0, 0, 80);
+    static ImU32 TitleBarDark         = IM_COL32(25, 25, 40, 255);
   } // namespace Color
   
   /// This function changes theme color to dark
