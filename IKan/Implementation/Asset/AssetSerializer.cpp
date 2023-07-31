@@ -6,8 +6,32 @@
 //
 
 #include "AssetSerializer.hpp"
+#include "Renderer/UI/Font.hpp"
+#include "Renderer/Graphics/Texture.hpp"
+#include "Scene/Scene.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
+  bool ImageSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
+  {
+    asset = Image::Create(AssetManager::GetFileSystemPathString(metadata));
+    asset->handle = metadata.handle;
+    return true;
+  }
+  
+  bool SceneAssetSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
+  {
+    asset = Scene::Create();
+    asset->handle = metadata.handle;
+    return true;
+  }
+  
+  bool FontSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
+  {
+    asset = Font::Create(AssetManager::GetFileSystemPathString(metadata));
+    asset->handle = metadata.handle;
+    return true;
+  }
   
 } // namespace IKan
