@@ -74,4 +74,31 @@ namespace IKan::UI
   /// This function Check if navigated to current item, e.g. with arrow keys
   bool NavigatedTo();
   
+  // Begin End -------------------------------------------------------------------------------------------------------
+  /// This function draws MenuBar which allows you to specify its rectangle
+  bool BeginMenuBar(const ImRect& barRectangle);
+  /// This function ends MenuBar
+  void EndMenuBar();
+
+  // Rectangles API -------------------------------------------------------------------------------------------------
+  /// This function returns the Imgui Item Rectangle vertex
+  ImRect GetItemRect();
+  /// This function expand the Imgui Retangle
+  /// - Parameters:
+  ///   - rect: rectangle
+  ///   - x: expand x
+  ///   - y: expand y
+  ImRect RectExpanded(const ImRect& rect, float x, float y);
+  /// This function Offset the rectangle
+  /// - Parameters:
+  ///   - rect: rectangle pos
+  ///   - x: x offset
+  ///   - y: y offset
+  ImRect RectOffset(const ImRect& rect, float x, float y);
+  /// This function Offset the rectangle
+  /// - Parameters:
+  ///   - rect: rectangle pos
+  ///   - xy: offset
+  ImRect RectOffset(const ImRect& rect, ImVec2 xy);
+
 } //  namespace IKan::UI
