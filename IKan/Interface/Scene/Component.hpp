@@ -17,8 +17,9 @@ namespace IKan
   //  1) Add new component here (obviously).
   //  2) Create Proper Copy and Move Constructors
   //  3) Add in ALL_COPY_COMPONENTS Macro
-  //  3) Add in Scene Duplicate Function
-  
+  //  4) Add in Scene Duplicate Function
+  //  5) Update SceneSerializer to (de)serialize the new component.
+
   struct IDComponent
   {
     UUID ID = 0;

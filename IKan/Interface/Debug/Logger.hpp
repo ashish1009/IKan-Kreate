@@ -20,7 +20,7 @@ f(GraphicsContext) f(Shader) f(IndexBuffer) f(VertexBuffer) f(Pipeline) f(Textur
 f(RenderPass) f(CharTexture)\
 f(SceneCamera) f(EditorCamera)\
 f(Imgui)\
-f(Scene) f(Component) \
+f(Scene) f(Component) f(SceneSerializer)\
 f(Asset) \
 f(Project)
   

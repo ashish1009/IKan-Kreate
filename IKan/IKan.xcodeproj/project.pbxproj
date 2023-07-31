@@ -139,6 +139,8 @@
 		B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE3D2A727C090068EEFB /* Timer.hpp */; };
 		B2D161592A76949A00DD1678 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D161572A76949A00DD1678 /* AssetManager.cpp */; };
 		B2D1615A2A76949A00DD1678 /* AssetManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D161582A76949A00DD1678 /* AssetManager.hpp */; };
+		B2D161652A77752B00DD1678 /* SceneSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D161632A77752B00DD1678 /* SceneSerializer.cpp */; };
+		B2D161662A77752B00DD1678 /* SceneSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D161642A77752B00DD1678 /* SceneSerializer.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -320,6 +322,8 @@
 		B2B5DE3D2A727C090068EEFB /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
 		B2D161572A76949A00DD1678 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		B2D161582A76949A00DD1678 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
+		B2D161632A77752B00DD1678 /* SceneSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSerializer.cpp; sourceTree = "<group>"; };
+		B2D161642A77752B00DD1678 /* SceneSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneSerializer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -579,6 +583,7 @@
 				B23367182A75405B00BC7B8B /* Scene.hpp */,
 				B233671C2A75420600BC7B8B /* Entity.hpp */,
 				B23367202A7548F200BC7B8B /* Component.hpp */,
+				B2D161642A77752B00DD1678 /* SceneSerializer.hpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -589,6 +594,7 @@
 				B23367172A75405B00BC7B8B /* Scene.cpp */,
 				B233671B2A75420600BC7B8B /* Entity.cpp */,
 				B233671F2A7548F200BC7B8B /* Component.cpp */,
+				B2D161632A77752B00DD1678 /* SceneSerializer.cpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -808,6 +814,7 @@
 				B23365572A7503CA00BC7B8B /* OpenGLFrameBuffer.hpp in Headers */,
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
 				B233648F2A72CE7200BC7B8B /* Renderer.hpp in Headers */,
+				B2D161662A77752B00DD1678 /* SceneSerializer.hpp in Headers */,
 				B23365022A742C0600BC7B8B /* OpenGLShader.hpp in Headers */,
 				B23364D92A74253900BC7B8B /* RendererAPI.hpp in Headers */,
 				B23367512A7592C000BC7B8B /* AssetMetadata.hpp in Headers */,
@@ -1029,6 +1036,7 @@
 				B2336A5E2A763B4300BC7B8B /* HashGenerator.cpp in Sources */,
 				B2336A6C2A7642AA00BC7B8B /* UserPreference.cpp in Sources */,
 				B23364CE2A741CE100BC7B8B /* EngineDirectoryManager.cpp in Sources */,
+				B2D161652A77752B00DD1678 /* SceneSerializer.cpp in Sources */,
 				B233673C2A75905100BC7B8B /* AssetType.cpp in Sources */,
 				B233671D2A75420600BC7B8B /* Entity.cpp in Sources */,
 				B23364DC2A74259600BC7B8B /* OpenGLRendererAPI.cpp in Sources */,

@@ -86,6 +86,7 @@
 #include <Scene/Entity.hpp>
 #include <Scene/Component.hpp>
 #include <Scene/Scene.hpp>
+#include <Scene/SceneSerializer.hpp>
 
 #include <Asset/AssetType.hpp>
 #include <Asset/Asset.hpp>
