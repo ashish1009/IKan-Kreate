@@ -267,4 +267,21 @@ return *this; \
     
   }
 
+  // Circle Component -------------------------------------------------------------------------------------------------
+  CircleComponent::CircleComponent()
+  {
+    COMP_LOG("Creating Circle Component");
+  }
+  CircleComponent::~CircleComponent()
+  {
+    COMP_LOG("Destroying Circle Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(CircleComponent);
+  
+  void CircleComponent::Copy(const CircleComponent &other)
+  {
+    thickness = other.thickness;
+    fade = other.fade;
+  }
+
 } // namespace IKan
