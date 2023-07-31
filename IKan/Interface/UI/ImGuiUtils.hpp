@@ -10,6 +10,7 @@
 namespace IKan
 {
   class Texture;
+  class Image;
 } // namespace IKan
 
 namespace IKan::UI
@@ -137,4 +138,62 @@ namespace IKan::UI
   ///   - multiplier: multiplier
   ImU32 ColorWithMultipliedHue(const ImColor& color, float multiplier);
   
+  // Draw APIs -------------------------------------------------------------------------------------------------------
+  /// This function Draw the button Image
+  /// - Parameters:
+  ///   - imageNormal: Button Image texture
+  ///   - imageHovered: Button Hovered Image texture
+  ///   - imagePressed: Button pressed Image texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  ///   - rectMin: rect Min
+  ///   - rectMax: rext Max
+  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered, const Ref<Image>& imagePressed,
+                       ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImVec2 rectMin, ImVec2 rectMax);
+  /// This function Draw the button Image
+  /// - Parameters:
+  ///   - imageNormal: Button Image texture
+  ///   - imageHovered: Button Hovered Image texture
+  ///   - imagePressed: Button pressed Image texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  ///   - rectangle: rectangle vertex
+  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered, const Ref<Image>& imagePressed,
+                       ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImRect rectangle);
+  /// This function Draw the button Image
+  /// - Parameters:
+  ///   - image: Button Image texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  ///   - rectMin: rect Min
+  ///   - rectMax: rext Max
+  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImVec2 rectMin, ImVec2 rectMax);
+  /// This function Draw the button Image
+  /// - Parameters:
+  ///   - imageNormal: Button Image texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  ///   - rectangle: rectangle vertex
+  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImRect rectangle);
+  /// This function Draw the button Image
+  /// - Parameters:
+  ///   - imageNormal: Button Image texture
+  ///   - imageHovered: Button Hovered Image texture
+  ///   - imagePressed: Button pressed Image texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered, const Ref<Image>& imagePressed,
+                       ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed);
+  /// This function Draw the button Image
+  /// - Parameters:
+  ///   - image: Button Image texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed);
 } //  namespace IKan::UI

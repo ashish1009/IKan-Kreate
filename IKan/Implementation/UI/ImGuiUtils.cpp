@@ -308,4 +308,58 @@ namespace IKan::UI
     ImGui::ColorConvertRGBtoHSV(colRow.x, colRow.y, colRow.z, hue, sat, val);
     return ImColor::HSV(std::min(hue * multiplier, 1.0f), sat, val);
   }
+  
+  // Draw APIs -------------------------------------------------------------------------------------------------------
+  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered,
+                       const Ref<Image>& imagePressed, ImU32 tintNormal, ImU32 tintHovered,
+                       ImU32 tintPressed, ImVec2 rectMin, ImVec2 rectMax)
+  {
+    auto* drawList = ImGui::GetWindowDrawList();
+    if (ImGui::IsItemActive())
+    {
+      drawList->AddImage(GetTextureID(imagePressed), rectMin, rectMax, ImVec2(0, 1), ImVec2(1, 0), tintPressed);
+    }
+    else if (ImGui::IsItemHovered())
+    {
+      drawList->AddImage(GetTextureID(imageHovered), rectMin, rectMax, ImVec2(0, 1), ImVec2(1, 0), tintHovered);
+    }
+    else
+    {
+      drawList->AddImage(GetTextureID(imageNormal), rectMin, rectMax, ImVec2(0, 1), ImVec2(1, 0), tintNormal);
+    }
+  }
+  
+  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered,
+                       const Ref<Image>& imagePressed, ImU32 tintNormal, ImU32 tintHovered,
+                       ImU32 tintPressed, ImRect rectangle)
+  {
+    DrawButtonImage(imageNormal, imageHovered, imagePressed, tintNormal, tintHovered,
+                    tintPressed, rectangle.Min, rectangle.Max);
+  }
+  
+  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered,
+                       ImU32 tintPressed, ImVec2 rectMin, ImVec2 rectMax)
+  {
+    DrawButtonImage(image, image, image, tintNormal, tintHovered, tintPressed, rectMin, rectMax);
+  };
+  
+  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered,
+                       ImU32 tintPressed, ImRect rectangle)
+  {
+    DrawButtonImage(image, image, image, tintNormal, tintHovered, tintPressed,
+                    rectangle.Min, rectangle.Max);
+  }
+  
+  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered,
+                       const Ref<Image>& imagePressed, ImU32 tintNormal, ImU32 tintHovered,
+                       ImU32 tintPressed)
+  {
+    DrawButtonImage(imageNormal, imageHovered, imagePressed, tintNormal, tintHovered,
+                    tintPressed, ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+  }
+  
+  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed)
+  {
+    DrawButtonImage(image, image, image, tintNormal, tintHovered, tintPressed, ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+  }
 } // namespace IKan::UI
