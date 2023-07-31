@@ -136,6 +136,15 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
+    
+    // Decorate the Theme
+    Kreator_UI::SetDarkTheme();
+    
+    UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
+    UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
+    UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
+    UI::Font sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};    
+    UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont});
 
     // Open or Create Project
     if (Utils::FileSystem::Exists(m_userPreferences->startupProject))
@@ -541,7 +550,7 @@ namespace Kreator
     UI::ShiftCursorY(1.0f + windowPadding.y);
     
     {
-      UI::ScopedFont boldFont(UI::Theme::GetBoldFont());
+      UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
       ImGui::Text(title.c_str());
     }
     UI::SetTooltip("Current project (" + Project::GetActive()->GetConfig().projectFileName + ")");

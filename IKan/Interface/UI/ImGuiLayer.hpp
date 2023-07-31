@@ -54,11 +54,8 @@ namespace IKan::UI
     void End();
     
     /// This function overrides font of imgui with new font path
-    /// - Parameters:
-    ///   - defaultFont: Default font informatiom
-    ///   - boldFont: bold Font informatiom
-    ///   - otherFonts: other fonts
-    void SetFont(const UI::Font &defaultFont, const UI::Font &boldFont, const std::vector<UI::Font> otherFonts = {});
+    /// - Parameter fonts: fonts
+    void SetFont(const std::vector<UI::Font> fontsW);
     /// This function the save location of ini file path
     /// - Parameter iniFilePath: file path relative to executable
     /// - Note: Directory must exist.

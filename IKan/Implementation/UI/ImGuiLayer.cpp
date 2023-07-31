@@ -98,9 +98,9 @@ namespace IKan::UI
     }
   }
   
-  void ImguiLayer::SetFont(const UI::Font &defaultFont, const UI::Font &boldFont, const std::vector<UI::Font> otherFonts)
+  void ImguiLayer::SetFont(const std::vector<UI::Font> otherFonts)
   {
-    if (defaultFont.filePath == "" or boldFont.filePath == "")
+    if (otherFonts.size() == 0)
     {
       return;
     }
@@ -108,21 +108,15 @@ namespace IKan::UI
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.Fonts->ClearFonts();
     
-    // Store the Bold font as well
-    io.Fonts->AddFontFromFileTTF(boldFont.filePath.c_str(), boldFont.size);
-    
-    // Default font is Regular
-    io.FontDefault = io.Fonts->AddFontFromFileTTF(defaultFont.filePath.c_str(), boldFont.size);
-    
     IK_LOG_INFO(LogModule::Imgui, "Imgui Font changed");
-    IK_LOG_INFO(LogModule::Imgui, "  Regular Font  {0} Size {1}", defaultFont.filePath.c_str(), defaultFont.size);
-    IK_LOG_INFO(LogModule::Imgui, "  Bold Font     {0} Size {1}", boldFont.filePath.c_str(), boldFont.size);
-    
     for (const auto& font : otherFonts)
     {
       io.Fonts->AddFontFromFileTTF(font.filePath.c_str(), font.size);
-      IK_LOG_INFO(LogModule::Imgui, "  Other Font    {0} Size {1}", font.filePath.c_str(), font.size);
+      IK_LOG_INFO(LogModule::Imgui, "  Font    {0} Size {1}", font.filePath.c_str(), font.size);
     }
+    
+    // Default font is Regular
+    io.FontDefault = io.Fonts->Fonts[0];
   }
   
   void ImguiLayer::SetIniFilePath(const std::string& iniFilePath)

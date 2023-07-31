@@ -219,7 +219,6 @@ namespace IKan::UI
   void DrawBorder(ImVec2 rectMin, ImVec2 rectMax, float thickness = 1.0f, float offsetX = 0.0f, float offsetY = 0.0f);
   /// This function draw the Border as rectangle
   /// - Parameter rect: rect vertex
-  void DrawBorder(ImRect rect, float thickness = 1.0f, float rounding = 0.0f, float offsetX = 0.0f, float offsetY = 0.0f);
-  
+  void DrawBorder(ImRect rect, float thickness = 1.0f, float rounding = 0.0f, float offsetX = 0.0f, float offsetY = 0.0f);  
 
 } //  namespace IKan::UI

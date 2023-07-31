@@ -7,9 +7,19 @@
 
 #pragma once
 
-namespace Kreator
+namespace Kreator_UI
 {
   /// This function changes theme color to dark
   void SetDarkTheme();
- 
-} // namespace Kreator
+  
+  
+  /// This function Returns the regular font
+  ImFont* GetRegularFont();
+  /// This function Returns the bold font
+  ImFont* GetBoldFont();
+  /// This function Returns the italic font
+  ImFont* GetItalicFont();
+  /// This function Returns the Fixed width font
+  ImFont* GetFixedWidthFont();
+
+} // namespace Kreator_UI
