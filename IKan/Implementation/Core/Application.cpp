@@ -175,6 +175,11 @@ namespace IKan
   {
     m_layers->PopLayer(layer);
   }
+  
+  const Application::Specification& Application::GetSpecification() const
+  {
+    return m_specificaion;
+  }
 
   void* Application::GetWindowPtr() const
   {
