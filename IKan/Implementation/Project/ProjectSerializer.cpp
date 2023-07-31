@@ -29,7 +29,9 @@ namespace IKan
       IK_SERIALIZE_PROPERTY(Name, m_project->m_config.name, out);
       IK_SERIALIZE_PROPERTY(AssetDirectory, m_project->m_config.assetDirectory, out);
       IK_SERIALIZE_PROPERTY(AssetRegistry, m_project->m_config.assetRegistryPath, out);
-      
+      IK_SERIALIZE_PROPERTY(StartScene, m_project->m_config.startScene, out);
+      IK_SERIALIZE_PROPERTY(AutoSave, m_project->m_config.enableAutoSave, out);
+      IK_SERIALIZE_PROPERTY(AutoSaveInterval, m_project->m_config.autoSaveIntervalSeconds, out);
       out << YAML::EndMap;
     }
     out << YAML::EndMap;
@@ -62,6 +64,9 @@ namespace IKan
     IK_DESERIALIZE_PROPERTY(Name, config.name, rootNode, std::string(""));
     IK_DESERIALIZE_PROPERTY(AssetDirectory, config.assetDirectory, rootNode, std::string(""));
     IK_DESERIALIZE_PROPERTY(AssetRegistry, config.assetRegistryPath, rootNode, std::string(""));
+    IK_DESERIALIZE_PROPERTY(StartScene, config.startScene, rootNode, std::string(""));
+    IK_DESERIALIZE_PROPERTY(AutoSave, config.enableAutoSave, rootNode, false);
+    IK_DESERIALIZE_PROPERTY(AutoSaveInterval, config.autoSaveIntervalSeconds, rootNode, static_cast<int32_t>(300));
 
     // Update the Project Direcotry and Name which was not serialised
     std::filesystem::path projectPath = filepath;
