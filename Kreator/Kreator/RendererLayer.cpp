@@ -116,6 +116,12 @@ namespace Kreator
     
     // Set the Application Icon
     m_applicationIcon = Image::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
+    
+    // Window Icons
+    m_iconClose = Image::Create(KreatorResourcePath("Textures/Icons/Close.png"));
+    m_iconMinimize = Image::Create(KreatorResourcePath("Textures/Icons/Minimize.png"));
+    m_iconMaximize = Image::Create(KreatorResourcePath("Textures/Icons/Maximize.png"));
+    m_iconRestore = Image::Create(KreatorResourcePath("Textures/Icons/Restore.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -519,6 +525,11 @@ namespace Kreator
     
     UI_MenuBar();
 
+    // Render the Window Buttons
+    UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
+    UI::SetCursorPosY(20.0f);
+    UI_WindowButtons();
+
     return titlebarHeight;
   }
   
@@ -641,6 +652,50 @@ namespace Kreator
     }
     UI::EndMenuBar();
     ImGui::EndGroup();
+  }
+
+  void RendererLayer::UI_WindowButtons()
+  {
+    // Window buttons
+    const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 0.9f);
+    const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 1.2f);
+    const ImU32 buttonColP = UI::Theme::Color::TextDarker;
+    const float buttonWidth = 14.0f;
+    const float buttonHeight = 14.0f;
+    const Window& window = Application::Get().GetWindow();
+    
+    // Minimize Button
+    {
+      const int iconHeight = m_iconMinimize->GetHeight();
+      const float padY = (buttonHeight - (float)iconHeight) / 2.0f;
+
+      if (ImGui::InvisibleButton("Minimize", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        window.Iconify();
+      }
+      UI::DrawButtonImage(m_iconMinimize, buttonColN, buttonColH, buttonColP, UI::RectExpanded(UI::GetItemRect(), 0.0f, -padY));
+    }
+
+    UI::SameLine();
+    // Maximize Button
+    {
+      bool isMaximized = window.IsMaximized();
+      if (ImGui::InvisibleButton("Maximize/Restore", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        (isMaximized) ? window.Restore() : window.Maximize();
+      }
+      UI::DrawButtonImage(isMaximized ? m_iconRestore : m_iconMaximize, buttonColN, buttonColH, buttonColP);
+    }
+
+    UI::SameLine();
+    // Close Button
+    {
+      if (ImGui::InvisibleButton("Close", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        Application::Get().Close();
+      }
+      UI::DrawButtonImage(m_iconClose, UI::Theme::Color::Text, UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 1.4f), buttonColP);
+    }
   }
 
 } // namespace Kreator

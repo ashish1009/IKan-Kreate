@@ -109,12 +109,15 @@ namespace Kreator
     void UI_TitlebarDragArea(float titlebarHeight);
     /// This function renders the Menu bar for Title bar
     void UI_MenuBar();
+    /// This function renders window buttons
+    void UI_WindowButtons();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     std::filesystem::path m_clientDirPath;
     
     // Applicaiton Icons ---------------------------------
     Ref<Image> m_applicationIcon;
+    Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
 
     // Camera Data ---------------------------------------
     bool m_allowViewportCameraEvents = false;
