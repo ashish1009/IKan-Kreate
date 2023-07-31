@@ -102,6 +102,11 @@ namespace Kreator
     void UI_StartMainWindowDocking();
     /// This function Ends Main ImGui window with Docking
     void UI_EndMainWindowDocking();
+    /// This function renders our title bar
+    float UI_DrawTitlebar();
+    /// This function handle the drag and Click on title bar
+    /// - Parameter titlebarHeight: Title bar height
+    void UI_TitlebarDragArea(float titlebarHeight);
 
     // Member Variables ----------------------------------------------------------------------------------------------
     std::filesystem::path m_clientDirPath;
