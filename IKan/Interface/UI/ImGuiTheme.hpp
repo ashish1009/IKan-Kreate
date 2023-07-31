@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "UI/ImGuiLayer.hpp"
+
 namespace IKan::UI
 {
   struct Theme
@@ -36,5 +38,13 @@ namespace IKan::UI
       inline static ImU32 SelectionMuted       = IM_COL32(57, 57, 57, 255);
       inline static ImU32 HoveredItem          = IM_COL32(0, 0, 0, 80);
     };
+    
+    /// This function changes the imgui font
+    ///  - Parameters:
+    ///   - defaultFont: Default font informatiom
+    ///   - boldFont: bold Font informatiom
+    ///   - otherFonts: other fonts
+    static void ChangeFont(const UI::Font &defaultFont, const UI::Font &boldFont, const
+                           std::vector<UI::Font> otherFonts = {});
   };
 } // namespace IKan::UI

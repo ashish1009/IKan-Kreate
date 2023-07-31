@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace Kreator::UI
+namespace Kreator
 {
   /// This function changes theme color to dark
   void SetDarkTheme();

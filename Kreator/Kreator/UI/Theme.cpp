@@ -7,7 +7,7 @@
 
 #include "Theme.hpp"
 
-namespace Kreator::UI
+namespace Kreator
 {
   void SetDarkTheme()
   {
