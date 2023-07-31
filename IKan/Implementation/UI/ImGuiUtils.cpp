@@ -218,6 +218,17 @@ namespace IKan::UI
     window->DC.MenuBarAppending = false;
   }
   
+  void BeginDisabled(bool disabled)
+  {
+    if (disabled)
+      ImGui::BeginDisabled(true);
+  }
+  
+  bool IsItemDisabled()
+  {
+    return ImGui::GetItemFlags() & ImGuiItemFlags_Disabled;
+  }
+
   // Rectangles API -------------------------------------------------------------------------------------------------
   ImRect GetItemRect()
   {

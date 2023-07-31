@@ -79,6 +79,10 @@ namespace IKan::UI
   bool BeginMenuBar(const ImRect& barRectangle);
   /// This function ends MenuBar
   void EndMenuBar();
+  /// This function begin disable
+  void BeginDisabled(bool disabled = true);
+  /// This function Ends the disable
+  void EndDisabled();
 
   // Rectangles API -------------------------------------------------------------------------------------------------
   /// This function returns the Imgui Item Rectangle vertex
