@@ -233,4 +233,38 @@ return *this; \
     return camera;
   }
 
+  // Sprite Renderer Component --------------------------------------------------------------------------------------
+  SpriteRendererComponent::SpriteRendererComponent()
+  {
+    COMP_LOG("Creating Sprite Renderer Component");
+  }
+  SpriteRendererComponent::~SpriteRendererComponent()
+  {
+    COMP_LOG("Destroying Sprite Renderer Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(SpriteRendererComponent);
+  
+  void SpriteRendererComponent::Copy(const SpriteRendererComponent &other)
+  {
+    texture = other.texture;
+    color = other.color;
+    tilingFactor = other.tilingFactor;
+  }
+
+  // Quad Component -------------------------------------------------------------------------------------------------
+  QuadComponent::QuadComponent()
+  {
+    COMP_LOG("Creating Quad Component");
+  }
+  QuadComponent::~QuadComponent()
+  {
+    COMP_LOG("Destroying Quad Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(QuadComponent);
+  
+  void QuadComponent::Copy(const QuadComponent &other)
+  {
+    
+  }
+
 } // namespace IKan

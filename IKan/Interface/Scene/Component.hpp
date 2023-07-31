@@ -120,13 +120,23 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(SpriteRendererComponent);
   };
 
+  struct QuadComponent : public SpriteRendererComponent
+  {
+    QuadComponent();
+    ~QuadComponent();
+    
+    void Copy(const QuadComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(QuadComponent);
+  };
+
   template<typename... Component>
   struct ComponentGroup
   {
     
   };
   
-#define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent
+#define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
+QuadComponent
   
   // Stores all the components present in Engine
   using AllComponents =
