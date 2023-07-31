@@ -167,8 +167,10 @@ namespace IKan
   OpenGLImage::OpenGLImage(const std::string& filePath, bool linear)
   : m_filePath(filePath), m_name(Utils::String::GetFileNameFromPath(filePath))
   {
+#ifdef InvertVertically
     // Invert the texture. as by default open gl load inverted vertically
     stbi_set_flip_vertically_on_load(1);
+#endif
     
     // Load the file with stb image API
     void* data = stbi_load(m_filePath.c_str(), &m_width, &m_height, &m_channel, 0 /* desired_channels */);

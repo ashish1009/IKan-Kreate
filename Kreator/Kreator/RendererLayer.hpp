@@ -111,6 +111,9 @@ namespace Kreator
     // Member Variables ----------------------------------------------------------------------------------------------
     std::filesystem::path m_clientDirPath;
     
+    // Applicaiton Icons ---------------------------------
+    Ref<Image> m_applicationIcon;
+
     // Camera Data ---------------------------------------
     bool m_allowViewportCameraEvents = false;
     EditorCamera m_editorCamera;

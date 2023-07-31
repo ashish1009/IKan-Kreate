@@ -68,6 +68,9 @@ namespace Kreator
     m_projectFilePathBuffer = iknew char[MAX_PROJECT_FILEPATH_LENGTH];
     
     m_templateProjectDir = m_clientDirPath / "Resources/TemplateProject";
+    
+    // Set the Application Icon
+    m_applicationIcon = Image::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -342,16 +345,19 @@ namespace Kreator
       windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
     }
     
+#if 0
     // When using ImGuiDockNodeFlags_PassthruDockspace, DockSpace() will render our background and handle
     // the pass-thru hole, so we ask Begin() to not render a background.
-#if 0
     if (optFlags & ImGuiDockNodeFlags_PassthruCentralNode)
     {
       windowFlags |= ImGuiWindowFlags_NoBackground;
     }
 #endif
 
-    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+    const Window& window = Application::Get().GetWindow();
+    bool isMaximized = window.IsMaximized();
+
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, isMaximized ? ImVec2(6.0f, 6.0f) : ImVec2(3.0f, 3.0f));
     ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 3.0f);
     ImGui::PushStyleColor(ImGuiCol_MenuBarBg, ImVec4{ 0.0f, 0.0f, 0.0f, 0.0f });
     ImGui::Begin("DockSpace Demo", nullptr, windowFlags);
@@ -428,7 +434,7 @@ namespace Kreator
 
     const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
 
-    // Draw the title Bar rectangle
+    // Draw the title Bar rectangle ---------------------------------------------------
     const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
     const ImVec2 titlebarMax =
     {
@@ -440,10 +446,27 @@ namespace Kreator
     auto* drawList = ImGui::GetWindowDrawList();
     drawList->AddRectFilled(titlebarMin, titlebarMax, UI::Theme::Color::Titlebar);
 
-    // Drag and Control the window with user title bar
+    // Drag and Control the window with user title bar ---------------------------------
     UI::SetCursorPos(windowPadding);
     UI_TitlebarDragArea(titlebarHeight);
 
+    // Draw Kreator Logo ---------------------------------------------------------------
+    const int32_t logoWidth = titlebarHeight - 10;
+    const int32_t logoHeight = titlebarHeight - 10;
+    const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
+    const ImVec2 logoRectStart =
+    {
+      ImGui::GetItemRectMin().x + logoOffset.x,
+      ImGui::GetItemRectMin().y + logoOffset.y
+    };
+    const ImVec2 logoRectMax =
+    {
+      logoRectStart.x + logoWidth,
+      logoRectStart.y + logoHeight
+    };
+    drawList->AddImage(UI::GetTextureID(m_applicationIcon), logoRectStart, logoRectMax);
+
+    
     return titlebarHeight;
   }
   
