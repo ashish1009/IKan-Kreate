@@ -74,6 +74,9 @@ namespace Kreator
     /// This function creates new scene
     /// - Parameter name: Scene name
     void NewScene(const std::string& name = "UntitledScene");
+    /// This function opens new scene with file
+    /// - Parameter filepath: Scene filepath
+    void OpenScene(const std::string& filepath);
 
     // Member Variables ----------------------------------------------------------------------------------------------
     std::filesystem::path m_clientDirPath;

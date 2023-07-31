@@ -69,26 +69,29 @@ namespace Kreator
       CreateProject(projDir);
     }
 
-//    // TODO: Temp
-//    {
-//      m_editorScene = Scene::Create();
-//      [[maybe_unused]] auto quad = m_editorScene->CreateEntity("Quad");
-//      quad.AddComponent<QuadComponent>();
-//      quad.GetComponent<TransformComponent>().UpdatePosition({1, 1, 0});
-//      const auto& textFileName = Project::GetActive()->GetAssetDirectory() / "Textures/checkerboard.png";
-//      quad.GetComponent<QuadComponent>().texture = AssetManager::CreateMemoryOnlyAsset<Image>(textFileName, textFileName);
-//      
-//      [[maybe_unused]] auto circle = m_editorScene->CreateEntity("Circle");
-//      circle.AddComponent<CircleComponent>();
-//      circle.GetComponent<TransformComponent>().UpdatePosition({0, 0, 0});
-//      
-//      [[maybe_unused]] auto text = m_editorScene->CreateEntity("Text");
-//      text.AddComponent<TextComponent>();
-//      text.GetComponent<TransformComponent>().UpdatePosition({0, -1, 1});
-//      
-//      [[maybe_unused]] auto camera = m_editorScene->CreateEntity("Camera");
-//      camera.AddComponent<SceneCamera>();
-//    }
+    // TODO: Temp
+    {
+      m_editorScene = Scene::Create();
+      [[maybe_unused]] auto quad = m_editorScene->CreateEntity("Quad");
+      quad.AddComponent<QuadComponent>();
+      quad.GetComponent<TransformComponent>().UpdatePosition({1, 1, 0});
+      const auto& textFileName = Project::GetActive()->GetAssetDirectory() / "Textures/checkerboard.png";
+      quad.GetComponent<QuadComponent>().texture = AssetManager::CreateMemoryOnlyAsset<Image>(textFileName, textFileName);
+
+      [[maybe_unused]] auto circle = m_editorScene->CreateEntity("Circle");
+      circle.AddComponent<CircleComponent>();
+      circle.GetComponent<TransformComponent>().UpdatePosition({0, 0, 0});
+
+      [[maybe_unused]] auto text = m_editorScene->CreateEntity("Text");
+      text.AddComponent<TextComponent>();
+      text.GetComponent<TransformComponent>().UpdatePosition({0, -1, 1});
+
+      [[maybe_unused]] auto camera = m_editorScene->CreateEntity("Camera");
+      camera.AddComponent<SceneCamera>();
+      
+      SceneSerializer serializer(m_editorScene);
+      serializer.Serialize(Project::GetActive()->GetAssetDirectory() / "Scenes/Sandbox.ikscene");
+    }
   }
   
   void RendererLayer::OnDetach()
@@ -247,7 +250,17 @@ namespace Kreator
     serializer.Deserialize(filepath);
     Project::SetActive(project);
     
-    NewScene();
+    // Reset cameras
+    m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
+    
+    if (!project->GetConfig().startScene.empty())
+    {
+      OpenScene((Project::GetAssetDirectory() / project->GetConfig().startScene).string());
+    }
+    else
+    {
+      NewScene();
+    }
   }
   
   void RendererLayer::OpenProject()
@@ -281,6 +294,25 @@ namespace Kreator
     
     m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
     m_currentScene = m_editorScene;
+  }
+  void RendererLayer::OpenScene(const std::string& filepath)
+  {
+    if (!Utils::FileSystem::Exists(filepath))
+    {
+      IK_LOG_ERROR("Kreator Layer" ,"Tried loading a non-existing scene: {0}", filepath);
+      IK_ASSERT(false);
+    }
+    
+    Ref<Scene> newScene = Scene::Create("New Scene");
+    SceneSerializer serializer(newScene);
+    serializer.Deserialize(filepath);
+    
+    m_editorScene = newScene;
+    m_currentScene = m_editorScene;
+    m_sceneFilePath = filepath;
+    
+    std::filesystem::path path = filepath;
+    UpdateWindowTitle(path.filename().string());
   }
 
 } // namespace Kreator
