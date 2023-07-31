@@ -34,7 +34,7 @@ namespace Kreator
   namespace UI_Utils
   {
     // Hovered Item Color
-    static const ImU32 s_hoveredColor = UI::Theme::Color::HoveredItem;
+    static const ImU32 s_hoveredColor = Kreator_UI::Color::HoveredItem;
     
     // Function to push Dark color on active
     static const auto pushDarkTextIfActive = [](const char* menuName)
@@ -533,29 +533,65 @@ namespace Kreator
     UI::SetCursorPos(ImVec2(logoOffsetX, 4.0f));
     
     UI_MenuBar();
-    
-    // Variable to store the ending of Menu Bar
-    const float menuBarRight = ImGui::GetItemRectMax().x - ImGui::GetCurrentWindow()->Pos.x;
-    
-    // Project name --------------------------------------------------------------------
-    UI::ScopedColor textColor(ImGuiCol_Text, UI::Theme::Color::TextDarker);
-    UI::ScopedColor border(ImGuiCol_Border, IM_COL32(100, 100, 100, 255));
-    
-    const std::string title = Project::GetActive()->GetConfig().name;
-    const ImVec2 textSize = ImGui::CalcTextSize(title.c_str());
-    const float rightOffset = ImGui::GetWindowWidth() / 5.0f;
 
-    UI::SameLine();
-    UI::SetCursorPosX(ImGui::GetWindowWidth() - rightOffset - textSize.x);
-    UI::ShiftCursorY(1.0f + windowPadding.y);
-    
+    // Round Bar -------------------------------------------------------------------------
+    UI::SetCursorPosX(ImGui::GetWindowWidth() / 4);
+    UI::SetCursorPosY(titlebarHeight / 3);
+
+    const ImVec2 roundBarMin = ImGui::GetCursorScreenPos();
+    const ImVec2 roundBarMax =
     {
-      UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
-      ImGui::Text(title.c_str());
-    }
-    UI::SetTooltip("Current project (" + Project::GetActive()->GetConfig().projectFileName + ")");
-    UI::DrawBorder(UI::RectExpanded(UI::GetItemRect(), 24.0f, 68.0f), 1.0f, 3.0f, 0.0f, -60.0f);
+      ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth() / 2,
+      ImGui::GetCursorScreenPos().y + 23
+    };
+    drawList->AddRectFilled(roundBarMin, roundBarMax, Kreator_UI::Color::TitleBarDark, 10);
+    float roundBarRight = (3 * ImGui::GetWindowWidth()) / 4;
+    UI::ShiftCursorY(5);
 
+    const float underlineThickness = 1.0f;
+    // Project name --------------------------------------------------------------------
+    {
+      UI::ScopedColor textColor(ImGuiCol_Text, Kreator_UI::Color::TextDarker);
+      UI::ShiftCursorX(10);
+      const std::string title = Project::GetActive()->GetConfig().name;
+      {
+        UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+        ImGui::Text(title.c_str());
+      }
+      UI::SetTooltip("Current project (" + Project::GetActive()->GetConfig().projectFileName + ")");
+
+      // Get the Project Name rectangle (Expanded by 10 to have good space)
+      ImRect itemRect = UI::RectExpanded(UI::GetItemRect(), 10.0f, 2.0f);
+      // Make the Max + thickness of rectange as min of verticle line
+      itemRect.Min.x = itemRect.Max.x + underlineThickness;
+      // Make the new Min + Thickness of rectange as new Max of verticle line
+      itemRect.Max.x = itemRect.Min.x + underlineThickness;
+      
+      drawList->AddRectFilled(itemRect.Min, itemRect.Max, Kreator_UI::Color::Muted, 2.0f);
+    }
+    
+    // Current Scene name ---------------------------------------------------------------
+    {
+      UI::ScopedColor textColor(ImGuiCol_Text, UI::Theme::Color::Text);
+      UI::SameLine();
+
+      const std::string sceneName = m_currentScene->GetName();
+      UI::SetCursorPosX(roundBarRight - ImGui::CalcTextSize(sceneName.c_str()).x - 20);
+      {
+        UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+        ImGui::Text(sceneName.c_str());
+      }
+      UI::SetTooltip("Current scene (" + m_sceneFilePath + ")");
+      
+      // Get the Project Name rectangle (Expanded by 10 to have good space)
+      ImRect itemRect = UI::RectExpanded(UI::GetItemRect(), 10.0f, 2.0f);
+
+      // Make the new Min + Thickness of rectange as new Max of verticle line
+      itemRect.Max.x = itemRect.Min.x + underlineThickness;
+      
+      drawList->AddRectFilled(itemRect.Min, itemRect.Max, Kreator_UI::Color::Muted, 2.0f);
+    }
+    
     // Render the Window Buttons -------------------------------------------------------
     UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
     UI::SetCursorPosY(20.0f);
@@ -637,7 +673,7 @@ namespace Kreator
       // Push the Colors if Menu is active
       if (menuOpen)
       {
-        const ImU32 colActive = UI::ColorWithSaturation(UI::Theme::Color::Accent, 0.5f);
+        const ImU32 colActive = UI::ColorWithSaturation(Kreator_UI::Color::Accent, 0.5f);
         ImGui::PushStyleColor(ImGuiCol_Header, colActive);
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, colActive);
       }
@@ -690,7 +726,7 @@ namespace Kreator
     // Window buttons
     const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 0.9f);
     const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 1.2f);
-    const ImU32 buttonColP = UI::Theme::Color::TextDarker;
+    const ImU32 buttonColP = Kreator_UI::Color::TextDarker;
     const float buttonWidth = 14.0f;
     const float buttonHeight = 14.0f;
     const Window& window = Application::Get().GetWindow();
