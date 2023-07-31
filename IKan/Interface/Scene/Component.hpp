@@ -16,7 +16,8 @@ namespace IKan
   // If you add a new type of component, there are several pieces of code that need updating:
   //  1) Add new component here (obviously).
   //  2) Create Proper Copy and Move Constructors
-  //  3) Adding in ALL_COPY_COMPONENTS Macro
+  //  3) Add in ALL_COPY_COMPONENTS Macro
+  //  3) Add in Scene Duplicate Function
   
   struct IDComponent
   {

@@ -187,7 +187,7 @@ namespace IKan
     
     CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     
-    auto childIds = entity.Children(); // need to take a copy of children here, because the collection is mutated below
+    auto childIds = entity.Children();
     for (auto childId : childIds)
     {
       Entity childDuplicate = DuplicateEntity(GetEntityWithUUID(childId));

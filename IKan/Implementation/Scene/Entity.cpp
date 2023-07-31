@@ -17,23 +17,26 @@ namespace IKan
   
   void Entity::SetParent(Entity parent)
   {
+    // Get the current Parent
     Entity currentParent = GetParent();
     if (currentParent == parent)
     {
+      // If current parent is same as 'parent' then do nothing
       return;
     }
     
-    // If changing parent, remove child from existing parent
+    // If this entity already have a parent then remove this child from existing parent
     if (currentParent)
     {
       currentParent.RemoveChild(*this);
     }
     
-    // Setting to null is okay
+    // Updating the Parent UUID as 'parent' entities UUID
     SetParentUUID(parent.GetUUID());
     
     if (parent)
     {
+      // Add current entity in parent's children
       auto& parentChildren = parent.Children();
       UUID uuid = GetUUID();
       if (std::find(parentChildren.begin(), parentChildren.end(), uuid) == parentChildren.end())
@@ -57,13 +60,16 @@ namespace IKan
   
   bool Entity::IsAncesterOf(Entity entity)
   {
+    // Get children on this entity
     const auto& children = Children();
     
+    // If no children then this entity is not ancestor of any entity
     if (children.empty())
     {
       return false;
     }
     
+    // Search for 'entity' in children
     for (UUID child : children)
     {
       if (child == entity.GetUUID())
@@ -72,6 +78,7 @@ namespace IKan
       }
     }
     
+    // Recursively search for anscestor for each children
     for (UUID child : children)
     {
       if (m_scene->GetEntityWithUUID(child).IsAncesterOf(entity))
