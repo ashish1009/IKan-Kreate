@@ -137,6 +137,8 @@
 		B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE392A7272560068EEFB /* AssertAPIs.h */; };
 		B2B5DE3E2A727C090068EEFB /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B5DE3C2A727C090068EEFB /* Timer.cpp */; };
 		B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE3D2A727C090068EEFB /* Timer.hpp */; };
+		B2B63F212A779E820056ED4E /* ImGuiTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B63F1F2A779E820056ED4E /* ImGuiTheme.cpp */; };
+		B2B63F222A779E820056ED4E /* ImGuiTheme.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */; };
 		B2D161592A76949A00DD1678 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D161572A76949A00DD1678 /* AssetManager.cpp */; };
 		B2D1615A2A76949A00DD1678 /* AssetManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D161582A76949A00DD1678 /* AssetManager.hpp */; };
 		B2D161652A77752B00DD1678 /* SceneSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D161632A77752B00DD1678 /* SceneSerializer.cpp */; };
@@ -320,6 +322,8 @@
 		B2B5DE392A7272560068EEFB /* AssertAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertAPIs.h; sourceTree = "<group>"; };
 		B2B5DE3C2A727C090068EEFB /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		B2B5DE3D2A727C090068EEFB /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
+		B2B63F1F2A779E820056ED4E /* ImGuiTheme.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiTheme.cpp; sourceTree = "<group>"; };
+		B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiTheme.hpp; sourceTree = "<group>"; };
 		B2D161572A76949A00DD1678 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		B2D161582A76949A00DD1678 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
 		B2D161632A77752B00DD1678 /* SceneSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSerializer.cpp; sourceTree = "<group>"; };
@@ -564,6 +568,7 @@
 			isa = PBXGroup;
 			children = (
 				B23367112A75396800BC7B8B /* ImGuiLayer.hpp */,
+				B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -573,6 +578,7 @@
 			children = (
 				B233670C2A75394300BC7B8B /* ImGuiBuild.cpp */,
 				B23367102A75396800BC7B8B /* ImGuiLayer.cpp */,
+				B2B63F1F2A779E820056ED4E /* ImGuiTheme.cpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -828,6 +834,7 @@
 				B23367222A7548F200BC7B8B /* Component.hpp in Headers */,
 				B233671A2A75405B00BC7B8B /* Scene.hpp in Headers */,
 				B233658D2A75345D00BC7B8B /* Layer.hpp in Headers */,
+				B2B63F222A779E820056ED4E /* ImGuiTheme.hpp in Headers */,
 				B233654F2A7502BA00BC7B8B /* FrameBuffer.hpp in Headers */,
 				B23365432A74D76C00BC7B8B /* stb_image.h in Headers */,
 				B23365152A74381300BC7B8B /* OpenGLRendererBuffers.hpp in Headers */,
@@ -988,6 +995,7 @@
 				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B23364D82A74253900BC7B8B /* RendererAPI.cpp in Sources */,
 				B23365562A7503CA00BC7B8B /* OpenGLFrameBuffer.cpp in Sources */,
+				B2B63F212A779E820056ED4E /* ImGuiTheme.cpp in Sources */,
 				B23365362A74422800BC7B8B /* FixedCamera.cpp in Sources */,
 				B233651C2A743D0E00BC7B8B /* Pipeline.cpp in Sources */,
 				B23365762A752E0A00BC7B8B /* Font.cpp in Sources */,
