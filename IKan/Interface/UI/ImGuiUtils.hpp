@@ -101,4 +101,36 @@ namespace IKan::UI
   ///   - xy: offset
   ImRect RectOffset(const ImRect& rect, ImVec2 xy);
 
+  // Colors ----------------------------------------------------------------------------------------------------------
+  /// This function add the color to some value
+  /// - Parameters:
+  ///   - color: color
+  ///   - value: value
+  ImU32 ColorWithValue(const ImColor& color, float value);
+  /// This function adds the color with saturation
+  /// - Parameters:
+  ///   - color: color
+  ///   - saturation: saturation
+  ImU32 ColorWithSaturation(const ImColor& color, float saturation);
+  /// This function adds the color with Hue
+  /// - Parameters:
+  ///   - color: color
+  ///   - hue: hue
+  ImU32 ColorWithHue(const ImColor& color, float hue);
+  /// This finction multiply the color with some value
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedValue(const ImColor& color, float multiplier);
+  /// This finction multiply the color with some saturation
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedSaturation(const ImColor& color, float multiplier);
+  /// This finction multiply the color with some hue
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedHue(const ImColor& color, float multiplier);
+  
 } //  namespace IKan::UI
