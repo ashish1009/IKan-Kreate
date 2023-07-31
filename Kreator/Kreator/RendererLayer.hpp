@@ -51,6 +51,10 @@ namespace Kreator
     /// - Parameter e: Mouse Event
     bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
 
+    /// This function updates the name of window tile
+    /// - Parameter sceneName: scene name
+    void UpdateWindowTitle(const std::string& sceneName);
+
     // Project API --------------------------------------
     /// This function Creates new project
     /// - Parameter projectPath: Project File path
@@ -66,6 +70,11 @@ namespace Kreator
     /// This function Opens the project from popup
     void OpenProject();
 
+    // Scene APIs ----------------------------------------
+    /// This function creates new scene
+    /// - Parameter name: Scene name
+    void NewScene(const std::string& name = "UntitledScene");
+
     // Member Variables ----------------------------------------------------------------------------------------------
     std::filesystem::path m_clientDirPath;
     
@@ -74,7 +83,8 @@ namespace Kreator
     EditorCamera m_editorCamera;
 
     // Scene Data ----------------------------------------
-    Ref<Scene> m_editorScene;
+    std::string m_sceneFilePath;
+    Ref<Scene> m_editorScene, m_currentScene;
     
     // Project Data --------------------------------------
     std::filesystem::path m_templateProjectDir;

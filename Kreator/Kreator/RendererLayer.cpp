@@ -69,26 +69,26 @@ namespace Kreator
       CreateProject(projDir);
     }
 
-    // TODO: Temp
-    {
-      m_editorScene = Scene::Create();
-      [[maybe_unused]] auto quad = m_editorScene->CreateEntity("Quad");
-      quad.AddComponent<QuadComponent>();
-      quad.GetComponent<TransformComponent>().UpdatePosition({1, 1, 0});
-      const auto& textFileName = Project::GetActive()->GetAssetDirectory() / "Textures/checkerboard.png";
-      quad.GetComponent<QuadComponent>().texture = AssetManager::CreateMemoryOnlyAsset<Image>(textFileName, textFileName);
-      
-      [[maybe_unused]] auto circle = m_editorScene->CreateEntity("Circle");
-      circle.AddComponent<CircleComponent>();
-      circle.GetComponent<TransformComponent>().UpdatePosition({0, 0, 0});
-      
-      [[maybe_unused]] auto text = m_editorScene->CreateEntity("Text");
-      text.AddComponent<TextComponent>();
-      text.GetComponent<TransformComponent>().UpdatePosition({0, -1, 1});
-      
-      [[maybe_unused]] auto camera = m_editorScene->CreateEntity("Camera");
-      camera.AddComponent<SceneCamera>();
-    }
+//    // TODO: Temp
+//    {
+//      m_editorScene = Scene::Create();
+//      [[maybe_unused]] auto quad = m_editorScene->CreateEntity("Quad");
+//      quad.AddComponent<QuadComponent>();
+//      quad.GetComponent<TransformComponent>().UpdatePosition({1, 1, 0});
+//      const auto& textFileName = Project::GetActive()->GetAssetDirectory() / "Textures/checkerboard.png";
+//      quad.GetComponent<QuadComponent>().texture = AssetManager::CreateMemoryOnlyAsset<Image>(textFileName, textFileName);
+//      
+//      [[maybe_unused]] auto circle = m_editorScene->CreateEntity("Circle");
+//      circle.AddComponent<CircleComponent>();
+//      circle.GetComponent<TransformComponent>().UpdatePosition({0, 0, 0});
+//      
+//      [[maybe_unused]] auto text = m_editorScene->CreateEntity("Text");
+//      text.AddComponent<TextComponent>();
+//      text.GetComponent<TransformComponent>().UpdatePosition({0, -1, 1});
+//      
+//      [[maybe_unused]] auto camera = m_editorScene->CreateEntity("Camera");
+//      camera.AddComponent<SceneCamera>();
+//    }
   }
   
   void RendererLayer::OnDetach()
@@ -124,6 +124,17 @@ namespace Kreator
   
   bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
   {
+    if (Input::IsKeyPressed(Key::LeftSuper) and !Input::IsMouseButtonPressed(MouseButton::Right))
+    {
+      switch (e.GetKeyCode())
+      {
+        case Key::N:
+          NewScene();
+          break;
+        default:
+          break;
+      }
+    }
     return false;
   }
   bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
@@ -156,6 +167,16 @@ namespace Kreator
 
     ImGui::End();
     ImGui::PopStyleVar();
+  }
+  
+  void RendererLayer::UpdateWindowTitle(const std::string& sceneName)
+  {
+    const auto& caps = Renderer::Capabilities::Get();
+    const std::string title = fmt::format("{0} ({1}) - Kreator - {2} ({3}) Renderer: {4}",
+                                          sceneName, Project::GetActive()->GetConfig().name,
+                                          caps.vendor, caps.version,
+                                          caps.renderer);
+    Application::Get().GetWindow().SetTitle(title);
   }
   
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
@@ -224,8 +245,9 @@ namespace Kreator
     Ref<Project> project = CreateRef<Project>();
     ProjectSerializer serializer(project);
     serializer.Deserialize(filepath);
-    
     Project::SetActive(project);
+    
+    NewScene();
   }
   
   void RendererLayer::OpenProject()
@@ -250,4 +272,15 @@ namespace Kreator
     ProjectSerializer serializer(project);
     serializer.Serialize(project->GetConfig().projectDirectory + "/" + project->GetConfig().projectFileName);
   }
+  
+  void RendererLayer::NewScene(const std::string& name)
+  {
+    m_editorScene =  Scene::Create(name);
+    UpdateWindowTitle(name);
+    m_sceneFilePath = std::string();
+    
+    m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
+    m_currentScene = m_editorScene;
+  }
+
 } // namespace Kreator
