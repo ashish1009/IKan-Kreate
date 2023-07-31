@@ -27,7 +27,7 @@ namespace IKan::UI
       inline static ImU32 GroupHeaderActive    = IM_COL32(30, 30, 30, 255);
       
       inline static ImU32 Highlight            = IM_COL32(12, 12, 242, 255);
-      inline static ImU32 Accent               = IM_COL32(11, 11, 236, 255);
+      inline static ImU32 Accent               = IM_COL32(0, 0, 255, 255);
       inline static ImU32 NiceBlue             = IM_COL32(10, 10, 254, 255);
       inline static ImU32 Compliment           = IM_COL32(9, 9, 9, 255);
       inline static ImU32 TextBrighter         = IM_COL32(210, 210, 210, 255);
