@@ -44,7 +44,11 @@ namespace IKan::UI
     ///   - defaultFont: Default font informatiom
     ///   - boldFont: bold Font informatiom
     ///   - otherFonts: other fonts
-    static void ChangeFont(const UI::Font &defaultFont, const UI::Font &boldFont, const
-                           std::vector<UI::Font> otherFonts = {});
+    static void ChangeFont(const UI::Font &defaultFont, const UI::Font &boldFont, const std::vector<UI::Font> otherFonts = {});
+    
+    /// This function Returns the regular font
+    static ImFont* GetRegularFont();
+    /// This function Returns the bold font
+    static ImFont* GetBoldFont();
   };
 } // namespace IKan::UI

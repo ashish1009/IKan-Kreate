@@ -19,4 +19,14 @@ namespace IKan::UI
     imguiLayer.ReloadIni();
     imguiLayer.SetFont(defaultFont, boldFont, otherFonts);
   }
+  
+  ImFont* Theme::GetRegularFont()
+  {
+    return ImGui::GetIO().Fonts->Fonts[0];
+  }
+  ImFont* Theme::GetBoldFont()
+  {
+    return ImGui::GetIO().Fonts->Fonts.Size > 1 ? ImGui::GetIO().Fonts->Fonts[1] : ImGui::GetIO().Fonts->Fonts[0];
+  }
+
 } // namespace IKan::UI
