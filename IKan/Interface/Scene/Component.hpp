@@ -141,6 +141,19 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(CircleComponent);
   };
 
+  struct TextComponent
+  {
+    std::string textString = "Text";
+    AssetHandle assetHandle;
+    glm::vec4 color = { 1.0f, 1.0f, 1.0f, 1.0f };
+    
+    TextComponent();
+    ~TextComponent();
+    
+    void Copy(const TextComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(TextComponent);
+  };
+
   template<typename... Component>
   struct ComponentGroup
   {
@@ -148,7 +161,7 @@ namespace IKan
   };
   
 #define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
-QuadComponent, CircleComponent
+QuadComponent, CircleComponent, TextComponent
   
   // Stores all the components present in Engine
   using AllComponents =

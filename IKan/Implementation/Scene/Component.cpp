@@ -284,4 +284,21 @@ return *this; \
     fade = other.fade;
   }
 
+  // Text Component ---------------------------------------------------------------------------------------------------
+  TextComponent::TextComponent()
+  {
+    COMP_LOG("Creating Text Component");
+  }
+  TextComponent::~TextComponent()
+  {
+    COMP_LOG("Destroying Text Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(TextComponent);
+  
+  void TextComponent::Copy(const TextComponent &other)
+  {
+    textString = other.textString;
+    assetHandle = other.assetHandle;
+    color = other.color;
+  }  
 } // namespace IKan
