@@ -2,3 +2,6 @@ Project:
   Name: Sandbox
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
+  StartScene: Scenes/Sandbox.ikscene
+  AutoSave: true
+  AutoSaveInterval: 60

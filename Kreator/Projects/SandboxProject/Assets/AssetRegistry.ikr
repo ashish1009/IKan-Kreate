@@ -1,2 +1,7 @@
 Assets:
-  []
+  - Handle: 644040266
+    FilePath: Textures/checkerboard.png
+    Type: Image
+  - Handle: 1447746694
+    FilePath: Scenes/Sandbox.ikscene
+    Type: Scene

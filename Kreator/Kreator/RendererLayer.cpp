@@ -68,30 +68,6 @@ namespace Kreator
       memcpy(m_projectNameBuffer, projName.c_str(), projName.size());
       CreateProject(projDir);
     }
-
-    // TODO: Temp
-    {
-      m_editorScene = Scene::Create();
-      [[maybe_unused]] auto quad = m_editorScene->CreateEntity("Quad");
-      quad.AddComponent<QuadComponent>();
-      quad.GetComponent<TransformComponent>().UpdatePosition({1, 1, 0});
-      const auto& textFileName = Project::GetActive()->GetAssetDirectory() / "Textures/checkerboard.png";
-      quad.GetComponent<QuadComponent>().texture = AssetManager::CreateMemoryOnlyAsset<Image>(textFileName, textFileName);
-
-      [[maybe_unused]] auto circle = m_editorScene->CreateEntity("Circle");
-      circle.AddComponent<CircleComponent>();
-      circle.GetComponent<TransformComponent>().UpdatePosition({0, 0, 0});
-
-      [[maybe_unused]] auto text = m_editorScene->CreateEntity("Text");
-      text.AddComponent<TextComponent>();
-      text.GetComponent<TransformComponent>().UpdatePosition({0, -1, 1});
-
-      [[maybe_unused]] auto camera = m_editorScene->CreateEntity("Camera");
-      camera.AddComponent<SceneCamera>();
-      
-      SceneSerializer serializer(m_editorScene);
-      serializer.Serialize(Project::GetActive()->GetAssetDirectory() / "Scenes/Sandbox.ikscene");
-    }
   }
   
   void RendererLayer::OnDetach()

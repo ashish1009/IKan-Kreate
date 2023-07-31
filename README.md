@@ -128,12 +128,11 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
 
 - v6.1.2.0  : IKan    - Render Scene With ECS
  ------------------------------------------------------------------------------------------------------------------  
-
-## Upcoming Release Tags
--   : IKan    - Scene Serializer
+- v6.2.2.0  : IKan    - Scene Serializer
   - SceneSerializer class (YAML Utils)
  ------------------------------------------------------------------------------------------------------------------  
-   
+
+## Upcoming Release Tags
 -  : IKan    - ImGui Color and API | Kreator - UI Theme (Font and Color)
   - ImGui Base Theme class
   - ImGui font loader
@@ -158,7 +157,6 @@ v<IKan Major Version>.<IKan Minor Verision>.<Kreator Major Version>.<Kreator Min
 
 -   : Kreator - Scene Playe Pause Simulation Tool bar
   - Scene Play and Pause
-  
  ------------------------------------------------------------------------------------------------------------------
 
 -   : IKan    - Editor Console, Project Setting | Kreator - All Project, Scene, Log, Setting ... panels
