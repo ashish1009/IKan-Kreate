@@ -155,8 +155,8 @@ if (!Project::GetActive()) return
     UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
     UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
     UI::Font sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
-    UI::Font Hugeheader = {KreatorResourcePath("Fonts/Headers/Header.ttf"), 30};
-    UI::Font semiheader = {KreatorResourcePath("Fonts/Headers/Header.ttf"), 12};
+    UI::Font Hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
+    UI::Font semiheader = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 18};
     UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, Hugeheader, semiheader});
 
     Kreator_UI::SetDarkTheme();
@@ -876,14 +876,18 @@ if (!Project::GetActive()) return
                 logoRectStart.x + buttonHeight,
                 logoRectStart.y + buttonHeight
               };
-              auto* drawList = ImGui::GetWindowDrawList();
-              drawList->AddImage(UI::GetTextureID(icon), logoRectStart, logoRectMax, {0, 0}, {1, 1}, IM_COL32(84, 84, 184, 255));
+              
+              const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 0.9f);
+              const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 1.2f);
+              const ImU32 buttonColP = Kreator_UI::Color::TextDarker;
+              UI::DrawButtonImage(icon, buttonColN, buttonColH, buttonColP, ImRect{logoRectStart, logoRectMax});
               
               ImGui::SameLine(140);
-              UI::ShiftCursorY(15);
+              UI::ShiftCursorY(10);
               {
                 UI::ScopedFont text(Kreator_UI::GetSemiHeaderFont());
                 UI::ScopedColor color(ImGuiCol_Text, IM_COL32(184, 184, 184, 255));
+
                 ImGui::Text("%s", buttonHelper.c_str());
               }
               
@@ -901,6 +905,18 @@ if (!Project::GetActive()) return
             }
           }
           
+          UI::ShiftCursorY(35);
+          UI::ShiftCursorX(10);
+          bool showAgain = m_userPreferences->showWelcomeScreen;
+          if (ImGui::Checkbox("##showAgain", &showAgain))
+          {
+            m_userPreferences->showWelcomeScreen = showAgain;
+            UserPreferencesSerializer serializer(m_userPreferences);
+            serializer.Serialize(m_userPreferences->filePath);
+          }
+          ImGui::SameLine();
+          ImGui::TextUnformatted("Show this window again when Kreator Launches");
+
           // Draw side shadow-----------------------------------------------------------------
           ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
           ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
