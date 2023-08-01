@@ -244,6 +244,7 @@ if (!Project::GetActive()) return
     
     // Should be above all scene GUI
     UI_WelcomePopup();
+    UI_NewProjectPopup();
     
     RETRUN_IF_NO_PROJECT();
     
@@ -896,7 +897,8 @@ if (!Project::GetActive()) return
             
             if (button("New Project", m_newProject, "Create New Kreator Project"))
             {
-              
+              m_showCreateNewProjectPopup = true;
+              ImGui::CloseCurrentPopup();
             }
             
             if (button("Open Project", m_Folder, "Open an exisiting Kreator Project"))
@@ -941,6 +943,23 @@ if (!Project::GetActive()) return
   }
   void RendererLayer::UI_NewProjectPopup()
   {
+    if (m_showCreateNewProjectPopup)
+    {
+      ImGui::OpenPopup("New Project");
+      memset(m_projectNameBuffer, 0, MAX_PROJECT_NAME_LENGTH);
+      m_showCreateNewProjectPopup = false;
+    }
     
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 700, 325 });
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 10));
+    
+    if (ImGui::BeginPopupModal("New Project", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove))
+    {
+      ImGui::EndPopup();
+    }
+    ImGui::PopStyleVar(2);
   }
 } // namespace Kreator

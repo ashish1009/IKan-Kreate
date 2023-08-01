@@ -132,7 +132,7 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const ApplicationData& ap
   applicationSpec.windowSpecification.width = 1600;
   applicationSpec.windowSpecification.height = 900;
   applicationSpec.windowSpecification.isFullscreen = false;
-  applicationSpec.windowSpecification.hideTitleBar = false;
+  applicationSpec.windowSpecification.hideTitleBar = true;
 
   applicationSpec.resizable = true;
   applicationSpec.startMaximized = true;
