@@ -37,5 +37,7 @@ namespace Kreator_UI
   ImFont* GetFixedWidthFont();
   /// This function Returns the Huge Header font
   ImFont* GetHugeHeaderFont();
+  /// This function Returns the Semi Header font
+  ImFont* GetSemiHeaderFont();
 
 } // namespace Kreator_UI

@@ -131,6 +131,10 @@ if (!Project::GetActive()) return
     
     // Shadow Icon
     m_shadowTexture = Image::Create(KreatorResourcePath("Textures/Icons/ShadowLineTop.png"));
+    
+    // Other Icons
+    m_newProject = Image::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
+    m_Folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -152,7 +156,8 @@ if (!Project::GetActive()) return
     UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
     UI::Font sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
     UI::Font Hugeheader = {KreatorResourcePath("Fonts/Headers/Header.ttf"), 30};
-    UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, Hugeheader});
+    UI::Font semiheader = {KreatorResourcePath("Fonts/Headers/Header.ttf"), 12};
+    UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, Hugeheader, semiheader});
 
     Kreator_UI::SetDarkTheme();
 
@@ -792,12 +797,13 @@ if (!Project::GetActive()) return
 
     UI::ScopedColor bgCol(ImGuiCol_ChildBg, IM_COL32(30, 30, 30, 255));
     UI::ScopedColor separator(ImGuiCol_Separator, IM_COL32(111, 111, 111, 155));
-    
+    UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 15.0f));
+
     if (ImGui::BeginPopupModal("Welcome Screen", nullptr,
                                ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
                                | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground))
     {
-      ImGuiTableFlags tableFlags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV;
+      ImGuiTableFlags tableFlags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV ;
       UI::PushID();
       if (ImGui::BeginTable(UI::GenerateID(), 2 /* Num Columns */, tableFlags, ImVec2(0.0f, 0.0f)))
       {
@@ -811,37 +817,89 @@ if (!Project::GetActive()) return
         ImGui::TableSetColumnIndex(0);
         ImGui::BeginChild("##About/New_Project");
         {
-          // Draw Kreator Logo ---------------------------------------------------------------
           const int32_t logoSize = 200;
-          
-          const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
-          const ImVec2 logoRectStart =
+          // Draw Kreator Logo ---------------------------------------------------------------
           {
-            ImGui::GetItemRectMin().x + (ImGui::GetColumnWidth() / 2 - logoSize / 2),
-            ImGui::GetItemRectMin().y
-          };
-          const ImVec2 logoRectMax =
-          {
-            logoRectStart.x + logoSize,
-            logoRectStart.y + logoSize
-          };
-          auto* drawList = ImGui::GetWindowDrawList();
-          drawList->AddImage(UI::GetTextureID(m_welcomeIcon), logoRectStart, logoRectMax, {0, 0}, {1, 1},
-                             IM_COL32(211, 211, 211, 255));
+            const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
+            const ImVec2 logoRectStart =
+            {
+              ImGui::GetItemRectMin().x + (ImGui::GetColumnWidth() / 2 - logoSize / 2),
+              ImGui::GetItemRectMin().y
+            };
+            const ImVec2 logoRectMax =
+            {
+              logoRectStart.x + logoSize,
+              logoRectStart.y + logoSize
+            };
+            auto* drawList = ImGui::GetWindowDrawList();
+            drawList->AddImage(UI::GetTextureID(m_welcomeIcon), logoRectStart, logoRectMax, {0, 0}, {1, 1},
+                               IM_COL32(84, 84, 211, 255));
+          }
           
           // Welcome Header -------
-          UI::SetCursorPosY(logoSize + ImGui::GetCurrentWindow()->WindowPadding.y + 10);
           {
-            UI::ScopedFont header(Kreator_UI::GetHugeHeaderFont());
-            static std::string welcomeText = "Welcome to IKan-Kreate";
-            UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(welcomeText.c_str()).x / 2);
-            ImGui::Text("%s", welcomeText.c_str());
+            UI::SetCursorPosY(logoSize + ImGui::GetCurrentWindow()->WindowPadding.y + 10);
+            {
+              UI::ScopedFont header(Kreator_UI::GetHugeHeaderFont());
+              static std::string welcomeText = "Welcome to IKan-Kreate";
+              UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(welcomeText.c_str()).x / 2);
+              ImGui::Text("%s", welcomeText.c_str());
+            }
+            
+            {
+              UI::ScopedFont version(Kreator_UI::GetBoldFont());
+              static std::string versionText = "Version" + IKanVersion;
+              UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(versionText.c_str()).x / 2);
+              ImGui::Text("%s", versionText.c_str());
+            }
           }
-
-          static std::string versionText = "Version" + IKanVersion;
-          UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(versionText.c_str()).x / 2);
-          ImGui::Text("%s", versionText.c_str());
           ImGui::Separator();
+          
+          // Buttons
+          {
+            auto button = [this](const char* title, Ref<Image> icon, const std::string& buttonHelper) {
+              auto textSize = ImGui::CalcTextSize(buttonHelper.c_str()).x;;
+
+              const float buttonHeight = 40.0f;
+              const float buttonWidth = textSize + buttonHeight;
+              
+              // Minimize Button
+              UI::ShiftCursorX(80);
+              if (ImGui::InvisibleButton(title, ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+              {
+                return true;
+              }
+              
+              const ImVec2 logoRectStart = ImGui::GetItemRectMin();
+              const ImVec2 logoRectMax =
+              {
+                logoRectStart.x + buttonHeight,
+                logoRectStart.y + buttonHeight
+              };
+              auto* drawList = ImGui::GetWindowDrawList();
+              drawList->AddImage(UI::GetTextureID(icon), logoRectStart, logoRectMax, {0, 0}, {1, 1}, IM_COL32(84, 84, 184, 255));
+              
+              ImGui::SameLine(140);
+              UI::ShiftCursorY(15);
+              {
+                UI::ScopedFont text(Kreator_UI::GetSemiHeaderFont());
+                UI::ScopedColor color(ImGuiCol_Text, IM_COL32(184, 184, 184, 255));
+                ImGui::Text("%s", buttonHelper.c_str());
+              }
+              
+              return false;
+            };
+            
+            if (button("New Project", m_newProject, "Create New Kreator Project"))
+            {
+              
+            }
+            
+            if (button("Open Project", m_Folder, "Open an exisiting Kreator Project"))
+            {
+              
+            }
+          }
           
           // Draw side shadow-----------------------------------------------------------------
           ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);

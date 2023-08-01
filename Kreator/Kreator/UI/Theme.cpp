@@ -141,6 +141,10 @@ namespace Kreator_UI
   {
     return ImGui::GetIO().Fonts->Fonts[4];
   }
+  ImFont* GetSemiHeaderFont()
+  {
+    return ImGui::GetIO().Fonts->Fonts[5];
+  }
 
 } // namespace Kreator_UI
 
