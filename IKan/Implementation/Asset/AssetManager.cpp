@@ -33,8 +33,11 @@ namespace IKan
   
   void AssetManager::Shutdown()
   {
-    // Write the asset data in registry file
-    WriteRegistryToFile();
+    if (Project::GetActive())
+    {
+      // Write the asset data in registry file
+      WriteRegistryToFile();
+    }
     
     s_memoryAssets.clear();
     s_loadedAssets.clear();

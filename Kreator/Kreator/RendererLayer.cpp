@@ -11,6 +11,9 @@ extern std::string IKanVersion;
 
 namespace Kreator
 {
+#define RETRUN_IF_NO_PROJECT() \
+if (!Project::GetActive()) return
+  
   // Kretor Resource Path
 #define KreatorResourcePath(path) m_clientDirPath / "Resources" / path
 
@@ -157,11 +160,14 @@ namespace Kreator
     }
     else
     {
+      m_showCreateNewProjectPopup = true;
+#if 0
       auto projName = Utils::String::GetFileNameFromPath(m_userPreferences->startupProject);
       auto projDir = Utils::String::GetDirectoryFromPath(m_userPreferences->startupProject);
-      
+
       memcpy(m_projectNameBuffer, projName.c_str(), projName.size());
       CreateProject(projDir);
+#endif
     }
   }
   
@@ -174,6 +180,8 @@ namespace Kreator
   void RendererLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
+    RETRUN_IF_NO_PROJECT();
+    
     m_viewport.UpdateMousePos();
 
     m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
@@ -190,6 +198,8 @@ namespace Kreator
   
   void RendererLayer::OnEvent(Event& event)
   {
+    RETRUN_IF_NO_PROJECT();
+
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnKeyPressedEvent));
     dispatcher.Dispatch<MouseButtonPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnMouseButtonPressed));
@@ -230,7 +240,8 @@ namespace Kreator
   void RendererLayer::OnImguiRender()
   {
     IK_PERFORMANCE("RendererLayer::OnImguiRender");
-
+    RETRUN_IF_NO_PROJECT();
+    
     UI_WelcomePopup();
 
     if (!m_welcomScreenActive)
@@ -697,6 +708,11 @@ namespace Kreator
       
       // Menu Items
       UI_Utils::AddMenu("File", popItemHighlight, [this]() {
+        if (ImGui::MenuItem("Create Project..."))
+        {
+          m_showCreateNewProjectPopup = true;
+        }
+
         if (ImGui::MenuItem("Exit", "Cmd + Q"))
         {
           Application::Get().Close();
@@ -776,4 +792,8 @@ namespace Kreator
   {
   }
 
+  void RendererLayer::UI_NewProjectPopup()
+  {
+    
+  }
 } // namespace Kreator

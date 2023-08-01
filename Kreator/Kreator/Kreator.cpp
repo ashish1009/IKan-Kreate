@@ -72,11 +72,13 @@ namespace Kreator
         {
           if (m_userPreference->startupProject.empty())
           {
+#if 0
             // If There is no startup project and no project is given by argument
             // Create Projects Directory
             auto sandboxProjectDir = projectDir / "SandboxProject";
             m_projectPath = sandboxProjectDir / "Sandbox.ikproj";
             m_userPreference->startupProject = m_projectPath;
+#endif
           }
           else
           {

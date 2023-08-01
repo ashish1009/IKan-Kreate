@@ -114,6 +114,9 @@ namespace Kreator
     /// This function shows the Welcome screen
     void UI_WelcomePopup();
 
+    /// This function shows new project popup
+    void UI_NewProjectPopup();
+
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
@@ -132,6 +135,7 @@ namespace Kreator
     Ref<Scene> m_editorScene, m_currentScene;
     
     // Project Data --------------------------------------
+    bool m_showCreateNewProjectPopup = false;
     std::filesystem::path m_templateProjectDir;
     Ref<UserPreferences> m_userPreferences;
     char* m_projectNameBuffer = nullptr;
