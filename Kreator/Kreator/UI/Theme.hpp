@@ -35,5 +35,7 @@ namespace Kreator_UI
   ImFont* GetItalicFont();
   /// This function Returns the Fixed width font
   ImFont* GetFixedWidthFont();
+  /// This function Returns the Huge Header font
+  ImFont* GetHugeHeaderFont();
 
 } // namespace Kreator_UI

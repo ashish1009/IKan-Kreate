@@ -137,5 +137,10 @@ namespace Kreator_UI
   {
     return ImGui::GetIO().Fonts->Fonts[3];
   }
+  ImFont* GetHugeHeaderFont()
+  {
+    return ImGui::GetIO().Fonts->Fonts[4];
+  }
+
 } // namespace Kreator_UI
 
