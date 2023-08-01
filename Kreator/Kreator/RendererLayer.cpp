@@ -7,6 +7,8 @@
 
 #include "RendererLayer.hpp"
 
+extern std::string IKanVersion;
+
 namespace Kreator
 {
   // Kretor Resource Path
@@ -138,13 +140,13 @@ namespace Kreator
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
     
     // Decorate the Theme
-    Kreator_UI::SetDarkTheme();
-    
-    UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
-    UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
-    UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
+    UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 13};
+    UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 13};
+    UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 13};
     UI::Font sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};    
     UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont});
+
+    Kreator_UI::SetDarkTheme();
 
     // Open or Create Project
     if (Utils::FileSystem::Exists(m_userPreferences->startupProject))
@@ -211,11 +213,12 @@ namespace Kreator
     }
     return false;
   }
+
   bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
   {
     return false;
   }
-  
+
   void RendererLayer::UpdateViewportSize()
   {
     Renderer2D::SetViewport(m_viewport.width, m_viewport.height);
@@ -225,12 +228,15 @@ namespace Kreator
   void RendererLayer::OnImguiRender()
   {
     IK_PERFORMANCE("RendererLayer::OnImguiRender");
-    
-    UI_StartMainWindowDocking();
-    
-    UI_Viewport();
-        
-    UI_EndMainWindowDocking();
+
+    UI_WelcomePopup();
+
+    if (!m_welcomScreenActive)
+    {
+      UI_StartMainWindowDocking();
+      UI_Viewport();
+      UI_EndMainWindowDocking();
+    }
   }
   
   void RendererLayer::UpdateWindowTitle(const std::string& sceneName)
@@ -238,8 +244,7 @@ namespace Kreator
     const auto& caps = Renderer::Capabilities::Get();
     const std::string title = fmt::format("{0} ({1}) - Kreator - {2} ({3}) Renderer: {4}",
                                           sceneName, Project::GetActive()->GetConfig().name,
-                                          caps.vendor, caps.version,
-                                          caps.renderer);
+                                          caps.vendor, caps.version, caps.renderer);
     Application::Get().GetWindow().SetTitle(title);
   }
   
@@ -762,6 +767,62 @@ namespace Kreator
         Application::Get().Close();
       }
       UI::DrawButtonImage(m_iconClose, UI::Theme::Color::Text, UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 1.4f), buttonColP);
+    }
+  }
+
+  void RendererLayer::UI_WelcomePopup()
+  {
+    if (m_userPreferences->showWelcomeScreen and m_showWelcomePopup)
+    {
+      ImGui::OpenPopup("Welcome");
+      m_showWelcomePopup = false;
+    }
+        
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 600, 0 });
+    if (ImGui::BeginPopupModal("Welcome", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
+    {
+      ImVec4* colors = ImGui::GetStyle().Colors;
+      colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.15f, 0.15f, 0.25f, 1.0f);
+
+      ImGui::Text("Welcome to IKan-Kreator!");
+      ImGui::SameLine();
+      UI::SetCursorPosX(ImGui::GetWindowSize().x - ImGui::CalcTextSize(IKanVersion.c_str()).x - 10);
+      ImGui::TextWrapped("%s", IKanVersion.c_str());
+
+      ImGui::Separator();
+      ImGui::TextWrapped("IKan-Kreate is a revolutionary game engine designed to empower game developers on the Mac OS");
+      ImGui::Separator();
+
+      auto cap = Renderer::Capabilities::Get();
+      ImGui::TextWrapped("Vendor %s", cap.vendor.c_str());
+      ImGui::TextWrapped("Renderer %s", cap.renderer.c_str());
+      ImGui::TextWrapped("Version %s", cap.version.c_str());
+      
+      ImGui::Separator();
+      ImGui::TextWrapped("Please report bugs to i.kan.1009@gmail.com");
+      ImGui::Separator();
+
+      if (ImGui::Button("OK") or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
+      {
+        ImGui::CloseCurrentPopup();
+        colors[ImGuiCol_ModalWindowDimBg] = ImVec4(0.15f, 0.15f, 0.25f, 0.6f);
+        m_welcomScreenActive = false;
+      }
+      
+      ImGui::SameLine(250.0f);
+      ImGui::TextUnformatted("Don't Show Again");
+      ImGui::SameLine(365.0f);
+      bool dontShowAgain = !m_userPreferences->showWelcomeScreen;
+      if (ImGui::Checkbox("##dont_show_again", &dontShowAgain))
+      {
+        m_userPreferences->showWelcomeScreen = !dontShowAgain;
+        UserPreferencesSerializer serializer(m_userPreferences);
+        serializer.Serialize(m_userPreferences->filePath);
+      }
+      
+      ImGui::EndPopup();
     }
   }
 

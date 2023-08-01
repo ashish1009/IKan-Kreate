@@ -72,7 +72,7 @@ namespace Kreator
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
 
-    // Project API --------------------------------------
+    // Project API ---------------------------------------
     /// This function Creates new project
     /// - Parameter projectPath: Project File path
     void CreateProject(const std::filesystem::path& projectPath);
@@ -111,9 +111,13 @@ namespace Kreator
     void UI_MenuBar();
     /// This function renders window buttons
     void UI_WindowButtons();
+    /// This function shows the Welcome screen
+    void UI_WelcomePopup();
 
     // Member Variables ----------------------------------------------------------------------------------------------
-    std::filesystem::path m_clientDirPath;
+    // Popups --------------------------------------------
+    bool m_showWelcomePopup = true;
+    bool m_welcomScreenActive = true;
     
     // Applicaiton Icons ---------------------------------
     Ref<Image> m_applicationIcon;
@@ -135,5 +139,8 @@ namespace Kreator
     
     // View port Data ------------------------------------
     Viewport m_viewport;
+    
+    // Client Data ---------------------------------------
+    std::filesystem::path m_clientDirPath;
   };
 } // namespace Kreator
