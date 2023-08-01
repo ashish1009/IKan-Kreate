@@ -120,9 +120,9 @@ namespace Kreator
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
-    bool m_welcomScreenActive = false;
     
     // Applicaiton Icons ---------------------------------
+    Ref<Image> m_shadowTexture;
     Ref<Image> m_applicationIcon, m_welcomeIcon;
     Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
 

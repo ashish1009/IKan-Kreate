@@ -48,7 +48,7 @@ namespace IKan::UI
   void SetCursorPosY(float y);
   /// This function shift the cursor position
   /// - Parameter val: New shift value
-  void SetCursor(ImVec2 val);
+  void SetCursor(const ImVec2& val);
   /// This function create same line
   /// - Parameters:
   ///   - offsetFromStartX: offset from sstart point
@@ -221,4 +221,50 @@ namespace IKan::UI
   /// - Parameter rect: rect vertex
   void DrawBorder(ImRect rect, float thickness = 1.0f, float rounding = 0.0f, float offsetX = 0.0f, float offsetY = 0.0f);  
 
+  /// This function render the Shadow image in Imgui
+  /// - Parameters:
+  ///   - shadowImage: shadow Image
+  ///   - radius: radius of shadow
+  ///   - rectMin: rect min
+  ///   - rectMax: rect Max
+  void DrawShadow(const Ref<Texture>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax,
+                  float alphMultiplier = 1.0f, float lengthStretch = 10.0f, bool drawLeft = true, bool drawRight = true,
+                  bool drawTop = true, bool drawBottom = true);
+  /// This function render the Shadow image in Imgui
+  /// - Parameters:
+  ///   - shadowImage: shadow Image
+  ///   - radius: radius of shadow
+  ///   - rectangle: rectangle Data
+  void DrawShadow(const Ref<Texture>& shadowImage, int radius, ImRect rectangle, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
+                  bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
+  /// This function render the Shadow image in Imgui
+  /// - Parameters:
+  ///   - shadowImage: shadow Image
+  ///   - radius: radius of shadow
+  void DrawShadow(const Ref<Texture>& shadow_image, int radius, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
+                  bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
+  /// This function render the Shadow image in Imgui
+  /// - Parameters:
+  ///   - shadowImage: shadow Image
+  ///   - radius: radius of shadow
+  ///   - rectMin: rect min
+  ///   - rectMax: rect Max
+  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax, float alpha = 1.0f,
+                       float lengthStretch = 10.0f, bool drawLeft = true, bool drawRight = true, bool drawTop = true,
+                       bool drawBottom = true);
+  
+  /// This function render the Shadow image in Imgui
+  /// - Parameters:
+  ///   - shadowImage: shadow Image
+  ///   - radius: radius of shadow
+  ///   - rectangle: rectangle Data
+  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, ImRect rectangle, float alpha = 1.0f, float lengthStretch = 10.0f,
+                       bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
+  /// This function render the Shadow image in Imgui
+  /// - Parameters:
+  ///   - shadowImage: shadow Image
+  ///   - radius: radius of shadow
+  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, float alpha = 1.0f, float lengthStretch = 10.0f,
+                       bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
+  
 } //  namespace IKan::UI

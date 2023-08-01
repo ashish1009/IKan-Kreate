@@ -26,6 +26,10 @@ namespace IKan::UI
   {
     return (ImTextureID)INT2VOIDP(texture->GetRendererID());
   }
+  void SetCursor(const ImVec2& pos)
+  {
+    ImGui::SetCursorPos(pos);
+  }
   void ShiftCursorX(float distance)
   {
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + distance);
@@ -417,6 +421,109 @@ namespace IKan::UI
     
     auto* drawList = ImGui::GetWindowDrawList();
     drawList->AddRect(min, max, ImGui::ColorConvertFloat4ToU32(ImGui::GetStyleColorVec4(ImGuiCol_Border)), rounding, 0, thickness);
+  }
+  
+  void DrawShadow(const Ref<Texture>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax, float alphMultiplier,
+                  float lengthStretch, bool drawLeft, bool drawRight, bool drawTop, bool drawBottom)
+  {
+    const float widthOffset = lengthStretch;
+    const float alphaTop = std::min(0.25f * alphMultiplier, 1.0f);
+    const float alphaSides = std::min(0.30f * alphMultiplier, 1.0f);
+    const float alphaBottom = std::min(0.60f * alphMultiplier, 1.0f);
+    const auto p1 = rectMin;
+    const auto p2 = rectMax;
+    
+    ImTextureID textureID = GetTextureID(shadowImage);
+    
+    auto* drawList = ImGui::GetWindowDrawList();
+    if (drawLeft)
+    {
+      drawList->AddImage(textureID, { p1.x - widthOffset,  p1.y - radius }, { p2.x + widthOffset, p1.y },
+                         ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f), ImColor(0.0f, 0.0f, 0.0f, alphaTop));
+    }
+    if (drawRight)
+    {
+      drawList->AddImage(textureID, { p1.x - widthOffset,  p2.y }, { p2.x + widthOffset, p2.y + radius },
+                         ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f), ImColor(0.0f, 0.0f, 0.0f, alphaBottom));
+    }
+    if (drawTop)
+    {
+      drawList->AddImageQuad(textureID, { p1.x - radius, p1.y - widthOffset }, { p1.x, p1.y - widthOffset },
+                             { p1.x, p2.y + widthOffset }, { p1.x - radius, p2.y + widthOffset }, { 0.0f, 0.0f },
+                             { 0.0f, 1.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, ImColor(0.0f, 0.0f, 0.0f, alphaSides));
+    }
+    if (drawBottom)
+    {
+      drawList->AddImageQuad(textureID, { p2.x, p1.y - widthOffset }, { p2.x + radius, p1.y - widthOffset },
+                             { p2.x + radius, p2.y + widthOffset }, { p2.x, p2.y + widthOffset }, { 0.0f, 1.0f },
+                             { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, ImColor(0.0f, 0.0f, 0.0f, alphaSides));
+    }
+  }
+  
+  void DrawShadow(const Ref<Texture>& shadowImage, int radius, ImRect rectangle, float alphMultiplier,
+                  float lengthStretch, bool drawLeft, bool drawRight, bool drawTop, bool drawBottom)
+  {
+    DrawShadow(shadowImage, radius, rectangle.Min, rectangle.Max, alphMultiplier, lengthStretch,
+               drawLeft, drawRight, drawTop, drawBottom);
+  }
+  
+  
+  void DrawShadow(const Ref<Texture>& shadowImage, int radius, float alphMultiplier, float lengthStretch,
+                  bool drawLeft, bool drawRight, bool drawTop, bool drawBottom)
+  {
+    DrawShadow(shadowImage, radius, ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), alphMultiplier,
+               lengthStretch, drawLeft, drawRight, drawTop, drawBottom);
+  }
+  
+  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax, float alpha,
+                       float lengthStretch, bool drawLeft, bool drawRight, bool drawTop, bool drawBottom)
+  {
+    const float widthOffset = lengthStretch;
+    const float alphaTop = alpha; //std::min(0.25f * alphMultiplier, 1.0f);
+    const float alphaSides = alpha; //std::min(0.30f * alphMultiplier, 1.0f);
+    const float alphaBottom = alpha; //std::min(0.60f * alphMultiplier, 1.0f);
+    const auto p1 = ImVec2(rectMin.x + radius, rectMin.y + radius);
+    const auto p2 = ImVec2(rectMax.x - radius, rectMax.y - radius);
+    auto* drawList = ImGui::GetWindowDrawList();
+    
+    ImTextureID textureID = GetTextureID(shadowImage);
+    
+    if (drawTop)
+    {
+      drawList->AddImage(textureID, { p1.x - widthOffset,  p1.y - radius }, { p2.x + widthOffset, p1.y },
+                         ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f), ImColor(0.0f, 0.0f, 0.0f, alphaTop));
+    }
+    if (drawBottom)
+    {
+      drawList->AddImage(textureID, { p1.x - widthOffset,  p2.y }, { p2.x + widthOffset, p2.y + radius },
+                         ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f), ImColor(0.0f, 0.0f, 0.0f, alphaBottom));
+    }
+    if (drawLeft)
+    {
+      drawList->AddImageQuad(textureID, { p1.x - radius, p1.y - widthOffset }, { p1.x, p1.y - widthOffset },
+                             { p1.x, p2.y + widthOffset }, { p1.x - radius, p2.y + widthOffset }, { 0.0f, 0.0f },
+                             { 0.0f, 1.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, ImColor(0.0f, 0.0f, 0.0f, alphaSides));
+    }
+    if (drawRight)
+    {
+      drawList->AddImageQuad(textureID, { p2.x, p1.y - widthOffset }, { p2.x + radius, p1.y - widthOffset },
+                             { p2.x + radius, p2.y + widthOffset }, { p2.x, p2.y + widthOffset },{ 0.0f, 0.0f },
+                             { 0.0f, 1.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, ImColor(0.0f, 0.0f, 0.0f, alphaSides));
+    }
+  }
+  
+  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, ImRect rectangle, float alpha,
+                       float lengthStretch, bool drawLeft, bool drawRight, bool drawTop, bool drawBottom)
+  {
+    DrawShadowInner(shadowImage, radius, rectangle.Min, rectangle.Max, alpha, lengthStretch, drawLeft,
+                    drawRight, drawTop, drawBottom);
+  }
+  
+  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, float alpha, float lengthStretch,
+                       bool drawLeft, bool drawRight, bool drawTop, bool drawBottom)
+  {
+    DrawShadowInner(shadowImage, radius, ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), alpha,
+                    lengthStretch, drawLeft, drawRight, drawTop, drawBottom);
   }
   
 } // namespace IKan::UI

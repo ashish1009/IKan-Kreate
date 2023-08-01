@@ -128,6 +128,9 @@ if (!Project::GetActive()) return
     m_iconMinimize = Image::Create(KreatorResourcePath("Textures/Icons/Minimize.png"));
     m_iconMaximize = Image::Create(KreatorResourcePath("Textures/Icons/Maximize.png"));
     m_iconRestore = Image::Create(KreatorResourcePath("Textures/Icons/Restore.png"));
+    
+    // Shadow Icon
+    m_shadowTexture = Image::Create(KreatorResourcePath("Textures/Icons/ShadowLineTop.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -160,14 +163,7 @@ if (!Project::GetActive()) return
     }
     else
     {
-      m_showCreateNewProjectPopup = true;
-#if 0
-      auto projName = Utils::String::GetFileNameFromPath(m_userPreferences->startupProject);
-      auto projDir = Utils::String::GetDirectoryFromPath(m_userPreferences->startupProject);
-
-      memcpy(m_projectNameBuffer, projName.c_str(), projName.size());
-      CreateProject(projDir);
-#endif
+      m_showWelcomePopup = true;
     }
   }
   
@@ -240,16 +236,15 @@ if (!Project::GetActive()) return
   void RendererLayer::OnImguiRender()
   {
     IK_PERFORMANCE("RendererLayer::OnImguiRender");
+    
+    // Should be above all scene GUI
+    UI_WelcomePopup();
+    
     RETRUN_IF_NO_PROJECT();
     
-    UI_WelcomePopup();
-
-    if (!m_welcomScreenActive)
-    {
-      UI_StartMainWindowDocking();
-      UI_Viewport();
-      UI_EndMainWindowDocking();
-    }
+    UI_StartMainWindowDocking();
+    UI_Viewport();
+    UI_EndMainWindowDocking();
   }
   
   void RendererLayer::UpdateWindowTitle(const std::string& sceneName)
@@ -708,11 +703,6 @@ if (!Project::GetActive()) return
       
       // Menu Items
       UI_Utils::AddMenu("File", popItemHighlight, [this]() {
-        if (ImGui::MenuItem("Create Project..."))
-        {
-          m_showCreateNewProjectPopup = true;
-        }
-
         if (ImGui::MenuItem("Exit", "Cmd + Q"))
         {
           Application::Get().Close();
@@ -790,8 +780,89 @@ if (!Project::GetActive()) return
 
   void RendererLayer::UI_WelcomePopup()
   {
-  }
+    if (m_showWelcomePopup)
+    {
+      ImGui::OpenPopup("Welcome Screen");
+      m_showWelcomePopup = false;
+    }
 
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 1000, 500 });
+
+    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IM_COL32(30, 30, 30, 255));
+
+    if (ImGui::BeginPopupModal("Welcome Screen", nullptr,
+                               ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
+                               | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground))
+    {
+      ImGuiTableFlags tableFlags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV;
+      UI::PushID();
+      if (ImGui::BeginTable(UI::GenerateID(), 2 /* Num Columns */, tableFlags, ImVec2(0.0f, 0.0f)))
+      {
+        ImGui::TableSetupColumn("##About/New_Project", 0, 650.0f);
+        ImGui::TableSetupColumn("##Recent_Projects", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableNextRow();
+        
+        // Content Outliner
+        ImGui::TableSetColumnIndex(0);
+        ImGui::BeginChild("##About/New_Project");
+        {
+          // Draw side shadow
+          ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
+          ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
+          UI::DrawShadowInner(m_shadowTexture, 20.0f, windowRect, 1.0f, windowRect.GetHeight() / 4.0f,
+                              false, true, false, false);
+          ImGui::PopClipRect();
+        }
+        ImGui::EndChild(); // About/New_Project
+
+        // Directory Content
+        ImGui::TableSetColumnIndex(1);
+        ImGui::BeginChild("##Recent_Projects");
+        {
+        }
+        ImGui::EndChild(); // Recent_Projects
+
+        ImGui::EndTable();
+      }
+      UI::PopID();
+      
+//      const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
+//
+//      // Draw the Welcome Screen rectangle -------------------------------------
+//      float popupHeight = 500;
+//
+//      UI::SetCursorPos(0, 0);
+//      const ImVec2 popupMin = ImGui::GetCursorScreenPos();
+//      const ImVec2 popupMax =
+//      {
+//        ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth(),
+//        ImGui::GetCursorScreenPos().y + popupHeight
+//      };
+//
+//      auto* drawList = ImGui::GetWindowDrawList();
+//      drawList->AddRectFilled(popupMin, popupMax, UI::Theme::Color::Titlebar);
+//
+//      // Draw Kreator Logo ---------------------------------------------------------------
+//      const int32_t logoSize = 300;
+//
+//      const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
+//      const ImVec2 logoRectStart =
+//      {
+//        ImGui::GetItemRectMin().x,
+//        ImGui::GetItemRectMin().y
+//      };
+//      const ImVec2 logoRectMax =
+//      {
+//        logoRectStart.x + logoSize,
+//        logoRectStart.y + logoSize
+//      };
+//      drawList->AddImage(UI::GetTextureID(m_welcomeIcon), logoRectStart, logoRectMax);
+
+      ImGui::EndPopup();
+    }
+  }
   void RendererLayer::UI_NewProjectPopup()
   {
     

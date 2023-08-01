@@ -1,7 +1,0 @@
-Assets:
-  - Handle: 644040266
-    FilePath: Textures/checkerboard.png
-    Type: Image
-  - Handle: 3526219999
-    FilePath: Scenes/NewScene.ikscene
-    Type: Scene
