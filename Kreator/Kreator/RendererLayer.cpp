@@ -151,7 +151,7 @@ if (!Project::GetActive()) return
     UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
     UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
     UI::Font sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
-    UI::Font Hugeheader = {KreatorResourcePath("Fonts/Headers/Header.ttf"), 50};
+    UI::Font Hugeheader = {KreatorResourcePath("Fonts/Headers/Header.ttf"), 30};
     UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, Hugeheader});
 
     Kreator_UI::SetDarkTheme();
@@ -791,7 +791,8 @@ if (!Project::GetActive()) return
     ImGui::SetNextWindowSize(ImVec2{ 1000, 500 });
 
     UI::ScopedColor bgCol(ImGuiCol_ChildBg, IM_COL32(30, 30, 30, 255));
-
+    UI::ScopedColor separator(ImGuiCol_Separator, IM_COL32(111, 111, 111, 155));
+    
     if (ImGui::BeginPopupModal("Welcome Screen", nullptr,
                                ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
                                | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground))
@@ -800,6 +801,8 @@ if (!Project::GetActive()) return
       UI::PushID();
       if (ImGui::BeginTable(UI::GenerateID(), 2 /* Num Columns */, tableFlags, ImVec2(0.0f, 0.0f)))
       {
+        const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
+
         ImGui::TableSetupColumn("##About/New_Project", 0, 650.0f);
         ImGui::TableSetupColumn("##Recent_Projects", ImGuiTableColumnFlags_WidthStretch);
         ImGui::TableNextRow();
@@ -808,7 +811,39 @@ if (!Project::GetActive()) return
         ImGui::TableSetColumnIndex(0);
         ImGui::BeginChild("##About/New_Project");
         {
-          // Draw side shadow
+          // Draw Kreator Logo ---------------------------------------------------------------
+          const int32_t logoSize = 200;
+          
+          const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
+          const ImVec2 logoRectStart =
+          {
+            ImGui::GetItemRectMin().x + (ImGui::GetColumnWidth() / 2 - logoSize / 2),
+            ImGui::GetItemRectMin().y
+          };
+          const ImVec2 logoRectMax =
+          {
+            logoRectStart.x + logoSize,
+            logoRectStart.y + logoSize
+          };
+          auto* drawList = ImGui::GetWindowDrawList();
+          drawList->AddImage(UI::GetTextureID(m_welcomeIcon), logoRectStart, logoRectMax, {0, 0}, {1, 1},
+                             IM_COL32(211, 211, 211, 255));
+          
+          // Welcome Header -------
+          UI::SetCursorPosY(logoSize + ImGui::GetCurrentWindow()->WindowPadding.y + 10);
+          {
+            UI::ScopedFont header(Kreator_UI::GetHugeHeaderFont());
+            static std::string welcomeText = "Welcome to IKan-Kreate";
+            UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(welcomeText.c_str()).x / 2);
+            ImGui::Text("%s", welcomeText.c_str());
+          }
+
+          static std::string versionText = "Version" + IKanVersion;
+          UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(versionText.c_str()).x / 2);
+          ImGui::Text("%s", versionText.c_str());
+          ImGui::Separator();
+          
+          // Draw side shadow-----------------------------------------------------------------
           ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
           ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
           UI::DrawShadowInner(m_shadowTexture, 20.0f, windowRect, 1.0f, windowRect.GetHeight() / 4.0f,
@@ -827,39 +862,6 @@ if (!Project::GetActive()) return
         ImGui::EndTable();
       }
       UI::PopID();
-      
-//      const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
-//
-//      // Draw the Welcome Screen rectangle -------------------------------------
-//      float popupHeight = 500;
-//
-//      UI::SetCursorPos(0, 0);
-//      const ImVec2 popupMin = ImGui::GetCursorScreenPos();
-//      const ImVec2 popupMax =
-//      {
-//        ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth(),
-//        ImGui::GetCursorScreenPos().y + popupHeight
-//      };
-//
-//      auto* drawList = ImGui::GetWindowDrawList();
-//      drawList->AddRectFilled(popupMin, popupMax, UI::Theme::Color::Titlebar);
-//
-//      // Draw Kreator Logo ---------------------------------------------------------------
-//      const int32_t logoSize = 300;
-//
-//      const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
-//      const ImVec2 logoRectStart =
-//      {
-//        ImGui::GetItemRectMin().x,
-//        ImGui::GetItemRectMin().y
-//      };
-//      const ImVec2 logoRectMax =
-//      {
-//        logoRectStart.x + logoSize,
-//        logoRectStart.y + logoSize
-//      };
-//      drawList->AddImage(UI::GetTextureID(m_welcomeIcon), logoRectStart, logoRectMax);
-
       ImGui::EndPopup();
     }
   }
