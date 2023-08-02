@@ -972,12 +972,12 @@ if (!Project::GetActive()) return
       ImVec2 buttonSize = ImGui::CalcItemSize(ImVec2(0, 0),
                                               labelSize.x + style.FramePadding.x * 2.0f,
                                               labelSize.y + style.FramePadding.y * 2.0f);
-      
-      ImGui::SetNextItemWidth(680 - style.FramePadding.x * 2.0f - style.ItemInnerSpacing.x - 1 - buttonSize.x);//  );
+
+      ImGui::SetNextItemWidth(680 - style.FramePadding.x * 2.0f - style.ItemInnerSpacing.x - 1 - buttonSize.x);
       ImGui::InputTextWithHint("##new_project_location", "Project Location",
                                m_projectFilePathBuffer, MAX_PROJECT_FILEPATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
       ImGui::SameLine();
-      if (ImGui::Button("..."))
+      if (UI::DrawRoundButton("...", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 0))
       {
         
       }
