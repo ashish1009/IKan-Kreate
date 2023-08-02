@@ -114,8 +114,13 @@ if (!Project::GetActive()) return
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
+    m_allProjectsPath = m_clientDirPath / "Projects";
+    
     m_projectNameBuffer = iknew char[MAX_PROJECT_NAME_LENGTH];
     m_projectFilePathBuffer = iknew char[MAX_PROJECT_FILEPATH_LENGTH];
+    
+    // Save the default project path
+    memccpy(m_projectFilePathBuffer, m_allProjectsPath.string().data(), 0, m_allProjectsPath.string().size());
     
     m_templateProjectDir = m_clientDirPath / "Resources/TemplateProject";
     
@@ -304,10 +309,6 @@ if (!Project::GetActive()) return
   {
     IK_LOG_TRACE("Kreator Layer", "Opening Project {0}", filepath.c_str());
 
-    // Reset Project Name and directory
-    memset(m_projectNameBuffer, 0, MAX_PROJECT_NAME_LENGTH);
-    memset(m_projectFilePathBuffer, 0, MAX_PROJECT_FILEPATH_LENGTH);
-    
     // Check if File exists
     if (!Utils::FileSystem::Exists(filepath))
     {
@@ -796,7 +797,7 @@ if (!Project::GetActive()) return
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
     ImGui::SetNextWindowSize(ImVec2{ 1000, 500 });
 
-    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IM_COL32(30, 30, 30, 255));
+    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IKan::UI::Theme::Color::BackgroundPopup);
     UI::ScopedColor separator(ImGuiCol_Separator, IM_COL32(111, 111, 111, 155));
     UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 15.0f));
 
@@ -849,7 +850,7 @@ if (!Project::GetActive()) return
             
             {
               UI::ScopedFont version(Kreator_UI::GetBoldFont());
-              static std::string versionText = "Version" + IKanVersion;
+              static std::string versionText = "Version " + IKanVersion;
               UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(versionText.c_str()).x / 2);
               ImGui::Text("%s", versionText.c_str());
             }
@@ -862,7 +863,7 @@ if (!Project::GetActive()) return
               auto textSize = ImGui::CalcTextSize(buttonHelper.c_str()).x;;
 
               const float buttonHeight = 40.0f;
-              const float buttonWidth = textSize + buttonHeight;
+              const float buttonWidth = textSize + buttonHeight + 80;
               
               // Minimize Button
               UI::ShiftCursorX(80);
@@ -943,6 +944,8 @@ if (!Project::GetActive()) return
   }
   void RendererLayer::UI_NewProjectPopup()
   {
+    auto boldFont = Kreator_UI::GetBoldFont();
+    
     if (m_showCreateNewProjectPopup)
     {
       ImGui::OpenPopup("New Project");
@@ -952,12 +955,56 @@ if (!Project::GetActive()) return
     
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
-    ImGui::SetNextWindowSize(ImVec2{ 700, 325 });
+    ImGui::SetNextWindowSize(ImVec2{ 700, 200 });
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 10));
     
     if (ImGui::BeginPopupModal("New Project", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove))
     {
+      ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 200 / 8);
+      ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 7));
+      
+      ImGui::SetNextItemWidth(-1);
+      ImGui::InputTextWithHint("##new_project_name", "Project Name", m_projectNameBuffer, MAX_PROJECT_NAME_LENGTH);
+      
+      ImVec2 labelSize = ImGui::CalcTextSize("...", NULL, true);
+      auto& style = ImGui::GetStyle();
+      ImVec2 buttonSize = ImGui::CalcItemSize(ImVec2(0, 0),
+                                              labelSize.x + style.FramePadding.x * 2.0f,
+                                              labelSize.y + style.FramePadding.y * 2.0f);
+      
+      ImGui::SetNextItemWidth(680 - style.FramePadding.x * 2.0f - style.ItemInnerSpacing.x - 1 - buttonSize.x);//  );
+      ImGui::InputTextWithHint("##new_project_location", "Project Location",
+                               m_projectFilePathBuffer, MAX_PROJECT_FILEPATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
+      ImGui::SameLine();
+      if (ImGui::Button("..."))
+      {
+        
+      }
+      
+      ImGui::Separator();
+      
+      // Buttons
+      {
+        ImGui::PushFont(boldFont);
+
+        UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 100);
+        if ((UI::DrawRoundButton("Create", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+        {
+
+        }
+
+        ImGui::SameLine();
+        if ((UI::DrawRoundButton("Cancel", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+        {
+          m_showWelcomePopup = true;
+          ImGui::CloseCurrentPopup();
+        }
+        ImGui::PopFont();
+      }
+      
+      ImGui::PopStyleVar();
+
       ImGui::EndPopup();
     }
     ImGui::PopStyleVar(2);

@@ -137,6 +137,7 @@ namespace Kreator
     
     // Project Data --------------------------------------
     bool m_showCreateNewProjectPopup = false;
+    std::filesystem::path m_allProjectsPath;
     std::filesystem::path m_templateProjectDir;
     Ref<UserPreferences> m_userPreferences;
     char* m_projectNameBuffer = nullptr;
