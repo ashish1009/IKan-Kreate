@@ -142,6 +142,14 @@ namespace IKan::UI
   ImU32 ColorWithMultipliedHue(const ImColor& color, float multiplier);
   
   // Draw APIs -------------------------------------------------------------------------------------------------------
+  
+  /// This function creates the rounding button
+  /// - Parameters:
+  ///   - title: Title
+  ///   - color: Background color
+  ///   - rounding: Rounding of button
+  bool DrawRoundButton(const char* title, glm::vec3 color, float rounding);
+
   /// This function Draw the button Image
   /// - Parameters:
   ///   - imageNormal: Button Image texture

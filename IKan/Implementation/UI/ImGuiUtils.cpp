@@ -325,6 +325,50 @@ namespace IKan::UI
   }
   
   // Draw APIs -------------------------------------------------------------------------------------------------------
+  bool DrawRoundButton(const char* title, glm::vec3 color, float rounding)
+  {
+    ImGui::PushID(title);
+    
+    ImVec4 tintNormal = {color.r, color.g, color.b, 0.4};
+    ImVec4 tintHovered = {color.r, color.g, color.b, 0.3};
+    ImVec4 tintPressed = {color.r, color.g, color.b, 0.5};
+    
+    UI::ScopedColor button(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+    UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, ImVec4(0, 0, 0, 0));
+    UI::ScopedColor buttonavtive(ImGuiCol_ButtonActive, ImVec4(0, 0, 0, 0));
+    
+    ImVec2 origCursonPos = ImGui::GetCursorScreenPos();
+    if (ImGui::Button(title))
+    {
+      ImGui::PopID();
+      return true;
+    }
+
+    // Round Bar -------------------------------------------------------------------------
+    const ImVec2 roundBarMin = origCursonPos;
+    const ImVec2 roundBarMax =
+    {
+      roundBarMin.x + ImGui::CalcTextSize(title).x + 20,
+      roundBarMin.y + ImGui::GetFontSize() * 2
+    };
+    auto* drawList = ImGui::GetWindowDrawList();
+    if (ImGui::IsItemActive())
+    {
+      drawList->AddRectFilled(roundBarMin, roundBarMax, ImGui::ColorConvertFloat4ToU32(tintPressed), rounding);
+    }
+    else if (ImGui::IsItemHovered())
+    {
+      drawList->AddRectFilled(roundBarMin, roundBarMax, ImGui::ColorConvertFloat4ToU32(tintHovered), rounding);
+    }
+    else
+    {
+      drawList->AddRectFilled(roundBarMin, roundBarMax, ImGui::ColorConvertFloat4ToU32(tintNormal), rounding);
+    }
+
+    ImGui::PopID();
+    return false;
+  }
+
   void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered,
                        const Ref<Image>& imagePressed, ImU32 tintNormal, ImU32 tintHovered,
                        ImU32 tintPressed, ImVec2 rectMin, ImVec2 rectMax)
@@ -501,8 +545,8 @@ namespace IKan::UI
     if (drawLeft)
     {
       drawList->AddImageQuad(textureID, { p1.x - radius, p1.y - widthOffset }, { p1.x, p1.y - widthOffset },
-                             { p1.x, p2.y + widthOffset }, { p1.x - radius, p2.y + widthOffset }, { 0.0f, 0.0f },
-                             { 0.0f, 1.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, ImColor(0.0f, 0.0f, 0.0f, alphaSides));
+                             { p1.x, p2.y + widthOffset }, { p1.x - radius, p2.y + widthOffset }, { 0.0f, 1.0f },
+                             { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, ImColor(0.0f, 0.0f, 0.0f, alphaSides));
     }
     if (drawRight)
     {
