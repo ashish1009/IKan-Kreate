@@ -39,5 +39,9 @@ namespace Kreator_UI
   ImFont* GetHugeHeaderFont();
   /// This function Returns the Semi Header font
   ImFont* GetSemiHeaderFont();
+  
+  /// This function convert the Im32 Color to glm 3
+  /// - Parameter color: color
+  glm::vec3 ColorVec3FromU32(ImU32 color);
 
 } // namespace Kreator_UI

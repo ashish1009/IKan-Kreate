@@ -120,7 +120,7 @@ namespace Kreator_UI
     // Model
     colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.15f, 0.15f, 0.25f, 1.7f);
   }
-
+  
   ImFont* GetRegularFont()
   {
     return ImGui::GetIO().Fonts->Fonts[0];
@@ -145,6 +145,11 @@ namespace Kreator_UI
   {
     return ImGui::GetIO().Fonts->Fonts[5];
   }
-
+  
+  glm::vec3 ColorVec3FromU32(ImU32 color)
+  {
+    ImVec4 result = ImGui::ColorConvertU32ToFloat4(color);
+    return {result.x, result.y, result.z};
+  }  
 } // namespace Kreator_UI
 
