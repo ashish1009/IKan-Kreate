@@ -45,6 +45,9 @@ namespace IKan::Utils
     /// This function returns the absolute File/Directory path
     /// - Parameter path: Current Relative File/Directory path passed
     static std::string Absolute(const std::string& path);
+    /// This function returns the absolute File/Directory path for Kreator
+    /// - Parameter path: Current Relative File/Directory path passed
+    static std::string KreatorAbsolute(const std::string &path);
 
     // Directory ----------------------------------------------------------------------------------------------------
     /// This function creates the directory. It creates all the folder in hierarchy (if any of them do not exists)

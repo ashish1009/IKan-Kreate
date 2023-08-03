@@ -276,6 +276,6 @@ namespace Kreator
 
     s_fileExplorerData->popup = true;
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
-    s_fileExplorerData->currentPath = Utils::FileSystem::Absolute(basePath);
+    s_fileExplorerData->currentPath = Utils::FileSystem::KreatorAbsolute(basePath);
   }
 } // namespace Kreator
