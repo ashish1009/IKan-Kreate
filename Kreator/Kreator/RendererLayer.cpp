@@ -807,7 +807,7 @@ if (!Project::GetActive()) return
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
     ImGui::SetNextWindowSize(ImVec2{ 1000, 500 });
 
-    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IM_COL32(63, 73, 87, 255));
+    UI::ScopedColor bgCol(ImGuiCol_ChildBg, UI::Theme::Color::BackgroundPopup);
     UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 15.0f));
 
     if (ImGui::BeginPopupModal("Welcome Screen", nullptr,

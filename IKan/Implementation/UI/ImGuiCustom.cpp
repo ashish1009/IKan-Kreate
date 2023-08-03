@@ -192,7 +192,7 @@ namespace IKan::UI
         [[maybe_unused]] auto cursorPos = ImGui::GetCursorPos();
         UI::ShiftCursorY(-frame_height + pad);
         UI::ShiftCursorX(arrowWidth);
-        UI::Image(icon, { frame_height - pad * 2.0f, frame_height - pad * 2.0f }, ImVec2(0, 1), ImVec2(1, 0),
+        UI::Image(icon, { frame_height - pad * 2.0f, frame_height - pad * 2.0f }, ImVec2(0, 0), ImVec2(1, 1),
                   iconTint /*selected ? colourDark : tintFloat*/);
         
         // Restore itme data
@@ -252,7 +252,7 @@ namespace IKan::UI
         [[maybe_unused]] auto cursorPos = ImGui::GetCursorPos();
         UI::ShiftCursorY(- frame_height + pad);
         UI::ShiftCursorX(arrowWidth);
-        UI::Image(icon, { frame_height - pad * 2.0f, frame_height - pad * 2.0f }, ImVec2(0, 1), ImVec2(1, 0), iconTint /*selected ? colourDark : tintFloat*/);
+        UI::Image(icon, { frame_height - pad * 2.0f, frame_height - pad * 2.0f }, ImVec2(0, 0), ImVec2(1, 1), iconTint /*selected ? colourDark : tintFloat*/);
         
         // Restore itme data
         ImGui::SetLastItemData(itemId, itemFlags, itemStatusFlags, itemRect);
