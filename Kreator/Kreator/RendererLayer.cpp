@@ -314,6 +314,8 @@ if (!Project::GetActive()) return
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Textures");
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Fonts");
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Scenes");
+    
+    OpenProject(projectDir.string() + "/" + std::string(m_projectNameBuffer) + ProjectExtension);
   }
   
   void RendererLayer::OpenProject(const std::string &filepath)
@@ -991,6 +993,7 @@ if (!Project::GetActive()) return
       ImGui::SameLine();
       if (UI::DrawRoundButton("...", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 5))
       {
+        ImGui::CloseCurrentPopup();
         FolderExplorer::SelectPopup(&m_showCreateNewProjectPopup, m_allProjectsPath);
         m_folderExplorerAction = FolderExplorerAction::NewPreoject;
       }
@@ -1005,7 +1008,14 @@ if (!Project::GetActive()) return
         if ((UI::DrawRoundButton("Create", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
             (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
         {
+          std::string fullProjectPath = "";
+          if (strlen(m_projectFilePathBuffer) > 0)
+          {
+            fullProjectPath = std::string(m_projectFilePathBuffer) + "/" + std::string(m_projectNameBuffer);
+          }
 
+          CreateProject(fullProjectPath);
+          ImGui::CloseCurrentPopup();
         }
 
         ImGui::SameLine();
