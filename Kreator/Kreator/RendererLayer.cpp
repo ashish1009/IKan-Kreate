@@ -150,6 +150,7 @@ if (!Project::GetActive()) return
     // Other Icons
     m_newProject = Image::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
     m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
+    m_projectIcon = Image::Create(KreatorResourcePath("Textures/Icons/Project.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -1046,10 +1047,16 @@ if (!Project::GetActive()) return
           UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 20.0f));
           UI::ScopedFont semiHeader(Kreator_UI::GetSemiHeaderFont());
           
-          for (const auto& [timeStamp, recentProject] : m_userPreferences->recentProjects)
+          for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
           {
+            if (!Utils::FileSystem::Exists(it->second.filePath))
+            {
+              m_userPreferences->recentProjects.erase(it);
+              break;
+            }
+
             ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
-            bool open = UI::TreeNode("##Recent_Projects", recentProject.name, flags, m_applicationIcon);
+            bool open = UI::TreeNode("##Recent_Projects", it->second.name, flags, m_projectIcon);
             if(open)
             {
               

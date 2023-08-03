@@ -153,6 +153,7 @@ namespace Kreator
     char* m_projectNameBuffer = nullptr;
     char* m_projectFilePathBuffer = nullptr;
     std::filesystem::path m_openProjectPath = "";
+    Ref<Image> m_projectIcon;
 
     // View port Data ------------------------------------
     Viewport m_viewport;
@@ -163,7 +164,7 @@ namespace Kreator
       None, NewPreoject, OpenProject
     };
     FolderExplorerAction m_folderExplorerAction;
-    
+
     // Client Data ---------------------------------------
     static std::filesystem::path s_clientDirPath;
   };
