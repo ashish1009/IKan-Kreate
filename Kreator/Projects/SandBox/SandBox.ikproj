@@ -1,5 +1,5 @@
 Project:
-  Name: SandBox
+  Name: Sandbox
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
   StartScene: ""

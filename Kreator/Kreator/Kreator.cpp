@@ -64,10 +64,8 @@ namespace Kreator
         {
           serializer.Deserialize(userPreferenceFile);
         }
-      } // User Preferences
       
-      // Project -----------------------------------------------------------------------------------
-      {
+        // Project -----------------------------------------------------------------------------------
         // Update the project Path
         if (m_projectPath.empty())
         {
@@ -88,13 +86,17 @@ namespace Kreator
         }
         else
         {
-          IK_ASSERT(false);
+          if (Utils::FileSystem::Exists(m_projectPath))
+          {
+            m_userPreference->startupProject = m_projectPath;
+            serializer.Serialize(userPreferenceFile);
+          }
         }
       }
       
       IK_LOG_TRACE("Kreator App", "  Application Path           : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientDirectory));
       IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_persistenceStoragePath));
-      IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_projectPath));
+      IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_userPreference->startupProject));
 
       // Create and Push the Rendere Layer --------------------------------------------------------
       m_rendereLayer = CreateRef<RendererLayer>(m_userPreference, m_clientDirectory);

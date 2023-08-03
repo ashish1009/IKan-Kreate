@@ -47,7 +47,7 @@ int main(int argc, const char * argv[])
       }
       else if (strcmp(argv[i], "-project") == 0)
       {
-        clientDirPath = argv[++i];
+        startupProject = argv[++i];
       }
     }
   }

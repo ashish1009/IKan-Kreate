@@ -7,7 +7,6 @@
 
 #include <yaml-cpp/yaml.h>
 #include "ProjectSerializer.hpp"
-#include "Utils/SerializeMacro.h"
 
 namespace IKan
 {
@@ -26,12 +25,12 @@ namespace IKan
     out << YAML::Key << "Project" << YAML::Value;
     {
       out << YAML::BeginMap;
-      IK_SERIALIZE_PROPERTY(Name, m_project->m_config.name, out);
-      IK_SERIALIZE_PROPERTY(AssetDirectory, m_project->m_config.assetDirectory, out);
-      IK_SERIALIZE_PROPERTY(AssetRegistry, m_project->m_config.assetRegistryPath, out);
-      IK_SERIALIZE_PROPERTY(StartScene, m_project->m_config.startScene, out);
-      IK_SERIALIZE_PROPERTY(AutoSave, m_project->m_config.enableAutoSave, out);
-      IK_SERIALIZE_PROPERTY(AutoSaveInterval, m_project->m_config.autoSaveIntervalSeconds, out);
+      out << YAML::Key << "Name" << YAML::Value << m_project->m_config.name;
+      out << YAML::Key << "AssetDirectory" << YAML::Value << m_project->m_config.assetDirectory;
+      out << YAML::Key << "AssetRegistry" << YAML::Value << m_project->m_config.assetRegistryPath;
+      out << YAML::Key << "StartScene" << YAML::Value << m_project->m_config.startScene;
+      out << YAML::Key << "AutoSave" << YAML::Value << m_project->m_config.enableAutoSave;
+      out << YAML::Key << "AutoSaveInterval" << YAML::Value << m_project->m_config.autoSaveIntervalSeconds;
       out << YAML::EndMap;
     }
     out << YAML::EndMap;
@@ -61,12 +60,12 @@ namespace IKan
     
     auto& config = m_project->m_config;
     
-    IK_DESERIALIZE_PROPERTY(Name, config.name, rootNode, std::string(""));
-    IK_DESERIALIZE_PROPERTY(AssetDirectory, config.assetDirectory, rootNode, std::string(""));
-    IK_DESERIALIZE_PROPERTY(AssetRegistry, config.assetRegistryPath, rootNode, std::string(""));
-    IK_DESERIALIZE_PROPERTY(StartScene, config.startScene, rootNode, std::string(""));
-    IK_DESERIALIZE_PROPERTY(AutoSave, config.enableAutoSave, rootNode, false);
-    IK_DESERIALIZE_PROPERTY(AutoSaveInterval, config.autoSaveIntervalSeconds, rootNode, static_cast<int32_t>(300));
+    config.name = rootNode["Name"].as<std::string>();
+    config.assetDirectory = rootNode["AssetDirectory"].as<std::string>();
+    config.assetRegistryPath = rootNode["AssetRegistry"].as<std::string>();
+    config.startScene = rootNode["StartScene"].as<std::string>("");
+    config.enableAutoSave = rootNode["AutoSave"].as<bool>(false);
+    config.autoSaveIntervalSeconds = rootNode["AutoSaveInterval"].as<int>(300);
 
     // Update the Project Direcotry and Name which was not serialised
     std::filesystem::path projectPath = filepath;

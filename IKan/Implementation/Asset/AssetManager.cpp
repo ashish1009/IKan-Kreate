@@ -7,7 +7,6 @@
 
 #include <yaml-cpp/yaml.h>
 #include "AssetManager.hpp"
-#include "Utils/SerializeMacro.h"
 #include "Asset/AssetImporter.hpp"
 #include "Project/Project.hpp"
 
@@ -211,9 +210,9 @@ namespace IKan
     for (auto& [handle, entry] : sortedMap)
     {
       out << YAML::BeginMap;
-      IK_SERIALIZE_PROPERTY(Handle, handle, out);
-      IK_SERIALIZE_PROPERTY(FilePath, entry.filePath, out);
-      IK_SERIALIZE_PROPERTY(Type, AssetUtils::AssetTypeToString(entry.type), out);
+      out << YAML::Key << "Handle" << YAML::Value << handle;
+      out << YAML::Key << "FilePath" << YAML::Value << entry.filePath;
+      out << YAML::Key << "Type" << YAML::Value << AssetUtils::AssetTypeToString(entry.type);
       out << YAML::EndMap;
     }
     out << YAML::EndSeq;

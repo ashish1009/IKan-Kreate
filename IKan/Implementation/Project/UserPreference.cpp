@@ -7,7 +7,6 @@
 
 #include <yaml-cpp/yaml.h>
 #include "UserPreference.hpp"
-#include "Utils/SerializeMacro.h"
 
 namespace IKan
 {
@@ -24,11 +23,11 @@ namespace IKan
     out << YAML::Key << "UserPrefs" << YAML::Value;
     {
       out << YAML::BeginMap;
-      IK_SERIALIZE_PROPERTY(ShowWelcomeScreen, m_preferences->showWelcomeScreen, out);
+      out << YAML::Key << "ShowWelcomeScreen" << YAML::Value << m_preferences->showWelcomeScreen;
       
       if (!m_preferences->startupProject.empty())
       {
-        IK_SERIALIZE_PROPERTY(StartupProject, m_preferences->startupProject, out);
+        out << YAML::Key << "StartupProject" << YAML::Value << m_preferences->startupProject;
       }
       
       {
@@ -37,9 +36,9 @@ namespace IKan
         for (const auto&[lastOpened, projectConfig] : m_preferences->recentProjects)
         {
           out << YAML::BeginMap;
-          IK_SERIALIZE_PROPERTY(Name, projectConfig.name, out);
-          IK_SERIALIZE_PROPERTY(ProjectPath, projectConfig.filePath, out);
-          IK_SERIALIZE_PROPERTY(LastOpened, projectConfig.lastOpened, out);
+          out << YAML::Key << "Name" << YAML::Value << projectConfig.name;
+          out << YAML::Key << "ProjectPath" << YAML::Value << projectConfig.filePath;
+          out << YAML::Key << "LastOpened" << YAML::Value << projectConfig.lastOpened;
           out << YAML::EndMap;
         }
         out << YAML::EndSeq;
@@ -69,15 +68,15 @@ namespace IKan
     }
     
     YAML::Node rootNode = data["UserPrefs"];
-    IK_DESERIALIZE_PROPERTY(ShowWelcomeScreen, m_preferences->showWelcomeScreen, rootNode, true);
-    IK_DESERIALIZE_PROPERTY(StartupProject, m_preferences->startupProject, rootNode, std::string(""));
+    m_preferences->showWelcomeScreen = rootNode["ShowWelcomeScreen"].as<bool>();
+    m_preferences->startupProject = rootNode["StartupProject"] ? rootNode["StartupProject"].as<std::string>() : "";
     
     for (auto recentProject : rootNode["RecentProjects"])
     {
       RecentProject entry;
-      IK_DESERIALIZE_PROPERTY(Name, entry.name, rootNode, std::string(""));
-      IK_DESERIALIZE_PROPERTY(ProjectPath, entry.filePath, rootNode, std::string(""));
-      IK_DESERIALIZE_PROPERTY(LastOpened, entry.lastOpened, rootNode, time(NULL));
+      entry.name = recentProject["Name"].as<std::string>();
+      entry.filePath = recentProject["ProjectPath"].as<std::string>();
+      entry.lastOpened = recentProject["LastOpened"] ? recentProject["LastOpened"].as<time_t>() : time(NULL);
       m_preferences->recentProjects[entry.lastOpened] = entry;
     }
     

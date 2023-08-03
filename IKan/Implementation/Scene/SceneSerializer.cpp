@@ -8,7 +8,6 @@
 #include <yaml-cpp/yaml.h>
 #include "SceneSerializer.hpp"
 #include "Scene/Entity.hpp"
-#include "Utils/SerializeMacro.h"
 #include "Utils/YAMLSerializerHelper.h"
 
 namespace IKan {
@@ -105,7 +104,7 @@ namespace IKan {
       out << YAML::BeginMap; // TagComponent
       
       auto& tag = entity.GetComponent<TagComponent>().tag;
-      IK_SERIALIZE_PROPERTY(Tag, tag, out);
+      out << YAML::Key << "Tag" << YAML::Value << tag;
       
       out << YAML::EndMap; // TagComponent
     }
@@ -113,15 +112,15 @@ namespace IKan {
     if (entity.HasComponent<RelationshipComponent>())
     {
       auto& relationshipComponent = entity.GetComponent<RelationshipComponent>();
-      IK_SERIALIZE_PROPERTY(Parent, relationshipComponent.parentHandle, out);
-
+      out << YAML::Key << "Parent" << YAML::Value << relationshipComponent.parentHandle;
+      
       out << YAML::Key << "Children";
       out << YAML::Value << YAML::BeginSeq;
       
       for (auto child : relationshipComponent.children)
       {
         out << YAML::BeginMap;
-        IK_SERIALIZE_PROPERTY(Handle, child, out);
+        out << YAML::Key << "Handle" << YAML::Value << child;
         out << YAML::EndMap;
       }
       out << YAML::EndSeq;
@@ -133,9 +132,9 @@ namespace IKan {
       out << YAML::BeginMap; // TransformComponent
       
       auto& transform = entity.GetComponent<TransformComponent>();
-      IK_SERIALIZE_PROPERTY(Position, transform.Position(), out);
-      IK_SERIALIZE_PROPERTY(Rotation, transform.Rotation(), out);
-      IK_SERIALIZE_PROPERTY(Scale, transform.Scale(), out);
+      out << YAML::Key << "Position" << YAML::Value << transform.Position();
+      out << YAML::Key << "Rotation" << YAML::Value << transform.Rotation();
+      out << YAML::Key << "Scale" << YAML::Value << transform.Scale();
       
       out << YAML::EndMap; // TransformComponent
     }
@@ -149,15 +148,13 @@ namespace IKan {
       auto& camera = cameraComponent.camera;
       out << YAML::Key << "Camera" << YAML::Value;
       out << YAML::BeginMap; // Camera
-
-      IK_SERIALIZE_PROPERTY(ProjectionType, (int)camera.GetProjectionType(), out);
-      IK_SERIALIZE_PROPERTY(PerspectiveFOV, camera.GetDegPerspectiveVerticalFOV(), out);
-      IK_SERIALIZE_PROPERTY(PerspectiveNear, camera.GetPerspectiveNearClip(), out);
-      IK_SERIALIZE_PROPERTY(PerspectiveFar, camera.GetPerspectiveFarClip(), out);
-      IK_SERIALIZE_PROPERTY(OrthographicSize, camera.GetOrthographicSize(), out);
-      IK_SERIALIZE_PROPERTY(OrthographicNear, camera.GetOrthographicNearClip(), out);
-      IK_SERIALIZE_PROPERTY(OrthographicFar, camera.GetOrthographicFarClip(), out);
-
+      out << YAML::Key << "ProjectionType" << YAML::Value << (int)camera.GetProjectionType();
+      out << YAML::Key << "PerspectiveFOV" << YAML::Value << camera.GetDegPerspectiveVerticalFOV();
+      out << YAML::Key << "PerspectiveNear" << YAML::Value << camera.GetPerspectiveNearClip();
+      out << YAML::Key << "PerspectiveFar" << YAML::Value << camera.GetPerspectiveFarClip();
+      out << YAML::Key << "OrthographicSize" << YAML::Value << camera.GetOrthographicSize();
+      out << YAML::Key << "OrthographicNear" << YAML::Value << camera.GetOrthographicNearClip();
+      out << YAML::Key << "OrthographicFar" << YAML::Value << camera.GetOrthographicFarClip();
       out << YAML::EndMap; // Camera
       out << YAML::Key << "Primary" << YAML::Value << cameraComponent.primary;
       
@@ -170,18 +167,16 @@ namespace IKan {
       out << YAML::BeginMap; // SpriteRendererComponent
       
       auto& spriteRendererComponent = entity.GetComponent<SpriteRendererComponent>();
-      IK_SERIALIZE_PROPERTY(Color, spriteRendererComponent.color, out);
-      
+      out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.color;
       if (spriteRendererComponent.texture)
       {
-        IK_SERIALIZE_PROPERTY(TextureHandle, spriteRendererComponent.texture, out);
+        out << YAML::Key << "TextureHandle" << YAML::Value << spriteRendererComponent.texture;
       }
       else
       {
-        IK_SERIALIZE_PROPERTY(TextureHandle, 0, out);
+        out << YAML::Key << "TextureHandle" << YAML::Value << 0;
       }
-
-      IK_SERIALIZE_PROPERTY(TilingFactor, spriteRendererComponent.tilingFactor, out);
+      out << YAML::Key << "TilingFactor" << YAML::Value << spriteRendererComponent.tilingFactor;
       
       out << YAML::EndMap; // SpriteRendererComponent
     }
@@ -192,18 +187,16 @@ namespace IKan {
       out << YAML::BeginMap; // QuadComponent
       
       auto& quadComponent = entity.GetComponent<QuadComponent>();
-      IK_SERIALIZE_PROPERTY(Color, quadComponent.color, out);
-      
+      out << YAML::Key << "Color" << YAML::Value << quadComponent.color;
       if (quadComponent.texture)
       {
-        IK_SERIALIZE_PROPERTY(TextureHandle, quadComponent.texture, out);
+        out << YAML::Key << "TextureHandle" << YAML::Value << quadComponent.texture;
       }
       else
       {
-        IK_SERIALIZE_PROPERTY(TextureHandle, 0, out);
+        out << YAML::Key << "TextureHandle" << YAML::Value << 0;
       }
-      
-      IK_SERIALIZE_PROPERTY(TilingFactor, quadComponent.tilingFactor, out);
+      out << YAML::Key << "TilingFactor" << YAML::Value << quadComponent.tilingFactor;
       
       out << YAML::EndMap; // QuadComponent
     }
@@ -214,22 +207,20 @@ namespace IKan {
       out << YAML::BeginMap; // CircleComponent
       
       auto& circleComponent = entity.GetComponent<CircleComponent>();
-      IK_SERIALIZE_PROPERTY(Color, circleComponent.color, out);
-      
+      out << YAML::Key << "Color" << YAML::Value << circleComponent.color;
       if (circleComponent.texture)
       {
-        IK_SERIALIZE_PROPERTY(TextureHandle, circleComponent.texture, out);
+        out << YAML::Key << "TextureHandle" << YAML::Value << circleComponent.texture;
       }
       else
       {
-        IK_SERIALIZE_PROPERTY(TextureHandle, 0, out);
+        out << YAML::Key << "TextureHandle" << YAML::Value << 0;
       }
+      out << YAML::Key << "TilingFactor" << YAML::Value << circleComponent.tilingFactor;
       
-      IK_SERIALIZE_PROPERTY(TilingFactor, circleComponent.tilingFactor, out);
+      out << YAML::Key << "Thickness" << YAML::Value << circleComponent.thickness;
+      out << YAML::Key << "Fade" << YAML::Value << circleComponent.fade;
       
-      IK_SERIALIZE_PROPERTY(Thickness, circleComponent.thickness, out);
-      IK_SERIALIZE_PROPERTY(Fade, circleComponent.fade, out);
-
       out << YAML::EndMap; // CircleComponent
     }
     
@@ -239,18 +230,17 @@ namespace IKan {
       out << YAML::BeginMap; // TextComponent
       
       auto& textComponent = entity.GetComponent<TextComponent>();
-      IK_SERIALIZE_PROPERTY(TextString, textComponent.textString, out);
-
+      out << YAML::Key << "TextString" << YAML::Value << textComponent.textString;
       if (textComponent.assetHandle)
       {
-        IK_SERIALIZE_PROPERTY(FontHandle, textComponent.assetHandle, out);
+        out << YAML::Key << "FontHandle" << YAML::Value << textComponent.assetHandle;
       }
       else
       {
-        IK_SERIALIZE_PROPERTY(FontHandle, 0, out);
+        out << YAML::Key << "FontHandle" << YAML::Value << 0;
       }
       
-      IK_SERIALIZE_PROPERTY(Color, textComponent.color, out);
+      out << YAML::Key << "Color" << YAML::Value << textComponent.color;
       
       out << YAML::EndMap; // TextComponent
     }

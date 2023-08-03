@@ -299,7 +299,6 @@
 		B233674F2A7592C000BC7B8B /* AssetMetadata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMetadata.hpp; sourceTree = "<group>"; };
 		B23367832A75930700BC7B8B /* Yaml.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Yaml.xcodeproj; path = Yaml/Yaml.xcodeproj; sourceTree = "<group>"; };
 		B2336A462A7593BE00BC7B8B /* YAMLSerializerHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YAMLSerializerHelper.h; sourceTree = "<group>"; };
-		B2336A472A7596D500BC7B8B /* SerializeMacro.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SerializeMacro.h; sourceTree = "<group>"; };
 		B2336A482A76399200BC7B8B /* AssetSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetSerializer.cpp; sourceTree = "<group>"; };
 		B2336A492A76399200BC7B8B /* AssetSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetSerializer.hpp; sourceTree = "<group>"; };
 		B2336A502A763A4C00BC7B8B /* AssetImporter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetImporter.cpp; sourceTree = "<group>"; };
@@ -751,7 +750,6 @@
 				B23364E92A74294400BC7B8B /* StringUtils.hpp */,
 				B233656B2A75231700BC7B8B /* MathUtils.hpp */,
 				B2336A462A7593BE00BC7B8B /* YAMLSerializerHelper.h */,
-				B2336A472A7596D500BC7B8B /* SerializeMacro.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
