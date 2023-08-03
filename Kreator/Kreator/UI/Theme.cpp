@@ -16,7 +16,7 @@ namespace Kreator_UI
     IKan::UI::Theme::Color::Background           = IM_COL32(28, 28, 33, 255);
     IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(63, 73, 87, 255);
     IKan::UI::Theme::Color::BackgroundDark       = IM_COL32(21, 21, 21, 255);
-    IKan::UI::Theme::Color::PropertyField        = IM_COL32(15, 15, 15, 255);
+    IKan::UI::Theme::Color::PropertyField        = IM_COL32(25, 35, 45, 255);
     IKan::UI::Theme::Color::GroupHeader          = IM_COL32(37, 37, 37, 255);
     IKan::UI::Theme::Color::GroupHeaderHovered   = IM_COL32(32, 32, 32, 255);
     IKan::UI::Theme::Color::GroupHeaderActive    = IM_COL32(30, 30, 30, 255);

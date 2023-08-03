@@ -86,7 +86,7 @@ namespace Kreator
           addresBarMin.y + topBarHeight
         };
         
-        drawList->AddRectFilled(addresBarMin, addresBarMax, UI::Theme::Color::Titlebar);
+        drawList->AddRectFilled(addresBarMin, addresBarMax, UI::Theme::Color::BackgroundPopup);
       }
       
       // Draw the Main Area Bar rectangle -------------------------------------------------
@@ -107,7 +107,7 @@ namespace Kreator
       
       {
         UI::ScopedStyle windowPadding (ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
-        UI::ScopedColor frameBg(ImGuiCol_FrameBg, UI::Theme::Color::BackgroundPopup);
+//        UI::ScopedColor frameBg(ImGuiCol_FrameBg, UI::Theme::Color::BackgroundPopup);
 
         UI::ShiftCursorX(ImGui::GetCurrentWindow()->WindowPadding.x);
         UI::ShiftCursorY(ImGui::GetCurrentWindow()->WindowPadding.y);
@@ -132,7 +132,7 @@ namespace Kreator
 
       ImRect windowRect = UI::RectExpanded(shadowRect, 0.0f, 0.0f);
       ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
-      UI::DrawShadowInner(s_fileExplorerData->shadowwTexture, 15.0f, windowRect, 1.0f, windowRect.GetWidth() / 8,
+      UI::DrawShadowInner(s_fileExplorerData->shadowwTexture, 10.0f, windowRect, 1.0f, windowRect.GetWidth() / 8,
                           false, false, true, false);
 
       ImGui::EndPopup();

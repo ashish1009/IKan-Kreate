@@ -807,8 +807,7 @@ if (!Project::GetActive()) return
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
     ImGui::SetNextWindowSize(ImVec2{ 1000, 500 });
 
-    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IKan::UI::Theme::Color::BackgroundPopup);
-    UI::ScopedColor separator(ImGuiCol_Separator, IM_COL32(111, 111, 111, 155));
+    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IM_COL32(63, 73, 87, 255));
     UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 15.0f));
 
     if (ImGui::BeginPopupModal("Welcome Screen", nullptr,
@@ -943,6 +942,7 @@ if (!Project::GetActive()) return
         ImGui::TableSetColumnIndex(1);
         ImGui::BeginChild("##Recent_Projects");
         {
+          
         }
         ImGui::EndChild(); // Recent_Projects
 
