@@ -89,7 +89,10 @@ namespace Kreator
     void OpenProject(const std::string& filepath);
     /// This function Opens the project from popup
     void OpenProject();
-
+    /// This funciton push the current project to recent project
+    /// - Parameter projectPath: Project to be pushed
+    void PushProjectToRecentProjects(std::filesystem::path projectPath);
+    
     // Scene APIs ----------------------------------------
     /// This function creates new scene
     /// - Parameter name: Scene name
@@ -130,7 +133,7 @@ namespace Kreator
     
     // Applicaiton Icons ---------------------------------
     Ref<Image> m_shadowTexture;
-    Ref<Image> m_newProject, m_Folder;
+    Ref<Image> m_newProject, m_folder;
     Ref<Image> m_applicationIcon, m_welcomeIcon;
     Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
 

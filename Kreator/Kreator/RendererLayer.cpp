@@ -149,7 +149,7 @@ if (!Project::GetActive()) return
     
     // Other Icons
     m_newProject = Image::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
-    m_Folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
+    m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -171,7 +171,7 @@ if (!Project::GetActive()) return
     UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
     UI::Font sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
     UI::Font Hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
-    UI::Font semiheader = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 18};
+    UI::Font semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
     UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, Hugeheader, semiheader});
 
     Kreator_UI::SetDarkTheme();
@@ -322,7 +322,8 @@ if (!Project::GetActive()) return
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Fonts");
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Scenes");
     
-    OpenProject(projectDir.string() + "/" + std::string(m_projectNameBuffer) + ProjectExtension);
+    auto projectFile = projectDir.string() + "/" + std::string(m_projectNameBuffer) + ProjectExtension;
+    OpenProject(projectFile);
   }
   
   void RendererLayer::OpenProject(const std::string &filepath)
@@ -362,22 +363,15 @@ if (!Project::GetActive()) return
     {
       NewScene();
     }
+    
+    PushProjectToRecentProjects(filepath);
   }
   
-  void RendererLayer::OpenProject()
+  void RendererLayer::PushProjectToRecentProjects(std::filesystem::path projectFile)
   {
-    if (m_openProjectPath == "")
-    {
-      return;
-    }
-    
-    // stash the filepath away.  Actual opening of project is deferred until it is "safe" to do so.
-    strcpy(m_projectFilePathBuffer, m_openProjectPath.string().c_str());
-    
-    std::filesystem::path projectFile = m_openProjectPath;
     RecentProject projectEntry;
     projectEntry.name = Utils::String::RemoveExtension(projectFile.filename().string());
-    projectEntry.filePath = m_openProjectPath;
+    projectEntry.filePath = projectFile;
     projectEntry.lastOpened = time(NULL);
     
     for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
@@ -390,13 +384,23 @@ if (!Project::GetActive()) return
     }
     
     m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
-    
     UserPreferencesSerializer serializer(m_userPreferences);
     serializer.Serialize(m_userPreferences->filePath);
-    
-    OpenProject(m_openProjectPath);
   }
   
+  void RendererLayer::OpenProject()
+  {
+    if (m_openProjectPath == "")
+    {
+      return;
+    }
+    
+    // stash the filepath away.  Actual opening of project is deferred until it is "safe" to do so.
+    strcpy(m_projectFilePathBuffer, m_openProjectPath.string().c_str());
+    
+    PushProjectToRecentProjects(m_openProjectPath);
+    OpenProject(m_openProjectPath);
+  }
   
   void RendererLayer::CloseProject(bool unloadProject)
   {
@@ -1005,7 +1009,7 @@ if (!Project::GetActive()) return
               ImGui::CloseCurrentPopup();
             }
             
-            if (button("Open Project", m_Folder, "Open an exisiting Kreator Project"))
+            if (button("Open Project", m_folder, "Open an exisiting Kreator Project"))
             {
               ImGui::CloseCurrentPopup();
               FolderExplorer::OpenPopup(m_allProjectsPath, &m_showWelcomePopup);
@@ -1038,7 +1042,20 @@ if (!Project::GetActive()) return
         ImGui::TableSetColumnIndex(1);
         ImGui::BeginChild("##Recent_Projects");
         {
+          UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+          UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 20.0f));
+          UI::ScopedFont semiHeader(Kreator_UI::GetSemiHeaderFont());
           
+          for (const auto& [timeStamp, recentProject] : m_userPreferences->recentProjects)
+          {
+            ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
+            bool open = UI::TreeNode("##Recent_Projects", recentProject.name, flags, m_applicationIcon);
+            if(open)
+            {
+              
+            }
+            ImGui::Separator();
+          }
         }
         ImGui::EndChild(); // Recent_Projects
 
