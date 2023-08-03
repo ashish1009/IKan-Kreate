@@ -6,6 +6,7 @@
 //
 
 #include "FolderExplorer.hpp"
+#include "RendererLayer.hpp"
 
 namespace Kreator
 {
@@ -22,6 +23,7 @@ namespace Kreator
     bool* lastPopupFlag;
     PopupType popupType;
     std::filesystem::path parentPath;
+    Ref<Image> shadowwTexture;
   };
   Scope<Data> s_fileExplorerData;
 
@@ -29,6 +31,7 @@ namespace Kreator
   {
     IK_LOG_TRACE("FolderExplorer", "Initialising the FolderExplorer textures");
     s_fileExplorerData = CreateScope<Data>();
+    s_fileExplorerData->shadowwTexture = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/ShadowLineTop.png");
   }
   
   void FolderExplorer::Shutdown()
@@ -53,12 +56,13 @@ namespace Kreator
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 10));
     
-    if (ImGui::BeginPopupModal("Folder Explorer", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove))
+    if (ImGui::BeginPopupModal("Folder Explorer", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove
+                               | ImGuiWindowFlags_NoTitleBar))
     {
       ImGui::EndPopup();
     }
     ImGui::PopStyleVar(2);
-
+ 
     return returnPath;
   }
   

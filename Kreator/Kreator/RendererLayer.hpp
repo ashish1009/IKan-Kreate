@@ -57,6 +57,9 @@ namespace Kreator
     /// - Parameter event: Event (Base class) intance. Dispatch event from Event Dispatcher
     void OnEvent(Event& event) override;
     
+    /// This function returns the client file path
+    static std::filesystem::path GetClientFilePath();
+    
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
     /// This function handles the key press event
@@ -149,15 +152,15 @@ namespace Kreator
     
     // View port Data ------------------------------------
     Viewport m_viewport;
-    
-    // Client Data ---------------------------------------
-    std::filesystem::path m_clientDirPath;
-    
+        
     // Editor Data ---------------------------------------
     enum class FolderExplorerAction
     {
       None, NewPreoject
     };
     FolderExplorerAction m_folderExplorerAction;
+    
+    // Client Data ---------------------------------------
+    static std::filesystem::path s_clientDirPath;
   };
 } // namespace Kreator

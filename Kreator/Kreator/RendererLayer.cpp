@@ -16,7 +16,7 @@ namespace Kreator
 if (!Project::GetActive()) return
   
   // Kretor Resource Path
-#define KreatorResourcePath(path) m_clientDirPath / "Resources" / path
+#define KreatorResourcePath(path) s_clientDirPath / "Resources" / path
 
   namespace KreatorUtils
   {
@@ -108,14 +108,22 @@ if (!Project::GetActive()) return
   {
     return { mousePosX, mousePosY };
   }
+  
+  std::filesystem::path RendererLayer::s_clientDirPath;
+  
+  std::filesystem::path RendererLayer::GetClientFilePath()
+  {
+    return s_clientDirPath;
+  }
 
   RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientDirPath)
   : Layer("Kreator Renderer"), m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
-  , m_userPreferences(userPreference), m_clientDirPath(clientDirPath)
+  , m_userPreferences(userPreference)
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
-    m_allProjectsPath = m_clientDirPath / "Projects";
+    s_clientDirPath = clientDirPath;
+    m_allProjectsPath = s_clientDirPath / "Projects";
     
     m_projectNameBuffer = iknew char[MAX_PROJECT_NAME_LENGTH];
     m_projectFilePathBuffer = iknew char[MAX_PROJECT_FILEPATH_LENGTH];
@@ -123,7 +131,7 @@ if (!Project::GetActive()) return
     // Save the default project path
     memccpy(m_projectFilePathBuffer, m_allProjectsPath.string().data(), 0, m_allProjectsPath.string().size());
     
-    m_templateProjectDir = m_clientDirPath / "Resources/TemplateProject";
+    m_templateProjectDir = s_clientDirPath / "Resources/TemplateProject";
     
     // Set the Application Icon
     m_applicationIcon = Image::Create(KreatorResourcePath("Textures/Logo/IKan.png"));

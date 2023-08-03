@@ -38,9 +38,6 @@ namespace Kreator
     
     void OnInit() override
     {
-      // Initialize the Kreator Modules -------------------------------------------------------------
-      FolderExplorer::Initialize();
-      
       // Create Persistance Directory ---------------------------------------------------------------
       m_persistenceStoragePath = m_clientDirectory / "PrsistenceStorage";
       if (!Utils::FileSystem::Exists(m_persistenceStoragePath))
@@ -102,6 +99,10 @@ namespace Kreator
       // Create and Push the Rendere Layer --------------------------------------------------------
       m_rendereLayer = CreateRef<RendererLayer>(m_userPreference, m_clientDirectory);
       PushLayer(m_rendereLayer);
+      
+      // Initialize the Kreator Modules -------------------------------------------------------------
+      // Should get initialized after layer initialize
+      FolderExplorer::Initialize();
     }
     
     void OnShutdown() override
