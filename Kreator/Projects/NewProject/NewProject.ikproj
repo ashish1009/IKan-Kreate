@@ -1,7 +1,0 @@
-Project:
-  Name: NewProject
-  AssetDirectory: Assets
-  AssetRegistry: Assets/AssetRegistry.ikr
-  StartScene: ""
-  AutoSave: false
-  AutoSaveInterval: 300

@@ -778,24 +778,34 @@ if (!Project::GetActive()) return
               break;
             }
             
-            if (ImGui::MenuItem(it->second.name.c_str()))
+            if (Utils::FileSystem::Exists(it->second.filePath))
             {
-              // stash filepath away and defer actual opening of project until it is "safe" to do so
-              strcpy(m_projectFilePathBuffer, it->second.filePath.data());
-              
-              RecentProject projectEntry;
-              projectEntry.name = it->second.name;
-              projectEntry.filePath = it->second.filePath;
-              projectEntry.lastOpened = time(NULL);
-              
-              it = m_userPreferences->recentProjects.erase(it);
-              
-              m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
-              
-              UserPreferencesSerializer preferencesSerializer(m_userPreferences);
-              preferencesSerializer.Serialize(m_userPreferences->filePath);
-              
-              OpenProject(projectEntry.filePath);
+              if (ImGui::MenuItem(it->second.name.c_str()))
+              {
+                // stash filepath away and defer actual opening of project until it is "safe" to do so
+                strcpy(m_projectFilePathBuffer, it->second.filePath.data());
+                
+                RecentProject projectEntry;
+                projectEntry.name = it->second.name;
+                projectEntry.filePath = it->second.filePath;
+                projectEntry.lastOpened = time(NULL);
+                
+                it = m_userPreferences->recentProjects.erase(it);
+                
+                m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+                
+                UserPreferencesSerializer preferencesSerializer(m_userPreferences);
+                preferencesSerializer.Serialize(m_userPreferences->filePath);
+                
+                OpenProject(projectEntry.filePath);
+                break;
+              }
+            }
+            else
+            {
+              m_userPreferences->recentProjects.erase(it);
+              UserPreferencesSerializer serializer(m_userPreferences);
+              serializer.Serialize(m_userPreferences->filePath);
               break;
             }
             
