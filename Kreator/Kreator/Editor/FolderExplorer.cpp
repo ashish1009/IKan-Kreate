@@ -28,6 +28,7 @@ namespace Kreator
     std::filesystem::path currentPath;
     Ref<Image> shadowwTexture;
     Ref<Image> backButton;
+    Ref<Image> folderIcon, fileTex;
 
     Data()
     {
@@ -48,6 +49,8 @@ namespace Kreator
     s_fileExplorerData = CreateScope<Data>();
     s_fileExplorerData->shadowwTexture = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/ShadowLineTop.png");
     s_fileExplorerData->backButton = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/Back.png");
+    s_fileExplorerData->folderIcon = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/Folder.png");
+    s_fileExplorerData->fileTex = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/File.png");
   }
   
   void FolderExplorer::Shutdown()
@@ -104,7 +107,7 @@ namespace Kreator
           mainAreaMin.y + 700 - topBarHeight
         };
         
-        drawList->AddRectFilled(mainAreaMin, mainAreaMax, UI::Theme::Color::BackgroundPopup);
+        drawList->AddRectFilled(mainAreaMin, mainAreaMax, UI::Theme::Color::GroupHeader);
       }
       
       {
@@ -198,12 +201,61 @@ namespace Kreator
           ImGui::GetCursorScreenPos().y + 20
         }
       };
-
+      
       ImRect windowRect = UI::RectExpanded(shadowRect, 0.0f, 0.0f);
       ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
       UI::DrawShadowInner(s_fileExplorerData->shadowwTexture, 10.0f, windowRect, 1.0f, windowRect.GetWidth() / 8,
                           false, false, true, false);
 
+      // Folder Explorer Main -----------------------------------------------------------
+      UI::PushID();
+      for (auto entry : std::filesystem::directory_iterator(s_fileExplorerData->currentPath))
+      {
+        if (entry.path().filename() == ".DS_Store")
+        {
+          continue;
+        }
+        
+        auto directoryName = std::filesystem::relative(entry.path(), s_fileExplorerData->currentPath);
+        std::string name = directoryName.filename().string();
+        std::string id = name + "_TreeNode";
+        
+        // ImGui item height hack
+        auto* window = ImGui::GetCurrentWindow();
+        window->DC.CurrLineSize.y = 20.0f;
+        window->DC.CurrLineTextBaseOffset = 3.0f;
+        
+        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet ;
+        //| ((s_fileExplorerData->selectedFilePath == entry) ? ImGuiTreeNodeFlags_Selected : 0);
+        
+        // Tree Node
+        auto tex = entry.is_directory() ? s_fileExplorerData->folderIcon : s_fileExplorerData->fileTex;
+        bool open = UI::TreeNode(id, name, flags, tex);
+        if (ImGui::IsItemClicked())
+        {
+          if (entry.is_directory())
+          {
+            s_fileExplorerData->currentPath = entry;
+          }
+          else
+          {
+            if (s_fileExplorerData->popupType == PopupType::Open)
+            {
+
+            }
+          }
+        }
+        
+        // Fixing slight overlap
+        UI::ShiftCursorY(3.0f);
+        
+        // If item clicked
+        if (open)
+        {
+          ImGui::TreePop();
+        }
+      }
+      UI::PopID();
       ImGui::EndPopup();
     }
     ImGui::PopStyleVar(1);

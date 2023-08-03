@@ -597,7 +597,7 @@ if (!Project::GetActive()) return
       // Make the new Min + Thickness of rectange as new Max of verticle line
       itemRect.Max.x = itemRect.Min.x + underlineThickness;
       
-      drawList->AddRectFilled(itemRect.Min, itemRect.Max, Kreator_UI::Color::Muted, 2.0f);
+      drawList->AddRectFilled(itemRect.Min, itemRect.Max, UI::Theme::Color::Muted, 2.0f);
     }
     
     // Current Scene name ---------------------------------------------------------------
@@ -619,7 +619,7 @@ if (!Project::GetActive()) return
       // Make the new Min + Thickness of rectange as new Max of verticle line
       itemRect.Max.x = itemRect.Min.x + underlineThickness;
       
-      drawList->AddRectFilled(itemRect.Min, itemRect.Max, Kreator_UI::Color::Muted, 2.0f);
+      drawList->AddRectFilled(itemRect.Min, itemRect.Max, UI::Theme::Color::Muted, 2.0f);
     }
     
     // Render the Window Buttons -------------------------------------------------------
