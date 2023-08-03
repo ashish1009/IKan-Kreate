@@ -52,7 +52,7 @@
       </BuildableProductRunnable>
       <CommandLineArguments>
          <CommandLineArgument
-            argument = "-core ../../../IKan -log ../../../Log -client ../../../Kreator -project ../../../Kreator/Projects/Sandbox/Sandbox.ikproj"
+            argument = "-log ../../../Log -client ../../../Kreator -project ../../../Kreator/Projects/Sandbox/Sandbox.ikproj"
             isEnabled = "YES">
          </CommandLineArgument>
       </CommandLineArguments>

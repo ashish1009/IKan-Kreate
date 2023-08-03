@@ -24,7 +24,6 @@ int main(int argc, const char * argv[])
 {
   // Log File Path. If External arguments are not given then logs to be saved at binary dir
   std::filesystem::path logDirectoryPath = "Log";
-  std::filesystem::path engineInstallPath = "";
   std::filesystem::path clientDirPath = "";
   std::filesystem::path startupProject = "";
 
@@ -37,10 +36,6 @@ int main(int argc, const char * argv[])
       {
         logDirectoryPath = argv[++i];
       }
-      else if (strcmp(argv[i], "-core") == 0)
-      {
-        engineInstallPath = argv[++i];
-      }
       else if (strcmp(argv[i], "-client") == 0)
       {
         clientDirPath = argv[++i];
@@ -51,13 +46,7 @@ int main(int argc, const char * argv[])
       }
     }
   }
-  
-  if (engineInstallPath == "")
-  {
-    std::cout << " Engine Install Path Not Given \n";
-    assert(false);
-  }
-  
+    
   // Date and Time
   time_t currentTime = time(0);             // get current dat/time with respect to system
   char* timeAsString = ctime(&currentTime); // convert it into string
@@ -70,13 +59,12 @@ int main(int argc, const char * argv[])
 #ifdef IK_ENABLE_LOG
   std::cout << "      Saving Logs at (Relative to Binary) : " << IKan::Utils::FileSystem::IKanAbsolute(logDirectoryPath) << std::endl;
 #endif
-  std::cout << "      Engine Install Path                 : " << IKan::Utils::FileSystem::IKanAbsolute(engineInstallPath) << std::endl;
   std::cout << " ------------------------------------------------------------------------------------------------ \n";
 
   InitializeEngine(logDirectoryPath.string());
   
   {
-    IKan::Scope<IKan::Application> app = IKan::CreateApplication({engineInstallPath, clientDirPath, startupProject});
+    IKan::Scope<IKan::Application> app = IKan::CreateApplication({clientDirPath, startupProject});
     app->Run();
     app.reset();
   }

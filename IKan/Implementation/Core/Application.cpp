@@ -29,7 +29,7 @@ namespace IKan
     Renderer::CreateRendererData(m_specificaion.renderingApi);
 
     // Update the core engine directory path
-    CoreDirectory::SetPath(m_specificaion.engineInstallPath);
+    CoreResourcesPath::SetPath(m_specificaion.engineResourcesPath);
 
     // Create the window
     m_window = Window::Create(m_specificaion.windowSpecification);

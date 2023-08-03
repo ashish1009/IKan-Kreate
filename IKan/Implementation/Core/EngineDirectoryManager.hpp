@@ -11,30 +11,23 @@
 
 namespace IKan
 {
-#define CoreAssetPath CoreDirectory::RelativeAssetPath
-#define EnginePath CoreDirectory::RelativeEnginePath
+#define CoreAssetPath CoreResourcesPath::RelativeResourcePath
   
   class Application;
   
   /// Stores the Engine directory path
-  struct CoreDirectory
+  struct CoreResourcesPath
   {
   public:
     /// This function returns the core engine base path
     /// - Important: To be setup via application specificaion
-    static std::filesystem::path GetEngineInstallPath();
-    /// This function returns the Core Asset Base path
-    /// - Important: Returned path is relative to .exce and upto the folder name of 'core_assets'
-    static std::filesystem::path GetAssetBasePath();
+    static std::filesystem::path GetEngineResourcesPath();
     
-    /// This function returns the path relative to the executable form the path relative to engine
-    /// - Parameter path: Path relative to workspace folder:
-    static std::filesystem::path RelativeEnginePath(const std::filesystem::path& path);
     /// This function returns the path relative to the executable form the path relative to Core asset path
     /// - Parameter asset_path: Aasset path relative to core_asset folder:
-    static std::filesystem::path RelativeAssetPath(const std::filesystem::path& assetPath);
+    static std::filesystem::path RelativeResourcePath(const std::filesystem::path& assetPath);
     
-    MAKE_PURE_STATIC(CoreDirectory);
+    MAKE_PURE_STATIC(CoreResourcesPath);
     friend class Application;
 
   private:
@@ -42,6 +35,6 @@ namespace IKan
     static void SetPath(const std::filesystem::path& enginePath);
     
     // Direcotry path of IKan Engine relative to Executable ----------------------------------------------------------
-    inline static std::filesystem::path s_engineBasePath;
+    inline static std::filesystem::path s_engineResourcesPath;
   };  
 } // namespace IKan

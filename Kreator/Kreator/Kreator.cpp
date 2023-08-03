@@ -130,7 +130,13 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const ApplicationData& ap
   IKan::Application::Specification applicationSpec;
  
   applicationSpec.name = "Kreator";
-  applicationSpec.engineInstallPath = appData.engineInstallPath;
+
+#ifdef DEBUG
+  applicationSpec.engineResourcesPath = "../../../IKan/Assets";
+#else
+  applicationSpec.engineResourcesPath "CoreResources";
+#endif
+  
   applicationSpec.iniPath = appData.clientDirectoryPath + "/Kreator.ini";
   applicationSpec.renderingApi = IKan::Renderer::Api::OpenGl;
 

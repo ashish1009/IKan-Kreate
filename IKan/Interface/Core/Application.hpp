@@ -28,7 +28,7 @@ namespace IKan
     struct Specification
     {
       std::string name = "iKan";
-      std::string engineInstallPath;
+      std::string engineResourcesPath;
       std::string iniPath = "ikan.ini";
 
       Renderer::Api renderingApi = Renderer::Api::None;
@@ -120,7 +120,6 @@ namespace IKan
   
   struct ApplicationData
   {
-    std::string engineInstallPath;
     std::string clientDirectoryPath;
     std::string startupProject;
   };

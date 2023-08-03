@@ -9,37 +9,27 @@
 
 namespace IKan
 {
-  std::filesystem::path CoreDirectory::GetEngineInstallPath()
+  std::filesystem::path CoreResourcesPath::GetEngineResourcesPath()
   {
-    return s_engineBasePath;
+    return s_engineResourcesPath;
   }
   
-  std::filesystem::path CoreDirectory::GetAssetBasePath()
+  
+  std::filesystem::path CoreResourcesPath::RelativeResourcePath(const std::filesystem::path &assetPath)
   {
-    return s_engineBasePath / "Assets/";
+    return s_engineResourcesPath / assetPath;
   }
   
-  std::filesystem::path CoreDirectory::RelativeEnginePath(const std::filesystem::path &path)
-  {
-    return s_engineBasePath / path;
-  }
-  
-  std::filesystem::path CoreDirectory::RelativeAssetPath(const std::filesystem::path &assetPath)
-  {
-    return GetAssetBasePath() / assetPath;
-  }
-  
-  void CoreDirectory::SetPath(const std::filesystem::path &enginePath)
+  void CoreResourcesPath::SetPath(const std::filesystem::path &enginePath)
   {
     IK_LOG_INFO(LogModule::IKan, "Engine is Instal path is {0}", Utils::FileSystem::IKanAbsolute(enginePath.c_str()));
     
     bool exist = Utils::FileSystem::Exists(enginePath);
-    bool assets = Utils::FileSystem::Exists(enginePath / "Assets");
-    bool interface = Utils::FileSystem::Exists(enginePath / "Interface");
-    bool implementation = Utils::FileSystem::Exists(enginePath / "Implementation");
-    bool vendors = Utils::FileSystem::Exists(enginePath / "Vendors");
+    bool shaders = Utils::FileSystem::Exists(enginePath / "Shaders");
+    bool textures = Utils::FileSystem::Exists(enginePath / "Textures");
+    bool fonts = Utils::FileSystem::Exists(enginePath / "Fonts");
     
-    IK_ASSERT(exist and assets and interface and implementation and vendors, "Invalid Engine Directory");
-    s_engineBasePath = enginePath;
+    IK_ASSERT(exist and fonts and shaders and textures, "Invalid Engine Directory");
+    s_engineResourcesPath = enginePath;
   }
 } // namespace IKan
