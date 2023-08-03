@@ -78,6 +78,14 @@ namespace IKan::UI
   /// - Parameter text: message
   void SetTooltip(std::string_view text);
 
+  /// This function renders the Tree node
+  /// - Parameters:
+  ///   - id: Item ID
+  ///   - label: Item Lable
+  ///   - flags: Item Flags
+  ///   - icon: Item Icon Texture
+  bool TreeNode(const std::string& id, const std::string& label, ImGuiTreeNodeFlags flags = 0, const Ref<Image>& icon = nullptr);
+  
   // Begin End -------------------------------------------------------------------------------------------------------
   /// This function draws MenuBar which allows you to specify its rectangle
   bool BeginMenuBar(const ImRect& barRectangle);
@@ -160,7 +168,7 @@ namespace IKan::UI
   ///   - tintPressed: tint pressed
   ///   - rectMin: rect Min
   ///   - rectMax: rext Max
-  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered, const Ref<Image>& imagePressed,
+  void DrawButtonImage(const Ref<IKan::Image>& imageNormal, const Ref<IKan::Image>& imageHovered, const Ref<IKan::Image>& imagePressed,
                        ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImVec2 rectMin, ImVec2 rectMax);
   /// This function Draw the button Image
   /// - Parameters:
@@ -171,7 +179,7 @@ namespace IKan::UI
   ///   - tintHovered: tint hovered
   ///   - tintPressed: tint pressed
   ///   - rectangle: rectangle vertex
-  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered, const Ref<Image>& imagePressed,
+  void DrawButtonImage(const Ref<IKan::Image>& imageNormal, const Ref<IKan::Image>& imageHovered, const Ref<IKan::Image>& imagePressed,
                        ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImRect rectangle);
   /// This function Draw the button Image
   /// - Parameters:
@@ -181,7 +189,7 @@ namespace IKan::UI
   ///   - tintPressed: tint pressed
   ///   - rectMin: rect Min
   ///   - rectMax: rext Max
-  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImVec2 rectMin, ImVec2 rectMax);
+  void DrawButtonImage(const Ref<IKan::Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImVec2 rectMin, ImVec2 rectMax);
   /// This function Draw the button Image
   /// - Parameters:
   ///   - imageNormal: Button Image texture
@@ -189,7 +197,7 @@ namespace IKan::UI
   ///   - tintHovered: tint hovered
   ///   - tintPressed: tint pressed
   ///   - rectangle: rectangle vertex
-  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImRect rectangle);
+  void DrawButtonImage(const Ref<IKan::Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed, ImRect rectangle);
   /// This function Draw the button Image
   /// - Parameters:
   ///   - imageNormal: Button Image texture
@@ -198,7 +206,7 @@ namespace IKan::UI
   ///   - tintNormal: tint normal
   ///   - tintHovered: tint hovered
   ///   - tintPressed: tint pressed
-  void DrawButtonImage(const Ref<Image>& imageNormal, const Ref<Image>& imageHovered, const Ref<Image>& imagePressed,
+  void DrawButtonImage(const Ref<IKan::Image>& imageNormal, const Ref<IKan::Image>& imageHovered, const Ref<IKan::Image>& imagePressed,
                        ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed);
   /// This function Draw the button Image
   /// - Parameters:
@@ -206,7 +214,7 @@ namespace IKan::UI
   ///   - tintNormal: tint normal
   ///   - tintHovered: tint hovered
   ///   - tintPressed: tint pressed
-  void DrawButtonImage(const Ref<Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed);
+  void DrawButtonImage(const Ref<IKan::Image>& image, ImU32 tintNormal, ImU32 tintHovered, ImU32 tintPressed);
   
   /// This function draw the Border as rectangle
   /// - Parameters:
@@ -235,7 +243,7 @@ namespace IKan::UI
   ///   - radius: radius of shadow
   ///   - rectMin: rect min
   ///   - rectMax: rect Max
-  void DrawShadow(const Ref<Texture>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax,
+  void DrawShadow(const Ref<IKan::Image>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax,
                   float alphMultiplier = 1.0f, float lengthStretch = 10.0f, bool drawLeft = true, bool drawRight = true,
                   bool drawTop = true, bool drawBottom = true);
   /// This function render the Shadow image in Imgui
@@ -243,13 +251,13 @@ namespace IKan::UI
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
   ///   - rectangle: rectangle Data
-  void DrawShadow(const Ref<Texture>& shadowImage, int radius, ImRect rectangle, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
+  void DrawShadow(const Ref<IKan::Image>& shadowImage, int radius, ImRect rectangle, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
                   bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
   /// This function render the Shadow image in Imgui
   /// - Parameters:
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
-  void DrawShadow(const Ref<Texture>& shadow_image, int radius, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
+  void DrawShadow(const Ref<Image>& shadow_image, int radius, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
                   bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
   /// This function render the Shadow image in Imgui
   /// - Parameters:
@@ -257,7 +265,7 @@ namespace IKan::UI
   ///   - radius: radius of shadow
   ///   - rectMin: rect min
   ///   - rectMax: rect Max
-  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax, float alpha = 1.0f,
+  void DrawShadowInner(const Ref<IKan::Image>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax, float alpha = 1.0f,
                        float lengthStretch = 10.0f, bool drawLeft = true, bool drawRight = true, bool drawTop = true,
                        bool drawBottom = true);
   
@@ -266,13 +274,21 @@ namespace IKan::UI
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
   ///   - rectangle: rectangle Data
-  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, ImRect rectangle, float alpha = 1.0f, float lengthStretch = 10.0f,
+  void DrawShadowInner(const Ref<IKan::Image>& shadowImage, int radius, ImRect rectangle, float alpha = 1.0f, float lengthStretch = 10.0f,
                        bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
   /// This function render the Shadow image in Imgui
   /// - Parameters:
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
-  void DrawShadowInner(const Ref<Texture>& shadowImage, int radius, float alpha = 1.0f, float lengthStretch = 10.0f,
+  void DrawShadowInner(const Ref<IKan::Image>& shadowImage, int radius, float alpha = 1.0f, float lengthStretch = 10.0f,
                        bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
-  
+
+  /// This function renders Imgae in current Imgui window
+  /// - Parameters:
+  ///   - texture; Texture reference
+  ///   - size; size of image need to be rendered inside Imgui window (this size will be visible as texture)
+  ///   - uv0; Left
+  ///   - uv1; Right
+  void Image(const Ref<IKan::Image>& texture, const ImVec2& size, const ImVec2& uv0 = {0, 1}, const ImVec2& uv1 = {1, 0},
+             const ImVec4& tintCol = {1, 1, 1, 1}, const ImVec4& borderCol = {0, 0, 0, 0});
 } //  namespace IKan::UI

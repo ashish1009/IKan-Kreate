@@ -26,6 +26,7 @@ namespace IKan::UI
       inline static ImU32 GroupHeaderHovered   = IM_COL32(32, 32, 32, 255);
       inline static ImU32 GroupHeaderActive    = IM_COL32(30, 30, 30, 255);
       inline static ImU32 TextBrighter         = IM_COL32(200, 200, 200, 255);
+      inline static ImU32 Muted                = IM_COL32(77, 77, 77, 255);
     };
     
     /// This function changes the imgui font

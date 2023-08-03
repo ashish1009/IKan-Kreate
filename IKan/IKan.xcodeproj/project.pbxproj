@@ -134,6 +134,8 @@
 		B240771F2A72665A00221919 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B240771D2A72665A00221919 /* Logger.hpp */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
+		B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */; };
+		B2B2CE562A7BA5F8007EACDE /* ImGuiCustom.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B2CE542A7BA5F8007EACDE /* ImGuiCustom.hpp */; };
 		B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE392A7272560068EEFB /* AssertAPIs.h */; };
 		B2B5DE3E2A727C090068EEFB /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B5DE3C2A727C090068EEFB /* Timer.cpp */; };
 		B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B5DE3D2A727C090068EEFB /* Timer.hpp */; };
@@ -323,6 +325,8 @@
 		B240771D2A72665A00221919 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
+		B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiCustom.cpp; sourceTree = "<group>"; };
+		B2B2CE542A7BA5F8007EACDE /* ImGuiCustom.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiCustom.hpp; sourceTree = "<group>"; };
 		B2B5DE392A7272560068EEFB /* AssertAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertAPIs.h; sourceTree = "<group>"; };
 		B2B5DE3C2A727C090068EEFB /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
 		B2B5DE3D2A727C090068EEFB /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
@@ -579,6 +583,7 @@
 				B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */,
 				B2CF83122A77D03C006B2D54 /* ImGuiUtils.hpp */,
 				B2CF831A2A77DAF0006B2D54 /* ImGuiScoped.hpp */,
+				B2B2CE542A7BA5F8007EACDE /* ImGuiCustom.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -591,6 +596,7 @@
 				B2B63F1F2A779E820056ED4E /* ImGuiTheme.cpp */,
 				B2CF83112A77D03C006B2D54 /* ImGuiUtils.cpp */,
 				B2CF83192A77DAF0006B2D54 /* ImGuiScoped.cpp */,
+				B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -856,6 +862,7 @@
 				B24077192A72651400221919 /* Common.hpp in Headers */,
 				B23364BA2A72D14800BC7B8B /* RendererContext.hpp in Headers */,
 				B23364E52A7427C300BC7B8B /* OpenGLShaderUniform.hpp in Headers */,
+				B2B2CE562A7BA5F8007EACDE /* ImGuiCustom.hpp in Headers */,
 				B23365332A74416700BC7B8B /* EditorCamera.hpp in Headers */,
 				B23364F62A742A4200BC7B8B /* Shader.hpp in Headers */,
 				B2336A4B2A76399200BC7B8B /* AssetSerializer.hpp in Headers */,
@@ -1009,6 +1016,7 @@
 				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B23364D82A74253900BC7B8B /* RendererAPI.cpp in Sources */,
 				B23365562A7503CA00BC7B8B /* OpenGLFrameBuffer.cpp in Sources */,
+				B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */,
 				B2B63F212A779E820056ED4E /* ImGuiTheme.cpp in Sources */,
 				B23365362A74422800BC7B8B /* FixedCamera.cpp in Sources */,
 				B233651C2A743D0E00BC7B8B /* Pipeline.cpp in Sources */,
