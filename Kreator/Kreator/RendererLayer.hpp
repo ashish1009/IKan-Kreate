@@ -149,7 +149,8 @@ namespace Kreator
     Ref<UserPreferences> m_userPreferences;
     char* m_projectNameBuffer = nullptr;
     char* m_projectFilePathBuffer = nullptr;
-    
+    std::filesystem::path m_openProjectPath = "";
+
     // View port Data ------------------------------------
     Viewport m_viewport;
         

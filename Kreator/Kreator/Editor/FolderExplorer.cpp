@@ -219,6 +219,10 @@ namespace Kreator
                 if (entry.is_directory())
                 {
                   s_fileExplorerData->currentPath = entry;
+                  if (s_fileExplorerData->popupType == PopupType::Open)
+                  {
+                    s_fileExplorerData->selectedFilePath = "";
+                  }
                 }
                 else
                 {

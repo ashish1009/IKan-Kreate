@@ -1,0 +1,7 @@
+Project:
+  Name: AnptherNewProject
+  AssetDirectory: Assets
+  AssetRegistry: Assets/AssetRegistry.ikr
+  StartScene: ""
+  AutoSave: false
+  AutoSaveInterval: 300

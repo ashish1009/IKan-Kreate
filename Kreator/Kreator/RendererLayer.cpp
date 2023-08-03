@@ -366,8 +366,37 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OpenProject()
   {
-    IK_ASSERT(false);
+    if (m_openProjectPath == "")
+    {
+      return;
+    }
+    
+    // stash the filepath away.  Actual opening of project is deferred until it is "safe" to do so.
+    strcpy(m_projectFilePathBuffer, m_openProjectPath.string().c_str());
+    
+    std::filesystem::path projectFile = m_openProjectPath;
+    RecentProject projectEntry;
+    projectEntry.name = Utils::String::RemoveExtension(projectFile.filename().string());
+    projectEntry.filePath = m_openProjectPath;
+    projectEntry.lastOpened = time(NULL);
+    
+    for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+    {
+      if (it->second.name == projectEntry.name)
+      {
+        m_userPreferences->recentProjects.erase(it);
+        break;
+      }
+    }
+    
+    m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+    
+    UserPreferencesSerializer serializer(m_userPreferences);
+    serializer.Serialize(m_userPreferences->filePath);
+    
+    OpenProject(m_openProjectPath);
   }
+  
   
   void RendererLayer::CloseProject(bool unloadProject)
   {
@@ -730,6 +759,17 @@ if (!Project::GetActive()) return
       
       // Menu Items
       UI_Utils::AddMenu("File", popItemHighlight, [this]() {
+        if (ImGui::MenuItem("Create Project..."))
+        {
+          m_showCreateNewProjectPopup = true;
+        }
+        if (ImGui::MenuItem("Open Project...", "Cmd + O"))
+        {
+          FolderExplorer::OpenPopup(m_allProjectsPath);
+          m_folderExplorerAction = FolderExplorerAction::OpenProject;
+        }
+
+        ImGui::Separator();
         if (ImGui::MenuItem("Exit", "Cmd + Q"))
         {
           Application::Get().Close();
@@ -1060,7 +1100,16 @@ if (!Project::GetActive()) return
         }
         case FolderExplorerAction::OpenProject:
         {
-          OpenProject(explorerOutput);
+          if (Utils::String::GetExtensionFromPath(explorerOutput) == ProjectExtension)
+          {
+            m_openProjectPath = explorerOutput;
+            OpenProject();
+          }
+          else
+          {
+            FolderExplorer::OpenPopup(explorerOutput.parent_path());
+            m_folderExplorerAction = FolderExplorerAction::OpenProject;
+          }
           break;
         }
         case FolderExplorerAction::None:

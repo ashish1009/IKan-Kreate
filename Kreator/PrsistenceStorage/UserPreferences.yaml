@@ -1,4 +1,6 @@
 UserPrefs:
   ShowWelcomeScreen: false
   RecentProjects:
-    []
+    - Name: AnptherNewProject
+      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Projects/AnptherNewProject/AnptherNewProject.ikproj
+      LastOpened: 1691065395
