@@ -138,6 +138,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 
 - v7.0.3.0  : Kreator - Kreator Title Bar
 - v7.0.3.1  : Kreator - Kreator Welcome Screen
+- v7.0.3.2  : Kreator - Folder Explorer to open Project and create new
  ------------------------------------------------------------------------------------------------------------------
 
 ## Upcoming Release Tags
