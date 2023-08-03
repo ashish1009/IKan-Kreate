@@ -25,13 +25,18 @@ namespace Kreator
     /// - Parameters:
     ///   - lastPopupFlad: Last Popup flag to be opened again
     ///   - basePath: Base Folder Explorer Patg
-    static void SelectPopup(bool *lastPopupFlad = nullptr, const std::filesystem::path& basePath = "");
-    
+    static void SelectPopup(const std::filesystem::path& basePath, bool *lastPopupFlad = nullptr);
+    /// This function set the popup to show open file widgwet
+    /// - Parameters:
+    ///   - lastPopupFlad: Last Popup flag to be opened again
+    ///   - basePath: Base Folder Explorer Patg
+    static void OpenPopup(const std::filesystem::path& basePath, bool *lastPopupFlad = nullptr );
+
   private:
     /// This function set the popup to show open file widgwet
     /// - Parameters:
     ///   - lastPopupFlad: Last Popup flag to be opened again
     ///   - basePath: Base Folder Explorer Patg
-    static void PopupImpl(bool *lastPopupFlad = nullptr, const std::filesystem::path& basePath = "");
+    static void PopupImpl(const std::filesystem::path& basePath, bool *lastPopupFlad = nullptr);
   };
 } // namespace IKan

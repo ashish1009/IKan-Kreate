@@ -16,7 +16,7 @@ namespace Kreator
   
   enum class PopupType
   {
-    Select
+    Select, Open
   };
 
   struct Data
@@ -26,6 +26,7 @@ namespace Kreator
     char* openPathBuffer;
     PopupType popupType;
     std::filesystem::path currentPath;
+    std::filesystem::path selectedFilePath = "";
     Ref<Image> shadowwTexture;
     Ref<Image> backButton;
     Ref<Image> folderIcon, fileTex;
@@ -121,6 +122,7 @@ namespace Kreator
       switch(s_fileExplorerData->popupType)
       {
         case PopupType::Select : buttonTitle = "Select";  break;
+        case PopupType::Open   : buttonTitle = "Open";    break;
         default:
           IK_ASSERT(false);
       }
@@ -135,15 +137,29 @@ namespace Kreator
             returnPath = s_fileExplorerData->currentPath;
             break;
           }
+          case PopupType::Open :
+          {
+            returnPath = s_fileExplorerData->selectedFilePath;
+            
+            // For Open file there must be some file selected to close the popup
+            if (returnPath == "")
+            {
+              isValid = false;
+            }
+            break;
+          }
           default:
             IK_ASSERT(false);
         }
         
         if (isValid)
         {
-          if (s_fileExplorerData->lastPopupFlag)
+          if (s_fileExplorerData->popupType == PopupType::Select)
           {
-            *s_fileExplorerData->lastPopupFlag = true;
+            if (s_fileExplorerData->lastPopupFlag)
+            {
+              *s_fileExplorerData->lastPopupFlag = true;
+            }
           }
           ImGui::CloseCurrentPopup();
         }
@@ -192,8 +208,8 @@ namespace Kreator
               window->DC.CurrLineSize.y = 20.0f;
               window->DC.CurrLineTextBaseOffset = 3.0f;
               
-              ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
-              // | ((s_fileExplorerData->selectedFilePath == entry) ? ImGuiTreeNodeFlags_Selected : 0);
+              ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
+              | ((s_fileExplorerData->selectedFilePath == entry) ? ImGuiTreeNodeFlags_Selected : 0);
               
               // Tree Node
               auto tex = entry.is_directory() ? s_fileExplorerData->folderIcon : s_fileExplorerData->fileTex;
@@ -206,7 +222,10 @@ namespace Kreator
                 }
                 else
                 {
-
+                  if (s_fileExplorerData->popupType == PopupType::Open)
+                  {
+                    s_fileExplorerData->selectedFilePath = entry;
+                  }
                 }
               }
               
@@ -233,18 +252,25 @@ namespace Kreator
     return returnPath;
   }
   
-  void FolderExplorer::SelectPopup(bool* lastPopupFlag, const std::filesystem::path& basePath)
+  void FolderExplorer::SelectPopup(const std::filesystem::path& basePath, bool* lastPopupFlag)
   {
     s_fileExplorerData->popupType = PopupType::Select;
-    PopupImpl(lastPopupFlag, basePath);
+    PopupImpl(basePath, lastPopupFlag);
   }
 
-  void FolderExplorer::PopupImpl(bool* lastPopupFlag, const std::filesystem::path& basePath)
+  void FolderExplorer::OpenPopup(const std::filesystem::path& basePath, bool* lastPopupFlag)
+  {
+    s_fileExplorerData->popupType = PopupType::Open;
+    PopupImpl(basePath, lastPopupFlag);
+  }
+
+  void FolderExplorer::PopupImpl(const std::filesystem::path& basePath, bool* lastPopupFlag)
   {
     IK_ASSERT(Utils::FileSystem::Exists(basePath));
 
     s_fileExplorerData->popup = true;
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
     s_fileExplorerData->currentPath = Utils::FileSystem::IKanAbsolute(basePath);
+    s_fileExplorerData->selectedFilePath = "";
   }
 } // namespace Kreator

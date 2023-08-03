@@ -156,7 +156,7 @@ namespace Kreator
     // Editor Data ---------------------------------------
     enum class FolderExplorerAction
     {
-      None, NewPreoject
+      None, NewPreoject, OpenProject
     };
     FolderExplorerAction m_folderExplorerAction;
     

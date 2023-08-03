@@ -179,7 +179,14 @@ if (!Project::GetActive()) return
     // Open or Create Project
     if (Utils::FileSystem::Exists(m_userPreferences->startupProject))
     {
-      OpenProject(m_userPreferences->startupProject);
+      if (m_userPreferences->showWelcomeScreen)
+      {
+        m_showWelcomePopup = true;
+      }
+      else
+      {
+        OpenProject(m_userPreferences->startupProject);
+      }
     }
     else
     {
@@ -916,7 +923,9 @@ if (!Project::GetActive()) return
             
             if (button("Open Project", m_Folder, "Open an exisiting Kreator Project"))
             {
-              
+              ImGui::CloseCurrentPopup();
+              FolderExplorer::OpenPopup(m_allProjectsPath, &m_showWelcomePopup);
+              m_folderExplorerAction = FolderExplorerAction::OpenProject;
             }
           }
           
@@ -994,7 +1003,7 @@ if (!Project::GetActive()) return
       if (UI::DrawRoundButton("...", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 5))
       {
         ImGui::CloseCurrentPopup();
-        FolderExplorer::SelectPopup(&m_showCreateNewProjectPopup, m_allProjectsPath);
+        FolderExplorer::SelectPopup(m_allProjectsPath, &m_showCreateNewProjectPopup);
         m_folderExplorerAction = FolderExplorerAction::NewPreoject;
       }
       
@@ -1047,6 +1056,11 @@ if (!Project::GetActive()) return
         {
           memset(m_projectFilePathBuffer, 0, MAX_PROJECT_FILEPATH_LENGTH);
           memcpy(m_projectFilePathBuffer, explorerOutput.string().c_str(), MAX_PROJECT_FILEPATH_LENGTH);
+          break;
+        }
+        case FolderExplorerAction::OpenProject:
+        {
+          OpenProject(explorerOutput);
           break;
         }
         case FolderExplorerAction::None:

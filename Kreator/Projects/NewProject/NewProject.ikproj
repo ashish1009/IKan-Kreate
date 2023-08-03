@@ -1,0 +1,4 @@
+Project:
+  Name: NewProject
+  AssetDirectory: Assets
+  AssetRegistry: Assets/AssetRegistry.ikr
