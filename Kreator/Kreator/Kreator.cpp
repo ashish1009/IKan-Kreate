@@ -22,7 +22,7 @@ namespace Kreator
       IK_LOG_TRACE("Kreator App", "Creating Kreator Application");
       
       // Check Client Path is valid
-      IK_LOG_TRACE("Kreator App", "Setting Client Directory {0}", Utils::FileSystem::Absolute(clientDirectory));
+      IK_LOG_TRACE("Kreator App", "Setting Client Directory {0}", Utils::FileSystem::KreatorAbsolute(clientDirectory));
       bool exist = Utils::FileSystem::Exists(clientDirectory);
       bool kreator = Utils::FileSystem::Exists(clientDirectory + "/Kreator");
       bool resources = Utils::FileSystem::Exists(clientDirectory + "/Resources");
@@ -92,9 +92,9 @@ namespace Kreator
         }
       }
       
-      IK_LOG_TRACE("Kreator App", "  Application Path           : {0}", m_clientDirectory.string().c_str());
-      IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", m_persistenceStoragePath.string().c_str());
-      IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", m_projectPath.string().c_str());
+      IK_LOG_TRACE("Kreator App", "  Application Path           : {0}", IKan::Utils::FileSystem::KreatorAbsolute(m_clientDirectory));
+      IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", IKan::Utils::FileSystem::KreatorAbsolute(m_persistenceStoragePath));
+      IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", IKan::Utils::FileSystem::KreatorAbsolute(m_projectPath));
 
       // Create and Push the Rendere Layer --------------------------------------------------------
       m_rendereLayer = CreateRef<RendererLayer>(m_userPreference, m_clientDirectory);
