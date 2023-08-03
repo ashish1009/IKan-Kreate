@@ -27,7 +27,8 @@ namespace Kreator
     PopupType popupType;
     std::filesystem::path currentPath;
     Ref<Image> shadowwTexture;
-    
+    Ref<Image> backButton;
+
     Data()
     {
       openPathBuffer = iknew char[MAX_PATH_LENGTH];
@@ -46,6 +47,7 @@ namespace Kreator
     IK_LOG_TRACE("FolderExplorer", "Initialising the FolderExplorer textures");
     s_fileExplorerData = CreateScope<Data>();
     s_fileExplorerData->shadowwTexture = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/ShadowLineTop.png");
+    s_fileExplorerData->backButton = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/Back.png");
   }
   
   void FolderExplorer::Shutdown()
@@ -107,11 +109,37 @@ namespace Kreator
       
       {
         UI::ScopedStyle windowPadding (ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
-//        UI::ScopedColor frameBg(ImGuiCol_FrameBg, UI::Theme::Color::BackgroundPopup);
-
         UI::ShiftCursorX(ImGui::GetCurrentWindow()->WindowPadding.x);
         UI::ShiftCursorY(ImGui::GetCurrentWindow()->WindowPadding.y);
-
+        
+        // Render Icon Buttons -----------------------------------------------------------
+        auto contenBrowserButton = [](const char* labelId, const Ref<Image>& icon)
+        {
+          const ImU32 buttonCol = UI::Theme::Color::BackgroundDark;
+          const ImU32 buttonColP = UI::ColorWithMultipliedValue(UI::Theme::Color::BackgroundDark, 0.8f);
+          UI::ScopedColorStack buttonColors(ImGuiCol_Button, buttonCol,
+                                            ImGuiCol_ButtonHovered, buttonCol,
+                                            ImGuiCol_ButtonActive, buttonColP);
+          
+          const float iconSize = 20.0f;
+          const float iconPadding = 3.0f;
+          const bool clicked = ImGui::Button(labelId, ImVec2(iconSize, iconSize));
+          UI::DrawButtonImage(icon, Kreator_UI::Color::TextDarker,
+                              UI::ColorWithMultipliedValue(Kreator_UI::Color::TextDarker, 1.2f),
+                              UI::ColorWithMultipliedValue(Kreator_UI::Color::TextDarker, 0.8f),
+                              UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
+          
+          return clicked;
+        };
+        
+        if (contenBrowserButton("##back", s_fileExplorerData->backButton))
+        {
+          
+        }
+        UI::SetTooltip("Previous directory");
+        ImGui::SameLine();
+      
+        // Draw Address bar --------------------------------------------------------------
         float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
         ImGui::SetNextItemWidth(addressBarWidth);
         ImGui::InputTextWithHint("##new_project_location", "Project Location",
