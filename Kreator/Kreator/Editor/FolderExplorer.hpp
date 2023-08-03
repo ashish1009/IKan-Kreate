@@ -18,5 +18,20 @@ namespace Kreator
     static void Initialize();
     /// This function shutdown the Folder explorer. Path and Textures
     static void Shutdown();
+    /// Thius function render the widget and return the selected file path
+    static std::filesystem::path Explore();
+    
+    /// This function set the popup to show Select folder widgwet
+    /// - Parameters:
+    ///   - lastPopupFlad: Last Popup flag to be opened again
+    ///   - basePath: Base Folder Explorer Patg
+    static void SelectPopup(bool *lastPopupFlad = nullptr, const std::filesystem::path& basePath = "");
+    
+  private:
+    /// This function set the popup to show open file widgwet
+    /// - Parameters:
+    ///   - lastPopupFlad: Last Popup flag to be opened again
+    ///   - basePath: Base Folder Explorer Patg
+    static void PopupImpl(bool *lastPopupFlad = nullptr, const std::filesystem::path& basePath = "");
   };
 } // namespace IKan

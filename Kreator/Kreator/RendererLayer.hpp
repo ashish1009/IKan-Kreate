@@ -102,6 +102,7 @@ namespace Kreator
     void UI_StartMainWindowDocking();
     /// This function Ends Main ImGui window with Docking
     void UI_EndMainWindowDocking();
+
     /// This function renders our title bar
     float UI_DrawTitlebar();
     /// This function handle the drag and Click on title bar
@@ -111,11 +112,14 @@ namespace Kreator
     void UI_MenuBar();
     /// This function renders window buttons
     void UI_WindowButtons();
+
     /// This function shows the Welcome screen
     void UI_WelcomePopup();
 
     /// This function shows new project popup
     void UI_NewProjectPopup();
+    /// This function update the folder explorer output
+    void UI_FolderExplorer();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
@@ -148,5 +152,12 @@ namespace Kreator
     
     // Client Data ---------------------------------------
     std::filesystem::path m_clientDirPath;
+    
+    // Editor Data ---------------------------------------
+    enum class FolderExplorerAction
+    {
+      None, NewPreoject
+    };
+    FolderExplorerAction m_folderExplorerAction;
   };
 } // namespace Kreator

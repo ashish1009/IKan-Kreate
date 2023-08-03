@@ -6,6 +6,7 @@
 //
 
 #include "RendererLayer.hpp"
+#include "FolderExplorer.hpp"
 
 extern std::string IKanVersion;
 
@@ -250,6 +251,7 @@ if (!Project::GetActive()) return
     // Should be above all scene GUI
     UI_WelcomePopup();
     UI_NewProjectPopup();
+    UI_FolderExplorer();
     
     RETRUN_IF_NO_PROJECT();
     
@@ -980,7 +982,8 @@ if (!Project::GetActive()) return
       ImGui::SameLine();
       if (UI::DrawRoundButton("...", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 5))
       {
-        
+        FolderExplorer::SelectPopup(&m_showCreateNewProjectPopup, m_allProjectsPath);
+        m_folderExplorerAction = FolderExplorerAction::NewPreoject;
       }
       
       ImGui::Separator();
@@ -1011,5 +1014,25 @@ if (!Project::GetActive()) return
       ImGui::EndPopup();
     }
     ImGui::PopStyleVar(2);
+  }
+  
+  void RendererLayer::UI_FolderExplorer()
+  {
+    // Folder explorer if clicked ... Button
+    auto explorerOutput = FolderExplorer::Explore();
+    if (explorerOutput != "")
+    {
+      switch (m_folderExplorerAction)
+      {
+        case FolderExplorerAction::NewPreoject:
+        {
+          break;
+        }
+        case FolderExplorerAction::None:
+        default:
+          IK_ASSERT(false);
+          break;
+      }
+    }
   }
 } // namespace Kreator

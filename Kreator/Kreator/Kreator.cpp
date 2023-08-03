@@ -107,7 +107,7 @@ namespace Kreator
     void OnShutdown() override
     {
       // Shutdown the Kreator Modules -------------------------------------------------------------
-      FolderExplorer::Initialize();
+      FolderExplorer::Shutdown();
       
       // Destroy and Pop the Rendere Layer --------------------------------------------------------
       PopLayer(m_rendereLayer);
