@@ -933,7 +933,7 @@ if (!Project::GetActive()) return
           // Draw side shadow-----------------------------------------------------------------
           ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
           ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
-          UI::DrawShadowInner(m_shadowTexture, 20.0f, windowRect, 1.0f, windowRect.GetHeight() / 4.0f,
+          UI::DrawShadowInner(m_shadowTexture, 12.0f, windowRect, 1.0f, windowRect.GetHeight() / 4.0f,
                               false, true, false, false);
           ImGui::PopClipRect();
         }
