@@ -27,7 +27,11 @@ namespace Kreator
       bool kreator = Utils::FileSystem::Exists(clientDirectory + "/Kreator");
       bool resources = Utils::FileSystem::Exists(clientDirectory + "/Resources");
       
-      IK_ASSERT(exist and kreator and resources, "Invalid Client Directory");
+      if (!exist or !kreator or !resources)
+      {
+        IK_LOG_CRITICAL("Kreator App", "Exist {0}, Kreator {1}, Resourece{2}", exist, kreator, resources);
+        IK_ASSERT(false, "Invalid Client Directory");
+      }
       m_clientDirectory = clientDirectory;
    }
     
@@ -71,17 +75,11 @@ namespace Kreator
         {
           if (m_userPreference->startupProject.empty())
           {
-#if 0
-            // If There is no startup project and no project is given by argument
-            // Create Projects Directory
-            auto sandboxProjectDir = projectDir / "SandboxProject";
-            m_projectPath = sandboxProjectDir / "Sandbox.ikproj";
-            m_userPreference->startupProject = m_projectPath;
-#endif
+            // DO Nothing it will popup the welcome screen
           }
           else
           {
-            IK_ASSERT(false);
+            // DO Nothing it will popup the welcome screen
           }
         }
         else

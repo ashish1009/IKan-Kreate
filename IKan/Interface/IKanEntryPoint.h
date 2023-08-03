@@ -54,7 +54,8 @@ int main(int argc, const char * argv[])
   
   if (engineInstallPath == "")
   {
-    IK_ASSERT(false, "Pass Engine Install Path in argument");
+    std::cout << " Engine Install Path Not Given \n";
+    assert(false);
   }
   
   // Date and Time
