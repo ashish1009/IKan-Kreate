@@ -64,7 +64,7 @@ namespace Kreator
     std::filesystem::path returnPath = "";
     
     memcpy(s_fileExplorerData->openPathBuffer, s_fileExplorerData->currentPath.c_str(), s_fileExplorerData->currentPath.string().size());
-
+    
     if (s_fileExplorerData->popup)
     {
       ImGui::OpenPopup("Folder Explorer");
@@ -74,197 +74,192 @@ namespace Kreator
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
     ImGui::SetNextWindowSize(ImVec2{ 700, 325 });
-
-    if (ImGui::BeginPopupModal("Folder Explorer", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove
-                               | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground))
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 10));
+    
+    if (ImGui::BeginPopupModal("Folder Explorer", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove |
+                               ImGuiWindowFlags_NoTitleBar))
     {
-      const float topBarHeight = 40;
-      auto* drawList = ImGui::GetWindowDrawList();
-
-      // Draw the address Bar -------------------------------------------------------------
+      // Render Icon Buttons
+      auto browserButton = [](const char* labelId, const Ref<Image>& icon)
       {
-        UI::ScopedStyle windowPadding (ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
-
-        const ImVec2 addresBarMin = ImGui::GetCursorScreenPos();
-        const ImVec2 addresBarMax =
+        const ImU32 buttonCol = UI::Theme::Color::BackgroundDark;
+        const ImU32 buttonColP = UI::ColorWithMultipliedValue(UI::Theme::Color::BackgroundDark, 0.8f);
+        UI::ScopedColorStack buttonColors(ImGuiCol_Button, buttonCol,
+                                          ImGuiCol_ButtonHovered, buttonCol,
+                                          ImGuiCol_ButtonActive, buttonColP);
+        
+        const float iconSize = 20.0f;
+        const float iconPadding = 3.0f;
+        const bool clicked = ImGui::Button(labelId, ImVec2(iconSize, iconSize));
+        UI::DrawButtonImage(icon, Kreator_UI::Color::TextDarker,
+                            UI::ColorWithMultipliedValue(Kreator_UI::Color::TextDarker, 1.2f),
+                            UI::ColorWithMultipliedValue(Kreator_UI::Color::TextDarker, 0.8f),
+                            UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
+        
+        return clicked;
+      };
+      
+      if (browserButton("##back", s_fileExplorerData->backButton))
+      {
+        if (s_fileExplorerData->currentPath != "/")
         {
-          addresBarMin.x + ImGui::GetContentRegionAvail().x,
-          addresBarMin.y + topBarHeight
-        };
-
-        drawList->AddRectFilled(addresBarMin, addresBarMax, UI::Theme::Color::BackgroundPopup);
-
-        UI::ShiftCursorX(ImGui::GetCurrentWindow()->WindowPadding.x);
-        UI::ShiftCursorY(ImGui::GetCurrentWindow()->WindowPadding.y);
-
-        // Render Icon Buttons -----------------------------------------------------------
-        {
-          UI::ScopedColor button(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
-          UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, ImVec4(0, 0, 0, 0));
-          UI::ScopedColor buttonavtive(ImGuiCol_ButtonActive, ImVec4(0, 0, 0, 0));
-          auto navigationButton = [](const char* labelId, const Ref<Image>& icon)
-          {
-            const ImU32 buttonCol = UI::Theme::Color::BackgroundDark;
-            const ImU32 buttonColP = UI::ColorWithMultipliedValue(UI::Theme::Color::BackgroundDark, 0.8f);
-            UI::ScopedColorStack buttonColors(ImGuiCol_Button, buttonCol,
-                                              ImGuiCol_ButtonHovered, buttonCol,
-                                              ImGuiCol_ButtonActive, buttonColP);
-
-            const float iconSize = 20.0f;
-            const float iconPadding = 3.0f;
-            const bool clicked = ImGui::Button(labelId, ImVec2(iconSize, iconSize));
-            UI::DrawButtonImage(icon, UI::ColorWithMultipliedValue(Kreator_UI::Color::NiceBlue, 0.8),
-                                UI::ColorWithMultipliedValue(Kreator_UI::Color::NiceBlue, 1.2f),
-                                UI::ColorWithMultipliedValue(Kreator_UI::Color::NiceBlue, 0.5f),
-                                UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
-
-            return clicked;
-          };
-
-          if (navigationButton("##back", s_fileExplorerData->backButton))
-          {
-//            if (s_fileExplorerData->currentPath != s_fileExplorerData->parentPath)
-            {
-              s_fileExplorerData->currentPath = s_fileExplorerData->currentPath.parent_path();
-              memset(s_fileExplorerData->openPathBuffer, 0, MAX_PATH_LENGTH);
-            }
-          }
-          UI::SetTooltip("Previous directory");
-        }
-
-        // Draw Address bar --------------------------------------------------------------
-        ImGui::SameLine();
-        float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
-        ImGui::SetNextItemWidth(addressBarWidth);
-        ImGui::InputTextWithHint("##new_project_location", "Project Location",
-                                 s_fileExplorerData->openPathBuffer, MAX_PATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
-
-        // Save/Open?Select Close buttons ------------------------------------------------
-        {
-          ImGui::PushFont(Kreator_UI::GetBoldFont());
-
-          ImGui::SameLine();
-          std::string buttonTitle = "";
-          switch(s_fileExplorerData->popupType)
-          {
-            case PopupType::Open :   buttonTitle = "Open";    break;
-            case PopupType::Select : buttonTitle = "Select";  break;
-            case PopupType::Save :   buttonTitle = "Save";    break;
-            default:
-              IK_ASSERT(false);
-          }
-
-          if ((UI::DrawRoundButton(buttonTitle.c_str(), Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
-              (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
-          {
-
-          }
-
-          ImGui::SameLine();
-          if ((UI::DrawRoundButton("Close", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
-              (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
-          {
-            ImGui::CloseCurrentPopup();
-            if (s_fileExplorerData->lastPopupFlag)
-            {
-              *s_fileExplorerData->lastPopupFlag = true;
-            }
-          }
-
-          ImGui::PopFont();
+          s_fileExplorerData->currentPath = s_fileExplorerData->currentPath.parent_path();
+          memset(s_fileExplorerData->openPathBuffer, 0, MAX_PATH_LENGTH);
         }
       }
-
-      // Folder Explorer Main -----------------------------------------------------------
+      
+      ImGui::SameLine();
+      
+      float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
+      ImGui::SetNextItemWidth(addressBarWidth);
+      ImGui::InputTextWithHint("##new_project_location", "Project Location",
+                               s_fileExplorerData->openPathBuffer, MAX_PATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
+      
+//      if (s_fileExplorerData->popupType == PopupType::Save)
+//      {
+//        ImGui::SameLine();
+//        ImGui::InputTextWithHint("##new_project_name", "File Name", s_fileExplorerData->saveFileBuffer, MAX_FILE_LENGTH);
+//      }
+      
+      ImGui::SameLine();
+      std::string buttonTitle = "";
+      switch(s_fileExplorerData->popupType)
       {
-        UI::PushID();
-        UI::ScopedColor bgCol(ImGuiCol_ChildBg, UI::Theme::Color::BackgroundPopup);
-        UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(3, 8));
-        if (ImGui::BeginTable(UI::GenerateID(), 1 /* Num Columns */, ImGuiTableFlags_SizingFixedFit, ImVec2(0.0f, 0.0f)))
+        case PopupType::Open :   buttonTitle = "Open";    break;
+        case PopupType::Select : buttonTitle = "Select";  break;
+        case PopupType::Save :   buttonTitle = "Save";    break;
+        default:
+          IK_ASSERT(false);
+      }
+      
+      if ((ImGui::Button(buttonTitle.c_str())) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+      {
+        bool isValid = true;
+        switch(s_fileExplorerData->popupType)
         {
-          ImGui::TableSetupColumn("Open Folder", ImGuiTableColumnFlags_WidthStretch, 0);
-          ImGui::TableNextRow();
-          
-          // Content Outliner
-          ImGui::TableSetColumnIndex(0);
-          ImGui::BeginChild("##Open_Folder", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetWindowHeight() - 110));
+          case PopupType::Open :
           {
+//            returnPath = s_fileExplorerData->selectedFilePath;
+            
+//            // For Open file there must be some file selected to close the popup
+//            if (returnPath == "")
+//            {
+//              isValid = false;
+//            }
+            break;
+          }
+          case PopupType::Select :
+          {
+//            returnPath = s_fileExplorerData->currentPath;
+            break;
+          }
+          case PopupType::Save :
+          {
+//            returnPath = s_fileExplorerData->currentPath / s_fileExplorerData->saveFileBuffer;
+            break;
+          }
+          default:
+            IK_ASSERT(false);
+        }
+        
+        if (isValid)
+        {
+          if (s_fileExplorerData->lastPopupFlag)
+          {
+            *s_fileExplorerData->lastPopupFlag = true;
+          }
+          
+//          s_fileExplorerData->active = false;
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      
+      ImGui::SameLine();
+      if ((ImGui::Button("Close")) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+      {
+        ImGui::CloseCurrentPopup();
+        if (s_fileExplorerData->lastPopupFlag)
+        {
+          *s_fileExplorerData->lastPopupFlag = true;
+        }
+        
+//        s_fileExplorerData->active = false;
+      }
+      
+      ImGui::Separator();
+      
+      UI::PushID();
+      if (ImGui::BeginTable(UI::GenerateID(), 1 /* Num Columns */, ImGuiTableFlags_SizingFixedFit, ImVec2(0.0f, 0.0f)))
+      {
+        UI::ScopedColor childBg(ImGuiCol_ChildBg, IM_COL32(43, 53, 67, 255));
+        ImGui::TableSetupColumn("Open Folder", ImGuiTableColumnFlags_WidthStretch, 0);
+        ImGui::TableNextRow();
+        
+        // Content Outliner
+        ImGui::TableSetColumnIndex(0);
+        ImGui::BeginChild("##Open_Folder", ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetWindowHeight() - 85));
+        {
+          {
+            UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+            UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 5.0f));
+
+            for (auto entry : std::filesystem::directory_iterator(s_fileExplorerData->currentPath))
             {
-              UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
-
-              // Draw top shadow-----------------------------------------------------------------
-              ImRect shadowRect =
+              if (entry.path().filename() == ".DS_Store")
               {
-                {
-                  ImGui::GetCursorScreenPos().x,
-                  ImGui::GetCursorScreenPos().y + 2
-                },
-                { ImGui::GetCursorScreenPos().x + ImGui::GetContentRegionAvail().x,
-                  ImGui::GetCursorScreenPos().y + 20
-                }
-              };
+                continue;
+              }
               
-              ImRect windowRect = UI::RectExpanded(shadowRect, 0.0f, 0.0f);
-              ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
-              UI::DrawShadowInner(s_fileExplorerData->shadowwTexture, 10.0f, windowRect, 1.0f, windowRect.GetWidth() / 8,
-                                  false, false, true, false);
-
-              for (auto entry : std::filesystem::directory_iterator(s_fileExplorerData->currentPath))
+              auto directoryName = std::filesystem::relative(entry.path(), s_fileExplorerData->currentPath);
+              std::string name = directoryName.filename().string();
+              std::string id = name + "_TreeNode";
+              
+              // ImGui item height hack
+              auto* window = ImGui::GetCurrentWindow();
+              window->DC.CurrLineSize.y = 20.0f;
+              window->DC.CurrLineTextBaseOffset = 3.0f;
+              
+              ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
+              // | ((s_fileExplorerData->selectedFilePath == entry) ? ImGuiTreeNodeFlags_Selected : 0);
+              
+              // Tree Node
+              auto tex = entry.is_directory() ? s_fileExplorerData->folderIcon : s_fileExplorerData->fileTex;
+              bool open = UI::TreeNode(id, name, flags, tex);
+              if (ImGui::IsItemClicked())
               {
-                if (entry.path().filename() == ".DS_Store")
+                if (entry.is_directory())
                 {
-                  continue;
+                  s_fileExplorerData->currentPath = entry;
                 }
-                
-                auto directoryName = std::filesystem::relative(entry.path(), s_fileExplorerData->currentPath);
-                std::string name = directoryName.filename().string();
-                std::string id = name + "_TreeNode";
-                
-                // ImGui item height hack
-                auto* window = ImGui::GetCurrentWindow();
-                window->DC.CurrLineSize.y = 20.0f;
-                window->DC.CurrLineTextBaseOffset = 3.0f;
-                
-                ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
-//                ((s_fileExplorerData->selectedFilePath == entry) ? ImGuiTreeNodeFlags_Selected : 0);
-                
-                // Tree Node
-                auto tex = entry.is_directory() ? s_fileExplorerData->folderIcon : s_fileExplorerData->fileTex;
-                bool open = UI::TreeNode(id, name, flags, tex);
-                if (ImGui::IsItemClicked())
+                else
                 {
-                  if (entry.is_directory())
+                  if (s_fileExplorerData->popupType == PopupType::Open)
                   {
-                    s_fileExplorerData->currentPath = entry;
-                  }
-                  else
-                  {
-                    if (s_fileExplorerData->popupType == PopupType::Open)
-                    {
-//                      s_fileExplorerData->selectedFilePath = entry;
-                    }
+//                    s_fileExplorerData->selectedFilePath = entry;
                   }
                 }
-                
-                // Fixing slight overlap
-                UI::ShiftCursorY(3.0f);
-                
-                // If item clicked
-                if (open)
-                {
-                  ImGui::TreePop();
-                }
+              }
+              
+              // Fixing slight overlap
+              UI::ShiftCursorY(3.0f);
+              
+              // If item clicked
+              if (open)
+              {
+                ImGui::TreePop();
               }
             }
           }
-          ImGui::EndChild(); // folders_fileExplorerData->common
-          ImGui::EndTable();
         }
-        UI::PopID();
+        ImGui::EndChild(); // folders_fileExplorerData->common
+        ImGui::EndTable();
       }
+      UI::PopID();
       ImGui::EndPopup();
     }
-//    ImGui::PopStyleVar(1);
+    ImGui::PopStyleVar(2);
+    
  
     return returnPath;
   }
@@ -281,6 +276,6 @@ namespace Kreator
 
     s_fileExplorerData->popup = true;
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
-    s_fileExplorerData->currentPath = basePath;
+    s_fileExplorerData->currentPath = Utils::FileSystem::Absolute(basePath);
   }
 } // namespace Kreator
