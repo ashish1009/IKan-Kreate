@@ -17,7 +17,7 @@ namespace IKan
   {
   public:
     /// This function Initialises the asset manager
-    static void Init();
+    static void Initialize();
     /// This function Shutdown the asset manager
     static void Shutdown();
     

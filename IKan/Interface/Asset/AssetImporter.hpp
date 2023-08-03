@@ -16,7 +16,7 @@ namespace IKan
   {
   public:
     /// This function initialise the Asset importer
-    static void Init();
+    static void Initialize();
     /// This function serialise the asset
     /// - Parameters:
     ///   - metadata: Asset Metadata

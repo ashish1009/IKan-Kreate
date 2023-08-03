@@ -19,10 +19,10 @@ namespace IKan
   std::unordered_map<AssetHandle, Ref<Asset>> AssetManager::s_memoryAssets;
   std::unordered_map<AssetHandle, Ref<Asset>> AssetManager::s_loadedAssets;
   
-  void AssetManager::Init()
+  void AssetManager::Initialize()
   {
     s_assetRegistry.Clear();
-    AssetImporter::Init();
+    AssetImporter::Initialize();
     
     // Loads the asset reguistry file path (If present) and update the registry data in manager
     LoadAssetRegistry();

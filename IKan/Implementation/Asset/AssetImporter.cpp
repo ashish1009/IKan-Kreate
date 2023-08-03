@@ -9,7 +9,7 @@
 
 namespace IKan
 {
-  void AssetImporter::Init()
+  void AssetImporter::Initialize()
   {
     s_serializers.clear();
     s_serializers[AssetType::Image] = CreateScope<ImageSerializer>();

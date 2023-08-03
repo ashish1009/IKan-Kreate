@@ -7,6 +7,7 @@
 
 #include <IKanEntryPoint.h>
 #include "RendererLayer.hpp"
+#include "FolderExplorer.hpp"
 
 namespace Kreator
 {
@@ -37,7 +38,10 @@ namespace Kreator
     
     void OnInit() override
     {
-      // Create Persistance Directory
+      // Initialize the Kreator Modules -------------------------------------------------------------
+      FolderExplorer::Initialize();
+      
+      // Create Persistance Directory ---------------------------------------------------------------
       m_persistenceStoragePath = m_clientDirectory / "PrsistenceStorage";
       if (!Utils::FileSystem::Exists(m_persistenceStoragePath))
       {
@@ -51,7 +55,7 @@ namespace Kreator
         Utils::FileSystem::CreateDirectory(projectDir);
       }
 
-      // User Preferences
+      // User Preferences --------------------------------------------------------------------------
       {
         UserPreferencesSerializer serializer(m_userPreference);
         std::filesystem::path userPreferenceFile = m_persistenceStoragePath / "UserPreferences.yaml";
@@ -65,7 +69,7 @@ namespace Kreator
         }
       } // User Preferences
       
-      // Project
+      // Project -----------------------------------------------------------------------------------
       {
         // Update the project Path
         if (m_projectPath.empty())
@@ -95,15 +99,17 @@ namespace Kreator
       IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", m_persistenceStoragePath.string().c_str());
       IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", m_projectPath.string().c_str());
 
-      // Create the Rendere Layer
+      // Create and Push the Rendere Layer --------------------------------------------------------
       m_rendereLayer = CreateRef<RendererLayer>(m_userPreference, m_clientDirectory);
-      
-      // Push the renderer Layer in Application
       PushLayer(m_rendereLayer);
     }
     
     void OnShutdown() override
     {
+      // Shutdown the Kreator Modules -------------------------------------------------------------
+      FolderExplorer::Initialize();
+      
+      // Destroy and Pop the Rendere Layer --------------------------------------------------------
       PopLayer(m_rendereLayer);
       m_rendereLayer.reset();
     }

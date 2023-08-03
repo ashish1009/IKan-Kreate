@@ -30,7 +30,7 @@ namespace IKan
     s_activeProject = project;
 
     // Initialize the assets
-    AssetManager::Init();
+    AssetManager::Initialize();
   }
   
   const Project::Config& Project::GetConfig() const

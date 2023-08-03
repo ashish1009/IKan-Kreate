@@ -127,23 +127,28 @@ namespace Kreator_UI
   }
   ImFont* GetBoldFont()
   {
-    return ImGui::GetIO().Fonts->Fonts[1];
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[1] : fonts[0];
   }
   ImFont* GetItalicFont()
   {
-    return ImGui::GetIO().Fonts->Fonts[2];
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[2] : fonts[0];
   }
   ImFont* GetFixedWidthFont()
   {
-    return ImGui::GetIO().Fonts->Fonts[3];
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[3] : fonts[0];
   }
   ImFont* GetHugeHeaderFont()
   {
-    return ImGui::GetIO().Fonts->Fonts[4];
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[4] : fonts[0];
   }
   ImFont* GetSemiHeaderFont()
   {
-    return ImGui::GetIO().Fonts->Fonts[5];
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[5] : fonts[0];
   }
   
   glm::vec3 ColorVec3FromU32(ImU32 color)

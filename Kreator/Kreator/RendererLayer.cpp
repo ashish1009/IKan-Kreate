@@ -959,7 +959,8 @@ if (!Project::GetActive()) return
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
     ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4, 10));
     
-    if (ImGui::BeginPopupModal("New Project", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove))
+    if (ImGui::BeginPopupModal("New Project", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove |
+                               ImGuiWindowFlags_NoTitleBar))
     {
       ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 200 / 8);
       ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 7));
@@ -977,7 +978,7 @@ if (!Project::GetActive()) return
       ImGui::InputTextWithHint("##new_project_location", "Project Location",
                                m_projectFilePathBuffer, MAX_PROJECT_FILEPATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
       ImGui::SameLine();
-      if (UI::DrawRoundButton("...", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 0))
+      if (UI::DrawRoundButton("...", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 5))
       {
         
       }
@@ -989,13 +990,15 @@ if (!Project::GetActive()) return
         ImGui::PushFont(boldFont);
 
         UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 100);
-        if ((UI::DrawRoundButton("Create", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+        if ((UI::DrawRoundButton("Create", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
+            (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
         {
 
         }
 
         ImGui::SameLine();
-        if ((UI::DrawRoundButton("Cancel", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+        if ((UI::DrawRoundButton("Cancel", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
+            (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
         {
           m_showWelcomePopup = true;
           ImGui::CloseCurrentPopup();
