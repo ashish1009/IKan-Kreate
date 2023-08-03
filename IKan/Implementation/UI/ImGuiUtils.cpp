@@ -345,11 +345,15 @@ namespace IKan::UI
     }
 
     // Round Bar -------------------------------------------------------------------------
-    const ImVec2 roundBarMin = origCursonPos;
+    const ImVec2 roundBarMin =
+    {
+      origCursonPos.x,
+      origCursonPos.y
+    };
     const ImVec2 roundBarMax =
     {
-      roundBarMin.x + ImGui::CalcTextSize(title).x + 20,
-      roundBarMin.y + ImGui::GetFontSize() * 2
+      roundBarMin.x + ImGui::CalcTextSize(title).x + ImGui::GetStyle().FramePadding.x * 2,
+      roundBarMin.y + ImGui::GetFrameHeight()
     };
     auto* drawList = ImGui::GetWindowDrawList();
     if (ImGui::IsItemActive())
