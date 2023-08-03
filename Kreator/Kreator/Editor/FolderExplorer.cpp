@@ -109,41 +109,82 @@ namespace Kreator
       
       {
         UI::ScopedStyle windowPadding (ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
+        
         UI::ShiftCursorX(ImGui::GetCurrentWindow()->WindowPadding.x);
         UI::ShiftCursorY(ImGui::GetCurrentWindow()->WindowPadding.y);
         
         // Render Icon Buttons -----------------------------------------------------------
-        auto contenBrowserButton = [](const char* labelId, const Ref<Image>& icon)
         {
-          const ImU32 buttonCol = UI::Theme::Color::BackgroundDark;
-          const ImU32 buttonColP = UI::ColorWithMultipliedValue(UI::Theme::Color::BackgroundDark, 0.8f);
-          UI::ScopedColorStack buttonColors(ImGuiCol_Button, buttonCol,
-                                            ImGuiCol_ButtonHovered, buttonCol,
-                                            ImGuiCol_ButtonActive, buttonColP);
+          UI::ScopedColor button(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+          UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, ImVec4(0, 0, 0, 0));
+          UI::ScopedColor buttonavtive(ImGuiCol_ButtonActive, ImVec4(0, 0, 0, 0));
+          auto contenBrowserButton = [](const char* labelId, const Ref<Image>& icon)
+          {
+            const ImU32 buttonCol = UI::Theme::Color::BackgroundDark;
+            const ImU32 buttonColP = UI::ColorWithMultipliedValue(UI::Theme::Color::BackgroundDark, 0.8f);
+            UI::ScopedColorStack buttonColors(ImGuiCol_Button, buttonCol,
+                                              ImGuiCol_ButtonHovered, buttonCol,
+                                              ImGuiCol_ButtonActive, buttonColP);
+            
+            const float iconSize = 20.0f;
+            const float iconPadding = 3.0f;
+            const bool clicked = ImGui::Button(labelId, ImVec2(iconSize, iconSize));
+            UI::DrawButtonImage(icon, UI::ColorWithMultipliedValue(Kreator_UI::Color::NiceBlue, 0.8),
+                                UI::ColorWithMultipliedValue(Kreator_UI::Color::NiceBlue, 1.2f),
+                                UI::ColorWithMultipliedValue(Kreator_UI::Color::NiceBlue, 0.5f),
+                                UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
+            
+            return clicked;
+          };
           
-          const float iconSize = 20.0f;
-          const float iconPadding = 3.0f;
-          const bool clicked = ImGui::Button(labelId, ImVec2(iconSize, iconSize));
-          UI::DrawButtonImage(icon, Kreator_UI::Color::TextDarker,
-                              UI::ColorWithMultipliedValue(Kreator_UI::Color::TextDarker, 1.2f),
-                              UI::ColorWithMultipliedValue(Kreator_UI::Color::TextDarker, 0.8f),
-                              UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
-          
-          return clicked;
-        };
-        
-        if (contenBrowserButton("##back", s_fileExplorerData->backButton))
-        {
-          
+          if (contenBrowserButton("##back", s_fileExplorerData->backButton))
+          {
+            
+          }
+          UI::SetTooltip("Previous directory");
         }
-        UI::SetTooltip("Previous directory");
-        ImGui::SameLine();
       
         // Draw Address bar --------------------------------------------------------------
+        ImGui::SameLine();
         float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
         ImGui::SetNextItemWidth(addressBarWidth);
         ImGui::InputTextWithHint("##new_project_location", "Project Location",
                                  s_fileExplorerData->openPathBuffer, MAX_PATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
+
+        // Save/Open?Select Close buttons ------------------------------------------------
+        {
+          ImGui::PushFont(Kreator_UI::GetBoldFont());
+          
+          ImGui::SameLine();
+          std::string buttonTitle = "";
+          switch(s_fileExplorerData->popupType)
+          {
+            case PopupType::Open :   buttonTitle = "Open";    break;
+            case PopupType::Select : buttonTitle = "Select";  break;
+            case PopupType::Save :   buttonTitle = "Save";    break;
+            default:
+              IK_ASSERT(false);
+          }
+          
+          if ((UI::DrawRoundButton(buttonTitle.c_str(), Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
+              (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+          {
+            
+          }
+          
+          ImGui::SameLine();
+          if ((UI::DrawRoundButton("Close", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
+              (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+          {
+            ImGui::CloseCurrentPopup();
+            if (s_fileExplorerData->lastPopupFlag)
+            {
+              *s_fileExplorerData->lastPopupFlag = true;
+            }
+          }
+
+          ImGui::PopFont();
+        }
       }
 
       // Draw top shadow-----------------------------------------------------------------
