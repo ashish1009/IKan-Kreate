@@ -190,4 +190,5 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
  ------------------------------------------------------------------------------------------------------------------
 
 #### Output
+![](/Kreator/Outputs/Kreator_Welcome.png)
 ![](/Kreator/Outputs/Kreator.png)
