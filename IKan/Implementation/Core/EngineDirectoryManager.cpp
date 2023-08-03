@@ -22,12 +22,13 @@ namespace IKan
   
   void CoreResourcesPath::SetPath(const std::filesystem::path &enginePath)
   {
-    IK_LOG_INFO(LogModule::IKan, "Engine is Instal path is {0}", Utils::FileSystem::IKanAbsolute(enginePath.c_str()));
+    std::filesystem::path absPath = Utils::FileSystem::IKanAbsolute(enginePath.c_str());
+    IK_LOG_INFO(LogModule::IKan, "Engine is Instal path is {0}", absPath.string().c_str());
     
-    bool exist = Utils::FileSystem::Exists(enginePath);
-    bool shaders = Utils::FileSystem::Exists(enginePath / "Shaders");
-    bool textures = Utils::FileSystem::Exists(enginePath / "Textures");
-    bool fonts = Utils::FileSystem::Exists(enginePath / "Fonts");
+    bool exist = Utils::FileSystem::Exists(absPath);
+    bool shaders = Utils::FileSystem::Exists(absPath / "Shaders");
+    bool textures = Utils::FileSystem::Exists(absPath / "Textures");
+    bool fonts = Utils::FileSystem::Exists(absPath / "Fonts");
     
     IK_ASSERT(exist and fonts and shaders and textures, "Invalid Engine Directory");
     s_engineResourcesPath = enginePath;

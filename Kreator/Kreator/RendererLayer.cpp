@@ -16,7 +16,7 @@ namespace Kreator
 if (!Project::GetActive()) return
   
   // Kretor Resource Path
-#define KreatorResourcePath(path) s_clientDirPath / "Resources" / path
+#define KreatorResourcePath(path) Utils::FileSystem::Absolute(s_clientResourcePath / path)
 
   namespace KreatorUtils
   {
@@ -109,21 +109,21 @@ if (!Project::GetActive()) return
     return { mousePosX, mousePosY };
   }
   
-  std::filesystem::path RendererLayer::s_clientDirPath;
+  std::filesystem::path RendererLayer::s_clientResourcePath;
   
-  std::filesystem::path RendererLayer::GetClientFilePath()
+  std::filesystem::path RendererLayer::GetClientResorucePath()
   {
-    return s_clientDirPath;
+    return s_clientResourcePath;
   }
 
-  RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientDirPath)
+  RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientResourcePath)
   : Layer("Kreator Renderer"), m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
   , m_userPreferences(userPreference)
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
-    s_clientDirPath = clientDirPath;
-    m_allProjectsPath = s_clientDirPath / "Projects";
+    s_clientResourcePath = clientResourcePath;
+    m_allProjectsPath = s_clientResourcePath / "Projects";
     
     m_projectNameBuffer = iknew char[MAX_PROJECT_NAME_LENGTH];
     m_projectFilePathBuffer = iknew char[MAX_PROJECT_FILEPATH_LENGTH];
@@ -132,7 +132,7 @@ if (!Project::GetActive()) return
     auto fullAllProjectPath =  Utils::FileSystem::IKanAbsolute(m_allProjectsPath);
     memccpy(m_projectFilePathBuffer, fullAllProjectPath.data(), 0, fullAllProjectPath.size());
     
-    m_templateProjectDir = s_clientDirPath / "Resources/TemplateProject";
+    m_templateProjectDir = s_clientResourcePath / "TemplateProject";
     
     // Set the Application Icon
     m_applicationIcon = Image::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
@@ -1046,7 +1046,8 @@ if (!Project::GetActive()) return
           UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
           UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 20.0f));
           UI::ScopedFont semiHeader(Kreator_UI::GetSemiHeaderFont());
-          
+
+          m_openProjectPath = "";
           for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
           {
             if (!Utils::FileSystem::Exists(it->second.filePath))
@@ -1057,11 +1058,22 @@ if (!Project::GetActive()) return
 
             ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
             bool open = UI::TreeNode("##Recent_Projects", it->second.name, flags, m_projectIcon);
+            if (ImGui::IsItemClicked())
+            {
+              m_openProjectPath = it->second.filePath;
+            }
+            
             if(open)
             {
-              
+              ImGui::TreePop();
             }
             ImGui::Separator();
+          }
+          
+          if(m_openProjectPath != "")
+          {
+            OpenProject();
+            ImGui::CloseCurrentPopup();
           }
         }
         ImGui::EndChild(); // Recent_Projects

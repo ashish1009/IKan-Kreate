@@ -35,7 +35,7 @@ namespace Kreator
     /// This is Renderer Layer's Default Constructor
     /// - Parameters:
     ///   - userPreferences: User preference from Client
-    RendererLayer(Ref<UserPreferences> userPreferences, const std::filesystem::path& clientDirPath);
+    RendererLayer(Ref<UserPreferences> userPreferences, const std::filesystem::path& clientResourcePath);
     /// Default Destructor
     virtual ~RendererLayer();
     
@@ -58,7 +58,7 @@ namespace Kreator
     void OnEvent(Event& event) override;
     
     /// This function returns the client file path
-    static std::filesystem::path GetClientFilePath();
+    static std::filesystem::path GetClientResorucePath();
     
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
@@ -166,6 +166,6 @@ namespace Kreator
     FolderExplorerAction m_folderExplorerAction;
 
     // Client Data ---------------------------------------
-    static std::filesystem::path s_clientDirPath;
+    static std::filesystem::path s_clientResourcePath;
   };
 } // namespace Kreator

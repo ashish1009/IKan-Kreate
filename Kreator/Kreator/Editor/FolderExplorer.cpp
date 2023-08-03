@@ -48,10 +48,10 @@ namespace Kreator
   {
     IK_LOG_TRACE("FolderExplorer", "Initialising the FolderExplorer textures");
     s_fileExplorerData = CreateScope<Data>();
-    s_fileExplorerData->shadowwTexture = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/ShadowLineTop.png");
-    s_fileExplorerData->backButton = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/Back.png");
-    s_fileExplorerData->folderIcon = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/Folder.png");
-    s_fileExplorerData->fileTex = Image::Create(RendererLayer::GetClientFilePath() / "Resources/Textures/Icons/File.png");
+    s_fileExplorerData->shadowwTexture = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Icons/ShadowLineTop.png");
+    s_fileExplorerData->backButton = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Icons/Back.png");
+    s_fileExplorerData->folderIcon = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Icons/Folder.png");
+    s_fileExplorerData->fileTex = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Icons/File.png");
   }
   
   void FolderExplorer::Shutdown()

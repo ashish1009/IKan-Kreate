@@ -249,6 +249,7 @@ namespace IKan
     }
     else
     {
+      std::cout << filePath << "\n";
       IK_ASSERT(false, "Failed to load stbi Image. Check the path from Logs");
     }
   }

@@ -118,15 +118,9 @@ namespace IKan
     inline static Application* s_instance;
   };
   
-  struct ApplicationData
-  {
-    std::string clientDirectoryPath;
-    std::string startupProject;
-  };
-  
   /// Defination API for creating application instance.
   /// - Note: Only defination is defined in core. Declaration should be at client side based on the application they
   ///         want to create
   /// - Parameter appData: Applcication Start Data
-  Scope<Application> CreateApplication(const ApplicationData& appData);
+  Scope<Application> CreateApplication(const std::filesystem::path& startupProject);
 } // namespace IKan

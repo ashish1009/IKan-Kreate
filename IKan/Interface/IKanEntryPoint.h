@@ -9,7 +9,7 @@
 
 extern void InitializeEngine(const std::string logDirectoryPath);
 extern void ShutdownEngine();
-extern IKan::Scope<IKan::Application> CreateApplication(int argc, const char** argv);
+extern IKan::Scope<IKan::Application> CreateApplication(const std::filesystem::path startupProject);
 extern std::string IKanVersion;
 
 /// This function is the core entry point.
@@ -64,7 +64,7 @@ int main(int argc, const char * argv[])
   InitializeEngine(logDirectoryPath.string());
   
   {
-    IKan::Scope<IKan::Application> app = IKan::CreateApplication({clientDirPath, startupProject});
+    IKan::Scope<IKan::Application> app = IKan::CreateApplication(startupProject);
     app->Run();
     app.reset();
   }
