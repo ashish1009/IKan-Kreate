@@ -768,7 +768,41 @@ if (!Project::GetActive()) return
           FolderExplorer::OpenPopup(m_allProjectsPath);
           m_folderExplorerAction = FolderExplorerAction::OpenProject;
         }
-
+        if (ImGui::BeginMenu("Open Recent"))
+        {
+          size_t i = 0;
+          for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+          {
+            if (i > 10)
+            {
+              break;
+            }
+            
+            if (ImGui::MenuItem(it->second.name.c_str()))
+            {
+              // stash filepath away and defer actual opening of project until it is "safe" to do so
+              strcpy(m_projectFilePathBuffer, it->second.filePath.data());
+              
+              RecentProject projectEntry;
+              projectEntry.name = it->second.name;
+              projectEntry.filePath = it->second.filePath;
+              projectEntry.lastOpened = time(NULL);
+              
+              it = m_userPreferences->recentProjects.erase(it);
+              
+              m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+              
+              UserPreferencesSerializer preferencesSerializer(m_userPreferences);
+              preferencesSerializer.Serialize(m_userPreferences->filePath);
+              
+              OpenProject(projectEntry.filePath);
+              break;
+            }
+            
+            i++;
+          }
+          ImGui::EndMenu();
+        }
         ImGui::Separator();
         if (ImGui::MenuItem("Exit", "Cmd + Q"))
         {
