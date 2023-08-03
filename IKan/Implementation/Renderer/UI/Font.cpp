@@ -70,7 +70,7 @@ namespace IKan
     
     m_filePath = fontFilePath;
     
-    IK_LOG_TRACE(LogModule::Font, "Loaded the Font for Text renderer '{0}'", Utils::FileSystem::KreatorAbsolute(fontFilePath.c_str()));
+    IK_LOG_TRACE(LogModule::Font, "Loaded the Font for Text renderer '{0}'", Utils::FileSystem::IKanAbsolute(fontFilePath.c_str()));
   }
   
   Font::~Font()

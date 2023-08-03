@@ -235,7 +235,7 @@ namespace IKan
       
       IK_LOG_DEBUG(LogModule::Texture, "Creating Open GL Texture from File ... ");
       IK_LOG_DEBUG(LogModule::Texture, "-------------------------------------- ");
-      IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", Utils::FileSystem::KreatorAbsolute(m_filePath));
+      IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", Utils::FileSystem::IKanAbsolute(m_filePath));
       IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID        {0}", m_rendererID);
       IK_LOG_DEBUG(LogModule::Texture, "  Width              {0}", m_width);
       IK_LOG_DEBUG(LogModule::Texture, "  Height             {0}", m_height);
@@ -257,7 +257,7 @@ namespace IKan
   {
     IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Image Texture ");
     IK_LOG_DEBUG(LogModule::Texture, "-------------------------------- ");
-    IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", Utils::FileSystem::KreatorAbsolute(m_filePath));
+    IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", Utils::FileSystem::IKanAbsolute(m_filePath));
     IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID        {0}", m_rendererID);
   }
   

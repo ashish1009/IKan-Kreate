@@ -16,7 +16,7 @@ namespace Kreator
   
   enum class PopupType
   {
-    Open, Select, Save
+    Select
   };
 
   struct Data
@@ -111,24 +111,16 @@ namespace Kreator
       
       ImGui::SameLine();
       
-      float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
+      float addressBarWidth = 550;
       ImGui::SetNextItemWidth(addressBarWidth);
       ImGui::InputTextWithHint("##new_project_location", "Project Location",
                                s_fileExplorerData->openPathBuffer, MAX_PATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
-      
-//      if (s_fileExplorerData->popupType == PopupType::Save)
-//      {
-//        ImGui::SameLine();
-//        ImGui::InputTextWithHint("##new_project_name", "File Name", s_fileExplorerData->saveFileBuffer, MAX_FILE_LENGTH);
-//      }
       
       ImGui::SameLine();
       std::string buttonTitle = "";
       switch(s_fileExplorerData->popupType)
       {
-        case PopupType::Open :   buttonTitle = "Open";    break;
         case PopupType::Select : buttonTitle = "Select";  break;
-        case PopupType::Save :   buttonTitle = "Save";    break;
         default:
           IK_ASSERT(false);
       }
@@ -138,25 +130,9 @@ namespace Kreator
         bool isValid = true;
         switch(s_fileExplorerData->popupType)
         {
-          case PopupType::Open :
-          {
-//            returnPath = s_fileExplorerData->selectedFilePath;
-            
-//            // For Open file there must be some file selected to close the popup
-//            if (returnPath == "")
-//            {
-//              isValid = false;
-//            }
-            break;
-          }
           case PopupType::Select :
           {
-//            returnPath = s_fileExplorerData->currentPath;
-            break;
-          }
-          case PopupType::Save :
-          {
-//            returnPath = s_fileExplorerData->currentPath / s_fileExplorerData->saveFileBuffer;
+            returnPath = s_fileExplorerData->currentPath;
             break;
           }
           default:
@@ -169,8 +145,6 @@ namespace Kreator
           {
             *s_fileExplorerData->lastPopupFlag = true;
           }
-          
-//          s_fileExplorerData->active = false;
           ImGui::CloseCurrentPopup();
         }
       }
@@ -183,8 +157,6 @@ namespace Kreator
         {
           *s_fileExplorerData->lastPopupFlag = true;
         }
-        
-//        s_fileExplorerData->active = false;
       }
       
       ImGui::Separator();
@@ -234,10 +206,7 @@ namespace Kreator
                 }
                 else
                 {
-                  if (s_fileExplorerData->popupType == PopupType::Open)
-                  {
-//                    s_fileExplorerData->selectedFilePath = entry;
-                  }
+
                 }
               }
               
@@ -276,6 +245,6 @@ namespace Kreator
 
     s_fileExplorerData->popup = true;
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
-    s_fileExplorerData->currentPath = Utils::FileSystem::KreatorAbsolute(basePath);
+    s_fileExplorerData->currentPath = Utils::FileSystem::IKanAbsolute(basePath);
   }
 } // namespace Kreator

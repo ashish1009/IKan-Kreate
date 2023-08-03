@@ -129,7 +129,8 @@ if (!Project::GetActive()) return
     m_projectFilePathBuffer = iknew char[MAX_PROJECT_FILEPATH_LENGTH];
     
     // Save the default project path
-    memccpy(m_projectFilePathBuffer, m_allProjectsPath.string().data(), 0, m_allProjectsPath.string().size());
+    auto fullAllProjectPath =  Utils::FileSystem::IKanAbsolute(m_allProjectsPath);
+    memccpy(m_projectFilePathBuffer, fullAllProjectPath.data(), 0, fullAllProjectPath.size());
     
     m_templateProjectDir = s_clientDirPath / "Resources/TemplateProject";
     
@@ -1034,6 +1035,8 @@ if (!Project::GetActive()) return
       {
         case FolderExplorerAction::NewPreoject:
         {
+          memset(m_projectFilePathBuffer, 0, MAX_PROJECT_FILEPATH_LENGTH);
+          memcpy(m_projectFilePathBuffer, explorerOutput.string().c_str(), MAX_PROJECT_FILEPATH_LENGTH);
           break;
         }
         case FolderExplorerAction::None:

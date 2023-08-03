@@ -87,7 +87,7 @@ namespace IKan
     SHADER_LOG("------------------------");
     SHADER_LOG("  Renderer ID  {0} ", m_rendererID);
     SHADER_LOG("  Name         {0} ", m_name);
-    SHADER_LOG("  File Path    {0} ", Utils::FileSystem::KreatorAbsolute(m_filePath));
+    SHADER_LOG("  File Path    {0} ", Utils::FileSystem::IKanAbsolute(m_filePath));
     
     // Extract the file and store the glsl code as text string
     std::string shaderString = Utils::String::ReadFromFile(m_filePath);
@@ -112,7 +112,7 @@ namespace IKan
     SHADER_LOG("--------------------------");
     SHADER_LOG("  Renderer ID  {0} ", m_rendererID);
     SHADER_LOG("  Name         {0} ", m_name);
-    SHADER_LOG("  File Path    {0} ", Utils::FileSystem::KreatorAbsolute(m_filePath));
+    SHADER_LOG("  File Path    {0} ", Utils::FileSystem::IKanAbsolute(m_filePath));
   }
   
   void OpenGLShader::PreprocessShader(const std::string &sourceString)

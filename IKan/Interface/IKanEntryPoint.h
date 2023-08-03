@@ -67,9 +67,9 @@ int main(int argc, const char * argv[])
   std::cout << "      Version                             : " << IKanVersion << std::endl;
   std::cout << "      Date and Time                       : " << timeAsString;
 #ifdef IK_ENABLE_LOG
-  std::cout << "      Saving Logs at (Relative to Binary) : " << IKan::Utils::FileSystem::KreatorAbsolute(logDirectoryPath) << std::endl;
+  std::cout << "      Saving Logs at (Relative to Binary) : " << IKan::Utils::FileSystem::IKanAbsolute(logDirectoryPath) << std::endl;
 #endif
-  std::cout << "      Engine Install Path                 : " << IKan::Utils::FileSystem::KreatorAbsolute(engineInstallPath) << std::endl;
+  std::cout << "      Engine Install Path                 : " << IKan::Utils::FileSystem::IKanAbsolute(engineInstallPath) << std::endl;
   std::cout << " ------------------------------------------------------------------------------------------------ \n";
 
   InitializeEngine(logDirectoryPath.string());

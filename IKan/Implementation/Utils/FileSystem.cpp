@@ -64,7 +64,7 @@ namespace IKan::Utils
     return std::filesystem::absolute(path);
   }
 
-  std::string FileSystem::KreatorAbsolute(const std::string &path)
+  std::string FileSystem::IKanAbsolute(const std::string &path)
   {
     auto dirs = Utils::String::SplitString(std::filesystem::absolute(path), '/');
     std::filesystem::path result = "/";

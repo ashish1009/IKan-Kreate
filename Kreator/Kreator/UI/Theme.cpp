@@ -21,7 +21,8 @@ namespace Kreator_UI
     IKan::UI::Theme::Color::GroupHeaderHovered   = IM_COL32(32, 32, 32, 255);
     IKan::UI::Theme::Color::GroupHeaderActive    = IM_COL32(30, 30, 30, 255);
     IKan::UI::Theme::Color::TextBrighter         = IM_COL32(210, 210, 210, 255);
-    
+    IKan::UI::Theme::Color::Muted                = IM_COL32(77, 77, 77, 255);
+
     ImVec4* colors = ImGui::GetStyle().Colors;
     
     // Text
