@@ -27,10 +27,17 @@ namespace Kreator_UI
     /// - Note: Press Escape to cancel the search
     static bool SearchWidget(char* searchString, uint32_t BuffSize = 128, const char* hint = "Search...",
                              bool* grabFocus = nullptr, float roundingVal = 10);
+    static bool AssetSearchPopup(const char* ID, AssetType assetType, AssetHandle& selected, bool allowMemoryOnlyAssets,
+                                 bool* cleared = nullptr, const char* hint = "Search Assets",
+                                 const ImVec2& size = ImVec2{ 250.0f, 350.0f });
 
   private:
     inline static Ref<Image> s_searchIcon;
     inline static Ref<Image> s_gearIcon;
     inline static char* s_assetSearchString;
-  }; 
+  };
+  
+  bool IsMatchingSearch(const std::string& item, std::string_view searchQuery, bool caseSensitive = false,
+                        bool stripWhiteSpaces = false, bool stripUnderscores = false);
+
 } // namespace Kreator_UI
