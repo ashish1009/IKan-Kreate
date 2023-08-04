@@ -610,4 +610,54 @@ namespace IKan::UI
   {
     ImGui::Image(INT2VOIDP(texture->GetRendererID()), size, uv0, uv1, tintCol, borderCol);
   }
+  
+  bool ImageButton(const Ref<Texture>& image, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, int frame_padding,
+                   const ImVec4& bg_col, const ImVec4& tint_col)
+  {
+    return ImageButton(nullptr, image, size, uv0, uv1, frame_padding, bg_col, tint_col);
+  }
+  
+  bool ImageButton(const char* stringID, const Ref<Texture>& texture, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1,
+                   int frame_padding, const ImVec4& bg_col, const ImVec4& tint_col)
+  {
+    if (!texture)
+    {
+      return false;
+    }
+    ImGuiID id = texture->GetRendererID();
+    return ImGui::ImageButtonEx(id, INT2VOIDP(texture->GetRendererID()), size, uv0, uv1, bg_col, tint_col);
+  }
+  
+  void DrawUnderline(bool fullWidth, float offsetX, float offsetY)
+  {
+    if (fullWidth)
+    {
+      if (ImGui::GetCurrentWindow()->DC.CurrentColumns != nullptr)
+      {
+        ImGui::PushColumnsBackground();
+      }
+      else if (ImGui::GetCurrentTable() != nullptr)
+      {
+        ImGui::TablePushBackgroundChannel();
+      }
+    }
+    
+    const float width = fullWidth ? ImGui::GetWindowWidth() : ImGui::GetContentRegionAvail().x;
+    const ImVec2 cursor = ImGui::GetCursorScreenPos();
+    ImGui::GetWindowDrawList()->AddLine(ImVec2(cursor.x + offsetX, cursor.y + offsetY),
+                                        ImVec2(cursor.x + width, cursor.y + offsetY),
+                                        Theme::Color::BackgroundDark, 1.0f);
+    
+    if (fullWidth)
+    {
+      if (ImGui::GetCurrentWindow()->DC.CurrentColumns != nullptr)
+      {
+        ImGui::PopColumnsBackground();
+      }
+      else if (ImGui::GetCurrentTable() != nullptr)
+      {
+        ImGui::TablePopBackgroundChannel();
+      }
+    }
+  }
 } // namespace IKan::UI

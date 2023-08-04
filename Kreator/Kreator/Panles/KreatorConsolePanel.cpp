@@ -68,6 +68,27 @@ namespace Kreator
       s_searchFilter.Build();
     }
 
+    constexpr float buttonOffset = 39;
+    constexpr float rightSideOffset = 15;
+    ImVec2 imageSize = {15.0f, 15.0f};
+    ImGui::SameLine(ImGui::GetWindowWidth() - (buttonOffset * 3) - rightSideOffset);
+    if (UI::ImageButton(m_infoButtonTex, imageSize, ImVec2(0, 0), ImVec2(1, 1z), -1, ImVec4(0, 0, 0, 0), infoButtonTint))
+    {
+      m_messageFilters ^= (int16_t)ConsoleMessage::Category::Info;
+    }
+    
+    ImGui::SameLine(ImGui::GetWindowWidth() - (buttonOffset * 2) - rightSideOffset);
+    if (UI::ImageButton(m_warningButtonTex, imageSize, ImVec2(0, 0), ImVec2(1, 1), -1, ImVec4(0, 0, 0, 0), warningButtonTint))
+    {
+      m_messageFilters ^= (int16_t)ConsoleMessage::Category::Warning;
+    }
+    
+    ImGui::SameLine(ImGui::GetWindowWidth() - (buttonOffset * 1) - rightSideOffset);
+    if (UI::ImageButton(m_errorButtonTex, imageSize, ImVec2(0, 0), ImVec2(1, 1), -1, ImVec4(0, 0, 0, 0), errorButtonTint))
+    {
+      m_messageFilters ^= (int16_t)ConsoleMessage::Category::Error;
+    }
+
     ImGui::PopStyleColor(3);
     ImGui::PopStyleVar(2);
   }

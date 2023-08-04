@@ -298,4 +298,24 @@ namespace IKan::UI
   ///   - uv1; Right
   void Image(const Ref<IKan::Image>& texture, const ImVec2& size, const ImVec2& uv0 = {0, 1}, const ImVec2& uv1 = {1, 0},
              const ImVec4& tintCol = {1, 1, 1, 1}, const ImVec4& borderCol = {0, 0, 0, 0});
+  
+  /// This function renders the image button
+  /// - Parameters:
+  ///   - image: Image Texture
+  ///   - size: Button Size
+  bool ImageButton(const Ref<Texture>& image, const ImVec2& size, const ImVec2& uv0 = ImVec2(0, 1),
+                   const ImVec2& uv1 = ImVec2(1, 0), int frame_padding = -1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0),
+                   const ImVec4& tint_col = ImVec4(1, 1, 1, 1));
+  /// This function renders the image button
+  /// - Parameters:
+  ///   - stringID: string ID
+  ///   - image: Image Texture
+  ///   - size: Buttoren Size
+  bool ImageButton(const char* stringID, const Ref<Texture>& image, const ImVec2& size, const ImVec2& uv0 = ImVec2(0, 1),
+                   const ImVec2& uv1 = ImVec2(1, 0), int frame_padding = -1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0),
+                   const ImVec4& tint_col = ImVec4(1, 1, 1, 1));
+  
+  /// This function renders the line in Ingui
+  void DrawUnderline(bool fullWidth = false, float offsetX = 0.0f, float offsetY = -1.0f);
+
 } //  namespace IKan::UI
