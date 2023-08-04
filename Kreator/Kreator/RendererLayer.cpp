@@ -1203,6 +1203,8 @@ if (!Project::GetActive()) return
   }
   void RendererLayer::UI_NewProjectPopup()
   {
+    UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, 20);
+
     auto boldFont = Kreator_UI::GetBoldFont();
     
     if (m_showCreateNewProjectPopup)

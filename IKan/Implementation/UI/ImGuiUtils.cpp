@@ -586,6 +586,24 @@ namespace IKan::UI
     DrawShadowInner(shadowImage, radius, ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), alpha,
                     lengthStretch, drawLeft, drawRight, drawTop, drawBottom);
   }
+  
+  void DrawItemActivityOutline(float rounding, bool drawWhenInactive, ImColor colorWhenActive)
+  {
+    auto* drawList = ImGui::GetWindowDrawList();
+    const ImRect rect = RectExpanded(GetItemRect(), 1.0f, 1.0f);
+    if (ImGui::IsItemHovered() and !ImGui::IsItemActive())
+    {
+      drawList->AddRect(rect.Min, rect.Max, ImColor(60, 60, 60), rounding, 0, 1.5f);
+    }
+    if (ImGui::IsItemActive())
+    {
+      drawList->AddRect(rect.Min, rect.Max, colorWhenActive, rounding, 0, 1.0f);
+    }
+    else if (!ImGui::IsItemHovered() and drawWhenInactive)
+    {
+      drawList->AddRect(rect.Min, rect.Max, ImColor(50, 50, 50), rounding, 0, 1.0f);
+    }
+  }
 
   void Image(const Ref<IKan::Image>& texture, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1,
              const ImVec4& tintCol, const ImVec4& borderCol)

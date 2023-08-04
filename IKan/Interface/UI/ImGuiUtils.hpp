@@ -283,6 +283,13 @@ namespace IKan::UI
   void DrawShadowInner(const Ref<IKan::Image>& shadowImage, int radius, float alpha = 1.0f, float lengthStretch = 10.0f,
                        bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
 
+  /// This function draw the Activity outline
+  /// - Parameters:
+  ///   - rounding: Outline rounding
+  ///   - drawWhenInactive: Flag to draw when inactive
+  ///   - colourWhenActive: Color when active
+  void DrawItemActivityOutline(float rounding = 0.0f, bool drawWhenInactive = false, ImColor colourWhenActive = ImColor(80, 80, 80));
+
   /// This function renders Imgae in current Imgui window
   /// - Parameters:
   ///   - texture; Texture reference

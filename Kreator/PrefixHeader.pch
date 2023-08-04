@@ -17,3 +17,4 @@
 #include <IKanHeaders.h>
 
 #include "Theme.hpp"
+#include "Widget.hpp"

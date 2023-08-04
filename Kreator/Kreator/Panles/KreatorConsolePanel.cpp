@@ -60,6 +60,14 @@ namespace Kreator
     ImGui::SameLine();
     ImGui::Checkbox("##CollapseMessages", &m_collapseMessages);
     
+    ImGui::SameLine();
+    ImGui::SetNextItemWidth(MAX_INPUT_BUFFER_LENGTH);
+    
+    if (Kreator_UI::Widgets::SearchWidget(s_searchFilter.InputBuf, MAX_INPUT_BUFFER_LENGTH, "Filter ..."))
+    {
+      s_searchFilter.Build();
+    }
+
     ImGui::PopStyleColor(3);
     ImGui::PopStyleVar(2);
   }

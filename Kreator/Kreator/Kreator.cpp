@@ -8,6 +8,7 @@
 #include <IKanEntryPoint.h>
 #include "RendererLayer.hpp"
 #include "FolderExplorer.hpp"
+#include "Widget.hpp"
 
 namespace Kreator
 {
@@ -108,11 +109,14 @@ namespace Kreator
       // Initialize the Kreator Modules -------------------------------------------------------------
       // Should get initialized after layer initialize
       FolderExplorer::Initialize();
+      
+      Kreator_UI::Widgets::Initialize();
     }
     
     void OnShutdown() override
     {
       // Shutdown the Kreator Modules -------------------------------------------------------------
+      Kreator_UI::Widgets::Shutdown();
       FolderExplorer::Shutdown();
       
       // Destroy and Pop the Rendere Layer --------------------------------------------------------

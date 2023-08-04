@@ -31,5 +31,6 @@ namespace Kreator
 
     // Member Variables ----------------------------------------------------------------------------------------------
     Ref<Image> m_infoButtonTex, m_warningButtonTex, m_errorButtonTex;
+    inline static ImGuiTextFilter s_searchFilter;
   };
 } // namespace Kreator
