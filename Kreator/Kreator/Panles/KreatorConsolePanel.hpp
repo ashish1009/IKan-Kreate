@@ -30,6 +30,10 @@ namespace Kreator
     void RenderConsole();
 
     // Member Variables ----------------------------------------------------------------------------------------------
+    bool m_displayMessageInspector = false;
+    bool m_isMessageInspectorHovered = false;
+    ConsoleMessage* m_selectedMessage = nullptr;
+
     Ref<Image> m_infoButtonTex, m_warningButtonTex, m_errorButtonTex;
     inline static ImGuiTextFilter s_searchFilter;
   };

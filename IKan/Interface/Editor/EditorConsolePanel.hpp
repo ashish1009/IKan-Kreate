@@ -27,11 +27,15 @@ namespace IKan
     virtual void OnImguiRender(bool& isOpen) override = 0;
     
   protected:
+    static constexpr uint32_t s_messageBufferCapacity = 1000;
+
     bool m_shouldClearOnPlay = false;
     bool m_collapseMessages = false;
 
     int32_t m_messageFilters;
     uint32_t m_messageBufferBegin = 0;
+
+    std::array<ConsoleMessage, s_messageBufferCapacity> m_messageBuffer;
 
   private:
     /// This function push the message for consol
@@ -39,11 +43,7 @@ namespace IKan
     static void PushMessage(const ConsoleMessage& message);
 
     // Member Variables ----------------------------------------------------------------------------------------------
-    static constexpr uint32_t s_messageBufferCapacity = 1000;
-
     bool m_newMessageAdded = false;
-
-    std::array<ConsoleMessage, s_messageBufferCapacity> m_messageBuffer;
 
     static EditorConsolePanel* s_instance;
     friend class EditorConsoleSink;
