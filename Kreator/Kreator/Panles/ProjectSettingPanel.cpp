@@ -43,8 +43,9 @@ namespace Kreator
     ImGui::PushID("GeneralSettings");
     if (Kreator_UI::PropertyGridHeader("General"))
     {
-      Kreator_UI::BeginPropertyGrid();
-      
+      Kreator_UI::BeginPropertyGrid(2, 2);
+      UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 20);
+
       {
         UI::ScopedDisable disable;
         Kreator_UI::Property("Name", m_project->GetConfig().name);

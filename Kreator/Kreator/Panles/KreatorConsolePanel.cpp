@@ -42,8 +42,8 @@ namespace Kreator
     UI::ScopedColor button(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
     UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
     UI::ScopedColor buttonActive(ImGuiCol_ButtonActive, ImVec4(0, 0, 0, 0));
-
     UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5, 5));
+    UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 20);
 
     if (UI::DrawRoundButton("Clear", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 10))
     {
