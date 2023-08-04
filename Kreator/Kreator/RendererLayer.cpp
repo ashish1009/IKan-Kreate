@@ -123,7 +123,12 @@ if (!Project::GetActive()) return
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
     s_clientResourcePath = clientResourcePath;
-    m_allProjectsPath = s_clientResourcePath / "Projects";
+    
+#ifdef DEBUG
+    m_allProjectsPath = s_clientResourcePath / "../Projects";
+#else
+    m_allProjectsPath = "Projects";
+#endif
     
     m_projectNameBuffer = iknew char[MAX_PROJECT_NAME_LENGTH];
     m_projectFilePathBuffer = iknew char[MAX_PROJECT_FILEPATH_LENGTH];
@@ -288,7 +293,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
   {
-    IK_LOG_TRACE("Kreator Layer", "Creating Project {0} at ", projectDir.string().c_str());
+    IK_LOG_TRACE("Kreator Layer", "Creating Project at {0} ", projectDir.string().c_str());
     
     // Close the current Project
     if (Project::GetActive())

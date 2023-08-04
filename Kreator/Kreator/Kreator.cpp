@@ -50,7 +50,12 @@ namespace Kreator
       }
 
       // Create projects Dir
-      auto projectDir = m_clientResourcePath / "Projects";
+      std::filesystem::path projectDir = "";
+#ifdef DEBUG
+      projectDir = m_clientResourcePath / "../Projects";
+#else
+      projectDir = "Projects";
+#endif
       if (!Utils::FileSystem::Exists(projectDir))
       {
         Utils::FileSystem::CreateDirectory(projectDir);
