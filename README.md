@@ -141,6 +141,15 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 - v7.0.3.2  : Kreator - Folder Explorer to open Project and create new
  ------------------------------------------------------------------------------------------------------------------
 
+- v8.0.4.0  : IKan    - Editor Console Panel
+              Kreator - Editor Consol for logs
+ ------------------------------------------------------------------------------------------------------------------
+
+- v8.1.4.1  : IKan    - Editor Console, Project Setting | Kreator - All Project, Scene, Log, Setting ... panels
+  - Project Setting
+  - Application Settings
+ ------------------------------------------------------------------------------------------------------------------
+
 ## Upcoming Release Tags  
 -   : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
   - Entire Content Browser Panel
@@ -151,12 +160,6 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
   - Scene Play and Pause
  ------------------------------------------------------------------------------------------------------------------
 
--   : IKan    - Editor Console, Project Setting | Kreator - All Project, Scene, Log, Setting ... panels
-  - Editor Consol for logs
-  - Project Setting
-  - Application Settings
-  - New/Open/Save Project and Scene popups
-  - About and Welcome sceen popups
  ------------------------------------------------------------------------------------------------------------------
 
 -   : IKan    - Scene Hierarchy panel
