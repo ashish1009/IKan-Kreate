@@ -241,13 +241,35 @@ if (!Project::GetActive()) return
   
   bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
   {
-    if (Input::IsKeyPressed(Key::LeftSuper) and !Input::IsMouseButtonPressed(MouseButton::Right))
+    bool leftCmd = Input::IsKeyPressed(Key::LeftSuper);
+    bool rightCmd = Input::IsKeyPressed(Key::RightSuper);
+    bool leftShift = Input::IsKeyPressed(Key::LeftShift);
+    bool rightShift = Input::IsKeyPressed(Key::RightShift);
+    
+    if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right))
     {
       switch (e.GetKeyCode())
       {
         case Key::N:
           NewScene();
           break;
+        default:
+          break;
+      }
+    }
+    
+    if ((leftCmd or rightCmd) and (leftShift or rightShift))
+    {
+      switch (e.GetKeyCode())
+      {
+        case Key::N:
+          m_showCreateNewProjectPopup = true;
+          break;
+        case Key::O:
+          FolderExplorer::OpenPopup(m_allProjectsPath);
+          m_folderExplorerAction = FolderExplorerAction::OpenProject;
+          break;
+          
         default:
           break;
       }
@@ -769,11 +791,11 @@ if (!Project::GetActive()) return
       
       // Menu Items
       UI_Utils::AddMenu("File", popItemHighlight, [this]() {
-        if (ImGui::MenuItem("Create Project..."))
+        if (ImGui::MenuItem("Create Project...", "Cmd + Shift + N"))
         {
           m_showCreateNewProjectPopup = true;
         }
-        if (ImGui::MenuItem("Open Project...", "Cmd + O"))
+        if (ImGui::MenuItem("Open Project...", "Cmd + Shift + O"))
         {
           FolderExplorer::OpenPopup(m_allProjectsPath);
           m_folderExplorerAction = FolderExplorerAction::OpenProject;
@@ -1156,7 +1178,10 @@ if (!Project::GetActive()) return
         if ((UI::DrawRoundButton("Cancel", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
             (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
         {
-          m_showWelcomePopup = true;
+          if (!Project::GetActive())
+          {
+            m_showWelcomePopup = true;
+          }
           ImGui::CloseCurrentPopup();
         }
         ImGui::PopFont();
