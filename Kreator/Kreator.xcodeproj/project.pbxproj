@@ -50,6 +50,7 @@
 		B26B1AA72A7D5D6F00676419 /* ProjectSettingPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSettingPanel.hpp; sourceTree = "<group>"; };
 		B26B1ABB2A7D62D600676419 /* UIProperty.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = UIProperty.hpp; sourceTree = "<group>"; };
 		B26B1ABC2A7D62D600676419 /* UIProperty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = UIProperty.cpp; sourceTree = "<group>"; };
+		B26B1ABF2A7D672200676419 /* UIInputs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIInputs.hpp; sourceTree = "<group>"; };
 		B2B2CE502A7B685A007EACDE /* FolderExplorer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FolderExplorer.cpp; sourceTree = "<group>"; };
 		B2B2CE512A7B685A007EACDE /* FolderExplorer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FolderExplorer.hpp; sourceTree = "<group>"; };
 		B2B63F2D2A77B5430056ED4E /* Theme.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Theme.cpp; sourceTree = "<group>"; };
@@ -149,6 +150,7 @@
 				B26B1AA42A7D261000676419 /* Widget.hpp */,
 				B26B1ABC2A7D62D600676419 /* UIProperty.cpp */,
 				B26B1ABB2A7D62D600676419 /* UIProperty.hpp */,
+				B26B1ABF2A7D672200676419 /* UIInputs.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
