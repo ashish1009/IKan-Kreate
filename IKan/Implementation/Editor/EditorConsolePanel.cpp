@@ -15,7 +15,8 @@ namespace IKan
   {
     IK_LOG_TRACE(LogModule::EditorConsolePanel, "Initialising Editor Console Panel Textures");
     IK_ASSERT(s_instance == nullptr);
-    s_instance = this;    
+    s_instance = this;
+    m_messageFilters = (int16_t)ConsoleMessage::Category::Info | (int16_t)ConsoleMessage::Category::Warning | (int16_t)ConsoleMessage::Category::Error;
   }
   
   EditorConsolePanel::~EditorConsolePanel()

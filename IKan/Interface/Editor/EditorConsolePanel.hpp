@@ -26,6 +26,13 @@ namespace IKan
     /// @see Editor Panel
     virtual void OnImguiRender(bool& isOpen) override = 0;
     
+  protected:
+    bool m_shouldClearOnPlay = false;
+    bool m_collapseMessages = false;
+
+    int32_t m_messageFilters;
+    uint32_t m_messageBufferBegin = 0;
+
   private:
     /// This function push the message for consol
     /// - Parameter message: Message
@@ -34,11 +41,9 @@ namespace IKan
     // Member Variables ----------------------------------------------------------------------------------------------
     static constexpr uint32_t s_messageBufferCapacity = 1000;
 
-    bool m_collapseMessages = false;
     bool m_newMessageAdded = false;
 
     std::array<ConsoleMessage, s_messageBufferCapacity> m_messageBuffer;
-    uint32_t m_messageBufferBegin = 0;
 
     static EditorConsolePanel* s_instance;
     friend class EditorConsoleSink;
