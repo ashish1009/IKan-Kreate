@@ -16,10 +16,13 @@ namespace Kreator
   public:
     /// Kreator Console panel constructor
     KreatorConsolePanel();
-    /// Kreator Console panel destructor
-    ~KreatorConsolePanel();
+    /// Kreator Console panel default destructor
+    ~KreatorConsolePanel() = default;
     
     /// @see Editor Panel
     virtual void OnImguiRender(bool& isOpen) override;
+    
+  private:
+    Ref<Image> m_infoButtonTex, m_warningButtonTex, m_errorButtonTex;
   };
 } // namespace Kreator
