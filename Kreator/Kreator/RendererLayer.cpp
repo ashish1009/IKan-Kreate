@@ -251,7 +251,7 @@ if (!Project::GetActive()) return
       switch (e.GetKeyCode())
       {
         case Key::N:
-          NewScene();
+          m_showNewScenePopup = true;
           break;
         default:
           break;
@@ -302,6 +302,7 @@ if (!Project::GetActive()) return
     UI_StartMainWindowDocking();
     UI_Viewport();
     UI_EndMainWindowDocking();
+    UI_NewScene();
   }
   
   void RendererLayer::UpdateWindowTitle(const std::string& sceneName)
@@ -846,6 +847,12 @@ if (!Project::GetActive()) return
           ImGui::EndMenu();
         }
         ImGui::Separator();
+        if (ImGui::MenuItem("New Scene", "Cmd+N"))
+        {
+          m_showNewScenePopup = true;
+        }
+
+        ImGui::Separator();
         if (ImGui::MenuItem("Exit", "Cmd + Q"))
         {
           Application::Get().Close();
@@ -1227,6 +1234,47 @@ if (!Project::GetActive()) return
           IK_ASSERT(false);
           break;
       }
+    }
+  }
+  
+  void RendererLayer::UI_NewScene()
+  {
+    static char s_newSceneName[128];
+    if (m_showNewScenePopup)
+    {
+      ImGui::OpenPopup("New Scene");
+      memset(s_newSceneName, 0, 128);
+      m_showNewScenePopup = false;
+    }
+    
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 400,0 });
+    if (ImGui::BeginPopupModal("New Scene", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
+    {
+      ImGui::BeginVertical("NewSceneVertical");
+      ImGui::SetNextItemWidth(-1);
+      ImGui::InputTextWithHint("##scene_name_input", "Name", s_newSceneName, 128);
+      
+      ImGui::BeginHorizontal("NewSceneHorizontal");
+      
+      UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - ImGui::CalcTextSize("Create").x * 2);
+      if (UI::DrawRoundButton("Create", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 10) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
+      {
+        if ((s_newSceneName[0] != '\0'))
+        {
+          NewScene(s_newSceneName);
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      
+      if (UI::DrawRoundButton("Cancel", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 10) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape))
+      {
+        ImGui::CloseCurrentPopup();
+      }
+      ImGui::EndHorizontal();
+      ImGui::EndVertical();
+      ImGui::EndPopup();
     }
   }
 } // namespace Kreator

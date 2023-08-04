@@ -126,7 +126,10 @@ namespace Kreator
     void UI_NewProjectPopup();
     /// This function update the folder explorer output
     void UI_FolderExplorer();
-
+    
+    /// This function popup new scene widget
+    void UI_NewScene();
+    
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
@@ -142,6 +145,7 @@ namespace Kreator
     EditorCamera m_editorCamera;
 
     // Scene Data ----------------------------------------
+    bool m_showNewScenePopup = false;
     std::string m_sceneFilePath;
     Ref<Scene> m_editorScene, m_currentScene;
     
