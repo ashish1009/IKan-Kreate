@@ -102,6 +102,11 @@ namespace IKan::UI
   bool BeginPopup(const char* strID, ImGuiWindowFlags flags = 0);
   /// This function ends the popup
   void EndPopup();
+  /// This function begins the tree node
+  /// - Parameter name: ndoe name
+  bool BeginTreeNode(const char* name, bool defaultOpen = true);
+  /// This function ends the tree node
+  void EndTreeNode();
 
   // Rectangles API -------------------------------------------------------------------------------------------------
   /// This function returns the Imgui Item Rectangle vertex
