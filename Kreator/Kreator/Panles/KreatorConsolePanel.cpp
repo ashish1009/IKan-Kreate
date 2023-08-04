@@ -12,9 +12,9 @@ namespace Kreator
 {
   KreatorConsolePanel::KreatorConsolePanel()
   {
-//    m_infoButtonTex = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Editor/InfoButton.png");
-//    m_warningButtonTex = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Editor/WarningButton.png");
-//    m_errorButtonTex = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Editor/ErrorButton.png");
+    m_infoButtonTex = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Editor/InfoButton.png");
+    m_warningButtonTex = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Editor/WarningButton.png");
+    m_errorButtonTex = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Editor/ErrorButton.png");
   }
   
   void KreatorConsolePanel::OnImguiRender(bool& isOpen)
