@@ -38,7 +38,6 @@ namespace IKan
       {
         continue;
       }
-      IK_ASSERT(false);
       EditorConsolePanel::PushMessage(message);
     }
     

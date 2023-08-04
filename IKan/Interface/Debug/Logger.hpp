@@ -160,23 +160,37 @@ f(Project) f(PanelManager) f(EditorConsolePanel)
 } // namespace IKan
 
 #ifdef IK_ENABLE_LOG
+
+#define IK_CONSOLE_TRACE(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Trace, tag, __VA_ARGS__)
+#define IK_CONSOLE_DEBUG(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Debug, tag, __VA_ARGS__)
+#define IK_CONSOLE_INFO(tag, ...)     ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Info, tag, __VA_ARGS__)
+#define IK_CONSOLE_WARN(tag, ...)     ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Warning, tag, __VA_ARGS__)
+#define IK_CONSOLE_ERROR(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Error, tag, __VA_ARGS__)
+#define IK_CONSOLE_CRITICAL(tag, ...) ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Critical, tag, __VA_ARGS__)
+
 #define IK_LOG_TRACE(tag, ...)  \
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Trace, tag, __VA_ARGS__); \
+IK_CONSOLE_TRACE(tag, __VA_ARGS__);
 
 #define IK_LOG_DEBUG(tag, ...)    \
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Debug, tag, __VA_ARGS__); \
+IK_CONSOLE_DEBUG(tag, __VA_ARGS__);
 
 #define IK_LOG_INFO(tag, ...)     \
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Info, tag, __VA_ARGS__); \
+IK_CONSOLE_INFO(tag, __VA_ARGS__);
 
 #define IK_LOG_WARN(tag, ...)     \
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Warning, tag, __VA_ARGS__); \
+IK_CONSOLE_WARN(tag, __VA_ARGS__);
 
 #define IK_LOG_ERROR(tag, ...)    \
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Error, tag, __VA_ARGS__); \
+IK_CONSOLE_ERROR(tag, __VA_ARGS__);
 
 #define IK_LOG_CRITICAL(tag, ...) \
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Critical, tag, __VA_ARGS__); \
+IK_CONSOLE_CRITICAL(tag, __VA_ARGS__);
 
 // Verify
 #define IK_LOG_VERIFY_MESSAGE_INTERNAL(...)  ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Debug, "Verify Fail", __VA_ARGS__)
@@ -207,5 +221,12 @@ f(Project) f(PanelManager) f(EditorConsolePanel)
 #define IK_PROFILE_WARN(tag, ...)     
 #define IK_PROFILE_ERROR(tag, ...)    
 #define IK_PROFILE_CRITICAL(tag, ...) 
+
+#define IK_CONSOLE_TRACE(tag, ...)
+#define IK_CONSOLE_DEBUG(tag, ...)
+#define IK_CONSOLE_INFO(tag, ...)
+#define IK_CONSOLE_WARN(tag, ...)
+#define IK_CONSOLE_ERROR(tag, ...)
+#define IK_CONSOLE_CRITICAL(tag, ...)
 
 #endif
