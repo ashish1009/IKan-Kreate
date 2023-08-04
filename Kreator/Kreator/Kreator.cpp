@@ -39,7 +39,11 @@ namespace Kreator
     void OnInit() override
     {
       // Create Persistance Directory ---------------------------------------------------------------
-      m_persistenceStoragePath = m_clientResourcePath / "PrsistenceStorage";
+#ifdef DEBUG
+      m_persistenceStoragePath = m_clientResourcePath / "../PrsistenceStorage";
+#else
+      m_persistenceStoragePath = "PrsistenceStorage";
+#endif
       if (!Utils::FileSystem::Exists(m_persistenceStoragePath))
       {
         Utils::FileSystem::CreateDirectory(m_persistenceStoragePath);
