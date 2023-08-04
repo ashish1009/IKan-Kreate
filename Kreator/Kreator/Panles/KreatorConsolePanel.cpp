@@ -72,7 +72,7 @@ namespace Kreator
     constexpr float rightSideOffset = 15;
     ImVec2 imageSize = {15.0f, 15.0f};
     ImGui::SameLine(ImGui::GetWindowWidth() - (buttonOffset * 3) - rightSideOffset);
-    if (UI::ImageButton(m_infoButtonTex, imageSize, ImVec2(0, 0), ImVec2(1, 1z), -1, ImVec4(0, 0, 0, 0), infoButtonTint))
+    if (UI::ImageButton(m_infoButtonTex, imageSize, ImVec2(0, 0), ImVec2(1, 1), -1, ImVec4(0, 0, 0, 0), infoButtonTint))
     {
       m_messageFilters ^= (int16_t)ConsoleMessage::Category::Info;
     }
