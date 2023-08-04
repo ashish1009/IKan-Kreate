@@ -70,7 +70,32 @@ namespace IKan
       }
       return std::static_pointer_cast<TPanel>(m_panels.at(id).panel);
     }
+
+    /// This function removes the Panel from map
+    /// - Parameter strID: string ID
+    void RemovePanel(const char* strID);
     
+    // Editor Panel APIs ---------------------------------------------------------------------------------------------
+    /// This function renders the Imgui for all Panels
+    void OnImguiRender();
+    /// This function handle Events for all Panels
+    /// - Parameter e: event handle
+    void OnEvent(Event& e);
+    /// This function handles the project change for all the panels
+    /// - Parameter project: New project
+    void OnProjectChanged(const Ref<Project>& project);
+    /// This function updats the scene in all panels;
+    /// - Parameter context: scene context
+    void SetSceneContext(const Ref<Scene>& context);
+    
+    // Getters ------------------------------------------------------------------------------------------------------
+    /// This function returns the reference of Panels
+    std::unordered_map<PanelID, PanelData>& GetPanels();
+    /// This function returns the const reference of Panels
+    const std::unordered_map<PanelID, PanelData>& GetPanels() const;
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(PanelManager);
+
   private:
     std::unordered_map<PanelID, PanelData> m_panels;
   };
