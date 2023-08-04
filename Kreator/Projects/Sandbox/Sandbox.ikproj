@@ -3,5 +3,5 @@ Project:
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
   StartScene: ""
-  AutoSave: false
-  AutoSaveInterval: 300
+  AutoSave: true
+  AutoSaveInterval: 60

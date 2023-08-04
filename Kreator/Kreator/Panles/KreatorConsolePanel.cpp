@@ -192,6 +192,37 @@ namespace Kreator
         }
       }
     }
+    
+    // Audio-scroll to the bottom when a new message is added
+    if (m_newMessageAdded)
+    {
+      ImGui::SetScrollHereY(1.0f);
+      m_newMessageAdded = false;
+    }
+    
+    if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY() && !m_displayMessageInspector)
+    {
+      ImGui::SetScrollHereY(1.0f);
+    }
+    
+    if (m_displayMessageInspector and m_selectedMessage != nullptr)
+    {
+      ImGui::Begin("Message Inspector");
+      
+      m_isMessageInspectorHovered = ImGui::IsWindowHovered();
+      
+      ImGui::PushTextWrapPos();
+      const auto& msg = m_selectedMessage->GetMessage();
+      ImGui::TextUnformatted(msg.c_str());
+      ImGui::PopTextWrapPos();
+      
+      ImGui::End();
+    }
+    else
+    {
+      m_isMessageInspectorHovered = false;
+    }
+
     ImGui::EndChild();
   }
 } // namespace Kreator

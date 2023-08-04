@@ -31,6 +31,7 @@ namespace IKan
 
     bool m_shouldClearOnPlay = false;
     bool m_collapseMessages = false;
+    bool m_newMessageAdded = false;
 
     int32_t m_messageFilters;
     uint32_t m_messageBufferBegin = 0;
@@ -41,9 +42,6 @@ namespace IKan
     /// This function push the message for consol
     /// - Parameter message: Message
     static void PushMessage(const ConsoleMessage& message);
-
-    // Member Variables ----------------------------------------------------------------------------------------------
-    bool m_newMessageAdded = false;
 
     static EditorConsolePanel* s_instance;
     friend class EditorConsoleSink;
