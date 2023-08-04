@@ -36,7 +36,7 @@ f(Project) f(PanelManager)
     /// This enum stores the type of Logger to be used for spd
     enum class Type : uint8_t
     {
-      Core, Profiler
+      Core, Profiler, Editor
     };
     /// This enum stores the Log level of engine
     enum class Level : uint8_t
@@ -154,7 +154,7 @@ f(Project) f(PanelManager)
     }
     
     // Static Member Variables ---------------------------------------------------------------------------------------
-    inline static Ref<spdlog::logger> s_coreLogger, s_profilerLogger;
+    inline static Ref<spdlog::logger> s_coreLogger, s_profilerLogger, s_editorConsoleLogger;
     inline static std::map<std::string /* Module Name */, TagDetails> s_tags;
   };
 } // namespace IKan

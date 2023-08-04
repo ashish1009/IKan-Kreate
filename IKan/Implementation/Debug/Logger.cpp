@@ -10,6 +10,7 @@
 
 #include "Logger.hpp"
 #include "Debug/Timer.hpp"
+#include "Editor/EditorConsoleSink.hpp"
 
 namespace IKan
 {
@@ -59,6 +60,17 @@ namespace IKan
     s_profilerLogger = CreateRef<spdlog::logger>("PROFILE", profilerSink.begin(), profilerSink.end());
     s_profilerLogger->set_level(spdlog::level::trace);
     s_profilerLogger->flush_on(spdlog::level::trace);
+    
+    // Editor Logger sink --------------------------------------------------------------------------------------------
+    std::vector<spdlog::sink_ptr> edirorSink =
+    {
+      std::make_shared<EditorConsoleSink>(1)
+    };
+    LoggerUtils::SetSamePatternInSinks(edirorSink, "[%T | %-8l | %-4n: %v%$");
+    
+    s_editorConsoleLogger = CreateRef<spdlog::logger>("EDITOR ", edirorSink.begin(), edirorSink.end());
+    s_editorConsoleLogger->set_level(spdlog::level::trace);
+    s_editorConsoleLogger->flush_on(spdlog::level::trace);
   }
   
   void Log::Shutdown()
@@ -72,6 +84,7 @@ namespace IKan
     switch (type) {
       case Type::Core:      return s_coreLogger;
       case Type::Profiler:  return s_profilerLogger;
+      case Type::Editor:    return s_editorConsoleLogger;
       default:
         assert(false);
     }
