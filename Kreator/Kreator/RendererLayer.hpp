@@ -127,6 +127,8 @@ namespace Kreator
 
     /// This function shows the Welcome screen
     void UI_WelcomePopup();
+    /// This function shows the About Application popup
+    void UI_AboutPopup();
 
     /// This function shows new project popup
     void UI_NewProjectPopup();
@@ -139,7 +141,8 @@ namespace Kreator
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
-    
+    bool m_showAboutPopup = false;
+
     // Applicaiton Icons ---------------------------------
     Ref<Image> m_shadowTexture;
     Ref<Image> m_newProject, m_folder;

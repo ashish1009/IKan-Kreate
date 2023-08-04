@@ -321,6 +321,7 @@ if (!Project::GetActive()) return
     UI_Viewport();
     UI_EndMainWindowDocking();
     UI_NewScene();
+    UI_AboutPopup();
   }
   
   void RendererLayer::UpdateWindowTitle(const std::string& sceneName)
@@ -929,7 +930,10 @@ if (!Project::GetActive()) return
       });
       
       UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
-
+        if (ImGui::MenuItem("About"))
+        {
+          m_showAboutPopup = true;
+        }
       });
       
       if (menuOpen)
@@ -1361,4 +1365,49 @@ if (!Project::GetActive()) return
       ImGui::EndPopup();
     }
   }
+  
+  void RendererLayer::UI_AboutPopup()
+  {
+    ImGuiIO& io = ImGui::GetIO();
+    auto boldFont = Kreator_UI::GetSemiHeaderFont();
+    auto largeFont = Kreator_UI::GetHugeHeaderFont();
+    
+    if (m_showAboutPopup)
+    {
+      ImGui::OpenPopup("About##AboutPopup");
+      m_showAboutPopup = false;
+    }
+    
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 600,0 });
+    if (ImGui::BeginPopupModal("About##AboutPopup", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar))
+    {
+      ImGui::PushFont(largeFont);
+      ImGui::Text("IKan-Kreate");
+      ImGui::PopFont();
+      
+      ImGui::Separator();
+      ImGui::TextWrapped("IKan-Kreate is a revolutionary game engine designed to empower game developers on the Mac OS");
+      
+      auto cap = Renderer::Capabilities::Get();
+      ImGui::TextWrapped("Vendor %s", cap.vendor.c_str());
+      ImGui::TextWrapped("Renderer %s", cap.renderer.c_str());
+      ImGui::TextWrapped("Version %s", cap.version.c_str());
+      
+      ImGui::Separator();
+      ImGui::PushFont(boldFont);
+      ImGui::Text("IKan Core Team");
+      ImGui::PopFont();
+      ImGui::Text("Ashish");
+      ImGui::Separator();
+      
+      if ((ImGui::Button("OK")) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+      {
+        ImGui::CloseCurrentPopup();
+      }
+      ImGui::EndPopup();
+    }
+  }
+  
 } // namespace Kreator
