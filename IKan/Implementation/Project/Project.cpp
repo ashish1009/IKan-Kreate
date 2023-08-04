@@ -37,7 +37,11 @@ namespace IKan
   {
     return m_config;
   }
-  
+  Project::Config& Project::GetConfig() 
+  {
+    return m_config;
+  }
+
   const std::string& Project::GetProjectName()
   {
     IK_ASSERT(s_activeProject);

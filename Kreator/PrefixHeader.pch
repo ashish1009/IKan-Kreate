@@ -20,3 +20,4 @@ using namespace IKan;
 
 #include "Theme.hpp"
 #include "Widget.hpp"
+#include "UIProperty.hpp"

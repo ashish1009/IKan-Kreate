@@ -252,6 +252,12 @@ namespace IKan::UI
       ImGui::BeginDisabled(true);
   }
   
+  void EndDisabled()
+  {
+    if (GImGui->DisabledStackSize > 0)
+      ImGui::EndDisabled();
+  }
+
   bool IsItemDisabled()
   {
     return ImGui::GetItemFlags() & ImGuiItemFlags_Disabled;

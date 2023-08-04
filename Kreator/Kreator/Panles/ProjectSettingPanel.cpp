@@ -41,9 +41,19 @@ namespace Kreator
   void ProjectSettingsPanel::RenderGeneralSettings()
   {
     ImGui::PushID("GeneralSettings");
-    if (UI::PropertyGridHeader("General"))
+    if (Kreator_UI::PropertyGridHeader("General"))
     {
-      UI::PropertyGridHeaderEnd();
+      Kreator_UI::BeginPropertyGrid();
+      
+//      {
+//        UI::ScopedDisable disable;
+//        Kreator_UI::Property("Name", m_project->GetConfig().name);
+//        Kreator_UI::Property("Asset Directory", m_project->GetConfig().assetDirectory);
+//        Kreator_UI::Property("Asset Registry Path", m_project->GetConfig().assetRegistryPath);
+//      }
+
+      Kreator_UI::EndPropertyGrid();
+      Kreator_UI::PropertyGridHeaderEnd();
     }
     ImGui::PopID();
   }

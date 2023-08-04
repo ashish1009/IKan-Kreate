@@ -95,6 +95,8 @@ namespace IKan::UI
   void BeginDisabled(bool disabled = true);
   /// This function Ends the disable
   void EndDisabled();
+  /// This function checkes item disable
+  bool IsItemDisabled();
 
   // Rectangles API -------------------------------------------------------------------------------------------------
   /// This function returns the Imgui Item Rectangle vertex

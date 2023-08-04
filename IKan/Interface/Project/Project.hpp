@@ -32,7 +32,9 @@ namespace IKan
     
     /// This funciton retusns the current project config
     const Config& GetConfig() const;
-    
+    /// This funciton retusns the current project config
+    Config& GetConfig();
+
     /// This function returns the active project
     static Ref<Project> GetActive();
     /// This function updates the active project instance
