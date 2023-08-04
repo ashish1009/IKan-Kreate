@@ -21,7 +21,9 @@ namespace Kreator
     
     ImGui::Begin("Project Settings", &isOpen);
     RenderGeneralSettings();
+#ifdef IK_ENABLE_LOG
     RenderLogSettings();
+#endif
     ImGui::End();
     
     if (s_serializeProject)
@@ -82,6 +84,32 @@ namespace Kreator
   
   void ProjectSettingsPanel::RenderLogSettings()
   {
- 
+    ImGui::PushID("LogSettings");
+    if (Kreator_UI::PropertyGridHeader("Log", false))
+    {
+      Kreator_UI::BeginPropertyGrid(3, 1);
+      auto& tags = Log::EnabledTags();
+      for (auto& [name, details] : tags)
+      {
+        // Don't show untagged log
+        if (!name.empty())
+        {
+          ImGui::PushID(name.c_str());
+
+          Kreator_UI::Property(name.c_str(), details.isEnabled);
+
+          const char* levelStrings[] = { "Trace", "Info", "Warn", "Error", "Fatal"};
+          int currentLevel = (int)details.levelFilter;
+          if (Kreator_UI::PropertyDropdownNoLabel("LevelFilter", levelStrings, 5, &currentLevel))
+          {
+            details.levelFilter = (Log::Level)currentLevel;
+          }
+          ImGui::PopID();
+        }
+      }
+      Kreator_UI::EndPropertyGrid();
+      ImGui::TreePop();
+    }
+    ImGui::PopID();
   }
 } // namespace Kreator
