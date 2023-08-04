@@ -1368,7 +1368,6 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UI_AboutPopup()
   {
-    ImGuiIO& io = ImGui::GetIO();
     auto boldFont = Kreator_UI::GetSemiHeaderFont();
     auto largeFont = Kreator_UI::GetHugeHeaderFont();
     
