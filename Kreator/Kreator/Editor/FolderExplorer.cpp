@@ -119,12 +119,15 @@ namespace Kreator
       ImGui::SameLine();
       
       float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
-      ImGui::SetNextItemWidth(addressBarWidth);
-      ImGui::InputTextWithHint("##new_project_location", "Project Location",
-                               s_fileExplorerData->openPathBuffer, MAX_PATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
-      
+      {
+        UI::ScopedColor muted(ImGuiCol_Text, UI::Theme::Color::Muted);
+        ImGui::SetNextItemWidth(addressBarWidth);
+        ImGui::InputTextWithHint("##new_project_location", "Project Location",
+                                 s_fileExplorerData->openPathBuffer, MAX_PATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
+      }
       if (s_fileExplorerData->popupType == PopupType::Save)
       {
+        UI::ScopedColor muted(ImGuiCol_Text, UI::Theme::Color::TextBrighter);
         ImGui::SameLine();
         ImGui::InputTextWithHint("##new_project_name", "File Name", s_fileExplorerData->saveFileBuffer, MAX_FILE_LENGTH);
       }
