@@ -126,7 +126,7 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const std::filesystem::pa
 #ifdef DEBUG
   clientResourcePath = "../../../Kreator/Resources";
 #else
-  clientResourcePath = "KreatorResources";
+  clientResourcePath = "Resources/Kreator";
 #endif
 
   // Set up all the applicaiton specification
@@ -137,7 +137,7 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const std::filesystem::pa
 #ifdef DEBUG
   applicationSpec.engineResourcesPath = "../../../IKan/Assets";
 #else
-  applicationSpec.engineResourcesPath = "CoreResources";
+  applicationSpec.engineResourcesPath = "Resources/Core";
 #endif
   
   applicationSpec.iniPath = clientResourcePath / "Kreator.ini";

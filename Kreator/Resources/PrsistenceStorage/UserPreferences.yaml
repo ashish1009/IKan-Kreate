@@ -1,6 +1,9 @@
 UserPrefs:
   ShowWelcomeScreen: true
   RecentProjects:
+    - Name: asdf
+      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Projects/asdf/asdf.ikproj
+      LastOpened: 1691122987
     - Name: Sandbox
       ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Projects/Sandbox/Sandbox.ikproj
       LastOpened: 1691085474
