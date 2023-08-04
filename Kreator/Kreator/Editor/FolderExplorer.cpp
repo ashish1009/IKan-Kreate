@@ -143,7 +143,8 @@ namespace Kreator
           IK_ASSERT(false);
       }
       
-      if ((ImGui::Button(buttonTitle.c_str())) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+      if (UI::DrawRoundButton(buttonTitle.c_str(), Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 10) or
+          ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
       {
         bool isValid = true;
         switch(s_fileExplorerData->popupType)
@@ -187,7 +188,9 @@ namespace Kreator
       }
       
       ImGui::SameLine();
-      if ((ImGui::Button("Close")) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+      if (UI::DrawRoundButton("Close", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 10) or
+          ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape))
+          
       {
         ImGui::CloseCurrentPopup();
         if (s_fileExplorerData->lastPopupFlag)
