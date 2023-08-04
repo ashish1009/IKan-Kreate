@@ -119,7 +119,7 @@ namespace Kreator_UI
     colors[ImGuiCol_NavWindowingDimBg]      = ImVec4(1.00f, 0.0f, 0.0f, 1.0f);
     
     // Model
-    colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.15f, 0.15f, 0.25f, 1.7f);
+    colors[ImGuiCol_ModalWindowDimBg]       = ImVec4(0.15f, 0.15f, 0.25f, 0.7f);
   }
   
   ImFont* GetRegularFont()

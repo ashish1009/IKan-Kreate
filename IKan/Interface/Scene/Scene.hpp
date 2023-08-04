@@ -17,6 +17,7 @@ namespace IKan
 {
   class Entity;
   using EntityMap = std::unordered_map<UUID, Entity>;
+  static const std::string SceneExtension = ".ikscene";
 
   class Scene : public Asset
   {

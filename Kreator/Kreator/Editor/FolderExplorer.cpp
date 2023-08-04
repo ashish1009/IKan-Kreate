@@ -11,19 +11,23 @@
 namespace Kreator
 {
 #define MAX_PATH_LENGTH 255
+#define MAX_FILE_LENGTH 128
 
   using namespace IKan;
   
   enum class PopupType
   {
-    Select, Open
+    Select, Open, Save
   };
 
   struct Data
   {
     bool popup = false;
     bool* lastPopupFlag;
+    
     char* openPathBuffer;
+    char* saveFileBuffer;
+
     PopupType popupType;
     std::filesystem::path currentPath;
     std::filesystem::path selectedFilePath = "";
@@ -34,11 +38,13 @@ namespace Kreator
     Data()
     {
       openPathBuffer = iknew char[MAX_PATH_LENGTH];
+      saveFileBuffer = iknew char[MAX_FILE_LENGTH];
     }
     
     ~Data()
     {
       ikdelete [] openPathBuffer;
+      ikdelete [] saveFileBuffer;
     }
 
   };
@@ -112,17 +118,24 @@ namespace Kreator
       
       ImGui::SameLine();
       
-      float addressBarWidth = 550;
+      float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
       ImGui::SetNextItemWidth(addressBarWidth);
       ImGui::InputTextWithHint("##new_project_location", "Project Location",
                                s_fileExplorerData->openPathBuffer, MAX_PATH_LENGTH, ImGuiInputTextFlags_ReadOnly);
       
+      if (s_fileExplorerData->popupType == PopupType::Save)
+      {
+        ImGui::SameLine();
+        ImGui::InputTextWithHint("##new_project_name", "File Name", s_fileExplorerData->saveFileBuffer, MAX_FILE_LENGTH);
+      }
+
       ImGui::SameLine();
       std::string buttonTitle = "";
       switch(s_fileExplorerData->popupType)
       {
         case PopupType::Select : buttonTitle = "Select";  break;
         case PopupType::Open   : buttonTitle = "Open";    break;
+        case PopupType::Save :   buttonTitle = "Save";    break;
         default:
           IK_ASSERT(false);
       }
@@ -146,6 +159,11 @@ namespace Kreator
             {
               isValid = false;
             }
+            break;
+          }
+          case PopupType::Save :
+          {
+            returnPath = s_fileExplorerData->currentPath / s_fileExplorerData->saveFileBuffer;
             break;
           }
           default:
@@ -252,7 +270,6 @@ namespace Kreator
     }
     ImGui::PopStyleVar(2);
     
- 
     return returnPath;
   }
   
@@ -268,6 +285,12 @@ namespace Kreator
     PopupImpl(basePath, lastPopupFlag);
   }
 
+  void FolderExplorer::SavePopup(const std::filesystem::path& basePath)
+  {
+    s_fileExplorerData->popupType = PopupType::Save;
+    PopupImpl(basePath, nullptr);
+  }
+
   void FolderExplorer::PopupImpl(const std::filesystem::path& basePath, bool* lastPopupFlag)
   {
     IK_ASSERT(Utils::FileSystem::Exists(basePath));
@@ -276,5 +299,8 @@ namespace Kreator
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
     s_fileExplorerData->currentPath = Utils::FileSystem::IKanAbsolute(basePath);
     s_fileExplorerData->selectedFilePath = "";
+    
+    memset(s_fileExplorerData->openPathBuffer, 0, MAX_PATH_LENGTH);
+    memset(s_fileExplorerData->saveFileBuffer, 0, MAX_FILE_LENGTH);
   }
 } // namespace Kreator

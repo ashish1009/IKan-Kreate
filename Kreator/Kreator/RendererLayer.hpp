@@ -100,6 +100,10 @@ namespace Kreator
     /// This function opens new scene with file
     /// - Parameter filepath: Scene filepath
     void OpenScene(const std::string& filepath);
+    /// This function Saves the scene at new location
+    void SaveSceneAs();
+    /// This function Saves the scene
+    void SaveScene();
 
     // UI API --------------------------------------------
     /// This functions shows primary Viewport
@@ -146,6 +150,7 @@ namespace Kreator
 
     // Scene Data ----------------------------------------
     bool m_showNewScenePopup = false;
+    float m_timeSinceLastSave = 0.0f;
     std::string m_sceneFilePath;
     Ref<Scene> m_editorScene, m_currentScene;
     
@@ -165,7 +170,7 @@ namespace Kreator
     // Editor Data ---------------------------------------
     enum class FolderExplorerAction
     {
-      None, NewPreoject, OpenProject
+      None, NewPreoject, OpenProject, SaveScene
     };
     FolderExplorerAction m_folderExplorerAction;
 

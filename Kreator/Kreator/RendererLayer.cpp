@@ -256,6 +256,18 @@ if (!Project::GetActive()) return
         default:
           break;
       }
+      
+      if (leftShift or rightShift)
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::S:
+            SaveSceneAs();
+            break;
+          default:
+            break;
+        }
+      }
     }
     
     if ((leftCmd or rightCmd) and (leftShift or rightShift))
@@ -476,6 +488,27 @@ if (!Project::GetActive()) return
     
     std::filesystem::path path = filepath;
     UpdateWindowTitle(path.filename().string());
+  }
+
+  void RendererLayer::SaveSceneAs()
+  {
+    FolderExplorer::SavePopup(Project::GetActive()->GetAssetDirectory());
+    m_folderExplorerAction = FolderExplorerAction::SaveScene;
+  }
+  
+  void RendererLayer::SaveScene()
+  {
+    if (!m_sceneFilePath.empty())
+    {
+      SceneSerializer serializer(m_editorScene);
+      serializer.Serialize(m_sceneFilePath);
+      
+      m_timeSinceLastSave = 0.0f;
+    }
+    else
+    {
+      SaveSceneAs();
+    }
   }
 
   // UI APIS ---------------------------------------------------------------------------------------------------------
@@ -850,6 +883,10 @@ if (!Project::GetActive()) return
         if (ImGui::MenuItem("New Scene", "Cmd+N"))
         {
           m_showNewScenePopup = true;
+        }
+        if (ImGui::MenuItem("Save Scene As", "Cmd+Shift+S"))
+        {
+          SaveSceneAs();
         }
 
         ImGui::Separator();
@@ -1229,6 +1266,17 @@ if (!Project::GetActive()) return
           }
           break;
         }
+        case FolderExplorerAction::SaveScene:
+        {
+          m_sceneFilePath = explorerOutput;
+          m_sceneFilePath += SceneExtension;
+          
+          SaveScene();
+          UpdateWindowTitle(m_sceneFilePath);
+          
+          break;
+        }
+
         case FolderExplorerAction::None:
         default:
           IK_ASSERT(false);
