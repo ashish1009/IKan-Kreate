@@ -178,7 +178,8 @@ namespace Kreator
       None, NewPreoject, OpenProject, SaveScene, OpenScene
     };
     FolderExplorerAction m_folderExplorerAction;
-
+    PanelManager m_panels;
+    
     // Client Data ---------------------------------------
     static std::filesystem::path s_clientResourcePath;
   };

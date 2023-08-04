@@ -6,3 +6,11 @@
 //
 
 #include "PanelManager.hpp"
+
+namespace IKan
+{
+  PanelManager::~PanelManager()
+  {
+    m_panels.clear();
+  }
+} // namespace IKan
