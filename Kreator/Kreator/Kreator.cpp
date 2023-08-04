@@ -40,9 +40,9 @@ namespace Kreator
     {
       // Create Persistance Directory ---------------------------------------------------------------
 #ifdef DEBUG
-      m_persistenceStoragePath = m_clientResourcePath / "../PrsistenceStorage";
+      m_persistenceStoragePath = m_clientResourcePath / "../PersistenceStorage";
 #else
-      m_persistenceStoragePath = "PrsistenceStorage";
+      m_persistenceStoragePath = "PersistenceStorage";
 #endif
       if (!Utils::FileSystem::Exists(m_persistenceStoragePath))
       {
