@@ -1,2 +1,4 @@
 Assets:
-  []
+  - Handle: 3827706865
+    FilePath: Scenes/MyScene.ikscene
+    Type: Scene

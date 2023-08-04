@@ -97,6 +97,8 @@ namespace Kreator
     /// This function creates new scene
     /// - Parameter name: Scene name
     void NewScene(const std::string& name = "UntitledScene");
+    /// This function opens new scene with file from popup
+    void OpenScene();
     /// This function opens new scene with file
     /// - Parameter filepath: Scene filepath
     void OpenScene(const std::string& filepath);
@@ -170,7 +172,7 @@ namespace Kreator
     // Editor Data ---------------------------------------
     enum class FolderExplorerAction
     {
-      None, NewPreoject, OpenProject, SaveScene
+      None, NewPreoject, OpenProject, SaveScene, OpenScene
     };
     FolderExplorerAction m_folderExplorerAction;
 

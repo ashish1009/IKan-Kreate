@@ -253,6 +253,12 @@ if (!Project::GetActive()) return
         case Key::N:
           m_showNewScenePopup = true;
           break;
+        case Key::O:
+          OpenScene();
+          break;
+        case Key::S:
+          SaveScene();
+          break;
         default:
           break;
       }
@@ -488,6 +494,12 @@ if (!Project::GetActive()) return
     
     std::filesystem::path path = filepath;
     UpdateWindowTitle(path.filename().string());
+  }
+
+  void RendererLayer::OpenScene()
+  {
+    FolderExplorer::OpenPopup(Project::GetActive()->GetAssetDirectory());
+    m_folderExplorerAction = FolderExplorerAction::OpenScene;
   }
 
   void RendererLayer::SaveSceneAs()
@@ -884,6 +896,14 @@ if (!Project::GetActive()) return
         {
           m_showNewScenePopup = true;
         }
+        if (ImGui::MenuItem("Open Scene", "Cmd+O"))
+        {
+          OpenScene();
+        }
+        if (ImGui::MenuItem("Save Scene", "Cmd+S"))
+        {
+          SaveScene();
+        }
         if (ImGui::MenuItem("Save Scene As", "Cmd+Shift+S"))
         {
           SaveSceneAs();
@@ -1277,6 +1297,19 @@ if (!Project::GetActive()) return
           SaveScene();
           UpdateWindowTitle(m_sceneFilePath);
           
+          break;
+        }
+        case FolderExplorerAction::OpenScene:
+        {
+          if (Utils::String::GetExtensionFromPath(explorerOutput) == SceneExtension)
+          {
+            OpenScene(explorerOutput);
+          }
+          else
+          {
+            FolderExplorer::OpenPopup(explorerOutput.parent_path());
+            m_folderExplorerAction = FolderExplorerAction::OpenScene;
+          }
           break;
         }
 
