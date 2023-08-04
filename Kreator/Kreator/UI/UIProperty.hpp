@@ -9,6 +9,24 @@
 
 namespace Kreator_UI
 {
+  enum class PropertyAssetReferenceError
+  {
+    None = 0, InvalidMetadata
+  };
+  
+  static AssetHandle s_propertyAssetReferenceAssetHandle;
+  
+  struct PropertyAssetReferenceSettings
+  {
+    bool advanceToNextColumn = true;
+    bool noItemSpacing = false; // After label
+    float widthOffset = 0.0f;
+    bool allowMemoryOnlyAssets = false;
+    ImVec4 buttonLabelColor = ImGui::ColorConvertU32ToFloat4(UI::Theme::Color::Text);
+    ImVec4 buttonLabelColorError = ImGui::ColorConvertU32ToFloat4(Color::TextError);
+    bool showFullFilePath = false;
+  };
+
   /// This function render property header
   /// - Parameter name: header name
   bool PropertyGridHeader(const std::string& name, bool openByDefault = true, float height = 6, float rounding = 15);
@@ -58,4 +76,112 @@ namespace Kreator_UI
   bool PropertyDropdownNoLabel(const char* strID, const char** options, int32_t optionCount, int32_t* selected);
   bool PropertyDropdown(const char* label, const std::vector<std::string>& options, int32_t optionCount, int32_t* selected);
 
+  template<typename T>
+  static bool PropertyAssetReference(const char* label, AssetHandle& outHandle, PropertyAssetReferenceError* outError = nullptr,
+                                     const PropertyAssetReferenceSettings& settings = {})
+  {
+    bool modified = false;
+    if (outError)
+    {
+      *outError = PropertyAssetReferenceError::None;
+    }
+
+    UI::ShiftCursor(0.0f, 9.0f);
+    ImGui::Text(label);
+    ImGui::NextColumn();
+    UI::ShiftCursorY(4.0f);
+    ImGui::PushItemWidth(-1);
+
+    ImVec2 originalButtonTextAlign = ImGui::GetStyle().ButtonTextAlign;
+    {
+      ImGui::GetStyle().ButtonTextAlign = { 0.0f, 0.5f };
+      float width = ImGui::GetContentRegionAvail().x - settings.widthOffset;
+      float itemHeight = 18.0f;
+
+      std::string buttonText = "Null";
+      bool valid = true;
+      if (AssetManager::IsAssetHandleValid(outHandle))
+      {
+        auto object = AssetManager::GetAsset<T>(outHandle);
+        valid = object and !object->IsFlagSet(AssetFlag::Invalid) and !object->IsFlagSet(AssetFlag::Missing);
+        
+        if (object and !object->IsFlagSet(AssetFlag::Missing))
+        {
+          if (settings.showFullFilePath)
+          {
+            buttonText = AssetManager::GetMetadata(outHandle).filePath.string();
+          }
+          else
+          {
+            buttonText = AssetManager::GetMetadata(outHandle).filePath.stem().string();
+          }
+        }
+        else
+        {
+          buttonText = "Missing";
+        }
+      }
+      
+      // PropertyAssetReference could be called multiple times in same "context"
+      // and so we need a unique id for the asset search popup each time.
+      // notes
+      // - don't use GenerateID(), that's inviting id clashes, which would be super confusing.
+      // - don't store return from GenerateLabelId in a const char* here. Because its pointing to an internal
+      //   buffer which may get overwritten by the time you want to use it later on.
+      std::string assetSearchPopupID = UI::GenerateLabelID("ARSP");
+      {
+        UI::ScopedColor buttonLabelColor(ImGuiCol_Text, valid? settings.buttonLabelColor : settings.buttonLabelColorError);
+        if (ImGui::Button(UI::GenerateLabelID(buttonText), { width, itemHeight }))
+        {
+          ImGui::OpenPopup(assetSearchPopupID.c_str());
+        }
+      }
+      ImGui::GetStyle().ButtonTextAlign = originalButtonTextAlign;
+
+      bool clear = false;
+      if (Widgets::AssetSearchPopup(assetSearchPopupID.c_str(), T::GetStaticType(), outHandle, settings.allowMemoryOnlyAssets, &clear))
+      {
+        if (clear)
+        {
+          outHandle = 0;
+        }
+        
+        modified = true;
+        s_propertyAssetReferenceAssetHandle = outHandle;
+      }
+    }
+    
+    if (!UI::IsItemDisabled())
+    {
+      // Drop Content
+      if (ImGui::BeginDragDropTarget())
+      {
+        auto data = ImGui::AcceptDragDropPayload("asset_payload");
+        
+        if (data)
+        {
+          AssetHandle assetHandle = *(AssetHandle*)data->Data;
+          s_propertyAssetReferenceAssetHandle = assetHandle;
+          Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+          if (asset and asset->GetAssetType() == T::GetStaticType())
+          {
+            outHandle = assetHandle;
+            modified = true;
+          }
+        }
+      }
+      
+      // Draw Outline
+      UI::DrawItemActivityOutline(2.0f, true, IM_COL32(256, 18, 36, 255));
+    }
+    
+    ImGui::PopItemWidth();
+    
+    if (settings.advanceToNextColumn)
+    {
+      ImGui::NextColumn();
+    }
+
+    return modified;
+  }
 } // namespace Kreator_UI
