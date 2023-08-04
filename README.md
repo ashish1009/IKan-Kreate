@@ -141,10 +141,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 - v7.0.3.2  : Kreator - Folder Explorer to open Project and create new
  ------------------------------------------------------------------------------------------------------------------
 
-## Upcoming Release Tags
--   : Kreator - User Preference for Start Application
- ------------------------------------------------------------------------------------------------------------------  
-  
+## Upcoming Release Tags  
 -   : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
   - Entire Content Browser Panel
   - Asset Editor Panel 
