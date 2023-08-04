@@ -235,6 +235,15 @@ if (!Project::GetActive()) return
     m_editorScene->OnRenderEditor(m_editorCamera);
 
     Renderer2D::EndRenderPass();
+    
+    if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
+    {
+      m_timeSinceLastSave += ts;
+      if (m_timeSinceLastSave > project->GetConfig().autoSaveIntervalSeconds)
+      {
+        SaveSceneAuto();
+      }
+    }
   }
   
   void RendererLayer::OnEvent(Event& event)
@@ -545,6 +554,15 @@ if (!Project::GetActive()) return
     else
     {
       SaveSceneAs();
+    }
+  }
+  void RendererLayer::SaveSceneAuto()
+  {
+    if (!m_sceneFilePath.empty())
+    {
+      SceneSerializer serializer(m_editorScene);
+      serializer.Serialize(m_sceneFilePath + ".auto");
+      m_timeSinceLastSave = 0.0f;
     }
   }
 

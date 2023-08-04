@@ -105,6 +105,8 @@ namespace Kreator
     void SaveSceneAs();
     /// This function Saves the scene
     void SaveScene();
+    /// This function Saves the scene automatically
+    void SaveSceneAuto();
 
     // UI API --------------------------------------------
     /// This functions shows primary Viewport

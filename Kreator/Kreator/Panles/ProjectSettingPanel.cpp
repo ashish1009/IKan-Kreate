@@ -52,6 +52,17 @@ namespace Kreator
         Kreator_UI::Property("Asset Registry Path", m_project->GetConfig().assetRegistryPath);
       }
 
+      if (Kreator_UI::Property("Auto-save active scene", m_project->GetConfig().enableAutoSave))
+      {
+        s_serializeProject = true;
+      }
+      
+      // 1 minute to 2 hours allowed range for auto-save.  Somewhat arbitrary...
+      if (Kreator_UI::PropertySlider("Auto save interval (seconds)", m_project->GetConfig().autoSaveIntervalSeconds, 60, 7200))
+      {
+        s_serializeProject = true;
+      }
+
       Kreator_UI::EndPropertyGrid();
       Kreator_UI::PropertyGridHeaderEnd();
     }
