@@ -137,6 +137,8 @@
 		B26B1A722A7D153400676419 /* PanelManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A702A7D153400676419 /* PanelManager.hpp */; };
 		B26B1A792A7D18AF00676419 /* EditorConsoleMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A772A7D18AF00676419 /* EditorConsoleMessage.cpp */; };
 		B26B1A7A2A7D18AF00676419 /* EditorConsoleMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */; };
+		B26B1A812A7D18DE00676419 /* EditorConsoleSink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A7F2A7D18DE00676419 /* EditorConsoleSink.cpp */; };
+		B26B1A822A7D18DE00676419 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
 		B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */; };
@@ -332,6 +334,8 @@
 		B26B1A702A7D153400676419 /* PanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PanelManager.hpp; sourceTree = "<group>"; };
 		B26B1A772A7D18AF00676419 /* EditorConsoleMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleMessage.cpp; sourceTree = "<group>"; };
 		B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleMessage.hpp; sourceTree = "<group>"; };
+		B26B1A7F2A7D18DE00676419 /* EditorConsoleSink.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleSink.cpp; sourceTree = "<group>"; };
+		B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleSink.hpp; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiCustom.cpp; sourceTree = "<group>"; };
@@ -842,6 +846,7 @@
 				B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */,
 				B26B1A702A7D153400676419 /* PanelManager.hpp */,
 				B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */,
+				B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -851,6 +856,7 @@
 			children = (
 				B26B1A6F2A7D153400676419 /* PanelManager.cpp */,
 				B26B1A772A7D18AF00676419 /* EditorConsoleMessage.cpp */,
+				B26B1A7F2A7D18DE00676419 /* EditorConsoleSink.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -924,6 +930,7 @@
 				B23364C72A72D2D300BC7B8B /* Input.hpp in Headers */,
 				B23365192A7438FA00BC7B8B /* RendererStats.hpp in Headers */,
 				B23365232A743E8500BC7B8B /* OpenGLPipeline.hpp in Headers */,
+				B26B1A822A7D18DE00676419 /* EditorConsoleSink.hpp in Headers */,
 				B23364EB2A74294400BC7B8B /* StringUtils.hpp in Headers */,
 				B2336A5B2A763B1400BC7B8B /* AssetRegistry.hpp in Headers */,
 				B23365932A75348800BC7B8B /* LayerStack.hpp in Headers */,
@@ -1078,6 +1085,7 @@
 				B23367252A75495000BC7B8B /* UUID.cpp in Sources */,
 				B2336A642A763D9600BC7B8B /* Project.cpp in Sources */,
 				B2336A5A2A763B1400BC7B8B /* AssetRegistry.cpp in Sources */,
+				B26B1A812A7D18DE00676419 /* EditorConsoleSink.cpp in Sources */,
 				B23365142A74381300BC7B8B /* OpenGLRendererBuffers.cpp in Sources */,
 				B23365472A74E6D300BC7B8B /* Renderer2D.cpp in Sources */,
 				B210481E2A72CA9000FA8CF2 /* MacWindow.cpp in Sources */,
