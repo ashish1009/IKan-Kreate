@@ -97,6 +97,11 @@ namespace IKan::UI
   void EndDisabled();
   /// This function checkes item disable
   bool IsItemDisabled();
+  /// This function begins the popup
+  /// - Parameter strID: string ID
+  bool BeginPopup(const char* strID, ImGuiWindowFlags flags = 0);
+  /// This function ends the popup
+  void EndPopup();
 
   // Rectangles API -------------------------------------------------------------------------------------------------
   /// This function returns the Imgui Item Rectangle vertex
