@@ -12,6 +12,7 @@
 		B23365962A75355200BC7B8B /* RendererLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365942A75355200BC7B8B /* RendererLayer.cpp */; };
 		B24076D62A72375000221919 /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076D52A72375000221919 /* Kreator.cpp */; };
 		B24077072A72591900221919 /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24077062A72591900221919 /* libIKan.a */; };
+		B26B1AA22A7D1EBC00676419 /* KreatorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AA02A7D1EBC00676419 /* KreatorConsolePanel.cpp */; };
 		B2B2CE522A7B685A007EACDE /* FolderExplorer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE502A7B685A007EACDE /* FolderExplorer.cpp */; };
 		B2B63F2F2A77B5430056ED4E /* Theme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B63F2D2A77B5430056ED4E /* Theme.cpp */; };
 /* End PBXBuildFile section */
@@ -38,6 +39,8 @@
 		B24076D52A72375000221919 /* Kreator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Kreator.cpp; sourceTree = "<group>"; };
 		B24076F82A723A6100221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24077062A72591900221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B26B1AA02A7D1EBC00676419 /* KreatorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorConsolePanel.cpp; sourceTree = "<group>"; };
+		B26B1AA12A7D1EBC00676419 /* KreatorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KreatorConsolePanel.hpp; sourceTree = "<group>"; };
 		B2B2CE502A7B685A007EACDE /* FolderExplorer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FolderExplorer.cpp; sourceTree = "<group>"; };
 		B2B2CE512A7B685A007EACDE /* FolderExplorer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FolderExplorer.hpp; sourceTree = "<group>"; };
 		B2B63F2D2A77B5430056ED4E /* Theme.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Theme.cpp; sourceTree = "<group>"; };
@@ -85,6 +88,7 @@
 				B23365952A75355200BC7B8B /* RendererLayer.hpp */,
 				B2B63F2C2A77B5360056ED4E /* UI */,
 				B2B2CE4F2A7B6840007EACDE /* Editor */,
+				B26B1A9F2A7D1EAF00676419 /* Panles */,
 			);
 			path = Kreator;
 			sourceTree = "<group>";
@@ -105,6 +109,15 @@
 				B24077062A72591900221919 /* libIKan.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B26B1A9F2A7D1EAF00676419 /* Panles */ = {
+			isa = PBXGroup;
+			children = (
+				B26B1AA02A7D1EBC00676419 /* KreatorConsolePanel.cpp */,
+				B26B1AA12A7D1EBC00676419 /* KreatorConsolePanel.hpp */,
+			);
+			path = Panles;
 			sourceTree = "<group>";
 		};
 		B2B2CE4F2A7B6840007EACDE /* Editor */ = {
@@ -186,6 +199,7 @@
 				B23365962A75355200BC7B8B /* RendererLayer.cpp in Sources */,
 				B2B63F2F2A77B5430056ED4E /* Theme.cpp in Sources */,
 				B24076D62A72375000221919 /* Kreator.cpp in Sources */,
+				B26B1AA22A7D1EBC00676419 /* KreatorConsolePanel.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
