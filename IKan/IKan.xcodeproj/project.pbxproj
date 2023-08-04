@@ -133,6 +133,8 @@
 		B240771E2A72665A00221919 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B240771C2A72665A00221919 /* Logger.cpp */; };
 		B240771F2A72665A00221919 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B240771D2A72665A00221919 /* Logger.hpp */; };
 		B26B1A6E2A7D14BE00676419 /* EditorPanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */; };
+		B26B1A712A7D153400676419 /* PanelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A6F2A7D153400676419 /* PanelManager.cpp */; };
+		B26B1A722A7D153400676419 /* PanelManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A702A7D153400676419 /* PanelManager.hpp */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
 		B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */; };
@@ -324,6 +326,8 @@
 		B240771C2A72665A00221919 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		B240771D2A72665A00221919 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
 		B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
+		B26B1A6F2A7D153400676419 /* PanelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PanelManager.cpp; sourceTree = "<group>"; };
+		B26B1A702A7D153400676419 /* PanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PanelManager.hpp; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiCustom.cpp; sourceTree = "<group>"; };
@@ -832,6 +836,7 @@
 			isa = PBXGroup;
 			children = (
 				B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */,
+				B26B1A702A7D153400676419 /* PanelManager.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -839,6 +844,7 @@
 		B26B1A6A2A7D14A300676419 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B26B1A6F2A7D153400676419 /* PanelManager.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -915,6 +921,7 @@
 				B2336A5B2A763B1400BC7B8B /* AssetRegistry.hpp in Headers */,
 				B23365932A75348800BC7B8B /* LayerStack.hpp in Headers */,
 				B233655D2A7506F700BC7B8B /* Table.hpp in Headers */,
+				B26B1A722A7D153400676419 /* PanelManager.hpp in Headers */,
 				B21FAA422A729256009EED1F /* TimeStep.hpp in Headers */,
 				B23365652A751DE500BC7B8B /* OpenGLRenderPass.hpp in Headers */,
 				B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */,
@@ -1057,6 +1064,7 @@
 				B233653A2A74D48B00BC7B8B /* Texture.cpp in Sources */,
 				B23365642A751DE500BC7B8B /* OpenGLRenderPass.cpp in Sources */,
 				B233648E2A72CE7200BC7B8B /* Renderer.cpp in Sources */,
+				B26B1A712A7D153400676419 /* PanelManager.cpp in Sources */,
 				B23367432A75911100BC7B8B /* Asset.cpp in Sources */,
 				B23367192A75405B00BC7B8B /* Scene.cpp in Sources */,
 				B21048162A72A1BA00FA8CF2 /* CoreWindow.cpp in Sources */,
