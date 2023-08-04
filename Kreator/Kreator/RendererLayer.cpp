@@ -237,6 +237,8 @@ if (!Project::GetActive()) return
     {
       m_editorCamera.OnEvent(event);
     }
+    
+    m_panels.OnEvent(event);
   }
   
   bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
@@ -317,9 +319,13 @@ if (!Project::GetActive()) return
     
     RETRUN_IF_NO_PROJECT();
     
+    // Dockings
     UI_StartMainWindowDocking();
     UI_Viewport();
+    m_panels.OnImguiRender();
     UI_EndMainWindowDocking();
+    
+    // Scene Popups
     UI_NewScene();
     UI_AboutPopup();
   }
@@ -400,6 +406,8 @@ if (!Project::GetActive()) return
     serializer.Deserialize(filepath);
     Project::SetActive(project);
     
+    m_panels.OnProjectChanged(project);
+
     // Reset cameras
     m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
     
@@ -476,6 +484,8 @@ if (!Project::GetActive()) return
     
     m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
     m_currentScene = m_editorScene;
+    
+    m_panels.SetSceneContext(m_editorScene);
   }
   void RendererLayer::OpenScene(const std::string& filepath)
   {
@@ -495,6 +505,8 @@ if (!Project::GetActive()) return
     
     std::filesystem::path path = filepath;
     UpdateWindowTitle(path.filename().string());
+    
+    m_panels.SetSceneContext(m_currentScene);
   }
 
   void RendererLayer::OpenScene()
@@ -922,7 +934,10 @@ if (!Project::GetActive()) return
       });
       
       UI_Utils::AddMenu("View", popItemHighlight, [this]() {
-
+        for (auto& [id, panelData] : m_panels.GetPanels())
+        {
+          ImGui::MenuItem(panelData.name, nullptr, &panelData.isOpen);
+        }
       });
       
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
