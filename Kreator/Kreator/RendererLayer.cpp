@@ -8,6 +8,7 @@
 #include "RendererLayer.hpp"
 #include "FolderExplorer.hpp"
 #include "KreatorConsolePanel.hpp"
+#include "ProjectSettingPanel.hpp"
 
 extern std::string IKanVersion;
 
@@ -21,6 +22,7 @@ if (!Project::GetActive()) return
 
   // Panel IDs
 #define CONSOLE_PANEL_ID "EditorConsolePanel"
+#define PROJECT_SETTING_PANEL_ID "ProjectSetting"
 
   namespace KreatorUtils
   {
@@ -176,7 +178,7 @@ if (!Project::GetActive()) return
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
     
     // Adding Panels
-
+    m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Settings", true);
 #ifdef DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
@@ -608,7 +610,7 @@ if (!Project::GetActive()) return
     
     // Dockspace
     float minWinSizeX = style.WindowMinSize.x;
-    style.WindowMinSize.x = 300.0f;
+    style.WindowMinSize.x = 350.0f;
     if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
     {
       ImGuiID dockspaceID = ImGui::GetID("MyDockspace");

@@ -12,8 +12,6 @@ namespace Kreator
 {
 #define MAX_PATH_LENGTH 255
 #define MAX_FILE_LENGTH 128
-
-  using namespace IKan;
   
   enum class PopupType
   {

@@ -11,9 +11,7 @@
 #include "Widget.hpp"
 
 namespace Kreator
-{
-  using namespace IKan;
-  
+{  
   class KreatorApp : public Application
   {
   public:

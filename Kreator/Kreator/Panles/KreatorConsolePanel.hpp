@@ -8,9 +8,7 @@
 #pragma once
 
 namespace Kreator
-{
-  using namespace IKan;
-  
+{  
   class KreatorConsolePanel : public EditorConsolePanel
   {
   public:

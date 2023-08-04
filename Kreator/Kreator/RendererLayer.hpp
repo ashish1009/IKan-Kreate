@@ -12,7 +12,6 @@ namespace Kreator
   // Project Path Name Length
 #define MAX_PROJECT_NAME_LENGTH 255
 #define MAX_PROJECT_FILEPATH_LENGTH 512
-  using namespace IKan;
 
   /// Stores the Viewport Data
   struct Viewport

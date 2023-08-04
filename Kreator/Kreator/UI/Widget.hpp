@@ -8,9 +8,7 @@
 #pragma once
 
 namespace Kreator_UI
-{
-  using namespace IKan;
-  
+{  
   // This class manage the Imgui predefined widget like Search, Setting etc
   class Widgets
   {

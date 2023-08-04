@@ -16,5 +16,7 @@
 
 #include <IKanHeaders.h>
 
+using namespace IKan;
+
 #include "Theme.hpp"
 #include "Widget.hpp"
