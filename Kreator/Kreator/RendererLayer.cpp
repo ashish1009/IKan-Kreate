@@ -18,6 +18,9 @@ if (!Project::GetActive()) return
   // Kretor Resource Path
 #define KreatorResourcePath(path) Utils::FileSystem::Absolute(s_clientResourcePath / path)
 
+  // Panel IDs
+#define CONSOLE_PANEL_ID "EditorConsolePanel"
+
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -171,6 +174,9 @@ if (!Project::GetActive()) return
     IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
     
+    // Adding Panels
+//    m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
+
     // Decorate the Theme
     UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
     UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};

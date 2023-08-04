@@ -139,6 +139,8 @@
 		B26B1A7A2A7D18AF00676419 /* EditorConsoleMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */; };
 		B26B1A812A7D18DE00676419 /* EditorConsoleSink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A7F2A7D18DE00676419 /* EditorConsoleSink.cpp */; };
 		B26B1A822A7D18DE00676419 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */; };
+		B26B1A952A7D1C2900676419 /* EditorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A932A7D1C2900676419 /* EditorConsolePanel.cpp */; };
+		B26B1A962A7D1C2900676419 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
 		B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */; };
@@ -336,6 +338,8 @@
 		B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleMessage.hpp; sourceTree = "<group>"; };
 		B26B1A7F2A7D18DE00676419 /* EditorConsoleSink.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleSink.cpp; sourceTree = "<group>"; };
 		B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleSink.hpp; sourceTree = "<group>"; };
+		B26B1A932A7D1C2900676419 /* EditorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsolePanel.cpp; sourceTree = "<group>"; };
+		B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsolePanel.hpp; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiCustom.cpp; sourceTree = "<group>"; };
@@ -847,6 +851,7 @@
 				B26B1A702A7D153400676419 /* PanelManager.hpp */,
 				B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */,
 				B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */,
+				B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -857,6 +862,7 @@
 				B26B1A6F2A7D153400676419 /* PanelManager.cpp */,
 				B26B1A772A7D18AF00676419 /* EditorConsoleMessage.cpp */,
 				B26B1A7F2A7D18DE00676419 /* EditorConsoleSink.cpp */,
+				B26B1A932A7D1C2900676419 /* EditorConsolePanel.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -924,6 +930,7 @@
 				B2336A652A763D9600BC7B8B /* Project.hpp in Headers */,
 				B23365612A751D6B00BC7B8B /* RenderPass.hpp in Headers */,
 				B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */,
+				B26B1A962A7D1C2900676419 /* EditorConsolePanel.hpp in Headers */,
 				B23367132A75396800BC7B8B /* ImGuiLayer.hpp in Headers */,
 				B233673D2A75905100BC7B8B /* AssetType.hpp in Headers */,
 				B23365372A74422800BC7B8B /* FixedCamera.hpp in Headers */,
@@ -1102,6 +1109,7 @@
 				B2CF83132A77D03C006B2D54 /* ImGuiUtils.cpp in Sources */,
 				B23364B92A72D14800BC7B8B /* RendererContext.cpp in Sources */,
 				B233654E2A7502BA00BC7B8B /* FrameBuffer.cpp in Sources */,
+				B26B1A952A7D1C2900676419 /* EditorConsolePanel.cpp in Sources */,
 				B23365102A74370700BC7B8B /* RendererBuffers.cpp in Sources */,
 				B23364C62A72D2D300BC7B8B /* MacInput.cpp in Sources */,
 				B23365222A743E8500BC7B8B /* OpenGLPipeline.cpp in Sources */,
