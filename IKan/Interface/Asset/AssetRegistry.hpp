@@ -51,6 +51,8 @@ namespace IKan
     // Iterators ----------------------------------------------------------------------------------------------------
     std::unordered_map<std::filesystem::path, AssetMetadata>::iterator begin() { return m_assetRegistry.begin(); }
     std::unordered_map<std::filesystem::path, AssetMetadata>::iterator end() { return m_assetRegistry.end(); }
+    std::unordered_map<std::filesystem::path, AssetMetadata>::const_iterator begin() const { return m_assetRegistry.cbegin(); }
+    std::unordered_map<std::filesystem::path, AssetMetadata>::const_iterator end() const { return m_assetRegistry.cend(); }
     std::unordered_map<std::filesystem::path, AssetMetadata>::const_iterator cbegin() const { return m_assetRegistry.cbegin(); }
     std::unordered_map<std::filesystem::path, AssetMetadata>::const_iterator cend() const { return m_assetRegistry.cend(); }
     
