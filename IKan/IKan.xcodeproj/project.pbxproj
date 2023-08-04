@@ -135,6 +135,8 @@
 		B26B1A6E2A7D14BE00676419 /* EditorPanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */; };
 		B26B1A712A7D153400676419 /* PanelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A6F2A7D153400676419 /* PanelManager.cpp */; };
 		B26B1A722A7D153400676419 /* PanelManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A702A7D153400676419 /* PanelManager.hpp */; };
+		B26B1A792A7D18AF00676419 /* EditorConsoleMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A772A7D18AF00676419 /* EditorConsoleMessage.cpp */; };
+		B26B1A7A2A7D18AF00676419 /* EditorConsoleMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
 		B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */; };
@@ -328,6 +330,8 @@
 		B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
 		B26B1A6F2A7D153400676419 /* PanelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PanelManager.cpp; sourceTree = "<group>"; };
 		B26B1A702A7D153400676419 /* PanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PanelManager.hpp; sourceTree = "<group>"; };
+		B26B1A772A7D18AF00676419 /* EditorConsoleMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleMessage.cpp; sourceTree = "<group>"; };
+		B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleMessage.hpp; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiCustom.cpp; sourceTree = "<group>"; };
@@ -837,6 +841,7 @@
 			children = (
 				B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */,
 				B26B1A702A7D153400676419 /* PanelManager.hpp */,
+				B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -845,6 +850,7 @@
 			isa = PBXGroup;
 			children = (
 				B26B1A6F2A7D153400676419 /* PanelManager.cpp */,
+				B26B1A772A7D18AF00676419 /* EditorConsoleMessage.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -859,6 +865,7 @@
 				B2336A532A763A4C00BC7B8B /* AssetImporter.hpp in Headers */,
 				B2D1615A2A76949A00DD1678 /* AssetManager.hpp in Headers */,
 				B23365572A7503CA00BC7B8B /* OpenGLFrameBuffer.hpp in Headers */,
+				B26B1A7A2A7D18AF00676419 /* EditorConsoleMessage.hpp in Headers */,
 				B24077012A72431700221919 /* FileSystem.hpp in Headers */,
 				B233648F2A72CE7200BC7B8B /* Renderer.hpp in Headers */,
 				B2D161662A77752B00DD1678 /* SceneSerializer.hpp in Headers */,
@@ -1081,6 +1088,7 @@
 				B23367212A7548F200BC7B8B /* Component.cpp in Sources */,
 				B2D161592A76949A00DD1678 /* AssetManager.cpp in Sources */,
 				B23365852A75303E00BC7B8B /* TextRenderer.cpp in Sources */,
+				B26B1A792A7D18AF00676419 /* EditorConsoleMessage.cpp in Sources */,
 				B233652A2A7440CD00BC7B8B /* Camera.cpp in Sources */,
 				B233653E2A74D49600BC7B8B /* OpenGLTexture.cpp in Sources */,
 				B2CF83132A77D03C006B2D54 /* ImGuiUtils.cpp in Sources */,
