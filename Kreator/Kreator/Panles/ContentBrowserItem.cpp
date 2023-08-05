@@ -39,17 +39,19 @@ namespace Kreator
   
   void ContentBrowserItem::OnRenderBegin()
   {
+    IK_ASSERT(false);
   }
   
   CBItemActionResult ContentBrowserItem::OnRender()
   {
     CBItemActionResult result;
-
+    IK_ASSERT(false);
     return result;
   }
   
   void ContentBrowserItem::OnRenderEnd()
   {
+    IK_ASSERT(false);
   }
   
   void ContentBrowserItem::StartRenaming()
@@ -133,5 +135,37 @@ namespace Kreator
     }
     
     RenderCustomContextItems();
+  }
+  
+  ContentBrowserDirectory::ContentBrowserDirectory(const Ref<DirectoryInfo>& directoryInfo, const Ref<Texture>& icon)
+  : ContentBrowserItem(ContentBrowserItem::ItemType::Directory, directoryInfo->handle,
+                       directoryInfo->filePath.filename().string(), icon), m_directoryInfo(directoryInfo)
+  {
+    
+  }
+  
+  void ContentBrowserDirectory::Activate(CBItemActionResult& actionResult)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserDirectory::OnRenamed(const std::string& newName)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserDirectory::UpdateDrop(CBItemActionResult& actionResult)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserDirectory::Delete()
+  {
+    IK_ASSERT(false);
+  }
+  
+  bool ContentBrowserDirectory::Move(const std::filesystem::path& destination)
+  {
+    IK_ASSERT(false);
   }
 } // namespace Kreator
