@@ -716,6 +716,58 @@ namespace Kreator
       Kreator_UI::Property("Main Camera", cc.primary);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
+    
+    DrawComponent<TextComponent>("Text", entity, [](TextComponent& tc)
+                                 {
+      Kreator_UI::BeginPropertyGrid();
+      Kreator_UI::PropertyMultiline("Text String", tc.textString);
+      
+      Kreator_UI::PropertyAssetReferenceSettings settings;
+      bool customFont = tc.assetHandle != Font::GetDefaultFont()->handle;
+      if (customFont)
+      {
+        settings.advanceToNextColumn = false;
+        settings.widthOffset = ImGui::GetStyle().ItemSpacing.x + 28.0f;
+      }
+      Kreator_UI::PropertyAssetReference<Font>("Font", tc.assetHandle, nullptr, settings);
+      if (customFont)
+      {
+        ImGui::SameLine();
+        float prevItemHeight = ImGui::GetItemRectSize().y;
+        if (ImGui::Button("X", { prevItemHeight, prevItemHeight }))
+        {
+          tc.assetHandle = Font::GetDefaultFont()->handle;
+        }
+        ImGui::NextColumn();
+      }
+      
+      Kreator_UI::PropertyColor("Color", tc.color);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<QuadComponent>("Quad", entity, [](QuadComponent& qc)
+                                 {
+      Kreator_UI::BeginPropertyGrid();
+      
+      Kreator_UI::PropertyAssetReferenceSettings settings;
+      Kreator_UI::PropertyAssetReference<Image>("Texture", qc.texture, nullptr, settings);
+      
+      Kreator_UI::PropertyColor("Color", qc.color);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<CircleComponent>("Circle", entity, [](CircleComponent& cc)
+                                   {
+      Kreator_UI::BeginPropertyGrid();
+      
+      Kreator_UI::PropertyAssetReferenceSettings settings;
+      Kreator_UI::PropertyAssetReference<Image>("Texture", cc.texture, nullptr, settings);
+      
+      Kreator_UI::PropertyColor("Color", cc.color);
+      Kreator_UI::Property("Thickness", cc.thickness);
+      Kreator_UI::Property("Fade", cc.fade);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
