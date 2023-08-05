@@ -328,7 +328,93 @@ namespace Kreator
     {
       item->OnRenderBegin();
       CBItemActionResult result = item->OnRender();
+      
+      // Clear the selection
+      if (result.IsSet(ContentBrowserAction::ClearSelections))
+      {
+        ClearSelections();
+      }
+      
+      // Select the item
+      if (result.IsSet(ContentBrowserAction::Selected) and !m_selectionStack.IsSelected(item->GetID()))
+      {
+        m_selectionStack.Select(item->GetID());
+        item->SetSelected(true);
+      }
+      
+      // Multiple Selection
+      if (result.IsSet(ContentBrowserAction::SelectToHere) and m_selectionStack.SelectionCount() == 2)
+      {
+        size_t firstIndex = m_currentItems.FindItem(m_selectionStack[0]);
+        size_t lastIndex = m_currentItems.FindItem(item->GetID());
+        
+        if (firstIndex > lastIndex)
+        {
+          size_t temp = firstIndex;
+          firstIndex = lastIndex;
+          lastIndex = temp;
+        }
+        
+        for (size_t i = firstIndex; i <= lastIndex; i++)
+        {
+          auto toSelect = m_currentItems[i];
+          toSelect->SetSelected(true);
+          m_selectionStack.Select(toSelect->GetID());
+        }
+      }
+      if (result.IsSet(ContentBrowserAction::StartRenaming))
+      {
+        item->StartRenaming();
+      }
+      
+      if (result.IsSet(ContentBrowserAction::Copy))
+      {
+        m_copiedAssets.Select(item->GetID());
+      }
+      
+      if (result.IsSet(ContentBrowserAction::Reload))
+      {
+        AssetManager::ReloadData(item->GetID());
+      }
+      
+      if (result.IsSet(ContentBrowserAction::OpenDeleteDialogue))
+      {
+        openDeleteDialogue = true;
+      }
+      
+      if (result.IsSet(ContentBrowserAction::Hovered))
+      {
+        m_isAnyItemHovered = true;
+      }
       item->OnRenderEnd();
+      
+      if (result.IsSet(ContentBrowserAction::Renamed))
+      {
+        Refresh();
+        SortItemList();
+        item->SetSelected(true);
+        m_selectionStack.Select(item->GetID());
+        break;
+      }
+      
+      if (result.IsSet(ContentBrowserAction::NavigateToThis))
+      {
+        ChangeDirectory(std::dynamic_pointer_cast<ContentBrowserDirectory>(item)->GetDirectoryInfo());
+        break;
+      }
+      
+      if (result.IsSet(ContentBrowserAction::Refresh))
+      {
+        Refresh();
+        break;
+      }
+    }
+    
+    // This is a workaround an issue with ImGui: https://github.com/ocornut/imgui/issues/331
+    if (openDeleteDialogue)
+    {
+      ImGui::OpenPopup("Delete");
+      openDeleteDialogue = false;
     }
   }
   
