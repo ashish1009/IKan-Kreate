@@ -300,4 +300,19 @@ namespace Kreator_UI
     return modified;
   }
 
+  bool Widgets::OptionsButton()
+  {
+    const bool clicked = ImGui::InvisibleButton("##options", ImVec2{ ImGui::GetFrameHeight(), ImGui::GetFrameHeight() });
+    
+    const float spaceAvail = std::min(ImGui::GetItemRectSize().x, ImGui::GetItemRectSize().y);
+    const float desiredIconSize = 15.0f;
+    const float padding = std::max((spaceAvail - desiredIconSize) / 2.0f, 0.0f);
+    
+    auto buttonColor = UI::Theme::Color::Text;
+    const uint8_t value = uint8_t(ImColor(buttonColor).Value.x * 255);
+    UI::DrawButtonImage(s_gearIcon, IM_COL32(value, value, value, 200), IM_COL32(value, value, value, 255),
+                        IM_COL32(value, value, value, 150), UI::RectExpanded(UI::GetItemRect(), -padding, -padding));
+    return clicked;
+  }
+
 } // namespace Kreator_UI

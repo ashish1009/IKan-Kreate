@@ -30,6 +30,8 @@ namespace Kreator_UI
     static bool AssetSearchPopup(const char* ID, AssetType assetType, AssetHandle& selected, bool allowMemoryOnlyAssets,
                                  bool* cleared = nullptr, const char* hint = "Search Assets",
                                  const ImVec2& size = ImVec2{ 250.0f, 350.0f });
+    /// This function renders the Setting Button
+    static bool OptionsButton();
 
   private:
     inline static Ref<Image> s_searchIcon;
