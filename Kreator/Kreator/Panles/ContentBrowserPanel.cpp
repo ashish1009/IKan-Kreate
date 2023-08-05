@@ -9,6 +9,8 @@
 
 namespace Kreator
 {
+  static float s_padding = 2.0f;
+
   // Selection Stack ------------------------------------------------------------------------------------------------
   void SelectionStack::CopyFrom(const SelectionStack& other)
   {
@@ -104,4 +106,132 @@ namespace Kreator
     return InvalidItem;
   }
   
+  ContentBrowserPanel::ContentBrowserPanel()
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::OnImguiRender(bool &isOpen)
+  {
+    IK_ASSERT(false);
+
+  }
+  
+  void ContentBrowserPanel::RenderDeleteDialogue()
+  {
+    IK_ASSERT(false);
+
+  }
+  
+  void ContentBrowserPanel::RemoveDirectory(Ref<DirectoryInfo>& directory, bool removeFromParent)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::RenderItems()
+  {
+    IK_ASSERT(false);
+
+  }
+  
+  void ContentBrowserPanel::RenderDirectoryHierarchy(Ref<DirectoryInfo> &directory)
+  {
+    IK_ASSERT(false);
+
+  }
+  
+  void ContentBrowserPanel::RenderTopBar(float height)
+  {
+    IK_ASSERT(false);
+
+  }
+  
+  void ContentBrowserPanel::OnEvent(Event &e)
+  {
+    IK_ASSERT(false);
+
+  }
+  
+  void ContentBrowserPanel::OnProjectChanged(const Ref<Project> &project)
+  {
+    IK_ASSERT(false);
+
+  }
+  
+  AssetHandle ContentBrowserPanel::ProcessDirectory(const std::filesystem::path &directoryPath, const Ref<DirectoryInfo> &parent)
+  {
+    IK_ASSERT(false);
+
+  }
+  
+  Ref<DirectoryInfo> ContentBrowserPanel::GetDirectory(const std::filesystem::path& filepath) const
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::ChangeDirectory(Ref<DirectoryInfo> &directory)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::SortItemList()
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::ClearSelections()
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::UpdateDropArea(const Ref<DirectoryInfo>& target)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::OnBrowseBack()
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::OnBrowseForward()
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::Refresh()
+  {
+    IK_ASSERT(false);
+  }
+  
+  ContentBrowserItemList ContentBrowserPanel::Search(const std::string &query, const Ref<DirectoryInfo> &directoryInfo)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::PasteCopiedAssets()
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserPanel::UpdateInput()
+  {
+    IK_ASSERT(false);
+  }
+  
+  ContentBrowserItemList& ContentBrowserPanel::GetCurrentItems()
+  {
+    return m_currentItems;
+  }
+  
+  const SelectionStack& ContentBrowserPanel::GetSelectionStack() const
+  {
+    return m_selectionStack;
+  }
+  
+  ContentBrowserPanel& ContentBrowserPanel::Get()
+  {
+    return *s_instance;
+  }
+
 } // namespace IKan
