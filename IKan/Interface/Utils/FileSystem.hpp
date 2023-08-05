@@ -48,6 +48,9 @@ namespace IKan::Utils
     /// This function returns the absolute File/Directory path for Kreator
     /// - Parameter path: Current Relative File/Directory path passed
     static std::string IKanAbsolute(const std::string &path);
+    /// This function deletes the file
+    /// - Parameter filepath: File path to be deleted
+    static bool DeleteFile(const std::filesystem::path& filepath);
 
     // Directory ----------------------------------------------------------------------------------------------------
     /// This function creates the directory. It creates all the folder in hierarchy (if any of them do not exists)

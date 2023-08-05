@@ -106,5 +106,18 @@ namespace IKan::Utils
   {
     return Copy(filepath, dest / filepath.filename());
   }
-  
+
+  bool FileSystem::DeleteFile(const std::filesystem::path& filepath)
+  {
+    if (!FileSystem::Exists(filepath))
+    {
+      return false;
+    }
+    if (std::filesystem::is_directory(filepath))
+    {
+      return std::filesystem::remove_all(filepath) > 0;
+    }
+    return std::filesystem::remove(filepath);
+  }
+
 } // namespace IKan::Utils

@@ -456,13 +456,27 @@ namespace Kreator
   
   void ContentBrowserDirectory::Delete()
   {
-    IK_ASSERT(false);
-  }
+    bool deleted = Utils::FileSystem::DeleteFile(Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath);
+    if (!deleted)
+    {
+      IK_LOG_ERROR("ContentBrowser", "Failed to delete folder {0}", m_directoryInfo->filePath.string().c_str());
+      return;
+    }
+    
+    for (auto asset : m_directoryInfo->assets)
+    {
+      AssetManager::OnAssetDeleted(asset);
+    }  }
   
   bool ContentBrowserDirectory::Move(const std::filesystem::path& destination)
   {
-    IK_ASSERT(false);
-  }
+    bool wasMoved = Utils::FileSystem::MoveFile(Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath,
+                                         Project::GetActive()->GetAssetDirectory() / destination);
+    if (!wasMoved)
+    {
+      return false;
+    }
+    return true;  }
   
   ContentBrowserAsset::ContentBrowserAsset(const AssetMetadata& assetInfo, const Ref<Image>& icon)
   : ContentBrowserItem(ContentBrowserItem::ItemType::Asset, assetInfo.handle, assetInfo.filePath.stem().string(), icon),
@@ -473,13 +487,35 @@ namespace Kreator
   
   void ContentBrowserAsset::Delete()
   {
-    IK_ASSERT(false);
-  }
+    auto filepath = AssetManager::GetFileSystemPath(m_assetInfo);
+    bool deleted = Utils::FileSystem::DeleteFile(filepath);
+    if (!deleted)
+    {
+      IK_LOG_ERROR("ContentBrowser", "Couldn't delete {0}", m_assetInfo.filePath.string().c_str());
+      return;
+    }
+    
+    Ref<DirectoryInfo> currentDirectory = ContentBrowserPanel::Get().GetDirectory(m_assetInfo.filePath.parent_path());
+    currentDirectory->assets.erase(std::remove(currentDirectory->assets.begin(),
+                                               currentDirectory->assets.end(),
+                                               m_assetInfo.handle),
+                                   currentDirectory->assets.end());
+    
+    AssetManager::OnAssetDeleted(m_assetInfo.handle);  }
   
   bool ContentBrowserAsset::Move(const std::filesystem::path& destination)
   {
-    IK_ASSERT(false);
-  }
+    auto filepath = AssetManager::GetFileSystemPath(m_assetInfo);
+    bool wasMoved = Utils::FileSystem::MoveFile(filepath, Project::GetActive()->GetAssetDirectory() / destination);
+    if (!wasMoved)
+    {
+      IK_LOG_ERROR("ContentBrowser", "Couldn't move {0} to {1}",
+               m_assetInfo.filePath.string().c_str(), destination.string().c_str());
+      return false;
+    }
+    
+    AssetManager::OnAssetMoved(m_assetInfo.handle, destination);
+    return true;  }
   
   void ContentBrowserAsset::Activate(CBItemActionResult& actionResult)
   {
@@ -495,7 +531,20 @@ namespace Kreator
   
   void ContentBrowserAsset::OnRenamed(const std::string& newName)
   {
-    IK_ASSERT(false);
+    auto filepath = AssetManager::GetFileSystemPath(m_assetInfo);
+    std::filesystem::path newFilepath = fmt::format("{0}\\{1}{2}", filepath.parent_path().string(),
+                                                    newName, filepath.extension().string());
+    
+    if (Utils::FileSystem::Rename(filepath, newFilepath))
+    {
+      // Update AssetManager with new name
+      [[maybe_unused]] auto& metadata = AssetManager::GetMetadata(m_assetInfo.handle);
+      AssetManager::OnAssetRenamed(m_assetInfo.handle, newFilepath);
+    }
+    else
+    {
+      IK_LOG_ERROR("ContentBrowser", "A file with that name already exists!");
+    }
   }
 
 } // namespace Kreator
