@@ -93,7 +93,8 @@ namespace Kreator
     UI::ShiftCursor(0.0f, 7.0f);
     
     ImGui::Text(label.c_str());
-    
+    UI::DrawUnderline(false, 0.0f, 2.0f);
+
     ImGui::TableSetColumnIndex(1);
     UI::ShiftCursor(7.0f, 0.0f);
     
@@ -668,6 +669,53 @@ namespace Kreator
       
       UI::ShiftCursorY(18.0f);
     }, s_gearIcon, false);
+    
+    DrawComponent<CameraComponent>("Camera", entity, [](CameraComponent& cc)
+                                   {
+      Kreator_UI::BeginPropertyGrid();
+      UI::ScopedStyle framePdding(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 2));
+
+      // Projection Type
+      const char* projTypeStrings[] = { "Perspective", "Orthographic" };
+      int currentProj = (int)cc.camera.GetProjectionType();
+      if (Kreator_UI::PropertyDropdown("Projection", projTypeStrings, 2, &currentProj))
+      {
+        cc.camera.SetProjectionType((SceneCamera::ProjectionType)currentProj);
+      }
+      
+      // Perspective parameters
+      if (cc.camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
+      {
+        float verticalFOV = cc.camera.GetDegPerspectiveVerticalFOV();
+        if (Kreator_UI::Property("Vertical FOV", verticalFOV))
+          cc.camera.SetDegPerspectiveVerticalFOV(verticalFOV);
+        
+        float nearClip = cc.camera.GetPerspectiveNearClip();
+        if (Kreator_UI::Property("Near Clip", nearClip))
+          cc.camera.SetPerspectiveNearClip(nearClip);
+        float farClip = cc.camera.GetPerspectiveFarClip();
+        if (Kreator_UI::Property("Far Clip", farClip))
+          cc.camera.SetPerspectiveFarClip(farClip);
+      }
+      
+      // Orthographic parameters
+      else if (cc.camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
+      {
+        float orthoSize = cc.camera.GetOrthographicSize();
+        if (Kreator_UI::Property("Size", orthoSize))
+          cc.camera.SetOrthographicSize(orthoSize);
+        
+        float nearClip = cc.camera.GetOrthographicNearClip();
+        if (Kreator_UI::Property("Near Clip", nearClip))
+          cc.camera.SetOrthographicNearClip(nearClip);
+        float farClip = cc.camera.GetOrthographicFarClip();
+        if (Kreator_UI::Property("Far Clip", farClip))
+          cc.camera.SetOrthographicFarClip(farClip);
+      }
+      
+      Kreator_UI::Property("Main Camera", cc.primary);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
