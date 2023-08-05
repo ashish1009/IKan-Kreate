@@ -198,9 +198,21 @@ namespace Kreator
         UI::DrawShadowInner(m_shadowTexture, 15.0f, windowRect, 1.0f, windowRect.GetHeight() / 4.0f,
                             false, true, false, false);
         ImGui::PopClipRect();
-
         ImGui::EndChild(); // folders_common
         
+        // Directory Content
+        ImGui::TableSetColumnIndex(1);
+        const float topBarHeight = 26.0f;
+        const float bottomBarHeight = 0.0f;
+        ImGui::BeginChild("##directory_structure",
+                          ImVec2(ImGui::GetContentRegionAvail().x, ImGui::GetWindowHeight() - topBarHeight - bottomBarHeight));
+        {
+          ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
+          RenderTopBar(topBarHeight);
+          ImGui::PopStyleVar();
+        }
+        
+        ImGui::EndChild(); // directory_structure
         ImGui::EndTable();
       }
       UI::PopID();
@@ -364,8 +376,61 @@ namespace Kreator
   
   void ContentBrowserPanel::RenderTopBar(float height)
   {
-    IK_ASSERT(false);
-
+    ImGui::BeginChild("##top_bar", ImVec2(0, height));
+    ImGui::BeginHorizontal("##top_bar", ImGui::GetWindowSize());
+    {
+      const float edgeOffset = 4.0f;
+      // Navigation buttons
+      {
+        UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(2.0f, 0.0f));
+        
+        // Render Icon Buttons
+        auto contenBrowserButton = [height](const char* labelId, const Ref<Image>& icon)
+        {
+          const ImU32 buttonCol = UI::Theme::Color::BackgroundDark;
+          const ImU32 buttonColP = UI::ColorWithMultipliedValue(UI::Theme::Color::BackgroundDark, 0.8f);
+          UI::ScopedColorStack buttonColors(ImGuiCol_Button, buttonCol,
+                                            ImGuiCol_ButtonHovered, buttonCol,
+                                            ImGuiCol_ButtonActive, buttonColP);
+          
+          const float iconSize = std::min(24.0f, height);
+          const float iconPadding = 3.0f;
+          const bool clicked = ImGui::Button(labelId, ImVec2(iconSize, iconSize));
+          UI::DrawButtonImage(icon, Kreator_UI::Color::TextDarker,
+                              UI::ColorWithMultipliedValue(Kreator_UI::Color::TextDarker, 1.2f),
+                              UI::ColorWithMultipliedValue(Kreator_UI::Color::TextDarker, 0.8f),
+                              UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
+          
+          return clicked;
+        };
+        
+        if (contenBrowserButton("##back", m_backButton))
+        {
+          OnBrowseBack();
+        }
+        UI::SetTooltip("Previous directory");
+        
+        ImGui::Spring(-1.0f, edgeOffset);
+        
+        if (contenBrowserButton("##forward", m_forwardButton))
+        {
+          OnBrowseForward();
+        }
+        UI::SetTooltip("Next directory");
+        
+        ImGui::Spring(-1.0f, edgeOffset * 2.0f);
+        
+        if (contenBrowserButton("##refresh", m_refreshIcon))
+        {
+          Refresh();
+        }
+        UI::SetTooltip("Refresh");
+        
+        ImGui::Spring(-1.0f, edgeOffset * 2.0f);
+      }
+    }
+    ImGui::EndHorizontal();
+    ImGui::EndChild();
   }
   
   void ContentBrowserPanel::OnEvent(Event &e)
