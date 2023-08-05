@@ -25,7 +25,7 @@ namespace Kreator
     virtual void OnImGuiRender(bool& isOpen) override;
 
     /// This funciton initialise the scene hierarchy panel
-    static void Init();
+    static void Initialize();
     /// This funciton shutdown the scene hierarchy panel
     static void Shutdown();
     
@@ -52,5 +52,9 @@ namespace Kreator
     bool m_isWindow;
     
     std::function<void(Entity)> m_selectionChangedCallback, m_entityDeletedCallback;
+    
+    inline static Ref<Image> s_pencilIcon;
+    inline static Ref<Image> s_plusIcon;
+    inline static Ref<Image> s_gearIcon;
   };
 } // namespace Kreator

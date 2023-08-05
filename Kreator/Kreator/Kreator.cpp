@@ -10,6 +10,7 @@
 #include "FolderExplorer.hpp"
 #include "Widget.hpp"
 #include "ApplicationSettings.hpp"
+#include "SceneHierarchyPanel.hpp"
 
 namespace Kreator
 {  
@@ -110,11 +111,13 @@ namespace Kreator
       FolderExplorer::Initialize();
       Kreator_UI::Widgets::Initialize();
       ApplicationSettingsSerializer::Initialize();
+      SceneHierarchyPanel::Initialize();
     }
     
     void OnShutdown() override
     {
       // Shutdown the Kreator Modules -------------------------------------------------------------
+      SceneHierarchyPanel::Shutdown();
       Kreator_UI::Widgets::Shutdown();
       FolderExplorer::Shutdown();
       
