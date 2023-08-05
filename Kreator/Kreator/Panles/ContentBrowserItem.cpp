@@ -436,7 +436,14 @@ namespace Kreator
   
   void ContentBrowserDirectory::OnRenamed(const std::string& newName)
   {
-    IK_ASSERT(false);
+    if (Utils::FileSystem::Exists(Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath.parent_path() / newName))
+    {
+      IK_LOG_ERROR("ContentBrowser", "A directory with that name already exists!");
+      return;
+    }
+    
+    Utils::FileSystem::Rename(Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath,
+                       Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath.parent_path() / newName);
   }
   
   void ContentBrowserDirectory::UpdateDrop(CBItemActionResult& actionResult)

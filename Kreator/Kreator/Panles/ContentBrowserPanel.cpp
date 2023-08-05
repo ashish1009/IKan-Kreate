@@ -297,6 +297,8 @@ namespace Kreator
             }
 
             ImGui::PopStyleColor(2);
+            
+            RenderDeleteDialogue();
           }
           ImGui::EndChild(); // Main Area
         }
@@ -310,13 +312,79 @@ namespace Kreator
   
   void ContentBrowserPanel::RenderDeleteDialogue()
   {
-    IK_ASSERT(false);
-
+    if (ImGui::BeginPopupModal("Delete", NULL, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar))
+    {
+      if (m_selectionStack.SelectionCount() == 0)
+      {
+        ImGui::CloseCurrentPopup();
+      }
+      
+      ImGui::Text("Are you sure you want to delete %d items?", (int32_t)m_selectionStack.SelectionCount());
+      
+      float columnWidth = ImGui::GetContentRegionAvail().x / 4;
+      
+      ImGui::Columns(4, 0, false);
+      ImGui::SetColumnWidth(0, columnWidth);
+      ImGui::SetColumnWidth(1, columnWidth);
+      ImGui::SetColumnWidth(2, columnWidth);
+      ImGui::SetColumnWidth(3, columnWidth);
+      ImGui::NextColumn();
+      if (ImGui::Button("Yes", ImVec2(columnWidth, 0)))
+      {
+        for (AssetHandle handle : m_selectionStack)
+        {
+          size_t index = m_currentItems.FindItem(handle);
+          if (index == ContentBrowserItemList::InvalidItem)
+          {
+            continue;
+          }
+          m_currentItems[index]->Delete();
+          m_currentItems.Erase(handle);
+        }
+        
+        for (AssetHandle handle : m_selectionStack)
+        {
+          if (m_directories.find(handle) != m_directories.end())
+          {
+            RemoveDirectory(m_directories[handle]);
+          }
+        }
+        
+        m_selectionStack.Clear();
+        
+        ChangeDirectory(m_currentDirectory);
+        
+        ImGui::CloseCurrentPopup();
+      }
+      
+      ImGui::NextColumn();
+      ImGui::SetItemDefaultFocus();
+      if (ImGui::Button("No", ImVec2(columnWidth, 0)))
+      {
+        ImGui::CloseCurrentPopup();
+      }
+      ImGui::NextColumn();
+      ImGui::EndPopup();
+    }
   }
   
   void ContentBrowserPanel::RemoveDirectory(Ref<DirectoryInfo>& directory, bool removeFromParent)
   {
-    IK_ASSERT(false);
+    if (directory->parent && removeFromParent)
+    {
+      auto& childList = directory->parent->subDirectories;
+      childList.erase(childList.find(directory->handle));
+    }
+    
+    for (auto&[handle, subdir] : directory->subDirectories)
+    {
+      RemoveDirectory(subdir, false);
+    }
+    
+    directory->subDirectories.clear();
+    directory->assets.clear();
+    
+    m_directories.erase(m_directories.find(directory->handle));
   }
   
   void ContentBrowserPanel::RenderItems()
