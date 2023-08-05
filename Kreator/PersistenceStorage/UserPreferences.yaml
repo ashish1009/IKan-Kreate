@@ -1,7 +1,7 @@
 UserPrefs:
-  ShowWelcomeScreen: true
+  ShowWelcomeScreen: false
   StartupProject: ../../../Kreator/Projects/Sandbox/Sandbox.ikproj
   RecentProjects:
     - Name: Sandbox
       ProjectPath: ../../../Kreator/Projects/Sandbox/Sandbox.ikproj
-      LastOpened: 1691258741
+      LastOpened: 1691259412

@@ -1,3 +1,60 @@
-Scene: UntitledScene
+Scene: MyScene
 Entities:
-  []
+  - Entity: 1418344165491701660
+    TagComponent:
+      Tag: Circle
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-1.60000002, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CircleComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 3816794033
+      TilingFactor: 1
+      Thickness: 1
+      Fade: 0.605000019
+  - Entity: 2944179269993974151
+    TagComponent:
+      Tag: Quad
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1.70000005, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    QuadComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 2578144778
+      TilingFactor: 1
+  - Entity: 6816102784547328360
+    TagComponent:
+      Tag: Quad
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    QuadComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 3816794033
+      TilingFactor: 1
+  - Entity: 10645959630531519041
+    TagComponent:
+      Tag: Text
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, -1.39999998, 0]
+      Rotation: [0, 0, 0]
+      Scale: [0.400000006, 0.400000006, 1]
+    TextComponent:
+      TextString: Sample Text
+      FontHandle: 2260695337888079942
+      Color: [0.751054883, 0.14577435, 0.14577435, 1]

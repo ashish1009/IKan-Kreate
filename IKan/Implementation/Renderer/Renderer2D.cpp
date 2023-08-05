@@ -87,7 +87,7 @@ namespace IKan
   
   static constexpr glm::vec2 TextureCoords[] =
   {
-    { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, { 0.0f, 1.0f }
+    { 0.0f, 1.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, { 0.0f, 0.0f }
   };
   
   /// This structure stores the common data for Batch 2D Renderer
