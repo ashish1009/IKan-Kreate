@@ -190,11 +190,146 @@ namespace Kreator
     }
     UI::ShiftCursor(-edgeOffset, -edgeOffset);
     
+    if (!m_isRenaming)
+    {
+      if (Input::IsKeyPressed(Key::F2) && m_isSelected)
+      {
+        StartRenaming();
+      }
+    }
+
     ImGui::PopStyleVar();
 
     // End of the Item Group
     //======================
     ImGui::EndGroup();
+    
+    // Draw outline
+    //-------------
+    if (m_isSelected or ImGui::IsItemHovered())
+    {
+      ImRect itemRect = UI::GetItemRect();
+      auto* drawList = ImGui::GetWindowDrawList();
+      
+      if (m_isSelected)
+      {
+        const bool mouseDown = ImGui::IsMouseDown(ImGuiMouseButton_Left) && ImGui::IsItemHovered();
+        ImU32 colTransition = UI::ColorWithMultipliedValue(Kreator_UI::Color::Selection, 0.8f);
+        
+        drawList->AddRect(itemRect.Min, itemRect.Max,
+                          mouseDown ? colTransition : Kreator_UI::Color::Selection, 6.0f,
+                          m_type == ItemType::Directory ? 0 : ImDrawFlags_RoundCornersBottom, 1.0f);
+      }
+      else // isHovered
+      {
+        if (m_type != ItemType::Directory)
+        {
+          drawList->AddRect(itemRect.Min, itemRect.Max,
+                            UI::Theme::Color::Muted, 6.0f,
+                            ImDrawFlags_RoundCornersBottom, 1.0f);
+        }
+      }
+    }
+    
+    // Mouse Events handling
+    //======================
+    UpdateDrop(result);
+
+    // Drag the Item
+    bool dragging = false;
+    if (dragging = ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID); dragging)
+    {
+      m_isDragging = true;
+      
+      const auto& selectionStack = ContentBrowserPanel::Get().GetSelectionStack();
+      if (!selectionStack.IsSelected(m_ID))
+      {
+        result.Set(ContentBrowserAction::ClearSelections, true);
+      }
+      
+      auto& currentItems = ContentBrowserPanel::Get().GetCurrentItems();
+      
+      if (selectionStack.SelectionCount() > 0)
+      {
+        for (const auto& selectedItemHandles : selectionStack)
+        {
+          size_t index = currentItems.FindItem(selectedItemHandles);
+          if (index == ContentBrowserItemList::InvalidItem)
+          {
+            continue;
+          }
+          
+          const auto& item = currentItems[index];
+          UI::Image(item->GetIcon(), ImVec2(20, 20));
+          ImGui::SameLine();
+          const auto& name = item->GetName();
+          ImGui::TextUnformatted(name.c_str());
+        }
+        
+        ImGui::SetDragDropPayload("asset_payload", selectionStack.SelectionData(), sizeof(AssetHandle) * selectionStack.SelectionCount());
+      }
+      
+      result.Set(ContentBrowserAction::Selected, true);
+      ImGui::EndDragDropSource();
+    }
+
+    // Item Hovered
+    if (ImGui::IsItemHovered())
+    {
+      result.Set(ContentBrowserAction::Hovered, true);
+      
+      if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+      {
+        Activate(result);
+      }
+      else
+      {
+        const auto& selectionStack = ContentBrowserPanel::Get().GetSelectionStack();
+        
+        bool action = selectionStack.SelectionCount() > 1 ?
+        ImGui::IsMouseReleased(ImGuiMouseButton_Left) :
+        ImGui::IsMouseClicked(ImGuiMouseButton_Left);
+        
+        bool skipBecauseDragging = m_isDragging and selectionStack.IsSelected(m_ID);
+        if (action and !skipBecauseDragging)
+        {
+          result.Set(ContentBrowserAction::Selected, true);
+          
+          if (!Input::IsKeyPressed(Key::LeftControl) and!Input::IsKeyPressed(Key::LeftShift))
+          {
+            result.Set(ContentBrowserAction::ClearSelections, true);
+          }
+          
+          if (Input::IsKeyPressed(Key::LeftShift))
+          {
+            result.Set(ContentBrowserAction::SelectToHere, true);
+          }
+        }
+      }
+    }
+    
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4.0f, 4.0f));
+    if (ImGui::BeginPopupContextItem("CBItemContextMenu"))
+    {
+      result.Set(ContentBrowserAction::Selected, true);
+      
+      if (!Input::IsKeyPressed(Key::LeftControl) and !Input::IsKeyPressed(Key::LeftShift))
+      {
+        result.Set(ContentBrowserAction::ClearSelections, true);
+      }
+      
+      if (Input::IsKeyPressed(Key::LeftShift))
+      {
+        result.Set(ContentBrowserAction::SelectToHere, true);
+      }
+      
+      OnContextMenuOpen(result);
+      ImGui::EndPopup();
+    }
+    ImGui::PopStyleVar();
+    
+    m_isDragging = dragging;
+    
     return result;
   }
   
@@ -244,7 +379,7 @@ namespace Kreator
   {
     return m_name;
   }
-  const Ref<Texture>& ContentBrowserItem::GetIcon() const
+  const Ref<Image>& ContentBrowserItem::GetIcon() const
   {
     return m_icon;
   }
@@ -296,7 +431,7 @@ namespace Kreator
   
   void ContentBrowserDirectory::Activate(CBItemActionResult& actionResult)
   {
-    IK_ASSERT(false);
+    actionResult.Set(ContentBrowserAction::NavigateToThis, true);
   }
   
   void ContentBrowserDirectory::OnRenamed(const std::string& newName)
@@ -306,7 +441,17 @@ namespace Kreator
   
   void ContentBrowserDirectory::UpdateDrop(CBItemActionResult& actionResult)
   {
-    IK_ASSERT(false);
+    if (IsSelected())
+    {
+      return;
+    }
+    
+    if (ImGui::BeginDragDropTarget())
+    {
+      // TODO: Implement later
+      IK_ASSERT(false);
+      ImGui::EndDragDropTarget();
+    }
   }
   
   void ContentBrowserDirectory::Delete()
@@ -338,7 +483,14 @@ namespace Kreator
   
   void ContentBrowserAsset::Activate(CBItemActionResult& actionResult)
   {
-    IK_ASSERT(false);
+    if (m_assetInfo.type == AssetType::Scene)
+    {
+      // TODO: Open in Viewport
+    }
+    else
+    {
+      AssetEditorManager::OpenEditor(AssetManager::GetAsset<Asset>(m_assetInfo.handle));
+    }
   }
   
   void ContentBrowserAsset::OnRenamed(const std::string& newName)

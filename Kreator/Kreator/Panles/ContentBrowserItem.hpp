@@ -111,7 +111,7 @@ namespace Kreator
     /// This function Returns the Name of Item
     const std::string& GetName() const;
     /// This function Returns the Texture Icon of Item
-    const Ref<Texture>& GetIcon() const;
+    const Ref<Image>& GetIcon() const;
     /// This function Checks is item selected
     bool IsSelected() const;
     /// This function checks is item is renaming
