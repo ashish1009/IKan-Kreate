@@ -39,4 +39,19 @@ namespace Kreator
     StartRenaming       = BIT(14)
   };
 
+  /// This structure stores all the actions for an item in CBP
+  struct CBItemActionResult
+  {
+    uint16_t Field = 0;
+    
+    /// This function set an action in CBI
+    /// - Parameters:
+    ///   - flag: Action flag
+    ///   - value: Set reset value
+    void Set(ContentBrowserAction flag, bool value);
+    /// This function check if an item have an action
+    /// - Parameter flag: action flag
+    bool IsSet(ContentBrowserAction flag) const;
+  };
+
 } // namespace Kreator
