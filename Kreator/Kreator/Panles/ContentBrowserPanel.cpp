@@ -8,6 +8,7 @@
 #include "ContentBrowserPanel.hpp"
 #include "RendererLayer.hpp"
 #include "Widget.hpp"
+#include "ApplicationSettings.hpp"
 
 namespace Kreator
 {
@@ -492,6 +493,30 @@ namespace Kreator
         }
       }
 
+      // Settings button
+      ImGui::Spring();
+      if (Kreator_UI::Widgets::OptionsButton())
+      {
+        ImGui::OpenPopup("ContentBrowserSettings");
+      }
+      UI::SetTooltip("Content Browser settings");
+      
+      
+      if (UI::BeginPopup("ContentBrowserSettings"))
+      {
+        auto& editorSettings = ApplicationSettings::Get();
+        
+        bool saveSettings = ImGui::MenuItem("Show Asset Types", nullptr, &editorSettings.ContentBrowserShowAssetTypes);
+        saveSettings |= ImGui::SliderInt("##thumbnail_size", &editorSettings.ContentBrowserThumbnailSize, 32, 512);
+        UI::SetTooltip("Thumnail Size");
+        
+        if (saveSettings)
+        {
+          ApplicationSettingsSerializer::SaveSettings();
+        }
+        
+        UI::EndPopup();
+      }
     }
     ImGui::EndHorizontal();
     ImGui::EndChild();
