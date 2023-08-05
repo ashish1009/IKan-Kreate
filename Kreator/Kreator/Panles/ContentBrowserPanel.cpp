@@ -191,6 +191,14 @@ namespace Kreator
             }
           }
         }
+        
+        // Draw side shadow
+        ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 10.0f);
+        ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
+        UI::DrawShadowInner(m_shadowTexture, 15.0f, windowRect, 1.0f, windowRect.GetHeight() / 4.0f,
+                            false, true, false, false);
+        ImGui::PopClipRect();
+
         ImGui::EndChild(); // folders_common
         
         ImGui::EndTable();
