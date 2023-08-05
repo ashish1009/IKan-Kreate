@@ -76,4 +76,52 @@ namespace IKan
   {
     return m_flags;
   }
+  
+  void AssetEditorManager::RegisterDefaultEditors()
+  {
+
+  }
+  
+  void AssetEditorManager::UnregisterAllEditors()
+  {
+    s_editors.clear();
+  }
+  
+  void AssetEditorManager::OnUpdate(TimeStep ts)
+  {
+    for (auto& kv : s_editors)
+    {
+      kv.second->OnUpdate(ts);
+    }
+  }
+  
+  void AssetEditorManager::OnEvent(Event& e)
+  {
+    for (auto& kv : s_editors)
+    {
+      kv.second->OnEvent(e);
+    }
+  }
+  
+  void AssetEditorManager::OnImGuiRender()
+  {
+    for (auto& kv : s_editors)
+    {
+      kv.second->OnImGuiRender();
+    }
+  }
+  
+  void AssetEditorManager::OpenEditor(const Ref<Asset>& asset)
+  {
+    if (s_editors.find(asset->GetAssetType()) == s_editors.end())
+    {
+      return;
+    }
+    
+    s_editors[asset->GetAssetType()]->SetOpen(true);
+    s_editors[asset->GetAssetType()]->SetAsset(AssetManager::GetAsset<Asset>(asset->handle));
+  }
+  
+  std::unordered_map<AssetType, Scope<AssetEditor>> AssetEditorManager::s_editors;
+
 } // namespace IKan

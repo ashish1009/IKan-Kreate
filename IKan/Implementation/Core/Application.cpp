@@ -8,6 +8,7 @@
 #include "Application.hpp"
 #include "Renderer/RendererStats.hpp"
 #include "Asset/AssetManager.hpp"
+#include "Editor/AssetEdtitor.hpp"
 #include "UI/ImGuiTheme.hpp"
 
 namespace IKan
@@ -52,6 +53,9 @@ namespace IKan
     // Initialize the Core Renderer
     Renderer::Initialize();
     
+    // Initialize all Editors
+    AssetEditorManager::RegisterDefaultEditors();
+    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialized                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -61,7 +65,8 @@ namespace IKan
   {
     IK_PROFILE();
 
-    // Shutdown asset manager to destory all memory
+    // Shutdown asset manager and Editors
+    AssetEditorManager::UnregisterAllEditors();
     AssetManager::Shutdown();
     
     // Reset the window

@@ -107,7 +107,6 @@ namespace Kreator
       // Initialize the Kreator Modules -------------------------------------------------------------
       // Should get initialized after layer initialize
       FolderExplorer::Initialize();
-      
       Kreator_UI::Widgets::Initialize();
     }
     
