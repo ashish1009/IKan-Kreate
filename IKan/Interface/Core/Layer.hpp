@@ -33,7 +33,7 @@ namespace IKan
     
     /// This function renders the GUI Window for this layer. To be called each frame from application.
     /// - Important: Core IKan::Application is taking care to call the RenderGui API for all Layers
-    virtual void OnImguiRender() = 0;
+    virtual void OnImGuiRender() = 0;
     /// This function updates the layer data. To be called each frame from application.
     /// - Parameter ts: Time step between 2 Frames
     /// - Important: Core IKan::Application is taking care to call the Update(ts) API for all Layers

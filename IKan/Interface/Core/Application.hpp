@@ -39,7 +39,7 @@ namespace IKan
     };
 
     /// This constructor instantiate the IKan Core application. Responsible to create Window, Renderer Context and
-    /// Initialize all the Renderer. Also add the Imgui Layer for GUI Rendering
+    /// Initialize all the Renderer. Also add the ImGui Layer for GUI Rendering
     /// - Parameter spec: Application specifications
     Application(const Specification& spec);
     /// This destructor destroy the Application instance and shutdown all the Renderers and Window
@@ -80,7 +80,7 @@ namespace IKan
     /// This function calls when an event triggers
     virtual void OnEvent(Event& event) {}
     /// This function calls in Game Loop under Gui Layer
-    virtual void OnImguiRender() {}
+    virtual void OnImGuiRender() {}
 
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the specification of application
@@ -91,8 +91,8 @@ namespace IKan
     void* GetWindowPtr() const;
     /// This fuinction returns the iKan Window Instance as reference
     Window& GetWindow();
-    /// This fuinction returns the Imgui Layer pointer Reference
-    UI::ImguiLayer& GetImGuiLayer() const;
+    /// This fuinction returns the ImGui Layer pointer Reference
+    UI::ImGuiLayer& GetImGuiLayer() const;
 
     /// This function returns the single instance of application
     static Application& Get();
@@ -104,8 +104,8 @@ namespace IKan
     /// This function dispatched in event dispatcher and trigger when window close event evoked
     /// - Parameter window_close_event: Window close event instacnce
     bool WindowClose([[maybe_unused]] WindowCloseEvent& window_close_event);
-    /// This function begin the Imgui Renderer and render Imgui for all the layers and finally ends the imgui rendering
-    void ImguiRender();
+    /// This function begin the ImGui Renderer and render ImGui for all the layers and finally ends the imgui rendering
+    void ImGuiRender();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     bool m_isRunning = true;
@@ -113,7 +113,7 @@ namespace IKan
     Specification m_specificaion;
     Ref<Window> m_window;
     Scope<LayerStack> m_layers;
-    Ref<UI::ImguiLayer> m_imguiLayer;
+    Ref<UI::ImGuiLayer> m_imguiLayer;
 
     inline static Application* s_instance;
   };

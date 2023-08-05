@@ -30,7 +30,7 @@
 #define GLM_ENABLE_EXPERIMENTAL
 #include <glm/gtx/quaternion.hpp>
 
-// Imgui files
+// ImGui files
 #include <imgui.h>
 #include <imgui_internal.h>
 

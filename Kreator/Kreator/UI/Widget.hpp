@@ -9,7 +9,7 @@
 
 namespace Kreator_UI
 {  
-  // This class manage the Imgui predefined widget like Search, Setting etc
+  // This class manage the ImGui predefined widget like Search, Setting etc
   class Widgets
   {
   public:

@@ -21,7 +21,7 @@ namespace IKan
     virtual ~EditorPanel() = default;
     
     /// This function render the Panel as GUI
-    virtual void OnImguiRender(bool& is_open) = 0;
+    virtual void OnImGuiRender(bool& is_open) = 0;
     /// This function hnadles all the events in panel
     virtual void OnEvent(Event& e) {}
     /// This function handles the project change for editor panel

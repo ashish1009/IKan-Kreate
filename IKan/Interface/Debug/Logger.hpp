@@ -19,7 +19,7 @@ f(Renderer) f(Renderer2D) f(Font) f(TextRenderer)\
 f(GraphicsContext) f(Shader) f(IndexBuffer) f(VertexBuffer) f(Pipeline) f(Texture) f(SubTexture) f(FrameBuffer)\
 f(RenderPass) f(CharTexture)\
 f(SceneCamera) f(EditorCamera)\
-f(Imgui)\
+f(ImGui)\
 f(Scene) f(Component) f(SceneSerializer)\
 f(Asset) \
 f(Project) f(PanelManager) f(EditorConsolePanel)

@@ -16,18 +16,18 @@
 
 namespace IKan::UI
 {
-  ImguiLayer::ImguiLayer(Ref<Window> window)
-  : Layer("Imgui Layer"), m_window(window)
+  ImGuiLayer::ImGuiLayer(Ref<Window> window)
+  : Layer("ImGui Layer"), m_window(window)
   {
-    IK_LOG_TRACE(LogModule::Imgui, "Creating Imgui Layer instance ...");
+    IK_LOG_TRACE(LogModule::ImGui, "Creating ImGui Layer instance ...");
   }
   
-  ImguiLayer::~ImguiLayer() {
-    IK_LOG_WARN(LogModule::Imgui, "Destroying Imgui Layer instance !!!");
+  ImGuiLayer::~ImGuiLayer() {
+    IK_LOG_WARN(LogModule::ImGui, "Destroying ImGui Layer instance !!!");
   }
   
-  void ImguiLayer::OnAttach() {
-    IK_LOG_TRACE(LogModule::Imgui, "'{0}' is attached to application", GetName());
+  void ImGuiLayer::OnAttach() {
+    IK_LOG_TRACE(LogModule::ImGui, "'{0}' is attached to application", GetName());
     
     IMGUI_CHECKVERSION();
     ImGui::CreateContext();
@@ -55,16 +55,16 @@ namespace IKan::UI
     ImGui_ImplOpenGL3_Init("#version 410");
   }
   
-  void ImguiLayer::OnDetach()
+  void ImGuiLayer::OnDetach()
   {
-    IK_LOG_WARN(LogModule::Imgui, "'{0}' is detached to application", GetName());
+    IK_LOG_WARN(LogModule::ImGui, "'{0}' is detached to application", GetName());
     
     ImGui_ImplOpenGL3_Shutdown();
     ImGui_ImplGlfw_Shutdown();
     ImGui::DestroyContext();
   }
   
-  void ImguiLayer::OnEvent(Event& event)
+  void ImGuiLayer::OnEvent(Event& event)
   {
     if (m_blockEvents)
     {
@@ -74,7 +74,7 @@ namespace IKan::UI
     }
   }
   
-  void ImguiLayer::Begin()
+  void ImGuiLayer::Begin()
   {
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
@@ -82,7 +82,7 @@ namespace IKan::UI
     ImGui::NewFrame();
   }
   
-  void ImguiLayer::End()
+  void ImGuiLayer::End()
   {
     ImGuiIO& io = ImGui::GetIO();
     io.DisplaySize = ImVec2((float)m_window->GetWidth(), (float)m_window->GetHeight());
@@ -98,7 +98,7 @@ namespace IKan::UI
     }
   }
   
-  void ImguiLayer::SetFont(const std::vector<UI::Font> otherFonts)
+  void ImGuiLayer::SetFont(const std::vector<UI::Font> otherFonts)
   {
     if (otherFonts.size() == 0)
     {
@@ -108,18 +108,18 @@ namespace IKan::UI
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.Fonts->ClearFonts();
     
-    IK_LOG_INFO(LogModule::Imgui, "Imgui Font changed");
+    IK_LOG_INFO(LogModule::ImGui, "ImGui Font changed");
     for (const auto& font : otherFonts)
     {
       io.Fonts->AddFontFromFileTTF(font.filePath.c_str(), font.size);
-      IK_LOG_INFO(LogModule::Imgui, "  Font    {0} Size {1}", Utils::FileSystem::IKanAbsolute(font.filePath), font.size);
+      IK_LOG_INFO(LogModule::ImGui, "  Font    {0} Size {1}", Utils::FileSystem::IKanAbsolute(font.filePath), font.size);
     }
     
     // Default font is Regular
     io.FontDefault = io.Fonts->Fonts[0];
   }
   
-  void ImguiLayer::SetIniFilePath(const std::string& iniFilePath)
+  void ImGuiLayer::SetIniFilePath(const std::string& iniFilePath)
   {
     ImGuiIO& io = ImGui::GetIO();
     (void)io;
@@ -127,7 +127,7 @@ namespace IKan::UI
     m_iniPath = iniFilePath;
   }
   
-  void ImguiLayer::ReloadIni()
+  void ImGuiLayer::ReloadIni()
   {
     ImGuiIO& io = ImGui::GetIO();
     (void)io;

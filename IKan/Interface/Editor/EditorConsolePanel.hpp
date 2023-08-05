@@ -24,7 +24,7 @@ namespace IKan
     virtual ~EditorConsolePanel();
  
     /// @see Editor Panel
-    virtual void OnImguiRender(bool& isOpen) override = 0;
+    virtual void OnImGuiRender(bool& isOpen) override = 0;
     
   protected:
     static constexpr uint32_t s_messageBufferCapacity = 1000;

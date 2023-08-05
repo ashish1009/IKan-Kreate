@@ -45,8 +45,8 @@ namespace IKan
       m_window->Maximize();
     }
 
-    // Initialize the Imgui Layer if GUI is enabled
-    m_imguiLayer = CreateRef<UI::ImguiLayer>(m_window);
+    // Initialize the ImGui Layer if GUI is enabled
+    m_imguiLayer = CreateRef<UI::ImGuiLayer>(m_window);
     m_layers->PushOverlay(m_imguiLayer);
     m_imguiLayer->SetIniFilePath(m_specificaion.iniPath);
 
@@ -108,7 +108,7 @@ namespace IKan
       OnUpdate(m_timeStep);
       
       // Render the Gui for Application
-      ImguiRender();
+      ImGuiRender();
       
       // Clear Runtime Performance profiler
       PerformanceProfiler::Get()->Clear();
@@ -155,18 +155,18 @@ namespace IKan
     IK_LOG_WARN(LogModule::Application, "Closing the Application");
   }
   
-  void Application::ImguiRender()
+  void Application::ImGuiRender()
   {
     m_imguiLayer->Begin();
     
     // Updating all the attached layer
     for (auto& layer : *(m_layers.get()))
     {
-      layer->OnImguiRender();
+      layer->OnImGuiRender();
     }
 
-    // Rendering Imgui for Client
-    OnImguiRender();
+    // Rendering ImGui for Client
+    OnImGuiRender();
 
     m_imguiLayer->End();
   }
@@ -196,7 +196,7 @@ namespace IKan
     return *(m_window.get());
   }
 
-  UI::ImguiLayer& Application::GetImGuiLayer() const
+  UI::ImGuiLayer& Application::GetImGuiLayer() const
   {
     return *m_imguiLayer.get();
   }

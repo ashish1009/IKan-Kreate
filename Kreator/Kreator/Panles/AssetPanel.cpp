@@ -9,7 +9,7 @@
 
 namespace Kreator
 {
-  void AssetPanel::OnImguiRender(bool& isOpen)
+  void AssetPanel::OnImGuiRender(bool& isOpen)
   {
     if (!isOpen)
     {

@@ -76,8 +76,8 @@ namespace IKan
     void RemovePanel(const char* strID);
     
     // Editor Panel APIs ---------------------------------------------------------------------------------------------
-    /// This function renders the Imgui for all Panels
-    void OnImguiRender();
+    /// This function renders the ImGui for all Panels
+    void OnImGuiRender();
     /// This function handle Events for all Panels
     /// - Parameter e: event handle
     void OnEvent(Event& e);

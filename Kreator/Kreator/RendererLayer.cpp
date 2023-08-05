@@ -335,9 +335,9 @@ if (!Project::GetActive()) return
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
   }
 
-  void RendererLayer::OnImguiRender()
+  void RendererLayer::OnImGuiRender()
   {
-    IK_PERFORMANCE("RendererLayer::OnImguiRender");
+    IK_PERFORMANCE("RendererLayer::OnImGuiRender");
     
     // Should be above all scene GUI
     UI_WelcomePopup();
@@ -349,7 +349,7 @@ if (!Project::GetActive()) return
     // Dockings
     UI_StartMainWindowDocking();
     UI_Viewport();
-    m_panels.OnImguiRender();
+    m_panels.OnImGuiRender();
     UI_EndMainWindowDocking();
     
     // Scene Popups

@@ -18,7 +18,7 @@ namespace Kreator
     ~ProjectSettingsPanel() = default;
     
     /// @see Editor Panel
-    virtual void OnImguiRender(bool& isOpen) override;
+    virtual void OnImGuiRender(bool& isOpen) override;
     /// @see Editor Panel
     virtual void OnProjectChanged(const Ref<Project>& project) override;
     

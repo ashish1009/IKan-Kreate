@@ -80,7 +80,7 @@ namespace Kreator
     ContentBrowserPanel();
     
     /// @see Editor Panel for Documentation
-    void OnImguiRender(bool& isOpen) override;
+    void OnImGuiRender(bool& isOpen) override;
     /// @see Editor Panel for Documentation
     void OnEvent(Event& e) override;
     /// @see Editor Panel for Documentation
@@ -114,7 +114,7 @@ namespace Kreator
     /// This function renders the directory hierarchy
     /// - Parameter directory: Directory
     void RenderDirectoryHierarchy(Ref<DirectoryInfo>& directory);
-    /// This function updatres the Imgui Drop content
+    /// This function updatres the ImGui Drop content
     /// - Parameter target: Target Directory
     void UpdateDropArea(const Ref<DirectoryInfo>& target);
     

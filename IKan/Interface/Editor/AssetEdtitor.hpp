@@ -88,7 +88,7 @@ namespace IKan
     /// This function handles events for asset editor
     /// - Parameter e: event
     static void OnEvent(Event& e);
-    /// This function renders Imgui
+    /// This function renders ImGui
     static void OnImGuiRender();
     /// This function Opens the Asset editor
     /// - Parameter asset asset

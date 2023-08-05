@@ -11,7 +11,7 @@ namespace Kreator
 {
   static bool s_serializeProject = false;
     
-  void ProjectSettingsPanel::OnImguiRender(bool& isOpen)
+  void ProjectSettingsPanel::OnImGuiRender(bool& isOpen)
   {
     if (m_project == nullptr)
     {

@@ -18,7 +18,7 @@ namespace Kreator
     ~KreatorConsolePanel() = default;
     
     /// @see Editor Panel
-    virtual void OnImguiRender(bool& isOpen) override;
+    virtual void OnImGuiRender(bool& isOpen) override;
     
   private:
     // Member Functions ----------------------------------------------------------------------------------------------

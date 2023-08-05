@@ -23,24 +23,24 @@ namespace IKan::UI
     uint32_t size;
   };
 
-  /// This class creates and manages the Imgui Layer in application
-  /// - Note: If Not using iKan Application then create instance of Imgui Layer in Client Application and manage API
+  /// This class creates and manages the ImGui Layer in application
+  /// - Note: If Not using iKan Application then create instance of ImGui Layer in Client Application and manage API
   ///         Accordingly, by default Application is taking care of all
-  class ImguiLayer : public Layer
+  class ImGuiLayer : public Layer
   {
   public:
-    /// This constructor creates the Imgui layer instance.
+    /// This constructor creates the ImGui layer instance.
     /// - Parameter windowPointer: application window pointer
-    ImguiLayer(Ref<Window> windowPointer);
-    /// This destrictor destroy the Imgui layer instance
-    ~ImguiLayer();
+    ImGuiLayer(Ref<Window> windowPointer);
+    /// This destrictor destroy the ImGui layer instance
+    ~ImGuiLayer();
     
     /// This funciton initialises the imgui layer. Creates the imgui layer using imgui file library
     void OnAttach() override;
     /// This funciton destroy the imgui layer delete all the imgui created impl
     void OnDetach() override;
     /// This function do nothing for now
-    void OnImguiRender() override {}
+    void OnImGuiRender() override {}
     /// This function do nothing for now
     void OnUpdate([[maybe_unused]] TimeStep ts) override {}
     /// This function handles all the events triggered for the imgui layer. To be called whenever an event is triggered in the window
@@ -63,7 +63,7 @@ namespace IKan::UI
     /// This function reload the Ini
     void ReloadIni();
     
-    DELETE_COPY_MOVE_CONSTRUCTORS(ImguiLayer);
+    DELETE_COPY_MOVE_CONSTRUCTORS(ImGuiLayer);
     
   private:
     bool m_blockEvents = true;

@@ -87,7 +87,7 @@ namespace Kreator_UI
 
     UI::PushID();
 
-    // Suspend the Imgui layout to overlap the Text box with Icon
+    // Suspend the ImGui layout to overlap the Text box with Icon
     const bool layoutSuspended = []
     {
       ImGuiWindow* window = ImGui::GetCurrentWindow();

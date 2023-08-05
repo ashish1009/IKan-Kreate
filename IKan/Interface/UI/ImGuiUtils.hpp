@@ -18,7 +18,7 @@ namespace IKan::UI
   // Wrappers --------------------------------------------------------------------------------------------------------
   /// Add horizontal seprator
   void Separator();
-  /// This function returns the Texutre Renderer ID for Imgui
+  /// This function returns the Texutre Renderer ID for ImGui
   /// - Parameter texture: texture
   ImTextureID GetTextureID(Ref<Texture> texture);
   /// This function shift the cursor position for x
@@ -59,11 +59,11 @@ namespace IKan::UI
   /// This function checkes is imgui item hovered
   bool IsItemHovered();
   
-  /// This function push unque id for Imgui
+  /// This function push unque id for ImGui
   void PushID();
-  /// This function pop last used id for Imgui
+  /// This function pop last used id for ImGui
   void PopID();
-  /// This function generate unique ID for Imgui
+  /// This function generate unique ID for ImGui
   const char* GenerateID();
   /// This function generate Unique id for labeled widget
   /// - Parameter label: Widget lable
@@ -109,9 +109,9 @@ namespace IKan::UI
   void EndTreeNode();
 
   // Rectangles API -------------------------------------------------------------------------------------------------
-  /// This function returns the Imgui Item Rectangle vertex
+  /// This function returns the ImGui Item Rectangle vertex
   ImRect GetItemRect();
-  /// This function expand the Imgui Retangle
+  /// This function expand the ImGui Retangle
   /// - Parameters:
   ///   - rect: rectangle
   ///   - x: expand x
@@ -249,7 +249,7 @@ namespace IKan::UI
   /// - Parameter rect: rect vertex
   void DrawBorder(ImRect rect, float thickness = 1.0f, float rounding = 0.0f, float offsetX = 0.0f, float offsetY = 0.0f);  
 
-  /// This function render the Shadow image in Imgui
+  /// This function render the Shadow image in ImGui
   /// - Parameters:
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
@@ -258,20 +258,20 @@ namespace IKan::UI
   void DrawShadow(const Ref<IKan::Image>& shadowImage, int radius, ImVec2 rectMin, ImVec2 rectMax,
                   float alphMultiplier = 1.0f, float lengthStretch = 10.0f, bool drawLeft = true, bool drawRight = true,
                   bool drawTop = true, bool drawBottom = true);
-  /// This function render the Shadow image in Imgui
+  /// This function render the Shadow image in ImGui
   /// - Parameters:
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
   ///   - rectangle: rectangle Data
   void DrawShadow(const Ref<IKan::Image>& shadowImage, int radius, ImRect rectangle, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
                   bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
-  /// This function render the Shadow image in Imgui
+  /// This function render the Shadow image in ImGui
   /// - Parameters:
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
   void DrawShadow(const Ref<Image>& shadow_image, int radius, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
                   bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
-  /// This function render the Shadow image in Imgui
+  /// This function render the Shadow image in ImGui
   /// - Parameters:
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
@@ -281,14 +281,14 @@ namespace IKan::UI
                        float lengthStretch = 10.0f, bool drawLeft = true, bool drawRight = true, bool drawTop = true,
                        bool drawBottom = true);
   
-  /// This function render the Shadow image in Imgui
+  /// This function render the Shadow image in ImGui
   /// - Parameters:
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
   ///   - rectangle: rectangle Data
   void DrawShadowInner(const Ref<IKan::Image>& shadowImage, int radius, ImRect rectangle, float alpha = 1.0f, float lengthStretch = 10.0f,
                        bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
-  /// This function render the Shadow image in Imgui
+  /// This function render the Shadow image in ImGui
   /// - Parameters:
   ///   - shadowImage: shadow Image
   ///   - radius: radius of shadow
@@ -302,10 +302,10 @@ namespace IKan::UI
   ///   - colourWhenActive: Color when active
   void DrawItemActivityOutline(float rounding = 0.0f, bool drawWhenInactive = false, ImColor colourWhenActive = ImColor(80, 80, 80));
 
-  /// This function renders Imgae in current Imgui window
+  /// This function renders Imgae in current ImGui window
   /// - Parameters:
   ///   - texture; Texture reference
-  ///   - size; size of image need to be rendered inside Imgui window (this size will be visible as texture)
+  ///   - size; size of image need to be rendered inside ImGui window (this size will be visible as texture)
   ///   - uv0; Left
   ///   - uv1; Right
   void Image(const Ref<IKan::Image>& texture, const ImVec2& size, const ImVec2& uv0 = {0, 1}, const ImVec2& uv1 = {1, 0},

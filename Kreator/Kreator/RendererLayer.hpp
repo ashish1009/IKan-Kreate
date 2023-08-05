@@ -46,7 +46,7 @@ namespace Kreator
     
     /// This function renders the GUI Window for this layer. To be called each frame from application.
     /// - Note: Core Application is taking care to call the RenderGui API for all Layers
-    void OnImguiRender() override;
+    void OnImGuiRender() override;
     /// This function updates the layer data. To be called each frame from application.
     /// - Note Core Application is taking care to call the Update(ts) API for all Layers
     /// - Parameter ts: Time step between 2 Frames

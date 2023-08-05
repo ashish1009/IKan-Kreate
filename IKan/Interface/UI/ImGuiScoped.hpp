@@ -9,7 +9,7 @@
 
 namespace IKan::UI
 {
-  /// Scoped Imgui Stype Var
+  /// Scoped ImGui Stype Var
   /// - Note: Should be inside Scope
   class ScopedStyle
   {
@@ -25,7 +25,7 @@ namespace IKan::UI
     }
   };
   
-  /// Scoped Imgui Color Var
+  /// Scoped ImGui Color Var
   /// - Note: Should be inside Scope
   class ScopedColor
   {

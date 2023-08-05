@@ -18,6 +18,6 @@ namespace Kreator
     ~AssetPanel() = default;
     
     /// @see Editor Panel
-    virtual void OnImguiRender(bool& isOpen) override;
+    virtual void OnImGuiRender(bool& isOpen) override;
   };
 } // namespace Kreator

@@ -109,7 +109,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
  ------------------------------------------------------------------------------------------------------------------  
 
 - v4.0.1.0  : IKan    - ImGui Layer  | Kreator - Render Scene in Viewport
-  - Imgui Layer 
+  - ImGui Layer 
   - Kreator Application
   - Kreator Renderer Layer
   - View port in Kreator and Render Scene 
@@ -169,7 +169,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 
 -   : Kreator - Guizmo and Mouse Selected Entity
   - Mouse Selectable entity 
-  - Imguizmo Toolbar and usage
+  - ImGuizmo Toolbar and usage
  ------------------------------------------------------------------------------------------------------------------
 
 -   : IKan    - Sub texture in quad component

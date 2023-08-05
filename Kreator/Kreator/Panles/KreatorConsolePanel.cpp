@@ -24,7 +24,7 @@ namespace Kreator
     m_errorButtonTex = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Editor/ErrorButton.png");
   }
   
-  void KreatorConsolePanel::OnImguiRender(bool& isOpen)
+  void KreatorConsolePanel::OnImGuiRender(bool& isOpen)
   {
     ImGui::Begin("Log", &isOpen);
     RenderMenu();

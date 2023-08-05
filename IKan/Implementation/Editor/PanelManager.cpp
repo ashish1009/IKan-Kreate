@@ -14,12 +14,12 @@ namespace IKan
     m_panels.clear();
   }
   
-  void PanelManager::OnImguiRender() {
+  void PanelManager::OnImGuiRender() {
     for (auto& [id, panelData] : m_panels)
     {
       if (panelData.isOpen)
       {
-        panelData.panel->OnImguiRender(panelData.isOpen);
+        panelData.panel->OnImGuiRender(panelData.isOpen);
       }
     }
   }

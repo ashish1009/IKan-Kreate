@@ -140,7 +140,7 @@ namespace Kreator
     m_assetIconMap[".ikscene"] = CBP_Utils::AssetPath("IKScene.png");
   }
   
-  void ContentBrowserPanel::OnImguiRender(bool &isOpen)
+  void ContentBrowserPanel::OnImGuiRender(bool &isOpen)
   {
     IK_ASSERT(false);
 
@@ -244,17 +244,22 @@ namespace Kreator
       auto metadata = AssetManager::GetMetadata(std::filesystem::relative(entry.path(), m_project->GetAssetDirectory()));
       if (!metadata.IsValid())
       {
+        // If directory have some file that is not registered
         AssetType type = AssetManager::GetAssetTypeFromPath(entry.path());
         if (type == AssetType::None)
         {
           continue;
         }
+        
+        // If that file is valid for Kreator then Import and push in registry
         metadata.handle = AssetManager::ImportAsset(entry.path());
       }
       
       // Failed to import
       if (!metadata.IsValid())
       {
+        // TODO: Temp assert to check code hit
+        IK_ASSERT(false);
         continue;
       }
       
