@@ -1498,13 +1498,124 @@ if (!Project::GetActive()) return
           
           ImGui::Separator();
           ImGui::Text("Frame Time : %.2fms\n", app.GetTimestep().MilliSeconds());
-          ImGui::Text("APP FPS    : %.2fms\n", app.GetTimestep().FPS());
-          ImGui::Text("GUI FPS    : %.2fms\n", ImGui::GetIO().Framerate);
+          ImGui::Text("FPS        : %.2fms\n", ImGui::GetIO().Framerate);
 
           ImGui::Separator();
           ImGui::EndTabItem();
         }
 
+        if (ImGui::BeginTabItem("Performance"))
+        {
+          ImGui::Text("Frame Time : %.2fms\n", app.GetTimestep().MilliSeconds());
+          ImGui::Text("FPS        : %.2fms\n", app.GetTimestep().FPS());
+          ImGui::Separator();
+          
+          const auto& perFrameData = PerformanceProfiler::Get()->GetPerFrameData();
+          for (auto&& [name, time] : perFrameData)
+          {
+            ImGui::Text("%s: %.3fms\n", name, time);
+          }
+          ImGui::Separator();
+          ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Memory"))
+        {
+#if IK_TRACK_MEMORY
+          const auto& allocStats = Memory::GetAllocationStats();
+          const auto& allocStatsMap = Allocator::GetAllocationStats();
+          
+          {
+            std::string totalAllocatedStr = StringUtils::BytesToString(allocStats.TotalAllocated);
+            std::string totalFreedStr = StringUtils::BytesToString(allocStats.TotalFreed);
+            std::string totalUsedStr = StringUtils::BytesToString(allocStats.TotalAllocated - allocStats.TotalFreed);
+            
+            ImGui::Text("Total allocated    : %s", totalAllocatedStr.c_str());
+            ImGui::Text("Total freed        : %s", totalFreedStr.c_str());
+            ImGui::Text("Current usage      : %s", totalUsedStr.c_str());
+          }
+          
+          ImGui::Separator();
+          
+          static std::string searchedString;
+          ImGui::SetNextItemWidth(-1);
+          UI::Widgets::SearchWidget(searchedString.data());
+          
+          struct MemoryRefEntry
+          {
+            const char* Category;
+            size_t Size;
+          };
+          std::vector<MemoryRefEntry> sortedEntries;
+          sortedEntries.reserve(allocStatsMap.size());
+          for (auto& [category, stats] : allocStatsMap)
+          {
+            if (!UI::IsMatchingSearch(category, searchedString))
+            {
+              continue;
+            }
+            
+            sortedEntries.push_back({ category, stats.TotalAllocated - stats.TotalFreed });
+          }
+          
+          std::sort(sortedEntries.begin(), sortedEntries.end(), [](auto& a, auto& b) { return a.Size > b.Size; });
+          
+          for (const auto& entry : sortedEntries)
+          {
+            std::string usageStr = StringUtils::BytesToString(entry.Size);
+            
+            if (const char* slash = strstr(entry.Category, "/"))
+            {
+              std::string tag = slash;
+              auto lastSlash = tag.find_last_of("/");
+              if (lastSlash != std::string::npos)
+              {
+                tag = tag.substr(lastSlash + 1, tag.size() - lastSlash);
+              }
+              ImGui::TextColored(ImVec4(0.3f, 0.4f, 0.9f, 1.0f), "%s: %s", tag.c_str(), usageStr.c_str());
+            }
+            else
+            {
+              const char* category = entry.Category;
+              if (category = strstr(entry.Category, "class"); category)
+              {
+                category += 6;
+              }
+              ImGui::Text("%s: %s", category, usageStr.c_str());
+              
+            }
+          }
+#else
+          ImGui::TextColored(ImVec4(0.9f, 0.35f, 0.3f, 1.0f), "Memory is not being tracked because IK_TRACK_MEMORY is not defined!");
+#endif
+          ImGui::Separator();
+          ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Renderer Stats"))
+        {
+          const auto& stats = RendererStatistics::Get();
+          
+          ImGui::Text("Renderer General Stats");
+          ImGui::Text("Draw Calls            : %d", stats.drawCalls);
+          ImGui::Text("Vertex Count          : %d", stats.vertexCount);
+          ImGui::Text("Vertex Buffer Size    : %d B", stats.vertexBufferSize);
+          ImGui::Text("Index Count           : %d B", stats.indexCount);
+          ImGui::Text("Index Buffer Size     : %d B", stats.indexBufferSize);
+          ImGui::Text("Texture Buffer Size   : %d B", stats.textureBufferSize);
+          
+          ImGui::Separator();
+          ImGui::Text("Renderer 2D Stats");
+          ImGui::Text("Quads in this batch   : %d", stats._2d.quads);
+          ImGui::Text("Max Quad Per Batch    : %d", stats._2d.maxQuads);
+          ImGui::Text("Circles in this batch : %d", stats._2d.circles);
+          ImGui::Text("Max Circles Per Batch : %d", stats._2d.maxCircles);
+          ImGui::Text("Lines in this batch   : %d", stats._2d.lines);
+          ImGui::Text("Max Lines Per Batch   : %d", stats._2d.maxLines);
+          ImGui::Text("Chars in this batch   : %d", stats._2d.chars);
+          ImGui::Text("Max Char Per Batch    : %d", 16);
+          
+          ImGui::Separator();
+          ImGui::EndTabItem();
+        }
         ImGui::EndTabBar();
       }
     }

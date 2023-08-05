@@ -128,15 +128,18 @@ namespace IKan
   void TextRenderer::EndBatch()
   {
     uint32_t dataSize = (uint32_t)((uint8_t*)s_textData->vertexBufferPtr - (uint8_t*)s_textData->vertexBufferBasePtr);
-    s_textData->vertexBuffer->SetData( s_textData->vertexBufferBasePtr, dataSize);
-    
-    // Render the Scene
-    s_textData->shader->Bind();
-    for (int j = 0; j < s_textData->numSlotsUsed; j ++)
+    if (dataSize > 0)
     {
-      s_textData->charTextures[j]->Bind(j);
+      s_textData->vertexBuffer->SetData( s_textData->vertexBufferBasePtr, dataSize);
+      
+      // Render the Scene
+      s_textData->shader->Bind();
+      for (int j = 0; j < s_textData->numSlotsUsed; j ++)
+      {
+        s_textData->charTextures[j]->Bind(j);
+      }
+      Renderer::DrawArrays(s_textData->pipeline, 6 * s_textData->numSlotsUsed);
     }
-    Renderer::DrawArrays(s_textData->pipeline, 6 * s_textData->numSlotsUsed);
   }
   
   void TextRenderer::NextBatch()
