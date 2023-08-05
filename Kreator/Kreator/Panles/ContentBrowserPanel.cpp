@@ -74,4 +74,34 @@ namespace Kreator
     IK_ASSERT(index >= 0 && index < m_selections.size());
     return m_selections[index];
   }
+  
+  // Content Browser Item List -------------------------------------------------------------------------------------------
+  void ContentBrowserItemList::Clear()
+  {
+    items.clear();
+  }
+  void ContentBrowserItemList::Erase(AssetHandle handle)
+  {
+    size_t index = FindItem(handle);
+    if (index == InvalidItem)
+    {
+      return;
+    }
+    
+    auto it = items.begin() + index;
+    items.erase(it);
+  }
+  
+  size_t ContentBrowserItemList::FindItem(AssetHandle handle) const
+  {
+    for (size_t i = 0; i < items.size(); i++)
+    {
+      if (items[i]->GetID() == handle)
+      {
+        return i;
+      }
+    }
+    return InvalidItem;
+  }
+  
 } // namespace IKan
