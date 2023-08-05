@@ -142,8 +142,62 @@ namespace Kreator
   
   void ContentBrowserPanel::OnImGuiRender(bool &isOpen)
   {
-    IK_ASSERT(false);
+    ImGui::Begin("Content Browser", &isOpen, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar);
+    {
+      m_isHovered = ImGui::IsWindowHovered(ImGuiHoveredFlags_RootAndChildWindows);
+      m_isFocused = ImGui::IsWindowFocused(ImGuiFocusedFlags_RootAndChildWindows);
+      
+      UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
+      UI::ScopedStyle padding(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 4.0f));
+      UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(10.0f, 2.0f));
+      UI::ScopedStyle rouning(ImGuiStyleVar_FrameRounding, 15);
+      
+      ImGuiTableFlags tableFlags = ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV;
+      UI::PushID();
+      if (ImGui::BeginTable(UI::GenerateID(), 2 /* Num Columns */, tableFlags, ImVec2(0.0f, 0.0f)))
+      {
+        ImGui::TableSetupColumn("Outliner", 0, 300.0f);
+        ImGui::TableSetupColumn("Directory Structure", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableNextRow();
+        
+        // Content Outliner
+        ImGui::TableSetColumnIndex(0);
+        ImGui::BeginChild("##folders_common");
+        {
+          UI::ScopedColor header(ImGuiCol_Header, UI::Theme::Color::PropertyField);
+          if (ImGui::CollapsingHeader("Content", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
+          {
+            UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+            UI::ScopedColorStack itemBg(ImGuiCol_Header, IM_COL32_DISABLE, ImGuiCol_HeaderActive, IM_COL32_DISABLE);
 
+            if (m_baseDirectory)
+            {
+              std::vector<Ref<DirectoryInfo>> directories;
+              directories.reserve(m_baseDirectory->subDirectories.size());
+              for (auto& [handle, directory] : m_baseDirectory->subDirectories)
+              {
+                directories.emplace_back(directory);
+              }
+              
+              std::sort(directories.begin(), directories.end(), [](const auto& a, const auto& b)
+                        {
+                return a->filePath.stem().string() < b->filePath.stem().string();
+              });
+              
+              for (auto& directory : directories)
+              {
+                RenderDirectoryHierarchy(directory);
+              }
+            }
+          }
+        }
+        ImGui::EndChild(); // folders_common
+        
+        ImGui::EndTable();
+      }
+      UI::PopID();
+    }
+    ImGui::End();
   }
   
   void ContentBrowserPanel::RenderDeleteDialogue()
@@ -165,8 +219,139 @@ namespace Kreator
   
   void ContentBrowserPanel::RenderDirectoryHierarchy(Ref<DirectoryInfo> &directory)
   {
-    IK_ASSERT(false);
+    std::string name = directory->filePath.filename().string();
+    std::string id = name + "_TreeNode";
+    bool previousState = ImGui::TreeNodeBehaviorIsOpen(ImGui::GetID(id.c_str()));
 
+    // ImGui item height hack
+    auto* window = ImGui::GetCurrentWindow();
+    window->DC.CurrLineSize.y = 20.0f;
+    window->DC.CurrLineTextBaseOffset = 3.0f;
+
+    // Window Item Rectangle area
+    const ImRect itemRect =
+    {
+      window->WorkRect.Min.x, window->DC.CursorPos.y,
+      window->WorkRect.Max.x, window->DC.CursorPos.y + window->DC.CurrLineSize.y
+    };
+
+    // Lamda to check is item clicked
+    const bool isItemClicked = [&itemRect, &id]
+    {
+      if (ImGui::ItemHoverable(itemRect, ImGui::GetID(id.c_str())))
+      {
+        return ImGui::IsMouseDown(ImGuiMouseButton_Left) or ImGui::IsMouseReleased(ImGuiMouseButton_Left);
+      }
+      return false;
+    }();
+
+    const bool isWindowFocused = ImGui::IsWindowFocused();
+
+    // Fill with light selection colour if any of the child entities selected
+    auto checkIfAnyDescendantSelected = [&](Ref<DirectoryInfo>& directory, auto isAnyDescendantSelected) -> bool
+    {
+      if (directory->handle == m_currentDirectory->handle)
+      {
+        return true;
+      }
+      
+      if (!directory->subDirectories.empty())
+      {
+        for (auto& [childHandle, childDir] : directory->subDirectories)
+        {
+          if (isAnyDescendantSelected(childDir, isAnyDescendantSelected))
+          {
+            return true;
+          }
+        }
+      }
+      
+      return false;
+    };
+
+    // Lamda to fill the item with color
+    auto fillWithColour = [&](const ImColor& colour)
+    {
+      const ImU32 bgColour = ImGui::ColorConvertFloat4ToU32(colour);
+      ImGui::GetWindowDrawList()->AddRectFilled(itemRect.Min, itemRect.Max, bgColour);
+    };
+
+    const bool isAnyDescendantSelected = checkIfAnyDescendantSelected(directory, checkIfAnyDescendantSelected);
+    const bool isActiveDirectory = directory->handle == m_currentDirectory->handle;
+
+    ImGuiTreeNodeFlags flags = (isActiveDirectory ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_SpanFullWidth;
+
+    // Fill background
+    //----------------
+    if (isActiveDirectory or isItemClicked)
+    {
+      if (isWindowFocused)
+      {
+        fillWithColour(Kreator_UI::Color::Selection);
+      }
+      else
+      {
+        const ImColor col = UI::ColorWithMultipliedValue(Kreator_UI::Color::Selection, 0.8f);
+        fillWithColour(UI::ColorWithMultipliedSaturation(col, 0.7f));
+      }
+      
+      ImGui::PushStyleColor(ImGuiCol_Text, UI::Theme::Color::BackgroundDark);
+    }
+    else if (isAnyDescendantSelected)
+    {
+      fillWithColour(Kreator_UI::Color::SelectionMuted);
+    }
+
+    // Tree Node
+    //----------
+    bool open = UI::TreeNode(id, name, flags, m_folderIcon);
+    
+    if (isActiveDirectory or isItemClicked)
+    {
+      ImGui::PopStyleColor();
+    }
+    
+    // Fixing slight overlap
+    UI::ShiftCursorY(3.0f);
+
+    // Draw children
+    //--------------
+    if (open)
+    {
+      std::vector<Ref<DirectoryInfo>> directories;
+      directories.reserve(m_baseDirectory->subDirectories.size());
+      for (auto& [handle, directory] : directory->subDirectories)
+      {
+        directories.emplace_back(directory);
+      }
+      
+      std::sort(directories.begin(), directories.end(), [](const auto& a, const auto& b)
+                {
+        return a->filePath.stem().string() < b->filePath.stem().string();
+      });
+      
+      for (auto& child : directories)
+      {
+        RenderDirectoryHierarchy(child);
+      }
+    }
+
+    // Drop the Favourit folders
+    UpdateDropArea(directory);
+
+    if (open != previousState and !isActiveDirectory)
+    {
+      if (!ImGui::IsMouseDragging(ImGuiMouseButton_Left, 0.01f))
+      {
+        ChangeDirectory(directory);
+      }
+    }
+
+    // Close Popup
+    if (open)
+    {
+      ImGui::TreePop();
+    }
   }
   
   void ContentBrowserPanel::RenderTopBar(float height)
@@ -177,7 +362,6 @@ namespace Kreator
   
   void ContentBrowserPanel::OnEvent(Event &e)
   {
-    IK_ASSERT(false);
 
   }
   
@@ -361,7 +545,11 @@ namespace Kreator
   
   void ContentBrowserPanel::UpdateDropArea(const Ref<DirectoryInfo>& target)
   {
-    IK_ASSERT(false);
+    if (target->handle != m_currentDirectory->handle and ImGui::BeginDragDropTarget())
+    {
+      // TODO: Implement  
+      IK_ASSERT(false);
+    }
   }
   
   void ContentBrowserPanel::OnBrowseBack()
