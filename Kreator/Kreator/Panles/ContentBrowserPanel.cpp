@@ -212,8 +212,67 @@ namespace Kreator
           ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
           RenderTopBar(topBarHeight);
           ImGui::PopStyleVar();
+          ImGui::Separator();
+          
+          ImGui::BeginChild("Main Area");
+          {
+            ImGui::PushStyleColor(ImGuiCol_Button, ImVec4(0.0f, 0.0f, 0.0f, 0.0f));
+            ImGui::PushStyleColor(ImGuiCol_ButtonHovered, ImVec4(0.3f, 0.3f, 0.3f, 0.35f));
+            ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(4.0f, 4.0f));
+
+            // Right click Menu --------------------------------------------------------------------------------------
+            if (ImGui::BeginPopupContextWindow(0))
+            {
+              if (ImGui::BeginMenu("New"))
+              {
+                if (ImGui::MenuItem("Folder"))
+                {
+                  bool created = Utils::FileSystem::CreateDirectory(Project::GetAssetDirectory() / m_currentDirectory->filePath / "New Folder");
+                  if (created)
+                  {
+                    Refresh();
+                    const auto& directoryInfo = GetDirectory(m_currentDirectory->filePath / "New Folder");
+                    size_t index = m_currentItems.FindItem(directoryInfo->handle);
+                    
+                    if (index != ContentBrowserItemList::InvalidItem)
+                    {
+                      m_currentItems[index]->StartRenaming();
+                    }
+                  }
+                }
+                ImGui::EndMenu();
+              }
+              
+              ImGui::Separator();
+              if (ImGui::MenuItem("Refresh"))
+              {
+                Refresh();
+              }
+              
+              ImGui::Separator();
+              if (ImGui::MenuItem("Copy", "Ctrl+C", nullptr, m_selectionStack.SelectionCount() > 0))
+              {
+                m_copiedAssets.CopyFrom(m_selectionStack);
+              }
+              
+              if (ImGui::MenuItem("Paste", "Ctrl+V", nullptr, m_copiedAssets.SelectionCount() > 0))
+              {
+                PasteCopiedAssets();
+              }
+              
+              if (ImGui::MenuItem("Duplicate", "Ctrl+D", nullptr, m_selectionStack.SelectionCount() > 0))
+              {
+                m_copiedAssets.CopyFrom(m_selectionStack);
+                PasteCopiedAssets();
+              }
+              ImGui::EndPopup(); // Right click
+            }
+            ImGui::PopStyleVar(); // ItemSpacing
+
+            ImGui::PopStyleColor(2);
+          }
+          ImGui::EndChild(); // Main Area
         }
-        
         ImGui::EndChild(); // directory_structure
         ImGui::EndTable();
       }
