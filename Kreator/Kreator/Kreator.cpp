@@ -9,6 +9,7 @@
 #include "RendererLayer.hpp"
 #include "FolderExplorer.hpp"
 #include "Widget.hpp"
+#include "ApplicationSettings.hpp"
 
 namespace Kreator
 {  
@@ -108,6 +109,7 @@ namespace Kreator
       // Should get initialized after layer initialize
       FolderExplorer::Initialize();
       Kreator_UI::Widgets::Initialize();
+      ApplicationSettingsSerializer::Initialize();
     }
     
     void OnShutdown() override
