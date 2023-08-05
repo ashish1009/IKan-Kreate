@@ -6,6 +6,7 @@
 //
 
 #include "ContentBrowserPanel.hpp"
+#include "RendererLayer.hpp"
 
 namespace Kreator
 {
@@ -106,9 +107,37 @@ namespace Kreator
     return InvalidItem;
   }
   
+  // Content Browser Panel -------------------------------------------------------------------------------------------
+  namespace CBP_Utils
+  {
+    /// Get Full Content browser panel path
+    /// - Parameter file_name: file name
+    Ref<Image> AssetPath(const std::string& fileName)
+    {
+      return Image::Create(RendererLayer::GetClientResorucePath() / "Textures/CBP" / fileName);
+    }
+  } // namespace CBP_Utils
+  
   ContentBrowserPanel::ContentBrowserPanel()
   {
-    IK_ASSERT(false);
+    IK_LOG_TRACE("ContentBrowserPanel", "Initialising Content Browser Panel Textures");
+    s_instance = this;
+    
+    m_shadowTexture = CBP_Utils::AssetPath("Shadow.png");
+    
+    m_fileTex = CBP_Utils::AssetPath("File.png");
+    m_folderIcon = CBP_Utils::AssetPath("Folder.png");
+    
+    m_backButton = CBP_Utils::AssetPath("Back.png");
+    m_forwardButton = CBP_Utils::AssetPath("Forward.png");
+    m_refreshIcon = CBP_Utils::AssetPath("Refresh.png");
+    
+    m_assetIconMap[".png"] = CBP_Utils::AssetPath("Png.png");
+    m_assetIconMap[".ttf"] = CBP_Utils::AssetPath("Font.png");
+    m_assetIconMap[".ttc"] = m_assetIconMap.at(".ttf");
+    m_assetIconMap[".otf"] = m_assetIconMap.at(".ttf");
+    
+    m_assetIconMap[".ikscene"] = CBP_Utils::AssetPath("IKScene.png");
   }
   
   void ContentBrowserPanel::OnImguiRender(bool &isOpen)

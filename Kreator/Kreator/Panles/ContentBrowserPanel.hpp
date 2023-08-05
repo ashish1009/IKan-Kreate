@@ -156,11 +156,11 @@ namespace Kreator
     
     Ref<Project> m_project;
     
-    Ref<Texture> m_fileTex;
-    Ref<Texture> m_folderIcon;
-    Ref<Texture> m_shadowTexture;
-    Ref<Texture> m_backButton, m_forwardButton, m_refreshIcon;
-    std::map<std::string, Ref<Texture>> m_assetIconMap;
+    Ref<Image> m_fileTex;
+    Ref<Image> m_folderIcon;
+    Ref<Image> m_shadowTexture;
+    Ref<Image> m_backButton, m_forwardButton, m_refreshIcon;
+    std::map<std::string, Ref<Image>> m_assetIconMap;
     
     std::unordered_map<AssetHandle, Ref<DirectoryInfo>> m_directories;
     std::vector<Ref<DirectoryInfo>> m_breadCrumbData;

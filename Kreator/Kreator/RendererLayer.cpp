@@ -10,6 +10,7 @@
 #include "KreatorConsolePanel.hpp"
 #include "ProjectSettingPanel.hpp"
 #include "AssetPanel.hpp"
+#include "ContentBrowserPanel.hpp"
 
 extern std::string IKanVersion;
 
@@ -25,6 +26,7 @@ if (!Project::GetActive()) return
 #define CONSOLE_PANEL_ID "EditorConsolePanel"
 #define PROJECT_SETTING_PANEL_ID "ProjectSetting"
 #define ASSET_MANAGER_PANEL_ID "Assets"
+#define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 
   namespace KreatorUtils
   {
@@ -182,6 +184,7 @@ if (!Project::GetActive()) return
     // Adding Panels
     m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Settings", true);
     m_panels.AddPanel<AssetPanel>(ASSET_MANAGER_PANEL_ID, "Assets", true);
+    m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
 #ifdef DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
