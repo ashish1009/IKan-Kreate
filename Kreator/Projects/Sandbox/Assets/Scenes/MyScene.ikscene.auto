@@ -1,3 +1,66 @@
 Scene: MyScene
 Entities:
-  []
+  - Entity: 632026479486890133
+    TagComponent:
+      Tag: Quad
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 1, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    QuadComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 0
+      TilingFactor: 1
+  - Entity: 1792102014972076567
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1, 1, -2]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 1
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+  - Entity: 4651200655341179947
+    TagComponent:
+      Tag: Circle
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1, 1, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CircleComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 0
+      TilingFactor: 1
+      Thickness: 1
+      Fade: 0.00499999989
+  - Entity: 15324785408769349701
+    TagComponent:
+      Tag: Text
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1, -2, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    TextComponent:
+      TextString: Text
+      FontHandle: 9767082020768651577
+      Color: [1, 1, 1, 1]

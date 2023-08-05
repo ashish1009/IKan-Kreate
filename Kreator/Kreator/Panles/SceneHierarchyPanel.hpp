@@ -45,6 +45,26 @@ namespace Kreator
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle
     void OnExternalEntityDestroyed(Entity entity);
+    /// This function render the hierachy of scene
+    void RenderHierarchy();
+    /// This funciton renders the Entity Hierarchy
+    /// - Parameters:
+    ///   - entity entity handle
+    ///   - searchFilter swearch filter
+    void DrawEntityNode(Entity entity, const std::string& searchFilter);
+    /// This function create menue for entiyt
+    void DrawEntityCreateMenu(Entity parent = {});
+
+    /// This function is the callback for external entity destroy
+    /// - Parameter entity entity handle
+    void OnEntityDestroyed(Entity entity);
+
+    /// This function search the entity string recursivly for childs too
+    /// - Parameters:
+    ///   - entity: entity handle
+    ///   - searchFilter: search filter
+    ///   - maxSearchDepth: max depth
+    bool TagSearchRecursive(Entity entity, std::string_view searchFilter, uint32_t maxSearchDepth, uint32_t currentDepth = 1);
 
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;

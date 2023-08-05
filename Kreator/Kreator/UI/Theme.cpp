@@ -12,7 +12,7 @@ namespace Kreator_UI
   void SetDarkTheme()
   {
     IKan::UI::Theme::Color::Text                 = IM_COL32(222, 222, 222, 255);
-    IKan::UI::Theme::Color::Titlebar             = IM_COL32(45, 45, 60, 255);
+    IKan::UI::Theme::Color::Titlebar             = IM_COL32(45, 45, 55, 255);
     IKan::UI::Theme::Color::Background           = IM_COL32(28, 28, 33, 255);
     IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(63, 73, 87, 255);
     IKan::UI::Theme::Color::BackgroundDark       = IM_COL32(21, 21, 21, 255);
@@ -106,9 +106,9 @@ namespace Kreator_UI
     // Table
     colors[ImGuiCol_TableHeaderBg]          = ImGui::ColorConvertU32ToFloat4(IKan::UI::Theme::Color::GroupHeader);
     colors[ImGuiCol_TableBorderLight]       = ImGui::ColorConvertU32ToFloat4(IKan::UI::Theme::Color::BackgroundDark);
-    colors[ImGuiCol_TableBorderStrong]      = ImVec4(1.0f, 0.0, 0.0, 1.0f);
-    colors[ImGuiCol_TableRowBg]             = ImVec4(1.0f, 0.0, 0.0, 1.0f);
-    colors[ImGuiCol_TableRowBgAlt]          = ImVec4(1.0f, 0.0, 0.0, 1.0f);
+    colors[ImGuiCol_TableBorderStrong]      = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
+    colors[ImGuiCol_TableRowBg]             = ImGui::ColorConvertU32ToFloat4(IKan::UI::Theme::Color::Titlebar);
+    colors[ImGuiCol_TableRowBgAlt]          = ImVec4(1.2f, 0.2f, 0.3f, 1.0f);
     
     // Drag Drop
     colors[ImGuiCol_DragDropTarget]         = ImVec4(1.0f, 1.0f, 0.0f, 0.9f);

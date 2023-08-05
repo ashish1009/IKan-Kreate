@@ -456,4 +456,9 @@ namespace IKan
   {
     return m_name;
   }
+  
+  entt::registry& Scene::GetRegistry()
+  {
+    return m_registry;
+  }
 } // namespace IKan

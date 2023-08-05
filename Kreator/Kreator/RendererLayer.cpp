@@ -247,7 +247,7 @@ if (!Project::GetActive()) return
     m_editorCamera.OnUpdate(ts);
 
     Renderer2D::BeginRenderPass();
-    Renderer::Clear({0.12f, 0.12f, 0.18f, 1.0f});
+    Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
       
     m_editorScene->OnUpdateEditor(ts);
     m_editorScene->OnRenderEditor(m_editorCamera);
@@ -551,6 +551,23 @@ if (!Project::GetActive()) return
     UpdateWindowTitle(path.filename().string());
     
     m_panels.SetSceneContext(m_currentScene);
+    
+    auto quad = m_editorScene->CreateEntity("Quad");
+    quad.GetComponent<TransformComponent>().UpdatePosition({0, 1, 0});
+    quad.AddComponent<QuadComponent>();
+    
+    auto circle = m_editorScene->CreateEntity("Circle");
+    circle.GetComponent<TransformComponent>().UpdatePosition({1, 1, 0});
+    circle.AddComponent<CircleComponent>();
+
+    auto camera = m_editorScene->CreateEntity("Camera");
+    camera.GetComponent<TransformComponent>().UpdatePosition({1, 1, -2});
+    camera.AddComponent<CameraComponent>();
+
+    auto text = m_editorScene->CreateEntity("Text");
+    text.GetComponent<TransformComponent>().UpdatePosition({1, -2, 0});
+    text.AddComponent<TextComponent>();
+
   }
 
   void RendererLayer::OpenScene()

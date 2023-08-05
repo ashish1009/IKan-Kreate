@@ -112,6 +112,9 @@ namespace IKan
     /// This function returns the scene name
     const std::string& GetName() const;
 
+    /// This function returns the reference of registry
+    entt::registry& GetRegistry();
+    
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
     ///   - name: Name of Scene
