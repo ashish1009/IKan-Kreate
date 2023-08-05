@@ -1051,6 +1051,7 @@ if (!Project::GetActive()) return
 
     UI::ScopedColor bgCol(ImGuiCol_ChildBg, UI::Theme::Color::BackgroundPopup);
     UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 15.0f));
+    UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, 10);
 
     if (ImGui::BeginPopupModal("Welcome Screen", nullptr,
                                ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar

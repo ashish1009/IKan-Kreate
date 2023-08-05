@@ -814,4 +814,4 @@ namespace Kreator_UI
     
     return modified;
   }
-} // namespace IKan::UI
+} // namespace Kreator_UI

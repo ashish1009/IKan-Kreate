@@ -11,6 +11,8 @@
 		B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21048152A72A1BA00FA8CF2 /* CoreWindow.hpp */; };
 		B210481E2A72CA9000FA8CF2 /* MacWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B210481C2A72CA9000FA8CF2 /* MacWindow.cpp */; };
 		B210481F2A72CA9000FA8CF2 /* MacWindow.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B210481D2A72CA9000FA8CF2 /* MacWindow.hpp */; };
+		B210631C2A7E20D100A28BA0 /* AssetEdtitor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B210631A2A7E20D100A28BA0 /* AssetEdtitor.cpp */; };
+		B210631D2A7E20D100A28BA0 /* AssetEdtitor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B210631B2A7E20D100A28BA0 /* AssetEdtitor.hpp */; };
 		B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA2F2A728EB9009EED1F /* KeyCodes.h */; };
 		B21FAA382A728F4D009EED1F /* Event.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA362A728F4D009EED1F /* Event.h */; };
 		B21FAA3D2A729078009EED1F /* KeyEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA3B2A729078009EED1F /* KeyEvent.h */; };
@@ -196,6 +198,8 @@
 		B21048152A72A1BA00FA8CF2 /* CoreWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CoreWindow.hpp; sourceTree = "<group>"; };
 		B210481C2A72CA9000FA8CF2 /* MacWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MacWindow.cpp; sourceTree = "<group>"; };
 		B210481D2A72CA9000FA8CF2 /* MacWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MacWindow.hpp; sourceTree = "<group>"; };
+		B210631A2A7E20D100A28BA0 /* AssetEdtitor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetEdtitor.cpp; sourceTree = "<group>"; };
+		B210631B2A7E20D100A28BA0 /* AssetEdtitor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetEdtitor.hpp; sourceTree = "<group>"; };
 		B21FAA2F2A728EB9009EED1F /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
 		B21FAA322A728EFC009EED1F /* MouseCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseCodes.h; sourceTree = "<group>"; };
 		B21FAA362A728F4D009EED1F /* Event.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Event.h; sourceTree = "<group>"; };
@@ -852,6 +856,7 @@
 				B26B1A782A7D18AF00676419 /* EditorConsoleMessage.hpp */,
 				B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */,
 				B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */,
+				B210631B2A7E20D100A28BA0 /* AssetEdtitor.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -863,6 +868,7 @@
 				B26B1A772A7D18AF00676419 /* EditorConsoleMessage.cpp */,
 				B26B1A7F2A7D18DE00676419 /* EditorConsoleSink.cpp */,
 				B26B1A932A7D1C2900676419 /* EditorConsolePanel.cpp */,
+				B210631A2A7E20D100A28BA0 /* AssetEdtitor.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -899,6 +905,7 @@
 				B23365432A74D76C00BC7B8B /* stb_image.h in Headers */,
 				B23365152A74381300BC7B8B /* OpenGLRendererBuffers.hpp in Headers */,
 				B2336A5F2A763B4300BC7B8B /* HashGenerator.hpp in Headers */,
+				B210631D2A7E20D100A28BA0 /* AssetEdtitor.hpp in Headers */,
 				B233652B2A7440CD00BC7B8B /* Camera.hpp in Headers */,
 				B233653F2A74D49600BC7B8B /* OpenGLTexture.hpp in Headers */,
 				B24077192A72651400221919 /* Common.hpp in Headers */,
@@ -1061,6 +1068,7 @@
 				B23364EA2A74294400BC7B8B /* StringUtils.cpp in Sources */,
 				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B23364D82A74253900BC7B8B /* RendererAPI.cpp in Sources */,
+				B210631C2A7E20D100A28BA0 /* AssetEdtitor.cpp in Sources */,
 				B23365562A7503CA00BC7B8B /* OpenGLFrameBuffer.cpp in Sources */,
 				B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */,
 				B2B63F212A779E820056ED4E /* ImGuiTheme.cpp in Sources */,

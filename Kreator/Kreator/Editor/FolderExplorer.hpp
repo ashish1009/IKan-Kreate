@@ -43,4 +43,4 @@ namespace Kreator
     ///   - basePath: Base Folder Explorer Patg
     static void PopupImpl(const std::filesystem::path& basePath, bool *lastPopupFlad = nullptr);
   };
-} // namespace IKan
+} // namespace Kreator
