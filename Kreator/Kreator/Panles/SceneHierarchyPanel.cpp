@@ -54,6 +54,30 @@ namespace Kreator
     {
       ImRect windowRect = { ImGui::GetWindowContentRegionMin(), ImGui::GetWindowContentRegionMax() };
       RenderHierarchy();
+      
+      if (ImGui::BeginDragDropTargetCustom(windowRect, ImGui::GetCurrentWindow()->ID))
+      {
+        const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("scene_entity_hierarchy", ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
+        
+        if (payload)
+        {
+          Entity& entity = *(Entity*)payload->Data;
+          m_context->UnparentEntity(entity);
+        }
+        
+        ImGui::EndDragDropTarget();
+      }
+      ImGui::End();
+
+      {
+        UI::ScopedStyle windowPadding(ImGuiStyleVar_WindowPadding, ImVec2(2.0, 4.0f));
+        ImGui::Begin("Properties");
+      }
+      
+      if (m_selectionContext)
+      {
+        DrawComponents(m_selectionContext);
+      }
     }
     
     if (m_isWindow)
@@ -374,6 +398,132 @@ namespace Kreator
     }
   }
   
+  void SceneHierarchyPanel::DrawComponents(Entity entity)
+  {
+    float roundingVal = 15.0f;
+    UI::ScopedStyle rounding (ImGuiStyleVar_FrameRounding, roundingVal);
+
+    ImGui::AlignTextToFramePadding();
+    auto ID = entity.GetComponent<IDComponent>().ID;
+    ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+    UI::ShiftCursor(4.0f, 4.0f);
+
+    bool isHoveringID = false;
+    if (entity.HasComponent<TagComponent>())
+    {
+      const float iconOffset = 3.0f;
+      UI::ShiftCursor(4.0f, iconOffset);
+      UI::Image(s_pencilIcon, ImVec2(s_pencilIcon->GetWidth(), s_pencilIcon->GetHeight()),
+                ImVec2(1.0f, 0.0f), ImVec2(0.0f, 1.0f), ImColor(128, 128, 128, 255).Value);
+
+      ImGui::SameLine(0.0f, 4.0f);
+      UI::ShiftCursorY(-iconOffset);
+
+      auto& tag = entity.GetComponent<TagComponent>().tag;
+      char buffer[256];
+      memset(buffer, 0, 256);
+      memcpy(buffer, tag.c_str(), tag.length());
+      ImGui::PushItemWidth(contentRegionAvailable.x * 0.4f);
+      
+      UI::ScopedStyle frameBorder(ImGuiStyleVar_FrameBorderSize, 0.0f);
+      UI::ScopedColor frameColour(ImGuiCol_FrameBg, IM_COL32(0, 0, 0, 0));
+      UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
+
+      if (ImGui::InputText("##Tag", buffer, 256))
+      {
+        tag = std::string(buffer);
+      }
+      UI::DrawItemActivityOutline(roundingVal, false, Kreator_UI::Color::Accent);
+
+      isHoveringID = ImGui::IsItemHovered();
+
+      ImGui::PopItemWidth();
+    }
+
+    // ID
+    if (isHoveringID)
+    {
+      ImGui::SameLine();
+      ImGui::TextDisabled("%llx", (uint64_t)ID);
+    }
+
+    float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+    ImVec2 textSize = ImGui::CalcTextSize(" ADD        ");
+    textSize.x += GImGui->Style.FramePadding.x * 2.0f;
+    {
+      UI::ScopedColorStack addCompButtonColours(ImGuiCol_Button, IM_COL32(70, 70, 70, 200),
+                                                ImGuiCol_ButtonHovered, IM_COL32(70, 70, 70, 255),
+                                                ImGuiCol_ButtonActive, IM_COL32(70, 70, 70, 150));
+      
+      ImGui::SameLine(contentRegionAvailable.x - (textSize.x + GImGui->Style.FramePadding.x));
+      if (ImGui::Button(" ADD       ", ImVec2(textSize.x + 4.0f, lineHeight + 2.0f)))
+      {
+        ImGui::OpenPopup("AddComponentPanel");
+      }
+
+      const float pad = 4.0f;
+      const float iconWidth = ImGui::GetFrameHeight() - pad * 2.0f;
+      const float iconHeight = iconWidth;
+      ImVec2 iconPos = ImGui::GetItemRectMax();
+      iconPos.x -= iconWidth + pad;
+      iconPos.y -= iconHeight + pad;
+      ImGui::SetCursorScreenPos(iconPos);
+      UI::ShiftCursor(-5.0f, -1.0f);
+
+      UI::Image(s_plusIcon, ImVec2(iconWidth, iconHeight),
+                ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f),
+                ImColor(160, 160, 160, 255).Value);
+    }
+
+    ImGui::Spacing();
+    ImGui::Spacing();
+    ImGui::Spacing();
+
+    AddComponentPopup();
+  }
+  
+  void SceneHierarchyPanel::AddComponentPopup()
+  {
+    UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
+    
+    if (UI::BeginPopup("AddComponentPanel"))
+    {
+      if (!m_selectionContext.HasComponent<CameraComponent>())
+      {
+        if (ImGui::MenuItem("Camera"))
+        {
+          m_selectionContext.AddComponent<CameraComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<QuadComponent>())
+      {
+        if (ImGui::MenuItem("Quad"))
+        {
+          m_selectionContext.AddComponent<QuadComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<CircleComponent>())
+      {
+        if (ImGui::MenuItem("Circle"))
+        {
+          m_selectionContext.AddComponent<CircleComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<TextComponent>())
+      {
+        if (ImGui::MenuItem("Text"))
+        {
+          auto& textComp = m_selectionContext.AddComponent<TextComponent>();
+          textComp.assetHandle = Font::GetDefaultFont()->handle;
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      UI::EndPopup();
+    }
+  }
   void SceneHierarchyPanel::DrawEntityCreateMenu(Entity parent)
   {
     if (!ImGui::BeginMenu("Create"))

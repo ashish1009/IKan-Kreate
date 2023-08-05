@@ -58,6 +58,11 @@ namespace Kreator
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle
     void OnEntityDestroyed(Entity entity);
+    /// This function draw selected component
+    /// - Parameter entity: entity handle
+    void DrawComponents(Entity entity);
+    /// This function shows the add component popup
+    void AddComponentPopup();
 
     /// This function search the entity string recursivly for childs too
     /// - Parameters:
