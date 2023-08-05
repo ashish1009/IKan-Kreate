@@ -551,23 +551,6 @@ if (!Project::GetActive()) return
     UpdateWindowTitle(path.filename().string());
     
     m_panels.SetSceneContext(m_currentScene);
-    
-    auto quad = m_editorScene->CreateEntity("Quad");
-    quad.GetComponent<TransformComponent>().UpdatePosition({0, 1, 0});
-    quad.AddComponent<QuadComponent>();
-    
-    auto circle = m_editorScene->CreateEntity("Circle");
-    circle.GetComponent<TransformComponent>().UpdatePosition({1, 1, 0});
-    circle.AddComponent<CircleComponent>();
-
-    auto camera = m_editorScene->CreateEntity("Camera");
-    camera.GetComponent<TransformComponent>().UpdatePosition({1, 1, -2});
-    camera.AddComponent<CameraComponent>();
-
-    auto text = m_editorScene->CreateEntity("Text");
-    text.GetComponent<TransformComponent>().UpdatePosition({1, -2, 0});
-    text.AddComponent<TextComponent>();
-
   }
 
   void RendererLayer::OpenScene()
@@ -1050,7 +1033,12 @@ if (!Project::GetActive()) return
       });
       
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
-        
+        if (ImGui::MenuItem("Show Wlecome Screen", nullptr, m_userPreferences->showWelcomeScreen))
+        {
+          m_userPreferences->showWelcomeScreen = m_userPreferences->showWelcomeScreen ? false : true;
+          UserPreferencesSerializer serializer(m_userPreferences);
+          serializer.Serialize(m_userPreferences->filePath);
+        }
       });
       
       UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
