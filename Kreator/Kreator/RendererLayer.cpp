@@ -354,6 +354,7 @@ if (!Project::GetActive()) return
     // Dockings
     UI_StartMainWindowDocking();
     UI_Viewport();
+    UI_StatisticsPanel();
     m_panels.OnImGuiRender();
     UI_EndMainWindowDocking();
     
@@ -1469,5 +1470,44 @@ if (!Project::GetActive()) return
       ImGui::EndPopup();
     }
   }
-  
+
+  void RendererLayer::UI_StatisticsPanel()
+  {
+    UI::ScopedFont sameWidth(Kreator_UI::GetFixedWidthFont());
+    if (!m_showStatisticsPanel)
+    {
+      return;
+    }
+
+    if (ImGui::Begin("Statistics"))
+    {
+      UI::ScopedColor windowBg (ImGuiCol_WindowBg, UI::Theme::Color::BackgroundDark);
+      UI::ScopedColor childBg (ImGuiCol_ChildBg, UI::Theme::Color::BackgroundDark);
+
+      ImGuiTabBarFlags tabBarFlags = ImGuiTabBarFlags_None;
+      if (ImGui::BeginTabBar("StatisticsTabs", tabBarFlags))
+      {
+        Application& app = Application::Get();
+        
+        if (ImGui::BeginTabItem("Renderer"))
+        {
+          auto& caps = Renderer::Capabilities::Get();
+          ImGui::Text("Vendor     : %s", caps.vendor.c_str());
+          ImGui::Text("Renderer   : %s", caps.renderer.c_str());
+          ImGui::Text("Version    : %s", caps.version.c_str());
+          
+          ImGui::Separator();
+          ImGui::Text("Frame Time : %.2fms\n", app.GetTimestep().MilliSeconds());
+          ImGui::Text("APP FPS    : %.2fms\n", app.GetTimestep().FPS());
+          ImGui::Text("GUI FPS    : %.2fms\n", ImGui::GetIO().Framerate);
+
+          ImGui::Separator();
+          ImGui::EndTabItem();
+        }
+
+        ImGui::EndTabBar();
+      }
+    }
+    ImGui::End();
+  }
 } // namespace Kreator

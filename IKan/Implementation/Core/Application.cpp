@@ -192,7 +192,10 @@ namespace IKan
   {
     return *(m_window.get());
   }
-
+  TimeStep Application::GetTimestep() const
+  {
+    return m_timeStep;
+  }
   UI::ImGuiLayer& Application::GetImGuiLayer() const
   {
     return *m_imguiLayer.get();

@@ -125,6 +125,8 @@ namespace Kreator
     void UI_MenuBar();
     /// This function renders window buttons
     void UI_WindowButtons();
+    /// This function shows the Statistics Panel
+    void UI_StatisticsPanel();
 
     /// This function shows the Welcome screen
     void UI_WelcomePopup();
@@ -143,6 +145,7 @@ namespace Kreator
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
     bool m_showAboutPopup = false;
+    bool m_showStatisticsPanel = true;
 
     // Applicaiton Icons ---------------------------------
     Ref<Image> m_shadowTexture;
