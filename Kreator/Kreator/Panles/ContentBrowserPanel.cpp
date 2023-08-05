@@ -785,7 +785,22 @@ namespace Kreator
   
   void ContentBrowserPanel::Refresh()
   {
-    IK_ASSERT(false);
+    // Clear the Items
+    m_currentItems.Clear();
+    m_directories.clear();
+    
+    // Process the directories again
+    Ref<DirectoryInfo> currentDirectory = m_currentDirectory;
+    AssetHandle baseDirectoryHandle = ProcessDirectory(m_project->GetAssetDirectory().string(), nullptr);
+    m_baseDirectory = m_directories[baseDirectoryHandle];
+    m_currentDirectory = GetDirectory(currentDirectory->filePath);
+    
+    // Update current durectory
+    if (!m_currentDirectory)
+    {
+      m_currentDirectory = m_baseDirectory; // Our current directory was removed
+    }
+    ChangeDirectory(m_currentDirectory);
   }
   
   ContentBrowserItemList ContentBrowserPanel::Search(const std::string &query, const Ref<DirectoryInfo> &directoryInfo)
