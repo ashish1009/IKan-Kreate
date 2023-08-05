@@ -966,12 +966,14 @@ namespace Kreator
   
   void ContentBrowserPanel::OnBrowseBack()
   {
-    IK_ASSERT(false);
+    m_nextDirectory = m_currentDirectory;
+    m_previousDirectory = m_currentDirectory->parent;
+    ChangeDirectory(m_previousDirectory);
   }
   
   void ContentBrowserPanel::OnBrowseForward()
   {
-    IK_ASSERT(false);
+    ChangeDirectory(m_nextDirectory);
   }
   
   void ContentBrowserPanel::Refresh()
@@ -996,12 +998,115 @@ namespace Kreator
   
   ContentBrowserItemList ContentBrowserPanel::Search(const std::string &query, const Ref<DirectoryInfo> &directoryInfo)
   {
-    IK_ASSERT(false);
+    ContentBrowserItemList results;
+    std::string queryLowerCase = Utils::String::ToLower(query);
+    
+    // Directories
+    for (auto&[handle, subdir] : directoryInfo->subDirectories)
+    {
+      std::string subdirName = subdir->filePath.filename().string();
+      if (subdirName.find(queryLowerCase) != std::string::npos)
+      {
+        results.items.push_back(CreateRef<ContentBrowserDirectory>(subdir, m_folderIcon));
+      }
+      
+      ContentBrowserItemList list = Search(query, subdir);
+      results.items.insert(results.items.end(), list.items.begin(), list.items.end());
+    }
+    
+    // Asset files
+    for (auto& assetHandle : directoryInfo->assets)
+    {
+      auto& asset = AssetManager::GetMetadata(assetHandle);
+      std::string filename = Utils::String::ToLower(asset.filePath.filename().string());
+      
+      if (filename.find(queryLowerCase) != std::string::npos)
+      {
+        // Set the asset texture
+        Ref<Image> assetTexture = m_fileTex;
+        if (m_assetIconMap.find(asset.filePath.extension().string()) != m_assetIconMap.end())
+        {
+          assetTexture = m_assetIconMap[asset.filePath.extension().string()];
+        }
+        
+        // Create Item list for asset
+        m_currentItems.items.push_back(CreateRef<ContentBrowserAsset>(asset, assetTexture));
+      }
+      if (queryLowerCase[0] != '.')
+      {
+        continue;
+      }
+      
+      if (asset.filePath.extension().string().find(std::string(&queryLowerCase[1])) != std::string::npos)
+      {
+        // Set the asset texture
+        Ref<Image> assetTexture = m_fileTex;
+        if (m_assetIconMap.find(asset.filePath.extension().string()) != m_assetIconMap.end())
+        {
+          assetTexture = m_assetIconMap[asset.filePath.extension().string()];
+        }
+        
+        // Create Item list for asset
+        m_currentItems.items.push_back(CreateRef<ContentBrowserAsset>(asset, assetTexture));
+      }
+    }
+    return results;
   }
   
   void ContentBrowserPanel::PasteCopiedAssets()
   {
-    IK_ASSERT(false);
+    if (m_copiedAssets.SelectionCount() == 0)
+    {
+      return;
+    }
+    
+    auto GetUniquePath = [](const std::filesystem::path& fp)
+    {
+      int counter = 0;
+      auto checkFileName = [&counter, &fp](auto checkFileName) -> std::filesystem::path
+      {
+        ++counter;
+        const std::string counterStr = [&counter] {
+          if (counter < 10)
+            return "0" + std::to_string(counter);
+          else
+            return std::to_string(counter);
+        }();
+        
+        std::string basePath = Utils::String::RemoveExtension(fp.string()) + "_" + counterStr + fp.extension().string();
+        if (std::filesystem::exists(basePath))
+          return checkFileName(checkFileName);
+        else
+          return std::filesystem::path(basePath);
+      };
+      
+      return checkFileName(checkFileName);
+    };
+    
+    for (AssetHandle copiedAsset : m_copiedAssets)
+    {
+      const auto& item = m_currentItems[m_currentItems.FindItem(copiedAsset)];
+      auto originalFilePath = Project::GetAssetDirectory();
+      
+      if (item->GetType() == ContentBrowserItem::ItemType::Asset)
+      {
+        originalFilePath /= std::dynamic_pointer_cast<ContentBrowserAsset>(item)->GetAssetInfo().filePath;
+        auto filepath = GetUniquePath(originalFilePath);
+        IK_LOG_VERIFY(!std::filesystem::exists(filepath), "File do not exist");
+        std::filesystem::copy_file(originalFilePath, filepath);
+      }
+      else
+      {
+        originalFilePath /= std::dynamic_pointer_cast<ContentBrowserDirectory>(item)->GetDirectoryInfo()->filePath;
+        auto filepath = GetUniquePath(originalFilePath);
+        IK_LOG_VERIFY(!std::filesystem::exists(filepath), "File do not exist");
+        std::filesystem::copy(originalFilePath, filepath, std::filesystem::copy_options::recursive);
+      }
+    }
+    
+    Refresh();
+    m_selectionStack.Clear();
+    m_copiedAssets.Clear();
   }
   
   void ContentBrowserPanel::UpdateInput()
