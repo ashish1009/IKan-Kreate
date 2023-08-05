@@ -87,6 +87,9 @@ namespace IKan
     /// - Parameter entity: enitty handle
     TransformComponent GetWorldSpaceTransform(Entity entity);
 
+    /// This function set the selected Entity
+    void SetSelectedEntity(entt::entity entity);
+
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion
@@ -135,6 +138,7 @@ namespace IKan
     uint32_t m_numEntities = 0;
     int32_t m_maxEntityID = -1;
     EntityMap m_entityIDMap;
+    entt::entity m_selectedEntity;
 
     std::string m_name = "";
 

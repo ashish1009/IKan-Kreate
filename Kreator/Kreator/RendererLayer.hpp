@@ -108,6 +108,18 @@ namespace Kreator
     /// This function Saves the scene automatically
     void SaveSceneAuto();
 
+    // Scene Panel Manager Callbacks ----------------------
+    /// This function handles the entity selection
+    /// - Parameter entity: entity
+    void OnEntitySelected(Entity entity);
+    /// This function handles the entity deletion
+    /// - Parameter entity: entity
+    void OnEntityDeleted(Entity e);
+
+    /// This function clear the selected Entity
+    /// - Note: To be called inside Render Pass Begin end End
+    void ClearSelectedEntity();
+
     // UI API --------------------------------------------
     /// This functions shows primary Viewport
     void UI_Viewport();
@@ -161,8 +173,13 @@ namespace Kreator
     bool m_showNewScenePopup = false;
     float m_timeSinceLastSave = 0.0f;
     std::string m_sceneFilePath;
-    Ref<Scene> m_editorScene, m_currentScene;
-    
+    Ref<Scene> m_editorScene, m_currentScene, m_runtimeScene, m_simulationScene;
+    struct SelectedSubmesh
+    {
+      Entity entity;
+    };
+    std::vector<SelectedSubmesh> m_selectionContext;
+
     // Project Data --------------------------------------
     bool m_showCreateNewProjectPopup = false;
     std::filesystem::path m_allProjectsPath;

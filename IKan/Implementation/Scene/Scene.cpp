@@ -423,6 +423,11 @@ namespace IKan
     return transformComponent;
   }
   
+  void Scene::SetSelectedEntity(entt::entity entity)
+  {
+    m_selectedEntity = entity;
+  }
+
   void Scene::SetEntityDestroyedCallback(const std::function<void(Entity)>& callback)
   {
     m_onEntityDestroyedCallback = callback;

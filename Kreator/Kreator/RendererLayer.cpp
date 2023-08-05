@@ -12,6 +12,7 @@
 #include "AssetPanel.hpp"
 #include "ContentBrowserPanel.hpp"
 #include "DefaultAssetViewer.hpp"
+#include "SceneHierarchyPanel.hpp"
 
 extern std::string IKanVersion;
 
@@ -28,6 +29,7 @@ if (!Project::GetActive()) return
 #define PROJECT_SETTING_PANEL_ID "ProjectSetting"
 #define ASSET_MANAGER_PANEL_ID "Assets"
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
+#define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
 
   namespace KreatorUtils
   {
@@ -186,6 +188,12 @@ if (!Project::GetActive()) return
     m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Settings", true);
     m_panels.AddPanel<AssetPanel>(ASSET_MANAGER_PANEL_ID, "Assets", true);
     m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
+    Ref<SceneHierarchyPanel> sceneHierarchyPanel = m_panels.AddPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID,
+                                                                                          "Scene Hierarchy", true,
+                                                                                          m_editorScene);
+    sceneHierarchyPanel->SetSelectionChangedCallback([this](Entity entity) { OnEntitySelected(entity); });
+    sceneHierarchyPanel->SetEntityDeletedCallback([this](Entity entity) { OnEntityDeleted(entity); });
+
 #ifdef DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
@@ -514,14 +522,15 @@ if (!Project::GetActive()) return
   void RendererLayer::NewScene(const std::string& name)
   {
     m_editorScene =  Scene::Create(name);
-    UpdateWindowTitle(name);
     m_sceneFilePath = std::string();
     
     m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
     m_currentScene = m_editorScene;
     
     m_panels.SetSceneContext(m_editorScene);
+    UpdateWindowTitle(name);
   }
+  
   void RendererLayer::OpenScene(const std::string& filepath)
   {
     if (!Utils::FileSystem::Exists(filepath))
@@ -578,6 +587,45 @@ if (!Project::GetActive()) return
       serializer.Serialize(m_sceneFilePath + ".auto");
       m_timeSinceLastSave = 0.0f;
     }
+  }
+  
+  void RendererLayer::OnEntitySelected(Entity entity)
+  {
+    if (!entity)
+    {
+      return;
+    }
+    
+    SelectedSubmesh selection;
+    selection.entity = entity;
+    
+    m_selectionContext.clear();
+    m_selectionContext.push_back(selection);
+    
+    if (m_currentScene != m_runtimeScene)
+    {
+      m_currentScene->SetSelectedEntity(entity);
+    }
+  }
+  void RendererLayer::OnEntityDeleted(Entity e)
+  {
+    if (m_selectionContext.size() == 0 or m_selectionContext[0].entity != e)
+    {
+      return;
+    }
+    ClearSelectedEntity();
+  }
+
+  void RendererLayer::ClearSelectedEntity()
+  {
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity({});
+
+    if (m_currentScene)
+    {
+      m_currentScene->SetSelectedEntity({});
+    }
+    
+    m_selectionContext.clear();
   }
 
   // UI APIS ---------------------------------------------------------------------------------------------------------
