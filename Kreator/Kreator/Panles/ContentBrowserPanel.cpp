@@ -449,6 +449,49 @@ namespace Kreator
         UI::ShiftCursorY(-2.0f);
       }
 
+      if (m_updateNavigationPath)
+      {
+        m_breadCrumbData.clear();
+        
+        Ref<DirectoryInfo> current = m_currentDirectory;
+        while (current && current->parent != nullptr)
+        {
+          m_breadCrumbData.push_back(current);
+          current = current->parent;
+        }
+        
+        std::reverse(m_breadCrumbData.begin(), m_breadCrumbData.end());
+        m_updateNavigationPath = false;
+      }
+      
+      // Breadcrumbs
+      {
+        UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
+        UI::ScopedColor textColour(ImGuiCol_Text, Kreator_UI::Color::TextDarker);
+        
+        const std::string& assetsDirectoryName = m_project->GetConfig().assetDirectory;
+        ImVec2 textSize = ImGui::CalcTextSize(assetsDirectoryName.c_str());
+        const float textPadding = ImGui::GetStyle().FramePadding.y;
+        if (ImGui::Selectable(assetsDirectoryName.c_str(), false, 0, ImVec2(textSize.x, textSize.y + textPadding)))
+        {
+          ChangeDirectory(m_baseDirectory);
+        }
+        UpdateDropArea(m_baseDirectory);
+        
+        for (auto& directory : m_breadCrumbData)
+        {
+          ImGui::Text("/");
+          
+          std::string directoryName = directory->filePath.filename().string();
+          ImVec2 textSize = ImGui::CalcTextSize(directoryName.c_str());
+          if (ImGui::Selectable(directoryName.c_str(), false, 0, ImVec2(textSize.x, textSize.y + textPadding)))
+          {
+            ChangeDirectory(directory);
+          }
+          UpdateDropArea(directory);
+        }
+      }
+
     }
     ImGui::EndHorizontal();
     ImGui::EndChild();
