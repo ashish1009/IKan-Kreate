@@ -168,4 +168,32 @@ namespace Kreator
   {
     IK_ASSERT(false);
   }
+  
+  ContentBrowserAsset::ContentBrowserAsset(const AssetMetadata& assetInfo, const Ref<Texture>& icon)
+  : ContentBrowserItem(ContentBrowserItem::ItemType::Asset, assetInfo.handle, assetInfo.filePath.stem().string(), icon),
+  m_assetInfo(assetInfo)
+  {
+    
+  }
+  
+  void ContentBrowserAsset::Delete()
+  {
+    IK_ASSERT(false);
+  }
+  
+  bool ContentBrowserAsset::Move(const std::filesystem::path& destination)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserAsset::Activate(CBItemActionResult& actionResult)
+  {
+    IK_ASSERT(false);
+  }
+  
+  void ContentBrowserAsset::OnRenamed(const std::string& newName)
+  {
+    IK_ASSERT(false);
+  }
+
 } // namespace Kreator

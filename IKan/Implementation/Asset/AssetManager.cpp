@@ -377,6 +377,4 @@ namespace IKan
     }
     return metadata.isDataLoaded;
   }
-  
-  
 } // namespace IKan
