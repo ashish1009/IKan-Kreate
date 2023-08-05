@@ -7,6 +7,7 @@
 
 #include "ContentBrowserPanel.hpp"
 #include "RendererLayer.hpp"
+#include "Widget.hpp"
 
 namespace Kreator
 {
@@ -428,6 +429,26 @@ namespace Kreator
         
         ImGui::Spring(-1.0f, edgeOffset * 2.0f);
       }
+      
+      // Search
+      {
+        UI::ShiftCursorY(2.0f);
+        ImGui::SetNextItemWidth(200);
+        if (Kreator_UI::Widgets::SearchWidget(m_searchBuffer, MAX_INPUT_BUFFER_LENGTH))
+        {
+          if (strlen(m_searchBuffer) == 0)
+          {
+            ChangeDirectory(m_currentDirectory);
+          }
+          else
+          {
+            m_currentItems = Search(m_searchBuffer, m_currentDirectory);
+            SortItemList();
+          }
+        }
+        UI::ShiftCursorY(-2.0f);
+      }
+
     }
     ImGui::EndHorizontal();
     ImGui::EndChild();
