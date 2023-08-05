@@ -70,7 +70,7 @@ namespace Kreator
     ///   - id: Asset Handle ID
     ///   - name: Asset Name
     ///   - icon: Texture Icon
-    ContentBrowserItem(ItemType type, AssetHandle id, const std::string& name, const Ref<Texture>& icon);
+    ContentBrowserItem(ItemType type, AssetHandle id, const std::string& name, const Ref<Image>& icon);
     /// This is the content browser Item Destructor
     virtual ~ContentBrowserItem() = default;
     
@@ -134,7 +134,7 @@ namespace Kreator
     ItemType m_type;
     AssetHandle m_ID;
     std::string m_name;
-    Ref<Texture> m_icon;
+    Ref<Image> m_icon;
     
     bool m_isSelected = false;
     bool m_isRenaming = false;
@@ -144,7 +144,7 @@ namespace Kreator
   class ContentBrowserDirectory : public ContentBrowserItem
   {
   public:
-    ContentBrowserDirectory(const Ref<DirectoryInfo>& directoryInfo, const Ref<Texture>& icon);
+    ContentBrowserDirectory(const Ref<DirectoryInfo>& directoryInfo, const Ref<Image>& icon);
     virtual ~ContentBrowserDirectory() = default;
     
     Ref<DirectoryInfo>& GetDirectoryInfo() { return m_directoryInfo; }
@@ -177,7 +177,7 @@ namespace Kreator
   class ContentBrowserAsset : public ContentBrowserItem
   {
   public:
-    ContentBrowserAsset(const AssetMetadata& assetInfo, const Ref<Texture>& icon);
+    ContentBrowserAsset(const AssetMetadata& assetInfo, const Ref<Image>& icon);
     virtual ~ContentBrowserAsset() = default;
     
     const AssetMetadata& GetAssetInfo() const { return m_assetInfo; }

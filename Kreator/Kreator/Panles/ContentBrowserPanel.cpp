@@ -269,6 +269,33 @@ namespace Kreator
             }
             ImGui::PopStyleVar(); // ItemSpacing
 
+            // Main Area ---------------------------------------------------------------------------------------------
+            const float paddingForOutline = 2.0f;
+            const float scrollBarrOffset = 20.0f + ImGui::GetStyle().ScrollbarSize;
+            float panelWidth = ImGui::GetContentRegionAvail().x - scrollBarrOffset;
+            float cellSize = ApplicationSettings::Get().ContentBrowserThumbnailSize + s_padding + paddingForOutline;
+            int32_t columnCount = (int)(panelWidth / cellSize);
+            if (columnCount < 1)
+            {
+              columnCount = 1;
+            }
+
+            // Render Items
+            {
+              const float rowSpacing = 12.0f;
+              UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(paddingForOutline, rowSpacing));
+              ImGui::Columns(columnCount, 0, false);
+              
+              UI::ScopedStyle border(ImGuiStyleVar_FrameBorderSize, 0.0f);
+              UI::ScopedStyle padding(ImGuiStyleVar_FramePadding, ImVec2(0.0f, 0.0f));
+              RenderItems();
+            }
+            
+            if (ImGui::IsWindowFocused() and !ImGui::IsMouseDragging(ImGuiMouseButton_Left))
+            {
+              UpdateInput();
+            }
+
             ImGui::PopStyleColor(2);
           }
           ImGui::EndChild(); // Main Area
@@ -294,8 +321,15 @@ namespace Kreator
   
   void ContentBrowserPanel::RenderItems()
   {
-    IK_ASSERT(false);
-
+    m_isAnyItemHovered = false;
+    bool openDeleteDialogue = false;
+    
+    for (auto& item : m_currentItems)
+    {
+      item->OnRenderBegin();
+      CBItemActionResult result = item->OnRender();
+      item->OnRenderEnd();
+    }
   }
   
   void ContentBrowserPanel::RenderDirectoryHierarchy(Ref<DirectoryInfo> &directory)
@@ -718,7 +752,7 @@ namespace Kreator
       if (metadata.IsValid())
       {
         // Set the asset texture
-        Ref<Texture> assetTexture = m_fileTex;
+        Ref<Image> assetTexture = m_fileTex;
         if (m_assetIconMap.find(metadata.filePath.extension().string()) != m_assetIconMap.end())
         {
           assetTexture = m_assetIconMap[metadata.filePath.extension().string()];
@@ -815,7 +849,20 @@ namespace Kreator
   
   void ContentBrowserPanel::UpdateInput()
   {
-    IK_ASSERT(false);
+    if (!m_isHovered)
+    {
+      return;
+    }
+    
+    if ((!m_isAnyItemHovered and ImGui::IsMouseDown(ImGuiMouseButton_Left)) or Input::IsKeyPressed(Key::Escape))
+    {
+      ClearSelections();
+    }
+    
+    if (Input::IsKeyPressed(Key::Delete) and m_selectionStack.SelectionCount() > 0)
+    {
+      ImGui::OpenPopup("Delete");
+    }
   }
   
   ContentBrowserItemList& ContentBrowserPanel::GetCurrentItems()
