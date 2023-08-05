@@ -78,8 +78,6 @@ namespace IKan
   class AssetEditorManager
   {
   public:
-    /// This function registers the default Asset Editors
-    static void RegisterDefaultEditors();
     /// This function unregisters the default Asset Editors
     static void UnregisterAllEditors();
     /// This function handles update of asset editor

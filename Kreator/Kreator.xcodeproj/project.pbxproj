@@ -10,6 +10,7 @@
 		B21063282A7E22F000A28BA0 /* ApplicationSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21063262A7E22F000A28BA0 /* ApplicationSettings.cpp */; };
 		B210632B2A7E240900A28BA0 /* ContentBrowserPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21063292A7E240900A28BA0 /* ContentBrowserPanel.cpp */; };
 		B210632E2A7E247400A28BA0 /* ContentBrowserItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B210632C2A7E247400A28BA0 /* ContentBrowserItem.cpp */; };
+		B23079582A7E4AE700300D82 /* DefaultAssetViewer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23079562A7E4AE700300D82 /* DefaultAssetViewer.cpp */; };
 		B233657C2A752FB900BC7B8B /* libbz2.1.0.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B233657B2A752FB900BC7B8B /* libbz2.1.0.8.tbd */; };
 		B23365802A752FC900BC7B8B /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B233657F2A752FC900BC7B8B /* libz.tbd */; };
 		B23365962A75355200BC7B8B /* RendererLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23365942A75355200BC7B8B /* RendererLayer.cpp */; };
@@ -43,6 +44,8 @@
 		B210632A2A7E240900A28BA0 /* ContentBrowserPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContentBrowserPanel.hpp; sourceTree = "<group>"; };
 		B210632C2A7E247400A28BA0 /* ContentBrowserItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContentBrowserItem.cpp; sourceTree = "<group>"; };
 		B210632D2A7E247400A28BA0 /* ContentBrowserItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContentBrowserItem.hpp; sourceTree = "<group>"; };
+		B23079562A7E4AE700300D82 /* DefaultAssetViewer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultAssetViewer.cpp; sourceTree = "<group>"; };
+		B23079572A7E4AE700300D82 /* DefaultAssetViewer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DefaultAssetViewer.hpp; sourceTree = "<group>"; };
 		B233657B2A752FB900BC7B8B /* libbz2.1.0.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.8.tbd; path = usr/lib/libbz2.1.0.8.tbd; sourceTree = SDKROOT; };
 		B233657D2A752FC000BC7B8B /* libz.1.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.1.tbd; path = usr/lib/libz.1.tbd; sourceTree = SDKROOT; };
 		B233657F2A752FC900BC7B8B /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
@@ -157,6 +160,8 @@
 				B2B2CE512A7B685A007EACDE /* FolderExplorer.hpp */,
 				B21063262A7E22F000A28BA0 /* ApplicationSettings.cpp */,
 				B21063272A7E22F000A28BA0 /* ApplicationSettings.hpp */,
+				B23079562A7E4AE700300D82 /* DefaultAssetViewer.cpp */,
+				B23079572A7E4AE700300D82 /* DefaultAssetViewer.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -242,6 +247,7 @@
 				B2B63F2F2A77B5430056ED4E /* Theme.cpp in Sources */,
 				B26B1AA52A7D261000676419 /* Widget.cpp in Sources */,
 				B24076D62A72375000221919 /* Kreator.cpp in Sources */,
+				B23079582A7E4AE700300D82 /* DefaultAssetViewer.cpp in Sources */,
 				B26B1AC32A7D76F800676419 /* AssetPanel.cpp in Sources */,
 				B26B1AA22A7D1EBC00676419 /* KreatorConsolePanel.cpp in Sources */,
 			);

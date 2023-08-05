@@ -11,6 +11,7 @@
 #include "ProjectSettingPanel.hpp"
 #include "AssetPanel.hpp"
 #include "ContentBrowserPanel.hpp"
+#include "DefaultAssetViewer.hpp"
 
 extern std::string IKanVersion;
 
@@ -216,6 +217,8 @@ if (!Project::GetActive()) return
     {
       m_showWelcomePopup = true;
     }
+    
+    AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
   }
   
   void RendererLayer::OnDetach()
@@ -229,6 +232,7 @@ if (!Project::GetActive()) return
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     RETRUN_IF_NO_PROJECT();
     
+    AssetEditorManager::OnUpdate(ts);
     m_viewport.UpdateMousePos();
 
     m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
@@ -266,6 +270,7 @@ if (!Project::GetActive()) return
     }
     
     m_panels.OnEvent(event);
+    AssetEditorManager::OnEvent(event);
   }
   
   bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
@@ -352,9 +357,11 @@ if (!Project::GetActive()) return
     m_panels.OnImGuiRender();
     UI_EndMainWindowDocking();
     
-    // Scene Popups
+    // Popups
     UI_NewScene();
     UI_AboutPopup();
+    
+    AssetEditorManager::OnImGuiRender();
   }
   
   void RendererLayer::UpdateWindowTitle(const std::string& sceneName)

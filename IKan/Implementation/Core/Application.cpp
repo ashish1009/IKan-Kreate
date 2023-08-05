@@ -53,9 +53,6 @@ namespace IKan
     // Initialize the Core Renderer
     Renderer::Initialize();
     
-    // Initialize all Editors
-    AssetEditorManager::RegisterDefaultEditors();
-    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialized                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");

@@ -150,16 +150,13 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
   - Application Settings
  ------------------------------------------------------------------------------------------------------------------
 
+- v8.1.4.2  : Kretor  - Content Browser Panel Class
+
 ## Upcoming Release Tags  
--   : IKan    - Content Browser Panel Class | Kreator - Content Browser Panel Usage
-  - Entire Content Browser Panel
   - Asset Editor Panel 
-  - Folder Explorer
 
 -   : Kreator - Scene Playe Pause Simulation Tool bar
   - Scene Play and Pause
- ------------------------------------------------------------------------------------------------------------------
-
  ------------------------------------------------------------------------------------------------------------------
 
 -   : IKan    - Scene Hierarchy panel

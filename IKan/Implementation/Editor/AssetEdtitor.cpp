@@ -76,12 +76,7 @@ namespace IKan
   {
     return m_flags;
   }
-  
-  void AssetEditorManager::RegisterDefaultEditors()
-  {
-
-  }
-  
+    
   void AssetEditorManager::UnregisterAllEditors()
   {
     s_editors.clear();
