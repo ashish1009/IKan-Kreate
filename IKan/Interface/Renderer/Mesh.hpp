@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Core/AABB.hpp"
+#include "Asset/Asset.hpp"
 
 struct aiNode;
 struct aiAnimation;
@@ -64,6 +65,42 @@ namespace IKan
   /// MeshSource is a representation of an actual asset file on disk. Meshes are created from MeshSource
   class MeshSource : public Asset
   {
+  public:
+    /// This is the constructor to create a Mesh source from file
+    /// - Parameter filename: Mesh source file path
+    MeshSource(const std::string& filename);
+    /// This is the constructor to create a Mesh source from vertices indices and transform
+    /// - Parameters:
+    ///   - vertices: vertices
+    ///   - indices: indices
+    ///   - transform: transform
+    MeshSource(const std::vector<Vertex>& vertices, const std::vector<Index>& indices, const glm::mat4& transform);
+    /// This is the constructor to create a Mesh source from vertices indices and sub meshees
+    /// - Parameters:
+    ///   - vertices: verices
+    ///   - indices: indices
+    ///   - submeshes: subm,eshed
+    MeshSource(const std::vector<Vertex>& vertices, const std::vector<Index>& indices, const std::vector<Submesh>& submeshes);
+    virtual ~MeshSource();
+
     
+    /// This function creates a Mesh source from file
+    /// - Parameter filename: Mesh source file path
+    static Ref<MeshSource> Cerate(const std::string& filename);
+    /// This function create a Mesh source from vertices indices and transform
+    /// - Parameters:
+    ///   - vertices: vertices
+    ///   - indices: indices
+    ///   - transform: transform
+    static Ref<MeshSource> Cerate(const std::vector<Vertex>& vertices, const std::vector<Index>& indices,
+                                  const glm::mat4& transform);
+    /// This function a Mesh source from vertices indices and sub meshees
+    /// - Parameters:
+    ///   - vertices: verices
+    ///   - indices: indices
+    ///   - submeshes: subm,eshed
+    static Ref<MeshSource> Cerate(const std::vector<Vertex>& vertices, const std::vector<Index>& indices,
+                                  const std::vector<Submesh>& submeshes);
+    ASSET_TYPE(MeshSource);
   };
 } // namespace IKan
