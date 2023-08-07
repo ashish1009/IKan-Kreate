@@ -239,6 +239,8 @@ if (!Project::GetActive()) return
     }
     
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
+    
+    auto mesh = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/backpack.obj"));
   }
   
   void RendererLayer::OnDetach()

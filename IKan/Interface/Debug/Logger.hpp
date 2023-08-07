@@ -22,7 +22,8 @@ f(SceneCamera) f(EditorCamera)\
 f(ImGui)\
 f(Scene) f(Component) f(SceneSerializer)\
 f(Asset) \
-f(Project) f(PanelManager) f(EditorConsolePanel)
+f(Project) f(PanelManager) f(EditorConsolePanel) \
+f(Mesh)
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)

@@ -86,21 +86,25 @@ namespace IKan
     
     /// This function creates a Mesh source from file
     /// - Parameter filename: Mesh source file path
-    static Ref<MeshSource> Cerate(const std::string& filename);
+    static Ref<MeshSource> Create(const std::string& filename);
     /// This function create a Mesh source from vertices indices and transform
     /// - Parameters:
     ///   - vertices: vertices
     ///   - indices: indices
     ///   - transform: transform
-    static Ref<MeshSource> Cerate(const std::vector<Vertex>& vertices, const std::vector<Index>& indices,
+    static Ref<MeshSource> Create(const std::vector<Vertex>& vertices, const std::vector<Index>& indices,
                                   const glm::mat4& transform);
     /// This function a Mesh source from vertices indices and sub meshees
     /// - Parameters:
     ///   - vertices: verices
     ///   - indices: indices
     ///   - submeshes: subm,eshed
-    static Ref<MeshSource> Cerate(const std::vector<Vertex>& vertices, const std::vector<Index>& indices,
+    static Ref<MeshSource> Create(const std::vector<Vertex>& vertices, const std::vector<Index>& indices,
                                   const std::vector<Submesh>& submeshes);
     ASSET_TYPE(MeshSource);
+    
+  private:
+    // Member Variables ---------------------------------------------------------------------------------------------
+    std::string m_filePath;
   };
 } // namespace IKan

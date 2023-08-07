@@ -71,6 +71,7 @@
 #include <Renderer/Renderer.hpp>
 #include <Renderer/Renderer2D.hpp>
 #include <Renderer/RendererStats.hpp>
+#include <Renderer/Mesh.hpp>
 #include <Renderer/UI/Font.hpp>
 
 #include <Renderer/Graphics/Shader.hpp>
