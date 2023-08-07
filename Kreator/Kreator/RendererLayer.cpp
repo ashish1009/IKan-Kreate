@@ -169,6 +169,12 @@ if (!Project::GetActive()) return
     m_newProject = Image::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
     m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
     m_projectIcon = Image::Create(KreatorResourcePath("Textures/Icons/Project.png"));
+    
+    // Guizmo Buttorn
+    m_selectToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Pointer.png"));
+    m_moveToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Move.png"));
+    m_rotateToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Rotate.png"));
+    m_scaleToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -806,6 +812,7 @@ if (!Project::GetActive()) return
     
     // Render viewport image
     UI::Image(Renderer2D::GetFinalImage(), viewportSize);
+    UI_GuizmoToolbar();
     UI_UpdateGuizmo();
 
     auto windowSize = ImGui::GetWindowSize();
@@ -1825,6 +1832,98 @@ if (!Project::GetActive()) return
         // Not Supported Yet
         IK_ASSERT(false);
       }
+    }
+  }
+  
+  void RendererLayer::UI_GuizmoToolbar()
+  {
+    // Gizmo Toolbar
+    if (m_currentScene != m_runtimeScene)
+    {
+      UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+      UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
+      UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
+      UI::ScopedStyle disablePadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+
+      auto viewportStart = ImGui::GetItemRectMin();
+
+      const float buttonSize = 18.0f;
+      const float edgeOffset = 4.0f;
+      const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
+      const float numberOfButtons = 4.0f;
+      const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
+
+      ImGui::SetNextWindowPos(ImVec2(viewportStart.x + 14, viewportStart.y + edgeOffset));
+      ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
+      ImGui::SetNextWindowBgAlpha(0.0f);
+
+      ImGui::Begin("##viewport_tools", 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking);
+      
+      // A hack to make icon panel appear smaller than minimum allowed by ImGui size
+      // Filling the background for the desired 26px height
+      const float desiredHeight = 26.0f;
+      ImRect background = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, -(windowHeight - desiredHeight) / 2.0f);
+      ImGui::GetWindowDrawList()->AddRectFilled(background.Min, background.Max, IM_COL32(15, 15, 15, 127), 4.0f);
+
+      ImGui::BeginVertical("##gizmosV", ImGui::GetContentRegionAvail());
+      ImGui::Spring();
+      ImGui::BeginHorizontal("##gizmosH", { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y });
+      ImGui::Spring();
+
+      {
+        UI::ScopedStyle enableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(edgeOffset * 2.0f, 0));
+        
+        const ImColor c_SelectedGizmoButtonColor = Kreator_UI::Color::Accent;
+        const ImColor c_UnselectedGizmoButtonColor = UI::Theme::Color::TextBrighter;
+        
+        auto gizmoButton = [&c_SelectedGizmoButtonColor, buttonSize](const Ref<Image>& icon,
+                                                                     const ImColor& tint, float paddingY = 0.0f)
+        {
+          const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
+          const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
+          const bool clicked = ImGui::InvisibleButton(UI::GenerateID(), ImVec2(width, height));
+          UI::DrawButtonImage(icon, tint, tint, tint, UI::RectOffset(UI::GetItemRect(), 0.0f, paddingY));
+          
+          return clicked;
+        };
+        
+        ImColor buttonTint = m_gizmoType == -1 ? c_SelectedGizmoButtonColor : c_UnselectedGizmoButtonColor;
+        if (gizmoButton(m_selectToolTex, buttonTint, m_gizmoType != -1))
+        {
+          m_gizmoType = -1;
+        }
+        
+        buttonTint = m_gizmoType == ImGuizmo::OPERATION::TRANSLATE ?
+        c_SelectedGizmoButtonColor :
+        c_UnselectedGizmoButtonColor;
+        if (gizmoButton(m_moveToolTex, buttonTint))
+        {
+          m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+        }
+        
+        buttonTint = m_gizmoType == ImGuizmo::OPERATION::ROTATE ?
+        c_SelectedGizmoButtonColor :
+        c_UnselectedGizmoButtonColor;
+        if (gizmoButton(m_rotateToolTex, buttonTint))
+        {
+          m_gizmoType = ImGuizmo::OPERATION::ROTATE;
+        }
+        
+        buttonTint = m_gizmoType == ImGuizmo::OPERATION::SCALE ?
+        c_SelectedGizmoButtonColor :
+        c_UnselectedGizmoButtonColor;
+        if (gizmoButton(m_scaleToolTex, buttonTint))
+        {
+          m_gizmoType = ImGuizmo::OPERATION::SCALE;
+        }
+      }
+      
+      ImGui::Spring();
+      ImGui::EndHorizontal();
+      ImGui::Spring();
+      ImGui::EndVertical();
+
+      ImGui::End();
     }
   }
 } // namespace Kreator

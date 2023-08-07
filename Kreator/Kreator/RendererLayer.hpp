@@ -164,6 +164,8 @@ namespace Kreator
     
     /// This function Update the Guizmo Renderer
     void UI_UpdateGuizmo();
+    /// This function renders the Guizmo toolbar
+    void UI_GuizmoToolbar();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
@@ -217,7 +219,7 @@ namespace Kreator
     // Guizmo Data ---------------------------------------
     int m_gizmoType = -1; // -1 = no gizmo
     int m_gizmoMode = 0; // 0 = local
-
+    Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
     enum class SelectionMode
     {
       None = 0, Entity = 1
