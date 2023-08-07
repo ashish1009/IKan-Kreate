@@ -701,6 +701,17 @@ if (!Project::GetActive()) return
   void RendererLayer::OnSceneStop()
   {
     ClearSelectedEntity();
+    
+    m_runtimeScene->OnRuntimeStop();
+    m_sceneState = SceneState::Edit;
+    Input::SetCursorMode(CursorMode::Normal);
+    UI::SetMouseEnabled(true);
+    
+    // Unload runtime scene
+    m_runtimeScene = nullptr;
+    
+    m_panels.SetSceneContext(m_editorScene);
+    m_currentScene = m_editorScene;
   }
   
   void RendererLayer::OnScenePause()
