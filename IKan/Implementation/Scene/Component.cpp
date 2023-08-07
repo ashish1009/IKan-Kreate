@@ -264,7 +264,9 @@ return *this; \
   
   void QuadComponent::Copy(const QuadComponent &other)
   {
-    
+    texture = other.texture;
+    color = other.color;
+    tilingFactor = other.tilingFactor;
   }
 
   // Circle Component -------------------------------------------------------------------------------------------------
@@ -280,6 +282,10 @@ return *this; \
   
   void CircleComponent::Copy(const CircleComponent &other)
   {
+    texture = other.texture;
+    color = other.color;
+    tilingFactor = other.tilingFactor;
+
     thickness = other.thickness;
     fade = other.fade;
   }
