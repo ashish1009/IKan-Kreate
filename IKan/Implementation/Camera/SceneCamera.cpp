@@ -36,6 +36,7 @@ namespace IKan
     m_degPerspectiveFOV = degVerticalFOV;
     m_perspectiveNear = nearClip;
     m_perspectiveFar = farClip;
+    RecalculateProjection();
   }
   
   void SceneCamera::SetOrthographic(float size, float nearClip, float farClip)
@@ -44,56 +45,55 @@ namespace IKan
     m_orthographicSize = size;
     m_orthographicNear = nearClip;
     m_orthographicFar = farClip;
+    RecalculateProjection();
   }
   
   void SceneCamera::SetViewportSize(uint32_t width, uint32_t height)
   {
-    switch (m_projectionType)
-    {
-      case ProjectionType::Perspective:
-        SetPerspectiveProjectionMatrix(glm::radians(m_degPerspectiveFOV), (float)width, (float)height,
-                                       m_perspectiveNear, m_perspectiveFar);
-        break;
-      case ProjectionType::Orthographic:
-        float aspect = (float)width / (float)height;
-        float width = m_orthographicSize * aspect;
-        float height = m_orthographicSize;
-        SetOrthoProjectionMatrix(width, height, m_orthographicNear, m_orthographicFar);
-        break;
-    }
+    m_viewportWidth = width;
+    m_viewportHeight = height;
+    RecalculateProjection();
   }
   
   void SceneCamera::SetDegPerspectiveVerticalFOV(const float degVerticalFov)
   {
     m_degPerspectiveFOV = degVerticalFov;
+    RecalculateProjection();
   }
   void SceneCamera::SetRadPerspectiveVerticalFOV(const float degVerticalFov)
   {
     m_degPerspectiveFOV = glm::degrees(degVerticalFov);
+    RecalculateProjection();
   }
   void SceneCamera::SetPerspectiveNearClip(const float nearClip)
   {
     m_perspectiveNear = nearClip;
+    RecalculateProjection();
   }
   void SceneCamera::SetOrthographicSize(const float size)
   {
     m_orthographicSize = size;
+    RecalculateProjection();
   }
   void SceneCamera::SetOrthographicNearClip(const float nearClip)
   {
     m_orthographicNear = nearClip;
+    RecalculateProjection();
   }
   void SceneCamera::SetOrthographicFarClip(const float farClip)
   {
     m_orthographicFar = farClip;
+    RecalculateProjection();
   }
   void SceneCamera::SetPerspectiveFarClip(const float farClip)
   {
     m_perspectiveFar = farClip;
+    RecalculateProjection();
   }
   void SceneCamera::SetProjectionType(ProjectionType type)
   {
     m_projectionType = type;
+    RecalculateProjection();
   }
   
   float SceneCamera::GetPerspectiveNearClip() const
@@ -130,4 +130,27 @@ namespace IKan
     return m_projectionType;
   }
   
+  void SceneCamera::RecalculateProjection() {
+    switch (m_projectionType)
+    {
+      case ProjectionType::Perspective:
+      {
+        SetPerspectiveProjectionMatrix(glm::radians(m_degPerspectiveFOV), (float)m_viewportWidth,
+                                       (float)m_viewportHeight, m_perspectiveNear, m_perspectiveFar);
+        break;
+      }
+      case ProjectionType::Orthographic:
+      {
+        float aspect = (float)m_viewportWidth / (float)m_viewportHeight;
+        float width = m_orthographicSize * aspect;
+        float height = m_orthographicSize;
+        SetOrthoProjectionMatrix(m_viewportWidth, m_viewportHeight, m_orthographicNear, m_orthographicFar);
+        break;
+      }
+      default:
+        IK_ASSERT(false);
+    }
+  }
+  
 } // namespace IKan
+

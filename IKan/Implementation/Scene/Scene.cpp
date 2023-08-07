@@ -91,7 +91,15 @@ namespace IKan
 
   void Scene::OnRenderRuntime(TimeStep ts)
   {
+    Entity cameraEntity = GetMainCameraEntity();
+    if (!cameraEntity)
+    {
+      return;
+    }
     
+    const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
+    const auto& cameraTransform = cameraEntity.GetComponent<TransformComponent>().Transform();
+    Render2DEntities(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
   }
   
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera)
@@ -509,6 +517,22 @@ namespace IKan
   void Scene::SetName(const std::string &name)
   {
     m_name = name;
+  }
+  
+  Entity Scene::GetMainCameraEntity()
+  {
+    auto view = m_registry.view<CameraComponent>();
+    for (auto entity : view)
+    {
+      auto& comp = view.get<CameraComponent>(entity);
+      if (comp.primary)
+      {
+        IK_ASSERT(comp.camera.GetOrthographicSize() or comp.camera.GetDegPerspectiveVerticalFOV(),
+                  "Camera is not fully initialized");
+        return { entity, this };
+      }
+    }
+    return {};
   }
 
   Entity Scene::GetEntityWithUUID(UUID id) const

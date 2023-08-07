@@ -16,6 +16,26 @@ Entities:
       TilingFactor: 1
       Thickness: 1
       Fade: 0.00499999989
+  - Entity: 2846957320582514972
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0.100000001]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 1
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 50
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
   - Entity: 2886910740919579138
     TagComponent:
       Tag: Circle Window

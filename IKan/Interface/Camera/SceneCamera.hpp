@@ -95,8 +95,14 @@ namespace IKan
     ProjectionType GetProjectionType() const;
     
   private:
+    // Member functions
+    /// This function recalculate the projection matrix
+    void RecalculateProjection();
+
     // Member variables
     ProjectionType m_projectionType = ProjectionType::Perspective;
+    
+    uint32_t m_viewportWidth, m_viewportHeight;
     
     float m_degPerspectiveFOV = 45.0f;
     float m_perspectiveNear = 0.1f, m_perspectiveFar = 1000.0f;

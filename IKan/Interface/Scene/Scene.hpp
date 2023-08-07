@@ -127,6 +127,9 @@ namespace IKan
     void SetName(const std::string& name);
 
     // Getters -----------------------------------------------------------------------------------------------------
+    /// This function finds the main camera entity
+    Entity GetMainCameraEntity();
+    
     /// This function return entity with id as specified. entity is expected to exist (runtime error if it doesn't)
     /// - Parameter id: UUID for entity
     Entity GetEntityWithUUID(UUID id) const;
