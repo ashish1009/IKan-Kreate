@@ -170,6 +170,13 @@
 			remoteGlobalIDString = B21FB3A22A729EBB009EED1F;
 			remoteInfo = GLFW;
 		};
+		B23079CD2A80B11100300D82 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B23079C92A80B11000300D82 /* ImGuizmo.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B23079BB2A80B11000300D82;
+			remoteInfo = ImGuizmo;
+		};
 		B23364AB2A72D0CC00BC7B8B /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B23364A72A72D0CC00BC7B8B /* Glad.xcodeproj */;
@@ -215,6 +222,7 @@
 		B21FAA4B2A7297DA009EED1F /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B21FAA4C2A7297DA009EED1F /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
 		B21FB3B02A729EBB009EED1F /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = GLFW/GLFW.xcodeproj; sourceTree = "<group>"; };
+		B23079C92A80B11000300D82 /* ImGuizmo.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ImGuizmo.xcodeproj; path = ImGuizmo/ImGuizmo.xcodeproj; sourceTree = "<group>"; };
 		B233648C2A72CE7200BC7B8B /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
 		B233648D2A72CE7200BC7B8B /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
 		B23364A72A72D0CC00BC7B8B /* Glad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Glad.xcodeproj; path = Glad/Glad.xcodeproj; sourceTree = "<group>"; };
@@ -414,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				B23365402A74D76C00BC7B8B /* StbImage */,
+				B23079C92A80B11000300D82 /* ImGuizmo.xcodeproj */,
 				B23367832A75930700BC7B8B /* Yaml.xcodeproj */,
 				B23365AE2A75386B00BC7B8B /* UI.xcodeproj */,
 				B23364A72A72D0CC00BC7B8B /* Glad.xcodeproj */,
@@ -426,6 +435,14 @@
 			isa = PBXGroup;
 			children = (
 				B21FB3B52A729EBB009EED1F /* libGLFW.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B23079CA2A80B11000300D82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B23079CE2A80B11100300D82 /* libImGuizmo.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1014,6 +1031,10 @@
 					ProjectRef = B21FB3B02A729EBB009EED1F /* GLFW.xcodeproj */;
 				},
 				{
+					ProductGroup = B23079CA2A80B11000300D82 /* Products */;
+					ProjectRef = B23079C92A80B11000300D82 /* ImGuizmo.xcodeproj */;
+				},
+				{
 					ProductGroup = B23365AF2A75386B00BC7B8B /* Products */;
 					ProjectRef = B23365AE2A75386B00BC7B8B /* UI.xcodeproj */;
 				},
@@ -1035,6 +1056,13 @@
 			fileType = archive.ar;
 			path = libGLFW.a;
 			remoteRef = B21FB3B42A729EBB009EED1F /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B23079CE2A80B11100300D82 /* libImGuizmo.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libImGuizmo.a;
+			remoteRef = B23079CD2A80B11100300D82 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 		B23364AC2A72D0CC00BC7B8B /* libGlad.a */ = {

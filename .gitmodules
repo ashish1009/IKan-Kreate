@@ -10,3 +10,6 @@
 [submodule "IKan/Vendors/Yaml/Yaml"]
 	path = IKan/Vendors/Yaml/Yaml
 	url = https://github.com/ashish1009/yaml-cpp
+[submodule "IKan/Vendors/ImGuizmo/ImGuizmo"]
+	path = IKan/Vendors/ImGuizmo/ImGuizmo
+	url = https://github.com/ashish1009/ImGuizmo

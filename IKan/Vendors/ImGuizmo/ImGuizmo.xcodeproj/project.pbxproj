@@ -1,0 +1,330 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B23079EC2A80B14D00300D82 /* ImGuizmo.h in Headers */ = {isa = PBXBuildFile; fileRef = B23079D02A80B14D00300D82 /* ImGuizmo.h */; };
+		B23079ED2A80B14D00300D82 /* ImCurveEdit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23079D12A80B14D00300D82 /* ImCurveEdit.cpp */; };
+		B23079FA2A80B14D00300D82 /* ImSequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23079E32A80B14D00300D82 /* ImSequencer.cpp */; };
+		B23079FB2A80B14D00300D82 /* ImCurveEdit.h in Headers */ = {isa = PBXBuildFile; fileRef = B23079E42A80B14D00300D82 /* ImCurveEdit.h */; };
+		B23079FC2A80B14D00300D82 /* ImZoomSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = B23079E72A80B14D00300D82 /* ImZoomSlider.h */; };
+		B23079FD2A80B14D00300D82 /* ImGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = B23079E82A80B14D00300D82 /* ImGradient.h */; };
+		B23079FE2A80B14D00300D82 /* ImGuizmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23079E92A80B14D00300D82 /* ImGuizmo.cpp */; };
+		B23079FF2A80B14D00300D82 /* ImGradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23079EA2A80B14D00300D82 /* ImGradient.cpp */; };
+		B2307A002A80B14D00300D82 /* ImSequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = B23079EB2A80B14D00300D82 /* ImSequencer.h */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B23079BB2A80B11000300D82 /* libImGuizmo.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libImGuizmo.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B23079D02A80B14D00300D82 /* ImGuizmo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImGuizmo.h; sourceTree = "<group>"; };
+		B23079D12A80B14D00300D82 /* ImCurveEdit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImCurveEdit.cpp; sourceTree = "<group>"; };
+		B23079D22A80B14D00300D82 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		B23079E32A80B14D00300D82 /* ImSequencer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImSequencer.cpp; sourceTree = "<group>"; };
+		B23079E42A80B14D00300D82 /* ImCurveEdit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImCurveEdit.h; sourceTree = "<group>"; };
+		B23079E62A80B14D00300D82 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
+		B23079E72A80B14D00300D82 /* ImZoomSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImZoomSlider.h; sourceTree = "<group>"; };
+		B23079E82A80B14D00300D82 /* ImGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImGradient.h; sourceTree = "<group>"; };
+		B23079E92A80B14D00300D82 /* ImGuizmo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuizmo.cpp; sourceTree = "<group>"; };
+		B23079EA2A80B14D00300D82 /* ImGradient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImGradient.cpp; sourceTree = "<group>"; };
+		B23079EB2A80B14D00300D82 /* ImSequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImSequencer.h; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B23079B92A80B11000300D82 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B23079B22A80B11000300D82 = {
+			isa = PBXGroup;
+			children = (
+				B23079CF2A80B14D00300D82 /* ImGuizmo */,
+				B23079BC2A80B11000300D82 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B23079BC2A80B11000300D82 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B23079BB2A80B11000300D82 /* libImGuizmo.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B23079CF2A80B14D00300D82 /* ImGuizmo */ = {
+			isa = PBXGroup;
+			children = (
+				B23079D22A80B14D00300D82 /* LICENSE */,
+				B23079E62A80B14D00300D82 /* README.md */,
+				B23079D02A80B14D00300D82 /* ImGuizmo.h */,
+				B23079D12A80B14D00300D82 /* ImCurveEdit.cpp */,
+				B23079E32A80B14D00300D82 /* ImSequencer.cpp */,
+				B23079E42A80B14D00300D82 /* ImCurveEdit.h */,
+				B23079E72A80B14D00300D82 /* ImZoomSlider.h */,
+				B23079E82A80B14D00300D82 /* ImGradient.h */,
+				B23079E92A80B14D00300D82 /* ImGuizmo.cpp */,
+				B23079EA2A80B14D00300D82 /* ImGradient.cpp */,
+				B23079EB2A80B14D00300D82 /* ImSequencer.h */,
+			);
+			path = ImGuizmo;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXHeadersBuildPhase section */
+		B23079B72A80B11000300D82 /* Headers */ = {
+			isa = PBXHeadersBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B23079FC2A80B14D00300D82 /* ImZoomSlider.h in Headers */,
+				B23079FD2A80B14D00300D82 /* ImGradient.h in Headers */,
+				B2307A002A80B14D00300D82 /* ImSequencer.h in Headers */,
+				B23079FB2A80B14D00300D82 /* ImCurveEdit.h in Headers */,
+				B23079EC2A80B14D00300D82 /* ImGuizmo.h in Headers */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXHeadersBuildPhase section */
+
+/* Begin PBXNativeTarget section */
+		B23079BA2A80B11000300D82 /* ImGuizmo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B23079C62A80B11000300D82 /* Build configuration list for PBXNativeTarget "ImGuizmo" */;
+			buildPhases = (
+				B23079B72A80B11000300D82 /* Headers */,
+				B23079B82A80B11000300D82 /* Sources */,
+				B23079B92A80B11000300D82 /* Frameworks */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImGuizmo;
+			productName = ImGuizmo;
+			productReference = B23079BB2A80B11000300D82 /* libImGuizmo.a */;
+			productType = "com.apple.product-type.library.static";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B23079B32A80B11000300D82 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastUpgradeCheck = 1430;
+				TargetAttributes = {
+					B23079BA2A80B11000300D82 = {
+						CreatedOnToolsVersion = 14.3.1;
+					};
+				};
+			};
+			buildConfigurationList = B23079B62A80B11000300D82 /* Build configuration list for PBXProject "ImGuizmo" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B23079B22A80B11000300D82;
+			productRefGroup = B23079BC2A80B11000300D82 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B23079BA2A80B11000300D82 /* ImGuizmo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B23079B82A80B11000300D82 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B23079ED2A80B14D00300D82 /* ImCurveEdit.cpp in Sources */,
+				B23079FF2A80B14D00300D82 /* ImGradient.cpp in Sources */,
+				B23079FA2A80B14D00300D82 /* ImSequencer.cpp in Sources */,
+				B23079FE2A80B14D00300D82 /* ImGuizmo.cpp in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		B23079C42A80B11000300D82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		B23079C52A80B11000300D82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 13.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		B23079C72A80B11000300D82 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 78KTXZ99TW;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/../UI/ImGui",
+					"${PROJECT_DIR}/ImGuizmo",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Debug;
+		};
+		B23079C82A80B11000300D82 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 78KTXZ99TW;
+				EXECUTABLE_PREFIX = lib;
+				GCC_ENABLE_CPP_EXCEPTIONS = YES;
+				GCC_ENABLE_CPP_RTTI = YES;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/../UI/ImGui",
+					"${PROJECT_DIR}/ImGuizmo",
+				);
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B23079B62A80B11000300D82 /* Build configuration list for PBXProject "ImGuizmo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B23079C42A80B11000300D82 /* Debug */,
+				B23079C52A80B11000300D82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B23079C62A80B11000300D82 /* Build configuration list for PBXNativeTarget "ImGuizmo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B23079C72A80B11000300D82 /* Debug */,
+				B23079C82A80B11000300D82 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B23079B32A80B11000300D82 /* Project object */;
+}
