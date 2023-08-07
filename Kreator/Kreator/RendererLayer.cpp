@@ -727,11 +727,28 @@ if (!Project::GetActive()) return
   void RendererLayer::OnSceneStartSimulation()
   {
     ClearSelectedEntity();
+    
+    m_sceneState = SceneState::Simulate;
+    
+    m_simulationScene = CreateRef<Scene>();
+    m_editorScene->CopyTo(m_simulationScene);
+    
+    m_simulationScene->OnSimulationStart();
+    m_panels.SetSceneContext(m_simulationScene);
+    m_currentScene = m_simulationScene;
   }
   
   void RendererLayer::OnSceneStopSimulation()
   {
     ClearSelectedEntity();
+    
+    m_simulationScene->OnSimulationStop();
+    m_sceneState = SceneState::Edit;
+    
+    m_simulationScene = nullptr;
+    
+    m_panels.SetSceneContext(m_editorScene);
+    m_currentScene = m_editorScene;
   }
 
   void RendererLayer::OnEntitySelected(Entity entity)
