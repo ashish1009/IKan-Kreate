@@ -32,6 +32,7 @@
 
 // ImGui files
 #include <imgui.h>
+#include <ImGuizmo.h>
 #include <imgui_internal.h>
 
 // Engine Files

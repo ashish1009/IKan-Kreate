@@ -13,6 +13,7 @@
 #include <backends/imgui_impl_glfw.cpp>
 
 #include <GLFW/glfw3.h>
+#include <ImGuizmo.h>
 
 namespace IKan::UI
 {
@@ -80,6 +81,7 @@ namespace IKan::UI
     ImGui_ImplGlfw_NewFrame();
     
     ImGui::NewFrame();
+    ImGuizmo::BeginFrame();
   }
   
   void ImGuiLayer::End()

@@ -24,6 +24,7 @@
 		B21FAA4A2A729312009EED1F /* IKMemory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA482A729312009EED1F /* IKMemory.hpp */; };
 		B21FAA4D2A7297DA009EED1F /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B21FAA4B2A7297DA009EED1F /* Application.cpp */; };
 		B21FAA4E2A7297DA009EED1F /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B21FAA4C2A7297DA009EED1F /* Application.hpp */; };
+		B2307A012A80B22600300D82 /* libImGuizmo.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B23079CE2A80B11100300D82 /* libImGuizmo.a */; };
 		B23364832A72CC9700BC7B8B /* libGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B21FB3B52A729EBB009EED1F /* libGLFW.a */; };
 		B233648E2A72CE7200BC7B8B /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233648C2A72CE7200BC7B8B /* Renderer.cpp */; };
 		B233648F2A72CE7200BC7B8B /* Renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233648D2A72CE7200BC7B8B /* Renderer.hpp */; };
@@ -376,6 +377,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2307A012A80B22600300D82 /* libImGuizmo.a in Frameworks */,
 				B2336A7A2A7644B300BC7B8B /* libYaml.a in Frameworks */,
 				B23367142A753AAB00BC7B8B /* libUI.a in Frameworks */,
 				B23365822A752FF000BC7B8B /* libpng16.a in Frameworks */,
@@ -1318,6 +1320,7 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/EnTT",
 					"${PROJECT_DIR}/Vendors/Yaml/Yaml/include",
+					"${PROJECT_DIR}/Vendors/ImGuizmo/ImGuizmo",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1348,6 +1351,7 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/EnTT",
 					"${PROJECT_DIR}/Vendors/Yaml/Yaml/include",
+					"${PROJECT_DIR}/Vendors/ImGuizmo/ImGuizmo",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
