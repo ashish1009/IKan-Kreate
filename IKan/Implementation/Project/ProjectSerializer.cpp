@@ -27,6 +27,8 @@ namespace IKan
       out << YAML::BeginMap;
       out << YAML::Key << "Name" << YAML::Value << m_project->m_config.name;
       out << YAML::Key << "AssetDirectory" << YAML::Value << m_project->m_config.assetDirectory;
+      out << YAML::Key << "MeshDirectory" << YAML::Value << m_project->m_config.meshPath;
+      out << YAML::Key << "MeshSourceDirectory" << YAML::Value << m_project->m_config.meshSourcePath;
       out << YAML::Key << "AssetRegistry" << YAML::Value << m_project->m_config.assetRegistryPath;
       out << YAML::Key << "StartScene" << YAML::Value << m_project->m_config.startScene;
       out << YAML::Key << "AutoSave" << YAML::Value << m_project->m_config.enableAutoSave;
@@ -62,6 +64,8 @@ namespace IKan
     
     config.name = rootNode["Name"].as<std::string>();
     config.assetDirectory = rootNode["AssetDirectory"].as<std::string>();
+    config.meshPath = rootNode["MeshDirectory"].as<std::string>();
+    config.meshSourcePath = rootNode["MeshSourceDirectory"].as<std::string>();
     config.assetRegistryPath = rootNode["AssetRegistry"].as<std::string>();
     config.startScene = rootNode["StartScene"].as<std::string>("");
     config.enableAutoSave = rootNode["AutoSave"].as<bool>(false);

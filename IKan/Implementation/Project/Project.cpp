@@ -59,6 +59,16 @@ namespace IKan
     IK_ASSERT(s_activeProject);
     return std::filesystem::path(s_activeProject->GetConfig().projectDirectory) / s_activeProject->GetConfig().assetDirectory;
   }
+  std::filesystem::path Project::GetMeshDirectory()
+  {
+    IK_ASSERT(s_activeProject);
+    return std::filesystem::path(s_activeProject->GetConfig().projectDirectory) / s_activeProject->GetConfig().meshPath;
+  }
+  std::filesystem::path Project::GetMeshSourceDirectory()
+  {
+    IK_ASSERT(s_activeProject);
+    return std::filesystem::path(s_activeProject->GetConfig().projectDirectory) / s_activeProject->GetConfig().meshSourcePath;
+  }
   std::filesystem::path Project::GetAssetRegistryPath()
   {
     IK_ASSERT(s_activeProject);
@@ -69,5 +79,13 @@ namespace IKan
   {
     return GetAssetDirectory() / assetRelativePath;
   }
-  
+  std::filesystem::path Project::GetMeshPath(const std::string& meshRelativePath)
+  {
+    return GetMeshDirectory() / meshRelativePath;
+  }
+  std::filesystem::path Project::GetMeshSourcePath(const std::string& meshsourceRelativePath)
+  {
+    return GetMeshSourceDirectory() / meshsourceRelativePath;;
+  }
+
 } // namespace IKan
