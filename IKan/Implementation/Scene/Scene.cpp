@@ -104,7 +104,7 @@ namespace IKan
   
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera)
   {
-    
+    Render2DEntities(editorCamera.GetUnReversedViewProjection());
   }
   
   void Scene::Render2DEntities(const glm::mat4& viewProjection)

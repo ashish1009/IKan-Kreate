@@ -151,6 +151,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
  ------------------------------------------------------------------------------------------------------------------
 
 - v8.1.4.2  : Kretor  - Content Browser Panel Class
+              Kretor  - Asset Editor Panel 
  ------------------------------------------------------------------------------------------------------------------
 
 - v8.1.5.0  : Kreator - Scene Hierarchy panel
@@ -158,14 +159,12 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 
 - v8.2.5.1  : IKan    - ImGuizmo 
               Kreator - Guizmo Toolbar
-
-## Upcoming Release Tags  
-  - Asset Editor Panel 
-
--   : Kreator - Scene Playe Pause Simulation Tool bar
-  - Scene Play and Pause
  ------------------------------------------------------------------------------------------------------------------
 
+- V8.2.5.2  : Kreator - Scene Playe Pause Simulation Tool bar
+ ------------------------------------------------------------------------------------------------------------------
+
+## Upcoming Release Tags  
 -   : IKan    - Sub texture in quad component
   - Quad Componentn GUI Update for Subtexture
  ------------------------------------------------------------------------------------------------------------------
