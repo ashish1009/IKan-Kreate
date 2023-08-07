@@ -687,7 +687,6 @@ if (!Project::GetActive()) return
     UI::SetMouseEnabled(true);
     Input::SetCursorMode(CursorMode::Normal);
     
-    // TODO: Implement OnScenePlay event
     m_panels.GetPanel<EditorConsolePanel>(CONSOLE_PANEL_ID)->OnScenePlay();
     
     m_runtimeScene = CreateRef<Scene>();
@@ -2088,12 +2087,10 @@ if (!Project::GetActive()) return
         if (m_sceneState == SceneState::Play)
         {
           OnScenePause();
-          m_sceneState = SceneState::Pause;
         }
         else if (m_sceneState == SceneState::Pause)
         {
           OnSceneResume();
-          m_sceneState = SceneState::Play;
         }
       }
     }

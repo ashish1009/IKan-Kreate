@@ -213,6 +213,8 @@ namespace IKan
     
     target->m_viewportWidth = m_viewportWidth;
     target->m_viewportHeight = m_viewportHeight;
+    
+    target->m_name = m_name;
   }
   
   void Scene::SetViewportSize(uint32_t width, uint32_t height)
