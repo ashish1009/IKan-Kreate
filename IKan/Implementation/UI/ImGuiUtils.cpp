@@ -663,7 +663,12 @@ namespace IKan::UI
   {
     ImGui::Image(INT2VOIDP(texture->GetRendererID()), size, uv0, uv1, tintCol, borderCol);
   }
-  
+  void Image(const Ref<IKan::Texture>& texture, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1,
+             const ImVec4& tintCol, const ImVec4& borderCol)
+  {
+    ImGui::Image(INT2VOIDP(texture->GetRendererID()), size, uv0, uv1, tintCol, borderCol);
+  }
+
   bool ImageButton(const Ref<Texture>& image, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, int frame_padding,
                    const ImVec4& bg_col, const ImVec4& tint_col)
   {

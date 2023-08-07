@@ -310,6 +310,14 @@ namespace IKan::UI
   ///   - uv1; Right
   void Image(const Ref<IKan::Image>& texture, const ImVec2& size, const ImVec2& uv0 = {0, 1}, const ImVec2& uv1 = {1, 0},
              const ImVec4& tintCol = {1, 1, 1, 1}, const ImVec4& borderCol = {0, 0, 0, 0});
+  /// This function renders Imgae in current ImGui window
+  /// - Parameters:
+  ///   - texture; Texture reference
+  ///   - size; size of image need to be rendered inside ImGui window (this size will be visible as texture)
+  ///   - uv0; Left
+  ///   - uv1; Right
+  void Image(const Ref<IKan::Texture>& texture, const ImVec2& size, const ImVec2& uv0 = {0, 1}, const ImVec2& uv1 = {1, 0},
+             const ImVec4& tintCol = {1, 1, 1, 1}, const ImVec4& borderCol = {0, 0, 0, 0});
   
   /// This function renders the image button
   /// - Parameters:

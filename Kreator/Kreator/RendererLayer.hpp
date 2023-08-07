@@ -77,6 +77,9 @@ namespace Kreator
     /// This function updates the hovered Entity
     void UpdateHoveredEntity();
 
+    /// This function returns the Imguizmo Snap value
+    float GetSnapValue();
+
     // Project API ---------------------------------------
     /// This function Creates new project
     /// - Parameter projectPath: Project File path
@@ -159,6 +162,9 @@ namespace Kreator
     /// This function popup new scene widget
     void UI_NewScene();
     
+    /// This function Update the Guizmo Renderer
+    void UI_UpdateGuizmo();
+
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
@@ -207,7 +213,17 @@ namespace Kreator
     };
     FolderExplorerAction m_folderExplorerAction;
     PanelManager m_panels;
-    
+
+    // Guizmo Data ---------------------------------------
+    int m_gizmoType = -1; // -1 = no gizmo
+    int m_gizmoMode = 0; // 0 = local
+
+    enum class SelectionMode
+    {
+      None = 0, Entity = 1
+    };
+    SelectionMode m_selectionMode = SelectionMode::Entity;
+
     // Client Data ---------------------------------------
     static std::filesystem::path s_clientResourcePath;
   };

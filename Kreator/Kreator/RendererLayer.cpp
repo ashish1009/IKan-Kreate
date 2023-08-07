@@ -289,6 +289,39 @@ if (!Project::GetActive()) return
     bool leftShift = Input::IsKeyPressed(Key::LeftShift);
     bool rightShift = Input::IsKeyPressed(Key::RightShift);
     
+    if (m_viewport.panelMouseHover and !Input::IsMouseButtonPressed(MouseButton::Right) and m_currentScene != m_runtimeScene)
+    {
+      switch (e.GetKeyCode())
+      {
+        case Key::Q:
+          m_gizmoType = -1;
+          break;
+        case Key::W:
+          m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+          break;
+        case Key::E:
+          m_gizmoType = ImGuizmo::OPERATION::ROTATE;
+          break;
+        case Key::R:
+          m_gizmoType = ImGuizmo::OPERATION::SCALE;
+          break;
+        case Key::F:
+        {
+          if (m_selectionContext.size() == 0)
+          {
+            break;
+          }
+          
+          Entity selectedEntity = m_selectionContext[0].entity;
+          m_editorCamera.Focus(selectedEntity.Transform().Position());
+          break;
+        }
+          
+        default:
+          break;
+      }
+    }
+    
     if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right))
     {
       switch (e.GetKeyCode())
@@ -412,6 +445,17 @@ if (!Project::GetActive()) return
 #if 1
     IK_CONSOLE_TRACE("", "{0}", m_hoveredEntityID);
 #endif
+  }
+
+  float RendererLayer::GetSnapValue()
+  {
+    switch (m_gizmoType)
+    {
+      case ImGuizmo::OPERATION::TRANSLATE: return 0.5f;
+      case ImGuizmo::OPERATION::ROTATE: return 45.0f;
+      case ImGuizmo::OPERATION::SCALE: return 0.5f;
+    }
+    return 0.0f;
   }
 
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
@@ -760,7 +804,8 @@ if (!Project::GetActive()) return
     UpdateViewportSize();
     
     // Render viewport image
-    ImGui::Image(INT2VOIDP(Renderer2D::GetFinalImage()->GetRendererID()), viewportSize, {0, 1}, {1, 0});
+    UI::Image(Renderer2D::GetFinalImage(), viewportSize);
+    UI_UpdateGuizmo();
 
     auto windowSize = ImGui::GetWindowSize();
     ImVec2 minBound = ImGui::GetWindowPos();
@@ -1710,5 +1755,71 @@ if (!Project::GetActive()) return
       }
     }
     ImGui::End();
+  }
+  
+  void RendererLayer::UI_UpdateGuizmo()
+  {
+    if (m_gizmoType != -1  and m_selectionContext.size() and m_currentScene != m_runtimeScene)
+    {
+      auto& selection = m_selectionContext[0];
+      
+      float rw = (float)ImGui::GetWindowWidth();
+      float rh = (float)ImGui::GetWindowHeight();
+      ImGuizmo::SetOrthographic(false);
+      ImGuizmo::SetDrawlist();
+      ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, rw, rh);
+      
+      bool snap = Input::IsKeyPressed(Key::LeftControl);
+      
+      TransformComponent& entityTransform = selection.entity.Transform();
+      glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(selection.entity);
+      float snapValue = GetSnapValue();
+      float snapValues[3] = { snapValue, snapValue, snapValue };
+      
+      if (m_selectionMode == SelectionMode::Entity)
+      {
+        ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
+                             glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
+                             (ImGuizmo::OPERATION)m_gizmoType,
+                             ImGuizmo::LOCAL,
+                             glm::value_ptr(transform),
+                             nullptr,
+                             snap ? snapValues : nullptr);
+        
+        if (ImGuizmo::IsUsing())
+        {
+          Entity parent = m_currentScene->TryGetEntityWithUUID(selection.entity.GetParentUUID());
+          
+          if (parent)
+          {
+            glm::mat4 parentTransform = m_currentScene->GetWorldSpaceTransformMatrix(parent);
+            transform = glm::inverse(parentTransform) * transform;
+            
+            glm::vec3 translation, rotation, scale;
+            Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+            
+            glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
+            entityTransform.UpdatePosition(translation);
+            entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+            entityTransform.UpdateScale(scale);
+          }
+          else
+          {
+            glm::vec3 translation, rotation, scale;
+            Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+            
+            glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
+            entityTransform.UpdatePosition(translation);
+            entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+            entityTransform.UpdateScale(scale);
+          }
+        }
+      }
+      else
+      {
+        // Not Supported Yet
+        IK_ASSERT(false);
+      }
+    }
   }
 } // namespace Kreator
