@@ -2,3 +2,5 @@ Project:
   Name: MeshSandbox
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
+  MeshPath: Assets/Meshes
+  MeshSourcePath: Assets/Meshes/Source

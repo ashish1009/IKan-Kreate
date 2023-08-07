@@ -1,19 +1,19 @@
 Assets:
-  - Handle: 845932729
-    FilePath: Models/Static/Backpack/ao.jpg
-    Type: Image
-  - Handle: 946391607
-    FilePath: Models/Static/Backpack/diffuse.jpg
-    Type: Image
-  - Handle: 1074034721
-    FilePath: Models/Static/Backpack/backpack.obj
+  - Handle: 782194101
+    FilePath: Models/Sources/Backpack/backpack.obj
     Type: MeshSource
-  - Handle: 1285560822
-    FilePath: Models/Static/Backpack/specular.jpg
+  - Handle: 851018354
+    FilePath: Models/Sources/Backpack/specular.jpg
     Type: Image
-  - Handle: 1890584983
-    FilePath: Models/Static/Backpack/roughness.jpg
+  - Handle: 1664882197
+    FilePath: Models/Sources/Backpack/ao.jpg
     Type: Image
-  - Handle: 3566499748
-    FilePath: Models/Static/Backpack/normal.png
+  - Handle: 1748401728
+    FilePath: Models/Sources/Backpack/normal.png
+    Type: Image
+  - Handle: 2505361275
+    FilePath: Models/Sources/Backpack/diffuse.jpg
+    Type: Image
+  - Handle: 3750278395
+    FilePath: Models/Sources/Backpack/roughness.jpg
     Type: Image
