@@ -457,6 +457,11 @@ namespace IKan
     return m_name;
   }
   
+  entt::entity Scene::GetSelectedEntity() const
+  {
+    return m_selectedEntity;
+  }
+  
   entt::registry& Scene::GetRegistry()
   {
     return m_registry;

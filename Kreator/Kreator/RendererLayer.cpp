@@ -438,11 +438,12 @@ if (!Project::GetActive()) return
   {
     if (ImGuizmo::IsOver())
     {
+      m_hoveredEntityID = (int32_t)m_currentScene->GetSelectedEntity();
       return;
     }
     
     Renderer2D::GetEntityIdFromPixels(m_viewport.mousePosX, m_viewport.mousePosY, m_hoveredEntityID);
-#if 1
+#if 0
     IK_CONSOLE_TRACE("", "{0}", m_hoveredEntityID);
 #endif
   }
@@ -1759,7 +1760,11 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UI_UpdateGuizmo()
   {
-    if (m_gizmoType != -1  and m_selectionContext.size() and m_currentScene != m_runtimeScene)
+    if (Input::IsKeyPressed(IKan::Key::LeftControl))
+    {
+      return;
+    }
+    if (m_gizmoType != -1 and m_selectionContext.size() and m_currentScene != m_runtimeScene)
     {
       auto& selection = m_selectionContext[0];
       

@@ -2,36 +2,34 @@ Scene: MyScene
 Entities:
   - Entity: 33784409437849635
     TagComponent:
-      Tag: Circle
+      Tag: Circle Marble
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [0, -2.5, 0]
+      Position: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CircleComponent:
       Color: [1, 1, 1, 1]
-      TextureHandle: 3816794033
-      TilingFactor: 1
-      Thickness: 1
-      Fade: 1.20000005
-  - Entity: 2886910740919579138
-    TagComponent:
-      Tag: Circle
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [-2.4000001, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CircleComponent:
-      Color: [1, 1, 1, 1]
-      TextureHandle: 0
+      TextureHandle: 1678758298
       TilingFactor: 1
       Thickness: 1
       Fade: 0.00499999989
+  - Entity: 2886910740919579138
+    TagComponent:
+      Tag: Quad Window
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0.000987634063, 0, -1.08596766]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    QuadComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 2335922169
+      TilingFactor: 1
   - Entity: 2944179269993974151
     TagComponent:
       Tag: Wood Quad

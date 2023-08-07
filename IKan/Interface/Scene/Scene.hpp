@@ -108,10 +108,10 @@ namespace IKan
 
     /// This function returns the max ID given to entity
     uint32_t GetMaxEntityId() const;
-
     /// This function returns the scene name
     const std::string& GetName() const;
-
+    /// This function returns the selected entity handle
+    entt::entity GetSelectedEntity() const;
     /// This function returns the reference of registry
     entt::registry& GetRegistry();
     
