@@ -18,18 +18,20 @@ Entities:
       Fade: 0.00499999989
   - Entity: 2886910740919579138
     TagComponent:
-      Tag: Quad Window
+      Tag: Circle Window
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [0.000987634063, 0, -1.08596766]
+      Position: [0.283718437, 0.401375145, 0.913853228]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
-    QuadComponent:
+    CircleComponent:
       Color: [1, 1, 1, 1]
       TextureHandle: 2335922169
       TilingFactor: 1
+      Thickness: 1
+      Fade: 0.00499999989
   - Entity: 2944179269993974151
     TagComponent:
       Tag: Wood Quad

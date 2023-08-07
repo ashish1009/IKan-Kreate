@@ -2,7 +2,7 @@ Scene: MyScene
 Entities:
   - Entity: 33784409437849635
     TagComponent:
-      Tag: Circle
+      Tag: Circle Marble
     Parent: 0
     Children:
       []
@@ -12,23 +12,23 @@ Entities:
       Scale: [1, 1, 1]
     CircleComponent:
       Color: [1, 1, 1, 1]
-      TextureHandle: 0
+      TextureHandle: 1678758298
       TilingFactor: 1
       Thickness: 1
       Fade: 0.00499999989
   - Entity: 2886910740919579138
     TagComponent:
-      Tag: Circle
+      Tag: Circle Window
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [-2.4000001, 0, 0]
+      Position: [0.283718437, 0.401375145, -1.25860405]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CircleComponent:
       Color: [1, 1, 1, 1]
-      TextureHandle: 0
+      TextureHandle: 2335922169
       TilingFactor: 1
       Thickness: 1
       Fade: 0.00499999989
