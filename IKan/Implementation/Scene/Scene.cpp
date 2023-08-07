@@ -229,6 +229,8 @@ namespace IKan
   {
     m_viewportWidth = width;
     m_viewportHeight = height;
+    
+    UpdateCamerasViewport();
   }
   
   Entity Scene::CreateEntity(const std::string& name)
@@ -504,7 +506,17 @@ namespace IKan
     
     return transformComponent;
   }
-  
+
+  void Scene::UpdateCamerasViewport()
+  {
+    auto view = m_registry.view<CameraComponent>();
+    for (auto entity : view)
+    {
+      auto& comp = view.get<CameraComponent>(entity);
+      comp.camera.SetViewportSize(m_viewportWidth, m_viewportHeight);
+    }
+  }
+
   void Scene::SetSelectedEntity(entt::entity entity)
   {
     m_selectedEntity = entity;
@@ -534,7 +546,7 @@ namespace IKan
     }
     return {};
   }
-
+  
   Entity Scene::GetEntityWithUUID(UUID id) const
   {
     IK_LOG_VERIFY(m_entityIDMap.find(id) != m_entityIDMap.end(), "Invalid entity ID or entity doesn't exist in scene!");

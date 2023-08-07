@@ -118,6 +118,9 @@ namespace IKan
     /// This function set the selected Entity
     void SetSelectedEntity(entt::entity entity);
 
+    /// This function Updates the camera viewport
+    void UpdateCamerasViewport();
+
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion

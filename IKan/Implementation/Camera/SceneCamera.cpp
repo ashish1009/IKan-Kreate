@@ -144,7 +144,7 @@ namespace IKan
         float aspect = (float)m_viewportWidth / (float)m_viewportHeight;
         float width = m_orthographicSize * aspect;
         float height = m_orthographicSize;
-        SetOrthoProjectionMatrix(m_viewportWidth, m_viewportHeight, m_orthographicNear, m_orthographicFar);
+        SetOrthoProjectionMatrix(width, height, m_orthographicNear, m_orthographicFar);
         break;
       }
       default:

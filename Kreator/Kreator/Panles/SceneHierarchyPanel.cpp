@@ -702,14 +702,14 @@ namespace Kreator
       else if (cc.camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
       {
         float orthoSize = cc.camera.GetOrthographicSize();
-        if (Kreator_UI::Property("Size", orthoSize))
+        if (Kreator_UI::Property("Size", orthoSize, 1.0f))
           cc.camera.SetOrthographicSize(orthoSize);
         
         float nearClip = cc.camera.GetOrthographicNearClip();
-        if (Kreator_UI::Property("Near Clip", nearClip))
+        if (Kreator_UI::Property("Near Clip", nearClip, 0.1f, -1.0f, 0.0f))
           cc.camera.SetOrthographicNearClip(nearClip);
         float farClip = cc.camera.GetOrthographicFarClip();
-        if (Kreator_UI::Property("Far Clip", farClip))
+        if (Kreator_UI::Property("Far Clip", farClip, 0.1f, 0.0f, 1.0f))
           cc.camera.SetOrthographicFarClip(farClip);
       }
       
