@@ -74,6 +74,9 @@ namespace Kreator
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
 
+    /// This function updates the hovered Entity
+    void UpdateHoveredEntity();
+
     // Project API ---------------------------------------
     /// This function Creates new project
     /// - Parameter projectPath: Project File path
@@ -179,6 +182,7 @@ namespace Kreator
       Entity entity;
     };
     std::vector<SelectedSubmesh> m_selectionContext;
+    int32_t m_hoveredEntityID = -1;
 
     // Project Data --------------------------------------
     bool m_showCreateNewProjectPopup = false;

@@ -241,6 +241,7 @@ if (!Project::GetActive()) return
     RETRUN_IF_NO_PROJECT();
     
     AssetEditorManager::OnUpdate(ts);
+    UpdateHoveredEntity();
     m_viewport.UpdateMousePos();
 
     m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
@@ -382,6 +383,19 @@ if (!Project::GetActive()) return
     Application::Get().GetWindow().SetTitle(title);
   }
   
+  void RendererLayer::UpdateHoveredEntity()
+  {
+    if (ImGuizmo::IsOver())
+    {
+      return;
+    }
+    
+    Renderer2D::GetEntityIdFromPixels(m_viewport.mousePosX, m_viewport.mousePosY, m_hoveredEntityID);
+#if 0
+    IK_CONSOLE_TRACE("", "{0}", m_hoveredEntityID);
+#endif
+  }
+
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Project at {0} ", projectDir.string().c_str());
