@@ -126,6 +126,12 @@ namespace Kreator
     void OnSceneStartSimulation();
     /// This function handle scene simuation ends
     void OnSceneStopSimulation();
+    
+    /// This function Renders the scene
+    /// - Parameters:
+    ///   - ts: Time step of Frames
+    ///   - scene: Scene based on state
+    void RenderScene(TimeStep ts, Ref<Scene> scene);
 
     // Scene Panel Manager Callbacks ----------------------
     /// This function handles the entity selection

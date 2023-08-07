@@ -252,28 +252,46 @@ if (!Project::GetActive()) return
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     RETRUN_IF_NO_PROJECT();
     
-    AssetEditorManager::OnUpdate(ts);
-    m_viewport.UpdateMousePos();
-
-    m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
-    m_editorCamera.OnUpdate(ts);
-
-    Renderer2D::BeginRenderPass();
-    Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
-      
-    m_editorScene->OnUpdateEditor(ts);
-    m_editorScene->OnRenderEditor(m_editorCamera);
-
-    UpdateHoveredEntity();
-    Renderer2D::EndRenderPass();
-    
-    if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
+    switch (m_sceneState)
     {
-      m_timeSinceLastSave += ts;
-      if (m_timeSinceLastSave > project->GetConfig().autoSaveIntervalSeconds)
+      case SceneState::Edit:
       {
-        SaveSceneAuto();
+        AssetEditorManager::OnUpdate(ts);
+        m_viewport.UpdateMousePos();
+        m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+        m_editorCamera.OnUpdate(ts);
+        
+        RenderScene(ts, m_editorScene);
+        
+        if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
+        {
+          m_timeSinceLastSave += ts;
+          if (m_timeSinceLastSave > project->GetConfig().autoSaveIntervalSeconds)
+          {
+            SaveSceneAuto();
+          }
+        }
+        break;
       }
+      case SceneState::Play:
+      {
+        RenderScene(ts, m_runtimeScene);
+        break;
+      }
+      case SceneState::Simulate:
+      {
+        m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+        m_editorCamera.OnUpdate(ts);
+        RenderScene(ts, m_simulationScene);
+        break;
+      }
+      case SceneState::Pause:
+      {
+        break;
+      }
+
+      default:
+        break;
     }
   }
   
@@ -684,8 +702,6 @@ if (!Project::GetActive()) return
     ClearSelectedEntity();
     
     m_sceneState = SceneState::Play;
-    UI::SetMouseEnabled(true);
-    Input::SetCursorMode(CursorMode::Normal);
     
     m_panels.GetPanel<EditorConsolePanel>(CONSOLE_PANEL_ID)->OnScenePlay();
     
@@ -703,8 +719,6 @@ if (!Project::GetActive()) return
     
     m_runtimeScene->OnRuntimeStop();
     m_sceneState = SceneState::Edit;
-    Input::SetCursorMode(CursorMode::Normal);
-    UI::SetMouseEnabled(true);
     
     // Unload runtime scene
     m_runtimeScene = nullptr;
@@ -748,6 +762,18 @@ if (!Project::GetActive()) return
     
     m_panels.SetSceneContext(m_editorScene);
     m_currentScene = m_editorScene;
+  }
+  
+  void RendererLayer::RenderScene(TimeStep ts, Ref<Scene> scene)
+  {
+    Renderer2D::BeginRenderPass();
+    Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+    
+    scene->OnUpdateEditor(ts);
+    scene->OnRenderEditor(m_editorCamera);
+    
+    UpdateHoveredEntity();
+    Renderer2D::EndRenderPass();
   }
 
   void RendererLayer::OnEntitySelected(Entity entity)
