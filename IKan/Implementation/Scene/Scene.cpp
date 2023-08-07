@@ -20,7 +20,7 @@ namespace IKan
   {
     registry.reserve<Component...>(capacity);
   }
-
+  
   template<typename T>
   static void CopyComponent(entt::registry& dstRegistry, entt::registry& srcRegistry, const std::unordered_map<UUID, entt::entity>& enttMap)
   {
@@ -30,7 +30,7 @@ namespace IKan
       entt::entity destEntity = enttMap.at(srcRegistry.get<IDComponent>(srcEntity).ID);
       
       auto& srcComponent = srcRegistry.get<T>(srcEntity);
-      auto& destComponent = dstRegistry.emplace_or_replace<T>(destEntity, srcComponent);
+      [[maybe_unused]] auto& destComponent = dstRegistry.emplace_or_replace<T>(destEntity, srcComponent);
     }
   }
   
@@ -53,7 +53,7 @@ namespace IKan
       dstRegistry.emplace_or_replace<T>(dst, srcComponent);
     }
   }
-
+  
   Ref<Scene> Scene::Create(const std::string& name, uint32_t maxEntityCapacity)
   {
     return CreateRef<Scene>(name, maxEntityCapacity);
@@ -67,7 +67,7 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
   }
-
+  
   Scene::~Scene()
   {
     IK_PROFILE();
@@ -79,9 +79,24 @@ namespace IKan
     
   }
   
+  void Scene::OnUpdateRuntime(TimeStep ts)
+  {
+    
+  }
+  
   void Scene::OnRenderEditor(const EditorCamera &editorCamera)
   {
     Render2DEntities(editorCamera.GetUnReversedViewProjection());
+  }
+
+  void Scene::OnRenderRuntime(TimeStep ts)
+  {
+    
+  }
+  
+  void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera)
+  {
+    
   }
   
   void Scene::Render2DEntities(const glm::mat4& viewProjection)
@@ -147,6 +162,63 @@ namespace IKan
     }
     
     Renderer2D::EndBatch();
+  }
+  
+  void Scene::OnRuntimeStart()
+  {
+    
+  }
+  void Scene::OnRuntimeStop()
+  {
+    
+  }
+  void Scene::OnSimulationStart()
+  {
+    
+  }
+  void Scene::OnSimulationStop()
+  {
+    
+  }
+  
+  void Scene::CopyTo(Ref<Scene> &target)
+  {
+    IK_PROFILE();
+    
+    std::unordered_map<UUID, entt::entity> enttMap;
+    auto idComponents = m_registry.view<IDComponent>();
+    for (auto entity : idComponents)
+    {
+      auto uuid = m_registry.get<IDComponent>(entity).ID;
+      auto name = m_registry.get<TagComponent>(entity).tag;
+      Entity e = target->CreateEntityWithID(uuid, name);
+      enttMap[uuid] = e.m_entityHandle;
+    }
+
+    CopyComponent<TagComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<TransformComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<CameraComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<QuadComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<CircleComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<TextComponent>(target->m_registry, m_registry, enttMap);
+    
+    // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
+    // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
+    target->m_registry.sort<IDComponent>([&target](const auto lhs, const auto rhs)
+                                         {
+      auto lhsEntity = target->m_entityIDMap.find(lhs.ID);
+      auto rhsEntity = target->m_entityIDMap.find(rhs.ID);
+      return static_cast<uint32_t>(lhsEntity->second) < static_cast<uint32_t>(rhsEntity->second);
+    });
+    
+    target->m_viewportWidth = m_viewportWidth;
+    target->m_viewportHeight = m_viewportHeight;
+  }
+  
+  void Scene::SetViewportSize(uint32_t width, uint32_t height)
+  {
+    m_viewportWidth = width;
+    m_viewportHeight = height;
   }
   
   Entity Scene::CreateEntity(const std::string& name)

@@ -25,7 +25,9 @@ namespace IKan
  
     /// @see Editor Panel
     virtual void OnImGuiRender(bool& isOpen) override = 0;
-    
+    /// Handle Scene Play
+    void OnScenePlay();
+
   protected:
     static constexpr uint32_t s_messageBufferCapacity = 1000;
 

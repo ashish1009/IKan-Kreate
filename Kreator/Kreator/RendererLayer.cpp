@@ -410,6 +410,7 @@ if (!Project::GetActive()) return
   {
     Renderer2D::SetViewport(m_viewport.width, m_viewport.height);
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
+    m_currentScene->SetViewportSize(m_viewport.width, m_viewport.height);
   }
 
   void RendererLayer::OnImGuiRender()
@@ -681,6 +682,20 @@ if (!Project::GetActive()) return
   void RendererLayer::OnScenePlay()
   {
     ClearSelectedEntity();
+    
+    m_sceneState = SceneState::Play;
+    UI::SetMouseEnabled(true);
+    Input::SetCursorMode(CursorMode::Normal);
+    
+    // TODO: Implement OnScenePlay event
+    m_panels.GetPanel<EditorConsolePanel>(CONSOLE_PANEL_ID)->OnScenePlay();
+    
+    m_runtimeScene = CreateRef<Scene>();
+    m_editorScene->CopyTo(m_runtimeScene);
+
+    m_runtimeScene->OnRuntimeStart();
+    m_panels.SetSceneContext(m_runtimeScene);
+    m_currentScene = m_runtimeScene;
   }
   
   void RendererLayer::OnSceneStop()

@@ -34,10 +34,38 @@ namespace IKan
     /// This functionm updates the scene for editor
     /// - Parameter ts: time step of 2 frames
     void OnUpdateEditor(TimeStep ts);
-    
+    /// This functionm updates the scene for runtime
+    /// - Parameter ts: time step of 2 frames
+    void OnUpdateRuntime(TimeStep ts);
+
     /// This functionm renders the scene for editor
     /// - Parameter editorCamera: Editor Camera
     void OnRenderEditor(const EditorCamera& editorCamera);
+    /// This functionm renders the scene for runtime
+    /// - Parameter ts: time step of 2 frames
+    void OnRenderRuntime(TimeStep ts);
+    /// This functionm renders the scene for simulation
+    void OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera);
+
+    // Runtime
+    /// This function handle runtime start
+    void OnRuntimeStart();
+    /// This function handle runtime stop
+    void OnRuntimeStop();
+    
+    /// This function handle simulation start
+    void OnSimulationStart();
+    /// This function handle simulation stop
+    void OnSimulationStop();
+
+    /// this function copy scene to target
+    /// - Parameter target: target scene
+    void CopyTo(Ref<Scene>& target);
+    /// This function updates the viewport of Scene
+    /// - Parameters:
+    ///   - width: width of view port
+    ///   - height: width of view port
+    void SetViewportSize(uint32_t width, uint32_t height);
 
     // Entity Manager ------------------------------------------------------------------------------------------------
     /// This function creates an unique entity with UUID
@@ -142,10 +170,10 @@ namespace IKan
     int32_t m_maxEntityID = -1;
     EntityMap m_entityIDMap;
     entt::entity m_selectedEntity;
-
     std::string m_name = "";
-
     std::function<void(Entity)> m_onEntityDestroyedCallback;
+    
+    uint32_t m_viewportWidth = 0, m_viewportHeight = 0;
 
     friend class Entity;
     friend class SceneSerializer;

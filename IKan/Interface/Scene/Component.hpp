@@ -19,6 +19,8 @@ namespace IKan
   //  3) Add in ALL_COPY_COMPONENTS Macro
   //  4) Add in Scene Duplicate Function
   //  5) Update SceneSerializer to (de)serialize the new component.
+  //  6) Update Scene::DuplicateEntity() to deal with the new component in whatever way is appropriate.
+  //  7) ditto Scene::CopyTo()
 
   struct IDComponent
   {

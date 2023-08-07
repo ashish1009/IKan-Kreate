@@ -54,5 +54,11 @@ namespace IKan
       s_instance->m_messageBufferBegin = 0;
     }
   }
+  
+  void EditorConsolePanel::OnScenePlay()
+  {
+    if (m_shouldClearOnPlay)
+      m_messageBufferBegin = 0;
+  }
 
 } // namespace IKan
