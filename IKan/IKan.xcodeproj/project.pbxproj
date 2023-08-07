@@ -144,6 +144,7 @@
 		B26B1A822A7D18DE00676419 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */; };
 		B26B1A952A7D1C2900676419 /* EditorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A932A7D1C2900676419 /* EditorConsolePanel.cpp */; };
 		B26B1A962A7D1C2900676419 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */; };
+		B283DF932A811EAC002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
 		B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */; };
@@ -353,6 +354,7 @@
 		B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleSink.hpp; sourceTree = "<group>"; };
 		B26B1A932A7D1C2900676419 /* EditorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsolePanel.cpp; sourceTree = "<group>"; };
 		B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsolePanel.hpp; sourceTree = "<group>"; };
+		B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiCustom.cpp; sourceTree = "<group>"; };
@@ -377,6 +379,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B283DF932A811EAC002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */,
 				B2307A012A80B22600300D82 /* libImGuizmo.a in Frameworks */,
 				B2336A7A2A7644B300BC7B8B /* libYaml.a in Frameworks */,
 				B23367142A753AAB00BC7B8B /* libUI.a in Frameworks */,
@@ -452,6 +455,7 @@
 		B23364822A72CC9700BC7B8B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */,
 				B23365812A752FF000BC7B8B /* libpng16.a */,
 				B23365792A752F9700BC7B8B /* libfreetype.a */,
 			);
@@ -1321,11 +1325,13 @@
 					"${PROJECT_DIR}/Vendors/EnTT",
 					"${PROJECT_DIR}/Vendors/Yaml/Yaml/include",
 					"${PROJECT_DIR}/Vendors/ImGuizmo/ImGuizmo",
+					"${PROJECT_DIR}/Vendors/Assimp/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
 					"$(PROJECT_DIR)/Vendors/Freetype/libpng/1.6.39/lib",
+					"$(PROJECT_DIR)/Vendors/Assimp/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -1352,11 +1358,13 @@
 					"${PROJECT_DIR}/Vendors/EnTT",
 					"${PROJECT_DIR}/Vendors/Yaml/Yaml/include",
 					"${PROJECT_DIR}/Vendors/ImGuizmo/ImGuizmo",
+					"${PROJECT_DIR}/Vendors/Assimp/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
 					"$(PROJECT_DIR)/Vendors/Freetype/libpng/1.6.39/lib",
+					"$(PROJECT_DIR)/Vendors/Assimp/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

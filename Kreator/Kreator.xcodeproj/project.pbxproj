@@ -22,6 +22,10 @@
 		B26B1AA82A7D5D6F00676419 /* ProjectSettingPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AA62A7D5D6F00676419 /* ProjectSettingPanel.cpp */; };
 		B26B1ABD2A7D62D600676419 /* UIProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1ABC2A7D62D600676419 /* UIProperty.cpp */; };
 		B26B1AC32A7D76F800676419 /* AssetPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AC12A7D76F800676419 /* AssetPanel.cpp */; };
+		B283DF8F2A8113E3002B5DC3 /* libminizip.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B283DF8C2A8113E3002B5DC3 /* libminizip.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B283DF902A8113E3002B5DC3 /* libassimp.5.2.4.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B283DF8D2A8113E3002B5DC3 /* libassimp.5.2.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B283DF912A8113E3002B5DC3 /* libpugixml.1.13.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B283DF8E2A8113E3002B5DC3 /* libpugixml.1.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B283DF942A811ED0002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B283DF8D2A8113E3002B5DC3 /* libassimp.5.2.4.dylib */; };
 		B2B2CE522A7B685A007EACDE /* FolderExplorer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE502A7B685A007EACDE /* FolderExplorer.cpp */; };
 		B2B63F2F2A77B5430056ED4E /* Theme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B63F2D2A77B5430056ED4E /* Theme.cpp */; };
 /* End PBXBuildFile section */
@@ -29,12 +33,15 @@
 /* Begin PBXCopyFilesBuildPhase section */
 		B24076D02A72375000221919 /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
 			files = (
+				B283DF8F2A8113E3002B5DC3 /* libminizip.1.dylib in CopyFiles */,
+				B283DF902A8113E3002B5DC3 /* libassimp.5.2.4.dylib in CopyFiles */,
+				B283DF912A8113E3002B5DC3 /* libpugixml.1.13.dylib in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -69,6 +76,12 @@
 		B26B1ABF2A7D672200676419 /* UIInputs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UIInputs.hpp; sourceTree = "<group>"; };
 		B26B1AC12A7D76F800676419 /* AssetPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetPanel.cpp; sourceTree = "<group>"; };
 		B26B1AC22A7D76F800676419 /* AssetPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetPanel.hpp; sourceTree = "<group>"; };
+		B283D6272A80E5E6002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
+		B283D6322A80E92B002B5DC3 /* Kreator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kreator.entitlements; sourceTree = "<group>"; };
+		B283DF7D2A81016A002B5DC3 /* my_libassimp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = my_libassimp.dylib; path = ../IKan/Vendors/Assimp/lib/my_libassimp.dylib; sourceTree = "<group>"; };
+		B283DF8C2A8113E3002B5DC3 /* libminizip.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libminizip.1.dylib; path = ../IKan/Vendors/Assimp/lib/libminizip.1.dylib; sourceTree = "<group>"; };
+		B283DF8D2A8113E3002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
+		B283DF8E2A8113E3002B5DC3 /* libpugixml.1.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugixml.1.13.dylib; path = ../IKan/Vendors/Assimp/lib/libpugixml.1.13.dylib; sourceTree = "<group>"; };
 		B2B2CE502A7B685A007EACDE /* FolderExplorer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FolderExplorer.cpp; sourceTree = "<group>"; };
 		B2B2CE512A7B685A007EACDE /* FolderExplorer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FolderExplorer.hpp; sourceTree = "<group>"; };
 		B2B63F2D2A77B5430056ED4E /* Theme.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Theme.cpp; sourceTree = "<group>"; };
@@ -80,6 +93,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B283DF942A811ED0002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */,
 				B23365802A752FC900BC7B8B /* libz.tbd in Frameworks */,
 				B233657C2A752FB900BC7B8B /* libbz2.1.0.8.tbd in Frameworks */,
 				B24077072A72591900221919 /* libIKan.a in Frameworks */,
@@ -92,6 +106,9 @@
 		B24076C92A72375000221919 = {
 			isa = PBXGroup;
 			children = (
+				B283DF8D2A8113E3002B5DC3 /* libassimp.5.2.4.dylib */,
+				B283DF8C2A8113E3002B5DC3 /* libminizip.1.dylib */,
+				B283DF8E2A8113E3002B5DC3 /* libpugixml.1.13.dylib */,
 				B24076F82A723A6100221919 /* PrefixHeader.pch */,
 				B24076F72A72399400221919 /* Resources */,
 				B24076D42A72375000221919 /* Kreator */,
@@ -111,6 +128,7 @@
 		B24076D42A72375000221919 /* Kreator */ = {
 			isa = PBXGroup;
 			children = (
+				B283D6322A80E92B002B5DC3 /* Kreator.entitlements */,
 				B24076D52A72375000221919 /* Kreator.cpp */,
 				B23365942A75355200BC7B8B /* RendererLayer.cpp */,
 				B23365952A75355200BC7B8B /* RendererLayer.hpp */,
@@ -131,6 +149,8 @@
 		B24077052A72591800221919 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B283DF7D2A81016A002B5DC3 /* my_libassimp.dylib */,
+				B283D6272A80E5E6002B5DC3 /* libassimp.5.2.4.dylib */,
 				B233657F2A752FC900BC7B8B /* libz.tbd */,
 				B233657D2A752FC000BC7B8B /* libz.1.tbd */,
 				B233657B2A752FB900BC7B8B /* libbz2.1.0.8.tbd */,
@@ -192,9 +212,9 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = B24076D92A72375000221919 /* Build configuration list for PBXNativeTarget "Kreator" */;
 			buildPhases = (
+				B24076D02A72375000221919 /* CopyFiles */,
 				B24076CE2A72375000221919 /* Sources */,
 				B24076CF2A72375000221919 /* Frameworks */,
-				B24076D02A72375000221919 /* CopyFiles */,
 			);
 			buildRules = (
 			);
@@ -374,7 +394,11 @@
 		B24076DA2A72375000221919 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_ENTITLEMENTS = Kreator/Kreator.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
+				"CODE_SIGN_IDENTITY[sdk=macosx*]" = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78KTXZ99TW;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -397,14 +421,23 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Yaml/Yaml/include",
 					"${PROJECT_DIR}/../IKan/Vendors/ImGuizmo/ImGuizmo",
 				);
+				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"${PROJECT_DIR}/../IKan/Vendors/Assimp/lib",
+					"${PROJECT_DIR}/../Build/Products/Debug",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Debug;
 		};
 		B24076DB2A72375000221919 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				BUILD_LIBRARY_FOR_DISTRIBUTION = NO;
 				CLANG_CXX_LANGUAGE_STANDARD = "c++17";
+				CODE_SIGN_ENTITLEMENTS = Kreator/Kreator.entitlements;
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78KTXZ99TW;
 				ENABLE_HARDENED_RUNTIME = YES;
@@ -422,8 +455,14 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Yaml/Yaml/include",
 					"${PROJECT_DIR}/../IKan/Vendors/ImGuizmo/ImGuizmo",
 				);
+				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
+				LIBRARY_SEARCH_PATHS = (
+					"${PROJECT_DIR}/../IKan/Vendors/Assimp/lib",
+					"${PROJECT_DIR}/../Build/Products/Debug",
+				);
 				ONLY_ACTIVE_ARCH = YES;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 			};
 			name = Release;
 		};
