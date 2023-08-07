@@ -241,7 +241,6 @@ if (!Project::GetActive()) return
     RETRUN_IF_NO_PROJECT();
     
     AssetEditorManager::OnUpdate(ts);
-    UpdateHoveredEntity();
     m_viewport.UpdateMousePos();
 
     m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
@@ -253,6 +252,7 @@ if (!Project::GetActive()) return
     m_editorScene->OnUpdateEditor(ts);
     m_editorScene->OnRenderEditor(m_editorCamera);
 
+    UpdateHoveredEntity();
     Renderer2D::EndRenderPass();
     
     if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
@@ -340,6 +340,24 @@ if (!Project::GetActive()) return
 
   bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
   {
+    if (Input::IsKeyPressed(IKan::Key::LeftControl))
+    {
+      return false;
+    }
+    
+    auto [mouseX, mouseY] = m_viewport.GetMousePos();
+    if (mouseX <= 0 or mouseY <= 0 or mouseX >= m_viewport.width or mouseY >= m_viewport.height)
+    {
+      return false;
+    }
+    
+    if (m_hoveredEntityID >= 0 and m_hoveredEntityID <= (int32_t)m_currentScene->GetMaxEntityId())
+    {
+      Entity selectedEntity = m_currentScene->GetEntityWithEntityHandle(m_hoveredEntityID);
+      
+      m_selectionContext.push_back({ selectedEntity });
+      SetSelectedEntity(selectedEntity);
+    }
     return false;
   }
 
@@ -391,7 +409,7 @@ if (!Project::GetActive()) return
     }
     
     Renderer2D::GetEntityIdFromPixels(m_viewport.mousePosX, m_viewport.mousePosY, m_hoveredEntityID);
-#if 0
+#if 1
     IK_CONSOLE_TRACE("", "{0}", m_hoveredEntityID);
 #endif
   }
@@ -640,6 +658,11 @@ if (!Project::GetActive()) return
     }
     
     m_selectionContext.clear();
+  }
+  
+  void RendererLayer::SetSelectedEntity(Entity entity)
+  {
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity);
   }
 
   // UI APIS ---------------------------------------------------------------------------------------------------------

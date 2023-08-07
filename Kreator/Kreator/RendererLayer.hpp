@@ -122,6 +122,9 @@ namespace Kreator
     /// This function clear the selected Entity
     /// - Note: To be called inside Render Pass Begin end End
     void ClearSelectedEntity();
+    /// This function set the selected entity
+    /// - Parameter entity: Selected entity
+    void SetSelectedEntity(Entity entity);
 
     // UI API --------------------------------------------
     /// This functions shows primary Viewport
