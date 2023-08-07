@@ -162,6 +162,8 @@ namespace Kreator
     /// This function popup new scene widget
     void UI_NewScene();
     
+    /// This function shows the Applicaton toolbar
+    void UI_SceneToolbar();
     /// This function Update the Guizmo Renderer
     void UI_UpdateGuizmo();
     /// This function renders the Guizmo toolbar
@@ -188,12 +190,18 @@ namespace Kreator
     float m_timeSinceLastSave = 0.0f;
     std::string m_sceneFilePath;
     Ref<Scene> m_editorScene, m_currentScene, m_runtimeScene, m_simulationScene;
+    Ref<Image> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
     struct SelectedSubmesh
     {
       Entity entity;
     };
     std::vector<SelectedSubmesh> m_selectionContext;
     int32_t m_hoveredEntityID = -1;
+    enum class SceneState
+    {
+      Edit = 0, Play = 1, Pause = 2, Simulate = 3
+    };
+    SceneState m_sceneState = SceneState::Edit;
 
     // Project Data --------------------------------------
     bool m_showCreateNewProjectPopup = false;

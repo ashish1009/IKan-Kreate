@@ -11,7 +11,7 @@
 
 /// Version number of IKan Engine
 ///- Note: To be updated manually
-std::string IKanVersion = "v8.2.5.1";
+std::string IKanVersion = "v8.3.5.2";
 
 void InitializeEngine(const std::string logDirectoryPath)
 {    
