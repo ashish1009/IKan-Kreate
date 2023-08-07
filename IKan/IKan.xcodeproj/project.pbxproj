@@ -156,6 +156,8 @@
 		B2B63F222A779E820056ED4E /* ImGuiTheme.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */; };
 		B2CD2AAC2A81269F00B0D70B /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2CD2AAA2A81269F00B0D70B /* Mesh.cpp */; };
 		B2CD2AAD2A81269F00B0D70B /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2CD2AAB2A81269F00B0D70B /* Mesh.hpp */; };
+		B2CD2ABA2A81277600B0D70B /* AABB.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2CD2AB82A81277600B0D70B /* AABB.cpp */; };
+		B2CD2ABB2A81277600B0D70B /* AABB.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2CD2AB92A81277600B0D70B /* AABB.hpp */; };
 		B2CF83132A77D03C006B2D54 /* ImGuiUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2CF83112A77D03C006B2D54 /* ImGuiUtils.cpp */; };
 		B2CF83142A77D03C006B2D54 /* ImGuiUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2CF83122A77D03C006B2D54 /* ImGuiUtils.hpp */; };
 		B2CF831B2A77DAF0006B2D54 /* ImGuiScoped.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2CF83192A77DAF0006B2D54 /* ImGuiScoped.cpp */; };
@@ -368,6 +370,8 @@
 		B2B63F202A779E820056ED4E /* ImGuiTheme.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiTheme.hpp; sourceTree = "<group>"; };
 		B2CD2AAA2A81269F00B0D70B /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		B2CD2AAB2A81269F00B0D70B /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
+		B2CD2AB82A81277600B0D70B /* AABB.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AABB.cpp; sourceTree = "<group>"; };
+		B2CD2AB92A81277600B0D70B /* AABB.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AABB.hpp; sourceTree = "<group>"; };
 		B2CF83112A77D03C006B2D54 /* ImGuiUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiUtils.cpp; sourceTree = "<group>"; };
 		B2CF83122A77D03C006B2D54 /* ImGuiUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiUtils.hpp; sourceTree = "<group>"; };
 		B2CF83192A77DAF0006B2D54 /* ImGuiScoped.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiScoped.cpp; sourceTree = "<group>"; };
@@ -835,6 +839,7 @@
 				B23365912A75348800BC7B8B /* LayerStack.hpp */,
 				B23367242A75495000BC7B8B /* UUID.hpp */,
 				B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */,
+				B2CD2AB92A81277600B0D70B /* AABB.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -853,6 +858,7 @@
 				B23365902A75348800BC7B8B /* LayerStack.cpp */,
 				B23367232A75495000BC7B8B /* UUID.cpp */,
 				B2336A5C2A763B4300BC7B8B /* HashGenerator.cpp */,
+				B2CD2AB82A81277600B0D70B /* AABB.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -985,6 +991,7 @@
 				B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */,
 				B233671E2A75420600BC7B8B /* Entity.hpp in Headers */,
 				B23364C32A72D1E300BC7B8B /* OpenGLRendererContext.hpp in Headers */,
+				B2CD2ABB2A81277600B0D70B /* AABB.hpp in Headers */,
 				B23365772A752E0A00BC7B8B /* Font.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1174,6 +1181,7 @@
 				B23364DC2A74259600BC7B8B /* OpenGLRendererAPI.cpp in Sources */,
 				B21FAA412A729256009EED1F /* TimeStep.cpp in Sources */,
 				B2B5DE3E2A727C090068EEFB /* Timer.cpp in Sources */,
+				B2CD2ABA2A81277600B0D70B /* AABB.cpp in Sources */,
 				B23364E02A74270000BC7B8B /* ShaderUniform.cpp in Sources */,
 				B23364E42A7427C300BC7B8B /* OpenGLShaderUniform.cpp in Sources */,
 				B233670E2A75394300BC7B8B /* ImGuiBuild.cpp in Sources */,
