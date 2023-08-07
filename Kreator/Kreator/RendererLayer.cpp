@@ -261,8 +261,15 @@ if (!Project::GetActive()) return
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
         
-        RenderScene(ts, m_editorScene);
+        Renderer2D::BeginRenderPass();
+        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
         
+        m_editorScene->OnUpdateEditor(ts);
+        m_editorScene->OnRenderEditor(m_editorCamera);
+        
+        UpdateHoveredEntity();
+        Renderer2D::EndRenderPass();
+
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
         {
           m_timeSinceLastSave += ts;
@@ -275,14 +282,29 @@ if (!Project::GetActive()) return
       }
       case SceneState::Play:
       {
-        RenderScene(ts, m_runtimeScene);
+        Renderer2D::BeginRenderPass();
+        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+        
+        m_runtimeScene->OnUpdateRuntime(ts);
+        m_runtimeScene->OnRenderRuntime(ts);
+        
+        UpdateHoveredEntity();
+        Renderer2D::EndRenderPass();
         break;
       }
       case SceneState::Simulate:
       {
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
-        RenderScene(ts, m_simulationScene);
+        
+        Renderer2D::BeginRenderPass();
+        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+        
+        m_simulationScene->OnUpdateRuntime(ts);
+        m_simulationScene->OnRenderSimulation(ts, m_editorCamera);
+        
+        UpdateHoveredEntity();
+        Renderer2D::EndRenderPass();
         break;
       }
       case SceneState::Pause:
@@ -764,18 +786,6 @@ if (!Project::GetActive()) return
     m_currentScene = m_editorScene;
   }
   
-  void RendererLayer::RenderScene(TimeStep ts, Ref<Scene> scene)
-  {
-    Renderer2D::BeginRenderPass();
-    Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
-    
-    scene->OnUpdateEditor(ts);
-    scene->OnRenderEditor(m_editorCamera);
-    
-    UpdateHoveredEntity();
-    Renderer2D::EndRenderPass();
-  }
-
   void RendererLayer::OnEntitySelected(Entity entity)
   {
     if (!entity)
