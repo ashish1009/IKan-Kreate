@@ -731,8 +731,12 @@ if (!Project::GetActive()) return
     m_editorScene->CopyTo(m_runtimeScene);
 
     m_runtimeScene->OnRuntimeStart();
-    m_panels.SetSceneContext(m_runtimeScene);
     m_currentScene = m_runtimeScene;
+    m_panels.SetSceneContext(m_runtimeScene);
+    
+#ifdef DEBUG
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_runtimeScene);
+#endif
   }
   
   void RendererLayer::OnSceneStop()
@@ -745,8 +749,9 @@ if (!Project::GetActive()) return
     // Unload runtime scene
     m_runtimeScene = nullptr;
     
-    m_panels.SetSceneContext(m_editorScene);
     m_currentScene = m_editorScene;
+    m_panels.SetSceneContext(m_editorScene);
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_editorScene);
   }
   
   void RendererLayer::OnScenePause()
@@ -769,8 +774,9 @@ if (!Project::GetActive()) return
     m_editorScene->CopyTo(m_simulationScene);
     
     m_simulationScene->OnSimulationStart();
-    m_panels.SetSceneContext(m_simulationScene);
     m_currentScene = m_simulationScene;
+    m_panels.SetSceneContext(m_simulationScene);
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_simulationScene);
   }
   
   void RendererLayer::OnSceneStopSimulation()
@@ -782,8 +788,9 @@ if (!Project::GetActive()) return
     
     m_simulationScene = nullptr;
     
-    m_panels.SetSceneContext(m_editorScene);
     m_currentScene = m_editorScene;
+    m_panels.SetSceneContext(m_editorScene);
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_editorScene);
   }
   
   void RendererLayer::OnEntitySelected(Entity entity)
