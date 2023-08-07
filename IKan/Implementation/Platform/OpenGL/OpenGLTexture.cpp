@@ -21,6 +21,7 @@ namespace IKan
         case TextureFormat::RGBA :            return "GL_RGBA";
         case TextureFormat::RGB8 :            return "GL_RGB8";
         case TextureFormat::RGB :             return "GL_RGB";
+        case TextureFormat::RED :             return "GL_RED";
         case TextureFormat::R32I :            return "GL_R32I";
         case TextureFormat::RED_INTEGER :     return "GL_RED_INTEGER";
         case TextureFormat::DEPTH_COMPONENT : return "GL_DEPTH_COMPONENT";

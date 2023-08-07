@@ -49,8 +49,6 @@ namespace IKan
     
     // mesh/animation source
     { ".fbx", AssetType::MeshSource },
-    { ".gltf", AssetType::MeshSource },
-    { ".glb", AssetType::MeshSource },
     { ".obj", AssetType::MeshSource },
   };
 

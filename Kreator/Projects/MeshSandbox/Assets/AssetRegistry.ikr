@@ -1,2 +1,19 @@
 Assets:
-  []
+  - Handle: 845932729
+    FilePath: Models/Static/Backpack/ao.jpg
+    Type: Image
+  - Handle: 946391607
+    FilePath: Models/Static/Backpack/diffuse.jpg
+    Type: Image
+  - Handle: 1074034721
+    FilePath: Models/Static/Backpack/backpack.obj
+    Type: MeshSource
+  - Handle: 1285560822
+    FilePath: Models/Static/Backpack/specular.jpg
+    Type: Image
+  - Handle: 1890584983
+    FilePath: Models/Static/Backpack/roughness.jpg
+    Type: Image
+  - Handle: 3566499748
+    FilePath: Models/Static/Backpack/normal.png
+    Type: Image

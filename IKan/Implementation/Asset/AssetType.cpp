@@ -19,7 +19,7 @@ namespace IKan
       if (assetType == "Scene")               return AssetType::Scene;
       if (assetType == "Mesh")                return AssetType::Mesh;
       if (assetType == "StaticMesh")          return AssetType::StaticMesh;
-      if (assetType == "MeshAsset")           return AssetType::MeshSource;
+      if (assetType == "MeshSource")          return AssetType::MeshSource;
       IK_ASSERT(false, "Unknown Asset Type");
       return AssetType::None;
     }

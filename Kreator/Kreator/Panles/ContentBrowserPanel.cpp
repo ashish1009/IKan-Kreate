@@ -135,11 +135,16 @@ namespace Kreator
     m_refreshIcon = CBP_Utils::AssetPath("Refresh.png");
     
     m_assetIconMap[".png"] = CBP_Utils::AssetPath("Png.png");
+    m_assetIconMap[".jpg"] = m_assetIconMap.at(".png");
+
     m_assetIconMap[".ttf"] = CBP_Utils::AssetPath("Font.png");
     m_assetIconMap[".ttc"] = m_assetIconMap.at(".ttf");
     m_assetIconMap[".otf"] = m_assetIconMap.at(".ttf");
     
     m_assetIconMap[".ikscene"] = CBP_Utils::AssetPath("IKScene.png");
+    
+    m_assetIconMap[".fbx"] = CBP_Utils::AssetPath("Fbx.png");
+    m_assetIconMap[".obj"] = CBP_Utils::AssetPath("Obj.png");
   }
   
   void ContentBrowserPanel::OnImGuiRender(bool &isOpen)
