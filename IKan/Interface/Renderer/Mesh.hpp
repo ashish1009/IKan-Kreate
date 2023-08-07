@@ -60,4 +60,10 @@ namespace IKan
     
     std::string NodeName, MeshName;
   };
+  
+  /// MeshSource is a representation of an actual asset file on disk. Meshes are created from MeshSource
+  class MeshSource : public Asset
+  {
+    
+  };
 } // namespace IKan

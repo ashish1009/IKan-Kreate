@@ -17,6 +17,9 @@ namespace IKan
       if (assetType == "Image")               return AssetType::Image;
       if (assetType == "Font")                return AssetType::Font;
       if (assetType == "Scene")               return AssetType::Scene;
+      if (assetType == "Mesh")                return AssetType::Mesh;
+      if (assetType == "StaticMesh")          return AssetType::StaticMesh;
+      if (assetType == "MeshAsset")           return AssetType::MeshSource;
       IK_ASSERT(false, "Unknown Asset Type");
       return AssetType::None;
     }
@@ -26,9 +29,12 @@ namespace IKan
       switch (assetType)
       {
         case AssetType::None:                  return "None";
-        case AssetType::Image:                return "Image";
+        case AssetType::Image:                 return "Image";
         case AssetType::Font:                  return "Font";
         case AssetType::Scene:                 return "Scene";
+        case AssetType::Mesh:                  return "Mesh";
+        case AssetType::StaticMesh:            return "StaticMesh";
+        case AssetType::MeshSource:            return "MeshSource";
       }
       IK_ASSERT(false, "Unknown Asset Type");
       return "None";
