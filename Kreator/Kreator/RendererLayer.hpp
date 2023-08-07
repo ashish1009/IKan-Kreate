@@ -114,6 +114,19 @@ namespace Kreator
     /// This function Saves the scene automatically
     void SaveSceneAuto();
 
+    /// This function handle scene play
+    void OnScenePlay();
+    /// This function handle scene Stop
+    void OnSceneStop();
+    /// This function handle scene Pause
+    void OnScenePause();
+    /// This function handle scene Resume
+    void OnSceneResume();
+    /// This function handle scene simuation start
+    void OnSceneStartSimulation();
+    /// This function handle scene simuation ends
+    void OnSceneStopSimulation();
+
     // Scene Panel Manager Callbacks ----------------------
     /// This function handles the entity selection
     /// - Parameter entity: entity

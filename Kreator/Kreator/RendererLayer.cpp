@@ -678,6 +678,36 @@ if (!Project::GetActive()) return
     }
   }
   
+  void RendererLayer::OnScenePlay()
+  {
+    ClearSelectedEntity();
+  }
+  
+  void RendererLayer::OnSceneStop()
+  {
+    ClearSelectedEntity();
+  }
+  
+  void RendererLayer::OnScenePause()
+  {
+    
+  }
+  
+  void RendererLayer::OnSceneResume()
+  {
+    
+  }
+  
+  void RendererLayer::OnSceneStartSimulation()
+  {
+    ClearSelectedEntity();
+  }
+  
+  void RendererLayer::OnSceneStopSimulation()
+  {
+    ClearSelectedEntity();
+  }
+
   void RendererLayer::OnEntitySelected(Entity entity)
   {
     if (!entity)
@@ -1989,11 +2019,11 @@ if (!Project::GetActive()) return
       {
         if (m_sceneState == SceneState::Edit)
         {
-//          OnScenePlay();
+          OnScenePlay();
         }
         else if (m_sceneState != SceneState::Simulate)
         {
-//          OnSceneStop();
+          OnSceneStop();
         }
       }
       
@@ -2002,11 +2032,11 @@ if (!Project::GetActive()) return
       {
         if (m_sceneState == SceneState::Edit)
         {
-//          OnSceneStartSimulation();
+          OnSceneStartSimulation();
         }
         else if (m_sceneState == SceneState::Simulate)
         {
-//          OnSceneStopSimulation();
+          OnSceneStopSimulation();
         }
       }
       
@@ -2014,12 +2044,12 @@ if (!Project::GetActive()) return
       {
         if (m_sceneState == SceneState::Play)
         {
-//          OnScenePause();
+          OnScenePause();
           m_sceneState = SceneState::Pause;
         }
         else if (m_sceneState == SceneState::Pause)
         {
-//          OnSceneResume();
+          OnSceneResume();
           m_sceneState = SceneState::Play;
         }
       }
