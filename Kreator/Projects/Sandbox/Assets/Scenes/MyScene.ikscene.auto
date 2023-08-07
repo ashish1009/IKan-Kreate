@@ -1,13 +1,29 @@
 Scene: MyScene
 Entities:
-  - Entity: 1418344165491701660
+  - Entity: 33784409437849635
     TagComponent:
       Tag: Circle
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [-1.60000002, 0, 0]
+      Position: [0, -2.5, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CircleComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 3816794033
+      TilingFactor: 1
+      Thickness: 1
+      Fade: 1.20000005
+  - Entity: 2886910740919579138
+    TagComponent:
+      Tag: Circle
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-2.4000001, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CircleComponent:
@@ -16,14 +32,28 @@ Entities:
       TilingFactor: 1
       Thickness: 1
       Fade: 0.00499999989
-  - Entity: 6816102784547328360
+  - Entity: 2944179269993974151
     TagComponent:
-      Tag: Quad
+      Tag: Wood Quad
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [1.60000002, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    QuadComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 2578144778
+      TilingFactor: 1
+  - Entity: 6816102784547328360
+    TagComponent:
+      Tag: Smile Quad
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-1.29999995, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     QuadComponent:

@@ -764,8 +764,8 @@ namespace Kreator
       Kreator_UI::PropertyAssetReference<Image>("Texture", cc.texture, nullptr, settings);
       
       Kreator_UI::PropertyColor("Color", cc.color);
-      Kreator_UI::Property("Thickness", cc.thickness);
-      Kreator_UI::Property("Fade", cc.fade);
+      Kreator_UI::Property("Thickness", cc.thickness, 0.1, 0.0, 1.0);
+      Kreator_UI::Property("Fade", cc.fade, 0.1, 0.0, 5.0);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
   }

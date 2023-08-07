@@ -119,7 +119,7 @@ namespace IKan
         else
         {
           Ref<Image> texture = AssetManager::GetAsset<Image>(circleComp.texture);
-          Renderer2D::DrawCircle(transformComp.Transform(), texture, circleComp.color, circleComp.thickness, circleComp.fade, (int32_t)entity);
+          Renderer2D::DrawCircle(transformComp.Transform(), texture, circleComp.color, 1.0f, circleComp.thickness, circleComp.fade, (int32_t)entity);
         }
       } // For each Quad Entity
     }
