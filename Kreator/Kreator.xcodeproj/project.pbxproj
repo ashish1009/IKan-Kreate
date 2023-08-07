@@ -77,7 +77,6 @@
 		B26B1AC12A7D76F800676419 /* AssetPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetPanel.cpp; sourceTree = "<group>"; };
 		B26B1AC22A7D76F800676419 /* AssetPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetPanel.hpp; sourceTree = "<group>"; };
 		B283D6272A80E5E6002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
-		B283D6322A80E92B002B5DC3 /* Kreator.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = Kreator.entitlements; sourceTree = "<group>"; };
 		B283DF7D2A81016A002B5DC3 /* my_libassimp.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = my_libassimp.dylib; path = ../IKan/Vendors/Assimp/lib/my_libassimp.dylib; sourceTree = "<group>"; };
 		B283DF8C2A8113E3002B5DC3 /* libminizip.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libminizip.1.dylib; path = ../IKan/Vendors/Assimp/lib/libminizip.1.dylib; sourceTree = "<group>"; };
 		B283DF8D2A8113E3002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
@@ -128,7 +127,6 @@
 		B24076D42A72375000221919 /* Kreator */ = {
 			isa = PBXGroup;
 			children = (
-				B283D6322A80E92B002B5DC3 /* Kreator.entitlements */,
 				B24076D52A72375000221919 /* Kreator.cpp */,
 				B23365942A75355200BC7B8B /* RendererLayer.cpp */,
 				B23365952A75355200BC7B8B /* RendererLayer.hpp */,

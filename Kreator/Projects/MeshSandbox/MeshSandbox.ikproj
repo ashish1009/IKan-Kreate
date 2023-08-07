@@ -1,0 +1,7 @@
+Project:
+  Name: MeshSandbox
+  AssetDirectory: Assets
+  AssetRegistry: Assets/AssetRegistry.ikr
+  StartScene: ""
+  AutoSave: true
+  AutoSaveInterval: 300
