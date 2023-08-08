@@ -902,7 +902,7 @@ if (!Project::GetActive()) return
     
     // Dockspace
     float minWinSizeX = style.WindowMinSize.x;
-    style.WindowMinSize.x = 350.0f;
+    style.WindowMinSize.x = 250.0f;
     if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
     {
       ImGuiID dockspaceID = ImGui::GetID("MyDockspace");

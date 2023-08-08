@@ -106,5 +106,7 @@ namespace IKan
   private:
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_filePath;
+    Scope<Assimp::Importer> m_importer; 
+    const aiScene* m_scene;
   };
 } // namespace IKan
