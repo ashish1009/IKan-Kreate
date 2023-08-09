@@ -149,6 +149,22 @@ namespace IKan
     }
     
     TraverseNodes(scene->mRootNode);
+    
+    for (const auto& submesh : m_submeshes)
+    {
+      AABB transformedSubmeshAABB = submesh.boundingBox;
+      glm::vec3 min = glm::vec3(submesh.transform * glm::vec4(transformedSubmeshAABB.min, 1.0f));
+      glm::vec3 max = glm::vec3(submesh.transform * glm::vec4(transformedSubmeshAABB.max, 1.0f));
+      
+      m_boundingBox.min.x = glm::min(m_boundingBox.min.x, min.x);
+      m_boundingBox.min.y = glm::min(m_boundingBox.min.y, min.y);
+      m_boundingBox.min.z = glm::min(m_boundingBox.min.z, min.z);
+      m_boundingBox.max.x = glm::max(m_boundingBox.max.x, max.x);
+      m_boundingBox.max.y = glm::max(m_boundingBox.max.y, max.y);
+      m_boundingBox.max.z = glm::max(m_boundingBox.max.z, max.z);
+    }
+    
+    
   }
   
   MeshSource::MeshSource(const std::vector<Vertex>& vertices, const std::vector<Index>& indices, const glm::mat4& transform)
