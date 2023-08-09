@@ -49,17 +49,17 @@ namespace IKan
   class Submesh
   {
   public:
-    uint32_t BaseVertex;
-    uint32_t BaseIndex;
-    uint32_t MaterialIndex;
-    uint32_t IndexCount;
-    uint32_t VertexCount;
+    uint32_t baseVertex;
+    uint32_t baseIndex;
+    uint32_t materialIndex;
+    uint32_t indexCount;
+    uint32_t vertexCount;
     
-    glm::mat4 Transform{ 1.0f }; // World transform
-    glm::mat4 LocalTransform{ 1.0f };
-    AABB BoundingBox;
+    glm::mat4 transform{ 1.0f }; // World transform
+    glm::mat4 localTransform{ 1.0f };
+    AABB boundingBox;
     
-    std::string NodeName, MeshName;
+    std::string nodeName, meshName;
   };
   
   /// MeshSource is a representation of an actual asset file on disk. Meshes are created from MeshSource
@@ -104,9 +104,20 @@ namespace IKan
     ASSET_TYPE(MeshSource);
     
   private:
+    // Member Fucntions ---------------------------------------------------------------------------------------------
+    void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
+
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_filePath;
     Scope<Assimp::Importer> m_importer; 
     const aiScene* m_scene;
+    std::unordered_map<aiNode*, std::vector<uint32_t>> m_nodeMap;
+
+    std::vector<Submesh> m_submeshes;
+    AABB m_boundingBox;
+        
+    std::vector<Vertex> m_vertices;
+    std::vector<Index> m_indices;
+    std::unordered_map<uint32_t, std::vector<Triangle>> m_triangleCache;
   };
 } // namespace IKan
