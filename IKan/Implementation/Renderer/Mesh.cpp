@@ -164,7 +164,10 @@ namespace IKan
       m_boundingBox.max.z = glm::max(m_boundingBox.max.z, max.z);
     }
     
+    LoadGraphicsdata();
     
+    m_vertexBuffer = VertexBuffer::Create(m_vertices.data(), (uint32_t)(m_vertices.size() * sizeof(Vertex)));
+    m_indexBuffer = IndexBuffer::CreateWithSize(m_indices.data(), (uint32_t)(m_indices.size() * sizeof(Index)));
   }
   
   MeshSource::MeshSource(const std::vector<Vertex>& vertices, const std::vector<Index>& indices, const glm::mat4& transform)
@@ -201,5 +204,4 @@ namespace IKan
       TraverseNodes(node->mChildren[i], transform, level + 1);
     }
   }
-
 } // namespace IKan

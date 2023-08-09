@@ -9,6 +9,8 @@
 
 #include "Core/AABB.hpp"
 #include "Asset/Asset.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
+#include "Renderer/Graphics/RendererBuffers.hpp"
 
 struct aiNode;
 struct aiAnimation;
@@ -106,6 +108,8 @@ namespace IKan
   private:
     // Member Fucntions ---------------------------------------------------------------------------------------------
     void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
+    /// This function loads the graphics data in renderer buffers
+    void LoadGraphicsdata();
 
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_filePath;
@@ -116,6 +120,10 @@ namespace IKan
     std::vector<Submesh> m_submeshes;
     AABB m_boundingBox;
         
+    // Graphics
+    Ref<VertexBuffer> m_vertexBuffer;
+    Ref<IndexBuffer> m_indexBuffer;
+
     std::vector<Vertex> m_vertices;
     std::vector<Index> m_indices;
     std::unordered_map<uint32_t, std::vector<Triangle>> m_triangleCache;
