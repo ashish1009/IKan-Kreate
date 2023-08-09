@@ -299,13 +299,13 @@ if (!Project::GetActive()) return
         
         pbr->Bind();
         
-        for (Submesh& submesh : mesh->SubMeshes())
+        for (Submesh& submesh : mesh->GetSubMeshes())
         {
           pbr->SetUniformMat4("u_ViewProjection", m_editorCamera.GetUnReversedViewProjection());
           pbr->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
           pip->Bind();
-          mesh->m_vertexBuffer->Bind();
-          mesh->m_indexBuffer->Bind();
+          mesh->GetVertexBuffer()->Bind();
+          mesh->GetIndexBuffer()->Bind();
           glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)submesh.indexCount, GL_UNSIGNED_INT,
                                    (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
           

@@ -201,4 +201,18 @@ namespace IKan
       TraverseNodes(node->mChildren[i], transform, level + 1);
     }
   }
+  
+  std::vector<Submesh>& MeshSource::GetSubMeshes()
+  {
+    return m_submeshes;
+  }
+  Ref<VertexBuffer> MeshSource::GetVertexBuffer()
+  {
+    return m_vertexBuffer;
+  }
+  Ref<IndexBuffer> MeshSource::GetIndexBuffer()
+  {
+    return m_indexBuffer;
+  }
+
 } // namespace IKan

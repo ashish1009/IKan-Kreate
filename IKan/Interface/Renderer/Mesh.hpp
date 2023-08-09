@@ -84,6 +84,13 @@ namespace IKan
     MeshSource(const std::vector<Vertex>& vertices, const std::vector<Index>& indices, const std::vector<Submesh>& submeshes);
     virtual ~MeshSource();
 
+    // Getters -----------------------------------------------------------------------------------------------------
+    /// This function returns the submeshes
+    std::vector<Submesh>& GetSubMeshes();
+    /// This function returns the Vertex Buffer
+    Ref<VertexBuffer> GetVertexBuffer();
+    /// This function returns the Index Buffer
+    Ref<IndexBuffer> GetIndexBuffer();
     
     /// This function creates a Mesh source from file
     /// - Parameter filename: Mesh source file path
@@ -104,11 +111,6 @@ namespace IKan
                                   const std::vector<Submesh>& submeshes);
     ASSET_TYPE(MeshSource);
     
-    std::vector<Submesh>& SubMeshes() {return m_submeshes;}
-    // Graphics
-    Ref<VertexBuffer> m_vertexBuffer;
-    Ref<IndexBuffer> m_indexBuffer;
-
   private:
     // Member Fucntions ---------------------------------------------------------------------------------------------
     void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
@@ -122,6 +124,9 @@ namespace IKan
     std::vector<Submesh> m_submeshes;
     AABB m_boundingBox;
         
+    // Graphics
+    Ref<VertexBuffer> m_vertexBuffer;
+    Ref<IndexBuffer> m_indexBuffer;
 
     std::vector<Vertex> m_vertices;
     std::vector<Index> m_indices;
