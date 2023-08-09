@@ -1,19 +1,19 @@
 Assets:
   - Handle: 782194101
-    FilePath: Models/Sources/Backpack/backpack.obj
+    FilePath: Meshes/Source/Backpack/backpack.obj
     Type: MeshSource
   - Handle: 851018354
-    FilePath: Models/Sources/Backpack/specular.jpg
+    FilePath: Meshes/Source/Backpack/specular.jpg
     Type: Image
   - Handle: 1664882197
-    FilePath: Models/Sources/Backpack/ao.jpg
+    FilePath: Meshes/Source/Backpack/ao.jpg
     Type: Image
   - Handle: 1748401728
-    FilePath: Models/Sources/Backpack/normal.png
+    FilePath: Meshes/Source/Backpack/normal.png
     Type: Image
   - Handle: 2505361275
-    FilePath: Models/Sources/Backpack/diffuse.jpg
+    FilePath: Meshes/Source/Backpack/diffuse.jpg
     Type: Image
   - Handle: 3750278395
-    FilePath: Models/Sources/Backpack/roughness.jpg
+    FilePath: Meshes/Source/Backpack/roughness.jpg
     Type: Image

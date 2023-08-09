@@ -60,7 +60,6 @@ namespace IKan
   MeshSource::MeshSource(const std::string& filename)
   : m_filePath(filename)
   {
-    MESH_LOG("Loading Mesh : {0}", m_filePath.c_str());
     m_importer = CreateScope<Assimp::Importer>();
     const aiScene* scene = m_importer->ReadFile(filename, s_MeshImportFlags);
     
@@ -163,8 +162,6 @@ namespace IKan
       m_boundingBox.max.y = glm::max(m_boundingBox.max.y, max.y);
       m_boundingBox.max.z = glm::max(m_boundingBox.max.z, max.z);
     }
-    
-    LoadGraphicsdata();
     
     m_vertexBuffer = VertexBuffer::Create(m_vertices.data(), (uint32_t)(m_vertices.size() * sizeof(Vertex)));
     m_indexBuffer = IndexBuffer::CreateWithSize(m_indices.data(), (uint32_t)(m_indices.size() * sizeof(Index)));

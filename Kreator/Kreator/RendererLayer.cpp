@@ -238,6 +238,7 @@ if (!Project::GetActive()) return
       m_showWelcomePopup = true;
     }
     
+    // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
     
     auto mesh = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/backpack.obj"));
@@ -550,7 +551,7 @@ if (!Project::GetActive()) return
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Textures");
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Fonts");
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Scenes");
-    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Models" / "Sources");
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Meshes" / "Source");
 
     auto projectFile = projectDir.string() + "/" + std::string(m_projectNameBuffer) + ProjectExtension;
     OpenProject(projectFile);

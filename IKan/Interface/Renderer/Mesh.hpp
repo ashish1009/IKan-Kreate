@@ -108,8 +108,6 @@ namespace IKan
   private:
     // Member Fucntions ---------------------------------------------------------------------------------------------
     void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
-    /// This function loads the graphics data in renderer buffers
-    void LoadGraphicsdata();
 
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_filePath;
