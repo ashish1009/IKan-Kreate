@@ -21,6 +21,26 @@ namespace IKan
     return Image::Create(filePath, linear);
   }
   
+  Ref<Texture> Texture::CreateWhiteTexture()
+  {
+    // White data
+    static uint32_t whiteTextureData = 0xffffffff;
+    
+    // Texture specificaion
+    TextureSpecification textureSpec;
+    textureSpec.type = TextureType::Texture2D;
+    textureSpec.internalFormat = TextureFormat::RGBA8;
+    textureSpec.dataFormat = TextureFormat::RGBA;
+    textureSpec.wrap = TextureWrap::Clamp;
+    textureSpec.filter = TextureFilter::Linear;
+    textureSpec.width = 1;
+    textureSpec.height = 1;
+    textureSpec.data = &whiteTextureData;
+    textureSpec.size = sizeof(uint32_t);
+
+    return Texture2D::Create(textureSpec);
+  }
+  
   Ref<Texture2D> Texture2D::Create(const TextureSpecification& spec)
   {
     switch (Renderer::GetApi())

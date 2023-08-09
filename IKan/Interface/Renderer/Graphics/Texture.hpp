@@ -96,6 +96,8 @@ namespace IKan
     ///         somewhere). This API will Load the texture again and new memory will be creted. So to avoid duplicate
     ///         memory for same texture use Renderer::GetTexture()
     [[nodiscard]] static Ref<Texture> Create(const std::string& filePath, bool linear = true);
+    /// This API creates the Texture instance with white based on the Renderer API
+    [[nodiscard]] static Ref<Texture> CreateWhiteTexture();
   };
   
   /// This is the interface class to create the Texture
