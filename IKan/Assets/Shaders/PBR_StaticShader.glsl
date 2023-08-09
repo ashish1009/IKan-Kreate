@@ -23,7 +23,6 @@ out VS_OUT
   mat3 WorldNormals;
   mat3 WorldTransform;
   vec3 Binormal;
-  float ObjectID;
 } vs_Output;
 
 uniform mat4 u_ViewProjection;
@@ -39,7 +38,6 @@ void main()
   vs_Output.WorldNormals = mat3(u_Transform) * mat3(a_Tangent, a_Binormal, a_Normal);
   vs_Output.WorldTransform = mat3(u_Transform);
   vs_Output.Binormal = a_Binormal;
-  vs_Output.ObjectID  = a_ObjectID;
   
   vs_Output.TexCoord = vs_Output.TexCoord;
   
@@ -51,7 +49,6 @@ void main()
 
 #version 330 core
 layout (location = 0) out vec4 o_Color;
-layout (location = 1) out int  o_IDBuffer;
 
 in VS_OUT
 {
@@ -61,12 +58,10 @@ in VS_OUT
   mat3 WorldNormals;
   mat3 WorldTransform;
   vec3 Binormal;
-  float ObjectID;
 } vs_Input;
 
 /// Fragment Main Function
 void main()
 {
   o_Color = vec4(1.0f);
-  o_IDBuffer = int(vs_Input.ObjectID);
 }

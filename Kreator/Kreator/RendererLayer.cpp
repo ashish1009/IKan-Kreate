@@ -13,6 +13,7 @@
 #include "ContentBrowserPanel.hpp"
 #include "DefaultAssetViewer.hpp"
 #include "SceneHierarchyPanel.hpp"
+#include <glad/glad.h>
 
 extern std::string IKanVersion;
 
@@ -30,6 +31,10 @@ if (!Project::GetActive()) return
 #define ASSET_MANAGER_PANEL_ID "Assets"
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 #define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
+  
+  static Ref<Shader> pbr;
+  static Ref<Pipeline> pip;
+  static Ref<MeshSource> mesh;
 
   namespace KreatorUtils
   {
@@ -241,12 +246,32 @@ if (!Project::GetActive()) return
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
     
-    auto mesh = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/backpack.obj"));
+    mesh = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/backpack.obj"));
+    pbr = Shader::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
+    
+    // Create Pipeline specification
+    Pipeline::Specification pipelineSpec;
+    pipelineSpec.debugName = "Full Screen Quad Renderer";
+    pipelineSpec.shader = pbr;
+    pipelineSpec.layout =
+    {
+      { "a_Position",  ShaderDataType::Float3 },
+      { "a_Normal",    ShaderDataType::Float3 },
+      { "a_Tangent",   ShaderDataType::Float3 },
+      { "a_Bitangent", ShaderDataType::Float3 },
+      { "a_TexCoord",  ShaderDataType::Float2 },
+    };
+    
+    // Create the Pipeline instnace for full screen quad
+    pip = Pipeline::Create(pipelineSpec);
   }
   
   void RendererLayer::OnDetach()
   {
     IK_PROFILE();
+    pip.reset();
+    mesh.reset();
+    pbr.reset();
     IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
   }
   
@@ -271,6 +296,21 @@ if (!Project::GetActive()) return
         m_editorScene->OnRenderEditor(m_editorCamera);
         
         UpdateHoveredEntity();
+        
+        pbr->Bind();
+        
+        for (Submesh& submesh : mesh->SubMeshes())
+        {
+          pbr->SetUniformMat4("u_ViewProjection", m_editorCamera.GetUnReversedViewProjection());
+          pbr->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
+          pip->Bind();
+          mesh->m_vertexBuffer->Bind();
+          mesh->m_indexBuffer->Bind();
+          glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)submesh.indexCount, GL_UNSIGNED_INT,
+                                   (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
+          
+        } // for (SubMesh& submesh : submeshes_)
+
         Renderer2D::EndRenderPass();
 
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
