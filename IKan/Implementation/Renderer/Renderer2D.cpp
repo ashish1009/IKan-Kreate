@@ -74,16 +74,6 @@ namespace IKan
     { 0.0f, 1.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, { 0.0f, 0.0f }
   };
   
-  /// This structure stores the common data for Batch 2D Renderer
-  struct Renderer2DData
-  {
-    bool needResize = false;
-    uint32_t viewportWidth, viewportHeight;
-    Ref<RenderPass> renderPass;
-  };
-  static Scope<Renderer2DData> s_commonData;
-
-  
   /// This structure holds the common batch renderer data for Quads, circle and lines
   struct CommonBatchData
   {
@@ -352,37 +342,16 @@ namespace IKan
   };
   static Scope<LineData> s_lineData;
   
-  void Renderer2D::Initialize(uint32_t maxQuads, uint32_t maxCirlces, uint32_t maxLines)
+  void Renderer2D::Initialize(const Renderer2DData& renderer2DData)
   {
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
 
     BATCH_INFO("Initialising the Batch Renderer 2D ");
     BATCH_INFO("-----------------------------------");
     
-    if (!s_commonData)
-    {
-      s_commonData = CreateScope<Renderer2DData>();
-      
-      // Create the Render pass
-      RenderPass::Specification rendererPassSpec;
-      rendererPassSpec.debugName = "Renderer 2D";
-      
-      // Create Framebuffer for Render Pass
-      FrameBuffer::Specification fbSpec;
-      fbSpec.attachments =
-      {
-        FrameBuffer::Attachments::TextureFormat::RGBA8,
-        FrameBuffer::Attachments::TextureFormat::R32I,
-        FrameBuffer::Attachments::TextureFormat::Depth24Stencil
-      };
-      
-      rendererPassSpec.targetFramebuffer = FrameBuffer::Create(fbSpec);
-      s_commonData->renderPass = RenderPass::Create(rendererPassSpec);
-    }
-    
-    AddQuadData(maxQuads);
-    AddCircleData(maxCirlces);
-    AddLineData(maxLines);
+    AddQuadData(renderer2DData.maxQuads);
+    AddCircleData(renderer2DData.maxCircles);
+    AddLineData(renderer2DData.maxLines);
   }
   
   void Renderer2D::Shutdown()
@@ -433,12 +402,6 @@ namespace IKan
       s_lineData.reset();
     }
 
-    // Destroy the Render Pass for Renderer 2D
-    if (s_commonData)
-    {
-      s_commonData.reset();
-    }
-    
     // Destroy Full screen data
     s_fullscreenQuadData.reset();
   }
@@ -656,29 +619,9 @@ namespace IKan
     BATCH_INFO("  Vertex Buffer used               {0} B", data->maxVertices * sizeof(LineData::Vertex));
     BATCH_INFO("  Shader Used                      {0}", data->shader->GetName());
   }
-  
-  void Renderer2D::SetViewport(uint32_t width, uint32_t height)
-  {
-    if (s_commonData->viewportWidth != width or s_commonData->viewportHeight != height)
-    {
-      s_commonData->needResize = true;
-      s_commonData->viewportWidth = width;
-      s_commonData->viewportHeight = height;
-    }
-    else
-    {
-      s_commonData->needResize = false;
-    }
-  }
-  
+    
   void Renderer2D::BeginBatch(const glm::mat4 &camViewProjMat)
   {
-    if (s_commonData->needResize)
-    {
-      // Resize the framebuffer
-      s_commonData->renderPass->Resize(s_commonData->viewportWidth, s_commonData->viewportHeight);
-    }
-    
     if (s_quadData)
     {
       s_quadData->StartBatch(camViewProjMat);
@@ -727,32 +670,6 @@ namespace IKan
       // Render the Scene
       Renderer::DrawLines(s_lineData->pipeline, s_lineData->vertexCount);
     }
-  }
-
-  void Renderer2D::BeginRenderPass()
-  {
-    s_commonData->renderPass->Begin();
-  }
-  
-  void Renderer2D::EndRenderPass()
-  {
-    s_commonData->renderPass->End();
-  }
-  
-  Ref<RenderPass> Renderer2D::GetRenderPass()
-  {
-    return s_commonData->renderPass;
-  }
-  
-  Ref<Texture> Renderer2D::GetFinalImage()
-  {
-    // FIXME: (IKan) Use Final Image ID in Render Pass Specificaion. For now by deafult its 0 in all shaders
-    return s_commonData->renderPass->GetSpecification().targetFramebuffer->GetColorAttachments().at(0);
-  }
-  
-  void Renderer2D::GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData)
-  {
-    Renderer::GetEntityIdFromPixels(mx, my, s_commonData->renderPass->GetSpecification().targetFramebuffer->GetPixelIdIndex(), pixeldData);
   }
   
   void Renderer2D::DrawFullscreenQuad(const Ref<Texture>& texture, uint32_t slot, bool overrideShader)

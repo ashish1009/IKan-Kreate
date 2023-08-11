@@ -9,6 +9,7 @@
 #include "Scene/Entity.hpp"
 #include "Renderer/UI/Font.hpp"
 #include "Renderer/Renderer2D.hpp"
+#include "Renderer/SceneRenderer.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include "Asset/AssetManager.hpp"
 
@@ -84,12 +85,14 @@ namespace IKan
     
   }
   
-  void Scene::OnRenderEditor(const EditorCamera &editorCamera)
+  void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
   {
-    Render2DEntities(editorCamera.GetUnReversedViewProjection());
+    renderer->BeginBatch(editorCamera.GetUnReversedViewProjection());
+    Render2DEntities();
+    renderer->EndBatch();
   }
 
-  void Scene::OnRenderRuntime(TimeStep ts)
+  void Scene::OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer)
   {
     Entity cameraEntity = GetMainCameraEntity();
     if (!cameraEntity)
@@ -99,18 +102,21 @@ namespace IKan
     
     const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
     const auto& cameraTransform = cameraEntity.GetComponent<TransformComponent>().Transform();
-    Render2DEntities(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
-  }
-  
-  void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera)
-  {
-    Render2DEntities(editorCamera.GetUnReversedViewProjection());
-  }
-  
-  void Scene::Render2DEntities(const glm::mat4& viewProjection)
-  {
-    Renderer2D::BeginBatch(viewProjection);
     
+    renderer->BeginBatch(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
+    Render2DEntities();
+    renderer->EndBatch();
+  }
+  
+  void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
+  {
+    renderer->BeginBatch(editorCamera.GetUnReversedViewProjection());
+    Render2DEntities();
+    renderer->EndBatch();
+  }
+  
+  void Scene::Render2DEntities()
+  {
     // Render All Quad Entities
     {
       auto view = m_registry.view<TransformComponent, QuadComponent>();
@@ -168,8 +174,6 @@ namespace IKan
         }
       } // For each Quad Entity
     }
-    
-    Renderer2D::EndBatch();
   }
   
   void Scene::OnRuntimeStart()

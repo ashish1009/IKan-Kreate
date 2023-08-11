@@ -15,6 +15,7 @@
 
 namespace IKan
 {
+  class SceneRenderer;
   class Entity;
   using EntityMap = std::unordered_map<UUID, Entity>;
   static const std::string SceneExtension = ".ikscene";
@@ -39,13 +40,21 @@ namespace IKan
     void OnUpdateRuntime(TimeStep ts);
 
     /// This functionm renders the scene for editor
-    /// - Parameter editorCamera: Editor Camera
-    void OnRenderEditor(const EditorCamera& editorCamera);
+    /// - Parameters:
+    ///  - editorCamera: Editor Camera
+    ///  - renderer: Scene renderer cintext
+    void OnRenderEditor(const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer);
     /// This functionm renders the scene for runtime
-    /// - Parameter ts: time step of 2 frames
-    void OnRenderRuntime(TimeStep ts);
+    /// - Parameters:
+    ///  - ts: time step of 2 frames
+    ///  - renderer: Scene renderer cintext
+    void OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer);
     /// This functionm renders the scene for simulation
-    void OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera);
+    /// - Parameters:
+    ///  - ts: time step of 2 frames
+    ///  - editorCamera: Editor Camera
+    ///  - renderer: Scene renderer cintext
+    void OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer);
 
     // Runtime
     /// This function handle runtime start
@@ -166,8 +175,7 @@ namespace IKan
   private:
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This function renders the 2D Entities
-    /// - Parameter viewProjection: camera view projection matrix
-    void Render2DEntities(const glm::mat4& viewProjection);
+    void Render2DEntities();
     
     // Member Variables ---------------------------------------------------------------------------------------------
     entt::registry m_registry;

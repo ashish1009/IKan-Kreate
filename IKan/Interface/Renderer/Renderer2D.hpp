@@ -14,6 +14,19 @@ namespace IKan
   class Sprite;
   class RenderPass;
   class Font;
+  
+  struct Renderer2DData
+  {
+    uint32_t maxQuads = 0;
+    uint32_t maxCircles = 0;
+    uint32_t maxLines = 0;
+    
+    Renderer2DData(uint32_t maxQuads = 0, uint32_t maxCircles = 0, uint32_t maxLines = 0)
+    : maxQuads(maxQuads), maxCircles(maxCircles), maxLines(maxLines)
+    {
+      
+    }
+  };
 
   /// This is the batch renderer for 2D Renderering
   class Renderer2D
@@ -24,7 +37,7 @@ namespace IKan
     ///   - maxQuads: Max Quad to render in one batch
     ///   - maxCirlces: Max Circles to render in one batch
     ///   - maxLines: Max Lines to render in one batch
-    static void Initialize(uint32_t maxQuads, uint32_t maxCirlces, uint32_t maxLines);
+    static void Initialize(const Renderer2DData& Renderer2DData);
     /// This functio dhutdown the batch renderer and destoy all the buffer reserved on initialize
     static void Shutdown();
 
@@ -38,34 +51,11 @@ namespace IKan
     /// - Parameter maxLines: max circle to be renderered in single batch
     static void AddLineData(uint32_t maxLines);
     
-    /// This function updates the viewport size for 2D Renderer
-    /// - Parameters:
-    ///   - width: new width of viewport
-    ///   - height: new height of viewport
-    static void SetViewport(uint32_t width, uint32_t height);
-
     /// This function begins the Batch for 2D Rendere (to be called each frame)
     /// - Parameter camViewProjMat: Camera View projection Matrix
     static void BeginBatch(const glm::mat4& camViewProjMat);
     /// This function Ends the current batch by rendering all the vertex
     static void EndBatch();
-
-    /// This function begins the Current Render Pass
-    static void BeginRenderPass();
-    /// This function ends the Current Render Pass
-    static void EndRenderPass();
-    
-    /// This function returns the Render pass for 2D Renderer
-    static Ref<RenderPass> GetRenderPass();
-    /// This fucntion returns the final Renderer Image of Taget framebuffer of Current Render Pass
-    static Ref<Texture> GetFinalImage();
-    
-    /// This function returns the the Pixel ID from Viewport
-    /// - Parameters:
-    ///   - mx: x pixel
-    ///   - my: y pixel
-    ///   - pixeldData: piixel value
-    static void GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData);
 
     /// This function render the fullscreen quad
     /// - Parameters:

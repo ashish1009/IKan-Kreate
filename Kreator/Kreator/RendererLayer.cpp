@@ -244,7 +244,7 @@ if (!Project::GetActive()) return
     }
     
     // Create Scene viewport renderer
-    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
+    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(10, 10, 10));
     
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
@@ -293,14 +293,16 @@ if (!Project::GetActive()) return
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
         
-        Renderer2D::BeginRenderPass();
+        SceneRenderer::BeginRenderPass();
         Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
         
         m_editorScene->OnUpdateEditor(ts);
-        m_editorScene->OnRenderEditor(m_editorCamera);
+        m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
         UpdateHoveredEntity();
         
+        
+        // TODO: -----------------------------------------------------------------
         pbr->Bind();
         
         for (Submesh& submesh : mesh->GetSubMeshes())
@@ -314,8 +316,8 @@ if (!Project::GetActive()) return
                                    (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
           
         } // for (SubMesh& submesh : submeshes_)
-
-        Renderer2D::EndRenderPass();
+        // TODO: --------------------------------------------------------------
+        SceneRenderer::EndRenderPass();
 
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
         {
@@ -329,14 +331,14 @@ if (!Project::GetActive()) return
       }
       case SceneState::Play:
       {
-        Renderer2D::BeginRenderPass();
+        SceneRenderer::BeginRenderPass();
         Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
         
         m_runtimeScene->OnUpdateRuntime(ts);
-        m_runtimeScene->OnRenderRuntime(ts);
+        m_runtimeScene->OnRenderRuntime(ts, m_viewportRenderer);
         
         UpdateHoveredEntity();
-        Renderer2D::EndRenderPass();
+        SceneRenderer::EndRenderPass();
         break;
       }
       case SceneState::Simulate:
@@ -344,14 +346,14 @@ if (!Project::GetActive()) return
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
         
-        Renderer2D::BeginRenderPass();
+        SceneRenderer::BeginRenderPass();
         Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
         
         m_simulationScene->OnUpdateRuntime(ts);
-        m_simulationScene->OnRenderSimulation(ts, m_editorCamera);
+        m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
         
         UpdateHoveredEntity();
-        Renderer2D::EndRenderPass();
+        SceneRenderer::EndRenderPass();
         break;
       }
       case SceneState::Pause:
@@ -495,7 +497,7 @@ if (!Project::GetActive()) return
 
   void RendererLayer::UpdateViewportSize()
   {
-    Renderer2D::SetViewport(m_viewport.width, m_viewport.height);
+    m_viewportRenderer->SetViewport(m_viewport.width, m_viewport.height);
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
     m_currentScene->SetViewportSize(m_viewport.width, m_viewport.height);
   }
@@ -542,7 +544,7 @@ if (!Project::GetActive()) return
       return;
     }
     
-    Renderer2D::GetEntityIdFromPixels(m_viewport.mousePosX, m_viewport.mousePosY, m_hoveredEntityID);
+    SceneRenderer::GetEntityIdFromPixels(m_viewport.mousePosX, m_viewport.mousePosY, m_hoveredEntityID);
 #if 0
     IK_CONSOLE_TRACE("", "{0}", m_hoveredEntityID);
 #endif
@@ -980,7 +982,7 @@ if (!Project::GetActive()) return
     UpdateViewportSize();
     
     // Render viewport image
-    UI::Image(Renderer2D::GetFinalImage(), viewportSize);
+    UI::Image(SceneRenderer::GetFinalImage(), viewportSize);
     UI_SceneToolbar();
     UI_GuizmoToolbar();
     UI_UpdateGuizmo();
