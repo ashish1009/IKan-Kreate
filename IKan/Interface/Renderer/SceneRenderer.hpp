@@ -9,6 +9,7 @@
 
 #include "Camera/Camera.hpp"
 #include "Scene/Scene.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
 
 namespace IKan
 {
@@ -20,5 +21,12 @@ namespace IKan
     SceneRenderer(Ref<Scene> scene);
     /// This destructor destroys the scene renderer instance
     virtual ~SceneRenderer();
+    
+    /// This function initializes the Scene renderer
+    void Initialize();
+    
+  private:
+    Ref<Scene> m_scene;
+    Ref<Pipeline> m_geometryPipeline;
   };
 } // namespace IKan
