@@ -243,9 +243,13 @@ if (!Project::GetActive()) return
       m_showWelcomePopup = true;
     }
     
+    // Create Scene viewport renderer
+    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
+    
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
     
+    // TODO: ----------------
     mesh = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/backpack.obj"));
     pbr = Shader::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
     

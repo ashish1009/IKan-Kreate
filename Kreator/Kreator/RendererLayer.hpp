@@ -247,6 +247,9 @@ namespace Kreator
     };
     SelectionMode m_selectionMode = SelectionMode::Entity;
 
+    // Renderers
+    Ref<SceneRenderer> m_viewportRenderer;
+    
     // Client Data ---------------------------------------
     static std::filesystem::path s_clientResourcePath;
   };

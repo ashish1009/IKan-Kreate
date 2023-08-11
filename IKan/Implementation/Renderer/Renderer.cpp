@@ -70,9 +70,9 @@ namespace IKan
     IK_PROFILE();
     
     // Shutdown All renderer
-    Renderer2D::Shutdown();
-    TextRenderer::Shutdown();
     Font::Shutdown();
+    TextRenderer::Shutdown();
+    Renderer2D::Shutdown();
     
     // Reset Libraries
     Shader::ResetLibrary();

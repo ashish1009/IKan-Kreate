@@ -144,6 +144,8 @@
 		B26B1A822A7D18DE00676419 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A802A7D18DE00676419 /* EditorConsoleSink.hpp */; };
 		B26B1A952A7D1C2900676419 /* EditorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A932A7D1C2900676419 /* EditorConsolePanel.cpp */; };
 		B26B1A962A7D1C2900676419 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */; };
+		B27812732A861C08005C0E7C /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B27812712A861C08005C0E7C /* SceneRenderer.cpp */; };
+		B27812742A861C08005C0E7C /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812722A861C08005C0E7C /* SceneRenderer.hpp */; };
 		B283DF932A811EAC002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
@@ -359,6 +361,8 @@
 		B26B1A932A7D1C2900676419 /* EditorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsolePanel.cpp; sourceTree = "<group>"; };
 		B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsolePanel.hpp; sourceTree = "<group>"; };
 		B26DEF702A838F5300C68ED5 /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
+		B27812712A861C08005C0E7C /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
+		B27812722A861C08005C0E7C /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
 		B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
@@ -481,6 +485,7 @@
 				B23365462A74E6D300BC7B8B /* Renderer2D.hpp */,
 				B23365842A75303E00BC7B8B /* TextRenderer.hpp */,
 				B2CD2AAB2A81269F00B0D70B /* Mesh.hpp */,
+				B27812722A861C08005C0E7C /* SceneRenderer.hpp */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -495,6 +500,7 @@
 				B23365452A74E6D300BC7B8B /* Renderer2D.cpp */,
 				B23365832A75303E00BC7B8B /* TextRenderer.cpp */,
 				B2CD2AAA2A81269F00B0D70B /* Mesh.cpp */,
+				B27812712A861C08005C0E7C /* SceneRenderer.cpp */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -961,6 +967,7 @@
 				B2336A6D2A7642AA00BC7B8B /* UserPreference.hpp in Headers */,
 				B2B5DE3F2A727C090068EEFB /* Timer.hpp in Headers */,
 				B23365482A74E6D300BC7B8B /* Renderer2D.hpp in Headers */,
+				B27812742A861C08005C0E7C /* SceneRenderer.hpp in Headers */,
 				B23367262A75495000BC7B8B /* UUID.hpp in Headers */,
 				B2B5DE3B2A7272560068EEFB /* AssertAPIs.h in Headers */,
 				B21FAA382A728F4D009EED1F /* Event.h in Headers */,
@@ -1186,6 +1193,7 @@
 				B2CD2ABA2A81277600B0D70B /* AABB.cpp in Sources */,
 				B23364E02A74270000BC7B8B /* ShaderUniform.cpp in Sources */,
 				B23364E42A7427C300BC7B8B /* OpenGLShaderUniform.cpp in Sources */,
+				B27812732A861C08005C0E7C /* SceneRenderer.cpp in Sources */,
 				B233670E2A75394300BC7B8B /* ImGuiBuild.cpp in Sources */,
 				B21FAA452A7292B3009EED1F /* Buffers.cpp in Sources */,
 			);
