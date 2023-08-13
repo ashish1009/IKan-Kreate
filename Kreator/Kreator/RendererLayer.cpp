@@ -303,6 +303,7 @@ if (!Project::GetActive()) return
         
         
         // TODO: -----------------------------------------------------------------
+        m_viewportRenderer->SubmitMeshSource(mesh);
         pbr->Bind();
         
         for (Submesh& submesh : mesh->GetSubMeshes())

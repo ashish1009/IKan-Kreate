@@ -215,4 +215,14 @@ namespace IKan
     return m_indexBuffer;
   }
 
+  std::vector<Submesh>& MeshSource::GetSubmeshes()
+  {
+    return m_submeshes;
+  }
+
+  const std::vector<Submesh>& MeshSource::GetSubmeshes() const
+  {
+    return m_submeshes;
+  }
+
 } // namespace IKan

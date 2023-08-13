@@ -91,7 +91,11 @@ namespace IKan
     Ref<VertexBuffer> GetVertexBuffer();
     /// This function returns the Index Buffer
     Ref<IndexBuffer> GetIndexBuffer();
-    
+    /// This function returns the Submeshes vector
+    std::vector<Submesh>& GetSubmeshes();
+    /// This function returns the Submeshes vector as const
+    const std::vector<Submesh>& GetSubmeshes() const;
+
     /// This function creates a Mesh source from file
     /// - Parameter filename: Mesh source file path
     static Ref<MeshSource> Create(const std::string& filename);

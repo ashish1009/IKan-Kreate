@@ -9,6 +9,7 @@
 
 #include "Camera/Camera.hpp"
 #include "Scene/Scene.hpp"
+#include "Renderer/Mesh.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
 #include "Renderer/Graphics/RenderPass.hpp"
 
@@ -50,6 +51,10 @@ namespace IKan
     void BeginBatch(const glm::mat4& camViewProjMat);
     /// This function Ends the current batch by rendering all the vertex
     void EndBatch();
+    
+    /// This function submits the mesh to scene
+    /// - Parameter mesh: mesh source
+    void SubmitMeshSource(Ref<MeshSource> mesh);
 
     /// This function begins the Current Render Pass
     static void BeginRenderPass();
@@ -71,6 +76,18 @@ namespace IKan
   private:
     Ref<Scene> m_scene;
     Ref<Pipeline> m_geometryPipeline;
+    
+    struct MeshKey
+    {
+      MeshKey();
+    };
+    
+    struct MeshSourceDrawCommand
+    {
+
+    };
+    
+    std::map<MeshKey, MeshSourceDrawCommand> m_meshSourceDrawList;
     inline static Scope<SceneRendererData> s_commonData;
   };
 } // namespace IKan

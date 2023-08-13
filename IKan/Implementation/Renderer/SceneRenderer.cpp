@@ -11,6 +11,11 @@
 
 namespace IKan
 {
+  SceneRenderer::MeshKey::MeshKey()
+  {
+    
+  }
+  
   SceneRenderer::SceneRenderer(Ref<Scene> scene, const Renderer2DData& rendere2DData)
   : m_scene(scene)
   {
@@ -101,6 +106,10 @@ namespace IKan
     Renderer2D::EndBatch();
   }
 
+  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> meshSource)
+  {
+  }
+  
   void SceneRenderer::BeginRenderPass()
   {
     s_commonData->renderPass->Begin();
@@ -126,5 +135,4 @@ namespace IKan
   {
     Renderer::GetEntityIdFromPixels(mx, my, s_commonData->renderPass->GetSpecification().targetFramebuffer->GetPixelIdIndex(), pixeldData);
   }
-
 } // namespace IKan
