@@ -28,7 +28,6 @@ out VS_OUT
 uniform mat4 u_ViewProjection;
 uniform mat4 u_Transform;
 
-
 /// Vertex Main Function
 void main()
 {

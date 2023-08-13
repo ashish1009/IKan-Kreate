@@ -118,7 +118,8 @@ namespace IKan
     /// - Parameters:
     ///   - data: Data pointer to be stored in GPU
     ///   - size: size of data
-    virtual void SetData(void* data, uint32_t size) = 0;
+    ///   - offset: offset of data
+    virtual void SetData(void* data, uint32_t size, uint32_t offset = 0) = 0;
     /// This function binds the Vertex Buffer before rendering
     virtual void Bind() const = 0;
     /// This function unbinds the Vertex Buffer after rendering
