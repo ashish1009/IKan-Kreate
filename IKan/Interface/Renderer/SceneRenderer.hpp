@@ -48,9 +48,9 @@ namespace IKan
     
     /// This function begins the Batch for 2D Rendere (to be called each frame)
     /// - Parameter camViewProjMat: Camera View projection Matrix
-    void BeginBatch(const glm::mat4& camViewProjMat);
+    void BeginScene(const glm::mat4& camViewProjMat);
     /// This function Ends the current batch by rendering all the vertex
-    void EndBatch();
+    void EndScene();
     
     /// This function submits the mesh to scene
     /// - Parameter mesh: mesh source
@@ -74,6 +74,13 @@ namespace IKan
     static void GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData);
     
   private:
+    // Member Functions ---------------------------------------------------------------------------------------------
+    /// This function flushes all draw Lists
+    void FlushDrawList();
+    /// This function pass the 3D Geometry Renderer
+    void GeometryPass();
+    
+    // Member Variables ---------------------------------------------------------------------------------------------
     Ref<Scene> m_scene;
     Ref<Pipeline> m_geometryPipeline;
     

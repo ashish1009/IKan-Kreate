@@ -90,7 +90,7 @@ namespace IKan
     }
   }
 
-  void SceneRenderer::BeginBatch(const glm::mat4& camViewProjMat)
+  void SceneRenderer::BeginScene(const glm::mat4& camViewProjMat)
   {
     if (s_commonData->needResize)
     {
@@ -101,13 +101,34 @@ namespace IKan
     Renderer2D::BeginBatch(camViewProjMat);
   }
   
-  void SceneRenderer::EndBatch()
+  void SceneRenderer::EndScene()
   {
+    // 2D ---------------------
     Renderer2D::EndBatch();
+    
+    // 3D ---------------------
+    FlushDrawList();
+  }
+  
+  void SceneRenderer::FlushDrawList()
+  {
+    if (s_commonData->viewportWidth > 0 and s_commonData->viewportHeight > 0)
+    {
+      GeometryPass();
+    }
+  }
+  
+  void SceneRenderer::GeometryPass()
+  {
+    for (auto& [mk, dc] : m_meshSourceDrawList)
+    {
+      
+    }
   }
 
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> meshSource)
   {
+    
   }
   
   void SceneRenderer::BeginRenderPass()

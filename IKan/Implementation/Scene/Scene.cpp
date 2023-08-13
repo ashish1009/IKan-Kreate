@@ -87,9 +87,9 @@ namespace IKan
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
   {
-    renderer->BeginBatch(editorCamera.GetUnReversedViewProjection());
+    renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
     Render2DEntities();
-    renderer->EndBatch();
+    renderer->EndScene();
   }
 
   void Scene::OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer)
@@ -103,16 +103,16 @@ namespace IKan
     const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
     const auto& cameraTransform = cameraEntity.GetComponent<TransformComponent>().Transform();
     
-    renderer->BeginBatch(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
+    renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
     Render2DEntities();
-    renderer->EndBatch();
+    renderer->EndScene();
   }
   
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
   {
-    renderer->BeginBatch(editorCamera.GetUnReversedViewProjection());
+    renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
     Render2DEntities();
-    renderer->EndBatch();
+    renderer->EndScene();
   }
   
   void Scene::Render2DEntities()
