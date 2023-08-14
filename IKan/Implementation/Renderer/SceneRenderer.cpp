@@ -72,13 +72,6 @@ namespace IKan
       { "a_TexCoord",  ShaderDataType::Float2 },
     };
     
-    geomatryPipelineSpec.instanceLayout =
-    {
-      { "a_MRow0",     ShaderDataType::Float4 },
-      { "a_MRow1",     ShaderDataType::Float4 },
-      { "a_MRow2",     ShaderDataType::Float4 },
-    };
-    
     // Create the Pipeline instnace for full screen quad
     m_geometryPipeline = Pipeline::Create(geomatryPipelineSpec);
   }

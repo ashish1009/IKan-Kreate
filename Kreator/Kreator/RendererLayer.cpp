@@ -265,14 +265,7 @@ if (!Project::GetActive()) return
       { "a_Bitangent", ShaderDataType::Float3 },
       { "a_TexCoord",  ShaderDataType::Float2 },
     };
-    
-    pipelineSpec.instanceLayout =
-    {
-      { "a_MRow0",     ShaderDataType::Float4 },
-      { "a_MRow1",     ShaderDataType::Float4 },
-      { "a_MRow2",     ShaderDataType::Float4 },
-    };
-    
+
     // Create the Pipeline instnace for full screen quad
     pip = Pipeline::Create(pipelineSpec);
   }

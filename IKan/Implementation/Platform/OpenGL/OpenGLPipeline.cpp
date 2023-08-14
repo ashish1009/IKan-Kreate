@@ -82,7 +82,6 @@ namespace IKan
     glBindVertexArray(m_rendererID);
     
     AddAttrib(m_specification.vertexLayout);
-    AddAttrib(m_specification.instanceLayout);
   }
   
   void OpenGLPipeline::AddAttrib(const BufferLayout& layout)
