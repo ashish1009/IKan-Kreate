@@ -162,6 +162,11 @@ namespace IKan
   {
     s_rendererData->rendererApiInstance->DrawQuad(pipeline);
   }
+  
+  void Renderer::DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex)
+  {
+    s_rendererData->rendererApiInstance->DrawIndexedBaseVertex(indexCount, indicesData, baseVertex);
+  }
 
   // Renderer Capabilities -------------------------------------------------------------------------------------------
   Renderer::Capabilities& Renderer::Capabilities::Get()

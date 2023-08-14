@@ -14,7 +14,6 @@
 #include "Asset/AssetManager.hpp"
 
 #include "Project.hpp"
-#include <glad/glad.h>
 
 namespace IKan
 {
@@ -112,9 +111,7 @@ namespace IKan
     for (Submesh& submesh : mesh->GetSubMeshes())
     {
       pbrShader->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
-      glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)submesh.indexCount, GL_UNSIGNED_INT,
-                               (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
-      
+      Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
     } // for (Submesh& submesh : mesh->GetSubMeshes())
     
     // TODO: --------------------------------------------------------------

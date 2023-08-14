@@ -133,4 +133,12 @@ namespace IKan
     
     RendererStatistics::Get().drawCalls++;
   }
+  
+  void OpenGLRendererAPI::DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex) const
+  {
+    glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)indexCount, GL_UNSIGNED_INT, indicesData, (GLint)baseVertex);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    RendererStatistics::Get().drawCalls++;
+  }
+
 } // namespace IKan

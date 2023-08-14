@@ -1,6 +1,8 @@
 Project:
   Name: Sandbox
   AssetDirectory: Assets
+  MeshDirectory: Assets/Meshes
+  MeshSourceDirectory: Assets/Meshes/Source
   AssetRegistry: Assets/AssetRegistry.ikr
   StartScene: Scenes/MyScene.ikscene
   AutoSave: true
