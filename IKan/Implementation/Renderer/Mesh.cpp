@@ -10,6 +10,7 @@
 #include <assimp/Importer.hpp>
 
 #include "Mesh.hpp"
+#include <glad/glad.h>
 
 namespace IKan
 {
@@ -222,9 +223,9 @@ namespace IKan
   {
     m_vertexBuffer->Bind();
     m_indexBuffer->Bind();
-    m_pipeline->Bind();
+    m_pipeline->Bind();    
   }
-  
+    
   std::vector<Submesh>& MeshSource::GetSubMeshes()
   {
     return m_submeshes;
@@ -238,6 +239,11 @@ namespace IKan
   const std::vector<Submesh>& MeshSource::GetSubmeshes() const
   {
     return m_submeshes;
+  }
+
+  Ref<Shader> MeshSource::GetShader() const
+  {
+    return m_pipeline->GetSpecification().shader;
   }
 
 } // namespace IKan

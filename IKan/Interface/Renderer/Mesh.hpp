@@ -95,6 +95,8 @@ namespace IKan
     std::vector<Submesh>& GetSubmeshes();
     /// This function returns the Submeshes vector as const
     const std::vector<Submesh>& GetSubmeshes() const;
+    /// This function returns the shader of Mesh
+    Ref<Shader> GetShader() const;
 
     /// This function creates a Mesh source from file
     /// - Parameter filename: Mesh source file path

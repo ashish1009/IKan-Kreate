@@ -103,18 +103,20 @@ namespace IKan
     Render2DEntities();
     
     // TODO: -----------------------------------------------------------------
-//    pbr->Bind();
     mesh->Bind();
 
-    pbr->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
-
+    Ref<Shader> pbrShader = mesh->GetShader();
+    pbrShader->Bind();
+    pbrShader->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
+    
     for (Submesh& submesh : mesh->GetSubMeshes())
     {
-      pbr->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
+      pbrShader->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
       glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)submesh.indexCount, GL_UNSIGNED_INT,
                                (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
-
-    } // for (SubMesh& submesh : submeshes_)
+      
+    } // for (Submesh& submesh : mesh->GetSubMeshes())
+    
     // TODO: --------------------------------------------------------------
 
     renderer->EndScene();
