@@ -53,23 +53,7 @@ namespace IKan
   void SceneRenderer::Initialize(const Renderer2DData& rendere2DData)
   {
     // Initialize the Renderer Data
-    Renderer2D::Initialize(rendere2DData);
-    
-    // Create Pipeline specification
-    Pipeline::Specification pipelineSpec;
-    pipelineSpec.debugName = "PBR-Static";
-    pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));;
-    pipelineSpec.vertexLayout =
-    {
-      { "a_Position",  ShaderDataType::Float3 },
-      { "a_Normal",    ShaderDataType::Float3 },
-      { "a_Tangent",   ShaderDataType::Float3 },
-      { "a_Bitangent", ShaderDataType::Float3 },
-      { "a_TexCoord",  ShaderDataType::Float2 },
-    };
-    
-    // Create the Pipeline instnace for full screen quad
-    m_geometryPipeline = Pipeline::Create(pipelineSpec);
+    Renderer2D::Initialize(rendere2DData);    
   }
   
   void SceneRenderer::SetViewport(uint32_t width, uint32_t height)
@@ -123,7 +107,7 @@ namespace IKan
   {
 //    Ref<Shader> pbrShader = m_geometryPipeline->GetSpecification().shader;
 //    pbrShader->Bind();
-    m_geometryPipeline->Bind();
+//    m_geometryPipeline->Bind();
 //    meshSource->GetVertexBuffer()->Bind();
 //    meshSource->GetIndexBuffer()->Bind();
 //    pbrShader->SetUniformMat4("u_ViewProjection", s_commonData->camViewProjection);

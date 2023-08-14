@@ -83,7 +83,6 @@ namespace IKan
     
     // Member Variables ---------------------------------------------------------------------------------------------
     Ref<Scene> m_scene;
-    Ref<Pipeline> m_geometryPipeline;
     
     inline static Scope<SceneRendererData> s_commonData;
   };

@@ -10,6 +10,7 @@
 #include "Core/AABB.hpp"
 #include "Asset/Asset.hpp"
 #include "Renderer/Graphics/RendererBuffers.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
 
 struct aiNode;
 struct aiAnimation;
@@ -83,14 +84,13 @@ namespace IKan
     ///   - submeshes: subm,eshed
     MeshSource(const std::vector<Vertex>& vertices, const std::vector<Index>& indices, const std::vector<Submesh>& submeshes);
     virtual ~MeshSource();
+    
+    /// This function binds all the Rendere buffers
+    void Bind();
 
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the submeshes
     std::vector<Submesh>& GetSubMeshes();
-    /// This function returns the Vertex Buffer
-    Ref<VertexBuffer> GetVertexBuffer();
-    /// This function returns the Index Buffer
-    Ref<IndexBuffer> GetIndexBuffer();
     /// This function returns the Submeshes vector
     std::vector<Submesh>& GetSubmeshes();
     /// This function returns the Submeshes vector as const
@@ -131,6 +131,7 @@ namespace IKan
     // Graphics
     Ref<VertexBuffer> m_vertexBuffer;
     Ref<IndexBuffer> m_indexBuffer;
+    Ref<Pipeline> m_pipeline;
 
     std::vector<Vertex> m_vertices;
     std::vector<Index> m_indices;

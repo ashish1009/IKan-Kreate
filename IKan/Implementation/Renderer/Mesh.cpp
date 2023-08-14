@@ -165,6 +165,22 @@ namespace IKan
     
     m_vertexBuffer = VertexBuffer::Create(m_vertices.data(), (uint32_t)(m_vertices.size() * sizeof(Vertex)));
     m_indexBuffer = IndexBuffer::CreateWithSize(m_indices.data(), (uint32_t)(m_indices.size() * sizeof(Index)));
+    
+    // Create Pipeline specification
+    Pipeline::Specification pipelineSpec;
+    pipelineSpec.debugName = "PBR-Static";
+    pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));;
+    pipelineSpec.vertexLayout =
+    {
+      { "a_Position",  ShaderDataType::Float3 },
+      { "a_Normal",    ShaderDataType::Float3 },
+      { "a_Tangent",   ShaderDataType::Float3 },
+      { "a_Bitangent", ShaderDataType::Float3 },
+      { "a_TexCoord",  ShaderDataType::Float2 },
+    };
+    
+    // Create the Pipeline instnace for full screen quad
+    m_pipeline = Pipeline::Create(pipelineSpec);
   }
   
   MeshSource::MeshSource(const std::vector<Vertex>& vertices, const std::vector<Index>& indices, const glm::mat4& transform)
@@ -202,17 +218,16 @@ namespace IKan
     }
   }
   
+  void MeshSource::Bind()
+  {
+    m_vertexBuffer->Bind();
+    m_indexBuffer->Bind();
+    m_pipeline->Bind();
+  }
+  
   std::vector<Submesh>& MeshSource::GetSubMeshes()
   {
     return m_submeshes;
-  }
-  Ref<VertexBuffer> MeshSource::GetVertexBuffer()
-  {
-    return m_vertexBuffer;
-  }
-  Ref<IndexBuffer> MeshSource::GetIndexBuffer()
-  {
-    return m_indexBuffer;
   }
 
   std::vector<Submesh>& MeshSource::GetSubmeshes()
