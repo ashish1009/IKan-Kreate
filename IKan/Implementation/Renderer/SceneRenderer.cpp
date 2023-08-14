@@ -72,7 +72,7 @@ namespace IKan
       { "a_TexCoord",  ShaderDataType::Float2 },
     };
     
-    geomatryPipelineSpec.vertexLayout =
+    geomatryPipelineSpec.instanceLayout =
     {
       { "a_MRow0",     ShaderDataType::Float4 },
       { "a_MRow1",     ShaderDataType::Float4 },

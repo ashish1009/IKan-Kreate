@@ -81,14 +81,12 @@ namespace IKan
     // Bind the Pipeline Vertex Array
     glBindVertexArray(m_rendererID);
     
-    AddVertexAttrib();
+    AddAttrib(m_specification.vertexLayout);
+    AddAttrib(m_specification.instanceLayout);
   }
-
-  void OpenGLPipeline::AddVertexAttrib()
+  
+  void OpenGLPipeline::AddAttrib(const BufferLayout& layout)
   {
-    // Layout reference
-    const auto& layout = m_specification.vertexLayout;
-
 #ifdef IK_ENABLE_LOG
     // Store the vertex attribute
     Table::Data tableData;
@@ -104,72 +102,64 @@ namespace IKan
     uint32_t index = 0;
     for (const auto& element : layout.GetElements())
     {
-      AddAttrib(element, index, verticesData);
+  #ifdef IK_ENABLE_LOG
+      verticesData.AddRow({
+        element.name, ShaderDataTypeToString(element.type),
+        std::to_string(element.offset),
+        std::to_string(element.size)
+      });
+  #endif
+      
+      switch (element.type)
+      {
+        case ShaderDataType::Int:
+        case ShaderDataType::Int2:
+        case ShaderDataType::Int3:
+        case ShaderDataType::Int4:
+        case ShaderDataType::Bool:
+        {
+          glEnableVertexAttribArray(index);
+          glVertexAttribIPointer(index, (int)element.count, ShaderDataTypeToOpenGLBaseType(element.type),
+                                 (int)layout.GetStride(), (const void*)element.offset);
+          index++;
+          break;
+        }
+          
+        case ShaderDataType::Float:
+        case ShaderDataType::Float2:
+        case ShaderDataType::Float3:
+        case ShaderDataType::Float4:
+        {
+          glEnableVertexAttribArray(index);
+          glVertexAttribPointer(index, (int)element.count, ShaderDataTypeToOpenGLBaseType(element.type),
+                                element.normalized ? GL_TRUE : GL_FALSE, (int)layout.GetStride(), (const void*)element.offset);
+          index++;
+          break;
+        }
+        case ShaderDataType::Mat3:
+        case ShaderDataType::Mat4:
+        {
+          uint32_t count = element.count;
+          for (uint8_t i = 0; i < count; i++)
+          {
+            glEnableVertexAttribArray(index);
+            glVertexAttribPointer(index, (int)count, ShaderDataTypeToOpenGLBaseType(element.type),
+                                  element.normalized ? GL_TRUE : GL_FALSE, (int)layout.GetStride(),
+                                  (const void*)(sizeof(float) * count * i));
+            glVertexAttribDivisor(index, 1);
+            index++;
+          }
+          break;
+        }
+        default:
+        {
+          IK_ASSERT(false, "Unknown ShaderDataType!");
+        }
+      } // switch (element.Type)
     } // For each elements
 #ifdef IK_ENABLE_LOG
     verticesData.Dump(Log::Level::Debug, "Pipeline");
 #endif
-  }
-  
-  void OpenGLPipeline::AddAttrib(const BufferElement& element, uint32_t& index, Table& verticesData)
-  {
-    // Layout reference
-    const auto& layout = m_specification.vertexLayout;
-
-#ifdef IK_ENABLE_LOG
-    verticesData.AddRow({
-      element.name, ShaderDataTypeToString(element.type),
-      std::to_string(element.offset),
-      std::to_string(element.size)
-    });
-#endif
-    
-    switch (element.type)
-    {
-      case ShaderDataType::Int:
-      case ShaderDataType::Int2:
-      case ShaderDataType::Int3:
-      case ShaderDataType::Int4:
-      case ShaderDataType::Bool:
-      {
-        glEnableVertexAttribArray(index);
-        glVertexAttribIPointer(index, (int)element.count, ShaderDataTypeToOpenGLBaseType(element.type),
-                               (int)layout.GetStride(), (const void*)element.offset);
-        index++;
-        break;
-      }
-        
-      case ShaderDataType::Float:
-      case ShaderDataType::Float2:
-      case ShaderDataType::Float3:
-      case ShaderDataType::Float4:
-      {
-        glEnableVertexAttribArray(index);
-        glVertexAttribPointer(index, (int)element.count, ShaderDataTypeToOpenGLBaseType(element.type),
-                              element.normalized ? GL_TRUE : GL_FALSE, (int)layout.GetStride(), (const void*)element.offset);
-        index++;
-        break;
-      }
-      case ShaderDataType::Mat3:
-      case ShaderDataType::Mat4:
-      {
-        uint32_t count = element.count;
-        for (uint8_t i = 0; i < count; i++)
-        {
-          glEnableVertexAttribArray(index);
-          glVertexAttribPointer(index, (int)count, ShaderDataTypeToOpenGLBaseType(element.type),
-                                element.normalized ? GL_TRUE : GL_FALSE, (int)layout.GetStride(),
-                                (const void*)(sizeof(float) * count * i));
-          glVertexAttribDivisor(index, 1);
-          index++;
-        }
-        break;
-      }
-      default:
-      {
-        IK_ASSERT(false, "Unknown ShaderDataType!");
-      }
-    } // switch (element.Type)
   }
   
   void OpenGLPipeline::Bind() const
