@@ -91,7 +91,7 @@ namespace IKan
         { "a_Bitangent", ShaderDataType::Float3 },
         { "a_TexCoord",  ShaderDataType::Float2 },
       };
-  
+
       // Create the Pipeline instnace for full screen quad
       pip = Pipeline::Create(pipelineSpec);
 
@@ -119,17 +119,17 @@ namespace IKan
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
   {
     renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
-    Render2DEntities();
+    //    Render2DEntities();
     
     // TODO: -----------------------------------------------------------------
-//    renderer->SubmitMeshSource(mesh);
     pbr->Bind();
-//    pip->Bind();
+
+    pip->Bind();
 
     mesh->GetVertexBuffer()->Bind();
     mesh->GetIndexBuffer()->Bind();
 
-        pbr->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
+    pbr->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
 
     for (Submesh& submesh : mesh->GetSubMeshes())
     {
@@ -137,7 +137,7 @@ namespace IKan
       glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)submesh.indexCount, GL_UNSIGNED_INT,
                                (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
 
-        } // for (SubMesh& submesh : submeshes_)
+    } // for (SubMesh& submesh : submeshes_)
     // TODO: --------------------------------------------------------------
 
     renderer->EndScene();
