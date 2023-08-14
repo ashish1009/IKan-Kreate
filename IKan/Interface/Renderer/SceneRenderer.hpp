@@ -83,7 +83,8 @@ namespace IKan
     
     // Member Variables ---------------------------------------------------------------------------------------------
     Ref<Scene> m_scene;
-    
+//    std::map<MeshKey, StaticDrawCommand> m_meshSurceDrawList;
+
     inline static Scope<SceneRendererData> s_commonData;
   };
 } // namespace IKan

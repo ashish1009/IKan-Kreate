@@ -105,20 +105,7 @@ namespace IKan
 
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> meshSource)
   {
-//    Ref<Shader> pbrShader = m_geometryPipeline->GetSpecification().shader;
-//    pbrShader->Bind();
-//    m_geometryPipeline->Bind();
-//    meshSource->GetVertexBuffer()->Bind();
-//    meshSource->GetIndexBuffer()->Bind();
-//    pbrShader->SetUniformMat4("u_ViewProjection", s_commonData->camViewProjection);
-//
-//    for (Submesh& submesh : meshSource->GetSubMeshes())
-//    {
-//      pbrShader->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
-//      glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)submesh.indexCount, GL_UNSIGNED_INT,
-//                               (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
-//
-//    } // for (SubMesh& submesh : submeshes_
+
   }
   
   void SceneRenderer::BeginRenderPass()

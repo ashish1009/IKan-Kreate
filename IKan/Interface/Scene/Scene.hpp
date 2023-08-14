@@ -176,7 +176,10 @@ namespace IKan
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This function renders the 2D Entities
     void Render2DEntities();
-    
+    /// This function renders the 3D Entities
+    /// - Parameter renderer: Scene Renderer Instance
+    void Render3DEntities(Ref<SceneRenderer> renderer);
+
     // Member Variables ---------------------------------------------------------------------------------------------
     entt::registry m_registry;
     uint32_t m_registryCapacity = 0;

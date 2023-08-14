@@ -195,7 +195,9 @@ namespace IKan
   }
   MeshSource::~MeshSource()
   {
-    
+    m_vertexBuffer.reset();
+    m_indexBuffer.reset();
+    m_pipeline.reset();
   }
   
   void MeshSource::TraverseNodes(aiNode* node, const glm::mat4& parentTransform, uint32_t level)
