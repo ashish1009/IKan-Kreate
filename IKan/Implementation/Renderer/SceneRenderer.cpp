@@ -8,14 +8,10 @@
 #include "SceneRenderer.hpp"
 #include "Renderer/Renderer2D.hpp"
 #include "Renderer/Graphics/Texture.hpp"
+#include <glad/glad.h>
 
 namespace IKan
 {
-  SceneRenderer::MeshKey::MeshKey()
-  {
-    
-  }
-  
   SceneRenderer::SceneRenderer(Ref<Scene> scene, const Renderer2DData& rendere2DData)
   : m_scene(scene)
   {
@@ -60,10 +56,10 @@ namespace IKan
     Renderer2D::Initialize(rendere2DData);
     
     // Create Pipeline specification
-    Pipeline::Specification geomatryPipelineSpec;
-    geomatryPipelineSpec.debugName = "PBR-Static";
-    geomatryPipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));
-    geomatryPipelineSpec.vertexLayout =
+    Pipeline::Specification pipelineSpec;
+    pipelineSpec.debugName = "PBR-Static";
+    pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));;
+    pipelineSpec.vertexLayout =
     {
       { "a_Position",  ShaderDataType::Float3 },
       { "a_Normal",    ShaderDataType::Float3 },
@@ -73,7 +69,7 @@ namespace IKan
     };
     
     // Create the Pipeline instnace for full screen quad
-    m_geometryPipeline = Pipeline::Create(geomatryPipelineSpec);
+    m_geometryPipeline = Pipeline::Create(pipelineSpec);
   }
   
   void SceneRenderer::SetViewport(uint32_t width, uint32_t height)
@@ -98,6 +94,7 @@ namespace IKan
       s_commonData->renderPass->Resize(s_commonData->viewportWidth, s_commonData->viewportHeight);
     }
     
+    s_commonData->camViewProjection = camViewProjMat;
     Renderer2D::BeginBatch(camViewProjMat);
   }
   
@@ -120,15 +117,24 @@ namespace IKan
   
   void SceneRenderer::GeometryPass()
   {
-    for (auto& [mk, dc] : m_meshSourceDrawList)
-    {
-      
-    }
   }
 
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> meshSource)
   {
-    
+//    Ref<Shader> pbrShader = m_geometryPipeline->GetSpecification().shader;
+//    pbrShader->Bind();
+    m_geometryPipeline->Bind();
+//    meshSource->GetVertexBuffer()->Bind();
+//    meshSource->GetIndexBuffer()->Bind();
+//    pbrShader->SetUniformMat4("u_ViewProjection", s_commonData->camViewProjection);
+//
+//    for (Submesh& submesh : meshSource->GetSubMeshes())
+//    {
+//      pbrShader->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
+//      glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)submesh.indexCount, GL_UNSIGNED_INT,
+//                               (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
+//
+//    } // for (SubMesh& submesh : submeshes_
   }
   
   void SceneRenderer::BeginRenderPass()

@@ -13,8 +13,15 @@
 #include "Renderer/Graphics/Texture.hpp"
 #include "Asset/AssetManager.hpp"
 
+#include "Project.hpp"
+#include <glad/glad.h>
+
 namespace IKan
 {
+    static Ref<Shader> pbr;
+    static Ref<Pipeline> pip;
+    static Ref<MeshSource> mesh;
+
   /// This function resize/reserve the registry capcity
   template<typename... Component>
   static void ReserveRegistry(ComponentGroup<Component...>, entt::registry& registry, int32_t capacity)
@@ -67,10 +74,34 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
     IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
+    
+    // TODO: ----------------
+      mesh = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/backpack.obj"));
+      pbr = Shader::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
+  
+    // Create Pipeline specification
+      Pipeline::Specification pipelineSpec;
+      pipelineSpec.debugName = "Full Screen Quad Renderer";
+      pipelineSpec.shader = pbr;
+      pipelineSpec.vertexLayout =
+      {
+        { "a_Position",  ShaderDataType::Float3 },
+        { "a_Normal",    ShaderDataType::Float3 },
+        { "a_Tangent",   ShaderDataType::Float3 },
+        { "a_Bitangent", ShaderDataType::Float3 },
+        { "a_TexCoord",  ShaderDataType::Float2 },
+      };
+  
+      // Create the Pipeline instnace for full screen quad
+      pip = Pipeline::Create(pipelineSpec);
+
   }
   
   Scene::~Scene()
   {
+    pip.reset();
+    mesh.reset();
+    pbr.reset();
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Scene, "Destroying Scene!!!");
   }
@@ -89,6 +120,26 @@ namespace IKan
   {
     renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
     Render2DEntities();
+    
+    // TODO: -----------------------------------------------------------------
+//    renderer->SubmitMeshSource(mesh);
+    pbr->Bind();
+//    pip->Bind();
+
+    mesh->GetVertexBuffer()->Bind();
+    mesh->GetIndexBuffer()->Bind();
+
+        pbr->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
+
+    for (Submesh& submesh : mesh->GetSubMeshes())
+    {
+          pbr->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
+      glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)submesh.indexCount, GL_UNSIGNED_INT,
+                               (void*)(sizeof(uint32_t) * submesh.baseIndex), (GLint)submesh.baseVertex);
+
+        } // for (SubMesh& submesh : submeshes_)
+    // TODO: --------------------------------------------------------------
+
     renderer->EndScene();
   }
 

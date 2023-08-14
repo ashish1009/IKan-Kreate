@@ -23,6 +23,7 @@ namespace IKan
     bool needResize = false;
     uint32_t viewportWidth, viewportHeight;
     Ref<RenderPass> renderPass;
+    glm::mat4 camViewProjection;
   };
   
   class SceneRenderer
@@ -84,17 +85,6 @@ namespace IKan
     Ref<Scene> m_scene;
     Ref<Pipeline> m_geometryPipeline;
     
-    struct MeshKey
-    {
-      MeshKey();
-    };
-    
-    struct MeshSourceDrawCommand
-    {
-
-    };
-    
-    std::map<MeshKey, MeshSourceDrawCommand> m_meshSourceDrawList;
     inline static Scope<SceneRendererData> s_commonData;
   };
 } // namespace IKan
