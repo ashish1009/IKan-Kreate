@@ -74,7 +74,7 @@ namespace IKan
     Pipeline::Specification pipelineSpec;
     pipelineSpec.debugName = "Text Renderer";
     pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/TextShader.glsl"));
-    pipelineSpec.layout =
+    pipelineSpec.vertexLayout =
     {
       { "a_Position",  ShaderDataType::Float3 },
       { "a_Color",     ShaderDataType::Float4 },

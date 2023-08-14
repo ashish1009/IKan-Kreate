@@ -63,13 +63,20 @@ namespace IKan
     Pipeline::Specification geomatryPipelineSpec;
     geomatryPipelineSpec.debugName = "PBR-Static";
     geomatryPipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));
-    geomatryPipelineSpec.layout =
+    geomatryPipelineSpec.vertexLayout =
     {
       { "a_Position",  ShaderDataType::Float3 },
       { "a_Normal",    ShaderDataType::Float3 },
       { "a_Tangent",   ShaderDataType::Float3 },
       { "a_Bitangent", ShaderDataType::Float3 },
       { "a_TexCoord",  ShaderDataType::Float2 },
+    };
+    
+    geomatryPipelineSpec.vertexLayout =
+    {
+      { "a_MRow0",     ShaderDataType::Float4 },
+      { "a_MRow1",     ShaderDataType::Float4 },
+      { "a_MRow2",     ShaderDataType::Float4 },
     };
     
     // Create the Pipeline instnace for full screen quad

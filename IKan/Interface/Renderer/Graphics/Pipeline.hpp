@@ -23,7 +23,8 @@ namespace IKan
     {
       std::string debugName;
       Ref<Shader> shader;
-      BufferLayout layout;
+      BufferLayout vertexLayout;
+      BufferLayout instanceLayout;
     };
     
     /// This is the virtual default destructor for Pipeline

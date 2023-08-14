@@ -39,6 +39,10 @@ namespace IKan
   private:
     /// This function invalidates the pipeline with new specificaion
     void Invalidate();
+    /// This function adds the vertex attribute
+    void AddVertexAttrib();
+    /// This function adds the single attribute
+    void AddAttrib(const BufferElement& element, uint32_t& index, Table& verticesData);
     
     RendererID m_rendererID;
     Specification m_specification;

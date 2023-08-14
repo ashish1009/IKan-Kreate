@@ -45,7 +45,7 @@ namespace IKan
       Pipeline::Specification pipelineSpec;
       pipelineSpec.debugName = "Full Screen Quad Renderer";
       pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/FSQuadShader.glsl"));
-      pipelineSpec.layout =
+      pipelineSpec.vertexLayout =
       {
         { "a_Position", ShaderDataType::Float3 },
         { "a_TexCoord", ShaderDataType::Float2 },
@@ -438,7 +438,7 @@ namespace IKan
     Pipeline::Specification pipelineSpec;
     pipelineSpec.debugName = "Quad Renderer";
     pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/QuadShader.glsl"));
-    pipelineSpec.layout =
+    pipelineSpec.vertexLayout =
     {
       { "a_Position",     ShaderDataType::Float3 },
       { "a_Color",        ShaderDataType::Float4 },
@@ -516,7 +516,7 @@ namespace IKan
     Pipeline::Specification pipelineSpec;
     pipelineSpec.debugName = "Circle Renderer";
     pipelineSpec.shader = Shader::Create (CoreAssetPath("Shaders/CircleShader.glsl"));
-    pipelineSpec.layout =
+    pipelineSpec.vertexLayout =
     {
       { "a_Position",     ShaderDataType::Float3 },
       { "a_Color",        ShaderDataType::Float4 },
@@ -599,7 +599,7 @@ namespace IKan
     Pipeline::Specification pipelineSpec;
     pipelineSpec.debugName = "Line Renderer";
     pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/LineShader.glsl"));
-    pipelineSpec.layout =
+    pipelineSpec.vertexLayout =
     {
       { "a_Position", ShaderDataType::Float3 },
       { "a_Color",    ShaderDataType::Float4 },
