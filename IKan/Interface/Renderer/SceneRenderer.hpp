@@ -53,10 +53,6 @@ namespace IKan
     /// This function Ends the current batch by rendering all the vertex
     void EndScene();
     
-    /// This function submits the mesh to scene
-    /// - Parameter mesh: mesh source
-    void SubmitMeshSource(Ref<MeshSource> mesh);
-
     /// This function begins the Current Render Pass
     static void BeginRenderPass();
     /// This function ends the Current Render Pass
@@ -83,7 +79,6 @@ namespace IKan
     
     // Member Variables ---------------------------------------------------------------------------------------------
     Ref<Scene> m_scene;
-//    std::map<MeshKey, StaticDrawCommand> m_meshSurceDrawList;
 
     inline static Scope<SceneRendererData> s_commonData;
   };

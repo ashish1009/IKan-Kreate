@@ -17,9 +17,6 @@
 
 namespace IKan
 {
-  static Ref<Shader> pbr;
-  static Ref<MeshSource> mesh;
-
   /// This function resize/reserve the registry capcity
   template<typename... Component>
   static void ReserveRegistry(ComponentGroup<Component...>, entt::registry& registry, int32_t capacity)
@@ -72,16 +69,10 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
     IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
-    
-    // TODO: ----------------
-    pbr = Shader::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
-    mesh = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/backpack.obj"));
   }
   
   Scene::~Scene()
   {
-    mesh.reset();
-    pbr.reset();
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Scene, "Destroying Scene!!!");
   }
@@ -101,22 +92,6 @@ namespace IKan
     renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
     Render2DEntities();
     Render3DEntities(renderer);
-    
-    // TODO: -----------------------------------------------------------------
-    mesh->Bind();
-
-    Ref<Shader> pbrShader = mesh->GetShader();
-    pbrShader->Bind();
-    pbrShader->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
-
-    for (Submesh& submesh : mesh->GetSubMeshes())
-    {
-      pbrShader->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
-      Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
-    } // for (Submesh& submesh : mesh->GetSubMeshes())
-
-    // TODO: --------------------------------------------------------------
-
     renderer->EndScene();
   }
 
@@ -206,7 +181,6 @@ namespace IKan
   
   void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
   {
-    renderer->SubmitMeshSource(mesh);
   }
   
   void Scene::OnRuntimeStart()

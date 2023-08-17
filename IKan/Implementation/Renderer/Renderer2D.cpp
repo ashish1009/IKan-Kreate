@@ -646,7 +646,8 @@ namespace IKan
     TextRenderer::EndBatch();
   }
 
-  void Renderer2D::Flush() {
+  void Renderer2D::Flush()
+  {
     if (s_quadData and s_quadData->indexCount)
     {
       uint32_t dataSize = (uint32_t)((uint8_t*)s_quadData->vertexBufferPtr - (uint8_t*)s_quadData->vertexBufferBasePtr);

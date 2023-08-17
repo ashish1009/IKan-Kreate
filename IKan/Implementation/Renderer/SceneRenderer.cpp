@@ -102,11 +102,6 @@ namespace IKan
   void SceneRenderer::GeometryPass()
   {
   }
-
-  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> meshSource)
-  {
-
-  }
   
   void SceneRenderer::BeginRenderPass()
   {
