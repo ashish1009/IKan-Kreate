@@ -102,20 +102,20 @@ namespace IKan
     Render2DEntities();
     Render3DEntities(renderer);
     
-//    // TODO: -----------------------------------------------------------------
-//    mesh->Bind();
-//
-//    Ref<Shader> pbrShader = mesh->GetShader();
-//    pbrShader->Bind();
-//    pbrShader->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
-//
-//    for (Submesh& submesh : mesh->GetSubMeshes())
-//    {
-//      pbrShader->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
-//      Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
-//    } // for (Submesh& submesh : mesh->GetSubMeshes())
-//
-//    // TODO: --------------------------------------------------------------
+    // TODO: -----------------------------------------------------------------
+    mesh->Bind();
+
+    Ref<Shader> pbrShader = mesh->GetShader();
+    pbrShader->Bind();
+    pbrShader->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
+
+    for (Submesh& submesh : mesh->GetSubMeshes())
+    {
+      pbrShader->SetUniformMat4("u_Transform", glm::mat4(1.0f) * submesh.transform);
+      Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+    } // for (Submesh& submesh : mesh->GetSubMeshes())
+
+    // TODO: --------------------------------------------------------------
 
     renderer->EndScene();
   }
