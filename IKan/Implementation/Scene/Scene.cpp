@@ -75,12 +75,12 @@ namespace IKan
     
     {
       const auto& file = Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj");
-      meshH[0] = AssetManager::CreateMemoryOnlyAsset<MeshSource>(file, file);
+      meshH[0] = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
     }
     
     {
       const auto& file = Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj");
-      meshH[1] = AssetManager::CreateMemoryOnlyAsset<MeshSource>(file, file);
+      meshH[1] = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
     }
     
     {
