@@ -87,7 +87,8 @@ namespace IKan
     
     struct MeshKey
     {
-      AssetHandle MeshHandle;
+      AssetHandle meshHandle;
+      bool operator<(const MeshKey& other) const;
     };
     struct StaticDrawCommand
     {

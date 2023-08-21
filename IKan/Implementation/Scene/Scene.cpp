@@ -76,11 +76,13 @@ namespace IKan
     if (!mesh[0])
     {
       mesh[0] = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj"));
+      mesh[0]->handle = AssetHandle();
     }
     
     if (!mesh[1])
     {
       mesh[1] = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj"));
+      mesh[1]->handle = AssetHandle();
     }
   }
   
@@ -109,24 +111,6 @@ namespace IKan
     Render2DEntities();
     Render3DEntities(renderer);
     renderer->EndScene();
-
-    for (int i = 0; i < 2 ; i ++)
-    {
-      auto pipeline = mesh[i]->GetPipeline();
-      pipeline->Bind();
-
-      auto shader = pipeline->GetSpecification().shader;
-      shader->Bind();
-      shader->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
-      
-      for (const SubMesh& submesh : mesh[i]->GetSubMeshes())
-      {
-        shader->SetUniformMat4("u_Transform", Utils::Math::GetTransformMatrix({i, 0, 0}) * submesh.transform);
-        Renderer::DrawIndexedBaseVertex(submesh.indexCount,
-                                        (void*)(sizeof(uint32_t) * submesh.baseIndex),
-                                        submesh.baseVertex);
-      } // for (SubMesh& submesh : submeshes_)
-    }
   }
 
   void Scene::OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer)
@@ -215,6 +199,10 @@ namespace IKan
   
   void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
   {
+    for (int i = 0; i < 2; i++)
+    {
+      renderer->SubmitMeshSource(mesh[i]);
+    }
   }
   
   void Scene::OnRuntimeStart()

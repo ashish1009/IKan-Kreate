@@ -12,6 +12,11 @@
 
 namespace IKan
 {
+  bool SceneRenderer::MeshKey::operator<(const MeshKey &other) const
+  {
+    return meshHandle < other.meshHandle;
+  }
+  
   SceneRenderer::SceneRenderer(Ref<Scene> scene, const Renderer2DData& rendere2DData)
   : m_scene(scene)
   {
@@ -108,6 +113,26 @@ namespace IKan
   
   void SceneRenderer::GeometryPass()
   {
+    int i = 0;
+    for (const auto& [mk, dc] : m_meshSourceDrawList)
+    {
+      auto pipeline = dc.meshSource->GetPipeline();
+      pipeline->Bind();
+      
+      auto shader = pipeline->GetSpecification().shader;
+      shader->Bind();
+      shader->SetUniformMat4("u_ViewProjection", s_commonData->camViewProjection);
+      
+      for (const SubMesh& submesh : dc.meshSource->GetSubMeshes())
+      {
+        shader->SetUniformMat4("u_Transform", Utils::Math::GetTransformMatrix({i, 0, 0}) * submesh.transform);
+        Renderer::DrawIndexedBaseVertex(submesh.indexCount,
+                                        (void*)(sizeof(uint32_t) * submesh.baseIndex),
+                                        submesh.baseVertex);
+      } // for (SubMesh& submesh : submeshes_)
+
+      i++;
+    }
   }
   
   void SceneRenderer::BeginRenderPass()
