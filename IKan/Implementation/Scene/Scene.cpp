@@ -18,7 +18,7 @@
 
 namespace IKan
 {
-  static AssetHandle meshH[4];
+  static AssetHandle meshH[5];
 
   /// This function resize/reserve the registry capcity
   template<typename... Component>
@@ -92,6 +92,10 @@ namespace IKan
       
       {
         meshH[3] = MeshFactory::CreateSphere(0.5);
+      }
+      
+      {
+        meshH[4] = MeshFactory::CreateCapsule(0.3, 2);
       }
       create = false;
     }
@@ -207,7 +211,7 @@ namespace IKan
   
   void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
   {
-    for (int i = 0; i < 4; i++)
+    for (int i = 0; i < 5; i++)
     {
       renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(meshH[i]));
     }
