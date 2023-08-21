@@ -18,7 +18,7 @@
 
 namespace IKan
 {
-  static Ref<MeshSource> mesh[2];
+  static AssetHandle meshH[2];
 
   /// This function resize/reserve the registry capcity
   template<typename... Component>
@@ -73,16 +73,14 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
     
-    if (!mesh[0])
     {
-      mesh[0] = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj"));
-      mesh[0]->handle = AssetHandle();
+      const auto& file = Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj");
+      meshH[0] = AssetManager::CreateMemoryOnlyAsset<MeshSource>(file, file);
     }
     
-    if (!mesh[1])
     {
-      mesh[1] = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj"));
-      mesh[1]->handle = AssetHandle();
+      const auto& file = Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj");
+      meshH[1] = AssetManager::CreateMemoryOnlyAsset<MeshSource>(file, file);
     }
   }
   
@@ -90,9 +88,6 @@ namespace IKan
   {
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Scene, "Destroying Scene!!!");
-    
-    mesh[0].reset();
-    mesh[1].reset();
   }
   
   void Scene::OnUpdateEditor(TimeStep ts)
@@ -201,7 +196,7 @@ namespace IKan
   {
     for (int i = 0; i < 2; i++)
     {
-      renderer->SubmitMeshSource(mesh[i]);
+      renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(meshH[i]));
     }
   }
   
