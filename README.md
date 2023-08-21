@@ -164,6 +164,10 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 - V8.2.5.2  : Kreator - Scene Playe Pause Simulation Tool bar
  ------------------------------------------------------------------------------------------------------------------
 
+- V9.0.6.0  : Mesh - Loader
+ ------------------------------------------------------------------------------------------------------------------
+
+
 ## Upcoming Release Tags  
 -   : IKan    - Sub texture in quad component
   - Quad Componentn GUI Update for Subtexture
