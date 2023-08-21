@@ -17,6 +17,7 @@ namespace IKan
 {
   class Texture;
   class Renderer2DData;
+  
   /// This structure stores the common data for Batch 2D Renderer
   struct SceneRendererData
   {
@@ -53,6 +54,10 @@ namespace IKan
     /// This function Ends the current batch by rendering all the vertex
     void EndScene();
     
+    /// This function submits the mesh source in scene
+    /// - Parameter mesh: mesh source
+    void SubmitMeshSource(Ref<MeshSource> mesh);
+    
     /// This function begins the Current Render Pass
     static void BeginRenderPass();
     /// This function ends the Current Render Pass
@@ -79,6 +84,17 @@ namespace IKan
     
     // Member Variables ---------------------------------------------------------------------------------------------
     Ref<Scene> m_scene;
+    
+    struct MeshKey
+    {
+      AssetHandle MeshHandle;
+    };
+    struct StaticDrawCommand
+    {
+      Ref<MeshSource> meshSource;
+    };
+
+    std::map<MeshKey, StaticDrawCommand> m_meshSourceDrawList;
 
     inline static Scope<SceneRendererData> s_commonData;
   };

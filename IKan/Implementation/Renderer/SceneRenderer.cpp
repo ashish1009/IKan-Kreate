@@ -82,6 +82,13 @@ namespace IKan
     Renderer2D::BeginBatch(camViewProjMat);
   }
   
+  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh)
+  {
+    MeshKey meshKey = { mesh->handle };
+    auto& dc = m_meshSourceDrawList[meshKey];
+    dc.meshSource = mesh;
+  }
+  
   void SceneRenderer::EndScene()
   {
     // 2D ---------------------
