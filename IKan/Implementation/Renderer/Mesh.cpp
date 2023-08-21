@@ -16,6 +16,22 @@ namespace IKan
 {
 #define MESH_LOG(...) IK_LOG_TRACE(LogModule::Mesh, __VA_ARGS__);
 
+  namespace MeshUtils
+  {
+    /// return glm mat4 from aiMatrix
+    /// @param matrix ai Matrix
+    static glm::mat4 Mat4FromAssimpMat4(const aiMatrix4x4& matrix)
+    {
+      glm::mat4 result;
+      //the a,b,c,d in assimp is the row ; the 1,2,3,4 is the column
+      result[0][0] = matrix.a1; result[1][0] = matrix.a2; result[2][0] = matrix.a3; result[3][0] = matrix.a4;
+      result[0][1] = matrix.b1; result[1][1] = matrix.b2; result[2][1] = matrix.b3; result[3][1] = matrix.b4;
+      result[0][2] = matrix.c1; result[1][2] = matrix.c2; result[2][2] = matrix.c3; result[3][2] = matrix.c4;
+      result[0][3] = matrix.d1; result[1][3] = matrix.d2; result[2][3] = matrix.d3; result[3][3] = matrix.d4;
+      return result;
+    }
+  } // namespace MeshUtils
+
   static const uint32_t s_MeshImportFlags =
   aiProcess_CalcTangentSpace |        // Create binormals/tangents just in case
   aiProcess_Triangulate |             // Make sure we're triangles
@@ -43,6 +59,7 @@ namespace IKan
     IK_ASSERT(!(!m_scene or m_scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE or !m_scene->mRootNode), importer.GetErrorString());
     
     StoreVerticesAndIndices();
+    TraverseNodes(m_scene->mRootNode);
   }
   
   MeshSource::~MeshSource()
@@ -162,6 +179,23 @@ namespace IKan
     
     MESH_LOG("  Number of Static Vertices   | {0}", m_staticVertices.size());
     MESH_LOG("  Number of Indices           | {0}", m_indices.size());
-
   }
+  
+  void MeshSource::TraverseNodes(aiNode *node, const glm::mat4 &parentTransform, uint32_t level)
+  {
+    glm::mat4 transform = parentTransform * MeshUtils::Mat4FromAssimpMat4(node->mTransformation);
+    for (uint32_t i = 0; i < node->mNumMeshes; i++)
+    {
+      uint32_t mesh = node->mMeshes[i];
+      auto& submesh = m_submeshes[mesh];
+      submesh.nodeName = node->mName.C_Str();
+      submesh.transform = transform;
+    }
+    
+    for (uint32_t i = 0; i < node->mNumChildren; i++)
+    {
+      TraverseNodes(node->mChildren[i], transform, level + 1);
+    }
+  }
+
 } // namespace IKan

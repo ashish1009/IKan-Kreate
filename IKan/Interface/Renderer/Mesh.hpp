@@ -11,6 +11,7 @@
 #include "Core/AABB.hpp"
 
 class aiScene;
+class aiNode;
 
 namespace IKan
 {
@@ -74,6 +75,13 @@ namespace IKan
     // Member functions ----------------------------------------------------------------------------------------------
     /// This function store the certices and indices of the mesh
     void StoreVerticesAndIndices();
+    /// This function rocesses a node in a recursive fashion. Processes each individual mesh located at the node and
+    /// repeats this process on its children nodes (if any).
+    /// - Parameters:
+    ///   - node: node pointer of submesh
+    ///   - parentTransform: parent node transform
+    ///   - level: level
+    void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
 
     // Member variables ----------------------------------------------------------------------------------------------
     std::string m_filePath = "";
