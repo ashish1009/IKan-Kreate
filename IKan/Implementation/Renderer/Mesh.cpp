@@ -60,9 +60,6 @@ namespace IKan
     
     StoreVerticesAndIndices();
     TraverseNodes(m_scene->mRootNode);
-    
-    m_shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));
-    
     LoadGraphicsdata();
   }
   
@@ -210,7 +207,7 @@ namespace IKan
     // Create Pipeline specification
     Pipeline::Specification pipelineSpec;
     pipelineSpec.debugName = Utils::String::GetFileNameFromPath(m_filePath);
-    pipelineSpec.shader = m_shader;
+//    pipelineSpec.shader = m_shader;
     pipelineSpec.vertexLayout =
     {
       { "a_Position",  ShaderDataType::Float3 },
@@ -232,12 +229,7 @@ namespace IKan
   {
     m_pipeline->Bind();
   }
-  
-  Ref<Shader> MeshSource::GetShader()
-  {
-    return m_shader;
-  }
-  
+    
   const std::vector<SubMesh>& MeshSource::GetSubMeshes() const
   {
     return m_submeshes;

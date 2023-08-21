@@ -69,8 +69,6 @@ namespace IKan
     /// This function binds the mesh for rendering
     void Bind();
     
-    /// This function returns the shader of mesh;
-    Ref<Shader> GetShader();
     /// This function returns the submeshes
     const std::vector<SubMesh>& GetSubMeshes() const;
 
@@ -115,9 +113,6 @@ namespace IKan
     std::shared_ptr<IndexBuffer> m_indexBuffer;
 
     // Assimp
-    const aiScene* m_scene;
-    
-    // TODO: Temp Later make it material
-    Ref<Shader> m_shader;
+    const aiScene* m_scene;    
   };
 } // namespace IKan
