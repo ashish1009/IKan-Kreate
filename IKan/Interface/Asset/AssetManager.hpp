@@ -84,6 +84,22 @@ namespace IKan
     
     // Template APIs ------------------------------------------------------------------------------------------------
     /// This function creates a memory asset that need to be stored`
+    /// - Parameter args: Arguments for asset creation
+    /// - Note :
+    ///   TAsset - Type of asset
+    ///   TArgs  - Dynamic arguments for asset creation
+    template<typename TAsset, typename... TArgs>
+    static AssetHandle CreateMemoryOnlyAsset(TArgs&&... args)
+    {
+      static_assert(std::is_base_of<Asset, TAsset>::value,
+                    "CreateMemoryOnlyAsset only works for types derived from Asset");
+
+      Ref<TAsset> asset = TAsset::Create(std::forward<TArgs>(args)...);
+      asset->handle = AssetHandle();
+      s_memoryAssets[asset->handle] = asset;
+      return asset->handle;
+    }
+    /// This function creates a memory asset that need to be stored`
     /// - Parameters:
     ///   - args: Arguments for asset creation
     ///   - fileName: file path of asset

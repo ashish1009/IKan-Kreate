@@ -46,6 +46,12 @@ namespace IKan
     return CreateRef<MeshSource>(filePath, entityID);
   }
   
+  Ref<MeshSource> MeshSource::Create(const std::vector<StaticVertex>& vertices, const std::vector<Index>& indices,
+                                     const glm::mat4& transform)
+  {
+    return CreateRef<MeshSource>(vertices, indices, transform);
+  }
+  
   MeshSource::MeshSource(const std::string &filePath, uint32_t entityID)
   : m_filePath(filePath), m_entityID(entityID)
   {
@@ -60,6 +66,22 @@ namespace IKan
     
     StoreVerticesAndIndices();
     TraverseNodes(m_scene->mRootNode);
+    LoadGraphicsdata();
+  }
+  
+  MeshSource::MeshSource(const std::vector<StaticVertex>& vertices, const std::vector<Index>& indices,
+                         const glm::mat4& transform)
+  {
+    m_staticVertices = vertices;
+    m_indices = indices;
+    
+    SubMesh submesh;
+    submesh.baseVertex = 0;
+    submesh.baseIndex = 0;
+    submesh.indexCount = (uint32_t)indices.size() * 3u;
+    submesh.transform = transform;
+    m_submeshes.push_back(submesh);
+
     LoadGraphicsdata();
   }
   

@@ -63,6 +63,12 @@ namespace IKan
     ///   - filePath: mesh model file path
     ///   - entityID: Entity id
     MeshSource(const std::string& filePath, uint32_t entityID);
+    /// This Constructur creates the mesh source fromn vertices and indices and transform
+    /// - Parameters:
+    ///   - vertices: veritices
+    ///   - indices: indices
+    ///   - transform: transform
+    MeshSource(const std::vector<StaticVertex>& vertices, const std::vector<Index>& indices, const glm::mat4& transform);
     /// This destructor destiory the loaded mesh and delete all the data
     ~MeshSource();
     
@@ -76,7 +82,14 @@ namespace IKan
     ///   - filePath: mesh model file path
     ///   - entityID: Entity id
     static Ref<MeshSource> Create(const std::string& filePath, uint32_t entityID = -1);
-    
+    /// This function creates the mesh source fromn vertices and indices and transform
+    /// - Parameters:
+    ///   - vertices: veritices
+    ///   - indices: indices
+    ///   - transform: transform
+    static Ref<MeshSource> Create(const std::vector<StaticVertex>& vertices, const std::vector<Index>& indices,
+                                  const glm::mat4& transform);
+
     ASSET_TYPE(MeshSource);
     
   private:

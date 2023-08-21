@@ -125,7 +125,7 @@ namespace IKan
       
       for (const SubMesh& submesh : dc.meshSource->GetSubMeshes())
       {
-        shader->SetUniformMat4("u_Transform", Utils::Math::GetTransformMatrix({i, 0, 0}) * submesh.transform);
+        shader->SetUniformMat4("u_Transform", Utils::Math::GetTransformMatrix({i*3, 0, 0}) * submesh.transform);
         Renderer::DrawIndexedBaseVertex(submesh.indexCount,
                                         (void*)(sizeof(uint32_t) * submesh.baseIndex),
                                         submesh.baseVertex);

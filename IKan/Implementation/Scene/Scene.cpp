@@ -72,19 +72,24 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
     IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
-    
+
+    static bool create = true;
+    if (create)
     {
-      const auto& file = Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj");
-      meshH[0] = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
-    }
-    
-    {
-      const auto& file = Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj");
-      meshH[1] = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
-    }
-    
-    {
-      meshH[2] = MeshFactory::CreateBox({1, 1, 1});
+      {
+        const auto& file = Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj");
+        meshH[0] = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+      }
+      
+      {
+        const auto& file = Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj");
+        meshH[1] = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+      }
+      
+      {
+        meshH[2] = MeshFactory::CreateBox({1, 1, 1});
+      }
+      create = false;
     }
   }
   
@@ -198,7 +203,7 @@ namespace IKan
   
   void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
   {
-    for (int i = 0; i < 2; i++)
+    for (int i = 0; i < 3; i++)
     {
       renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(meshH[i]));
     }
