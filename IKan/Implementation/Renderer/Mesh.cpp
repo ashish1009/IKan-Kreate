@@ -227,23 +227,19 @@ namespace IKan
     m_indexBuffer = IndexBuffer::CreateWithSize((void*)m_indices.data(),
                                                 uint32_t(m_indices.size() * sizeof(Index)));
   }
-  
-  void MeshSource::Draw(const glm::mat4 &transform)
+    
+  void MeshSource::Bind()
   {
-    for (SubMesh& submesh : m_submeshes)
-    {
-      m_pipeline->Bind();
-//      m_vertexBuffer->Bind();
-//      m_indexBuffer->Bind();
-      m_shader->SetUniformMat4("u_Transform", transform * submesh.transform);
-      Renderer::DrawIndexedBaseVertex(submesh.indexCount,
-                                      (void*)(sizeof(uint32_t) * submesh.baseIndex),
-                                      submesh.baseVertex);
-    } // for (SubMesh& submesh : submeshes_)
+    m_pipeline->Bind();
   }
   
   Ref<Shader> MeshSource::GetShader()
   {
     return m_shader;
+  }
+  
+  const std::vector<SubMesh>& MeshSource::GetSubMeshes() const
+  {
+    return m_submeshes;
   }
 } // namespace IKan

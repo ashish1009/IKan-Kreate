@@ -110,17 +110,23 @@ namespace IKan
     Render3DEntities(renderer);
     renderer->EndScene();
 
-    auto shader1 = mesh[0]->GetShader();
-    shader1->Bind();
-    shader1->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
-
-    mesh[0]->Draw(Utils::Math::GetTransformMatrix({0, 0, 0}));
-    
-    auto shader2 = mesh[1]->GetShader();
-    shader2->Bind();
-    shader2->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
-
-    mesh[1]->Draw(Utils::Math::GetTransformMatrix({1, 0, 0}));
+    for (int i = 0; i < 2 ; i ++)
+    {
+      auto shader1 = mesh[i]->GetShader();
+      shader1->Bind();
+      shader1->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
+      
+      {
+        mesh[i]->Bind();
+        for (const SubMesh& submesh : mesh[i]->GetSubMeshes())
+        {
+          shader1->SetUniformMat4("u_Transform", Utils::Math::GetTransformMatrix({i, 0, 0}) * submesh.transform);
+          Renderer::DrawIndexedBaseVertex(submesh.indexCount,
+                                          (void*)(sizeof(uint32_t) * submesh.baseIndex),
+                                          submesh.baseVertex);
+        } // for (SubMesh& submesh : submeshes_)
+      }
+    }
   }
 
   void Scene::OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer)

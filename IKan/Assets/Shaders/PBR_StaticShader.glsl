@@ -65,5 +65,5 @@ in VS_OUT
 /// Fragment Main Function
 void main()
 {
-  o_Color = vec4(1.0f);
+  o_Color = vec4(vs_Input.WorldPosition, 1.0f);
 }

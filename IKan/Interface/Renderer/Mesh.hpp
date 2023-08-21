@@ -66,13 +66,13 @@ namespace IKan
     /// This destructor destiory the loaded mesh and delete all the data
     ~MeshSource();
     
-    /// This function draws the Mesh
-    /// - Parameter transform: mesh transform matrix
-    void Draw(const glm::mat4& transform);
+    /// This function binds the mesh for rendering
+    void Bind();
     
-    // TODO: Temp later move to Material
     /// This function returns the shader of mesh;
     Ref<Shader> GetShader();
+    /// This function returns the submeshes
+    const std::vector<SubMesh>& GetSubMeshes() const;
 
     /// This funciton creates the mesh from assimp library and store the data
     /// - Parameters:
