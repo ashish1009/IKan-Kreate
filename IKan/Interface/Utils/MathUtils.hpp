@@ -29,7 +29,8 @@ namespace IKan::Utils
     ///   - scale: Size of the component. Default glm vec3(1.0f):
     ///  - Important: Return value should not be discarded.
     ///  - Important: This function cost too much in CPU
-    [[nodiscard]] static glm::mat4 GetTransformMatrix(const glm::vec3& position, const glm::vec3& rotation, const glm::vec3& scale);
+    [[nodiscard]] static glm::mat4 GetTransformMatrix(const glm::vec3& position, const glm::vec3& rotation = {0, 0, 0},
+                                                      const glm::vec3& scale = {1, 1, 1});
     
     /// This function conerts the Cartisian point to Isometric
     /// - Parameter cartisian: cartisian point

@@ -109,6 +109,18 @@ namespace IKan
     Render2DEntities();
     Render3DEntities(renderer);
     renderer->EndScene();
+
+    auto shader1 = mesh[0]->GetShader();
+    shader1->Bind();
+    shader1->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
+
+    mesh[0]->Draw(Utils::Math::GetTransformMatrix({0, 0, 0}));
+    
+    auto shader2 = mesh[1]->GetShader();
+    shader2->Bind();
+    shader2->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
+
+    mesh[1]->Draw(Utils::Math::GetTransformMatrix({1, 0, 0}));
   }
 
   void Scene::OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer)
