@@ -216,6 +216,16 @@ namespace IKan
   
   void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
   {
+    auto view = m_registry.view<TransformComponent, StaticMeshComponent>();
+    for (const auto& entity : view)
+    {
+      const auto& [transformComp, staticMeshComp] = view.get<TransformComponent, StaticMeshComponent>(entity);
+      if (staticMeshComp.staticMesh != 0)
+      {
+        renderer->SubmitStaticMesh(AssetManager::GetAsset<StaticMesh>(staticMeshComp.staticMesh));
+      }
+    } // For each Quad Entity
+
     for (int i = 0; i < 5; i++)
     {
       renderer->SubmitStaticMesh(AssetManager::GetAsset<StaticMesh>(meshH[i]));
