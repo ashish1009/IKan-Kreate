@@ -60,6 +60,8 @@ namespace IKan
     
     StoreVerticesAndIndices();
     TraverseNodes(m_scene->mRootNode);
+    
+    m_shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));
   }
   
   MeshSource::~MeshSource()

@@ -9,6 +9,7 @@
 
 #include "Asset/Asset.hpp"
 #include "Core/AABB.hpp"
+#include "Renderer/Graphics/Shader.hpp"
 
 class aiScene;
 class aiNode;
@@ -98,5 +99,8 @@ namespace IKan
 
     // Assimp
     const aiScene* m_scene;
+    
+    // TODO: Temp Later make it material
+    Ref<Shader> m_shader;
   };
 } // namespace IKan
