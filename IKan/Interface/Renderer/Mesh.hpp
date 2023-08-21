@@ -10,6 +10,8 @@
 #include "Asset/Asset.hpp"
 #include "Core/AABB.hpp"
 #include "Renderer/Graphics/Shader.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
+#include "Renderer/Graphics/RendererBuffers.hpp"
 
 class aiScene;
 class aiNode;
@@ -83,6 +85,8 @@ namespace IKan
     ///   - parentTransform: parent node transform
     ///   - level: level
     void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
+    /// This function loads the graphics data in renderer buffers
+    void LoadGraphicsdata();
 
     // Member variables ----------------------------------------------------------------------------------------------
     std::string m_filePath = "";
@@ -96,6 +100,11 @@ namespace IKan
     std::vector<Index> m_indices;
     std::vector<glm::vec3> m_vertices;
     std::unordered_map<uint32_t, std::vector<Triangle>> m_triangleCache;
+
+    // Graphics
+    std::shared_ptr<Pipeline> m_pipeline;
+    std::shared_ptr<VertexBuffer> m_vertexBuffer;
+    std::shared_ptr<IndexBuffer> m_indexBuffer;
 
     // Assimp
     const aiScene* m_scene;

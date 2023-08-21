@@ -62,6 +62,8 @@ namespace IKan
     TraverseNodes(m_scene->mRootNode);
     
     m_shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));
+    
+    LoadGraphicsdata();
   }
   
   MeshSource::~MeshSource()
@@ -199,5 +201,30 @@ namespace IKan
       TraverseNodes(node->mChildren[i], transform, level + 1);
     }
   }
-
+  
+  void MeshSource::LoadGraphicsdata()
+  {
+    m_vertexBuffer = VertexBuffer::Create((void*)(m_staticVertices.data()),
+                                          uint32_t(m_staticVertices.size() * sizeof(StaticVertex)));
+    
+    // Create Pipeline specification
+    Pipeline::Specification pipelineSpec;
+    pipelineSpec.debugName = Utils::String::GetFileNameFromPath(m_filePath);
+    pipelineSpec.shader = m_shader;
+    pipelineSpec.vertexLayout =
+    {
+      { "a_Position",  ShaderDataType::Float3 },
+      { "a_Normal",    ShaderDataType::Float3 },
+      { "a_TexCoord",  ShaderDataType::Float2 },
+      { "a_Tangent",   ShaderDataType::Float3 },
+      { "a_Bitangent", ShaderDataType::Float3 },
+      { "a_ObjectID",  ShaderDataType::Int },
+    };
+    
+    // Create the Pipeline instnace
+    m_pipeline = Pipeline::Create(pipelineSpec);
+    
+    m_indexBuffer = IndexBuffer::CreateWithSize((void*)m_indices.data(),
+                                                uint32_t(m_indices.size() * sizeof(Index)));
+  }
 } // namespace IKan
