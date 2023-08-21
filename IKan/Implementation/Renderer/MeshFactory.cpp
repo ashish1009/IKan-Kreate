@@ -52,7 +52,44 @@ namespace IKan
   
   AssetHandle MeshFactory::CreateSphere(float radius)
   {
-    return AssetHandle();
+    std::vector<StaticVertex> vertices;
+    std::vector<Index> indices;
+    
+    constexpr float latitudeBands = 30;
+    constexpr float longitudeBands = 30;
+    
+    for (float latitude = 0.0f; latitude <= latitudeBands; latitude++)
+    {
+      const float theta = latitude * (float)M_PI / latitudeBands;
+      const float sinTheta = glm::sin(theta);
+      const float cosTheta = glm::cos(theta);
+      
+      for (float longitude = 0.0f; longitude <= longitudeBands; longitude++)
+      {
+        const float phi = longitude * 2.f * (float)M_PI / longitudeBands;
+        const float sinPhi = glm::sin(phi);
+        const float cosPhi = glm::cos(phi);
+        
+        StaticVertex vertex;
+        vertex.normal = { cosPhi * sinTheta, cosTheta, sinPhi * sinTheta };
+        vertex.position = { radius * vertex.normal.x, radius * vertex.normal.y, radius * vertex.normal.z };
+        vertices.push_back(vertex);
+      }
+    }
+    
+    for (uint32_t latitude = 0; latitude < (uint32_t)latitudeBands; latitude++)
+    {
+      for (uint32_t longitude = 0; longitude < (uint32_t)longitudeBands; longitude++)
+      {
+        const uint32_t first = (latitude * ((uint32_t)longitudeBands + 1)) + longitude;
+        const uint32_t second = first + (uint32_t)longitudeBands + 1;
+        
+        indices.push_back({ first, second, first + 1 });
+        indices.push_back({ second, second + 1, first + 1 });
+      }
+    }
+    
+    return AssetManager::CreateMemoryOnlyAsset<MeshSource>(vertices, indices, glm::mat4(1.0f));
   }
   
   static void CalculateRing(size_t segments, float radius, float y, float dy, float height, float actualRadius,
