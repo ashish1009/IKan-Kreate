@@ -78,24 +78,29 @@ namespace IKan
     {
       {
         const auto& file = Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj");
-        meshH[0] = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+
+        AssetHandle meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+        Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
+        meshH[3] = AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
       }
-      
+
       {
         const auto& file = Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj");
-        meshH[1] = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+        AssetHandle meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+        Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
+        meshH[4] = AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
+      }
+
+      {
+        meshH[0] = MeshFactory::CreateBox({1, 1, 1});
       }
       
       {
-        meshH[2] = MeshFactory::CreateBox({1, 1, 1});
+        meshH[1] = MeshFactory::CreateSphere(0.5);
       }
       
       {
-        meshH[3] = MeshFactory::CreateSphere(0.5);
-      }
-      
-      {
-        meshH[4] = MeshFactory::CreateCapsule(0.3, 2);
+        meshH[2] = MeshFactory::CreateCapsule(0.3, 2);
       }
       create = false;
     }
@@ -213,7 +218,7 @@ namespace IKan
   {
     for (int i = 0; i < 5; i++)
     {
-      renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(meshH[i]));
+      renderer->SubmitStaticMesh(AssetManager::GetAsset<StaticMesh>(meshH[i]));
     }
   }
   

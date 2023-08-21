@@ -70,7 +70,7 @@ namespace IKan
     ///   - transform: transform
     MeshSource(const std::vector<StaticVertex>& vertices, const std::vector<Index>& indices, const glm::mat4& transform);
     /// This destructor destiory the loaded mesh and delete all the data
-    ~MeshSource();
+    virtual ~MeshSource();
     
     /// This function returns the submeshes
     const std::vector<SubMesh>& GetSubMeshes() const;
@@ -125,6 +125,38 @@ namespace IKan
     std::shared_ptr<IndexBuffer> m_indexBuffer;
 
     // Assimp
-    const aiScene* m_scene;    
+    const aiScene* m_scene;
+    
+    friend class StaticMesh;
+  };
+  
+  // Static Mesh - no skeletal animation, flattened hierarchy
+  class StaticMesh : public Asset
+  {
+  public:
+    /// This constructor creates the static mesh
+    /// - Parameter meshSource: mesh source
+    explicit StaticMesh(Ref<MeshSource> meshSource);
+    /// This destructor destiory the loaded mesh and delete all the data
+    virtual ~StaticMesh();
+    
+    /// This function returns the mesh source
+    Ref<MeshSource> GetMeshSource();
+    /// This function returns the mesh source
+    Ref<MeshSource> GetMeshSource() const;
+
+    /// This function returns the submeshes
+    const std::vector<SubMesh>& GetSubMeshes() const;
+    /// This function returns the mesh pipeline
+    const Ref<Pipeline>& GetPipeline() const;
+
+    /// This function creates the static mesh
+    /// - Parameter meshSource: mesh source
+    static Ref<StaticMesh> Create(Ref<MeshSource> meshSource);
+    
+    ASSET_TYPE(StaticMesh);
+
+  private:
+    Ref<MeshSource> m_meshSource;
   };
 } // namespace IKan

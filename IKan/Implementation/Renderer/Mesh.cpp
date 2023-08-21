@@ -247,7 +247,7 @@ namespace IKan
     m_indexBuffer = IndexBuffer::CreateWithSize((void*)m_indices.data(),
                                                 uint32_t(m_indices.size() * sizeof(Index)));
   }
-        
+
   const std::vector<SubMesh>& MeshSource::GetSubMeshes() const
   {
     return m_submeshes;
@@ -257,4 +257,31 @@ namespace IKan
   {
     return m_pipeline;
   }
+  
+  Ref<StaticMesh> StaticMesh::Create(Ref<MeshSource> meshSource)
+  {
+    return CreateRef<StaticMesh>(meshSource);
+  }
+  
+  StaticMesh::StaticMesh(Ref<MeshSource> meshSource)
+  : m_meshSource(meshSource)
+  {
+
+  }
+    
+  StaticMesh::~StaticMesh()
+  {
+    
+  }
+
+  const std::vector<SubMesh>& StaticMesh::GetSubMeshes() const
+  {
+    return m_meshSource->m_submeshes;
+  }
+  
+  const Ref<Pipeline>& StaticMesh::GetPipeline() const
+  {
+    return m_meshSource->m_pipeline;
+  }
+
 } // namespace IKan

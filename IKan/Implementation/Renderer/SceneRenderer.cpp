@@ -87,11 +87,11 @@ namespace IKan
     Renderer2D::BeginBatch(camViewProjMat);
   }
   
-  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh)
+  void SceneRenderer::SubmitStaticMesh(Ref<StaticMesh> mesh)
   {
     MeshKey meshKey = { mesh->handle };
-    auto& dc = m_meshSourceDrawList[meshKey];
-    dc.meshSource = mesh;
+    auto& dc = m_staticMeshDrawList[meshKey];
+    dc.staticMesh = mesh;
   }
   
   void SceneRenderer::EndScene()
@@ -114,16 +114,16 @@ namespace IKan
   void SceneRenderer::GeometryPass()
   {
     int i = 0;
-    for (const auto& [mk, dc] : m_meshSourceDrawList)
+    for (const auto& [mk, dc] : m_staticMeshDrawList)
     {
-      auto pipeline = dc.meshSource->GetPipeline();
+      auto pipeline = dc.staticMesh->GetPipeline();
       pipeline->Bind();
       
       auto shader = pipeline->GetSpecification().shader;
       shader->Bind();
       shader->SetUniformMat4("u_ViewProjection", s_commonData->camViewProjection);
       
-      for (const SubMesh& submesh : dc.meshSource->GetSubMeshes())
+      for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
       {
         shader->SetUniformMat4("u_Transform", Utils::Math::GetTransformMatrix({i*3, 0, 0}) * submesh.transform);
         Renderer::DrawIndexedBaseVertex(submesh.indexCount,

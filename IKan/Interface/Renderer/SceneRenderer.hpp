@@ -56,7 +56,7 @@ namespace IKan
     
     /// This function submits the mesh source in scene
     /// - Parameter mesh: mesh source
-    void SubmitMeshSource(Ref<MeshSource> mesh);
+    void SubmitStaticMesh(Ref<StaticMesh> mesh);
     
     /// This function begins the Current Render Pass
     static void BeginRenderPass();
@@ -92,10 +92,10 @@ namespace IKan
     };
     struct StaticDrawCommand
     {
-      Ref<MeshSource> meshSource;
+      Ref<StaticMesh> staticMesh;
     };
 
-    std::map<MeshKey, StaticDrawCommand> m_meshSourceDrawList;
+    std::map<MeshKey, StaticDrawCommand> m_staticMeshDrawList;
 
     inline static Scope<SceneRendererData> s_commonData;
   };
