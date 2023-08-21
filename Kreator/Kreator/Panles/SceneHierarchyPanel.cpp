@@ -854,6 +854,27 @@ namespace Kreator
       
       ImGui::EndMenu();
     }
+    if (ImGui::BeginMenu("3D"))
+    {
+      if (ImGui::MenuItem("Cube"))
+      {
+        newEntity = m_context->CreateEntity("Cube");
+        newEntity.AddComponent<StaticMeshComponent>(MeshFactory::CreateBox({1, 1, 1}));
+      }
+      
+      if (ImGui::MenuItem("Sphere"))
+      {
+        newEntity = m_context->CreateEntity("Sphere");
+        newEntity.AddComponent<StaticMeshComponent>(MeshFactory::CreateSphere(0.5));
+      }
+      
+      if (ImGui::MenuItem("Capsule"))
+      {
+        newEntity = m_context->CreateEntity("Capsule");
+        newEntity.AddComponent<StaticMeshComponent>(MeshFactory::CreateCapsule(0.5, 1));
+      }
+      ImGui::EndMenu();
+    }
     
     if (newEntity and parent)
     {

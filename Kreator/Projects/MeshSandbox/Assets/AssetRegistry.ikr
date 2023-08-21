@@ -5,6 +5,9 @@ Assets:
   - Handle: 851018354
     FilePath: Meshes/Source/Backpack/specular.jpg
     Type: Image
+  - Handle: 997940619
+    FilePath: Meshes/Source/Backpack/Backpack.obj
+    Type: MeshSource
   - Handle: 1664882197
     FilePath: Meshes/Source/Backpack/ao.jpg
     Type: Image
@@ -23,6 +26,9 @@ Assets:
   - Handle: 3338776851
     FilePath: Meshes/Source/Cyborg/cyborg_normal.png
     Type: Image
+  - Handle: 3364878951
+    FilePath: Meshes/Source/Cyborg/Cyborg.obj
+    Type: MeshSource
   - Handle: 3593056929
     FilePath: Meshes/Source/Cyborg/cyborg_specular.png
     Type: Image

@@ -73,6 +73,7 @@
 #include <Renderer/SceneRenderer.hpp>
 #include <Renderer/RendererStats.hpp>
 #include <Renderer/Mesh.hpp>
+#include <Renderer/MeshFactory.hpp>
 #include <Renderer/UI/Font.hpp>
 
 #include <Renderer/Graphics/Shader.hpp>

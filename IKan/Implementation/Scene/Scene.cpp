@@ -18,8 +18,6 @@
 
 namespace IKan
 {
-  static AssetHandle meshH[5];
-
   /// This function resize/reserve the registry capcity
   template<typename... Component>
   static void ReserveRegistry(ComponentGroup<Component...>, entt::registry& registry, int32_t capacity)
@@ -72,38 +70,6 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
     IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
-
-    static bool create = true;
-    if (create)
-    {
-      {
-        const auto& file = Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj");
-
-        AssetHandle meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
-        Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
-        meshH[3] = AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
-      }
-
-      {
-        const auto& file = Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj");
-        AssetHandle meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
-        Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
-        meshH[4] = AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
-      }
-
-      {
-        meshH[0] = MeshFactory::CreateBox({1, 1, 1});
-      }
-      
-      {
-        meshH[1] = MeshFactory::CreateSphere(0.5);
-      }
-      
-      {
-        meshH[2] = MeshFactory::CreateCapsule(0.3, 2);
-      }
-      create = false;
-    }
   }
   
   Scene::~Scene()
@@ -225,11 +191,6 @@ namespace IKan
         renderer->SubmitStaticMesh(AssetManager::GetAsset<StaticMesh>(staticMeshComp.staticMesh));
       }
     } // For each Quad Entity
-
-    for (int i = 0; i < 5; i++)
-    {
-      renderer->SubmitStaticMesh(AssetManager::GetAsset<StaticMesh>(meshH[i]));
-    }
   }
   
   void Scene::OnRuntimeStart()
