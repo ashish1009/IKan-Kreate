@@ -410,7 +410,7 @@ namespace IKan {
       if (staticMeshComponent)
       {
         auto& component = deserializedEntity.AddComponent<StaticMeshComponent>();
-        component.staticMesh = quadComponent["MeshHandle"].as<AssetHandle>();
+        component.staticMesh = staticMeshComponent["MeshHandle"].as<AssetHandle>();
       }
     }
   }

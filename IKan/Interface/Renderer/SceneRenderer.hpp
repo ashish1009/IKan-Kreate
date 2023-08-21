@@ -55,8 +55,10 @@ namespace IKan
     void EndScene();
     
     /// This function submits the mesh source in scene
-    /// - Parameter mesh: mesh source
-    void SubmitStaticMesh(Ref<StaticMesh> mesh);
+    /// - Parameters:
+    ///   - mesh: Mesh source
+    ///   - transform: mesh transform
+    void SubmitStaticMesh(Ref<StaticMesh> mesh, const glm::mat4& transform);
     
     /// This function begins the Current Render Pass
     static void BeginRenderPass();
@@ -93,6 +95,7 @@ namespace IKan
     struct StaticDrawCommand
     {
       Ref<StaticMesh> staticMesh;
+      glm::mat4 transform;
     };
 
     std::map<MeshKey, StaticDrawCommand> m_staticMeshDrawList;
