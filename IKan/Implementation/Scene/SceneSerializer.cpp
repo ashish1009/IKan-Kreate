@@ -245,6 +245,22 @@ namespace IKan {
       out << YAML::EndMap; // TextComponent
     }
     
+    if (entity.HasComponent<StaticMeshComponent>())
+    {
+      out << YAML::Key << "StaticMeshComponent";
+      out << YAML::BeginMap; // StaticMeshComponent
+      
+      auto& staticMeshComponent = entity.GetComponent<StaticMeshComponent>();
+      if (staticMeshComponent.staticMesh)
+      {
+        out << YAML::Key << "MeshHandle" << YAML::Value << staticMeshComponent.staticMesh;
+      }
+      else
+      {
+        out << YAML::Key << "MeshHandle" << YAML::Value << 0;
+      }
+      out << YAML::EndMap; // StaticMeshComponent
+    }
     out << YAML::EndMap; // Entity
   }
   
@@ -387,6 +403,14 @@ namespace IKan {
         component.textString = textComponent["TextString"].as<std::string>();
         component.assetHandle  = textComponent["FontHandle"].as<AssetHandle>();
         component.color = textComponent["Color"].as<glm::vec4>();
+      }
+      
+      // StaticMeshComponent ----------------------------------------------------------------------------------------------
+      auto staticMeshComponent = entity["StaticMeshComponent"];
+      if (staticMeshComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<StaticMeshComponent>();
+        component.staticMesh = quadComponent["MeshHandle"].as<AssetHandle>();
       }
     }
   }

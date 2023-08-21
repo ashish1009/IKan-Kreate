@@ -259,7 +259,8 @@ namespace IKan
     CopyComponent<QuadComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<CircleComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<TextComponent>(target->m_registry, m_registry, enttMap);
-    
+    CopyComponent<StaticMeshComponent>(target->m_registry, m_registry, enttMap);
+
     // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
     // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
     target->m_registry.sort<IDComponent>([&target](const auto lhs, const auto rhs)
@@ -404,6 +405,7 @@ namespace IKan
     CopyComponentIfExists<QuadComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<CircleComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<TextComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<StaticMeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
 
     auto childIds = entity.Children();
     for (auto childId : childIds)

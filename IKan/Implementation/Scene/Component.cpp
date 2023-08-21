@@ -306,5 +306,29 @@ return *this; \
     textString = other.textString;
     assetHandle = other.assetHandle;
     color = other.color;
-  }  
+  }
+  
+  // Static Mesh Component ---------------------------------------------------------------------------------------------------
+  StaticMeshComponent::StaticMeshComponent()
+  {
+    COMP_LOG("Creating Static Mesh Component");
+  }
+  
+  StaticMeshComponent::StaticMeshComponent(AssetHandle staticMesh)
+  : staticMesh(staticMesh)
+  {
+    COMP_LOG("Creating Static Mesh Component from mesh handle");
+  }
+
+  StaticMeshComponent::~StaticMeshComponent()
+  {
+    COMP_LOG("Destroying Static Mesh Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(StaticMeshComponent);
+  
+  void StaticMeshComponent::Copy(const StaticMeshComponent &other)
+  {
+    staticMesh = other.staticMesh;
+  }
+
 } // namespace IKan

@@ -17,10 +17,9 @@ namespace IKan
   //  1) Add new component here (obviously).
   //  2) Create Proper Copy and Move Constructors
   //  3) Add in ALL_COPY_COMPONENTS Macro
-  //  4) Add in Scene Duplicate Function
+  //  4) Add in Scene Copy Function
   //  5) Update SceneSerializer to (de)serialize the new component.
   //  6) Update Scene::DuplicateEntity() to deal with the new component in whatever way is appropriate.
-  //  7) ditto Scene::CopyTo()
 
   struct IDComponent
   {
@@ -156,6 +155,18 @@ namespace IKan
     void Copy(const TextComponent& other);
     DEFINE_COPY_MOVE_CONSTRUCTORS(TextComponent);
   };
+  
+  struct StaticMeshComponent
+  {
+    AssetHandle staticMesh;
+    
+    StaticMeshComponent();
+    StaticMeshComponent(AssetHandle staticMesh);
+    ~StaticMeshComponent();
+
+    void Copy(const StaticMeshComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(StaticMeshComponent);
+  };
 
   template<typename... Component>
   struct ComponentGroup
@@ -164,7 +175,7 @@ namespace IKan
   };
   
 #define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
-QuadComponent, CircleComponent, TextComponent
+QuadComponent, CircleComponent, TextComponent, StaticMeshComponent
   
   // Stores all the components present in Engine
   using AllComponents =
