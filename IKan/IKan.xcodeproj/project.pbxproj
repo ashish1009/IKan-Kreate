@@ -146,6 +146,8 @@
 		B26B1A962A7D1C2900676419 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */; };
 		B27812732A861C08005C0E7C /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B27812712A861C08005C0E7C /* SceneRenderer.cpp */; };
 		B27812742A861C08005C0E7C /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812722A861C08005C0E7C /* SceneRenderer.hpp */; };
+		B27812912A939B05005C0E7C /* MeshFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B278128F2A939B05005C0E7C /* MeshFactory.cpp */; };
+		B27812922A939B05005C0E7C /* MeshFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812902A939B05005C0E7C /* MeshFactory.hpp */; };
 		B283DF932A811EAC002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
@@ -363,6 +365,8 @@
 		B26DEF702A838F5300C68ED5 /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
 		B27812712A861C08005C0E7C /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
 		B27812722A861C08005C0E7C /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
+		B278128F2A939B05005C0E7C /* MeshFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshFactory.cpp; sourceTree = "<group>"; };
+		B27812902A939B05005C0E7C /* MeshFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshFactory.hpp; sourceTree = "<group>"; };
 		B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
@@ -485,6 +489,7 @@
 				B23365462A74E6D300BC7B8B /* Renderer2D.hpp */,
 				B23365842A75303E00BC7B8B /* TextRenderer.hpp */,
 				B2CD2AAB2A81269F00B0D70B /* Mesh.hpp */,
+				B27812902A939B05005C0E7C /* MeshFactory.hpp */,
 				B27812722A861C08005C0E7C /* SceneRenderer.hpp */,
 			);
 			path = Renderer;
@@ -500,6 +505,7 @@
 				B23365452A74E6D300BC7B8B /* Renderer2D.cpp */,
 				B23365832A75303E00BC7B8B /* TextRenderer.cpp */,
 				B2CD2AAA2A81269F00B0D70B /* Mesh.cpp */,
+				B278128F2A939B05005C0E7C /* MeshFactory.cpp */,
 				B27812712A861C08005C0E7C /* SceneRenderer.cpp */,
 			);
 			path = Renderer;
@@ -981,6 +987,7 @@
 				B26B1A6E2A7D14BE00676419 /* EditorPanel.hpp in Headers */,
 				B2336A652A763D9600BC7B8B /* Project.hpp in Headers */,
 				B23365612A751D6B00BC7B8B /* RenderPass.hpp in Headers */,
+				B27812922A939B05005C0E7C /* MeshFactory.hpp in Headers */,
 				B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */,
 				B26B1A962A7D1C2900676419 /* EditorConsolePanel.hpp in Headers */,
 				B23367132A75396800BC7B8B /* ImGuiLayer.hpp in Headers */,
@@ -1125,6 +1132,7 @@
 				B23364EA2A74294400BC7B8B /* StringUtils.cpp in Sources */,
 				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B23364D82A74253900BC7B8B /* RendererAPI.cpp in Sources */,
+				B27812912A939B05005C0E7C /* MeshFactory.cpp in Sources */,
 				B210631C2A7E20D100A28BA0 /* AssetEdtitor.cpp in Sources */,
 				B23365562A7503CA00BC7B8B /* OpenGLFrameBuffer.cpp in Sources */,
 				B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */,

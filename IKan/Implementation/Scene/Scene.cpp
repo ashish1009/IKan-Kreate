@@ -14,11 +14,11 @@
 #include "Asset/AssetManager.hpp"
 
 #include "Project.hpp"
-#include "Mesh.hpp"
+#include "MeshFactory.hpp"
 
 namespace IKan
 {
-  static AssetHandle meshH[2];
+  static AssetHandle meshH[3];
 
   /// This function resize/reserve the registry capcity
   template<typename... Component>
@@ -81,6 +81,10 @@ namespace IKan
     {
       const auto& file = Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj");
       meshH[1] = AssetManager::CreateMemoryOnlyAsset<MeshSource>(file, file);
+    }
+    
+    {
+      meshH[2] = MeshFactory::CreateBox({1, 1, 1});
     }
   }
   
