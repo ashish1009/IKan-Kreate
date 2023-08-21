@@ -17,6 +17,9 @@ Assets:
   - Handle: 1876644030
     FilePath: Meshes/Source/Cyborg/cyborg_diffuse.png
     Type: Image
+  - Handle: 1878069206
+    FilePath: Scenes/MeshScene.ikscene
+    Type: Scene
   - Handle: 2505361275
     FilePath: Meshes/Source/Backpack/diffuse.jpg
     Type: Image

@@ -1,0 +1,16 @@
+Scene: Test
+Entities:
+  - Entity: 7739334612940350306
+    TagComponent:
+      Tag: Quad
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [4.80000019, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    QuadComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 3750278395
+      TilingFactor: 1

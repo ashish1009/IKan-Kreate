@@ -10,6 +10,8 @@
 #include "Asset/Asset.hpp"
 #include "Core/AABB.hpp"
 
+class aiScene;
+
 namespace IKan
 {
   // Vertex of Static Submesh
@@ -20,7 +22,7 @@ namespace IKan
     glm::vec2 textureCoords;
     glm::vec3 tangent;
     glm::vec3 biTangent;
-    int32_t object_id;
+    int32_t objectID;
   };
   
   /// Index Infor of each submesh
@@ -47,16 +49,12 @@ namespace IKan
     glm::mat4 transform;
     
     std::string nodeName, meshName;
-    
-    SubMesh() = default;
-    
-    DEFINE_COPY_MOVE_CONSTRUCTORS(SubMesh)
   };
 
   class MeshSource : public Asset
   {
   public:
-    /// This Constructor loads the mesh from assim library and store the data
+    /// This Constructor loads the mesh from assimp library and store the data
     /// - Parameters:
     ///   - filePath: mesh model file path
     ///   - entityID: Entity id
@@ -64,6 +62,33 @@ namespace IKan
     /// This destructor destiory the loaded mesh and delete all the data
     ~MeshSource();
     
+    /// This funciton creates the mesh from assimp library and store the data
+    /// - Parameters:
+    ///   - filePath: mesh model file path
+    ///   - entityID: Entity id
+    static Ref<MeshSource> Create(const std::string& filePath, uint32_t entityID = -1);
+    
     ASSET_TYPE(MeshSource);
+    
+  private:
+    // Member functions ----------------------------------------------------------------------------------------------
+    /// This function store the certices and indices of the mesh
+    void StoreVerticesAndIndices();
+
+    // Member variables ----------------------------------------------------------------------------------------------
+    std::string m_filePath = "";
+    uint32_t m_entityID;
+
+    // To enclose in bouding box
+    AABB m_boundinBox, m_worldBoundingBox;
+
+    std::vector<SubMesh> m_submeshes;
+    std::vector<StaticVertex> m_staticVertices;
+    std::vector<Index> m_indices;
+    std::vector<glm::vec3> m_vertices;
+    std::unordered_map<uint32_t, std::vector<Triangle>> m_triangleCache;
+
+    // Assimp
+    const aiScene* m_scene;
   };
 } // namespace IKan

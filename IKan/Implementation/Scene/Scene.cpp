@@ -14,9 +14,12 @@
 #include "Asset/AssetManager.hpp"
 
 #include "Project.hpp"
+#include "Mesh.hpp"
 
 namespace IKan
 {
+  static Ref<MeshSource> mesh[2];
+  
   /// This function resize/reserve the registry capcity
   template<typename... Component>
   static void ReserveRegistry(ComponentGroup<Component...>, entt::registry& registry, int32_t capacity)
@@ -69,12 +72,25 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
     IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
+    
+    if (!mesh[0])
+    {
+      mesh[0] = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Backpack/Backpack.obj"));
+    }
+    
+    if (!mesh[1])
+    {
+      mesh[1] = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj"));
+    }
   }
   
   Scene::~Scene()
   {
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Scene, "Destroying Scene!!!");
+    
+    mesh[0].reset();
+    mesh[1].reset();
   }
   
   void Scene::OnUpdateEditor(TimeStep ts)
