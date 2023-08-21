@@ -19,7 +19,6 @@
 namespace IKan
 {
   static Ref<MeshSource> mesh[2];
-  static Ref<Shader> shader;
 
   /// This function resize/reserve the registry capcity
   template<typename... Component>
@@ -83,8 +82,6 @@ namespace IKan
     {
       mesh[1] = MeshSource::Create(Project::GetActive()->GetMeshSourcePath("Cyborg/Cyborg.obj"));
     }
-    
-    shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));
   }
   
   Scene::~Scene()
@@ -94,7 +91,6 @@ namespace IKan
     
     mesh[0].reset();
     mesh[1].reset();
-    shader.reset();
   }
   
   void Scene::OnUpdateEditor(TimeStep ts)
@@ -114,20 +110,22 @@ namespace IKan
     Render3DEntities(renderer);
     renderer->EndScene();
 
-    shader->Bind();
-    shader->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
     for (int i = 0; i < 2 ; i ++)
-    {      
+    {
+      auto pipeline = mesh[i]->GetPipeline();
+      pipeline->Bind();
+
+      auto shader = pipeline->GetSpecification().shader;
+      shader->Bind();
+      shader->SetUniformMat4("u_ViewProjection", editorCamera.GetUnReversedViewProjection());
+      
+      for (const SubMesh& submesh : mesh[i]->GetSubMeshes())
       {
-        mesh[i]->Bind();
-        for (const SubMesh& submesh : mesh[i]->GetSubMeshes())
-        {
-          shader->SetUniformMat4("u_Transform", Utils::Math::GetTransformMatrix({i, 0, 0}) * submesh.transform);
-          Renderer::DrawIndexedBaseVertex(submesh.indexCount,
-                                          (void*)(sizeof(uint32_t) * submesh.baseIndex),
-                                          submesh.baseVertex);
-        } // for (SubMesh& submesh : submeshes_)
-      }
+        shader->SetUniformMat4("u_Transform", Utils::Math::GetTransformMatrix({i, 0, 0}) * submesh.transform);
+        Renderer::DrawIndexedBaseVertex(submesh.indexCount,
+                                        (void*)(sizeof(uint32_t) * submesh.baseIndex),
+                                        submesh.baseVertex);
+      } // for (SubMesh& submesh : submeshes_)
     }
   }
 

@@ -207,7 +207,8 @@ namespace IKan
     // Create Pipeline specification
     Pipeline::Specification pipelineSpec;
     pipelineSpec.debugName = Utils::String::GetFileNameFromPath(m_filePath);
-//    pipelineSpec.shader = m_shader;
+    pipelineSpec.shader = Shader::Create(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));
+
     pipelineSpec.vertexLayout =
     {
       { "a_Position",  ShaderDataType::Float3 },
@@ -224,14 +225,14 @@ namespace IKan
     m_indexBuffer = IndexBuffer::CreateWithSize((void*)m_indices.data(),
                                                 uint32_t(m_indices.size() * sizeof(Index)));
   }
-    
-  void MeshSource::Bind()
-  {
-    m_pipeline->Bind();
-  }
-    
+        
   const std::vector<SubMesh>& MeshSource::GetSubMeshes() const
   {
     return m_submeshes;
+  }
+  
+  const Ref<Pipeline>& MeshSource::GetPipeline() const
+  {
+    return m_pipeline;
   }
 } // namespace IKan
