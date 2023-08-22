@@ -62,6 +62,7 @@
 #include <Core/UUID.hpp>
 #include <Core/HashGenerator.hpp>
 #include <Core/IKMemory.hpp>
+#include <Core/Ray.hpp>
 
 #include <Event/Event.h>
 #include <Event/ApplicationEvent.h>

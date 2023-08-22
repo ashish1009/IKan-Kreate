@@ -148,6 +148,8 @@
 		B27812742A861C08005C0E7C /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812722A861C08005C0E7C /* SceneRenderer.hpp */; };
 		B27812912A939B05005C0E7C /* MeshFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B278128F2A939B05005C0E7C /* MeshFactory.cpp */; };
 		B27812922A939B05005C0E7C /* MeshFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812902A939B05005C0E7C /* MeshFactory.hpp */; };
+		B278129A2A94D666005C0E7C /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B27812982A94D666005C0E7C /* Ray.cpp */; };
+		B278129B2A94D666005C0E7C /* Ray.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812992A94D666005C0E7C /* Ray.hpp */; };
 		B283DF932A811EAC002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
@@ -367,6 +369,8 @@
 		B27812722A861C08005C0E7C /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
 		B278128F2A939B05005C0E7C /* MeshFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshFactory.cpp; sourceTree = "<group>"; };
 		B27812902A939B05005C0E7C /* MeshFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshFactory.hpp; sourceTree = "<group>"; };
+		B27812982A94D666005C0E7C /* Ray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ray.cpp; sourceTree = "<group>"; };
+		B27812992A94D666005C0E7C /* Ray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ray.hpp; sourceTree = "<group>"; };
 		B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
@@ -854,6 +858,7 @@
 				B23367242A75495000BC7B8B /* UUID.hpp */,
 				B2336A5D2A763B4300BC7B8B /* HashGenerator.hpp */,
 				B2CD2AB92A81277600B0D70B /* AABB.hpp */,
+				B27812992A94D666005C0E7C /* Ray.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -873,6 +878,7 @@
 				B23367232A75495000BC7B8B /* UUID.cpp */,
 				B2336A5C2A763B4300BC7B8B /* HashGenerator.cpp */,
 				B2CD2AB82A81277600B0D70B /* AABB.cpp */,
+				B27812982A94D666005C0E7C /* Ray.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -962,6 +968,7 @@
 				B23364E52A7427C300BC7B8B /* OpenGLShaderUniform.hpp in Headers */,
 				B2B2CE562A7BA5F8007EACDE /* ImGuiCustom.hpp in Headers */,
 				B23365332A74416700BC7B8B /* EditorCamera.hpp in Headers */,
+				B278129B2A94D666005C0E7C /* Ray.hpp in Headers */,
 				B2CD2AAD2A81269F00B0D70B /* Mesh.hpp in Headers */,
 				B23364F62A742A4200BC7B8B /* Shader.hpp in Headers */,
 				B2336A4B2A76399200BC7B8B /* AssetSerializer.hpp in Headers */,
@@ -1133,6 +1140,7 @@
 				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B23364D82A74253900BC7B8B /* RendererAPI.cpp in Sources */,
 				B27812912A939B05005C0E7C /* MeshFactory.cpp in Sources */,
+				B278129A2A94D666005C0E7C /* Ray.cpp in Sources */,
 				B210631C2A7E20D100A28BA0 /* AssetEdtitor.cpp in Sources */,
 				B23365562A7503CA00BC7B8B /* OpenGLFrameBuffer.cpp in Sources */,
 				B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */,

@@ -7,7 +7,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.72829294, 0, 0]
+      Position: [1.72829294, 0.694929719, -1.51993656]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -19,7 +19,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-2.37159467, 0, 0]
+      Position: [-2.61307383, -0.844769061, -0.958372831]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -31,25 +31,11 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, -1.87206233]
+      Position: [0, 0, -2.57966852]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
-  - Entity: 7739334612940350306
-    TagComponent:
-      Tag: Quad
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [4.80000019, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    QuadComponent:
-      Color: [1, 1, 1, 1]
-      TextureHandle: 3750278395
-      TilingFactor: 1
   - Entity: 10918126021211713702
     TagComponent:
       Tag: Cube
@@ -57,7 +43,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [0, 0, 1.77097225]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -81,7 +67,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [3.26539946, 0, 0]
+      Position: [3.26539946, 0, 1.3021574]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -93,7 +79,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 1.7407099, 0]
+      Position: [-3.83892107, 1.7407099, -2.78248239]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -117,7 +103,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, -2.48976421, 0]
+      Position: [-0.862149239, -1.46938789, -4.04810238]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:

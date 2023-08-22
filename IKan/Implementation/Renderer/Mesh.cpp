@@ -257,4 +257,10 @@ namespace IKan
   {
     return m_pipeline;
   }
+  
+  const std::vector<Triangle>& MeshSource::GetTriangleCache(uint32_t submeshIndex) const
+  {
+    return m_triangleCache.at(submeshIndex);
+  }
+
 } // namespace IKan

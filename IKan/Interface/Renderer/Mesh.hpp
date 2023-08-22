@@ -74,6 +74,9 @@ namespace IKan
     
     /// This function returns the submeshes
     const std::vector<SubMesh>& GetSubMeshes() const;
+    /// This function returns the submeshes
+    /// - Parameter submeshIndex: This function returns the triangle cache
+    const std::vector<Triangle>& GetTriangleCache(uint32_t submeshIndex) const;
     /// This function returns the mesh pipeline
     const Ref<Pipeline>& GetPipeline() const;
 

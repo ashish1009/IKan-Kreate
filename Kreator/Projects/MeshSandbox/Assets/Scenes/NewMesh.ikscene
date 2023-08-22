@@ -7,8 +7,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Position: [2.22325373, 0, -1.02972579]
+      Rotation: [-1.18005836, -0.43328476, 0.442176431]
+      Scale: [0.99999994, 0.999999762, 0.99999994]
     StaticMeshComponent:
       MeshHandle: 1336252552
