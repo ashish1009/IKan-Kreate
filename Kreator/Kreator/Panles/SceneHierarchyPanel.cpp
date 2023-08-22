@@ -768,6 +768,16 @@ namespace Kreator
       Kreator_UI::Property("Fade", cc.fade, 0.1, 0.0, 5.0);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
+    
+    DrawComponent<StaticMeshComponent>("Static Mesh", entity, [&](StaticMeshComponent& smc)
+                                       {
+      Ref<MeshSource> mesh = AssetManager::GetAsset<MeshSource>(smc.staticMesh);
+
+      Kreator_UI::BeginPropertyGrid();
+      Kreator_UI::PropertyAssetReferenceSettings settings;
+      Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", smc.staticMesh, nullptr, settings);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
