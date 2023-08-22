@@ -15,6 +15,7 @@ namespace IKan
     s_serializers[AssetType::Image] = CreateScope<ImageSerializer>();
     s_serializers[AssetType::Font] = CreateScope<FontSerializer>();
     s_serializers[AssetType::Scene] = CreateScope<SceneAssetSerializer>();
+    s_serializers[AssetType::MeshSource] = CreateScope<MeshSourceSerializer>();
   }
   
   void AssetImporter::Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset)

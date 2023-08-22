@@ -10,6 +10,7 @@
 #include "Renderer/Graphics/Texture.hpp"
 #include "Scene/Scene.hpp"
 #include "Asset/AssetManager.hpp"
+#include "Renderer/Mesh.hpp"
 
 namespace IKan
 {
@@ -33,5 +34,12 @@ namespace IKan
     asset->handle = metadata.handle;
     return true;
   }
-  
+
+  bool MeshSourceSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
+  {
+    asset = MeshSource::Create(AssetManager::GetFileSystemPathString(metadata));
+    asset->handle = metadata.handle;
+    return true;
+  }
+
 } // namespace IKan

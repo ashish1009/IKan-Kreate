@@ -14,3 +14,15 @@ Entities:
       Color: [1, 1, 1, 1]
       TextureHandle: 3750278395
       TilingFactor: 1
+  - Entity: 10918126021211713702
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 560965872
