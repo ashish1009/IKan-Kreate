@@ -237,7 +237,6 @@ namespace IKan
       { "a_TexCoord",  ShaderDataType::Float2 },
       { "a_Tangent",   ShaderDataType::Float3 },
       { "a_Bitangent", ShaderDataType::Float3 },
-      { "a_ObjectID",  ShaderDataType::Int },
     };
     
     // Create the Pipeline instnace

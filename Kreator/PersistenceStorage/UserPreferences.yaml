@@ -1,10 +1,10 @@
 UserPrefs:
-  ShowWelcomeScreen: false
+  ShowWelcomeScreen: true
   StartupProject: ../../../Kreator/Projects/MeshSandbox/MeshSandbox.ikproj
   RecentProjects:
     - Name: MeshSandbox
       ProjectPath: ../../../Kreator/Projects/MeshSandbox/MeshSandbox.ikproj
-      LastOpened: 1692707869
+      LastOpened: 1692708896
     - Name: Sandbox
       ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Projects/Sandbox/Sandbox.ikproj
       LastOpened: 1692684859

@@ -473,7 +473,6 @@ if (!Project::GetActive()) return
       {
         Entity selectedEntity = m_currentScene->GetEntityWithEntityHandle(m_hoveredEntityID);
         
-        m_selectionContext.push_back({ selectedEntity });
         SetSelectedEntity(selectedEntity);
         return false;
       }
@@ -918,6 +917,7 @@ if (!Project::GetActive()) return
   void RendererLayer::SetSelectedEntity(Entity entity)
   {
     m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity);
+    m_selectionContext.push_back({ entity });
   }
 
   // UI APIS ---------------------------------------------------------------------------------------------------------
