@@ -17,6 +17,9 @@ Assets:
   - Handle: 1003214154
     FilePath: Meshes/Default/Torus.fbx
     Type: MeshSource
+  - Handle: 1336252552
+    FilePath: Meshes/Default/Sphere.fbx
+    Type: MeshSource
   - Handle: 1664882197
     FilePath: Meshes/Source/Backpack/ao.jpg
     Type: Image
