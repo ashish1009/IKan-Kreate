@@ -859,8 +859,6 @@ namespace Kreator
       // Failed to import
       if (!metadata.IsValid())
       {
-        // TODO: Temp assert to check code hit
-        IK_ASSERT(false);
         continue;
       }
       

@@ -11,6 +11,9 @@ Assets:
   - Handle: 851018354
     FilePath: Meshes/Source/Backpack/specular.jpg
     Type: Image
+  - Handle: 900216866
+    FilePath: Scenes/NewMesh.ikscene
+    Type: Scene
   - Handle: 997940619
     FilePath: Meshes/Source/Backpack/Backpack.obj
     Type: MeshSource
@@ -53,9 +56,6 @@ Assets:
   - Handle: 3750278395
     FilePath: Meshes/Source/Backpack/roughness.jpg
     Type: Image
-  - Handle: 3760519821
-    FilePath: Scenes/Test.ikscene
-    Type: Scene
   - Handle: 3806376486
     FilePath: Meshes/Default/Cone.fbx
     Type: MeshSource

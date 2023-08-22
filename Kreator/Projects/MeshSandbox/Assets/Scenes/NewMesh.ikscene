@@ -1,0 +1,14 @@
+Scene: NewMEsh
+Entities:
+  - Entity: 6442995915451246995
+    TagComponent:
+      Tag: Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552

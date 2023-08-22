@@ -93,12 +93,13 @@ namespace IKan
   
   void SceneRenderer::EndScene()
   {
-    // 2D ---------------------
-    Renderer2D::EndBatch();
-    
     // 3D ---------------------
     FlushDrawList();
     ClearDrawLists();
+
+    // NOTE: Draw Flush the 2D at the end to render the bounding box
+    // 2D ---------------------
+    Renderer2D::EndBatch();
   }
   
   void SceneRenderer::FlushDrawList()
@@ -128,6 +129,7 @@ namespace IKan
       for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
       {
         shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);
+        submesh.boundingBox.Draw();
         Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
       } // for each submeshes
     }
