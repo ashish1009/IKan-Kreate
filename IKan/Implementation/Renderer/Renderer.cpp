@@ -8,6 +8,8 @@
 #include "Renderer.hpp"
 #include "Renderer/RendererStats.hpp"
 #include "Renderer/TextRenderer.hpp"
+#include "Renderer/Mesh.hpp"
+#include "Renderer/Renderer2D.hpp"
 #include "Renderer/UI/Font.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
@@ -140,6 +142,52 @@ namespace IKan
   {
     IK_ASSERT(s_rendererData, "Renderer Data didnt initialised");
     return s_rendererData->api;
+  }
+  
+  // Draw Wrappers ------------------------------------------------------------------------------------------------
+  void Renderer::DrawAABB(Ref<MeshSource> mesh, const glm::mat4& transform, const glm::vec4& color)
+  {
+    auto& submeshes = mesh->GetSubMeshes();
+    for (const auto& submesh : submeshes)
+    {
+      auto& aabb = submesh.boundingBox;
+      auto aabbTransform = transform * submesh.transform;
+      DrawAABB(aabb, aabbTransform, color);
+    }
+  }
+  
+  void Renderer::DrawAABB(const AABB& aabb, const glm::mat4& transform, const glm::vec4& color)
+  {
+    glm::vec4 min = { aabb.min.x, aabb.min.y, aabb.min.z, 1.0f };
+    glm::vec4 max = { aabb.max.x, aabb.max.y, aabb.max.z, 1.0f };
+    
+    glm::vec4 corners[8] =
+    {
+      transform * glm::vec4 { aabb.min.x, aabb.min.y, aabb.max.z, 1.0f },
+      transform * glm::vec4 { aabb.min.x, aabb.max.y, aabb.max.z, 1.0f },
+      transform * glm::vec4 { aabb.max.x, aabb.max.y, aabb.max.z, 1.0f },
+      transform * glm::vec4 { aabb.max.x, aabb.min.y, aabb.max.z, 1.0f },
+      
+      transform * glm::vec4 { aabb.min.x, aabb.min.y, aabb.min.z, 1.0f },
+      transform * glm::vec4 { aabb.min.x, aabb.max.y, aabb.min.z, 1.0f },
+      transform * glm::vec4 { aabb.max.x, aabb.max.y, aabb.min.z, 1.0f },
+      transform * glm::vec4 { aabb.max.x, aabb.min.y, aabb.min.z, 1.0f }
+    };
+    
+    for (uint32_t i = 0; i < 4; i++)
+    {
+      Renderer2D::DrawLine(corners[i], corners[(i + 1) % 4], color);
+    }
+    
+    for (uint32_t i = 0; i < 4; i++)
+    {
+      Renderer2D::DrawLine(corners[i + 4], corners[((i + 1) % 4) + 4], color);
+    }
+    
+    for (uint32_t i = 0; i < 4; i++)
+    {
+      Renderer2D::DrawLine(corners[i], corners[i + 4], color);
+    }
   }
 
   // Draw Calls -----------------------------------------------------------------------------------------------------

@@ -7,11 +7,14 @@
 
 #pragma once
 
+#include "Core/AABB.hpp"
+
 namespace IKan
 {
   // Forward Declaration
   class Shader;
   class Pipeline;
+  class MeshSource;
 
   /// All renderer ID type
   using RendererID = uint32_t;
@@ -110,6 +113,20 @@ namespace IKan
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns the current API supported
     static Api GetApi();
+    
+    // Draw Wrappers ------------------------------------------------------------------------------------------------
+    /// This function draws the Mesh AABb
+    /// - Parameters:
+    ///   - mesh: mesh
+    ///   - transform: transform
+    ///   - color: color
+    static void DrawAABB(Ref<MeshSource> mesh, const glm::mat4& transform, const glm::vec4& color);
+    /// This function draws the AABB
+    /// - Parameters:
+    ///   - aabb: aabb
+    ///   - transform: transform
+    ///   - color: color
+    static void DrawAABB(const AABB& aabb, const glm::mat4& transform, const glm::vec4& color);
     
     // Draw Calls ---------------------------------------------------------------------------------------------------
     /// This API draws a quad with pipeline and indexed count
