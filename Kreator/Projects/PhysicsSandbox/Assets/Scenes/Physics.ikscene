@@ -1,0 +1,38 @@
+Scene: UntitledScene
+Entities:
+  - Entity: 1925597331728664743
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-1.74149203, 0, 0]
+      Rotation: [0, 0, -0.455530941]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+  - Entity: 3541793152397044619
+    TagComponent:
+      Tag: Base
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, -5.5, 0]
+      Rotation: [0, 0, 0]
+      Scale: [10, 0.100000001, 10]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+  - Entity: 14603536773887636582
+    TagComponent:
+      Tag: Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1.57269096, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552
