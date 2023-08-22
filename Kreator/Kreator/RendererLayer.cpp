@@ -31,8 +31,6 @@ if (!Project::GetActive()) return
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 #define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
 
-  static glm::vec3 p[2];
-
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -274,10 +272,6 @@ if (!Project::GetActive()) return
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
         UpdateHoveredEntity();
-        
-        Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection());
-        Renderer2D::DrawLine(p[0], p[1], {1, 1, 1, 1});
-        Renderer2D::EndBatch();
                 
         SceneRenderer::EndRenderPass();
 
@@ -506,7 +500,6 @@ if (!Project::GetActive()) return
         
         glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(entity);
         auto& submeshes = mesh->GetSubMeshes();
-        float lastT = std::numeric_limits<float>::max();
         for (uint32_t i = 0; i < submeshes.size(); i++)
         {
           auto& submesh = submeshes[i];
@@ -515,23 +508,20 @@ if (!Project::GetActive()) return
             glm::inverse(transform * submesh.transform) * glm::vec4(origin, 1.0f),
             glm::inverse(glm::mat3(transform * submesh.transform)) * direction
           };
-          p[0] = ray.Origin;
-          p[1] = {ray.Direction.x * 100, ray.Direction.y * 100, ray.Direction.z * 100};
 
-          float t;
-          bool intersects = ray.IntersectsAABB(submesh.boundingBox, t);
-          if (intersects)
+          float distance;
+          if (ray.IntersectsAABB(submesh.boundingBox, distance))
           {
             const auto& triangleCache = mesh->GetTriangleCache(i);
             for (const auto& triangle : triangleCache)
             {
-              if (ray.IntersectsTriangle(triangle.V0.position, triangle.V1.position, triangle.V2.position, t))
+              if (ray.IntersectsTriangle(triangle.V0.position, triangle.V1.position, triangle.V2.position, distance))
               {
                 SetSelectedEntity(entity);
                 break;
               }
             }
-          }
+          } // Bounding box intersect
         }
       }
     }
