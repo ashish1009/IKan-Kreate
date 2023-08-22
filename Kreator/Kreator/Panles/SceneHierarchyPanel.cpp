@@ -856,30 +856,26 @@ namespace Kreator
     }
     if (ImGui::BeginMenu("3D"))
     {
-      auto createDefaultMesh = [](Entity& newEntity, const std::string& name) {
-        std::string file = Project::GetActive()->GetMeshPath("Default/");
-        file += name;
-        auto meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
-        newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
+      auto menuForDefaultMesh = [this](Entity& newEntity, const std::string& name) {
+        if (ImGui::MenuItem(name.c_str()))
+        {
+          newEntity = m_context->CreateEntity(name);
+          std::string file = Project::GetActive()->GetMeshPath("Default/");
+          file += name;
+          file += ".fbx";
+          auto meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+          newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
+        }
       };
       
-      if (ImGui::MenuItem("Cube"))
-      {
-        newEntity = m_context->CreateEntity("Cube");
-        createDefaultMesh(newEntity, "Cube.fbx");
-      }
-      
-      if (ImGui::MenuItem("Sphere"))
-      {
-        newEntity = m_context->CreateEntity("Sphere");
-        createDefaultMesh(newEntity, "Sphere.fbx");
-      }
-      
-      if (ImGui::MenuItem("Capsule"))
-      {
-        newEntity = m_context->CreateEntity("Capsule");
-        createDefaultMesh(newEntity, "Capsule.fbx");
-      }
+      menuForDefaultMesh(newEntity, "Cube");
+      menuForDefaultMesh(newEntity, "Cone");
+      menuForDefaultMesh(newEntity, "Capsule");
+      menuForDefaultMesh(newEntity, "Cylinder");
+      menuForDefaultMesh(newEntity, "Plane");
+      menuForDefaultMesh(newEntity, "Sphere");
+      menuForDefaultMesh(newEntity, "Torus");
+
       ImGui::EndMenu();
     }
     

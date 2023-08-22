@@ -13,9 +13,6 @@
 #include "Renderer/Graphics/Texture.hpp"
 #include "Asset/AssetManager.hpp"
 
-#include "Project.hpp"
-#include "MeshFactory.hpp"
-
 namespace IKan
 {
   /// This function resize/reserve the registry capcity

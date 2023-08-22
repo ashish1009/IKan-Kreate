@@ -1,5 +1,41 @@
 Scene: Test
 Entities:
+  - Entity: 378459803898624110
+    TagComponent:
+      Tag: Capsule
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1.72829294, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 2234008704
+  - Entity: 1549597178693036450
+    TagComponent:
+      Tag: Plane
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-2.37159467, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 3651669563
+  - Entity: 1774740171906267790
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, -1.87206233]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 560965872
   - Entity: 7739334612940350306
     TagComponent:
       Tag: Quad
@@ -26,3 +62,51 @@ Entities:
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
+  - Entity: 12029039683090001314
+    TagComponent:
+      Tag: Torus
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [3.26539946, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1003214154
+  - Entity: 15586122026679388323
+    TagComponent:
+      Tag: Cylinder
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 1.7407099, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 27450833
+  - Entity: 15906954798362676126
+    TagComponent:
+      Tag: Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-1.13248551, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552
+  - Entity: 16609700515445466696
+    TagComponent:
+      Tag: Cone
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, -2.48976421, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 3806376486
