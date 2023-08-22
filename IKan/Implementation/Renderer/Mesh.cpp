@@ -41,9 +41,9 @@ namespace IKan
   aiProcess_OptimizeMeshes |          // Batch draws where possible
   aiProcess_ValidateDataStructure;    // Validation
 
-  Ref<MeshSource> MeshSource::Create(const std::string &filePath, uint32_t entityID)
+  Ref<MeshSource> MeshSource::Create(const std::string &filePath)
   {
-    return CreateRef<MeshSource>(filePath, entityID);
+    return CreateRef<MeshSource>(filePath);
   }
   
   Ref<MeshSource> MeshSource::Create(const std::vector<StaticVertex>& vertices, const std::vector<Index>& indices,
@@ -52,8 +52,8 @@ namespace IKan
     return CreateRef<MeshSource>(vertices, indices, transform);
   }
   
-  MeshSource::MeshSource(const std::string &filePath, uint32_t entityID)
-  : m_filePath(filePath), m_entityID(entityID)
+  MeshSource::MeshSource(const std::string &filePath)
+  : m_filePath(filePath)
   {
     MESH_LOG("Loading mesh from file {0}", m_filePath.c_str());
     
@@ -178,7 +178,6 @@ namespace IKan
           };
         }
         
-        vertex.objectID = (int32_t)m_entityID;
         m_staticVertices.push_back(vertex);
       } // for (size_t i = 0; i < mesh->mNumVertices; i++)
       

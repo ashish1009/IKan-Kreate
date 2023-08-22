@@ -109,7 +109,6 @@
 				B283DF8C2A8113E3002B5DC3 /* libminizip.1.dylib */,
 				B283DF8E2A8113E3002B5DC3 /* libpugixml.1.13.dylib */,
 				B24076F82A723A6100221919 /* PrefixHeader.pch */,
-				B24076F72A72399400221919 /* Resources */,
 				B24076D42A72375000221919 /* Kreator */,
 				B24076D32A72375000221919 /* Products */,
 				B24077052A72591800221919 /* Frameworks */,
@@ -135,13 +134,6 @@
 				B26B1A9F2A7D1EAF00676419 /* Panles */,
 			);
 			path = Kreator;
-			sourceTree = "<group>";
-		};
-		B24076F72A72399400221919 /* Resources */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Resources;
 			sourceTree = "<group>";
 		};
 		B24077052A72591800221919 /* Frameworks */ = {

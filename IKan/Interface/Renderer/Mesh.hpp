@@ -26,7 +26,6 @@ namespace IKan
     glm::vec2 textureCoords;
     glm::vec3 tangent;
     glm::vec3 biTangent;
-    int32_t objectID;
   };
   
   /// Index Infor of each submesh
@@ -59,10 +58,8 @@ namespace IKan
   {
   public:
     /// This Constructor loads the mesh from assimp library and store the data
-    /// - Parameters:
-    ///   - filePath: mesh model file path
-    ///   - entityID: Entity id
-    MeshSource(const std::string& filePath, uint32_t entityID);
+    /// - Parameter filePath: mesh model file path
+    MeshSource(const std::string& filePath);
     /// This Constructur creates the mesh source fromn vertices and indices and transform
     /// - Parameters:
     ///   - vertices: veritices
@@ -81,10 +78,8 @@ namespace IKan
     const Ref<Pipeline>& GetPipeline() const;
 
     /// This funciton creates the mesh from assimp library and store the data
-    /// - Parameters:
-    ///   - filePath: mesh model file path
-    ///   - entityID: Entity id
-    static Ref<MeshSource> Create(const std::string& filePath, uint32_t entityID = -1);
+    /// - Parameter filePath: mesh model file path
+    static Ref<MeshSource> Create(const std::string& filePath);
     /// This function creates the mesh source fromn vertices and indices and transform
     /// - Parameters:
     ///   - vertices: veritices
@@ -111,7 +106,6 @@ namespace IKan
 
     // Member variables ----------------------------------------------------------------------------------------------
     std::string m_filePath = "";
-    uint32_t m_entityID;
 
     // To enclose in bouding box
     AABB m_boundinBox, m_worldBoundingBox;
