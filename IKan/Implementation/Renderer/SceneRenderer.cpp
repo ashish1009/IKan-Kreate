@@ -125,8 +125,10 @@ namespace IKan
       auto shader = pipeline->GetSpecification().shader;
       shader->Bind();
       shader->SetUniformMat4("u_ViewProjection", s_commonData->camViewProjection);
-      
+
+#if 0
       Renderer::DrawAABB(dc.staticMesh, dc.transform, {1, 0.3, 0.5, 1});
+#endif
       for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
       {
         shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);

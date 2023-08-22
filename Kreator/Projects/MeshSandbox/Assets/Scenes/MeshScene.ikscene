@@ -36,6 +36,18 @@ Entities:
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
+  - Entity: 3927871411104084505
+    TagComponent:
+      Tag: Bagpack
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 6.84504843]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 997940619
   - Entity: 10918126021211713702
     TagComponent:
       Tag: Cube

@@ -5,9 +5,6 @@ Assets:
   - Handle: 560965872
     FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
-  - Handle: 782194101
-    FilePath: Meshes/Source/Backpack/backpack.obj
-    Type: MeshSource
   - Handle: 851018354
     FilePath: Meshes/Source/Backpack/specular.jpg
     Type: Image
@@ -58,7 +55,4 @@ Assets:
     Type: Image
   - Handle: 3806376486
     FilePath: Meshes/Default/Cone.fbx
-    Type: MeshSource
-  - Handle: 3916556423
-    FilePath: Meshes/Source/Cyborg/cyborg.obj
     Type: MeshSource

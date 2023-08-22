@@ -819,6 +819,16 @@ namespace Kreator
           ImGui::CloseCurrentPopup();
         }
       }
+      if (!m_selectionContext.HasComponent<StaticMeshComponent>())
+      {
+        if (ImGui::MenuItem("Mesh"))
+        {
+          auto& meshComp = m_selectionContext.AddComponent<StaticMeshComponent>();
+          meshComp.staticMesh = 0;
+          ImGui::CloseCurrentPopup();
+        }
+      }
+
       UI::EndPopup();
     }
   }
