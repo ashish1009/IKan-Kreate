@@ -31,6 +31,8 @@ if (!Project::GetActive()) return
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 #define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
 
+  static glm::vec3 p[2];
+
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -239,7 +241,7 @@ if (!Project::GetActive()) return
     }
     
     // Create Scene viewport renderer
-    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(10, 10, 10));
+    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(1000, 1000, 10000));
     
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);    
@@ -272,6 +274,10 @@ if (!Project::GetActive()) return
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
         UpdateHoveredEntity();
+        
+        Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection());
+        Renderer2D::DrawLine(p[0], p[1], {1, 1, 1, 1});
+        Renderer2D::EndBatch();
                 
         SceneRenderer::EndRenderPass();
 
@@ -427,6 +433,32 @@ if (!Project::GetActive()) return
     }
     return false;
   }
+  
+  std::pair<float, float> RendererLayer::GetMouseViewportSpace()
+  {
+    auto [mx, my] = ImGui::GetMousePos();
+    const auto& viewportBounds = m_viewport.bounds;
+    mx -= viewportBounds[0].x;
+    my -= viewportBounds[0].y;
+    auto viewportWidth = viewportBounds[1].x - viewportBounds[0].x;
+    auto viewportHeight = viewportBounds[1].y - viewportBounds[0].y;
+    
+    return { (mx / viewportWidth) * 2.0f - 1.0f, ((my / viewportHeight) * 2.0f - 1.0f) * -1.0f };
+  }
+  
+  std::pair<glm::vec3, glm::vec3> RendererLayer::CastRay(const EditorCamera& camera, float mx, float my)
+  {
+    glm::vec4 mouseClipPos = { mx, my, -1.0f, 1.0f };
+    
+    auto inverseProj = glm::inverse(camera.GetProjectionMatrix());
+    auto inverseView = glm::inverse(glm::mat3(camera.GetViewMatrix()));
+    
+    glm::vec4 ray = inverseProj * mouseClipPos;
+    glm::vec3 rayPos = camera.GetPosition();
+    glm::vec3 rayDir = inverseView * glm::vec3(ray);
+    
+    return { rayPos, rayDir };
+  }
 
   bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
   {
@@ -434,19 +466,74 @@ if (!Project::GetActive()) return
     {
       return false;
     }
-    
-    auto [mouseX, mouseY] = m_viewport.GetMousePos();
-    if (mouseX <= 0 or mouseY <= 0 or mouseX >= m_viewport.width or mouseY >= m_viewport.height)
+   
     {
-      return false;
+      auto [mouseX, mouseY] = m_viewport.GetMousePos();
+      if (mouseX <= 0 or mouseY <= 0 or mouseX >= m_viewport.width or mouseY >= m_viewport.height)
+      {
+        return false;
+      }
+      
+      ClearSelectedEntity();
+      if (m_hoveredEntityID >= 0 and m_hoveredEntityID <= (int32_t)m_currentScene->GetMaxEntityId())
+      {
+        Entity selectedEntity = m_currentScene->GetEntityWithEntityHandle(m_hoveredEntityID);
+        
+        m_selectionContext.push_back({ selectedEntity });
+        SetSelectedEntity(selectedEntity);
+        return false;
+      }
     }
     
-    if (m_hoveredEntityID >= 0 and m_hoveredEntityID <= (int32_t)m_currentScene->GetMaxEntityId())
+    auto [spaceMouseX, spaceMouseY] = GetMouseViewportSpace();
+    if (spaceMouseX > -1.0f and spaceMouseX < 1.0f and spaceMouseY > -1.0f and spaceMouseY < 1.0f)
     {
-      Entity selectedEntity = m_currentScene->GetEntityWithEntityHandle(m_hoveredEntityID);
-      
-      m_selectionContext.push_back({ selectedEntity });
-      SetSelectedEntity(selectedEntity);
+      ClearSelectedEntity();
+
+      const auto& camera = m_editorCamera;
+      auto [origin, direction] = CastRay(camera, spaceMouseX, spaceMouseY);
+
+      auto meshEntities = m_currentScene->GetAllEntitiesWith<StaticMeshComponent>();
+      for (auto e : meshEntities)
+      {
+        Entity entity = { e, m_currentScene.get() };
+        auto& mc = entity.GetComponent<StaticMeshComponent>();
+        auto mesh = AssetManager::GetAsset<MeshSource>(mc.staticMesh);
+        if (!mesh || mesh->IsFlagSet(AssetFlag::Missing))
+        {
+          continue;
+        }
+        
+        glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(entity);
+        auto& submeshes = mesh->GetSubMeshes();
+        float lastT = std::numeric_limits<float>::max();
+        for (uint32_t i = 0; i < submeshes.size(); i++)
+        {
+          auto& submesh = submeshes[i];
+          Ray ray =
+          {
+            glm::inverse(transform * submesh.transform) * glm::vec4(origin, 1.0f),
+            glm::inverse(glm::mat3(transform * submesh.transform)) * direction
+          };
+          p[0] = ray.Origin;
+          p[1] = {ray.Direction.x * 100, ray.Direction.y * 100, ray.Direction.z * 100};
+
+          float t;
+          bool intersects = ray.IntersectsAABB(submesh.boundingBox, t);
+          if (intersects)
+          {
+            const auto& triangleCache = mesh->GetTriangleCache(i);
+            for (const auto& triangle : triangleCache)
+            {
+              if (ray.IntersectsTriangle(triangle.V0.position, triangle.V1.position, triangle.V2.position, t))
+              {
+                SetSelectedEntity(entity);
+                break;
+              }
+            }
+          }
+        }
+      }
     }
     return false;
   }

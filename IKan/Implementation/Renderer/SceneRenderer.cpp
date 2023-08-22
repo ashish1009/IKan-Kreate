@@ -126,7 +126,7 @@ namespace IKan
       shader->Bind();
       shader->SetUniformMat4("u_ViewProjection", s_commonData->camViewProjection);
       
-      Renderer::DrawAABB(dc.staticMesh, dc.transform, {1, 1, 1, 1});
+      Renderer::DrawAABB(dc.staticMesh, dc.transform, {1, 0.3, 0.5, 1});
       for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
       {
         shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);

@@ -67,16 +67,22 @@ namespace Kreator
     /// This function handles the mouse events
     /// - Parameter e: Mouse Event
     bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
+    /// This function returns the space mouse position
+    std::pair<float, float> GetMouseViewportSpace();
+    /// This function cast ray from camera
+    /// - Parameters:
+    ///   - camera: Camera
+    ///   - mx: mouse x
+    ///   - my: mouse y
+    std::pair<glm::vec3, glm::vec3> CastRay(const EditorCamera& camera, float mx, float my);
 
     /// This function updates the name of window tile
     /// - Parameter sceneName: scene name
     void UpdateWindowTitle(const std::string& sceneName);
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
-
     /// This function updates the hovered Entity
     void UpdateHoveredEntity();
-
     /// This function returns the Imguizmo Snap value
     float GetSnapValue();
 
