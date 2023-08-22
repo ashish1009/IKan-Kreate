@@ -537,7 +537,7 @@ class Map {
         /// an iterator pointing to the end if not found
         Iterator find(const K& key) const {
 
-            uint64 bucket;
+            uint64 bucket = 0;
             uint64 entry = INVALID_INDEX;
 
             if (mHashSize > 0) {

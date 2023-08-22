@@ -411,6 +411,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Yaml/Yaml/include",
 					"${PROJECT_DIR}/../IKan/Vendors/ImGuizmo/ImGuizmo",
 					"${PROJECT_DIR}/../IKan/Vendors/Glad/include",
+					"${PROJECT_DIR}/../IKan/Vendors/Physics3D/ReactPhysics3D/include",
 				);
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = (
@@ -446,6 +447,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Yaml/Yaml/include",
 					"${PROJECT_DIR}/../IKan/Vendors/ImGuizmo/ImGuizmo",
 					"${PROJECT_DIR}/../IKan/Vendors/Glad/include",
+					"${PROJECT_DIR}/../IKan/Vendors/Physics3D/ReactPhysics3D/include",
 				);
 				LD_QUOTE_LINKER_ARGUMENTS_FOR_COMPILER_DRIVER = YES;
 				LIBRARY_SEARCH_PATHS = (

@@ -8,6 +8,8 @@
 #pragma once
 
 #include <entt/entt.hpp>
+#include <reactphysics3d/reactphysics3d.h>
+
 #include "Core/TimeStep.hpp"
 #include "Camera/EditorCamera.hpp"
 #include "Scene/Component.hpp"
@@ -183,17 +185,25 @@ namespace IKan
     void Render3DEntities(Ref<SceneRenderer> renderer);
 
     // Member Variables ---------------------------------------------------------------------------------------------
+    // Scene Utils ----------------------
+    std::string m_name = "";
+    uint32_t m_viewportWidth = 0, m_viewportHeight = 0;
+    
+    // EnTT -----------------------------
     entt::registry m_registry;
     uint32_t m_registryCapacity = 0;
     uint32_t m_numEntities = 0;
     int32_t m_maxEntityID = -1;
+    
+    // Entity ---------------------------
     EntityMap m_entityIDMap;
     entt::entity m_selectedEntity;
-    std::string m_name = "";
     std::function<void(Entity)> m_onEntityDestroyedCallback;
-    
-    uint32_t m_viewportWidth = 0, m_viewportHeight = 0;
 
+    // Physics
+    reactphysics3d::PhysicsCommon m_physics3DCommon;
+    reactphysics3d::PhysicsWorld* m_physics3DWorld = nullptr;
+    
     friend class Entity;
     friend class SceneSerializer;
   };

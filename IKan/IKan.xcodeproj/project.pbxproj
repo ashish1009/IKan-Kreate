@@ -150,6 +150,7 @@
 		B27812922A939B05005C0E7C /* MeshFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812902A939B05005C0E7C /* MeshFactory.hpp */; };
 		B278129A2A94D666005C0E7C /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B27812982A94D666005C0E7C /* Ray.cpp */; };
 		B278129B2A94D666005C0E7C /* Ray.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812992A94D666005C0E7C /* Ray.hpp */; };
+		B27815C12A94FE94005C0E7C /* libPhysics3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B27812BD2A94EF34005C0E7C /* libPhysics3D.a */; };
 		B283DF932A811EAC002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
@@ -408,6 +409,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B27815C12A94FE94005C0E7C /* libPhysics3D.a in Frameworks */,
 				B283DF932A811EAC002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */,
 				B2307A012A80B22600300D82 /* libImGuizmo.a in Frameworks */,
 				B2336A7A2A7644B300BC7B8B /* libYaml.a in Frameworks */,
@@ -1396,6 +1398,7 @@
 					"${PROJECT_DIR}/Vendors/Yaml/Yaml/include",
 					"${PROJECT_DIR}/Vendors/ImGuizmo/ImGuizmo",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
+					"${PROJECT_DIR}/Vendors/Physics3D/ReactPhysics3D/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1429,6 +1432,7 @@
 					"${PROJECT_DIR}/Vendors/Yaml/Yaml/include",
 					"${PROJECT_DIR}/Vendors/ImGuizmo/ImGuizmo",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
+					"${PROJECT_DIR}/Vendors/Physics3D/ReactPhysics3D/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

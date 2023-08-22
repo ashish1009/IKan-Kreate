@@ -13,6 +13,8 @@
 #include "Renderer/Graphics/Texture.hpp"
 #include "Asset/AssetManager.hpp"
 
+using namespace reactphysics3d;
+
 namespace IKan
 {
   /// This function resize/reserve the registry capcity
@@ -192,11 +194,18 @@ namespace IKan
   
   void Scene::OnRuntimeStart()
   {
-    
+    // Create the world settings
+    PhysicsWorld::WorldSettings settings;
+    settings.defaultVelocitySolverNbIterations = 20;
+    settings.isSleepingEnabled = false ;
+    settings.gravity = Vector3 (0 , -9.81 , 0) ;
+
+    // Create the physics world with your settings
+    m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
   }
   void Scene::OnRuntimeStop()
   {
-    
+    m_physics3DCommon.destroyPhysicsWorld(m_physics3DWorld);
   }
   void Scene::OnSimulationStart()
   {
