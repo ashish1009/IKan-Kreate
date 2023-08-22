@@ -25,8 +25,6 @@ namespace IKan
     Font,
     Scene,
     MeshSource,
-    StaticMesh,
-    Mesh,
   };
   
   /// Map to store the asset with its Extension
@@ -42,10 +40,6 @@ namespace IKan
     
     // Fonts
     { ".ttf", AssetType::Font },
-    
-    // Mesh
-    { ".ikmesh", AssetType::Mesh },
-    { ".iksmesh", AssetType::StaticMesh },
     
     // mesh/animation source
     { ".fbx", AssetType::MeshSource },

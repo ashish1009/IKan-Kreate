@@ -860,9 +860,7 @@ namespace Kreator
         std::string file = Project::GetActive()->GetMeshPath("Default/");
         file += name;
         auto meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
-        auto meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
-        auto mesh = AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
-        newEntity.AddComponent<StaticMeshComponent>(mesh);
+        newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
       };
       
       if (ImGui::MenuItem("Cube"))

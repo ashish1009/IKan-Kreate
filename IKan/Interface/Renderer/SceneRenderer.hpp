@@ -58,7 +58,7 @@ namespace IKan
     /// - Parameters:
     ///   - mesh: Mesh source
     ///   - transform: mesh transform
-    void SubmitStaticMesh(Ref<StaticMesh> mesh, const glm::mat4& transform);
+    void SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform);
     
     /// This function begins the Current Render Pass
     static void BeginRenderPass();
@@ -92,13 +92,13 @@ namespace IKan
       AssetHandle meshHandle;
       bool operator<(const MeshKey& other) const;
     };
-    struct StaticDrawCommand
+    struct MeshSourceDrawCommand
     {
-      Ref<StaticMesh> staticMesh;
+      Ref<MeshSource> staticMesh;
       glm::mat4 transform;
     };
 
-    std::map<MeshKey, StaticDrawCommand> m_staticMeshDrawList;
+    std::map<MeshKey, MeshSourceDrawCommand> m_meshSourceDrawList;
 
     inline static Scope<SceneRendererData> s_commonData;
   };

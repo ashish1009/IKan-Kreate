@@ -129,34 +129,4 @@ namespace IKan
     
     friend class StaticMesh;
   };
-  
-  // Static Mesh - no skeletal animation, flattened hierarchy
-  class StaticMesh : public Asset
-  {
-  public:
-    /// This constructor creates the static mesh
-    /// - Parameter meshSource: mesh source
-    explicit StaticMesh(Ref<MeshSource> meshSource);
-    /// This destructor destiory the loaded mesh and delete all the data
-    virtual ~StaticMesh();
-    
-    /// This function returns the mesh source
-    Ref<MeshSource> GetMeshSource();
-    /// This function returns the mesh source
-    Ref<MeshSource> GetMeshSource() const;
-
-    /// This function returns the submeshes
-    const std::vector<SubMesh>& GetSubMeshes() const;
-    /// This function returns the mesh pipeline
-    const Ref<Pipeline>& GetPipeline() const;
-
-    /// This function creates the static mesh
-    /// - Parameter meshSource: mesh source
-    static Ref<StaticMesh> Create(Ref<MeshSource> meshSource);
-    
-    ASSET_TYPE(StaticMesh);
-
-  private:
-    Ref<MeshSource> m_meshSource;
-  };
 } // namespace IKan

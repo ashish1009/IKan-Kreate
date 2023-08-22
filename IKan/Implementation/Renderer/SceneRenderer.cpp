@@ -87,10 +87,10 @@ namespace IKan
     Renderer2D::BeginBatch(camViewProjMat);
   }
   
-  void SceneRenderer::SubmitStaticMesh(Ref<StaticMesh> mesh, const glm::mat4& transform)
+  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform)
   {
     MeshKey meshKey = { mesh->handle };
-    auto& dc = m_staticMeshDrawList[meshKey];
+    auto& dc = m_meshSourceDrawList[meshKey];
     dc.staticMesh = mesh;
     dc.transform = transform;
   }
@@ -114,7 +114,7 @@ namespace IKan
   
   void SceneRenderer::GeometryPass()
   {
-    for (const auto& [mk, dc] : m_staticMeshDrawList)
+    for (const auto& [mk, dc] : m_meshSourceDrawList)
     {
       auto pipeline = dc.staticMesh->GetPipeline();
       pipeline->Bind();

@@ -47,9 +47,7 @@ namespace IKan
     indices[10] = { 3, 2, 6 };
     indices[11] = { 6, 7, 3 };
     
-    AssetHandle meshSourceHandle = AssetManager::CreateMemoryOnlyAsset<MeshSource>(vertices, indices, glm::mat4(1.0f));
-    Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
-    return AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
+    return AssetManager::CreateMemoryOnlyAsset<MeshSource>(vertices, indices, glm::mat4(1.0f));
   }
   
   AssetHandle MeshFactory::CreateSphere(float radius)
@@ -91,9 +89,7 @@ namespace IKan
       }
     }
     
-    AssetHandle meshSourceHandle = AssetManager::CreateMemoryOnlyAsset<MeshSource>(vertices, indices, glm::mat4(1.0f));
-    Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
-    return AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
+    return AssetManager::CreateMemoryOnlyAsset<MeshSource>(vertices, indices, glm::mat4(1.0f));
   }
   
   static void CalculateRing(size_t segments, float radius, float y, float dy, float height, float actualRadius,
@@ -157,8 +153,6 @@ namespace IKan
       }
     }
     
-    AssetHandle meshSourceHandle = AssetManager::CreateMemoryOnlyAsset<MeshSource>(vertices, indices, glm::mat4(1.0f));
-    Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
-    return AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
+    return AssetManager::CreateMemoryOnlyAsset<MeshSource>(vertices, indices, glm::mat4(1.0f));
   }
 } // namespace IKan

@@ -188,7 +188,7 @@ namespace IKan
       const auto& [transformComp, staticMeshComp] = view.get<TransformComponent, StaticMeshComponent>(entity);
       if (staticMeshComp.staticMesh != 0)
       {
-        renderer->SubmitStaticMesh(AssetManager::GetAsset<StaticMesh>(staticMeshComp.staticMesh), transformComp.Transform());
+        renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(staticMeshComp.staticMesh), transformComp.Transform());
       }
     } // For each Quad Entity
   }

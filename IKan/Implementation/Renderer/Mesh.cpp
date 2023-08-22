@@ -257,31 +257,4 @@ namespace IKan
   {
     return m_pipeline;
   }
-  
-  Ref<StaticMesh> StaticMesh::Create(Ref<MeshSource> meshSource)
-  {
-    return CreateRef<StaticMesh>(meshSource);
-  }
-  
-  StaticMesh::StaticMesh(Ref<MeshSource> meshSource)
-  : m_meshSource(meshSource)
-  {
-
-  }
-    
-  StaticMesh::~StaticMesh()
-  {
-    
-  }
-
-  const std::vector<SubMesh>& StaticMesh::GetSubMeshes() const
-  {
-    return m_meshSource->m_submeshes;
-  }
-  
-  const Ref<Pipeline>& StaticMesh::GetPipeline() const
-  {
-    return m_meshSource->m_pipeline;
-  }
-
 } // namespace IKan
