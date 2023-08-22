@@ -210,6 +210,13 @@
 			remoteGlobalIDString = B23367752A75930700BC7B8B;
 			remoteInfo = Yaml;
 		};
+		B27812BC2A94EF34005C0E7C /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B27812B82A94EF34005C0E7C /* Physics3D.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B27812AA2A94EF34005C0E7C;
+			remoteInfo = Physics3D;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -371,6 +378,7 @@
 		B27812902A939B05005C0E7C /* MeshFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshFactory.hpp; sourceTree = "<group>"; };
 		B27812982A94D666005C0E7C /* Ray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ray.cpp; sourceTree = "<group>"; };
 		B27812992A94D666005C0E7C /* Ray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ray.hpp; sourceTree = "<group>"; };
+		B27812B82A94EF34005C0E7C /* Physics3D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Physics3D.xcodeproj; path = Physics3D/Physics3D.xcodeproj; sourceTree = "<group>"; };
 		B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
@@ -448,6 +456,7 @@
 			isa = PBXGroup;
 			children = (
 				B23365402A74D76C00BC7B8B /* StbImage */,
+				B27812B82A94EF34005C0E7C /* Physics3D.xcodeproj */,
 				B23079C92A80B11000300D82 /* ImGuizmo.xcodeproj */,
 				B23367832A75930700BC7B8B /* Yaml.xcodeproj */,
 				B23365AE2A75386B00BC7B8B /* UI.xcodeproj */,
@@ -928,6 +937,14 @@
 			path = Editor;
 			sourceTree = "<group>";
 		};
+		B27812B92A94EF34005C0E7C /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B27812BD2A94EF34005C0E7C /* libPhysics3D.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -1078,6 +1095,10 @@
 					ProjectRef = B23079C92A80B11000300D82 /* ImGuizmo.xcodeproj */;
 				},
 				{
+					ProductGroup = B27812B92A94EF34005C0E7C /* Products */;
+					ProjectRef = B27812B82A94EF34005C0E7C /* Physics3D.xcodeproj */;
+				},
+				{
 					ProductGroup = B23365AF2A75386B00BC7B8B /* Products */;
 					ProjectRef = B23365AE2A75386B00BC7B8B /* UI.xcodeproj */;
 				},
@@ -1127,6 +1148,13 @@
 			fileType = archive.ar;
 			path = libYaml.a;
 			remoteRef = B23367872A75930700BC7B8B /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B27812BD2A94EF34005C0E7C /* libPhysics3D.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libPhysics3D.a;
+			remoteRef = B27812BC2A94EF34005C0E7C /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
