@@ -62,6 +62,18 @@ Entities:
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
+  - Entity: 11633995189445706160
+    TagComponent:
+      Tag: Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 2.4216969, -3.1070106]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552
   - Entity: 12029039683090001314
     TagComponent:
       Tag: Torus

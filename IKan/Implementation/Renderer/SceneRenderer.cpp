@@ -12,11 +12,6 @@
 
 namespace IKan
 {
-  bool SceneRenderer::MeshKey::operator<(const MeshKey &other) const
-  {
-    return meshHandle < other.meshHandle;
-  }
-  
   SceneRenderer::SceneRenderer(Ref<Scene> scene, const Renderer2DData& rendere2DData)
   : m_scene(scene)
   {
@@ -89,10 +84,11 @@ namespace IKan
   
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform)
   {
-    MeshKey meshKey = { mesh->handle };
-    auto& dc = m_meshSourceDrawList[meshKey];
+    MeshSourceDrawCommand dc;
     dc.staticMesh = mesh;
     dc.transform = transform;
+    
+    m_meshSourceDrawList.emplace_back(dc);
   }
   
   void SceneRenderer::EndScene()
@@ -102,6 +98,7 @@ namespace IKan
     
     // 3D ---------------------
     FlushDrawList();
+    ClearDrawLists();
   }
   
   void SceneRenderer::FlushDrawList()
@@ -112,9 +109,14 @@ namespace IKan
     }
   }
   
+  void SceneRenderer::ClearDrawLists()
+  {
+    m_meshSourceDrawList.clear();
+  }
+  
   void SceneRenderer::GeometryPass()
   {
-    for (const auto& [mk, dc] : m_meshSourceDrawList)
+    for (const auto& dc : m_meshSourceDrawList)
     {
       auto pipeline = dc.staticMesh->GetPipeline();
       pipeline->Bind();

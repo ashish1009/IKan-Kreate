@@ -83,22 +83,19 @@ namespace IKan
     void FlushDrawList();
     /// This function pass the 3D Geometry Renderer
     void GeometryPass();
+    /// This function clears the draw lists
+    void ClearDrawLists();
     
     // Member Variables ---------------------------------------------------------------------------------------------
     Ref<Scene> m_scene;
     
-    struct MeshKey
-    {
-      AssetHandle meshHandle;
-      bool operator<(const MeshKey& other) const;
-    };
     struct MeshSourceDrawCommand
     {
       Ref<MeshSource> staticMesh;
       glm::mat4 transform;
     };
 
-    std::map<MeshKey, MeshSourceDrawCommand> m_meshSourceDrawList;
+    std::vector<MeshSourceDrawCommand> m_meshSourceDrawList;
 
     inline static Scope<SceneRendererData> s_commonData;
   };
