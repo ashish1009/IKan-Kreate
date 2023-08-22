@@ -1,4 +1,10 @@
 Assets:
+  - Handle: 27450833
+    FilePath: Meshes/Default/Cylinder.fbx
+    Type: MeshSource
+  - Handle: 560965872
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
   - Handle: 782194101
     FilePath: Meshes/Source/Backpack/backpack.obj
     Type: MeshSource
@@ -7,6 +13,12 @@ Assets:
     Type: Image
   - Handle: 997940619
     FilePath: Meshes/Source/Backpack/Backpack.obj
+    Type: MeshSource
+  - Handle: 1003214154
+    FilePath: Meshes/Default/Torus.fbx
+    Type: MeshSource
+  - Handle: 1336252552
+    FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
   - Handle: 1664882197
     FilePath: Meshes/Source/Backpack/ao.jpg
@@ -20,6 +32,9 @@ Assets:
   - Handle: 1878069206
     FilePath: Scenes/MeshScene.ikscene
     Type: Scene
+  - Handle: 2234008704
+    FilePath: Meshes/Default/Capsule.fbx
+    Type: MeshSource
   - Handle: 2505361275
     FilePath: Meshes/Source/Backpack/diffuse.jpg
     Type: Image
@@ -32,12 +47,18 @@ Assets:
   - Handle: 3593056929
     FilePath: Meshes/Source/Cyborg/cyborg_specular.png
     Type: Image
+  - Handle: 3651669563
+    FilePath: Meshes/Default/Plane.fbx
+    Type: MeshSource
   - Handle: 3750278395
     FilePath: Meshes/Source/Backpack/roughness.jpg
     Type: Image
   - Handle: 3760519821
     FilePath: Scenes/Test.ikscene
     Type: Scene
+  - Handle: 3806376486
+    FilePath: Meshes/Default/Cone.fbx
+    Type: MeshSource
   - Handle: 3916556423
     FilePath: Meshes/Source/Cyborg/cyborg.obj
     Type: MeshSource

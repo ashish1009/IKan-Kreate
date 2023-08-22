@@ -856,22 +856,31 @@ namespace Kreator
     }
     if (ImGui::BeginMenu("3D"))
     {
+      auto createDefaultMesh = [](Entity& newEntity, const std::string& name) {
+        std::string file = Project::GetActive()->GetMeshPath("Default/");
+        file += name;
+        auto meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+        auto meshSource = AssetManager::GetAsset<MeshSource>(meshSourceHandle);
+        auto mesh = AssetManager::CreateMemoryOnlyAsset<StaticMesh>(meshSource);
+        newEntity.AddComponent<StaticMeshComponent>(mesh);
+      };
+      
       if (ImGui::MenuItem("Cube"))
       {
         newEntity = m_context->CreateEntity("Cube");
-        newEntity.AddComponent<StaticMeshComponent>(MeshFactory::CreateBox({1, 1, 1}));
+        createDefaultMesh(newEntity, "Cube.fbx");
       }
       
       if (ImGui::MenuItem("Sphere"))
       {
         newEntity = m_context->CreateEntity("Sphere");
-        newEntity.AddComponent<StaticMeshComponent>(MeshFactory::CreateSphere(0.5));
+        createDefaultMesh(newEntity, "Sphere.fbx");
       }
       
       if (ImGui::MenuItem("Capsule"))
       {
         newEntity = m_context->CreateEntity("Capsule");
-        newEntity.AddComponent<StaticMeshComponent>(MeshFactory::CreateCapsule(0.5, 1));
+        createDefaultMesh(newEntity, "Capsule.fbx");
       }
       ImGui::EndMenu();
     }
