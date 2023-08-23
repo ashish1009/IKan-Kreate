@@ -84,7 +84,8 @@ namespace IKan
   
   void Scene::OnUpdateRuntime(TimeStep ts)
   {
-    
+    // Update the Dynamics world with a constant time step
+    m_physics3DWorld->update(ts);
   }
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
@@ -196,8 +197,9 @@ namespace IKan
   {
     // Create the world settings
     PhysicsWorld::WorldSettings settings;
-    settings.defaultVelocitySolverNbIterations = 20;
-    settings.isSleepingEnabled = false ;
+    settings.defaultVelocitySolverNbIterations = 15;
+    settings.defaultPositionSolverNbIterations = 5;
+    settings.isSleepingEnabled = true;
     settings.gravity = Vector3 (0 , -9.81 , 0) ;
 
     // Create the physics world with your settings
@@ -237,6 +239,7 @@ namespace IKan
     CopyComponent<CircleComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<TextComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<StaticMeshComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<RigidBodyComponent>(target->m_registry, m_registry, enttMap);
 
     // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
     // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
@@ -383,6 +386,7 @@ namespace IKan
     CopyComponentIfExists<CircleComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<TextComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<StaticMeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<RigidBodyComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
 
     auto childIds = entity.Children();
     for (auto childId : childIds)

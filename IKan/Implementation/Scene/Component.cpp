@@ -331,4 +331,21 @@ return *this; \
     staticMesh = other.staticMesh;
   }
 
+  // Rigid Body Component ---------------------------------------------------------------------------------------------------
+  RigidBodyComponent::RigidBodyComponent()
+  {
+    COMP_LOG("Creating Rigid Body Component");
+  }
+  
+  RigidBodyComponent::~RigidBodyComponent()
+  {
+    COMP_LOG("Destroying Rigid Body Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(RigidBodyComponent);
+  
+  void RigidBodyComponent::Copy(const RigidBodyComponent &other)
+  {
+    bodyType = other.bodyType;
+  }
+
 } // namespace IKan

@@ -167,6 +167,18 @@ namespace IKan
     void Copy(const StaticMeshComponent& other);
     DEFINE_COPY_MOVE_CONSTRUCTORS(StaticMeshComponent);
   };
+  
+  struct RigidBodyComponent
+  {
+    enum class BodyType { Static, Kinametic, Dynamic };
+    BodyType bodyType = BodyType::Static;
+
+    RigidBodyComponent();
+    ~RigidBodyComponent();
+    
+    void Copy(const RigidBodyComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(RigidBodyComponent);
+  };
 
   template<typename... Component>
   struct ComponentGroup
@@ -175,7 +187,7 @@ namespace IKan
   };
   
 #define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
-QuadComponent, CircleComponent, TextComponent, StaticMeshComponent
+QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent
   
   // Stores all the components present in Engine
   using AllComponents =

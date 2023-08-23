@@ -261,6 +261,16 @@ namespace IKan {
       }
       out << YAML::EndMap; // StaticMeshComponent
     }
+
+    if (entity.HasComponent<RigidBodyComponent>())
+    {
+      out << YAML::Key << "RigidBodyComponent";
+      out << YAML::BeginMap; // RigidBodyComponent
+      
+      auto& rigidBodyComponent = entity.GetComponent<RigidBodyComponent>();
+      out << YAML::Key << "BodyType" << YAML::Value << (uint32_t)rigidBodyComponent.bodyType;
+      out << YAML::EndMap; // RigidBodyComponent
+    }
     out << YAML::EndMap; // Entity
   }
   
@@ -411,6 +421,14 @@ namespace IKan {
       {
         auto& component = deserializedEntity.AddComponent<StaticMeshComponent>();
         component.staticMesh = staticMeshComponent["MeshHandle"].as<AssetHandle>();
+      }
+
+      // StaticMeshComponent ----------------------------------------------------------------------------------------------
+      auto rigidBodyComponent = entity["RigidBodyComponent"];
+      if (rigidBodyComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<RigidBodyComponent>();
+        component.bodyType = static_cast<RigidBodyComponent::BodyType>(rigidBodyComponent["BodyType"].as<uint32_t>());
       }
     }
   }

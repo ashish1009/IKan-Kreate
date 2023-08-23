@@ -828,7 +828,14 @@ namespace Kreator
           ImGui::CloseCurrentPopup();
         }
       }
-
+      if (!m_selectionContext.HasComponent<RigidBodyComponent>())
+      {
+        if (ImGui::MenuItem("Rigid Body"))
+        {
+          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<RigidBodyComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
       UI::EndPopup();
     }
   }
