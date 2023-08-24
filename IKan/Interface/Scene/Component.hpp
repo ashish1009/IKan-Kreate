@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include <reactphysics3d/reactphysics3d.h>
 #include "Camera/SceneCamera.hpp"
 
 namespace IKan
@@ -172,6 +173,11 @@ namespace IKan
   {
     enum class BodyType { Static, Kinametic, Dynamic };
     BodyType bodyType = BodyType::Static;
+    
+    // Storage : No Need to serialze. Need to decide later to copy or not
+    void* runtimeBody = nullptr;
+
+    static reactphysics3d::BodyType ReactPhysicsBodyType(BodyType type);
 
     RigidBodyComponent();
     ~RigidBodyComponent();

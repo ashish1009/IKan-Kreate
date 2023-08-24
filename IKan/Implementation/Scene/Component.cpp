@@ -348,4 +348,15 @@ return *this; \
     bodyType = other.bodyType;
   }
 
+  reactphysics3d::BodyType RigidBodyComponent::ReactPhysicsBodyType(BodyType type)
+  {
+    switch (type)
+    {
+      case BodyType::Static: return reactphysics3d::BodyType::STATIC;
+      case BodyType::Kinametic: return reactphysics3d::BodyType::KINEMATIC;
+      case BodyType::Dynamic: return reactphysics3d::BodyType::DYNAMIC;
+      default: IK_ASSERT(false);
+    }
+  }
+
 } // namespace IKan

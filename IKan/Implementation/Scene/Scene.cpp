@@ -13,8 +13,6 @@
 #include "Renderer/Graphics/Texture.hpp"
 #include "Asset/AssetManager.hpp"
 
-using namespace reactphysics3d;
-
 namespace IKan
 {
   /// This function resize/reserve the registry capcity
@@ -86,6 +84,27 @@ namespace IKan
   {
     // Update the Dynamics world with a constant time step
     m_physics3DWorld->update(ts);
+    
+    auto rigidBodyView = m_registry.view<RigidBodyComponent>();
+    for (auto entityHandle : rigidBodyView)
+    {
+      Entity entity = { entityHandle, this };
+      auto& rbc = entity.GetComponent<RigidBodyComponent>();
+      auto& tc = entity.GetComponent<TransformComponent>();
+
+      // Initial position and orientation of the rigid body
+      reactphysics3d::Vector3 position (tc.Position().x, tc.Position().y, tc.Position().z);
+      auto quaternion = glm::quat(tc.Rotation());
+      reactphysics3d::Quaternion orientation(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+      
+      // Create a rigid body in the world
+      reactphysics3d::Transform transform(position, orientation);
+      reactphysics3d::RigidBody* body = m_physics3DWorld->createRigidBody(transform);
+      rbc.runtimeBody = body;
+      
+      // Change the type of the body to kinematic
+      body->setType(RigidBodyComponent::ReactPhysicsBodyType(rbc.bodyType));
+    }
   }
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
@@ -196,11 +215,11 @@ namespace IKan
   void Scene::OnRuntimeStart()
   {
     // Create the world settings
-    PhysicsWorld::WorldSettings settings;
+    reactphysics3d::PhysicsWorld::WorldSettings settings;
     settings.defaultVelocitySolverNbIterations = 15;
     settings.defaultPositionSolverNbIterations = 5;
     settings.isSleepingEnabled = true;
-    settings.gravity = Vector3 (0 , -9.81 , 0) ;
+    settings.gravity = reactphysics3d::Vector3 (0 , -9.81 , 0) ;
 
     // Create the physics world with your settings
     m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
