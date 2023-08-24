@@ -84,28 +84,7 @@ namespace IKan
   {
     // Update the Dynamics world with a constant time step
     m_physics3DWorld->update(ts);
-    
-    auto rigidBodyView = m_registry.view<RigidBodyComponent>();
-    for (auto entityHandle : rigidBodyView)
-    {
-      Entity entity = { entityHandle, this };
-      auto& rbc = entity.GetComponent<RigidBodyComponent>();
-      auto& tc = entity.GetComponent<TransformComponent>();
-
-      // Initial position and orientation of the rigid body
-      reactphysics3d::Vector3 position (tc.Position().x, tc.Position().y, tc.Position().z);
-      auto quaternion = glm::quat(tc.Rotation());
-      reactphysics3d::Quaternion orientation(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
-      
-      // Create a rigid body in the world
-      reactphysics3d::Transform transform(position, orientation);
-      reactphysics3d::RigidBody* body = m_physics3DWorld->createRigidBody(transform);
-      rbc.runtimeBody = body;
-      
-      // Change the type of the body to kinematic
-      body->setType(RigidBodyComponent::ReactPhysicsBodyType(rbc.bodyType));
-    }
-  }
+ }
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
   {
@@ -223,6 +202,56 @@ namespace IKan
 
     // Create the physics world with your settings
     m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
+    
+    auto rigidBodyView = m_registry.view<RigidBodyComponent>();
+    for (auto entityHandle : rigidBodyView)
+    {
+      Entity entity = { entityHandle, this };
+      auto& rbc = entity.GetComponent<RigidBodyComponent>();
+      auto& tc = entity.GetComponent<TransformComponent>();
+      
+      // Initial position and orientation of the rigid body
+      reactphysics3d::Vector3 position (tc.Position().x, tc.Position().y, tc.Position().z);
+      auto quaternion = glm::quat(tc.Rotation());
+      reactphysics3d::Quaternion orientation(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+      
+      // Create a rigid body in the world
+      reactphysics3d::Transform transform(position, orientation);
+      reactphysics3d::RigidBody* body = m_physics3DWorld->createRigidBody(transform);
+      rbc.runtimeBody = body;
+      
+      // Change the type of the body to kinematic
+      body->setType(RigidBodyComponent::ReactPhysicsBodyType(rbc.bodyType));
+      
+      if (entity.HasComponent<Box3DColliderComponent>())
+      {
+        auto& bcc = entity.GetComponent<Box3DColliderComponent>();
+        
+        // Half extents of the box in the x, y and z directions
+        glm::vec3 relativeSize = tc.Scale() * bcc.size;
+        const reactphysics3d::Vector3 halfExtents(relativeSize.x, relativeSize.y, relativeSize.z);
+        
+        // Create the box shape
+        reactphysics3d::BoxShape* boxShape = m_physics3DCommon.createBoxShape(halfExtents);
+        
+        // Add the collider to the rigid body
+        auto colliderPosition = reactphysics3d::Vector3(bcc.positionOffset.x,
+                                                        bcc.positionOffset.y,
+                                                        bcc.positionOffset.x);
+        auto collideerQuaternion = reactphysics3d::Quaternion(bcc.quaternionOffset.x,
+                                                              bcc.quaternionOffset.y, bcc.quaternionOffset.z, bcc.quaternionOffset.w);
+        reactphysics3d::Transform collidertransform = reactphysics3d::Transform(colliderPosition, collideerQuaternion);
+        reactphysics3d::Collider* collider = body->addCollider(boxShape, collidertransform);
+        
+        // Get the current material of the collider
+        reactphysics3d::Material& material = collider->getMaterial();
+        // Change the bounciness of the collider
+        material.setBounciness(bcc.bounciness);
+        // Change the friction coefficient of the collider
+        material.setFrictionCoefficient(bcc.frictionCoefficient);
+      } // Box3d Collider
+    }
+
   }
   void Scene::OnRuntimeStop()
   {
