@@ -82,6 +82,11 @@ namespace IKan
   
   void Scene::OnUpdateRuntime(TimeStep ts)
   {
+    // Change the number of iterations of the velocity solver
+    m_physics3DWorld->setNbIterationsVelocitySolver(15);
+    // Change the number of iterations of the position solver
+    m_physics3DWorld->setNbIterationsPositionSolver(8);
+    
     // Update the Dynamics world with a constant time step
     m_physics3DWorld->update(ts);
  }
@@ -107,6 +112,23 @@ namespace IKan
     
     renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
     Render2DEntities();
+    Render3DEntities(renderer);
+    
+    {
+      auto debugRenderer = m_physics3DWorld->getDebugRenderer();
+      auto triangle = debugRenderer.getTriangles();
+      Renderer2D::BeginBatch(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
+      for (auto i = 0; i < debugRenderer.getNbTriangles(); i++)
+      {
+        Renderer2D::DrawLine({triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z},
+                             {triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z}, {1, 0, 0, 1});
+        Renderer2D::DrawLine({triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z},
+                             {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, {1, 0, 0, 1});
+        Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
+                             {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, {1, 0, 0, 1});
+      }
+      Renderer2D::EndBatch();
+    }
     renderer->EndScene();
   }
   
@@ -203,6 +225,13 @@ namespace IKan
     // Create the physics world with your settings
     m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
     
+    // Debug Renderer
+    m_physics3DWorld->setIsDebugRenderingEnabled(true);
+    
+    // Get a reference to the debug renderer
+    reactphysics3d::DebugRenderer& debugRenderer = m_physics3DWorld->getDebugRenderer();
+    debugRenderer.setIsDebugItemDisplayed(reactphysics3d::DebugRenderer::DebugItem::COLLISION_SHAPE, true);
+    
     auto rigidBodyView = m_registry.view<RigidBodyComponent>();
     for (auto entityHandle : rigidBodyView)
     {
@@ -251,7 +280,6 @@ namespace IKan
         material.setFrictionCoefficient(bcc.frictionCoefficient);
       } // Box3d Collider
     }
-
   }
   void Scene::OnRuntimeStop()
   {

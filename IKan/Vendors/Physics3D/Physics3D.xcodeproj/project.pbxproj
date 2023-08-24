@@ -436,19 +436,19 @@
 		B278139C2A94F00D005C0E7C /* reactphysics3d */ = {
 			isa = PBXGroup;
 			children = (
-				B278139D2A94F00D005C0E7C /* memory */,
-				B27813A42A94F00D005C0E7C /* body */,
-				B27813A72A94F00D005C0E7C /* configuration.h */,
-				B27813A82A94F00D005C0E7C /* mathematics */,
-				B27813B32A94F00D005C0E7C /* decimal.h */,
-				B27813B42A94F00D005C0E7C /* utils */,
-				B27813B92A94F00D005C0E7C /* components */,
-				B27813C42A94F00D005C0E7C /* reactphysics3d.h */,
 				B27813C52A94F00D005C0E7C /* containers */,
 				B27813CE2A94F00D005C0E7C /* systems */,
 				B27813D82A94F00D005C0E7C /* engine */,
 				B27813E22A94F00D005C0E7C /* constraint */,
 				B27813E92A94F00D005C0E7C /* collision */,
+				B27813B42A94F00D005C0E7C /* utils */,
+				B27813B92A94F00D005C0E7C /* components */,
+				B27813A82A94F00D005C0E7C /* mathematics */,
+				B278139D2A94F00D005C0E7C /* memory */,
+				B27813A42A94F00D005C0E7C /* body */,
+				B27813A72A94F00D005C0E7C /* configuration.h */,
+				B27813B32A94F00D005C0E7C /* decimal.h */,
+				B27813C42A94F00D005C0E7C /* reactphysics3d.h */,
 			);
 			path = reactphysics3d;
 			sourceTree = "<group>";
