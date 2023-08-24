@@ -420,6 +420,13 @@ return *this; \
   void MeshColliderComponent::Copy(const MeshColliderComponent& other)
   {
     collisionMesh = other.collisionMesh;
+    
+    frictionCoefficient = other.frictionCoefficient;
+    bounciness = other.bounciness;
+    massDensity = other.massDensity;
+    
+    positionOffset = other.positionOffset;
+    quaternionOffset = other.quaternionOffset;
   }
 
 } // namespace IKan

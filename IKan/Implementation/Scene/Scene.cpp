@@ -13,6 +13,8 @@
 #include "Renderer/Graphics/Texture.hpp"
 #include "Asset/AssetManager.hpp"
 
+using namespace reactphysics3d;
+
 namespace IKan
 {
   /// This function resize/reserve the registry capcity
@@ -100,7 +102,7 @@ namespace IKan
       if (rbc.bodyType == RigidBodyComponent::BodyType::Dynamic or rbc.bodyType == RigidBodyComponent::BodyType::Kinametic)
       {
         auto& tc = entity.GetComponent<TransformComponent>();
-        reactphysics3d::RigidBody* body = (reactphysics3d::RigidBody*)rbc.runtimeBody;
+        RigidBody* body = (RigidBody*)rbc.runtimeBody;
         if (body != nullptr)
         {
           const auto& tramsform = body->getTransform();
@@ -270,11 +272,11 @@ namespace IKan
   void Scene::InitializePhysicsWorld()
   {
     // Create the world settings
-    reactphysics3d::PhysicsWorld::WorldSettings settings;
+    PhysicsWorld::WorldSettings settings;
     settings.defaultVelocitySolverNbIterations = 15;
     settings.defaultPositionSolverNbIterations = 5;
     settings.isSleepingEnabled = true;
-    settings.gravity = reactphysics3d::Vector3 (0 , -9.81 , 0) ;
+    settings.gravity = Vector3 (0 , -9.81 , 0) ;
     
     // Create the physics world with your settings
     m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
@@ -283,8 +285,8 @@ namespace IKan
     m_physics3DWorld->setIsDebugRenderingEnabled(true);
     
     // Get a reference to the debug renderer
-    reactphysics3d::DebugRenderer& debugRenderer = m_physics3DWorld->getDebugRenderer();
-    debugRenderer.setIsDebugItemDisplayed(reactphysics3d::DebugRenderer::DebugItem::COLLISION_SHAPE, true);
+    DebugRenderer& debugRenderer = m_physics3DWorld->getDebugRenderer();
+    debugRenderer.setIsDebugItemDisplayed(DebugRenderer::DebugItem::COLLISION_SHAPE, true);
     
     auto rigidBodyView = m_registry.view<RigidBodyComponent>();
     for (auto entityHandle : rigidBodyView)
@@ -294,48 +296,46 @@ namespace IKan
       auto& tc = entity.GetComponent<TransformComponent>();
       
       // Initial position and orientation of the rigid body
-      reactphysics3d::Vector3 position (tc.Position().x, tc.Position().y, tc.Position().z);
+      Vector3 position (tc.Position().x, tc.Position().y, tc.Position().z);
       auto quaternion = glm::quat(tc.Rotation());
-      reactphysics3d::Quaternion orientation(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+      Quaternion orientation(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
       
       // Create a rigid body in the world
-      reactphysics3d::Transform transform(position, orientation);
-      reactphysics3d::RigidBody* body = m_physics3DWorld->createRigidBody(transform);
+      Transform transform(position, orientation);
+      RigidBody* body = m_physics3DWorld->createRigidBody(transform);
       rbc.runtimeBody = body;
       
       // Change the type of the body to kinematic
       body->setType(RigidBodyComponent::ReactPhysicsBodyType(rbc.bodyType));
       
+      // Box 3D -----------------------------------------------------------------------------------------------------
       if (entity.HasComponent<Box3DColliderComponent>())
       {
         auto& bcc = entity.GetComponent<Box3DColliderComponent>();
         
         // Half extents of the box in the x, y and z directions
         glm::vec3 relativeSize = tc.Scale() * bcc.size;
-        const reactphysics3d::Vector3 halfExtents(relativeSize.x, relativeSize.y, relativeSize.z);
+        const Vector3 halfExtents(relativeSize.x, relativeSize.y, relativeSize.z);
         
         // Create the box shape
-        reactphysics3d::BoxShape* boxShape = m_physics3DCommon.createBoxShape(halfExtents);
+        BoxShape* boxShape = m_physics3DCommon.createBoxShape(halfExtents);
         
         // Add the collider to the rigid body
-        auto colliderPosition = reactphysics3d::Vector3(bcc.positionOffset.x,
-                                                        bcc.positionOffset.y,
-                                                        bcc.positionOffset.x);
-        auto collideerQuaternion = reactphysics3d::Quaternion(bcc.quaternionOffset.x,
-                                                              bcc.quaternionOffset.y,
-                                                              bcc.quaternionOffset.z,
-                                                              bcc.quaternionOffset.w);
-        reactphysics3d::Transform collidertransform = reactphysics3d::Transform(colliderPosition, collideerQuaternion);
-        reactphysics3d::Collider* collider = body->addCollider(boxShape, collidertransform);
+        auto colliderPosition = Vector3(bcc.positionOffset.x, bcc.positionOffset.y, bcc.positionOffset.x);
+        auto collideerQuaternion = Quaternion(bcc.quaternionOffset.x, bcc.quaternionOffset.y, bcc.quaternionOffset.z,
+                                              bcc.quaternionOffset.w);
+        Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
+        Collider* collider = body->addCollider(boxShape, collidertransform);
         
         // Get the current material of the collider
-        reactphysics3d::Material& material = collider->getMaterial();
+        Material& material = collider->getMaterial();
         
         material.setBounciness(bcc.bounciness);
         material.setFrictionCoefficient(bcc.frictionCoefficient);
         material.setMassDensity(bcc.massDensity);
       } // Box3d Collider
       
+      // Sphere -----------------------------------------------------------------------------------------------------
       if (entity.HasComponent<SphereColliderComponent>())
       {
         auto& scc = entity.GetComponent<SphereColliderComponent>();
@@ -345,26 +345,95 @@ namespace IKan
         
         // Create the box shape
         // NOTE: There is no feature to have oval shape sp size should be same for all xyz
-        reactphysics3d::SphereShape* boxShape = m_physics3DCommon.createSphereShape(relativeRadius.x);
+        SphereShape* boxShape = m_physics3DCommon.createSphereShape(relativeRadius.x);
         
         // Add the collider to the rigid body
-        auto colliderPosition = reactphysics3d::Vector3(scc.positionOffset.x,
-                                                        scc.positionOffset.y,
-                                                        scc.positionOffset.x);
-        auto collideerQuaternion = reactphysics3d::Quaternion(scc.quaternionOffset.x,
-                                                              scc.quaternionOffset.y,
-                                                              scc.quaternionOffset.z,
-                                                              scc.quaternionOffset.w);
-        reactphysics3d::Transform collidertransform = reactphysics3d::Transform(colliderPosition, collideerQuaternion);
-        reactphysics3d::Collider* collider = body->addCollider(boxShape, collidertransform);
+        auto colliderPosition = Vector3(scc.positionOffset.x, scc.positionOffset.y, scc.positionOffset.x);
+        auto collideerQuaternion = Quaternion(scc.quaternionOffset.x, scc.quaternionOffset.y, scc.quaternionOffset.z,
+                                              scc.quaternionOffset.w);
+        Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
+        Collider* collider = body->addCollider(boxShape, collidertransform);
         
         // Get the current material of the collider
-        reactphysics3d::Material& material = collider->getMaterial();
+        Material& material = collider->getMaterial();
         
         material.setBounciness(scc.bounciness);
         material.setFrictionCoefficient(scc.frictionCoefficient);
         material.setMassDensity(scc.massDensity);
-      } // Box3d Collider
+      } // Sphere Collider
+      
+      // Mesh -----------------------------------------------------------------------------------------------------
+      if (entity.HasComponent<MeshColliderComponent>())
+      {
+        auto& mcc = entity.GetComponent<MeshColliderComponent>();
+        auto meshSource  = AssetManager::GetAsset<MeshSource>(mcc.collisionMesh);
+
+#if 0
+        std::vector<PolygonVertexArray::PolygonFace> polygonFaces;
+        for (uint32_t submeshIdx = 0; submeshIdx < meshSource->GetSubMeshes().size(); submeshIdx++)
+        {
+          const auto& triangleCache = meshSource->GetTriangleCache(submeshIdx);
+          for (uint32_t faceIdx = 0; faceIdx < triangleCache.size(); faceIdx++)
+          {
+            PolygonVertexArray::PolygonFace face;
+            face.nbVertices = 3;
+            face.indexBase = submeshIdx * faceIdx * submeshIdx * 3;
+
+            polygonFaces.emplace_back(face);
+          }
+        }
+
+        //No matching constructor for initialization of 'PolygonVertexArray'
+        // Create the polygon vertex array
+        PolygonVertexArray* polygonVertexArray;
+        polygonVertexArray = new PolygonVertexArray((uint32_t)meshSource->GetVertices().size(),
+                                                    meshSource->GetVertices().data(),
+                                                    3 * sizeof(float),
+                                                    meshSource->GetIndices().data(),
+                                                    sizeof(int32_t),
+                                                    (uint32_t)polygonFaces.size(),
+                                                    polygonFaces.data(),
+                                                    PolygonVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
+                                                    PolygonVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
+        // Create the polyhedron mesh
+        PolyhedronMesh* polyhedronMesh = m_physics3DCommon.createPolyhedronMesh(polygonVertexArray);
+        // Create the convex mesh collision shape
+        ConvexMeshShape* convexMeshShape = m_physics3DCommon.createConvexMeshShape(polyhedronMesh);
+
+        // Add the collider to the rigid body
+        auto colliderPosition = Vector3(mcc.positionOffset.x, mcc.positionOffset.y, mcc.positionOffset.x);
+        auto collideerQuaternion = Quaternion(mcc.quaternionOffset.x, mcc.quaternionOffset.y, mcc.quaternionOffset.z,
+                                              mcc.quaternionOffset.w);
+        Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
+        [[maybe_unused]] Collider* collider = body->addCollider(convexMeshShape, collidertransform);
+#endif
+        int nbTriangles = 0;
+        for (uint32_t submeshIdx = 0; submeshIdx < meshSource->GetSubMeshes().size(); submeshIdx++)
+        {
+          const auto& triangleCache = meshSource->GetTriangleCache(submeshIdx);
+          nbTriangles += triangleCache.size();
+        }
+
+        const int nbVertices = (int)meshSource->GetVertices().size();
+        const float* vertices = &(meshSource->GetVertices().data()->x);
+        const uint32_t* indices = &(meshSource->GetIndices().data()->V1);
+        TriangleVertexArray* triangleArray = new TriangleVertexArray(nbVertices, vertices, 3 * sizeof(float), nbTriangles,
+                                indices , 3 * sizeof(int), TriangleVertexArray::VertexDataType::VERTEX_FLOAT_TYPE ,
+                                TriangleVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
+
+        TriangleMesh* triangleMesh = m_physics3DCommon.createTriangleMesh();
+        // Add the triangle vertex array to the triangle mesh
+        triangleMesh ->addSubpart(triangleArray);
+        // Create the concave mesh shape
+        ConcaveMeshShape* concaveMesh = m_physics3DCommon. createConcaveMeshShape(triangleMesh);
+
+        // Add the collider to the rigid body
+        auto colliderPosition = Vector3(mcc.positionOffset.x, mcc.positionOffset.y, mcc.positionOffset.x);
+        auto collideerQuaternion = Quaternion(mcc.quaternionOffset.x, mcc.quaternionOffset.y, mcc.quaternionOffset.z,
+                                              mcc.quaternionOffset.w);
+        Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
+        Collider* collider = body->addCollider(concaveMesh, collidertransform);
+      }
     }
   }
   

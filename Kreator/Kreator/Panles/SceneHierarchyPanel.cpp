@@ -825,9 +825,25 @@ namespace Kreator
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
     
-    DrawComponent<MeshColliderComponent>("Mesh Collider", entity, [&](MeshColliderComponent& scc)
+    DrawComponent<MeshColliderComponent>("Mesh Collider", entity, [&](MeshColliderComponent& mcc)
                                            {
       Kreator_UI::BeginPropertyGrid();
+      {
+        UI::ScopedDisable disable;
+        std::string handle = fmt::format("{0}", (uint64_t)mcc.collisionMesh);
+        Kreator_UI::Property("Mesh Handle", handle);
+      }
+      
+      // Physical
+      Kreator_UI::Property("Position Offset", mcc.positionOffset);
+      auto quaternion = glm::eulerAngles(mcc.quaternionOffset);
+      Kreator_UI::Property("Quaternion Offset", quaternion);
+      mcc.quaternionOffset = glm::quat(quaternion);
+      
+      // Material
+      Kreator_UI::Property("Friction Coefficient", mcc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+      Kreator_UI::Property("Mass Density", mcc.massDensity, 0.1f, 0.0f, 10000.0f);
+      Kreator_UI::Property("Bounciness", mcc.bounciness, 0.01f, 0.0f, 1.0f);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
   }

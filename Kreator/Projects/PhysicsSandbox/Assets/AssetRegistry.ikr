@@ -23,6 +23,9 @@ Assets:
   - Handle: 2234008704
     FilePath: Meshes/Default/Capsule.fbx
     Type: MeshSource
+  - Handle: 2247131531
+    FilePath: Scenes/PhysicsBkp.ikscene
+    Type: Scene
   - Handle: 2595908900
     FilePath: Meshes/Source/Backpack/specular.jpg
     Type: Image

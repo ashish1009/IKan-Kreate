@@ -239,7 +239,7 @@ if (!Project::GetActive()) return
     }
     
     // Create Scene viewport renderer
-    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(1000, 1000, 10000));
+    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(1000, 1000, 1000000));
     
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);    

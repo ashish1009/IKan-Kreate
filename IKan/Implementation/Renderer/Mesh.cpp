@@ -103,6 +103,7 @@ namespace IKan
     
     // Travers all the sub meshes from the scene and add vertex and indices for
     // each submesh. Store them in class
+    uint32_t numFaces = 0; // Only for Debug Log
     for (size_t m = 0; m < m_scene->mNumMeshes; m++)
     {
       aiMesh* mesh = m_scene->mMeshes[m];
@@ -182,6 +183,7 @@ namespace IKan
       } // for (size_t i = 0; i < mesh->mNumVertices; i++)
       
       // Indices
+      numFaces += mesh->mNumFaces;
       for (size_t i = 0; i < mesh->mNumFaces; i++)
       {
         IK_ASSERT(mesh->mFaces[i].mNumIndices == 3, "Must have 3 indices.");
@@ -197,10 +199,12 @@ namespace IKan
                                                   m_staticVertices[index.V2 + submesh.baseVertex],
                                                   m_staticVertices[index.V3 + submesh.baseVertex]);
       }
-    } // for (size_t m = 0; m < scene_->mNumMeshes; m++)
+    } // for (size_t m = 0; m < m_scene->mNumMeshes; m++)
     
+    MESH_LOG("  Number of Num Meshes        | {0}", m_scene->mNumMeshes);
     MESH_LOG("  Number of Static Vertices   | {0}", m_staticVertices.size());
     MESH_LOG("  Number of Indices           | {0}", m_indices.size());
+    MESH_LOG("  Number of Faces             | {0}", numFaces);
   }
   
   void MeshSource::TraverseNodes(aiNode *node, const glm::mat4 &parentTransform, uint32_t level)
@@ -259,6 +263,15 @@ namespace IKan
   const std::vector<Triangle>& MeshSource::GetTriangleCache(uint32_t submeshIndex) const
   {
     return m_triangleCache.at(submeshIndex);
+  }
+
+  const std::vector<glm::vec3>& MeshSource::GetVertices() const
+  {
+    return m_vertices;
+  }
+  const std::vector<Index>& MeshSource::GetIndices() const
+  {
+    return m_indices;
   }
 
 } // namespace IKan

@@ -187,14 +187,18 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(RigidBodyComponent);
   };
   
-  struct Box3DColliderComponent
+  struct CommonCollider
   {
-    glm::vec3 size = glm::vec3(0.5f);
     glm::vec3 positionOffset;
     glm::quat quaternionOffset;
     float frictionCoefficient = 0.2;
     float bounciness = 0.1;
     float massDensity;
+  };
+  
+  struct Box3DColliderComponent : CommonCollider
+  {
+    glm::vec3 size = glm::vec3(0.5f);
 
     Box3DColliderComponent();
     ~Box3DColliderComponent();
@@ -202,14 +206,9 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(Box3DColliderComponent);
   };
 
-  struct SphereColliderComponent
+  struct SphereColliderComponent : CommonCollider
   {
     float radius = 0.5f;
-    glm::vec3 positionOffset;
-    glm::quat quaternionOffset;
-    float frictionCoefficient = 0.2;
-    float bounciness = 0.1;
-    float massDensity;
 
     SphereColliderComponent();
     ~SphereColliderComponent();
@@ -217,9 +216,10 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(SphereColliderComponent);
   };
   
-  struct MeshColliderComponent
+  struct MeshColliderComponent : CommonCollider
   {
     AssetHandle collisionMesh; // Either static or dynamic mesh
+    
     MeshColliderComponent();
     ~MeshColliderComponent();
     void Copy(const MeshColliderComponent& other);

@@ -306,7 +306,7 @@ namespace IKan {
     {
       out << YAML::Key << "MeshColliderComponent";
       out << YAML::BeginMap; // MeshColliderComponent
-      
+
       auto& meshColliderComponent = entity.GetComponent<MeshColliderComponent>();
       if (meshColliderComponent.collisionMesh)
       {
@@ -316,6 +316,13 @@ namespace IKan {
       {
         out << YAML::Key << "CollisionMesh" << YAML::Value << 0;
       }
+      
+      out << YAML::Key << "PositionOffset" << YAML::Value << meshColliderComponent.positionOffset;
+      out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(meshColliderComponent.quaternionOffset);
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << meshColliderComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << meshColliderComponent.bounciness;
+      out << YAML::Key << "MassDensity" << YAML::Value << meshColliderComponent.massDensity;
+
       out << YAML::EndMap; // MeshColliderComponent
     }
     out << YAML::EndMap; // Entity
@@ -509,7 +516,12 @@ namespace IKan {
       if (meshColliderComponent)
       {
         auto& component = deserializedEntity.AddComponent<MeshColliderComponent>();
-        component.collisionMesh = meshColliderComponent["CollisionMesh"].as<AssetHandle>();
+        component.collisionMesh = meshColliderComponent["CollisionMesh"].as<uint64_t>();
+        component.positionOffset = meshColliderComponent["PositionOffset"].as<glm::vec3>();
+        component.quaternionOffset = glm::quat(meshColliderComponent["QuaternionOffset"].as<glm::vec3>());
+        component.frictionCoefficient = meshColliderComponent["FrictionCoefficient"].as<float>();
+        component.massDensity = meshColliderComponent["MassDensity"].as<float>();
+        component.bounciness = meshColliderComponent["Bounciness"].as<float>();
       }
     }
   }
