@@ -259,6 +259,8 @@ namespace IKan
     CopyComponent<TextComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<StaticMeshComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<RigidBodyComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<Box3DColliderComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<SphereColliderComponent>(target->m_registry, m_registry, enttMap);
 
     // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
     // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
@@ -406,6 +408,8 @@ namespace IKan
     CopyComponentIfExists<TextComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<StaticMeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<RigidBodyComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<Box3DColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<SphereColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
 
     auto childIds = entity.Children();
     for (auto childId : childIds)

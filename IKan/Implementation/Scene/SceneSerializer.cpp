@@ -271,6 +271,36 @@ namespace IKan {
       out << YAML::Key << "BodyType" << YAML::Value << (uint32_t)rigidBodyComponent.bodyType;
       out << YAML::EndMap; // RigidBodyComponent
     }
+
+    if (entity.HasComponent<Box3DColliderComponent>())
+    {
+      out << YAML::Key << "Box3DColliderComponent";
+      out << YAML::BeginMap; // Box3DColliderComponent
+      
+      auto& box3DBodyComponent = entity.GetComponent<Box3DColliderComponent>();
+      out << YAML::Key << "Size" << YAML::Value << box3DBodyComponent.size;
+      out << YAML::Key << "PositionOffset" << YAML::Value << box3DBodyComponent.positionOffset;
+      out << YAML::Key << "QuaternionOffset" << YAML::Value << box3DBodyComponent.quaternionOffset;
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << box3DBodyComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << box3DBodyComponent.bounciness;
+      out << YAML::Key << "MassDencity" << YAML::Value << box3DBodyComponent.massDencity;
+      out << YAML::EndMap; // Box3DColliderComponent
+    }
+
+    if (entity.HasComponent<SphereColliderComponent>())
+    {
+      out << YAML::Key << "SphereColliderComponent";
+      out << YAML::BeginMap; // SphereColliderComponent
+      
+      auto& sphereColliderComponent = entity.GetComponent<SphereColliderComponent>();
+      out << YAML::Key << "Radius" << YAML::Value << sphereColliderComponent.radius;
+      out << YAML::Key << "PositionOffset" << YAML::Value << sphereColliderComponent.positionOffset;
+      out << YAML::Key << "QuaternionOffset" << YAML::Value << sphereColliderComponent.quaternionOffset;
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << sphereColliderComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << sphereColliderComponent.bounciness;
+      out << YAML::Key << "MassDencity" << YAML::Value << sphereColliderComponent.massDencity;
+      out << YAML::EndMap; // SphereColliderComponent
+    }
     out << YAML::EndMap; // Entity
   }
   
@@ -423,12 +453,38 @@ namespace IKan {
         component.staticMesh = staticMeshComponent["MeshHandle"].as<AssetHandle>();
       }
 
-      // StaticMeshComponent ----------------------------------------------------------------------------------------------
+      // RigidBodyComponent ----------------------------------------------------------------------------------------------
       auto rigidBodyComponent = entity["RigidBodyComponent"];
       if (rigidBodyComponent)
       {
         auto& component = deserializedEntity.AddComponent<RigidBodyComponent>();
         component.bodyType = static_cast<RigidBodyComponent::BodyType>(rigidBodyComponent["BodyType"].as<uint32_t>());
+      }
+
+      // Box3DColliderComponent ----------------------------------------------------------------------------------------------
+      auto box3DColliderComponent = entity["Box3DColliderComponent"];
+      if (box3DColliderComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<Box3DColliderComponent>();
+        component.size = box3DColliderComponent["Size"].as<glm::vec3>();
+        component.positionOffset = box3DColliderComponent["PositionOffset"].as<glm::vec3>();
+        component.quaternionOffset = box3DColliderComponent["QuaternionOffset"].as<glm::vec3>();
+        component.frictionCoefficient = box3DColliderComponent["frictionCoefficient"].as<float>();
+        component.massDencity = box3DColliderComponent["massDencity"].as<float>();
+        component.bounciness = box3DColliderComponent["bounciness"].as<float>();
+      }
+
+      // Box3DColliderComponent ----------------------------------------------------------------------------------------------
+      auto sphereColliderComponent = entity["SphereColliderComponent"];
+      if (sphereColliderComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<SphereColliderComponent>();
+        component.radius = sphereColliderComponent["Radius"].as<float>();
+        component.positionOffset = sphereColliderComponent["PositionOffset"].as<glm::vec3>();
+        component.quaternionOffset = sphereColliderComponent["QuaternionOffset"].as<glm::vec3>();
+        component.frictionCoefficient = sphereColliderComponent["frictionCoefficient"].as<float>();
+        component.massDencity = sphereColliderComponent["massDencity"].as<float>();
+        component.bounciness = sphereColliderComponent["bounciness"].as<float>();
       }
     }
   }

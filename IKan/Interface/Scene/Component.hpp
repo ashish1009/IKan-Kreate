@@ -19,8 +19,9 @@ namespace IKan
   //  2) Create Proper Copy and Move Constructors
   //  3) Add in ALL_COPY_COMPONENTS Macro
   //  4) Add in Scene Copy Function
-  //  5) Update SceneSerializer to (de)serialize the new component.
-  //  6) Update Scene::DuplicateEntity() to deal with the new component in whatever way is appropriate.
+  //  5) Update Scene::DuplicateEntity() to deal with the new component in whatever way is appropriate.
+  //  6) Update SceneSerializer to (de)serialize the new component.
+  //  7) Update SceneHierarchy Panel
 
   struct IDComponent
   {
