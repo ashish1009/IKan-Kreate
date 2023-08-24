@@ -7,7 +7,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1.74149203, 0, 0]
+      Position: [4, 0, 4]
       Rotation: [0, 0, -0.455530941]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -21,7 +21,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, -5.5, 0]
+      Position: [4, -5.5, 4]
       Rotation: [0, 0, 0]
       Scale: [10, 0.100000001, 10]
     StaticMeshComponent:
@@ -35,7 +35,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.57269096, 0, 0]
+      Position: [4, 0, 0.200000003]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:

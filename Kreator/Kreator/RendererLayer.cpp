@@ -516,12 +516,21 @@ if (!Project::GetActive()) return
             {
               if (ray.IntersectsTriangle(triangle.V0.position, triangle.V1.position, triangle.V2.position, distance))
               {
-                SetSelectedEntity(entity);
+                m_selectionContext.push_back({entity, distance});
                 break;
               }
-            }
+            } // For each triangle cache
           } // Bounding box intersect
-        }
+        } // For each submesh
+      } // For each Mesh Entity
+      
+      std::sort(m_selectionContext.begin(), m_selectionContext.end(), [](auto& a, auto& b) {
+        return a.distance < b.distance;
+      });
+      
+      if (m_selectionContext.size())
+      {
+        SetSelectedEntity(m_selectionContext[0].entity);
       }
     }
     return false;
@@ -917,7 +926,6 @@ if (!Project::GetActive()) return
   void RendererLayer::SetSelectedEntity(Entity entity)
   {
     m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity);
-    m_selectionContext.push_back({ entity });
   }
 
   // UI APIS ---------------------------------------------------------------------------------------------------------

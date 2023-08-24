@@ -210,10 +210,13 @@ namespace Kreator
     std::string m_sceneFilePath;
     Ref<Scene> m_editorScene, m_currentScene, m_runtimeScene, m_simulationScene;
     Ref<Image> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
+    
     struct SelectedSubmesh
     {
       Entity entity;
+      float distance = 0.0f;
     };
+    
     std::vector<SelectedSubmesh> m_selectionContext;
     int32_t m_hoveredEntityID = -1;
     enum class SceneState
