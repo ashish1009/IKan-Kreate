@@ -20,7 +20,7 @@ Entities:
       QuaternionOffset: [0, -0, 0]
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
-      MassDencity: 0
+      MassDensity: 0
   - Entity: 3541793152397044619
     TagComponent:
       Tag: Base
@@ -30,7 +30,7 @@ Entities:
     TransformComponent:
       Position: [0, -5.5, 0]
       Rotation: [0, 0, 0]
-      Scale: [10, 0.100000001, 10]
+      Scale: [50, 0.100000001, 50]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
@@ -39,9 +39,9 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.200000003
+      FrictionCoefficient: 1
       Bounciness: 0.100000001
-      MassDencity: 0
+      MassDensity: 0
   - Entity: 12373677453902845384
     TagComponent:
       Tag: Camera
@@ -82,4 +82,4 @@ Entities:
       QuaternionOffset: [0, -0, 0]
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
-      MassDencity: 0
+      MassDensity: 0

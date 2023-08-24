@@ -800,10 +800,10 @@ namespace Kreator
       bcc.quaternionOffset = glm::quat(quaternion);
 
       // Material
-      Kreator_UI::Property("Friction Coefficient", bcc.frictionCoefficient);
-      Kreator_UI::Property("Mass Densitu", bcc.massDencity);
-      Kreator_UI::Property("Bounciness", bcc.bounciness);
-      
+      Kreator_UI::Property("Friction Coefficient", bcc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+      Kreator_UI::Property("Mass Density", bcc.massDensity, 0.1f, 0.0f, 10000.0f);
+      Kreator_UI::Property("Bounciness", bcc.bounciness, 0.01f, 0.0f, 1.0f);
+
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
 
@@ -819,9 +819,9 @@ namespace Kreator
       scc.quaternionOffset = glm::quat(quaternion);
 
       // Material
-      Kreator_UI::Property("Friction Coefficient", scc.frictionCoefficient);
-      Kreator_UI::Property("Mass Densitu", scc.massDencity);
-      Kreator_UI::Property("Bounciness", scc.bounciness);
+      Kreator_UI::Property("Friction Coefficient", scc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+      Kreator_UI::Property("Mass Density", scc.massDensity, 0.1f, 0.0f, 10000.0f);
+      Kreator_UI::Property("Bounciness", scc.bounciness, 0.01f, 0.0f, 1.0f);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
   }

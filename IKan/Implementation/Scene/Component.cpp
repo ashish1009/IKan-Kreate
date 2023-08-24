@@ -376,7 +376,7 @@ return *this; \
     size = other.size;
     frictionCoefficient = other.frictionCoefficient;
     bounciness = other.bounciness;
-    massDencity = other.massDencity;
+    massDensity = other.massDensity;
     
     positionOffset = other.positionOffset;
     quaternionOffset = other.quaternionOffset;
@@ -399,7 +399,7 @@ return *this; \
     radius = other.radius;
     frictionCoefficient = other.frictionCoefficient;
     bounciness = other.bounciness;
-    massDencity = other.massDencity;
+    massDensity = other.massDensity;
     
     positionOffset = other.positionOffset;
     quaternionOffset = other.quaternionOffset;

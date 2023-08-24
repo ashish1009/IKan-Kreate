@@ -330,10 +330,10 @@ namespace IKan
         
         // Get the current material of the collider
         reactphysics3d::Material& material = collider->getMaterial();
-        // Change the bounciness of the collider
+        
         material.setBounciness(bcc.bounciness);
-        // Change the friction coefficient of the collider
         material.setFrictionCoefficient(bcc.frictionCoefficient);
+        material.setMassDensity(bcc.massDensity);
       } // Box3d Collider
       
       if (entity.HasComponent<SphereColliderComponent>())
@@ -360,10 +360,10 @@ namespace IKan
         
         // Get the current material of the collider
         reactphysics3d::Material& material = collider->getMaterial();
-        // Change the bounciness of the collider
+        
         material.setBounciness(scc.bounciness);
-        // Change the friction coefficient of the collider
         material.setFrictionCoefficient(scc.frictionCoefficient);
+        material.setMassDensity(scc.massDensity);
       } // Box3d Collider
     }
   }

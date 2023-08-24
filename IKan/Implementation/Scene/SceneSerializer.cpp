@@ -283,7 +283,7 @@ namespace IKan {
       out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(box3DBodyComponent.quaternionOffset);
       out << YAML::Key << "FrictionCoefficient" << YAML::Value << box3DBodyComponent.frictionCoefficient;
       out << YAML::Key << "Bounciness" << YAML::Value << box3DBodyComponent.bounciness;
-      out << YAML::Key << "MassDencity" << YAML::Value << box3DBodyComponent.massDencity;
+      out << YAML::Key << "MassDensity" << YAML::Value << box3DBodyComponent.massDensity;
       out << YAML::EndMap; // Box3DColliderComponent
     }
 
@@ -298,7 +298,7 @@ namespace IKan {
       out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(sphereColliderComponent.quaternionOffset);
       out << YAML::Key << "FrictionCoefficient" << YAML::Value << sphereColliderComponent.frictionCoefficient;
       out << YAML::Key << "Bounciness" << YAML::Value << sphereColliderComponent.bounciness;
-      out << YAML::Key << "MassDencity" << YAML::Value << sphereColliderComponent.massDencity;
+      out << YAML::Key << "MassDensity" << YAML::Value << sphereColliderComponent.massDensity;
       out << YAML::EndMap; // SphereColliderComponent
     }
     out << YAML::EndMap; // Entity
@@ -470,7 +470,7 @@ namespace IKan {
         component.positionOffset = box3DColliderComponent["PositionOffset"].as<glm::vec3>();
         component.quaternionOffset = glm::quat(box3DColliderComponent["QuaternionOffset"].as<glm::vec3>());
         component.frictionCoefficient = box3DColliderComponent["FrictionCoefficient"].as<float>();
-        component.massDencity = box3DColliderComponent["MassDencity"].as<float>();
+        component.massDensity = box3DColliderComponent["MassDensity"].as<float>();
         component.bounciness = box3DColliderComponent["Bounciness"].as<float>();
       }
 
@@ -483,7 +483,7 @@ namespace IKan {
         component.positionOffset = sphereColliderComponent["PositionOffset"].as<glm::vec3>();
         component.quaternionOffset = glm::quat(sphereColliderComponent["QuaternionOffset"].as<glm::vec3>());
         component.frictionCoefficient = sphereColliderComponent["FrictionCoefficient"].as<float>();
-        component.massDencity = sphereColliderComponent["MassDencity"].as<float>();
+        component.massDensity = sphereColliderComponent["MassDensity"].as<float>();
         component.bounciness = sphereColliderComponent["Bounciness"].as<float>();
       }
     }

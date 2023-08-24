@@ -194,7 +194,7 @@ namespace IKan
     glm::quat quaternionOffset;
     float frictionCoefficient = 0.2;
     float bounciness = 0.1;
-    float massDencity;
+    float massDensity;
 
     Box3DColliderComponent();
     ~Box3DColliderComponent();
@@ -209,7 +209,7 @@ namespace IKan
     glm::quat quaternionOffset;
     float frictionCoefficient = 0.2;
     float bounciness = 0.1;
-    float massDencity;
+    float massDensity;
 
     SphereColliderComponent();
     ~SphereColliderComponent();
