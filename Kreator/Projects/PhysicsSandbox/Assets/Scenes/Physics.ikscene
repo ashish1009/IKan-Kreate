@@ -1,4 +1,4 @@
-Scene: UntitledScene
+Scene: Physics
 Entities:
   - Entity: 1925597331728664743
     TagComponent:
@@ -12,6 +12,8 @@ Entities:
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 0
   - Entity: 3541793152397044619
     TagComponent:
       Tag: Base
@@ -24,6 +26,8 @@ Entities:
       Scale: [10, 0.100000001, 10]
     StaticMeshComponent:
       MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 0
   - Entity: 14603536773887636582
     TagComponent:
       Tag: Sphere
@@ -36,3 +40,5 @@ Entities:
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 1336252552
+    RigidBodyComponent:
+      BodyType: 0

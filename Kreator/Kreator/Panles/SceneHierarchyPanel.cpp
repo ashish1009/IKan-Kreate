@@ -778,6 +778,15 @@ namespace Kreator
       Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", smc.staticMesh, nullptr, settings);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
+
+    DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)
+                                       {
+      Kreator_UI::BeginPropertyGrid();
+      static const char* bodyTypeStrings[] = { "Static", "Kinametic", "Dynamic"};
+      int currentType = (int)rbc.bodyType;
+      Kreator_UI::PropertyDropdown("Body Type", bodyTypeStrings, 3, &currentType);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
