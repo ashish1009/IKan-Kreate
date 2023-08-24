@@ -279,6 +279,36 @@ namespace IKan
         // Change the friction coefficient of the collider
         material.setFrictionCoefficient(bcc.frictionCoefficient);
       } // Box3d Collider
+      
+      if (entity.HasComponent<SphereColliderComponent>())
+      {
+        auto& scc = entity.GetComponent<SphereColliderComponent>();
+        
+        // Half extents of the box in the x, y and z directions
+        glm::vec3 relativeRadius = tc.Scale() * scc.radius;
+        
+        // Create the box shape
+        // NOTE: There is no feature to have oval shape sp size should be same for all xyz
+        reactphysics3d::SphereShape* boxShape = m_physics3DCommon.createSphereShape(relativeRadius.x);
+        
+        // Add the collider to the rigid body
+        auto colliderPosition = reactphysics3d::Vector3(scc.positionOffset.x,
+                                                        scc.positionOffset.y,
+                                                        scc.positionOffset.x);
+        auto collideerQuaternion = reactphysics3d::Quaternion(scc.quaternionOffset.x,
+                                                              scc.quaternionOffset.y,
+                                                              scc.quaternionOffset.z,
+                                                              scc.quaternionOffset.w);
+        reactphysics3d::Transform collidertransform = reactphysics3d::Transform(colliderPosition, collideerQuaternion);
+        reactphysics3d::Collider* collider = body->addCollider(boxShape, collidertransform);
+        
+        // Get the current material of the collider
+        reactphysics3d::Material& material = collider->getMaterial();
+        // Change the bounciness of the collider
+        material.setBounciness(scc.bounciness);
+        // Change the friction coefficient of the collider
+        material.setFrictionCoefficient(scc.frictionCoefficient);
+      } // Box3d Collider
     }
   }
   void Scene::OnRuntimeStop()
