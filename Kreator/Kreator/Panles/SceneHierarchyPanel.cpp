@@ -824,6 +824,12 @@ namespace Kreator
       Kreator_UI::Property("Bounciness", scc.bounciness, 0.01f, 0.0f, 1.0f);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
+    
+    DrawComponent<MeshColliderComponent>("Mesh Collider", entity, [&](MeshColliderComponent& scc)
+                                           {
+      Kreator_UI::BeginPropertyGrid();
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
@@ -895,6 +901,14 @@ namespace Kreator
         if (ImGui::MenuItem("Sphere Collider"))
         {
           [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<SphereColliderComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<MeshColliderComponent>())
+      {
+        if (ImGui::MenuItem("Mesh Collider"))
+        {
+          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<MeshColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }

@@ -301,6 +301,22 @@ namespace IKan {
       out << YAML::Key << "MassDensity" << YAML::Value << sphereColliderComponent.massDensity;
       out << YAML::EndMap; // SphereColliderComponent
     }
+
+    if (entity.HasComponent<MeshColliderComponent>())
+    {
+      out << YAML::Key << "MeshColliderComponent";
+      out << YAML::BeginMap; // MeshColliderComponent
+      
+      auto& meshColliderComponent = entity.GetComponent<MeshColliderComponent>();
+      if (meshColliderComponent.collisionMesh)
+      {
+        out << YAML::Key << "CollisionMesh" << YAML::Value << meshColliderComponent.collisionMesh;
+      }
+      else
+      {
+        out << YAML::Key << "CollisionMesh" << YAML::Value << 0;
+      }
+    }
     out << YAML::EndMap; // Entity
   }
   
@@ -474,7 +490,7 @@ namespace IKan {
         component.bounciness = box3DColliderComponent["Bounciness"].as<float>();
       }
 
-      // Box3DColliderComponent ----------------------------------------------------------------------------------------------
+      // SphereColliderComponent ----------------------------------------------------------------------------------------------
       auto sphereColliderComponent = entity["SphereColliderComponent"];
       if (sphereColliderComponent)
       {
@@ -485,6 +501,14 @@ namespace IKan {
         component.frictionCoefficient = sphereColliderComponent["FrictionCoefficient"].as<float>();
         component.massDensity = sphereColliderComponent["MassDensity"].as<float>();
         component.bounciness = sphereColliderComponent["Bounciness"].as<float>();
+      }
+
+      // MeshColliderComponent ----------------------------------------------------------------------------------------------
+      auto meshColliderComponent = entity["MeshColliderComponent"];
+      if (meshColliderComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<MeshColliderComponent>();
+        component.collisionMesh = meshColliderComponent["CollisionMesh"].as<AssetHandle>();
       }
     }
   }

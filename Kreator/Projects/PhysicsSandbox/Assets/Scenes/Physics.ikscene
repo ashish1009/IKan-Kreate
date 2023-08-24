@@ -56,44 +56,46 @@ Entities:
       MeshHandle: 997940619
     RigidBodyComponent:
       BodyType: 2
-  - Entity: 12373677453902845384
-    TagComponent:
-      Tag: Camera
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [0, 0, 22.1000004]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 0
-        PerspectiveFOV: 45
-        PerspectiveNear: 0.100000001
-        PerspectiveFar: 1000
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-  - Entity: 14603536773887636582
-    TagComponent:
-      Tag: Sphere
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [0, 0, 1.70000005]
-      Rotation: [0, 0, 0]
-      Scale: [2, 2, 2]
-    StaticMeshComponent:
-      MeshHandle: 1336252552
-    RigidBodyComponent:
-      BodyType: 2
-    SphereColliderComponent:
-      Radius: 0.5
-      PositionOffset: [0, 0, 0]
-      QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
-      MassDensity: 0
+    MeshColliderComponent:
+      CollisionMesh: 2860682728063411324
+    ? Entity: 12373677453902845384
+      TagComponent:
+        Tag: Camera
+      Parent: 0
+      Children:
+        []
+      TransformComponent:
+        Position: [0, 0, 22.1000004]
+        Rotation: [0, 0, 0]
+        Scale: [1, 1, 1]
+      CameraComponent:
+        Camera:
+          ProjectionType: 0
+          PerspectiveFOV: 45
+          PerspectiveNear: 0.100000001
+          PerspectiveFar: 1000
+          OrthographicSize: 10
+          OrthographicNear: -1
+          OrthographicFar: 1
+        Primary: true
+    : Entity: 14603536773887636582
+      TagComponent:
+        Tag: Sphere
+      Parent: 0
+      Children:
+        []
+      TransformComponent:
+        Position: [0, 0, 1.70000005]
+        Rotation: [0, 0, 0]
+        Scale: [2, 2, 2]
+      StaticMeshComponent:
+        MeshHandle: 1336252552
+      RigidBodyComponent:
+        BodyType: 2
+      SphereColliderComponent:
+        Radius: 0.5
+        PositionOffset: [0, 0, 0]
+        QuaternionOffset: [0, -0, 0]
+        FrictionCoefficient: 0.200000003
+        Bounciness: 0.100000001
+        MassDensity: 0
