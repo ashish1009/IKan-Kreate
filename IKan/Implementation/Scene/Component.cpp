@@ -232,7 +232,7 @@ return *this; \
   {
     return camera;
   }
-
+  
   // Sprite Renderer Component --------------------------------------------------------------------------------------
   SpriteRendererComponent::SpriteRendererComponent()
   {
@@ -250,7 +250,7 @@ return *this; \
     color = other.color;
     tilingFactor = other.tilingFactor;
   }
-
+  
   // Quad Component -------------------------------------------------------------------------------------------------
   QuadComponent::QuadComponent()
   {
@@ -268,7 +268,7 @@ return *this; \
     color = other.color;
     tilingFactor = other.tilingFactor;
   }
-
+  
   // Circle Component -------------------------------------------------------------------------------------------------
   CircleComponent::CircleComponent()
   {
@@ -285,11 +285,11 @@ return *this; \
     texture = other.texture;
     color = other.color;
     tilingFactor = other.tilingFactor;
-
+    
     thickness = other.thickness;
     fade = other.fade;
   }
-
+  
   // Text Component ---------------------------------------------------------------------------------------------------
   TextComponent::TextComponent()
   {
@@ -308,7 +308,7 @@ return *this; \
     color = other.color;
   }
   
-  // Static Mesh Component ---------------------------------------------------------------------------------------------------
+  // Static Mesh Component -------------------------------------------------------------------------------------------
   StaticMeshComponent::StaticMeshComponent()
   {
     COMP_LOG("Creating Static Mesh Component");
@@ -319,7 +319,7 @@ return *this; \
   {
     COMP_LOG("Creating Static Mesh Component from mesh handle");
   }
-
+  
   StaticMeshComponent::~StaticMeshComponent()
   {
     COMP_LOG("Destroying Static Mesh Component");
@@ -330,8 +330,8 @@ return *this; \
   {
     staticMesh = other.staticMesh;
   }
-
-  // Rigid Body Component ---------------------------------------------------------------------------------------------------
+  
+  // Rigid Body Component --------------------------------------------------------------------------------------------
   RigidBodyComponent::RigidBodyComponent()
   {
     COMP_LOG("Creating Rigid Body Component");
@@ -347,7 +347,7 @@ return *this; \
   {
     bodyType = other.bodyType;
   }
-
+  
   reactphysics3d::BodyType RigidBodyComponent::ReactPhysicsBodyType(BodyType type)
   {
     switch (type)
@@ -358,5 +358,50 @@ return *this; \
       default: IK_ASSERT(false);
     }
   }
-
+  
+  // Box 3D Colldier Component -------------------------------------------------------------------------------------
+  Box3DColliderComponent::Box3DColliderComponent()
+  {
+    COMP_LOG("Creating Box 3D Component");
+  }
+  
+  Box3DColliderComponent::~Box3DColliderComponent()
+  {
+    COMP_LOG("Destroying Box 3D Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(Box3DColliderComponent);
+  
+  void Box3DColliderComponent::Copy(const Box3DColliderComponent& other)
+  {
+    size = other.size;
+    frictionCoefficient = other.frictionCoefficient;
+    bounciness = other.bounciness;
+    massDencity = other.massDencity;
+    
+    positionOffset = other.positionOffset;
+    quaternionOffset = other.quaternionOffset;
+  }
+  
+  // Sphere Colldier Component ---------------------------------------------------------------------------------------
+  SphereColliderComponent::SphereColliderComponent()
+  {
+    COMP_LOG("Creating Sphere Component");
+  }
+  
+  SphereColliderComponent::~SphereColliderComponent()
+  {
+    COMP_LOG("Destroying Sphere Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(SphereColliderComponent);
+  
+  void SphereColliderComponent::Copy(const SphereColliderComponent& other)
+  {
+    radius = other.radius;
+    frictionCoefficient = other.frictionCoefficient;
+    bounciness = other.bounciness;
+    massDencity = other.massDencity;
+    
+    positionOffset = other.positionOffset;
+    quaternionOffset = other.quaternionOffset;
+  }
 } // namespace IKan

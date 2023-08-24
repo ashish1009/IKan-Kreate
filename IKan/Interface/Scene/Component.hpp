@@ -185,6 +185,36 @@ namespace IKan
     void Copy(const RigidBodyComponent& other);
     DEFINE_COPY_MOVE_CONSTRUCTORS(RigidBodyComponent);
   };
+  
+  struct Box3DColliderComponent
+  {
+    glm::vec3 size = glm::vec3(0.5f);
+    glm::vec3 positionOffset;
+    glm::quat quaternionOffset;
+    float frictionCoefficient = 0.2;
+    float bounciness = 0.1;
+    float massDencity;
+
+    Box3DColliderComponent();
+    ~Box3DColliderComponent();
+    void Copy(const Box3DColliderComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(Box3DColliderComponent);
+  };
+
+  struct SphereColliderComponent
+  {
+    float radius = 0.5f;
+    glm::vec3 positionOffset;
+    glm::quat quaternionOffset;
+    float frictionCoefficient = 0.2;
+    float bounciness = 0.1;
+    float massDencity;
+
+    SphereColliderComponent();
+    ~SphereColliderComponent();
+    void Copy(const SphereColliderComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(SphereColliderComponent);
+  };
 
   template<typename... Component>
   struct ComponentGroup
@@ -193,7 +223,7 @@ namespace IKan
   };
   
 #define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
-QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent
+QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent, Box3DColliderComponent
   
   // Stores all the components present in Engine
   using AllComponents =
