@@ -89,6 +89,34 @@ namespace IKan
     
     // Update the Dynamics world with a constant time step
     m_physics3DWorld->update(ts);
+    
+    // Get Transform
+    auto view = m_registry.view<RigidBodyComponent>();
+    for (auto entityHandle : view)
+    {
+      Entity entity = { entityHandle, this };
+
+      auto& rbc = entity.GetComponent<RigidBodyComponent>();
+      if (rbc.bodyType == RigidBodyComponent::BodyType::Dynamic or rbc.bodyType == RigidBodyComponent::BodyType::Kinametic)
+      {
+        auto& tc = entity.GetComponent<TransformComponent>();
+        reactphysics3d::RigidBody* body = (reactphysics3d::RigidBody*)rbc.runtimeBody;
+        if (body != nullptr)
+        {
+          const auto& tramsform = body->getTransform();
+          tc.UpdatePosition({tramsform.getPosition().x, tramsform.getPosition().y, tramsform.getPosition().z});
+          
+          glm::quat q(tramsform.getOrientation().w,
+                      tramsform.getOrientation().x,
+                      tramsform.getOrientation().y,
+                      tramsform.getOrientation().z);
+          
+          const glm::vec3 angles = glm::eulerAngles(q);
+          tc.UpdateRotation(angles);
+        }
+      } // if (rb2d.type == b2_dynamicBody or rb2d.type == b2_kinematicBody)
+    } // for (auto e : view)
+
   }
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
