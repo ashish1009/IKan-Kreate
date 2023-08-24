@@ -183,6 +183,13 @@ namespace IKan
     /// This function renders the 3D Entities
     /// - Parameter renderer: Scene Renderer Instance
     void Render3DEntities(Ref<SceneRenderer> renderer);
+    /// This function renders the debug Colliders
+    /// - Parameter color: color of collider
+    void RenderDebugColliders(const glm::vec4& color);
+    /// This function initilzie physics world
+    void InitializePhysicsWorld();
+    /// This function destroy physics world
+    void DestroyPhysicsWorld();
 
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------

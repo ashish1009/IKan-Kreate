@@ -89,7 +89,7 @@ namespace IKan
     
     // Update the Dynamics world with a constant time step
     m_physics3DWorld->update(ts);
- }
+  }
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
   {
@@ -98,7 +98,7 @@ namespace IKan
     Render3DEntities(renderer);
     renderer->EndScene();
   }
-
+  
   void Scene::OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer)
   {
     Entity cameraEntity = GetMainCameraEntity();
@@ -113,22 +113,7 @@ namespace IKan
     renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
     Render2DEntities();
     Render3DEntities(renderer);
-    
-    {
-      auto debugRenderer = m_physics3DWorld->getDebugRenderer();
-      auto triangle = debugRenderer.getTriangles();
-      Renderer2D::BeginBatch(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
-      for (auto i = 0; i < debugRenderer.getNbTriangles(); i++)
-      {
-        Renderer2D::DrawLine({triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z},
-                             {triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z}, {1, 0, 0, 1});
-        Renderer2D::DrawLine({triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z},
-                             {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, {1, 0, 0, 1});
-        Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
-                             {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, {1, 0, 0, 1});
-      }
-      Renderer2D::EndBatch();
-    }
+    RenderDebugColliders({1, 0, 1, 1});
     renderer->EndScene();
   }
   
@@ -136,6 +121,8 @@ namespace IKan
   {
     renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
     Render2DEntities();
+    Render3DEntities(renderer);
+    RenderDebugColliders({1, 0, 1, 1});
     renderer->EndScene();
   }
   
@@ -213,7 +200,46 @@ namespace IKan
     } // For each Quad Entity
   }
   
+  void Scene::RenderDebugColliders(const glm::vec4& color)
+  {
+    auto debugRenderer = m_physics3DWorld->getDebugRenderer();
+    auto triangle = debugRenderer.getTriangles();
+
+    for (auto i = 0; i < debugRenderer.getNbTriangles(); i++)
+    {
+      Renderer2D::DrawLine({triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z},
+                           {triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z}, color);
+      Renderer2D::DrawLine({triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z},
+                           {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, color);
+      Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
+                           {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
+    }
+  }
+  
   void Scene::OnRuntimeStart()
+  {
+    InitializePhysicsWorld();
+  }
+
+  void Scene::OnRuntimeStop()
+  {
+    DestroyPhysicsWorld();
+  }
+  void Scene::OnSimulationStart()
+  {
+    InitializePhysicsWorld();
+  }
+  void Scene::OnSimulationStop()
+  {
+    DestroyPhysicsWorld();
+  }
+  
+  void Scene::DestroyPhysicsWorld()
+  {
+    m_physics3DCommon.destroyPhysicsWorld(m_physics3DWorld);
+  }
+  
+  void Scene::InitializePhysicsWorld()
   {
     // Create the world settings
     reactphysics3d::PhysicsWorld::WorldSettings settings;
@@ -221,7 +247,7 @@ namespace IKan
     settings.defaultPositionSolverNbIterations = 5;
     settings.isSleepingEnabled = true;
     settings.gravity = reactphysics3d::Vector3 (0 , -9.81 , 0) ;
-
+    
     // Create the physics world with your settings
     m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
     
@@ -268,7 +294,9 @@ namespace IKan
                                                         bcc.positionOffset.y,
                                                         bcc.positionOffset.x);
         auto collideerQuaternion = reactphysics3d::Quaternion(bcc.quaternionOffset.x,
-                                                              bcc.quaternionOffset.y, bcc.quaternionOffset.z, bcc.quaternionOffset.w);
+                                                              bcc.quaternionOffset.y,
+                                                              bcc.quaternionOffset.z,
+                                                              bcc.quaternionOffset.w);
         reactphysics3d::Transform collidertransform = reactphysics3d::Transform(colliderPosition, collideerQuaternion);
         reactphysics3d::Collider* collider = body->addCollider(boxShape, collidertransform);
         
@@ -310,18 +338,6 @@ namespace IKan
         material.setFrictionCoefficient(scc.frictionCoefficient);
       } // Box3d Collider
     }
-  }
-  void Scene::OnRuntimeStop()
-  {
-    m_physics3DCommon.destroyPhysicsWorld(m_physics3DWorld);
-  }
-  void Scene::OnSimulationStart()
-  {
-    
-  }
-  void Scene::OnSimulationStop()
-  {
-    
   }
   
   void Scene::CopyTo(Ref<Scene> &target)
