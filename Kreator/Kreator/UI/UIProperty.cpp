@@ -392,6 +392,65 @@ namespace Kreator_UI
     return modified;
   }
   
+  bool Property(const char* label, glm::vec2& value, float delta, float min, float max)
+  {
+    ShiftCursor(10.0f, 9.0f);
+    ImGui::Text(label);
+    ImGui::NextColumn();
+    ShiftCursorY(4.0f);
+    ImGui::PushItemWidth(-1);
+    
+    bool modified = ImGui::DragFloat2(GenerateID(), glm::value_ptr(value), delta, min, max);
+    
+    if (!IsItemDisabled())
+      DrawItemActivityOutline(2.0f, true, Color::Accent);
+
+    ImGui::PopItemWidth();
+    ImGui::NextColumn();
+    DrawUnderline();
+
+    return modified;
+  }
+  
+  bool Property(const char* label, glm::vec3& value, float delta, float min, float max)
+  {
+    ShiftCursor(10.0f, 9.0f);
+    ImGui::Text(label);
+    ImGui::NextColumn();
+    ShiftCursorY(4.0f);
+    ImGui::PushItemWidth(-1);
+    
+    bool modified = ImGui::DragFloat3(GenerateID(), glm::value_ptr(value), delta, min, max);
+    
+    if (!IsItemDisabled())
+      DrawItemActivityOutline(2.0f, true, Color::Accent);
+
+    ImGui::PopItemWidth();
+    ImGui::NextColumn();
+    DrawUnderline();
+
+    return modified;
+  }
+  
+  bool Property(const char* label, glm::vec4& value, float delta, float min, float max)
+  {
+    ShiftCursor(10.0f, 9.0f);
+    ImGui::Text(label);
+    ImGui::NextColumn();
+    ShiftCursorY(4.0f);
+    ImGui::PushItemWidth(-1);
+    
+    bool modified = ImGui::DragFloat4(GenerateID(), glm::value_ptr(value), delta, min, max);
+    
+    if (!IsItemDisabled())
+      DrawItemActivityOutline(2.0f, true, Color::Accent);
+
+    ImGui::PopItemWidth();
+    ImGui::NextColumn();
+    DrawUnderline();
+
+    return modified;
+  }
   bool PropertySlider(const char* label, int& value, int min, int max)
   {
     ShiftCursor(0.0f, 9.0f);

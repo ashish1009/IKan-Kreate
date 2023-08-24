@@ -645,7 +645,8 @@ namespace Kreator
       
       ImGui::BeginTable("transformComponent", 2, ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_NoClip);
       ImGui::TableSetupColumn("label_column", 0, 100.0f);
-      ImGui::TableSetupColumn("value_column", ImGuiTableColumnFlags_IndentEnable | ImGuiTableColumnFlags_NoClip, ImGui::GetContentRegionAvail().x - 100.0f);
+      ImGui::TableSetupColumn("value_column", ImGuiTableColumnFlags_IndentEnable | ImGuiTableColumnFlags_NoClip,
+                              ImGui::GetContentRegionAvail().x - 100.0f);
       
       ImGui::TableNextRow();
       auto position = component.Position();
@@ -665,8 +666,6 @@ namespace Kreator
       ImGui::EndTable();
       
       UI::ShiftCursorY(-8.0f);
-      UI::DrawUnderline();
-      
       UI::ShiftCursorY(18.0f);
     }, s_gearIcon, false);
     
@@ -792,12 +791,37 @@ namespace Kreator
     DrawComponent<Box3DColliderComponent>("Box 3D Collider", entity, [&](Box3DColliderComponent& bcc)
                                       {
       Kreator_UI::BeginPropertyGrid();
+
+      // Physical
+      Kreator_UI::Property("Size", bcc.size);
+      Kreator_UI::Property("Position Offset", bcc.positionOffset);
+      auto quaternion = glm::eulerAngles(bcc.quaternionOffset);
+      Kreator_UI::Property("Quaternion Offset", quaternion);
+      bcc.quaternionOffset = glm::quat(quaternion);
+
+      // Material
+      Kreator_UI::Property("Friction Coefficient", bcc.frictionCoefficient);
+      Kreator_UI::Property("Mass Densitu", bcc.massDencity);
+      Kreator_UI::Property("Bounciness", bcc.bounciness);
+      
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
 
     DrawComponent<SphereColliderComponent>("Sphere Collider", entity, [&](SphereColliderComponent& scc)
                                       {
       Kreator_UI::BeginPropertyGrid();
+      
+      // Physical
+      Kreator_UI::Property("Size", scc.radius);
+      Kreator_UI::Property("Position Offset", scc.positionOffset);
+      auto quaternion = glm::eulerAngles(scc.quaternionOffset);
+      Kreator_UI::Property("Quaternion Offset", quaternion);
+      scc.quaternionOffset = glm::quat(quaternion);
+
+      // Material
+      Kreator_UI::Property("Friction Coefficient", scc.frictionCoefficient);
+      Kreator_UI::Property("Mass Densitu", scc.massDencity);
+      Kreator_UI::Property("Bounciness", scc.bounciness);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
   }
