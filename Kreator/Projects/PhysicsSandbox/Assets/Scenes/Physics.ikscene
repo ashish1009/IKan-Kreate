@@ -42,6 +42,20 @@ Entities:
       FrictionCoefficient: 1
       Bounciness: 0.100000001
       MassDensity: 0
+  - Entity: 9104947190740822792
+    TagComponent:
+      Tag: Mesh
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 997940619
+    RigidBodyComponent:
+      BodyType: 2
   - Entity: 12373677453902845384
     TagComponent:
       Tag: Camera

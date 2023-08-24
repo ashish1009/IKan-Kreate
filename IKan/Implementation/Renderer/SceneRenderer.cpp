@@ -84,6 +84,11 @@ namespace IKan
   
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform)
   {
+    if (!mesh)
+    {
+      return;
+    }
+      
     MeshSourceDrawCommand dc;
     dc.staticMesh = mesh;
     dc.transform = transform;

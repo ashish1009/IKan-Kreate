@@ -141,7 +141,7 @@ namespace IKan
     renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
     Render2DEntities();
     Render3DEntities(renderer);
-    RenderDebugColliders({1, 0, 1, 1});
+    RenderDebugColliders({0, 1, 0, 1});
     renderer->EndScene();
   }
   
@@ -150,7 +150,7 @@ namespace IKan
     renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
     Render2DEntities();
     Render3DEntities(renderer);
-    RenderDebugColliders({1, 0, 1, 1});
+    RenderDebugColliders({0, 1, 0, 1});
     renderer->EndScene();
   }
   

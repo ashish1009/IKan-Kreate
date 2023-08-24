@@ -956,7 +956,13 @@ namespace Kreator
           newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
         }
       };
-      
+
+      if (ImGui::MenuItem("Empty Mesh"))
+      {
+        newEntity = m_context->CreateEntity("Mesh");
+        newEntity.AddComponent<StaticMeshComponent>();
+      }
+
       menuForDefaultMesh(newEntity, "Cube");
       menuForDefaultMesh(newEntity, "Cone");
       menuForDefaultMesh(newEntity, "Capsule");

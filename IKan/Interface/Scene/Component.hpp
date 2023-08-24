@@ -216,6 +216,15 @@ namespace IKan
     void Copy(const SphereColliderComponent& other);
     DEFINE_COPY_MOVE_CONSTRUCTORS(SphereColliderComponent);
   };
+  
+  struct MeshColliderComponent
+  {
+    AssetHandle collisionMesh; // Either static or dynamic mesh
+    MeshColliderComponent();
+    ~MeshColliderComponent();
+    void Copy(const MeshColliderComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(MeshColliderComponent);
+  };
 
   template<typename... Component>
   struct ComponentGroup
@@ -224,7 +233,8 @@ namespace IKan
   };
   
 #define ALL_COPY_COMPONENTS TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
-QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent, Box3DColliderComponent
+QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent, Box3DColliderComponent, \
+MeshColliderComponent
   
   // Stores all the components present in Engine
   using AllComponents =

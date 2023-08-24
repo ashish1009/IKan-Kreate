@@ -404,4 +404,22 @@ return *this; \
     positionOffset = other.positionOffset;
     quaternionOffset = other.quaternionOffset;
   }
+  
+  // Mesh Colldier Component ---------------------------------------------------------------------------------------
+  MeshColliderComponent::MeshColliderComponent()
+  {
+    COMP_LOG("Creating Mesh Component");
+  }
+  
+  MeshColliderComponent::~MeshColliderComponent()
+  {
+    COMP_LOG("Destroying Mesh Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(MeshColliderComponent);
+  
+  void MeshColliderComponent::Copy(const MeshColliderComponent& other)
+  {
+    collisionMesh = other.collisionMesh;
+  }
+
 } // namespace IKan

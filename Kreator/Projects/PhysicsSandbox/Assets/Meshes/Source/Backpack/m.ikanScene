@@ -1,0 +1,49 @@
+Scene: Untitled
+Scene_type: 1
+Setting_editor_camera: true
+Setting_scene_data: true
+Use_editor_camera: true
+Debug_draw: true
+Entities:
+  - Entity: 1885773838628213792
+    TagComponent:
+      Tag: Mesh
+    TransformComponent:
+      Translation: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      FilePath: ../../../kreator/assets/model/static/backpack/backpack.obj
+      IsLightSource: false
+      ActiveMaterial: 0
+      Material Name 0: DefaultMaterial
+      Material InvertX 0: false
+      Material InvertY 0: false
+      Material Proeprty Color DefaultMaterial: [1, 0.600000024, 0.600000024]
+      Material Proeprty Metalness DefaultMaterial: 0
+      Material Proeprty Roughness DefaultMaterial: 1
+      Material Proeprty TilinghFactor DefaultMaterial: 1
+      Use DefaultMaterial0: false
+      Path DefaultMaterial0: ""
+      Use DefaultMaterial1: false
+      Path DefaultMaterial1: ""
+      Use DefaultMaterial2: false
+      Path DefaultMaterial2: ""
+      Use DefaultMaterial3: false
+      Path DefaultMaterial3: ""
+      Material Name 1: Scene_-_Root
+      Material InvertX 1: false
+      Material InvertY 1: false
+      Material Proeprty Color Scene_-_Root: [1, 0.800000012, 0.800000012]
+      Material Proeprty Metalness Scene_-_Root: 0
+      Material Proeprty Roughness Scene_-_Root: -0.5
+      Material Proeprty TilinghFactor Scene_-_Root: 1
+      Use Scene_-_Root0: true
+      Path Scene_-_Root0: ../../../kreator/assets/model/static/backpack/diffuse.jpg
+      Use Scene_-_Root1: false
+      Path Scene_-_Root1: ""
+      Use Scene_-_Root2: false
+      Path Scene_-_Root2: ""
+      Use Scene_-_Root3: false
+      Path Scene_-_Root3: ""
+      Num Materials: 2
