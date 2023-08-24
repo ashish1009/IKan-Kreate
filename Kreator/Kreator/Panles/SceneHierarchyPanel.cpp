@@ -892,7 +892,7 @@ namespace Kreator
       {
         if (ImGui::MenuItem("Box 3D Collider"))
         {
-          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<Box3DColliderComponent>();
+          [[maybe_unused]] auto& box3DColliderComp = m_selectionContext.AddComponent<Box3DColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
@@ -900,7 +900,7 @@ namespace Kreator
       {
         if (ImGui::MenuItem("Sphere Collider"))
         {
-          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<SphereColliderComponent>();
+          [[maybe_unused]] auto& sphereColliderComp = m_selectionContext.AddComponent<SphereColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
@@ -908,7 +908,11 @@ namespace Kreator
       {
         if (ImGui::MenuItem("Mesh Collider"))
         {
-          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<MeshColliderComponent>();
+          auto& meshColliderComp = m_selectionContext.AddComponent<MeshColliderComponent>();
+          if (m_selectionContext.HasComponent<StaticMeshComponent>())
+          {
+            meshColliderComp.collisionMesh = m_selectionContext.GetComponent<StaticMeshComponent>().staticMesh;
+          }
           ImGui::CloseCurrentPopup();
         }
       }

@@ -316,6 +316,7 @@ namespace IKan {
       {
         out << YAML::Key << "CollisionMesh" << YAML::Value << 0;
       }
+      out << YAML::EndMap; // MeshColliderComponent
     }
     out << YAML::EndMap; // Entity
   }
