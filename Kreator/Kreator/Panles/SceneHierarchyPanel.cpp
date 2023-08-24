@@ -785,6 +785,19 @@ namespace Kreator
       static const char* bodyTypeStrings[] = { "Static", "Kinametic", "Dynamic"};
       int currentType = (int)rbc.bodyType;
       Kreator_UI::PropertyDropdown("Body Type", bodyTypeStrings, 3, &currentType);
+      rbc.bodyType = static_cast<RigidBodyComponent::BodyType>(currentType);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+
+    DrawComponent<Box3DColliderComponent>("Box 3D Collider", entity, [&](Box3DColliderComponent& bcc)
+                                      {
+      Kreator_UI::BeginPropertyGrid();
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+
+    DrawComponent<SphereColliderComponent>("Sphere Collider", entity, [&](SphereColliderComponent& scc)
+                                      {
+      Kreator_UI::BeginPropertyGrid();
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
   }
@@ -842,6 +855,22 @@ namespace Kreator
         if (ImGui::MenuItem("Rigid Body"))
         {
           [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<RigidBodyComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<Box3DColliderComponent>())
+      {
+        if (ImGui::MenuItem("Box 3D Collider"))
+        {
+          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<Box3DColliderComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<SphereColliderComponent>())
+      {
+        if (ImGui::MenuItem("Sphere Collider"))
+        {
+          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<SphereColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
