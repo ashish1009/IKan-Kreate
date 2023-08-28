@@ -56,8 +56,12 @@ namespace Kreator
     /// - Parameter event: Event (Base class) intance. Dispatch event from Event Dispatcher
     void OnEvent(Event& event) override;
     
+    // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the client file path
-    static std::filesystem::path GetClientResorucePath();
+    std::filesystem::path GetClientResorucePath() const;
+    
+    /// This function returns the single instance of the renderer layer
+    static RendererLayer& Get();
     
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
@@ -260,6 +264,9 @@ namespace Kreator
     Ref<SceneRenderer> m_viewportRenderer;
     
     // Client Data ---------------------------------------
-    static std::filesystem::path s_clientResourcePath;
+    std::filesystem::path m_clientResourcePath;
+    
+    // Single Instance -----------------------------------
+    static RendererLayer* s_instance;
   };
 } // namespace Kreator

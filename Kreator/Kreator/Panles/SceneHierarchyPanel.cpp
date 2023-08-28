@@ -168,9 +168,9 @@ namespace Kreator
   }
   void SceneHierarchyPanel::Initialize()
   {
-    s_pencilIcon = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Icons/Pencil.png");
-    s_plusIcon = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Icons/Plus.png");
-    s_gearIcon = Image::Create(RendererLayer::GetClientResorucePath() / "Textures/Icons/Gear.png");
+    s_pencilIcon = Image::Create(RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Pencil.png");
+    s_plusIcon = Image::Create(RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Plus.png");
+    s_gearIcon = Image::Create(RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Gear.png");
   }
   void SceneHierarchyPanel::Shutdown()
   {

@@ -22,7 +22,7 @@ namespace Kreator
 if (!Project::GetActive()) return
   
   // Kretor Resource Path
-#define KreatorResourcePath(path) Utils::FileSystem::Absolute(s_clientResourcePath / path)
+#define KreatorResourcePath(path) Utils::FileSystem::Absolute(m_clientResourcePath / path)
 
   // Panel IDs
 #define CONSOLE_PANEL_ID "EditorConsolePanel"
@@ -122,23 +122,27 @@ if (!Project::GetActive()) return
     return { mousePosX, mousePosY };
   }
   
-  std::filesystem::path RendererLayer::s_clientResourcePath;
+  RendererLayer* RendererLayer::s_instance = nullptr;
   
-  std::filesystem::path RendererLayer::GetClientResorucePath()
+  RendererLayer& RendererLayer::Get()
   {
-    return s_clientResourcePath;
+    return *s_instance;
   }
-
+  
   RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientResourcePath)
   : Layer("Kreator Renderer"), m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
   , m_userPreferences(userPreference)
   {
+    IK_ASSERT(!s_instance, "RendererLayer instance already created");
+    // Copy the single instance of application
+    s_instance = this;
+
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
-    s_clientResourcePath = clientResourcePath;
+    m_clientResourcePath = clientResourcePath;
     
 #ifdef DEBUG
-    m_allProjectsPath = s_clientResourcePath / "../Projects";
+    m_allProjectsPath = m_clientResourcePath / "../Projects";
 #else
     m_allProjectsPath = "Projects";
 #endif
@@ -150,7 +154,7 @@ if (!Project::GetActive()) return
     auto fullAllProjectPath =  Utils::FileSystem::IKanAbsolute(m_allProjectsPath);
     memccpy(m_projectFilePathBuffer, fullAllProjectPath.data(), 0, fullAllProjectPath.size());
     
-    m_templateProjectDir = s_clientResourcePath / "TemplateProject";
+    m_templateProjectDir = m_clientResourcePath / "TemplateProject";
     
     // Set the Application Icon
     m_applicationIcon = Image::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
@@ -426,6 +430,11 @@ if (!Project::GetActive()) return
       }
     }
     return false;
+  }
+  
+  std::filesystem::path RendererLayer::GetClientResorucePath() const
+  {
+    return m_clientResourcePath;
   }
   
   std::pair<float, float> RendererLayer::GetMouseViewportSpace()

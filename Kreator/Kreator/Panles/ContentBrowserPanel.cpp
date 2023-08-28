@@ -116,7 +116,7 @@ namespace Kreator
     /// - Parameter file_name: file name
     Ref<Image> AssetPath(const std::string& fileName)
     {
-      return Image::Create(RendererLayer::GetClientResorucePath() / "Textures/CBP" / fileName);
+      return Image::Create(RendererLayer::Get().GetClientResorucePath() / "Textures/CBP" / fileName);
     }
   } // namespace CBP_Utils
   

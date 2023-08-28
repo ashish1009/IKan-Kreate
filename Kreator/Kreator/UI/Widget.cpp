@@ -64,8 +64,8 @@ namespace Kreator_UI
   {
     IK_LOG_TRACE("Kreator UI", "Initialising Widgets Textures");
     
-    s_searchIcon = Image::Create(Kreator::RendererLayer::GetClientResorucePath() / "Textures/Icons/Search.png");
-    s_gearIcon = Image::Create(Kreator::RendererLayer::GetClientResorucePath() / "Textures/Icons/Gear.png");
+    s_searchIcon = Image::Create(Kreator::RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Search.png");
+    s_gearIcon = Image::Create(Kreator::RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Gear.png");
     
     s_assetSearchString = iknew char[MAX_ASSET_INPUT];
   }
