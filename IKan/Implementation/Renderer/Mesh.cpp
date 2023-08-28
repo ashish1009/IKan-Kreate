@@ -114,7 +114,7 @@ namespace IKan
       submesh.baseIndex = indexCount;
       submesh.materialIndex = mesh->mMaterialIndex;
       submesh.indexCount = mesh->mNumFaces * 3;
-      submesh.indexCount = mesh->mNumVertices;
+      submesh.vertexCount = mesh->mNumVertices;
       submesh.meshName = mesh->mName.C_Str();
       
       vertexCount += mesh->mNumVertices;

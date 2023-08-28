@@ -827,6 +827,8 @@ namespace Kreator
     
     DrawComponent<CapsuleColliderComponent>("Capsule Collider", entity, [&](CapsuleColliderComponent& ccc)
                                            {
+      Kreator_UI::BeginPropertyGrid();
+
       // Physical
       Kreator_UI::Property("Radius", ccc.radius);
       Kreator_UI::Property("height", ccc.height);
@@ -917,7 +919,7 @@ namespace Kreator
       }
       if (!m_selectionContext.HasComponent<CapsuleColliderComponent>())
       {
-        if (ImGui::MenuItem("Mesh Collider"))
+        if (ImGui::MenuItem("Capsule Collider"))
         {
           [[maybe_unused]] auto& meshColliderComp = m_selectionContext.AddComponent<CapsuleColliderComponent>();
           ImGui::CloseCurrentPopup();
