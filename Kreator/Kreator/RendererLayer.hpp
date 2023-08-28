@@ -56,6 +56,11 @@ namespace Kreator
     /// - Parameter event: Event (Base class) intance. Dispatch event from Event Dispatcher
     void OnEvent(Event& event) override;
     
+    // Scene APIs ----------------------------------------
+    /// This function opens new scene with file
+    /// - Parameter filepath: Scene filepath
+    void OpenScene(const std::string& filepath);
+
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the client file path
     std::filesystem::path GetClientResorucePath() const;
@@ -114,9 +119,6 @@ namespace Kreator
     void NewScene(const std::string& name = "UntitledScene");
     /// This function opens new scene with file from popup
     void OpenScene();
-    /// This function opens new scene with file
-    /// - Parameter filepath: Scene filepath
-    void OpenScene(const std::string& filepath);
     /// This function Saves the scene at new location
     void SaveSceneAs();
     /// This function Saves the scene

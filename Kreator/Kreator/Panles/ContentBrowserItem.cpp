@@ -8,6 +8,7 @@
 #include "ContentBrowserItem.hpp"
 #include "ContentBrowserPanel.hpp"
 #include "ApplicationSettings.hpp"
+#include "RendererLayer.hpp"
 
 namespace Kreator
 {
@@ -528,7 +529,7 @@ namespace Kreator
   {
     if (m_assetInfo.type == AssetType::Scene)
     {
-      // TODO: Open in Viewport
+      RendererLayer::Get().OpenScene(m_assetInfo.filePath);
     }
     else
     {
