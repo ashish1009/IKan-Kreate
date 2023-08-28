@@ -143,7 +143,7 @@ namespace IKan
     renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
     Render2DEntities();
     Render3DEntities(renderer);
-    RenderDebugColliders({0, 1, 0, 1});
+//    RenderDebugColliders({0, 1, 0, 1});
     renderer->EndScene();
   }
   
@@ -362,78 +362,33 @@ namespace IKan
         material.setMassDensity(scc.massDensity);
       } // Sphere Collider
       
-      // Mesh -----------------------------------------------------------------------------------------------------
-      if (entity.HasComponent<MeshColliderComponent>())
+      // Capsule -----------------------------------------------------------------------------------------------------
+      if (entity.HasComponent<CapsuleColliderComponent>())
       {
-        auto& mcc = entity.GetComponent<MeshColliderComponent>();
-        auto meshSource  = AssetManager::GetAsset<MeshSource>(mcc.collisionMesh);
+        auto& ccc = entity.GetComponent<CapsuleColliderComponent>();
 
-#if 0
-        std::vector<PolygonVertexArray::PolygonFace> polygonFaces;
-        for (uint32_t submeshIdx = 0; submeshIdx < meshSource->GetSubMeshes().size(); submeshIdx++)
-        {
-          const auto& triangleCache = meshSource->GetTriangleCache(submeshIdx);
-          for (uint32_t faceIdx = 0; faceIdx < triangleCache.size(); faceIdx++)
-          {
-            PolygonVertexArray::PolygonFace face;
-            face.nbVertices = 3;
-            face.indexBase = submeshIdx * faceIdx * submeshIdx * 3;
+        // Half extents of the box in the x, y and z directions
+        glm::vec3 relativeRadius = tc.Scale() * ccc.radius;
+        glm::vec3 relativeSize = tc.Scale() * ccc.height;
 
-            polygonFaces.emplace_back(face);
-          }
-        }
-
-        //No matching constructor for initialization of 'PolygonVertexArray'
-        // Create the polygon vertex array
-        PolygonVertexArray* polygonVertexArray;
-        polygonVertexArray = new PolygonVertexArray((uint32_t)meshSource->GetVertices().size(),
-                                                    meshSource->GetVertices().data(),
-                                                    3 * sizeof(float),
-                                                    meshSource->GetIndices().data(),
-                                                    sizeof(int32_t),
-                                                    (uint32_t)polygonFaces.size(),
-                                                    polygonFaces.data(),
-                                                    PolygonVertexArray::VertexDataType::VERTEX_FLOAT_TYPE,
-                                                    PolygonVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
-        // Create the polyhedron mesh
-        PolyhedronMesh* polyhedronMesh = m_physics3DCommon.createPolyhedronMesh(polygonVertexArray);
-        // Create the convex mesh collision shape
-        ConvexMeshShape* convexMeshShape = m_physics3DCommon.createConvexMeshShape(polyhedronMesh);
-
+        // Create the capsule shape
+        CapsuleShape* capsuleShape = m_physics3DCommon.createCapsuleShape(relativeRadius.x, relativeSize.y);
+        
         // Add the collider to the rigid body
-        auto colliderPosition = Vector3(mcc.positionOffset.x, mcc.positionOffset.y, mcc.positionOffset.x);
-        auto collideerQuaternion = Quaternion(mcc.quaternionOffset.x, mcc.quaternionOffset.y, mcc.quaternionOffset.z,
-                                              mcc.quaternionOffset.w);
+        auto colliderPosition = Vector3(ccc.positionOffset.x, ccc.positionOffset.y, ccc.positionOffset.x);
+        auto collideerQuaternion = Quaternion(ccc.quaternionOffset.x, ccc.quaternionOffset.y, ccc.quaternionOffset.z,
+                                              ccc.quaternionOffset.w);
         Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
-        [[maybe_unused]] Collider* collider = body->addCollider(convexMeshShape, collidertransform);
-#endif
-        int nbTriangles = 0;
-        for (uint32_t submeshIdx = 0; submeshIdx < meshSource->GetSubMeshes().size(); submeshIdx++)
-        {
-          const auto& triangleCache = meshSource->GetTriangleCache(submeshIdx);
-          nbTriangles += triangleCache.size();
-        }
-
-        const int nbVertices = (int)meshSource->GetVertices().size();
-        const float* vertices = &(meshSource->GetVertices().data()->x);
-        const uint32_t* indices = &(meshSource->GetIndices().data()->V1);
-        TriangleVertexArray* triangleArray = new TriangleVertexArray(nbVertices, vertices, 3 * sizeof(float), nbTriangles,
-                                indices , 3 * sizeof(int), TriangleVertexArray::VertexDataType::VERTEX_FLOAT_TYPE ,
-                                TriangleVertexArray::IndexDataType::INDEX_INTEGER_TYPE);
-
-        TriangleMesh* triangleMesh = m_physics3DCommon.createTriangleMesh();
-        // Add the triangle vertex array to the triangle mesh
-        triangleMesh ->addSubpart(triangleArray);
-        // Create the concave mesh shape
-        ConcaveMeshShape* concaveMesh = m_physics3DCommon. createConcaveMeshShape(triangleMesh);
-
-        // Add the collider to the rigid body
-        auto colliderPosition = Vector3(mcc.positionOffset.x, mcc.positionOffset.y, mcc.positionOffset.x);
-        auto collideerQuaternion = Quaternion(mcc.quaternionOffset.x, mcc.quaternionOffset.y, mcc.quaternionOffset.z,
-                                              mcc.quaternionOffset.w);
-        Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
-        Collider* collider = body->addCollider(concaveMesh, collidertransform);
-      }
+        Collider* collider = body->addCollider(capsuleShape, collidertransform);
+        
+        // Get the current material of the collider
+        Material& material = collider->getMaterial();
+        
+        material.setBounciness(ccc.bounciness);
+        material.setFrictionCoefficient(ccc.frictionCoefficient);
+        material.setMassDensity(ccc.massDensity);
+        
+      } // Capsule Collider
     }
   }
   
@@ -461,7 +416,7 @@ namespace IKan
     CopyComponent<RigidBodyComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<Box3DColliderComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<SphereColliderComponent>(target->m_registry, m_registry, enttMap);
-    CopyComponent<MeshColliderComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<CapsuleColliderComponent>(target->m_registry, m_registry, enttMap);
 
     // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
     // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
@@ -611,7 +566,7 @@ namespace IKan
     CopyComponentIfExists<RigidBodyComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<Box3DColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<SphereColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
-    CopyComponentIfExists<MeshColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<CapsuleColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
 
     auto childIds = entity.Children();
     for (auto childId : childIds)

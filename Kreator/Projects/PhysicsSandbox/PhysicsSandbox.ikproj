@@ -4,6 +4,6 @@ Project:
   MeshDirectory: Assets/Meshes
   MeshSourceDirectory: Assets/Meshes/Source
   AssetRegistry: Assets/AssetRegistry.ikr
-  StartScene: Scenes/Physics.ikscene
+  StartScene: Scenes/MeshCollider.ikscene
   AutoSave: true
   AutoSaveInterval: 300

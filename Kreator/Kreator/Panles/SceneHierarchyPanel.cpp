@@ -812,7 +812,7 @@ namespace Kreator
       Kreator_UI::BeginPropertyGrid();
       
       // Physical
-      Kreator_UI::Property("Size", scc.radius);
+      Kreator_UI::Property("Radius", scc.radius);
       Kreator_UI::Property("Position Offset", scc.positionOffset);
       auto quaternion = glm::eulerAngles(scc.quaternionOffset);
       Kreator_UI::Property("Quaternion Offset", quaternion);
@@ -825,25 +825,20 @@ namespace Kreator
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
     
-    DrawComponent<MeshColliderComponent>("Mesh Collider", entity, [&](MeshColliderComponent& mcc)
+    DrawComponent<CapsuleColliderComponent>("Capsule Collider", entity, [&](CapsuleColliderComponent& ccc)
                                            {
-      Kreator_UI::BeginPropertyGrid();
-      {
-        UI::ScopedDisable disable;
-        std::string handle = fmt::format("{0}", (uint64_t)mcc.collisionMesh);
-        Kreator_UI::Property("Mesh Handle", handle);
-      }
-      
       // Physical
-      Kreator_UI::Property("Position Offset", mcc.positionOffset);
-      auto quaternion = glm::eulerAngles(mcc.quaternionOffset);
+      Kreator_UI::Property("Radius", ccc.radius);
+      Kreator_UI::Property("height", ccc.height);
+      Kreator_UI::Property("Position Offset", ccc.positionOffset);
+      auto quaternion = glm::eulerAngles(ccc.quaternionOffset);
       Kreator_UI::Property("Quaternion Offset", quaternion);
-      mcc.quaternionOffset = glm::quat(quaternion);
+      ccc.quaternionOffset = glm::quat(quaternion);
       
       // Material
-      Kreator_UI::Property("Friction Coefficient", mcc.frictionCoefficient, 0.01, 0.0f, 1.0f);
-      Kreator_UI::Property("Mass Density", mcc.massDensity, 0.1f, 0.0f, 10000.0f);
-      Kreator_UI::Property("Bounciness", mcc.bounciness, 0.01f, 0.0f, 1.0f);
+      Kreator_UI::Property("Friction Coefficient", ccc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+      Kreator_UI::Property("Mass Density", ccc.massDensity, 0.1f, 0.0f, 10000.0f);
+      Kreator_UI::Property("Bounciness", ccc.bounciness, 0.01f, 0.0f, 1.0f);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
   }
@@ -920,15 +915,11 @@ namespace Kreator
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<MeshColliderComponent>())
+      if (!m_selectionContext.HasComponent<CapsuleColliderComponent>())
       {
         if (ImGui::MenuItem("Mesh Collider"))
         {
-          auto& meshColliderComp = m_selectionContext.AddComponent<MeshColliderComponent>();
-          if (m_selectionContext.HasComponent<StaticMeshComponent>())
-          {
-            meshColliderComp.collisionMesh = m_selectionContext.GetComponent<StaticMeshComponent>().staticMesh;
-          }
+          [[maybe_unused]] auto& meshColliderComp = m_selectionContext.AddComponent<CapsuleColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }

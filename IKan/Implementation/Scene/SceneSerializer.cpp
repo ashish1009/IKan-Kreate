@@ -302,21 +302,14 @@ namespace IKan {
       out << YAML::EndMap; // SphereColliderComponent
     }
 
-    if (entity.HasComponent<MeshColliderComponent>())
+    if (entity.HasComponent<CapsuleColliderComponent>())
     {
-      out << YAML::Key << "MeshColliderComponent";
-      out << YAML::BeginMap; // MeshColliderComponent
+      out << YAML::Key << "CapsuleColliderComponent";
+      out << YAML::BeginMap; // CapsuleColliderComponent
 
-      auto& meshColliderComponent = entity.GetComponent<MeshColliderComponent>();
-      if (meshColliderComponent.collisionMesh)
-      {
-        out << YAML::Key << "CollisionMesh" << YAML::Value << meshColliderComponent.collisionMesh;
-      }
-      else
-      {
-        out << YAML::Key << "CollisionMesh" << YAML::Value << 0;
-      }
-      
+      auto& meshColliderComponent = entity.GetComponent<CapsuleColliderComponent>();
+      out << YAML::Key << "Radius" << YAML::Value << meshColliderComponent.radius;
+      out << YAML::Key << "Height" << YAML::Value << meshColliderComponent.height;
       out << YAML::Key << "PositionOffset" << YAML::Value << meshColliderComponent.positionOffset;
       out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(meshColliderComponent.quaternionOffset);
       out << YAML::Key << "FrictionCoefficient" << YAML::Value << meshColliderComponent.frictionCoefficient;
@@ -512,11 +505,12 @@ namespace IKan {
       }
 
       // MeshColliderComponent ----------------------------------------------------------------------------------------------
-      auto meshColliderComponent = entity["MeshColliderComponent"];
+      auto meshColliderComponent = entity["CapsuleColliderComponent"];
       if (meshColliderComponent)
       {
-        auto& component = deserializedEntity.AddComponent<MeshColliderComponent>();
-        component.collisionMesh = meshColliderComponent["CollisionMesh"].as<uint64_t>();
+        auto& component = deserializedEntity.AddComponent<CapsuleColliderComponent>();
+        component.radius = meshColliderComponent["Radius"].as<float>();
+        component.height = meshColliderComponent["Height"].as<float>();
         component.positionOffset = meshColliderComponent["PositionOffset"].as<glm::vec3>();
         component.quaternionOffset = glm::quat(meshColliderComponent["QuaternionOffset"].as<glm::vec3>());
         component.frictionCoefficient = meshColliderComponent["FrictionCoefficient"].as<float>();

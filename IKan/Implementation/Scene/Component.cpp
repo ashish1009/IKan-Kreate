@@ -405,21 +405,22 @@ return *this; \
     quaternionOffset = other.quaternionOffset;
   }
   
-  // Mesh Colldier Component ---------------------------------------------------------------------------------------
-  MeshColliderComponent::MeshColliderComponent()
+  // Capsule Colldier Component ---------------------------------------------------------------------------------------
+  CapsuleColliderComponent::CapsuleColliderComponent()
   {
-    COMP_LOG("Creating Mesh Component");
+    COMP_LOG("Creating Capsule Component");
   }
   
-  MeshColliderComponent::~MeshColliderComponent()
+  CapsuleColliderComponent::~CapsuleColliderComponent()
   {
-    COMP_LOG("Destroying Mesh Component");
+    COMP_LOG("Destroying Capsule Component");
   }
-  COMP_COPY_MOVE_CONSTRUCTORS(MeshColliderComponent);
+  COMP_COPY_MOVE_CONSTRUCTORS(CapsuleColliderComponent);
   
-  void MeshColliderComponent::Copy(const MeshColliderComponent& other)
+  void CapsuleColliderComponent::Copy(const CapsuleColliderComponent& other)
   {
-    collisionMesh = other.collisionMesh;
+    radius = other.radius;
+    height = other.height;
     
     frictionCoefficient = other.frictionCoefficient;
     bounciness = other.bounciness;

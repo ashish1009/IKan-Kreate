@@ -47,6 +47,7 @@ namespace IKan
     uint32_t baseIndex;
     uint32_t materialIndex;
     uint32_t indexCount;
+    uint32_t vertexCount;
     
     AABB boundingBox;
     glm::mat4 transform;

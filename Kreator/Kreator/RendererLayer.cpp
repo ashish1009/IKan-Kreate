@@ -757,7 +757,10 @@ if (!Project::GetActive()) return
     if (!Utils::FileSystem::Exists(filepath))
     {
       IK_LOG_ERROR("Kreator Layer" ,"Tried loading a non-existing scene: {0}", filepath);
-      IK_ASSERT(false);
+      NewScene(Utils::String::GetFileNameFromPath(filepath));
+      m_sceneFilePath = filepath;
+      SaveScene();
+      return;
     }
     
     Ref<Scene> newScene = Scene::Create("New Scene");
