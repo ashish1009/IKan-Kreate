@@ -65,6 +65,9 @@ namespace IKan
     // Shutdown the Renderer
     Renderer::Shutdown();
 
+    // Reset the window
+    m_window.reset();
+
     IK_LOG_WARN(LogModule::Application, "Destroying Core Application Instance : {0}", m_specificaion.name);
   }
 
@@ -79,7 +82,34 @@ namespace IKan
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                          Starting Game Loop                              ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
-        
+
+    while (m_isRunning)
+    {
+      // Update the window swap buffers
+      m_window->Update();
+      
+      // Store the frame time difference
+      m_timeStep = m_window->GetTimestep();
+      
+      // Updating all the attached layer
+      for (auto& layer : *(m_layers.get()))
+      {
+        layer->OnUpdate(m_timeStep);
+      }
+      
+      // Update the client application
+      OnUpdate(m_timeStep);
+      
+      // Render the Gui for Application
+      ImGuiRender();
+      
+      // Clear Runtime Performance profiler
+      PerformanceProfiler::Get()->Clear();
+      
+      // Reset Statistics each frame
+      RendererStatistics::Get().ResetEachFrame();
+    }
+
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                           Ending Game Loop                               ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -120,7 +150,18 @@ namespace IKan
   
   void Application::ImGuiRender()
   {
-
+    m_imguiLayer->Begin();
+    
+    // Updating all the attached layer
+    for (auto& layer : *(m_layers.get()))
+    {
+      layer->OnImGuiRender();
+    }
+    
+    // Rendering ImGui for Client
+    OnImGuiRender();
+    
+    m_imguiLayer->End();
   }
   
   void Application::PushLayer(const Ref<Layer> &layer)
