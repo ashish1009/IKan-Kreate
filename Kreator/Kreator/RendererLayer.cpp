@@ -6,6 +6,7 @@
 //
 
 #include "RendererLayer.hpp"
+#include "FolderExplorer.hpp"
 
 extern std::string IKanVersion;
 
@@ -138,6 +139,7 @@ namespace Kreator
     // Should be above all scene GUI
     UI_WelcomePopup();
     UI_NewProjectPopup();
+    UI_FolderExplorer();
   }
   
   // UI APIS ---------------------------------------------------------------------------------------------------------
@@ -262,9 +264,9 @@ namespace Kreator
             
             if (button("Open Project", m_folder, "Open an exisiting Kreator Project"))
             {
-//              ImGui::CloseCurrentPopup();
-//              FolderExplorer::OpenPopup(m_allProjectsPath, &m_showWelcomePopup);
-//              m_folderExplorerAction = FolderExplorerAction::OpenProject;
+              ImGui::CloseCurrentPopup();
+              FolderExplorer::OpenPopup("Open Project", m_allProjectsPath, &m_showWelcomePopup);
+              m_folderExplorerAction = FolderExplorerAction::OpenProject;
             }
           }
           
@@ -353,8 +355,8 @@ namespace Kreator
       if (UI::DrawRoundButton("...", Kreator_UI::ColorVec3FromU32(UI::Theme::Color::BackgroundDark), 0))
       {
         ImGui::CloseCurrentPopup();
-//        FolderExplorer::SelectPopup(m_allProjectsPath, &m_showCreateNewProjectPopup);
-//        m_folderExplorerAction = FolderExplorerAction::NewPreoject;
+        FolderExplorer::SelectPopup("Select Project Directory", m_allProjectsPath, &m_showCreateNewProjectPopup);
+        m_folderExplorerAction = FolderExplorerAction::NewPreoject;
       }
       
       // Buttons
@@ -394,6 +396,39 @@ namespace Kreator
     }
   }
 
+  void RendererLayer::UI_FolderExplorer()
+  {
+    // Folder explorer if clicked ... Button
+    auto explorerOutput = FolderExplorer::Explore();
+    if (explorerOutput != "")
+    {
+      switch (m_folderExplorerAction)
+      {
+        case FolderExplorerAction::NewPreoject:
+        {
+          break;
+        }
+        case FolderExplorerAction::OpenProject:
+        {
+          break;
+        }
+        case FolderExplorerAction::SaveScene:
+        {
+          break;
+        }
+        case FolderExplorerAction::OpenScene:
+        {
+          break;
+        }
+          
+        case FolderExplorerAction::None:
+        default:
+          IK_ASSERT(false);
+          break;
+      }
+    }
+  }
+  
   std::filesystem::path RendererLayer::GetClientResorucePath() const
   {
     return m_clientResourcePath;

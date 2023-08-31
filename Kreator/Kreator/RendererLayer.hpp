@@ -54,6 +54,8 @@ namespace Kreator
     void UI_WelcomePopup();
     /// This function shows new project popup
     void UI_NewProjectPopup();
+    /// This function update the folder explorer output
+    void UI_FolderExplorer();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
@@ -72,6 +74,13 @@ namespace Kreator
     std::filesystem::path m_templateProjectDir;
     GUI_InputBuffer<255> m_projectNameBuffer;
     GUI_InputBuffer<512> m_projectFilePathBuffer;
+
+    // Editor Data ---------------------------------------
+    enum class FolderExplorerAction
+    {
+      None, NewPreoject, OpenProject, SaveScene, OpenScene
+    };
+    FolderExplorerAction m_folderExplorerAction;
 
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;

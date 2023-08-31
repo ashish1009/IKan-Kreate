@@ -112,11 +112,18 @@ namespace Kreator
       // Create and Push the Rendere Layer --------------------------------------------------------
       m_rendereLayer = CreateRef<RendererLayer>(userPreference, m_clientResourcePath);
       PushLayer(m_rendereLayer);
+      
+      // Initialize the Kreator Modules -------------------------------------------------------------
+      // Should get initialized after layer initialize
+      FolderExplorer::Initialize();
     }
 
     void OnShutdown() override
     {
       IK_PROFILE();
+
+      // Shutdown the Kreator Modules -------------------------------------------------------------
+      FolderExplorer::Shutdown();
 
       // Destroy and Pop the Rendere Layer --------------------------------------------------------
       PopLayer(m_rendereLayer);

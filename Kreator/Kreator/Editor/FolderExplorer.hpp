@@ -25,16 +25,19 @@ namespace Kreator
     /// - Parameters:
     ///   - lastPopupFlad: Last Popup flag to be opened again
     ///   - basePath: Base Folder Explorer Patg
-    static void SelectPopup(const std::filesystem::path& basePath, bool *lastPopupFlad = nullptr);
+    ///   - title: Title of popeup
+    static void SelectPopup(const std::string& title, const std::filesystem::path& basePath, bool *lastPopupFlad = nullptr);
     /// This function set the popup to show open file widgwet
     /// - Parameters:
     ///   - lastPopupFlad: Last Popup flag to be opened again
     ///   - basePath: Base Folder Explorer Patg
-    static void OpenPopup(const std::filesystem::path& basePath, bool *lastPopupFlad = nullptr );
+    ///   - title: Title of popeup
+    static void OpenPopup(const std::string& title, const std::filesystem::path& basePath, bool *lastPopupFlad = nullptr );
     /// This function set the popup to show save file widgwet
-    /// - Parameter basePath: Base Folder Explorer Patg
+    /// - Parameters:
     ///   - basePath: Base Folder Explorer Patg
-    static void SavePopup(const std::filesystem::path& basePath);
+    ///   - title: Title of popeup
+    static void SavePopup(const std::string& title, const std::filesystem::path& basePath);
     
   private:
     /// This function set the popup to show open file widgwet
