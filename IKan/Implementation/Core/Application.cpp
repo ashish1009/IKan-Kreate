@@ -62,6 +62,10 @@ namespace IKan
   {
     IK_PROFILE();
 
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
+    IK_LOG_INFO("", "                     Shutting down Core Application                       ");
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
+
     // Shutdown the Renderer
     Renderer::Shutdown();
 
