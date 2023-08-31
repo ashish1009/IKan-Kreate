@@ -146,8 +146,6 @@
 		B26B1A962A7D1C2900676419 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A942A7D1C2900676419 /* EditorConsolePanel.hpp */; };
 		B27812732A861C08005C0E7C /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B27812712A861C08005C0E7C /* SceneRenderer.cpp */; };
 		B27812742A861C08005C0E7C /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812722A861C08005C0E7C /* SceneRenderer.hpp */; };
-		B27812912A939B05005C0E7C /* MeshFactory.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B278128F2A939B05005C0E7C /* MeshFactory.cpp */; };
-		B27812922A939B05005C0E7C /* MeshFactory.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812902A939B05005C0E7C /* MeshFactory.hpp */; };
 		B278129A2A94D666005C0E7C /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B27812982A94D666005C0E7C /* Ray.cpp */; };
 		B278129B2A94D666005C0E7C /* Ray.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812992A94D666005C0E7C /* Ray.hpp */; };
 		B27815C12A94FE94005C0E7C /* libPhysics3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B27812BD2A94EF34005C0E7C /* libPhysics3D.a */; };
@@ -375,8 +373,6 @@
 		B26DEF702A838F5300C68ED5 /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
 		B27812712A861C08005C0E7C /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
 		B27812722A861C08005C0E7C /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
-		B278128F2A939B05005C0E7C /* MeshFactory.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MeshFactory.cpp; sourceTree = "<group>"; };
-		B27812902A939B05005C0E7C /* MeshFactory.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MeshFactory.hpp; sourceTree = "<group>"; };
 		B27812982A94D666005C0E7C /* Ray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ray.cpp; sourceTree = "<group>"; };
 		B27812992A94D666005C0E7C /* Ray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ray.hpp; sourceTree = "<group>"; };
 		B27812B82A94EF34005C0E7C /* Physics3D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Physics3D.xcodeproj; path = Physics3D/Physics3D.xcodeproj; sourceTree = "<group>"; };
@@ -504,7 +500,6 @@
 				B23365462A74E6D300BC7B8B /* Renderer2D.hpp */,
 				B23365842A75303E00BC7B8B /* TextRenderer.hpp */,
 				B2CD2AAB2A81269F00B0D70B /* Mesh.hpp */,
-				B27812902A939B05005C0E7C /* MeshFactory.hpp */,
 				B27812722A861C08005C0E7C /* SceneRenderer.hpp */,
 			);
 			path = Renderer;
@@ -520,7 +515,6 @@
 				B23365452A74E6D300BC7B8B /* Renderer2D.cpp */,
 				B23365832A75303E00BC7B8B /* TextRenderer.cpp */,
 				B2CD2AAA2A81269F00B0D70B /* Mesh.cpp */,
-				B278128F2A939B05005C0E7C /* MeshFactory.cpp */,
 				B27812712A861C08005C0E7C /* SceneRenderer.cpp */,
 			);
 			path = Renderer;
@@ -1013,7 +1007,6 @@
 				B26B1A6E2A7D14BE00676419 /* EditorPanel.hpp in Headers */,
 				B2336A652A763D9600BC7B8B /* Project.hpp in Headers */,
 				B23365612A751D6B00BC7B8B /* RenderPass.hpp in Headers */,
-				B27812922A939B05005C0E7C /* MeshFactory.hpp in Headers */,
 				B21048172A72A1BA00FA8CF2 /* CoreWindow.hpp in Headers */,
 				B26B1A962A7D1C2900676419 /* EditorConsolePanel.hpp in Headers */,
 				B23367132A75396800BC7B8B /* ImGuiLayer.hpp in Headers */,
@@ -1169,7 +1162,6 @@
 				B23364EA2A74294400BC7B8B /* StringUtils.cpp in Sources */,
 				B23364C22A72D1E300BC7B8B /* OpenGLRendererContext.cpp in Sources */,
 				B23364D82A74253900BC7B8B /* RendererAPI.cpp in Sources */,
-				B27812912A939B05005C0E7C /* MeshFactory.cpp in Sources */,
 				B278129A2A94D666005C0E7C /* Ray.cpp in Sources */,
 				B210631C2A7E20D100A28BA0 /* AssetEdtitor.cpp in Sources */,
 				B23365562A7503CA00BC7B8B /* OpenGLFrameBuffer.cpp in Sources */,

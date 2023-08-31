@@ -7,10 +7,3 @@
 
 #include "AssetMetadata.hpp"
 
-namespace IKan
-{
-  bool AssetMetadata::IsValid() const
-  {
-    return handle != 0 and !isMemoryAsset;
-  }
-} // namespace IKan

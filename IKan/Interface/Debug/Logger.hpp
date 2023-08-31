@@ -155,7 +155,7 @@ f(Mesh)
     }
     
     // Static Member Variables ---------------------------------------------------------------------------------------
-    inline static Ref<spdlog::logger> s_coreLogger, s_profilerLogger, s_editorConsoleLogger;
+    inline static Ref<spdlog::logger> s_coreLogger, s_profilerLogger;
     inline static std::map<std::string /* Module Name */, TagDetails> s_tags;
   };
 } // namespace IKan

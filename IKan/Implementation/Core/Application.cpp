@@ -61,10 +61,6 @@ namespace IKan
   Application::~Application()
   {
     IK_PROFILE();
-
-    // Shutdown asset manager and Editors
-    AssetEditorManager::UnregisterAllEditors();
-    AssetManager::Shutdown();
     
     // Reset the window
     m_window.reset();

@@ -17,7 +17,7 @@ namespace Kreator
     return *s_instance;
   }
   
-  RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientResourcePath)
+  RendererLayer::RendererLayer()
   : Layer("Kreator Renderer")
   {
   }
