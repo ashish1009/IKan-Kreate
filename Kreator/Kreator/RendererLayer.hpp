@@ -11,6 +11,45 @@
 
 namespace Kreator
 {
+  template <uint32_t SIZE>
+  class GUI_InputBuffer
+  {
+  public:
+    GUI_InputBuffer()
+    {
+      m_buffer = iknew char[SIZE];
+    }
+    
+    ~GUI_InputBuffer()
+    {
+      ikdelete m_buffer;
+    }
+    
+    void Memset(char data)
+    {
+      memset(m_buffer, data, SIZE);
+    }
+    
+    char* Data()
+    {
+      return m_buffer;
+    }
+    
+    operator std::string()
+    {
+      return static_cast<std::string>(m_buffer);
+    }
+    
+    constexpr uint32_t Size() const
+    {
+      return SIZE;
+    }
+    
+  private:
+    char* m_buffer = nullptr;
+  };
+  
+
   class RendererLayer : public Layer
   {
   public:
@@ -52,6 +91,8 @@ namespace Kreator
     // UI API --------------------------------------------
     /// This function shows the Welcome screen
     void UI_WelcomePopup();
+    /// This function shows new project popup
+    void UI_NewProjectPopup();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
@@ -64,9 +105,12 @@ namespace Kreator
     Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
 
     // Project Data --------------------------------------
+    bool m_showCreateNewProjectPopup = false;
     Ref<UserPreferences> m_userPreferences;
     std::filesystem::path m_allProjectsPath;
     std::filesystem::path m_templateProjectDir;
+    GUI_InputBuffer<255> m_projectNameBuffer;
+    GUI_InputBuffer<512> m_projectFilePathBuffer;
 
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;

@@ -14,15 +14,19 @@ namespace Kreator_UI
     IK_LOG_TRACE("Kreator UI", "Setting up the Kreator Dark Theme for GUI");
     
     IKan::UI::Theme::Color::Text                 = IM_COL32(222, 222, 222, 255);
-    IKan::UI::Theme::Color::Titlebar             = IM_COL32(45, 45, 55, 255);
+    IKan::UI::Theme::Color::Titlebar             = IM_COL32(45, 45, 65, 255);
     IKan::UI::Theme::Color::Background           = IM_COL32(28, 28, 33, 255);
+#if Grey
     IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(63, 73, 87, 255);
+#else
+    IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(43, 63, 91, 255);
+#endif
     IKan::UI::Theme::Color::BackgroundDark       = IM_COL32(21, 21, 21, 255);
     IKan::UI::Theme::Color::PropertyField        = IM_COL32(25, 35, 45, 255);
     IKan::UI::Theme::Color::GroupHeader          = IM_COL32(27, 27, 27, 255);
     IKan::UI::Theme::Color::GroupHeaderHovered   = IM_COL32(32, 32, 32, 255);
     IKan::UI::Theme::Color::GroupHeaderActive    = IM_COL32(30, 30, 30, 255);
-    IKan::UI::Theme::Color::TextBrighter         = IM_COL32(210, 210, 210, 255);
+    IKan::UI::Theme::Color::TextBrighter         = IM_COL32(10, 210, 210, 255);
     IKan::UI::Theme::Color::Muted                = IM_COL32(77, 77, 77, 255);
     
     ImVec4* colors = ImGui::GetStyle().Colors;

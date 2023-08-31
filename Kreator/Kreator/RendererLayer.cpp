@@ -133,6 +133,7 @@ namespace Kreator
     
     // Should be above all scene GUI
     UI_WelcomePopup();
+    UI_NewProjectPopup();
   }
   
   // UI APIS ---------------------------------------------------------------------------------------------------------
@@ -148,7 +149,7 @@ namespace Kreator
     ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
     ImGui::SetNextWindowSize(ImVec2{ 1000, 500 });
 
-    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IM_COL32(43, 63, 91, 255));
+    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IKan::UI::Theme::Color::BackgroundPopup);
     UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 15.0f));
     UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, 10);
 
@@ -251,8 +252,8 @@ namespace Kreator
             
             if (button("New Project", m_newProject, "Create New Kreator Project"))
             {
-//              m_showCreateNewProjectPopup = true;
-//              ImGui::CloseCurrentPopup();
+              m_showCreateNewProjectPopup = true;
+              ImGui::CloseCurrentPopup();
             }
             
             if (button("Open Project", m_folder, "Open an exisiting Kreator Project"))
@@ -288,6 +289,103 @@ namespace Kreator
       }
       
       UI::PopID();
+      ImGui::EndPopup();
+    }
+  }
+  
+  void RendererLayer::UI_NewProjectPopup()
+  {
+    UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, 0);
+
+    if (m_showCreateNewProjectPopup)
+    {
+      ImGui::OpenPopup("New Project");
+      m_projectNameBuffer.Memset(0);
+      m_showCreateNewProjectPopup = false;
+    }
+
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 700, 0 });
+    UI::ScopedStyle windowPadding(ImGuiStyleVar_WindowPadding, ImVec2(20, 20));
+    UI::ScopedStyle itemSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(4, 10));
+
+    if (ImGui::BeginPopupModal("New Project", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove
+                               | ImGuiWindowFlags_NoTitleBar))
+    {
+      // Title of Popupt --------------------------------------------------
+      {
+        UI::ScopedColor muted(ImGuiCol_Text, IM_COL32(155, 155, 155, 255));
+
+        static const std::string title = "New Project";
+        static const auto titleSize = ImGui::CalcTextSize(title.c_str());
+
+        UI::ScopedFont version(Kreator_UI::GetSemiHeaderFont());
+        UI::SetCursorPosY(10);
+        UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 -  titleSize.x / 2);
+        ImGui::Text(title.c_str());
+      }
+      
+      UI::ShiftCursorY(-20);
+      ImGui::SetCursorPosY(ImGui::GetCursorPosY() + 200 / 8);
+      ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 7));
+      
+      ImGui::SetNextItemWidth(-1);
+      ImGui::InputTextWithHint("##new_project_name", "Project Name", m_projectNameBuffer.Data(), m_projectNameBuffer.Size());
+      
+      ImVec2 labelSize = ImGui::CalcTextSize("...", NULL, true);
+      auto& style = ImGui::GetStyle();
+      ImVec2 buttonSize = ImGui::CalcItemSize(ImVec2(0, 0),
+                                              labelSize.x + style.FramePadding.x * 2.0f,
+                                              labelSize.y + style.FramePadding.y * 2.0f);
+
+      ImGui::SetNextItemWidth(680 - style.FramePadding.x * 2.0f - style.ItemInnerSpacing.x - 1 - buttonSize.x);
+      {
+        UI::ScopedColor muted(ImGuiCol_Text, UI::Theme::Color::Muted);
+        ImGui::InputTextWithHint("##new_project_location", "Project Location",
+                                 m_projectFilePathBuffer.Data(), m_projectFilePathBuffer.Size(), ImGuiInputTextFlags_ReadOnly);
+      }
+      ImGui::SameLine();
+      if (UI::DrawRoundButton("...", Kreator_UI::ColorVec3FromU32(UI::Theme::Color::BackgroundDark), 0))
+      {
+        ImGui::CloseCurrentPopup();
+//        FolderExplorer::SelectPopup(m_allProjectsPath, &m_showCreateNewProjectPopup);
+//        m_folderExplorerAction = FolderExplorerAction::NewPreoject;
+      }
+      
+      // Buttons
+      {
+        auto boldFont = Kreator_UI::GetBoldFont();
+        ImGui::PushFont(boldFont);
+        
+        UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 90);
+        if ((UI::DrawRoundButton("Create", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
+            (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+        {
+          std::string fullProjectPath = "";
+          if (strlen(m_projectFilePathBuffer.Data()) > 0)
+          {
+            fullProjectPath = std::string(m_projectFilePathBuffer) + "/" + std::string(m_projectNameBuffer);
+          }
+          
+//          CreateProject(fullProjectPath);
+//          ImGui::CloseCurrentPopup();
+        }
+        
+        ImGui::SameLine();
+        if ((UI::DrawRoundButton("Cancel", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
+            (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+        {
+//          if (!Project::GetActive())
+//          {
+//            m_showWelcomePopup = true;
+//          }
+//          ImGui::CloseCurrentPopup();
+        }
+        ImGui::PopFont();
+      }
+
+      ImGui::PopStyleVar();
       ImGui::EndPopup();
     }
   }
