@@ -59,8 +59,8 @@ namespace IKan
   
   void TextRenderer::Initialize()
   {
+    IK_PROFILE();
     IK_LOG_TRACE(LogModule::TextRenderer, "Initialising the Text Renderer ");
-    IK_LOG_TRACE(LogModule::TextRenderer, "-------------------------------");
     
     s_textData = CreateScope<TextData>();
     
@@ -106,6 +106,7 @@ namespace IKan
   
   void TextRenderer::Shutdown()
   {
+    IK_PROFILE();
     IK_LOG_WARN(LogModule::TextRenderer, "Shutting down the Text Renderer ");
     IK_LOG_WARN(LogModule::TextRenderer, "--------------------------------");
     IK_LOG_WARN(LogModule::TextRenderer, "  Vertex Buffer Used  {0} B",

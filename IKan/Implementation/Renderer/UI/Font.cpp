@@ -17,6 +17,7 @@ namespace IKan
   
   void Font::Initialize()
   {
+    IK_PROFILE();
     // Default Font
     std::string defaultFontFilePath = CoreAssetPath("Fonts/HfMonorita/Regular.ttf");
     s_defaultFont = Font::Create(defaultFontFilePath);
@@ -24,6 +25,7 @@ namespace IKan
   
   void Font::Shutdown()
   {
+    IK_PROFILE();
     s_defaultFont.reset();
   }
   

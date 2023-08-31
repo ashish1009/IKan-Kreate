@@ -36,6 +36,7 @@ namespace IKan
   
   void Shader::ResetLibrary()
   {
+    IK_PROFILE();
     for (auto it = s_shaders.begin(); it != s_shaders.end(); it++)
     {
       it->second.reset();

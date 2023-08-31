@@ -81,6 +81,7 @@ namespace IKan
   
   void Image::ResetLibrary()
   {
+    IK_PROFILE();
     for (auto it = s_textureLibrary.begin(); it != s_textureLibrary.end(); it++)
     {
       IK_LOG_DEBUG(LogModule::Texture, "Removing Texture '{0}' from Texture Library",
