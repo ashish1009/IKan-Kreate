@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "UserPreference.hpp"
+
 namespace Kreator
 {
   class RendererLayer : public Layer

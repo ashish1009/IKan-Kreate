@@ -8,7 +8,7 @@
 #include <yaml-cpp/yaml.h>
 #include "UserPreference.hpp"
 
-namespace IKan
+namespace Kreator
 {
   UserPreferencesSerializer::UserPreferencesSerializer(const Ref<UserPreferences>& preferences)
   : m_preferences(preferences)
@@ -24,7 +24,8 @@ namespace IKan
     {
       out << YAML::BeginMap;
       out << YAML::Key << "ShowWelcomeScreen" << YAML::Value << m_preferences->showWelcomeScreen;
-      
+      out << YAML::Key << "Theme" << YAML::Value << (uint32_t)m_preferences->theme;
+
       if (!m_preferences->startupProject.empty())
       {
         out << YAML::Key << "StartupProject" << YAML::Value << m_preferences->startupProject;
@@ -71,6 +72,7 @@ namespace IKan
     
     YAML::Node rootNode = data["UserPrefs"];
     m_preferences->showWelcomeScreen = rootNode["ShowWelcomeScreen"].as<bool>();
+    m_preferences->theme = static_cast<UserPreferences::Theme>(rootNode["Theme"].as<uint32_t>());
     m_preferences->startupProject = rootNode["StartupProject"] ? rootNode["StartupProject"].as<std::string>() : "";
     
     for (auto recentProject : rootNode["RecentProjects"])
@@ -88,4 +90,4 @@ namespace IKan
     
     IK_LOG_TRACE(LogModule::UserPreference, "Using the User preference Settings from {0}", Utils::FileSystem::IKanAbsolute(m_preferences->filePath));
   }
-} // namespace IKan
+} // namespace Kreator

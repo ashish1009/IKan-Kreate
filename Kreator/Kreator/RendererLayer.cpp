@@ -51,7 +51,8 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
     
-    // Decorate the Theme
+    // Decorate the Theme ------------------------------------------------------------------------------------------
+    // Set all the required Fonts
     UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
     UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
     UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
@@ -59,6 +60,18 @@ namespace Kreator
     UI::Font hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
     UI::Font semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
     UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
+    
+    // Set the Theme of ImGui as user preference
+    switch (m_userPreferences->theme)
+    {
+      case UserPreferences::Theme::KreatorDark:
+        Kreator_UI::SetDarkTheme();
+        break;
+        
+      default:
+      case UserPreferences::Theme::Default:
+        break;
+    }
   }
   
   void RendererLayer::OnDetach()

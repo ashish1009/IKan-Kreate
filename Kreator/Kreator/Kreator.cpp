@@ -11,6 +11,7 @@
 #include "Widget.hpp"
 #include "ApplicationSettings.hpp"
 #include "SceneHierarchyPanel.hpp"
+#include "UserPreference.hpp"
 
 namespace Kreator
 {  
@@ -66,6 +67,8 @@ namespace Kreator
       
       // User Preferences --------------------------------------------------------------------------
       Ref<UserPreferences> userPreference =  CreateRef<UserPreferences>();
+      userPreference->theme = UserPreferences::Theme::KreatorDark;
+      
       UserPreferencesSerializer serializer(userPreference);
       std::filesystem::path userPreferenceFile = persistenceStoragePath / "UserPreferences.yaml";
       if (!Utils::FileSystem::Exists(userPreferenceFile))

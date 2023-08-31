@@ -7,7 +7,7 @@
 
 #pragma once
 
-namespace IKan
+namespace Kreator
 {
   /// This structure stores the recent project data
   struct RecentProject
@@ -21,10 +21,15 @@ namespace IKan
   struct UserPreferences
   {
     bool showWelcomeScreen = true;
+    enum class Theme
+    {
+      Default, KreatorDark
+    };
+    Theme theme = Theme::Default;
+
     std::string startupProject;
     std::map<time_t, RecentProject, std::greater<time_t>> recentProjects;
     
-    // Theme ...
     // .....
     // Some Settings ?
     
@@ -52,4 +57,4 @@ namespace IKan
   private:
     Ref<UserPreferences> m_preferences;
   };
-} // namespace IKan
+} // namespace Kreator
