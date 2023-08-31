@@ -142,6 +142,53 @@ namespace Kreator
     UI_FolderExplorer();
   }
   
+  void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
+  {
+    IK_LOG_TRACE("Kreator Layer", "Creating Project at {0} ", projectDir.string().c_str());
+
+  }
+  
+  void RendererLayer::OpenProject(const std::string &filepath)
+  {
+    IK_LOG_TRACE("Kreator Layer", "Opening Project {0}", filepath.c_str());
+  }
+  
+  void RendererLayer::PushProjectToRecentProjects(std::filesystem::path projectFile)
+  {
+    RecentProject projectEntry;
+    projectEntry.name = Utils::String::RemoveExtension(projectFile.filename().string());
+    projectEntry.filePath = projectFile;
+    projectEntry.lastOpened = time(NULL);
+    
+    for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+    {
+      if (it->second.name == projectEntry.name)
+      {
+        m_userPreferences->recentProjects.erase(it);
+        break;
+      }
+    }
+    
+    m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+    UserPreferencesSerializer serializer(m_userPreferences);
+    serializer.Serialize(m_userPreferences->filePath);
+  }
+  
+  void RendererLayer::OpenProject()
+  {
+    SaveProject();
+  }
+  
+  void RendererLayer::CloseProject(bool unloadProject)
+  {
+
+  }
+  
+  void RendererLayer::SaveProject()
+  {
+
+  }
+  
   // UI APIS ---------------------------------------------------------------------------------------------------------
   void RendererLayer::UI_WelcomePopup()
   {
@@ -374,8 +421,8 @@ namespace Kreator
             fullProjectPath = std::string(m_projectFilePathBuffer) + "/" + std::string(m_projectNameBuffer);
           }
           
-//          CreateProject(fullProjectPath);
-//          ImGui::CloseCurrentPopup();
+          CreateProject(fullProjectPath);
+          ImGui::CloseCurrentPopup();
         }
         
         ImGui::SameLine();

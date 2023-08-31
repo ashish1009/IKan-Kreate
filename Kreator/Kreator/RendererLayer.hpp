@@ -49,6 +49,24 @@ namespace Kreator
     
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
+    // Project API ---------------------------------------
+    /// This function Creates new project
+    /// - Parameter projectPath: Project File path
+    void CreateProject(const std::filesystem::path& projectPath);
+    /// This function Closed the current active project
+    /// - Parameter unloadProject: flag to unload the project
+    void CloseProject(bool unloadProject = true);
+    /// This function saves the Project
+    void SaveProject();
+    /// This function opens the Project from file path
+    /// - Parameter filepath: project file path
+    void OpenProject(const std::string& filepath);
+    /// This function Opens the project from popup
+    void OpenProject();
+    /// This funciton push the current project to recent project
+    /// - Parameter projectPath: Project to be pushed
+    void PushProjectToRecentProjects(std::filesystem::path projectPath);
+
     // UI API --------------------------------------------
     /// This function shows the Welcome screen
     void UI_WelcomePopup();
