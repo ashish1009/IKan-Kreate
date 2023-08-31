@@ -23,7 +23,7 @@ void InitializeEngine(const std::string logDirectoryPath)
   // Initialize the Memory Allocator
   IKan::Allocator::Initialize();
   
-  IK_LOG_INFO(IKan::LogModule::IKan, "Initialized the Engine");
+  IK_LOG_TRACE(IKan::LogModule::IKan, "Initialized the Engine");
 }
 
 void ShutdownEngine()

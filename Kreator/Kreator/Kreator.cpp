@@ -41,7 +41,8 @@ namespace Kreator
     void OnInit() override
     {
       IK_PROFILE();
-      
+      IK_LOG_TRACE("Kreator App", "  Kreator Resources Path     : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
+
       // Create Persistance Directory ---------------------------------------------------------------
 #ifdef DEBUG
       std::filesystem::path persistenceStoragePath = m_clientResourcePath / "../PersistenceStorage";
@@ -52,7 +53,8 @@ namespace Kreator
       {
         Utils::FileSystem::CreateDirectory(persistenceStoragePath);
       }
-      
+      IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath));
+
       // Create projects Directory ------------------------------------------------------------------
 #ifdef DEBUG
       std::filesystem::path projectDir = m_clientResourcePath / "../Projects";
@@ -63,8 +65,21 @@ namespace Kreator
       {
         Utils::FileSystem::CreateDirectory(projectDir);
       }
+      
+      // User Preferences --------------------------------------------------------------------------
+      Ref<UserPreferences> userPreference =  CreateRef<UserPreferences>();
+      UserPreferencesSerializer serializer(userPreference);
+      std::filesystem::path userPreferenceFile = persistenceStoragePath / "UserPreferences.yaml";
+      if (!Utils::FileSystem::Exists(userPreferenceFile))
+      {
+        serializer.Serialize(userPreferenceFile);
+      }
+      else
+      {
+        serializer.Deserialize(userPreferenceFile);
+      }
     }
-    
+
     void OnShutdown() override
     {
       IK_PROFILE();
