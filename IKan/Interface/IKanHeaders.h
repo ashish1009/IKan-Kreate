@@ -108,6 +108,7 @@
 #include <UI/ImGuiUtils.hpp>
 #include <UI/ImGuiScoped.hpp>
 #include <UI/ImGuiCustom.hpp>
+#include <UI/UI_Buffer.hpp>
 
 #include <Editor/EditorPanel.hpp>
 #include <Editor/PanelManager.hpp>

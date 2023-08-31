@@ -38,6 +38,10 @@ namespace Kreator
     m_allProjectsPath = m_clientResourcePath / "../Projects";
 #endif
 
+    // Save the default project path
+    auto fullAllProjectPath =  Utils::FileSystem::IKanAbsolute(m_allProjectsPath);
+    m_projectFilePathBuffer.MemCpy(fullAllProjectPath.data(), 0, fullAllProjectPath.size());
+
     // Save the template project dir
     m_templateProjectDir = m_clientResourcePath / "TemplateProject";
     

@@ -11,45 +11,6 @@
 
 namespace Kreator
 {
-  template <uint32_t SIZE>
-  class GUI_InputBuffer
-  {
-  public:
-    GUI_InputBuffer()
-    {
-      m_buffer = iknew char[SIZE];
-    }
-    
-    ~GUI_InputBuffer()
-    {
-      ikdelete m_buffer;
-    }
-    
-    void Memset(char data)
-    {
-      memset(m_buffer, data, SIZE);
-    }
-    
-    char* Data()
-    {
-      return m_buffer;
-    }
-    
-    operator std::string()
-    {
-      return static_cast<std::string>(m_buffer);
-    }
-    
-    constexpr uint32_t Size() const
-    {
-      return SIZE;
-    }
-    
-  private:
-    char* m_buffer = nullptr;
-  };
-  
-
   class RendererLayer : public Layer
   {
   public:
