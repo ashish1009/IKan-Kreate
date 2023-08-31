@@ -17,30 +17,38 @@ namespace Kreator
     return *s_instance;
   }
   
-  RendererLayer::RendererLayer()
-  : Layer("Kreator Renderer")
+  RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientResourcePath)
+  : Layer("Kreator Renderer"), m_userPreferences(userPreference), m_clientResourcePath(clientResourcePath)
   {
+    IK_PROFILE();
+    IK_ASSERT(!s_instance, "RendererLayer instance already created");
+    // Copy the single instance of application
+    s_instance = this;
+    
+    IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
   }
   
   RendererLayer::~RendererLayer()
   {
-
+    IK_PROFILE();
+    IK_LOG_WARN("Kreator Layer", "Destroying Kreator Renderer Layer instance");
   }
   
   void RendererLayer::OnAttach()
   {
-
+    IK_PROFILE();
+    IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
   }
   
   void RendererLayer::OnDetach()
   {
-
+    IK_PROFILE();
+    IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
   }
   
   void RendererLayer::OnUpdate(TimeStep ts)
   {
 
-    
   }
   
   void RendererLayer::OnEvent(Event& event)

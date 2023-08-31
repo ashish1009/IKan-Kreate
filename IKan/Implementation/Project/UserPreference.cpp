@@ -53,10 +53,7 @@ namespace IKan
     
     m_preferences->filePath = filepath.string();
     
-    IK_LOG_TRACE(LogModule::UserPreference, "Saving the Default User preference in file");
-    IK_LOG_TRACE(LogModule::UserPreference, "  File                     | {0}", Utils::FileSystem::IKanAbsolute(m_preferences->filePath));
-    IK_LOG_TRACE(LogModule::UserPreference, "  Show Welcome Screen      | {0}", m_preferences->showWelcomeScreen);
-    IK_LOG_TRACE(LogModule::UserPreference, "  Startup Project          | {0}", m_preferences->startupProject);
+    IK_LOG_TRACE(LogModule::UserPreference, "Saving the Default User preference in file {0}", Utils::FileSystem::IKanAbsolute(m_preferences->filePath));
   }
   
   void UserPreferencesSerializer::Deserialize(const std::filesystem::path& filepath)
@@ -89,9 +86,6 @@ namespace IKan
     
     m_preferences->filePath = filepath.string();
     
-    IK_LOG_TRACE(LogModule::UserPreference, "Using the User preference Settings");
-    IK_LOG_TRACE(LogModule::UserPreference, "  File                     | {0}", Utils::FileSystem::IKanAbsolute(m_preferences->filePath));
-    IK_LOG_TRACE(LogModule::UserPreference, "  Show Welcome Screen      | {0}", m_preferences->showWelcomeScreen);
-    IK_LOG_TRACE(LogModule::UserPreference, "  Startup Project          | {0}", m_preferences->startupProject);
+    IK_LOG_TRACE(LogModule::UserPreference, "Using the User preference Settings from {0}", Utils::FileSystem::IKanAbsolute(m_preferences->filePath));
   }
 } // namespace IKan

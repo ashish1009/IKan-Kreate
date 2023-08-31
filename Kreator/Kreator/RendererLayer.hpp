@@ -13,7 +13,10 @@ namespace Kreator
   {
   public:
     /// This is Renderer Layer's Default Constructor
-    RendererLayer();
+    /// - Parameters:
+    ///   - userPreferences: User preference
+    ///   - clientResourcePath: Client resource path
+    RendererLayer(Ref<UserPreferences> userPreferences, const std::filesystem::path& clientResourcePath);
     /// Default Destructor
     virtual ~RendererLayer();
     
@@ -44,6 +47,8 @@ namespace Kreator
     
   private:
     // Member Variables ----------------------------------------------------------------------------------------------
+    // Project Data --------------------------------------
+    Ref<UserPreferences> m_userPreferences;
 
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;

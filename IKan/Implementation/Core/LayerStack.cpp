@@ -28,11 +28,12 @@ namespace IKan
     {
       return;
     }
-    IK_LOG_TRACE(LogModule::LayerStack, "Pushing the {0} Layer in the stack at position {1}. Total Layers added {2}",
-                  layer->GetName().c_str(), m_layerInsertIndex, ++m_totalLayers);
-    
-    m_layers.emplace(m_layers.begin() + m_layerInsertIndex, layer);
     m_layerInsertIndex++;
+    IK_LOG_TRACE(LogModule::LayerStack, "Pushing the {0} Layer in the stack at position {1}. Total Layers added {2}",
+                 layer->GetName().c_str(), m_layerInsertIndex, m_totalLayers);
+
+    m_layers.emplace(m_layers.begin() + m_layerInsertIndex, layer);
+    m_totalLayers++;
     layer->OnAttach();
   }
   
@@ -44,10 +45,11 @@ namespace IKan
       layer->OnDetach();
       m_layers.erase(it);
       m_layerInsertIndex--;
+      m_totalLayers--;
     }
     
     IK_LOG_WARN(LogModule::LayerStack, "Poping the {0} Layer in the stack from the index {1}. Total Layers left {2}",
-                 layer->GetName().c_str(), m_layerInsertIndex, --m_totalLayers);
+                 layer->GetName().c_str(), m_layerInsertIndex, m_totalLayers);
   }
   
   void LayerStack::PushOverlay(const Ref<Layer>& layer)
@@ -56,12 +58,12 @@ namespace IKan
     {
       return;
     }
-    
+    m_totalLayers++;
     IK_LOG_TRACE(LogModule::LayerStack, "Pushing the {0} Layer in the stack at the end. Total Layers added {1}",
-                  layer->GetName().c_str(), ++m_totalLayers);
-    
+                 layer->GetName().c_str(), m_totalLayers);
+
     m_layers.emplace_back(layer);
-    layer->OnAttach();
+    layer->OnAttach();    
   }
   
   void LayerStack::PopOverlay(const Ref<Layer>& layer)
@@ -71,6 +73,7 @@ namespace IKan
     {
       layer->OnDetach();
       m_layers.erase(it);
+      m_totalLayers--;
     }
     
     IK_LOG_WARN(LogModule::LayerStack, "Poping the {0} Layer in the stack from the end. Total Layers left {1}",

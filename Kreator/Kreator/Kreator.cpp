@@ -17,8 +17,8 @@ namespace Kreator
   class KreatorApp : public Application
   {
   public:
-    KreatorApp(const Application::Specification& appSpec, const std::string& clientResourcePath, const std::string& startProject)
-    : Application(appSpec), m_clientResourcePath(clientResourcePath)
+    KreatorApp(const Application::Specification& appSpec, const std::string& clientResourcePath, const std::string& startupProject)
+    : Application(appSpec), m_clientResourcePath(clientResourcePath), m_startupProjectPath(startupProject)
     {
       IK_PROFILE();
       IK_LOG_TRACE("Kreator App", "Creating Kreator Application");
@@ -41,7 +41,6 @@ namespace Kreator
     void OnInit() override
     {
       IK_PROFILE();
-      IK_LOG_TRACE("Kreator App", "  Kreator Resources Path     : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
 
       // Create Persistance Directory ---------------------------------------------------------------
 #ifdef DEBUG
@@ -53,7 +52,6 @@ namespace Kreator
       {
         Utils::FileSystem::CreateDirectory(persistenceStoragePath);
       }
-      IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath));
 
       // Create projects Directory ------------------------------------------------------------------
 #ifdef DEBUG
@@ -78,16 +76,54 @@ namespace Kreator
       {
         serializer.Deserialize(userPreferenceFile);
       }
+      
+      // Project -----------------------------------------------------------------------------------
+      // Update the project Path
+      if (m_startupProjectPath.empty())
+      {
+        if (userPreference->startupProject.empty())
+        {
+          // DO Nothing it will popup the welcome screen
+        }
+        else
+        {
+          // DO Nothing it will Open the Project in Renderer Layer
+        }
+      }
+      else
+      {
+        if (Utils::FileSystem::Exists(m_startupProjectPath))
+        {
+          userPreference->startupProject = m_startupProjectPath;
+          serializer.Serialize(userPreferenceFile);
+        }
+      }
+
+      IK_LOG_TRACE("Kreator App", "  Kreator Resources Path     : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
+      IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath));
+      if (userPreference->startupProject != "")
+      {
+        IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", IKan::Utils::FileSystem::IKanAbsolute(userPreference->startupProject));
+      }
+      
+      // Create and Push the Rendere Layer --------------------------------------------------------
+      m_rendereLayer = CreateRef<RendererLayer>(userPreference, m_clientResourcePath);
+      PushLayer(m_rendereLayer);
     }
 
     void OnShutdown() override
     {
       IK_PROFILE();
 
+      // Destroy and Pop the Rendere Layer --------------------------------------------------------
+      PopLayer(m_rendereLayer);
+      m_rendereLayer.reset();
     }
     
   private:
+    Ref<Layer> m_rendereLayer;
     std::filesystem::path m_clientResourcePath;
+    std::filesystem::path m_startupProjectPath;
   };
 } // namespace Kreator
 
