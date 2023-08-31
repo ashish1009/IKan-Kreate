@@ -180,6 +180,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
  ------------------------------------------------------------------------------------------------------------------
 
 ## TODO  
+- Grid
 - Sub texture in quad component
 - Script Integration
 - Light

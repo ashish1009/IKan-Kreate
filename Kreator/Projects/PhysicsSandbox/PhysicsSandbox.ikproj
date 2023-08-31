@@ -1,9 +1,0 @@
-Project:
-  Name: PhysicsSandbox
-  AssetDirectory: Assets
-  MeshDirectory: Assets/Meshes
-  MeshSourceDirectory: Assets/Meshes/Source
-  AssetRegistry: Assets/AssetRegistry.ikr
-  StartScene: Scenes/Scene1.ikscene
-  AutoSave: false
-  AutoSaveInterval: 300

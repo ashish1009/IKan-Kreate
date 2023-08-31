@@ -21,16 +21,7 @@ namespace Kreator
     : Application(appSpec), m_userPreference(CreateRef<UserPreferences>()), m_projectPath(startProject)
     {
       IK_LOG_TRACE("Kreator App", "Creating Kreator Application");
-      
-      // Check Client Path is valid
-      IK_LOG_TRACE("Kreator App", "Setting Client Resources Directory {0}", Utils::FileSystem::IKanAbsolute(clientResourcePath));
-      bool exist = Utils::FileSystem::Exists(clientResourcePath);
-      bool tempalateProj = Utils::FileSystem::Exists(clientResourcePath + "/TemplateProject");
-      bool fonts = Utils::FileSystem::Exists(clientResourcePath + "/Fonts");
-      bool textures = Utils::FileSystem::Exists(clientResourcePath + "/Textures");
-      IK_ASSERT(exist and tempalateProj and fonts and textures, "Invalid Client Directory");
-      m_clientResourcePath = clientResourcePath;
-   }
+    }
     
     ~KreatorApp()
     {
@@ -39,91 +30,12 @@ namespace Kreator
     
     void OnInit() override
     {
-      // Create Persistance Directory ---------------------------------------------------------------
-#ifdef DEBUG
-      m_persistenceStoragePath = m_clientResourcePath / "../PersistenceStorage";
-#else
-      m_persistenceStoragePath = "PersistenceStorage";
-#endif
-      if (!Utils::FileSystem::Exists(m_persistenceStoragePath))
-      {
-        Utils::FileSystem::CreateDirectory(m_persistenceStoragePath);
-      }
 
-      // Create projects Dir
-      std::filesystem::path projectDir = "";
-#ifdef DEBUG
-      projectDir = m_clientResourcePath / "../Projects";
-#else
-      projectDir = "Projects";
-#endif
-      if (!Utils::FileSystem::Exists(projectDir))
-      {
-        Utils::FileSystem::CreateDirectory(projectDir);
-      }
-
-      // User Preferences --------------------------------------------------------------------------
-      {
-        UserPreferencesSerializer serializer(m_userPreference);
-        std::filesystem::path userPreferenceFile = m_persistenceStoragePath / "UserPreferences.yaml";
-        if (!Utils::FileSystem::Exists(userPreferenceFile))
-        {
-          serializer.Serialize(userPreferenceFile);
-        }
-        else
-        {
-          serializer.Deserialize(userPreferenceFile);
-        }
-      
-        // Project -----------------------------------------------------------------------------------
-        // Update the project Path
-        if (m_projectPath.empty())
-        {
-          if (m_userPreference->startupProject.empty())
-          {
-            // DO Nothing it will popup the welcome screen
-          }
-          else
-          {
-            // DO Nothing it will popup the welcome screen
-          }
-        }
-        else
-        {
-          if (Utils::FileSystem::Exists(m_projectPath))
-          {
-            m_userPreference->startupProject = m_projectPath;
-            serializer.Serialize(userPreferenceFile);
-          }
-        }
-      }
-      
-      IK_LOG_TRACE("Kreator App", "  Kreator Resources Path     : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
-      IK_LOG_TRACE("Kreator App", "  Persistance storage Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_persistenceStoragePath));
-      IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_userPreference->startupProject));
-
-      // Create and Push the Rendere Layer --------------------------------------------------------
-      m_rendereLayer = CreateRef<RendererLayer>(m_userPreference, m_clientResourcePath);
-      PushLayer(m_rendereLayer);
-      
-      // Initialize the Kreator Modules -------------------------------------------------------------
-      // Should get initialized after layer initialize
-      FolderExplorer::Initialize();
-      Kreator_UI::Widgets::Initialize();
-      ApplicationSettingsSerializer::Initialize();
-      SceneHierarchyPanel::Initialize();
     }
     
     void OnShutdown() override
     {
-      // Shutdown the Kreator Modules -------------------------------------------------------------
-      SceneHierarchyPanel::Shutdown();
-      Kreator_UI::Widgets::Shutdown();
-      FolderExplorer::Shutdown();
-      
-      // Destroy and Pop the Rendere Layer --------------------------------------------------------
-      PopLayer(m_rendereLayer);
-      m_rendereLayer.reset();
+
     }
     
   private:
@@ -163,11 +75,10 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const std::filesystem::pa
   applicationSpec.windowSpecification.width = 1600;
   applicationSpec.windowSpecification.height = 900;
   applicationSpec.windowSpecification.isFullscreen = false;
-  applicationSpec.windowSpecification.hideTitleBar = true;
+  applicationSpec.windowSpecification.hideTitleBar = false;
 
   applicationSpec.resizable = true;
   applicationSpec.startMaximized = true;
-  
 
-  return IKan::CreateScope<Kreator::KreatorApp>(applicationSpec, clientResourcePath, startupProject);
+  return IKan::CreateScope<IKan::Application>(applicationSpec);
 }

@@ -1,9 +1,0 @@
-Project:
-  Name: MeshSandbox
-  AssetDirectory: Assets
-  MeshDirectory: Assets/Meshes
-  MeshSourceDirectory: Assets/Meshes/Source
-  AssetRegistry: Assets/AssetRegistry.ikr
-  StartScene: Scenes/MeshScene.ikscene
-  AutoSave: true
-  AutoSaveInterval: 300

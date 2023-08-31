@@ -529,7 +529,7 @@ namespace Kreator
   {
     if (m_assetInfo.type == AssetType::Scene)
     {
-      RendererLayer::Get().OpenScene(m_assetInfo.filePath);
+      IK_ASSERT(false);
     }
     else
     {
