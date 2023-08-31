@@ -9,7 +9,9 @@
 
 namespace Kreator
 {
-  
+  // Kretor Resource Path
+#define KreatorResourcePath(path) Utils::FileSystem::Absolute(m_clientResourcePath / path)
+
   RendererLayer* RendererLayer::s_instance = nullptr;
   
   RendererLayer& RendererLayer::Get()
@@ -26,6 +28,16 @@ namespace Kreator
     s_instance = this;
     
     IK_LOG_TRACE("Kreator Layer", "Creating Kreator Renderer Layer instance");
+    
+    // Save All Project Path
+#ifdef DEBUG
+    m_allProjectsPath = m_clientResourcePath / "../Projects";
+#else
+    m_allProjectsPath = m_clientResourcePath / "../Projects";
+#endif
+
+    // Save the template project dir
+    m_templateProjectDir = m_clientResourcePath / "TemplateProject";
   }
   
   RendererLayer::~RendererLayer()
@@ -38,6 +50,15 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
+    
+    // Decorate the Theme
+    UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
+    UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
+    UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
+    UI::Font sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
+    UI::Font hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
+    UI::Font semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
+    UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
   }
   
   void RendererLayer::OnDetach()

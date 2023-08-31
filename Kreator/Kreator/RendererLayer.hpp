@@ -49,6 +49,8 @@ namespace Kreator
     // Member Variables ----------------------------------------------------------------------------------------------
     // Project Data --------------------------------------
     Ref<UserPreferences> m_userPreferences;
+    std::filesystem::path m_allProjectsPath;
+    std::filesystem::path m_templateProjectDir;
 
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;
