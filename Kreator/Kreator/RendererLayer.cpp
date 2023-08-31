@@ -15,6 +15,24 @@ namespace Kreator
   // Kretor Resource Path
 #define KreatorResourcePath(path) Utils::FileSystem::Absolute(m_clientResourcePath / path)
 
+  namespace KreatorUtils
+  {
+    /// This function replace the project name
+    /// - Parameters:
+    ///   - str: Project file content
+    ///   - projectName: New project name
+    static void ReplaceProjectName(std::string& str, const std::string& projectName)
+    {
+      static const char* projectNameToken = "$PROJECT_NAME$";
+      size_t pos = 0;
+      while ((pos = str.find(projectNameToken, pos)) != std::string::npos)
+      {
+        str.replace(pos, strlen(projectNameToken), projectName);
+        pos += strlen(projectNameToken);
+      }
+    }
+  } // namespace Utils
+
   RendererLayer* RendererLayer::s_instance = nullptr;
   
   RendererLayer& RendererLayer::Get()
@@ -146,11 +164,67 @@ namespace Kreator
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Project at {0} ", projectDir.string().c_str());
 
+    // Close the current Project
+    if (Project::GetActive())
+    {
+      CloseProject();
+    }
+
+    // Copy the template files
+    Utils::FileSystem::Copy(m_templateProjectDir, projectDir);
+
+    // Open Template Project file
+    std::ifstream stream(projectDir / "TemplateProject.ikproj");
+    std::stringstream ss;
+    ss << stream.rdbuf();
+    stream.close();
+    
+    // Rename the Project name in file
+    std::string str = ss.str();
+    KreatorUtils::ReplaceProjectName(str, m_projectNameBuffer);
+    
+    // Open Projecy file again
+    std::ofstream ostream(projectDir / "TemplateProject.ikproj");
+    ostream << str;
+    ostream.close();
+    
+    // Rename the file name
+    std::string newProjectFileName = std::string(m_projectNameBuffer) + ProjectExtension;
+    Utils::FileSystem::Rename(projectDir / "TemplateProject.ikproj", projectDir / newProjectFileName);
+    
+    // Create Required Direcotries
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Textures");
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Fonts");
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Scenes");
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Meshes" / "Source");
+    
+    auto projectFile = projectDir.string() + "/" + std::string(m_projectNameBuffer) + ProjectExtension;
+    OpenProject(projectFile);
   }
   
   void RendererLayer::OpenProject(const std::string &filepath)
   {
     IK_LOG_TRACE("Kreator Layer", "Opening Project {0}", filepath.c_str());
+    
+    // Check if File exists
+    if (!Utils::FileSystem::Exists(filepath))
+    {
+      IK_LOG_ERROR("Kreator Layer", "Tried to open a project that doesn't exist. Project path: {0}", filepath);
+      
+      // TODO: Remove Assert after testing. may be this will never hit just precaution check
+      IK_ASSERT(false);
+    }
+    
+    // Close the current Project
+    if (Project::GetActive())
+    {
+      CloseProject();
+    }
+
+    // Create new project fill the config with file data
+    Ref<Project> project = CreateRef<Project>();
+    ProjectSerializer serializer(project);
+    serializer.Deserialize(filepath);
   }
   
   void RendererLayer::PushProjectToRecentProjects(std::filesystem::path projectFile)
