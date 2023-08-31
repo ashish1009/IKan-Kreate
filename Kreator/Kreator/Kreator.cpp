@@ -47,5 +47,7 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const std::filesystem::pa
 {
   // Set up all the applicaiton specification
   IKan::Application::Specification applicationSpec;
+  applicationSpec.renderingApi = Renderer::Api::OpenGl;
+  applicationSpec.engineResourcesPath = "../../../IKan/Assets";
   return IKan::CreateScope<IKan::Application>(applicationSpec);
 }

@@ -162,12 +162,23 @@ f(Mesh)
 
 #ifdef IK_ENABLE_LOG
 
+#if 0
 #define IK_CONSOLE_TRACE(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Trace, tag, __VA_ARGS__)
 #define IK_CONSOLE_DEBUG(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Debug, tag, __VA_ARGS__)
 #define IK_CONSOLE_INFO(tag, ...)     ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Info, tag, __VA_ARGS__)
 #define IK_CONSOLE_WARN(tag, ...)     ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Warning, tag, __VA_ARGS__)
 #define IK_CONSOLE_ERROR(tag, ...)    ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Error, tag, __VA_ARGS__)
 #define IK_CONSOLE_CRITICAL(tag, ...) ::IKan::Log::PrintMessage(::IKan::Log::Type::Editor, ::IKan::Log::Level::Critical, tag, __VA_ARGS__)
+
+#else
+#define IK_CONSOLE_TRACE(tag, ...)    
+#define IK_CONSOLE_DEBUG(tag, ...)    
+#define IK_CONSOLE_INFO(tag, ...)     
+#define IK_CONSOLE_WARN(tag, ...)     
+#define IK_CONSOLE_ERROR(tag, ...)    
+#define IK_CONSOLE_CRITICAL(tag, ...) 
+
+#endif
 
 #define IK_LOG_TRACE(tag, ...)  \
 ::IKan::Log::PrintMessage(::IKan::Log::Type::Core, ::IKan::Log::Level::Trace, tag, __VA_ARGS__); \
