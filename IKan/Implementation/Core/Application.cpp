@@ -24,35 +24,6 @@ namespace IKan
 
     IK_LOG_TRACE(LogModule::Application, "Creating Core Application Instance : {0}", m_specificaion.name);
     
-    // Create Renderer Instance before any GLFW or Renderer Context
-    // NOTE: Creating the Renderer Data Memory in very begining as this will setup the Renderer API to be used to
-    //       create any Renderer Implementation
-    Renderer::CreateRendererData(m_specificaion.renderingApi);
-
-    // Update the core engine directory path
-    CoreResourcesPath::SetPath(m_specificaion.engineResourcesPath);
-
-    // Create the window
-    m_window = Window::Create(m_specificaion.windowSpecification);
-    
-    // Set the application callback to window
-    m_window->SetEventFunction(IK_BIND_EVENT_FN(Application::HandleEvents));
-    
-    // Control Window
-    m_window->SetResizable(m_specificaion.resizable);
-    if (m_specificaion.startMaximized)
-    {
-      m_window->Maximize();
-    }
-
-    // Initialize the ImGui Layer if GUI is enabled
-    m_imguiLayer = CreateRef<UI::ImGuiLayer>(m_window);
-    m_layers->PushOverlay(m_imguiLayer);
-    m_imguiLayer->SetIniFilePath(m_specificaion.iniPath);
-
-    // Initialize the Core Renderer
-    Renderer::Initialize();
-    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialized                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -61,12 +32,6 @@ namespace IKan
   Application::~Application()
   {
     IK_PROFILE();
-    
-    // Reset the window
-    m_window.reset();
-
-    // Shutdown the Renderer
-    Renderer::Shutdown();
 
     IK_LOG_WARN(LogModule::Application, "Destroying Core Application Instance : {0}", m_specificaion.name);
   }
@@ -82,34 +47,7 @@ namespace IKan
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                          Starting Game Loop                              ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
-    
-    while (m_isRunning)
-    {
-      // Update the window swap buffers
-      m_window->Update();
-
-      // Store the frame time difference
-      m_timeStep = m_window->GetTimestep();
-
-      // Updating all the attached layer
-      for (auto& layer : *(m_layers.get()))
-      {
-        layer->OnUpdate(m_timeStep);
-      }
-
-      // Update the client application
-      OnUpdate(m_timeStep);
-      
-      // Render the Gui for Application
-      ImGuiRender();
-      
-      // Clear Runtime Performance profiler
-      PerformanceProfiler::Get()->Clear();
-      
-      // Reset Statistics each frame
-      RendererStatistics::Get().ResetEachFrame();
-    }
-    
+        
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                           Ending Game Loop                               ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -150,18 +88,7 @@ namespace IKan
   
   void Application::ImGuiRender()
   {
-    m_imguiLayer->Begin();
-    
-    // Updating all the attached layer
-    for (auto& layer : *(m_layers.get()))
-    {
-      layer->OnImGuiRender();
-    }
 
-    // Rendering ImGui for Client
-    OnImGuiRender();
-
-    m_imguiLayer->End();
   }
   
   void Application::PushLayer(const Ref<Layer> &layer)
