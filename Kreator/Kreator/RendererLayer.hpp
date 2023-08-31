@@ -48,7 +48,21 @@ namespace Kreator
     static RendererLayer& Get();
     
   private:
+    // Member Functions ----------------------------------------------------------------------------------------------
+    // UI API --------------------------------------------
+    /// This function shows the Welcome screen
+    void UI_WelcomePopup();
+
     // Member Variables ----------------------------------------------------------------------------------------------
+    // Popups --------------------------------------------
+    bool m_showWelcomePopup = false;
+
+    // Applicaiton Icons ---------------------------------
+    Ref<Image> m_shadowTexture;
+    Ref<Image> m_newProject, m_folder;
+    Ref<Image> m_applicationIcon, m_welcomeIcon;
+    Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
+
     // Project Data --------------------------------------
     Ref<UserPreferences> m_userPreferences;
     std::filesystem::path m_allProjectsPath;

@@ -7,6 +7,8 @@
 
 #include "RendererLayer.hpp"
 
+extern std::string IKanVersion;
+
 namespace Kreator
 {
   // Kretor Resource Path
@@ -38,7 +40,24 @@ namespace Kreator
 
     // Save the template project dir
     m_templateProjectDir = m_clientResourcePath / "TemplateProject";
-  }
+    
+    // Set the Application Icon
+    m_applicationIcon = Image::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
+    m_welcomeIcon = Image::Create(KreatorResourcePath("Textures/Logo/WelcomeIKan.png"));
+    
+    // Window Icons
+    m_iconClose = Image::Create(KreatorResourcePath("Textures/Icons/Close.png"));
+    m_iconMinimize = Image::Create(KreatorResourcePath("Textures/Icons/Minimize.png"));
+    m_iconMaximize = Image::Create(KreatorResourcePath("Textures/Icons/Maximize.png"));
+    m_iconRestore = Image::Create(KreatorResourcePath("Textures/Icons/Restore.png"));
+    
+    // Shadow Icon
+    m_shadowTexture = Image::Create(KreatorResourcePath("Textures/Icons/ShadowLineTop.png"));
+    
+    // Other Icons
+    m_newProject = Image::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
+    m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
+ }
   
   RendererLayer::~RendererLayer()
   {
@@ -72,6 +91,23 @@ namespace Kreator
       case UserPreferences::Theme::Default:
         break;
     }
+    
+    // Open or Create Project ---------------------------------------------------------------------------------------
+    if (Utils::FileSystem::Exists(m_userPreferences->startupProject))
+    {
+      if (m_userPreferences->showWelcomeScreen)
+      {
+        m_showWelcomePopup = true;
+      }
+      else
+      {
+        IK_ASSERT(false, "Open the Project");
+      }
+    }
+    else
+    {
+      m_showWelcomePopup = true;
+    }
   }
   
   void RendererLayer::OnDetach()
@@ -82,7 +118,8 @@ namespace Kreator
   
   void RendererLayer::OnUpdate(TimeStep ts)
   {
-
+    IK_PERFORMANCE("RendererLayer::OnUpdate");
+    Renderer::Clear({0.1f, 0.1f, 0.14f, 1.0f});
   }
   
   void RendererLayer::OnEvent(Event& event)
@@ -92,7 +129,167 @@ namespace Kreator
   
   void RendererLayer::OnImGuiRender()
   {
+    IK_PERFORMANCE("RendererLayer::OnImGuiRender");
     
+    // Should be above all scene GUI
+    UI_WelcomePopup();
+  }
+  
+  // UI APIS ---------------------------------------------------------------------------------------------------------
+  void RendererLayer::UI_WelcomePopup()
+  {
+    if (m_showWelcomePopup)
+    {
+      ImGui::OpenPopup("Welcome Screen");
+      m_showWelcomePopup = false;
+    }
+    
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 1000, 500 });
+
+    UI::ScopedColor bgCol(ImGuiCol_ChildBg, IM_COL32(43, 63, 91, 255));
+    UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 15.0f));
+    UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, 10);
+
+    if (ImGui::BeginPopupModal("Welcome Screen", nullptr,
+                               ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar
+                               | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoBackground))
+    {
+      ImGuiTableFlags tableFlags = ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV ;
+      UI::PushID();
+
+      if (ImGui::BeginTable(UI::GenerateID(), 2 /* Num Columns */, tableFlags, ImVec2(0.0f, 0.0f)))
+      {
+        const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
+
+        ImGui::TableSetupColumn("##About/New_Project", 0, 650.0f);
+        ImGui::TableSetupColumn("##Recent_Projects", ImGuiTableColumnFlags_WidthStretch);
+        ImGui::TableNextRow();
+
+        // About/New_Project -----------------------------------------------------
+        ImGui::TableSetColumnIndex(0);
+        ImGui::BeginChild("##About/New_Project");
+        {
+          const int32_t logoSize = 200;
+
+          // Draw Kreator Logo -----
+          {
+            const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
+            const ImVec2 logoRectStart =
+            {
+              ImGui::GetItemRectMin().x + (ImGui::GetColumnWidth() / 2 - logoSize / 2),
+              ImGui::GetItemRectMin().y
+            };
+            const ImVec2 logoRectMax =
+            {
+              logoRectStart.x + logoSize,
+              logoRectStart.y + logoSize
+            };
+            auto* drawList = ImGui::GetWindowDrawList();
+            drawList->AddImage(UI::GetTextureID(m_welcomeIcon), logoRectStart, logoRectMax, {0, 0}, {1, 1},
+                               IM_COL32(255, 255, 255, 255));
+          }
+
+          // Welcome Header -------
+          {
+            UI::SetCursorPosY(logoSize + ImGui::GetCurrentWindow()->WindowPadding.y + 10);
+            {
+              UI::ScopedFont header(Kreator_UI::GetHugeHeaderFont());
+              static std::string welcomeText = "Welcome to IKan-Kreate";
+              UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(welcomeText.c_str()).x / 2);
+              ImGui::Text("%s", welcomeText.c_str());
+            }
+            
+            {
+              UI::ScopedFont version(Kreator_UI::GetBoldFont());
+              static std::string versionText = "Version " + IKanVersion;
+              UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(versionText.c_str()).x / 2);
+              ImGui::Text("%s", versionText.c_str());
+            }
+          }
+          ImGui::Separator();
+
+          // Buttons
+          {
+            auto button = [this](const char* title, Ref<Image> icon, const std::string& buttonHelper) {
+              auto textSize = ImGui::CalcTextSize(buttonHelper.c_str()).x;;
+              
+              const float buttonHeight = 40.0f;
+              const float buttonWidth = textSize + buttonHeight + 80;
+              
+              // Minimize Button
+              UI::ShiftCursorX(80);
+              if (ImGui::InvisibleButton(title, ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+              {
+                return true;
+              }
+              
+              const ImVec2 logoRectStart = ImGui::GetItemRectMin();
+              const ImVec2 logoRectMax =
+              {
+                logoRectStart.x + buttonHeight,
+                logoRectStart.y + buttonHeight
+              };
+              
+              const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 0.9f);
+              const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 1.2f);
+              const ImU32 buttonColP = Kreator_UI::Color::TextDarker;
+              UI::DrawButtonImage(icon, buttonColN, buttonColH, buttonColP, ImRect{logoRectStart, logoRectMax});
+              
+              ImGui::SameLine(140);
+              UI::ShiftCursorY(10);
+              {
+                UI::ScopedFont text(Kreator_UI::GetSemiHeaderFont());
+                UI::ScopedColor color(ImGuiCol_Text, IM_COL32(184, 184, 184, 255));
+                
+                ImGui::Text("%s", buttonHelper.c_str());
+              }
+              
+              return false;
+            };
+            
+            if (button("New Project", m_newProject, "Create New Kreator Project"))
+            {
+//              m_showCreateNewProjectPopup = true;
+//              ImGui::CloseCurrentPopup();
+            }
+            
+            if (button("Open Project", m_folder, "Open an exisiting Kreator Project"))
+            {
+//              ImGui::CloseCurrentPopup();
+//              FolderExplorer::OpenPopup(m_allProjectsPath, &m_showWelcomePopup);
+//              m_folderExplorerAction = FolderExplorerAction::OpenProject;
+            }
+          }
+          
+          UI::ShiftCursorY(35);
+          UI::ShiftCursorX(10);
+          bool showAgain = m_userPreferences->showWelcomeScreen;
+          if (ImGui::Checkbox("##showAgain", &showAgain))
+          {
+            m_userPreferences->showWelcomeScreen = showAgain;
+            UserPreferencesSerializer serializer(m_userPreferences);
+            serializer.Serialize(m_userPreferences->filePath);
+          }
+          ImGui::SameLine();
+          ImGui::TextUnformatted("Show this window again when Kreator Launches");
+          
+          // Draw side shadow-----------------------------------------------------------------
+          ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
+          ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
+          UI::DrawShadowInner(m_shadowTexture, 12.0f, windowRect, 1.0f, windowRect.GetHeight() / 4.0f,
+                              false, true, false, false);
+          ImGui::PopClipRect();
+        }
+        ImGui::EndChild(); // About/New_Project
+
+        ImGui::EndTable();
+      }
+      
+      UI::PopID();
+      ImGui::EndPopup();
+    }
   }
 
   std::filesystem::path RendererLayer::GetClientResorucePath() const

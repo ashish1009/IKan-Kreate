@@ -11,6 +11,8 @@ namespace Kreator_UI
 {
   void SetDarkTheme()
   {
+    IK_LOG_TRACE("Kreator UI", "Setting up the Kreator Dark Theme for GUI");
+    
     IKan::UI::Theme::Color::Text                 = IM_COL32(222, 222, 222, 255);
     IKan::UI::Theme::Color::Titlebar             = IM_COL32(45, 45, 55, 255);
     IKan::UI::Theme::Color::Background           = IM_COL32(28, 28, 33, 255);
