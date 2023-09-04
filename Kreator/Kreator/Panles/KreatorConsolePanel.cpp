@@ -35,10 +35,194 @@ namespace Kreator
   
   void KreatorConsolePanel::RenderMenu()
   {
+    ImVec4 infoButtonTint = (m_messageFilters & (int16_t)ConsoleMessage::Category::Info) ? s_infoButtonOnTint : s_noTint;
+    ImVec4 warningButtonTint = (m_messageFilters & (int16_t)ConsoleMessage::Category::Warning) ? s_warningButtonOnTint : s_noTint;
+    ImVec4 errorButtonTint = (m_messageFilters & (int16_t)ConsoleMessage::Category::Error) ? s_errorButtonOnTint : s_noTint;
+    
+    UI::ScopedColor button(ImGuiCol_Button, ImVec4(0, 0, 0, 0));
+    UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, ImVec4(0.3f, 0.3f, 0.3f, 1.0f));
+    UI::ScopedColor buttonActive(ImGuiCol_ButtonActive, ImVec4(0, 0, 0, 0));
+    UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5, 5));
+    UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 20);
+    
+    if (UI::DrawRoundButton("Clear", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 10))
+    {
+      m_messageBufferBegin = 0;
+    }
+    
+    ImGui::SameLine(0.0f, 5.0f);
+    ImGui::TextUnformatted("Clear On Play:");
+    ImGui::SameLine();
+    ImGui::Checkbox("##ClearOnPlay", &m_shouldClearOnPlay);
+    
+    ImGui::SameLine(0.0f, 5.0f);
+    ImGui::TextUnformatted("Collapse:");
+    ImGui::SameLine();
+    ImGui::Checkbox("##CollapseMessages", &m_collapseMessages);
+    
+    ImGui::SameLine();
+    ImGui::SetNextItemWidth(MAX_INPUT_BUFFER_LENGTH);
+    
+    if (Kreator_UI::Widgets::SearchWidget(s_searchFilter.InputBuf, MAX_INPUT_BUFFER_LENGTH, "Filter ..."))
+    {
+      s_searchFilter.Build();
+    }
+    
+    constexpr float buttonOffset = 39;
+    constexpr float rightSideOffset = 15;
+    ImVec2 imageSize = {15.0f, 15.0f};
+    ImGui::SameLine(ImGui::GetWindowWidth() - (buttonOffset * 3) - rightSideOffset);
+    if (UI::ImageButton(m_infoButtonTex, imageSize, ImVec2(0, 0), ImVec2(1, 1), -1, ImVec4(0, 0, 0, 0), infoButtonTint))
+    {
+      m_messageFilters ^= (int16_t)ConsoleMessage::Category::Info;
+    }
+    
+    ImGui::SameLine(ImGui::GetWindowWidth() - (buttonOffset * 2) - rightSideOffset);
+    if (UI::ImageButton(m_warningButtonTex, imageSize, ImVec2(0, 0), ImVec2(1, 1), -1, ImVec4(0, 0, 0, 0), warningButtonTint))
+    {
+      m_messageFilters ^= (int16_t)ConsoleMessage::Category::Warning;
+    }
+    
+    ImGui::SameLine(ImGui::GetWindowWidth() - (buttonOffset * 1) - rightSideOffset);
+    if (UI::ImageButton(m_errorButtonTex, imageSize, ImVec2(0, 0), ImVec2(1, 1), -1, ImVec4(0, 0, 0, 0), errorButtonTint))
+    {
+      m_messageFilters ^= (int16_t)ConsoleMessage::Category::Error;
+    }
   }
   
   void KreatorConsolePanel::RenderConsole()
   {
-
+    UI::ScopedFont logFont(Kreator_UI::GetFixedWidthFont());
+    ImGui::BeginChild("LogMessages");
+    
+    if (m_messageBufferBegin == 0)
+    {
+      m_displayMessageInspector = false;
+      m_selectedMessage = nullptr;
+    }
+    
+    if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) and !m_isMessageInspectorHovered)
+    {
+      m_displayMessageInspector = false;
+      m_selectedMessage = nullptr;
+    }
+    
+    for (uint32_t i = 0; i < m_messageBufferBegin; i++)
+    {
+      const auto& msg = m_messageBuffer[i];
+      // Copying to replace the content ...
+      std::string messageText = msg.GetMessage();
+      
+      // If search result passes
+      if (s_searchFilter.PassFilter(messageText.c_str()))
+      {
+        if (m_messageFilters & (int16_t)msg.GetCategory())
+        {
+          UI::ScopedStyle windowPadding(ImGuiStyleVar_WindowPadding, ImVec2(10, 5));
+          // Alternate color
+          if (i % 2 == 0)
+          {
+            ImGui::PushStyleColor(ImGuiCol_ChildBg, ImVec4(ImVec4(0.20f, 0.20f, 0.20f, 1.0f)));
+          }
+          
+          ImGui::BeginChild(i + 1, ImVec2(0, ImGui::GetFontSize() * 1.75F), false,
+                            ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar
+                            | ImGuiWindowFlags_AlwaysUseWindowPadding);
+          
+          
+          // Selec the message to popout
+          if (ImGui::IsWindowHovered() and ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+          {
+            m_selectedMessage = &m_messageBuffer[i];
+            m_displayMessageInspector = true;
+          }
+          
+          // Right click popup
+          if (ImGui::BeginPopupContextWindow())
+          {
+            if (ImGui::MenuItem("Copy"))
+            {
+              ImGui::SetClipboardText(messageText.c_str());
+            }
+            ImGui::EndPopup();
+          }
+          
+          // Render Icons
+          ImGuiContext& g = *GImGui;
+          auto size = g.FontSize;
+          if (msg.GetCategory() == ConsoleMessage::Category::Info)
+          {
+            UI::Image(m_infoButtonTex, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), s_infoButtonOnTint);
+          }
+          else if (msg.GetCategory() == ConsoleMessage::Category::Warning)
+          {
+            UI::Image(m_warningButtonTex, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), s_warningButtonOnTint);
+          }
+          else if (msg.GetCategory() == ConsoleMessage::Category::Error)
+          {
+            UI::Image(m_errorButtonTex, ImVec2(size, size), ImVec2(0, 0), ImVec2(1, 1), s_errorButtonOnTint);
+          }
+          
+          ImGui::SameLine();
+          // Add ... after 200 characters
+          if (messageText.length() > 200)
+          {
+            size_t spacePos = messageText.find_first_of(' ', 200);
+            if (spacePos != std::string::npos)
+            {
+              messageText.replace(spacePos, messageText.length() - 1, "...");
+            }
+          }
+          // Print Message
+          ImGui::TextUnformatted(messageText.c_str());
+          
+          if (m_collapseMessages and msg.GetCount() > 1)
+          {
+            ImGui::SameLine(ImGui::GetWindowWidth() - 30);
+            ImGui::Text("%d", msg.GetCount());
+          }
+          
+          ImGui::EndChild();
+          
+          // Pop Alternate color
+          if (i % 2 == 0)
+          {
+            ImGui::PopStyleColor();
+          }
+        }
+      }
+    }
+    
+    // Audio-scroll to the bottom when a new message is added
+    if (m_newMessageAdded)
+    {
+      ImGui::SetScrollHereY(1.0f);
+      m_newMessageAdded = false;
+    }
+    
+    if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY() && !m_displayMessageInspector)
+    {
+      ImGui::SetScrollHereY(1.0f);
+    }
+    
+    if (m_displayMessageInspector and m_selectedMessage != nullptr)
+    {
+      ImGui::Begin("Message Inspector");
+      
+      m_isMessageInspectorHovered = ImGui::IsWindowHovered();
+      
+      ImGui::PushTextWrapPos();
+      const auto& msg = m_selectedMessage->GetMessage();
+      ImGui::TextUnformatted(msg.c_str());
+      ImGui::PopTextWrapPos();
+      
+      ImGui::End();
+    }
+    else
+    {
+      m_isMessageInspectorHovered = false;
+    }
+    
+    ImGui::EndChild();
   }
 } // namespace Kreator

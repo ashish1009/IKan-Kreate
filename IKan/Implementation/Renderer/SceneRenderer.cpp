@@ -160,17 +160,7 @@ namespace IKan
   Ref<Texture> SceneRenderer::GetFinalImage()
   {
     // FIXME: (IKan) Use Final Image ID in Render Pass Specificaion. For now by deafult its 0 in all shaders
-    Ref<Texture> finalImage;
-    if (s_commonData)
-    {
-      finalImage = s_commonData->renderPass->GetSpecification().targetFramebuffer->GetColorAttachments().at(0);
-    }
-    else
-    {
-      finalImage = Texture::CreateWhiteTexture(0xff202020);
-    }
-
-    return finalImage;
+    return s_commonData->renderPass->GetSpecification().targetFramebuffer->GetColorAttachments().at(0);
   }
   
   void SceneRenderer::GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData)
