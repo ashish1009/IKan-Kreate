@@ -6,4 +6,3 @@
 //
 
 #include "ProjectSettingPanel.hpp"
-
