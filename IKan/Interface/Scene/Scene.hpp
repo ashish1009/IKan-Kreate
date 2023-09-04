@@ -103,5 +103,7 @@ namespace IKan
     uint32_t m_registryCapacity = 0;
     uint32_t m_numEntities = 0;
     int32_t m_maxEntityID = -1;
+    
+    friend class Entity;
   };
 } // namespace IKan
