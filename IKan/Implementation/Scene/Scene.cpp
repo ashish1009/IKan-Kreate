@@ -6,9 +6,17 @@
 //
 
 #include "Scene.hpp"
+#include "Scene/Component.hpp"
 
 namespace IKan
 {
+  /// This function resize/reserve the registry capcity
+  template<typename... Component>
+  static void ReserveRegistry(ComponentGroup<Component...>, entt::registry& registry, int32_t capacity)
+  {
+    registry.reserve<Component...>(capacity);
+  }
+
   Ref<Scene> Scene::Create(const std::string& name, uint32_t maxEntityCapacity)
   {
     return CreateRef<Scene>(name, maxEntityCapacity);
@@ -20,6 +28,8 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Creating Scene ...");
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
+    IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
+    ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
   }
   
   Scene::~Scene()
@@ -27,6 +37,7 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Scene, "Destroying Scene!!!");
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
+    IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
   }
   
   void Scene::OnUpdateEditor(TimeStep ts)

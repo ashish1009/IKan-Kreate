@@ -97,5 +97,11 @@ namespace IKan
     // Scene Utils ----------------------
     std::string m_name = "";
     uint32_t m_viewportWidth = 0, m_viewportHeight = 0;
+
+    // EnTT -----------------------------
+    entt::registry m_registry;
+    uint32_t m_registryCapacity = 0;
+    uint32_t m_numEntities = 0;
+    int32_t m_maxEntityID = -1;
   };
 } // namespace IKan
