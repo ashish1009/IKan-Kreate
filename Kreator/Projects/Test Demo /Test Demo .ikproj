@@ -1,6 +1,9 @@
 Project:
-  Name: Test Demo 
+  Name: Test Demo
   AssetDirectory: Assets
-  AssetRegistry: Assets/AssetRegistry.ikr
   MeshDirectory: Assets/Meshes
   MeshSourceDirectory: Assets/Meshes/Source
+  AssetRegistry: Assets/AssetRegistry.ikr
+  StartScene: ""
+  AutoSave: false
+  AutoSaveInterval: 300

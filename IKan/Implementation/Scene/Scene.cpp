@@ -520,7 +520,38 @@ namespace IKan
     {
       // Unparent the 'parent' first
       UnparentEntity(parent);
+      
+      // If Current 'entity' already have some parent
+      Entity newParent = TryGetEntityWithUUID(entity.GetParentUUID());
+      if (newParent)
+      {
+        // Unperent current entity
+        UnparentEntity(entity);
+        
+        // Set the 'newParent' as parent of 'parent' which was child of 'entity'
+        ParentEntity(parent, newParent);
+      }
     }
+    else
+    {
+      // Get the previous parent of 'entity'
+      Entity previousParent = TryGetEntityWithUUID(entity.GetParentUUID());
+      
+      // If Current 'entity' already have some parent
+      if (previousParent)
+      {
+        // Unperent current entity
+        UnparentEntity(entity);
+      }
+    }
+    
+    // Update parent UUID of 'entity'
+    entity.SetParentUUID(parent.GetUUID());
+    // Update children of 'parent'
+    parent.Children().push_back(entity.GetUUID());
+    
+    // Update local space of 'entity'
+    ConvertToLocalSpace(entity);
   }
   
   void Scene::UnparentEntity(Entity entity, bool convertToWorldSpace)
