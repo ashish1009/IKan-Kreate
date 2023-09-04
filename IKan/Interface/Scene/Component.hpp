@@ -44,7 +44,20 @@ namespace IKan
     ~TagComponent();
     DEFINE_COPY_MOVE_CONSTRUCTORS(TagComponent);
   };
-
+  
+  struct RelationshipComponent
+  {
+    UUID parentHandle = 0;
+    std::vector<UUID> children;
+    
+    void Copy(const RelationshipComponent& other);
+    
+    RelationshipComponent();
+    RelationshipComponent(UUID parent);
+    ~RelationshipComponent();
+    DEFINE_COPY_MOVE_CONSTRUCTORS(RelationshipComponent);
+  };
+  
   struct TransformComponent
   {
     enum Axis : uint8_t
@@ -222,7 +235,7 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, TagComponent, TransformComponent, CameraComponent, SpriteRendererComponent, \
+  ComponentGroup<IDComponent, TagComponent, TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
   QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent, Box3DColliderComponent, \
   CapsuleColliderComponent>;
 } // namespace IKan

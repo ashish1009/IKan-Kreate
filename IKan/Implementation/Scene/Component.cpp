@@ -182,6 +182,32 @@ return *this; \
     ADD_TRANSFORM(scale)
   }
   
+  // Relation Component ----------------------------------------------------------------------------------------------
+  RelationshipComponent::RelationshipComponent()
+  {
+    COMP_LOG("Creating Relationship Component");
+  }
+  RelationshipComponent::RelationshipComponent(UUID parent)
+  : parentHandle(parent)
+  {
+    COMP_LOG("Creating Relationship Component with parent {}", (uint64_t)parent);
+  }
+  RelationshipComponent::~RelationshipComponent()
+  {
+    COMP_LOG("Destroying Relationship Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(RelationshipComponent);
+  void RelationshipComponent::Copy(const RelationshipComponent &other)
+  {
+    children.clear();
+    
+    parentHandle = other.parentHandle;
+    for (const auto& child : children)
+    {
+      children.push_back(child);
+    }
+  }
+
   // Camera Component -----------------------------------------------------------------------------------------------
   CameraComponent::CameraComponent()
   {
