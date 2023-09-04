@@ -118,6 +118,7 @@ namespace Kreator
       FolderExplorer::Initialize();
       Kreator_UI::Widgets::Initialize();
       ApplicationSettingsSerializer::Initialize();
+      SceneHierarchyPanel::Initialize();
     }
 
     void OnShutdown() override
@@ -125,6 +126,7 @@ namespace Kreator
       IK_PROFILE();
 
       // Shutdown the Kreator Modules -------------------------------------------------------------
+      SceneHierarchyPanel::Shutdown();
       Kreator_UI::Widgets::Shutdown();
       FolderExplorer::Shutdown();
 

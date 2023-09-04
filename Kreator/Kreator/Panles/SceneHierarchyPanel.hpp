@@ -23,5 +23,19 @@ namespace Kreator
     virtual void SetSceneContext(const Ref<Scene>& scene) override;
     /// @see Editor Panel
     virtual void OnImGuiRender(bool& isOpen) override;
+    
+    /// This funciton initialise the scene hierarchy panel
+    static void Initialize();
+    /// This funciton shutdown the scene hierarchy panel
+    static void Shutdown();
+    
+  private:
+    // Member Variable ---------------------------------------------------------------------------------------------
+    Ref<Scene> m_context;
+    bool m_isWindow;
+
+    inline static Ref<Image> s_pencilIcon;
+    inline static Ref<Image> s_plusIcon;
+    inline static Ref<Image> s_gearIcon;
   };
 } // namespace Kreator
