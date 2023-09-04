@@ -16,25 +16,30 @@ namespace IKan
 {
   bool ImageSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
   {
-    IK_ASSERT(false);
+    asset = Image::Create(AssetManager::GetFileSystemPathString(metadata));
+    asset->handle = metadata.handle;
     return true;
   }
   
   bool SceneAssetSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
   {
-    IK_ASSERT(false);
+    asset = Scene::Create();
+    asset->handle = metadata.handle;
     return true;
   }
   
   bool FontSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
   {
-    IK_ASSERT(false);
+    asset = Font::Create(AssetManager::GetFileSystemPathString(metadata));
+    asset->handle = metadata.handle;
     return true;
   }
   
   bool MeshSourceSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
   {
-    IK_ASSERT(false);
+    asset = MeshSource::Create(AssetManager::GetFileSystemPathString(metadata));
+    asset->handle = metadata.handle;
     return true;
-  }  
+  }
+  
 } // namespace IKan
