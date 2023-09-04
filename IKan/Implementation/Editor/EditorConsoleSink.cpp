@@ -39,7 +39,7 @@ namespace IKan
         continue;
       }
       // PUSH Message in Editor Console
-//      EditorConsolePanel::PushMessage(message);
+      EditorConsolePanel::PushMessage(message);
     }
     
     m_messageCount = 0;

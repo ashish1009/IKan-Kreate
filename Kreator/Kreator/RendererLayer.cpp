@@ -7,6 +7,12 @@
 
 #include "RendererLayer.hpp"
 #include "FolderExplorer.hpp"
+#include "KreatorConsolePanel.hpp"
+#include "ProjectSettingPanel.hpp"
+#include "AssetPanel.hpp"
+#include "ContentBrowserPanel.hpp"
+#include "DefaultAssetViewer.hpp"
+#include "SceneHierarchyPanel.hpp"
 
 extern std::string IKanVersion;
 
@@ -14,6 +20,13 @@ namespace Kreator
 {
   // Kretor Resource Path
 #define KreatorResourcePath(path) Utils::FileSystem::Absolute(m_clientResourcePath / path)
+
+  // Panel IDs
+#define CONSOLE_PANEL_ID "EditorConsolePanel"
+#define PROJECT_SETTING_PANEL_ID "ProjectSetting"
+#define ASSET_MANAGER_PANEL_ID "Assets"
+#define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
+#define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
 
   namespace KreatorUtils
   {
@@ -123,6 +136,15 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Attaching Kreator Renderer Layer to application");
     
+    // Adding Panels -----------------------------------------------------------------------------------------------
+    m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Settings", true);
+    m_panels.AddPanel<AssetPanel>(ASSET_MANAGER_PANEL_ID, "Assets", true);
+    m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
+    
+#ifdef DEBUG
+    m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
+#endif
+
     // Decorate the Theme ------------------------------------------------------------------------------------------
     // Set all the required Fonts
     UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
