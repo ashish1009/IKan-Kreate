@@ -812,16 +812,40 @@ if (!Project::GetActive()) return
       m_timeSinceLastSave = 0.0f;
     }
   }
+
   void RendererLayer::OnScenePlay()
   {
     ClearSelectedEntity();
-
+    
+    m_sceneState = SceneState::Play;
+    
+    m_panels.GetPanel<EditorConsolePanel>(CONSOLE_PANEL_ID)->OnScenePlay();
+    
+    m_runtimeScene = CreateRef<Scene>();
+    m_editorScene->CopyTo(m_runtimeScene);
+    
+    m_runtimeScene->OnRuntimeStart();
+    m_currentScene = m_runtimeScene;
+    m_panels.SetSceneContext(m_runtimeScene);
+    
+#ifdef DEBUG
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_runtimeScene);
+#endif
   }
   
   void RendererLayer::OnSceneStop()
   {
     ClearSelectedEntity();
-
+    
+    m_runtimeScene->OnRuntimeStop();
+    m_sceneState = SceneState::Edit;
+    
+    // Unload runtime scene
+    m_runtimeScene = nullptr;
+    
+    m_currentScene = m_editorScene;
+    m_panels.SetSceneContext(m_editorScene);
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_editorScene);
   }
   
   void RendererLayer::OnScenePause()
@@ -837,13 +861,30 @@ if (!Project::GetActive()) return
   void RendererLayer::OnSceneStartSimulation()
   {
     ClearSelectedEntity();
-
+    
+    m_sceneState = SceneState::Simulate;
+    
+    m_simulationScene = CreateRef<Scene>();
+    m_editorScene->CopyTo(m_simulationScene);
+    
+    m_simulationScene->OnSimulationStart();
+    m_currentScene = m_simulationScene;
+    m_panels.SetSceneContext(m_simulationScene);
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_simulationScene);
   }
   
   void RendererLayer::OnSceneStopSimulation()
   {
     ClearSelectedEntity();
-
+    
+    m_simulationScene->OnSimulationStop();
+    m_sceneState = SceneState::Edit;
+    
+    m_simulationScene = nullptr;
+    
+    m_currentScene = m_editorScene;
+    m_panels.SetSceneContext(m_editorScene);
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_editorScene);
   }
 
   void RendererLayer::OnEntitySelected(Entity entity)

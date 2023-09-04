@@ -34,6 +34,19 @@ namespace IKan
     }
   }
 
+  template<typename T>
+  static void CopyComponent(entt::registry& dstRegistry, entt::registry& srcRegistry, const std::unordered_map<UUID, entt::entity>& enttMap)
+  {
+    auto srcEntities = srcRegistry.view<T>();
+    for (auto srcEntity : srcEntities)
+    {
+      entt::entity destEntity = enttMap.at(srcRegistry.get<IDComponent>(srcEntity).ID);
+      
+      auto& srcComponent = srcRegistry.get<T>(srcEntity);
+      [[maybe_unused]] auto& destComponent = dstRegistry.emplace_or_replace<T>(destEntity, srcComponent);
+    }
+  }
+
   Ref<Scene> Scene::Create(const std::string& name, uint32_t maxEntityCapacity)
   {
     return CreateRef<Scene>(name, maxEntityCapacity);
@@ -125,6 +138,15 @@ namespace IKan
     renderer->EndScene();
   }
   
+  void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
+  {
+    renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
+    Render2DEntities();
+    Render3DEntities(renderer);
+    RenderDebugColliders({0, 1, 0, 1});
+    renderer->EndScene();
+  }
+
   void Scene::Render2DEntities()
   {
     // Render All Quad Entities
@@ -197,10 +219,6 @@ namespace IKan
         renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(staticMeshComp.staticMesh), transformComp.Transform());
       }
     } // For each Quad Entity
-  }
-  void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
-  {
-    
   }
   
   void Scene::RenderDebugColliders(const glm::vec4& color)
@@ -374,8 +392,44 @@ namespace IKan
   void Scene::CopyTo(Ref<Scene> &target)
   {
     IK_PROFILE();
+    
+    std::unordered_map<UUID, entt::entity> enttMap;
+    auto idComponents = m_registry.view<IDComponent>();
+    for (auto entity : idComponents)
+    {
+      auto uuid = m_registry.get<IDComponent>(entity).ID;
+      auto name = m_registry.get<TagComponent>(entity).tag;
+      Entity e = target->CreateEntityWithID(uuid, name);
+      enttMap[uuid] = e.m_entityHandle;
+    }
+    
+    CopyComponent<TagComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<TransformComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<CameraComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<QuadComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<CircleComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<TextComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<StaticMeshComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<RigidBodyComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<Box3DColliderComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<SphereColliderComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<CapsuleColliderComponent>(target->m_registry, m_registry, enttMap);
+    
+    // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
+    // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
+    target->m_registry.sort<IDComponent>([&target](const auto lhs, const auto rhs)
+                                         {
+      auto lhsEntity = target->m_entityIDMap.find(lhs.ID);
+      auto rhsEntity = target->m_entityIDMap.find(rhs.ID);
+      return static_cast<uint32_t>(lhsEntity->second) < static_cast<uint32_t>(rhsEntity->second);
+    });
+    
+    target->m_viewportWidth = m_viewportWidth;
+    target->m_viewportHeight = m_viewportHeight;
+    
+    target->m_name = m_name;
   }
-
+  
   void Scene::SetViewportSize(uint32_t width, uint32_t height)
   {
     m_viewportWidth = width;
