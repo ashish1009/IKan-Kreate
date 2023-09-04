@@ -116,6 +116,8 @@ namespace Kreator
       // Initialize the Kreator Modules -------------------------------------------------------------
       // Should get initialized after layer initialize
       FolderExplorer::Initialize();
+      Kreator_UI::Widgets::Initialize();
+      ApplicationSettingsSerializer::Initialize();
     }
 
     void OnShutdown() override
@@ -123,6 +125,7 @@ namespace Kreator
       IK_PROFILE();
 
       // Shutdown the Kreator Modules -------------------------------------------------------------
+      Kreator_UI::Widgets::Shutdown();
       FolderExplorer::Shutdown();
 
       // Destroy and Pop the Rendere Layer --------------------------------------------------------
