@@ -30,11 +30,50 @@ namespace IKan
     /// This is the default destructor of EnTT Scene
     ~Scene();
 
-    /// This function creates the instance of EnTT Scene
+    // Runtime APIs --------------------------------------------------------------------------------------------------
+    /// This functionm updates the scene for editor
+    /// - Parameter ts: time step of 2 frames
+    void OnUpdateEditor(TimeStep ts);
+    /// This functionm updates the scene for runtime
+    /// - Parameter ts: time step of 2 frames
+    void OnUpdateRuntime(TimeStep ts);
+    
+    /// This functionm renders the scene for editor
     /// - Parameters:
-    ///   - name: Name of Scene
-    ///   - maxEntityCapacity: Max Entity capacity to reserve
-    static Ref<Scene> Create(const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
+    ///  - editorCamera: Editor Camera
+    ///  - renderer: Scene renderer cintext
+    void OnRenderEditor(const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer);
+    /// This functionm renders the scene for runtime
+    /// - Parameters:
+    ///  - ts: time step of 2 frames
+    ///  - renderer: Scene renderer cintext
+    void OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer);
+    /// This functionm renders the scene for simulation
+    /// - Parameters:
+    ///  - ts: time step of 2 frames
+    ///  - editorCamera: Editor Camera
+    ///  - renderer: Scene renderer cintext
+    void OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer);
+    
+    // Runtime
+    /// This function handle runtime start
+    void OnRuntimeStart();
+    /// This function handle runtime stop
+    void OnRuntimeStop();
+    
+    /// This function handle simulation start
+    void OnSimulationStart();
+    /// This function handle simulation stop
+    void OnSimulationStop();
+    
+    /// this function copy scene to target
+    /// - Parameter target: target scene
+    void CopyTo(Ref<Scene>& target);
+    /// This function updates the viewport of Scene
+    /// - Parameters:
+    ///   - width: width of view port
+    ///   - height: width of view port
+    void SetViewportSize(uint32_t width, uint32_t height);
 
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
@@ -45,6 +84,12 @@ namespace IKan
     /// This function returns the scene name
     const std::string& GetName() const;
 
+    /// This function creates the instance of EnTT Scene
+    /// - Parameters:
+    ///   - name: Name of Scene
+    ///   - maxEntityCapacity: Max Entity capacity to reserve
+    static Ref<Scene> Create(const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
+    
     ASSET_TYPE(Scene);
     
   private:

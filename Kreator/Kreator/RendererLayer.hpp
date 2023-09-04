@@ -111,6 +111,18 @@ namespace Kreator
     void SaveScene();
     /// This function Saves the scene automatically
     void SaveSceneAuto();
+    /// This function handle scene play
+    void OnScenePlay();
+    /// This function handle scene Stop
+    void OnSceneStop();
+    /// This function handle scene Pause
+    void OnScenePause();
+    /// This function handle scene Resume
+    void OnSceneResume();
+    /// This function handle scene simuation start
+    void OnSceneStartSimulation();
+    /// This function handle scene simuation ends
+    void OnSceneStopSimulation();
 
     // UI API --------------------------------------------
     /// This function Creates main ImGui Window with Docking
@@ -190,6 +202,11 @@ namespace Kreator
     std::string m_sceneFilePath;
     Ref<Scene> m_editorScene, m_currentScene, m_runtimeScene, m_simulationScene;
     Ref<Image> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
+    enum class SceneState
+    {
+      Edit = 0, Play = 1, Pause = 2, Simulate = 3
+    };
+    SceneState m_sceneState = SceneState::Edit;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

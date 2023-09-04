@@ -29,6 +29,60 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
   }
   
+  void Scene::OnUpdateEditor(TimeStep ts)
+  {
+    
+  }
+  
+  void Scene::OnUpdateRuntime(TimeStep ts)
+  {
+    
+  }
+  
+  void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
+  {
+    
+  }
+  
+  void Scene::OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer)
+  {
+    
+  }
+  
+  void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
+  {
+    
+  }
+  
+  void Scene::OnRuntimeStart()
+  {
+    IK_PROFILE();
+  }
+  
+  void Scene::OnRuntimeStop()
+  {
+    IK_PROFILE();
+  }
+  void Scene::OnSimulationStart()
+  {
+    IK_PROFILE();
+  }
+  void Scene::OnSimulationStop()
+  {
+    IK_PROFILE();
+  }
+
+  void Scene::CopyTo(Ref<Scene> &target)
+  {
+    IK_PROFILE();
+  }
+
+  void Scene::SetViewportSize(uint32_t width, uint32_t height)
+  {
+    m_viewportWidth = width;
+    m_viewportHeight = height;
+  }
+
   void Scene::SetName(const std::string &name)
   {
     m_name = name;

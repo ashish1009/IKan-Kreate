@@ -246,12 +246,68 @@ if (!Project::GetActive()) return
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
-    m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
-    m_editorCamera.OnUpdate(ts);
-
-    m_viewport.UpdateMousePos();
-
-    Renderer::Clear({0.1f, 0.1f, 0.14f, 1.0f});
+    switch (m_sceneState)
+    {
+      case SceneState::Edit:
+      {
+        AssetEditorManager::OnUpdate(ts);
+        m_viewport.UpdateMousePos();
+        m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+        m_editorCamera.OnUpdate(ts);
+        
+        SceneRenderer::BeginRenderPass();
+        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+        
+        m_editorScene->OnUpdateEditor(ts);
+        m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
+        
+        SceneRenderer::EndRenderPass();
+        
+        if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
+        {
+          m_timeSinceLastSave += ts;
+          if (m_timeSinceLastSave > project->GetConfig().autoSaveIntervalSeconds)
+          {
+            SaveSceneAuto();
+          }
+        }
+        break;
+      }
+      case SceneState::Simulate:
+      {
+        AssetEditorManager::OnUpdate(ts);
+        m_viewport.UpdateMousePos();
+        m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+        m_editorCamera.OnUpdate(ts);
+        
+        SceneRenderer::BeginRenderPass();
+        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+        
+        m_simulationScene->OnUpdateRuntime(ts);
+        m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
+        
+        SceneRenderer::EndRenderPass();
+        break;
+      }
+      case SceneState::Play:
+      {
+        SceneRenderer::BeginRenderPass();
+        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+        
+        m_runtimeScene->OnUpdateRuntime(ts);
+        m_runtimeScene->OnRenderRuntime(ts, m_viewportRenderer);
+        
+        SceneRenderer::EndRenderPass();
+        break;
+      }
+      case SceneState::Pause:
+      {
+        break;
+      }
+        
+      default:
+        break;
+    }
   }
   
   void RendererLayer::OnEvent(Event& event)
@@ -559,6 +615,36 @@ if (!Project::GetActive()) return
       m_timeSinceLastSave = 0.0f;
     }
   }
+  void RendererLayer::OnScenePlay()
+  {
+    
+  }
+  
+  void RendererLayer::OnSceneStop()
+  {
+
+  }
+  
+  void RendererLayer::OnScenePause()
+  {
+    
+  }
+  
+  void RendererLayer::OnSceneResume()
+  {
+    
+  }
+  
+  void RendererLayer::OnSceneStartSimulation()
+  {
+
+  }
+  
+  void RendererLayer::OnSceneStopSimulation()
+  {
+
+  }
+
   // UI APIS ---------------------------------------------------------------------------------------------------------
   void RendererLayer::UI_StartMainWindowDocking()
   {
@@ -1486,8 +1572,7 @@ if (!Project::GetActive()) return
           
           // Theme Selection --------------------------------------------------
           {
-            UI::SetCursorPosY(ImGui::GetWindowHeight() - 50);
-            ImGui::Separator();
+            UI::SetCursorPosY(ImGui::GetWindowHeight() - 30);
             int32_t theme = (int32_t)m_userPreferences->theme;
             if (Kreator_UI::PropertyDropdownNoLabel("Theme", {"Grey", "Blue"}, 2, &theme))
             {
