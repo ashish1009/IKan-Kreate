@@ -84,12 +84,16 @@ namespace IKan
     /// This function sets the scene name
     /// - Parameter name: scene name
     void SetName(const std::string& name);
-    
+    /// This function set the selected Entity
+    void SetSelectedEntity(entt::entity entity);
+
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the scene name
     const std::string& GetName() const;
     /// This function returns the reference of registry
     entt::registry& GetRegistry();
+    /// This function returns the selected entity handle
+    entt::entity GetSelectedEntity() const;
 
     /// This function returns entity with id as specified, or empty entity if cannot be found - caller must check
     /// - Parameter id: UUID of entity
@@ -123,6 +127,8 @@ namespace IKan
     
     // Entity ---------------------------
     EntityMap m_entityIDMap;
+    entt::entity m_selectedEntity;
+
     friend class Entity;
   };
 } // namespace IKan

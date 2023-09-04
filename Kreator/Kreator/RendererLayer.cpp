@@ -204,6 +204,9 @@ if (!Project::GetActive()) return
     Ref<SceneHierarchyPanel> sceneHierarchyPanel = m_panels.AddPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID,
                                                                                           "Scene Hierarchy", true,
                                                                                           m_editorScene);
+    sceneHierarchyPanel->SetSelectionChangedCallback([this](Entity entity) { OnEntitySelected(entity); });
+    sceneHierarchyPanel->SetEntityDeletedCallback([this](Entity entity) { OnEntityDeleted(entity); });
+
 #ifdef DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
@@ -629,11 +632,13 @@ if (!Project::GetActive()) return
   }
   void RendererLayer::OnScenePlay()
   {
-    
+    ClearSelectedEntity();
+
   }
   
   void RendererLayer::OnSceneStop()
   {
+    ClearSelectedEntity();
 
   }
   
@@ -649,14 +654,59 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OnSceneStartSimulation()
   {
+    ClearSelectedEntity();
 
   }
   
   void RendererLayer::OnSceneStopSimulation()
   {
+    ClearSelectedEntity();
 
   }
 
+  void RendererLayer::OnEntitySelected(Entity entity)
+  {
+    if (!entity)
+    {
+      return;
+    }
+    
+    SelectedSubmesh selection;
+    selection.entity = entity;
+    
+    m_selectionContext.clear();
+    m_selectionContext.push_back(selection);
+    
+    if (m_currentScene != m_runtimeScene)
+    {
+      m_currentScene->SetSelectedEntity(entity);
+    }
+  }
+  void RendererLayer::OnEntityDeleted(Entity e)
+  {
+    if (m_selectionContext.size() == 0 or m_selectionContext[0].entity != e)
+    {
+      return;
+    }
+    ClearSelectedEntity();
+  }
+  
+  void RendererLayer::ClearSelectedEntity()
+  {
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity({});
+    
+    if (m_currentScene)
+    {
+      m_currentScene->SetSelectedEntity({});
+    }
+    
+    m_selectionContext.clear();
+  }
+  
+  void RendererLayer::SetSelectedEntity(Entity entity)
+  {
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity);
+  }
   // UI APIS ---------------------------------------------------------------------------------------------------------
   void RendererLayer::UI_StartMainWindowDocking()
   {

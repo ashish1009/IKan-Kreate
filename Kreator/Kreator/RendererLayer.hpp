@@ -123,6 +123,21 @@ namespace Kreator
     void OnSceneStartSimulation();
     /// This function handle scene simuation ends
     void OnSceneStopSimulation();
+    
+    // Scene Panel Manager Callbacks ----------------------
+    /// This function handles the entity selection
+    /// - Parameter entity: entity
+    void OnEntitySelected(Entity entity);
+    /// This function handles the entity deletion
+    /// - Parameter entity: entity
+    void OnEntityDeleted(Entity e);
+    
+    /// This function clear the selected Entity
+    /// - Note: To be called inside Render Pass Begin end End
+    void ClearSelectedEntity();
+    /// This function set the selected entity
+    /// - Parameter entity: Selected entity
+    void SetSelectedEntity(Entity entity);
 
     // UI API --------------------------------------------
     /// This function Creates main ImGui Window with Docking
@@ -211,6 +226,12 @@ namespace Kreator
       Edit = 0, Play = 1, Pause = 2, Simulate = 3
     };
     SceneState m_sceneState = SceneState::Edit;
+    struct SelectedSubmesh
+    {
+      Entity entity;
+      float distance = 0.0f;
+    };    
+    std::vector<SelectedSubmesh> m_selectionContext;
 
     // Guizmo Data ---------------------------------------
     int32_t m_gizmoType = -1; // -1 = no gizmo

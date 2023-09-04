@@ -108,6 +108,10 @@ namespace IKan
   {
     m_name = name;
   }
+  void Scene::SetSelectedEntity(entt::entity entity)
+  {
+    m_selectedEntity = entity;
+  }
 
   const std::string& Scene::GetName() const
   {
@@ -118,7 +122,11 @@ namespace IKan
   {
     return m_registry;
   }
-  
+  entt::entity Scene::GetSelectedEntity() const
+  {
+    return m_selectedEntity;
+  }
+
   Entity Scene::GetEntityWithUUID(UUID id) const
   {
     IK_LOG_VERIFY(m_entityIDMap.find(id) != m_entityIDMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
