@@ -264,6 +264,40 @@ if (!Project::GetActive()) return
   
   bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
   {
+    bool leftCmd = Input::IsKeyPressed(Key::LeftSuper);
+    bool leftShift = Input::IsKeyPressed(Key::LeftShift);
+    bool rightShift = Input::IsKeyPressed(Key::RightShift);
+
+    if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right))
+    {
+      switch (e.GetKeyCode())
+      {
+        case Key::N:
+          m_showNewScenePopup = true;
+          break;
+        case Key::O:
+          OpenScene();
+          break;
+        case Key::S:
+          SaveScene();
+          break;
+        default:
+          break;
+      }
+      
+      if (leftShift or rightShift)
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::S:
+            SaveSceneAs();
+            break;
+          default:
+            break;
+        }
+      }
+    }
+
     return false;
   }
   
@@ -297,6 +331,7 @@ if (!Project::GetActive()) return
     UI_EndMainWindowDocking();
     
     // Popups
+    UI_NewScene();
     UI_AboutPopup();
   }
   
@@ -720,10 +755,25 @@ if (!Project::GetActive()) return
       const std::string sceneName = m_currentScene->GetName();
       UI::SetCursorPosX(roundBarRight - ImGui::CalcTextSize(sceneName.c_str()).x - 20);
       {
+        if (m_sceneFilePath == "")
+        {
+          ImGui::PushStyleColor(ImGuiCol_Text, Kreator_UI::Color::Warning);
+        }
         UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
         ImGui::Text(sceneName.c_str());
+        if (m_sceneFilePath == "")
+        {
+          ImGui::PopStyleColor();
+        }
       }
-      UI::SetTooltip("Current scene (" + m_sceneFilePath + ")");
+      if (m_sceneFilePath == "")
+      {
+        UI::SetTooltip("Unsaved Scene");
+      }
+      else
+      {
+        UI::SetTooltip("Current scene (" + m_sceneFilePath + ")");
+      }
       
       // Get the Project Name rectangle (Expanded by 10 to have good space)
       ImRect itemRect = UI::RectExpanded(UI::GetItemRect(), 10.0f, 2.0f);
@@ -829,6 +879,23 @@ if (!Project::GetActive()) return
             i++;
           }
           ImGui::EndMenu();
+        }
+        ImGui::Separator();
+        if (ImGui::MenuItem("New Scene", "Cmd+N"))
+        {
+          m_showNewScenePopup = true;
+        }
+        if (ImGui::MenuItem("Open Scene", "Cmd+O"))
+        {
+          OpenScene();
+        }
+        if (ImGui::MenuItem("Save Scene", "Cmd+S"))
+        {
+          SaveScene();
+        }
+        if (ImGui::MenuItem("Save Scene As", "Cmd+Shift+S"))
+        {
+          SaveSceneAs();
         }
         
         ImGui::Separator();
@@ -970,6 +1037,47 @@ if (!Project::GetActive()) return
         ImVec2 point = ImGui::GetMousePos();
         window.SetPosition({point.x - moveOffsetX, point.y - moveOffsetY});
       }
+    }
+  }
+  
+  void RendererLayer::UI_NewScene()
+  {
+    static char s_newSceneName[128];
+    if (m_showNewScenePopup)
+    {
+      ImGui::OpenPopup("New Scene");
+      memset(s_newSceneName, 0, 128);
+      m_showNewScenePopup = false;
+    }
+    
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 400,0 });
+    if (ImGui::BeginPopupModal("New Scene", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
+    {
+      ImGui::BeginVertical("NewSceneVertical");
+      ImGui::SetNextItemWidth(-1);
+      ImGui::InputTextWithHint("##scene_name_input", "Scene Name", s_newSceneName, 128);
+      
+      ImGui::BeginHorizontal("NewSceneHorizontal");
+      
+      UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - ImGui::CalcTextSize("Create").x * 2);
+      if (UI::DrawRoundButton("Create", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 10) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
+      {
+        if ((s_newSceneName[0] != '\0'))
+        {
+          NewScene(s_newSceneName);
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      
+      if (UI::DrawRoundButton("Cancel", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 10) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape))
+      {
+        ImGui::CloseCurrentPopup();
+      }
+      ImGui::EndHorizontal();
+      ImGui::EndVertical();
+      ImGui::EndPopup();
     }
   }
   

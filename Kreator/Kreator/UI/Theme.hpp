@@ -16,6 +16,7 @@ namespace Kreator_UI
     static ImU32 Highlight            = IM_COL32(39, 185, 242, 255);
     static ImU32 Accent               = IM_COL32(236, 158, 36, 255);
     static ImU32 NiceBlue             = IM_COL32(83, 232, 254, 255);
+    static ImU32 Warning              = IM_COL32(183, 32, 54, 255);
     static ImU32 Compliment           = IM_COL32(78, 151, 166, 255);
     static ImU32 TextDarker           = IM_COL32(128, 128, 128, 255);
     static ImU32 TextError            = IM_COL32(230, 51, 51, 255);

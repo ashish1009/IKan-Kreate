@@ -138,6 +138,8 @@ namespace Kreator
     void UI_StatisticsPanel();
     /// This function shows the About Application popup
     void UI_AboutPopup();
+    /// This function popup new scene widget
+    void UI_NewScene();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------

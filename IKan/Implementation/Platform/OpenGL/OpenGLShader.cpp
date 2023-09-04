@@ -82,7 +82,6 @@ namespace IKan
   OpenGLShader::OpenGLShader(const std::string& shaderFilePath)
   : m_rendererID(glCreateProgram()), m_filePath(shaderFilePath), m_name(Utils::String::GetFileNameFromPath(shaderFilePath))
   {
-    IK_PROFILE();
     SHADER_LOG("Creating Open GL Shader ");
     SHADER_LOG("------------------------");
     SHADER_LOG("  Renderer ID  {0} ", m_rendererID);
@@ -107,7 +106,6 @@ namespace IKan
   }
   OpenGLShader::~OpenGLShader()
   {
-    IK_PROFILE();
     SHADER_LOG("Destroying Open GL Shader ");
     SHADER_LOG("--------------------------");
     SHADER_LOG("  Renderer ID  {0} ", m_rendererID);
