@@ -29,6 +29,16 @@ namespace Kreator
     /// This funciton shutdown the scene hierarchy panel
     static void Shutdown();
     
+    /// This function sets the entity set callback
+    /// - Parameter func: function pointer
+    void SetSelectionChangedCallback(const std::function<void(Entity)>& func);
+    /// This function sets the entity delete callback
+    /// - Parameter func: function pointer
+    void SetEntityDeletedCallback(const std::function<void(Entity)>& func);
+    /// This function update the selected entity
+    /// - Parameter entity: entity
+    void SetSelectedEntity(Entity entity);
+
   private:
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This function render the hierachy of scene
@@ -44,10 +54,19 @@ namespace Kreator
     /// This function create menue for entiyt
     void DrawCreateEntityMenu(Entity parent = {});
 
+    /// This function search the entity string recursivly for childs too
+    /// - Parameters:
+    ///   - entity: entity handle
+    ///   - searchFilter: search filter
+    ///   - maxSearchDepth: max depth
+    bool TagSearchRecursive(Entity entity, std::string_view searchFilter, uint32_t maxSearchDepth, uint32_t currentDepth = 1);
+
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
     bool m_isWindow;
+    
     Entity m_selectionContext;
+    std::function<void(Entity)> m_selectionChangedCallback, m_entityDeletedCallback;
 
     inline static Ref<Image> s_pencilIcon;
     inline static Ref<Image> s_plusIcon;
