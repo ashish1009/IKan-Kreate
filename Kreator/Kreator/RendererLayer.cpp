@@ -234,6 +234,9 @@ if (!Project::GetActive()) return
   {
     IK_PROFILE();
     IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
+    
+    // Close the project
+    Project::CloseActive();
   }
   
   void RendererLayer::OnUpdate(TimeStep ts)
@@ -520,13 +523,13 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OpenScene()
   {
-    FolderExplorer::OpenPopup("Open Scene", Project::GetActive()->GetAssetDirectory());
+    FolderExplorer::OpenPopup("Open Scene", Project::GetActive()->GetAssetDirectory() / "Scenes");
     m_folderExplorerAction = FolderExplorerAction::OpenScene;
   }
   
   void RendererLayer::SaveSceneAs()
   {
-    FolderExplorer::SavePopup("Save Scene", Project::GetActive()->GetAssetDirectory());
+    FolderExplorer::SavePopup("Save Scene", Project::GetActive()->GetAssetDirectory() / "Scenes");
     m_folderExplorerAction = FolderExplorerAction::SaveScene;
   }
   

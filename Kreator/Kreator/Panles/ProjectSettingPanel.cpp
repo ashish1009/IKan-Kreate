@@ -69,7 +69,7 @@ namespace Kreator
       if (Kreator_UI::PropertyAssetReference<IKan::Scene>("Startup Scene", m_defaultScene))
       {
         const auto& metadata = AssetManager::GetMetadata(m_defaultScene);
-        if (metadata.IsValid())
+//        if (metadata.IsValid())
         {
           m_project->GetConfig().startScene = metadata.filePath.string();
           s_serializeProject = true;

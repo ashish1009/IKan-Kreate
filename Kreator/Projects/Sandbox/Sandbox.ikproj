@@ -1,6 +1,9 @@
 Project:
   Name: Sandbox
   AssetDirectory: Assets
-  AssetRegistry: Assets/AssetRegistry.ikr
   MeshDirectory: Assets/Meshes
   MeshSourceDirectory: Assets/Meshes/Source
+  AssetRegistry: Assets/AssetRegistry.ikr
+  StartScene: ""
+  AutoSave: true
+  AutoSaveInterval: 60

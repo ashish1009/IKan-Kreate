@@ -42,6 +42,8 @@ namespace IKan
     /// This function updates the active project instance
     /// - Parameter project: Active project
     static void SetActive(Ref<Project> project);
+    /// This function closes the active project
+    static void CloseActive();
 
     /// This function returns the project name
     static const std::string& GetProjectName();
