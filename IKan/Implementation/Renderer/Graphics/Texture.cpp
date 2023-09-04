@@ -21,10 +21,10 @@ namespace IKan
     return Image::Create(filePath, linear);
   }
   
-  Ref<Texture> Texture::CreateWhiteTexture()
+  Ref<Texture> Texture::CreateWhiteTexture(uint32_t data)
   {
     // White data
-    static uint32_t whiteTextureData = 0xffffffff;
+    static uint32_t whiteTextureData = data;
     
     // Texture specificaion
     TextureSpecification textureSpec;

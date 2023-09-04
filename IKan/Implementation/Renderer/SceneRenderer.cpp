@@ -167,7 +167,7 @@ namespace IKan
     }
     else
     {
-      finalImage = Texture::CreateWhiteTexture();
+      finalImage = Texture::CreateWhiteTexture(0xff202020);
     }
 
     return finalImage;

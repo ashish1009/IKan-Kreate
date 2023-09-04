@@ -97,7 +97,8 @@ namespace IKan
     ///         memory for same texture use Renderer::GetTexture()
     [[nodiscard]] static Ref<Texture> Create(const std::string& filePath, bool linear = true);
     /// This API creates the Texture instance with white based on the Renderer API
-    [[nodiscard]] static Ref<Texture> CreateWhiteTexture();
+    /// - Parameter data : White data
+    [[nodiscard]] static Ref<Texture> CreateWhiteTexture(uint32_t data = 0xffffffff);
   };
   
   /// This is the interface class to create the Texture

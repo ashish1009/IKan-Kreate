@@ -248,7 +248,14 @@ if (!Project::GetActive()) return
 
     m_viewport.UpdateMousePos();
 
-    Renderer::Clear({0.1f, 0.1f, 0.14f, 1.0f});
+    if (Project::GetActive())
+    {
+      Renderer::Clear({0.1f, 0.1f, 0.14f, 1.0f});
+    }
+    else
+    {
+      Renderer::Clear({0.2f, 0.2f, 0.1f, 1.0f});
+    }
   }
   
   void RendererLayer::OnEvent(Event& event)
@@ -599,8 +606,31 @@ if (!Project::GetActive()) return
       ImGui::GetCursorScreenPos().y + 23
     };
     drawList->AddRectFilled(roundBarMin, roundBarMax, Kreator_UI::Color::TitleBarDark, 10);
+    float roundBarRight = (3 * ImGui::GetWindowWidth()) / 4;
     UI::ShiftCursorY(5);
-        
+
+    const float underlineThickness = 1.0f;
+    // Project name --------------------------------------------------------------------
+    {
+      UI::ScopedColor textColor(ImGuiCol_Text, Kreator_UI::Color::TextDarker);
+      UI::ShiftCursorX(10);
+      const std::string title = Project::GetActive()->GetConfig().name;
+      {
+        UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+        ImGui::Text(title.c_str());
+      }
+      UI::SetTooltip("Current project (" + Project::GetActive()->GetConfig().projectFileName + ")");
+      
+      // Get the Project Name rectangle (Expanded by 10 to have good space)
+      ImRect itemRect = UI::RectExpanded(UI::GetItemRect(), 10.0f, 2.0f);
+      // Make the Max + thickness of rectange as min of verticle line
+      itemRect.Min.x = itemRect.Max.x + underlineThickness;
+      // Make the new Min + Thickness of rectange as new Max of verticle line
+      itemRect.Max.x = itemRect.Min.x + underlineThickness;
+      
+      drawList->AddRectFilled(itemRect.Min, itemRect.Max, UI::Theme::Color::Muted, 2.0f);
+    }
+
     // Render the Window Buttons -------------------------------------------------------
     UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
     UI::SetCursorPosY(20.0f);
