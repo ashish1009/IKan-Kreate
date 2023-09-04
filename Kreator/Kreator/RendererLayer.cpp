@@ -225,6 +225,9 @@ if (!Project::GetActive()) return
     
     // Create Scene viewport renderer
     m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(1000, 1000, 1000000));
+    
+    // Register Default Asset Editor
+    AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
   }
   
   void RendererLayer::OnDetach()
@@ -297,6 +300,15 @@ if (!Project::GetActive()) return
     UI_AboutPopup();
   }
   
+  void RendererLayer::UpdateWindowTitle(const std::string& sceneName)
+  {
+    const auto& caps = Renderer::Capabilities::Get();
+    const std::string title = fmt::format("{0} ({1}) - Kreator - {2} ({3}) Renderer: {4}",
+                                          sceneName, Project::GetActive()->GetConfig().name,
+                                          caps.vendor, caps.version, caps.renderer);
+    Application::Get().GetWindow().SetTitle(title);
+  }
+
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
   {
     IK_LOG_TRACE("Kreator Layer", "Creating Project at {0} ", projectDir.string().c_str());
@@ -369,6 +381,15 @@ if (!Project::GetActive()) return
     // Reset cameras
     m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
     
+    if (!project->GetConfig().startScene.empty())
+    {
+      OpenScene((Project::GetAssetDirectory() / project->GetConfig().startScene).string());
+    }
+    else
+    {
+      NewScene();
+    }
+
     PushProjectToRecentProjects(filepath);
   }
   
@@ -425,6 +446,78 @@ if (!Project::GetActive()) return
     serializer.Serialize(project->GetConfig().projectDirectory + "/" + project->GetConfig().projectFileName);
   }
   
+  void RendererLayer::NewScene(const std::string& name)
+  {
+    m_editorScene =  Scene::Create(name);
+    m_sceneFilePath = std::string();
+    
+    m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
+    m_currentScene = m_editorScene;
+    
+    m_panels.SetSceneContext(m_editorScene);
+    UpdateWindowTitle(name);
+  }
+  
+  void RendererLayer::OpenScene(const std::string& filepath)
+  {
+    if (!Utils::FileSystem::Exists(filepath))
+    {
+      IK_LOG_ERROR("Kreator Layer" ,"Tried loading a non-existing scene: {0}", filepath);
+      NewScene(Utils::String::GetFileNameFromPath(filepath));
+      m_sceneFilePath = filepath;
+      SaveScene();
+      return;
+    }
+    
+    Ref<Scene> newScene = Scene::Create("New Scene");
+    SceneSerializer serializer(newScene);
+    serializer.Deserialize(filepath);
+    
+    m_editorScene = newScene;
+    m_currentScene = m_editorScene;
+    m_sceneFilePath = filepath;
+    
+    std::filesystem::path path = filepath;
+    UpdateWindowTitle(path.filename().string());
+    
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void RendererLayer::OpenScene()
+  {
+    FolderExplorer::OpenPopup("Open Scene", Project::GetActive()->GetAssetDirectory());
+    m_folderExplorerAction = FolderExplorerAction::OpenScene;
+  }
+  
+  void RendererLayer::SaveSceneAs()
+  {
+    FolderExplorer::SavePopup("Save Scene", Project::GetActive()->GetAssetDirectory());
+    m_folderExplorerAction = FolderExplorerAction::SaveScene;
+  }
+  
+  void RendererLayer::SaveScene()
+  {
+    if (!m_sceneFilePath.empty())
+    {
+      SceneSerializer serializer(m_editorScene);
+      serializer.Serialize(m_sceneFilePath);
+      
+      m_timeSinceLastSave = 0.0f;
+    }
+    else
+    {
+      SaveSceneAs();
+    }
+  }
+  void RendererLayer::SaveSceneAuto()
+  {
+    if (!m_sceneFilePath.empty())
+    {
+      SceneSerializer serializer(m_editorScene);
+      serializer.Serialize(m_sceneFilePath + ".auto");
+      m_timeSinceLastSave = 0.0f;
+    }
+  }
   // UI APIS ---------------------------------------------------------------------------------------------------------
   void RendererLayer::UI_StartMainWindowDocking()
   {
@@ -619,6 +712,28 @@ if (!Project::GetActive()) return
       drawList->AddRectFilled(itemRect.Min, itemRect.Max, UI::Theme::Color::Muted, 2.0f);
     }
 
+    // Current Scene name ---------------------------------------------------------------
+    {
+      UI::ScopedColor textColor(ImGuiCol_Text, UI::Theme::Color::Text);
+      UI::SameLine();
+      
+      const std::string sceneName = m_currentScene->GetName();
+      UI::SetCursorPosX(roundBarRight - ImGui::CalcTextSize(sceneName.c_str()).x - 20);
+      {
+        UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+        ImGui::Text(sceneName.c_str());
+      }
+      UI::SetTooltip("Current scene (" + m_sceneFilePath + ")");
+      
+      // Get the Project Name rectangle (Expanded by 10 to have good space)
+      ImRect itemRect = UI::RectExpanded(UI::GetItemRect(), 10.0f, 2.0f);
+      
+      // Make the new Min + Thickness of rectange as new Max of verticle line
+      itemRect.Max.x = itemRect.Min.x + underlineThickness;
+      
+      drawList->AddRectFilled(itemRect.Min, itemRect.Max, UI::Theme::Color::Muted, 2.0f);
+    }
+    
     // Render the Window Buttons -------------------------------------------------------
     UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
     UI::SetCursorPosY(20.0f);

@@ -114,3 +114,8 @@
 #include <Editor/PanelManager.hpp>
 #include <Editor/EditorConsolePanel.hpp>
 #include <Editor/AssetEdtitor.hpp>
+
+#include <Scene/Scene.hpp>
+#include <Scene/SceneSerializer.hpp>
+#include <Scene/Entity.hpp>
+#include <Scene/Component.hpp>

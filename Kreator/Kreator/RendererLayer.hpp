@@ -55,6 +55,11 @@ namespace Kreator
     /// - Parameter event: Event (Base class) intance. Dispatch event from Event Dispatcher
     void OnEvent(Event& event) override;
     
+    // Scene Public APIs --------------------------------
+    /// This function opens new scene with file
+    /// - Parameter filepath: Scene filepath
+    void OpenScene(const std::string& filepath);
+
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the client file path
     std::filesystem::path GetClientResorucePath() const;
@@ -72,6 +77,9 @@ namespace Kreator
     bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
+    /// This function updates the name of window tile
+    /// - Parameter sceneName: scene name
+    void UpdateWindowTitle(const std::string& sceneName);
 
     // Project API ---------------------------------------
     /// This function Creates new project
@@ -90,6 +98,19 @@ namespace Kreator
     /// This funciton push the current project to recent project
     /// - Parameter projectPath: Project to be pushed
     void PushProjectToRecentProjects(std::filesystem::path projectPath);
+
+    // Scene APIs ----------------------------------------
+    /// This function creates new scene
+    /// - Parameter name: Scene name
+    void NewScene(const std::string& name = "UntitledScene");
+    /// This function opens new scene with file from popup
+    void OpenScene();
+    /// This function Saves the scene at new location
+    void SaveSceneAs();
+    /// This function Saves the scene
+    void SaveScene();
+    /// This function Saves the scene automatically
+    void SaveSceneAuto();
 
     // UI API --------------------------------------------
     /// This function Creates main ImGui Window with Docking

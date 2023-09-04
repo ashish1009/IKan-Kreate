@@ -36,6 +36,21 @@ namespace IKan
     ///   - maxEntityCapacity: Max Entity capacity to reserve
     static Ref<Scene> Create(const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
 
+    // Setters -----------------------------------------------------------------------------------------------------
+    /// This function sets the scene name
+    /// - Parameter name: scene name
+    void SetName(const std::string& name);
+    
+    // Getters -----------------------------------------------------------------------------------------------------
+    /// This function returns the scene name
+    const std::string& GetName() const;
+
     ASSET_TYPE(Scene);
+    
+  private:
+    // Member Variables ---------------------------------------------------------------------------------------------
+    // Scene Utils ----------------------
+    std::string m_name = "";
+    uint32_t m_viewportWidth = 0, m_viewportHeight = 0;
   };
 } // namespace IKan

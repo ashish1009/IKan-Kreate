@@ -15,12 +15,27 @@ namespace IKan
   }
   
   Scene::Scene(const std::string& name, uint32_t maxEntityCapacity)
+  : m_name(name)
   {
-    
+    IK_PROFILE();
+    IK_LOG_TRACE(LogModule::Scene, "Creating Scene ...");
+    IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
   }
   
   Scene::~Scene()
   {
-    
+    IK_PROFILE();
+    IK_LOG_WARN(LogModule::Scene, "Destroying Scene!!!");
+    IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
+  }
+  
+  void Scene::SetName(const std::string &name)
+  {
+    m_name = name;
+  }
+
+  const std::string& Scene::GetName() const
+  {
+    return m_name;
   }
 } // namespace IKan
