@@ -917,6 +917,12 @@ namespace Kreator
       }
       ImGui::TreePop();
     }
+    
+    // Defer deletion until end of node UI
+    if (entityDeleted)
+    {
+      OnEntityDestroyed(entity);
+    }
   }
   
   void SceneHierarchyPanel::DrawCreateEntityMenu(Entity parent)
@@ -1051,6 +1057,17 @@ namespace Kreator
   void SceneHierarchyPanel::SetEntityDeletedCallback(const std::function<void(Entity)>& func)
   {
     m_entityDeletedCallback = func;
+  }
+
+  void SceneHierarchyPanel::OnEntityDestroyed(Entity entity)
+  {
+    if (entity == m_selectionContext)
+    {
+      m_selectionContext = {};
+    }
+    
+    m_context->DestroyEntity(entity);
+    m_entityDeletedCallback(entity);
   }
 
 } // namespace Kreator

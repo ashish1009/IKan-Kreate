@@ -66,6 +66,9 @@ namespace Kreator
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle
     void OnExternalEntityDestroyed(Entity entity);
+    /// This function is the callback for external entity destroy
+    /// - Parameter entity entity handle
+    void OnEntityDestroyed(Entity entity);
 
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
