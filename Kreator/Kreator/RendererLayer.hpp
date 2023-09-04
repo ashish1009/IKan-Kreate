@@ -152,6 +152,8 @@ namespace Kreator
     void UI_NewScene();
     /// This function shows the Applicaton toolbar
     void UI_SceneToolbar();
+    /// This function renders the Guizmo toolbar
+    void UI_GuizmoToolbar();
     /// This function shows the About Application popup
     void UI_AboutPopup();
 
@@ -209,6 +211,16 @@ namespace Kreator
       Edit = 0, Play = 1, Pause = 2, Simulate = 3
     };
     SceneState m_sceneState = SceneState::Edit;
+
+    // Guizmo Data ---------------------------------------
+    int32_t m_gizmoType = -1; // -1 = no gizmo
+    int32_t m_gizmoMode = 0;  //  0 = local
+    Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
+    enum class SelectionMode
+    {
+      None = 0, Entity = 1
+    };
+    SelectionMode m_selectionMode = SelectionMode::Entity;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
