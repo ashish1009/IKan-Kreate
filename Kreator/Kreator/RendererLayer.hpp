@@ -11,6 +11,21 @@
 
 namespace Kreator
 {
+  /// Stores the Viewport Data
+  struct Viewport
+  {
+    bool panelMouseHover;
+    bool panelFocused;
+    uint32_t width, height;
+    glm::vec2 bounds[2];
+    int32_t mousePosX = -1;
+    int32_t mousePosY = -1;
+    
+    void UpdateMousePos();
+    std::pair<float, float> GetMouseSpace();
+    std::pair<float, float> GetMousePos();
+  };
+
   class RendererLayer : public Layer
   {
   public:
@@ -49,6 +64,15 @@ namespace Kreator
     
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
+    /// This function handles the key press event
+    /// - Parameter e: key events
+    bool OnKeyPressedEvent(KeyPressedEvent& e);
+    /// This function handles the mouse events
+    /// - Parameter e: Mouse Event
+    bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
+    /// This function Updates the viewports of all Kreator Data
+    void UpdateViewportSize();
+
     // Project API ---------------------------------------
     /// This function Creates new project
     /// - Parameter projectPath: Project File path
@@ -100,6 +124,13 @@ namespace Kreator
     };
     FolderExplorerAction m_folderExplorerAction;
     PanelManager m_panels;
+
+    // Camera Data ---------------------------------------
+    bool m_allowViewportCameraEvents = false;
+    EditorCamera m_editorCamera;
+
+    // View port Data ------------------------------------
+    Viewport m_viewport;
 
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;

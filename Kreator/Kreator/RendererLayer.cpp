@@ -32,6 +32,34 @@ namespace Kreator
       }
     }
   } // namespace Utils
+  
+  void Viewport::UpdateMousePos()
+  {
+    auto [mx, my] = ImGui::GetMousePos();
+    mx -= bounds[0].x;
+    my -= bounds[0].y;
+    
+    my = height - my;
+    
+    mousePosX = (int32_t)mx;
+    mousePosY = (int32_t)my;
+  }
+  
+  std::pair<float, float> Viewport::GetMouseSpace()
+  {
+    auto [mx, my] = ImGui::GetMousePos();
+    mx -= bounds[0].x;
+    my -= bounds[0].y;
+    auto viewportWidth = bounds[1].x - bounds[0].x;
+    auto viewportHeight = bounds[1].y - bounds[0].y;
+    
+    return { (mx / viewportWidth) * 2.0f - 1.0f, ((my / viewportHeight) * 2.0f - 1.0f) * -1.0f };
+  }
+  
+  std::pair<float, float> Viewport::GetMousePos()
+  {
+    return { mousePosX, mousePosY };
+  }
 
   RendererLayer* RendererLayer::s_instance = nullptr;
   
@@ -41,7 +69,8 @@ namespace Kreator
   }
   
   RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientResourcePath)
-  : Layer("Kreator Renderer"), m_userPreferences(userPreference), m_clientResourcePath(clientResourcePath)
+  : Layer("Kreator Renderer"), m_userPreferences(userPreference), m_clientResourcePath(clientResourcePath),
+  m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
   {
     IK_PROFILE();
     IK_ASSERT(!s_instance, "RendererLayer instance already created");
@@ -142,12 +171,42 @@ namespace Kreator
   void RendererLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
+    
+    m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+    m_editorCamera.OnUpdate(ts);
+
+    m_viewport.UpdateMousePos();
+
     Renderer::Clear({0.1f, 0.1f, 0.14f, 1.0f});
   }
   
   void RendererLayer::OnEvent(Event& event)
   {
+    EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnKeyPressedEvent));
+    dispatcher.Dispatch<MouseButtonPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnMouseButtonPressed));
+
     m_panels.OnEvent(event);
+    
+    if (m_viewport.panelMouseHover)
+    {
+      m_editorCamera.OnEvent(event);
+    }
+  }
+  
+  bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
+  {
+    return false;
+  }
+  
+  void RendererLayer::UpdateViewportSize()
+  {
+    m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
+  }
+  
+  bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
+  {
+    return false;
   }
   
   void RendererLayer::OnImGuiRender()
@@ -230,6 +289,11 @@ namespace Kreator
     Project::SetActive(project);
     
     m_panels.OnProjectChanged(project);
+    
+    // Reset cameras
+    m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
+    
+    PushProjectToRecentProjects(filepath);
   }
   
   void RendererLayer::PushProjectToRecentProjects(std::filesystem::path projectFile)
