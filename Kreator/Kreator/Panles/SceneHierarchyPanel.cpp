@@ -330,7 +330,6 @@ namespace Kreator
       ImGui::FocusWindow(ImGui::GetCurrentWindow());
     }
     
-
     if (isSelected)
     {
       ImGui::PopStyleColor();
@@ -350,6 +349,11 @@ namespace Kreator
   
   void SceneHierarchyPanel::DrawCreateEntityMenu(Entity parent)
   {
+    Entity newEntity;
+    if (ImGui::MenuItem("Empty Entity"))
+    {
+      newEntity = m_context->CreateEntity("Empty Entity");
+    }
   }
   
   bool SceneHierarchyPanel::TagSearchRecursive(Entity entity, std::string_view searchFilter, uint32_t maxSearchDepth,

@@ -18,6 +18,16 @@ namespace IKan
     registry.reserve<Component...>(capacity);
   }
 
+  template<typename T>
+  static void CopyComponentIfExists(entt::entity dst, entt::entity src, entt::registry& registry)
+  {
+    if (registry.has<T>(src))
+    {
+      auto& srcComponent = registry.get<T>(src);
+      registry.emplace_or_replace<T>(dst, srcComponent);
+    }
+  }
+
   Ref<Scene> Scene::Create(const std::string& name, uint32_t maxEntityCapacity)
   {
     return CreateRef<Scene>(name, maxEntityCapacity);
@@ -95,13 +105,79 @@ namespace IKan
     m_viewportHeight = height;
   }
   
-  Entity Scene::TryGetEntityWithUUID(UUID id) const
+  Entity Scene::CreateEntity(const std::string& name)
   {
-    if (const auto iter = m_entityIDMap.find(id); iter != m_entityIDMap.end())
+    return CreateChildEntity({}, name);
+  }
+  
+  Entity Scene::CreateChildEntity(Entity parent, const std::string& name)
+  {
+    Entity entity = CreateEntityWithID({}, name);
+    
+    // Add Parent if requred
+    if (parent)
     {
-      return iter->second;
+      entity.SetParent(parent);
     }
-    return Entity{};
+    
+    // Debug Logs
+    IK_LOG_TRACE(LogModule::Scene, "Stored Entity in Scene");
+    IK_LOG_TRACE(LogModule::Scene, "  Name    {0}", entity.GetComponent<TagComponent>().tag.c_str());
+    IK_LOG_TRACE(LogModule::Scene, "  Handle  {0}", (uint32_t)entity);
+    IK_LOG_TRACE(LogModule::Scene, "  ID      {0}", (uint32_t)entity.GetComponent<IDComponent>().ID);
+    IK_LOG_TRACE(LogModule::Scene, "  Number of entities Added in Scene  {0}", m_numEntities);
+    IK_LOG_TRACE(LogModule::Scene, "  Max ID given to entity             {0}", m_maxEntityID);
+    
+    return entity;
+  }
+  
+  Entity Scene::CreateEntityWithID(UUID uuid, const std::string& name)
+  {
+    // If max capcity reached then resize the capacity
+    if (m_registry.size() >= m_registryCapacity)
+    {
+      IK_ASSERT(false, "Temp Assert to check performance")
+      m_registryCapacity *= 2;
+      ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
+    }
+    
+    // Create new entity
+    auto entity = Entity { m_registry.create(), this };
+    
+    // Add Mendatory Components
+    [[maybe_unused]] auto& idComponent = entity.AddComponent<IDComponent>(uuid);
+    
+    entity.AddComponent<TransformComponent>();
+    if (!name.empty())
+    {
+      entity.AddComponent<TagComponent>(name);
+    }
+    
+    entity.AddComponent<RelationshipComponent>();
+    
+    // Store in Entity ID Map
+    IK_ASSERT(m_entityIDMap.find(uuid) == m_entityIDMap.end());
+    m_entityIDMap[uuid] = entity;
+    
+    // Updating the Max entity ID
+    m_maxEntityID = (int32_t)((uint32_t)entity);
+    
+    ++m_numEntities;
+    
+    return entity;
+  }
+  
+  void Scene::DestroyEntity(Entity entity)
+  {
+    if (m_onEntityDestroyedCallback)
+    {
+      m_onEntityDestroyedCallback(entity);
+    }
+    
+    m_entityIDMap.erase(entity.GetUUID());
+    m_registry.destroy(entity.m_entityHandle);
+    
+    --m_numEntities;
   }
 
   void Scene::SetName(const std::string &name)
@@ -139,4 +215,13 @@ namespace IKan
     return GetEntityWithUUID(ID);
   }
 
+  Entity Scene::TryGetEntityWithUUID(UUID id) const
+  {
+    if (const auto iter = m_entityIDMap.find(id); iter != m_entityIDMap.end())
+    {
+      return iter->second;
+    }
+    return Entity{};
+  }
+  
 } // namespace IKan
