@@ -97,4 +97,311 @@ return *this; \
   {
     return tag;
   }
+
+  // Transform Component --------------------------------------------------------------------------------------------
+  TransformComponent::TransformComponent()
+  {
+    transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
+    quaternion = glm::quat(rotation);
+    COMP_LOG("Creating Transform Component");
+  }
+  TransformComponent::~TransformComponent()
+  {
+    COMP_LOG("Destroying Transform Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(TransformComponent);
+  
+  void TransformComponent::Copy(const TransformComponent &other)
+  {
+    position = other.Position();
+    scale = other.Scale();
+    rotation = other.Rotation();
+    transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
+    quaternion = glm::quat(rotation);
+  }
+  const glm::mat4& TransformComponent::Transform() const
+  {
+    return transform;
+  }
+  const glm::vec3& TransformComponent::Position() const
+  {
+    return position;
+  }
+  const glm::vec3& TransformComponent::Rotation() const
+  {
+    return rotation;
+  }
+  const glm::vec3& TransformComponent::Scale() const
+  {
+    return scale;
+  }
+  const glm::quat& TransformComponent::Quaternion() const
+  {
+    return quaternion;
+  }
+  
+  void TransformComponent::UpdatePosition(TransformComponent::Axis axis, float value)
+  {
+    UPDATE_TRANSFORM(position)
+  }
+  void TransformComponent::UpdateRotation(TransformComponent::Axis axis, float value)
+  {
+    UPDATE_TRANSFORM(rotation)
+  }
+  void TransformComponent::UpdateScale(TransformComponent::Axis axis, float value)
+  {
+    UPDATE_TRANSFORM(scale)
+  }
+  
+  void TransformComponent::UpdatePosition(const glm::vec3& value)
+  {
+    position = value;
+    transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
+  }
+  void TransformComponent::UpdateRotation(const glm::vec3& value)
+  {
+    rotation = value;
+    transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
+  }
+  void TransformComponent::UpdateScale(const glm::vec3& value)
+  {
+    scale = value;
+    transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
+  }
+  
+  void TransformComponent::AddPosition(Axis axis, float value)
+  {
+    ADD_TRANSFORM(position)
+  }
+  void TransformComponent::AddRotation(Axis axis, float value)
+  {
+    ADD_TRANSFORM(rotation)
+  }
+  void TransformComponent::AddScale(Axis axis, float value)
+  {
+    ADD_TRANSFORM(scale)
+  }
+  
+  // Camera Component -----------------------------------------------------------------------------------------------
+  CameraComponent::CameraComponent()
+  {
+    COMP_LOG("Creating Camera Component");
+  }
+  CameraComponent::~CameraComponent()
+  {
+    COMP_LOG("Destroying Camera Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(CameraComponent);
+  
+  void CameraComponent::Copy(const CameraComponent &other)
+  {
+    primary = other.primary;
+    camera = other.camera;
+  }
+  CameraComponent::operator SceneCamera& ()
+  {
+    return camera;
+  }
+  CameraComponent::operator const SceneCamera& () const
+  {
+    return camera;
+  }
+  
+  // Sprite Renderer Component --------------------------------------------------------------------------------------
+  SpriteRendererComponent::SpriteRendererComponent()
+  {
+    COMP_LOG("Creating Sprite Renderer Component");
+  }
+  SpriteRendererComponent::~SpriteRendererComponent()
+  {
+    COMP_LOG("Destroying Sprite Renderer Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(SpriteRendererComponent);
+  
+  void SpriteRendererComponent::Copy(const SpriteRendererComponent &other)
+  {
+    texture = other.texture;
+    color = other.color;
+    tilingFactor = other.tilingFactor;
+  }
+  
+  // Quad Component -------------------------------------------------------------------------------------------------
+  QuadComponent::QuadComponent()
+  {
+    COMP_LOG("Creating Quad Component");
+  }
+  QuadComponent::~QuadComponent()
+  {
+    COMP_LOG("Destroying Quad Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(QuadComponent);
+  
+  void QuadComponent::Copy(const QuadComponent &other)
+  {
+    texture = other.texture;
+    color = other.color;
+    tilingFactor = other.tilingFactor;
+  }
+  
+  // Circle Component -------------------------------------------------------------------------------------------------
+  CircleComponent::CircleComponent()
+  {
+    COMP_LOG("Creating Circle Component");
+  }
+  CircleComponent::~CircleComponent()
+  {
+    COMP_LOG("Destroying Circle Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(CircleComponent);
+  
+  void CircleComponent::Copy(const CircleComponent &other)
+  {
+    texture = other.texture;
+    color = other.color;
+    tilingFactor = other.tilingFactor;
+    
+    thickness = other.thickness;
+    fade = other.fade;
+  }
+  
+  // Text Component ---------------------------------------------------------------------------------------------------
+  TextComponent::TextComponent()
+  {
+    COMP_LOG("Creating Text Component");
+  }
+  TextComponent::~TextComponent()
+  {
+    COMP_LOG("Destroying Text Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(TextComponent);
+  
+  void TextComponent::Copy(const TextComponent &other)
+  {
+    textString = other.textString;
+    assetHandle = other.assetHandle;
+    color = other.color;
+  }
+  
+  // Static Mesh Component -------------------------------------------------------------------------------------------
+  StaticMeshComponent::StaticMeshComponent()
+  {
+    COMP_LOG("Creating Static Mesh Component");
+  }
+  
+  StaticMeshComponent::StaticMeshComponent(AssetHandle staticMesh)
+  : staticMesh(staticMesh)
+  {
+    COMP_LOG("Creating Static Mesh Component from mesh handle");
+  }
+  
+  StaticMeshComponent::~StaticMeshComponent()
+  {
+    COMP_LOG("Destroying Static Mesh Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(StaticMeshComponent);
+  
+  void StaticMeshComponent::Copy(const StaticMeshComponent &other)
+  {
+    staticMesh = other.staticMesh;
+  }
+  
+  // Rigid Body Component --------------------------------------------------------------------------------------------
+  RigidBodyComponent::RigidBodyComponent()
+  {
+    COMP_LOG("Creating Rigid Body Component");
+  }
+  
+  RigidBodyComponent::~RigidBodyComponent()
+  {
+    COMP_LOG("Destroying Rigid Body Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(RigidBodyComponent);
+  
+  void RigidBodyComponent::Copy(const RigidBodyComponent &other)
+  {
+    bodyType = other.bodyType;
+  }
+  
+  reactphysics3d::BodyType RigidBodyComponent::ReactPhysicsBodyType(BodyType type)
+  {
+    switch (type)
+    {
+      case BodyType::Static: return reactphysics3d::BodyType::STATIC;
+      case BodyType::Kinametic: return reactphysics3d::BodyType::KINEMATIC;
+      case BodyType::Dynamic: return reactphysics3d::BodyType::DYNAMIC;
+      default: IK_ASSERT(false);
+    }
+  }
+  
+  // Box 3D Colldier Component -------------------------------------------------------------------------------------
+  Box3DColliderComponent::Box3DColliderComponent()
+  {
+    COMP_LOG("Creating Box 3D Component");
+  }
+  
+  Box3DColliderComponent::~Box3DColliderComponent()
+  {
+    COMP_LOG("Destroying Box 3D Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(Box3DColliderComponent);
+  
+  void Box3DColliderComponent::Copy(const Box3DColliderComponent& other)
+  {
+    size = other.size;
+    frictionCoefficient = other.frictionCoefficient;
+    bounciness = other.bounciness;
+    massDensity = other.massDensity;
+    
+    positionOffset = other.positionOffset;
+    quaternionOffset = other.quaternionOffset;
+  }
+  
+  // Sphere Colldier Component ---------------------------------------------------------------------------------------
+  SphereColliderComponent::SphereColliderComponent()
+  {
+    COMP_LOG("Creating Sphere Component");
+  }
+  
+  SphereColliderComponent::~SphereColliderComponent()
+  {
+    COMP_LOG("Destroying Sphere Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(SphereColliderComponent);
+  
+  void SphereColliderComponent::Copy(const SphereColliderComponent& other)
+  {
+    radius = other.radius;
+    frictionCoefficient = other.frictionCoefficient;
+    bounciness = other.bounciness;
+    massDensity = other.massDensity;
+    
+    positionOffset = other.positionOffset;
+    quaternionOffset = other.quaternionOffset;
+  }
+  
+  // Capsule Colldier Component ---------------------------------------------------------------------------------------
+  CapsuleColliderComponent::CapsuleColliderComponent()
+  {
+    COMP_LOG("Creating Capsule Component");
+  }
+  
+  CapsuleColliderComponent::~CapsuleColliderComponent()
+  {
+    COMP_LOG("Destroying Capsule Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(CapsuleColliderComponent);
+  
+  void CapsuleColliderComponent::Copy(const CapsuleColliderComponent& other)
+  {
+    radius = other.radius;
+    height = other.height;
+    
+    frictionCoefficient = other.frictionCoefficient;
+    bounciness = other.bounciness;
+    massDensity = other.massDensity;
+    
+    positionOffset = other.positionOffset;
+    quaternionOffset = other.quaternionOffset;
+  }
+  
 } // namespace IKan
