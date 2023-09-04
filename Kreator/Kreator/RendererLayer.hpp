@@ -158,8 +158,15 @@ namespace Kreator
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;
 
-    // Renderers
+    // Renderers -----------------------------------------
     Ref<SceneRenderer> m_viewportRenderer;
+
+    // Scene Data ----------------------------------------
+    bool m_showNewScenePopup = false;
+    float m_timeSinceLastSave = 0.0f;
+    std::string m_sceneFilePath;
+    Ref<Scene> m_editorScene, m_currentScene, m_runtimeScene, m_simulationScene;
+    Ref<Image> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

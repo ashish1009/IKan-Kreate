@@ -24,7 +24,7 @@ namespace Kreator_UI
         break;
 
       case Kreator::UserPreferences::Theme::Blue:
-        IKan::UI::Theme::Color::Titlebar             = IM_COL32(35, 45, 55, 255);
+        IKan::UI::Theme::Color::Titlebar             = IM_COL32(35, 45, 60, 255);
         IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(43, 63, 91, 255);
         break;
 

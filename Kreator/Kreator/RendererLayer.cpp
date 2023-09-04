@@ -222,6 +222,9 @@ if (!Project::GetActive()) return
     {
       m_showWelcomePopup = true;
     }
+    
+    // Create Scene viewport renderer
+    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(1000, 1000, 1000000));
   }
   
   void RendererLayer::OnDetach()
@@ -239,14 +242,7 @@ if (!Project::GetActive()) return
 
     m_viewport.UpdateMousePos();
 
-    if (Project::GetActive())
-    {
-      Renderer::Clear({0.1f, 0.1f, 0.14f, 1.0f});
-    }
-    else
-    {
-      Renderer::Clear({0.2f, 0.2f, 0.1f, 1.0f});
-    }
+    Renderer::Clear({0.1f, 0.1f, 0.14f, 1.0f});
   }
   
   void RendererLayer::OnEvent(Event& event)
@@ -270,6 +266,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UpdateViewportSize()
   {
+    m_viewportRenderer->SetViewport(m_viewport.width, m_viewport.height);
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
   }
   
