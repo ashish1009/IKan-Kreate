@@ -92,6 +92,10 @@ namespace Kreator
     void PushProjectToRecentProjects(std::filesystem::path projectPath);
 
     // UI API --------------------------------------------
+    /// This function Creates main ImGui Window with Docking
+    void UI_StartMainWindowDocking();
+    /// This function Ends Main ImGui window with Docking
+    void UI_EndMainWindowDocking();
     /// This function shows the Welcome screen
     void UI_WelcomePopup();
     /// This function shows new project popup

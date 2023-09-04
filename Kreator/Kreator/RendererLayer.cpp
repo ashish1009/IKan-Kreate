@@ -18,6 +18,9 @@ extern std::string IKanVersion;
 
 namespace Kreator
 {
+#define RETRUN_IF_NO_PROJECT() \
+if (!Project::GetActive()) return
+
   // Kretor Resource Path
 #define KreatorResourcePath(path) Utils::FileSystem::Absolute(m_clientResourcePath / path)
 
@@ -241,7 +244,12 @@ namespace Kreator
     UI_NewProjectPopup();
     UI_FolderExplorer();
     
+    RETRUN_IF_NO_PROJECT();
+    
+    // Dockings
+    UI_StartMainWindowDocking();
     m_panels.OnImGuiRender();
+    UI_EndMainWindowDocking();
   }
   
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
@@ -373,6 +381,74 @@ namespace Kreator
   }
   
   // UI APIS ---------------------------------------------------------------------------------------------------------
+  void RendererLayer::UI_StartMainWindowDocking()
+  {
+    static bool optFullscreenPersistant = true;
+    static ImGuiDockNodeFlags optFlags = ImGuiDockNodeFlags_None;
+    bool optFullscreen = optFullscreenPersistant;
+    
+    // ImGui Input Output Fonts
+    ImGuiIO& io = ImGui::GetIO();
+    ImGuiStyle& style = ImGui::GetStyle();
+    
+    io.ConfigWindowsResizeFromEdges = io.BackendFlags & ImGuiBackendFlags_HasMouseCursors;
+    
+    // We are using the ImGuiWindowFlags_NoDocking flag to make the parent window not dockable into,
+    // because it would be confusing to have two docking targets within each others.
+    ImGuiWindowFlags windowFlags = /* ImGuiWindowFlags_MenuBar |*/ ImGuiWindowFlags_NoDocking;
+    if (optFullscreen)
+    {
+      ImGuiViewport* viewport = ImGui::GetMainViewport();
+      ImGui::SetNextWindowPos(viewport->Pos);
+      ImGui::SetNextWindowSize(viewport->Size);
+      ImGui::SetNextWindowViewport(viewport->ID);
+      ImGui::PushStyleVar(ImGuiStyleVar_WindowRounding, 0.0f);
+      ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 0.0f);
+      windowFlags |= ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoCollapse;
+      windowFlags |= ImGuiWindowFlags_NoResize | ImGuiWindowFlags_NoMove;
+      windowFlags |= ImGuiWindowFlags_NoBringToFrontOnFocus | ImGuiWindowFlags_NoNavFocus;
+    }
+    
+#if 0
+    // When using ImGuiDockNodeFlags_PassthruDockspace, DockSpace() will render our background and handle
+    // the pass-thru hole, so we ask Begin() to not render a background.
+    if (optFlags & ImGuiDockNodeFlags_PassthruCentralNode)
+    {
+      windowFlags |= ImGuiWindowFlags_NoBackground;
+    }
+#endif
+    
+    const Window& window = Application::Get().GetWindow();
+    bool isMaximized = window.IsMaximized();
+    
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, isMaximized ? ImVec2(6.0f, 6.0f) : ImVec2(3.0f, 3.0f));
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowBorderSize, 3.0f);
+    ImGui::PushStyleColor(ImGuiCol_MenuBarBg, ImVec4{ 0.0f, 0.0f, 0.0f, 0.0f });
+    ImGui::Begin("DockSpace Demo", nullptr, windowFlags);
+    ImGui::PopStyleColor(); // MenuBarBg
+    ImGui::PopStyleVar(2);
+    
+    if (optFullscreen)
+    {
+      ImGui::PopStyleVar(2);
+    }
+    
+    // Dockspace
+    float minWinSizeX = style.WindowMinSize.x;
+    style.WindowMinSize.x = 250.0f;
+    if (io.ConfigFlags & ImGuiConfigFlags_DockingEnable)
+    {
+      ImGuiID dockspaceID = ImGui::GetID("MyDockspace");
+      ImGui::DockSpace(dockspaceID, ImVec2(0.0f, 0.0f), optFlags);
+    }
+    style.WindowMinSize.x = minWinSizeX;
+  }
+  
+  void RendererLayer::UI_EndMainWindowDocking()
+  {
+    ImGui::End();
+  }
+  
   void RendererLayer::UI_WelcomePopup()
   {
     if (m_showWelcomePopup)
