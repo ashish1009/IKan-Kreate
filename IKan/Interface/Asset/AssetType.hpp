@@ -37,6 +37,7 @@ namespace IKan
     
     // Scene
     { ".ikscene", AssetType::Scene },
+    { ".ikscene.auto", AssetType::Scene },
     
     // Fonts
     { ".ttf", AssetType::Font },

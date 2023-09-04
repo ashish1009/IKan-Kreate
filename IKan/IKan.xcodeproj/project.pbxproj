@@ -114,7 +114,7 @@
 		B233673D2A75905100BC7B8B /* AssetType.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233673B2A75905100BC7B8B /* AssetType.hpp */; };
 		B23367432A75911100BC7B8B /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23367412A75911100BC7B8B /* Asset.cpp */; };
 		B23367442A75911100BC7B8B /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23367422A75911100BC7B8B /* Asset.hpp */; };
-		B23367502A7592C000BC7B8B /* AssetMedata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233674E2A7592C000BC7B8B /* AssetMedata.cpp */; };
+		B23367502A7592C000BC7B8B /* AssetMetadata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B233674E2A7592C000BC7B8B /* AssetMetadata.cpp */; };
 		B23367512A7592C000BC7B8B /* AssetMetadata.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B233674F2A7592C000BC7B8B /* AssetMetadata.hpp */; };
 		B2336A4A2A76399200BC7B8B /* AssetSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2336A482A76399200BC7B8B /* AssetSerializer.cpp */; };
 		B2336A4B2A76399200BC7B8B /* AssetSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2336A492A76399200BC7B8B /* AssetSerializer.hpp */; };
@@ -333,7 +333,7 @@
 		B233673B2A75905100BC7B8B /* AssetType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetType.hpp; sourceTree = "<group>"; };
 		B23367412A75911100BC7B8B /* Asset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Asset.cpp; sourceTree = "<group>"; };
 		B23367422A75911100BC7B8B /* Asset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Asset.hpp; sourceTree = "<group>"; };
-		B233674E2A7592C000BC7B8B /* AssetMedata.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetMedata.cpp; sourceTree = "<group>"; };
+		B233674E2A7592C000BC7B8B /* AssetMetadata.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetMetadata.cpp; sourceTree = "<group>"; };
 		B233674F2A7592C000BC7B8B /* AssetMetadata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMetadata.hpp; sourceTree = "<group>"; };
 		B23367832A75930700BC7B8B /* Yaml.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Yaml.xcodeproj; path = Yaml/Yaml.xcodeproj; sourceTree = "<group>"; };
 		B2336A462A7593BE00BC7B8B /* YAMLSerializerHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YAMLSerializerHelper.h; sourceTree = "<group>"; };
@@ -718,7 +718,7 @@
 			children = (
 				B233673A2A75905100BC7B8B /* AssetType.cpp */,
 				B23367412A75911100BC7B8B /* Asset.cpp */,
-				B233674E2A7592C000BC7B8B /* AssetMedata.cpp */,
+				B233674E2A7592C000BC7B8B /* AssetMetadata.cpp */,
 				B2336A482A76399200BC7B8B /* AssetSerializer.cpp */,
 				B2336A502A763A4C00BC7B8B /* AssetImporter.cpp */,
 				B2336A582A763B1400BC7B8B /* AssetRegistry.cpp */,
@@ -1167,7 +1167,7 @@
 				B23365362A74422800BC7B8B /* FixedCamera.cpp in Sources */,
 				B233651C2A743D0E00BC7B8B /* Pipeline.cpp in Sources */,
 				B23365762A752E0A00BC7B8B /* Font.cpp in Sources */,
-				B23367502A7592C000BC7B8B /* AssetMedata.cpp in Sources */,
+				B23367502A7592C000BC7B8B /* AssetMetadata.cpp in Sources */,
 				B2CF831B2A77DAF0006B2D54 /* ImGuiScoped.cpp in Sources */,
 				B23365602A751D6B00BC7B8B /* RenderPass.cpp in Sources */,
 				B24077182A72651400221919 /* Common.cpp in Sources */,

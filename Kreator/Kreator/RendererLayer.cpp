@@ -225,6 +225,7 @@ namespace Kreator
     Ref<Project> project = CreateRef<Project>();
     ProjectSerializer serializer(project);
     serializer.Deserialize(filepath);
+    Project::SetActive(project);
   }
   
   void RendererLayer::PushProjectToRecentProjects(std::filesystem::path projectFile)
