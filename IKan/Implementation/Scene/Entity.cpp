@@ -63,6 +63,39 @@ namespace IKan
   {
     GetComponent<RelationshipComponent>().parentHandle = parent;
   }
+  
+  bool Entity::IsAncesterOf(Entity entity)
+  {
+    // Get children on this entity
+    const auto& children = Children();
+
+    // If no children then this entity is not ancestor of any entity
+    if (children.empty())
+    {
+      return false;
+    }
+
+    // Search for 'entity' in children
+    for (UUID child : children)
+    {
+      if (child == entity.GetUUID())
+      {
+        return true;
+      }
+
+      if (m_scene->GetEntityWithUUID(child).IsAncesterOf(entity))
+      {
+        return true;
+      }
+    }
+
+    return false;
+  }
+
+  bool Entity::IsDescendantOf(Entity entity)
+  {
+    return entity.IsAncesterOf(*this);
+  }
 
   TransformComponent& Entity::Transform()
   {
