@@ -104,10 +104,25 @@ namespace Kreator
     void UI_NewProjectPopup();
     /// This function update the folder explorer output
     void UI_FolderExplorer();
+    /// This function renders our title bar
+    float UI_DrawTitlebar();
+    /// This function handle the drag and Click on title bar
+    /// - Parameter titlebarHeight: Title bar height
+    void UI_TitlebarDragArea(float titlebarHeight);
+    /// This function renders the Menu bar for Title bar
+    void UI_MenuBar();
+    /// This function renders window buttons
+    void UI_WindowButtons();
+    /// This function shows the Statistics Panel
+    void UI_StatisticsPanel();
+    /// This function shows the About Application popup
+    void UI_AboutPopup();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
+    bool m_showAboutPopup = false;
+    bool m_showStatisticsPanel = true;
 
     // Applicaiton Icons ---------------------------------
     Ref<Image> m_shadowTexture;

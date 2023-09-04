@@ -49,6 +49,51 @@ if (!Project::GetActive()) return
     }
   } // namespace Utils
   
+  // Kreator UI utils
+  namespace UI_Utils
+  {
+    // Hovered Item Color
+    static const ImU32 s_hoveredColor = Kreator_UI::Color::HoveredItem;
+    
+    // Function to push Dark color on active
+    static const auto pushDarkTextIfActive = [](const char* menuName)
+    {
+      if (ImGui::IsPopupOpen(menuName))
+      {
+        ImGui::PushStyleColor(ImGuiCol_Text, UI::Theme::Color::BackgroundDark);
+        return true;
+      }
+      return false;
+    };
+    
+    /// This function Create template for Menu Item in Menu Bar
+    /// - Parameters:
+    ///   - title: Title of Menu
+    ///   - func: function of Menu
+    ///   - pop_func: Pop item highlight
+    template<typename PopFunction, typename UIFunction>
+    void AddMenu(const char* title, PopFunction popItemHighlight, UIFunction menuFunc)
+    {
+      // Change Text colored to dark if item is opened
+      bool pushItemColor = pushDarkTextIfActive(title);
+      
+      if (ImGui::BeginMenu(title))
+      {
+        popItemHighlight();
+        {
+          UI::ScopedColor hovered(ImGuiCol_HeaderHovered, s_hoveredColor);
+          menuFunc();
+        }
+        ImGui::EndMenu();
+      }
+      if (pushItemColor)
+      {
+        ImGui::PopStyleColor();
+      }
+    }
+    
+  } // namespace UI_Utils
+
   void Viewport::UpdateMousePos()
   {
     auto [mx, my] = ImGui::GetMousePos();
@@ -249,8 +294,12 @@ if (!Project::GetActive()) return
     // Dockings
     UI_StartMainWindowDocking();
     UI_Viewport();
+    UI_StatisticsPanel();
     m_panels.OnImGuiRender();
     UI_EndMainWindowDocking();
+    
+    // Popups
+    UI_AboutPopup();
   }
   
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
@@ -434,6 +483,13 @@ if (!Project::GetActive()) return
       ImGui::PopStyleVar(2);
     }
     
+    // Render the title if original title bar is hidden
+    if (Application::Get().GetSpecification().windowSpecification.hideTitleBar)
+    {
+      float titlebarHeight = UI_DrawTitlebar();
+      UI::SetCursorPosY(titlebarHeight + ImGui::GetCurrentWindow()->WindowPadding.y);
+    }
+    
     // Dockspace
     float minWinSizeX = style.WindowMinSize.x;
     style.WindowMinSize.x = 250.0f;
@@ -486,6 +542,497 @@ if (!Project::GetActive()) return
     ImGui::PopStyleVar();
   }
   
+  float RendererLayer::UI_DrawTitlebar()
+  {
+    float titlebarHeight = 40.0f;
+    
+    const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
+    
+    // Draw the title Bar rectangle ---------------------------------------------------
+    const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
+    const ImVec2 titlebarMax =
+    {
+      ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth(),
+      ImGui::GetCursorScreenPos().y + titlebarHeight
+    };
+    
+    UI::SetCursorPos(ImVec2(windowPadding.x, windowPadding.y));
+    auto* drawList = ImGui::GetWindowDrawList();
+    drawList->AddRectFilled(titlebarMin, titlebarMax, UI::Theme::Color::Titlebar);
+    
+    // Drag and Control the window with user title bar ---------------------------------
+    UI::SetCursorPos(windowPadding);
+    UI_TitlebarDragArea(titlebarHeight);
+    
+    // Draw Kreator Logo ---------------------------------------------------------------
+    const int32_t logoWidth = titlebarHeight - 10;
+    const int32_t logoHeight = titlebarHeight - 10;
+    const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
+    const ImVec2 logoRectStart =
+    {
+      ImGui::GetItemRectMin().x + logoOffset.x,
+      ImGui::GetItemRectMin().y + logoOffset.y
+    };
+    const ImVec2 logoRectMax =
+    {
+      logoRectStart.x + logoWidth,
+      logoRectStart.y + logoHeight
+    };
+    drawList->AddImage(UI::GetTextureID(m_applicationIcon), logoRectStart, logoRectMax);
+    
+    // Draw the Menu Tab in Title bar --------------------------------------------------
+    ImGui::SetItemAllowOverlap();
+    
+    const float logoOffsetX = 6.0f * 2.0f + 41.0f + windowPadding.x;
+    UI::SetCursorPos(ImVec2(logoOffsetX, 4.0f));
+    
+    UI_MenuBar();
+    
+    // Round Bar -------------------------------------------------------------------------
+    UI::SetCursorPosX(ImGui::GetWindowWidth() / 4);
+    UI::SetCursorPosY(titlebarHeight / 3);
+    
+    const ImVec2 roundBarMin = ImGui::GetCursorScreenPos();
+    const ImVec2 roundBarMax =
+    {
+      ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth() / 2,
+      ImGui::GetCursorScreenPos().y + 23
+    };
+    drawList->AddRectFilled(roundBarMin, roundBarMax, Kreator_UI::Color::TitleBarDark, 10);
+    UI::ShiftCursorY(5);
+        
+    // Render the Window Buttons -------------------------------------------------------
+    UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
+    UI::SetCursorPosY(20.0f);
+    UI_WindowButtons();
+    
+    return titlebarHeight;
+  }
+  
+  void RendererLayer::UI_MenuBar()
+  {
+    // Menu Bar Rectactangle Size
+    const ImRect menuBarRect =
+    {
+      ImGui::GetCursorPos(), // Min Rect Coord
+      {ImGui::GetContentRegionAvail().x, ImGui::GetFrameHeightWithSpacing()} // Max Rect Coord
+    };
+    
+    ImGui::BeginGroup();
+    if (UI::BeginMenuBar(menuBarRect))
+    {
+      bool menuOpen = ImGui::IsPopupOpen("##menubar", ImGuiPopupFlags_AnyPopupId);
+      
+      // Push the Colors if Menu is active
+      if (menuOpen)
+      {
+        const ImU32 colActive = UI::ColorWithSaturation(Kreator_UI::Color::Accent, 0.5f);
+        ImGui::PushStyleColor(ImGuiCol_Header, colActive);
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, colActive);
+      }
+      
+      // Function to Pop the highlight Color
+      auto popItemHighlight = [&menuOpen]
+      {
+        if (menuOpen)
+        {
+          ImGui::PopStyleColor(2);
+          menuOpen = false;
+        }
+      };
+      
+      // Menu Items
+      UI_Utils::AddMenu("File", popItemHighlight, [this]() {
+        if (ImGui::MenuItem("Create Project...", "Cmd + Shift + N"))
+        {
+          m_showCreateNewProjectPopup = true;
+        }
+        if (ImGui::MenuItem("Open Project...", "Cmd + Shift + O"))
+        {
+          FolderExplorer::OpenPopup("Open Project", m_allProjectsPath);
+          m_folderExplorerAction = FolderExplorerAction::OpenProject;
+        }
+        if (ImGui::BeginMenu("Open Recent"))
+        {
+          size_t i = 0;
+          for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+          {
+            if (i > 10)
+            {
+              break;
+            }
+            
+            if (Utils::FileSystem::Exists(it->second.filePath))
+            {
+              if (ImGui::MenuItem(it->second.name.c_str()))
+              {
+                // stash filepath away and defer actual opening of project until it is "safe" to do so
+                m_projectFilePathBuffer.StrCpy(it->second.filePath.data());
+                
+                RecentProject projectEntry;
+                projectEntry.name = it->second.name;
+                projectEntry.filePath = it->second.filePath;
+                projectEntry.lastOpened = time(NULL);
+                
+                it = m_userPreferences->recentProjects.erase(it);
+                
+                m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+                
+                UserPreferencesSerializer preferencesSerializer(m_userPreferences);
+                preferencesSerializer.Serialize(m_userPreferences->filePath);
+                
+                OpenProject(projectEntry.filePath);
+                break;
+              }
+            }
+            else
+            {
+              m_userPreferences->recentProjects.erase(it);
+              UserPreferencesSerializer serializer(m_userPreferences);
+              serializer.Serialize(m_userPreferences->filePath);
+              break;
+            }
+            
+            i++;
+          }
+          ImGui::EndMenu();
+        }
+        
+        ImGui::Separator();
+        if (ImGui::MenuItem("Exit", "Cmd + Q"))
+        {
+          Application::Get().Close();
+        }
+      });
+      
+      UI_Utils::AddMenu("Edit", popItemHighlight, [this]() {
+        
+      });
+      
+      UI_Utils::AddMenu("View", popItemHighlight, [this]() {
+        for (auto& [id, panelData] : m_panels.GetPanels())
+        {
+          ImGui::MenuItem(panelData.name, nullptr, &panelData.isOpen);
+        }
+      });
+      
+      UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
+        if (ImGui::MenuItem("Show Wlecome Screen", nullptr, m_userPreferences->showWelcomeScreen))
+        {
+          m_userPreferences->showWelcomeScreen = m_userPreferences->showWelcomeScreen ? false : true;
+          UserPreferencesSerializer serializer(m_userPreferences);
+          serializer.Serialize(m_userPreferences->filePath);
+        }
+      });
+      
+      UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
+        if (ImGui::MenuItem("About"))
+        {
+          m_showAboutPopup = true;
+        }
+      });
+      
+      if (menuOpen)
+      {
+        ImGui::PopStyleColor(2);
+      }
+    }
+    UI::EndMenuBar();
+    ImGui::EndGroup();
+  }
+  
+  void RendererLayer::UI_WindowButtons()
+  {
+    // Window buttons
+    const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 0.9f);
+    const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 1.2f);
+    const ImU32 buttonColP = Kreator_UI::Color::TextDarker;
+    const float buttonWidth = 14.0f;
+    const float buttonHeight = 14.0f;
+    const Window& window = Application::Get().GetWindow();
+    
+    // Minimize Button
+    {
+      const int iconHeight = m_iconMinimize->GetHeight();
+      const float padY = (buttonHeight - (float)iconHeight) / 2.0f;
+      
+      if (ImGui::InvisibleButton("Minimize", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        window.Iconify();
+      }
+      UI::DrawButtonImage(m_iconMinimize, buttonColN, buttonColH, buttonColP, UI::RectExpanded(UI::GetItemRect(), 0.0f, -padY));
+    }
+    
+    UI::SameLine();
+    // Maximize Button
+    {
+      bool isMaximized = window.IsMaximized();
+      if (ImGui::InvisibleButton("Maximize/Restore", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        (isMaximized) ? window.Restore() : window.Maximize();
+      }
+      UI::DrawButtonImage(isMaximized ? m_iconRestore : m_iconMaximize, buttonColN, buttonColH, buttonColP);
+    }
+    
+    UI::SameLine();
+    // Close Button
+    {
+      if (ImGui::InvisibleButton("Close", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        Application::Get().Close();
+      }
+      UI::DrawButtonImage(m_iconClose, UI::Theme::Color::Text, UI::ColorWithMultipliedValue(UI::Theme::Color::Text, 1.4f), buttonColP);
+    }
+  }
+  void RendererLayer::UI_TitlebarDragArea(float titlebarHeight)
+  {
+    static float moveOffsetX;
+    static float moveOffsetY;
+    const float titleBarWidth = ImGui::GetContentRegionAvail().x;
+    
+    auto* rootWindow = ImGui::GetCurrentWindow()->RootWindow;
+    const float windowWidth = (int32_t)rootWindow->RootWindow->Size.x;
+    
+    if (ImGui::InvisibleButton("##titleBarDragZone", ImVec2(titleBarWidth, titlebarHeight * 2),
+                               ImGuiButtonFlags_PressedOnClick | ImGuiButtonFlags_AllowItemOverlap))
+    {
+      ImVec2 point = ImGui::GetMousePos();
+      ImRect rect = rootWindow->Rect();
+      
+      // Calculate the difference between the cursor pos and window pos
+      moveOffsetX = point.x - rect.Min.x;
+      moveOffsetY = point.y - rect.Min.y;
+    }
+    
+    const Window& window = Application::Get().GetWindow();
+    bool maximized = window.IsMaximized();
+    
+    // Maximize or restore on doublt click
+    if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) and ImGui::IsItemHovered())
+    {
+      (maximized) ? window.Restore() : window.Maximize();
+    }
+    else if (ImGui::IsItemActive())
+    {
+      if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
+      {
+        if (maximized)
+        {
+          window.Restore();
+          
+          // Get the original size of window
+          [[maybe_unused]] int32_t newWidth = window.GetWidth();
+          [[maybe_unused]] int32_t newHeight = window.GetHeight();
+          
+          // Offset position proportionally to mouse position on titlebar
+          // This ensures we dragging window relatively to cursor position on titlebar
+          // correctly when window size changes
+          if (windowWidth - (float)newWidth > 0.0f)
+          {
+            moveOffsetX *= (float)newWidth / windowWidth;
+          }
+        }
+        
+        // Update the new position of window
+        ImVec2 point = ImGui::GetMousePos();
+        window.SetPosition({point.x - moveOffsetX, point.y - moveOffsetY});
+      }
+    }
+  }
+  
+  void RendererLayer::UI_AboutPopup()
+  {
+    auto boldFont = Kreator_UI::GetSemiHeaderFont();
+    auto largeFont = Kreator_UI::GetHugeHeaderFont();
+    
+    if (m_showAboutPopup)
+    {
+      ImGui::OpenPopup("About##AboutPopup");
+      m_showAboutPopup = false;
+    }
+    
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 600,0 });
+    if (ImGui::BeginPopupModal("About##AboutPopup", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoTitleBar))
+    {
+      ImGui::PushFont(largeFont);
+      ImGui::Text("IKan-Kreate");
+      ImGui::PopFont();
+      
+      ImGui::Separator();
+      ImGui::TextWrapped("IKan-Kreate is a revolutionary game engine designed to empower game developers on the Mac OS");
+      
+      auto cap = Renderer::Capabilities::Get();
+      ImGui::TextWrapped("Vendor %s", cap.vendor.c_str());
+      ImGui::TextWrapped("Renderer %s", cap.renderer.c_str());
+      ImGui::TextWrapped("Version %s", cap.version.c_str());
+      
+      ImGui::Separator();
+      ImGui::PushFont(boldFont);
+      ImGui::Text("IKan Core Team");
+      ImGui::PopFont();
+      ImGui::Text("Ashish");
+      ImGui::Separator();
+      
+      if ((ImGui::Button("OK")) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+      {
+        ImGui::CloseCurrentPopup();
+      }
+      ImGui::EndPopup();
+    }
+  }
+  
+  void RendererLayer::UI_StatisticsPanel()
+  {
+    UI::ScopedFont sameWidth(Kreator_UI::GetFixedWidthFont());
+    if (!m_showStatisticsPanel)
+    {
+      return;
+    }
+    
+    if (ImGui::Begin("Statistics"))
+    {
+      UI::ScopedColor windowBg (ImGuiCol_WindowBg, UI::Theme::Color::BackgroundDark);
+      UI::ScopedColor childBg (ImGuiCol_ChildBg, UI::Theme::Color::BackgroundDark);
+      
+      ImGuiTabBarFlags tabBarFlags = ImGuiTabBarFlags_None;
+      if (ImGui::BeginTabBar("StatisticsTabs", tabBarFlags))
+      {
+        Application& app = Application::Get();
+        
+        if (ImGui::BeginTabItem("Renderer"))
+        {
+          auto& caps = Renderer::Capabilities::Get();
+          ImGui::Text("Vendor     : %s", caps.vendor.c_str());
+          ImGui::Text("Renderer   : %s", caps.renderer.c_str());
+          ImGui::Text("Version    : %s", caps.version.c_str());
+          
+          ImGui::Separator();
+          ImGui::Text("Frame Time : %.2fms\n", app.GetTimestep().MilliSeconds());
+          ImGui::Text("FPS        : %.2fms\n", ImGui::GetIO().Framerate);
+          
+          ImGui::Separator();
+          ImGui::EndTabItem();
+        }
+        
+        if (ImGui::BeginTabItem("Performance"))
+        {
+          ImGui::Text("Frame Time : %.2fms\n", app.GetTimestep().MilliSeconds());
+          ImGui::Text("FPS        : %.2fms\n", app.GetTimestep().FPS());
+          ImGui::Separator();
+          
+          const auto& perFrameData = PerformanceProfiler::Get()->GetPerFrameData();
+          for (auto&& [name, time] : perFrameData)
+          {
+            ImGui::Text("%s: %.3fms\n", name, time);
+          }
+          ImGui::Separator();
+          ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Memory"))
+        {
+#if IK_TRACK_MEMORY
+          const auto& allocStats = Memory::GetAllocationStats();
+          const auto& allocStatsMap = Allocator::GetAllocationStats();
+          
+          {
+            std::string totalAllocatedStr = StringUtils::BytesToString(allocStats.TotalAllocated);
+            std::string totalFreedStr = StringUtils::BytesToString(allocStats.TotalFreed);
+            std::string totalUsedStr = StringUtils::BytesToString(allocStats.TotalAllocated - allocStats.TotalFreed);
+            
+            ImGui::Text("Total allocated    : %s", totalAllocatedStr.c_str());
+            ImGui::Text("Total freed        : %s", totalFreedStr.c_str());
+            ImGui::Text("Current usage      : %s", totalUsedStr.c_str());
+          }
+          
+          ImGui::Separator();
+          
+          static std::string searchedString;
+          ImGui::SetNextItemWidth(-1);
+          UI::Widgets::SearchWidget(searchedString.data());
+          
+          struct MemoryRefEntry
+          {
+            const char* Category;
+            size_t Size;
+          };
+          std::vector<MemoryRefEntry> sortedEntries;
+          sortedEntries.reserve(allocStatsMap.size());
+          for (auto& [category, stats] : allocStatsMap)
+          {
+            if (!UI::IsMatchingSearch(category, searchedString))
+            {
+              continue;
+            }
+            
+            sortedEntries.push_back({ category, stats.TotalAllocated - stats.TotalFreed });
+          }
+          
+          std::sort(sortedEntries.begin(), sortedEntries.end(), [](auto& a, auto& b) { return a.Size > b.Size; });
+          
+          for (const auto& entry : sortedEntries)
+          {
+            std::string usageStr = StringUtils::BytesToString(entry.Size);
+            
+            if (const char* slash = strstr(entry.Category, "/"))
+            {
+              std::string tag = slash;
+              auto lastSlash = tag.find_last_of("/");
+              if (lastSlash != std::string::npos)
+              {
+                tag = tag.substr(lastSlash + 1, tag.size() - lastSlash);
+              }
+              ImGui::TextColored(ImVec4(0.3f, 0.4f, 0.9f, 1.0f), "%s: %s", tag.c_str(), usageStr.c_str());
+            }
+            else
+            {
+              const char* category = entry.Category;
+              if (category = strstr(entry.Category, "class"); category)
+              {
+                category += 6;
+              }
+              ImGui::Text("%s: %s", category, usageStr.c_str());
+              
+            }
+          }
+#else
+          ImGui::TextColored(ImVec4(0.9f, 0.35f, 0.3f, 1.0f), "Memory is not being tracked because IK_TRACK_MEMORY is not defined!");
+#endif
+          ImGui::Separator();
+          ImGui::EndTabItem();
+        }
+        if (ImGui::BeginTabItem("Renderer Stats"))
+        {
+          const auto& stats = RendererStatistics::Get();
+          
+          ImGui::Text("Renderer General Stats");
+          ImGui::Text("Draw Calls            : %d", stats.drawCalls);
+          ImGui::Text("Vertex Count          : %d", stats.vertexCount);
+          ImGui::Text("Vertex Buffer Size    : %d B", stats.vertexBufferSize);
+          ImGui::Text("Index Count           : %d B", stats.indexCount);
+          ImGui::Text("Index Buffer Size     : %d B", stats.indexBufferSize);
+          ImGui::Text("Texture Buffer Size   : %d B", stats.textureBufferSize);
+          
+          ImGui::Separator();
+          ImGui::Text("Renderer 2D Stats");
+          ImGui::Text("Quads in this batch   : %d", stats._2d.quads);
+          ImGui::Text("Max Quad Per Batch    : %d", stats._2d.maxQuads);
+          ImGui::Text("Circles in this batch : %d", stats._2d.circles);
+          ImGui::Text("Max Circles Per Batch : %d", stats._2d.maxCircles);
+          ImGui::Text("Lines in this batch   : %d", stats._2d.lines);
+          ImGui::Text("Max Lines Per Batch   : %d", stats._2d.maxLines);
+          ImGui::Text("Chars in this batch   : %d", stats._2d.chars);
+          ImGui::Text("Max Char Per Batch    : %d", 16);
+          
+          ImGui::Separator();
+          ImGui::EndTabItem();
+        }
+        ImGui::EndTabBar();
+      }
+    }
+    ImGui::End();
+  }
   void RendererLayer::UI_WelcomePopup()
   {
     if (m_showWelcomePopup)
