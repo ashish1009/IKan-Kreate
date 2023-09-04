@@ -36,9 +36,16 @@ namespace IKan
     /// This function returns name of entity
     const std::string& Name() const;
     
+    /// This function returns the parent of entity
+    Entity GetParent();
     /// This function returns the parent UUID of entity
     UUID GetParentUUID() const;
+    /// This function returns the chidlenrs of entity
+    std::vector<UUID>& Children();
 
+    /// This function returns the UUID of Current entity
+    UUID GetUUID() const;
+    
     /// This function returns the entity handle from this Entity
     operator uint32_t () const;
     /// This function returns Entity as entity handle
@@ -52,9 +59,6 @@ namespace IKan
     /// - parameter other: other entity
     bool operator!=(const Entity& other) const;
     
-    /// This function returns the UUID of Current entity
-    UUID GetUUID() const;
-        
     // Component Manager --------------------------------------------------------------------------------------------
     /// This function adds component in Current Entity
     /// - Parameter args: Arguments needed to construct the component NOTE : T is type of component

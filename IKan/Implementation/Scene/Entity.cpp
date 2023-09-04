@@ -33,9 +33,22 @@ namespace IKan
     return HasComponent<TagComponent>() ? GetComponent<TagComponent>().tag : s_noName;
   }
 
+  Entity Entity::GetParent()
+  {
+    return m_scene->TryGetEntityWithUUID(GetParentUUID());
+  }
   UUID Entity::GetParentUUID() const
   {
     return GetComponent<RelationshipComponent>().parentHandle;
+  }
+  std::vector<UUID>& Entity::Children()
+  {
+    return GetComponent<RelationshipComponent>().children;
+  }
+
+  UUID Entity::GetUUID() const
+  {
+    return GetComponent<IDComponent>().ID;
   }
 
   Entity::operator uint32_t () const
@@ -59,10 +72,5 @@ namespace IKan
   bool Entity::operator!=(const Entity& other) const
   {
     return !(*this == other);
-  }
-  
-  UUID Entity::GetUUID() const
-  {
-    return GetComponent<IDComponent>().ID;
   }
 } // namespace IKan

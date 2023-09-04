@@ -16,7 +16,10 @@
 
 namespace IKan
 {
-  class SceneRenderer;  
+  class SceneRenderer;
+  class Entity;
+  
+  using EntityMap = std::unordered_map<UUID, Entity>;
   static const std::string SceneExtension = ".ikscene";
 
   class Scene : public Asset
@@ -55,7 +58,6 @@ namespace IKan
     ///  - renderer: Scene renderer cintext
     void OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer);
     
-    // Runtime
     /// This function handle runtime start
     void OnRuntimeStart();
     /// This function handle runtime stop
@@ -66,6 +68,7 @@ namespace IKan
     /// This function handle simulation stop
     void OnSimulationStop();
     
+    // Fundamentals ------------------------------------------------------------------------------------------------
     /// this function copy scene to target
     /// - Parameter target: target scene
     void CopyTo(Ref<Scene>& target);
@@ -74,6 +77,8 @@ namespace IKan
     ///   - width: width of view port
     ///   - height: width of view port
     void SetViewportSize(uint32_t width, uint32_t height);
+    
+    // Entity Manager ----------------------------------------------------------------------------------------------
 
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
@@ -85,6 +90,16 @@ namespace IKan
     const std::string& GetName() const;
     /// This function returns the reference of registry
     entt::registry& GetRegistry();
+
+    /// This function returns entity with id as specified, or empty entity if cannot be found - caller must check
+    /// - Parameter id: UUID of entity
+    Entity TryGetEntityWithUUID(UUID id) const;
+    /// This function return entity with id as specified. entity is expected to exist (runtime error if it doesn't)
+    /// - Parameter id: UUID for entity
+    Entity GetEntityWithUUID(UUID id) const;
+    /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
+    /// - Parameter entityHandle: handle for entity
+    Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
 
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
@@ -106,6 +121,8 @@ namespace IKan
     uint32_t m_numEntities = 0;
     int32_t m_maxEntityID = -1;
     
+    // Entity ---------------------------
+    EntityMap m_entityIDMap;
     friend class Entity;
   };
 } // namespace IKan

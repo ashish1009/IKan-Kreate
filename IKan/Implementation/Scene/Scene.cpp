@@ -7,6 +7,7 @@
 
 #include "Scene.hpp"
 #include "Scene/Component.hpp"
+#include "Scene/Entity.hpp"
 
 namespace IKan
 {
@@ -93,6 +94,15 @@ namespace IKan
     m_viewportWidth = width;
     m_viewportHeight = height;
   }
+  
+  Entity Scene::TryGetEntityWithUUID(UUID id) const
+  {
+    if (const auto iter = m_entityIDMap.find(id); iter != m_entityIDMap.end())
+    {
+      return iter->second;
+    }
+    return Entity{};
+  }
 
   void Scene::SetName(const std::string &name)
   {
@@ -108,4 +118,17 @@ namespace IKan
   {
     return m_registry;
   }
+  
+  Entity Scene::GetEntityWithUUID(UUID id) const
+  {
+    IK_LOG_VERIFY(m_entityIDMap.find(id) != m_entityIDMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+    return m_entityIDMap.at(id);
+  }
+  
+  Entity Scene::GetEntityWithEntityHandle(int32_t entityHandle) const
+  {
+    auto& ID = m_registry.get<IDComponent>(static_cast<entt::entity>(entityHandle)).ID;
+    return GetEntityWithUUID(ID);
+  }
+
 } // namespace IKan
