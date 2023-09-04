@@ -112,10 +112,12 @@ namespace Kreator
     // Project Data --------------------------------------
     bool m_showCreateNewProjectPopup = false;
     Ref<UserPreferences> m_userPreferences;
-    std::filesystem::path m_allProjectsPath;
-    std::filesystem::path m_templateProjectDir;
+    std::filesystem::path m_allProjectsPath = "";
+    std::filesystem::path m_templateProjectDir = "";
+    std::filesystem::path m_openProjectPath = "";
     GUI_InputBuffer<255> m_projectNameBuffer;
     GUI_InputBuffer<512> m_projectFilePathBuffer;
+    Ref<Image> m_projectIcon;
 
     // Editor Data ---------------------------------------
     enum class FolderExplorerAction

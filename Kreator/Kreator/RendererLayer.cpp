@@ -109,6 +109,7 @@ namespace Kreator
     // Other Icons
     m_newProject = Image::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
     m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
+    m_projectIcon = Image::Create(KreatorResourcePath("Textures/Icons/Project.png"));
  }
   
   RendererLayer::~RendererLayer()
@@ -489,6 +490,57 @@ namespace Kreator
         }
         ImGui::EndChild(); // About/New_Project
 
+        // Recent Project
+        ImGui::TableSetColumnIndex(1);
+        ImGui::BeginChild("##Recent_Projects");
+        {
+          // Title of Popup --------------------------------------------------
+          {
+            UI::ScopedColor muted(ImGuiCol_Text, IM_COL32(155, 155, 155, 255));
+            
+            static const std::string title = "Recent Projects";
+            static const auto titleSize = ImGui::CalcTextSize(title.c_str());
+            
+            UI::ScopedFont version(Kreator_UI::GetSemiHeaderFont());
+            UI::SetCursorPosY(10);
+            UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - titleSize.x / 1.4);
+            ImGui::Text(title.c_str());
+            ImGui::Separator();
+          }
+
+          UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+          UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 20.0f));
+          UI::ScopedFont semiHeader(Kreator_UI::GetSemiHeaderFont());
+          
+          m_openProjectPath = "";
+          for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+          {
+            if (!Utils::FileSystem::Exists(it->second.filePath))
+            {
+              m_userPreferences->recentProjects.erase(it);
+              break;
+            }
+            
+            ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
+            bool open = UI::TreeNode("##Recent_Projects", it->second.name, flags, m_projectIcon);
+            if (ImGui::IsItemClicked())
+            {
+              m_openProjectPath = it->second.filePath;
+            }
+            
+            if(open)
+            {
+              ImGui::TreePop();
+            }
+          }
+          
+          if(m_openProjectPath != "")
+          {
+            OpenProject();
+            ImGui::CloseCurrentPopup();
+          }
+        }
+        ImGui::EndChild(); // Recent_Projects
         ImGui::EndTable();
       }
       
@@ -517,7 +569,7 @@ namespace Kreator
     if (ImGui::BeginPopupModal("New Project", nullptr, ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove
                                | ImGuiWindowFlags_NoTitleBar))
     {
-      // Title of Popupt --------------------------------------------------
+      // Title of Popup --------------------------------------------------
       {
         UI::ScopedColor muted(ImGuiCol_Text, IM_COL32(155, 155, 155, 255));
 
@@ -580,11 +632,11 @@ namespace Kreator
         if ((UI::DrawRoundButton("Cancel", Kreator_UI::ColorVec3FromU32(Kreator_UI::Color::NiceBlue), 20)) or
             (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
         {
-//          if (!Project::GetActive())
-//          {
-//            m_showWelcomePopup = true;
-//          }
-//          ImGui::CloseCurrentPopup();
+          if (!Project::GetActive())
+          {
+            m_showWelcomePopup = true;
+          }
+          ImGui::CloseCurrentPopup();
         }
         ImGui::PopFont();
       }
