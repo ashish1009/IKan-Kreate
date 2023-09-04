@@ -171,6 +171,12 @@ if (!Project::GetActive()) return
     m_newProject = Image::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
     m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
     m_projectIcon = Image::Create(KreatorResourcePath("Textures/Icons/Project.png"));
+    
+    // Scene Button
+    m_playButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Play.png"));
+    m_stopButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Stop.png"));
+    m_simulateButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Simulate.png"));
+    m_pauseButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Pause.png"));
  }
   
   RendererLayer::~RendererLayer()
@@ -742,6 +748,8 @@ if (!Project::GetActive()) return
     // Render viewport image
     UI::Image(SceneRenderer::GetFinalImage(), viewportSize);
     
+    UI_SceneToolbar();
+    
     auto windowSize = ImGui::GetWindowSize();
     ImVec2 minBound = ImGui::GetWindowPos();
     minBound.x += viewportOffset.x;
@@ -1171,6 +1179,102 @@ if (!Project::GetActive()) return
       ImGui::EndVertical();
       ImGui::EndPopup();
     }
+  }
+  
+  void RendererLayer::UI_SceneToolbar()
+  {
+    UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+    UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
+    UI::ScopedStyle disablePadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    
+    auto viewportStart = ImGui::GetItemRectMin();
+    
+    const float buttonSize = 18.0f;
+    const float edgeOffset = 4.0f;
+    const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
+    const float numberOfButtons = 4.0f;
+    const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
+    
+    ImGui::SetNextWindowPos(ImVec2(viewportStart.x + m_viewport.width / 2, viewportStart.y + edgeOffset));
+    ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
+    ImGui::SetNextWindowBgAlpha(0.0f);
+    ImGui::Begin("##scene_tool", 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking);
+    
+    // A hack to make icon panel appear smaller than minimum allowed by ImGui size
+    // Filling the background for the desired 26px height
+    const float desiredHeight = 26.0f;
+    ImRect background = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, -(windowHeight - desiredHeight) / 2.0f);
+    ImGui::GetWindowDrawList()->AddRectFilled(background.Min, background.Max, IM_COL32(15, 15, 15, 127), 4.0f);
+    
+    ImGui::BeginVertical("##scene_tool_V", ImGui::GetContentRegionAvail());
+    ImGui::Spring();
+    ImGui::BeginHorizontal("##scene_tool_H", { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y });
+    ImGui::Spring();
+    {
+      UI::ScopedStyle enableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(edgeOffset * 2.0f, 0));
+      
+      auto playbackButton = [](const Ref<Image>& icon, const ImColor& tint)
+      {
+        const float size = std::min((float)icon->GetHeight(), ImGui::GetWindowHeight() - 4.0f);
+        const float iconPadding = 0.0f;
+        const bool clicked = ImGui::InvisibleButton(UI::GenerateID(), ImVec2(size, size));
+        UI::DrawButtonImage(icon, tint,
+                            UI::ColorWithMultipliedValue(tint, 1.3f),
+                            UI::ColorWithMultipliedValue(tint, 0.8f),
+                            UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
+        
+        return clicked;
+      };
+      
+      // white buttons
+      const ImColor buttonTint = IM_COL32(192, 192, 192, 255);
+      
+      Ref<Image> buttonTex = m_sceneState == SceneState::Play ? m_stopButtonTex : m_playButtonTex;
+      
+      if (playbackButton(buttonTex, buttonTint))
+      {
+        if (m_sceneState == SceneState::Edit)
+        {
+          OnScenePlay();
+        }
+        else if (m_sceneState != SceneState::Simulate)
+        {
+          OnSceneStop();
+        }
+      }
+      
+      const ImColor tint = m_sceneState == SceneState::Simulate ? ImColor(1.0f, 0.75f, 0.75f, 1.0f) : buttonTint;
+      if (playbackButton(m_simulateButtonTex, tint))
+      {
+        if (m_sceneState == SceneState::Edit)
+        {
+          OnSceneStartSimulation();
+        }
+        else if (m_sceneState == SceneState::Simulate)
+        {
+          OnSceneStopSimulation();
+        }
+      }
+      
+      if (playbackButton(m_pauseButtonTex, buttonTint))
+      {
+        if (m_sceneState == SceneState::Play)
+        {
+          OnScenePause();
+        }
+        else if (m_sceneState == SceneState::Pause)
+        {
+          OnSceneResume();
+        }
+      }
+    }
+    ImGui::Spring();
+    ImGui::EndHorizontal();
+    ImGui::Spring();
+    ImGui::EndVertical();
+    
+    ImGui::End();
   }
   
   void RendererLayer::UI_AboutPopup()

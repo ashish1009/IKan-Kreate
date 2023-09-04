@@ -148,10 +148,12 @@ namespace Kreator
     void UI_WindowButtons();
     /// This function shows the Statistics Panel
     void UI_StatisticsPanel();
-    /// This function shows the About Application popup
-    void UI_AboutPopup();
     /// This function popup new scene widget
     void UI_NewScene();
+    /// This function shows the Applicaton toolbar
+    void UI_SceneToolbar();
+    /// This function shows the About Application popup
+    void UI_AboutPopup();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
