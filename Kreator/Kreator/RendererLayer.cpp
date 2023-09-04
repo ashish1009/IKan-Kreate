@@ -204,16 +204,7 @@ if (!Project::GetActive()) return
     UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
     
     // Set the Theme of ImGui as user preference
-    switch (m_userPreferences->theme)
-    {
-      case UserPreferences::Theme::KreatorDark:
-        Kreator_UI::SetDarkTheme();
-        break;
-        
-      default:
-      case UserPreferences::Theme::Default:
-        break;
-    }
+    Kreator_UI::SetTheme(m_userPreferences->theme);
     
     // Open or Create Project ---------------------------------------------------------------------------------------
     if (Utils::FileSystem::Exists(m_userPreferences->startupProject))
@@ -1199,8 +1190,11 @@ if (!Project::GetActive()) return
             UserPreferencesSerializer serializer(m_userPreferences);
             serializer.Serialize(m_userPreferences->filePath);
           }
+          
           ImGui::SameLine();
           ImGui::TextUnformatted("Show this window again when Kreator Launches");
+
+          ImGui::SameLine();
           
           // Draw side shadow-----------------------------------------------------------------
           ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
@@ -1229,36 +1223,54 @@ if (!Project::GetActive()) return
             ImGui::Separator();
           }
 
-          UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
-          UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 20.0f));
-          UI::ScopedFont semiHeader(Kreator_UI::GetSemiHeaderFont());
-          
-          m_openProjectPath = "";
-          for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+          // Recent Project --------------------------------------------------
           {
-            if (!Utils::FileSystem::Exists(it->second.filePath))
+            UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+            UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 20.0f));
+            UI::ScopedFont semiHeader(Kreator_UI::GetSemiHeaderFont());
+            
+            m_openProjectPath = "";
+            for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
             {
-              m_userPreferences->recentProjects.erase(it);
-              break;
+              if (!Utils::FileSystem::Exists(it->second.filePath))
+              {
+                m_userPreferences->recentProjects.erase(it);
+                break;
+              }
+              
+              ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
+              bool open = UI::TreeNode("##Recent_Projects", it->second.name, flags, m_projectIcon);
+              if (ImGui::IsItemClicked())
+              {
+                m_openProjectPath = it->second.filePath;
+              }
+              
+              if(open)
+              {
+                ImGui::TreePop();
+              }
             }
             
-            ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
-            bool open = UI::TreeNode("##Recent_Projects", it->second.name, flags, m_projectIcon);
-            if (ImGui::IsItemClicked())
+            if(m_openProjectPath != "")
             {
-              m_openProjectPath = it->second.filePath;
-            }
-            
-            if(open)
-            {
-              ImGui::TreePop();
+              OpenProject();
+              ImGui::CloseCurrentPopup();
             }
           }
           
-          if(m_openProjectPath != "")
+          // Theme Selection --------------------------------------------------
           {
-            OpenProject();
-            ImGui::CloseCurrentPopup();
+            UI::SetCursorPosY(ImGui::GetWindowHeight() - 50);
+            ImGui::Separator();
+            int32_t theme = (int32_t)m_userPreferences->theme;
+            if (Kreator_UI::PropertyDropdownNoLabel("Theme", {"Grey", "Blue"}, 2, &theme))
+            {
+              m_userPreferences->theme = static_cast<UserPreferences::Theme>(theme);
+              UserPreferencesSerializer userPreferencesSerializer(m_userPreferences);
+              userPreferencesSerializer.Serialize(m_userPreferences->filePath);
+              
+              Kreator_UI::SetTheme(m_userPreferences->theme);
+            }
           }
         }
         ImGui::EndChild(); // Recent_Projects

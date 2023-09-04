@@ -78,7 +78,8 @@ namespace Kreator_UI
   bool PropertyDropdown(const char* label, const char** options, int32_t optionCount, int32_t* selected);
   bool PropertyDropdownNoLabel(const char* strID, const char** options, int32_t optionCount, int32_t* selected);
   bool PropertyDropdown(const char* label, const std::vector<std::string>& options, int32_t optionCount, int32_t* selected);
-  
+  bool PropertyDropdownNoLabel(const char* strID, const std::vector<std::string>& options, int32_t optionCount, int32_t* selected);
+
   template<typename T>
   static bool PropertyAssetReference(const char* label, AssetHandle& outHandle, PropertyAssetReferenceError* outError = nullptr,
                                      const PropertyAssetReferenceSettings& settings = {})

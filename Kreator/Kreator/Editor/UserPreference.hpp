@@ -23,9 +23,9 @@ namespace Kreator
     bool showWelcomeScreen = true;
     enum class Theme
     {
-      Default, KreatorDark
+      Grey, Blue
     };
-    Theme theme = Theme::Default;
+    Theme theme = Theme::Grey;
 
     std::string startupProject;
     std::map<time_t, RecentProject, std::greater<time_t>> recentProjects;

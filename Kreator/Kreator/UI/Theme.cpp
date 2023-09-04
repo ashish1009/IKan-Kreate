@@ -9,18 +9,29 @@
 
 namespace Kreator_UI
 {
-  void SetDarkTheme()
+  void SetTheme(Kreator::UserPreferences::Theme theme)
   {
     IK_LOG_TRACE("Kreator UI", "Setting up the Kreator Dark Theme for GUI");
     
     IKan::UI::Theme::Color::Text                 = IM_COL32(222, 222, 222, 255);
-    IKan::UI::Theme::Color::Titlebar             = IM_COL32(45, 45, 55, 255);
     IKan::UI::Theme::Color::Background           = IM_COL32(28, 28, 33, 255);
-#if Grey
-    IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(63, 73, 87, 255);
-#else
-    IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(43, 63, 91, 255);
-#endif
+    
+    switch (theme)
+    {
+      case Kreator::UserPreferences::Theme::Grey:
+        IKan::UI::Theme::Color::Titlebar             = IM_COL32(31, 31, 31, 255);
+        IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(63, 73, 83, 255);
+        break;
+
+      case Kreator::UserPreferences::Theme::Blue:
+        IKan::UI::Theme::Color::Titlebar             = IM_COL32(35, 45, 55, 255);
+        IKan::UI::Theme::Color::BackgroundPopup      = IM_COL32(43, 63, 91, 255);
+        break;
+
+      default:
+        break;
+    }
+
     IKan::UI::Theme::Color::BackgroundDark       = IM_COL32(21, 21, 21, 255);
     IKan::UI::Theme::Color::PropertyField        = IM_COL32(25, 35, 45, 255);
     IKan::UI::Theme::Color::GroupHeader          = IM_COL32(27, 27, 27, 255);

@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "UserPreference.hpp"
+
 namespace Kreator_UI
 {
   namespace Color
@@ -24,7 +26,8 @@ namespace Kreator_UI
   } // namespace Color
   
   /// This function changes theme color to dark
-  void SetDarkTheme();
+  /// - Parameter theme: Theme enum
+  void SetTheme(Kreator::UserPreferences::Theme theme);
 
   /// This function Returns the regular font
   ImFont* GetRegularFont();

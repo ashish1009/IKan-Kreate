@@ -67,7 +67,7 @@ namespace Kreator
       
       // User Preferences --------------------------------------------------------------------------
       Ref<UserPreferences> userPreference =  CreateRef<UserPreferences>();
-      userPreference->theme = UserPreferences::Theme::KreatorDark;
+      userPreference->theme = UserPreferences::Theme::Grey;
       
       UserPreferencesSerializer serializer(userPreference);
       std::filesystem::path userPreferenceFile = persistenceStoragePath / "UserPreferences.yaml";
