@@ -248,6 +248,7 @@ if (!Project::GetActive()) return
     
     // Dockings
     UI_StartMainWindowDocking();
+    UI_Viewport();
     m_panels.OnImGuiRender();
     UI_EndMainWindowDocking();
   }
@@ -447,6 +448,42 @@ if (!Project::GetActive()) return
   void RendererLayer::UI_EndMainWindowDocking()
   {
     ImGui::End();
+  }
+  
+  void RendererLayer::UI_Viewport()
+  {
+    ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    ImGui::Begin("Viewport");
+    
+    m_viewport.panelMouseHover = ImGui::IsWindowHovered();
+    m_viewport.panelFocused = ImGui::IsWindowFocused();
+    
+    auto viewportOffset = ImGui::GetCursorPos(); // includes tab bar
+    auto viewportSize = ImGui::GetContentRegionAvail();
+    
+    // Updating the View port size
+    m_viewport.width = viewportSize.x;
+    m_viewport.height = viewportSize.y;
+    
+    // Set Viewport of Kreator Data
+    UpdateViewportSize();
+    
+    // Render viewport image
+    UI::Image(SceneRenderer::GetFinalImage(), viewportSize);
+    
+    auto windowSize = ImGui::GetWindowSize();
+    ImVec2 minBound = ImGui::GetWindowPos();
+    minBound.x += viewportOffset.x;
+    minBound.y += viewportOffset.y;
+    
+    ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
+    m_viewport.bounds[0] = { minBound.x, minBound.y };
+    m_viewport.bounds[1] = { maxBound.x, maxBound.y };
+    
+    m_allowViewportCameraEvents = ImGui::IsMouseHoveringRect(minBound, maxBound);
+    
+    ImGui::End();
+    ImGui::PopStyleVar();
   }
   
   void RendererLayer::UI_WelcomePopup()

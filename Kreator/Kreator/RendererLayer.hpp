@@ -96,6 +96,8 @@ namespace Kreator
     void UI_StartMainWindowDocking();
     /// This function Ends Main ImGui window with Docking
     void UI_EndMainWindowDocking();
+    /// This functions shows primary Viewport
+    void UI_Viewport();
     /// This function shows the Welcome screen
     void UI_WelcomePopup();
     /// This function shows new project popup
@@ -140,6 +142,9 @@ namespace Kreator
 
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;
+
+    // Renderers
+    Ref<SceneRenderer> m_viewportRenderer;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
