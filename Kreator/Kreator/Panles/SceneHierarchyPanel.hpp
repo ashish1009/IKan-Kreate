@@ -30,9 +30,24 @@ namespace Kreator
     static void Shutdown();
     
   private:
+    // Member Functions ---------------------------------------------------------------------------------------------
+    /// This function render the hierachy of scene
+    void RenderHierarchy();
+    /// This function draw selected component
+    /// - Parameter entity: entity handle
+    void DrawComponents(Entity entity);
+    /// This funciton renders the Entity Hierarchy
+    /// - Parameters:
+    ///   - entity entity handle
+    ///   - searchFilter swearch filter
+    void DrawEntityNode(Entity entity, const std::string& searchFilter);
+    /// This function create menue for entiyt
+    void DrawCreateEntityMenu(Entity parent = {});
+
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
     bool m_isWindow;
+    Entity m_selectionContext;
 
     inline static Ref<Image> s_pencilIcon;
     inline static Ref<Image> s_plusIcon;

@@ -32,7 +32,12 @@ namespace IKan
   {
     return HasComponent<TagComponent>() ? GetComponent<TagComponent>().tag : s_noName;
   }
-  
+
+  UUID Entity::GetParentUUID() const
+  {
+    return GetComponent<RelationshipComponent>().parentHandle;
+  }
+
   Entity::operator uint32_t () const
   {
     return (uint32_t)m_entityHandle;

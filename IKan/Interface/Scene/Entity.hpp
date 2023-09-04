@@ -36,6 +36,9 @@ namespace IKan
     /// This function returns name of entity
     const std::string& Name() const;
     
+    /// This function returns the parent UUID of entity
+    UUID GetParentUUID() const;
+
     /// This function returns the entity handle from this Entity
     operator uint32_t () const;
     /// This function returns Entity as entity handle
