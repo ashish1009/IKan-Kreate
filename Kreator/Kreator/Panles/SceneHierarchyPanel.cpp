@@ -54,6 +54,19 @@ namespace Kreator
     {
       ImRect windowRect = { ImGui::GetWindowContentRegionMin(), ImGui::GetWindowContentRegionMax() };
       RenderHierarchy();
+      if (ImGui::BeginDragDropTargetCustom(windowRect, ImGui::GetCurrentWindow()->ID))
+      {
+        const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("scene_entity_hierarchy", ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
+        
+        if (payload)
+        {
+          Entity& entity = *(Entity*)payload->Data;
+          m_context->UnparentEntity(entity);
+        }
+        
+        ImGui::EndDragDropTarget();
+      }
+
       ImGui::End();
       
       {
@@ -343,6 +356,30 @@ namespace Kreator
       ImGui::PopStyleColor();
     }
     
+    // Drag & Drop
+    //------------
+    if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
+    {
+      ImGui::Text(entity.GetComponent<TagComponent>().tag.c_str());
+      ImGui::SetDragDropPayload("scene_entity_hierarchy", &entity, sizeof(Entity));
+      ImGui::EndDragDropSource();
+    }
+    
+    if (ImGui::BeginDragDropTarget())
+    {
+      const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("scene_entity_hierarchy", ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
+      
+      if (payload)
+      {
+        Entity& droppedEntity = *(Entity*)payload->Data;
+        m_context->ParentEntity(droppedEntity, entity);
+      }
+      
+      ImGui::EndDragDropTarget();
+    }
+    
+    ImGui::TableNextColumn();
+
     // Draw children
     //--------------
     if (opened)
