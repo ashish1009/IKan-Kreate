@@ -142,7 +142,9 @@ namespace IKan
     entt::entity GetSelectedEntity() const;
     /// This function finds the main camera entity
     Entity GetMainCameraEntity();
-    
+    /// This function returns the max ID given to entity
+    uint32_t GetMaxEntityId() const;
+
     /// This function returns entity with id as specified, or empty entity if cannot be found - caller must check
     /// - Parameter id: UUID of entity
     Entity TryGetEntityWithUUID(UUID id) const;
@@ -159,6 +161,12 @@ namespace IKan
     ///   - maxEntityCapacity: Max Entity capacity to reserve
     static Ref<Scene> Create(const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
     
+    /// This funcrion returns all the components of type Components
+    template<typename... Components> auto GetAllEntitiesWith()
+    {
+      return m_registry.view<Components...>();
+    }
+
     ASSET_TYPE(Scene);
     
   private:

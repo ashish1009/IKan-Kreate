@@ -77,9 +77,21 @@ namespace Kreator
     bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
+    /// This function updates the hovered Entity
+    void UpdateHoveredEntity();
+    /// This function returns the Imguizmo Snap value
+    float GetSnapValue();
     /// This function updates the name of window tile
     /// - Parameter sceneName: scene name
     void UpdateWindowTitle(const std::string& sceneName);
+    /// This function returns the space mouse position
+    std::pair<float, float> GetMouseViewportSpace();
+    /// This function cast ray from camera
+    /// - Parameters:
+    ///   - camera: Camera
+    ///   - mx: mouse x
+    ///   - my: mouse y
+    std::pair<glm::vec3, glm::vec3> CastRay(const EditorCamera& camera, float mx, float my);
 
     // Project API ---------------------------------------
     /// This function Creates new project
@@ -169,6 +181,8 @@ namespace Kreator
     void UI_SceneToolbar();
     /// This function renders the Guizmo toolbar
     void UI_GuizmoToolbar();
+    /// This function Update the Guizmo Renderer
+    void UI_UpdateGuizmo();
     /// This function shows the About Application popup
     void UI_AboutPopup();
 
@@ -232,6 +246,7 @@ namespace Kreator
       float distance = 0.0f;
     };    
     std::vector<SelectedSubmesh> m_selectionContext;
+    int32_t m_hoveredEntityID = -1;
 
     // Guizmo Data ---------------------------------------
     int32_t m_gizmoType = -1; // -1 = no gizmo

@@ -627,5 +627,9 @@ namespace IKan
     }
     return Entity{};
   }
-  
+  uint32_t Scene::GetMaxEntityId() const
+  {
+    return m_maxEntityID;
+  }
+
 } // namespace IKan

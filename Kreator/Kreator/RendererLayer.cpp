@@ -338,14 +338,49 @@ if (!Project::GetActive()) return
     {
       m_editorCamera.OnEvent(event);
     }
+    AssetEditorManager::OnEvent(event);
   }
   
   bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
   {
     bool leftCmd = Input::IsKeyPressed(Key::LeftSuper);
+    bool rightCmd = Input::IsKeyPressed(Key::RightSuper);
     bool leftShift = Input::IsKeyPressed(Key::LeftShift);
     bool rightShift = Input::IsKeyPressed(Key::RightShift);
-
+    
+    if (m_viewport.panelMouseHover and !Input::IsMouseButtonPressed(MouseButton::Right) and m_currentScene != m_runtimeScene)
+    {
+      switch (e.GetKeyCode())
+      {
+        case Key::Q:
+          m_gizmoType = -1;
+          break;
+        case Key::W:
+          m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+          break;
+        case Key::E:
+          m_gizmoType = ImGuizmo::OPERATION::ROTATE;
+          break;
+        case Key::R:
+          m_gizmoType = ImGuizmo::OPERATION::SCALE;
+          break;
+        case Key::F:
+        {
+          if (m_selectionContext.size() == 0)
+          {
+            break;
+          }
+          
+          Entity selectedEntity = m_selectionContext[0].entity;
+          m_editorCamera.Focus(selectedEntity.Transform().Position());
+          break;
+        }
+          
+        default:
+          break;
+      }
+    }
+    
     if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right))
     {
       switch (e.GetKeyCode())
@@ -375,7 +410,23 @@ if (!Project::GetActive()) return
         }
       }
     }
-
+    
+    if ((leftCmd or rightCmd) and (leftShift or rightShift))
+    {
+      switch (e.GetKeyCode())
+      {
+        case Key::N:
+          m_showCreateNewProjectPopup = true;
+          break;
+        case Key::O:
+          FolderExplorer::OpenPopup("Open Project", m_allProjectsPath);
+          m_folderExplorerAction = FolderExplorerAction::OpenProject;
+          break;
+          
+        default:
+          break;
+      }
+    }
     return false;
   }
   
@@ -385,11 +436,139 @@ if (!Project::GetActive()) return
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
   }
   
-  bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
+  void RendererLayer::UpdateHoveredEntity()
   {
-    return false;
+    if (ImGuizmo::IsOver())
+    {
+      m_hoveredEntityID = (int32_t)m_currentScene->GetSelectedEntity();
+      return;
+    }
+    
+    SceneRenderer::GetEntityIdFromPixels(m_viewport.mousePosX, m_viewport.mousePosY, m_hoveredEntityID);
+#if 0
+    IK_CONSOLE_TRACE("", "{0}", m_hoveredEntityID);
+#endif
   }
   
+  float RendererLayer::GetSnapValue()
+  {
+    switch (m_gizmoType)
+    {
+      case ImGuizmo::OPERATION::TRANSLATE: return 0.5f;
+      case ImGuizmo::OPERATION::ROTATE: return 45.0f;
+      case ImGuizmo::OPERATION::SCALE: return 0.5f;
+    }
+    return 0.0f;
+  }
+  
+  std::pair<float, float> RendererLayer::GetMouseViewportSpace()
+  {
+    auto [mx, my] = ImGui::GetMousePos();
+    const auto& viewportBounds = m_viewport.bounds;
+    mx -= viewportBounds[0].x;
+    my -= viewportBounds[0].y;
+    auto viewportWidth = viewportBounds[1].x - viewportBounds[0].x;
+    auto viewportHeight = viewportBounds[1].y - viewportBounds[0].y;
+    
+    return { (mx / viewportWidth) * 2.0f - 1.0f, ((my / viewportHeight) * 2.0f - 1.0f) * -1.0f };
+  }
+  
+  std::pair<glm::vec3, glm::vec3> RendererLayer::CastRay(const EditorCamera& camera, float mx, float my)
+  {
+    glm::vec4 mouseClipPos = { mx, my, -1.0f, 1.0f };
+    
+    auto inverseProj = glm::inverse(camera.GetProjectionMatrix());
+    auto inverseView = glm::inverse(glm::mat3(camera.GetViewMatrix()));
+    
+    glm::vec4 ray = inverseProj * mouseClipPos;
+    glm::vec3 rayPos = camera.GetPosition();
+    glm::vec3 rayDir = inverseView * glm::vec3(ray);
+    
+    return { rayPos, rayDir };
+  }
+  
+  bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
+  {
+    if (Input::IsKeyPressed(IKan::Key::LeftControl))
+    {
+      return false;
+    }
+    
+    {
+      auto [mouseX, mouseY] = m_viewport.GetMousePos();
+      if (mouseX <= 0 or mouseY <= 0 or mouseX >= m_viewport.width or mouseY >= m_viewport.height)
+      {
+        return false;
+      }
+      
+      ClearSelectedEntity();
+      if (m_hoveredEntityID >= 0 and m_hoveredEntityID <= (int32_t)m_currentScene->GetMaxEntityId())
+      {
+        Entity selectedEntity = m_currentScene->GetEntityWithEntityHandle(m_hoveredEntityID);
+        
+        SetSelectedEntity(selectedEntity);
+        return false;
+      }
+    }
+    
+    auto [spaceMouseX, spaceMouseY] = GetMouseViewportSpace();
+    if (spaceMouseX > -1.0f and spaceMouseX < 1.0f and spaceMouseY > -1.0f and spaceMouseY < 1.0f)
+    {
+      ClearSelectedEntity();
+      
+      const auto& camera = m_editorCamera;
+      auto [origin, direction] = CastRay(camera, spaceMouseX, spaceMouseY);
+      
+      auto meshEntities = m_currentScene->GetAllEntitiesWith<StaticMeshComponent>();
+      for (auto e : meshEntities)
+      {
+        Entity entity = { e, m_currentScene.get() };
+        auto& mc = entity.GetComponent<StaticMeshComponent>();
+        auto mesh = AssetManager::GetAsset<MeshSource>(mc.staticMesh);
+        if (!mesh || mesh->IsFlagSet(AssetFlag::Missing))
+        {
+          continue;
+        }
+        
+        glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(entity);
+        auto& submeshes = mesh->GetSubMeshes();
+        for (uint32_t i = 0; i < submeshes.size(); i++)
+        {
+          auto& submesh = submeshes[i];
+          Ray ray =
+          {
+            glm::inverse(transform * submesh.transform) * glm::vec4(origin, 1.0f),
+            glm::inverse(glm::mat3(transform * submesh.transform)) * direction
+          };
+          
+          float distance;
+          if (ray.IntersectsAABB(submesh.boundingBox, distance))
+          {
+            const auto& triangleCache = mesh->GetTriangleCache(i);
+            for (const auto& triangle : triangleCache)
+            {
+              if (ray.IntersectsTriangle(triangle.V0.position, triangle.V1.position, triangle.V2.position, distance))
+              {
+                m_selectionContext.push_back({entity, distance});
+                break;
+              }
+            } // For each triangle cache
+          } // Bounding box intersect
+        } // For each submesh
+      } // For each Mesh Entity
+      
+      std::sort(m_selectionContext.begin(), m_selectionContext.end(), [](auto& a, auto& b) {
+        return a.distance < b.distance;
+      });
+      
+      if (m_selectionContext.size())
+      {
+        SetSelectedEntity(m_selectionContext[0].entity);
+      }
+    }
+    return false;
+  }
+
   void RendererLayer::OnImGuiRender()
   {
     IK_PERFORMANCE("RendererLayer::OnImGuiRender");
@@ -411,6 +590,8 @@ if (!Project::GetActive()) return
     // Popups
     UI_NewScene();
     UI_AboutPopup();
+
+    AssetEditorManager::OnImGuiRender();
   }
   
   void RendererLayer::UpdateWindowTitle(const std::string& sceneName)
@@ -708,6 +889,7 @@ if (!Project::GetActive()) return
   {
     m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity);
   }
+  
   // UI APIS ---------------------------------------------------------------------------------------------------------
   void RendererLayer::UI_StartMainWindowDocking()
   {
@@ -807,6 +989,7 @@ if (!Project::GetActive()) return
     
     UI_SceneToolbar();
     UI_GuizmoToolbar();
+    UI_UpdateGuizmo();
     
     auto windowSize = ImGui::GetWindowSize();
     ImVec2 minBound = ImGui::GetWindowPos();
@@ -1424,6 +1607,76 @@ if (!Project::GetActive()) return
       ImGui::EndVertical();
       
       ImGui::End();
+    }
+  }
+  
+  void RendererLayer::UI_UpdateGuizmo()
+  {
+    if (Input::IsKeyPressed(IKan::Key::LeftControl))
+    {
+      return;
+    }
+    if (m_gizmoType != -1 and m_selectionContext.size() and m_currentScene != m_runtimeScene)
+    {
+      auto& selection = m_selectionContext[0];
+      
+      float rw = (float)ImGui::GetWindowWidth();
+      float rh = (float)ImGui::GetWindowHeight();
+      ImGuizmo::SetOrthographic(false);
+      ImGuizmo::SetDrawlist();
+      ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, rw, rh);
+      
+      bool snap = Input::IsKeyPressed(Key::LeftControl);
+      
+      TransformComponent& entityTransform = selection.entity.Transform();
+      glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(selection.entity);
+      float snapValue = GetSnapValue();
+      float snapValues[3] = { snapValue, snapValue, snapValue };
+      
+      if (m_selectionMode == SelectionMode::Entity)
+      {
+        ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
+                             glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
+                             (ImGuizmo::OPERATION)m_gizmoType,
+                             ImGuizmo::LOCAL,
+                             glm::value_ptr(transform),
+                             nullptr,
+                             snap ? snapValues : nullptr);
+        
+        if (ImGuizmo::IsUsing())
+        {
+          Entity parent = m_currentScene->TryGetEntityWithUUID(selection.entity.GetParentUUID());
+          
+          if (parent)
+          {
+            glm::mat4 parentTransform = m_currentScene->GetWorldSpaceTransformMatrix(parent);
+            transform = glm::inverse(parentTransform) * transform;
+            
+            glm::vec3 translation, rotation, scale;
+            Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+            
+            glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
+            entityTransform.UpdatePosition(translation);
+            entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+            entityTransform.UpdateScale(scale);
+          }
+          else
+          {
+            glm::vec3 translation, rotation, scale;
+            Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+            
+            glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
+            entityTransform.UpdatePosition(translation);
+            entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+            entityTransform.UpdateScale(scale);
+          }
+        }
+      }
+      else
+      {
+        // Not Supported Yet
+        IK_ASSERT(false);
+      }
     }
   }
   
