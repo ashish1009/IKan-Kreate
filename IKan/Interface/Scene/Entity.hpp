@@ -25,6 +25,16 @@ namespace IKan
     /// This is the Default Destructor for Entity
     ~Entity() = default;
     
+    /// This function set the parent of this entity
+    /// - Parameter parent: parent entity
+    void SetParent(Entity parent);
+    /// This function remove child from this entity (if exist)
+    /// - Parameter child: Child Entity
+    bool RemoveChild(Entity child);
+    /// This function update the parent UUID of entity
+    /// - Parameter parent: Parent UUID
+    void SetParentUUID(UUID parent);
+
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns transform comp of entity
     TransformComponent& Transform();
