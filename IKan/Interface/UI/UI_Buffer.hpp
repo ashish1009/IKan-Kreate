@@ -33,6 +33,11 @@ namespace IKan
       memccpy(m_buffer, data, 0, size);
     }
     
+    void StrCpy(const std::string& data)
+    {
+      strcpy(m_buffer, data.c_str());
+    }
+    
     char* Data()
     {
       return m_buffer;
