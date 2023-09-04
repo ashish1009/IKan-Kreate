@@ -197,5 +197,6 @@ namespace IKan
     reactphysics3d::PhysicsWorld* m_physics3DWorld = nullptr;
 
     friend class Entity;
+    friend class SceneSerializer;
   };
 } // namespace IKan
