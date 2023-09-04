@@ -97,6 +97,32 @@ namespace IKan
     /// - Parameter entity: entity handle
     void DestroyEntity(Entity entity);
 
+    /// This function parent set the parent of entity
+    /// - Parameters:
+    ///   - entity: Current entity
+    ///   - parent: parent entity
+    void ParentEntity(Entity entity, Entity parent);
+    /// This function removes the parent relation
+    /// - Parameter entity: parent entity
+    void UnparentEntity(Entity entity, bool convertToWorldSpace = true);
+
+    /// This function convert the entity to local space
+    /// - Parameter entity: Entity handle
+    void ConvertToLocalSpace(Entity entity);
+    /// This function convert the entity to world space
+    /// - Parameter entity: Entity handle
+    void ConvertToWorldSpace(Entity entity);
+    
+    /// This function return the world transform from entity
+    /// - Parameter entity: enitty handle
+    glm::mat4 GetWorldSpaceTransformMatrix(Entity entity);
+    /// This function return the world transform component
+    /// - Parameter entity: enitty handle
+    TransformComponent GetWorldSpaceTransform(Entity entity);
+
+    /// This function Updates the camera viewport
+    void UpdateCamerasViewport();
+
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
     /// - Parameter name: scene name

@@ -380,6 +380,8 @@ namespace IKan
   {
     m_viewportWidth = width;
     m_viewportHeight = height;
+
+    UpdateCamerasViewport();
   }
   
   Entity Scene::CreateEntity(const std::string& name)
@@ -457,6 +459,111 @@ namespace IKan
     --m_numEntities;
   }
 
+  void Scene::ParentEntity(Entity entity, Entity parent)
+  {
+    // If new parent is already child of 'entity'
+    if (parent.IsDescendantOf(entity))
+    {
+      // Unparent the 'parent' first
+      UnparentEntity(parent);
+    }
+  }
+  
+  void Scene::UnparentEntity(Entity entity, bool convertToWorldSpace)
+  {
+    // Get the previous parent of 'entity'
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    if (!parent)
+    {
+      return;
+    }
+
+    // Remove the entity from 'parent's' children
+    auto& parentChildren = parent.Children();
+    parentChildren.erase(std::remove(parentChildren.begin(), parentChildren.end(), entity.GetUUID()), parentChildren.end());
+    
+    if (convertToWorldSpace)
+    {
+      ConvertToWorldSpace(entity);
+    }
+    
+    entity.SetParentUUID(0);
+  }
+  
+  void Scene::ConvertToLocalSpace(Entity entity)
+  {
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    
+    if (!parent)
+    {
+      return;
+    }
+    auto& transform = entity.Transform();
+    glm::mat4 parentTransform = GetWorldSpaceTransformMatrix(parent);
+    glm::mat4 localTransform = glm::inverse(parentTransform) * transform.Transform();
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(localTransform, position, rotation, scale);
+    transform.UpdatePosition(position);
+    transform.UpdateScale(scale);
+    transform.UpdateRotation(rotation);
+  }
+  
+  void Scene::ConvertToWorldSpace(Entity entity)
+  {
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    
+    if (!parent)
+    {
+      return;
+    }
+    
+    glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
+    auto& entityTransform = entity.Transform();
+    
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    entityTransform.UpdatePosition(position);
+    entityTransform.UpdateScale(scale);
+    entityTransform.UpdateRotation(rotation);
+  }
+  
+  glm::mat4 Scene::GetWorldSpaceTransformMatrix(Entity entity)
+  {
+    glm::mat4 transform(1.0f);
+    
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    if (parent)
+    {
+      transform = GetWorldSpaceTransformMatrix(parent);
+    }
+    return transform * entity.Transform().Transform();
+  }
+  
+  // TODO: Definitely cache this at some point
+  TransformComponent Scene::GetWorldSpaceTransform(Entity entity)
+  {
+    glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
+    TransformComponent transformComponent;
+    
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    transformComponent.UpdatePosition(position);
+    transformComponent.UpdateScale(scale);
+    transformComponent.UpdateRotation(rotation);
+    
+    return transformComponent;
+  }
+
+  void Scene::UpdateCamerasViewport()
+  {
+    auto view = m_registry.view<CameraComponent>();
+    for (auto entity : view)
+    {
+      auto& comp = view.get<CameraComponent>(entity);
+      comp.camera.SetViewportSize(m_viewportWidth, m_viewportHeight);
+    }
+  }
+  
   void Scene::SetName(const std::string &name)
   {
     m_name = name;

@@ -259,6 +259,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OnUpdate(TimeStep ts)
   {
+    RETRUN_IF_NO_PROJECT();
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
     switch (m_sceneState)

@@ -354,6 +354,76 @@ namespace Kreator
     {
       newEntity = m_context->CreateEntity("Empty Entity");
     }
+    
+    
+    if (ImGui::MenuItem("Camera"))
+    {
+      newEntity = m_context->CreateEntity("Camera");
+      newEntity.AddComponent<CameraComponent>();
+    }
+    
+    if (ImGui::MenuItem("Text"))
+    {
+      newEntity = m_context->CreateEntity("Text");
+      newEntity.AddComponent<TextComponent>();
+    }
+    
+    if (ImGui::BeginMenu("2D"))
+    {
+      if (ImGui::MenuItem("Quad"))
+      {
+        newEntity = m_context->CreateEntity("Quad");
+        newEntity.AddComponent<QuadComponent>();
+      }
+      
+      if (ImGui::MenuItem("Circle"))
+      {
+        newEntity = m_context->CreateEntity("Circle");
+        newEntity.AddComponent<CircleComponent>();
+      }
+      
+      ImGui::EndMenu();
+    }
+    if (ImGui::BeginMenu("3D"))
+    {
+      auto menuForDefaultMesh = [this](Entity& newEntity, const std::string& name) {
+        if (ImGui::MenuItem(name.c_str()))
+        {
+          newEntity = m_context->CreateEntity(name);
+          std::string file = Project::GetActive()->GetMeshPath("Default/");
+          file += name;
+          file += ".fbx";
+          auto meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+          newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
+        }
+      };
+      
+      if (ImGui::MenuItem("Empty Mesh"))
+      {
+        newEntity = m_context->CreateEntity("Mesh");
+        newEntity.AddComponent<StaticMeshComponent>();
+      }
+      
+      menuForDefaultMesh(newEntity, "Cube");
+      menuForDefaultMesh(newEntity, "Cone");
+      menuForDefaultMesh(newEntity, "Capsule");
+      menuForDefaultMesh(newEntity, "Cylinder");
+      menuForDefaultMesh(newEntity, "Plane");
+      menuForDefaultMesh(newEntity, "Sphere");
+      menuForDefaultMesh(newEntity, "Torus");
+      
+      ImGui::EndMenu();
+    }
+    
+    if (newEntity and parent)
+    {
+      m_context->ParentEntity(newEntity, parent);
+    }
+    
+    if (newEntity)
+    {
+      SetSelectedEntity(newEntity);
+    }
   }
   
   bool SceneHierarchyPanel::TagSearchRecursive(Entity entity, std::string_view searchFilter, uint32_t maxSearchDepth,
