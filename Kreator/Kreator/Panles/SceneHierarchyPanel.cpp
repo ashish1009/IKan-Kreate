@@ -10,6 +10,163 @@
 
 namespace Kreator
 {
+  template<typename T, typename UIFunction>
+  static void DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction, const Ref<Image>& settingsIcon,
+                            bool canBeRemoved = true)
+  {
+    if (entity.HasComponent<T>())
+    {
+      // NOTE(Peter):
+      //  This fixes an issue where the first "+" button would display the "Remove" buttons for ALL components on an Entity.
+      //  This is due to ImGui::TreeNodeEx only pushing the id for it's children if it's actually open
+      ImGui::PushID((void*)typeid(T).hash_code());
+      auto& component = entity.GetComponent<T>();
+      ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+      
+      bool open = Kreator_UI::PropertyGridHeader(name);
+      bool right_clicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
+      float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+      
+      bool resetValues = false;
+      bool removeComponent = false;
+      
+      ImGui::SameLine(contentRegionAvailable.x - lineHeight);
+      if (ImGui::InvisibleButton("##options", ImVec2{ lineHeight, lineHeight }) || right_clicked)
+      {
+        ImGui::OpenPopup("ComponentSettings");
+      }
+      UI::DrawButtonImage(settingsIcon, IM_COL32(160, 160, 160, 200),
+                          IM_COL32(160, 160, 160, 255),
+                          IM_COL32(160, 160, 160, 150),
+                          UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+      
+      if (UI::BeginPopup("ComponentSettings"))
+      {
+        if (ImGui::MenuItem("Reset"))
+          resetValues = true;
+        
+        if (canBeRemoved)
+        {
+          if (ImGui::MenuItem("Remove component"))
+          {
+            removeComponent = true;
+          }
+        }
+        
+        UI::EndPopup();
+      }
+      
+      if (open)
+      {
+        uiFunction(component);
+        ImGui::TreePop();
+      }
+      
+      if (removeComponent or resetValues)
+      {
+        entity.RemoveComponent<T>();
+      }
+      
+      if (resetValues)
+      {
+        entity.AddComponent<T>();
+      }
+      
+      if(!open)
+      {
+        UI::ShiftCursorY(-(ImGui::GetStyle().ItemSpacing.y + 1.0f));
+      }
+      
+      ImGui::PopID();
+    }
+  }
+  
+  static bool DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f)
+  {
+    bool modified = false;
+    
+    UI::ScopedStyle framePdding(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 2));
+    UI::ScopedStyle framerounding(ImGuiStyleVar_FrameRounding, 15);
+    
+    UI::PushID();
+    ImGui::TableSetColumnIndex(0);
+    UI::ShiftCursor(0.0f, 7.0f);
+    
+    ImGui::Text(label.c_str());
+    UI::DrawUnderline(false, 0.0f, 2.0f);
+    
+    ImGui::TableSetColumnIndex(1);
+    UI::ShiftCursor(7.0f, 0.0f);
+    
+    {
+      const float spacingX = 8.0f;
+      UI::ScopedStyle itemSpacing(ImGuiStyleVar_ItemSpacing, ImVec2{ spacingX, 0.0f });
+      UI::ScopedStyle padding(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 2.0f });
+      
+      {
+        // Begin XYZ area
+        UI::ScopedColor padding(ImGuiCol_Border, IM_COL32(0, 0, 0, 0));
+        UI::ScopedStyle frame(ImGuiCol_FrameBg, IM_COL32(0, 0, 0, 0));
+        
+        ImGui::BeginChild(ImGui::GetID((label + "fr").c_str()),
+                          ImVec2(ImGui::GetContentRegionAvail().x - spacingX, ImGui::GetFrameHeightWithSpacing() + 10.0f),
+                          ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+      }
+      const float framePadding = 2.0f;
+      const float outlineSpacing = 1.0f;
+      const float lineHeight = GImGui->Font->FontSize + framePadding * 2.0f;
+      const ImVec2 buttonSize = { lineHeight + 2.0f, lineHeight };
+      const float inputItemWidth = (ImGui::GetContentRegionAvail().x - spacingX) / 3.0f - buttonSize.x;
+      
+      const ImGuiIO& io = ImGui::GetIO();
+      auto boldFont = io.Fonts->Fonts[0];
+      
+      auto drawControl = [&] (const std::string& label, float& value, const ImVec4& colourN,
+                              const ImVec4& colourH,
+                              const ImVec4& colourP) {
+        {
+          UI::ScopedStyle buttonFrame(ImGuiStyleVar_FramePadding, ImVec2(framePadding, 0.0f));
+          UI::ScopedStyle buttonRounding(ImGuiStyleVar_FrameRounding, 1.0f);
+          UI::ScopedColorStack buttonColours(ImGuiCol_Button, colourN,
+                                             ImGuiCol_ButtonHovered, colourH,
+                                             ImGuiCol_ButtonActive, colourP);
+          
+          UI::ScopedFont buttonFont(boldFont);
+          
+          UI::ShiftCursorY(2.0f);
+          if (ImGui::Button(label.c_str(), buttonSize))
+          {
+            value = resetValue;
+            modified = true;
+          }
+        }
+        
+        ImGui::SameLine(0.0f, outlineSpacing);
+        ImGui::SetNextItemWidth(inputItemWidth);
+        UI::ShiftCursorY(-2.0f);
+        modified |= ImGui::DragFloat(("##" + label).c_str(), &value, 0.1f, 0.0f, 0.0f, "%.2f");
+        
+        if (!UI::IsItemDisabled())
+        {
+          UI::DrawItemActivityOutline(2.0f, true, Kreator_UI::Color::Accent);
+        }
+      };
+      
+      drawControl("X", values.x, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f }, ImVec4{ 0.9f, 0.2f, 0.2f, 1.0f }, ImVec4{ 0.8f, 0.1f, 0.15f, 1.0f });
+      
+      ImGui::SameLine(0.0f, outlineSpacing);
+      drawControl("Y", values.y, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f }, ImVec4{ 0.3f, 0.8f, 0.3f, 1.0f }, ImVec4{ 0.2f, 0.7f, 0.2f, 1.0f });
+      
+      ImGui::SameLine(0.0f, outlineSpacing);
+      drawControl("Z", values.z, ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f }, ImVec4{ 0.2f, 0.35f, 0.9f, 1.0f }, ImVec4{ 0.1f, 0.25f, 0.8f, 1.0f });
+      
+      ImGui::EndChild();
+    }
+    UI::PopID();
+    
+    return modified;
+  }
+  
   void SceneHierarchyPanel::Initialize()
   {
     s_pencilIcon = Image::Create(RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Pencil.png");
@@ -177,7 +334,377 @@ namespace Kreator
   
   void SceneHierarchyPanel::DrawComponents(Entity entity)
   {
+    float roundingVal = 15.0f;
+    UI::ScopedStyle rounding (ImGuiStyleVar_FrameRounding, roundingVal);
     
+    ImGui::AlignTextToFramePadding();
+    auto ID = entity.GetComponent<IDComponent>().ID;
+    ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+    UI::ShiftCursor(4.0f, 4.0f);
+    
+    bool isHoveringID = false;
+    if (entity.HasComponent<TagComponent>())
+    {
+      const float iconOffset = 3.0f;
+      UI::ShiftCursor(4.0f, iconOffset);
+      UI::Image(s_pencilIcon, ImVec2(s_pencilIcon->GetWidth(), s_pencilIcon->GetHeight()),
+                ImVec2(1.0f, 0.0f), ImVec2(0.0f, 1.0f), ImColor(128, 128, 128, 255).Value);
+      
+      ImGui::SameLine(0.0f, 4.0f);
+      UI::ShiftCursorY(-iconOffset);
+      
+      auto& tag = entity.GetComponent<TagComponent>().tag;
+      char buffer[256];
+      memset(buffer, 0, 256);
+      memcpy(buffer, tag.c_str(), tag.length());
+      ImGui::PushItemWidth(contentRegionAvailable.x * 0.4f);
+      
+      UI::ScopedStyle frameBorder(ImGuiStyleVar_FrameBorderSize, 0.0f);
+      UI::ScopedColor frameColour(ImGuiCol_FrameBg, IM_COL32(0, 0, 0, 0));
+      UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
+      
+      if (ImGui::InputText("##Tag", buffer, 256))
+      {
+        tag = std::string(buffer);
+      }
+      UI::DrawItemActivityOutline(roundingVal, false, Kreator_UI::Color::Accent);
+      
+      isHoveringID = ImGui::IsItemHovered();
+      
+      ImGui::PopItemWidth();
+    }
+    
+    // ID
+    if (isHoveringID)
+    {
+      ImGui::SameLine();
+      ImGui::TextDisabled("%llx", (uint64_t)ID);
+    }
+    
+    float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+    ImVec2 textSize = ImGui::CalcTextSize(" ADD        ");
+    textSize.x += GImGui->Style.FramePadding.x * 2.0f;
+    {
+      UI::ScopedColorStack addCompButtonColours(ImGuiCol_Button, IM_COL32(70, 70, 70, 200),
+                                                ImGuiCol_ButtonHovered, IM_COL32(70, 70, 70, 255),
+                                                ImGuiCol_ButtonActive, IM_COL32(70, 70, 70, 150));
+      
+      ImGui::SameLine(contentRegionAvailable.x - (textSize.x + GImGui->Style.FramePadding.x));
+      if (ImGui::Button(" ADD       ", ImVec2(textSize.x + 4.0f, lineHeight + 2.0f)))
+      {
+        ImGui::OpenPopup("AddComponentPanel");
+      }
+      
+      const float pad = 4.0f;
+      const float iconWidth = ImGui::GetFrameHeight() - pad * 2.0f;
+      const float iconHeight = iconWidth;
+      ImVec2 iconPos = ImGui::GetItemRectMax();
+      iconPos.x -= iconWidth + pad;
+      iconPos.y -= iconHeight + pad;
+      ImGui::SetCursorScreenPos(iconPos);
+      UI::ShiftCursor(-5.0f, -1.0f);
+      
+      UI::Image(s_plusIcon, ImVec2(iconWidth, iconHeight),
+                ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f),
+                ImColor(160, 160, 160, 255).Value);
+    }
+    
+    ImGui::Spacing();
+    ImGui::Spacing();
+    ImGui::Spacing();
+    
+    AddComponentPopup();
+    ImGui::Separator();
+    
+    DrawComponent<TransformComponent>("Transform", entity, [](TransformComponent& component)
+                                      {
+      UI::ScopedStyle spacing (ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
+      UI::ScopedStyle padding (ImGuiStyleVar_FramePadding, ImVec2(4.0f, 4.0f));
+      
+      ImGui::BeginTable("transformComponent", 2, ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_NoClip);
+      ImGui::TableSetupColumn("label_column", 0, 100.0f);
+      ImGui::TableSetupColumn("value_column", ImGuiTableColumnFlags_IndentEnable | ImGuiTableColumnFlags_NoClip,
+                              ImGui::GetContentRegionAvail().x - 100.0f);
+      
+      ImGui::TableNextRow();
+      auto position = component.Position();
+      DrawVec3Control("Translation", position);
+      component.UpdatePosition(position);
+      
+      ImGui::TableNextRow();
+      auto rotation = glm::degrees(component.Rotation());
+      DrawVec3Control("Rotation", rotation);
+      component.UpdateRotation(glm::radians(rotation));
+      
+      ImGui::TableNextRow();
+      auto scale = component.Scale();
+      DrawVec3Control("Scale", scale);
+      component.UpdateScale(scale);
+      
+      ImGui::EndTable();
+      
+      UI::ShiftCursorY(-8.0f);
+      UI::ShiftCursorY(18.0f);
+    }, s_gearIcon, false);
+    
+    DrawComponent<CameraComponent>("Camera", entity, [](CameraComponent& cc)
+                                   {
+      Kreator_UI::BeginPropertyGrid();
+      UI::ScopedStyle framePdding(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 2));
+      
+      // Projection Type
+      const char* projTypeStrings[] = { "Perspective", "Orthographic" };
+      int currentProj = (int)cc.camera.GetProjectionType();
+      if (Kreator_UI::PropertyDropdown("Projection", projTypeStrings, 2, &currentProj))
+      {
+        cc.camera.SetProjectionType((SceneCamera::ProjectionType)currentProj);
+      }
+      
+      // Perspective parameters
+      if (cc.camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
+      {
+        float verticalFOV = cc.camera.GetDegPerspectiveVerticalFOV();
+        if (Kreator_UI::Property("Vertical FOV", verticalFOV))
+          cc.camera.SetDegPerspectiveVerticalFOV(verticalFOV);
+        
+        float nearClip = cc.camera.GetPerspectiveNearClip();
+        if (Kreator_UI::Property("Near Clip", nearClip))
+          cc.camera.SetPerspectiveNearClip(nearClip);
+        float farClip = cc.camera.GetPerspectiveFarClip();
+        if (Kreator_UI::Property("Far Clip", farClip))
+          cc.camera.SetPerspectiveFarClip(farClip);
+      }
+      
+      // Orthographic parameters
+      else if (cc.camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
+      {
+        float orthoSize = cc.camera.GetOrthographicSize();
+        if (Kreator_UI::Property("Size", orthoSize, 1.0f))
+          cc.camera.SetOrthographicSize(orthoSize);
+        
+        float nearClip = cc.camera.GetOrthographicNearClip();
+        if (Kreator_UI::Property("Near Clip", nearClip, 0.1f, -1.0f, 0.0f))
+          cc.camera.SetOrthographicNearClip(nearClip);
+        float farClip = cc.camera.GetOrthographicFarClip();
+        if (Kreator_UI::Property("Far Clip", farClip, 0.1f, 0.0f, 1.0f))
+          cc.camera.SetOrthographicFarClip(farClip);
+      }
+      
+      Kreator_UI::Property("Main Camera", cc.primary);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<TextComponent>("Text", entity, [](TextComponent& tc)
+                                 {
+      Kreator_UI::BeginPropertyGrid();
+      Kreator_UI::PropertyMultiline("Text String", tc.textString);
+      
+      Kreator_UI::PropertyAssetReferenceSettings settings;
+      bool customFont = tc.assetHandle != Font::GetDefaultFont()->handle;
+      if (customFont)
+      {
+        settings.advanceToNextColumn = false;
+        settings.widthOffset = ImGui::GetStyle().ItemSpacing.x + 28.0f;
+      }
+      Kreator_UI::PropertyAssetReference<Font>("Font", tc.assetHandle, nullptr, settings);
+      if (customFont)
+      {
+        ImGui::SameLine();
+        float prevItemHeight = ImGui::GetItemRectSize().y;
+        if (ImGui::Button("X", { prevItemHeight, prevItemHeight }))
+        {
+          tc.assetHandle = Font::GetDefaultFont()->handle;
+        }
+        ImGui::NextColumn();
+      }
+      
+      Kreator_UI::PropertyColor("Color", tc.color);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<QuadComponent>("Quad", entity, [](QuadComponent& qc)
+                                 {
+      Kreator_UI::BeginPropertyGrid();
+      
+      Kreator_UI::PropertyAssetReferenceSettings settings;
+      Kreator_UI::PropertyAssetReference<Image>("Texture", qc.texture, nullptr, settings);
+      
+      Kreator_UI::PropertyColor("Color", qc.color);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<CircleComponent>("Circle", entity, [](CircleComponent& cc)
+                                   {
+      Kreator_UI::BeginPropertyGrid();
+      
+      Kreator_UI::PropertyAssetReferenceSettings settings;
+      Kreator_UI::PropertyAssetReference<Image>("Texture", cc.texture, nullptr, settings);
+      
+      Kreator_UI::PropertyColor("Color", cc.color);
+      Kreator_UI::Property("Thickness", cc.thickness, 0.1, 0.0, 1.0);
+      Kreator_UI::Property("Fade", cc.fade, 0.1, 0.0, 5.0);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<StaticMeshComponent>("Static Mesh", entity, [&](StaticMeshComponent& smc)
+                                       {
+      Ref<MeshSource> mesh = AssetManager::GetAsset<MeshSource>(smc.staticMesh);
+      
+      Kreator_UI::BeginPropertyGrid();
+      Kreator_UI::PropertyAssetReferenceSettings settings;
+      Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", smc.staticMesh, nullptr, settings);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)
+                                      {
+      Kreator_UI::BeginPropertyGrid();
+      static const char* bodyTypeStrings[] = { "Static", "Kinametic", "Dynamic"};
+      int currentType = (int)rbc.bodyType;
+      Kreator_UI::PropertyDropdown("Body Type", bodyTypeStrings, 3, &currentType);
+      rbc.bodyType = static_cast<RigidBodyComponent::BodyType>(currentType);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<Box3DColliderComponent>("Box 3D Collider", entity, [&](Box3DColliderComponent& bcc)
+                                          {
+      Kreator_UI::BeginPropertyGrid();
+      
+      // Physical
+      Kreator_UI::Property("Size", bcc.size);
+      Kreator_UI::Property("Position Offset", bcc.positionOffset);
+      auto quaternion = glm::eulerAngles(bcc.quaternionOffset);
+      Kreator_UI::Property("Quaternion Offset", quaternion);
+      bcc.quaternionOffset = glm::quat(quaternion);
+      
+      // Material
+      Kreator_UI::Property("Friction Coefficient", bcc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+      Kreator_UI::Property("Mass Density", bcc.massDensity, 0.1f, 0.0f, 10000.0f);
+      Kreator_UI::Property("Bounciness", bcc.bounciness, 0.01f, 0.0f, 1.0f);
+      
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<SphereColliderComponent>("Sphere Collider", entity, [&](SphereColliderComponent& scc)
+                                           {
+      Kreator_UI::BeginPropertyGrid();
+      
+      // Physical
+      Kreator_UI::Property("Radius", scc.radius);
+      Kreator_UI::Property("Position Offset", scc.positionOffset);
+      auto quaternion = glm::eulerAngles(scc.quaternionOffset);
+      Kreator_UI::Property("Quaternion Offset", quaternion);
+      scc.quaternionOffset = glm::quat(quaternion);
+      
+      // Material
+      Kreator_UI::Property("Friction Coefficient", scc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+      Kreator_UI::Property("Mass Density", scc.massDensity, 0.1f, 0.0f, 10000.0f);
+      Kreator_UI::Property("Bounciness", scc.bounciness, 0.01f, 0.0f, 1.0f);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+    
+    DrawComponent<CapsuleColliderComponent>("Capsule Collider", entity, [&](CapsuleColliderComponent& ccc)
+                                            {
+      Kreator_UI::BeginPropertyGrid();
+      
+      // Physical
+      Kreator_UI::Property("Radius", ccc.radius);
+      Kreator_UI::Property("height", ccc.height);
+      Kreator_UI::Property("Position Offset", ccc.positionOffset);
+      auto quaternion = glm::eulerAngles(ccc.quaternionOffset);
+      Kreator_UI::Property("Quaternion Offset", quaternion);
+      ccc.quaternionOffset = glm::quat(quaternion);
+      
+      // Material
+      Kreator_UI::Property("Friction Coefficient", ccc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+      Kreator_UI::Property("Mass Density", ccc.massDensity, 0.1f, 0.0f, 10000.0f);
+      Kreator_UI::Property("Bounciness", ccc.bounciness, 0.01f, 0.0f, 1.0f);
+      Kreator_UI::EndPropertyGrid();
+    }, s_gearIcon);
+  }
+  
+  void SceneHierarchyPanel::AddComponentPopup()
+  {
+    UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
+    
+    if (UI::BeginPopup("AddComponentPanel"))
+    {
+      if (!m_selectionContext.HasComponent<CameraComponent>())
+      {
+        if (ImGui::MenuItem("Camera"))
+        {
+          m_selectionContext.AddComponent<CameraComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<QuadComponent>())
+      {
+        if (ImGui::MenuItem("Quad"))
+        {
+          m_selectionContext.AddComponent<QuadComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<CircleComponent>())
+      {
+        if (ImGui::MenuItem("Circle"))
+        {
+          m_selectionContext.AddComponent<CircleComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<TextComponent>())
+      {
+        if (ImGui::MenuItem("Text"))
+        {
+          auto& textComp = m_selectionContext.AddComponent<TextComponent>();
+          textComp.assetHandle = Font::GetDefaultFont()->handle;
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<StaticMeshComponent>())
+      {
+        if (ImGui::MenuItem("Mesh"))
+        {
+          auto& meshComp = m_selectionContext.AddComponent<StaticMeshComponent>();
+          meshComp.staticMesh = 0;
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<RigidBodyComponent>())
+      {
+        if (ImGui::MenuItem("Rigid Body"))
+        {
+          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<RigidBodyComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<Box3DColliderComponent>())
+      {
+        if (ImGui::MenuItem("Box 3D Collider"))
+        {
+          [[maybe_unused]] auto& box3DColliderComp = m_selectionContext.AddComponent<Box3DColliderComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<SphereColliderComponent>())
+      {
+        if (ImGui::MenuItem("Sphere Collider"))
+        {
+          [[maybe_unused]] auto& sphereColliderComp = m_selectionContext.AddComponent<SphereColliderComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.HasComponent<CapsuleColliderComponent>())
+      {
+        if (ImGui::MenuItem("Capsule Collider"))
+        {
+          [[maybe_unused]] auto& meshColliderComp = m_selectionContext.AddComponent<CapsuleColliderComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      UI::EndPopup();
+    }
   }
   
   void SceneHierarchyPanel::DrawEntityNode(Entity entity, const std::string& searchFilter)
