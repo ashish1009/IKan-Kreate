@@ -23,14 +23,14 @@ namespace IKan
     if (s_activeProject)
     {
       // Shutdown all asset
-//      AssetManager::Shutdown();
+      AssetManager::Shutdown();
     }
     
     // Set new project and initialise the asset manager
     s_activeProject = project;
     
     // Initialize the assets
-//    AssetManager::Initialize();
+    AssetManager::Initialize();
   }
   
   const Project::Config& Project::GetConfig() const
