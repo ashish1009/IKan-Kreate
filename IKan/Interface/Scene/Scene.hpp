@@ -111,7 +111,9 @@ namespace IKan
     entt::registry& GetRegistry();
     /// This function returns the selected entity handle
     entt::entity GetSelectedEntity() const;
-
+    /// This function finds the main camera entity
+    Entity GetMainCameraEntity();
+    
     /// This function returns entity with id as specified, or empty entity if cannot be found - caller must check
     /// - Parameter id: UUID of entity
     Entity TryGetEntityWithUUID(UUID id) const;
@@ -131,6 +133,20 @@ namespace IKan
     ASSET_TYPE(Scene);
     
   private:
+    // Member Functions ---------------------------------------------------------------------------------------------
+    /// This function renders the 2D Entities
+    void Render2DEntities();
+    /// This function renders the 3D Entities
+    /// - Parameter renderer: Scene Renderer Instance
+    void Render3DEntities(Ref<SceneRenderer> renderer);
+    /// This function renders the debug Colliders
+    /// - Parameter color: color of collider
+    void RenderDebugColliders(const glm::vec4& color);
+    /// This function initilzie physics world
+    void InitializePhysicsWorld();
+    /// This function destroy physics world
+    void DestroyPhysicsWorld();
+
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
     std::string m_name = "";
@@ -146,6 +162,10 @@ namespace IKan
     EntityMap m_entityIDMap;
     entt::entity m_selectedEntity;
     std::function<void(Entity)> m_onEntityDestroyedCallback;
+
+    // Physics
+    reactphysics3d::PhysicsCommon m_physics3DCommon;
+    reactphysics3d::PhysicsWorld* m_physics3DWorld = nullptr;
 
     friend class Entity;
   };

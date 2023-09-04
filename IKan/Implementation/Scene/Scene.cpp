@@ -6,8 +6,14 @@
 //
 
 #include "Scene.hpp"
-#include "Scene/Component.hpp"
 #include "Scene/Entity.hpp"
+#include "Renderer/UI/Font.hpp"
+#include "Renderer/Renderer2D.hpp"
+#include "Renderer/SceneRenderer.hpp"
+#include "Renderer/Graphics/Texture.hpp"
+#include "Asset/AssetManager.hpp"
+
+using namespace reactphysics3d;
 
 namespace IKan
 {
@@ -34,7 +40,7 @@ namespace IKan
   }
   
   Scene::Scene(const std::string& name, uint32_t maxEntityCapacity)
-  : m_name(name)
+  : m_name(name), m_registryCapacity(maxEntityCapacity)
   {
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Creating Scene ...");
@@ -58,40 +64,311 @@ namespace IKan
   
   void Scene::OnUpdateRuntime(TimeStep ts)
   {
+    // Change the number of iterations of the velocity solver
+    m_physics3DWorld->setNbIterationsVelocitySolver(15);
+    // Change the number of iterations of the position solver
+    m_physics3DWorld->setNbIterationsPositionSolver(8);
     
+    // Update the Dynamics world with a constant time step
+    m_physics3DWorld->update(ts);
+    
+    // Get Transform
+    auto view = m_registry.view<RigidBodyComponent>();
+    for (auto entityHandle : view)
+    {
+      Entity entity = { entityHandle, this };
+      
+      auto& rbc = entity.GetComponent<RigidBodyComponent>();
+      if (rbc.bodyType == RigidBodyComponent::BodyType::Dynamic or rbc.bodyType == RigidBodyComponent::BodyType::Kinametic)
+      {
+        auto& tc = entity.GetComponent<TransformComponent>();
+        RigidBody* body = (RigidBody*)rbc.runtimeBody;
+        if (body != nullptr)
+        {
+          const auto& tramsform = body->getTransform();
+          tc.UpdatePosition({tramsform.getPosition().x, tramsform.getPosition().y, tramsform.getPosition().z});
+          
+          glm::quat q(tramsform.getOrientation().w,
+                      tramsform.getOrientation().x,
+                      tramsform.getOrientation().y,
+                      tramsform.getOrientation().z);
+          
+          const glm::vec3 angles = glm::eulerAngles(q);
+          tc.UpdateRotation(angles);
+        }
+      } // if (rb2d.type == b2_dynamicBody or rb2d.type == b2_kinematicBody)
+    } // for (auto e : view)
   }
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
   {
-    
+    renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
+    Render2DEntities();
+    Render3DEntities(renderer);
+    renderer->EndScene();
   }
   
   void Scene::OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer)
   {
+    Entity cameraEntity = GetMainCameraEntity();
+    if (!cameraEntity)
+    {
+      return;
+    }
     
+    const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
+    const auto& cameraTransform = cameraEntity.GetComponent<TransformComponent>().Transform();
+    
+    renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
+    Render2DEntities();
+    Render3DEntities(renderer);
+    renderer->EndScene();
   }
   
+  void Scene::Render2DEntities()
+  {
+    // Render All Quad Entities
+    {
+      auto view = m_registry.view<TransformComponent, QuadComponent>();
+      for (const auto& entity : view)
+      {
+        const auto& [transformComp, quadComp] = view.get<TransformComponent, QuadComponent>(entity);
+        if (quadComp.texture == 0)
+        {
+          Renderer2D::DrawQuad(transformComp.Transform(), quadComp.color, (int32_t)entity);
+        }
+        else
+        {
+          Ref<Image> texture = AssetManager::GetAsset<Image>(quadComp.texture);
+          Renderer2D::DrawQuad(transformComp.Transform(), texture, quadComp.color, quadComp.tilingFactor, (int32_t)entity);
+        }
+      } // For each Quad Entity
+    }
+    
+    // Render All Circle Entities
+    {
+      auto view = m_registry.view<TransformComponent, CircleComponent>();
+      for (const auto& entity : view)
+      {
+        const auto& [transformComp, circleComp] = view.get<TransformComponent, CircleComponent>(entity);
+        if (circleComp.texture == 0)
+        {
+          Renderer2D::DrawCircle(transformComp.Transform(), circleComp.color, circleComp.thickness, circleComp.fade, (int32_t)entity);
+        }
+        else
+        {
+          Ref<Image> texture = AssetManager::GetAsset<Image>(circleComp.texture);
+          Renderer2D::DrawCircle(transformComp.Transform(), texture, circleComp.color, 1.0f, circleComp.thickness, circleComp.fade, (int32_t)entity);
+        }
+      } // For each Quad Entity
+    }
+    
+    // Render All Text Entities
+    {
+      auto view = m_registry.view<TransformComponent, TextComponent>();
+      for (const auto& entity : view)
+      {
+        const auto& [transformComp, textComp] = view.get<TransformComponent, TextComponent>(entity);
+        if (textComp.assetHandle == 0)
+        {
+          Renderer2D::RenderText(textComp.textString, Font::GetDefaultFont(), transformComp.Position(), transformComp.Scale(), textComp.color, (int32_t)entity);
+        }
+        else
+        {
+          Ref<Font> font = AssetManager::GetAsset<Font>(textComp.assetHandle);
+          if (font == nullptr)
+          {
+            font = Font::GetDefaultFont();
+          }
+          Renderer2D::RenderText(textComp.textString, font, transformComp.Position(), transformComp.Scale(), textComp.color, (int32_t)entity);
+        }
+      } // For each Quad Entity
+    }
+  }
+  
+  void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
+  {
+    auto view = m_registry.view<TransformComponent, StaticMeshComponent>();
+    for (const auto& entity : view)
+    {
+      const auto& [transformComp, staticMeshComp] = view.get<TransformComponent, StaticMeshComponent>(entity);
+      if (staticMeshComp.staticMesh != 0)
+      {
+        renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(staticMeshComp.staticMesh), transformComp.Transform());
+      }
+    } // For each Quad Entity
+  }
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
   {
     
   }
   
+  void Scene::RenderDebugColliders(const glm::vec4& color)
+  {
+    auto debugRenderer = m_physics3DWorld->getDebugRenderer();
+    auto triangle = debugRenderer.getTriangles();
+    
+    for (auto i = 0; i < debugRenderer.getNbTriangles(); i++)
+    {
+      Renderer2D::DrawLine({triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z},
+                           {triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z}, color);
+      Renderer2D::DrawLine({triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z},
+                           {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, color);
+      Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
+                           {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
+    }
+  }
+  
   void Scene::OnRuntimeStart()
   {
     IK_PROFILE();
+    InitializePhysicsWorld();
   }
   
   void Scene::OnRuntimeStop()
   {
     IK_PROFILE();
+    DestroyPhysicsWorld();
   }
   void Scene::OnSimulationStart()
   {
     IK_PROFILE();
+    InitializePhysicsWorld();
   }
   void Scene::OnSimulationStop()
   {
     IK_PROFILE();
+    DestroyPhysicsWorld();
+  }
+  
+  void Scene::DestroyPhysicsWorld()
+  {
+    IK_PROFILE();
+    m_physics3DCommon.destroyPhysicsWorld(m_physics3DWorld);
+  }
+  
+  void Scene::InitializePhysicsWorld()
+  {
+    IK_PROFILE();
+    // Create the world settings
+    PhysicsWorld::WorldSettings settings;
+    settings.defaultVelocitySolverNbIterations = 15;
+    settings.defaultPositionSolverNbIterations = 5;
+    settings.isSleepingEnabled = true;
+    settings.gravity = Vector3 (0 , -9.81 , 0) ;
+    
+    // Create the physics world with your settings
+    m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
+    
+    // Debug Renderer
+    m_physics3DWorld->setIsDebugRenderingEnabled(true);
+    
+    // Get a reference to the debug renderer
+    DebugRenderer& debugRenderer = m_physics3DWorld->getDebugRenderer();
+    debugRenderer.setIsDebugItemDisplayed(DebugRenderer::DebugItem::COLLISION_SHAPE, true);
+    
+    auto rigidBodyView = m_registry.view<RigidBodyComponent>();
+    for (auto entityHandle : rigidBodyView)
+    {
+      Entity entity = { entityHandle, this };
+      auto& rbc = entity.GetComponent<RigidBodyComponent>();
+      auto& tc = entity.GetComponent<TransformComponent>();
+      
+      // Initial position and orientation of the rigid body
+      Vector3 position (tc.Position().x, tc.Position().y, tc.Position().z);
+      auto quaternion = glm::quat(tc.Rotation());
+      Quaternion orientation(quaternion.x, quaternion.y, quaternion.z, quaternion.w);
+      
+      // Create a rigid body in the world
+      Transform transform(position, orientation);
+      RigidBody* body = m_physics3DWorld->createRigidBody(transform);
+      rbc.runtimeBody = body;
+      
+      // Change the type of the body to kinematic
+      body->setType(RigidBodyComponent::ReactPhysicsBodyType(rbc.bodyType));
+      
+      // Box 3D -----------------------------------------------------------------------------------------------------
+      if (entity.HasComponent<Box3DColliderComponent>())
+      {
+        auto& bcc = entity.GetComponent<Box3DColliderComponent>();
+        
+        // Half extents of the box in the x, y and z directions
+        glm::vec3 relativeSize = tc.Scale() * bcc.size;
+        const Vector3 halfExtents(relativeSize.x, relativeSize.y, relativeSize.z);
+        
+        // Create the box shape
+        BoxShape* boxShape = m_physics3DCommon.createBoxShape(halfExtents);
+        
+        // Add the collider to the rigid body
+        auto colliderPosition = Vector3(bcc.positionOffset.x, bcc.positionOffset.y, bcc.positionOffset.x);
+        auto collideerQuaternion = Quaternion(bcc.quaternionOffset.x, bcc.quaternionOffset.y, bcc.quaternionOffset.z,
+                                              bcc.quaternionOffset.w);
+        Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
+        Collider* collider = body->addCollider(boxShape, collidertransform);
+        
+        // Get the current material of the collider
+        Material& material = collider->getMaterial();
+        
+        material.setBounciness(bcc.bounciness);
+        material.setFrictionCoefficient(bcc.frictionCoefficient);
+        material.setMassDensity(bcc.massDensity);
+      } // Box3d Collider
+      
+      // Sphere -----------------------------------------------------------------------------------------------------
+      if (entity.HasComponent<SphereColliderComponent>())
+      {
+        auto& scc = entity.GetComponent<SphereColliderComponent>();
+        
+        // Half extents of the box in the x, y and z directions
+        glm::vec3 relativeRadius = tc.Scale() * scc.radius;
+        
+        // Create the box shape
+        // NOTE: There is no feature to have oval shape sp size should be same for all xyz
+        SphereShape* boxShape = m_physics3DCommon.createSphereShape(relativeRadius.x);
+        
+        // Add the collider to the rigid body
+        auto colliderPosition = Vector3(scc.positionOffset.x, scc.positionOffset.y, scc.positionOffset.x);
+        auto collideerQuaternion = Quaternion(scc.quaternionOffset.x, scc.quaternionOffset.y, scc.quaternionOffset.z,
+                                              scc.quaternionOffset.w);
+        Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
+        Collider* collider = body->addCollider(boxShape, collidertransform);
+        
+        // Get the current material of the collider
+        Material& material = collider->getMaterial();
+        
+        material.setBounciness(scc.bounciness);
+        material.setFrictionCoefficient(scc.frictionCoefficient);
+        material.setMassDensity(scc.massDensity);
+      } // Sphere Collider
+      
+      // Capsule -----------------------------------------------------------------------------------------------------
+      if (entity.HasComponent<CapsuleColliderComponent>())
+      {
+        auto& ccc = entity.GetComponent<CapsuleColliderComponent>();
+        
+        // Half extents of the box in the x, y and z directions
+        glm::vec3 relativeRadius = tc.Scale() * ccc.radius;
+        glm::vec3 relativeSize = tc.Scale() * ccc.height;
+        
+        // Create the capsule shape
+        CapsuleShape* capsuleShape = m_physics3DCommon.createCapsuleShape(relativeRadius.x, relativeSize.y);
+        
+        // Add the collider to the rigid body
+        auto colliderPosition = Vector3(ccc.positionOffset.x, ccc.positionOffset.y, ccc.positionOffset.x);
+        auto collideerQuaternion = Quaternion(ccc.quaternionOffset.x, ccc.quaternionOffset.y, ccc.quaternionOffset.z,
+                                              ccc.quaternionOffset.w);
+        Transform collidertransform = Transform(colliderPosition, collideerQuaternion);
+        Collider* collider = body->addCollider(capsuleShape, collidertransform);
+        
+        // Get the current material of the collider
+        Material& material = collider->getMaterial();
+        
+        material.setBounciness(ccc.bounciness);
+        material.setFrictionCoefficient(ccc.frictionCoefficient);
+        material.setMassDensity(ccc.massDensity);
+        
+      } // Capsule Collider
+    }
   }
 
   void Scene::CopyTo(Ref<Scene> &target)
@@ -188,7 +465,23 @@ namespace IKan
   {
     m_selectedEntity = entity;
   }
-
+  
+  Entity Scene::GetMainCameraEntity()
+  {
+    auto view = m_registry.view<CameraComponent>();
+    for (auto entity : view)
+    {
+      auto& comp = view.get<CameraComponent>(entity);
+      if (comp.primary)
+      {
+        IK_ASSERT(comp.camera.GetOrthographicSize() or comp.camera.GetDegPerspectiveVerticalFOV(),
+                  "Camera is not fully initialized");
+        return { entity, this };
+      }
+    }
+    return {};
+  }
+  
   const std::string& Scene::GetName() const
   {
     return m_name;
