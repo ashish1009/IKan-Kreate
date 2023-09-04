@@ -324,12 +324,20 @@ namespace Kreator
   
   void RendererLayer::CloseProject(bool unloadProject)
   {
-
+    SaveProject();
   }
   
   void RendererLayer::SaveProject()
   {
-
+    if (!Project::GetActive())
+    {
+      // FIXME: (Kreator) Fix Later
+      IK_ASSERT(false);
+    }
+    
+    Ref<Project> project = Project::GetActive();
+    ProjectSerializer serializer(project);
+    serializer.Serialize(project->GetConfig().projectDirectory + "/" + project->GetConfig().projectFileName);
   }
   
   // UI APIS ---------------------------------------------------------------------------------------------------------
