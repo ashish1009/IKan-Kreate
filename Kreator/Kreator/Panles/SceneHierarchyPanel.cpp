@@ -26,12 +26,20 @@ namespace Kreator
   SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& context, bool isWindow)
   : m_context(context), m_isWindow(isWindow)
   {
-
+    if(m_context)
+    {
+      m_context->SetEntityDestroyedCallback([this](Entity entity) { OnExternalEntityDestroyed(entity); });
+    }
   }
   
   void SceneHierarchyPanel::SetSceneContext(const Ref<Scene>& scene)
   {
     m_context = scene;
+    m_selectionContext = {};
+    if(m_context)
+    {
+      m_context->SetEntityDestroyedCallback([this](Entity entity) { OnExternalEntityDestroyed(entity); });
+    }
   }
   
   void SceneHierarchyPanel::OnImGuiRender(bool& isOpen)
@@ -452,6 +460,14 @@ namespace Kreator
       }
     }
     return false;
+  }
+  
+  void SceneHierarchyPanel::OnExternalEntityDestroyed(Entity entity)
+  {
+    if (entity == m_selectionContext)
+    {
+      m_selectionContext = {};
+    }
   }
 
   void SceneHierarchyPanel::SetSelectedEntity(Entity entity)

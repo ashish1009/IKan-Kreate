@@ -129,6 +129,9 @@ namespace IKan
     void SetName(const std::string& name);
     /// This function set the selected Entity
     void SetSelectedEntity(entt::entity entity);
+    /// This function set the entity deletion callback
+    /// - Parameter callback: callback funtion
+    void SetEntityDestroyedCallback(const std::function<void(Entity)>& callback);
 
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the scene name

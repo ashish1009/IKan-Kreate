@@ -61,6 +61,10 @@ namespace Kreator
     ///   - maxSearchDepth: max depth
     bool TagSearchRecursive(Entity entity, std::string_view searchFilter, uint32_t maxSearchDepth, uint32_t currentDepth = 1);
 
+    /// This function is the callback for external entity destroy
+    /// - Parameter entity entity handle
+    void OnExternalEntityDestroyed(Entity entity);
+
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
     bool m_isWindow;

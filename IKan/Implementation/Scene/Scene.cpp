@@ -572,7 +572,11 @@ namespace IKan
   {
     m_selectedEntity = entity;
   }
-  
+  void Scene::SetEntityDestroyedCallback(const std::function<void(Entity)>& callback)
+  {
+    m_onEntityDestroyedCallback = callback;
+  }
+
   Entity Scene::GetMainCameraEntity()
   {
     auto view = m_registry.view<CameraComponent>();
