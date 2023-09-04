@@ -1613,14 +1613,39 @@ if (!Project::GetActive()) return
         }
         case FolderExplorerAction::OpenProject:
         {
+          if (Utils::String::GetExtensionFromPath(explorerOutput) == ProjectExtension)
+          {
+            m_openProjectPath = explorerOutput;
+            OpenProject();
+          }
+          else
+          {
+            FolderExplorer::OpenPopup("Open Project", explorerOutput.parent_path());
+            m_folderExplorerAction = FolderExplorerAction::OpenProject;
+          }
           break;
         }
         case FolderExplorerAction::SaveScene:
         {
+          m_sceneFilePath = explorerOutput;
+          m_sceneFilePath += SceneExtension;
+          
+          SaveScene();
+          UpdateWindowTitle(m_sceneFilePath);
+          
           break;
         }
         case FolderExplorerAction::OpenScene:
         {
+          if (Utils::String::GetExtensionFromPath(explorerOutput) == SceneExtension)
+          {
+            OpenScene(explorerOutput);
+          }
+          else
+          {
+            FolderExplorer::OpenPopup("Open Scene", explorerOutput.parent_path());
+            m_folderExplorerAction = FolderExplorerAction::OpenScene;
+          }
           break;
         }
           

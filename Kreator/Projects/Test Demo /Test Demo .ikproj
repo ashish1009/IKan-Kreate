@@ -1,5 +1,5 @@
 Project:
-  Name: TestProject
+  Name: Test Demo 
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
   MeshDirectory: Assets/Meshes
