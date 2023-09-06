@@ -119,7 +119,6 @@ namespace Kreator
       const float inputItemWidth = (ImGui::GetContentRegionAvail().x - spacingX) / 3.0f - buttonSize.x;
       
       const ImGuiIO& io = ImGui::GetIO();
-      auto boldFont = io.Fonts->Fonts[0];
       
       auto drawControl = [&] (const std::string& label, float& value, const ImVec4& colourN,
                               const ImVec4& colourH,
@@ -131,8 +130,8 @@ namespace Kreator
                                              ImGuiCol_ButtonHovered, colourH,
                                              ImGuiCol_ButtonActive, colourP);
           
-          UI::ScopedFont buttonFont(boldFont);
-          
+          UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+
           UI::ShiftCursorY(2.0f);
           if (ImGui::Button(label.c_str(), buttonSize))
           {
@@ -362,8 +361,8 @@ namespace Kreator
       
       UI::ScopedStyle frameBorder(ImGuiStyleVar_FrameBorderSize, 0.0f);
       UI::ScopedColor frameColour(ImGuiCol_FrameBg, IM_COL32(0, 0, 0, 0));
-      UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
-      
+      UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+
       if (ImGui::InputText("##Tag", buffer, 256))
       {
         tag = std::string(buffer);
@@ -626,8 +625,8 @@ namespace Kreator
   
   void SceneHierarchyPanel::AddComponentPopup()
   {
-    UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
-    
+    UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+
     if (UI::BeginPopup("AddComponentPanel"))
     {
       if (!m_selectionContext.HasComponent<CameraComponent>())

@@ -722,7 +722,7 @@ namespace Kreator
       
       // Breadcrumbs
       {
-        UI::ScopedFont boldFont(ImGui::GetIO().Fonts->Fonts[0]);
+        UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
         UI::ScopedColor textColour(ImGuiCol_Text, Kreator_UI::Color::TextDarker);
         
         const std::string& assetsDirectoryName = m_project->GetConfig().assetDirectory;

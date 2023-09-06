@@ -2016,7 +2016,11 @@ if (!Project::GetActive()) return
         {
           const auto& stats = RendererStatistics::Get();
           
-          ImGui::Text("Renderer General Stats");
+          {
+            UI::ScopedColor header(ImGuiCol_Text, ImVec4(0.6f, 0.25f, 0.3f, 1.0f));
+            UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+            ImGui::Text("Renderer General Stats");
+          }
           ImGui::Text("Draw Calls            : %d", stats.drawCalls);
           ImGui::Text("Vertex Count          : %d", stats.vertexCount);
           ImGui::Text("Vertex Buffer Size    : %d B", stats.vertexBufferSize);
@@ -2025,7 +2029,11 @@ if (!Project::GetActive()) return
           ImGui::Text("Texture Buffer Size   : %d B", stats.textureBufferSize);
           
           ImGui::Separator();
-          ImGui::Text("Renderer 2D Stats");
+          {
+            UI::ScopedColor header(ImGuiCol_Text, ImVec4(0.6f, 0.25f, 0.3f, 1.0f));
+            UI::ScopedFont boldFont(Kreator_UI::GetBoldFont());
+            ImGui::Text("Renderer 2D Stats");
+          }
           ImGui::Text("Quads in this batch   : %d", stats._2d.quads);
           ImGui::Text("Max Quad Per Batch    : %d", stats._2d.maxQuads);
           ImGui::Text("Circles in this batch : %d", stats._2d.circles);
