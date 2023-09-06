@@ -273,10 +273,11 @@ if (!Project::GetActive()) return
         
         SceneRenderer::BeginRenderPass();
         Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
-        
+
         m_editorScene->OnUpdateEditor(ts);
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
+        UpdateHoveredEntity();
         SceneRenderer::EndRenderPass();
         
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
@@ -501,9 +502,9 @@ if (!Project::GetActive()) return
         return false;
       }
       
-      ClearSelectedEntity();
       if (m_hoveredEntityID >= 0 and m_hoveredEntityID <= (int32_t)m_currentScene->GetMaxEntityId())
       {
+        ClearSelectedEntity();
         Entity selectedEntity = m_currentScene->GetEntityWithEntityHandle(m_hoveredEntityID);
         
         SetSelectedEntity(selectedEntity);
@@ -514,8 +515,17 @@ if (!Project::GetActive()) return
     auto [spaceMouseX, spaceMouseY] = GetMouseViewportSpace();
     if (spaceMouseX > -1.0f and spaceMouseX < 1.0f and spaceMouseY > -1.0f and spaceMouseY < 1.0f)
     {
+      if (ImGuizmo::IsOver())
+      {
+//        auto entityID = (int32_t)m_currentScene->GetSelectedEntity();
+//        Entity selectedEntity = m_currentScene->GetEntityWithEntityHandle(entityID);
+//        SetSelectedEntity(selectedEntity);
+        return false;
+      }
+
       ClearSelectedEntity();
       
+
       const auto& camera = m_editorCamera;
       auto [origin, direction] = CastRay(camera, spaceMouseX, spaceMouseY);
       
@@ -530,7 +540,11 @@ if (!Project::GetActive()) return
           continue;
         }
         
+#ifdef WorldSpace
         glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(entity);
+#else
+        glm::mat4 transform = entity.GetComponent<TransformComponent>().Transform();
+#endif
         auto& submeshes = mesh->GetSubMeshes();
         for (uint32_t i = 0; i < submeshes.size(); i++)
         {
