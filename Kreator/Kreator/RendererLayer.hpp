@@ -199,11 +199,12 @@ namespace Kreator
     // Flags ---------------------------------------------
     bool m_showIcons = true;
     bool m_showColliders = true;
-    
+
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
     bool m_showAboutPopup = false;
     bool m_showStatisticsPanel = true;
+    bool m_showEditorPanel = true;
 
     // Applicaiton Icons ---------------------------------
     Ref<Image> m_shadowTexture;

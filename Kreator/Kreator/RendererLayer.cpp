@@ -1372,6 +1372,9 @@ if (!Project::GetActive()) return
         {
           ImGui::MenuItem(panelData.name, nullptr, &panelData.isOpen);
         }
+        ImGui::Separator();
+        ImGui::MenuItem("Editor Panel", nullptr, &m_showEditorPanel);
+        ImGui::MenuItem("Statistic Panel", nullptr, &m_showStatisticsPanel);
       });
       
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
@@ -2379,8 +2382,12 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UI_EditorPanel()
   {
-    // Editor Panel ------------------------------------------------------------------------------
-    ImGui::Begin("Settings");
+    if (!m_showEditorPanel)
+    {
+      return;
+    }
+    
+    ImGui::Begin("Settings", &m_showEditorPanel);
     {
       Kreator_UI::BeginPropertyGrid();
       ImGui::AlignTextToFramePadding();
@@ -2403,50 +2410,6 @@ if (!Project::GetActive()) return
       
       Kreator_UI::Property("Show Icons", m_showIcons);
       Kreator_UI::Property("Show Colliders", m_showColliders);
-      Kreator_UI::EndPropertyGrid();
-
-//      ImGui::Text("Selection mode");
-//      ImGui::SameLine();
-//      UI::ShiftCursorY(-3.0f);
-//
-//      char* label = m_SelectionMode == SelectionMode::Entity ? "Entity" : "Mesh";
-//      if (ImGui::Button(label))
-//      {
-//        m_SelectionMode = m_SelectionMode == SelectionMode::Entity ? SelectionMode::SubMesh : SelectionMode::Entity;
-//      }
-//
-//      ImGui::Spacing();
-//      ImGui::Spacing();
-//      ImGui::Separator();
-//      ImGui::Spacing();
-//      ImGui::Spacing();
-//      ImGui::Spacing();
-//      ImGui::Spacing();
-//      ImGui::Spacing();
-//
-//      ImGui::PushFont(boldFont);
-//      ImGui::Text("Renderer Settings");
-//      ImGui::PopFont();
-      Kreator_UI::BeginPropertyGrid();
-//      UI::Property("Enable HDR environment maps", rendererConfig.ComputeEnvironmentMaps);
-//
-//      {
-//        const char* environmentMapSizes[] = { "128", "256", "512", "1024", "2048", "4096" };
-//        int currentSize = (int)glm::log2((float)rendererConfig.EnvironmentMapResolution) - 7;
-//        if (UI::PropertyDropdown("Environment Map Size", environmentMapSizes, 6, &currentSize))
-//        {
-//          rendererConfig.EnvironmentMapResolution = (uint32_t)glm::pow(2, currentSize + 7);
-//        }
-//      }
-//
-//      {
-//        const char* irradianceComputeSamples[] = { "128", "256", "512", "1024", "2048", "4096" };
-//        int currentSamples = (int)glm::log2((float)rendererConfig.IrradianceMapComputeSamples) - 7;
-//        if (UI::PropertyDropdown("Irradiance Map Compute Samples", irradianceComputeSamples, 6, &currentSamples))
-//        {
-//          rendererConfig.IrradianceMapComputeSamples = (uint32_t)glm::pow(2, currentSamples + 7);
-//        }
-//      }
       Kreator_UI::EndPropertyGrid();
     }
     ImGui::End();
