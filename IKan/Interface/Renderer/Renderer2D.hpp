@@ -52,8 +52,10 @@ namespace IKan
     static void AddLineData(uint32_t maxLines);
     
     /// This function begins the Batch for 2D Rendere (to be called each frame)
-    /// - Parameter camViewProjMat: Camera View projection Matrix
-    static void BeginBatch(const glm::mat4& camViewProjMat);
+    /// - Parameters:
+    ///   - camViewProjMat: Camera View projection Matrix
+    ///   - cameraViewMat: Camera View Matrix
+    static void BeginBatch(const glm::mat4& camViewProjMat, const glm::mat4 &cameraViewMat);
     /// This function Ends the current batch by rendering all the vertex
     static void EndBatch();
 
@@ -112,6 +114,33 @@ namespace IKan
     static void DrawQuad(const glm::mat4& transform, const Ref<Sprite>& subTexture, const glm::vec4& tintColor = glm::vec4(1.0f),
                          int32_t objectID = -1);
     
+    /// This functon draws Quad API with Texture with fixed camera with transform matrix
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - entityId: Pixel ID of Quad
+    static void DrawFixedViewQuad(const glm::mat4& transform,
+                                  const Ref<Texture>& texture,
+                                  const glm::vec4& tintColor = glm::vec4(1.0f),
+                                  float tilingFactor = 1.0f,
+                                  int32_t entityId = -1);
+    /// This functon draws Quad API with Texture with fixed camera with transform position and scale
+    /// - Parameters:
+    ///   - position: Position matrix of Quad
+    ///   - position: Size matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - entityDd: Pixel ID of Quad
+    static void DrawFixedViewQuad(const glm::vec3& position,
+                                  const glm::vec3& scale,
+                                  const Ref<Texture>& texture,
+                                  const glm::vec4& tintColor = glm::vec4(1.0f),
+                                  float tilingFactor = 1.0f,
+                                  int32_t entityId = -1);
+
     /// This function draws circle with color
     /// - Parameters:
     ///   - position: Center Circle

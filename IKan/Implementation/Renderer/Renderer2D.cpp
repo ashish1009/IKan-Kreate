@@ -74,6 +74,16 @@ namespace IKan
     { 0.0f, 1.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, { 0.0f, 0.0f }
   };
   
+  /// This structure stores the environmant data
+  struct Environment
+  {
+    glm::mat4 cameraViewProjectionMatrix;
+    glm::mat4 cameraViewMatrix;
+  };
+  
+  /// Store the Environment data
+  static Environment s_environment;
+  
   /// This structure holds the common batch renderer data for Quads, circle and lines
   struct CommonBatchData
   {
@@ -620,8 +630,12 @@ namespace IKan
     BATCH_INFO("  Shader Used                      {0}", data->shader->GetName());
   }
     
-  void Renderer2D::BeginBatch(const glm::mat4 &camViewProjMat)
+  void Renderer2D::BeginBatch(const glm::mat4 &camViewProjMat, const glm::mat4 &cameraViewMat)
   {
+    // Start batch for quads
+    s_environment.cameraViewProjectionMatrix = camViewProjMat;
+    s_environment.cameraViewMatrix = cameraViewMat;
+
     if (s_quadData)
     {
       s_quadData->StartBatch(camViewProjMat);
@@ -783,6 +797,94 @@ namespace IKan
     }
     
     s_quadData->indexCount += Shape2DCommonData::IndicesForSingleElement;
+    
+    // Update Stats
+    RendererStatistics::Get().indexCount += Shape2DCommonData::IndicesForSingleElement;
+    RendererStatistics::Get().vertexCount += Shape2DCommonData::VertexForSingleElement;
+    RendererStatistics::Get()._2d.quads++;
+  }
+  
+  void Renderer2D::DrawFixedViewQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor,
+                                     float tilingFactor, int32_t entityID)
+  {
+    glm::vec3 position, rotation, scale;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    DrawFixedViewQuad(position, scale, texture, tintColor, tilingFactor, entityID);
+  }
+  
+  void Renderer2D::DrawFixedViewQuad(const glm::vec3& position, const glm::vec3& scale, const Ref<Texture>& texture,
+                                        const glm::vec4& tintColor, float tilingFactor, int32_t entityID)
+  {
+    // If number of indices increase in batch then start new batch
+    if (s_quadData->indexCount >= s_quadData->maxIndices)
+    {
+      BATCH_WARN("Starts the new batch as number of indices ({0}) increases in the previous batch", s_quadData->indexCount);
+      EndBatch();
+      s_quadData->StartInternalBatch();
+    }
+
+    float textureIndex = 0.0f;
+    if (texture)
+    {
+      // Find if texture is already loaded in current batch
+      for (size_t i = 1; i < s_quadData->textureSlotIndex; i++)
+      {
+        if (s_quadData->textureSlots[i].get() == texture.get())
+        {
+          // Found the current textue in the batch
+          textureIndex = (float)i;
+          break;
+        }
+      }
+      
+      // If current texture slot is not pre loaded then load the texture in proper slot
+      if (textureIndex == 0.0f)
+      {
+        // If number of slots increases max then start new batch
+        if (s_quadData->textureSlotIndex >= MaxTextureSlotsInShader)
+        {
+          BATCH_WARN("Starts the new batch as number of texture slot ({0}) increases in the previous batch", s_quadData->textureSlotIndex);
+          EndBatch();
+          s_quadData->StartInternalBatch();
+        }
+        
+        // Loading the current texture in the first free slot slot
+        textureIndex = (float)s_quadData->textureSlotIndex;
+        s_quadData->textureSlots[s_quadData->textureSlotIndex] = texture;
+        s_quadData->textureSlotIndex++;
+      }
+    }
+    
+    // get the fixed view from camera view matrix
+    glm::vec3 camRightWS =
+    {
+       s_environment.cameraViewMatrix[0][0],
+       s_environment.cameraViewMatrix[1][0],
+       s_environment.cameraViewMatrix[2][0]
+    };
+    
+    glm::vec3 camUpWS =
+    {
+      s_environment.cameraViewMatrix[0][1],
+      s_environment.cameraViewMatrix[1][1],
+      s_environment.cameraViewMatrix[2][1]
+    };
+    
+    for (size_t i = 0; i < QuadData::VertexForSingleElement; i++)
+    {
+      s_quadData->vertexBufferPtr->position         = position + camRightWS *
+      s_quadData->vertexBasePosition[i].x * scale.x + camUpWS *
+      s_quadData->vertexBasePosition[i].y * scale.y;
+      
+      s_quadData->vertexBufferPtr->color            = tintColor;
+      s_quadData->vertexBufferPtr->textureCoords    = TextureCoords[i];
+      s_quadData->vertexBufferPtr->textureIndex     = textureIndex;
+      s_quadData->vertexBufferPtr->tilingFactor     = tilingFactor;
+      s_quadData->vertexBufferPtr->pixelID          = entityID;
+      s_quadData->vertexBufferPtr++;
+    }
+    
+    s_quadData->indexCount += QuadData::IndicesForSingleElement;
     
     // Update Stats
     RendererStatistics::Get().indexCount += Shape2DCommonData::IndicesForSingleElement;

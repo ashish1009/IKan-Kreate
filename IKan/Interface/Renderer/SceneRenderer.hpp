@@ -25,6 +25,7 @@ namespace IKan
     uint32_t viewportWidth, viewportHeight;
     Ref<RenderPass> renderPass;
     glm::mat4 camViewProjection;
+    glm::mat4 camView;
   };
   
   class SceneRenderer
@@ -49,8 +50,10 @@ namespace IKan
     void SetViewport(uint32_t width, uint32_t height);
     
     /// This function begins the Batch for 2D Rendere (to be called each frame)
-    /// - Parameter camViewProjMat: Camera View projection Matrix
-    void BeginScene(const glm::mat4& camViewProjMat);
+    /// - Parameters:
+    ///   - camViewProjMat: Camera View projection Matrix
+    ///   - camViewMat: Camera Ciew matrix
+    void BeginScene(const glm::mat4& camViewProjMat, const glm::mat4& camViewMat);
     /// This function Ends the current batch by rendering all the vertex
     void EndScene();
     

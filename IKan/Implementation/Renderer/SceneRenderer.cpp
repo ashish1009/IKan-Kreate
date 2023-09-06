@@ -70,7 +70,7 @@ namespace IKan
     }
   }
 
-  void SceneRenderer::BeginScene(const glm::mat4& camViewProjMat)
+  void SceneRenderer::BeginScene(const glm::mat4& camViewProjMat, const glm::mat4& camViewMat)
   {
     if (s_commonData->needResize)
     {
@@ -79,7 +79,8 @@ namespace IKan
     }
     
     s_commonData->camViewProjection = camViewProjMat;
-    Renderer2D::BeginBatch(camViewProjMat);
+    s_commonData->camView = camViewMat;
+    Renderer2D::BeginBatch(camViewProjMat, camViewMat);
   }
   
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform)

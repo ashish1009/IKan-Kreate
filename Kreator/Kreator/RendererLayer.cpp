@@ -277,6 +277,10 @@ if (!Project::GetActive()) return
         m_editorScene->OnUpdateEditor(ts);
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
+        m_viewportRenderer->BeginScene(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
+        Renderer2D::DrawFixedViewQuad(glm::mat4(1.0f), nullptr);
+        m_viewportRenderer->EndScene();
+        
         UpdateHoveredEntity();
         SceneRenderer::EndRenderPass();
         
@@ -517,9 +521,6 @@ if (!Project::GetActive()) return
     {
       if (ImGuizmo::IsOver())
       {
-//        auto entityID = (int32_t)m_currentScene->GetSelectedEntity();
-//        Entity selectedEntity = m_currentScene->GetEntityWithEntityHandle(entityID);
-//        SetSelectedEntity(selectedEntity);
         return false;
       }
 

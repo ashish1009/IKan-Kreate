@@ -115,7 +115,7 @@ namespace IKan
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
   {
-    renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
+    renderer->BeginScene(editorCamera.GetUnReversedViewProjection(), editorCamera.GetViewMatrix());
     Render2DEntities();
     Render3DEntities(renderer);
     renderer->EndScene();
@@ -132,7 +132,7 @@ namespace IKan
     const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
     const auto& cameraTransform = cameraEntity.GetComponent<TransformComponent>().Transform();
     
-    renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
+    renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform), glm::inverse(cameraTransform));
     Render2DEntities();
     Render3DEntities(renderer);
     renderer->EndScene();
@@ -140,7 +140,7 @@ namespace IKan
   
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
   {
-    renderer->BeginScene(editorCamera.GetUnReversedViewProjection());
+    renderer->BeginScene(editorCamera.GetUnReversedViewProjection(), editorCamera.GetViewMatrix());
     Render2DEntities();
     Render3DEntities(renderer);
     RenderDebugColliders({0, 1, 0, 1});
