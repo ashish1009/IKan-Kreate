@@ -34,24 +34,24 @@ namespace IKan
     ~Scene();
 
     // Runtime APIs --------------------------------------------------------------------------------------------------
-    /// This functionm updates the scene for editor
+    /// This function updates the scene for editor
     /// - Parameter ts: time step of 2 frames
     void OnUpdateEditor(TimeStep ts);
     /// This functionm updates the scene for runtime
     /// - Parameter ts: time step of 2 frames
     void OnUpdateRuntime(TimeStep ts);
     
-    /// This functionm renders the scene for editor
+    /// This function renders the scene for editor
     /// - Parameters:
     ///  - editorCamera: Editor Camera
     ///  - renderer: Scene renderer cintext
     void OnRenderEditor(const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer);
-    /// This functionm renders the scene for runtime
+    /// This function renders the scene for runtime
     /// - Parameters:
     ///  - ts: time step of 2 frames
     ///  - renderer: Scene renderer cintext
     void OnRenderRuntime(TimeStep ts, const Ref<SceneRenderer> renderer);
-    /// This functionm renders the scene for simulation
+    /// This function renders the scene for simulation
     /// - Parameters:
     ///  - ts: time step of 2 frames
     ///  - editorCamera: Editor Camera

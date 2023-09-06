@@ -1,5 +1,17 @@
 Scene: Demo
 Entities:
+  - Entity: 1652624999247050772
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 560965872
   - Entity: 4818952058294986168
     TagComponent:
       Tag: Cube
@@ -7,7 +19,7 @@ Entities:
     Children:
       - Handle: 16107639747932871619
     TransformComponent:
-      Position: [-1.00296116, 0, 0]
+      Position: [5.99108887, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -28,7 +40,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, -1.9960134, 0]
+      Position: [12.5307741, -1.9960134, 0]
       Rotation: [0, 0, 0]
       Scale: [6.34103107, 0.0213917978, 6.67717218]
     StaticMeshComponent:
@@ -49,7 +61,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 1.06648755, 9.50910187]
+      Position: [0, 0, 3.25489759]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -69,8 +81,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.00296116, 0, 0]
-      Rotation: [0, -0, 0]
+      Position: [9.15072918, 0, 0]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 1336252552

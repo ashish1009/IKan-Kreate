@@ -724,12 +724,12 @@ namespace IKan
   }
 
   void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation,
-                            const Ref<Image>& texture, const glm::vec4& color, int32_t objectID)
+                            const Ref<Texture>& texture, const glm::vec4& color, int32_t objectID)
   {
     auto transform  = Utils::Math::GetTransformMatrix(position, rotation, scale);
     DrawTextureQuad(transform, texture, TextureCoords, 1.0f /* tiling factor */, color, objectID);
   }
-  void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor,
+  void Renderer2D::DrawQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor,
                             float tilingFactor, int32_t objectID)
   {
     DrawTextureQuad(transform, texture ? texture : nullptr, TextureCoords, tilingFactor, tintColor, objectID );
@@ -742,7 +742,7 @@ namespace IKan
                     (subTexture) ? textureCoords : TextureCoords, 1.0f, tintColor, objectID);
   }
   
-  void Renderer2D::DrawTextureQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec2* textureCoords,
+  void Renderer2D::DrawTextureQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec2* textureCoords,
                                    float tilingFactor, const glm::vec4& tintColor, int32_t objectID)
   {
     // If number of indices increase in batch then start new batch
@@ -903,13 +903,13 @@ namespace IKan
   {
     DrawTextureCircle(transform, nullptr, 1.0f /* tiling factor */, color, thickness, fade, objectID);
   }
-  void Renderer2D::DrawCircle(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor,
+  void Renderer2D::DrawCircle(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor,
                               float tilingFactor, float thickness, float fade, int32_t objectID)
   {
     DrawTextureCircle(transform, texture, tilingFactor, tintColor, thickness, fade, objectID);
   }
   
-  void Renderer2D::DrawTextureCircle(const glm::mat4& transform, const Ref<Image>& texture, float tilingFactor,
+  void Renderer2D::DrawTextureCircle(const glm::mat4& transform, const Ref<Texture>& texture, float tilingFactor,
                                      const glm::vec4& tintColor, float thickness, float fade, int32_t objectID)
   {
     // If number of indices increase in batch then start new batch

@@ -9,7 +9,6 @@
 
 namespace IKan
 {
-  class Image;
   class Texture;
   class Sprite;
   class RenderPass;
@@ -94,7 +93,7 @@ namespace IKan
     ///   - objectID: Pixel ID of Quad
     /// - Note: High Cycle API
     static void DrawQuad(const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation,
-                         const Ref<Image>& texture, const glm::vec4& color = glm::vec4(1.0f), int32_t objectID = -1 );
+                         const Ref<Texture>& texture, const glm::vec4& color = glm::vec4(1.0f), int32_t objectID = -1 );
     
     /// This function draws Quad with texture
     /// - Parameters:
@@ -103,7 +102,7 @@ namespace IKan
     ///   - tintColor: Color of Quad
     ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
     ///   - objectID: Pixel ID of Quad
-    static void DrawQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor = glm::vec4(1.0f),
+    static void DrawQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor = glm::vec4(1.0f),
                          float tilingFactor = 1.0f, int32_t objectID = -1 );
     
     /// This function draws Quad with Subtexture sprite
@@ -172,7 +171,7 @@ namespace IKan
     ///   - thickness: thickneess of Circle
     ///   - fade: fade of Circle Edge
     ///   - objectID: Pixel ID of Circle
-    static void DrawCircle(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec4& tintColor = glm::vec4(1.0f),
+    static void DrawCircle(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor = glm::vec4(1.0f),
                            float tilingFactor = 1.0f, float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1 );
     
     /// This function draws a line using two points in 3d Space
@@ -235,7 +234,7 @@ namespace IKan
     ///   - tilingFactor: tiling factor of texture
     ///   - tintColor: color of quad
     ///   - objectID: object/pixel id
-    static void DrawTextureQuad(const glm::mat4& transform, const Ref<Image>& texture, const glm::vec2* textureCoords,
+    static void DrawTextureQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec2* textureCoords,
                                 float tilingFactor, const glm::vec4& tintColor, int32_t objectID);
 
     /// This function is the helper function to rendere the circle
@@ -247,7 +246,7 @@ namespace IKan
     ///   - thickness: thickness of circle
     ///   - fade: cirlce face
     ///   - objectID: object/pixel id
-    static void DrawTextureCircle(const glm::mat4& transform, const Ref<Image>& texture, float tilingFactor,
+    static void DrawTextureCircle(const glm::mat4& transform, const Ref<Texture>& texture, float tilingFactor,
                                   const glm::vec4& tintColor, float thickness, float fade, int32_t objectID);
   };
 } // namespace IKan

@@ -84,6 +84,8 @@ namespace Kreator
     /// This function updates the name of window tile
     /// - Parameter sceneName: scene name
     void UpdateWindowTitle(const std::string& sceneName);
+    /// This function renders the mini viewport
+    void RenderMiniViewport();
     /// This function renders the debug icons, colliders and so on....
     void RenderDebug();
     /// This function show the icons

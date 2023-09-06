@@ -274,22 +274,36 @@ if (!Project::GetActive()) return
     {
       case SceneState::Edit:
       {
+        // Update Data
         AssetEditorManager::OnUpdate(ts);
         m_viewport.UpdateMousePos();
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
         
-        m_viewportRenderer->BeginRenderPass();
-        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
-
-        m_editorScene->OnUpdateEditor(ts);
-        m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
+        // Render Main Viewport
+        {
+          m_viewportRenderer->BeginRenderPass();
+          Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+          
+          m_editorScene->OnUpdateEditor(ts);
+          m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
+          
+          RenderDebug();
+          UpdateHoveredEntity();
+          RenderMiniViewport();
+          m_viewportRenderer->EndRenderPass();
+        }
         
-        RenderDebug();
-
-        UpdateHoveredEntity();
-        m_viewportRenderer->EndRenderPass();
+        // Render Mini Viewport
+        {
+          m_miniViewportRenderer->BeginRenderPass();
+          Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+          m_editorScene->OnUpdateEditor(ts);
+          m_editorScene->OnRenderRuntime(ts, m_viewportRenderer);
+          m_miniViewportRenderer->EndRenderPass();
+        }
         
+        // Save Scene Auto
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
         {
           m_timeSinceLastSave += ts;
@@ -302,11 +316,13 @@ if (!Project::GetActive()) return
       }
       case SceneState::Simulate:
       {
+        // Update Data
         AssetEditorManager::OnUpdate(ts);
         m_viewport.UpdateMousePos();
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
         
+        // Renderer for Main Viewport
         m_viewportRenderer->BeginRenderPass();
         Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
         
@@ -320,6 +336,7 @@ if (!Project::GetActive()) return
       }
       case SceneState::Play:
       {
+        // Renderer for Main Viewport
         m_viewportRenderer->BeginRenderPass();
         Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
         
@@ -461,6 +478,18 @@ if (!Project::GetActive()) return
 #if 0
     IK_CONSOLE_TRACE("", "{0}", m_hoveredEntityID);
 #endif
+  }
+  
+  void RendererLayer::RenderMiniViewport()
+  {
+    static const glm::mat4& unitMat4 = glm::mat4(1.0f);
+    static const glm::vec3 size = {1.0f/4.0f, -1.0f/4.0f, 1.0f};
+    static const glm::vec3 position = {0.75f, 0.75f, 0.0f};
+    static const glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
+    
+    Renderer2D::BeginBatch(unitMat4, unitMat4);
+    Renderer2D::DrawQuad(position, size, rotation, m_miniViewportRenderer->GetFinalImage());
+    Renderer2D::EndBatch();
   }
   
   float RendererLayer::GetSnapValue()
