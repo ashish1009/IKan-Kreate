@@ -631,7 +631,8 @@ if (!Project::GetActive()) return
 #ifdef WorldSpace
       Renderer2D::DrawFixedViewQuad(m_currentScene->GetWorldSpaceTransform(entity).Transform(), m_cameraIcon);
 #else
-      Renderer2D::DrawFixedViewQuad(entity.GetComponent<TransformComponent>().Transform(), m_cameraIcon);
+      const auto& tc = entity.GetComponent<TransformComponent>();
+      Renderer2D::DrawFixedViewQuad(tc.Position(), tc.Scale(), m_cameraIcon, glm::vec4(1.0f), 1, (uint32_t)entity);
 #endif
     }
     
