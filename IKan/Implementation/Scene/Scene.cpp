@@ -143,7 +143,6 @@ namespace IKan
     renderer->BeginScene(editorCamera.GetUnReversedViewProjection(), editorCamera.GetViewMatrix());
     Render2DEntities();
     Render3DEntities(renderer);
-    RenderDebugColliders({0, 1, 0, 1});
     renderer->EndScene();
   }
 
@@ -220,23 +219,7 @@ namespace IKan
       }
     } // For each Quad Entity
   }
-  
-  void Scene::RenderDebugColliders(const glm::vec4& color)
-  {
-    auto debugRenderer = m_physics3DWorld->getDebugRenderer();
-    auto triangle = debugRenderer.getTriangles();
     
-    for (auto i = 0; i < debugRenderer.getNbTriangles(); i++)
-    {
-      Renderer2D::DrawLine({triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z},
-                           {triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z}, color);
-      Renderer2D::DrawLine({triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z},
-                           {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, color);
-      Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
-                           {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
-    }
-  }
-  
   void Scene::OnRuntimeStart()
   {
     IK_PROFILE();
@@ -764,6 +747,11 @@ namespace IKan
   uint32_t Scene::GetMaxEntityId() const
   {
     return m_maxEntityID;
+  }
+  
+  reactphysics3d::PhysicsWorld* Scene::Get3DPhysicsWorld() const
+  {
+    return m_physics3DWorld;
   }
 
 } // namespace IKan

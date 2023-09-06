@@ -158,6 +158,9 @@ namespace IKan
     /// - Parameter entityHandle: handle for entity
     Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
 
+    /// This function rerturns the 3D Physics world
+    reactphysics3d::PhysicsWorld* Get3DPhysicsWorld() const;
+    
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
     ///   - name: Name of Scene
@@ -179,9 +182,6 @@ namespace IKan
     /// This function renders the 3D Entities
     /// - Parameter renderer: Scene Renderer Instance
     void Render3DEntities(Ref<SceneRenderer> renderer);
-    /// This function renders the debug Colliders
-    /// - Parameter color: color of collider
-    void RenderDebugColliders(const glm::vec4& color);
     /// This function initilzie physics world
     void InitializePhysicsWorld();
     /// This function destroy physics world

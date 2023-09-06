@@ -84,8 +84,13 @@ namespace Kreator
     /// This function updates the name of window tile
     /// - Parameter sceneName: scene name
     void UpdateWindowTitle(const std::string& sceneName);
+    /// This function renders the debug icons, colliders and so on....
+    void RenderDebug();
     /// This function show the icons
     void ShowIcons();
+    /// This function renders the debug Colliders
+    /// - Parameter color: color of collider
+    void ShowColliders(const glm::vec4& color);
     /// This function returns the space mouse position
     std::pair<float, float> GetMouseViewportSpace();
     /// This function cast ray from camera
@@ -191,6 +196,7 @@ namespace Kreator
     // Member Variables ----------------------------------------------------------------------------------------------
     // Flags ---------------------------------------------
     bool m_showIcons = true;
+    bool m_showColliders = true;
     
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;

@@ -278,10 +278,7 @@ if (!Project::GetActive()) return
         m_editorScene->OnUpdateEditor(ts);
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
-        if (m_showIcons)
-        {
-          ShowIcons();
-        }
+        RenderDebug();
 
         UpdateHoveredEntity();
         SceneRenderer::EndRenderPass();
@@ -309,6 +306,8 @@ if (!Project::GetActive()) return
         m_simulationScene->OnUpdateRuntime(ts);
         m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
         
+        RenderDebug();
+
         SceneRenderer::EndRenderPass();
         break;
       }
@@ -619,10 +618,25 @@ if (!Project::GetActive()) return
     Application::Get().GetWindow().SetTitle(title);
   }
   
-  void RendererLayer::ShowIcons()
+  void RendererLayer::RenderDebug()
   {
     m_viewportRenderer->BeginScene(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
     
+    if (m_showIcons)
+    {
+      ShowIcons();
+    }
+    
+    if (m_showColliders)
+    {
+      ShowColliders({0, 1, 0, 1});
+    }
+
+    m_viewportRenderer->EndScene();
+  }
+  
+  void RendererLayer::ShowIcons()
+  {
     // Cameras -----------
     auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
     for (auto e : cameraEntities)
@@ -635,8 +649,33 @@ if (!Project::GetActive()) return
       Renderer2D::DrawFixedViewQuad(tc.Position(), tc.Scale(), m_cameraIcon, glm::vec4(1.0f), 1, (uint32_t)entity);
 #endif
     }
+  }
+  
+  void RendererLayer::ShowColliders(const glm::vec4& color)
+  {
+    if (!m_simulationScene)
+    {
+      return;
+    }
     
-    m_viewportRenderer->EndScene();
+    auto physics3DWorld = m_simulationScene->Get3DPhysicsWorld();
+    if (!physics3DWorld)
+    {
+      return;
+    }
+    
+    auto debugRenderer = physics3DWorld->getDebugRenderer();
+    auto triangle = debugRenderer.getTriangles();
+    
+    for (auto i = 0; i < debugRenderer.getNbTriangles(); i++)
+    {
+      Renderer2D::DrawLine({triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z},
+                           {triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z}, color);
+      Renderer2D::DrawLine({triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z},
+                           {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, color);
+      Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
+                           {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
+    }
   }
 
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
