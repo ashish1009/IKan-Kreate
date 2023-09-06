@@ -290,16 +290,24 @@ if (!Project::GetActive()) return
           
           RenderDebug();
           UpdateHoveredEntity();
-          RenderMiniViewport();
+          
+          if (m_showMiniViewport)
+          {
+            RenderMiniViewport();
+          }
+          
           m_viewportRenderer->EndRenderPass();
         }
         
         // Render Mini Viewport
+        if (m_showMiniViewport)
         {
           m_miniViewportRenderer->BeginRenderPass();
-          Renderer::Clear({0.1f, 0.1f, 0.1f, 1.0f});
+          Renderer::Clear({0.2f, 0.2f, 0.2f, 0.3f});
+          
           m_editorScene->OnUpdateEditor(ts);
           m_editorScene->OnRenderRuntime(ts, m_viewportRenderer);
+          
           m_miniViewportRenderer->EndRenderPass();
         }
         

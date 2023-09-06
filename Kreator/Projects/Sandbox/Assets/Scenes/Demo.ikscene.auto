@@ -1,5 +1,26 @@
 Scene: Demo
 Entities:
+  - Entity: 1652624999247050772
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-1.80793786, 1.14685488, -1.16032791]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 2
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
   - Entity: 4818952058294986168
     TagComponent:
       Tag: Cube
@@ -7,9 +28,9 @@ Entities:
     Children:
       - Handle: 16107639747932871619
     TransformComponent:
-      Position: [-1.00296116, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Position: [-3.8071785, 1.86448205, 3.7252903e-09]
+      Rotation: [1.61670804, 0.274493635, 0.519862831]
+      Scale: [1.23482513, 1.0000006, 1.00000024]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
@@ -28,9 +49,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, -1.9960134, 0]
+      Position: [-0.0679665804, -1.75404644, 0]
       Rotation: [0, 0, 0]
-      Scale: [6.34103107, 0.0213917978, 6.67717218]
+      Scale: [14.7600279, 0.0213917959, 39.4463081]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
@@ -49,7 +70,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 7.6289072]
+      Position: [0, 0, 7.66208363]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -69,8 +90,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.00296116, 0, 0]
-      Rotation: [0, -0, 0]
+      Position: [-1.52409041, 2.71673131, -3.13053226]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 1336252552

@@ -272,14 +272,15 @@ namespace Kreator
       | ImGuiTableFlags_Resizable
       | ImGuiTableFlags_Reorderable
       | ImGuiTableFlags_ScrollY
-      | ImGuiTableFlags_RowBg | ImGuiTableFlags_Sortable;
+      | ImGuiTableFlags_RowBg
+      | ImGuiTableFlags_Sortable;
       
       const int numColumns = 3;
       if (ImGui::BeginTable("##SceneHierarchy-Table", numColumns, tableFlags, ImVec2(ImGui::GetContentRegionAvail())))
       {
         ImGui::TableSetupColumn("Label");
-        ImGui::TableSetupColumn("Type");
-        ImGui::TableSetupColumn("Visibility");
+        ImGui::TableSetupColumn(" ");
+        ImGui::TableSetupColumn(" ");
         
         // Headers
         {
@@ -874,15 +875,18 @@ namespace Kreator
       ImGui::EndPopup();
     }
     
-    // Type column
-    //------------
+    // <> column -------------------------------------------------------------------------------------------------
     ImGui::TableNextColumn();
+
+    // <> column -------------------------------------------------------------------------------------------
+    ImGui::TableNextColumn();
+
     if (isRowClicked)
     {
       SetSelectedEntity(entity);
       ImGui::FocusWindow(ImGui::GetCurrentWindow());
     }
-    
+
     if (isSelected)
     {
       ImGui::PopStyleColor();

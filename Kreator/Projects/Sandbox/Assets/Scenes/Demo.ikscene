@@ -7,13 +7,13 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [-0.0446871221, 1.87171769, -0.00151491165]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
-      BodyType: 0
+      BodyType: 2
     Box3DColliderComponent:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
@@ -28,9 +28,9 @@ Entities:
     Children:
       - Handle: 16107639747932871619
     TransformComponent:
-      Position: [-1.96443748, 0, 3.7252903e-09]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Position: [-2.50792074, 4.67548609, -1.29520822]
+      Rotation: [1.61670804, 0.274493635, 0.519862831]
+      Scale: [1.23482513, 1.00000095, 1.00000024]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
@@ -49,15 +49,37 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.0679665804, -1.9960134, 0]
+      Position: [-0.0679665804, -1.75404644, 0]
       Rotation: [0, 0, 0]
-      Scale: [6.34103107, 0.0213917978, 6.67717218]
+      Scale: [29.2827339, 0.0213917959, 39.4463081]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
       BodyType: 0
     Box3DColliderComponent:
       Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+  - Entity: 7784077153625953427
+    TagComponent:
+      Tag: Capsule
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0.0657582879, 2.32686162, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 2234008704
+    RigidBodyComponent:
+      BodyType: 2
+    CapsuleColliderComponent:
+      Radius: 0.5
+      Height: 1
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
       FrictionCoefficient: 0.200000003
@@ -70,13 +92,13 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 3.25489759]
+      Position: [-0.105336547, 0, 13.7494783]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
       Camera:
         ProjectionType: 0
-        PerspectiveFOV: 45
+        PerspectiveFOV: 57.5999985
         PerspectiveNear: 0.100000001
         PerspectiveFar: 1000
         OrthographicSize: 10
@@ -90,7 +112,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.50858533, 0, 0]
+      Position: [-1.52409041, 2.71673131, -1.05409956]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:

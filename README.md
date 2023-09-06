@@ -179,6 +179,9 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 - V10.0.7.0 : 3D Physics
  ------------------------------------------------------------------------------------------------------------------
 
+- V10.0.8.0 : Clean Editor Mini Viewport Bug Fixes
+ ------------------------------------------------------------------------------------------------------------------
+
 ## TODO  
 - Grid
 - Sub texture in quad component
