@@ -15,9 +15,9 @@ namespace IKan
   SceneRenderer::SceneRenderer(Ref<Scene> scene, const Renderer2DData& rendere2DData)
   : m_scene(scene)
   {
-    if (!s_commonData)
+    if (!m_commonData)
     {
-      s_commonData = CreateScope<SceneRendererData>();
+      m_commonData = CreateScope<SceneRendererData>();
       
       // Create the Render pass
       RenderPass::Specification rendererPassSpec;
@@ -33,7 +33,7 @@ namespace IKan
       };
       
       rendererPassSpec.targetFramebuffer = FrameBuffer::Create(fbSpec);
-      s_commonData->renderPass = RenderPass::Create(rendererPassSpec);
+      m_commonData->renderPass = RenderPass::Create(rendererPassSpec);
     }
     
     Initialize(rendere2DData);
@@ -44,9 +44,9 @@ namespace IKan
     Renderer2D::Shutdown();
     
     // Destroy the Render Pass for Renderer 2D
-    if (s_commonData)
+    if (m_commonData)
     {
-      s_commonData.reset();
+      m_commonData.reset();
     }
   }
   
@@ -58,28 +58,28 @@ namespace IKan
   
   void SceneRenderer::SetViewport(uint32_t width, uint32_t height)
   {
-    if (s_commonData->viewportWidth != width or s_commonData->viewportHeight != height)
+    if (m_commonData->viewportWidth != width or m_commonData->viewportHeight != height)
     {
-      s_commonData->needResize = true;
-      s_commonData->viewportWidth = width;
-      s_commonData->viewportHeight = height;
+      m_commonData->needResize = true;
+      m_commonData->viewportWidth = width;
+      m_commonData->viewportHeight = height;
     }
     else
     {
-      s_commonData->needResize = false;
+      m_commonData->needResize = false;
     }
   }
 
   void SceneRenderer::BeginScene(const glm::mat4& camViewProjMat, const glm::mat4& camViewMat)
   {
-    if (s_commonData->needResize)
+    if (m_commonData->needResize)
     {
       // Resize the framebuffer
-      s_commonData->renderPass->Resize(s_commonData->viewportWidth, s_commonData->viewportHeight);
+      m_commonData->renderPass->Resize(m_commonData->viewportWidth, m_commonData->viewportHeight);
     }
     
-    s_commonData->camViewProjection = camViewProjMat;
-    s_commonData->camView = camViewMat;
+    m_commonData->camViewProjection = camViewProjMat;
+    m_commonData->camView = camViewMat;
     Renderer2D::BeginBatch(camViewProjMat, camViewMat);
   }
   
@@ -110,7 +110,7 @@ namespace IKan
   
   void SceneRenderer::FlushDrawList()
   {
-    if (s_commonData->viewportWidth > 0 and s_commonData->viewportHeight > 0)
+    if (m_commonData->viewportWidth > 0 and m_commonData->viewportHeight > 0)
     {
       GeometryPass();
     }
@@ -130,7 +130,7 @@ namespace IKan
       
       auto shader = pipeline->GetSpecification().shader;
       shader->Bind();
-      shader->SetUniformMat4("u_ViewProjection", s_commonData->camViewProjection);
+      shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
 
 #if 0
       Renderer::DrawAABB(dc.staticMesh, dc.transform, {1, 0.3, 0.5, 1});
@@ -145,27 +145,27 @@ namespace IKan
   
   void SceneRenderer::BeginRenderPass()
   {
-    s_commonData->renderPass->Begin();
+    m_commonData->renderPass->Begin();
   }
   
   void SceneRenderer::EndRenderPass()
   {
-    s_commonData->renderPass->End();
+    m_commonData->renderPass->End();
   }
   
   Ref<RenderPass> SceneRenderer::GetRenderPass()
   {
-    return s_commonData->renderPass;
+    return m_commonData->renderPass;
   }
   
   Ref<Texture> SceneRenderer::GetFinalImage()
   {
     // FIXME: (IKan) Use Final Image ID in Render Pass Specificaion. For now by deafult its 0 in all shaders
-    return s_commonData->renderPass->GetSpecification().targetFramebuffer->GetColorAttachments().at(0);
+    return m_commonData->renderPass->GetSpecification().targetFramebuffer->GetColorAttachments().at(0);
   }
   
   void SceneRenderer::GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData)
   {
-    Renderer::GetEntityIdFromPixels(mx, my, s_commonData->renderPass->GetSpecification().targetFramebuffer->GetPixelIdIndex(), pixeldData);
+    Renderer::GetEntityIdFromPixels(mx, my, m_commonData->renderPass->GetSpecification().targetFramebuffer->GetPixelIdIndex(), pixeldData);
   }
 } // namespace IKan

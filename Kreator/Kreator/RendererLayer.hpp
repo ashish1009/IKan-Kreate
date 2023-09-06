@@ -243,6 +243,7 @@ namespace Kreator
 
     // Renderers -----------------------------------------
     Ref<SceneRenderer> m_viewportRenderer;
+    Ref<SceneRenderer> m_miniViewportRenderer;
 
     // Scene Data ----------------------------------------
     bool m_showNewScenePopup = false;

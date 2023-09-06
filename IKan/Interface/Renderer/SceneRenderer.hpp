@@ -64,21 +64,21 @@ namespace IKan
     void SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform);
     
     /// This function begins the Current Render Pass
-    static void BeginRenderPass();
+    void BeginRenderPass();
     /// This function ends the Current Render Pass
-    static void EndRenderPass();
+    void EndRenderPass();
 
     /// This function returns the Render pass for 2D Renderer
-    static Ref<RenderPass> GetRenderPass();
+    Ref<RenderPass> GetRenderPass();
     /// This fucntion returns the final Renderer Image of Taget framebuffer of Current Render Pass
-    static Ref<Texture> GetFinalImage();
+    Ref<Texture> GetFinalImage();
     
     /// This function returns the the Pixel ID from Viewport
     /// - Parameters:
     ///   - mx: x pixel
     ///   - my: y pixel
     ///   - pixeldData: piixel value
-    static void GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData);
+    void GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData);
     
   private:
     // Member Functions ---------------------------------------------------------------------------------------------
@@ -99,7 +99,6 @@ namespace IKan
     };
 
     std::vector<MeshSourceDrawCommand> m_meshSourceDrawList;
-
-    inline static Scope<SceneRendererData> s_commonData;
+    Scope<SceneRendererData> m_commonData;
   };
 } // namespace IKan
