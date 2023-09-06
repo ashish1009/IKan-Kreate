@@ -1035,13 +1035,13 @@ namespace IKan
     DrawLine(line_vertices[3], line_vertices[0], color);
   }
 
-  void Renderer2D::RenderFixedViewText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
-                                       const glm::vec4& color, int32_t objectID)
+  void Renderer2D::RenderFixedViewText(const std::string& text, Ref<Font> font, glm::vec3 position,
+                                       const glm::vec2& scale, const glm::vec4& color, int32_t objectID)
   {
     TextRenderer::RenderFixedViewText(text, font, position, scale, color, objectID);
   }
   
-  void Renderer2D::RenderText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+  void Renderer2D::RenderText(const std::string& text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
                               const glm::vec4& color, int32_t objectID)
   {
     TextRenderer::RenderText(text, font, position, scale, color, objectID);

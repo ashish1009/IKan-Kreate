@@ -117,9 +117,7 @@ namespace Kreator
       const float lineHeight = GImGui->Font->FontSize + framePadding * 2.0f;
       const ImVec2 buttonSize = { lineHeight + 2.0f, lineHeight };
       const float inputItemWidth = (ImGui::GetContentRegionAvail().x - spacingX) / 3.0f - buttonSize.x;
-      
-      const ImGuiIO& io = ImGui::GetIO();
-      
+            
       auto drawControl = [&] (const std::string& label, float& value, const ImVec4& colourN,
                               const ImVec4& colourH,
                               const ImVec4& colourP) {

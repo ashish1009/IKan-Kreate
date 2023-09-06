@@ -93,6 +93,8 @@ namespace Kreator
     /// This function renders the debug Colliders
     /// - Parameter color: color of collider
     void ShowColliders(const glm::vec4& color);
+    /// This function renders the Fix Texts
+    void RenderFixTexts();
     /// This function returns the space mouse position
     std::pair<float, float> GetMouseViewportSpace();
     /// This function cast ray from camera

@@ -207,7 +207,7 @@ namespace IKan
     ///   - scale: Text Poistion
     ///   - color: Color of text
     ///   - objectID: Pixel ID of Circle
-    static void RenderFixedViewText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+    static void RenderFixedViewText(const std::string& text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
                                     const glm::vec4& color, int32_t objectID);
     /// This functions renders the Text in Window using postition and sclae
     /// - Parameters:
@@ -217,7 +217,7 @@ namespace IKan
     ///   - scale: Text Poistion
     ///   - color: Color of text
     ///   - objectID: Pixel ID of Circle
-    static void RenderText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+    static void RenderText(const std::string& text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
                            const glm::vec4& color, int32_t objectID);
 
     MAKE_PURE_STATIC(Renderer2D);

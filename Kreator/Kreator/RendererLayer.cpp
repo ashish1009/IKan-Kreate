@@ -20,17 +20,17 @@ namespace Kreator
 {
 #define RETRUN_IF_NO_PROJECT() \
 if (!Project::GetActive()) return
-
+  
   // Kretor Resource Path
 #define KreatorResourcePath(path) Utils::FileSystem::Absolute(m_clientResourcePath / path)
-
+  
   // Panel IDs
 #define CONSOLE_PANEL_ID "EditorConsolePanel"
 #define PROJECT_SETTING_PANEL_ID "ProjectSetting"
 #define ASSET_MANAGER_PANEL_ID "Assets"
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 #define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
-
+  
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -93,7 +93,7 @@ if (!Project::GetActive()) return
     }
     
   } // namespace UI_Utils
-
+  
   void Viewport::UpdateMousePos()
   {
     auto [mx, my] = ImGui::GetMousePos();
@@ -121,7 +121,7 @@ if (!Project::GetActive()) return
   {
     return { mousePosX, mousePosY };
   }
-
+  
   RendererLayer* RendererLayer::s_instance = nullptr;
   
   RendererLayer& RendererLayer::Get()
@@ -146,11 +146,11 @@ if (!Project::GetActive()) return
 #else
     m_allProjectsPath = m_clientResourcePath / "../Projects";
 #endif
-
+    
     // Save the default project path
     auto fullAllProjectPath =  Utils::FileSystem::IKanAbsolute(m_allProjectsPath);
     m_projectFilePathBuffer.MemCpy(fullAllProjectPath.data(), 0, fullAllProjectPath.size());
-
+    
     // Save the template project dir
     m_templateProjectDir = m_clientResourcePath / "TemplateProject";
     
@@ -172,7 +172,7 @@ if (!Project::GetActive()) return
     m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
     m_projectIcon = Image::Create(KreatorResourcePath("Textures/Icons/Project.png"));
     m_cameraIcon = Image::Create(KreatorResourcePath("Textures/Icons/Camera.png"));
-
+    
     // Scene Button
     m_playButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Play.png"));
     m_stopButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Stop.png"));
@@ -184,7 +184,7 @@ if (!Project::GetActive()) return
     m_moveToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Move.png"));
     m_rotateToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Rotate.png"));
     m_scaleToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
- }
+  }
   
   RendererLayer::~RendererLayer()
   {
@@ -207,11 +207,11 @@ if (!Project::GetActive()) return
                                                                                           m_editorScene);
     sceneHierarchyPanel->SetSelectionChangedCallback([this](Entity entity) { OnEntitySelected(entity); });
     sceneHierarchyPanel->SetEntityDeletedCallback([this](Entity entity) { OnEntityDeleted(entity); });
-
+    
 #ifdef DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
-
+    
     // Decorate the Theme ------------------------------------------------------------------------------------------
     // Set all the required Fonts
     UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
@@ -255,7 +255,7 @@ if (!Project::GetActive()) return
   {
     IK_PROFILE();
     IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
-
+    
     // Shutdown the renderers
     Renderer2D::Shutdown();
     m_viewportRenderer.reset();
@@ -283,19 +283,20 @@ if (!Project::GetActive()) return
         // Render Main Viewport
         {
           m_viewportRenderer->BeginRenderPass();
-          Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+          Renderer::Clear({0.16f, 0.16f, 0.19f, 1.0f});
           
           m_editorScene->OnUpdateEditor(ts);
           m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
           
           RenderDebug();
+          RenderFixTexts();
           UpdateHoveredEntity();
           
           if (m_showMiniViewport)
           {
             RenderMiniViewport();
           }
-          
+                    
           m_viewportRenderer->EndRenderPass();
         }
         
@@ -338,6 +339,7 @@ if (!Project::GetActive()) return
         m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
         
         RenderDebug();
+        RenderFixTexts();
 
         m_viewportRenderer->EndRenderPass();
         break;
@@ -351,6 +353,8 @@ if (!Project::GetActive()) return
         m_runtimeScene->OnUpdateRuntime(ts);
         m_runtimeScene->OnRenderRuntime(ts, m_viewportRenderer);
         
+        RenderFixTexts();
+ 
         m_viewportRenderer->EndRenderPass();
         break;
       }
@@ -369,7 +373,7 @@ if (!Project::GetActive()) return
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnKeyPressedEvent));
     dispatcher.Dispatch<MouseButtonPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnMouseButtonPressed));
-
+    
     m_panels.OnEvent(event);
     
     if (m_viewport.panelMouseHover)
@@ -473,6 +477,8 @@ if (!Project::GetActive()) return
     m_viewportRenderer->SetViewport(m_viewport.width, m_viewport.height);
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
     m_currentScene->SetViewportSize(m_viewport.width, m_viewport.height);
+    
+    FixedCamera::SetViewport(m_viewport.width, m_viewport.height);
   }
   
   void RendererLayer::UpdateHoveredEntity()
@@ -493,7 +499,7 @@ if (!Project::GetActive()) return
   {
     static const glm::mat4& unitMat4 = glm::mat4(1.0f);
     static const glm::vec3 size = {1.0f/4.0f, -1.0f/4.0f, 1.0f};
-    static const glm::vec3 position = {0.75f, 0.75f, 0.0f};
+    static const glm::vec3 position = {0.88f, 0.88f, 0.0f};
     static const glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
     
     Renderer2D::BeginBatch(unitMat4, unitMat4);
@@ -569,9 +575,9 @@ if (!Project::GetActive()) return
       {
         return false;
       }
-
+      
       ClearSelectedEntity();
-
+      
       const auto& camera = m_editorCamera;
       auto [origin, direction] = CastRay(camera, spaceMouseX, spaceMouseY);
       
@@ -628,7 +634,7 @@ if (!Project::GetActive()) return
     }
     return false;
   }
-
+  
   void RendererLayer::OnImGuiRender()
   {
     IK_PERFORMANCE("RendererLayer::OnImGuiRender");
@@ -651,7 +657,7 @@ if (!Project::GetActive()) return
     // Popups
     UI_NewScene();
     UI_AboutPopup();
-
+    
     AssetEditorManager::OnImGuiRender();
   }
   
@@ -677,7 +683,7 @@ if (!Project::GetActive()) return
     {
       ShowColliders({0, 1, 0, 1});
     }
-
+    
     Renderer2D::EndBatch();
   }
   
@@ -722,6 +728,20 @@ if (!Project::GetActive()) return
       Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
                            {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
     }
+  }
+  
+  void RendererLayer::RenderFixTexts()
+  {
+    static const glm::vec3& position = { 5.0f, 5.0f, 0.3f };
+    static const glm::vec2& size = {0.3f, 0.3f};
+    static const glm::vec4& color = { 0.23f, 0.33f, 0.22f, 1.0f};
+    
+    TextRenderer::BeginBatch(FixedCamera::s_projection);
+    TextRenderer::RenderFixedViewText("(c) IKAN", Font::GetDefaultFont(), { m_viewport.width - 80, 5.0f, 0.3f },
+                                      size, color);
+    TextRenderer::RenderFixedViewText(std::to_string((uint32_t)(ImGui::GetIO().Framerate)), Font::GetDefaultFont(),
+                                      position, size, color);
+    TextRenderer::EndBatch();
   }
 
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)

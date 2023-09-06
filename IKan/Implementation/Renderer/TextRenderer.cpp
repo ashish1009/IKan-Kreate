@@ -153,21 +153,21 @@ namespace IKan
     NextBatch();
   }
 
-  void TextRenderer::RenderFixedViewText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
-                                         const glm::vec4& color, int32_t objectID)
+  void TextRenderer::RenderFixedViewText(const std::string& text, Ref<Font> font, glm::vec3 position,
+                                         const glm::vec2& scale, const glm::vec4& color, int32_t objectID)
   {
     RenderTextImpl(text, font, position, scale, color, objectID);
   }
   
-  void TextRenderer::RenderText(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& originalScale,
-                                const glm::vec4& color, int32_t objectID)
+  void TextRenderer::RenderText(const std::string& text, Ref<Font> font, glm::vec3 position,
+                                const glm::vec2& originalScale, const glm::vec4& color, int32_t objectID)
   {
     glm::vec2 scale = { originalScale.x * 0.025, originalScale.y * 0.025 };
     RenderTextImpl(text, font, position, scale, color, objectID);
   }
   
-  void TextRenderer::RenderTextImpl(std::string text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
-                                    const glm::vec4& color, int32_t objectID)
+  void TextRenderer::RenderTextImpl(const std::string& text, Ref<Font> font, glm::vec3 position,
+                                    const glm::vec2& scale, const glm::vec4& color, int32_t objectID)
   {
     float originalPosX = position.x;
     float slot = 0.0f;

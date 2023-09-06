@@ -70,6 +70,7 @@
 #include <Event/KeyEvent.h>
 
 #include <Renderer/Renderer.hpp>
+#include <Renderer/TextRenderer.hpp>
 #include <Renderer/Renderer2D.hpp>
 #include <Renderer/SceneRenderer.hpp>
 #include <Renderer/RendererStats.hpp>
