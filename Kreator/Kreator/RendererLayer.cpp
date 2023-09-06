@@ -242,9 +242,10 @@ if (!Project::GetActive()) return
       m_showWelcomePopup = true;
     }
     
-    // Create Scene viewport renderer
-    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(1000, 1000, 1000000));
-    m_miniViewportRenderer = CreateRef<SceneRenderer>(m_currentScene, Renderer2DData(1000, 1000, 1000000));
+    // Initilaize the Renderers
+    Renderer2D::Initialize({1000, 1000, 1000000});
+    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
+    m_miniViewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
     
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
@@ -254,6 +255,11 @@ if (!Project::GetActive()) return
   {
     IK_PROFILE();
     IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
+
+    // Shutdown the renderers
+    Renderer2D::Shutdown();
+    m_viewportRenderer.reset();
+    m_miniViewportRenderer.reset();
     
     // Close the project
     Project::CloseActive();
@@ -622,7 +628,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::RenderDebug()
   {
-    m_viewportRenderer->BeginScene(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
+    Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
     
     if (m_showIcons)
     {
@@ -634,7 +640,7 @@ if (!Project::GetActive()) return
       ShowColliders({0, 1, 0, 1});
     }
 
-    m_viewportRenderer->EndScene();
+    Renderer2D::EndBatch();
   }
   
   void RendererLayer::ShowIcons()

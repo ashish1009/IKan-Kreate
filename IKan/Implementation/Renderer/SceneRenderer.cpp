@@ -6,13 +6,12 @@
 //
 
 #include "SceneRenderer.hpp"
-#include "Renderer/Renderer2D.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include <glad/glad.h>
 
 namespace IKan
 {
-  SceneRenderer::SceneRenderer(Ref<Scene> scene, const Renderer2DData& rendere2DData)
+  SceneRenderer::SceneRenderer(Ref<Scene> scene)
   : m_scene(scene)
   {
     if (!m_commonData)
@@ -35,25 +34,15 @@ namespace IKan
       rendererPassSpec.targetFramebuffer = FrameBuffer::Create(fbSpec);
       m_commonData->renderPass = RenderPass::Create(rendererPassSpec);
     }
-    
-    Initialize(rendere2DData);
   }
   
   SceneRenderer::~SceneRenderer()
   {
-    Renderer2D::Shutdown();
-    
     // Destroy the Render Pass for Renderer 2D
     if (m_commonData)
     {
       m_commonData.reset();
     }
-  }
-  
-  void SceneRenderer::Initialize(const Renderer2DData& rendere2DData)
-  {
-    // Initialize the Renderer Data
-    Renderer2D::Initialize(rendere2DData);    
   }
   
   void SceneRenderer::SetViewport(uint32_t width, uint32_t height)
@@ -80,7 +69,6 @@ namespace IKan
     
     m_commonData->camViewProjection = camViewProjMat;
     m_commonData->camView = camViewMat;
-    Renderer2D::BeginBatch(camViewProjMat, camViewMat);
   }
   
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform)
@@ -99,13 +87,8 @@ namespace IKan
   
   void SceneRenderer::EndScene()
   {
-    // 3D ---------------------
     FlushDrawList();
     ClearDrawLists();
-
-    // NOTE: Draw Flush the 2D at the end to render the bounding box
-    // 2D ---------------------
-    Renderer2D::EndBatch();
   }
   
   void SceneRenderer::FlushDrawList()
@@ -132,9 +115,6 @@ namespace IKan
       shader->Bind();
       shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
 
-#if 0
-      Renderer::DrawAABB(dc.staticMesh, dc.transform, {1, 0.3, 0.5, 1});
-#endif
       for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
       {
         shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);

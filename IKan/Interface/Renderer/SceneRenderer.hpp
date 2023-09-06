@@ -32,16 +32,10 @@ namespace IKan
   {
   public:
     /// This function create scene renderer instance
-    /// - Parameters:
-    ///   - scene: scene context
-    ///   - renderer2DData: renderer 2D Data
-    SceneRenderer(Ref<Scene> scene, const Renderer2DData& renderer2DData);
+    /// - Parameter scene: scene context
+    SceneRenderer(Ref<Scene> scene);
     /// This destructor destroys the scene renderer instance
     virtual ~SceneRenderer();
-    
-    /// This function initializes the Scene renderer
-    /// - Parameter rendere2DData: rendere 2D Data 
-    void Initialize(const Renderer2DData& rendere2DData);
     
     /// This function updates the viewport size for 2D Renderer
     /// - Parameters:
