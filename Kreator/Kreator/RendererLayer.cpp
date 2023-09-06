@@ -1684,7 +1684,11 @@ if (!Project::GetActive()) return
       bool snap = Input::IsKeyPressed(Key::LeftControl);
       
       TransformComponent& entityTransform = selection.entity.Transform();
+#ifdef WorldSpace
       glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(selection.entity);
+#else
+      glm::mat4 transform = entityTransform.Transform();
+#endif
       float snapValue = GetSnapValue();
       float snapValues[3] = { snapValue, snapValue, snapValue };
       
@@ -1700,8 +1704,8 @@ if (!Project::GetActive()) return
         
         if (ImGuizmo::IsUsing())
         {
+#ifdef WorldSpace
           Entity parent = m_currentScene->TryGetEntityWithUUID(selection.entity.GetParentUUID());
-          
           if (parent)
           {
             glm::mat4 parentTransform = m_currentScene->GetWorldSpaceTransformMatrix(parent);
@@ -1716,6 +1720,7 @@ if (!Project::GetActive()) return
             entityTransform.UpdateScale(scale);
           }
           else
+#endif
           {
             glm::vec3 translation, rotation, scale;
             Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
