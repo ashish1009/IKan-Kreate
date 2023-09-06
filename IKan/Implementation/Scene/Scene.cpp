@@ -256,7 +256,7 @@ namespace IKan
     settings.defaultVelocitySolverNbIterations = 15;
     settings.defaultPositionSolverNbIterations = 5;
     settings.isSleepingEnabled = true;
-    settings.gravity = Vector3 (0 , -9.81 , 0) ;
+    settings.gravity = Vector3 (0 , m_gravity , 0) ;
     
     // Create the physics world with your settings
     m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
@@ -409,8 +409,8 @@ namespace IKan
     
     target->m_viewportWidth = m_viewportWidth;
     target->m_viewportHeight = m_viewportHeight;
-    
     target->m_name = m_name;
+    target->m_gravity = m_gravity;
   }
   
   void Scene::SetViewportSize(uint32_t width, uint32_t height)
@@ -693,6 +693,11 @@ namespace IKan
   {
     m_onEntityDestroyedCallback = callback;
   }
+  
+  void Scene::SetPhysics3DGravity(float gravity)
+  {
+    m_gravity = gravity;
+  }
 
   Entity Scene::GetMainCameraEntity()
   {
@@ -752,6 +757,11 @@ namespace IKan
   reactphysics3d::PhysicsWorld* Scene::Get3DPhysicsWorld() const
   {
     return m_physics3DWorld;
+  }
+  
+  float Scene::GetPhysics3DGravity() const
+  {
+    return m_gravity;
   }
 
 } // namespace IKan

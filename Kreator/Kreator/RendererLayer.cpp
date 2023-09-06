@@ -599,6 +599,7 @@ if (!Project::GetActive()) return
     UI_StartMainWindowDocking();
     UI_Viewport();
     UI_StatisticsPanel();
+    UI_EditorPanel();
     m_panels.OnImGuiRender();
     UI_EndMainWindowDocking();
     
@@ -2374,6 +2375,81 @@ if (!Project::GetActive()) return
           break;
       }
     }
+  }
+  
+  void RendererLayer::UI_EditorPanel()
+  {
+    // Editor Panel ------------------------------------------------------------------------------
+    ImGui::Begin("Settings");
+    {
+      Kreator_UI::BeginPropertyGrid();
+      ImGui::AlignTextToFramePadding();
+
+      float camSpeed = m_editorCamera.GetNormalSpeed();
+      if (Kreator_UI::PropertySlider("Camera Speed", camSpeed, 0.0005f, 2.f))
+      {
+        m_editorCamera.SetNormalSpeed(camSpeed);
+      }
+      
+      if (m_sceneState != SceneState::Play)
+      {
+        float physics3DGravity = m_currentScene->GetPhysics3DGravity();
+        float physics3DGravityDelta = physics3DGravity / 1000;
+        if (Kreator_UI::Property("Gravity", physics3DGravity, physics3DGravityDelta, -10000.0f, 10000.0f))
+        {
+          m_currentScene->SetPhysics3DGravity(physics3DGravity);
+        }
+      }
+      
+      Kreator_UI::Property("Show Icons", m_showIcons);
+      Kreator_UI::Property("Show Colliders", m_showColliders);
+      Kreator_UI::EndPropertyGrid();
+
+//      ImGui::Text("Selection mode");
+//      ImGui::SameLine();
+//      UI::ShiftCursorY(-3.0f);
+//
+//      char* label = m_SelectionMode == SelectionMode::Entity ? "Entity" : "Mesh";
+//      if (ImGui::Button(label))
+//      {
+//        m_SelectionMode = m_SelectionMode == SelectionMode::Entity ? SelectionMode::SubMesh : SelectionMode::Entity;
+//      }
+//
+//      ImGui::Spacing();
+//      ImGui::Spacing();
+//      ImGui::Separator();
+//      ImGui::Spacing();
+//      ImGui::Spacing();
+//      ImGui::Spacing();
+//      ImGui::Spacing();
+//      ImGui::Spacing();
+//
+//      ImGui::PushFont(boldFont);
+//      ImGui::Text("Renderer Settings");
+//      ImGui::PopFont();
+      Kreator_UI::BeginPropertyGrid();
+//      UI::Property("Enable HDR environment maps", rendererConfig.ComputeEnvironmentMaps);
+//
+//      {
+//        const char* environmentMapSizes[] = { "128", "256", "512", "1024", "2048", "4096" };
+//        int currentSize = (int)glm::log2((float)rendererConfig.EnvironmentMapResolution) - 7;
+//        if (UI::PropertyDropdown("Environment Map Size", environmentMapSizes, 6, &currentSize))
+//        {
+//          rendererConfig.EnvironmentMapResolution = (uint32_t)glm::pow(2, currentSize + 7);
+//        }
+//      }
+//
+//      {
+//        const char* irradianceComputeSamples[] = { "128", "256", "512", "1024", "2048", "4096" };
+//        int currentSamples = (int)glm::log2((float)rendererConfig.IrradianceMapComputeSamples) - 7;
+//        if (UI::PropertyDropdown("Irradiance Map Compute Samples", irradianceComputeSamples, 6, &currentSamples))
+//        {
+//          rendererConfig.IrradianceMapComputeSamples = (uint32_t)glm::pow(2, currentSamples + 7);
+//        }
+//      }
+      Kreator_UI::EndPropertyGrid();
+    }
+    ImGui::End();
   }
   
   std::filesystem::path RendererLayer::GetClientResorucePath() const

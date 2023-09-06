@@ -192,6 +192,8 @@ namespace Kreator
     void UI_UpdateGuizmo();
     /// This function shows the About Application popup
     void UI_AboutPopup();
+    /// This function renders the editor panel
+    void UI_EditorPanel();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Flags ---------------------------------------------

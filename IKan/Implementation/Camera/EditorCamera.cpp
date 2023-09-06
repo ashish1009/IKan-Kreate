@@ -290,6 +290,11 @@ namespace IKan
     m_distance = distance;
   }
   
+  void EditorCamera::SetNormalSpeed(float camSpeed)
+  {
+    m_normalSpeed = camSpeed;
+  }
+  
   glm::vec3 EditorCamera::GetUpDirection() const
   {
     return glm::rotate(GetOrientation(), glm::vec3(0.0f, 1.0f, 0.0f));
@@ -351,6 +356,11 @@ namespace IKan
   const glm::vec3& EditorCamera::GetPosition() const
   {
     return m_position;
+  }
+  
+  float EditorCamera::GetNormalSpeed() const
+  {
+    return m_normalSpeed;
   }
   
   [[nodiscard]] float EditorCamera::GetVerticalFOV() const

@@ -135,6 +135,9 @@ namespace IKan
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion
     void SetEntityDestroyedCallback(const std::function<void(Entity)>& callback);
+    /// This function sets the 3D Physics world gravity
+    /// - Parameter gravity: New gravity
+    void SetPhysics3DGravity(float gravity);
 
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the scene name
@@ -160,7 +163,9 @@ namespace IKan
 
     /// This function rerturns the 3D Physics world
     reactphysics3d::PhysicsWorld* Get3DPhysicsWorld() const;
-    
+    /// This function returns the 3D Physics world gravity
+    float GetPhysics3DGravity() const;
+      
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
     ///   - name: Name of Scene
@@ -204,6 +209,7 @@ namespace IKan
     std::function<void(Entity)> m_onEntityDestroyedCallback;
 
     // Physics
+    float m_gravity = -9.8f;
     reactphysics3d::PhysicsCommon m_physics3DCommon;
     reactphysics3d::PhysicsWorld* m_physics3DWorld = nullptr;
 

@@ -61,6 +61,9 @@ namespace IKan
     ///   - width: new width
     ///   - height: new height
     void SetViewportSize(uint32_t width, uint32_t height);
+    /// This function set the normal camera speed
+    /// - Parameter camSpeed: camera speed
+    void SetNormalSpeed(float camSpeed);
     
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns if camera is active
@@ -100,6 +103,8 @@ namespace IKan
     /// This function returns the camera Orientation
     glm::quat GetOrientation() const;
     
+    /// This function returns the noaml speed of camera
+    float GetNormalSpeed() const;
     [[nodiscard]] float GetVerticalFOV() const;
     [[nodiscard]] float GetAspectRatio() const;
     [[nodiscard]] float GetNearClip() const;
