@@ -306,7 +306,6 @@ if (!Project::GetActive()) return
           m_miniViewportRenderer->BeginRenderPass();
           Renderer::Clear({0.2f, 0.2f, 0.2f, 0.3f});
           
-          m_editorScene->OnUpdateEditor(ts);
           m_editorScene->OnRenderRuntime(ts, m_viewportRenderer);
           
           m_miniViewportRenderer->EndRenderPass();
@@ -390,6 +389,7 @@ if (!Project::GetActive()) return
     bool leftShift = Input::IsKeyPressed(Key::LeftShift);
     bool rightShift = Input::IsKeyPressed(Key::RightShift);
     
+    // Guizmo -----------------------------------------------------------
     if (m_viewport.panelMouseHover and !Input::IsMouseButtonPressed(MouseButton::Right) and m_currentScene != m_runtimeScene)
     {
       switch (e.GetKeyCode())
@@ -423,6 +423,7 @@ if (!Project::GetActive()) return
       }
     }
     
+    // Scene -----------------------------------------------------------
     if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right))
     {
       switch (e.GetKeyCode())
@@ -453,6 +454,13 @@ if (!Project::GetActive()) return
       }
     }
     
+    // Stop Scene --------------------------------------------------------
+    if (m_sceneState == SceneState::Play and e.GetKeyCode() == Key::Escape)
+    {
+      OnSceneStop();
+    }
+    
+    // Project -----------------------------------------------------------
     if ((leftCmd or rightCmd) and (leftShift or rightShift))
     {
       switch (e.GetKeyCode())
@@ -469,6 +477,7 @@ if (!Project::GetActive()) return
           break;
       }
     }
+    
     return false;
   }
   
@@ -649,9 +658,14 @@ if (!Project::GetActive()) return
     // Dockings
     UI_StartMainWindowDocking();
     UI_Viewport();
-    UI_StatisticsPanel();
-    UI_EditorPanel();
-    m_panels.OnImGuiRender();
+    
+    if (m_sceneState != SceneState::Play)
+    {
+      UI_StatisticsPanel();
+      UI_EditorPanel();
+      m_panels.OnImGuiRender();
+    }
+    
     UI_EndMainWindowDocking();
     
     // Popups
@@ -732,7 +746,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::RenderFixTexts()
   {
-    static const glm::vec3& position = { 5.0f, 5.0f, 0.3f };
+    static const glm::vec3& position = { 15.0f, 15.0f, 0.3f };
     static const glm::vec2& size = {0.3f, 0.3f};
     static const glm::vec4& color = { 0.23f, 0.33f, 0.22f, 1.0f};
     
@@ -1125,11 +1139,14 @@ if (!Project::GetActive()) return
       ImGui::PopStyleVar(2);
     }
     
-    // Render the title if original title bar is hidden
-    if (Application::Get().GetSpecification().windowSpecification.hideTitleBar)
+    if (m_sceneState != SceneState::Play)
     {
-      float titlebarHeight = UI_DrawTitlebar();
-      UI::SetCursorPosY(titlebarHeight + ImGui::GetCurrentWindow()->WindowPadding.y);
+      // Render the title if original title bar is hidden
+      if (Application::Get().GetSpecification().windowSpecification.hideTitleBar)
+      {
+        float titlebarHeight = UI_DrawTitlebar();
+        UI::SetCursorPosY(titlebarHeight + ImGui::GetCurrentWindow()->WindowPadding.y);
+      }
     }
     
     // Dockspace
@@ -1169,9 +1186,12 @@ if (!Project::GetActive()) return
     // Render viewport image
     UI::Image(m_viewportRenderer->GetFinalImage(), viewportSize);
     
-    UI_SceneToolbar();
-    UI_GuizmoToolbar();
-    UI_UpdateGuizmo();
+    if (m_sceneState != SceneState::Play)
+    {
+      UI_SceneToolbar();
+      UI_GuizmoToolbar();
+      UI_UpdateGuizmo();
+    }
     
     auto windowSize = ImGui::GetWindowSize();
     ImVec2 minBound = ImGui::GetWindowPos();
@@ -1655,19 +1675,10 @@ if (!Project::GetActive()) return
       
       // white buttons
       const ImColor buttonTint = IM_COL32(192, 192, 192, 255);
-      
-      Ref<Image> buttonTex = m_sceneState == SceneState::Play ? m_stopButtonTex : m_playButtonTex;
-      
-      if (playbackButton(buttonTex, buttonTint))
+            
+      if (playbackButton(m_playButtonTex, buttonTint))
       {
-        if (m_sceneState == SceneState::Edit)
-        {
-          OnScenePlay();
-        }
-        else if (m_sceneState != SceneState::Simulate)
-        {
-          OnSceneStop();
-        }
+        OnScenePlay();
       }
       
       const ImColor tint = m_sceneState == SceneState::Simulate ? ImColor(1.0f, 0.75f, 0.75f, 1.0f) : buttonTint;
@@ -1685,7 +1696,7 @@ if (!Project::GetActive()) return
       
       if (playbackButton(m_pauseButtonTex, buttonTint))
       {
-        if (m_sceneState == SceneState::Play)
+        if (m_sceneState == SceneState::Simulate)
         {
           OnScenePause();
         }
@@ -1705,94 +1716,90 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UI_GuizmoToolbar()
   {
-    // Gizmo Toolbar
-    if (m_currentScene != m_runtimeScene)
+    UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+    UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
+    UI::ScopedStyle disablePadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    
+    auto viewportStart = ImGui::GetItemRectMin();
+    
+    const float buttonSize = 18.0f;
+    const float edgeOffset = 4.0f;
+    const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
+    const float numberOfButtons = 4.0f;
+    const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
+    
+    ImGui::SetNextWindowPos(ImVec2(viewportStart.x + 14, viewportStart.y + edgeOffset));
+    ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
+    ImGui::SetNextWindowBgAlpha(0.0f);
+    
+    ImGui::Begin("##viewport_tools", 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking);
+    
+    // A hack to make icon panel appear smaller than minimum allowed by ImGui size
+    // Filling the background for the desired 26px height
+    const float desiredHeight = 26.0f;
+    ImRect background = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, -(windowHeight - desiredHeight) / 2.0f);
+    ImGui::GetWindowDrawList()->AddRectFilled(background.Min, background.Max, IM_COL32(15, 15, 15, 127), 4.0f);
+    
+    ImGui::BeginVertical("##gizmosV", ImGui::GetContentRegionAvail());
+    ImGui::Spring();
+    ImGui::BeginHorizontal("##gizmosH", { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y });
+    ImGui::Spring();
+    
     {
-      UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
-      UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
-      UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
-      UI::ScopedStyle disablePadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+      UI::ScopedStyle enableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(edgeOffset * 2.0f, 0));
       
-      auto viewportStart = ImGui::GetItemRectMin();
+      const ImColor c_SelectedGizmoButtonColor = Kreator_UI::Color::Accent;
+      const ImColor c_UnselectedGizmoButtonColor = UI::Theme::Color::TextBrighter;
       
-      const float buttonSize = 18.0f;
-      const float edgeOffset = 4.0f;
-      const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
-      const float numberOfButtons = 4.0f;
-      const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
-      
-      ImGui::SetNextWindowPos(ImVec2(viewportStart.x + 14, viewportStart.y + edgeOffset));
-      ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
-      ImGui::SetNextWindowBgAlpha(0.0f);
-      
-      ImGui::Begin("##viewport_tools", 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking);
-      
-      // A hack to make icon panel appear smaller than minimum allowed by ImGui size
-      // Filling the background for the desired 26px height
-      const float desiredHeight = 26.0f;
-      ImRect background = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, -(windowHeight - desiredHeight) / 2.0f);
-      ImGui::GetWindowDrawList()->AddRectFilled(background.Min, background.Max, IM_COL32(15, 15, 15, 127), 4.0f);
-      
-      ImGui::BeginVertical("##gizmosV", ImGui::GetContentRegionAvail());
-      ImGui::Spring();
-      ImGui::BeginHorizontal("##gizmosH", { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y });
-      ImGui::Spring();
-      
+      auto gizmoButton = [&c_SelectedGizmoButtonColor, buttonSize](const Ref<Image>& icon,
+                                                                   const ImColor& tint, float paddingY = 0.0f)
       {
-        UI::ScopedStyle enableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(edgeOffset * 2.0f, 0));
+        const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
+        const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
+        const bool clicked = ImGui::InvisibleButton(UI::GenerateID(), ImVec2(width, height));
+        UI::DrawButtonImage(icon, tint, tint, tint, UI::RectOffset(UI::GetItemRect(), 0.0f, paddingY));
         
-        const ImColor c_SelectedGizmoButtonColor = Kreator_UI::Color::Accent;
-        const ImColor c_UnselectedGizmoButtonColor = UI::Theme::Color::TextBrighter;
-        
-        auto gizmoButton = [&c_SelectedGizmoButtonColor, buttonSize](const Ref<Image>& icon,
-                                                                     const ImColor& tint, float paddingY = 0.0f)
-        {
-          const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
-          const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
-          const bool clicked = ImGui::InvisibleButton(UI::GenerateID(), ImVec2(width, height));
-          UI::DrawButtonImage(icon, tint, tint, tint, UI::RectOffset(UI::GetItemRect(), 0.0f, paddingY));
-          
-          return clicked;
-        };
-        
-        ImColor buttonTint = m_gizmoType == -1 ? c_SelectedGizmoButtonColor : c_UnselectedGizmoButtonColor;
-        if (gizmoButton(m_selectToolTex, buttonTint, m_gizmoType != -1))
-        {
-          m_gizmoType = -1;
-        }
-        
-        buttonTint = m_gizmoType == ImGuizmo::OPERATION::TRANSLATE ?
-        c_SelectedGizmoButtonColor :
-        c_UnselectedGizmoButtonColor;
-        if (gizmoButton(m_moveToolTex, buttonTint))
-        {
-          m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
-        }
-        
-        buttonTint = m_gizmoType == ImGuizmo::OPERATION::ROTATE ?
-        c_SelectedGizmoButtonColor :
-        c_UnselectedGizmoButtonColor;
-        if (gizmoButton(m_rotateToolTex, buttonTint))
-        {
-          m_gizmoType = ImGuizmo::OPERATION::ROTATE;
-        }
-        
-        buttonTint = m_gizmoType == ImGuizmo::OPERATION::SCALE ?
-        c_SelectedGizmoButtonColor :
-        c_UnselectedGizmoButtonColor;
-        if (gizmoButton(m_scaleToolTex, buttonTint))
-        {
-          m_gizmoType = ImGuizmo::OPERATION::SCALE;
-        }
+        return clicked;
+      };
+      
+      ImColor buttonTint = m_gizmoType == -1 ? c_SelectedGizmoButtonColor : c_UnselectedGizmoButtonColor;
+      if (gizmoButton(m_selectToolTex, buttonTint, m_gizmoType != -1))
+      {
+        m_gizmoType = -1;
       }
       
-      ImGui::Spring();
-      ImGui::EndHorizontal();
-      ImGui::Spring();
-      ImGui::EndVertical();
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::TRANSLATE ?
+      c_SelectedGizmoButtonColor :
+      c_UnselectedGizmoButtonColor;
+      if (gizmoButton(m_moveToolTex, buttonTint))
+      {
+        m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+      }
       
-      ImGui::End();
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::ROTATE ?
+      c_SelectedGizmoButtonColor :
+      c_UnselectedGizmoButtonColor;
+      if (gizmoButton(m_rotateToolTex, buttonTint))
+      {
+        m_gizmoType = ImGuizmo::OPERATION::ROTATE;
+      }
+      
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::SCALE ?
+      c_SelectedGizmoButtonColor :
+      c_UnselectedGizmoButtonColor;
+      if (gizmoButton(m_scaleToolTex, buttonTint))
+      {
+        m_gizmoType = ImGuizmo::OPERATION::SCALE;
+      }
     }
+    
+    ImGui::Spring();
+    ImGui::EndHorizontal();
+    ImGui::Spring();
+    ImGui::EndVertical();
+    
+    ImGui::End();
   }
   
   void RendererLayer::UI_UpdateGuizmo()
