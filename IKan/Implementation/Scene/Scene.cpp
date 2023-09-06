@@ -135,11 +135,11 @@ namespace IKan
     const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
     const auto& cameraTransform = cameraEntity.GetComponent<TransformComponent>().Transform();
     
-    renderer->BeginScene(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform));
+    renderer->BeginScene(mainCamera.GetUnReversedProjectionMatrix() * glm::inverse(cameraTransform));
     Render3DEntities(renderer);
     renderer->EndScene();
 
-    Renderer2D::BeginBatch(mainCamera.GetProjectionMatrix() * glm::inverse(cameraTransform), glm::inverse(cameraTransform));
+    Renderer2D::BeginBatch(mainCamera.GetUnReversedProjectionMatrix() * glm::inverse(cameraTransform), glm::inverse(cameraTransform));
     Render2DEntities();
     Renderer2D::EndBatch();
   }

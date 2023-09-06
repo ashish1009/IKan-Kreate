@@ -49,7 +49,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.0679665804, -5.46999979, 0]
+      Position: [-0.0679665804, -8.78147125, 0]
       Rotation: [0, 0, 0]
       Scale: [29.2827339, 0.0213917959, 39.4463081]
     StaticMeshComponent:
@@ -92,8 +92,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.105336547, 0, 13.7494783]
-      Rotation: [0, 0, 0]
+      Position: [-0.105334453, 12.0995598, 13.7494783]
+      Rotation: [0, 0, -3.14159226]
       Scale: [1, 1, 1]
     CameraComponent:
       Camera:

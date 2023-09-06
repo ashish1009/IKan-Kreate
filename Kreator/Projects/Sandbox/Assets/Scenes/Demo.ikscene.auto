@@ -92,9 +92,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.105336547, 0, 13.7494783]
-      Rotation: [0, 0, 3.00196624]
-      Scale: [1, 1, 1]
+      Position: [-0.400000006, 2.7864871, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 0.999999642, 0.999974012]
     CameraComponent:
       Camera:
         ProjectionType: 0
