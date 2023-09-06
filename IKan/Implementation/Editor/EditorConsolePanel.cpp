@@ -58,7 +58,9 @@ namespace IKan
   void EditorConsolePanel::OnScenePlay()
   {
     if (m_shouldClearOnPlay)
+    {
       m_messageBufferBegin = 0;
+    }
   }
   
 } // namespace IKan

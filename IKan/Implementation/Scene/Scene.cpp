@@ -424,6 +424,11 @@ namespace IKan
   
   void Scene::SetViewportSize(uint32_t width, uint32_t height)
   {
+    if (m_viewportWidth == width and m_viewportHeight == height)
+    {
+      return;
+    }
+
     m_viewportWidth = width;
     m_viewportHeight = height;
 

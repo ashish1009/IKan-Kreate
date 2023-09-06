@@ -20,6 +20,8 @@ namespace IKan
     static void SetViewport(float width, float height);
     
     inline static glm::mat4 s_projection;
+    inline static uint32_t s_viewportWidth;
+    inline static uint32_t s_viewportHeight;
   };
   
 } // namespace IKan

@@ -351,7 +351,7 @@ if (!Project::GetActive()) return
         
         m_runtimeScene->OnUpdateRuntime(ts);
         m_runtimeScene->OnRenderRuntime(ts, m_viewportRenderer);
-        
+
         RenderFixTexts();
  
         m_viewportRenderer->EndRenderPass();
@@ -746,7 +746,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::RenderFixTexts()
   {
-    static const glm::vec3& position = { 15.0f, 15.0f, 0.3f };
+    static const glm::vec3& position = { 5.0f, 5.0f, 0.3f };
     static const glm::vec2& size = {0.3f, 0.3f};
     static const glm::vec4& color = { 0.23f, 0.33f, 0.22f, 1.0f};
     
