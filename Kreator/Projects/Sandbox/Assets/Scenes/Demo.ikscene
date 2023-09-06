@@ -23,7 +23,7 @@ Entities:
       MassDensity: 0
   - Entity: 4818952058294986168
     TagComponent:
-      Tag: Cube
+      Tag: Parent Cube
     Parent: 0
     Children:
       - Handle: 16107639747932871619
@@ -49,7 +49,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.0679665804, 14.5347691, 0]
+      Position: [-0.0679665804, -5.46999979, 0]
       Rotation: [0, 0, 0]
       Scale: [29.2827339, 0.0213917959, 39.4463081]
     StaticMeshComponent:

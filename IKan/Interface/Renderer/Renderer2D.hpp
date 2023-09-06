@@ -186,7 +186,14 @@ namespace IKan
     ///   - p1: Bottom Right Point
     ///   - color: Color of line
     static void DrawRect(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color);
-    
+    /// This function draws a Recttangle using position and size of rectangle
+    /// - Parameters:
+    ///   - p0: Top left Point
+    ///   - p1: Bottom Right Point
+    ///   - color: Color of line
+    static void DrawRect(const glm::vec3& p0, const glm::vec3& p1,
+                         const glm::vec3& p2, const glm::vec3& p3, const glm::vec4& color);
+
     /// This function draws a Recttangle using position and size of rectangle
     /// - Parameters:
     ///   - position: position of rectangle

@@ -91,6 +91,13 @@ namespace IKan
     /// This function returns the Far Plane value
     float GetOrthographicFarClip() const;
     
+    /// This function returns the Width of camera
+    uint32_t GetWidth() const;
+    /// This function returns the Height of camera
+    uint32_t GetHeight() const;
+    /// This function returns the Aspect Ratio of camera
+    float GetAspectRatio() const;
+    
     /// This function returns the Projection type of camera
     ProjectionType GetProjectionType() const;
     

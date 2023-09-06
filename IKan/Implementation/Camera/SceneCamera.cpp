@@ -131,6 +131,19 @@ namespace IKan
     return m_projectionType;
   }
   
+  uint32_t SceneCamera::GetWidth() const
+  {
+    return m_viewportWidth;
+  }
+  uint32_t SceneCamera::GetHeight() const
+  {
+    return m_viewportHeight;
+  }
+  float SceneCamera::GetAspectRatio() const
+  {
+    return (float)m_viewportWidth / (float)m_viewportHeight;
+  }
+
   void SceneCamera::RecalculateProjection() {
     switch (m_projectionType)
     {
