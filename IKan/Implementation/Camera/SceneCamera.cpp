@@ -28,6 +28,7 @@ namespace IKan
   : m_projectionType(projType)
   {
     IK_LOG_TRACE(LogModule::SceneCamera, "Creating {0} Scene Camera ...", CameraUtils::GetProjectionNameFromType(m_projectionType));
+    RecalculateProjection();
   }
   
   void SceneCamera::SetPerspective(float degVerticalFOV, float nearClip, float farClip)

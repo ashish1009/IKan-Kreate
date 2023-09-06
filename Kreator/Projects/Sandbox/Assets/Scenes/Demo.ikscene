@@ -12,6 +12,15 @@ Entities:
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 0
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
   - Entity: 4818952058294986168
     TagComponent:
       Tag: Cube
@@ -19,7 +28,7 @@ Entities:
     Children:
       - Handle: 16107639747932871619
     TransformComponent:
-      Position: [5.99108887, 0, 0]
+      Position: [-1.96443748, 0, 3.7252903e-09]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -40,7 +49,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [12.5307741, -1.9960134, 0]
+      Position: [-0.0679665804, -1.9960134, 0]
       Rotation: [0, 0, 0]
       Scale: [6.34103107, 0.0213917978, 6.67717218]
     StaticMeshComponent:
@@ -81,7 +90,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [9.15072918, 0, 0]
+      Position: [1.50858533, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:

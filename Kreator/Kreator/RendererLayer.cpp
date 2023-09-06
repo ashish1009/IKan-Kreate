@@ -297,7 +297,7 @@ if (!Project::GetActive()) return
         // Render Mini Viewport
         {
           m_miniViewportRenderer->BeginRenderPass();
-          Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
+          Renderer::Clear({0.1f, 0.1f, 0.1f, 1.0f});
           m_editorScene->OnUpdateEditor(ts);
           m_editorScene->OnRenderRuntime(ts, m_viewportRenderer);
           m_miniViewportRenderer->EndRenderPass();
@@ -464,6 +464,7 @@ if (!Project::GetActive()) return
   {
     m_viewportRenderer->SetViewport(m_viewport.width, m_viewport.height);
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
+    m_currentScene->SetViewportSize(m_viewport.width, m_viewport.height);
   }
   
   void RendererLayer::UpdateHoveredEntity()
@@ -659,7 +660,7 @@ if (!Project::GetActive()) return
   {
     Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
     
-    if (m_showIcons)
+    if (m_showIcons and m_sceneState == SceneState::Edit)
     {
       ShowIcons();
     }
@@ -2446,6 +2447,7 @@ if (!Project::GetActive()) return
       
       Kreator_UI::Property("Show Icons", m_showIcons);
       Kreator_UI::Property("Show Colliders", m_showColliders);
+      Kreator_UI::Property("Show Mini Viewport", m_showMiniViewport);
       Kreator_UI::EndPropertyGrid();
     }
     ImGui::End();

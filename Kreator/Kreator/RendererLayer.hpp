@@ -201,6 +201,7 @@ namespace Kreator
     // Flags ---------------------------------------------
     bool m_showIcons = true;
     bool m_showColliders = true;
+    bool m_showMiniViewport = true;
 
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
