@@ -861,9 +861,14 @@ namespace Kreator
                                              ImGuiCol_HeaderActive, UI::Theme::Color::GroupHeader);
         DrawCreateEntityMenu(entity);
         
+        ImGui::Separator();
         if (ImGui::MenuItem("Delete"))
         {
           entityDeleted = true;
+        }
+        if (ImGui::MenuItem("Duplicate"))
+        {
+          m_context->DuplicateEntity(m_selectionContext);
         }
       }
       ImGui::EndPopup();

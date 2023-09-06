@@ -96,6 +96,9 @@ namespace IKan
     /// This function destriy the entity
     /// - Parameter entity: entity handle
     void DestroyEntity(Entity entity);
+    /// This function duplicate the entity
+    /// - Parameter entity: entity to be duplicated
+    Entity DuplicateEntity(Entity entity);
 
     /// This function parent set the parent of entity
     /// - Parameters:

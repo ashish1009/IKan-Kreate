@@ -513,6 +513,55 @@ namespace IKan
     --m_numEntities;
   }
 
+  Entity Scene::DuplicateEntity(Entity entity)
+  {
+    auto parentNewEntity = [&entity, scene = this](Entity newEntity)
+    {
+      if (auto parent = entity.GetParent(); parent)
+      {
+        newEntity.SetParentUUID(parent.GetUUID());
+        parent.Children().push_back(newEntity.GetUUID());
+      }
+    };
+    
+    Entity newEntity;
+    if (entity.HasComponent<TagComponent>())
+    {
+      newEntity = CreateEntity(entity.GetComponent<TagComponent>().tag);
+    }
+    else
+    {
+      newEntity = CreateEntity();
+    }
+    
+    CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<SpriteRendererComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<QuadComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<CircleComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<TextComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<StaticMeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<RigidBodyComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<Box3DColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<SphereColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<CapsuleColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    
+    auto childIds = entity.Children();
+    for (auto childId : childIds)
+    {
+      Entity childDuplicate = DuplicateEntity(GetEntityWithUUID(childId));
+      
+      // At this point childDuplicate is a child of entity, we need to remove it from that entity
+      UnparentEntity(childDuplicate, false);
+      
+      childDuplicate.SetParentUUID(newEntity.GetUUID());
+      newEntity.Children().push_back(childDuplicate.GetUUID());
+    }
+    
+    parentNewEntity(newEntity);
+    
+    return newEntity;
+  }
+  
   void Scene::ParentEntity(Entity entity, Entity parent)
   {
     // If new parent is already child of 'entity'
