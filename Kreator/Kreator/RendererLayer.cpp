@@ -171,7 +171,8 @@ if (!Project::GetActive()) return
     m_newProject = Image::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
     m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
     m_projectIcon = Image::Create(KreatorResourcePath("Textures/Icons/Project.png"));
-    
+    m_cameraIcon = Image::Create(KreatorResourcePath("Textures/Icons/Camera.png"));
+
     // Scene Button
     m_playButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Play.png"));
     m_stopButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Stop.png"));
@@ -277,10 +278,11 @@ if (!Project::GetActive()) return
         m_editorScene->OnUpdateEditor(ts);
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
-        m_viewportRenderer->BeginScene(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
-        Renderer2D::DrawFixedViewQuad(glm::mat4(1.0f), nullptr);
-        m_viewportRenderer->EndScene();
-        
+        if (m_showIcons)
+        {
+          ShowIcons();
+        }
+
         UpdateHoveredEntity();
         SceneRenderer::EndRenderPass();
         
@@ -525,7 +527,6 @@ if (!Project::GetActive()) return
       }
 
       ClearSelectedEntity();
-      
 
       const auto& camera = m_editorCamera;
       auto [origin, direction] = CastRay(camera, spaceMouseX, spaceMouseY);
@@ -616,6 +617,25 @@ if (!Project::GetActive()) return
                                           sceneName, Project::GetActive()->GetConfig().name,
                                           caps.vendor, caps.version, caps.renderer);
     Application::Get().GetWindow().SetTitle(title);
+  }
+  
+  void RendererLayer::ShowIcons()
+  {
+    m_viewportRenderer->BeginScene(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
+    
+    // Cameras -----------
+    auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
+    for (auto e : cameraEntities)
+    {
+      Entity entity = { e, m_currentScene.get() };
+#ifdef WorldSpace
+      Renderer2D::DrawFixedViewQuad(m_currentScene->GetWorldSpaceTransform(entity).Transform(), m_cameraIcon);
+#else
+      Renderer2D::DrawFixedViewQuad(entity.GetComponent<TransformComponent>().Transform(), m_cameraIcon);
+#endif
+    }
+    
+    m_viewportRenderer->EndScene();
   }
 
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)

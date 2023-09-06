@@ -84,6 +84,8 @@ namespace Kreator
     /// This function updates the name of window tile
     /// - Parameter sceneName: scene name
     void UpdateWindowTitle(const std::string& sceneName);
+    /// This function show the icons
+    void ShowIcons();
     /// This function returns the space mouse position
     std::pair<float, float> GetMouseViewportSpace();
     /// This function cast ray from camera
@@ -187,6 +189,9 @@ namespace Kreator
     void UI_AboutPopup();
 
     // Member Variables ----------------------------------------------------------------------------------------------
+    // Flags ---------------------------------------------
+    bool m_showIcons = true;
+    
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
     bool m_showAboutPopup = false;
@@ -197,6 +202,7 @@ namespace Kreator
     Ref<Image> m_newProject, m_folder;
     Ref<Image> m_applicationIcon, m_welcomeIcon;
     Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
+    Ref<Image> m_cameraIcon;
 
     // Project Data --------------------------------------
     bool m_showCreateNewProjectPopup = false;

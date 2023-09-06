@@ -677,7 +677,7 @@ namespace IKan
   TransformComponent Scene::GetWorldSpaceTransform(Entity entity)
   {
     glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
-    TransformComponent transformComponent;
+    TransformComponent transformComponent = entity.GetComponent<TransformComponent>();
     
     glm::vec3 position, scale, rotation;
     Utils::Math::DecomposeTransform(transform, position, rotation, scale);
