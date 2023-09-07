@@ -248,7 +248,6 @@ if (!Project::GetActive()) return
     Renderer2D::Initialize({1000, 1000, 1000000});
     m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
     m_miniViewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
-    m_axisViewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
 
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
@@ -300,11 +299,6 @@ if (!Project::GetActive()) return
             RenderMiniViewport();
           }
           
-          if (m_showGrid)
-          {
-            RenderGridViewport();
-          }
-                    
           m_viewportRenderer->EndRenderPass();
         }
         
@@ -317,62 +311,6 @@ if (!Project::GetActive()) return
           m_editorScene->OnRenderRuntime(ts, m_viewportRenderer);
           
           m_miniViewportRenderer->EndRenderPass();
-        }
-        
-        // Render Axis Viewport
-        if (m_showGrid)
-        {
-          static constexpr glm::vec3 szie = {1, 1, 1};
-          static constexpr glm::vec3 origin = {0, 0, 0};
-          static constexpr float distance = 3.0f;
-          
-          m_axisViewportRenderer->BeginRenderPass();
-          Renderer::Clear({0.2f, 0.2f, 0.2f, 0.0f});
-          
-          Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
-          
-          // X Axis ------------------
-          {
-            static constexpr glm::vec3 posX = {distance, 0, 0};
-            static constexpr glm::vec3 negX = {-distance, 0, 0};
-            static constexpr glm::vec4 XColor = {1, 0, 0, 1};
-            
-            Renderer2D::DrawLine(origin, posX, XColor);
-            Renderer2D::DrawFixedViewCircle(posX, szie, nullptr, XColor);
-            
-            Renderer2D::DrawLine(origin, negX, XColor);
-            Renderer2D::DrawFixedViewCircle(negX, szie, nullptr, XColor, 0.2);
-          }
-          
-          // Y Axis ------------------
-          {
-            static constexpr glm::vec3 posY = {0, distance, 0};
-            static constexpr glm::vec3 negY = {0, -distance, 0};
-            static constexpr glm::vec4 YColor = {0, 1, 0, 1};
-
-            Renderer2D::DrawLine(origin, posY, YColor);
-            Renderer2D::DrawFixedViewCircle(posY, szie, nullptr, YColor);
-            
-            Renderer2D::DrawLine(origin, negY, YColor);
-            Renderer2D::DrawFixedViewCircle(negY, szie, nullptr, YColor, 0.2);
-          }
-          
-          // Z Axis ------------------
-          {
-            static constexpr glm::vec3 posZ = {0, 0, distance};
-            static constexpr glm::vec3 negZ = {0, 0, -distance};
-            static constexpr glm::vec4 ZColor = {0, 0, 1, 1};
-
-            Renderer2D::DrawLine(origin, posZ, ZColor);
-            Renderer2D::DrawFixedViewCircle(posZ, szie, nullptr, ZColor);
-            
-            Renderer2D::DrawLine(origin, negZ, ZColor);
-            Renderer2D::DrawFixedViewCircle(negZ, szie, nullptr, ZColor, 0.2);
-          }
-          
-          Renderer2D::EndBatch();
-          
-          m_axisViewportRenderer->EndRenderPass();
         }
         
         // Save Scene Auto
@@ -579,19 +517,7 @@ if (!Project::GetActive()) return
     Renderer2D::DrawQuad(position, size, rotation, m_miniViewportRenderer->GetFinalImage());
     Renderer2D::EndBatch();
   }
-  
-  void RendererLayer::RenderGridViewport()
-  {
-    static constexpr glm::mat4 unitMat4 = glm::mat4(1.0f);
-    static constexpr glm::vec3 size = {1.0f/4.0f, -1.0f/4.0f, 1.0f};
-    static constexpr glm::vec3 position = {-0.92f, 0.80f, 0.0f};
-    static constexpr glm::vec3 rotation = {0.0f, 0.0f, 0.0f};
     
-    Renderer2D::BeginBatch(unitMat4, unitMat4);
-    Renderer2D::DrawQuad(position, size, rotation, m_axisViewportRenderer->GetFinalImage());
-    Renderer2D::EndBatch();
-  }
-  
   float RendererLayer::GetSnapValue()
   {
     switch (m_gizmoType)
@@ -736,6 +662,11 @@ if (!Project::GetActive()) return
       UI_EditorPanel();
       m_panels.OnImGuiRender();
     }
+    
+    ImGui::Begin("EditorCamera Debug");
+    
+    ImGui::Text("%f, %f, %f", m_editorCamera.GetFocalPoint().x, m_editorCamera.GetFocalPoint().y, m_editorCamera.GetFocalPoint().z);
+    ImGui::End();
     
     UI_EndMainWindowDocking();
     

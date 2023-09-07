@@ -134,7 +134,7 @@ namespace IKan
     
     // Member Variables ----------------------------------------------------------------------------------------------
     glm::mat4 m_viewMatrix;
-    glm::vec3 m_position, m_direction, m_focalPoint;
+    glm::vec3 m_position, m_direction, m_focalPoint = {1, 0, 0};
     
     // Perspective projection params
     float m_verticalFOV, m_aspectRatio, m_nearClip, m_farClip;
