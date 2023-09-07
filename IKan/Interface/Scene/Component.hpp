@@ -230,7 +230,17 @@ namespace IKan
     void Copy(const CapsuleColliderComponent& other);
     DEFINE_COPY_MOVE_CONSTRUCTORS(CapsuleColliderComponent);
   };
-  
+
+  struct FixedJointComponent
+  {
+    UUID connectedEntity;
+
+    FixedJointComponent();
+    ~FixedJointComponent();
+    void Copy(const FixedJointComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(FixedJointComponent);
+  };
+
   template<typename... Component>
   struct ComponentGroup
   {
@@ -241,5 +251,5 @@ namespace IKan
   using AllComponents =
   ComponentGroup<IDComponent, TagComponent, TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
   QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent, Box3DColliderComponent, \
-  CapsuleColliderComponent>;
+  CapsuleColliderComponent, FixedJointComponent>;
 } // namespace IKan

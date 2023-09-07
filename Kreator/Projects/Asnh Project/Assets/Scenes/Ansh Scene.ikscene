@@ -1,0 +1,119 @@
+Scene: UntitledScene
+Entities:
+  - Entity: 3537870125163096756
+    TagComponent:
+      Tag: Base
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, -2.60948086, 0]
+      Rotation: [0, 0, 0]
+      Scale: [10.6008244, 0.322016031, 13.4147816]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0
+      Bounciness: 0
+      MassDensity: 0
+  - Entity: 9764472932107630019
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [2.16428709, 1.42723036, 1.94813538]
+      Rotation: [0, 0, 0]
+      Scale: [0.226471692, 4.7445097, 0.206463233]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 1
+      Bounciness: 1
+      MassDensity: 0
+  - Entity: 10449525925186373851
+    TagComponent:
+      Tag: Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 1.69664085]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552
+    RigidBodyComponent:
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    SphereColliderComponent:
+      Radius: 0.5
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 1
+      MassDensity: 0
+  - Entity: 15676702694279377836
+    TagComponent:
+      Tag: Capsule
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-0.365722656, 1.89025116, 3.9689157]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 2234008704
+    RigidBodyComponent:
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    CapsuleColliderComponent:
+      Radius: 0.5
+      Height: 1
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0
+      Bounciness: 1
+      MassDensity: 0
+  - Entity: 17106973643729668559
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 15.6999998]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true

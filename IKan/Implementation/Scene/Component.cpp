@@ -408,7 +408,7 @@ return *this; \
     quaternionOffset = other.quaternionOffset;
   }
   
-  // Capsule Colldier Component ---------------------------------------------------------------------------------------
+  // Capsule Colldier Component -------------------------------------------------------------------------------------
   CapsuleColliderComponent::CapsuleColliderComponent()
   {
     COMP_LOG("Creating Capsule Component");
@@ -432,5 +432,22 @@ return *this; \
     positionOffset = other.positionOffset;
     quaternionOffset = other.quaternionOffset;
   }
+
+  // Fixed Joint Component -------------------------------------------------------------------------------------
+  FixedJointComponent::FixedJointComponent()
+  {
+    COMP_LOG("Creating Fixed Joint Component");
+  }
   
+  FixedJointComponent::~FixedJointComponent()
+  {
+    COMP_LOG("Destroying Fixed Joint Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(FixedJointComponent);
+  
+  void FixedJointComponent::Copy(const FixedJointComponent& other)
+  {
+    connectedEntity = other.connectedEntity;
+  }
+
 } // namespace IKan

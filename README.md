@@ -185,6 +185,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 ## TODO  
 - Grid
 - Selected Mesh Highlight
+- Parent Child Movement
 - Joints
 - Light
 - Materials

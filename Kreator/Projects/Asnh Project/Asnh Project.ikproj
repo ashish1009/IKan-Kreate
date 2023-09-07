@@ -1,0 +1,6 @@
+Project:
+  Name: Asnh Project
+  AssetDirectory: Assets
+  AssetRegistry: Assets/AssetRegistry.ikr
+  MeshDirectory: Assets/Meshes
+  MeshSourceDirectory: Assets/Meshes/Source
