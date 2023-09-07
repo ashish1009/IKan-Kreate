@@ -36,8 +36,10 @@ namespace Kreator
     /// - Parameter func: function pointer
     void SetEntityDeletedCallback(const std::function<void(Entity)>& func);
     /// This function update the selected entity
-    /// - Parameter entity: entity
-    void SetSelectedEntity(Entity entity);
+    /// - Parameters:
+    ///   - entity: entity
+    ///   - multipleSelection: multiple Selection falase
+    void SetSelectedEntity(Entity entity, bool multipleSelection = false);
 
   private:
     // Member Functions ---------------------------------------------------------------------------------------------

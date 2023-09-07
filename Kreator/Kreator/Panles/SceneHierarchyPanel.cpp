@@ -883,7 +883,8 @@ namespace Kreator
 
     if (isRowClicked)
     {
-      SetSelectedEntity(entity);
+      bool multipleSelection = Input::IsKeyPressed(IKan::Key::LeftControl);
+      SetSelectedEntity(entity, multipleSelection);
       ImGui::FocusWindow(ImGui::GetCurrentWindow());
     }
 
@@ -1049,9 +1050,13 @@ namespace Kreator
     }
   }
 
-  void SceneHierarchyPanel::SetSelectedEntity(Entity entity)
+  void SceneHierarchyPanel::SetSelectedEntity(Entity entity, bool multipleSelection)
   {
-    m_selectionContext.Clear();
+    if (!multipleSelection)
+    {
+      m_selectionContext.Clear();
+    }
+    
     if (!entity)
     {
       return;

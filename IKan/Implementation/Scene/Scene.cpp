@@ -531,6 +531,7 @@ namespace IKan
     }
     
     CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<CameraComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<SpriteRendererComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<QuadComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<CircleComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
