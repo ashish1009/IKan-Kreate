@@ -310,16 +310,27 @@ namespace IKan {
       out << YAML::Key << "CapsuleColliderComponent";
       out << YAML::BeginMap; // CapsuleColliderComponent
       
-      auto& meshColliderComponent = entity.GetComponent<CapsuleColliderComponent>();
-      out << YAML::Key << "Radius" << YAML::Value << meshColliderComponent.radius;
-      out << YAML::Key << "Height" << YAML::Value << meshColliderComponent.height;
-      out << YAML::Key << "PositionOffset" << YAML::Value << meshColliderComponent.positionOffset;
-      out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(meshColliderComponent.quaternionOffset);
-      out << YAML::Key << "FrictionCoefficient" << YAML::Value << meshColliderComponent.frictionCoefficient;
-      out << YAML::Key << "Bounciness" << YAML::Value << meshColliderComponent.bounciness;
-      out << YAML::Key << "MassDensity" << YAML::Value << meshColliderComponent.massDensity;
+      auto& capsuleColliderComponent = entity.GetComponent<CapsuleColliderComponent>();
+      out << YAML::Key << "Radius" << YAML::Value << capsuleColliderComponent.radius;
+      out << YAML::Key << "Height" << YAML::Value << capsuleColliderComponent.height;
+      out << YAML::Key << "PositionOffset" << YAML::Value << capsuleColliderComponent.positionOffset;
+      out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(capsuleColliderComponent.quaternionOffset);
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << capsuleColliderComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << capsuleColliderComponent.bounciness;
+      out << YAML::Key << "MassDensity" << YAML::Value << capsuleColliderComponent.massDensity;
       
-      out << YAML::EndMap; // MeshColliderComponent
+      out << YAML::EndMap; // CapsuleColliderComponent
+    }
+
+    if (entity.HasComponent<FixedJointComponent>())
+    {
+      out << YAML::Key << "FixedJointComponent";
+      out << YAML::BeginMap; // FixedJointComponent
+      
+      auto& fixedJointComponent = entity.GetComponent<FixedJointComponent>();
+      out << YAML::Key << "ConnectedEntity" << YAML::Value << fixedJointComponent.connectedEntity;
+      
+      out << YAML::EndMap; // FixedJointComponent
     }
     out << YAML::EndMap; // Entity
   }
@@ -497,7 +508,7 @@ namespace IKan {
         component.bounciness = box3DColliderComponent["Bounciness"].as<float>();
       }
       
-      // SphereColliderComponent ----------------------------------------------------------------------------------------------
+      // SphereColliderComponent ------------------------------------------------------------------------------------
       auto sphereColliderComponent = entity["SphereColliderComponent"];
       if (sphereColliderComponent)
       {
@@ -510,7 +521,7 @@ namespace IKan {
         component.bounciness = sphereColliderComponent["Bounciness"].as<float>();
       }
       
-      // MeshColliderComponent ----------------------------------------------------------------------------------------------
+      // MeshColliderComponent --------------------------------------------------------------------------------------
       auto meshColliderComponent = entity["CapsuleColliderComponent"];
       if (meshColliderComponent)
       {
@@ -522,6 +533,14 @@ namespace IKan {
         component.frictionCoefficient = meshColliderComponent["FrictionCoefficient"].as<float>();
         component.massDensity = meshColliderComponent["MassDensity"].as<float>();
         component.bounciness = meshColliderComponent["Bounciness"].as<float>();
+      }
+
+      // FixedJointComponent --------------------------------------------------------------------------------------
+      auto fixedJointComponent = entity["FixedJointComponent"];
+      if (fixedJointComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<FixedJointComponent>();
+        component.connectedEntity = fixedJointComponent["ConnectedEntity"].as<uint64_t>();
       }
     }
   }
