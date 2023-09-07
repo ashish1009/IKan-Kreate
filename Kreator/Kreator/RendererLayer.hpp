@@ -8,6 +8,7 @@
 #pragma once
 
 #include "UserPreference.hpp"
+#include "EntitySelectionContext.hpp"
 
 namespace Kreator
 {
@@ -149,11 +150,11 @@ namespace Kreator
     
     // Scene Panel Manager Callbacks ----------------------
     /// This function handles the entity selection
-    /// - Parameter entity: entity
-    void OnEntitySelected(Entity entity);
+    /// - Parameter entities: entities
+    void OnEntitySelected(SelectionContext entities);
     /// This function handles the entity deletion
-    /// - Parameter entity: entity
-    void OnEntityDeleted(Entity e);
+    /// - Parameter entities: entities
+    void OnEntityDeleted(SelectionContext entities);
     
     /// This function clear the selected Entity
     /// - Note: To be called inside Render Pass Begin end End

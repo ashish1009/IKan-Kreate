@@ -33,10 +33,10 @@ namespace Kreator
     
     /// This function sets the entity set callback
     /// - Parameter func: function pointer
-    void SetSelectionChangedCallback(const std::function<void(Entity)>& func);
+    void SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func);
     /// This function sets the entity delete callback
     /// - Parameter func: function pointer
-    void SetEntityDeletedCallback(const std::function<void(Entity)>& func);
+    void SetEntityDeletedCallback(const std::function<void(SelectionContext)>& func);
     /// This function update the selected entity
     /// - Parameters:
     ///   - entity: entity
@@ -79,7 +79,7 @@ namespace Kreator
     bool m_isWindow;
     
     SelectionContext m_selectionContext;    
-    std::function<void(Entity)> m_selectionChangedCallback, m_entityDeletedCallback;
+    std::function<void(SelectionContext)> m_selectionChangedCallback, m_entityDeletedCallback;
 
     inline static Ref<Image> s_pencilIcon;
     inline static Ref<Image> s_plusIcon;

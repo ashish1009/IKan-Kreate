@@ -205,8 +205,8 @@ if (!Project::GetActive()) return
     Ref<SceneHierarchyPanel> sceneHierarchyPanel = m_panels.AddPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID,
                                                                                           "Scene Hierarchy", true,
                                                                                           m_editorScene);
-    sceneHierarchyPanel->SetSelectionChangedCallback([this](Entity entity) { OnEntitySelected(entity); });
-    sceneHierarchyPanel->SetEntityDeletedCallback([this](Entity entity) { OnEntityDeleted(entity); });
+    sceneHierarchyPanel->SetSelectionChangedCallback([this](SelectionContext entities) { OnEntitySelected(entities); });
+    sceneHierarchyPanel->SetEntityDeletedCallback([this](SelectionContext entities) { OnEntityDeleted(entities); });
     
 #ifdef DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
@@ -1042,27 +1042,30 @@ if (!Project::GetActive()) return
     m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_editorScene);
   }
 
-  void RendererLayer::OnEntitySelected(Entity entity)
+  void RendererLayer::OnEntitySelected(SelectionContext entities)
   {
-    if (!entity)
+    if (entities.Size() == 0)
     {
       return;
     }
     
-    SelectedSubmesh selection;
-    selection.entity = entity;
-    
     m_selectionContext.clear();
-    m_selectionContext.push_back(selection);
+    for (const auto& entity : entities)
+    {
+      SelectedSubmesh selection;
+      selection.entity = entity;
+      
+      m_selectionContext.push_back(selection);
+    }
     
     if (m_currentScene != m_runtimeScene)
     {
-      m_currentScene->SetSelectedEntity(entity);
+      m_currentScene->SetSelectedEntity(entities.At(0));
     }
   }
-  void RendererLayer::OnEntityDeleted(Entity e)
+  void RendererLayer::OnEntityDeleted(SelectionContext entities)
   {
-    if (m_selectionContext.size() == 0 or m_selectionContext[0].entity != e)
+    if (m_selectionContext.size() == 0 or !entities.Find(m_selectionContext[0].entity))
     {
       return;
     }

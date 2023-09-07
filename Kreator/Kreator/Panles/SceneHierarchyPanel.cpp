@@ -1062,32 +1062,32 @@ namespace Kreator
       return;
     }
 
+    m_selectionContext.PushBack(entity);
     if (m_selectionChangedCallback)
     {
-      m_selectionChangedCallback(entity);
+      m_selectionChangedCallback(m_selectionContext);
     }
-
-    m_selectionContext.PushBack(entity);
   }
 
-  void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(Entity)>& func)
+  void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func)
   {
     m_selectionChangedCallback = func;
   }
-  void SceneHierarchyPanel::SetEntityDeletedCallback(const std::function<void(Entity)>& func)
+  void SceneHierarchyPanel::SetEntityDeletedCallback(const std::function<void(SelectionContext)>& func)
   {
     m_entityDeletedCallback = func;
   }
 
   void SceneHierarchyPanel::OnEntityDestroyed(Entity entity)
   {
+    m_entityDeletedCallback(m_selectionContext);
+
     if (m_selectionContext.Find(entity))
     {
       m_selectionContext.Erase(entity);
     }
     
     m_context->DestroyEntity(entity);
-    m_entityDeletedCallback(entity);
   }
 
 } // namespace Kreator
