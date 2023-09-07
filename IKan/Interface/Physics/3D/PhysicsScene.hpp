@@ -36,6 +36,9 @@ namespace IKan
     /// - Parameter ts: time step
     void OnUpdate(TimeStep ts);
     
+    /// This function returns the physics Debug renderer
+    reactphysics3d::DebugRenderer GetDebugRenderer() const;
+
   private:
     PhysicsSettings m_physicsSettings;
 

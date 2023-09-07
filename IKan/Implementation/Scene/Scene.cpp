@@ -227,14 +227,7 @@ namespace IKan
   void Scene::InitializePhysicsWorld()
   {
     IK_PROFILE();
-
-    PhysicsSettings settings;
-    settings.solverVelocityIterations = 15;
-    settings.solverPositionIterations = 5;
-    settings.isAllowSleep = true;
-    settings.gravity = {0 , -9.98, 0};
-
-    m_physicsScene = CreateRef<PhysicsScene>(settings, this);
+    m_physicsScene = CreateRef<PhysicsScene>(m_physicsSettings, this);
   }
 
   void Scene::CopyTo(Ref<Scene> &target)
@@ -275,6 +268,7 @@ namespace IKan
     target->m_viewportWidth = m_viewportWidth;
     target->m_viewportHeight = m_viewportHeight;
     target->m_name = m_name;
+    target->m_physicsSettings = m_physicsSettings;
   }
   
   void Scene::SetViewportSize(uint32_t width, uint32_t height)
@@ -625,4 +619,15 @@ namespace IKan
   {
     return m_maxEntityID;
   }
+  
+  PhysicsSettings& Scene::GetPhysicsSettings()
+  {
+    return m_physicsSettings;
+  }
+  
+  reactphysics3d::DebugRenderer Scene::GetPhysicsDebugRenderer() const
+  {
+    return m_physicsScene->GetDebugRenderer();
+  }
+
 } // namespace IKan

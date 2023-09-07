@@ -186,4 +186,10 @@ namespace IKan
       } // if (rb2d.type == b2_dynamicBody or rb2d.type == b2_kinematicBody)
     } // for (auto e : view)
   }
+  
+  DebugRenderer PhysicsScene::GetDebugRenderer() const
+  {
+    return m_physics3DWorld->getDebugRenderer();
+  }
+
 } // namespace IKan

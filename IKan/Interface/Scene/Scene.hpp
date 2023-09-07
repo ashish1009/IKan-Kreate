@@ -158,7 +158,13 @@ namespace IKan
     /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
     /// - Parameter entityHandle: handle for entity
     Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
-      
+    
+    
+    /// This function returns the physcis settings
+    PhysicsSettings& GetPhysicsSettings();
+    /// This function returns the physics Debug renderer
+    reactphysics3d::DebugRenderer GetPhysicsDebugRenderer() const;
+    
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
     ///   - name: Name of Scene
@@ -200,7 +206,9 @@ namespace IKan
     EntityMap m_entityIDMap;
     entt::entity m_selectedEntity;
     std::function<void(Entity)> m_onEntityDestroyedCallback;
-    
+
+    // Physics Data
+    PhysicsSettings m_physicsSettings;
     Ref<PhysicsScene> m_physicsScene;
   
     friend class Entity;

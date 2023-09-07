@@ -690,7 +690,7 @@ if (!Project::GetActive()) return
       ShowIcons();
     }
     
-    if (m_showColliders)
+    if (m_showColliders and m_sceneState == SceneState::Simulate)
     {
       ShowColliders({0, 1, 0, 1});
     }
@@ -720,19 +720,12 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowColliders(const glm::vec4& color)
   {
-#if 0
     if (!m_simulationScene)
     {
       return;
     }
     
-    auto physics3DWorld = m_simulationScene->Get3DPhysicsWorld();
-    if (!physics3DWorld)
-    {
-      return;
-    }
-    
-    auto debugRenderer = physics3DWorld->getDebugRenderer();
+    auto debugRenderer = m_currentScene->GetPhysicsDebugRenderer();
     auto triangle = debugRenderer.getTriangles();
     
     for (auto i = 0; i < debugRenderer.getNbTriangles(); i++)
@@ -744,7 +737,6 @@ if (!Project::GetActive()) return
       Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
                            {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
     }
-#endif
   }
   
   void RendererLayer::ShowGrid(const glm::vec4 &color)
@@ -2490,11 +2482,20 @@ if (!Project::GetActive()) return
       {
         m_editorCamera.SetNormalSpeed(camSpeed);
       }
-            
-      Kreator_UI::Property("Show Icons", m_showIcons);
-      Kreator_UI::Property("Show Grids", m_showGrid);
-      Kreator_UI::Property("Show Colliders", m_showColliders);
-      Kreator_UI::Property("Show Mini Viewport", m_showMiniViewport);
+      
+      // Other Settings
+      {
+        Kreator_UI::Property("Show Icons", m_showIcons);
+        Kreator_UI::Property("Show Grids", m_showGrid);
+        Kreator_UI::Property("Show Mini Viewport", m_showMiniViewport);
+      }
+      
+      ImGui::Separator();
+      // Physics
+      {
+        Kreator_UI::Property("Show Colliders", m_showColliders);
+        Kreator_UI::Property("Gravity", m_currentScene->GetPhysicsSettings().gravity);
+      }
       Kreator_UI::EndPropertyGrid();
     }
     ImGui::End();
