@@ -306,8 +306,8 @@ if (!Project::GetActive()) return
         if (m_showMiniViewport)
         {
           m_miniViewportRenderer->BeginRenderPass();
-          Renderer::Clear({0.2f, 0.2f, 0.2f, 0.3f});
-          
+          Renderer::Clear({0.26f, 0.26f, 0.29f, 0.3f});
+
           m_editorScene->OnRenderRuntime(ts, m_viewportRenderer);
           
           m_miniViewportRenderer->EndRenderPass();
@@ -334,8 +334,8 @@ if (!Project::GetActive()) return
         
         // Renderer for Main Viewport
         m_viewportRenderer->BeginRenderPass();
-        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
-        
+        Renderer::Clear({0.26f, 0.26f, 0.29f, 1.0f});
+
         m_simulationScene->OnUpdateRuntime(ts);
         m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
         
@@ -349,8 +349,8 @@ if (!Project::GetActive()) return
       {
         // Renderer for Main Viewport
         m_viewportRenderer->BeginRenderPass();
-        Renderer::Clear({0.12f, 0.12f, 0.14f, 1.0f});
-        
+        Renderer::Clear({0.26f, 0.26f, 0.29f, 1.0f});
+
         m_runtimeScene->OnUpdateRuntime(ts);
         m_runtimeScene->OnRenderRuntime(ts, m_viewportRenderer);
 
@@ -662,11 +662,6 @@ if (!Project::GetActive()) return
       UI_EditorPanel();
       m_panels.OnImGuiRender();
     }
-    
-    ImGui::Begin("EditorCamera Debug");
-    
-    ImGui::Text("%f, %f, %f", m_editorCamera.GetFocalPoint().x, m_editorCamera.GetFocalPoint().y, m_editorCamera.GetFocalPoint().z);
-    ImGui::End();
     
     UI_EndMainWindowDocking();
     

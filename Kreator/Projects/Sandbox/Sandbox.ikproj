@@ -4,6 +4,6 @@ Project:
   MeshDirectory: Assets/Meshes
   MeshSourceDirectory: Assets/Meshes/Source
   AssetRegistry: Assets/AssetRegistry.ikr
-  StartScene: Scenes/New Scene.ikscene
+  StartScene: Scenes/Demo_01.ikscene
   AutoSave: true
   AutoSaveInterval: 60

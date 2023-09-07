@@ -21,28 +21,6 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 0
-  - Entity: 2289073378691598442
-    TagComponent:
-      Tag: Cone
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [-2.83213282, 3.03217602, -7.4505806e-09]
-      Rotation: [0, 0.62831831, 2.71922302]
-      Scale: [1.00000119, 1.00000131, 1]
-    StaticMeshComponent:
-      MeshHandle: 3806376486
-    RigidBodyComponent:
-      BodyType: 2
-    CapsuleColliderComponent:
-      Radius: 0.5
-      Height: 1
-      PositionOffset: [0, 0, 0]
-      QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
-      MassDensity: 0
   - Entity: 4818952058294986168
     TagComponent:
       Tag: Parent Cube
@@ -82,31 +60,9 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
-      MassDensity: 0
-  - Entity: 6718098301877003594
-    TagComponent:
-      Tag: Capsule
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [-2.63000011, 2.32686162, 2.6952939]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    StaticMeshComponent:
-      MeshHandle: 2234008704
-    RigidBodyComponent:
-      BodyType: 2
-    CapsuleColliderComponent:
-      Radius: 0.5
-      Height: 1
-      PositionOffset: [0, 0, 0]
-      QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
-      MassDensity: 0
+      FrictionCoefficient: 1
+      Bounciness: 0
+      MassDensity: 100
   - Entity: 7784077153625953427
     TagComponent:
       Tag: Capsule
@@ -167,6 +123,6 @@ Entities:
       Radius: 0.5
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
-      MassDensity: 0
+      FrictionCoefficient: 1
+      Bounciness: 1
+      MassDensity: 2

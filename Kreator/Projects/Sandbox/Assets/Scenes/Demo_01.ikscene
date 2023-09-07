@@ -1,0 +1,43 @@
+Scene: Demo
+Entities:
+  - Entity: 5124504400299946702
+    TagComponent:
+      Tag: Base
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-0.0679665804, -8.78147125, 0]
+      Rotation: [0, 0, 0]
+      Scale: [29.2827339, 0.0213917959, 39.4463081]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 0
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 1
+      Bounciness: 0
+      MassDensity: 100
+  - Entity: 13775343779537046068
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-0.105329178, -1.46484709, 13.7494783]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 90
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true

@@ -503,6 +503,13 @@ namespace IKan
       m_onEntityDestroyedCallback(entity);
     }
     
+    for (size_t i = 0; i < entity.Children().size(); i++)
+    {
+      auto childId = entity.Children()[i];
+      Entity child = GetEntityWithUUID(childId);
+      DestroyEntity(child);
+    }
+    
     m_entityIDMap.erase(entity.GetUUID());
     m_registry.destroy(entity.m_entityHandle);
     
