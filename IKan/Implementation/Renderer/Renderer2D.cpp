@@ -908,7 +908,97 @@ namespace IKan
   {
     DrawTextureCircle(transform, texture, tilingFactor, tintColor, thickness, fade, objectID);
   }
+  void Renderer2D::DrawFixedViewCircle(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor,
+                                       float thickness, float fade, float tilingFactor, int32_t entityID)
+  {
+    glm::vec3 position, rotation, scale;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    DrawFixedViewCircle(position, scale, texture, tintColor, thickness, fade, tilingFactor, entityID);
+  }
   
+  void Renderer2D::DrawFixedViewCircle(const glm::vec3& position, const glm::vec3& scale, const Ref<Texture>& texture,
+                                       const glm::vec4& tintColor, float thickness, float fade, float tilingFactor,
+                                       int32_t entityID)
+  {
+    // If number of indices increase in batch then start new batch
+    if (s_circleData->indexCount >= s_circleData->maxIndices)
+    {
+      BATCH_WARN("Starts the new batch as number of indices ({0}) increases in the previous batch", s_circleData->indexCount);
+      EndBatch();
+      s_circleData->StartInternalBatch();
+    }
+    
+    float textureIndex = 0.0f;
+    if (texture)
+    {
+      // Find if texture is already loaded in current batch
+      for (size_t i = 1; i < s_circleData->textureSlotIndex; i++)
+      {
+        if (s_circleData->textureSlots[i].get() == texture.get())
+        {
+          // Found the current textue in the batch
+          textureIndex = (float)i;
+          break;
+        }
+      }
+      
+      // If current texture slot is not pre loaded then load the texture in proper slot
+      if (textureIndex == 0.0f)
+      {
+        // If number of slots increases max then start new batch
+        if (s_circleData->textureSlotIndex >= MaxTextureSlotsInShader)
+        {
+          BATCH_WARN("Starts the new batch as number of texture slot ({0}) increases in the previous batch", s_circleData->textureSlotIndex);
+          EndBatch();
+          s_circleData->StartInternalBatch();
+        }
+        
+        // Loading the current texture in the first free slot slot
+        textureIndex = (float)s_circleData->textureSlotIndex;
+        s_circleData->textureSlots[s_circleData->textureSlotIndex] = texture;
+        s_circleData->textureSlotIndex++;
+      }
+    }
+    
+    // get the fixed view from camera view matrix
+    glm::vec3 camRightWS =
+    {
+      s_environment.cameraViewMatrix[0][0],
+      s_environment.cameraViewMatrix[1][0],
+      s_environment.cameraViewMatrix[2][0]
+    };
+    
+    glm::vec3 camUpWS =
+    {
+      s_environment.cameraViewMatrix[0][1],
+      s_environment.cameraViewMatrix[1][1],
+      s_environment.cameraViewMatrix[2][1]
+    };
+    
+    for (size_t i = 0; i < CircleData::VertexForSingleElement; i++)
+    {
+      s_circleData->vertexBufferPtr->position         = position + camRightWS *
+      s_circleData->vertexBasePosition[i].x * scale.x + camUpWS *
+      s_circleData->vertexBasePosition[i].y * scale.y;
+      
+      s_circleData->vertexBufferPtr->color           = tintColor;
+      s_circleData->vertexBufferPtr->textureCoords   = 2.0f * s_circleData->vertexBasePosition[i];
+      s_circleData->vertexBufferPtr->textureIndex    = textureIndex;
+      s_circleData->vertexBufferPtr->tilingFactor    = tilingFactor;
+      s_circleData->vertexBufferPtr->localPosition   = 2.0f * s_circleData->vertexBasePosition[i];
+      s_circleData->vertexBufferPtr->thickness       = thickness;
+      s_circleData->vertexBufferPtr->fade            = fade;
+      s_circleData->vertexBufferPtr->pixelID         = entityID;
+      s_circleData->vertexBufferPtr++;
+    }
+    
+    s_circleData->indexCount += CircleData::IndicesForSingleElement;
+    
+    // Update Stats
+    RendererStatistics::Get().indexCount += Shape2DCommonData::IndicesForSingleElement;
+    RendererStatistics::Get().vertexCount += Shape2DCommonData::VertexForSingleElement;
+    RendererStatistics::Get()._2d.quads++;
+  }
   void Renderer2D::DrawTextureCircle(const glm::mat4& transform, const Ref<Texture>& texture, float tilingFactor,
                                      const glm::vec4& tintColor, float thickness, float fade, int32_t objectID)
   {

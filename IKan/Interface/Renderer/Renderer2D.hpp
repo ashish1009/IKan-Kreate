@@ -173,7 +173,35 @@ namespace IKan
     ///   - objectID: Pixel ID of Circle
     static void DrawCircle(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor = glm::vec4(1.0f),
                            float tilingFactor = 1.0f, float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1 );
-    
+    /// This functon draws Quad API with Texture with fixed camera with transform matrix
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - entityId: Pixel ID of Quad
+    static void DrawFixedViewCircle(const glm::mat4& transform,
+                                    const Ref<Texture>& texture,
+                                    const glm::vec4& tintColor = glm::vec4(1.0f),
+                                    float thickness = 1.0f, float fade = (float)0.005,
+                                    float tilingFactor = 1.0f,
+                                    int32_t entityId = -1);
+    /// This functon draws Quad API with Texture with fixed camera with transform position and scale
+    /// - Parameters:
+    ///   - position: Position matrix of Quad
+    ///   - position: Size matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - entityDd: Pixel ID of Quad
+    static void DrawFixedViewCircle(const glm::vec3& position,
+                                    const glm::vec3& scale,
+                                    const Ref<Texture>& texture,
+                                    const glm::vec4& tintColor = glm::vec4(1.0f),
+                                    float thickness = 1.0f, float fade = (float)0.005,
+                                    float tilingFactor = 1.0f,
+                                    int32_t entityId = -1);
+
     /// This function draws a line using two points in 3d Space
     /// - Parameters:
     ///   - p0: fisrt point

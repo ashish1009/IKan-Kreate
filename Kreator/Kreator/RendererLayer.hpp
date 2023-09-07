@@ -87,6 +87,8 @@ namespace Kreator
     void UpdateWindowTitle(const std::string& sceneName);
     /// This function renders the mini viewport
     void RenderMiniViewport();
+    /// This function renders the axis viewport
+    void RenderGridViewport();
     /// This function renders the debug icons, colliders and so on....
     void RenderDebug();
     /// This function show the icons
@@ -254,6 +256,7 @@ namespace Kreator
     // Renderers -----------------------------------------
     Ref<SceneRenderer> m_viewportRenderer;
     Ref<SceneRenderer> m_miniViewportRenderer;
+    Ref<SceneRenderer> m_axisViewportRenderer;
 
     // Scene Data ----------------------------------------
     bool m_showNewScenePopup = false;

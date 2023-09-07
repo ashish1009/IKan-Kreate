@@ -1,3 +1,34 @@
 Scene: New Scene
 Entities:
-  []
+  - Entity: 5970611806304602905
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 2.70000005, 7.80000019]
+      Rotation: [-0.35953784, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+  - Entity: 10654899642097637939
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 560965872

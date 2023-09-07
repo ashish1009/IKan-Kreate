@@ -109,7 +109,7 @@ namespace IKan
     // Member variables
     ProjectionType m_projectionType = ProjectionType::Perspective;
     
-    uint32_t m_viewportWidth, m_viewportHeight;
+    uint32_t m_viewportWidth = 16, m_viewportHeight = 9;
     
     float m_degPerspectiveFOV = 45.0f;
     float m_perspectiveNear = 0.1f, m_perspectiveFar = 1000.0f;
