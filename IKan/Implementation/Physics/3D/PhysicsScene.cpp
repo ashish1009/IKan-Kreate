@@ -38,8 +38,6 @@ namespace IKan
     debugRenderer.setIsDebugItemDisplayed(DebugRenderer::DebugItem::COLLISION_SHAPE, true);
     
     auto rigidBodyView = m_scene->GetAllEntitiesWith<RigidBodyComponent>();
-    RigidBody* b[2];
-    int i = 0;
     for (auto entityHandle : rigidBodyView)
     {
       Entity entity = { entityHandle, m_scene };
@@ -61,12 +59,7 @@ namespace IKan
       body->setLinearDamping(rbc.liniarDamping);
       body->setAngularDamping(rbc.angularDamping);
       body->setIsAllowedToSleep(rbc.allowSleep);
-      
-      if (rbc.bodyType == RigidBodyComponent::BodyType::Dynamic)
-      {
-        b[i++] = body;
-      }
-      
+            
       // Box 3D -----------------------------------------------------------------------------------------------------
       if (entity.HasComponent<Box3DColliderComponent>())
       {
@@ -214,10 +207,13 @@ namespace IKan
     auto body2 = static_cast<RigidBody*>(rigidBodyComponent2.runtimeBody);
     
     // Anchor point in world-space
-    Vector3 anchorPoint(0.0, 3.7, 0.0);
+    Vector3 anchorPoint({
+      fixedJointComponent.anchorPoint.x,
+      fixedJointComponent.anchorPoint.y,
+      fixedJointComponent.anchorPoint.z});
     
     // Create the joint info object
-    FixedJointInfo jointInfo(body1, body2, anchorPoint);
+    BallAndSocketJointInfo jointInfo(body1, body2, anchorPoint);
     
     // Create the fixed joint in the physics world
     // TODO: Store the joint in some map?

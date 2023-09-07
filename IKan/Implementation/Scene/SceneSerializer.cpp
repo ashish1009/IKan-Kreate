@@ -329,7 +329,8 @@ namespace IKan {
       
       auto& fixedJointComponent = entity.GetComponent<FixedJointComponent>();
       out << YAML::Key << "ConnectedEntity" << YAML::Value << fixedJointComponent.connectedEntity;
-      
+      out << YAML::Key << "AnchorPoint" << YAML::Value << fixedJointComponent.anchorPoint;
+
       out << YAML::EndMap; // FixedJointComponent
     }
     out << YAML::EndMap; // Entity
@@ -541,6 +542,8 @@ namespace IKan {
       {
         auto& component = deserializedEntity.AddComponent<FixedJointComponent>();
         component.connectedEntity = fixedJointComponent["ConnectedEntity"].as<uint64_t>();
+        component.anchorPoint = fixedJointComponent["AnchorPoint"].as<glm::vec3>();
+
       }
     }
   }

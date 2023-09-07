@@ -634,15 +634,9 @@ namespace Kreator
       if (Kreator_UI::PropertyEntityReference("Connected Entity", targetEntity))
       {
         fjc.connectedEntity = targetEntity.GetUUID();
-//
-//        if (m_Context->IsPlaying())
-//        {
-//          auto joint = physicsScene->GetJoint(entity);
-//          if (joint)
-//            joint->SetConnectedEntity(targetEntity);
-//        }
       }
 
+      Kreator_UI::Property("Anchor Point", fjc.anchorPoint);
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
   }

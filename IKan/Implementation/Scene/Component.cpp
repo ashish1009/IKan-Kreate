@@ -448,6 +448,7 @@ return *this; \
   void FixedJointComponent::Copy(const FixedJointComponent& other)
   {
     connectedEntity = other.connectedEntity;
+    anchorPoint = other.anchorPoint;
   }
 
 } // namespace IKan

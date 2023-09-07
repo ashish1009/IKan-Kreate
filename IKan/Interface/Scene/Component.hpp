@@ -234,6 +234,7 @@ namespace IKan
   struct FixedJointComponent
   {
     UUID connectedEntity;
+    glm::vec3 anchorPoint = {0, 0, 0};
 
     FixedJointComponent();
     ~FixedJointComponent();
