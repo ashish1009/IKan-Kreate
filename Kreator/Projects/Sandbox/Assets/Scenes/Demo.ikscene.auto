@@ -7,7 +7,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.0446871221, 1.87171769, -0.00151491165]
+      Position: [-4.10822725, 1.87171769, -1.30785632]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -28,7 +28,7 @@ Entities:
     Children:
       - Handle: 16107639747932871619
     TransformComponent:
-      Position: [-2.50792074, 4.67548609, -1.29520822]
+      Position: [-3.26276469, 4.39826727, -4.11063957]
       Rotation: [1.61670804, 0.274493635, 0.519862831]
       Scale: [1.23482513, 1.00000095, 1.00000024]
     StaticMeshComponent:
@@ -49,7 +49,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.0679665804, -5.46999979, 0]
+      Position: [-0.0679665804, -8.78147125, 0]
       Rotation: [0, 0, 0]
       Scale: [29.2827339, 0.0213917959, 39.4463081]
     StaticMeshComponent:
@@ -70,7 +70,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0.0657582879, 2.32686162, 0]
+      Position: [0.0657582879, 2.32686162, 2.6952939]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -92,9 +92,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.400000006, 2.7864871, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 0.999999642, 0.999974012]
+      Position: [-0.105334453, 12.0995598, 13.7494783]
+      Rotation: [0, 0, -3.14159226]
+      Scale: [1, 1, 1]
     CameraComponent:
       Camera:
         ProjectionType: 0

@@ -376,7 +376,6 @@ namespace IKan
         material.setBounciness(ccc.bounciness);
         material.setFrictionCoefficient(ccc.frictionCoefficient);
         material.setMassDensity(ccc.massDensity);
-        
       } // Capsule Collider
     }
   }
