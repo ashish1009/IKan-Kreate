@@ -62,7 +62,7 @@ Entities:
       MeshHandle: 560965872
     RigidBodyComponent:
       BodyType: 2
-      LiniarDamping: 1
+      LiniarDamping: 5.30000019
       AngularDamping: 0
       AllowSleep: true
     Box3DColliderComponent:
@@ -72,3 +72,5 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 0
+    FixedJointComponent:
+      ConnectedEntity: 5124504400299946702
