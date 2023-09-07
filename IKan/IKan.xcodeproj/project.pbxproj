@@ -149,6 +149,8 @@
 		B278129B2A94D666005C0E7C /* Ray.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B27812992A94D666005C0E7C /* Ray.hpp */; };
 		B27815C12A94FE94005C0E7C /* libPhysics3D.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B27812BD2A94EF34005C0E7C /* libPhysics3D.a */; };
 		B283DF932A811EAC002B5DC3 /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */; };
+		B28EFE652AAA0EAC00255B40 /* PhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28EFE632AAA0EAC00255B40 /* PhysicsScene.cpp */; };
+		B28EFE662AAA0EAC00255B40 /* PhysicsScene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B28EFE642AAA0EAC00255B40 /* PhysicsScene.hpp */; };
 		B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */; };
 		B2AB33F02A76503A00BC405F /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */; };
 		B2B2CE552A7BA5F8007EACDE /* ImGuiCustom.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */; };
@@ -375,6 +377,8 @@
 		B27812992A94D666005C0E7C /* Ray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ray.hpp; sourceTree = "<group>"; };
 		B27812B82A94EF34005C0E7C /* Physics3D.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Physics3D.xcodeproj; path = Physics3D/Physics3D.xcodeproj; sourceTree = "<group>"; };
 		B283DF922A811EAC002B5DC3 /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
+		B28EFE632AAA0EAC00255B40 /* PhysicsScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsScene.cpp; sourceTree = "<group>"; };
+		B28EFE642AAA0EAC00255B40 /* PhysicsScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsScene.hpp; sourceTree = "<group>"; };
 		B2AB33ED2A76503A00BC405F /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2AB33EE2A76503A00BC405F /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2B2CE532A7BA5F8007EACDE /* ImGuiCustom.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiCustom.cpp; sourceTree = "<group>"; };
@@ -798,6 +802,7 @@
 				B23367352A75903000BC7B8B /* Asset */,
 				B2336A602A763D8100BC7B8B /* Project */,
 				B26B1A652A7D149900676419 /* Editor */,
+				B28EFE592AAA0E7D00255B40 /* Physics */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -815,6 +820,7 @@
 				B23367392A75903700BC7B8B /* Asset */,
 				B2336A612A763D8900BC7B8B /* Project */,
 				B26B1A6A2A7D14A300676419 /* Editor */,
+				B28EFE602AAA0E8C00255B40 /* Physics */,
 				B21048192A72CA6A00FA8CF2 /* Platform */,
 			);
 			path = Implementation;
@@ -938,6 +944,38 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B28EFE592AAA0E7D00255B40 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				B28EFE612AAA0E9800255B40 /* 3D */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
+		B28EFE602AAA0E8C00255B40 /* Physics */ = {
+			isa = PBXGroup;
+			children = (
+				B28EFE622AAA0E9F00255B40 /* 3D */,
+			);
+			path = Physics;
+			sourceTree = "<group>";
+		};
+		B28EFE612AAA0E9800255B40 /* 3D */ = {
+			isa = PBXGroup;
+			children = (
+				B28EFE642AAA0EAC00255B40 /* PhysicsScene.hpp */,
+			);
+			path = 3D;
+			sourceTree = "<group>";
+		};
+		B28EFE622AAA0E9F00255B40 /* 3D */ = {
+			isa = PBXGroup;
+			children = (
+				B28EFE632AAA0EAC00255B40 /* PhysicsScene.cpp */,
+			);
+			path = 3D;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -968,6 +1006,7 @@
 				B2B63F222A779E820056ED4E /* ImGuiTheme.hpp in Headers */,
 				B233654F2A7502BA00BC7B8B /* FrameBuffer.hpp in Headers */,
 				B23365432A74D76C00BC7B8B /* stb_image.h in Headers */,
+				B28EFE662AAA0EAC00255B40 /* PhysicsScene.hpp in Headers */,
 				B23365152A74381300BC7B8B /* OpenGLRendererBuffers.hpp in Headers */,
 				B2336A5F2A763B4300BC7B8B /* HashGenerator.hpp in Headers */,
 				B210631D2A7E20D100A28BA0 /* AssetEdtitor.hpp in Headers */,
@@ -1178,6 +1217,7 @@
 				B23365182A7438FA00BC7B8B /* RendererStats.cpp in Sources */,
 				B24077002A72431700221919 /* FileSystem.cpp in Sources */,
 				B23365012A742C0600BC7B8B /* OpenGLShader.cpp in Sources */,
+				B28EFE652AAA0EAC00255B40 /* PhysicsScene.cpp in Sources */,
 				B233656C2A75231700BC7B8B /* MathUtils.cpp in Sources */,
 				B21FAA492A729312009EED1F /* IKMemory.cpp in Sources */,
 				B2AB33EF2A76503A00BC405F /* ProjectSerializer.cpp in Sources */,

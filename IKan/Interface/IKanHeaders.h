@@ -120,3 +120,5 @@
 #include <Scene/SceneSerializer.hpp>
 #include <Scene/Entity.hpp>
 #include <Scene/Component.hpp>
+
+#include <Physics/3D/PhysicsScene.hpp>

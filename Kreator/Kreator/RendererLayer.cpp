@@ -720,6 +720,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowColliders(const glm::vec4& color)
   {
+#if 0
     if (!m_simulationScene)
     {
       return;
@@ -743,6 +744,7 @@ if (!Project::GetActive()) return
       Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
                            {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
     }
+#endif
   }
   
   void RendererLayer::ShowGrid(const glm::vec4 &color)
@@ -2488,17 +2490,7 @@ if (!Project::GetActive()) return
       {
         m_editorCamera.SetNormalSpeed(camSpeed);
       }
-      
-      if (m_sceneState != SceneState::Play)
-      {
-        float physics3DGravity = m_currentScene->GetPhysics3DGravity();
-        float physics3DGravityDelta = physics3DGravity / 1000;
-        if (Kreator_UI::Property("Gravity", physics3DGravity, physics3DGravityDelta, -10000.0f, 10000.0f))
-        {
-          m_currentScene->SetPhysics3DGravity(physics3DGravity);
-        }
-      }
-      
+            
       Kreator_UI::Property("Show Icons", m_showIcons);
       Kreator_UI::Property("Show Grids", m_showGrid);
       Kreator_UI::Property("Show Colliders", m_showColliders);

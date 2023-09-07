@@ -565,7 +565,7 @@ namespace Kreator
       
       Kreator_UI::Property("Allow Sleep", rbc.allowSleep);
       Kreator_UI::Property("Linear Damping", rbc.liniarDamping);
-      Kreator_UI::Property("Angular Damping", rbc.liniarDamping);
+      Kreator_UI::Property("Angular Damping", rbc.angularDamping);
 
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);

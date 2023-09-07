@@ -13,6 +13,7 @@
 #include "Camera/EditorCamera.hpp"
 #include "Scene/Component.hpp"
 #include "Asset/Asset.hpp"
+#include "Physics/3D/PhysicsScene.hpp"
 
 namespace IKan
 {
@@ -135,9 +136,6 @@ namespace IKan
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion
     void SetEntityDestroyedCallback(const std::function<void(Entity)>& callback);
-    /// This function sets the 3D Physics world gravity
-    /// - Parameter gravity: New gravity
-    void SetPhysics3DGravity(float gravity);
 
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the scene name
@@ -160,11 +158,6 @@ namespace IKan
     /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
     /// - Parameter entityHandle: handle for entity
     Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
-
-    /// This function rerturns the 3D Physics world
-    reactphysics3d::PhysicsWorld* Get3DPhysicsWorld() const;
-    /// This function returns the 3D Physics world gravity
-    float GetPhysics3DGravity() const;
       
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
@@ -207,12 +200,9 @@ namespace IKan
     EntityMap m_entityIDMap;
     entt::entity m_selectedEntity;
     std::function<void(Entity)> m_onEntityDestroyedCallback;
-
-    // Physics
-    float m_gravity = -9.8f;
-    reactphysics3d::PhysicsCommon m_physics3DCommon;
-    reactphysics3d::PhysicsWorld* m_physics3DWorld = nullptr;
-
+    
+    Ref<PhysicsScene> m_physicsScene;
+  
     friend class Entity;
     friend class SceneSerializer;
   };
