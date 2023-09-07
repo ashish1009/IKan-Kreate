@@ -31,6 +31,8 @@ if (!Project::GetActive()) return
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 #define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
   
+  static constexpr float CamFarView = 1000.0f;
+  
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -131,7 +133,7 @@ if (!Project::GetActive()) return
   
   RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientResourcePath)
   : Layer("Kreator Renderer"), m_userPreferences(userPreference), m_clientResourcePath(clientResourcePath),
-  m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f)
+  m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, CamFarView)
   {
     IK_PROFILE();
     IK_ASSERT(!s_instance, "RendererLayer instance already created");
@@ -555,7 +557,7 @@ if (!Project::GetActive()) return
   
   bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
   {
-    if (Input::IsKeyPressed(IKan::Key::LeftControl))
+    if (Input::IsKeyPressed(IKan::Key::LeftControl) or ImGuizmo::IsOver())
     {
       return false;
     }
@@ -580,11 +582,6 @@ if (!Project::GetActive()) return
     auto [spaceMouseX, spaceMouseY] = GetMouseViewportSpace();
     if (spaceMouseX > -1.0f and spaceMouseX < 1.0f and spaceMouseY > -1.0f and spaceMouseY < 1.0f)
     {
-      if (ImGuizmo::IsOver())
-      {
-        return false;
-      }
-      
       ClearSelectedEntity();
       
       const auto& camera = m_editorCamera;
@@ -698,12 +695,16 @@ if (!Project::GetActive()) return
       ShowColliders({0, 1, 0, 1});
     }
     
+    if (m_showGrid)
+    {
+      ShowGrid({0.6, 0.6, 0.6, 0.3f});
+    }
+    
     Renderer2D::EndBatch();
   }
   
   void RendererLayer::ShowIcons()
   {
-    // Cameras -----------
     auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
     for (auto e : cameraEntities)
     {
@@ -741,6 +742,15 @@ if (!Project::GetActive()) return
                            {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, color);
       Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
                            {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
+    }
+  }
+  
+  void RendererLayer::ShowGrid(const glm::vec4 &color)
+  {
+    for (int32_t i = -CamFarView; i < CamFarView; i+=2)
+    {
+      Renderer2D::DrawLine({i, 0, -CamFarView}, {i, 0, CamFarView}, color);
+      Renderer2D::DrawLine({-CamFarView, 0, i}, {CamFarView, 0, i}, color);
     }
   }
   
@@ -828,7 +838,7 @@ if (!Project::GetActive()) return
     m_panels.OnProjectChanged(project);
     
     // Reset cameras
-    m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
+    m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, CamFarView);
     
     if (!project->GetConfig().startScene.empty())
     {
@@ -900,7 +910,7 @@ if (!Project::GetActive()) return
     m_editorScene =  Scene::Create(name);
     m_sceneFilePath = std::string();
     
-    m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 1000.0f);
+    m_editorCamera = EditorCamera(45.0f, 1280.0f, 720.0f, 0.1f, CamFarView);
     m_currentScene = m_editorScene;
     
     m_panels.SetSceneContext(m_editorScene);
@@ -1807,14 +1817,12 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UI_UpdateGuizmo()
   {
-    if (Input::IsKeyPressed(IKan::Key::LeftControl))
+    if (Input::IsKeyPressed(IKan::Key::LeftControl) or m_selectionContext.size() > 1)
     {
       return;
     }
     if (m_gizmoType != -1 and m_selectionContext.size() and m_currentScene != m_runtimeScene)
     {
-      auto& selection = m_selectionContext[0];
-      
       float rw = (float)ImGui::GetWindowWidth();
       float rh = (float)ImGui::GetWindowHeight();
       ImGuizmo::SetOrthographic(false);
@@ -1822,16 +1830,16 @@ if (!Project::GetActive()) return
       ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, rw, rh);
       
       bool snap = Input::IsKeyPressed(Key::LeftControl);
+      float snapValue = GetSnapValue();
+      float snapValues[3] = { snapValue, snapValue, snapValue };
       
+      auto& selection = m_selectionContext[0];
       TransformComponent& entityTransform = selection.entity.Transform();
 #ifdef WorldSpace
       glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(selection.entity);
 #else
       glm::mat4 transform = entityTransform.Transform();
 #endif
-      float snapValue = GetSnapValue();
-      float snapValues[3] = { snapValue, snapValue, snapValue };
-      
       ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
                            glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
                            (ImGuizmo::OPERATION)m_gizmoType,
@@ -2484,6 +2492,7 @@ if (!Project::GetActive()) return
       }
       
       Kreator_UI::Property("Show Icons", m_showIcons);
+      Kreator_UI::Property("Show Grids", m_showGrid);
       Kreator_UI::Property("Show Colliders", m_showColliders);
       Kreator_UI::Property("Show Mini Viewport", m_showMiniViewport);
       Kreator_UI::EndPropertyGrid();

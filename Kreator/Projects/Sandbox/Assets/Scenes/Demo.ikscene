@@ -115,8 +115,8 @@ Entities:
       []
     TransformComponent:
       Position: [0.0657582879, 2.32686162, 2.6952939]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Rotation: [0.113684706, -0.058384303, 0.0391216837]
+      Scale: [0.999999881, 1, 1]
     StaticMeshComponent:
       MeshHandle: 2234008704
     RigidBodyComponent:

@@ -94,6 +94,9 @@ namespace Kreator
     /// This function renders the debug Colliders
     /// - Parameter color: color of collider
     void ShowColliders(const glm::vec4& color);
+    /// This function renders the debug Colliders
+    /// - Parameter color: color of grid
+    void ShowGrid(const glm::vec4& color);
     /// This function renders the Fix Texts
     void RenderFixTexts();
     /// This function returns the space mouse position
@@ -205,6 +208,7 @@ namespace Kreator
     bool m_showIcons = true;
     bool m_showColliders = true;
     bool m_showMiniViewport = true;
+    bool m_showGrid = true;
 
     // Popups --------------------------------------------
     bool m_showWelcomePopup = false;
