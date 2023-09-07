@@ -273,11 +273,6 @@ namespace Kreator
     int32_t m_gizmoType = -1; // -1 = no gizmo
     int32_t m_gizmoMode = 0;  //  0 = local
     Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
-    enum class SelectionMode
-    {
-      None = 0, Entity = 1
-    };
-    SelectionMode m_selectionMode = SelectionMode::Entity;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

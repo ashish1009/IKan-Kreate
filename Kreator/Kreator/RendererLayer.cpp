@@ -1829,50 +1829,42 @@ if (!Project::GetActive()) return
       float snapValue = GetSnapValue();
       float snapValues[3] = { snapValue, snapValue, snapValue };
       
-      if (m_selectionMode == SelectionMode::Entity)
+      ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
+                           glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
+                           (ImGuizmo::OPERATION)m_gizmoType,
+                           ImGuizmo::LOCAL,
+                           glm::value_ptr(transform),
+                           nullptr,
+                           snap ? snapValues : nullptr);
+      
+      if (ImGuizmo::IsUsing())
       {
-        ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
-                             glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
-                             (ImGuizmo::OPERATION)m_gizmoType,
-                             ImGuizmo::LOCAL,
-                             glm::value_ptr(transform),
-                             nullptr,
-                             snap ? snapValues : nullptr);
-        
-        if (ImGuizmo::IsUsing())
-        {
 #ifdef WorldSpace
-          Entity parent = m_currentScene->TryGetEntityWithUUID(selection.entity.GetParentUUID());
-          if (parent)
-          {
-            glm::mat4 parentTransform = m_currentScene->GetWorldSpaceTransformMatrix(parent);
-            transform = glm::inverse(parentTransform) * transform;
-            
-            glm::vec3 translation, rotation, scale;
-            Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
-            
-            glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
-            entityTransform.UpdatePosition(translation);
-            entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
-            entityTransform.UpdateScale(scale);
-          }
-          else
-#endif
-          {
-            glm::vec3 translation, rotation, scale;
-            Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
-            
-            glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
-            entityTransform.UpdatePosition(translation);
-            entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
-            entityTransform.UpdateScale(scale);
-          }
+        Entity parent = m_currentScene->TryGetEntityWithUUID(selection.entity.GetParentUUID());
+        if (parent)
+        {
+          glm::mat4 parentTransform = m_currentScene->GetWorldSpaceTransformMatrix(parent);
+          transform = glm::inverse(parentTransform) * transform;
+          
+          glm::vec3 translation, rotation, scale;
+          Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+          
+          glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
+          entityTransform.UpdatePosition(translation);
+          entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+          entityTransform.UpdateScale(scale);
         }
-      }
-      else
-      {
-        // Not Supported Yet
-        IK_ASSERT(false);
+        else
+#endif
+        {
+          glm::vec3 translation, rotation, scale;
+          Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+          
+          glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
+          entityTransform.UpdatePosition(translation);
+          entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+          entityTransform.UpdateScale(scale);
+        }
       }
     }
   }

@@ -74,7 +74,51 @@ namespace Kreator
     Ref<Scene> m_context;
     bool m_isWindow;
     
-    Entity m_selectionContext;
+    struct SelectionContext
+    {
+      std::vector<Entity> selections;
+      bool Find(Entity entity)
+      {
+        for (const auto& e : selections)
+        {
+          if (e == entity)
+          {
+            return true;
+          }
+        }
+        return false;
+      }
+      void Erase(Entity entity)
+      {
+        auto it = std::find(selections.begin(), selections.end(), entity);
+        if (it != selections.end())
+        {
+          selections.erase(it);
+        }
+      }
+      void PushBack(Entity entity)
+      {
+        selections.push_back(entity);
+      }
+      void Clear()
+      {
+        selections.clear();
+      }
+      Entity& operator[](size_t index)
+      {
+        return selections[index];
+      }
+      Entity& At(size_t index)
+      {
+        return selections.at(index);
+      }
+      size_t Size() const
+      {
+        return selections.size();
+      }
+    };
+    SelectionContext m_selectionContext;
+    
     std::function<void(Entity)> m_selectionChangedCallback, m_entityDeletedCallback;
 
     inline static Ref<Image> s_pencilIcon;

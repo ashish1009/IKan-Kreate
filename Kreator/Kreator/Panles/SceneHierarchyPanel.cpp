@@ -189,7 +189,7 @@ namespace Kreator
   void SceneHierarchyPanel::SetSceneContext(const Ref<Scene>& scene)
   {
     m_context = scene;
-    m_selectionContext = {};
+    m_selectionContext.Clear();
     if(m_context)
     {
       m_context->SetEntityDestroyedCallback([this](Entity entity) { OnExternalEntityDestroyed(entity); });
@@ -228,9 +228,9 @@ namespace Kreator
         ImGui::Begin("Properties");
       }
       
-      if (m_selectionContext)
+      if (m_selectionContext.Size() == 1)
       {
-        DrawComponents(m_selectionContext);
+        DrawComponents(m_selectionContext.At(0));
       }
     }
     
@@ -627,77 +627,77 @@ namespace Kreator
 
     if (UI::BeginPopup("AddComponentPanel"))
     {
-      if (!m_selectionContext.HasComponent<CameraComponent>())
+      if (!m_selectionContext.At(0).HasComponent<CameraComponent>())
       {
         if (ImGui::MenuItem("Camera"))
         {
-          m_selectionContext.AddComponent<CameraComponent>();
+          m_selectionContext.At(0).AddComponent<CameraComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<QuadComponent>())
+      if (!m_selectionContext.At(0).HasComponent<QuadComponent>())
       {
         if (ImGui::MenuItem("Quad"))
         {
-          m_selectionContext.AddComponent<QuadComponent>();
+          m_selectionContext.At(0).AddComponent<QuadComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<CircleComponent>())
+      if (!m_selectionContext.At(0).HasComponent<CircleComponent>())
       {
         if (ImGui::MenuItem("Circle"))
         {
-          m_selectionContext.AddComponent<CircleComponent>();
+          m_selectionContext.At(0).AddComponent<CircleComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<TextComponent>())
+      if (!m_selectionContext.At(0).HasComponent<TextComponent>())
       {
         if (ImGui::MenuItem("Text"))
         {
-          auto& textComp = m_selectionContext.AddComponent<TextComponent>();
+          auto& textComp = m_selectionContext.At(0).AddComponent<TextComponent>();
           textComp.assetHandle = Font::GetDefaultFont()->handle;
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<StaticMeshComponent>())
+      if (!m_selectionContext.At(0).HasComponent<StaticMeshComponent>())
       {
         if (ImGui::MenuItem("Mesh"))
         {
-          auto& meshComp = m_selectionContext.AddComponent<StaticMeshComponent>();
+          auto& meshComp = m_selectionContext.At(0).AddComponent<StaticMeshComponent>();
           meshComp.staticMesh = 0;
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<RigidBodyComponent>())
+      if (!m_selectionContext.At(0).HasComponent<RigidBodyComponent>())
       {
         if (ImGui::MenuItem("Rigid Body"))
         {
-          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.AddComponent<RigidBodyComponent>();
+          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.At(0).AddComponent<RigidBodyComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<Box3DColliderComponent>())
+      if (!m_selectionContext.At(0).HasComponent<Box3DColliderComponent>())
       {
         if (ImGui::MenuItem("Box 3D Collider"))
         {
-          [[maybe_unused]] auto& box3DColliderComp = m_selectionContext.AddComponent<Box3DColliderComponent>();
+          [[maybe_unused]] auto& box3DColliderComp = m_selectionContext.At(0).AddComponent<Box3DColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<SphereColliderComponent>())
+      if (!m_selectionContext.At(0).HasComponent<SphereColliderComponent>())
       {
         if (ImGui::MenuItem("Sphere Collider"))
         {
-          [[maybe_unused]] auto& sphereColliderComp = m_selectionContext.AddComponent<SphereColliderComponent>();
+          [[maybe_unused]] auto& sphereColliderComp = m_selectionContext.At(0).AddComponent<SphereColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.HasComponent<CapsuleColliderComponent>())
+      if (!m_selectionContext.At(0).HasComponent<CapsuleColliderComponent>())
       {
         if (ImGui::MenuItem("Capsule Collider"))
         {
-          [[maybe_unused]] auto& meshColliderComp = m_selectionContext.AddComponent<CapsuleColliderComponent>();
+          [[maybe_unused]] auto& meshColliderComp = m_selectionContext.At(0)  .AddComponent<CapsuleColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
@@ -734,7 +734,7 @@ namespace Kreator
       rowAreaMin.y + rowHeight
     };
     
-    const bool isSelected = entity == m_selectionContext;
+    const bool isSelected = m_selectionContext.Find(entity);
     ImGuiTreeNodeFlags flags = (isSelected ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow;
     flags |= ImGuiTreeNodeFlags_SpanAvailWidth;
     
@@ -764,7 +764,7 @@ namespace Kreator
     // Fill with light selection Color if any of the child entities selected
     auto isAnyDescendantSelected = [&](Entity ent, auto isAnyDescendantSelected) -> bool
     {
-      if (ent == m_selectionContext)
+      if (m_selectionContext.Find(ent))
       {
         return true;
       }
@@ -859,14 +859,17 @@ namespace Kreator
                                              ImGuiCol_HeaderActive, UI::Theme::Color::GroupHeader);
         DrawCreateEntityMenu(entity);
         
-        ImGui::Separator();
-        if (ImGui::MenuItem("Delete"))
+        if (m_selectionContext.Size() == 1)
         {
-          entityDeleted = true;
-        }
-        if (ImGui::MenuItem("Duplicate"))
-        {
-          m_context->DuplicateEntity(m_selectionContext);
+          ImGui::Separator();
+          if (ImGui::MenuItem("Delete"))
+          {
+            entityDeleted = true;
+          }
+          if (ImGui::MenuItem("Duplicate"))
+          {
+            m_context->DuplicateEntity(m_selectionContext.At(0));
+          }
         }
       }
       ImGui::EndPopup();
@@ -1040,20 +1043,26 @@ namespace Kreator
   
   void SceneHierarchyPanel::OnExternalEntityDestroyed(Entity entity)
   {
-    if (entity == m_selectionContext)
+    if (m_selectionContext.Find(entity))
     {
-      m_selectionContext = {};
+      m_selectionContext.Erase(entity);
     }
   }
 
   void SceneHierarchyPanel::SetSelectedEntity(Entity entity)
   {
-    m_selectionContext = entity;
-    
+    m_selectionContext.Clear();
+    if (!entity)
+    {
+      return;
+    }
+
     if (m_selectionChangedCallback)
     {
-      m_selectionChangedCallback(m_selectionContext);
+      m_selectionChangedCallback(entity);
     }
+
+    m_selectionContext.PushBack(entity);
   }
 
   void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(Entity)>& func)
@@ -1067,9 +1076,9 @@ namespace Kreator
 
   void SceneHierarchyPanel::OnEntityDestroyed(Entity entity)
   {
-    if (entity == m_selectionContext)
+    if (m_selectionContext.Find(entity))
     {
-      m_selectionContext = {};
+      m_selectionContext.Erase(entity);
     }
     
     m_context->DestroyEntity(entity);
