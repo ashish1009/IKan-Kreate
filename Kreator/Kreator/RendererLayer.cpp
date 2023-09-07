@@ -285,7 +285,7 @@ if (!Project::GetActive()) return
         // Render Main Viewport
         {
           m_viewportRenderer->BeginRenderPass();
-          Renderer::Clear({0.16f, 0.16f, 0.19f, 1.0f});
+          Renderer::Clear({0.26f, 0.26f, 0.29f, 1.0f});
           
           m_editorScene->OnUpdateEditor(ts);
           m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
@@ -749,8 +749,16 @@ if (!Project::GetActive()) return
   {
     for (int32_t i = -CamFarView; i < CamFarView; i+=2)
     {
-      Renderer2D::DrawLine({i, 0, -CamFarView}, {i, 0, CamFarView}, color);
-      Renderer2D::DrawLine({-CamFarView, 0, i}, {CamFarView, 0, i}, color);
+      if (i == 0)
+      {
+        Renderer2D::DrawLine({i, 0, -CamFarView}, {i, 0, CamFarView}, {1, 0, 0, 0.6});
+        Renderer2D::DrawLine({-CamFarView, 0, i}, {CamFarView, 0, i}, {0, 1, 0, 0.6});
+      }
+      else
+      {
+        Renderer2D::DrawLine({i, 0, -CamFarView}, {i, 0, CamFarView}, color);
+        Renderer2D::DrawLine({-CamFarView, 0, i}, {CamFarView, 0, i}, color);
+      }
     }
   }
   
