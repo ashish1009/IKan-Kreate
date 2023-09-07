@@ -13,14 +13,65 @@ Entities:
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
-      BodyType: 0
+      BodyType: 1
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
     Box3DColliderComponent:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
       FrictionCoefficient: 1
       Bounciness: 0
+      MassDensity: 1
+  - Entity: 9408356895660953807
+    TagComponent:
+      Tag: Sphere Friction
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [4.11176825, 0, 1.49011612e-08]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552
+    RigidBodyComponent:
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    SphereColliderComponent:
+      Radius: 0.5
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 100
+  - Entity: 11807474324644226401
+    TagComponent:
+      Tag: Sphere Bounce
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1.81913018, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552
+    RigidBodyComponent:
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    SphereColliderComponent:
+      Radius: 0.5
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0
+      Bounciness: 0.980000019
+      MassDensity: 2
   - Entity: 13775343779537046068
     TagComponent:
       Tag: Camera
@@ -41,3 +92,27 @@ Entities:
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
+  - Entity: 14071844146558564814
+    TagComponent:
+      Tag: Sphere Friction Bouce
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-7.4505806e-09, 0, -3.7252903e-09]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552
+    RigidBodyComponent:
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    SphereColliderComponent:
+      Radius: 0.5
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 1
+      Bounciness: 0.519999981
+      MassDensity: 2

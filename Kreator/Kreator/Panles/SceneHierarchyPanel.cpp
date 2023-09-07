@@ -557,10 +557,16 @@ namespace Kreator
     DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)
                                       {
       Kreator_UI::BeginPropertyGrid();
+      
       static const char* bodyTypeStrings[] = { "Static", "Kinametic", "Dynamic"};
       int currentType = (int)rbc.bodyType;
       Kreator_UI::PropertyDropdown("Body Type", bodyTypeStrings, 3, &currentType);
       rbc.bodyType = static_cast<RigidBodyComponent::BodyType>(currentType);
+      
+      Kreator_UI::Property("Allow Sleep", rbc.allowSleep);
+      Kreator_UI::Property("Linear Damping", rbc.liniarDamping);
+      Kreator_UI::Property("Angular Damping", rbc.liniarDamping);
+
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
     

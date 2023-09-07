@@ -175,6 +175,10 @@ namespace IKan
     enum class BodyType { Static, Kinametic, Dynamic };
     BodyType bodyType = BodyType::Static;
     
+    bool allowSleep = true;
+    float liniarDamping = 0.0f;
+    float angularDamping = 0.0f;
+    
     // Storage : No Need to serialze. Need to decide later to copy or not
     void* runtimeBody = nullptr;
     

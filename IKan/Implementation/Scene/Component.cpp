@@ -346,6 +346,9 @@ return *this; \
   void RigidBodyComponent::Copy(const RigidBodyComponent &other)
   {
     bodyType = other.bodyType;
+    allowSleep = other.allowSleep;
+    liniarDamping = other.liniarDamping;
+    angularDamping = other.angularDamping;
   }
   
   reactphysics3d::BodyType RigidBodyComponent::ReactPhysicsBodyType(BodyType type)

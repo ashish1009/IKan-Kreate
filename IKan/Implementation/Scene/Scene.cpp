@@ -294,8 +294,11 @@ namespace IKan
       RigidBody* body = m_physics3DWorld->createRigidBody(transform);
       rbc.runtimeBody = body;
       
-      // Change the type of the body to kinematic
+      // Change the body parameters
       body->setType(RigidBodyComponent::ReactPhysicsBodyType(rbc.bodyType));
+      body->setLinearDamping(rbc.liniarDamping);
+      body->setAngularDamping(rbc.angularDamping);
+      body->setIsAllowedToSleep(rbc.allowSleep);
       
       // Box 3D -----------------------------------------------------------------------------------------------------
       if (entity.HasComponent<Box3DColliderComponent>())

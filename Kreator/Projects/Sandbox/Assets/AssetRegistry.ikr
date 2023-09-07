@@ -2,9 +2,6 @@ Assets:
   - Handle: 27450833
     FilePath: Meshes/Default/Cylinder.fbx
     Type: MeshSource
-  - Handle: 69959665
-    FilePath: Scenes/New Scene.ikscene
-    Type: Scene
   - Handle: 560965872
     FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
@@ -14,9 +11,6 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
-  - Handle: 2139408664
-    FilePath: Scenes/Demo.ikscene
-    Type: Scene
   - Handle: 2234008704
     FilePath: Meshes/Default/Capsule.fbx
     Type: MeshSource

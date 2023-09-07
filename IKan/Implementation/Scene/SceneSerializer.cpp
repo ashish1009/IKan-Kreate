@@ -269,6 +269,9 @@ namespace IKan {
       
       auto& rigidBodyComponent = entity.GetComponent<RigidBodyComponent>();
       out << YAML::Key << "BodyType" << YAML::Value << (uint32_t)rigidBodyComponent.bodyType;
+      out << YAML::Key << "LiniarDamping" << YAML::Value << rigidBodyComponent.liniarDamping;
+      out << YAML::Key << "AngularDamping" << YAML::Value << rigidBodyComponent.angularDamping;
+      out << YAML::Key << "AllowSleep" << YAML::Value << rigidBodyComponent.allowSleep;
       out << YAML::EndMap; // RigidBodyComponent
     }
     
@@ -476,6 +479,9 @@ namespace IKan {
       {
         auto& component = deserializedEntity.AddComponent<RigidBodyComponent>();
         component.bodyType = static_cast<RigidBodyComponent::BodyType>(rigidBodyComponent["BodyType"].as<uint32_t>());
+        component.liniarDamping = rigidBodyComponent["LiniarDamping"].as<float>();
+        component.angularDamping = rigidBodyComponent["AngularDamping"].as<float>();
+        component.allowSleep = rigidBodyComponent["AllowSleep"].as<bool>();
       }
       
       // Box3DColliderComponent ----------------------------------------------------------------------------------------------
