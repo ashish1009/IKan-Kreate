@@ -7,7 +7,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-0.0679665804, -2.4649117, 0]
+      Position: [-0.0679665804, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [29.2827339, 0.0213917959, 39.4463081]
     StaticMeshComponent:
@@ -31,9 +31,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-2.4355402, 2.73206115, 0]
+      Position: [-1.79999995, 4, 0]
       Rotation: [0, 0, 1.57079649]
-      Scale: [0.499983728, 3.99989891, 0.5]
+      Scale: [0.499950171, 3.99963045, 0.5]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
@@ -55,7 +55,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 5, 0]
+      Position: [0, 2, 0]
       Rotation: [0, 0, 0]
       Scale: [0.5, 4, 0.5]
     StaticMeshComponent:
@@ -73,4 +73,4 @@ Entities:
       Bounciness: 0.100000001
       MassDensity: 0
     FixedJointComponent:
-      ConnectedEntity: 5124504400299946702
+      ConnectedEntity: 11073933567834345838

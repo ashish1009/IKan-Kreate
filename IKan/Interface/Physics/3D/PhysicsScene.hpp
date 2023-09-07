@@ -13,6 +13,8 @@
 namespace IKan
 {
   class Scene;
+  class Entity;
+  
   struct PhysicsSettings
   {
     glm::vec3 gravity = { 0.0f, -9.81f, 0.0f };
@@ -36,6 +38,10 @@ namespace IKan
     /// - Parameter ts: time step
     void OnUpdate(TimeStep ts);
     
+    /// This function creates new joint in the entity
+    /// - Parameter entity: entity
+    void CreateJoint(Entity entity);
+
     /// This function returns the physics Debug renderer
     reactphysics3d::DebugRenderer GetDebugRenderer() const;
 
@@ -44,7 +50,7 @@ namespace IKan
 
     reactphysics3d::PhysicsCommon m_physics3DCommon;
     reactphysics3d::PhysicsWorld* m_physics3DWorld = nullptr;
-    
+
     Scene* m_scene;
   };
 } // namespace IKan

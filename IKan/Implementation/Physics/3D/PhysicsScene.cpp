@@ -38,6 +38,8 @@ namespace IKan
     debugRenderer.setIsDebugItemDisplayed(DebugRenderer::DebugItem::COLLISION_SHAPE, true);
     
     auto rigidBodyView = m_scene->GetAllEntitiesWith<RigidBodyComponent>();
+    RigidBody* b[2];
+    int i = 0;
     for (auto entityHandle : rigidBodyView)
     {
       Entity entity = { entityHandle, m_scene };
@@ -59,6 +61,11 @@ namespace IKan
       body->setLinearDamping(rbc.liniarDamping);
       body->setAngularDamping(rbc.angularDamping);
       body->setIsAllowedToSleep(rbc.allowSleep);
+      
+      if (rbc.bodyType == RigidBodyComponent::BodyType::Dynamic)
+      {
+        b[i++] = body;
+      }
       
       // Box 3D -----------------------------------------------------------------------------------------------------
       if (entity.HasComponent<Box3DColliderComponent>())
@@ -141,6 +148,14 @@ namespace IKan
         material.setMassDensity(ccc.massDensity);
       } // Capsule Collider
     } // Each Rigid Body
+    
+    // Joints -------------------------------------------------------------------------------------
+    auto view = m_scene->GetAllEntitiesWith<FixedJointComponent>();
+    for (auto entity : view)
+    {
+      Entity e = { entity, m_scene };
+      CreateJoint(e);
+    }
   }
   
   PhysicsScene::~PhysicsScene()
@@ -185,6 +200,28 @@ namespace IKan
         }
       } // if (rb2d.type == b2_dynamicBody or rb2d.type == b2_kinematicBody)
     } // for (auto e : view)
+  }
+  
+  void PhysicsScene::CreateJoint(Entity entity)
+  {
+    const auto& fixedJointComponent = entity.GetComponent<FixedJointComponent>();
+    Entity connectedEntity = m_scene->GetEntityWithUUID(fixedJointComponent.connectedEntity);
+
+    const auto& rigidBodyComponent1 = entity.GetComponent<RigidBodyComponent>();
+    auto body1 = static_cast<RigidBody*>(rigidBodyComponent1.runtimeBody);
+    
+    const auto& rigidBodyComponent2 = connectedEntity.GetComponent<RigidBodyComponent>();
+    auto body2 = static_cast<RigidBody*>(rigidBodyComponent2.runtimeBody);
+    
+    // Anchor point in world-space
+    Vector3 anchorPoint(0.0, 3.7, 0.0);
+    
+    // Create the joint info object
+    FixedJointInfo jointInfo(body1, body2, anchorPoint);
+    
+    // Create the fixed joint in the physics world
+    // TODO: Store the joint in some map?
+    m_physics3DWorld->createJoint(jointInfo);
   }
   
   DebugRenderer PhysicsScene::GetDebugRenderer() const

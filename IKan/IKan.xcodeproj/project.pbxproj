@@ -134,8 +134,6 @@
 		B24077192A72651400221919 /* Common.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24077172A72651400221919 /* Common.hpp */; };
 		B240771E2A72665A00221919 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B240771C2A72665A00221919 /* Logger.cpp */; };
 		B240771F2A72665A00221919 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B240771D2A72665A00221919 /* Logger.hpp */; };
-		B24A8A332AAA334E00FABB45 /* PhyscisJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A8A312AAA334E00FABB45 /* PhyscisJoint.cpp */; };
-		B24A8A342AAA334E00FABB45 /* PhyscisJoint.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A8A322AAA334E00FABB45 /* PhyscisJoint.hpp */; };
 		B26B1A6E2A7D14BE00676419 /* EditorPanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */; };
 		B26B1A712A7D153400676419 /* PanelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A6F2A7D153400676419 /* PanelManager.cpp */; };
 		B26B1A722A7D153400676419 /* PanelManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A702A7D153400676419 /* PanelManager.hpp */; };
@@ -363,8 +361,6 @@
 		B24077172A72651400221919 /* Common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Common.hpp; sourceTree = "<group>"; };
 		B240771C2A72665A00221919 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		B240771D2A72665A00221919 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
-		B24A8A312AAA334E00FABB45 /* PhyscisJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PhyscisJoint.cpp; sourceTree = "<group>"; };
-		B24A8A322AAA334E00FABB45 /* PhyscisJoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhyscisJoint.hpp; sourceTree = "<group>"; };
 		B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
 		B26B1A6F2A7D153400676419 /* PanelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PanelManager.cpp; sourceTree = "<group>"; };
 		B26B1A702A7D153400676419 /* PanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PanelManager.hpp; sourceTree = "<group>"; };
@@ -968,7 +964,6 @@
 			isa = PBXGroup;
 			children = (
 				B28EFE642AAA0EAC00255B40 /* PhysicsScene.hpp */,
-				B24A8A322AAA334E00FABB45 /* PhyscisJoint.hpp */,
 			);
 			path = 3D;
 			sourceTree = "<group>";
@@ -977,7 +972,6 @@
 			isa = PBXGroup;
 			children = (
 				B28EFE632AAA0EAC00255B40 /* PhysicsScene.cpp */,
-				B24A8A312AAA334E00FABB45 /* PhyscisJoint.cpp */,
 			);
 			path = 3D;
 			sourceTree = "<group>";
@@ -1046,7 +1040,6 @@
 				B23364DD2A74259600BC7B8B /* OpenGLRendererAPI.hpp in Headers */,
 				B233656D2A75231700BC7B8B /* MathUtils.hpp in Headers */,
 				B23367442A75911100BC7B8B /* Asset.hpp in Headers */,
-				B24A8A342AAA334E00FABB45 /* PhyscisJoint.hpp in Headers */,
 				B26B1A6E2A7D14BE00676419 /* EditorPanel.hpp in Headers */,
 				B2336A652A763D9600BC7B8B /* Project.hpp in Headers */,
 				B23365612A751D6B00BC7B8B /* RenderPass.hpp in Headers */,
@@ -1214,7 +1207,6 @@
 				B233651C2A743D0E00BC7B8B /* Pipeline.cpp in Sources */,
 				B23365762A752E0A00BC7B8B /* Font.cpp in Sources */,
 				B23367502A7592C000BC7B8B /* AssetMetadata.cpp in Sources */,
-				B24A8A332AAA334E00FABB45 /* PhyscisJoint.cpp in Sources */,
 				B2CF831B2A77DAF0006B2D54 /* ImGuiScoped.cpp in Sources */,
 				B23365602A751D6B00BC7B8B /* RenderPass.cpp in Sources */,
 				B24077182A72651400221919 /* Common.cpp in Sources */,
