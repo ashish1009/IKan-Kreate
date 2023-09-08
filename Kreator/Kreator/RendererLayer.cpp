@@ -1141,7 +1141,7 @@ if (!Project::GetActive()) return
     
     if (m_currentScene)
     {
-      m_currentScene->SetSelectedEntity({});
+      m_currentScene->SetSelectedEntity(entt::null);
     }
     
     m_selectionContext.clear();

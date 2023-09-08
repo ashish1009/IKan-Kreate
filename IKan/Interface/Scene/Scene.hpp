@@ -204,7 +204,7 @@ namespace IKan
     
     // Entity ---------------------------
     EntityMap m_entityIDMap;
-    entt::entity m_selectedEntity;
+    entt::entity m_selectedEntity = entt::null;
     std::function<void(Entity)> m_onEntityDestroyedCallback;
 
     // Physics Data

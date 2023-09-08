@@ -186,13 +186,12 @@ namespace IKan
   void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
   {
     auto view = m_registry.view<TransformComponent, StaticMeshComponent>();
-    for (const auto& entity : view)
+    for (const auto& entityHandle : view)
     {
-      const auto& [transformComp, staticMeshComp] = view.get<TransformComponent, StaticMeshComponent>(entity);
+      const auto& [transformComp, staticMeshComp] = view.get<TransformComponent, StaticMeshComponent>(entityHandle);
       if (staticMeshComp.staticMesh != 0)
       {
-        Entity e {entity, this};
-        if (e == m_selectedEntity)
+        if (entityHandle == m_selectedEntity)
         {
           renderer->SubmitSelectedMeshSource(AssetManager::GetAsset<MeshSource>(staticMeshComp.staticMesh), transformComp.Transform());
         }

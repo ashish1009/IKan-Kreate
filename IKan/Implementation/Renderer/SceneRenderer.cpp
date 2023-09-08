@@ -162,7 +162,6 @@ namespace IKan
         float scaleFactor = 0.003 * m_commonData->cameraDistance;
         scaleFactor = Utils::Math::FloatClamp(scaleFactor, 0.005, 0.05);
         s += scaleFactor;
-        IK_CONSOLE_TRACE(" >> ", "{0}", scaleFactor);
 
         auto tt = Utils::Math::GetTransformMatrix(p, r, s);
         
@@ -195,7 +194,6 @@ namespace IKan
         } // for each submeshes
       }
     }
-    IK_CONSOLE_TRACE(" >> ", "------------");
   }
   
   void SceneRenderer::BeginRenderPass()
