@@ -283,6 +283,7 @@ if (!Project::GetActive()) return
         // Update Data
         AssetEditorManager::OnUpdate(ts);
         m_viewport.UpdateMousePos();
+        m_viewport.UpdateMousePos();
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
         
@@ -751,6 +752,10 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowJoints(const glm::vec4 &color)
   {
+#if _3DJoint
+    m_viewportRenderer->BeginScene({m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetDistance()});
+#endif
+    
     static constexpr glm::vec3 unitScale = {1, 1, 1};
     static constexpr glm::vec3 zeroRotation = {0, 0, 0};
     
@@ -770,16 +775,28 @@ if (!Project::GetActive()) return
       }
       else
       {
-        auto drawJoint = [&color](const Entity& entity, const glm::vec3& localAnchorPoint) {
+        auto drawJoint = [&color, this](const Entity& entity, const glm::vec3& localAnchorPoint) {
+          static constexpr glm::mat4 unitMat(1.0f);
+          
           const auto& tc = entity.GetComponent<TransformComponent>();
-          auto posRotTransform = Utils::Math::GetTransformMatrix(tc.Position(), tc.Rotation(), unitScale);
-          auto position = posRotTransform * glm::vec4(localAnchorPoint, 1.0f);
+          const glm::mat4 posRotTransform = Utils::Math::GetTransformMatrix(tc.Position(), tc.Rotation(), unitScale);
+          const glm::vec3 position = posRotTransform * glm::vec4(localAnchorPoint, 1.0f);
+
+#if _3DJoint
+          m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Cube),
+                                               glm::translate(unitMat, position));
+#else
           Renderer2D::DrawQuad(position, unitScale, zeroRotation, color);
+#endif
         };
         drawJoint(entity, fjc.localAnchorPoint1);
         drawJoint(m_currentScene->GetEntityWithUUID(fjc.connectedEntity), fjc.localAnchorPoint2);
       }
     }
+    
+#ifdef _3DJoint
+    m_viewportRenderer->EndScene();
+#endif
   }
   
   void RendererLayer::ShowGrid(const glm::vec4 &color)

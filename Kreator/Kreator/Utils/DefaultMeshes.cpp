@@ -20,4 +20,9 @@ namespace Kreator
   {
     s_meshes.clear();
   }
+  
+  Ref<MeshSource> DefaultMesh::GetMesh(Type type)
+  {
+    return s_meshes.at(type);
+  }
 } // namespace Kreator

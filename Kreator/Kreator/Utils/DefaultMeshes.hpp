@@ -22,6 +22,9 @@ namespace Kreator
     /// This function destroy the default meshes
     static void Shutdown();
     
+    /// This function returns the Reference of Mesh from type
+    static Ref<MeshSource> GetMesh(Type type);
+    
   private:
     inline static std::unordered_map<Type, Ref<MeshSource>> s_meshes;
   };
