@@ -215,14 +215,12 @@ namespace IKan
     if (fjc.isWorldSpace)
     {
       FixedJointInfo jointInfo(body1, body2, worldAnchorPoint);
-      // Create the fixed joint in the physics world
       // TODO: Store the joint in some map?
       m_physics3DWorld->createJoint(jointInfo);
     }
     else
     {
       FixedJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
-      // Create the fixed joint in the physics world
       // TODO: Store the joint in some map?
       m_physics3DWorld->createJoint(jointInfo);
     }

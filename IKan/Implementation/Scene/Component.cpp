@@ -433,15 +433,15 @@ return *this; \
     quaternionOffset = other.quaternionOffset;
   }
 
-  // Fixed Joint Component -------------------------------------------------------------------------------------
+  // Joint Component -------------------------------------------------------------------------------------
   JointComponent::JointComponent()
   {
-    COMP_LOG("Creating Fixed Joint Component");
+    COMP_LOG("Creating Joint Component");
   }
   
   JointComponent::~JointComponent()
   {
-    COMP_LOG("Destroying Fixed Joint Component");
+    COMP_LOG("Destroying Joint Component");
   }
   COMP_COPY_MOVE_CONSTRUCTORS(JointComponent);
   
