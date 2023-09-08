@@ -235,6 +235,8 @@ namespace IKan
       // Create the fixed joint in the physics world
       // TODO: Store the joint in some map?
       m_physics3DWorld->createJoint(jointInfo);
+      
+      m_physics3DWorld->
     }
   }
   

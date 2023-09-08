@@ -693,6 +693,7 @@ if (!Project::GetActive()) return
     if (m_showColliders and m_sceneState == SceneState::Simulate)
     {
       ShowColliders({0, 1, 0, 1});
+      ShowJoints({0, 0, 1, 1});
     }
     
     if (m_showGrid)
@@ -720,11 +721,6 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowColliders(const glm::vec4& color)
   {
-    if (!m_simulationScene)
-    {
-      return;
-    }
-    
     auto debugRenderer = m_currentScene->GetPhysicsDebugRenderer();
     auto triangle = debugRenderer.getTriangles();
     
@@ -736,6 +732,27 @@ if (!Project::GetActive()) return
                            {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, color);
       Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z},
                            {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, color);
+    }
+  }
+  
+  void RendererLayer::ShowJoints(const glm::vec4 &color)
+  {
+    static constexpr glm::vec3 scale = {1, 1, 1};
+    static constexpr glm::vec3 rotation = {0, 0, 0};
+    
+    auto jointEntities = m_currentScene->GetAllEntitiesWith<FixedJointComponent>();
+    for (auto e : jointEntities)
+    {
+      Entity entity = { e, m_currentScene.get() };
+      const auto& fjc = entity.GetComponent<FixedJointComponent>();
+      if (fjc.isWorldSpace)
+      {
+        Renderer2D::DrawQuad({fjc.worldAnchorPoint}, scale, rotation, color);
+      }
+      else
+      {
+        
+      }
     }
   }
   

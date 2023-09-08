@@ -92,8 +92,11 @@ namespace Kreator
     /// This function show the icons
     void ShowIcons();
     /// This function renders the debug Colliders
-    /// - Parameter color: color of collider
+    /// - Parameter color: color of Collider
     void ShowColliders(const glm::vec4& color);
+    /// This function renders the debug Joints
+    /// - Parameter color: color of Joints
+    void ShowJoints(const glm::vec4& color);
     /// This function renders the debug Colliders
     /// - Parameter color: color of grid
     void ShowGrid(const glm::vec4& color);

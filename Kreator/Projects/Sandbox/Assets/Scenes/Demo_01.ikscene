@@ -62,8 +62,8 @@ Entities:
       MeshHandle: 560965872
     RigidBodyComponent:
       BodyType: 2
-      LiniarDamping: 0
-      AngularDamping: 0
+      LiniarDamping: 1
+      AngularDamping: 1
       AllowSleep: true
     Box3DColliderComponent:
       Size: [0.5, 0.5, 0.5]
@@ -86,8 +86,8 @@ Entities:
       MeshHandle: 560965872
     RigidBodyComponent:
       BodyType: 2
-      LiniarDamping: 100000
-      AngularDamping: 1e+10
+      LiniarDamping: 1
+      AngularDamping: 1
       AllowSleep: true
     Box3DColliderComponent:
       Size: [0.5, 0.5, 0.5]
@@ -98,7 +98,7 @@ Entities:
       MassDensity: 1000000
     FixedJointComponent:
       ConnectedEntity: 11073933567834345838
-      IsWorldSpace: false
+      IsWorldSpace: true
       WorldAnchorPoint: [0, 4, 0]
       LocalAnchorPoint1: [0, 0, 0]
       LocalAnchorPoint2: [0, 0, 0]
