@@ -62,7 +62,7 @@ namespace IKan
     }
     else
     {
-      HingeJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2,
+      HingeJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2, localAxis1, localAxis2,
                                initMinAngleLimit, initMaxAngleLimit, initMotorSpeed, initMaxMotorTorque);
 
       world->createJoint(jointInfo);
