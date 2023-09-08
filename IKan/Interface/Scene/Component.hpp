@@ -234,7 +234,10 @@ namespace IKan
   struct FixedJointComponent
   {
     UUID connectedEntity;
-    glm::vec3 anchorPoint = {0, 0, 0};
+    bool isWorldSpace = false;
+    glm::vec3 worldAnchorPoint = {0, 0, 0};
+    glm::vec3 localAnchorPoint1 = {0, 0, 0};
+    glm::vec3 localAnchorPoint2 = {0, 0, 0};
 
     FixedJointComponent();
     ~FixedJointComponent();

@@ -208,12 +208,15 @@ namespace IKan
     
     // Anchor point in world-space
     Vector3 anchorPoint({
-      fixedJointComponent.anchorPoint.x,
-      fixedJointComponent.anchorPoint.y,
-      fixedJointComponent.anchorPoint.z});
+      fixedJointComponent.worldAnchorPoint.x,
+      fixedJointComponent.worldAnchorPoint.y,
+      fixedJointComponent.worldAnchorPoint.z});
+    
+    Vector3 anchorPoint1({0, 2, 0});
+    Vector3 anchorPoint2({-2, 0, 0});
     
     // Create the joint info object
-    BallAndSocketJointInfo jointInfo(body1, body2, anchorPoint);
+    FixedJointInfo jointInfo(body1, body2, anchorPoint1, anchorPoint2);
     
     // Create the fixed joint in the physics world
     // TODO: Store the joint in some map?

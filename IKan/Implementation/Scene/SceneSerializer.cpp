@@ -329,7 +329,10 @@ namespace IKan {
       
       auto& fixedJointComponent = entity.GetComponent<FixedJointComponent>();
       out << YAML::Key << "ConnectedEntity" << YAML::Value << fixedJointComponent.connectedEntity;
-      out << YAML::Key << "AnchorPoint" << YAML::Value << fixedJointComponent.anchorPoint;
+      out << YAML::Key << "IsWorldSpace" << YAML::Value << fixedJointComponent.isWorldSpace;
+      out << YAML::Key << "WorldAnchorPoint" << YAML::Value << fixedJointComponent.worldAnchorPoint;
+      out << YAML::Key << "LocalAnchorPoint1" << YAML::Value << fixedJointComponent.localAnchorPoint1;
+      out << YAML::Key << "LocalAnchorPoint2" << YAML::Value << fixedJointComponent.localAnchorPoint2;
 
       out << YAML::EndMap; // FixedJointComponent
     }
@@ -542,7 +545,10 @@ namespace IKan {
       {
         auto& component = deserializedEntity.AddComponent<FixedJointComponent>();
         component.connectedEntity = fixedJointComponent["ConnectedEntity"].as<uint64_t>();
-        component.anchorPoint = fixedJointComponent["AnchorPoint"].as<glm::vec3>();
+        component.isWorldSpace = fixedJointComponent["IsWorldSpace"].as<bool>();
+        component.worldAnchorPoint = fixedJointComponent["WorldAnchorPoint"].as<glm::vec3>();
+        component.localAnchorPoint1 = fixedJointComponent["LocalAnchorPoint1"].as<glm::vec3>();
+        component.localAnchorPoint2 = fixedJointComponent["LocalAnchorPoint2"].as<glm::vec3>();
 
       }
     }

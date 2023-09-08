@@ -98,4 +98,7 @@ Entities:
       MassDensity: 1000000
     FixedJointComponent:
       ConnectedEntity: 11073933567834345838
-      AnchorPoint: [0, 4, 0]
+      IsWorldSpace: false
+      WorldAnchorPoint: [0, 4, 0]
+      LocalAnchorPoint1: [0, 0, 0]
+      LocalAnchorPoint2: [0, 0, 0]

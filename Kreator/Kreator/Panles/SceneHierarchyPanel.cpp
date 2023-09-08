@@ -636,7 +636,16 @@ namespace Kreator
         fjc.connectedEntity = targetEntity.GetUUID();
       }
 
-      Kreator_UI::Property("Anchor Point", fjc.anchorPoint);
+      Kreator_UI::Property("Use world Space", fjc.isWorldSpace);
+      if (fjc.isWorldSpace)
+      {
+        Kreator_UI::Property("World Anchor Point", fjc.worldAnchorPoint);
+      }
+      else
+      {
+        Kreator_UI::Property("Local Anchor Point 1", fjc.localAnchorPoint1);
+        Kreator_UI::Property("Local Anchor Point 2", fjc.localAnchorPoint2);
+      }
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
   }
