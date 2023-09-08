@@ -25,7 +25,7 @@ namespace IKan
     glEnable(GL_STENCIL_TEST);
     glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
-
+    
     auto& caps = Renderer::Capabilities::Get();
     
     caps.vendor   = (const char*)glGetString(GL_VENDOR);
@@ -67,6 +67,21 @@ namespace IKan
   {
     (state) ? glEnable(GL_MULTISAMPLE) : glDisable(GL_MULTISAMPLE);
   }
+  
+  void OpenGLRendererAPI::EnableStencilPass() const
+  {
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilMask(0x00);
+    glDisable(GL_DEPTH_TEST);
+
+  }
+  void OpenGLRendererAPI::DisableStencilPass() const
+  {
+    glStencilMask(0xFF);
+    glStencilFunc(GL_ALWAYS, 0, 0xFF);
+    glEnable(GL_DEPTH_TEST);
+  }
+
   void OpenGLRendererAPI::SetClearColor(const glm::vec4& color) const
   {
     glClearColor(color.r, color.g, color.b, color.a);

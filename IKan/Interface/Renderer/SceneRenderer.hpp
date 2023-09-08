@@ -79,6 +79,12 @@ namespace IKan
     void GetEntityIdFromPixels(int32_t mx, int32_t my, int32_t& pixeldData);
     
   private:
+    struct MeshSourceDrawCommand
+    {
+      Ref<MeshSource> staticMesh;
+      glm::mat4 transform;
+    };
+
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This function flushes all draw Lists
     void FlushDrawList();
@@ -88,16 +94,18 @@ namespace IKan
     void CompositePass();
     /// This function clears the draw lists
     void ClearDrawLists();
+    /// This function renders the mesh
+    /// - Parameters:
+    ///   - submeshes: mesh submeshes
+    ///   - pipeline: pipeline
+    ///   - shader: shader
+    ///   - transform: transform
+    void RenderMesh(const std::vector<SubMesh>& submeshes, const Ref<Pipeline>& pipeline,
+                    const Ref<Shader>& shader, const glm::mat4& transform);
     
     // Member Variables ---------------------------------------------------------------------------------------------
     Ref<Scene> m_scene;
     
-    struct MeshSourceDrawCommand
-    {
-      Ref<MeshSource> staticMesh;
-      glm::mat4 transform;
-    };
-
     std::vector<MeshSourceDrawCommand> m_meshSourceDrawList;
     std::vector<MeshSourceDrawCommand> m_selectedMeshSourceDrawList;
     Scope<SceneRendererData> m_commonData;

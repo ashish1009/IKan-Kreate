@@ -41,6 +41,11 @@ namespace IKan
     /// This function Clears Stensil Bit
     void ClearStencilBit() const override;
     
+    /// This function enables the stencil pass
+    void EnableStencilPass() const override;
+    /// This function disables the stencil pass
+    void DisableStencilPass() const override;
+
     /// This function update the renderer viewport size
     /// - Parameters:
     ///   - width: new width of renderer viewport

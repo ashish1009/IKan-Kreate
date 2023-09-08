@@ -121,22 +121,26 @@ namespace IKan
     m_selectedMeshSourceDrawList.clear();
   }
   
+  void SceneRenderer::RenderMesh(const std::vector<SubMesh>& submeshes, const Ref<Pipeline>& pipeline,
+                                 const Ref<Shader>& shader, const glm::mat4& transform)
+  {
+    pipeline->Bind();
+    shader->Bind();
+    shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
+    
+    for (const SubMesh& submesh : submeshes)
+    {
+      shader->SetUniformMat4("u_Transform", transform * submesh.transform);
+      Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+    } // for each submeshes
+  }
+  
   void SceneRenderer::GeometryPass()
   {
     for (const auto& dc : m_meshSourceDrawList)
     {
-      auto pipeline = dc.staticMesh->GetPipeline();
-      pipeline->Bind();
-      
-      auto shader = pipeline->GetSpecification().shader;
-      shader->Bind();
-      shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
-      
-      for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
-      {
-        shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);
-        Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
-      } // for each submeshes
+      const auto& pipeline = dc.staticMesh->GetPipeline();
+      RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, pipeline->GetSpecification().shader, dc.transform);
     }
   }
   
@@ -144,55 +148,23 @@ namespace IKan
   {
     for (const auto& dc : m_selectedMeshSourceDrawList)
     {
+      auto pipeline = dc.staticMesh->GetPipeline();
+      // Stencil Pass Mesh Render
       {
-        glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
-        glStencilMask(0x00);
-        glDisable(GL_DEPTH_TEST);
+        Renderer::EnableStencilPass();
 
-        auto pipeline = dc.staticMesh->GetPipeline();
-        pipeline->Bind();
-
-        auto shader = m_commonData->stencilShader;
-        shader->Bind();
-        shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
-        
         // Hack to change size of mesh
         glm::vec3 p, r, s;
         Utils::Math::DecomposeTransform(dc.transform, p, r, s);
-        float scaleFactor = 0.003 * m_commonData->cameraDistance;
-        scaleFactor = Utils::Math::FloatClamp(scaleFactor, 0.005, 0.05);
+        float scaleFactor = Utils::Math::FloatClamp(0.003 * m_commonData->cameraDistance, 0.005, 0.05);
         s += scaleFactor;
-
         auto tt = Utils::Math::GetTransformMatrix(p, r, s);
-        
-        for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
-        {
-          shader->SetUniformMat4("u_Transform", tt * submesh.transform);
-          Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
-        } // for each submeshes
-        
-        glStencilMask(0xFF);
-        glStencilFunc(GL_ALWAYS, 0, 0xFF);
-        glEnable(GL_DEPTH_TEST);
+
+        RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, m_commonData->stencilShader, tt);
       }
 
-      {
-        glStencilFunc(GL_ALWAYS, 1, 0xFF);
-        glStencilMask(0xFF);
-        
-        auto pipeline = dc.staticMesh->GetPipeline();
-        pipeline->Bind();
-        
-        auto shader = pipeline->GetSpecification().shader;
-        shader->Bind();
-        shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
-        
-        for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
-        {
-          shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);
-          Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
-        } // for each submeshes
-      }
+      // Geometry pass Selected Mesh
+      RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, pipeline->GetSpecification().shader, dc.transform);
     }
   }
   

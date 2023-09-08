@@ -89,7 +89,11 @@ namespace IKan
     /// This funciton Enables or disables MultiSample Field
     /// - Parameter state: flag to be set as MultiSample
     static void MultiSample(bool state);
-    
+    /// This function enables the stencil pass
+    static void EnableStencilPass();
+    /// This function disables the stencil pass
+    static void DisableStencilPass();
+
     /// This function update the renderer viewport size
     /// - Parameters:
     ///   - width: new width of renderer viewport

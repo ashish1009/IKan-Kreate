@@ -35,7 +35,7 @@ namespace IKan
   {
     Renderer::Api api = Renderer::Api::None;
     Scope<RendererAPI> rendererApiInstance;
-
+    
     RendererData(Renderer::Api newApi)
     : api(newApi)
     {
@@ -76,7 +76,7 @@ namespace IKan
     // Reset Libraries
     Shader::ResetLibrary();
     Image::ResetLibrary();
-
+    
     s_rendererData.reset();
   }
   
@@ -118,6 +118,15 @@ namespace IKan
   {
     s_rendererData->rendererApiInstance->MultiSample(state);
   }
+  void Renderer::EnableStencilPass()
+  {
+    s_rendererData->rendererApiInstance->EnableStencilPass();
+  }
+  void Renderer::DisableStencilPass()
+  {
+    s_rendererData->rendererApiInstance->DisableStencilPass();
+  }
+
   void Renderer::SetViewport(uint32_t width, uint32_t height)
   {
     s_rendererData->rendererApiInstance->SetViewport(width, height);
