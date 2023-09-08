@@ -214,16 +214,30 @@ namespace IKan
     Vector3 localAnchorPoint1({ fjc.localAnchorPoint1.x, fjc.localAnchorPoint1.y, fjc.localAnchorPoint1.z});
     Vector3 localAnchorPoint2({ fjc.localAnchorPoint2.x, fjc.localAnchorPoint2.y, fjc.localAnchorPoint2.z});
 
+    joint.SetAnchors(worldAnchorPoint, localAnchorPoint1, localAnchorPoint2);
+    
     switch (fjc.type)
     {
       case JointComponent::Type::Fixed:
-        joint.MakeFixed(worldAnchorPoint, localAnchorPoint1, localAnchorPoint2);
+      {
+        joint.MakeFixed();
         break;
-
+      }
       case JointComponent::Type::BallSocket:
-        joint.MakeBallSocket(worldAnchorPoint, localAnchorPoint1, localAnchorPoint2);
+      {
+        joint.MakeBallSocket();
         break;
+      }
+      case JointComponent::Type::Hinge:
+      {
+        Vector3 worldAxis({ fjc.hingeData.worldAxis.x, fjc.hingeData.worldAxis.y, fjc.hingeData.worldAxis.z});
+        Vector3 localAxis1({ fjc.hingeData.localAxis1.x, fjc.hingeData.localAxis1.y, fjc.hingeData.localAxis1.z});
+        Vector3 localAxis2({ fjc.hingeData.localAxis2.x, fjc.hingeData.localAxis2.y, fjc.hingeData.localAxis2.z});
 
+        joint.MakeHinge(worldAxis, localAxis1, localAxis1, fjc.hingeData.initMinAngleLimit, fjc.hingeData.initMaxAngleLimit,
+                        fjc.hingeData.initMotorSpeed, fjc.hingeData.initMaxMotorTorque);
+        break;
+      }
       default:
         break;
     }

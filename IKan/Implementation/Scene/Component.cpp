@@ -453,6 +453,7 @@ return *this; \
     worldAnchorPoint = other.worldAnchorPoint;
     localAnchorPoint1 = other.localAnchorPoint1;
     localAnchorPoint2 = other.localAnchorPoint2;
+    hingeData = other.hingeData;
   }
 
 } // namespace IKan

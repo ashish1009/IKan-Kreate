@@ -15,7 +15,14 @@ namespace IKan
     
   }
   
-  void PhysicsJoint::MakeFixed(const Vector3& worldAnchorPoint, const Vector3& localAnchorPoint1, const Vector3& localAnchorPoint2)
+  void PhysicsJoint::SetAnchors(const Vector3& worldAnchorPoint, const Vector3& localAnchorPoint1, const Vector3& localAnchorPoint2)
+  {
+    this->worldAnchorPoint = worldAnchorPoint;
+    this->localAnchorPoint1 = localAnchorPoint1;
+    this->localAnchorPoint2 = localAnchorPoint2;
+  }
+  
+  void PhysicsJoint::MakeFixed()
   {
     if (worldSpace)
     {
@@ -29,7 +36,7 @@ namespace IKan
     }
   }
   
-  void PhysicsJoint::MakeBallSocket(const Vector3& worldAnchorPoint, const Vector3& localAnchorPoint1, const Vector3& localAnchorPoint2)
+  void PhysicsJoint::MakeBallSocket()
   {
     if (worldSpace)
     {
@@ -42,4 +49,24 @@ namespace IKan
       world->createJoint(jointInfo);
     }
   }
+  
+  void PhysicsJoint::MakeHinge(const Vector3& worldAxis, const Vector3& localAxis1, const Vector3& localAxis2,
+                               decimal initMinAngleLimit, decimal initMaxAngleLimit, decimal initMotorSpeed,
+                               decimal initMaxMotorTorque)
+  {
+    if (worldSpace)
+    {
+      HingeJointInfo jointInfo(body1, body2, worldAnchorPoint, worldAxis,
+                               initMinAngleLimit, initMaxAngleLimit, initMotorSpeed, initMaxMotorTorque);
+      world->createJoint(jointInfo);
+    }
+    else
+    {
+      HingeJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2,
+                               initMinAngleLimit, initMaxAngleLimit, initMotorSpeed, initMaxMotorTorque);
+
+      world->createJoint(jointInfo);
+    }
+  }
+
 } // namespace IKan

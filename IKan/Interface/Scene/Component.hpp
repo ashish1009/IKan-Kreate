@@ -230,12 +230,22 @@ namespace IKan
     void Copy(const CapsuleColliderComponent& other);
     DEFINE_COPY_MOVE_CONSTRUCTORS(CapsuleColliderComponent);
   };
+  
+  struct HingeData
+  {
+    glm::vec3 worldAxis = {0, 0, 0};
+    glm::vec3 localAxis1 = {0, 0, 0};
+    glm::vec3 localAxis2 = {0, 0, 0};
+    
+    float initMinAngleLimit, initMaxAngleLimit;
+    float initMotorSpeed, initMaxMotorTorque;
+  };
 
   struct JointComponent
   {
     enum class Type
     {
-      Fixed, BallSocket
+      Fixed, BallSocket, Hinge
     };
     
     UUID connectedEntity;
@@ -244,6 +254,8 @@ namespace IKan
     glm::vec3 worldAnchorPoint = {0, 0, 0};
     glm::vec3 localAnchorPoint1 = {0, 0, 0};
     glm::vec3 localAnchorPoint2 = {0, 0, 0};
+    
+    HingeData hingeData;
 
     JointComponent();
     ~JointComponent();

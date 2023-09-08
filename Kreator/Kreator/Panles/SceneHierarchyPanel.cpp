@@ -640,7 +640,9 @@ namespace Kreator
       Kreator_UI::Property("Use world Space", fjc.isWorldSpace);
 
       int32_t selected = static_cast<int32_t>(fjc.type);
-      if (Kreator_UI::PropertyDropdown("Type", {"Fixed", "BallSocket"}, 2, &selected))
+      if (Kreator_UI::PropertyDropdown("Type",
+                                       {"Fixed", "BallSocket", "Hinge"},
+                                       2, &selected))
       {
         fjc.type = static_cast<JointComponent::Type>(selected);
       }
