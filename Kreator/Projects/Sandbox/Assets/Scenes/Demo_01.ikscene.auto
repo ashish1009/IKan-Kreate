@@ -79,7 +79,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.697824, 8.5238781, -0.0200806484]
+      Position: [4.697824, 14.5200005, -0.0200806484]
       Rotation: [-0.785398185, 0, 0]
       Scale: [1, 6, 1]
     StaticMeshComponent:
@@ -100,5 +100,5 @@ Entities:
       ConnectedEntity: 11073933567834345838
       IsWorldSpace: false
       WorldAnchorPoint: [2, 5.9000001, 0]
-      LocalAnchorPoint1: [0, -3, 0]
+      LocalAnchorPoint1: [0, 0.5, 0]
       LocalAnchorPoint2: [2, 0, 0]

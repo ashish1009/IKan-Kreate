@@ -197,8 +197,8 @@ namespace IKan
   
   void PhysicsScene::CreateJoint(Entity entity)
   {
-    const auto& fixedJointComponent = entity.GetComponent<FixedJointComponent>();
-    Entity connectedEntity = m_scene->GetEntityWithUUID(fixedJointComponent.connectedEntity);
+    const auto& fjc = entity.GetComponent<FixedJointComponent>();
+    Entity connectedEntity = m_scene->GetEntityWithUUID(fjc.connectedEntity);
 
     const auto& rigidBodyComponent1 = entity.GetComponent<RigidBodyComponent>();
     auto body1 = static_cast<RigidBody*>(rigidBodyComponent1.runtimeBody);
@@ -207,22 +207,12 @@ namespace IKan
     auto body2 = static_cast<RigidBody*>(rigidBodyComponent2.runtimeBody);
     
     // Anchor point in world-space
-    Vector3 worldAnchorPoint({
-      fixedJointComponent.worldAnchorPoint.x,
-      fixedJointComponent.worldAnchorPoint.y,
-      fixedJointComponent.worldAnchorPoint.z});
-    
-    Vector3 localAnchorPoint1({
-      fixedJointComponent.localAnchorPoint1.x,
-      fixedJointComponent.localAnchorPoint1.y,
-      fixedJointComponent.localAnchorPoint1.z});
-    Vector3 localAnchorPoint2({
-      fixedJointComponent.localAnchorPoint2.x,
-      fixedJointComponent.localAnchorPoint2.y,
-      fixedJointComponent.localAnchorPoint2.z});
+    Vector3 worldAnchorPoint({ fjc.worldAnchorPoint.x, fjc.worldAnchorPoint.y, fjc.worldAnchorPoint.z});
+    Vector3 localAnchorPoint1({ fjc.localAnchorPoint1.x, fjc.localAnchorPoint1.y, fjc.localAnchorPoint1.z});
+    Vector3 localAnchorPoint2({ fjc.localAnchorPoint2.x, fjc.localAnchorPoint2.y, fjc.localAnchorPoint2.z});
     
     // Create the joint info object
-    if (fixedJointComponent.isWorldSpace)
+    if (fjc.isWorldSpace)
     {
       FixedJointInfo jointInfo(body1, body2, worldAnchorPoint);
       // Create the fixed joint in the physics world
@@ -235,8 +225,6 @@ namespace IKan
       // Create the fixed joint in the physics world
       // TODO: Store the joint in some map?
       m_physics3DWorld->createJoint(jointInfo);
-      
-      m_physics3DWorld->
     }
   }
   
@@ -244,5 +232,4 @@ namespace IKan
   {
     return m_physics3DWorld->getDebugRenderer();
   }
-
 } // namespace IKan

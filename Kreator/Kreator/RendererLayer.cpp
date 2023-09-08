@@ -685,12 +685,12 @@ if (!Project::GetActive()) return
   {
     Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
     
-    if (m_showIcons and m_sceneState == SceneState::Edit)
+    if (m_showIcons)
     {
       ShowIcons();
     }
     
-    if (m_showColliders and m_sceneState == SceneState::Simulate)
+    if (m_showColliders)
     {
       ShowColliders({0, 1, 0, 1});
       ShowJoints({0, 0, 1, 1});
@@ -706,6 +706,11 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowIcons()
   {
+    if (m_sceneState != SceneState::Edit)
+    {
+      return;
+    }
+    
     auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
     for (auto e : cameraEntities)
     {
@@ -721,6 +726,11 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowColliders(const glm::vec4& color)
   {
+    if(m_sceneState != SceneState::Simulate)
+    {
+      return;
+    }
+    
     auto debugRenderer = m_currentScene->GetPhysicsDebugRenderer();
     auto triangle = debugRenderer.getTriangles();
     
@@ -737,21 +747,33 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowJoints(const glm::vec4 &color)
   {
-    static constexpr glm::vec3 scale = {1, 1, 1};
-    static constexpr glm::vec3 rotation = {0, 0, 0};
+    static constexpr glm::vec3 unitScale = {1, 1, 1};
+    static constexpr glm::vec3 zeroRotation = {0, 0, 0};
     
     auto jointEntities = m_currentScene->GetAllEntitiesWith<FixedJointComponent>();
     for (auto e : jointEntities)
     {
       Entity entity = { e, m_currentScene.get() };
+      if (!IsEntitySelected(entity))
+      {
+        continue;
+      }
+      
       const auto& fjc = entity.GetComponent<FixedJointComponent>();
       if (fjc.isWorldSpace)
       {
-        Renderer2D::DrawQuad({fjc.worldAnchorPoint}, scale, rotation, color);
+        Renderer2D::DrawQuad({fjc.worldAnchorPoint}, unitScale, zeroRotation, color);
       }
       else
       {
-        
+        auto drawJoint = [&color](const Entity& entity, const glm::vec3& localAnchorPoint) {
+          const auto& tc = entity.GetComponent<TransformComponent>();
+          auto posRotTransform = Utils::Math::GetTransformMatrix(tc.Position(), tc.Rotation(), unitScale);
+          auto position = posRotTransform * glm::vec4(localAnchorPoint, 1.0f);
+          Renderer2D::DrawQuad(position, unitScale, zeroRotation, color);
+        };
+        drawJoint(entity, fjc.localAnchorPoint1);
+        drawJoint(m_currentScene->GetEntityWithUUID(fjc.connectedEntity), fjc.localAnchorPoint2);
       }
     }
   }
@@ -1069,6 +1091,18 @@ if (!Project::GetActive()) return
     m_currentScene = m_editorScene;
     m_panels.SetSceneContext(m_editorScene);
     m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSceneContext(m_editorScene);
+  }
+  
+  bool RendererLayer::IsEntitySelected(Entity entity) const
+  {
+    for (const auto& selectedContext : m_selectionContext)
+    {
+      if (selectedContext.entity == entity)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 
   void RendererLayer::OnEntitySelected(SelectionContext entities)

@@ -153,6 +153,9 @@ namespace Kreator
     void OnSceneStartSimulation();
     /// This function handle scene simuation ends
     void OnSceneStopSimulation();
+    /// This function checks is entity is selected
+    /// - Parameter e: Entity to be checked
+    bool IsEntitySelected(Entity e) const;
     
     // Scene Panel Manager Callbacks ----------------------
     /// This function handles the entity selection
