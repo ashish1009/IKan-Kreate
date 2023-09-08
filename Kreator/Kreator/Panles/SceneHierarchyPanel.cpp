@@ -626,7 +626,7 @@ namespace Kreator
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
 
-    DrawComponent<FixedJointComponent>("Fixed Joint", entity, [&](FixedJointComponent& fjc)
+    DrawComponent<JointComponent>("Fixed Joint", entity, [&](JointComponent& fjc)
                                             {
       Kreator_UI::BeginPropertyGrid();
       
@@ -730,11 +730,11 @@ namespace Kreator
           ImGui::CloseCurrentPopup();
         }
       }
-      if (!m_selectionContext.At(0).HasComponent<FixedJointComponent>())
+      if (!m_selectionContext.At(0).HasComponent<JointComponent>())
       {
         if (ImGui::MenuItem("Fixed Joint"))
         {
-          [[maybe_unused]] auto& meshColliderComp = m_selectionContext.At(0).AddComponent<FixedJointComponent>();
+          [[maybe_unused]] auto& meshColliderComp = m_selectionContext.At(0).AddComponent<JointComponent>();
           ImGui::CloseCurrentPopup();
         }
       }

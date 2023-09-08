@@ -231,7 +231,7 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(CapsuleColliderComponent);
   };
 
-  struct FixedJointComponent
+  struct JointComponent
   {
     UUID connectedEntity;
     bool isWorldSpace = false;
@@ -239,10 +239,10 @@ namespace IKan
     glm::vec3 localAnchorPoint1 = {0, 0, 0};
     glm::vec3 localAnchorPoint2 = {0, 0, 0};
 
-    FixedJointComponent();
-    ~FixedJointComponent();
-    void Copy(const FixedJointComponent& other);
-    DEFINE_COPY_MOVE_CONSTRUCTORS(FixedJointComponent);
+    JointComponent();
+    ~JointComponent();
+    void Copy(const JointComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(JointComponent);
   };
 
   template<typename... Component>
@@ -255,5 +255,5 @@ namespace IKan
   using AllComponents =
   ComponentGroup<IDComponent, TagComponent, TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
   QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent, Box3DColliderComponent, \
-  CapsuleColliderComponent, FixedJointComponent>;
+  CapsuleColliderComponent, JointComponent>;
 } // namespace IKan

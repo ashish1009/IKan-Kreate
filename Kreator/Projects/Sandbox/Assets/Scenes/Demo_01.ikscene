@@ -96,7 +96,7 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1000000
-    FixedJointComponent:
+    JointComponent:
       ConnectedEntity: 11073933567834345838
       IsWorldSpace: false
       WorldAnchorPoint: [2, 5.9000001, 0]

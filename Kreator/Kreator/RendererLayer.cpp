@@ -759,7 +759,7 @@ if (!Project::GetActive()) return
     static constexpr glm::vec3 unitScale = {1, 1, 1};
     static constexpr glm::vec3 zeroRotation = {0, 0, 0};
     
-    auto jointEntities = m_currentScene->GetAllEntitiesWith<FixedJointComponent>();
+    auto jointEntities = m_currentScene->GetAllEntitiesWith<JointComponent>();
     for (auto e : jointEntities)
     {
       Entity entity = { e, m_currentScene.get() };
@@ -768,7 +768,7 @@ if (!Project::GetActive()) return
         continue;
       }
       
-      const auto& fjc = entity.GetComponent<FixedJointComponent>();
+      const auto& fjc = entity.GetComponent<JointComponent>();
       if (fjc.isWorldSpace)
       {
         Renderer2D::DrawQuad({fjc.worldAnchorPoint}, unitScale, zeroRotation, color);

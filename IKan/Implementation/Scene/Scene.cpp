@@ -262,7 +262,7 @@ namespace IKan
     CopyComponent<Box3DColliderComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<SphereColliderComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<CapsuleColliderComponent>(target->m_registry, m_registry, enttMap);
-    CopyComponent<FixedJointComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<JointComponent>(target->m_registry, m_registry, enttMap);
 
     // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
     // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
@@ -406,7 +406,7 @@ namespace IKan
     CopyComponentIfExists<Box3DColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<SphereColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<CapsuleColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
-    CopyComponentIfExists<FixedJointComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<JointComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
 
     auto childIds = entity.Children();
     for (auto childId : childIds)

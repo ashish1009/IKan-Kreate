@@ -322,19 +322,19 @@ namespace IKan {
       out << YAML::EndMap; // CapsuleColliderComponent
     }
 
-    if (entity.HasComponent<FixedJointComponent>())
+    if (entity.HasComponent<JointComponent>())
     {
-      out << YAML::Key << "FixedJointComponent";
-      out << YAML::BeginMap; // FixedJointComponent
+      out << YAML::Key << "JointComponent";
+      out << YAML::BeginMap; // JointComponent
       
-      auto& fixedJointComponent = entity.GetComponent<FixedJointComponent>();
-      out << YAML::Key << "ConnectedEntity" << YAML::Value << fixedJointComponent.connectedEntity;
-      out << YAML::Key << "IsWorldSpace" << YAML::Value << fixedJointComponent.isWorldSpace;
-      out << YAML::Key << "WorldAnchorPoint" << YAML::Value << fixedJointComponent.worldAnchorPoint;
-      out << YAML::Key << "LocalAnchorPoint1" << YAML::Value << fixedJointComponent.localAnchorPoint1;
-      out << YAML::Key << "LocalAnchorPoint2" << YAML::Value << fixedJointComponent.localAnchorPoint2;
+      auto& jointComponent = entity.GetComponent<JointComponent>();
+      out << YAML::Key << "ConnectedEntity" << YAML::Value << jointComponent.connectedEntity;
+      out << YAML::Key << "IsWorldSpace" << YAML::Value << jointComponent.isWorldSpace;
+      out << YAML::Key << "WorldAnchorPoint" << YAML::Value << jointComponent.worldAnchorPoint;
+      out << YAML::Key << "LocalAnchorPoint1" << YAML::Value << jointComponent.localAnchorPoint1;
+      out << YAML::Key << "LocalAnchorPoint2" << YAML::Value << jointComponent.localAnchorPoint2;
 
-      out << YAML::EndMap; // FixedJointComponent
+      out << YAML::EndMap; // JointComponent
     }
     out << YAML::EndMap; // Entity
   }
@@ -539,16 +539,16 @@ namespace IKan {
         component.bounciness = meshColliderComponent["Bounciness"].as<float>();
       }
 
-      // FixedJointComponent --------------------------------------------------------------------------------------
-      auto fixedJointComponent = entity["FixedJointComponent"];
-      if (fixedJointComponent)
+      // JointComponent --------------------------------------------------------------------------------------
+      auto jointComponent = entity["JointComponent"];
+      if (jointComponent)
       {
-        auto& component = deserializedEntity.AddComponent<FixedJointComponent>();
-        component.connectedEntity = fixedJointComponent["ConnectedEntity"].as<uint64_t>();
-        component.isWorldSpace = fixedJointComponent["IsWorldSpace"].as<bool>();
-        component.worldAnchorPoint = fixedJointComponent["WorldAnchorPoint"].as<glm::vec3>();
-        component.localAnchorPoint1 = fixedJointComponent["LocalAnchorPoint1"].as<glm::vec3>();
-        component.localAnchorPoint2 = fixedJointComponent["LocalAnchorPoint2"].as<glm::vec3>();
+        auto& component = deserializedEntity.AddComponent<JointComponent>();
+        component.connectedEntity = jointComponent["ConnectedEntity"].as<uint64_t>();
+        component.isWorldSpace = jointComponent["IsWorldSpace"].as<bool>();
+        component.worldAnchorPoint = jointComponent["WorldAnchorPoint"].as<glm::vec3>();
+        component.localAnchorPoint1 = jointComponent["LocalAnchorPoint1"].as<glm::vec3>();
+        component.localAnchorPoint2 = jointComponent["LocalAnchorPoint2"].as<glm::vec3>();
 
       }
     }

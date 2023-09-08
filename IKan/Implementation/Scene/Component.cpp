@@ -434,18 +434,18 @@ return *this; \
   }
 
   // Fixed Joint Component -------------------------------------------------------------------------------------
-  FixedJointComponent::FixedJointComponent()
+  JointComponent::JointComponent()
   {
     COMP_LOG("Creating Fixed Joint Component");
   }
   
-  FixedJointComponent::~FixedJointComponent()
+  JointComponent::~JointComponent()
   {
     COMP_LOG("Destroying Fixed Joint Component");
   }
-  COMP_COPY_MOVE_CONSTRUCTORS(FixedJointComponent);
+  COMP_COPY_MOVE_CONSTRUCTORS(JointComponent);
   
-  void FixedJointComponent::Copy(const FixedJointComponent& other)
+  void JointComponent::Copy(const JointComponent& other)
   {
     connectedEntity = other.connectedEntity;
     isWorldSpace = other.isWorldSpace;

@@ -143,7 +143,7 @@ namespace IKan
     } // Each Rigid Body
     
     // Joints -------------------------------------------------------------------------------------
-    auto view = m_scene->GetAllEntitiesWith<FixedJointComponent>();
+    auto view = m_scene->GetAllEntitiesWith<JointComponent>();
     for (auto entity : view)
     {
       Entity e = { entity, m_scene };
@@ -197,7 +197,7 @@ namespace IKan
   
   void PhysicsScene::CreateJoint(Entity entity)
   {
-    const auto& fjc = entity.GetComponent<FixedJointComponent>();
+    const auto& fjc = entity.GetComponent<JointComponent>();
     Entity connectedEntity = m_scene->GetEntityWithUUID(fjc.connectedEntity);
 
     const auto& rigidBodyComponent1 = entity.GetComponent<RigidBodyComponent>();
