@@ -12,6 +12,7 @@
 #include "ApplicationSettings.hpp"
 #include "SceneHierarchyPanel.hpp"
 #include "UserPreference.hpp"
+#include "DummyApplication.hpp"
 
 namespace Kreator
 {  
@@ -167,7 +168,7 @@ IKan::Scope<IKan::Application> IKan::CreateApplication(const std::filesystem::pa
   applicationSpec.windowSpecification.width = 1600;
   applicationSpec.windowSpecification.height = 900;
   applicationSpec.windowSpecification.isFullscreen = false;
-  applicationSpec.windowSpecification.hideTitleBar = true;
+  applicationSpec.windowSpecification.hideTitleBar = false;
 
   applicationSpec.resizable = true;
   applicationSpec.startMaximized = true;

@@ -24,6 +24,7 @@ namespace IKan
     bool needResize = false;
     uint32_t viewportWidth, viewportHeight;
     Ref<RenderPass> renderPass;
+    Ref<Shader> stencilShader;
     glm::mat4 camViewProjection;
   };
   

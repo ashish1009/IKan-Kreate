@@ -33,6 +33,8 @@ namespace IKan
       
       rendererPassSpec.targetFramebuffer = FrameBuffer::Create(fbSpec);
       m_commonData->renderPass = RenderPass::Create(rendererPassSpec);
+      
+      m_commonData->stencilShader = Shader::Create(CoreAssetPath("Shaders/MeshStencilShader.glsl"));
     }
   }
   
@@ -104,20 +106,82 @@ namespace IKan
   
   void SceneRenderer::GeometryPass()
   {
+    int i = 0;
     for (const auto& dc : m_meshSourceDrawList)
     {
-      auto pipeline = dc.staticMesh->GetPipeline();
-      pipeline->Bind();
-      
-      auto shader = pipeline->GetSpecification().shader;
-      shader->Bind();
-      shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
-
-      for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
+      if (i != 0)
       {
-        shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);
-        Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
-      } // for each submeshes
+        // draw floor as normal, but don't write the floor to the stencil buffer, we only care about the containers.
+        // We set its mask to 0x00 to not write to the stencil buffer.
+        glStencilMask(0x00);
+
+        auto pipeline = dc.staticMesh->GetPipeline();
+        pipeline->Bind();
+        
+        auto shader = pipeline->GetSpecification().shader;
+        shader->Bind();
+        shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
+        
+        for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
+        {
+          shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);
+          Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+        } // for each submeshes
+      }
+      i++;
+    }
+    
+    i = 0;
+    for (const auto& dc : m_meshSourceDrawList)
+    {
+      if (i == 0)
+      {
+        {
+          // 2nd. render pass: now draw slightly scaled versions of the objects, this time disabling stencil writing.
+          // Because the stencil buffer is now filled with several 1s. The parts of the buffer that are 1 are not drawn, thus only drawing
+          // the objects' size differences, making it look like borders.
+          // -----------------------------------------------------------------------------------------------------------------------------
+          glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+          glStencilMask(0x00);
+          glDisable(GL_DEPTH_TEST);
+          
+          auto shader = m_commonData->stencilShader;
+          shader->Bind();
+          shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
+          
+          auto tt = glm::scale(dc.transform, {1.2, 1.2, 1.2});
+          
+          for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
+          {
+            shader->SetUniformMat4("u_Transform", tt * submesh.transform);
+            Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+          } // for each submeshes
+          glStencilMask(0xFF);
+          glStencilFunc(GL_ALWAYS, 0, 0xFF);
+          glEnable(GL_DEPTH_TEST);
+        }
+
+        {
+          // 1st. render pass, draw objects as normal, writing to the stencil buffer
+          // --------------------------------------------------------------------
+          glStencilFunc(GL_ALWAYS, 1, 0xFF);
+          glStencilMask(0xFF);
+          
+          auto pipeline = dc.staticMesh->GetPipeline();
+          pipeline->Bind();
+          
+          auto shader = pipeline->GetSpecification().shader;
+          shader->Bind();
+          shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
+          
+          for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
+          {
+            shader->SetUniformMat4("u_Transform", dc.transform * submesh.transform);
+            Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+          } // for each submeshes
+        }
+      }
+      i++;
     }
   }
   

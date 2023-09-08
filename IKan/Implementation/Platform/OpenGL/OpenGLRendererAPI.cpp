@@ -18,12 +18,14 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Renderer, "Creating Open GL Renderer API");
     IK_LOG_TRACE(LogModule::Renderer, "-----------------------------");
     
-    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
-    glEnable(GL_MULTISAMPLE);
-    glEnable(GL_BLEND);
-    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    // configure global opengl state
+    // -----------------------------
     glEnable(GL_DEPTH_TEST);
-    
+    glDepthFunc(GL_LESS);
+    glEnable(GL_STENCIL_TEST);
+    glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
+    glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
+
     auto& caps = Renderer::Capabilities::Get();
     
     caps.vendor   = (const char*)glGetString(GL_VENDOR);
