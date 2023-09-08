@@ -182,11 +182,11 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 - V10.0.8.0 : Clean Editor Mini Viewport Bug Fixes
  ------------------------------------------------------------------------------------------------------------------
 
+- V11.0..0 : Grid, Joint, Select Mesh Outline
+ ------------------------------------------------------------------------------------------------------------------
+
 ## TODO  
-- Grid
-- Selected Mesh Highlight
 - Parent Child Movement
-- Joints
 - Light
 - Materials
 - Sub texture in quad component
