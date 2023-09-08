@@ -448,6 +448,7 @@ return *this; \
   void JointComponent::Copy(const JointComponent& other)
   {
     connectedEntity = other.connectedEntity;
+    type = other.type;
     isWorldSpace = other.isWorldSpace;
     worldAnchorPoint = other.worldAnchorPoint;
     localAnchorPoint1 = other.localAnchorPoint1;

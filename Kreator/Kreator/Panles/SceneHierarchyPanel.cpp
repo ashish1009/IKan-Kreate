@@ -630,6 +630,7 @@ namespace Kreator
                                             {
       Kreator_UI::BeginPropertyGrid();
       
+      
       Entity targetEntity = m_context->TryGetEntityWithUUID(fjc.connectedEntity);
       if (Kreator_UI::PropertyEntityReference("Connected Entity", targetEntity))
       {
@@ -637,6 +638,13 @@ namespace Kreator
       }
 
       Kreator_UI::Property("Use world Space", fjc.isWorldSpace);
+
+      int32_t selected = static_cast<int32_t>(fjc.type);
+      if (Kreator_UI::PropertyDropdown("Type", {"Fixed", "BallSocket"}, 2, &selected))
+      {
+        fjc.type = static_cast<JointComponent::Type>(selected);
+      }
+
       if (fjc.isWorldSpace)
       {
         Kreator_UI::Property("World Anchor Point", fjc.worldAnchorPoint);

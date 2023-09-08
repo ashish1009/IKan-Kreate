@@ -233,7 +233,13 @@ namespace IKan
 
   struct JointComponent
   {
+    enum class Type
+    {
+      Fixed, BallSocket
+    };
+    
     UUID connectedEntity;
+    Type type = Type::Fixed;
     bool isWorldSpace = false;
     glm::vec3 worldAnchorPoint = {0, 0, 0};
     glm::vec3 localAnchorPoint1 = {0, 0, 0};
