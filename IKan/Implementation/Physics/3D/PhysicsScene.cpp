@@ -214,7 +214,19 @@ namespace IKan
     Vector3 localAnchorPoint1({ fjc.localAnchorPoint1.x, fjc.localAnchorPoint1.y, fjc.localAnchorPoint1.z});
     Vector3 localAnchorPoint2({ fjc.localAnchorPoint2.x, fjc.localAnchorPoint2.y, fjc.localAnchorPoint2.z});
 
-    joint.MakeFixed(worldAnchorPoint, localAnchorPoint1, localAnchorPoint2);
+    switch (fjc.type)
+    {
+      case JointComponent::Type::Fixed:
+        joint.MakeFixed(worldAnchorPoint, localAnchorPoint1, localAnchorPoint2);
+        break;
+
+      case JointComponent::Type::BallSocket:
+        joint.MakeBallSocket(worldAnchorPoint, localAnchorPoint1, localAnchorPoint2);
+        break;
+
+      default:
+        break;
+    }
   }
   
   DebugRenderer PhysicsScene::GetDebugRenderer() const

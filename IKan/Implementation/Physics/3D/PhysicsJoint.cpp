@@ -28,4 +28,18 @@ namespace IKan
       world->createJoint(jointInfo);
     }
   }
+  
+  void PhysicsJoint::MakeBallSocket(const Vector3& worldAnchorPoint, const Vector3& localAnchorPoint1, const Vector3& localAnchorPoint2)
+  {
+    if (worldSpace)
+    {
+      BallAndSocketJointInfo jointInfo(body1, body2, worldAnchorPoint);
+      world->createJoint(jointInfo);
+    }
+    else
+    {
+      BallAndSocketJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
+      world->createJoint(jointInfo);
+    }
+  }
 } // namespace IKan
