@@ -175,6 +175,7 @@ if (!Project::GetActive()) return
     m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
     m_projectIcon = Image::Create(KreatorResourcePath("Textures/Icons/Project.png"));
     m_cameraIcon = Image::Create(KreatorResourcePath("Textures/Icons/Camera.png"));
+    m_settingIcon = Image::Create(KreatorResourcePath("Textures/Icons/Gear.png"));
     
     // Scene Button
     m_playButtonTex = Image::Create(KreatorResourcePath("Textures/Icons/Play.png"));
@@ -187,6 +188,7 @@ if (!Project::GetActive()) return
     m_moveToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Move.png"));
     m_rotateToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Rotate.png"));
     m_scaleToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
+    m_gizmoModeTex = Image::Create(KreatorResourcePath("Textures/Icons/GuizmoMode.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -562,7 +564,7 @@ if (!Project::GetActive()) return
   
   bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
   {
-    if (Input::IsKeyPressed(IKan::Key::LeftControl) or ImGuizmo::IsOver())
+    if (Input::IsKeyPressed(IKan::Key::LeftControl) or ImGuizmo::IsOver() or m_hoveredGuizmotoolbar)
     {
       return false;
     }
@@ -776,13 +778,13 @@ if (!Project::GetActive()) return
       else
       {
         auto drawJoint = [&color, this](const Entity& entity, const glm::vec3& localAnchorPoint) {
-          static constexpr glm::mat4 unitMat(1.0f);
           
           const auto& tc = entity.GetComponent<TransformComponent>();
           const glm::mat4 posRotTransform = Utils::Math::GetTransformMatrix(tc.Position(), tc.Rotation(), unitScale);
           const glm::vec3 position = posRotTransform * glm::vec4(localAnchorPoint, 1.0f);
 
 #if _3DJoint
+          static constexpr glm::mat4 unitMat(1.0f);
           m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Cube),
                                                glm::translate(unitMat, position));
 #else
@@ -1845,14 +1847,14 @@ if (!Project::GetActive()) return
       const ImColor c_SelectedGizmoButtonColor = Kreator_UI::Color::Accent;
       const ImColor c_UnselectedGizmoButtonColor = UI::Theme::Color::TextBrighter;
       
-      auto gizmoButton = [&c_SelectedGizmoButtonColor, buttonSize](const Ref<Image>& icon,
+      auto gizmoButton = [&c_SelectedGizmoButtonColor, buttonSize, this](const Ref<Image>& icon,
                                                                    const ImColor& tint, float paddingY = 0.0f)
       {
         const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
         const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
         const bool clicked = ImGui::InvisibleButton(UI::GenerateID(), ImVec2(width, height));
         UI::DrawButtonImage(icon, tint, tint, tint, UI::RectOffset(UI::GetItemRect(), 0.0f, paddingY));
-        
+        m_hoveredGuizmotoolbar = ImGui::IsItemHovered();
         return clicked;
       };
       
@@ -1885,13 +1887,36 @@ if (!Project::GetActive()) return
       {
         m_gizmoType = ImGuizmo::OPERATION::SCALE;
       }
+
+      buttonTint = m_gizmoMode == ImGuizmo::MODE::LOCAL ?
+      c_SelectedGizmoButtonColor :
+      c_UnselectedGizmoButtonColor;
+      if (gizmoButton(m_gizmoModeTex, buttonTint))
+      {
+        if (m_gizmoMode == ImGuizmo::MODE::LOCAL)
+        {
+          m_gizmoMode = ImGuizmo::MODE::WORLD;
+        }
+        else
+        {
+          m_gizmoMode = ImGuizmo::MODE::LOCAL;
+        }
+      }
+      if (m_gizmoMode == ImGuizmo::MODE::LOCAL)
+      {
+        UI::SetTooltip("Change to World Space");
+      }
+      else
+      {
+        UI::SetTooltip("Change to Local Space");
+      }
     }
     
     ImGui::Spring();
     ImGui::EndHorizontal();
     ImGui::Spring();
     ImGui::EndVertical();
-    
+       
     ImGui::End();
   }
   
@@ -1923,7 +1948,7 @@ if (!Project::GetActive()) return
       ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
                            glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
                            (ImGuizmo::OPERATION)m_gizmoType,
-                           ImGuizmo::LOCAL,
+                           (ImGuizmo::MODE)m_gizmoMode,
                            glm::value_ptr(transform),
                            nullptr,
                            snap ? snapValues : nullptr);

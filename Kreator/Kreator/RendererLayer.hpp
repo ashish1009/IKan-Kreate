@@ -228,6 +228,7 @@ namespace Kreator
     Ref<Image> m_applicationIcon, m_welcomeIcon;
     Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
     Ref<Image> m_cameraIcon;
+    Ref<Image> m_settingIcon;
 
     // Project Data --------------------------------------
     bool m_showCreateNewProjectPopup = false;
@@ -281,8 +282,9 @@ namespace Kreator
     int32_t m_hoveredEntityID = -1;
 
     // Guizmo Data ---------------------------------------
+    bool m_hoveredGuizmotoolbar = false;
     int32_t m_gizmoType = -1; // -1 = no gizmo
-    int32_t m_gizmoMode = 0;  //  0 = local
+    uint32_t m_gizmoMode = 0;  //  0 = local
     Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
 
     // Single Instance -----------------------------------

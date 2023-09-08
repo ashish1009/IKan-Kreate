@@ -55,7 +55,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-4.84423923, 6.48058271, 1.9861095]
+      Position: [-4.84426928, 1.16480768, 1.98629272]
       Rotation: [0, 0, 0]
       Scale: [4, 0.99999994, 0.999999762]
     StaticMeshComponent:
@@ -79,7 +79,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-2.21038389, 8.52188969, -0.0180926286]
+      Position: [-2.31388378, 3.13180161, 0.10898757]
       Rotation: [-0.785398245, 0, 0]
       Scale: [1, 6, 1]
     StaticMeshComponent:
@@ -101,7 +101,7 @@ Entities:
       Type: 0
       IsWorldSpace: false
       WorldAnchorPoint: [2, 5.9000001, 0]
-      LocalAnchorPoint1: [0, -3, 0]
+      LocalAnchorPoint1: [0, -2.79999995, 0]
       LocalAnchorPoint2: [2, 0, 0]
   - Entity: 15023677173591981440
     TagComponent:
@@ -110,7 +110,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [7.91724539, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [0.999999881, 0.99999994, 1]
     StaticMeshComponent:
