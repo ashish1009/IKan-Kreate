@@ -361,6 +361,7 @@
 		B24077172A72651400221919 /* Common.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Common.hpp; sourceTree = "<group>"; };
 		B240771C2A72665A00221919 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		B240771D2A72665A00221919 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		B24A8A512AAB254600FABB45 /* MeshStencilShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MeshStencilShader.glsl; sourceTree = "<group>"; };
 		B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
 		B26B1A6F2A7D153400676419 /* PanelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PanelManager.cpp; sourceTree = "<group>"; };
 		B26B1A702A7D153400676419 /* PanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PanelManager.hpp; sourceTree = "<group>"; };
@@ -596,6 +597,7 @@
 				B23365662A7521EB00BC7B8B /* QuadShader.glsl */,
 				B23365872A7530A600BC7B8B /* TextShader.glsl */,
 				B26DEF702A838F5300C68ED5 /* PBR_StaticShader.glsl */,
+				B24A8A512AAB254600FABB45 /* MeshStencilShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";

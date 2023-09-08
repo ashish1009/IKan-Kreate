@@ -54,7 +54,12 @@ namespace IKan
     ///   - mesh: Mesh source
     ///   - transform: mesh transform
     void SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform);
-    
+    /// This function submits the selected mesh source in scene
+    /// - Parameters:
+    ///   - mesh: Mesh source
+    ///   - transform: mesh transform
+    void SubmitSelectedMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform);
+
     /// This function begins the Current Render Pass
     void BeginRenderPass();
     /// This function ends the Current Render Pass
@@ -78,6 +83,8 @@ namespace IKan
     void FlushDrawList();
     /// This function pass the 3D Geometry Renderer
     void GeometryPass();
+    /// This function pass the 3D Composit Stencil Renderer
+    void CompositePass();
     /// This function clears the draw lists
     void ClearDrawLists();
     
@@ -91,6 +98,7 @@ namespace IKan
     };
 
     std::vector<MeshSourceDrawCommand> m_meshSourceDrawList;
+    std::vector<MeshSourceDrawCommand> m_selectedMeshSourceDrawList;
     Scope<SceneRendererData> m_commonData;
   };
 } // namespace IKan

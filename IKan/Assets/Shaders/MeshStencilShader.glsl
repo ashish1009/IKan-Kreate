@@ -61,5 +61,5 @@ in VS_OUT
 /// Fragment Main Function
 void main()
 {
-  o_Color = vec4(1.0f);
+  o_Color = vec4(1.0, 0.65, 0.01, 1.0);
 }
