@@ -564,7 +564,7 @@ if (!Project::GetActive()) return
   
   bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
   {
-    if (Input::IsKeyPressed(IKan::Key::LeftControl) or ImGuizmo::IsOver() or m_hoveredGuizmotoolbar)
+    if (Input::IsKeyPressed(IKan::Key::LeftControl) or ImGuizmo::IsOver() or m_hoveredGuizmotoolbar or !m_viewport.panelMouseHover)
     {
       return false;
     }
@@ -771,6 +771,12 @@ if (!Project::GetActive()) return
       }
       
       const auto& fjc = entity.GetComponent<JointComponent>();
+      auto connectedEntity = m_currentScene->TryGetEntityWithUUID(fjc.connectedEntity);
+      if (!connectedEntity)
+      {
+        continue;
+      }
+      
       if (fjc.isWorldSpace)
       {
         Renderer2D::DrawQuad({fjc.worldAnchorPoint}, unitScale, zeroRotation, color);

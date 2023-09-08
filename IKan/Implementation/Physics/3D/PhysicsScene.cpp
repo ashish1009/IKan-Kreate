@@ -6,6 +6,7 @@
 //
 
 #include "PhysicsScene.hpp"
+#include "PhysicsJoint.hpp"
 #include "Scene/Scene.hpp"
 #include "Scene/Entity.hpp"
 
@@ -14,7 +15,7 @@ using namespace reactphysics3d;
 namespace IKan
 {
   PhysicsScene::PhysicsScene(const PhysicsSettings& setting, Scene* scene)
-  : m_physicsSettings(setting), m_scene(scene)
+  : m_settings(setting), m_scene(scene)
   {
     IK_LOG_TRACE(LogModule::Physics, "Creating Physics Scene");
     IK_LOG_TRACE(LogModule::Physics, "  Gravity {0} | {1} | {2}",
@@ -22,19 +23,19 @@ namespace IKan
     
     // Create the world settings
     PhysicsWorld::WorldSettings settings;
-    settings.defaultVelocitySolverNbIterations = m_physicsSettings.solverVelocityIterations;
-    settings.defaultPositionSolverNbIterations = m_physicsSettings.solverPositionIterations;
-    settings.isSleepingEnabled = m_physicsSettings.isAllowSleep;
-    settings.gravity = Vector3(m_physicsSettings.gravity.x, m_physicsSettings.gravity.y, m_physicsSettings.gravity.z);
+    settings.defaultVelocitySolverNbIterations = m_settings.solverVelocityIterations;
+    settings.defaultPositionSolverNbIterations = m_settings.solverPositionIterations;
+    settings.isSleepingEnabled = m_settings.isAllowSleep;
+    settings.gravity = Vector3(m_settings.gravity.x, m_settings.gravity.y, m_settings.gravity.z);
 
     // Create the physics world with your settings
-    m_physics3DWorld = m_physics3DCommon.createPhysicsWorld(settings);
+    m_world = m_common.createPhysicsWorld(settings);
     
     // Debug Renderer
-    m_physics3DWorld->setIsDebugRenderingEnabled(true);
+    m_world->setIsDebugRenderingEnabled(true);
     
     // Get a reference to the debug renderer
-    DebugRenderer& debugRenderer = m_physics3DWorld->getDebugRenderer();
+    DebugRenderer& debugRenderer = m_world->getDebugRenderer();
     debugRenderer.setIsDebugItemDisplayed(DebugRenderer::DebugItem::COLLISION_SHAPE, true);
     
     auto rigidBodyView = m_scene->GetAllEntitiesWith<RigidBodyComponent>();
@@ -51,7 +52,7 @@ namespace IKan
       
       // Create a rigid body in the world
       Transform transform(position, orientation);
-      RigidBody* body = m_physics3DWorld->createRigidBody(transform);
+      RigidBody* body = m_world->createRigidBody(transform);
       rbc.runtimeBody = body;
       
       // Change the body parameters
@@ -70,7 +71,7 @@ namespace IKan
         const Vector3 halfExtents(relativeSize.x, relativeSize.y, relativeSize.z);
         
         // Create the box shape
-        BoxShape* boxShape = m_physics3DCommon.createBoxShape(halfExtents);
+        BoxShape* boxShape = m_common.createBoxShape(halfExtents);
         
         // Add the collider to the rigid body
         auto colliderPosition = Vector3(bcc.positionOffset.x, bcc.positionOffset.y, bcc.positionOffset.x);
@@ -97,7 +98,7 @@ namespace IKan
         
         // Create the box shape
         // NOTE: There is no feature to have oval shape sp size should be same for all xyz
-        SphereShape* boxShape = m_physics3DCommon.createSphereShape(relativeRadius.x);
+        SphereShape* boxShape = m_common.createSphereShape(relativeRadius.x);
         
         // Add the collider to the rigid body
         auto colliderPosition = Vector3(scc.positionOffset.x, scc.positionOffset.y, scc.positionOffset.x);
@@ -124,7 +125,7 @@ namespace IKan
         glm::vec3 relativeSize = tc.Scale() * ccc.height;
         
         // Create the capsule shape
-        CapsuleShape* capsuleShape = m_physics3DCommon.createCapsuleShape(relativeRadius.x, relativeSize.y);
+        CapsuleShape* capsuleShape = m_common.createCapsuleShape(relativeRadius.x, relativeSize.y);
         
         // Add the collider to the rigid body
         auto colliderPosition = Vector3(ccc.positionOffset.x, ccc.positionOffset.y, ccc.positionOffset.x);
@@ -154,18 +155,18 @@ namespace IKan
   PhysicsScene::~PhysicsScene()
   {
     IK_LOG_WARN(LogModule::Physics, "Destroying Physics Scene");
-    m_physics3DCommon.destroyPhysicsWorld(m_physics3DWorld);
+    m_common.destroyPhysicsWorld(m_world);
   }
   
   void PhysicsScene::OnUpdate(TimeStep ts)
   {
     // Change the number of iterations of the velocity solver
-    m_physics3DWorld->setNbIterationsVelocitySolver(15);
+    m_world->setNbIterationsVelocitySolver(15);
     // Change the number of iterations of the position solver
-    m_physics3DWorld->setNbIterationsPositionSolver(8);
+    m_world->setNbIterationsPositionSolver(8);
     
     // Update the Dynamics world with a constant time step
-    m_physics3DWorld->update(ts);
+    m_world->update(ts);
     
     // Get Transform
     auto view = m_scene->GetAllEntitiesWith<RigidBodyComponent>();
@@ -206,28 +207,18 @@ namespace IKan
     const auto& rigidBodyComponent2 = connectedEntity.GetComponent<RigidBodyComponent>();
     auto body2 = static_cast<RigidBody*>(rigidBodyComponent2.runtimeBody);
     
+    PhysicsJoint joint(m_world, body1, body2);
+    
     // Anchor point in world-space
     Vector3 worldAnchorPoint({ fjc.worldAnchorPoint.x, fjc.worldAnchorPoint.y, fjc.worldAnchorPoint.z});
     Vector3 localAnchorPoint1({ fjc.localAnchorPoint1.x, fjc.localAnchorPoint1.y, fjc.localAnchorPoint1.z});
     Vector3 localAnchorPoint2({ fjc.localAnchorPoint2.x, fjc.localAnchorPoint2.y, fjc.localAnchorPoint2.z});
-    
-    // Create the joint info object
-    if (fjc.isWorldSpace)
-    {
-      FixedJointInfo jointInfo(body1, body2, worldAnchorPoint);
-      // TODO: Store the joint in some map?
-      m_physics3DWorld->createJoint(jointInfo);
-    }
-    else
-    {
-      FixedJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
-      // TODO: Store the joint in some map?
-      m_physics3DWorld->createJoint(jointInfo);
-    }
+
+    joint.MakeFixed(worldAnchorPoint, localAnchorPoint1, localAnchorPoint2);
   }
   
   DebugRenderer PhysicsScene::GetDebugRenderer() const
   {
-    return m_physics3DWorld->getDebugRenderer();
+    return m_world->getDebugRenderer();
   }
 } // namespace IKan

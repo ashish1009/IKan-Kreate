@@ -284,7 +284,7 @@ namespace Kreator
     // Guizmo Data ---------------------------------------
     bool m_hoveredGuizmotoolbar = false;
     int32_t m_gizmoType = -1; // -1 = no gizmo
-    uint32_t m_gizmoMode = 0;  //  0 = local
+    uint32_t m_gizmoMode = 1;  //  0 = local, 1 = World
     Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
 
     // Single Instance -----------------------------------

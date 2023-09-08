@@ -369,7 +369,7 @@ namespace Kreator_UI
   
   bool Property(const char* label, float& value, float delta, float min, float max, const char* helpText)
   {
-    ShiftCursor(10.0f, 9.0f);
+    ShiftCursor(0.0f, 9.0f);
     ImGui::Text(label);
     if (std::strlen(helpText) != 0)
     {
@@ -394,7 +394,7 @@ namespace Kreator_UI
   
   bool Property(const char* label, glm::vec2& value, float delta, float min, float max)
   {
-    ShiftCursor(10.0f, 9.0f);
+    ShiftCursor(0.0f, 9.0f);
     ImGui::Text(label);
     ImGui::NextColumn();
     ShiftCursorY(4.0f);
@@ -414,7 +414,7 @@ namespace Kreator_UI
   
   bool Property(const char* label, glm::vec3& value, float delta, float min, float max)
   {
-    ShiftCursor(10.0f, 9.0f);
+    ShiftCursor(0.0f, 9.0f);
     ImGui::Text(label);
     ImGui::NextColumn();
     ShiftCursorY(4.0f);
@@ -434,7 +434,7 @@ namespace Kreator_UI
   
   bool Property(const char* label, glm::vec4& value, float delta, float min, float max)
   {
-    ShiftCursor(10.0f, 9.0f);
+    ShiftCursor(0.0f, 9.0f);
     ImGui::Text(label);
     ImGui::NextColumn();
     ShiftCursorY(4.0f);
@@ -914,7 +914,7 @@ namespace Kreator_UI
   {
     bool receivedValidEntity = false;
     
-    ShiftCursor(10.0f, 9.0f);
+    ShiftCursor(0.0f, 9.0f);
     ImGui::Text(label);
     ImGui::NextColumn();
     ShiftCursorY(4.0f);

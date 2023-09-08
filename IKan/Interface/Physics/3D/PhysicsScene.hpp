@@ -22,7 +22,7 @@ namespace IKan
     uint32_t solverPositionIterations = 8;
     uint32_t solverVelocityIterations = 2;
   };
-
+  
   class PhysicsScene
   {
   public:
@@ -46,10 +46,10 @@ namespace IKan
     reactphysics3d::DebugRenderer GetDebugRenderer() const;
 
   private:
-    PhysicsSettings m_physicsSettings;
+    PhysicsSettings m_settings;
 
-    reactphysics3d::PhysicsCommon m_physics3DCommon;
-    reactphysics3d::PhysicsWorld* m_physics3DWorld = nullptr;
+    reactphysics3d::PhysicsCommon m_common;
+    reactphysics3d::PhysicsWorld* m_world = nullptr;
 
     Scene* m_scene;
   };
