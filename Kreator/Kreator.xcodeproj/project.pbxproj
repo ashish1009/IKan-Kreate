@@ -18,6 +18,7 @@
 		B23918E22AA09A0500641BF8 /* UserPreference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23918E02AA09A0500641BF8 /* UserPreference.cpp */; };
 		B24076D62A72375000221919 /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076D52A72375000221919 /* Kreator.cpp */; };
 		B24077072A72591900221919 /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24077062A72591900221919 /* libIKan.a */; };
+		B24A8A612AAB516500FABB45 /* DefaultMeshes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A8A5F2AAB516500FABB45 /* DefaultMeshes.cpp */; };
 		B26B1AA22A7D1EBC00676419 /* KreatorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AA02A7D1EBC00676419 /* KreatorConsolePanel.cpp */; };
 		B26B1AA52A7D261000676419 /* Widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AA32A7D261000676419 /* Widget.cpp */; };
 		B26B1AA82A7D5D6F00676419 /* ProjectSettingPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AA62A7D5D6F00676419 /* ProjectSettingPanel.cpp */; };
@@ -70,6 +71,8 @@
 		B24076F82A723A6100221919 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B24077062A72591900221919 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B24A8A4F2AAB0E2300FABB45 /* DummyApplication.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DummyApplication.hpp; sourceTree = "<group>"; };
+		B24A8A5F2AAB516500FABB45 /* DefaultMeshes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultMeshes.cpp; sourceTree = "<group>"; };
+		B24A8A602AAB516500FABB45 /* DefaultMeshes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DefaultMeshes.hpp; sourceTree = "<group>"; };
 		B26B1AA02A7D1EBC00676419 /* KreatorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorConsolePanel.cpp; sourceTree = "<group>"; };
 		B26B1AA12A7D1EBC00676419 /* KreatorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KreatorConsolePanel.hpp; sourceTree = "<group>"; };
 		B26B1AA32A7D261000676419 /* Widget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Widget.cpp; sourceTree = "<group>"; };
@@ -180,6 +183,8 @@
 		B27B98C32AA9C173004A0388 /* Utils */ = {
 			isa = PBXGroup;
 			children = (
+				B24A8A5F2AAB516500FABB45 /* DefaultMeshes.cpp */,
+				B24A8A602AAB516500FABB45 /* DefaultMeshes.hpp */,
 				B27B98C42AA9C184004A0388 /* EntitySelectionContext.cpp */,
 				B27B98C52AA9C184004A0388 /* EntitySelectionContext.hpp */,
 			);
@@ -276,6 +281,7 @@
 				B210632E2A7E247400A28BA0 /* ContentBrowserItem.cpp in Sources */,
 				B2B2CE522A7B685A007EACDE /* FolderExplorer.cpp in Sources */,
 				B27B98C62AA9C184004A0388 /* EntitySelectionContext.cpp in Sources */,
+				B24A8A612AAB516500FABB45 /* DefaultMeshes.cpp in Sources */,
 				B23365962A75355200BC7B8B /* RendererLayer.cpp in Sources */,
 				B26B1ABD2A7D62D600676419 /* UIProperty.cpp in Sources */,
 				B23918E22AA09A0500641BF8 /* UserPreference.cpp in Sources */,

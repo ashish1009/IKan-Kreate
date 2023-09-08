@@ -13,6 +13,7 @@
 #include "ContentBrowserPanel.hpp"
 #include "DefaultAssetViewer.hpp"
 #include "SceneHierarchyPanel.hpp"
+#include "DefaultMeshes.hpp"
 
 extern std::string IKanVersion;
 
@@ -265,6 +266,9 @@ if (!Project::GetActive()) return
     
     // Close the project
     Project::CloseActive();
+    
+    // Destroy Default mesh if left
+    DefaultMesh::Shutdown();
   }
   
   void RendererLayer::OnUpdate(TimeStep ts)
@@ -891,6 +895,9 @@ if (!Project::GetActive()) return
     }
 
     PushProjectToRecentProjects(filepath);
+    
+    // Initialize Default mesh
+    DefaultMesh::Initialize();
   }
   
   void RendererLayer::PushProjectToRecentProjects(std::filesystem::path projectFile)
@@ -931,6 +938,9 @@ if (!Project::GetActive()) return
   void RendererLayer::CloseProject(bool unloadProject)
   {
     SaveProject();
+    
+    // Destroy Default mesh
+    DefaultMesh::Shutdown();
   }
   
   void RendererLayer::SaveProject()

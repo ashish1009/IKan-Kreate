@@ -161,6 +161,8 @@ namespace IKan
         auto tt = Utils::Math::GetTransformMatrix(p, r, s);
 
         RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, m_commonData->stencilShader, tt);
+        
+        Renderer::DisableStencilPass();
       }
 
       // Geometry pass Selected Mesh

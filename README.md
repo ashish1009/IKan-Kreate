@@ -186,6 +186,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
  ------------------------------------------------------------------------------------------------------------------
 
 ## TODO  
+- Joints
 - Parent Child Movement
 - Light
 - Materials
