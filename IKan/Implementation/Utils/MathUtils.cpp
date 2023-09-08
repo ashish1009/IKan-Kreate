@@ -79,4 +79,10 @@ namespace IKan::Utils
   {
     return {cartisian.x - cartisian.y, (cartisian.x + cartisian.y) / 2};
   }
+  
+  float Math::FloatClamp(float n, float lower, float upper)
+  {
+    return std::max(lower, std::min(n, upper));
+  }
+
 } // namespace IKan::Utils

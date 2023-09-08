@@ -61,7 +61,7 @@ namespace IKan
     }
   }
 
-  void SceneRenderer::BeginScene(const glm::mat4& camViewProjMat)
+  void SceneRenderer::BeginScene(const glm::mat4& camViewProjMat, float camDistance)
   {
     if (m_commonData->needResize)
     {
@@ -69,6 +69,7 @@ namespace IKan
       m_commonData->renderPass->Resize(m_commonData->viewportWidth, m_commonData->viewportHeight);
     }
     m_commonData->camViewProjection = camViewProjMat;
+    m_commonData->cameraDistance = camDistance;
   }
   
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform)
@@ -124,10 +125,6 @@ namespace IKan
   {
     for (const auto& dc : m_meshSourceDrawList)
     {
-      // draw floor as normal, but don't write the floor to the stencil buffer, we only care about the containers.
-      // We set its mask to 0x00 to not write to the stencil buffer.
-      glStencilMask(0x00);
-      
       auto pipeline = dc.staticMesh->GetPipeline();
       pipeline->Bind();
       
@@ -148,10 +145,6 @@ namespace IKan
     for (const auto& dc : m_selectedMeshSourceDrawList)
     {
       {
-        // 2nd. render pass: now draw slightly scaled versions of the objects, this time disabling stencil writing.
-        // Because the stencil buffer is now filled with several 1s. The parts of the buffer that are 1 are not drawn, thus only drawing
-        // the objects' size differences, making it look like borders.
-        // -----------------------------------------------------------------------------------------------------------------------------
         glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
         glStencilMask(0x00);
         glDisable(GL_DEPTH_TEST);
@@ -163,9 +156,14 @@ namespace IKan
         shader->Bind();
         shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
         
+        // Hack to change size of mesh
         glm::vec3 p, r, s;
         Utils::Math::DecomposeTransform(dc.transform, p, r, s);
-        s += 0.1;
+        float scaleFactor = 0.003 * m_commonData->cameraDistance;
+        scaleFactor = Utils::Math::FloatClamp(scaleFactor, 0.005, 0.05);
+        s += scaleFactor;
+        IK_CONSOLE_TRACE(" >> ", "{0}", scaleFactor);
+
         auto tt = Utils::Math::GetTransformMatrix(p, r, s);
         
         for (const SubMesh& submesh : dc.staticMesh->GetSubMeshes())
@@ -173,14 +171,13 @@ namespace IKan
           shader->SetUniformMat4("u_Transform", tt * submesh.transform);
           Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
         } // for each submeshes
+        
         glStencilMask(0xFF);
         glStencilFunc(GL_ALWAYS, 0, 0xFF);
         glEnable(GL_DEPTH_TEST);
       }
 
       {
-        // 1st. render pass, draw objects as normal, writing to the stencil buffer
-        // --------------------------------------------------------------------
         glStencilFunc(GL_ALWAYS, 1, 0xFF);
         glStencilMask(0xFF);
         
@@ -198,6 +195,7 @@ namespace IKan
         } // for each submeshes
       }
     }
+    IK_CONSOLE_TRACE(" >> ", "------------");
   }
   
   void SceneRenderer::BeginRenderPass()

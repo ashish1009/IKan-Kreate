@@ -26,6 +26,7 @@ namespace IKan
     Ref<RenderPass> renderPass;
     Ref<Shader> stencilShader;
     glm::mat4 camViewProjection;
+    float cameraDistance;
   };
   
   class SceneRenderer
@@ -45,7 +46,7 @@ namespace IKan
     
     /// This function begins the Batch for 2D Rendere (to be called each frame)
     /// - Parameter camViewProjMat: Camera View projection Matrix
-    void BeginScene(const glm::mat4& camViewProjMat);
+    void BeginScene(const glm::mat4& camViewProjMat, float camDistance);
     /// This function Ends the current batch by rendering all the vertex
     void EndScene();
     

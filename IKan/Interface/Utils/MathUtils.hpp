@@ -36,6 +36,13 @@ namespace IKan::Utils
     /// - Parameter cartisian: cartisian point
     [[nodiscard]] static glm::vec2 GetIsometricFromCartesian(const glm::vec2& cartisian);
     
+    /// This function clamp the float
+    /// - Parameters:
+    ///   - n: number
+    ///   - lower: lower bound
+    ///   - upper: upper bound
+    static float FloatClamp(float n, float lower, float upper);
+
     MAKE_PURE_STATIC(Math);
   };
 } // namespace IKan::Utils
