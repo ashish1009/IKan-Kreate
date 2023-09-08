@@ -61,15 +61,14 @@ namespace IKan
     }
   }
 
-  void SceneRenderer::BeginScene(const glm::mat4& camViewProjMat, float camDistance)
+  void SceneRenderer::BeginScene(const SceneRendererCamera& sceneCamera)
   {
     if (m_commonData->needResize)
     {
       // Resize the framebuffer
       m_commonData->renderPass->Resize(m_commonData->viewportWidth, m_commonData->viewportHeight);
     }
-    m_commonData->camViewProjection = camViewProjMat;
-    m_commonData->cameraDistance = camDistance;
+    m_commonData->sceneCamera = sceneCamera;
   }
   
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform)
@@ -126,7 +125,7 @@ namespace IKan
   {
     pipeline->Bind();
     shader->Bind();
-    shader->SetUniformMat4("u_ViewProjection", m_commonData->camViewProjection);
+    shader->SetUniformMat4("u_ViewProjection", m_commonData->sceneCamera.viewProjection);
     
     for (const SubMesh& submesh : submeshes)
     {
@@ -156,7 +155,7 @@ namespace IKan
         // Hack to change size of mesh
         glm::vec3 p, r, s;
         Utils::Math::DecomposeTransform(dc.transform, p, r, s);
-        float scaleFactor = Utils::Math::FloatClamp(0.003 * m_commonData->cameraDistance, 0.005, 0.05);
+        float scaleFactor = Utils::Math::FloatClamp(0.003 * m_commonData->sceneCamera.distance, 0.005, 0.05);
         s += scaleFactor;
         auto tt = Utils::Math::GetTransformMatrix(p, r, s);
 

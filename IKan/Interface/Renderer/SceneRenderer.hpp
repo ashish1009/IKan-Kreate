@@ -18,6 +18,12 @@ namespace IKan
   class Texture;
   class Renderer2DData;
   
+  struct SceneRendererCamera
+  {
+    glm::mat4 viewProjection;
+    float distance;
+  };
+  
   /// This structure stores the common data for Batch 2D Renderer
   struct SceneRendererData
   {
@@ -25,8 +31,7 @@ namespace IKan
     uint32_t viewportWidth, viewportHeight;
     Ref<RenderPass> renderPass;
     Ref<Shader> stencilShader;
-    glm::mat4 camViewProjection;
-    float cameraDistance;
+    SceneRendererCamera sceneCamera;
   };
   
   class SceneRenderer
@@ -45,8 +50,8 @@ namespace IKan
     void SetViewport(uint32_t width, uint32_t height);
     
     /// This function begins the Batch for 2D Rendere (to be called each frame)
-    /// - Parameter camViewProjMat: Camera View projection Matrix
-    void BeginScene(const glm::mat4& camViewProjMat, float camDistance);
+    /// - Parameter sceneCamera: Camera data
+    void BeginScene(const SceneRendererCamera& sceneCamera);
     /// This function Ends the current batch by rendering all the vertex
     void EndScene();
     
