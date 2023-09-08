@@ -26,12 +26,12 @@ Entities:
       MassDensity: 1
   - Entity: 5163250027035128624
     TagComponent:
-      Tag: Socket
+      Tag: Socket Hinge
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [-5.32716656, 3, 0]
+      Position: [6.04061556, 3, 0]
       Rotation: [0, 0, 0]
       Scale: [4, 0.99999994, 0.999999762]
     StaticMeshComponent:
@@ -48,14 +48,52 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 0
-  - Entity: 8245286707095445701
+  - Entity: 7860675139489931845
     TagComponent:
       Tag: Ball
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [-2.50130749, 2.99954224, -0.000305141788]
+      Position: [-2.50142956, 2.99953079, -0.000366188586]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 1336252552
+    RigidBodyComponent:
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    SphereColliderComponent:
+      Radius: 0.5
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+    JointComponent:
+      ConnectedEntity: 14962288839927092726
+      Type: 1
+      IsWorldSpace: false
+      WorldAnchorPoint: [0, 0, 0]
+      LocalAnchorPoint1: [0, 0, 0]
+      LocalAnchorPoint2: [2.79999995, 0, 0]
+      WorldAxis: [0, 0, 0]
+      LocalAxis1: [0, 0, 0]
+      LocalAxis2: [0, 0, 0]
+      MinAngle: 0
+      MaxAngle: 0
+      Speed: 0
+      Torque: 0
+  - Entity: 8245286707095445701
+    TagComponent:
+      Tag: Ball Hinge
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [8.64853954, 2.99957657, -0.000305114314]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -74,11 +112,18 @@ Entities:
       MassDensity: 0
     JointComponent:
       ConnectedEntity: 5163250027035128624
-      Type: 1
+      Type: 2
       IsWorldSpace: false
       WorldAnchorPoint: [0, 0, 0]
       LocalAnchorPoint1: [0, 0, 0]
-      LocalAnchorPoint2: [2.79999995, 0, 0]
+      LocalAnchorPoint2: [2.5999999, 0, 0]
+      WorldAxis: [0, 0, 0]
+      LocalAxis1: [0, 0, 0]
+      LocalAxis2: [2.5999999, 0, 0]
+      MinAngle: -1.57079637
+      MaxAngle: 1.57079637
+      Speed: 0
+      Torque: 0
   - Entity: 11073933567834345838
     TagComponent:
       Tag: Cube Fixed Ball 2
@@ -104,12 +149,19 @@ Entities:
       Bounciness: 0.100000001
       MassDensity: 0
     JointComponent:
-      ConnectedEntity: 8245286707095445701
+      ConnectedEntity: 7860675139489931845
       Type: 1
       IsWorldSpace: false
       WorldAnchorPoint: [0, 0, 0]
-      LocalAnchorPoint1: [-2.9000001, 0, 0]
+      LocalAnchorPoint1: [-3, 0, 0]
       LocalAnchorPoint2: [0, 0, 0]
+      WorldAxis: [0, 0, 0]
+      LocalAxis1: [0, 0, 0]
+      LocalAxis2: [0, 0, 0]
+      MinAngle: 0
+      MaxAngle: 0
+      Speed: 0
+      Torque: 0
   - Entity: 11623088448997931326
     TagComponent:
       Tag: Cube Fixed 1
@@ -141,6 +193,37 @@ Entities:
       WorldAnchorPoint: [2, 5.9000001, 0]
       LocalAnchorPoint1: [0, -3, 0]
       LocalAnchorPoint2: [2, 0, 0]
+      WorldAxis: [0, 0, 0]
+      LocalAxis1: [0, 0, 0]
+      LocalAxis2: [0, 0, 0]
+      MinAngle: 0
+      MaxAngle: 0
+      Speed: 0
+      Torque: 0
+  - Entity: 14962288839927092726
+    TagComponent:
+      Tag: Socket
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-5.32732534, 3, 0]
+      Rotation: [0, 0, 0]
+      Scale: [4, 0.99999994, 0.999999762]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
   - Entity: 15023677173591981440
     TagComponent:
       Tag: Sphere

@@ -642,7 +642,7 @@ namespace Kreator
       int32_t selected = static_cast<int32_t>(fjc.type);
       if (Kreator_UI::PropertyDropdown("Type",
                                        {"Fixed", "BallSocket", "Hinge"},
-                                       2, &selected))
+                                       3, &selected))
       {
         fjc.type = static_cast<JointComponent::Type>(selected);
       }
@@ -655,6 +655,34 @@ namespace Kreator
       {
         Kreator_UI::Property("Local Anchor Point 1", fjc.localAnchorPoint1);
         Kreator_UI::Property("Local Anchor Point 2", fjc.localAnchorPoint2);
+      }
+      
+      if (fjc.type == IKan::JointComponent::Type::Hinge)
+      {
+        if (fjc.isWorldSpace)
+        {
+          Kreator_UI::Property("World Anchor Axis", fjc.hingeData.worldAxis);
+        }
+        else
+        {
+          Kreator_UI::Property("Local Anchor Axis 1", fjc.hingeData.localAxis1);
+          Kreator_UI::Property("Local Anchor Axis 2", fjc.hingeData.localAxis2);
+        }
+        
+        auto rotationMin = glm::degrees(fjc.hingeData.initMinAngleLimit);
+        if (Kreator_UI::Property("Init Min Angle", rotationMin))
+        {
+          fjc.hingeData.initMinAngleLimit = glm::radians(rotationMin);
+        }
+
+        auto rotationMax = glm::degrees(fjc.hingeData.initMaxAngleLimit);
+        if (Kreator_UI::Property("Init Max Angle", rotationMax))
+        {
+          fjc.hingeData.initMaxAngleLimit = glm::radians(rotationMax);
+        }
+        
+        Kreator_UI::Property("Init Speed", fjc.hingeData.initMotorSpeed);
+        Kreator_UI::Property("Init Torque", fjc.hingeData.initMaxMotorTorque);
       }
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);

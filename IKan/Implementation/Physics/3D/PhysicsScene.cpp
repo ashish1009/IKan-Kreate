@@ -234,7 +234,7 @@ namespace IKan
         Vector3 localAxis1({ fjc.hingeData.localAxis1.x, fjc.hingeData.localAxis1.y, fjc.hingeData.localAxis1.z});
         Vector3 localAxis2({ fjc.hingeData.localAxis2.x, fjc.hingeData.localAxis2.y, fjc.hingeData.localAxis2.z});
 
-        joint.MakeHinge(worldAxis, localAxis1, localAxis1, fjc.hingeData.initMinAngleLimit, fjc.hingeData.initMaxAngleLimit,
+        joint.MakeHinge(worldAxis, localAxis1, localAxis2, fjc.hingeData.initMinAngleLimit, fjc.hingeData.initMaxAngleLimit,
                         fjc.hingeData.initMotorSpeed, fjc.hingeData.initMaxMotorTorque);
         break;
       }

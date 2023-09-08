@@ -335,6 +335,15 @@ namespace IKan {
       out << YAML::Key << "LocalAnchorPoint1" << YAML::Value << jointComponent.localAnchorPoint1;
       out << YAML::Key << "LocalAnchorPoint2" << YAML::Value << jointComponent.localAnchorPoint2;
 
+      out << YAML::Key << "WorldAxis" << YAML::Value << jointComponent.hingeData.worldAxis;
+      out << YAML::Key << "LocalAxis1" << YAML::Value << jointComponent.hingeData.localAxis1;
+      out << YAML::Key << "LocalAxis2" << YAML::Value << jointComponent.hingeData.localAxis2;
+
+      out << YAML::Key << "MinAngle" << YAML::Value << jointComponent.hingeData.initMinAngleLimit;
+      out << YAML::Key << "MaxAngle" << YAML::Value << jointComponent.hingeData.initMaxAngleLimit;
+      out << YAML::Key << "Speed" << YAML::Value << jointComponent.hingeData.initMotorSpeed;
+      out << YAML::Key << "Torque" << YAML::Value << jointComponent.hingeData.initMaxMotorTorque;
+
       out << YAML::EndMap; // JointComponent
     }
     out << YAML::EndMap; // Entity
@@ -551,6 +560,16 @@ namespace IKan {
         component.worldAnchorPoint = jointComponent["WorldAnchorPoint"].as<glm::vec3>();
         component.localAnchorPoint1 = jointComponent["LocalAnchorPoint1"].as<glm::vec3>();
         component.localAnchorPoint2 = jointComponent["LocalAnchorPoint2"].as<glm::vec3>();
+        
+        component.hingeData.worldAxis = jointComponent["WorldAxis"].as<glm::vec3>();
+        component.hingeData.localAxis1 = jointComponent["LocalAxis1"].as<glm::vec3>();
+        component.hingeData.localAxis2 = jointComponent["LocalAxis2"].as<glm::vec3>();
+        
+        component.hingeData.initMinAngleLimit = jointComponent["MinAngle"].as<float>();
+        component.hingeData.initMaxAngleLimit = jointComponent["MaxAngle"].as<float>();
+        component.hingeData.initMotorSpeed = jointComponent["Speed"].as<float>();
+        component.hingeData.initMaxMotorTorque = jointComponent["Torque"].as<float>();
+
       }
     }
   }

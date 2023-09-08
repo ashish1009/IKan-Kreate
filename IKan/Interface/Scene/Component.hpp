@@ -237,8 +237,8 @@ namespace IKan
     glm::vec3 localAxis1 = {0, 0, 0};
     glm::vec3 localAxis2 = {0, 0, 0};
     
-    float initMinAngleLimit, initMaxAngleLimit;
-    float initMotorSpeed, initMaxMotorTorque;
+    float initMinAngleLimit = 0, initMaxAngleLimit = 0;
+    float initMotorSpeed = 0, initMaxMotorTorque = 0;
   };
 
   struct JointComponent
