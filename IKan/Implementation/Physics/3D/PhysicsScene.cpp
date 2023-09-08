@@ -207,20 +207,35 @@ namespace IKan
     auto body2 = static_cast<RigidBody*>(rigidBodyComponent2.runtimeBody);
     
     // Anchor point in world-space
-    Vector3 anchorPoint({
+    Vector3 worldAnchorPoint({
       fixedJointComponent.worldAnchorPoint.x,
       fixedJointComponent.worldAnchorPoint.y,
       fixedJointComponent.worldAnchorPoint.z});
     
-    Vector3 anchorPoint1({0, 2, 0});
-    Vector3 anchorPoint2({-2, 0, 0});
+    Vector3 localAnchorPoint1({
+      fixedJointComponent.localAnchorPoint1.x,
+      fixedJointComponent.localAnchorPoint1.y,
+      fixedJointComponent.localAnchorPoint1.z});
+    Vector3 localAnchorPoint2({
+      fixedJointComponent.localAnchorPoint2.x,
+      fixedJointComponent.localAnchorPoint2.y,
+      fixedJointComponent.localAnchorPoint2.z});
     
     // Create the joint info object
-    FixedJointInfo jointInfo(body1, body2, anchorPoint1, anchorPoint2);
-    
-    // Create the fixed joint in the physics world
-    // TODO: Store the joint in some map?
-    m_physics3DWorld->createJoint(jointInfo);
+    if (fixedJointComponent.isWorldSpace)
+    {
+      FixedJointInfo jointInfo(body1, body2, worldAnchorPoint);
+      // Create the fixed joint in the physics world
+      // TODO: Store the joint in some map?
+      m_physics3DWorld->createJoint(jointInfo);
+    }
+    else
+    {
+      FixedJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
+      // Create the fixed joint in the physics world
+      // TODO: Store the joint in some map?
+      m_physics3DWorld->createJoint(jointInfo);
+    }
   }
   
   DebugRenderer PhysicsScene::GetDebugRenderer() const
