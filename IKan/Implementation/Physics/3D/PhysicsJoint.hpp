@@ -35,7 +35,10 @@ namespace IKan
     void MakeFixed();
 
     /// This function create the fixed joint in world
-    void MakeBallSocket();
+    /// - Parameters:
+    ///   - coneLimit: Cone Limit flag
+    ///   - coneAngle: cone angle
+    void MakeBallSocket(bool coneLimit, float coneAngle);
 
     /// This function create the fixed joint in world
     /// - Parameters:

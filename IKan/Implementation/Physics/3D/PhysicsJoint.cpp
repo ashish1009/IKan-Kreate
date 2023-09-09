@@ -36,17 +36,21 @@ namespace IKan
     }
   }
   
-  void PhysicsJoint::MakeBallSocket()
+  void PhysicsJoint::MakeBallSocket(bool coneLimit, float coneAngle)
   {
     if (worldSpace)
     {
       BallAndSocketJointInfo jointInfo(body1, body2, worldAnchorPoint);
-      world->createJoint(jointInfo);
+      BallAndSocketJoint* joint = dynamic_cast<BallAndSocketJoint*>(world->createJoint(jointInfo));
+      joint->enableConeLimit(coneLimit);
+      joint->setConeLimitHalfAngle(coneAngle);
     }
     else
     {
       BallAndSocketJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
-      world->createJoint(jointInfo);
+      BallAndSocketJoint* joint = dynamic_cast<BallAndSocketJoint*>(world->createJoint(jointInfo));
+      joint->enableConeLimit(coneLimit);
+      joint->setConeLimitHalfAngle(coneAngle);
     }
   }
   

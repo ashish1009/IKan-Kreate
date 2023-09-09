@@ -231,6 +231,12 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(CapsuleColliderComponent);
   };
   
+  struct BallSocketData
+  {
+    bool coneLimit = false;
+    float coneAngle = M_PI / 4;
+  };
+  
   struct HingeData
   {
     glm::vec3 worldAxis = {0, 0, 0};
@@ -255,6 +261,7 @@ namespace IKan
     glm::vec3 localAnchorPoint1 = {0, 0, 0};
     glm::vec3 localAnchorPoint2 = {0, 0, 0};
     
+    BallSocketData ballSocketData;
     HingeData hingeData;
 
     JointComponent();

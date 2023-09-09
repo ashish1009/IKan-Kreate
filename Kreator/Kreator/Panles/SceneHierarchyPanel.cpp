@@ -657,7 +657,16 @@ namespace Kreator
         Kreator_UI::Property("Local Anchor Point 2", fjc.localAnchorPoint2);
       }
       
-      if (fjc.type == IKan::JointComponent::Type::Hinge)
+      if (fjc.type == IKan::JointComponent::Type::BallSocket)
+      {
+        Kreator_UI::Property("Limit Cone", fjc.ballSocketData.coneLimit);
+        auto rotation = glm::degrees(fjc.ballSocketData.coneAngle);
+        if (Kreator_UI::Property("Cone Angle", rotation))
+        {
+          fjc.ballSocketData.coneAngle = glm::radians(rotation);
+        }
+      }
+      else if (fjc.type == IKan::JointComponent::Type::Hinge)
       {
         if (fjc.isWorldSpace)
         {

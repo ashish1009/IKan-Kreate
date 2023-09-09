@@ -453,6 +453,8 @@ return *this; \
     worldAnchorPoint = other.worldAnchorPoint;
     localAnchorPoint1 = other.localAnchorPoint1;
     localAnchorPoint2 = other.localAnchorPoint2;
+    
+    ballSocketData = other.ballSocketData;
     hingeData = other.hingeData;
   }
 

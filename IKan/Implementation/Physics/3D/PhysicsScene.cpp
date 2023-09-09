@@ -225,7 +225,7 @@ namespace IKan
       }
       case JointComponent::Type::BallSocket:
       {
-        joint.MakeBallSocket();
+        joint.MakeBallSocket(fjc.ballSocketData.coneLimit, fjc.ballSocketData.coneAngle);
         break;
       }
       case JointComponent::Type::Hinge:

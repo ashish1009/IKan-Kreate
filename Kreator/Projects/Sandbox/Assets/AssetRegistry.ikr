@@ -14,9 +14,6 @@ Assets:
   - Handle: 2234008704
     FilePath: Meshes/Default/Capsule.fbx
     Type: MeshSource
-  - Handle: 3172804954
-    FilePath: Scenes/Demo_01.ikscene
-    Type: Scene
   - Handle: 3651669563
     FilePath: Meshes/Default/Plane.fbx
     Type: MeshSource
