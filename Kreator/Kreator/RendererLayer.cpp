@@ -787,8 +787,8 @@ if (!Project::GetActive()) return
       
       if (fjc.isWorldSpace)
       {
-        m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Cube),
-                                             glm::scale(glm::translate(unitMat, fjc.worldAnchorPoint), {0.5, 0.5, 0.5}),
+        m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Sphere),
+                                             glm::scale(glm::translate(unitMat, fjc.worldAnchorPoint), {0.2, 0.2, 0.2}),
                                              m_jointShader);
       }
       else
@@ -799,8 +799,9 @@ if (!Project::GetActive()) return
           const glm::mat4 posRotTransform = Utils::Math::GetTransformMatrix(tc.Position(), tc.Rotation(), unitScale);
           const glm::vec3 position = posRotTransform * glm::vec4(localAnchorPoint, 1.0f);
 
-          m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Cube),
-                                               glm::translate(unitMat, position), m_jointShader);
+          m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Sphere),
+                                               glm::scale(glm::translate(unitMat, position), {0.2, 0.2, 0.2}),
+                                               m_jointShader);
         };
         drawJoint(entity, fjc.localAnchorPoint1);
         drawJoint(m_currentScene->GetEntityWithUUID(fjc.connectedEntity), fjc.localAnchorPoint2);
@@ -1896,29 +1897,6 @@ if (!Project::GetActive()) return
       {
         m_gizmoType = ImGuizmo::OPERATION::SCALE;
       }
-
-      buttonTint = m_gizmoMode == ImGuizmo::MODE::LOCAL ?
-      c_SelectedGizmoButtonColor :
-      c_UnselectedGizmoButtonColor;
-      if (gizmoButton(m_gizmoModeTex, buttonTint))
-      {
-        if (m_gizmoMode == ImGuizmo::MODE::LOCAL)
-        {
-          m_gizmoMode = ImGuizmo::MODE::WORLD;
-        }
-        else
-        {
-          m_gizmoMode = ImGuizmo::MODE::LOCAL;
-        }
-      }
-      if (m_gizmoMode == ImGuizmo::MODE::LOCAL)
-      {
-        UI::SetTooltip("Change to World Space");
-      }
-      else
-      {
-        UI::SetTooltip("Change to Local Space");
-      }
     }
     
     ImGui::Spring();
@@ -1954,6 +1932,14 @@ if (!Project::GetActive()) return
 #else
       glm::mat4 transform = entityTransform.Transform();
 #endif
+      if (Input::IsKeyPressed(Key::LeftAlt))
+      {
+        m_gizmoMode = 1;
+      }
+      else
+      {
+        m_gizmoMode = 0;
+      }
       ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
                            glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
                            (ImGuizmo::OPERATION)m_gizmoType,
