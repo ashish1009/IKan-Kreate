@@ -48,8 +48,8 @@ Entities:
     JointComponent:
       ConnectedEntity: 15405040201572041777
       Type: 1
-      IsWorldSpace: false
-      WorldAnchorPoint: [0, 0, 0]
+      IsWorldSpace: true
+      WorldAnchorPoint: [3.29999995, 2.4000001, 19]
       LocalAnchorPoint1: [0, -2.5, 0]
       LocalAnchorPoint2: [-3.79999995, 0, 0]
       ConeLimit: false
@@ -91,17 +91,17 @@ Entities:
       ConnectedEntity: 17134614711486225160
       Type: 2
       IsWorldSpace: true
-      WorldAnchorPoint: [-0.100000001, 0, 22.6000004]
+      WorldAnchorPoint: [-4, 4, 19.3999996]
       LocalAnchorPoint1: [0, 1.5, 0]
       LocalAnchorPoint2: [-3.70000005, 0, -1.70000005]
       ConeLimit: true
       ConeAngle: 0.785398185
-      Limit: false
-      WorldAxis: [-4, 4, 0]
+      Limit: true
+      WorldAxis: [1, 0, 0]
       LocalAxis1: [0, 0, 0]
       LocalAxis2: [7.5, 0, 0]
-      MinAngle: -1.57079637
-      MaxAngle: 1.57079637
+      MinAngle: -0.785398185
+      MaxAngle: 0.785398185
       Speed: 0
       Torque: 0
   - Entity: 15405040201572041777
@@ -159,8 +159,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-3.8304925, 3.93492079, 16.2221584]
-      Rotation: [0, 1.57079637, 0]
+      Position: [-3.8304925, 3.93492079, 15.8680687]
+      Rotation: [0, 1.61617482, 0]
       Scale: [6, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872

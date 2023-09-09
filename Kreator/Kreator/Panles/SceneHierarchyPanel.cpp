@@ -637,8 +637,10 @@ namespace Kreator
         fjc.connectedEntity = targetEntity.GetUUID();
       }
 
+#ifdef UseLocalSpace
       Kreator_UI::Property("Use world Space", fjc.isWorldSpace);
-
+#endif
+      
       int32_t selected = static_cast<int32_t>(fjc.type);
       if (Kreator_UI::PropertyDropdown("Type",
                                        {"Fixed", "BallSocket", "Hinge"},
@@ -683,6 +685,7 @@ namespace Kreator
         }
         
         Kreator_UI::Property("Limit", fjc.hingeData.limit);
+        Kreator_UI::Property("Motor", fjc.hingeData.motor);
         if (fjc.hingeData.limit)
         {
           auto rotationMin = glm::degrees(fjc.hingeData.initMinAngleLimit);
@@ -696,10 +699,20 @@ namespace Kreator
           {
             fjc.hingeData.initMaxAngleLimit = glm::radians(rotationMax);
           }
-          
-          Kreator_UI::Property("Init Speed", fjc.hingeData.initMotorSpeed);
-          Kreator_UI::Property("Init Torque", fjc.hingeData.initMaxMotorTorque);
         }
+        
+        if (fjc.hingeData.motor)
+        {
+          auto rotation = glm::degrees(fjc.hingeData.initMotorSpeed);
+          if (Kreator_UI::Property("Init Speed", rotation))
+          {
+            fjc.hingeData.initMotorSpeed = glm::radians(rotation);
+          }
+          UI::SetTooltip("Degree per seconds");
+          
+          Kreator_UI::Property("Max Torque", fjc.hingeData.initMaxMotorTorque);
+          UI::SetTooltip("Newton-Meter");
+        } 
       }
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
@@ -781,7 +794,7 @@ namespace Kreator
       {
         if (ImGui::MenuItem("Capsule Collider"))
         {
-          [[maybe_unused]] auto& meshColliderComp = m_selectionContext.At(0).AddComponent<CapsuleColliderComponent>();
+          [[maybe_unused]] auto& capsuleColliderComp = m_selectionContext.At(0).AddComponent<CapsuleColliderComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
@@ -789,7 +802,8 @@ namespace Kreator
       {
         if (ImGui::MenuItem("Joint"))
         {
-          [[maybe_unused]] auto& meshColliderComp = m_selectionContext.At(0).AddComponent<JointComponent>();
+          [[maybe_unused]] auto& jointComp = m_selectionContext.At(0).AddComponent<JointComponent>();
+          jointComp.worldAnchorPoint = m_selectionContext.At(0).Transform().Position();
           ImGui::CloseCurrentPopup();
         }
       }

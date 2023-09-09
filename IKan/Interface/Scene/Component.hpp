@@ -239,13 +239,14 @@ namespace IKan
   
   struct HingeData
   {
-    bool limit = false;
-    
     glm::vec3 worldAxis = {0, 0, 0};
     glm::vec3 localAxis1 = {0, 0, 0};
     glm::vec3 localAxis2 = {0, 0, 0};
-    
+   
+    bool limit = false;
     float initMinAngleLimit = -M_PI / 4, initMaxAngleLimit = M_PI / 4;
+    
+    bool motor = false;
     float initMotorSpeed = 0, initMaxMotorTorque = 0;
   };
 
@@ -258,7 +259,7 @@ namespace IKan
     
     UUID connectedEntity;
     Type type = Type::Fixed;
-    bool isWorldSpace = false;
+    bool isWorldSpace = true;
     glm::vec3 worldAnchorPoint = {0, 0, 0};
     glm::vec3 localAnchorPoint1 = {0, 0, 0};
     glm::vec3 localAnchorPoint2 = {0, 0, 0};

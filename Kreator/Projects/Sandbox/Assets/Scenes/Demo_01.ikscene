@@ -48,18 +48,19 @@ Entities:
     JointComponent:
       ConnectedEntity: 15405040201572041777
       Type: 1
-      IsWorldSpace: false
-      WorldAnchorPoint: [0, 0, 0]
+      IsWorldSpace: true
+      WorldAnchorPoint: [3.29999995, 2.4000001, 19]
       LocalAnchorPoint1: [0, -2.5, 0]
       LocalAnchorPoint2: [-3.79999995, 0, 0]
       ConeLimit: false
       ConeAngle: 0.785398185
-      Limit: false
       WorldAxis: [0, 0, 0]
       LocalAxis1: [0, 0, 0]
       LocalAxis2: [-3.79999995, 0, 0]
+      Limit: false
       MinAngle: -1.57079637
       MaxAngle: 1.57079637
+      Motor: false
       Speed: 0
       Torque: 0
   - Entity: 11770239766120266953
@@ -69,9 +70,9 @@ Entities:
     Children:
       - Handle: 17134614711486225160
     TransformComponent:
-      Position: [-4.00199318, 4.00005341, 19.999939]
+      Position: [-3.90980268, 4.00005341, 19.999939]
       Rotation: [0, 0, 1.57079649]
-      Scale: [0.999983907, 0.999983907, 1]
+      Scale: [0.999983609, 0.999983609, 1]
     StaticMeshComponent:
       MeshHandle: 2234008704
     RigidBodyComponent:
@@ -96,14 +97,15 @@ Entities:
       LocalAnchorPoint2: [-3.70000005, 0, -1.70000005]
       ConeLimit: true
       ConeAngle: 0.785398185
-      Limit: false
-      WorldAxis: [1, 0, 0]
+      WorldAxis: [1, 1, 0]
       LocalAxis1: [0, 0, 0]
       LocalAxis2: [7.5, 0, 0]
-      MinAngle: -1.57079637
-      MaxAngle: 1.57079637
-      Speed: 0
-      Torque: 0
+      Limit: false
+      MinAngle: -0.785398185
+      MaxAngle: 0.785398185
+      Motor: true
+      Speed: 0.0174532924
+      Torque: 20
   - Entity: 15405040201572041777
     TagComponent:
       Tag: Socket Cube
@@ -159,9 +161,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-3.8304925, 3.93492079, 15.8680687]
-      Rotation: [3.14159274, 1.57079637, 3.14159274]
-      Scale: [6, 1, 1]
+      Position: [-3.8304925, 0.0758515224, 17.5726528]
+      Rotation: [0.535816073, 0, 0]
+      Scale: [1, 6, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:

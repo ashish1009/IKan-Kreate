@@ -50,8 +50,8 @@ namespace IKan
     ///   - initMaxAngleLimit: initMaxAngleLimit
     ///   - initMotorSpeed: initMotorSpeed 
     ///   - initMaxMotorTorque: initMaxMotorTorque 
-    void MakeHinge(const Vector3& worldAxis, const Vector3& localAxis1, const Vector3& localAxis2, bool limit,
-                   decimal initMinAngleLimit, decimal initMaxAngleLimit, decimal initMotorSpeed,
-                   decimal initMaxMotorTorque);
+    void MakeHinge(const Vector3& worldAxis, const Vector3& localAxis1, const Vector3& localAxis2,
+                   bool limit, decimal initMinAngleLimit, decimal initMaxAngleLimit,
+                   bool motor, decimal initMotorSpeed, decimal initMaxMotorTorque);
   };
 } // namespace IKan
