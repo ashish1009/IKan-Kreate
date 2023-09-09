@@ -248,8 +248,8 @@ namespace Kreator
     
     ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x - edgeOffset * 3.0f);
     
-    static std::string searchedString;
-    Kreator_UI::Widgets::SearchWidget(searchedString.data());
+    static char searchedString[128];
+    Kreator_UI::Widgets::SearchWidget(searchedString);
     
     ImGui::Spacing();
 

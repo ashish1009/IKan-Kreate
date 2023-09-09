@@ -22,7 +22,7 @@ Entities:
       Primary: true
   - Entity: 7152025791517664716
     TagComponent:
-      Tag: Hinge Capsule
+      Tag: Ball Capsule
     Parent: 0
     Children:
       - Handle: 15405040201572041777
@@ -47,7 +47,7 @@ Entities:
       MassDensity: 0
     JointComponent:
       ConnectedEntity: 15405040201572041777
-      Type: 2
+      Type: 1
       IsWorldSpace: false
       WorldAnchorPoint: [0, 0, 0]
       LocalAnchorPoint1: [0, -2.5, 0]
@@ -103,7 +103,7 @@ Entities:
       Torque: 0
   - Entity: 15405040201572041777
     TagComponent:
-      Tag: Hinge Socket
+      Tag: Socket
     Parent: 7152025791517664716
     Children:
       []
