@@ -246,9 +246,10 @@ namespace IKan
     
     // Create the Pipeline instnace
     m_pipeline = Pipeline::Create(pipelineSpec);
+    m_indexBuffer = IndexBuffer::CreateWithSize((void*)m_indices.data(), uint32_t(m_indices.size() * sizeof(Index)));
     
-    m_indexBuffer = IndexBuffer::CreateWithSize((void*)m_indices.data(),
-                                                uint32_t(m_indices.size() * sizeof(Index)));
+    // Create Base Material
+    m_baseMaterial = Material::Create(pipelineSpec.shader);
   }
 
   const std::vector<SubMesh>& MeshSource::GetSubMeshes() const
@@ -260,7 +261,11 @@ namespace IKan
   {
     return m_pipeline;
   }
-  
+  const Ref<Material>& MeshSource::GetBaseMaterial() const
+  {
+    return m_baseMaterial;
+  }
+
   const std::vector<Triangle>& MeshSource::GetTriangleCache(uint32_t submeshIndex) const
   {
     return m_triangleCache.at(submeshIndex);

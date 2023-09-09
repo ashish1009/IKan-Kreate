@@ -9,6 +9,7 @@
 
 #include "Asset/Asset.hpp"
 #include "Core/AABB.hpp"
+#include "Renderer/ShaderMaterial.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
 #include "Renderer/Graphics/RendererBuffers.hpp"
@@ -81,6 +82,8 @@ namespace IKan
     const std::vector<Triangle>& GetTriangleCache(uint32_t submeshIndex) const;
     /// This function returns the mesh pipeline
     const Ref<Pipeline>& GetPipeline() const;
+    /// This function returns the Base Material
+    Ref<Material>& GetBaseMaterial() const;
 
     /// This funciton creates the mesh from assimp library and store the data
     /// - Parameter filePath: mesh model file path
@@ -122,9 +125,10 @@ namespace IKan
     std::unordered_map<uint32_t, std::vector<Triangle>> m_triangleCache;
 
     // Graphics
-    std::shared_ptr<Pipeline> m_pipeline;
-    std::shared_ptr<VertexBuffer> m_vertexBuffer;
-    std::shared_ptr<IndexBuffer> m_indexBuffer;
+    Ref<Pipeline> m_pipeline;
+    Ref<VertexBuffer> m_vertexBuffer;
+    Ref<IndexBuffer> m_indexBuffer;
+    Ref<Material> m_baseMaterial;
 
     // Assimp
     const aiScene* m_scene;
