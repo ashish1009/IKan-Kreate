@@ -287,6 +287,9 @@ namespace Kreator
     uint32_t m_gizmoMode = 1;  //  0 = local, 1 = World
     Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
 
+    // Editor Data ---------------------------------------
+    Ref<Shader> m_jointShader;
+    
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
   };

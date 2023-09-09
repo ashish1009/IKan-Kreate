@@ -73,6 +73,7 @@
 		B24A8A4F2AAB0E2300FABB45 /* DummyApplication.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DummyApplication.hpp; sourceTree = "<group>"; };
 		B24A8A5F2AAB516500FABB45 /* DefaultMeshes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultMeshes.cpp; sourceTree = "<group>"; };
 		B24A8A602AAB516500FABB45 /* DefaultMeshes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DefaultMeshes.hpp; sourceTree = "<group>"; };
+		B24A8AC52AACDC6900FABB45 /* JointMeshShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = JointMeshShader.glsl; sourceTree = "<group>"; };
 		B26B1AA02A7D1EBC00676419 /* KreatorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorConsolePanel.cpp; sourceTree = "<group>"; };
 		B26B1AA12A7D1EBC00676419 /* KreatorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KreatorConsolePanel.hpp; sourceTree = "<group>"; };
 		B26B1AA32A7D261000676419 /* Widget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Widget.cpp; sourceTree = "<group>"; };
@@ -119,6 +120,7 @@
 				B283DF8C2A8113E3002B5DC3 /* libminizip.1.dylib */,
 				B283DF8E2A8113E3002B5DC3 /* libpugixml.1.13.dylib */,
 				B24076F82A723A6100221919 /* PrefixHeader.pch */,
+				B24A8A852AACDC6900FABB45 /* Resources */,
 				B24076D42A72375000221919 /* Kreator */,
 				B24076D32A72375000221919 /* Products */,
 				B24077052A72591800221919 /* Frameworks */,
@@ -159,6 +161,22 @@
 				B24077062A72591900221919 /* libIKan.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B24A8A852AACDC6900FABB45 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B24A8AC42AACDC6900FABB45 /* Shader */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B24A8AC42AACDC6900FABB45 /* Shader */ = {
+			isa = PBXGroup;
+			children = (
+				B24A8AC52AACDC6900FABB45 /* JointMeshShader.glsl */,
+			);
+			path = Shader;
 			sourceTree = "<group>";
 		};
 		B26B1A9F2A7D1EAF00676419 /* Panles */ = {

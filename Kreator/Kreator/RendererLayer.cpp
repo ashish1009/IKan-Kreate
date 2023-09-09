@@ -189,6 +189,9 @@ if (!Project::GetActive()) return
     m_rotateToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Rotate.png"));
     m_scaleToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
     m_gizmoModeTex = Image::Create(KreatorResourcePath("Textures/Icons/GuizmoMode.png"));
+    
+    // Overriden Shader
+    m_jointShader = Shader::Create(KreatorResourcePath("Shader/JointMeshShader.glsl"));
   }
   
   RendererLayer::~RendererLayer()
@@ -759,6 +762,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowJoints(const glm::vec4 &color)
   {
+    Renderer::EnableStencilPass();
     m_viewportRenderer->BeginScene({m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetDistance()});
     
     static constexpr glm::vec3 unitScale = {1, 1, 1};
@@ -784,9 +788,8 @@ if (!Project::GetActive()) return
       if (fjc.isWorldSpace)
       {
         m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Cube),
-                                             glm::translate(unitMat, fjc.worldAnchorPoint));
-
-        Renderer2D::DrawQuad({fjc.worldAnchorPoint}, unitScale, zeroRotation, color);
+                                             glm::scale(glm::translate(unitMat, fjc.worldAnchorPoint), {0.5, 0.5, 0.5}),
+                                             m_jointShader);
       }
       else
       {
@@ -797,13 +800,14 @@ if (!Project::GetActive()) return
           const glm::vec3 position = posRotTransform * glm::vec4(localAnchorPoint, 1.0f);
 
           m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Cube),
-                                               glm::translate(unitMat, position));
+                                               glm::translate(unitMat, position), m_jointShader);
         };
         drawJoint(entity, fjc.localAnchorPoint1);
         drawJoint(m_currentScene->GetEntityWithUUID(fjc.connectedEntity), fjc.localAnchorPoint2);
       }
     }
     m_viewportRenderer->EndScene();
+    Renderer::DisableStencilPass();
   }
   
   void RendererLayer::ShowGrid(const glm::vec4 &color)

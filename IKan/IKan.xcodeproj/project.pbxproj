@@ -366,7 +366,6 @@
 		B24A8A512AAB254600FABB45 /* MeshStencilShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MeshStencilShader.glsl; sourceTree = "<group>"; };
 		B24A8A622AAB9B0800FABB45 /* PhysicsJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsJoint.cpp; sourceTree = "<group>"; };
 		B24A8A632AAB9B0800FABB45 /* PhysicsJoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsJoint.hpp; sourceTree = "<group>"; };
-		B24A8A7E2AACDA3B00FABB45 /* JointMeshShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = JointMeshShader.glsl; sourceTree = "<group>"; };
 		B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
 		B26B1A6F2A7D153400676419 /* PanelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PanelManager.cpp; sourceTree = "<group>"; };
 		B26B1A702A7D153400676419 /* PanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PanelManager.hpp; sourceTree = "<group>"; };
@@ -603,7 +602,6 @@
 				B23365872A7530A600BC7B8B /* TextShader.glsl */,
 				B26DEF702A838F5300C68ED5 /* PBR_StaticShader.glsl */,
 				B24A8A512AAB254600FABB45 /* MeshStencilShader.glsl */,
-				B24A8A7E2AACDA3B00FABB45 /* JointMeshShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
