@@ -18,10 +18,19 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Renderer, "Creating Open GL Renderer API");
     IK_LOG_TRACE(LogModule::Renderer, "-----------------------------");
     
-    // configure global opengl state
-    // -----------------------------
+    // TODO: Get from user?
+    // Configure global opengl state -----------------------
+    
+    // For Text Rendering
+    glPixelStorei(GL_UNPACK_ALIGNMENT, 1);
+    glEnable(GL_MULTISAMPLE);
+    
+    glEnable(GL_BLEND);
+    glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
+    
     glEnable(GL_DEPTH_TEST);
     glDepthFunc(GL_LESS);
+    
     glEnable(GL_STENCIL_TEST);
     glStencilFunc(GL_NOTEQUAL, 1, 0xFF);
     glStencilOp(GL_KEEP, GL_KEEP, GL_REPLACE);
