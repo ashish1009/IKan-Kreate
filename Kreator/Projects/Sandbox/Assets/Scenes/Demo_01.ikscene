@@ -27,7 +27,7 @@ Entities:
     Children:
       - Handle: 15405040201572041777
     TransformComponent:
-      Position: [4.99999952, 5.00017357, 20]
+      Position: [3.30158281, 5.00017357, 19.1149387]
       Rotation: [0, 0, 0]
       Scale: [0.999999225, 2, 1]
     StaticMeshComponent:
@@ -54,6 +54,7 @@ Entities:
       LocalAnchorPoint2: [-3.79999995, 0, 0]
       ConeLimit: false
       ConeAngle: 0.785398185
+      Limit: false
       WorldAxis: [0, 0, 0]
       LocalAxis1: [0, 0, 0]
       LocalAxis2: [-3.79999995, 0, 0]
@@ -63,23 +64,24 @@ Entities:
       Torque: 0
   - Entity: 11770239766120266953
     TagComponent:
-      Tag: Ball
+      Tag: Hing Sphere
     Parent: 0
     Children:
       - Handle: 17134614711486225160
     TransformComponent:
-      Position: [-2.99992943, 4.00005341, 19.999939]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Position: [-4.00199318, 4.00005341, 19.999939]
+      Rotation: [0, 0, 1.57079649]
+      Scale: [0.999983907, 0.999983907, 1]
     StaticMeshComponent:
-      MeshHandle: 1336252552
+      MeshHandle: 2234008704
     RigidBodyComponent:
       BodyType: 0
-      LiniarDamping: 0
+      LiniarDamping: 10.3999996
       AngularDamping: 0
       AllowSleep: true
-    SphereColliderComponent:
+    CapsuleColliderComponent:
       Radius: 0.5
+      Height: 1
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
       FrictionCoefficient: 0.200000003
@@ -87,28 +89,29 @@ Entities:
       MassDensity: 0
     JointComponent:
       ConnectedEntity: 17134614711486225160
-      Type: 1
-      IsWorldSpace: false
-      WorldAnchorPoint: [0, 0, 0]
-      LocalAnchorPoint1: [0, 0, 0]
-      LocalAnchorPoint2: [3.5, 0, 0]
+      Type: 2
+      IsWorldSpace: true
+      WorldAnchorPoint: [-4, 4, 19.3999996]
+      LocalAnchorPoint1: [0, 1.5, 0]
+      LocalAnchorPoint2: [-3.70000005, 0, -1.70000005]
       ConeLimit: true
       ConeAngle: 0.785398185
-      WorldAxis: [0, 0, 0]
+      Limit: false
+      WorldAxis: [1, 0, 0]
       LocalAxis1: [0, 0, 0]
-      LocalAxis2: [3.5, 0, 0]
+      LocalAxis2: [7.5, 0, 0]
       MinAngle: -1.57079637
       MaxAngle: 1.57079637
       Speed: 0
       Torque: 0
   - Entity: 15405040201572041777
     TagComponent:
-      Tag: Socket
+      Tag: Socket Cube
     Parent: 7152025791517664716
     Children:
       []
     TransformComponent:
-      Position: [8.83389854, 2.54886436, 20]
+      Position: [7.11192465, 2.54886436, 19.0989399]
       Rotation: [0, 0, 0]
       Scale: [6, 1, 1]
     StaticMeshComponent:
@@ -151,13 +154,13 @@ Entities:
       MassDensity: 0
   - Entity: 17134614711486225160
     TagComponent:
-      Tag: Socket
+      Tag: Hinge Cube
     Parent: 11770239766120266953
     Children:
       []
     TransformComponent:
-      Position: [-6.2679882, 3.99983215, 20]
-      Rotation: [0, 0, 0]
+      Position: [-3.8304925, 3.93492079, 15.8680687]
+      Rotation: [3.14159274, 1.57079637, 3.14159274]
       Scale: [6, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872

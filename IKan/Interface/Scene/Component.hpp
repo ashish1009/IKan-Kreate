@@ -239,6 +239,8 @@ namespace IKan
   
   struct HingeData
   {
+    bool limit = false;
+    
     glm::vec3 worldAxis = {0, 0, 0};
     glm::vec3 localAxis1 = {0, 0, 0};
     glm::vec3 localAxis2 = {0, 0, 0};

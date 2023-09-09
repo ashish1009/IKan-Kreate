@@ -338,6 +338,7 @@ namespace IKan {
       out << YAML::Key << "ConeLimit" << YAML::Value << jointComponent.ballSocketData.coneLimit;
       out << YAML::Key << "ConeAngle" << YAML::Value << jointComponent.ballSocketData.coneAngle;
 
+      out << YAML::Key << "Limit" << YAML::Value << jointComponent.hingeData.limit;
       out << YAML::Key << "WorldAxis" << YAML::Value << jointComponent.hingeData.worldAxis;
       out << YAML::Key << "LocalAxis1" << YAML::Value << jointComponent.hingeData.localAxis1;
       out << YAML::Key << "LocalAxis2" << YAML::Value << jointComponent.hingeData.localAxis2;
@@ -566,6 +567,7 @@ namespace IKan {
         component.ballSocketData.coneLimit = jointComponent["ConeLimit"].as<bool>();
         component.ballSocketData.coneAngle = jointComponent["ConeAngle"].as<float>();
 
+        component.hingeData.limit = jointComponent["Limit"].as<bool>();
         component.hingeData.worldAxis = jointComponent["WorldAxis"].as<glm::vec3>();
         component.hingeData.localAxis1 = jointComponent["LocalAxis1"].as<glm::vec3>();
         component.hingeData.localAxis2 = jointComponent["LocalAxis2"].as<glm::vec3>();

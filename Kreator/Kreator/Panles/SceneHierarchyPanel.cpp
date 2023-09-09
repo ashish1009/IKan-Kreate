@@ -660,10 +660,14 @@ namespace Kreator
       if (fjc.type == IKan::JointComponent::Type::BallSocket)
       {
         Kreator_UI::Property("Limit Cone", fjc.ballSocketData.coneLimit);
-        auto rotation = glm::degrees(fjc.ballSocketData.coneAngle);
-        if (Kreator_UI::Property("Cone Angle", rotation))
+        UI::SetTooltip("NOTE: Cone Axis is from Body 1 COM to Anchor Point");
+        if (fjc.ballSocketData.coneLimit)
         {
-          fjc.ballSocketData.coneAngle = glm::radians(rotation);
+          auto rotation = glm::degrees(fjc.ballSocketData.coneAngle);
+          if (Kreator_UI::Property("Cone Angle", rotation))
+          {
+            fjc.ballSocketData.coneAngle = glm::radians(rotation);
+          }
         }
       }
       else if (fjc.type == IKan::JointComponent::Type::Hinge)
@@ -678,20 +682,24 @@ namespace Kreator
           Kreator_UI::Property("Local Anchor Axis 2", fjc.hingeData.localAxis2);
         }
         
-        auto rotationMin = glm::degrees(fjc.hingeData.initMinAngleLimit);
-        if (Kreator_UI::Property("Init Min Angle", rotationMin))
+        Kreator_UI::Property("Limit", fjc.hingeData.limit);
+        if (fjc.hingeData.limit)
         {
-          fjc.hingeData.initMinAngleLimit = glm::radians(rotationMin);
+          auto rotationMin = glm::degrees(fjc.hingeData.initMinAngleLimit);
+          if (Kreator_UI::Property("Init Min Angle", rotationMin))
+          {
+            fjc.hingeData.initMinAngleLimit = glm::radians(rotationMin);
+          }
+          
+          auto rotationMax = glm::degrees(fjc.hingeData.initMaxAngleLimit);
+          if (Kreator_UI::Property("Init Max Angle", rotationMax))
+          {
+            fjc.hingeData.initMaxAngleLimit = glm::radians(rotationMax);
+          }
+          
+          Kreator_UI::Property("Init Speed", fjc.hingeData.initMotorSpeed);
+          Kreator_UI::Property("Init Torque", fjc.hingeData.initMaxMotorTorque);
         }
-
-        auto rotationMax = glm::degrees(fjc.hingeData.initMaxAngleLimit);
-        if (Kreator_UI::Property("Init Max Angle", rotationMax))
-        {
-          fjc.hingeData.initMaxAngleLimit = glm::radians(rotationMax);
-        }
-        
-        Kreator_UI::Property("Init Speed", fjc.hingeData.initMotorSpeed);
-        Kreator_UI::Property("Init Torque", fjc.hingeData.initMaxMotorTorque);
       }
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);

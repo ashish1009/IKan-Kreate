@@ -38,39 +38,48 @@ namespace IKan
   
   void PhysicsJoint::MakeBallSocket(bool coneLimit, float coneAngle)
   {
+    BallAndSocketJointInfo* jointInfo;
     if (worldSpace)
     {
-      BallAndSocketJointInfo jointInfo(body1, body2, worldAnchorPoint);
-      BallAndSocketJoint* joint = dynamic_cast<BallAndSocketJoint*>(world->createJoint(jointInfo));
-      joint->enableConeLimit(coneLimit);
-      joint->setConeLimitHalfAngle(coneAngle);
+      jointInfo = iknew BallAndSocketJointInfo(body1, body2, worldAnchorPoint);
     }
     else
     {
-      BallAndSocketJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
-      BallAndSocketJoint* joint = dynamic_cast<BallAndSocketJoint*>(world->createJoint(jointInfo));
-      joint->enableConeLimit(coneLimit);
-      joint->setConeLimitHalfAngle(coneAngle);
+      jointInfo = iknew BallAndSocketJointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
     }
+
+    BallAndSocketJoint* joint = dynamic_cast<BallAndSocketJoint*>(world->createJoint(*jointInfo));
+    joint->enableConeLimit(coneLimit);
+    joint->setConeLimitHalfAngle(coneAngle);
+
+    ikdelete jointInfo;
   }
   
-  void PhysicsJoint::MakeHinge(const Vector3& worldAxis, const Vector3& localAxis1, const Vector3& localAxis2,
+  void PhysicsJoint::MakeHinge(const Vector3& worldAxis, const Vector3& localAxis1, const Vector3& localAxis2, bool limit,
                                decimal initMinAngleLimit, decimal initMaxAngleLimit, decimal initMotorSpeed,
                                decimal initMaxMotorTorque)
   {
+    HingeJointInfo* jointInfo;
     if (worldSpace)
     {
-      HingeJointInfo jointInfo(body1, body2, worldAnchorPoint, worldAxis,
-                               initMinAngleLimit, initMaxAngleLimit, initMotorSpeed, initMaxMotorTorque);
-      world->createJoint(jointInfo);
+      jointInfo = iknew HingeJointInfo(body1, body2, worldAnchorPoint, worldAxis);
     }
     else
     {
-      HingeJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2, localAxis1, localAxis2,
-                               initMinAngleLimit, initMaxAngleLimit, initMotorSpeed, initMaxMotorTorque);
-
-      world->createJoint(jointInfo);
+      jointInfo = iknew HingeJointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2, localAxis1, localAxis2);
     }
+    
+    jointInfo->isLimitEnabled = limit;
+    if (limit)
+    {
+      jointInfo->minAngleLimit = initMinAngleLimit;
+      jointInfo->maxAngleLimit = initMaxAngleLimit;
+      jointInfo->motorSpeed = initMotorSpeed;
+      jointInfo->maxMotorTorque = initMaxMotorTorque;
+    }
+    
+    [[maybe_unused]] HingeJoint* joint = dynamic_cast<HingeJoint*>(world->createJoint(*jointInfo));
+    ikdelete jointInfo;
   }
 
 } // namespace IKan
