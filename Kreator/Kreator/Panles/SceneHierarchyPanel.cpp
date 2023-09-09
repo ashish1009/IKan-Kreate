@@ -881,6 +881,14 @@ namespace Kreator
     {
       flags |= ImGuiTreeNodeFlags_Leaf;
     }
+    
+    if (isSelected)
+    {
+      if (entity.Children().size() > 0)
+      {
+        flags |= ImGuiTreeNodeFlags_DefaultOpen;
+      }
+    }
 
     const std::string strID = std::string(name) + std::to_string((uint32_t)entity);
 
