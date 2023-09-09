@@ -766,7 +766,6 @@ if (!Project::GetActive()) return
     m_viewportRenderer->BeginScene({m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetDistance()});
     
     static constexpr glm::vec3 unitScale = {1, 1, 1};
-    static constexpr glm::vec3 zeroRotation = {0, 0, 0};
     static constexpr glm::mat4 unitMat(1.0f);
 
     auto jointEntities = m_currentScene->GetAllEntitiesWith<JointComponent>();

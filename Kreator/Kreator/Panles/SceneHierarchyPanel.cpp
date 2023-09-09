@@ -676,12 +676,12 @@ namespace Kreator
       {
         if (fjc.isWorldSpace)
         {
-          Kreator_UI::Property("World Anchor Axis", fjc.hingeData.worldAxis);
+          Kreator_UI::Property("World Anchor Axis", fjc.hingeData.worldAxis, 1.0f, 0.0f, 1.0f);
         }
         else
         {
-          Kreator_UI::Property("Local Anchor Axis 1", fjc.hingeData.localAxis1);
-          Kreator_UI::Property("Local Anchor Axis 2", fjc.hingeData.localAxis2);
+          Kreator_UI::Property("Local Anchor Axis 1", fjc.hingeData.localAxis1, 1.0f, 0.0f, 1.0f);
+          Kreator_UI::Property("Local Anchor Axis 2", fjc.hingeData.localAxis2, 1.0f, 0.0f, 1.0f);
         }
         
         Kreator_UI::Property("Limit", fjc.hingeData.limit);
@@ -719,11 +719,11 @@ namespace Kreator
       {
         if (fjc.isWorldSpace)
         {
-          Kreator_UI::Property("World Anchor Axis", fjc.sliderData.worldAxis);
+          Kreator_UI::Property("World Anchor Axis", fjc.sliderData.worldAxis, 1.0f, 0.0f, 1.0f);
         }
         else
         {
-          Kreator_UI::Property("Local Anchor Axis 1", fjc.sliderData.localAxis1);
+          Kreator_UI::Property("Local Anchor Axis 1", fjc.sliderData.localAxis1, 1.0f, 0.0f, 1.0f);
         }
         
         Kreator_UI::Property("Limit", fjc.sliderData.limit);
