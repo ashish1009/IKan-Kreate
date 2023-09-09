@@ -700,7 +700,6 @@ if (!Project::GetActive()) return
     if (m_showColliders)
     {
       ShowColliders({0, 1, 0, 1});
-      ShowJoints({0, 0, 1, 1});
     }
     
     if (m_showGrid)
@@ -709,6 +708,12 @@ if (!Project::GetActive()) return
     }
     
     Renderer2D::EndBatch();
+
+    // Joints are in 3D Renderer
+    if (m_showColliders)
+    {
+      ShowJoints({0, 0, 1, 1});
+    }
   }
   
   void RendererLayer::ShowIcons()
@@ -754,13 +759,12 @@ if (!Project::GetActive()) return
   
   void RendererLayer::ShowJoints(const glm::vec4 &color)
   {
-#if _3DJoint
     m_viewportRenderer->BeginScene({m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetDistance()});
-#endif
     
     static constexpr glm::vec3 unitScale = {1, 1, 1};
     static constexpr glm::vec3 zeroRotation = {0, 0, 0};
-    
+    static constexpr glm::mat4 unitMat(1.0f);
+
     auto jointEntities = m_currentScene->GetAllEntitiesWith<JointComponent>();
     for (auto e : jointEntities)
     {
@@ -779,6 +783,9 @@ if (!Project::GetActive()) return
       
       if (fjc.isWorldSpace)
       {
+        m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Cube),
+                                             glm::translate(unitMat, fjc.worldAnchorPoint));
+
         Renderer2D::DrawQuad({fjc.worldAnchorPoint}, unitScale, zeroRotation, color);
       }
       else
@@ -789,22 +796,14 @@ if (!Project::GetActive()) return
           const glm::mat4 posRotTransform = Utils::Math::GetTransformMatrix(tc.Position(), tc.Rotation(), unitScale);
           const glm::vec3 position = posRotTransform * glm::vec4(localAnchorPoint, 1.0f);
 
-#if _3DJoint
-          static constexpr glm::mat4 unitMat(1.0f);
           m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Cube),
                                                glm::translate(unitMat, position));
-#else
-          Renderer2D::DrawQuad(position, unitScale, zeroRotation, color);
-#endif
         };
         drawJoint(entity, fjc.localAnchorPoint1);
         drawJoint(m_currentScene->GetEntityWithUUID(fjc.connectedEntity), fjc.localAnchorPoint2);
       }
     }
-    
-#ifdef _3DJoint
     m_viewportRenderer->EndScene();
-#endif
   }
   
   void RendererLayer::ShowGrid(const glm::vec4 &color)
