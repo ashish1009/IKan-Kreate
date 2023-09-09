@@ -133,6 +133,8 @@ namespace IKan
     void SetName(const std::string& name);
     /// This function set the selected Entity
     void SetSelectedEntity(entt::entity entity);
+    /// This function clears the selected entity
+    void ClearSelectedEntity();
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion
     void SetEntityDestroyedCallback(const std::function<void(Entity)>& callback);
@@ -143,7 +145,7 @@ namespace IKan
     /// This function returns the reference of registry
     entt::registry& GetRegistry();
     /// This function returns the selected entity handle
-    entt::entity GetSelectedEntity() const;
+    const std::vector<entt::entity>& GetSelectedEntity() const;
     /// This function finds the main camera entity
     Entity GetMainCameraEntity();
     /// This function returns the max ID given to entity
@@ -158,7 +160,6 @@ namespace IKan
     /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
     /// - Parameter entityHandle: handle for entity
     Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
-    
     
     /// This function returns the physcis settings
     PhysicsSettings& GetPhysicsSettings();
@@ -190,6 +191,9 @@ namespace IKan
     void InitializePhysicsWorld();
     /// This function destroy physics world
     void DestroyPhysicsWorld();
+    /// This function check entity is selected
+    /// - Parameter entity: Selected Entity
+    bool IsEntitySelected(entt::entity entity) const;
 
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
@@ -204,7 +208,7 @@ namespace IKan
     
     // Entity ---------------------------
     EntityMap m_entityIDMap;
-    entt::entity m_selectedEntity = entt::null;
+    std::vector<entt::entity> m_selectedEntities;
     std::function<void(Entity)> m_onEntityDestroyedCallback;
 
     // Physics Data

@@ -191,7 +191,7 @@ namespace IKan
       const auto& [transformComp, staticMeshComp] = view.get<TransformComponent, StaticMeshComponent>(entityHandle);
       if (staticMeshComp.staticMesh != 0)
       {
-        if (entityHandle == m_selectedEntity)
+        if (IsEntitySelected(entityHandle))
         {
           renderer->SubmitSelectedMeshSource(AssetManager::GetAsset<MeshSource>(staticMeshComp.staticMesh), transformComp.Transform());
         }
@@ -567,10 +567,28 @@ namespace IKan
   {
     m_name = name;
   }
+  bool Scene::IsEntitySelected(entt::entity entity) const
+  {
+    for (const auto& selectedEntity : m_selectedEntities)
+    {
+      if (selectedEntity == entity)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
   void Scene::SetSelectedEntity(entt::entity entity)
   {
-    m_selectedEntity = entity;
+    m_selectedEntities.push_back(entity);
   }
+  
+  void Scene::ClearSelectedEntity()
+  {
+    m_selectedEntities.clear();
+  }
+  
   void Scene::SetEntityDestroyedCallback(const std::function<void(Entity)>& callback)
   {
     m_onEntityDestroyedCallback = callback;
@@ -601,9 +619,9 @@ namespace IKan
   {
     return m_registry;
   }
-  entt::entity Scene::GetSelectedEntity() const
+  const std::vector<entt::entity>& Scene::GetSelectedEntity() const
   {
-    return m_selectedEntity;
+    return m_selectedEntities;
   }
 
   Entity Scene::GetEntityWithUUID(UUID id) const

@@ -506,7 +506,7 @@ if (!Project::GetActive()) return
   {
     if (ImGuizmo::IsOver())
     {
-      m_hoveredEntityID = (int32_t)m_currentScene->GetSelectedEntity();
+      m_hoveredEntityID = (int32_t)m_currentScene->GetSelectedEntity().at(0);
       return;
     }
     
@@ -1151,17 +1151,17 @@ if (!Project::GetActive()) return
     }
     
     m_selectionContext.clear();
+    m_currentScene->ClearSelectedEntity();
     for (const auto& entity : entities)
     {
       SelectedSubmesh selection;
       selection.entity = entity;
       
       m_selectionContext.push_back(selection);
-    }
-    
-    if (m_currentScene != m_runtimeScene)
-    {
-      m_currentScene->SetSelectedEntity(entities.At(0));
+      if (m_currentScene != m_runtimeScene)
+      {
+        m_currentScene->SetSelectedEntity(entity);
+      }
     }
   }
   void RendererLayer::OnEntityDeleted(SelectionContext entities)
@@ -1179,7 +1179,7 @@ if (!Project::GetActive()) return
     
     if (m_currentScene)
     {
-      m_currentScene->SetSelectedEntity(entt::null);
+      m_currentScene->ClearSelectedEntity();
     }
     
     m_selectionContext.clear();
@@ -1986,8 +1986,6 @@ if (!Project::GetActive()) return
           }
         }
       }
-      
-      IK_LOG_INFO("", "---------------------------");
     }
   }
   
