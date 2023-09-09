@@ -34,7 +34,7 @@ namespace IKan
       rendererPassSpec.targetFramebuffer = FrameBuffer::Create(fbSpec);
       m_commonData->renderPass = RenderPass::Create(rendererPassSpec);
       
-      m_commonData->stencilShader = Shader::Create(CoreAssetPath("Shaders/MeshStencilShader.glsl"));
+      m_commonData->highlightMaterial = Material::Create(CoreAssetPath("Shaders/MeshStencilShader.glsl"));
     }
   }
   
@@ -71,7 +71,7 @@ namespace IKan
     m_commonData->sceneCamera = sceneCamera;
   }
   
-  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform, const Ref<Shader>& oevrridenShader)
+  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform, const Ref<Material>& oevrridenMaterial)
   {
     if (!mesh)
     {
@@ -81,7 +81,7 @@ namespace IKan
     MeshSourceDrawCommand dc;
     dc.staticMesh = mesh;
     dc.transform = transform;
-    dc.overrideShader = oevrridenShader;
+    dc.oevrridenMaterial = oevrridenMaterial;
     
     m_meshSourceDrawList.emplace_back(dc);
   }
@@ -122,15 +122,16 @@ namespace IKan
   }
   
   void SceneRenderer::RenderMesh(const std::vector<SubMesh>& submeshes, const Ref<Pipeline>& pipeline,
-                                 const Ref<Shader>& shader, const glm::mat4& transform)
+                                 const Ref<Material>& material, const glm::mat4& transform)
   {
     pipeline->Bind();
-    shader->Bind();
-    shader->SetUniformMat4("u_ViewProjection", m_commonData->sceneCamera.viewProjection);
+    material->Set("u_ViewProjection", m_commonData->sceneCamera.viewProjection);
     
     for (const SubMesh& submesh : submeshes)
     {
-      shader->SetUniformMat4("u_Transform", transform * submesh.transform);
+      material->Set("u_Transform", transform * submesh.transform);
+      
+      material->Bind();
       Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
     } // for each submeshes
   }
@@ -139,9 +140,8 @@ namespace IKan
   {
     for (const auto& dc : m_meshSourceDrawList)
     {
-      const auto& pipeline = dc.staticMesh->GetPipeline();
-      auto shader = dc.overrideShader ? dc.overrideShader : pipeline->GetSpecification().shader;
-      RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, shader, dc.transform);
+      auto material = dc.oevrridenMaterial ? dc.oevrridenMaterial : dc.staticMesh->GetBaseMaterial();
+      RenderMesh(dc.staticMesh->GetSubMeshes(), dc.staticMesh->GetPipeline(), material, dc.transform);
     }
   }
   
@@ -149,7 +149,6 @@ namespace IKan
   {
     for (const auto& dc : m_selectedMeshSourceDrawList)
     {
-      auto pipeline = dc.staticMesh->GetPipeline();
       // Stencil Pass Mesh Render
       {
         Renderer::EnableStencilPass();
@@ -161,13 +160,13 @@ namespace IKan
         s += scaleFactor;
         auto tt = Utils::Math::GetTransformMatrix(p, r, s);
 
-        RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, m_commonData->stencilShader, tt);
+        RenderMesh(dc.staticMesh->GetSubMeshes(), dc.staticMesh->GetPipeline(), m_commonData->highlightMaterial, tt);
         
         Renderer::DisableStencilPass();
       }
 
       // Geometry pass Selected Mesh
-      RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, pipeline->GetSpecification().shader, dc.transform);
+      RenderMesh(dc.staticMesh->GetSubMeshes(), dc.staticMesh->GetPipeline(), dc.staticMesh->GetBaseMaterial(), dc.transform);
     }
   }
   

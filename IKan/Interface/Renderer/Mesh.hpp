@@ -83,7 +83,7 @@ namespace IKan
     /// This function returns the mesh pipeline
     const Ref<Pipeline>& GetPipeline() const;
     /// This function returns the Base Material
-    Ref<Material>& GetBaseMaterial() const;
+    const Ref<Material>& GetBaseMaterial() const;
 
     /// This funciton creates the mesh from assimp library and store the data
     /// - Parameter filePath: mesh model file path

@@ -288,7 +288,7 @@ namespace Kreator
     Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
 
     // Editor Data ---------------------------------------
-    Ref<Shader> m_jointShader;
+    Ref<Material> m_jointMaterial;
     
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

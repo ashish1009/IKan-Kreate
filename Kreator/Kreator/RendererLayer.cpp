@@ -191,7 +191,7 @@ if (!Project::GetActive()) return
     m_gizmoModeTex = Image::Create(KreatorResourcePath("Textures/Icons/GuizmoMode.png"));
     
     // Overriden Shader
-    m_jointShader = Shader::Create(KreatorResourcePath("Shader/JointMeshShader.glsl"));
+    m_jointMaterial = Material::Create(KreatorResourcePath("Shader/JointMeshShader.glsl"));
   }
   
   RendererLayer::~RendererLayer()
@@ -788,7 +788,7 @@ if (!Project::GetActive()) return
       {
         m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Sphere),
                                              glm::scale(glm::translate(unitMat, fjc.worldAnchorPoint), {0.2, 0.2, 0.2}),
-                                             m_jointShader);
+                                             m_jointMaterial);
       }
       else
       {
@@ -800,7 +800,7 @@ if (!Project::GetActive()) return
 
           m_viewportRenderer->SubmitMeshSource(DefaultMesh::GetMesh(DefaultMesh::Type::Sphere),
                                                glm::scale(glm::translate(unitMat, position), {0.2, 0.2, 0.2}),
-                                               m_jointShader);
+                                               m_jointMaterial);
         };
         drawJoint(entity, fjc.localAnchorPoint1);
         drawJoint(m_currentScene->GetEntityWithUUID(fjc.connectedEntity), fjc.localAnchorPoint2);

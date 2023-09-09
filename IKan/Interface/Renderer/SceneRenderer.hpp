@@ -30,7 +30,7 @@ namespace IKan
     bool needResize = false;
     uint32_t viewportWidth, viewportHeight;
     Ref<RenderPass> renderPass;
-    Ref<Shader> stencilShader;
+    Ref<Material> highlightMaterial;
     SceneRendererCamera sceneCamera;
   };
   
@@ -59,14 +59,14 @@ namespace IKan
     /// - Parameters:
     ///   - mesh: Mesh source
     ///   - transform: mesh transform
-    ///   - oevrridenShader: override shader reference
+    ///   - oevrridenMaterial: override material reference
     ///  - Note: Vertex Attribute of shader should bea s follow
     ///          layout (location = 0) in vec3 a_Position;
     ///          layout (location = 1) in vec3 a_Normal;
     ///          layout (location = 2) in vec2 a_TexCoord;
     ///          layout (location = 3) in vec3 a_Tangent;
     ///          layout (location = 4) in vec3 a_Binormal;
-    void SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform, const Ref<Shader>& oevrridenShader = nullptr);
+    void SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform, const Ref<Material>& oevrridenMaterial = nullptr);
     /// This function submits the selected mesh source in scene
     /// - Parameters:
     ///   - mesh: Mesh source
@@ -95,7 +95,7 @@ namespace IKan
     {
       Ref<MeshSource> staticMesh;
       glm::mat4 transform;
-      Ref<Shader> overrideShader = nullptr;
+      Ref<Material> oevrridenMaterial = nullptr;
     };
 
     // Member Functions ---------------------------------------------------------------------------------------------
@@ -111,10 +111,10 @@ namespace IKan
     /// - Parameters:
     ///   - submeshes: mesh submeshes
     ///   - pipeline: pipeline
-    ///   - shader: shader
+    ///   - material: shader
     ///   - transform: transform
     void RenderMesh(const std::vector<SubMesh>& submeshes, const Ref<Pipeline>& pipeline,
-                    const Ref<Shader>& shader, const glm::mat4& transform);
+                    const Ref<Material>& material, const glm::mat4& transform);
     
     // Member Variables ---------------------------------------------------------------------------------------------
     Ref<Scene> m_scene;
