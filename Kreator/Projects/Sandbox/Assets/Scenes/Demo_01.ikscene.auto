@@ -22,24 +22,53 @@ Entities:
       Primary: true
   - Entity: 7152025791517664716
     TagComponent:
-      Tag: Capsule
+      Tag: Hinge Capsule
     Parent: 0
     Children:
-      []
+      - Handle: 15405040201572041777
     TransformComponent:
-      Position: [5, 5, 0]
-      Rotation: [0, 0, 1.51145506]
-      Scale: [1, 1, 1]
+      Position: [4.99999952, 5.00017357, 20]
+      Rotation: [0, 0, 0]
+      Scale: [0.999999225, 2, 1]
     StaticMeshComponent:
       MeshHandle: 2234008704
+    RigidBodyComponent:
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    CapsuleColliderComponent:
+      Radius: 0.5
+      Height: 1
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+    JointComponent:
+      ConnectedEntity: 15405040201572041777
+      Type: 2
+      IsWorldSpace: false
+      WorldAnchorPoint: [0, 0, 0]
+      LocalAnchorPoint1: [0, -2.5, 0]
+      LocalAnchorPoint2: [-3.79999995, 0, 0]
+      ConeLimit: false
+      ConeAngle: 0.785398185
+      WorldAxis: [0, 0, 0]
+      LocalAxis1: [0, 0, 0]
+      LocalAxis2: [-3.79999995, 0, 0]
+      MinAngle: -1.57079637
+      MaxAngle: 1.57079637
+      Speed: 0
+      Torque: 0
   - Entity: 11770239766120266953
     TagComponent:
-      Tag: Sphere
+      Tag: Ball
     Parent: 0
     Children:
-      []
+      - Handle: 17134614711486225160
     TransformComponent:
-      Position: [-3, 4, 0]
+      Position: [-2.99992943, 4.00005341, 19.999939]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
@@ -56,6 +85,46 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 0
+    JointComponent:
+      ConnectedEntity: 17134614711486225160
+      Type: 1
+      IsWorldSpace: false
+      WorldAnchorPoint: [0, 0, 0]
+      LocalAnchorPoint1: [0, 0, 0]
+      LocalAnchorPoint2: [3.5, 0, 0]
+      ConeLimit: true
+      ConeAngle: 0.785398185
+      WorldAxis: [0, 0, 0]
+      LocalAxis1: [0, 0, 0]
+      LocalAxis2: [3.5, 0, 0]
+      MinAngle: -1.57079637
+      MaxAngle: 1.57079637
+      Speed: 0
+      Torque: 0
+  - Entity: 15405040201572041777
+    TagComponent:
+      Tag: Hinge Socket
+    Parent: 7152025791517664716
+    Children:
+      []
+    TransformComponent:
+      Position: [8.83389854, 2.54886436, 20]
+      Rotation: [0, 0, 0]
+      Scale: [6, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
   - Entity: 15749313935134342912
     TagComponent:
       Tag: Base
@@ -63,13 +132,37 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, -10, 50]
+      Position: [0, -10, 40]
       Rotation: [0, 0, 0]
       Scale: [73.5999985, 1, 67.4000015]
     StaticMeshComponent:
       MeshHandle: 560965872
     RigidBodyComponent:
       BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+  - Entity: 17134614711486225160
+    TagComponent:
+      Tag: Socket
+    Parent: 11770239766120266953
+    Children:
+      []
+    TransformComponent:
+      Position: [-6.2679882, 3.99983215, 20]
+      Rotation: [0, 0, 0]
+      Scale: [6, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 2
       LiniarDamping: 0
       AngularDamping: 0
       AllowSleep: true

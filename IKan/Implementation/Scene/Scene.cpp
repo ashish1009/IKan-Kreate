@@ -431,7 +431,7 @@ namespace IKan
     if (parent.IsDescendantOf(entity))
     {
       // Unparent the 'parent' first
-      UnparentEntity(parent);
+      UnparentEntity(parent, false);
       
       // If Current 'entity' already have some parent
       Entity newParent = TryGetEntityWithUUID(entity.GetParentUUID());
@@ -453,7 +453,7 @@ namespace IKan
       if (previousParent)
       {
         // Unperent current entity
-        UnparentEntity(entity);
+        UnparentEntity(entity, false);
       }
     }
     
@@ -462,8 +462,10 @@ namespace IKan
     // Update children of 'parent'
     parent.Children().push_back(entity.GetUUID());
     
+#if 0
     // Update local space of 'entity'
     ConvertToLocalSpace(entity);
+#endif
   }
   
   void Scene::UnparentEntity(Entity entity, bool convertToWorldSpace)

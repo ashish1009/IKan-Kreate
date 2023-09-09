@@ -215,7 +215,7 @@ namespace Kreator
         if (payload)
         {
           Entity& entity = *(Entity*)payload->Data;
-          m_context->UnparentEntity(entity);
+          m_context->UnparentEntity(entity, false);
         }
         
         ImGui::EndDragDropTarget();
