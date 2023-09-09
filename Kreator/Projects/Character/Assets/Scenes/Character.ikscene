@@ -1,0 +1,46 @@
+Scene: Character
+Entities:
+  - Entity: 13570300467605798894
+    TagComponent:
+      Tag: Base ground
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 3.02791595e-05, 0]
+      Rotation: [0, 0, 0]
+      Scale: [25, 0.49999994, 25]
+    StaticMeshComponent:
+      MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+  - Entity: 16898004803666068435
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 3.84487295, 23.005291]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true

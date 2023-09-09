@@ -136,6 +136,8 @@
 		B240771F2A72665A00221919 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B240771D2A72665A00221919 /* Logger.hpp */; };
 		B24A8A642AAB9B0800FABB45 /* PhysicsJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A8A622AAB9B0800FABB45 /* PhysicsJoint.cpp */; };
 		B24A8A652AAB9B0800FABB45 /* PhysicsJoint.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A8A632AAB9B0800FABB45 /* PhysicsJoint.hpp */; };
+		B24A8AEA2AACF08000FABB45 /* ShaderMaterial.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A8AE82AACF08000FABB45 /* ShaderMaterial.cpp */; };
+		B24A8AEB2AACF08000FABB45 /* ShaderMaterial.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A8AE92AACF08000FABB45 /* ShaderMaterial.hpp */; };
 		B26B1A6E2A7D14BE00676419 /* EditorPanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */; };
 		B26B1A712A7D153400676419 /* PanelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1A6F2A7D153400676419 /* PanelManager.cpp */; };
 		B26B1A722A7D153400676419 /* PanelManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B26B1A702A7D153400676419 /* PanelManager.hpp */; };
@@ -366,6 +368,8 @@
 		B24A8A512AAB254600FABB45 /* MeshStencilShader.glsl */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = MeshStencilShader.glsl; sourceTree = "<group>"; };
 		B24A8A622AAB9B0800FABB45 /* PhysicsJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsJoint.cpp; sourceTree = "<group>"; };
 		B24A8A632AAB9B0800FABB45 /* PhysicsJoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsJoint.hpp; sourceTree = "<group>"; };
+		B24A8AE82AACF08000FABB45 /* ShaderMaterial.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderMaterial.cpp; sourceTree = "<group>"; };
+		B24A8AE92AACF08000FABB45 /* ShaderMaterial.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderMaterial.hpp; sourceTree = "<group>"; };
 		B26B1A6C2A7D14BE00676419 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
 		B26B1A6F2A7D153400676419 /* PanelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PanelManager.cpp; sourceTree = "<group>"; };
 		B26B1A702A7D153400676419 /* PanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PanelManager.hpp; sourceTree = "<group>"; };
@@ -508,6 +512,7 @@
 				B23365842A75303E00BC7B8B /* TextRenderer.hpp */,
 				B2CD2AAB2A81269F00B0D70B /* Mesh.hpp */,
 				B27812722A861C08005C0E7C /* SceneRenderer.hpp */,
+				B24A8AE92AACF08000FABB45 /* ShaderMaterial.hpp */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -523,6 +528,7 @@
 				B23365832A75303E00BC7B8B /* TextRenderer.cpp */,
 				B2CD2AAA2A81269F00B0D70B /* Mesh.cpp */,
 				B27812712A861C08005C0E7C /* SceneRenderer.cpp */,
+				B24A8AE82AACF08000FABB45 /* ShaderMaterial.cpp */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -531,6 +537,7 @@
 			isa = PBXGroup;
 			children = (
 				B23364F42A742A4200BC7B8B /* Shader.hpp */,
+				B23364DF2A74270000BC7B8B /* ShaderUniform.hpp */,
 				B233650F2A74370700BC7B8B /* RendererBuffers.hpp */,
 				B233651B2A743D0E00BC7B8B /* Pipeline.hpp */,
 				B23365392A74D48B00BC7B8B /* Texture.hpp */,
@@ -548,7 +555,6 @@
 				B23364D62A74253900BC7B8B /* RendererAPI.cpp */,
 				B23364D72A74253900BC7B8B /* RendererAPI.hpp */,
 				B23364DE2A74270000BC7B8B /* ShaderUniform.cpp */,
-				B23364DF2A74270000BC7B8B /* ShaderUniform.hpp */,
 				B23364F32A742A4200BC7B8B /* Shader.cpp */,
 				B233650E2A74370700BC7B8B /* RendererBuffers.cpp */,
 				B233651A2A743D0E00BC7B8B /* Pipeline.cpp */,
@@ -1003,6 +1009,7 @@
 				B23367512A7592C000BC7B8B /* AssetMetadata.hpp in Headers */,
 				B23365112A74370700BC7B8B /* RendererBuffers.hpp in Headers */,
 				B21FAA3D2A729078009EED1F /* KeyEvent.h in Headers */,
+				B24A8AEB2AACF08000FABB45 /* ShaderMaterial.hpp in Headers */,
 				B233653B2A74D48B00BC7B8B /* Texture.hpp in Headers */,
 				B233652F2A74410F00BC7B8B /* SceneCamera.hpp in Headers */,
 				B21FAA312A728EB9009EED1F /* KeyCodes.h in Headers */,
@@ -1267,6 +1274,7 @@
 				B233655C2A7506F700BC7B8B /* Table.cpp in Sources */,
 				B2336A522A763A4C00BC7B8B /* AssetImporter.cpp in Sources */,
 				B2336A5E2A763B4300BC7B8B /* HashGenerator.cpp in Sources */,
+				B24A8AEA2AACF08000FABB45 /* ShaderMaterial.cpp in Sources */,
 				B23364CE2A741CE100BC7B8B /* EngineDirectoryManager.cpp in Sources */,
 				B2D161652A77752B00DD1678 /* SceneSerializer.cpp in Sources */,
 				B233673C2A75905100BC7B8B /* AssetType.cpp in Sources */,

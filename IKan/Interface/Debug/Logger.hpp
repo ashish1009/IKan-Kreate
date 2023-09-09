@@ -23,7 +23,7 @@ f(ImGui)\
 f(Scene) f(Component) f(SceneSerializer)\
 f(Asset) \
 f(Project) f(PanelManager) f(EditorConsolePanel) f(UserPreference)\
-f(Mesh)\
+f(Mesh) f(Material)\
 f(Physics)
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all

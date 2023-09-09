@@ -1,0 +1,9 @@
+Project:
+  Name: Character
+  AssetDirectory: Assets
+  MeshDirectory: Assets/Meshes
+  MeshSourceDirectory: Assets/Meshes/Source
+  AssetRegistry: Assets/AssetRegistry.ikr
+  StartScene: Scenes/Character.ikscene
+  AutoSave: true
+  AutoSaveInterval: 300

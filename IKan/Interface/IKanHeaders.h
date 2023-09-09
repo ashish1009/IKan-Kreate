@@ -20,6 +20,7 @@
 #include <fstream>
 #include <sstream>
 #include <map>
+#include <unordered_set>
 
 // glm math library
 #include <glm/glm.hpp>

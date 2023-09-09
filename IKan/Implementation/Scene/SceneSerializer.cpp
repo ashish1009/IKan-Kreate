@@ -20,6 +20,13 @@ namespace IKan {
   void SceneSerializer::Serialize(const std::string& filepath)
   {
     IK_LOG_TRACE(LogModule::SceneSerializer, "Serializing the Scene {0}", Utils::String::GetFileNameFromPath(filepath));
+    
+    const std::string filename = Utils::String::GetFileNameFromPath(filepath);
+    if (filename != m_scene->GetName())
+    {
+      m_scene->SetName(filename);
+    }
+    
     YAML::Emitter out;
     out << YAML::BeginMap;
     out << YAML::Key << "Scene";
