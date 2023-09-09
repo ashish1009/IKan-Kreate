@@ -1908,7 +1908,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UI_UpdateGuizmo()
   {
-    if (Input::IsKeyPressed(IKan::Key::LeftControl) or m_selectionContext.size() > 1)
+    if (Input::IsKeyPressed(IKan::Key::LeftControl))
     {
       return;
     }
@@ -1920,17 +1920,10 @@ if (!Project::GetActive()) return
       ImGuizmo::SetDrawlist();
       ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, rw, rh);
       
-      bool snap = Input::IsKeyPressed(Key::LeftControl);
+      bool snap = Input::IsKeyPressed(Key::LeftShift);
       float snapValue = GetSnapValue();
       float snapValues[3] = { snapValue, snapValue, snapValue };
-      
-      auto& selection = m_selectionContext[0];
-      TransformComponent& entityTransform = selection.entity.Transform();
-#ifdef WorldSpace
-      glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(selection.entity);
-#else
-      glm::mat4 transform = entityTransform.Transform();
-#endif
+
       if (Input::IsKeyPressed(Key::LeftAlt))
       {
         m_gizmoMode = 1;
@@ -1939,6 +1932,16 @@ if (!Project::GetActive()) return
       {
         m_gizmoMode = 0;
       }
+
+      glm::mat4 transform;
+      auto& selection = m_selectionContext[0];
+      TransformComponent& entityTransform_1 = selection.entity.Transform();
+
+#ifdef WorldSpace
+      glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(selection.entity);
+#else
+      transform = entityTransform_1.Transform();
+#endif
       ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
                            glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
                            (ImGuizmo::OPERATION)m_gizmoType,
@@ -1946,36 +1949,45 @@ if (!Project::GetActive()) return
                            glm::value_ptr(transform),
                            nullptr,
                            snap ? snapValues : nullptr);
+
+      glm::vec3 translation, rotation, scale;
+      Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
       
-      if (ImGuizmo::IsUsing())
+      glm::vec3 deltaPosition = translation - entityTransform_1.Position();
+      glm::vec3 deltaRotation = rotation - entityTransform_1.Rotation();
+      glm::vec3 deltaScale = scale - entityTransform_1.Scale();
+
+      for (auto& selection : m_selectionContext)
       {
+        TransformComponent& entityTransform = selection.entity.Transform();
+        if (ImGuizmo::IsUsing())
+        {
 #ifdef WorldSpace
-        Entity parent = m_currentScene->TryGetEntityWithUUID(selection.entity.GetParentUUID());
-        if (parent)
-        {
-          glm::mat4 parentTransform = m_currentScene->GetWorldSpaceTransformMatrix(parent);
-          transform = glm::inverse(parentTransform) * transform;
-          
-          glm::vec3 translation, rotation, scale;
-          Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
-          
-          glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
-          entityTransform.UpdatePosition(translation);
-          entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
-          entityTransform.UpdateScale(scale);
-        }
-        else
+          Entity parent = m_currentScene->TryGetEntityWithUUID(selection.entity.GetParentUUID());
+          if (parent)
+          {
+            glm::mat4 parentTransform = m_currentScene->GetWorldSpaceTransformMatrix(parent);
+            transform = glm::inverse(parentTransform) * transform;
+            
+            glm::vec3 translation, rotation, scale;
+            Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+            
+            glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
+            entityTransform.UpdatePosition(translation);
+            entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+            entityTransform.UpdateScale(scale);
+          }
+          else
 #endif
-        {
-          glm::vec3 translation, rotation, scale;
-          Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
-          
-          glm::vec3 deltaRotation = rotation - entityTransform.Rotation();
-          entityTransform.UpdatePosition(translation);
-          entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
-          entityTransform.UpdateScale(scale);
+          {
+            entityTransform.UpdatePosition(entityTransform.Position() + deltaPosition);
+            entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+            entityTransform.UpdateScale(entityTransform.Scale() + deltaScale);
+          }
         }
       }
+      
+      IK_LOG_INFO("", "---------------------------");
     }
   }
   
