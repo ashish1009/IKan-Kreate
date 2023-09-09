@@ -9,8 +9,8 @@
 
 namespace IKan
 {
-  PhysicsJoint::PhysicsJoint(PhysicsWorld* world, RigidBody *body1, RigidBody *body2, bool worldSpace)
-  : world(world), body1(body1), body2(body2), worldSpace(worldSpace)
+  PhysicsJoint::PhysicsJoint(PhysicsWorld* world, RigidBody *body1, RigidBody *body2, bool worldSpace, bool allowCollision)
+  : world(world), body1(body1), body2(body2), worldSpace(worldSpace), allowCollision(allowCollision)
   {
     
   }
@@ -27,11 +27,13 @@ namespace IKan
     if (worldSpace)
     {
       FixedJointInfo jointInfo(body1, body2, worldAnchorPoint);
+      jointInfo.isCollisionEnabled = allowCollision;
       world->createJoint(jointInfo);
     }
     else
     {
       FixedJointInfo jointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
+      jointInfo.isCollisionEnabled = allowCollision;
       world->createJoint(jointInfo);
     }
   }
@@ -47,6 +49,7 @@ namespace IKan
     {
       jointInfo = iknew BallAndSocketJointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2);
     }
+    jointInfo->isCollisionEnabled = allowCollision;
 
     BallAndSocketJoint* joint = dynamic_cast<BallAndSocketJoint*>(world->createJoint(*jointInfo));
     joint->enableConeLimit(coneLimit);
@@ -68,7 +71,7 @@ namespace IKan
     {
       jointInfo = iknew HingeJointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2, localAxis1, localAxis2);
     }
-    
+    jointInfo->isCollisionEnabled = allowCollision;
     jointInfo->isLimitEnabled = limit;
     if (limit)
     {
@@ -100,7 +103,7 @@ namespace IKan
     {
       jointInfo = iknew SliderJointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2, localAxis1);
     }
-    
+    jointInfo->isCollisionEnabled = allowCollision;
     jointInfo->isLimitEnabled = limit;
     if (limit)
     {

@@ -331,6 +331,7 @@ namespace IKan {
       out << YAML::Key << "ConnectedEntity" << YAML::Value << jointComponent.connectedEntity;
       out << YAML::Key << "Type" << YAML::Value << (uint32_t)jointComponent.type;
       out << YAML::Key << "IsWorldSpace" << YAML::Value << jointComponent.isWorldSpace;
+      out << YAML::Key << "IsCollisionEnabled" << YAML::Value << jointComponent.isCollisionEnabled;
       out << YAML::Key << "WorldAnchorPoint" << YAML::Value << jointComponent.worldAnchorPoint;
       out << YAML::Key << "LocalAnchorPoint1" << YAML::Value << jointComponent.localAnchorPoint1;
       out << YAML::Key << "LocalAnchorPoint2" << YAML::Value << jointComponent.localAnchorPoint2;
@@ -574,6 +575,7 @@ namespace IKan {
         component.connectedEntity = jointComponent["ConnectedEntity"].as<uint64_t>();
         component.type = static_cast<JointComponent::Type>(jointComponent["Type"].as<uint32_t>());
         component.isWorldSpace = jointComponent["IsWorldSpace"].as<bool>();
+        component.isCollisionEnabled = jointComponent["IsCollisionEnabled"].as<bool>();
         component.worldAnchorPoint = jointComponent["WorldAnchorPoint"].as<glm::vec3>();
         component.localAnchorPoint1 = jointComponent["LocalAnchorPoint1"].as<glm::vec3>();
         component.localAnchorPoint2 = jointComponent["LocalAnchorPoint2"].as<glm::vec3>();

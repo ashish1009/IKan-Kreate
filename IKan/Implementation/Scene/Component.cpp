@@ -450,6 +450,7 @@ return *this; \
     connectedEntity = other.connectedEntity;
     type = other.type;
     isWorldSpace = other.isWorldSpace;
+    isCollisionEnabled = other.isCollisionEnabled;
     worldAnchorPoint = other.worldAnchorPoint;
     localAnchorPoint1 = other.localAnchorPoint1;
     localAnchorPoint2 = other.localAnchorPoint2;

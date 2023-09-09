@@ -16,13 +16,14 @@ namespace IKan
   struct PhysicsJoint
   {
     bool worldSpace = false;
+    bool allowCollision = false;
     reactphysics3d::PhysicsWorld* world = nullptr;
     reactphysics3d::RigidBody *body1, *body2;
     Vector3 worldAnchorPoint;
     Vector3 localAnchorPoint1;
     Vector3 localAnchorPoint2;
     
-    PhysicsJoint(PhysicsWorld* world, RigidBody *body1, RigidBody *body2, bool worldSpace = false);
+    PhysicsJoint(PhysicsWorld* world, RigidBody *body1, RigidBody *body2, bool worldSpace = false, bool allowCollision = false);
     
     /// This function set the anchors
     /// - Parameters:

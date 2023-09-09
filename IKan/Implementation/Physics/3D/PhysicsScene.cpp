@@ -207,7 +207,7 @@ namespace IKan
     const auto& rigidBodyComponent2 = connectedEntity.GetComponent<RigidBodyComponent>();
     auto body2 = static_cast<RigidBody*>(rigidBodyComponent2.runtimeBody);
     
-    PhysicsJoint joint(m_world, body1, body2, fjc.isWorldSpace);
+    PhysicsJoint joint(m_world, body1, body2, fjc.isWorldSpace, fjc.isCollisionEnabled);
     
     // Anchor point in world-space
     Vector3 worldAnchorPoint({ fjc.worldAnchorPoint.x, fjc.worldAnchorPoint.y, fjc.worldAnchorPoint.z});

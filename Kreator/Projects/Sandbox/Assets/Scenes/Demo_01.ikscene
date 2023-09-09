@@ -28,6 +28,7 @@ Entities:
       ConnectedEntity: 4356354757083591802
       Type: 0
       IsWorldSpace: true
+      IsCollisionEnabled: true
       WorldAnchorPoint: [11.1850004, 3.4230001, 17.6285172]
       LocalAnchorPoint1: [0, 0, 0]
       LocalAnchorPoint2: [0, 0, 0]
@@ -102,6 +103,7 @@ Entities:
       ConnectedEntity: 4892841051168067413
       Type: 3
       IsWorldSpace: true
+      IsCollisionEnabled: true
       WorldAnchorPoint: [3.78500009, -0.800000012, 11.9289999]
       LocalAnchorPoint1: [0, 0, 0]
       LocalAnchorPoint2: [0, 0, 0]
@@ -197,6 +199,7 @@ Entities:
       ConnectedEntity: 15405040201572041777
       Type: 1
       IsWorldSpace: true
+      IsCollisionEnabled: true
       WorldAnchorPoint: [3.29999995, 2.4000001, 19]
       LocalAnchorPoint1: [0, -2.5, 0]
       LocalAnchorPoint2: [-3.79999995, 0, 0]
@@ -226,9 +229,9 @@ Entities:
     Children:
       - Handle: 17134614711486225160
     TransformComponent:
-      Position: [-7.49968052, 4.00005341, 19.999939]
+      Position: [-7.49968052, 4.00005341, 20.0004292]
       Rotation: [0, 0, 1.57079649]
-      Scale: [0.999977648, 0.999977648, 1]
+      Scale: [0.99997741, 0.99997741, 1]
     StaticMeshComponent:
       MeshHandle: 2234008704
     RigidBodyComponent:
@@ -248,6 +251,7 @@ Entities:
       ConnectedEntity: 17134614711486225160
       Type: 2
       IsWorldSpace: true
+      IsCollisionEnabled: false
       WorldAnchorPoint: [-4, 4, 19.3999996]
       LocalAnchorPoint1: [0, 1.5, 0]
       LocalAnchorPoint2: [-3.70000005, 0, -1.70000005]
@@ -325,7 +329,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-7.52745819, 0.0758515224, 17.5726528]
+      Position: [-7.52745819, 0.885903299, 18.0536156]
       Rotation: [0.535816073, 0, 0]
       Scale: [1, 6, 1]
     StaticMeshComponent:

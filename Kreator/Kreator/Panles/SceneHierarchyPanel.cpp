@@ -640,7 +640,8 @@ namespace Kreator
 #ifdef UseLocalSpace
       Kreator_UI::Property("Use world Space", fjc.isWorldSpace);
 #endif
-      
+      Kreator_UI::Property("Allow internal collision", fjc.isCollisionEnabled);
+
       int32_t selected = static_cast<int32_t>(fjc.type);
       static std::vector<std::string> options = {"Fixed", "BallSocket", "Hinge", "Sldier"};
       if (Kreator_UI::PropertyDropdown("Type", options, (uint32_t)options.size(), &selected))
