@@ -59,7 +59,14 @@ namespace IKan
     /// - Parameters:
     ///   - mesh: Mesh source
     ///   - transform: mesh transform
-    void SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform);
+    ///   - oevrridenShader: override shader reference
+    ///  - Note: Vertex Attribute of shader should bea s follow
+    ///          layout (location = 0) in vec3 a_Position;
+    ///          layout (location = 1) in vec3 a_Normal;
+    ///          layout (location = 2) in vec2 a_TexCoord;
+    ///          layout (location = 3) in vec3 a_Tangent;
+    ///          layout (location = 4) in vec3 a_Binormal;
+    void SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform, const Ref<Shader>& oevrridenShader = nullptr);
     /// This function submits the selected mesh source in scene
     /// - Parameters:
     ///   - mesh: Mesh source
@@ -88,6 +95,7 @@ namespace IKan
     {
       Ref<MeshSource> staticMesh;
       glm::mat4 transform;
+      Ref<Shader> overrideShader = nullptr;
     };
 
     // Member Functions ---------------------------------------------------------------------------------------------

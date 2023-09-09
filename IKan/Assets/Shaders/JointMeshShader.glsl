@@ -1,5 +1,5 @@
 //
-//  MeshStencilShader.glsl
+//  JointMeshShader.glsl
 //  ikan
 //
 //  Created by iKan on 09/09/23.
@@ -61,5 +61,5 @@ in VS_OUT
 /// Fragment Main Function
 void main()
 {
-  o_Color = vec4(1.0, 0.65, 0.01, 1.0);
+  o_Color = vec4(0.2, 0.6, 0.3, 1.0);
 }

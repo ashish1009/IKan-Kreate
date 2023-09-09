@@ -71,7 +71,7 @@ namespace IKan
     m_commonData->sceneCamera = sceneCamera;
   }
   
-  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform)
+  void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform, const Ref<Shader>& oevrridenShader)
   {
     if (!mesh)
     {
@@ -81,6 +81,7 @@ namespace IKan
     MeshSourceDrawCommand dc;
     dc.staticMesh = mesh;
     dc.transform = transform;
+    dc.overrideShader = oevrridenShader;
     
     m_meshSourceDrawList.emplace_back(dc);
   }
@@ -139,7 +140,8 @@ namespace IKan
     for (const auto& dc : m_meshSourceDrawList)
     {
       const auto& pipeline = dc.staticMesh->GetPipeline();
-      RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, pipeline->GetSpecification().shader, dc.transform);
+      auto shader = dc.overrideShader ? dc.overrideShader : pipeline->GetSpecification().shader;
+      RenderMesh(dc.staticMesh->GetSubMeshes(), pipeline, shader, dc.transform);
     }
   }
   

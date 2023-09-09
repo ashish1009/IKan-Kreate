@@ -252,7 +252,7 @@ Entities:
       Type: 2
       IsWorldSpace: true
       IsCollisionEnabled: false
-      WorldAnchorPoint: [-4, 4, 19.3999996]
+      WorldAnchorPoint: [-7.4000001, 4, 19.3999996]
       LocalAnchorPoint1: [0, 1.5, 0]
       LocalAnchorPoint2: [-3.70000005, 0, -1.70000005]
       ConeLimit: true
