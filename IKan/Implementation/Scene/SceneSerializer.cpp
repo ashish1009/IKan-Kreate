@@ -350,6 +350,17 @@ namespace IKan {
       out << YAML::Key << "Speed" << YAML::Value << jointComponent.hingeData.initMotorSpeed;
       out << YAML::Key << "Torque" << YAML::Value << jointComponent.hingeData.initMaxMotorTorque;
 
+      out << YAML::Key << "SliderWorldAxis" << YAML::Value << jointComponent.sliderData.worldAxis;
+      out << YAML::Key << "SliderLocalAxis1" << YAML::Value << jointComponent.sliderData.localAxis1;
+      
+      out << YAML::Key << "SliderLimit" << YAML::Value << jointComponent.sliderData.limit;
+      out << YAML::Key << "SliderMinTranse" << YAML::Value << jointComponent.sliderData.initMinTransLimit;
+      out << YAML::Key << "SliderMaxTranse" << YAML::Value << jointComponent.sliderData.initMaxTransLimit;
+      
+      out << YAML::Key << "SliderMotor" << YAML::Value << jointComponent.sliderData.motor;
+      out << YAML::Key << "SliderSpeed" << YAML::Value << jointComponent.sliderData.initMotorSpeed;
+      out << YAML::Key << "SliderForce" << YAML::Value << jointComponent.sliderData.initMaxMotorForce;
+
       out << YAML::EndMap; // JointComponent
     }
     out << YAML::EndMap; // Entity
@@ -570,16 +581,24 @@ namespace IKan {
         component.ballSocketData.coneLimit = jointComponent["ConeLimit"].as<bool>();
         component.ballSocketData.coneAngle = jointComponent["ConeAngle"].as<float>();
 
-        component.hingeData.limit = jointComponent["Limit"].as<bool>();
         component.hingeData.worldAxis = jointComponent["WorldAxis"].as<glm::vec3>();
         component.hingeData.localAxis1 = jointComponent["LocalAxis1"].as<glm::vec3>();
         component.hingeData.localAxis2 = jointComponent["LocalAxis2"].as<glm::vec3>();
+        component.hingeData.limit = jointComponent["Limit"].as<bool>();
         component.hingeData.initMinAngleLimit = jointComponent["MinAngle"].as<float>();
         component.hingeData.initMaxAngleLimit = jointComponent["MaxAngle"].as<float>();
         component.hingeData.motor = jointComponent["Motor"].as<bool>();
         component.hingeData.initMotorSpeed = jointComponent["Speed"].as<float>();
         component.hingeData.initMaxMotorTorque = jointComponent["Torque"].as<float>();
 
+        component.sliderData.worldAxis = jointComponent["SliderWorldAxis"].as<glm::vec3>();
+        component.sliderData.localAxis1 = jointComponent["SliderLocalAxis1"].as<glm::vec3>();
+        component.sliderData.limit = jointComponent["SliderLimit"].as<bool>();
+        component.sliderData.initMinTransLimit = jointComponent["SliderMinTranse"].as<float>();
+        component.sliderData.initMaxTransLimit = jointComponent["SliderMaxTranse"].as<float>();
+        component.sliderData.motor = jointComponent["SliderMotor"].as<bool>();
+        component.sliderData.initMotorSpeed = jointComponent["SliderSpeed"].as<float>();
+        component.sliderData.initMaxMotorForce = jointComponent["SliderForce"].as<float>();
       }
     }
   }

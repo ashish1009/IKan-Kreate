@@ -42,16 +42,31 @@ namespace IKan
 
     /// This function create the fixed joint in world
     /// - Parameters:
-    ///   - axis : axis of movement
     ///   - worldAxis: worldAxis
     ///   - localAxis1: localAxis1
     ///   - localAxis2: localAxis2
     ///   - initMinAngleLimit: initMinAngleLimit
     ///   - initMaxAngleLimit: initMaxAngleLimit
-    ///   - initMotorSpeed: initMotorSpeed 
-    ///   - initMaxMotorTorque: initMaxMotorTorque 
+    ///   - initMotorSpeed: initMotorSpeed
+    ///   - initMaxMotorTorque: initMaxMotorTorque
+    ///   - limit: Limit flag
+    ///   - motor: motor flag
     void MakeHinge(const Vector3& worldAxis, const Vector3& localAxis1, const Vector3& localAxis2,
                    bool limit, decimal initMinAngleLimit, decimal initMaxAngleLimit,
                    bool motor, decimal initMotorSpeed, decimal initMaxMotorTorque);
+    
+    /// This function create the fixed joint in world
+    /// - Parameters:
+    ///   - worldAxis: worldAxis
+    ///   - localAxis1: localAxis
+    ///   - initMinAngleLimit: initMinAngleLimit
+    ///   - initMaxAngleLimit: initMaxAngleLimit
+    ///   - initMotorSpeed: initMotorSpeed
+    ///   - initMaxMotorForce: initMaxMotorTorque
+    ///   - limit: Limit flag
+    ///   - motor: motor flag
+    void MakeSlider(const Vector3& worldAxis, const Vector3& localAxis1,
+                    bool limit, decimal initMinTransLimit, decimal initMaxTransLimit,
+                    bool motor, decimal initMotorSpeed, decimal initMaxMotorForce);
   };
 } // namespace IKan

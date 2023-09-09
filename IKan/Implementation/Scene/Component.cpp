@@ -456,6 +456,7 @@ return *this; \
     
     ballSocketData = other.ballSocketData;
     hingeData = other.hingeData;
+    sliderData = other.sliderData;
   }
 
 } // namespace IKan

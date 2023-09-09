@@ -239,6 +239,16 @@ namespace IKan
                         fjc.hingeData.motor, fjc.hingeData.initMotorSpeed, fjc.hingeData.initMaxMotorTorque);
         break;
       }
+        
+      case JointComponent::Type::Slider:
+      {
+        Vector3 worldAxis({ fjc.sliderData.worldAxis.x, fjc.sliderData.worldAxis.y, fjc.sliderData.worldAxis.z});
+        Vector3 localAxis1({ fjc.sliderData.localAxis1.x, fjc.sliderData.localAxis1.y, fjc.sliderData.localAxis1.z});
+
+        joint.MakeSlider(worldAxis, localAxis1,
+                        fjc.sliderData.limit, fjc.sliderData.initMinTransLimit, fjc.sliderData.initMaxTransLimit,
+                        fjc.sliderData.motor, fjc.sliderData.initMotorSpeed, fjc.sliderData.initMaxMotorForce);
+      }
       default:
         break;
     }

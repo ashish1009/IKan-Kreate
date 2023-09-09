@@ -642,9 +642,8 @@ namespace Kreator
 #endif
       
       int32_t selected = static_cast<int32_t>(fjc.type);
-      if (Kreator_UI::PropertyDropdown("Type",
-                                       {"Fixed", "BallSocket", "Hinge"},
-                                       3, &selected))
+      static std::vector<std::string> options = {"Fixed", "BallSocket", "Hinge", "Sldier"};
+      if (Kreator_UI::PropertyDropdown("Type", options, (uint32_t)options.size(), &selected))
       {
         fjc.type = static_cast<JointComponent::Type>(selected);
       }
@@ -713,6 +712,34 @@ namespace Kreator
           Kreator_UI::Property("Max Torque", fjc.hingeData.initMaxMotorTorque);
           UI::SetTooltip("Newton-Meter");
         } 
+      }
+      
+      else if (fjc.type == IKan::JointComponent::Type::Slider)
+      {
+        if (fjc.isWorldSpace)
+        {
+          Kreator_UI::Property("World Anchor Axis", fjc.sliderData.worldAxis);
+        }
+        else
+        {
+          Kreator_UI::Property("Local Anchor Axis 1", fjc.sliderData.localAxis1);
+        }
+        
+        Kreator_UI::Property("Limit", fjc.sliderData.limit);
+        Kreator_UI::Property("Motor", fjc.sliderData.motor);
+        if (fjc.sliderData.limit)
+        {
+          Kreator_UI::Property("Init Min Translation", fjc.sliderData.initMinTransLimit);
+          Kreator_UI::Property("Init Min Translation", fjc.sliderData.initMaxTransLimit);
+        }
+        
+        if (fjc.sliderData.motor)
+        {
+          Kreator_UI::Property("Init Speed", fjc.sliderData.initMotorSpeed);
+          UI::SetTooltip("Meter per seconds");
+          Kreator_UI::Property("Max Force", fjc.sliderData.initMaxMotorForce);
+          UI::SetTooltip("Newton");
+        }
       }
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
@@ -968,6 +995,15 @@ namespace Kreator
         if (m_selectionContext.Size() == 1)
         {
           ImGui::Separator();
+          if (m_selectionContext.At(0).GetParent())
+          {
+            if (ImGui::MenuItem("Unparent"))
+            {
+              m_context->UnparentEntity(m_selectionContext.At(0), false);
+              ImGui::Separator();
+            }
+          }
+          
           if (ImGui::MenuItem("Delete"))
           {
             entityDeleted = true;

@@ -438,7 +438,7 @@ namespace IKan
       if (newParent)
       {
         // Unperent current entity
-        UnparentEntity(entity);
+        UnparentEntity(entity, false);
         
         // Set the 'newParent' as parent of 'parent' which was child of 'entity'
         ParentEntity(parent, newParent);

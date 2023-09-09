@@ -108,7 +108,7 @@ namespace IKan
     void ParentEntity(Entity entity, Entity parent);
     /// This function removes the parent relation
     /// - Parameter entity: parent entity
-    void UnparentEntity(Entity entity, bool convertToWorldSpace = true);
+    void UnparentEntity(Entity entity, bool convertToWorldSpace);
 
     /// This function convert the entity to local space
     /// - Parameter entity: Entity handle

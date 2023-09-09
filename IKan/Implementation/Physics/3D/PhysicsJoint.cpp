@@ -87,4 +87,36 @@ namespace IKan
     ikdelete jointInfo;
   }
 
+  void PhysicsJoint::MakeSlider(const Vector3& worldAxis, const Vector3& localAxis1,
+                                bool limit, decimal initMinTransLimit, decimal initMaxTransLimit,
+                                bool motor, decimal initMotorSpeed, decimal initMaxMotorForce)
+  {
+    SliderJointInfo* jointInfo;
+    if (worldSpace)
+    {
+      jointInfo = iknew SliderJointInfo(body1, body2, worldAnchorPoint, worldAxis);
+    }
+    else
+    {
+      jointInfo = iknew SliderJointInfo(body1, body2, localAnchorPoint1, localAnchorPoint2, localAxis1);
+    }
+    
+    jointInfo->isLimitEnabled = limit;
+    if (limit)
+    {
+      jointInfo->minTranslationLimit = initMinTransLimit;
+      jointInfo->maxTranslationLimit = initMaxTransLimit;
+    }
+    
+    jointInfo->isMotorEnabled = motor;
+    if (motor)
+    {
+      jointInfo->motorSpeed = initMotorSpeed;
+      jointInfo->maxMotorForce = initMaxMotorForce;
+    }
+    
+    [[maybe_unused]] SliderJoint* joint = dynamic_cast<SliderJoint*>(world->createJoint(*jointInfo));
+    ikdelete jointInfo;
+  }
+
 } // namespace IKan

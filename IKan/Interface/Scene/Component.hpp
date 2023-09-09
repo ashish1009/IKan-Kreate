@@ -250,11 +250,23 @@ namespace IKan
     float initMotorSpeed = 0, initMaxMotorTorque = 0;
   };
 
+  struct SliderData
+  {
+    glm::vec3 worldAxis = {0, 0, 0};
+    glm::vec3 localAxis1 = {0, 0, 0};
+    
+    bool limit = false;
+    float initMinTransLimit = -2.0f, initMaxTransLimit = 2.0f;
+    
+    bool motor = false;
+    float initMotorSpeed = 0, initMaxMotorForce = 0;
+  };
+
   struct JointComponent
   {
     enum class Type
     {
-      Fixed, BallSocket, Hinge
+      Fixed, BallSocket, Hinge, Slider
     };
     
     UUID connectedEntity;
@@ -266,6 +278,7 @@ namespace IKan
     
     BallSocketData ballSocketData;
     HingeData hingeData;
+    SliderData sliderData;
 
     JointComponent();
     ~JointComponent();
