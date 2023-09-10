@@ -256,7 +256,6 @@ namespace IKan
   {
     return m_submeshes;
   }
-  
   const Ref<Pipeline>& MeshSource::GetPipeline() const
   {
     return m_pipeline;
@@ -265,12 +264,10 @@ namespace IKan
   {
     return m_baseMaterial;
   }
-
   const std::vector<Triangle>& MeshSource::GetTriangleCache(uint32_t submeshIndex) const
   {
     return m_triangleCache.at(submeshIndex);
   }
-
   const std::vector<glm::vec3>& MeshSource::GetVertices() const
   {
     return m_vertices;

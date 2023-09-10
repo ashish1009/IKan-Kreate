@@ -29,4 +29,18 @@ namespace IKan
     std::string m_materialShaderPath;
     Ref<Material> m_material;
   };
+  
+  class MaterialTable
+  {
+  public:
+    /// This creates material table
+    /// - Parameter materialCount: material count
+    MaterialTable(uint32_t materialCount);
+    /// This destroys the material table
+    ~MaterialTable();
+    
+  private:
+    std::map<uint32_t /* Material Index */, Ref<MaterialAsset>> m_materials;
+    uint32_t m_materialCount;
+  };
 } // namespace IKan

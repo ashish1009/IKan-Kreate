@@ -29,7 +29,7 @@ namespace IKan
   };
   
   /// Map to store the asset with its Extension
-  inline static std::unordered_map<std::string, AssetType> s_assetExtensionMap =
+  inline static std::unordered_map<std::string /*Extesntion*/, AssetType> s_assetExtensionMap =
   {
     // Textures
     { ".png", AssetType::Image },

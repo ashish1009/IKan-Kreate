@@ -18,4 +18,16 @@ namespace IKan
   {
     
   }
+  
+  MaterialTable::MaterialTable(uint32_t materialCount)
+  : m_materialCount(materialCount)
+  {
+    
+  }
+  
+  MaterialTable::~MaterialTable()
+  {
+
+  }
+
 } // namespace IKan

@@ -467,7 +467,7 @@ if (!Project::GetActive()) return
     }
     
     // Stop Scene --------------------------------------------------------
-    if (m_sceneState == SceneState::Play and e.GetKeyCode() == Key::Escape)
+    if (m_sceneState != SceneState::Edit and e.GetKeyCode() == Key::Escape)
     {
       OnSceneStop();
     }

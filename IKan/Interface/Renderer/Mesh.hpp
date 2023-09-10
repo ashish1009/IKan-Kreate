@@ -122,7 +122,7 @@ namespace IKan
     std::vector<StaticVertex> m_staticVertices;
     std::vector<Index> m_indices;
     std::vector<glm::vec3> m_vertices;
-    std::unordered_map<uint32_t, std::vector<Triangle>> m_triangleCache;
+    std::unordered_map<uint32_t /*Submesh Index */, std::vector<Triangle>> m_triangleCache;
 
     // Graphics
     Ref<Pipeline> m_pipeline;
