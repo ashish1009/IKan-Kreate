@@ -878,7 +878,8 @@ if (!Project::GetActive()) return
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Fonts");
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Scenes");
     Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Meshes" / "Source");
-    
+    Utils::FileSystem::CreateDirectory(projectDir / "Assets" / "Meshes" / "Materials");
+
     auto projectFile = projectDir.string() + "/" + std::string(m_projectNameBuffer) + ProjectExtension;
     OpenProject(projectFile);
   }

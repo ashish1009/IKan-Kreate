@@ -25,6 +25,7 @@ namespace IKan
     Font,
     Scene,
     MeshSource,
+    MaterialAsset,
   };
   
   /// Map to store the asset with its Extension
@@ -42,9 +43,12 @@ namespace IKan
     // Fonts
     { ".ttf", AssetType::Font },
     
-    // mesh/animation source
+    // Mesh source
     { ".fbx", AssetType::MeshSource },
     { ".obj", AssetType::MeshSource },
+    
+    // Material
+    { ".ikmat", AssetType::MaterialAsset }
   };
 
   namespace AssetUtils

@@ -76,7 +76,7 @@
 #include <Renderer/SceneRenderer.hpp>
 #include <Renderer/RendererStats.hpp>
 #include <Renderer/Mesh.hpp>
-#include <Renderer/ShaderMaterial.hpp>
+#include <Renderer/Material.hpp>
 #include <Renderer/UI/Font.hpp>
 
 #include <Renderer/Graphics/Shader.hpp>

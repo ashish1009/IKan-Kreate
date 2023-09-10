@@ -1,5 +1,5 @@
 //
-//  ShaderMaterial.hpp
+//  Material.hpp
 //  IKan
 //
 //  Created by Ashish . on 09/09/23.

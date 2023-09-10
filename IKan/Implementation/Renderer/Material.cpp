@@ -1,11 +1,11 @@
 //
-//  ShaderMaterial.cpp
+//  Material.cpp
 //  IKan
 //
 //  Created by Ashish . on 09/09/23.
 //
 
-#include "ShaderMaterial.hpp"
+#include "Material.hpp"
 #include "Renderer/Renderer.hpp"
 
 namespace IKan

@@ -18,6 +18,7 @@ namespace IKan
       if (assetType == "Font")                return AssetType::Font;
       if (assetType == "Scene")               return AssetType::Scene;
       if (assetType == "MeshSource")          return AssetType::MeshSource;
+      if (assetType == "MaterialAsset")          return AssetType::MaterialAsset;
       IK_ASSERT(false, "Unknown Asset Type");
       return AssetType::None;
     }
@@ -31,6 +32,7 @@ namespace IKan
         case AssetType::Font:                  return "Font";
         case AssetType::Scene:                 return "Scene";
         case AssetType::MeshSource:            return "MeshSource";
+        case AssetType::MaterialAsset:         return "MaterialAsset";
       }
       IK_ASSERT(false, "Unknown Asset Type");
       return "None";

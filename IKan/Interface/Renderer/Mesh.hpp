@@ -9,7 +9,7 @@
 
 #include "Asset/Asset.hpp"
 #include "Core/AABB.hpp"
-#include "Renderer/ShaderMaterial.hpp"
+#include "Renderer/Material.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
 #include "Renderer/Graphics/RendererBuffers.hpp"
