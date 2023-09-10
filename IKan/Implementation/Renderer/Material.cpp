@@ -25,7 +25,7 @@ namespace IKan
   : m_shader(shader)
   {
     IK_LOG_TRACE(LogModule::Material, "Creating Material ...");
-    IK_LOG_TRACE(LogModule::Material, "  Shader           | {0}", m_shader->GetName());
+    IK_LOG_TRACE(LogModule::Material, "  Shader                  | {0}", m_shader->GetName());
     AllocateStorage();
   }
   
@@ -42,7 +42,7 @@ namespace IKan
       const auto& vsBuffer = m_shader->GetVSMaterialUniformBuffer();
       m_vsUniformStorageBuffer.Allocate(vsBuffer.GetSize());
       m_vsUniformStorageBuffer.ZeroInitialize();
-      IK_LOG_TRACE(LogModule::Material, "  Vertex Buffer    | {0} Bytes", vsBuffer.GetSize());
+      IK_LOG_TRACE(LogModule::Material, "  Vertex Shader Buffer    | {0} Bytes", vsBuffer.GetSize());
     }
     
     if (m_shader->HasFSMaterialUniformBuffer())
@@ -50,7 +50,7 @@ namespace IKan
       const auto& psBuffer = m_shader->GetFSMaterialUniformBuffer();
       m_fsUniformStorageBuffer.Allocate(psBuffer.GetSize());
       m_fsUniformStorageBuffer.ZeroInitialize();
-      IK_LOG_TRACE(LogModule::Material, "  Fragment Buffer  | {0} Bytes", psBuffer.GetSize());
+      IK_LOG_TRACE(LogModule::Material, "  Fragment Shader Buffer  | {0} Bytes", psBuffer.GetSize());
     }
     
     if (m_shader->HasGSMaterialUniformBuffer())
@@ -58,7 +58,7 @@ namespace IKan
       const auto& gsBuffer = m_shader->GetGSMaterialUniformBuffer();
       m_gsUniformStorageBuffer.Allocate(gsBuffer.GetSize());
       m_gsUniformStorageBuffer.ZeroInitialize();
-      IK_LOG_TRACE(LogModule::Material, "  Geomatery Buffer | {0} Bytes", gsBuffer.GetSize());
+      IK_LOG_TRACE(LogModule::Material, "  Geomatery Shader Buffer | {0} Bytes", gsBuffer.GetSize());
     }
   }
   

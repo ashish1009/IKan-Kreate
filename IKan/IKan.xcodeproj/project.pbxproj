@@ -514,8 +514,8 @@
 				B23365172A7438FA00BC7B8B /* RendererStats.hpp */,
 				B23365462A74E6D300BC7B8B /* Renderer2D.hpp */,
 				B23365842A75303E00BC7B8B /* TextRenderer.hpp */,
-				B2CD2AAB2A81269F00B0D70B /* Mesh.hpp */,
 				B27812722A861C08005C0E7C /* SceneRenderer.hpp */,
+				B2CD2AAB2A81269F00B0D70B /* Mesh.hpp */,
 				B24A8AE92AACF08000FABB45 /* Material.hpp */,
 				B24A8AF92AADC38600FABB45 /* MaterialAsset.hpp */,
 			);

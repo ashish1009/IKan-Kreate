@@ -14,6 +14,7 @@ namespace IKan
   SceneRenderer::SceneRenderer(Ref<Scene> scene)
   : m_scene(scene)
   {
+    IK_LOG_TRACE(LogModule::SceneRenderer, "Creating Scene Renderer instance");
     if (!m_commonData)
     {
       m_commonData = CreateScope<SceneRendererData>();
@@ -45,6 +46,7 @@ namespace IKan
     {
       m_commonData.reset();
     }
+    IK_LOG_TRACE(LogModule::SceneRenderer, "Destroying Scene Renderer instance");
   }
   
   void SceneRenderer::SetViewport(uint32_t width, uint32_t height)

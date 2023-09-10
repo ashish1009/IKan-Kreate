@@ -43,6 +43,8 @@ namespace IKan
   
   bool ProjectSerializer::Deserialize(const std::string& filepath)
   {
+    IK_LOG_TRACE(LogModule::Project, "Deserialising the project {0}", Utils::String::GetFileNameFromPath(filepath));
+
     std::ifstream stream(filepath);
     IK_ASSERT(stream);
     std::stringstream strStream;

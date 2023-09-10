@@ -111,6 +111,8 @@ namespace IKan
     void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
     /// This function loads the graphics data in renderer buffers
     void LoadGraphicsdata();
+    /// This function loads the predefined material of mesh
+    void UploadMaterial();
 
     // Member variables ----------------------------------------------------------------------------------------------
     std::string m_filePath = "";

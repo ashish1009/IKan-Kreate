@@ -11,6 +11,7 @@ namespace Kreator
 {
   void DefaultMesh::Initialize()
   {
+    IK_LOG_TRACE("Default Mesh", "Creating Default Meshes");
     s_meshes[Type::Cube] = MeshSource::Create(Project::GetActive()->GetMeshPath("Default/Cube.fbx"));
     s_meshes[Type::Sphere] = MeshSource::Create(Project::GetActive()->GetMeshPath("Default/Sphere.fbx"));
     s_meshes[Type::Capsule] = MeshSource::Create(Project::GetActive()->GetMeshPath("Default/Capsule.fbx"));
@@ -19,6 +20,7 @@ namespace Kreator
   void DefaultMesh::Shutdown()
   {
     s_meshes.clear();
+    IK_LOG_WARN("Default Mesh", "Destroying Default Meshes");
   }
   
   Ref<MeshSource> DefaultMesh::GetMesh(Type type)

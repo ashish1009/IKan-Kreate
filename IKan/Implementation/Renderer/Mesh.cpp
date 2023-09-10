@@ -67,6 +67,7 @@ namespace IKan
     StoreVerticesAndIndices();
     TraverseNodes(m_scene->mRootNode);
     LoadGraphicsdata();
+    UploadMaterial();
   }
   
   MeshSource::MeshSource(const std::vector<StaticVertex>& vertices, const std::vector<Index>& indices,
@@ -250,6 +251,19 @@ namespace IKan
     
     // Create Base Material
     m_baseMaterial = Material::Create(pipelineSpec.shader);
+  }
+  
+  void MeshSource::UploadMaterial()
+  {
+    // If mesh do not have material then return
+    if (!m_scene->HasMaterials())
+    {
+      return;
+    }
+    
+//    MESH_LOG("Loading Materials for Mesh");
+//    MESH_LOG("  Mesh                | {0}", name_);
+//    MESH_LOG("  Number of Materials | {0}", scene_->mNumMaterials);
   }
 
   const std::vector<SubMesh>& MeshSource::GetSubMeshes() const

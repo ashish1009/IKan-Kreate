@@ -373,7 +373,6 @@ if (!Project::GetActive()) return
       {
         break;
       }
-        
       default:
         break;
     }
@@ -489,7 +488,6 @@ if (!Project::GetActive()) return
           break;
       }
     }
-    
     return false;
   }
   
@@ -966,6 +964,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::CloseProject(bool unloadProject)
   {
+    IK_LOG_TRACE("Kreator Layer", "Closing the Current Project");
     SaveProject();
     
     // Destroy Default mesh
@@ -974,6 +973,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::SaveProject()
   {
+    IK_LOG_TRACE("Kreator Layer", "Saving the Current Project");
     if (!Project::GetActive())
     {
       // FIXME: (Kreator) Fix Later
@@ -987,6 +987,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::NewScene(const std::string& name)
   {
+    IK_LOG_INFO("Kreator Layer", "Creating new scene: {0}", name);
     m_editorScene =  Scene::Create(name);
     m_sceneFilePath = std::string();
     
@@ -999,6 +1000,8 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OpenScene(const std::string& filepath)
   {
+    IK_LOG_INFO("Kreator Layer", "Opening scene: {0}", filepath);
+
     if (!Utils::FileSystem::Exists(filepath))
     {
       IK_LOG_ERROR("Kreator Layer" ,"Tried loading a non-existing scene: {0}", filepath);
@@ -1038,6 +1041,7 @@ if (!Project::GetActive()) return
   {
     if (!m_sceneFilePath.empty())
     {
+      IK_LOG_INFO("Kreator Layer", "Saving the scene: {0}", m_sceneFilePath.c_str());
       SceneSerializer serializer(m_editorScene);
       serializer.Serialize(m_sceneFilePath);
       
