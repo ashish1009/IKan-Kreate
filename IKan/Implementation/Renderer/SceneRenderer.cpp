@@ -14,6 +14,7 @@ namespace IKan
   SceneRenderer::SceneRenderer(Ref<Scene> scene)
   : m_scene(scene)
   {
+    IK_PROFILE();
     IK_LOG_TRACE(LogModule::SceneRenderer, "Creating Scene Renderer instance");
     if (!m_commonData)
     {
@@ -41,6 +42,7 @@ namespace IKan
   
   SceneRenderer::~SceneRenderer()
   {
+    IK_PROFILE();
     // Destroy the Render Pass for Renderer 2D
     if (m_commonData)
     {

@@ -20,6 +20,7 @@ namespace Kreator
   
   void ApplicationSettingsSerializer::Initialize()
   {
+    IK_PROFILE();
     IK_LOG_TRACE("ApplicationSettings", "Initialising the ApplicationSettingsSerializer");
     
     s_editorSettingsPath = std::filesystem::absolute("Config");

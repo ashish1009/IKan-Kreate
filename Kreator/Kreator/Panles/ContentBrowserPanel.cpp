@@ -122,6 +122,7 @@ namespace Kreator
   
   ContentBrowserPanel::ContentBrowserPanel()
   {
+    IK_PROFILE();
     IK_LOG_TRACE("ContentBrowserPanel", "Initialising Content Browser Panel Textures");
     s_instance = this;
     

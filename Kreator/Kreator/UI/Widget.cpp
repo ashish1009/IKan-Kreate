@@ -62,6 +62,7 @@ namespace Kreator_UI
   
   void Widgets::Initialize()
   {
+    IK_PROFILE();
     IK_LOG_TRACE("Kreator UI", "Initialising Widgets Textures");
     
     s_searchIcon = Image::Create(Kreator::RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Search.png");
@@ -72,6 +73,7 @@ namespace Kreator_UI
   
   void Widgets::Shutdown()
   {
+    IK_PROFILE();
     s_searchIcon.reset();
     s_gearIcon.reset();
     ikdelete[] s_assetSearchString;

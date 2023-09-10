@@ -354,6 +354,7 @@ namespace IKan
   
   void Renderer2D::Initialize(const Renderer2DData& renderer2DData)
   {
+    IK_PROFILE();
     s_fullscreenQuadData = CreateScope<FullScreenQuad>();
 
     BATCH_INFO("Initialising the Batch Renderer 2D ");
@@ -366,6 +367,7 @@ namespace IKan
   
   void Renderer2D::Shutdown()
   {
+    IK_PROFILE();
     BATCH_WARN("Shutting Down the Batch Renderer 2D ");
     BATCH_WARN("------------------------------------");
     

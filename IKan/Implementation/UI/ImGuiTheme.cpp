@@ -12,6 +12,7 @@ namespace IKan::UI
 {
   void Theme::ChangeFont(const std::vector<UI::Font> otherFonts)
   {
+    IK_PROFILE();
     auto& imguiLayer = Application::Get().GetImGuiLayer();
     imguiLayer.OnDetach();
     

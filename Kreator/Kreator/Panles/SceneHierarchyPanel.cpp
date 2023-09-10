@@ -166,6 +166,7 @@ namespace Kreator
   
   void SceneHierarchyPanel::Initialize()
   {
+    IK_PROFILE();
     IK_LOG_TRACE("SceneHierarchyPanel", "Initializing the Scene Hierarchy Panel");
     s_pencilIcon = Image::Create(RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Pencil.png");
     s_plusIcon = Image::Create(RendererLayer::Get().GetClientResorucePath() / "Textures/Icons/Plus.png");
@@ -173,6 +174,7 @@ namespace Kreator
   }
   void SceneHierarchyPanel::Shutdown()
   {
+    IK_PROFILE();
     s_pencilIcon.reset();
     s_plusIcon.reset();
     s_gearIcon.reset();
