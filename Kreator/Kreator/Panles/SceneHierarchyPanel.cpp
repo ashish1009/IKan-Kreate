@@ -1136,7 +1136,7 @@ namespace Kreator
           std::string file = Project::GetActive()->GetMeshPath("Default/");
           file += name;
           file += ".fbx";
-          auto meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+          auto meshSourceHandle = AssetManager::CreateAssetWithFile<MeshSource>(file, file);
           newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
         }
       };
@@ -1152,7 +1152,7 @@ namespace Kreator
             std::string file = Project::GetActive()->GetMeshPath("Default/");
             file += name;
             file += ".fbx";
-            auto meshSourceHandle = AssetManager::CreateMemoryOnlyAssetWithFile<MeshSource>(file, file);
+            auto meshSourceHandle = AssetManager::CreateAssetWithFile<MeshSource>(file, file);
             newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
 
             newEntity.AddComponent<RigidBodyComponent>();
