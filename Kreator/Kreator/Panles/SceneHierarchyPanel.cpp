@@ -578,7 +578,7 @@ namespace Kreator
       }
       Kreator_UI::EndPropertyGrid();
       
-      // Open Material Popup    
+      // Open Material Popup
       s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materials.at(selectedMaterialIndex)->handle);
       AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
     }, s_gearIcon);

@@ -206,6 +206,11 @@ namespace IKan
     }
   }
   
+  void Material::SetName(const std::string& name)
+  {
+    m_name = name;
+  }
+  
   const Ref<Shader>& Material::GetShader() const
   {
     return m_shader;

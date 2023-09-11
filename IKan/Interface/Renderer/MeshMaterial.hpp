@@ -28,6 +28,10 @@ namespace IKan
     /// This function unbinds the material. To be called after rendering any scene
     void Unbind();
     
+    /// This function update the material name
+    /// - Parameter name: name
+    void SetName(const std::string& name);
+    
     /// This function returns the name of Material
     const Ref<Shader>& GetShader() const;
     /// This function returns the shader binded to Material

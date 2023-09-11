@@ -88,8 +88,26 @@ namespace Kreator
       SetOpen(false);
     }
     
+    float roundingVal = 15.0f;
+    UI::ScopedStyle rounding (ImGuiStyleVar_FrameRounding, roundingVal);
+
     auto& material = m_asset->GetMaterial();
-    ImGui::Text("Shader: %s", material->GetShader()->GetName().c_str());
+    std::string name = material->GetName();
+    
+    char buffer[256];
+    memset(buffer, 0, 256);
+    memcpy(buffer, name.c_str(), name.length());
+    ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+    ImGui::PushItemWidth(contentRegionAvailable.x);
+        
+    if (ImGui::InputText("##Tag", buffer, 256))
+    {
+      name = std::string(buffer);
+      material->SetName(name);
+    }
+    UI::DrawItemActivityOutline(roundingVal, false, Kreator_UI::Color::Accent);
+    std::string shader = std::string("Shader: ") + material->GetShader()->GetName();
+    UI::SetTooltip(shader.c_str());
     
     // Albedo
     if (ImGui::CollapsingHeader("Albedo", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
