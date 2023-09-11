@@ -12,3 +12,42 @@ Entities:
       Scale: [1, 1, 1]
     StaticMeshComponent:
       MeshHandle: 560965872
+    RigidBodyComponent:
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+    JointComponent:
+      ConnectedEntity: 17355571055812945083
+      Type: 0
+      IsWorldSpace: true
+      IsCollisionEnabled: true
+      WorldAnchorPoint: [0, 0, 0]
+      LocalAnchorPoint1: [0, 0, 0]
+      LocalAnchorPoint2: [0, 0, 0]
+      ConeLimit: false
+      ConeAngle: 0.785398185
+      WorldAxis: [0, 0, 0]
+      LocalAxis1: [0, 0, 0]
+      LocalAxis2: [0, 0, 0]
+      Limit: false
+      MinAngle: -0.785398185
+      MaxAngle: 0.785398185
+      Motor: false
+      Speed: 0
+      Torque: 0
+      SliderWorldAxis: [0, 0, 0]
+      SliderLocalAxis1: [0, 0, 0]
+      SliderLimit: false
+      SliderMinTranse: -2
+      SliderMaxTranse: 2
+      SliderMotor: false
+      SliderSpeed: 0
+      SliderForce: 0

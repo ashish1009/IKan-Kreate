@@ -48,4 +48,29 @@ namespace Kreator
     UI::EndDisabled();
     Kreator_UI::EndPropertyGrid();
   }
+  
+  MaterialViewer::MaterialViewer()
+  : AssetEditor("Edit Material")
+  {
+    SetMinSize(200, 600);
+    SetMaxSize(500, 1000);
+  }
+  
+  void MaterialViewer::SetAsset(const Ref<Asset>& asset)
+  {
+    m_asset = std::dynamic_pointer_cast<MaterialAsset>(asset);
+  }
+  
+  void MaterialViewer::OnClose()
+  {
+    m_asset = nullptr;
+  }
+  
+  void MaterialViewer::Render()
+  {
+    if (!m_asset)
+    {
+      SetOpen(false);
+    }    
+  }
 } // namespace Kreator

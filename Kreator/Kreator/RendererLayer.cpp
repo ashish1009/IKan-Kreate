@@ -260,6 +260,7 @@ if (!Project::GetActive()) return
 
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
+    AssetEditorManager::RegisterEditor<MaterialViewer>(AssetType::MaterialAsset);
   }
   
   void RendererLayer::OnDetach()
@@ -704,6 +705,7 @@ if (!Project::GetActive()) return
                 }
                 if (opened)
                 {
+                  AssetEditorManager::OpenEditor(AssetManager::GetAsset<MaterialAsset>(materialAsset->handle));
                   ImGui::TreePop();
                 }
               } // For each materials
