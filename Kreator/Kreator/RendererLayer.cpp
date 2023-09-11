@@ -190,8 +190,11 @@ if (!Project::GetActive()) return
     m_scaleToolTex = Image::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
     m_gizmoModeTex = Image::Create(KreatorResourcePath("Textures/Icons/GuizmoMode.png"));
     
+    // No texture Image
+    m_checkerboardTex = Image::Create(KreatorResourcePath("Textures/Editor/CheckBoard.png"));
+    
     // Overriden Shader
-    m_jointMaterial = Material::Create(KreatorResourcePath("Shader/JointMeshShader.glsl"));
+    m_jointMaterial = Material::Create(KreatorResourcePath("Shader/JointMeshShader.glsl"), "Joint Material");
   }
   
   RendererLayer::~RendererLayer()
@@ -667,6 +670,131 @@ if (!Project::GetActive()) return
       UI_StatisticsPanel();
       UI_EditorPanel();
       m_panels.OnImGuiRender();
+      
+      // Materials
+      {
+        ImGui::Begin("Materials");
+        ImGui::PushID("Materials");
+        if (m_selectionContext.size())
+        {
+          Entity selectedEntity = m_selectionContext.front().entity;
+          if (selectedEntity.HasComponent<StaticMeshComponent>())
+          {
+            Ref<MeshSource> mesh = AssetManager::GetAsset<MeshSource>(selectedEntity.GetComponent<StaticMeshComponent>().staticMesh);
+            
+            if (mesh and mesh->GetAssetType() == AssetType::MeshSource)
+            {
+              auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
+              static uint32_t selectedMaterialIndex = 0;
+              for (auto& [MaterialIdx, materialAsset] : materials)
+              {
+                auto& material = materialAsset->GetMaterial();
+                std::string materialName = material->GetName();
+                
+                if (materialName.empty())
+                {
+                  materialName = fmt::format("Unnamed Material #{0}", MaterialIdx);
+                }
+                
+                ImGuiTreeNodeFlags nodeFlags = (selectedMaterialIndex == MaterialIdx ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf;
+                bool opened = ImGui::TreeNodeEx((void*)(&material), nodeFlags, materialName.c_str());
+                if (ImGui::IsItemClicked())
+                {
+                  selectedMaterialIndex = MaterialIdx;
+                }
+                if (opened)
+                {
+                  ImGui::TreePop();
+                }
+              } // For each materials
+              ImGui::Separator();
+              
+              // Selected material
+              if (selectedMaterialIndex < materials.size())
+              {
+                auto& material = materials[selectedMaterialIndex]->GetMaterial();
+                ImGui::Text("Shader: %s", material->GetShader()->GetName().c_str());
+
+                // Textures ------------------------------------------------------------------------------
+                {
+                  // Albedo
+                  if (ImGui::CollapsingHeader("Albedo", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
+                  {
+                    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+                    auto& albedoColor = material->Get<glm::vec3>("u_Material_AlbedoColor");
+                    float& useAlbedoMap = material->Get<float>("u_AlbedoTextureToggle");
+                    
+                    Ref<Image> albedoMap = material->TryGetImage("u_AlbedoTexture");
+                    bool hasAlbedoMap = albedoMap != nullptr;
+                    Ref<Image> albedoUITexture = hasAlbedoMap? albedoMap : m_checkerboardTex;
+                    UI::Image(albedoUITexture, ImVec2(48, 48));
+                    
+                    if (ImGui::BeginDragDropTarget())
+                    {
+                      auto data = ImGui::AcceptDragDropPayload("asset_payload");
+                      if (data)
+                      {
+                        int32_t count = data->DataSize / sizeof(AssetHandle);
+                        
+                        for (int32_t i = 0; i < count; i++)
+                        {
+                          if (count > 1)
+                          {
+                            break;
+                          }
+                          
+                          AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+                          Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+                          if (!asset || asset->GetAssetType() != AssetType::Image)
+                          {
+                            break;
+                          }
+                          albedoMap = std::dynamic_pointer_cast<Image>(asset);
+                          material->Set("u_AlbedoTextureToggle", true);
+                          material->Set("u_AlbedoTexture", albedoMap);
+                        }
+                      }
+                      
+                      ImGui::EndDragDropTarget();
+                    }
+                    ImGui::PopStyleVar();
+                    
+                    if (ImGui::IsItemHovered())
+                    {
+                      if (hasAlbedoMap)
+                      {
+                        ImGui::BeginTooltip();
+                        ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+                        ImGui::TextUnformatted(albedoMap->GetfilePath().c_str());
+                        ImGui::PopTextWrapPos();
+                        UI::Image(albedoUITexture, ImVec2(384, 384));
+                        ImGui::EndTooltip();
+                      }
+                      if (ImGui::IsItemClicked() and hasAlbedoMap)
+                      {
+                        AssetEditorManager::OpenEditor(AssetManager::GetAsset<Asset>(albedoMap->handle));
+                      }
+                    }
+                    ImGui::SameLine();
+                    ImGui::BeginGroup();
+                    bool useFlag = static_cast<bool>(useAlbedoMap);
+                    if (ImGui::Checkbox("Use##AlbedoMap", &useFlag))
+                    {
+                      useAlbedoMap = static_cast<float>(useFlag);
+                    }
+                    ImGui::EndGroup();
+
+                    ImGui::SameLine();
+                    ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(albedoColor), ImGuiColorEditFlags_NoInputs);
+                  }
+                }
+              } // If valid selected Material
+            } // If valid Mesh
+          } // If have Mesh
+        } // If Selected Context
+        ImGui::PopID();
+        ImGui::End();
+      }
     }
     
     UI_EndMainWindowDocking();

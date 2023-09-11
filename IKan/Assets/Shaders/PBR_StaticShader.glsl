@@ -59,13 +59,9 @@ in VS_OUT
 } vs_Input;
 
 // Stores the Material Property
-struct Material
-{
-  vec3 AlbedoColor;
-  float Metalness;
-  float Roughness;
-};
-uniform Material u_Material;
+uniform vec3 u_Material_AlbedoColor;
+uniform float u_Material_Metalness;
+uniform float u_Material_Roughness;
 
 // Texture Uniforms
 uniform sampler2D u_AlbedoTexture;
@@ -99,9 +95,9 @@ void main()
 {
   // TODO: Make things in vertex Shader if possible
   // Setup Material property
-  m_Params.Albedo    = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, vs_Input.TexCoord).rgb : u_Material.AlbedoColor;
-  m_Params.Metalness = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, vs_Input.TexCoord).r : u_Material.Metalness;
-  m_Params.Roughness = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, vs_Input.TexCoord).r : u_Material.Roughness;
+  m_Params.Albedo    = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, vs_Input.TexCoord).rgb : u_Material_AlbedoColor;
+  m_Params.Metalness = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, vs_Input.TexCoord).r : u_Material_Metalness;
+  m_Params.Roughness = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, vs_Input.TexCoord).r : u_Material_Roughness;
   m_Params.Roughness = max(m_Params.Roughness, 0.05); // Minimum roughness of 0.05 to keep specular highlight
   
   // Normals (either from vertex or map)
@@ -115,5 +111,5 @@ void main()
   m_Params.View = normalize(u_CameraPosition - vs_Input.WorldPosition);
   m_Params.NdotV = max(dot(m_Params.Normal, m_Params.View), 0.0f);
 
-  o_Color = vec4(vs_Input.WorldPosition, 1.0f);
+  o_Color = vec4(m_Params.Albedo, 1.0f);
 }

@@ -289,6 +289,7 @@ namespace Kreator
 
     // Editor Data ---------------------------------------
     Ref<Material> m_jointMaterial;
+    Ref<Image> m_checkerboardTex;
     
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

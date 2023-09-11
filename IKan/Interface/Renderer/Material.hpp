@@ -20,7 +20,7 @@ namespace IKan
   {
   public:
     /// @param shader shader instance
-    Material(const Ref<Shader>& shader);
+    Material(const Ref<Shader>& shader, const std::string& name);
     /// Destructor
     virtual ~Material();
     
@@ -30,8 +30,10 @@ namespace IKan
     /// This function unbinds the material. To be called after rendering any scene
     void Unbind();
     
-    /// This function returns the shader binded to Material
+    /// This function returns the name of Material
     const Ref<Shader>& GetShader() const;
+    /// This function returns the shader binded to Material
+    const std::string& GetName() const;
     
     /// This fucntion uploads the date to material of type T
     /// - Parameters:
@@ -46,18 +48,32 @@ namespace IKan
       OnMaterialValueUpdated(decl);
     }
     
+    /// This fucntion returns the data from material of type T
+    /// - Parameters:
+    ///   - name: name of uniform store in shader
+    template <typename T> T& Get(const std::string& name)
+    {
+      auto decl = FindUniformDeclaration(name);
+      auto& buffer = GetUniformBufferTarget(decl);
+      return buffer.Read<T>(decl->GetOffset());
+    }
+    
     /// This function uploads the image to material
     /// - Parameters:
     ///   - name: name of uniform store in shader
     ///   - image: image data
     void Set(const std::string& name, const Ref<Image>& image);
-    
+    /// This function returns the image from material
+    /// - Parameters:
+    ///   - name: name of uniform store in shader
+    Ref<Image> TryGetImage(const std::string& name);
+
     /// This function creates instance of Material with Shader instance
     /// - Parameter shader: shader instance
-    [[nodiscard]] static Ref<Material> Create(const Ref<Shader>& shader);
+    [[nodiscard]] static Ref<Material> Create(const Ref<Shader>& shader, const std::string& name);
     /// This funciton creates instance of Material with sahder file path
     /// - Parameter shader_file_path: shader file path
-    [[nodiscard]] static Ref<Material> Create(const std::string& shaderFilePath);
+    [[nodiscard]] static Ref<Material> Create(const std::string& shaderFilePath, const std::string& name);
     
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
@@ -83,6 +99,7 @@ namespace IKan
     
     // Member Functions ----------------------------------------------------------------------------------------------
     Ref<Shader> m_shader;
+    std::string m_name;
     std::unordered_set<MaterialInstance*> m_materialInstances;
     
     Buffer m_vsUniformStorageBuffer;

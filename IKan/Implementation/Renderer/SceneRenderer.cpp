@@ -36,7 +36,7 @@ namespace IKan
       rendererPassSpec.targetFramebuffer = FrameBuffer::Create(fbSpec);
       m_commonData->renderPass = RenderPass::Create(rendererPassSpec);
       
-      m_commonData->highlightMaterial = Material::Create(CoreAssetPath("Shaders/MeshStencilShader.glsl"));
+      m_commonData->highlightMaterial = Material::Create(CoreAssetPath("Shaders/MeshStencilShader.glsl"), "Mesh Stencil");
     }
   }
   
@@ -134,7 +134,6 @@ namespace IKan
     for (const SubMesh& submesh : submeshes)
     {
       material->Set("u_Transform", transform * submesh.transform);
-      
       material->Bind();
       Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
     } // for each submeshes

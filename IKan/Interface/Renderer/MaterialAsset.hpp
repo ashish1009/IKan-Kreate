@@ -19,23 +19,26 @@ namespace IKan
   public:
     /// This function creates a font instance
     /// - Parameter filePath: font file path
-    MaterialAsset(const std::string& materialShaderPath);
+    MaterialAsset(const std::string& materialShaderPath, const std::string &name);
     /// This Constructor loads the material asset shader
     /// - Parameter material: material reference
-    MaterialAsset(const Ref<Shader>& shader);
+    MaterialAsset(const Ref<Shader>& shader, const std::string &name);
     /// This Constructor loads the material asset shader
     /// - Parameter material: Shader reference
-    MaterialAsset(const Ref<Material>& material);
-    
+    MaterialAsset(const Ref<Material>& material, const std::string &name);
+     
+    /// This function returns the material from asset
+    Ref<Material>& GetMaterial();
+
     /// This function creates a font instance
     /// - Parameter filePath: shader file path
-    static Ref<MaterialAsset> Create(const std::string& materialShaderPath);
+    static Ref<MaterialAsset> Create(const std::string& materialShaderPath, const std::string &name);
     /// This functions Creates the material asset shader
     /// - Parameter shader: Shader reference
-    static Ref<MaterialAsset> Create(const Ref<Shader>& shader);
+    static Ref<MaterialAsset> Create(const Ref<Shader>& shader, const std::string &name);
     /// This functions Creates the material asset shader
     /// - Parameter material: material reference
-    static Ref<MaterialAsset> Create(const Ref<Material>& material);
+    static Ref<MaterialAsset> Create(const Ref<Material>& material, const std::string &name);
 
     ASSET_TYPE(MaterialAsset);
     
@@ -60,6 +63,11 @@ namespace IKan
     ///   - index: material index
     ///   - material: material asset
     void SetMaterial(uint32_t index, Ref<MaterialAsset> material);
+    
+    /// This function returns the materials
+    std::map<uint32_t, Ref<MaterialAsset>>& GetMaterialAssets();
+    /// This function returns the materials
+    const std::map<uint32_t, Ref<MaterialAsset>>& GetMaterialAssets() const;
     
   private:
     std::map<uint32_t /* Material Index */, Ref<MaterialAsset>> m_materials;

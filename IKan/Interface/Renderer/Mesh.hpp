@@ -89,7 +89,7 @@ namespace IKan
     /// This function returns the Base Material
     const Ref<Material>& GetBaseMaterial() const;
     /// This function returns the material table
-    const Ref<MaterialTable>& GetMaterials() const;
+    const Ref<MaterialTable>& GetMaterialTable() const;
 
     /// This funciton creates the mesh from assimp library and store the data
     /// - Parameter filePath: mesh model file path

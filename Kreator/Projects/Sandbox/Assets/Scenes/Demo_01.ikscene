@@ -274,18 +274,6 @@ Entities:
       SliderMotor: false
       SliderSpeed: 0
       SliderForce: 0
-  - Entity: 13833772306854666110
-    TagComponent:
-      Tag: Cube
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    StaticMeshComponent:
-      MeshHandle: 2120756891
   - Entity: 15405040201572041777
     TagComponent:
       Tag: Socket Cube

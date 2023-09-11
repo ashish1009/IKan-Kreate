@@ -10,21 +10,22 @@
 
 namespace IKan
 {
-  [[nodiscard]] Ref<Material> Material::Create(const Ref<Shader>& shader)
+  [[nodiscard]] Ref<Material> Material::Create(const Ref<Shader>& shader, const std::string& name)
   {
-    return CreateRef<Material>(shader);
+    return CreateRef<Material>(shader, name);
   }
   
-  [[nodiscard]] Ref<Material> Material::Create(const std::string& shaderFilePath)
+  [[nodiscard]] Ref<Material> Material::Create(const std::string& shaderFilePath, const std::string& name)
   {
     auto shader = Shader::Create(shaderFilePath);
-    return CreateRef<Material>(shader);
+    return CreateRef<Material>(shader, name);
   }
   
-  Material::Material(const Ref<Shader>& shader)
-  : m_shader(shader)
+  Material::Material(const Ref<Shader>& shader, const std::string& name)
+  : m_shader(shader), m_name(name)
   {
     IK_LOG_TRACE(LogModule::Material, "Creating Material ...");
+    IK_LOG_TRACE(LogModule::Material, "  Name                    | {0}", m_name);
     IK_LOG_TRACE(LogModule::Material, "  Shader                  | {0}", m_shader->GetName());
     AllocateStorage();
   }
@@ -148,6 +149,18 @@ namespace IKan
     m_images[slot] = image;
   }
   
+  Ref<Image> Material:: TryGetImage(const std::string& name)
+  {
+    auto decl = FindResourceDeclaration(name);
+    
+    uint32_t slot = decl->GetRegister();
+    if (slot < m_images.size())
+    {
+      return m_images.at(slot);
+    }
+    return nullptr;
+  }
+  
   void Material::Bind()
   {
     m_shader->Bind();
@@ -203,6 +216,11 @@ namespace IKan
   const Ref<Shader>& Material::GetShader() const
   {
     return m_shader;
+  }
+  
+  const std::string& Material::GetName() const
+  {
+    return m_name;
   }
   
   [[nodiscard]] Ref<MaterialInstance> MaterialInstance::Create(const Ref<Material>& material, const std::string& name)

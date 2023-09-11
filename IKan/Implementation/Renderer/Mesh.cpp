@@ -264,7 +264,7 @@ namespace IKan
     m_indexBuffer = IndexBuffer::CreateWithSize((void*)m_indices.data(), uint32_t(m_indices.size() * sizeof(Index)));
     
     // Create Base Material
-    m_baseMaterial = Material::Create(pipelineSpec.shader);
+    m_baseMaterial = Material::Create(pipelineSpec.shader, "PBR_Static");
   }
   
   void MeshSource::UploadMaterial()
@@ -312,17 +312,11 @@ namespace IKan
       MESH_LOG("    Roughness | {0}", roughness);
       
       // Set the uniforms in materials
-      struct MaterialStruct
-      {
-        glm::vec3 color;
-        float metalness;
-        float roughness;
-      } materialStruct;
-      materialStruct.color = {aiColor.r, aiColor.g, aiColor.b};
-      materialStruct.metalness = metalness;
-      materialStruct.roughness = roughness;
-      m_baseMaterial->Set("u_Material", materialStruct);
-      
+      glm::vec3 color = {aiColor.r, aiColor.g, aiColor.b};
+      m_baseMaterial->Set("u_Material_AlbedoColor", color);
+      m_baseMaterial->Set("u_Material_Metalness", metalness);
+      m_baseMaterial->Set("u_Material_Roughness", roughness);
+
       MESH_LOG("      Uploading Textures");
       for (size_t textureIdx = 0; textureIdx < MaxPBRTextureSupported; textureIdx++)
       {
@@ -350,7 +344,7 @@ namespace IKan
       } // For each texture index
       
       // Add the Material Asset
-      AssetHandle materialAssetHandle = AssetManager::CreateMemoryOnlyAsset<MaterialAsset>(m_baseMaterial);
+      AssetHandle materialAssetHandle = AssetManager::CreateMemoryOnlyAsset<MaterialAsset>(m_baseMaterial, "PBR Static");
       Ref<MaterialAsset> materialAsset = AssetManager::GetAsset<MaterialAsset>(materialAssetHandle);
       m_materials->SetMaterial(materialIdx, materialAsset);
     }
@@ -366,7 +360,7 @@ namespace IKan
   }
   const Ref<Material>& MeshSource::GetBaseMaterial() const
   {
-    return m_baseMaterial;
+    return m_materials->GetMaterialAssets().at(0)->GetMaterial();
   }
   const std::vector<Triangle>& MeshSource::GetTriangleCache(uint32_t submeshIndex) const
   {
@@ -380,7 +374,7 @@ namespace IKan
   {
     return m_indices;
   }
-  const Ref<MaterialTable>& MeshSource::GetMaterials() const
+  const Ref<MaterialTable>& MeshSource::GetMaterialTable() const
   {
     return m_materials;
   }

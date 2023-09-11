@@ -9,32 +9,37 @@
 
 namespace IKan
 {
-  Ref<MaterialAsset> MaterialAsset::Create(const std::string &materialShaderPath)
+  Ref<MaterialAsset> MaterialAsset::Create(const std::string &materialShaderPath, const std::string &name)
   {
-    return CreateRef<MaterialAsset>(materialShaderPath);
+    return CreateRef<MaterialAsset>(materialShaderPath, name);
   }
-  Ref<MaterialAsset> MaterialAsset::Create(const Ref<Shader> &shader)
+  Ref<MaterialAsset> MaterialAsset::Create(const Ref<Shader> &shader, const std::string &name)
   {
-    return CreateRef<MaterialAsset>(shader);
+    return CreateRef<MaterialAsset>(shader, name);
   }
-  Ref<MaterialAsset> MaterialAsset::Create(const Ref<Material> &material)
+  Ref<MaterialAsset> MaterialAsset::Create(const Ref<Material> &material, const std::string &name)
   {
-    return CreateRef<MaterialAsset>(material);
+    return CreateRef<MaterialAsset>(material, name);
   }
-  MaterialAsset::MaterialAsset(const std::string &materialShaderPath)
-  : m_materialShaderPath(materialShaderPath), m_material(Material::Create(materialShaderPath))
-  {
-    
-  }
-  MaterialAsset::MaterialAsset(const Ref<Shader> &shader)
-  : m_materialShaderPath(shader->GetFilePath()), m_material(Material::Create(shader))
+  MaterialAsset::MaterialAsset(const std::string &materialShaderPath, const std::string &name)
+  : m_materialShaderPath(materialShaderPath), m_material(Material::Create(materialShaderPath, name))
   {
     
   }
-  MaterialAsset::MaterialAsset(const Ref<Material> &material)
+  MaterialAsset::MaterialAsset(const Ref<Shader> &shader, const std::string &name)
+  : m_materialShaderPath(shader->GetFilePath()), m_material(Material::Create(shader, name))
+  {
+    
+  }
+  MaterialAsset::MaterialAsset(const Ref<Material> &material, const std::string &name)
   : m_materialShaderPath(material->GetShader()->GetFilePath()), m_material(material)
   {
     
+  }
+  
+  Ref<Material>& MaterialAsset::GetMaterial()
+  {
+    return m_material;
   }
 
   MaterialTable::MaterialTable()
@@ -50,6 +55,16 @@ namespace IKan
   void MaterialTable::SetMaterial(uint32_t index, Ref<MaterialAsset> material)
   {
     m_materials[index] = material;
+  }
+  
+  const std::map<uint32_t, Ref<MaterialAsset>>& MaterialTable::GetMaterialAssets() const
+  {
+    return m_materials;
+  }
+
+  std::map<uint32_t, Ref<MaterialAsset>>& MaterialTable::GetMaterialAssets()
+  {
+    return m_materials;
   }
 
 } // namespace IKan
