@@ -278,6 +278,8 @@ namespace IKan
       return;
     }
     
+    m_materialIndex = 0;
+    
     MESH_LOG("  Loading Materials for Mesh");
     MESH_LOG("    Number of Materials | {0}", m_scene->mNumMaterials);
         
@@ -378,4 +380,9 @@ namespace IKan
   {
     return m_materials;
   }
+  uint32_t MeshSource::GetMaterialIndex() const
+  {
+    return m_materialIndex;
+  }
+
 } // namespace IKan

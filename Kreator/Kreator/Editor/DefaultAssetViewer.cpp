@@ -56,7 +56,7 @@ namespace Kreator
   }
   
   MaterialViewer::MaterialViewer()
-  : AssetEditor("Edit Material")
+  : AssetEditor("Material")
   {
     SetMinSize(200, 600);
     SetMaxSize(500, 1000);

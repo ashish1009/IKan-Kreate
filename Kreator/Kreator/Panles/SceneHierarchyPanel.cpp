@@ -175,6 +175,7 @@ namespace Kreator
   void SceneHierarchyPanel::Shutdown()
   {
     IK_PROFILE();
+    s_currentOpenedMaterialAsset.reset();
     s_pencilIcon.reset();
     s_plusIcon.reset();
     s_gearIcon.reset();
@@ -555,35 +556,31 @@ namespace Kreator
       Kreator_UI::BeginPropertyGrid();
       Kreator_UI::PropertyAssetReferenceSettings settings;
       Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", smc.staticMesh, nullptr, settings);
-      ImGui::Separator();
       
+      // Materials
       auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
-      static uint32_t selectedMaterialIndex = 0;
-      for (auto& [MaterialIdx, materialAsset] : materials)
+      int32_t selectedMaterialIndex = mesh->GetMaterialIndex();
+      if (materials.size() > 0)
       {
-        auto& material = materialAsset->GetMaterial();
-        std::string materialName = material->GetName();
-        
-        if (materialName.empty())
+        std::vector<std::string> materialString;
+        for (auto& [materialIdx, materialAsset] : materials)
         {
-          materialName = fmt::format("Unnamed Material #{0}", MaterialIdx);
+          auto& material = materialAsset->GetMaterial();
+          std::string materialName = material->GetName();
+          
+          if (materialName.empty())
+          {
+            materialName = fmt::format("Unnamed Material #{0}", materialIdx);
+          }
+          materialString.push_back(materialName);
         }
-        
-        ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_Leaf;// (selectedMaterialIndex == MaterialIdx ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf;
-        bool opened = ImGui::TreeNodeEx((void*)(&material), nodeFlags, materialName.c_str());
-        if (ImGui::IsItemClicked())
-        {
-          selectedMaterialIndex = MaterialIdx;
-        }
-        if (opened)
-        {
-          s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materialAsset->handle);
-          AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
-          ImGui::TreePop();
-        }
-      } // For each materials
-      
+        Kreator_UI::PropertyDropdown("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex);
+      }
       Kreator_UI::EndPropertyGrid();
+      
+      // Open Material Popup    
+      s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materials.at(selectedMaterialIndex)->handle);
+      AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
     }, s_gearIcon);
     
     DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)

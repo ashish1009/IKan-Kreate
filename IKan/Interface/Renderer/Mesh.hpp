@@ -75,6 +75,8 @@ namespace IKan
     /// This destructor destiory the loaded mesh and delete all the data
     virtual ~MeshSource();
     
+    /// This function returns the material index
+    uint32_t GetMaterialIndex() const;
     /// This function returns the submeshes
     const std::vector<SubMesh>& GetSubMeshes() const;
     /// This function returns the Vertices
@@ -138,6 +140,8 @@ namespace IKan
     Ref<IndexBuffer> m_indexBuffer;
     Ref<Material> m_baseMaterial;
     Ref<MaterialTable> m_materials;
+    
+    uint32_t m_materialIndex = 0;
 
     // Assimp
     const aiScene* m_scene;
