@@ -1,11 +1,11 @@
 //
-//  Material.cpp
+//  MeshMaterial.cpp
 //  IKan
 //
 //  Created by Ashish . on 09/09/23.
 //
 
-#include "Material.hpp"
+#include "MeshMaterial.hpp"
 #include "Renderer/Renderer.hpp"
 
 namespace IKan

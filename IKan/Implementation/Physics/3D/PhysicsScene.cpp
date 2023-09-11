@@ -8,7 +8,7 @@
 #include "PhysicsScene.hpp"
 #include "PhysicsJoint.hpp"
 #include "Scene/Scene.hpp"
-#include "Scene/Entity.hpp"
+#include "Scene/CoreEntity.hpp"
 
 using namespace reactphysics3d;
 

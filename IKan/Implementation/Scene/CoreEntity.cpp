@@ -1,11 +1,11 @@
 //
-//  Entity.cpp
+//  CoreEntity.cpp
 //  IKan
 //
 //  Created by Ashish . on 29/07/23.
 //
 
-#include "Entity.hpp"
+#include "CoreEntity.hpp"
 
 namespace IKan
 {

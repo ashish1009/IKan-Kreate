@@ -268,6 +268,8 @@ if (!Project::GetActive()) return
     IK_PROFILE();
     IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
     
+    AssetEditorManager::Clear();
+    
     // Shutdown the renderers
     Renderer2D::Shutdown();
     m_viewportRenderer.reset();

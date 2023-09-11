@@ -8,7 +8,7 @@
 #pragma once
 
 #include "Asset/Asset.hpp"
-#include "Renderer/Material.hpp"
+#include "Renderer/MeshMaterial.hpp"
 
 namespace IKan
 {

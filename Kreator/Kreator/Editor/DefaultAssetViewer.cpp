@@ -16,6 +16,11 @@ namespace Kreator
     SetMaxSize(500, 1000);
   }
   
+  ImageViewer::~ImageViewer()
+  {
+    OnClose();
+  }
+  
   void ImageViewer::SetAsset(const Ref<Asset>& asset)
   {
     m_asset = std::dynamic_pointer_cast<Image>(asset);
@@ -54,6 +59,11 @@ namespace Kreator
   {
     SetMinSize(200, 600);
     SetMaxSize(500, 1000);
+  }
+  
+  MaterialViewer::~MaterialViewer()
+  {
+    OnClose();
   }
   
   void MaterialViewer::SetAsset(const Ref<Asset>& asset)

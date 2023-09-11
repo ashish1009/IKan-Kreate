@@ -14,6 +14,8 @@ namespace Kreator
   public:
     /// Default Texture Viewer constructor
     ImageViewer();
+    ~ImageViewer();
+    
     /// @see AssetEditor
     virtual void SetAsset(const Ref<Asset>& asset) override;
     
@@ -32,6 +34,7 @@ namespace Kreator
   public:
     /// Default Texture Viewer constructor
     MaterialViewer();
+    ~MaterialViewer();
     /// @see AssetEditor
     virtual void SetAsset(const Ref<Asset>& asset) override;
     

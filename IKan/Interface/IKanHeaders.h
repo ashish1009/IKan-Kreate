@@ -76,7 +76,7 @@
 #include <Renderer/SceneRenderer.hpp>
 #include <Renderer/RendererStats.hpp>
 #include <Renderer/Mesh.hpp>
-#include <Renderer/Material.hpp>
+#include <Renderer/MeshMaterial.hpp>
 #include <Renderer/UI/Font.hpp>
 
 #include <Renderer/Graphics/Shader.hpp>
@@ -91,7 +91,7 @@
 #include <Camera/EditorCamera.hpp>
 #include <Camera/FixedCamera.hpp>
 
-#include <Scene/Entity.hpp>
+#include <Scene/CoreEntity.hpp>
 #include <Scene/Component.hpp>
 #include <Scene/Scene.hpp>
 #include <Scene/SceneSerializer.hpp>
@@ -120,7 +120,7 @@
 
 #include <Scene/Scene.hpp>
 #include <Scene/SceneSerializer.hpp>
-#include <Scene/Entity.hpp>
+#include <Scene/CoreEntity.hpp>
 #include <Scene/Component.hpp>
 
 #include <Physics/3D/PhysicsScene.hpp>

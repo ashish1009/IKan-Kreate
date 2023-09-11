@@ -91,6 +91,8 @@ namespace IKan
     /// This function Opens the Asset editor
     /// - Parameter asset asset
     static void OpenEditor(const Ref<Asset>& asset);
+    /// This function Opens the Asset editor
+    static void Clear();
     
     /// This function register an asset in map
     template<typename T> static void RegisterEditor(AssetType type)

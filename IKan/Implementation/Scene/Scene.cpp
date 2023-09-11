@@ -6,7 +6,7 @@
 //
 
 #include "Scene.hpp"
-#include "Scene/Entity.hpp"
+#include "Scene/CoreEntity.hpp"
 #include "Renderer/UI/Font.hpp"
 #include "Renderer/Renderer2D.hpp"
 #include "Renderer/SceneRenderer.hpp"

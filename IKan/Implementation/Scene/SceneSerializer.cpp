@@ -7,7 +7,7 @@
 
 #include <yaml-cpp/yaml.h>
 #include "SceneSerializer.hpp"
-#include "Scene/Entity.hpp"
+#include "Scene/CoreEntity.hpp"
 #include "Utils/YAMLSerializerHelper.h"
 
 namespace IKan {

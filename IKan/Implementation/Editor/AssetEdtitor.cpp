@@ -116,6 +116,11 @@ namespace IKan
     s_editors[asset->GetAssetType()]->SetAsset(AssetManager::GetAsset<Asset>(asset->handle));
   }
   
+  void AssetEditorManager::Clear()
+  {
+    s_editors.clear();
+  }
+  
   std::unordered_map<AssetType, Scope<AssetEditor>> AssetEditorManager::s_editors;
   
 } // namespace IKan
