@@ -107,7 +107,7 @@ namespace IKan
     ///   TAsset - Type of asset
     ///   TArgs  - Dynamic arguments for asset creation
     template<typename TAsset, typename... TArgs>
-    static AssetHandle CreateAssetWithFile(const std::string& fileName, TArgs&&... args)
+    static AssetHandle CreateAsset(const std::string& fileName, TArgs&&... args)
     {
       static_assert(std::is_base_of<Asset, TAsset>::value,
                     "CreateMemoryOnlyAsset only works for types derived from Asset");
