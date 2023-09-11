@@ -136,16 +136,16 @@ namespace IKan
     }
   }
   
-  void Material::Set(const std::string& name, const Ref<Texture>& texture)
+  void Material::Set(const std::string& name, const Ref<Image>& image)
   {
     auto decl = FindResourceDeclaration(name);
     
     uint32_t slot = decl->GetRegister();
-    if (m_textures.size() <= slot)
+    if (m_images.size() <= slot)
     {
-      m_textures.resize((size_t)slot + 1);
+      m_images.resize((size_t)slot + 1);
     }
-    m_textures[slot] = texture;
+    m_images[slot] = image;
   }
   
   void Material::Bind()
@@ -167,35 +167,35 @@ namespace IKan
       m_shader->SetGSMaterialUniformBuffer(m_gsUniformStorageBuffer);
     }
     
-    BindTextures();
+    BindImages();
   }
   
   void Material::Unbind()
   {
     m_shader->Unbind();
-    UnbindTextures();
+    UnbindImages();
   }
   
-  void Material::BindTextures()
+  void Material::BindImages()
   {
-    for (size_t i = 0; i < m_textures.size(); i++)
+    for (size_t i = 0; i < m_images.size(); i++)
     {
-      auto& texture = m_textures[i];
-      if (texture)
+      auto& image = m_images[i];
+      if (image)
       {
-        texture->Bind((uint32_t)i);
+        image->Bind((uint32_t)i);
       }
     }
   }
   
-  void Material::UnbindTextures()
+  void Material::UnbindImages()
   {
-    for (size_t i = 0; i < m_textures.size(); i++)
+    for (size_t i = 0; i < m_images.size(); i++)
     {
-      auto& texture = m_textures[i];
-      if (texture)
+      auto& image = m_images[i];
+      if (image)
       {
-        texture->Unbind();
+        image->Unbind();
       }
     }
   }
@@ -278,22 +278,22 @@ namespace IKan
     }
   }
   
-  void MaterialInstance::Set(const std::string& name, const Ref<Texture>& texture)
+  void MaterialInstance::Set(const std::string& name, const Ref<Image>& image)
   {
     auto decl = m_material->FindResourceDeclaration(name);
     
     uint32_t slot = decl->GetRegister();
-    if (m_textures.size() <= slot)
+    if (m_images.size() <= slot)
     {
-      m_textures.resize((size_t)slot + 1);
+      m_images.resize((size_t)slot + 1);
     }
-    m_textures[slot] = texture;
+    m_images[slot] = image;
   }
   
   void MaterialInstance::Bind()
   {
     m_material->m_shader->Bind();
-    m_material->BindTextures();
+    m_material->BindImages();
     
     if (m_vsUniformStorageBuffer)
     {
@@ -310,12 +310,12 @@ namespace IKan
       m_material->m_shader->SetGSMaterialUniformBuffer(m_gsUniformStorageBuffer);
     }
     
-    for (size_t i = 0; i < m_textures.size(); i++)
+    for (size_t i = 0; i < m_images.size(); i++)
     {
-      auto& texture = m_textures[i];
-      if (texture)
+      auto& image = m_images[i];
+      if (image)
       {
-        texture->Bind((uint32_t)i);
+        image->Bind((uint32_t)i);
       }
     }
   }
@@ -323,14 +323,14 @@ namespace IKan
   void MaterialInstance::Unbind()
   {
     m_material->m_shader->Unbind();
-    m_material->UnbindTextures();
+    m_material->UnbindImages();
     
-    for (size_t i = 0; i < m_textures.size(); i++)
+    for (size_t i = 0; i < m_images.size(); i++)
     {
-      auto& texture = m_textures[i];
-      if (texture)
+      auto& image = m_images[i];
+      if (image)
       {
-        texture->Unbind();
+        image->Unbind();
       }
     }
   }

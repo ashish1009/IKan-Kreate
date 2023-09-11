@@ -24,7 +24,7 @@ namespace IKan
     /// Destructor
     virtual ~Material();
     
-    /// This function binds the material and upload all the shader data. Binds all the loaded texture to shader slot.
+    /// This function binds the material and upload all the shader data. Binds all the loaded image to shader slot.
     /// To be called before rendering any scene
     void Bind();
     /// This function unbinds the material. To be called after rendering any scene
@@ -46,11 +46,11 @@ namespace IKan
       OnMaterialValueUpdated(decl);
     }
     
-    /// This function uploads the texture to material
+    /// This function uploads the image to material
     /// - Parameters:
     ///   - name: name of uniform store in shader
-    ///   - texture: texture data
-    void Set(const std::string& name, const Ref<Texture>& texture);
+    ///   - image: image data
+    void Set(const std::string& name, const Ref<Image>& image);
     
     /// This function creates instance of Material with Shader instance
     /// - Parameter shader: shader instance
@@ -76,10 +76,10 @@ namespace IKan
     void OnMaterialValueUpdated(ShaderUniformDeclaration* decl);
     /// This funtion allocate memory to store shader data in buffer
     void AllocateStorage();
-    /// This function binds all the texture to be stored in shader material
-    void BindTextures();
-    /// This function unbinds all the texture to be stored in shader material
-    void UnbindTextures();
+    /// This function binds all the image to be stored in shader material
+    void BindImages();
+    /// This function unbinds all the image to be stored in shader material
+    void UnbindImages();
     
     // Member Functions ----------------------------------------------------------------------------------------------
     Ref<Shader> m_shader;
@@ -89,7 +89,7 @@ namespace IKan
     Buffer m_fsUniformStorageBuffer;
     Buffer m_gsUniformStorageBuffer;
     
-    std::vector<Ref<Texture>> m_textures;
+    std::vector<Ref<Image>> m_images;
     
     friend class MaterialInstance;
   };
@@ -106,10 +106,10 @@ namespace IKan
     /// This is defautl destructo of material instance
     virtual ~MaterialInstance();
     
-    /// This function binds the material and upload all the shader data. Bind all the loaded texture to shader slot.
+    /// This function binds the material and upload all the shader data. Bind all the loaded image to shader slot.
     /// To be called before rendering any scene
     void Bind();
-    /// This function unbinds the material and upload all the shader data. Bind all the loaded texture to shader slot.
+    /// This function unbinds the material and upload all the shader data. Bind all the loaded image to shader slot.
     /// To be called before rendering any scene
     void Unbind();
     
@@ -135,11 +135,11 @@ namespace IKan
       m_overriddenValues.insert(name);
     }
     
-    /// This function uploads the texture to material
+    /// This function uploads the image to material
     /// - Parameters:
     ///   - name: name of uniform store in shader
-    ///   - texture: texture data
-    void Set(const std::string& name, const Ref<Texture>& texture);
+    ///   - image: image data
+    void Set(const std::string& name, const Ref<Image>& image);
     
     /// This function creates instance of material instance with material reference and name
     /// - Parameters:
@@ -166,7 +166,7 @@ namespace IKan
     Buffer m_fsUniformStorageBuffer;
     Buffer m_gsUniformStorageBuffer;
     
-    std::vector<Ref<Texture>> m_textures;
+    std::vector<Ref<Image>> m_images;
     
     std::unordered_set<std::string> m_overriddenValues;
     

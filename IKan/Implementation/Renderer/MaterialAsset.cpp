@@ -37,8 +37,7 @@ namespace IKan
     
   }
 
-  MaterialTable::MaterialTable(uint32_t materialCount)
-  : m_materialCount(materialCount)
+  MaterialTable::MaterialTable()
   {
     
   }
@@ -46,6 +45,11 @@ namespace IKan
   MaterialTable::~MaterialTable()
   {
 
+  }
+
+  void MaterialTable::SetMaterial(uint32_t index, Ref<MaterialAsset> material)
+  {
+    m_materials[index] = material;
   }
 
 } // namespace IKan

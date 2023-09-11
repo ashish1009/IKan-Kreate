@@ -12,6 +12,8 @@
 
 namespace IKan
 {
+  /// - Note: Create the Material Asset using AssetManager::CreateMemoryOnlyAsset<>() to store the asset in Manager
+  ///         And load the same easily
   class MaterialAsset : public Asset
   {
   public:
@@ -24,7 +26,7 @@ namespace IKan
     /// This Constructor loads the material asset shader
     /// - Parameter material: Shader reference
     MaterialAsset(const Ref<Material>& material);
-
+    
     /// This function creates a font instance
     /// - Parameter filePath: shader file path
     static Ref<MaterialAsset> Create(const std::string& materialShaderPath);
@@ -38,6 +40,9 @@ namespace IKan
     ASSET_TYPE(MaterialAsset);
     
   private:
+    // Member Functions ---------------------------------------------------------------------------------------------
+
+    // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_materialShaderPath;
     Ref<Material> m_material;
   };
@@ -46,13 +51,18 @@ namespace IKan
   {
   public:
     /// This creates material table
-    /// - Parameter materialCount: material count
-    MaterialTable(uint32_t materialCount);
+    MaterialTable();
     /// This destroys the material table
     ~MaterialTable();
     
+    /// This function sets the material Asset in table
+    /// - Parameters:
+    ///   - index: material index
+    ///   - material: material asset
+    void SetMaterial(uint32_t index, Ref<MaterialAsset> material);
+    
   private:
     std::map<uint32_t /* Material Index */, Ref<MaterialAsset>> m_materials;
-    uint32_t m_materialCount;
+    uint32_t m_materialCount = 0;
   };
 } // namespace IKan

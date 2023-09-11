@@ -2,6 +2,9 @@ Assets:
   - Handle: 27450833
     FilePath: Meshes/Default/Cylinder.fbx
     Type: MeshSource
+  - Handle: 414429746
+    FilePath: Meshes/backpack/normal.png
+    Type: Image
   - Handle: 560965872
     FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
@@ -11,9 +14,21 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
+  - Handle: 2017167497
+    FilePath: Meshes/backpack/diffuse.jpg
+    Type: Image
+  - Handle: 2120756891
+    FilePath: Meshes/backpack/backpack.obj
+    Type: MeshSource
   - Handle: 2234008704
     FilePath: Meshes/Default/Capsule.fbx
     Type: MeshSource
+  - Handle: 2324977431
+    FilePath: Meshes/backpack/ao.jpg
+    Type: Image
+  - Handle: 2377613109
+    FilePath: Meshes/backpack/roughness.jpg
+    Type: Image
   - Handle: 3172804954
     FilePath: Scenes/Demo_01.ikscene
     Type: Scene
@@ -23,3 +38,6 @@ Assets:
   - Handle: 3806376486
     FilePath: Meshes/Default/Cone.fbx
     Type: MeshSource
+  - Handle: 4042299796
+    FilePath: Meshes/backpack/specular.jpg
+    Type: Image

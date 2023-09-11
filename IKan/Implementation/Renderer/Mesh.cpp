@@ -11,6 +11,7 @@
 #include <assimp/postprocess.h>     // Post processing flags
 
 #include "Mesh.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
@@ -40,6 +41,19 @@ namespace IKan
   aiProcess_GenUVCoords |             // Convert UVs if required
   aiProcess_OptimizeMeshes |          // Batch draws where possible
   aiProcess_ValidateDataStructure;    // Validation
+
+  static constexpr aiTextureType s_AIMaterialType[MaxPBRTextureSupported] =
+  {
+    aiTextureType_DIFFUSE,
+    aiTextureType_NORMALS,
+    aiTextureType_SHININESS,
+    aiTextureType_METALNESS
+  };
+
+  static const std::string s_TextureName[MaxPBRTextureSupported] =
+  {
+    "Albedo", "Normal", "Roughness", "Metallic"
+  };
 
   Ref<MeshSource> MeshSource::Create(const std::string &filePath)
   {
@@ -255,10 +269,90 @@ namespace IKan
   
   void MeshSource::UploadMaterial()
   {
+    // Create the Instance to store the materials
+    m_materials = CreateRef<MaterialTable>();
+    
     // If mesh do not have material then return
     if (!m_scene->HasMaterials())
     {
       return;
+    }
+    
+    MESH_LOG("  Loading Materials for Mesh");
+    MESH_LOG("    Number of Materials | {0}", m_scene->mNumMaterials);
+        
+    for (uint32_t materialIdx = 0; materialIdx < m_scene->mNumMaterials; materialIdx++)
+    {
+      auto aiMaterial = m_scene->mMaterials[materialIdx];
+      auto aiMaterialName = aiMaterial->GetName();
+      
+      MESH_LOG("    Name      | {0}", aiMaterialName.data);
+      MESH_LOG("    Index     | {0}", materialIdx);
+      
+      aiString aiTexPath;
+      aiColor3D aiColor;
+      
+      aiMaterial->Get(AI_MATKEY_COLOR_DIFFUSE, aiColor);
+      
+      float shininess, metalness;
+      if (aiMaterial->Get(AI_MATKEY_SHININESS, shininess) != aiReturn_SUCCESS)
+      {
+        shininess = 80.0f; // Default value
+      }
+      
+      if (aiMaterial->Get(AI_MATKEY_REFLECTIVITY, metalness) != aiReturn_SUCCESS)
+      {
+        metalness = 0.0f;
+      }
+      
+      float roughness = 1.0f - glm::sqrt(shininess / 100.0f);
+      
+      MESH_LOG("    Color     | {0} | {1} | {2}", aiColor.r, aiColor.g, aiColor.b);
+      MESH_LOG("    Metalness | {0}", metalness);
+      MESH_LOG("    Roughness | {0}", roughness);
+      
+      // Set the uniforms in materials
+      struct MaterialStruct
+      {
+        glm::vec3 color;
+        float metalness;
+        float roughness;
+      } materialStruct;
+      materialStruct.color = {aiColor.r, aiColor.g, aiColor.b};
+      materialStruct.metalness = metalness;
+      materialStruct.roughness = roughness;
+      m_baseMaterial->Set("u_Material", materialStruct);
+      
+      MESH_LOG("      Uploading Textures");
+      for (size_t textureIdx = 0; textureIdx < MaxPBRTextureSupported; textureIdx++)
+      {
+        // Load each texture
+        if (aiMaterial->GetTexture(s_AIMaterialType[textureIdx], 0, &aiTexPath) == AI_SUCCESS)
+        {
+          std::filesystem::path path = m_filePath;
+          auto parentPath = path.parent_path();
+          
+          std::string tempPathString = std::string(aiTexPath.data);
+          std::replace( tempPathString.begin(), tempPathString.end(), '\\', '/');
+          
+          parentPath /= tempPathString;
+          std::string texturePath = parentPath.string();
+          
+          MESH_LOG("      Name | {0}", s_TextureName[textureIdx]);
+          MESH_LOG("      Path | {0}", texturePath);
+          
+          auto texture = Image::Create(texturePath);
+          auto textureShaderName = "u_" + s_TextureName[textureIdx] + "Texture";
+          
+          m_baseMaterial->Set(textureShaderName, texture);
+          m_baseMaterial->Set(textureShaderName + "Toggle", 1.0f);
+        } // If mesh exist in assim model
+      } // For each texture index
+      
+      // Add the Material Asset
+      AssetHandle materialAssetHandle = AssetManager::CreateMemoryOnlyAsset<MaterialAsset>(m_baseMaterial);
+      Ref<MaterialAsset> materialAsset = AssetManager::GetAsset<MaterialAsset>(materialAssetHandle);
+      m_materials->SetMaterial(materialIdx, materialAsset);
     }
   }
 

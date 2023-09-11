@@ -64,7 +64,6 @@ struct Material
   vec3 AlbedoColor;
   float Metalness;
   float Roughness;
-  float TilinghFactor;
 };
 uniform Material u_Material;
 
@@ -100,16 +99,16 @@ void main()
 {
   // TODO: Make things in vertex Shader if possible
   // Setup Material property
-  m_Params.Albedo    = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, vs_Input.TexCoord * u_Material.TilinghFactor).rgb : u_Material.AlbedoColor;
-  m_Params.Metalness = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, vs_Input.TexCoord * u_Material.TilinghFactor).r : u_Material.Metalness;
-  m_Params.Roughness = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, vs_Input.TexCoord * u_Material.TilinghFactor).r : u_Material.Roughness;
+  m_Params.Albedo    = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, vs_Input.TexCoord).rgb : u_Material.AlbedoColor;
+  m_Params.Metalness = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, vs_Input.TexCoord).r : u_Material.Metalness;
+  m_Params.Roughness = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, vs_Input.TexCoord).r : u_Material.Roughness;
   m_Params.Roughness = max(m_Params.Roughness, 0.05); // Minimum roughness of 0.05 to keep specular highlight
   
   // Normals (either from vertex or map)
   m_Params.Normal = normalize(vs_Input.Normal);
   if (u_NormalTextureToggle > 0.5)
   {
-    m_Params.Normal = 2.0 * texture(u_NormalTexture, vs_Input.TexCoord * u_Material.TilinghFactor).rgb - 1.0f;
+    m_Params.Normal = 2.0 * texture(u_NormalTexture, vs_Input.TexCoord).rgb - 1.0f;
     m_Params.Normal = normalize(vs_Input.WorldNormals * m_Params.Normal);
   }
   

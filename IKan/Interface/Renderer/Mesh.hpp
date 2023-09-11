@@ -20,6 +20,9 @@ class aiNode;
 
 namespace IKan
 {
+  // Only 4 PBR Texture supported "Albedo, Normal, Metal, Roughness"
+  static constexpr uint32_t MaxPBRTextureSupported = 4;
+
   // Vertex of Static Submesh
   struct StaticVertex
   {
