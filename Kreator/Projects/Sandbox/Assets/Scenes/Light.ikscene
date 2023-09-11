@@ -1,5 +1,19 @@
 Scene: Light
 Entities:
+  - Entity: 1455773775650498899
+    TagComponent:
+      Tag: Quad
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [2.34973216, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    QuadComponent:
+      Color: [1, 1, 1, 1]
+      TextureHandle: 0
+      TilingFactor: 1
   - Entity: 5686607249599343436
     TagComponent:
       Tag: Cube

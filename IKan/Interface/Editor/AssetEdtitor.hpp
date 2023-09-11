@@ -30,7 +30,6 @@ namespace IKan
     /// This function handles Sett the asset
     /// - Parameter asset: asset
     virtual void SetAsset(const Ref<Asset>& asset) = 0;
-    
     /// This function set the panel open
     /// - Parameter isOpen: open flag
     void SetOpen(bool isOpen);
@@ -61,7 +60,7 @@ namespace IKan
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
     /// This function handles the close of panel
-    virtual void OnClose() = 0;
+    virtual void OnClose() = 0;    
     /// This function Renders the panel
     virtual void Render() = 0;
     /// This function returns the flags
@@ -91,6 +90,9 @@ namespace IKan
     /// This function Opens the Asset editor
     /// - Parameter asset asset
     static void OpenEditor(const Ref<Asset>& asset);
+    /// This function closes the Asset editor
+    /// - Parameter asset asset
+    static void CloseEditor(const Ref<Asset>& asset);
     /// This function Opens the Asset editor
     static void Clear();
     

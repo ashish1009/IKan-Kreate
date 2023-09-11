@@ -555,6 +555,34 @@ namespace Kreator
       Kreator_UI::BeginPropertyGrid();
       Kreator_UI::PropertyAssetReferenceSettings settings;
       Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", smc.staticMesh, nullptr, settings);
+      ImGui::Separator();
+      
+      auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
+      static uint32_t selectedMaterialIndex = 0;
+      for (auto& [MaterialIdx, materialAsset] : materials)
+      {
+        auto& material = materialAsset->GetMaterial();
+        std::string materialName = material->GetName();
+        
+        if (materialName.empty())
+        {
+          materialName = fmt::format("Unnamed Material #{0}", MaterialIdx);
+        }
+        
+        ImGuiTreeNodeFlags nodeFlags = ImGuiTreeNodeFlags_Leaf;// (selectedMaterialIndex == MaterialIdx ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_Leaf;
+        bool opened = ImGui::TreeNodeEx((void*)(&material), nodeFlags, materialName.c_str());
+        if (ImGui::IsItemClicked())
+        {
+          selectedMaterialIndex = MaterialIdx;
+        }
+        if (opened)
+        {
+          s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materialAsset->handle);
+          AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
+          ImGui::TreePop();
+        }
+      } // For each materials
+      
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
     
@@ -1239,6 +1267,13 @@ namespace Kreator
 
   void SceneHierarchyPanel::SetSelectedEntity(Entity entity, bool multipleSelection)
   {
+    // close the currene material asset Viewer
+    if (s_currentOpenedMaterialAsset)
+    {
+      AssetEditorManager::CloseEditor(s_currentOpenedMaterialAsset);
+      s_currentOpenedMaterialAsset = nullptr;
+    }
+    
     if (!multipleSelection)
     {
       m_selectionContext.Clear();

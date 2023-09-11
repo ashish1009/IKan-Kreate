@@ -45,6 +45,7 @@ namespace Kreator
     virtual void Render() override;
     
   private:
+    Ref<Image> m_checkerboardTex;
     Ref<MaterialAsset> m_asset;
   };
 } // namespace Kreator

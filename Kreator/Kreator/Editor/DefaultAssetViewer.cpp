@@ -6,6 +6,7 @@
 //
 
 #include "DefaultAssetViewer.hpp"
+#include "RendererLayer.hpp"
 
 namespace Kreator
 {
@@ -59,10 +60,14 @@ namespace Kreator
   {
     SetMinSize(200, 600);
     SetMaxSize(500, 1000);
+
+    // No texture Image
+    m_checkerboardTex = Image::Create(Utils::FileSystem::Absolute(RendererLayer::Get().GetClientResorucePath() /"Textures/Editor/CheckBoard.png"));
   }
   
   MaterialViewer::~MaterialViewer()
   {
+    m_checkerboardTex.reset();
     OnClose();
   }
   
@@ -81,6 +86,80 @@ namespace Kreator
     if (!m_asset)
     {
       SetOpen(false);
-    }    
+    }
+    
+    auto& material = m_asset->GetMaterial();
+    ImGui::Text("Shader: %s", material->GetShader()->GetName().c_str());
+    
+    // Albedo
+    if (ImGui::CollapsingHeader("Albedo", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
+    {
+      ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+      auto& albedoColor = material->Get<glm::vec3>("u_Material_AlbedoColor");
+      float& useAlbedoMap = material->Get<float>("u_AlbedoTextureToggle");
+      
+      Ref<Image> albedoMap = material->TryGetImage("u_AlbedoTexture");
+      bool hasAlbedoMap = albedoMap != nullptr;
+      Ref<Image> albedoUITexture = hasAlbedoMap? albedoMap : m_checkerboardTex;
+      UI::Image(albedoUITexture, ImVec2(48, 48));
+      
+      if (ImGui::BeginDragDropTarget())
+      {
+        auto data = ImGui::AcceptDragDropPayload("asset_payload");
+        if (data)
+        {
+          int32_t count = data->DataSize / sizeof(AssetHandle);
+          
+          for (int32_t i = 0; i < count; i++)
+          {
+            if (count > 1)
+            {
+              break;
+            }
+            
+            AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+            Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+            if (!asset || asset->GetAssetType() != AssetType::Image)
+            {
+              break;
+            }
+            albedoMap = std::dynamic_pointer_cast<Image>(asset);
+            material->Set("u_AlbedoTextureToggle", true);
+            material->Set("u_AlbedoTexture", albedoMap);
+          }
+        }
+        
+        ImGui::EndDragDropTarget();
+      }
+      ImGui::PopStyleVar();
+      
+      if (ImGui::IsItemHovered())
+      {
+        if (hasAlbedoMap)
+        {
+          ImGui::BeginTooltip();
+          ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+          ImGui::TextUnformatted(albedoMap->GetfilePath().c_str());
+          ImGui::PopTextWrapPos();
+          UI::Image(albedoUITexture, ImVec2(384, 384));
+          ImGui::EndTooltip();
+        }
+        if (ImGui::IsItemClicked() and hasAlbedoMap)
+        {
+          AssetEditorManager::OpenEditor(AssetManager::GetAsset<Asset>(albedoMap->handle));
+        }
+      }
+      ImGui::SameLine();
+      ImGui::BeginGroup();
+      bool useFlag = static_cast<bool>(useAlbedoMap);
+      if (ImGui::Checkbox("Use##AlbedoMap", &useFlag))
+      {
+        useAlbedoMap = static_cast<float>(useFlag);
+      }
+      ImGui::EndGroup();
+      
+      ImGui::SameLine();
+      ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(albedoColor), ImGuiColorEditFlags_NoInputs);
+    }
   }
 } // namespace Kreator

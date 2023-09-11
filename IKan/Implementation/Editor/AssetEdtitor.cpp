@@ -116,6 +116,15 @@ namespace IKan
     s_editors[asset->GetAssetType()]->SetAsset(AssetManager::GetAsset<Asset>(asset->handle));
   }
   
+  void AssetEditorManager::CloseEditor(const Ref<Asset>& asset)
+  {
+    if (s_editors.find(asset->GetAssetType()) == s_editors.end())
+    {
+      return;
+    }
+    s_editors[asset->GetAssetType()]->SetOpen(false);
+  }
+
   void AssetEditorManager::Clear()
   {
     s_editors.clear();

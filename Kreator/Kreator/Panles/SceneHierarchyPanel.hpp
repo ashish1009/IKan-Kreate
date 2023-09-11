@@ -80,6 +80,8 @@ namespace Kreator
     
     SelectionContext m_selectionContext;    
     std::function<void(SelectionContext)> m_selectionChangedCallback, m_entityDeletedCallback;
+    
+    inline static Ref<MaterialAsset> s_currentOpenedMaterialAsset;
 
     inline static Ref<Image> s_pencilIcon;
     inline static Ref<Image> s_plusIcon;
