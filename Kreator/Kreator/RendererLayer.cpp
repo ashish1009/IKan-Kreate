@@ -651,8 +651,6 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OnImGuiRender()
   {
-    IK_PERFORMANCE("RendererLayer::OnImGuiRender");
-    
     // Should be above all scene GUI
     UI_WelcomePopup();
     UI_NewProjectPopup();
@@ -841,6 +839,7 @@ if (!Project::GetActive()) return
 
   void RendererLayer::CreateProject(const std::filesystem::path &projectDir)
   {
+    IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Creating Project at {0} ", projectDir.string().c_str());
 
     // Close the current Project
@@ -884,6 +883,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OpenProject(const std::string &filepath)
   {
+    IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Opening Project {0}", filepath.c_str());
     
     // Check if File exists
@@ -929,6 +929,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::PushProjectToRecentProjects(std::filesystem::path projectFile)
   {
+    IK_PROFILE();
     RecentProject projectEntry;
     projectEntry.name = Utils::String::RemoveExtension(projectFile.filename().string());
     projectEntry.filePath = projectFile;
@@ -950,6 +951,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OpenProject()
   {
+    IK_PROFILE();
     if (m_openProjectPath == "")
     {
       return;
@@ -964,6 +966,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::CloseProject(bool unloadProject)
   {
+    IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Closing the Current Project");
     SaveProject();
     
@@ -973,6 +976,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::SaveProject()
   {
+    IK_PROFILE();
     IK_LOG_TRACE("Kreator Layer", "Saving the Current Project");
     if (!Project::GetActive())
     {
@@ -987,6 +991,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::NewScene(const std::string& name)
   {
+    IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Creating new scene: {0}", name);
     m_editorScene =  Scene::Create(name);
     m_sceneFilePath = std::string();
@@ -1000,6 +1005,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OpenScene(const std::string& filepath)
   {
+    IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Opening scene: {0}", filepath);
 
     if (!Utils::FileSystem::Exists(filepath))
@@ -1039,6 +1045,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::SaveScene()
   {
+    IK_PROFILE();
     if (!m_sceneFilePath.empty())
     {
       IK_LOG_INFO("Kreator Layer", "Saving the scene: {0}", m_sceneFilePath.c_str());
@@ -1054,6 +1061,7 @@ if (!Project::GetActive()) return
   }
   void RendererLayer::SaveSceneAuto()
   {
+    IK_PROFILE();
     if (!m_sceneFilePath.empty())
     {
       SceneSerializer serializer(m_editorScene);
@@ -1064,6 +1072,7 @@ if (!Project::GetActive()) return
 
   void RendererLayer::OnScenePlay()
   {
+    IK_PROFILE();
     ClearSelectedEntity();
     
     m_sceneState = SceneState::Play;
@@ -1084,6 +1093,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OnSceneStop()
   {
+    IK_PROFILE();
     ClearSelectedEntity();
     
     m_runtimeScene->OnRuntimeStop();
@@ -1099,16 +1109,17 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OnScenePause()
   {
-    
+    IK_PROFILE();
   }
   
   void RendererLayer::OnSceneResume()
   {
-    
+    IK_PROFILE();
   }
   
   void RendererLayer::OnSceneStartSimulation()
   {
+    IK_PROFILE();
     ClearSelectedEntity();
     
     m_sceneState = SceneState::Simulate;
@@ -1124,6 +1135,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OnSceneStopSimulation()
   {
+    IK_PROFILE();
     ClearSelectedEntity();
     
     m_simulationScene->OnSimulationStop();

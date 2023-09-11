@@ -18,10 +18,22 @@ namespace IKan
     /// This function creates a font instance
     /// - Parameter filePath: font file path
     MaterialAsset(const std::string& materialShaderPath);
-    
+    /// This Constructor loads the material asset shader
+    /// - Parameter material: material reference
+    MaterialAsset(const Ref<Shader>& shader);
+    /// This Constructor loads the material asset shader
+    /// - Parameter material: Shader reference
+    MaterialAsset(const Ref<Material>& material);
+
     /// This function creates a font instance
     /// - Parameter filePath: shader file path
     static Ref<MaterialAsset> Create(const std::string& materialShaderPath);
+    /// This functions Creates the material asset shader
+    /// - Parameter shader: Shader reference
+    static Ref<MaterialAsset> Create(const Ref<Shader>& shader);
+    /// This functions Creates the material asset shader
+    /// - Parameter material: material reference
+    static Ref<MaterialAsset> Create(const Ref<Material>& material);
 
     ASSET_TYPE(MaterialAsset);
     

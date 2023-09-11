@@ -10,6 +10,7 @@
 #include "Asset/Asset.hpp"
 #include "Core/AABB.hpp"
 #include "Renderer/Material.hpp"
+#include "Renderer/MaterialAsset.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
 #include "Renderer/Graphics/RendererBuffers.hpp"
@@ -84,6 +85,8 @@ namespace IKan
     const Ref<Pipeline>& GetPipeline() const;
     /// This function returns the Base Material
     const Ref<Material>& GetBaseMaterial() const;
+    /// This function returns the material table
+    const Ref<MaterialTable>& GetMaterials() const;
 
     /// This funciton creates the mesh from assimp library and store the data
     /// - Parameter filePath: mesh model file path
@@ -131,6 +134,7 @@ namespace IKan
     Ref<VertexBuffer> m_vertexBuffer;
     Ref<IndexBuffer> m_indexBuffer;
     Ref<Material> m_baseMaterial;
+    Ref<MaterialTable> m_materials;
 
     // Assimp
     const aiScene* m_scene;

@@ -62,7 +62,6 @@ in VS_OUT
 struct Material
 {
   vec3 AlbedoColor;
-  
   float Metalness;
   float Roughness;
   float TilinghFactor;

@@ -260,10 +260,6 @@ namespace IKan
     {
       return;
     }
-    
-//    MESH_LOG("Loading Materials for Mesh");
-//    MESH_LOG("  Mesh                | {0}", name_);
-//    MESH_LOG("  Number of Materials | {0}", scene_->mNumMaterials);
   }
 
   const std::vector<SubMesh>& MeshSource::GetSubMeshes() const
@@ -290,5 +286,8 @@ namespace IKan
   {
     return m_indices;
   }
-
+  const Ref<MaterialTable>& MeshSource::GetMaterials() const
+  {
+    return m_materials;
+  }
 } // namespace IKan
