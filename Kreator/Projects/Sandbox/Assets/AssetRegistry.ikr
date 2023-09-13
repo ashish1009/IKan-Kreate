@@ -20,6 +20,9 @@ Assets:
   - Handle: 447202830
     FilePath: Textures/PBR/Wall/normal.png
     Type: Image
+  - Handle: 560965872
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
   - Handle: 751491585
     FilePath: Textures/PBR/Wall/roughness.png
     Type: Image
@@ -38,9 +41,6 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
-  - Handle: 1448456998
-    FilePath: Scenes/LightDemo.ikscene
-    Type: Scene
   - Handle: 1454229622
     FilePath: Textures/PBR/Gold/albedo.png
     Type: Image
@@ -59,6 +59,9 @@ Assets:
   - Handle: 2234008704
     FilePath: Meshes/Default/Capsule.fbx
     Type: MeshSource
+  - Handle: 2311477359
+    FilePath: Scenes/Light.ikscene
+    Type: Scene
   - Handle: 2568710277
     FilePath: Textures/PBR/Plastic/ao.png
     Type: Image
@@ -68,9 +71,6 @@ Assets:
   - Handle: 3077414120
     FilePath: Textures/PBR/Wall/metallic.png
     Type: Image
-  - Handle: 3172804954
-    FilePath: Scenes/Demo_01.ikscene
-    Type: Scene
   - Handle: 3368361283
     FilePath: Textures/PBR/Grass/ao.png
     Type: Image

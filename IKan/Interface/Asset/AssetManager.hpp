@@ -113,8 +113,7 @@ namespace IKan
       Ref<TAsset> asset = TAsset::Create(std::forward<TArgs>(args)...);
       
       const auto& relPath = GetRelativePath(fileName);
-      std::string hashString = relPath.string() + std::to_string(uuid);
-      asset->handle = Hash::GenerateFNV(hashString);
+      asset->handle = Hash::GenerateFNV(relPath);
       
       AssetMetadata metadata;
       metadata.handle = asset->handle;
@@ -157,7 +156,6 @@ namespace IKan
       {
         asset = s_loadedAssets[assetHandle];
       }
-      
       return std::dynamic_pointer_cast<T>(asset);
     }
     
