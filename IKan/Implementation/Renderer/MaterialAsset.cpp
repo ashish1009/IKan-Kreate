@@ -56,7 +56,13 @@ namespace IKan
   {
     m_materials[index] = material;
   }
-  
+  void MaterialTable::Serialize()
+  {
+    for (const auto& [matIdx, material] : m_materials)
+    {
+      
+    }
+  }
   const std::map<uint32_t, Ref<MaterialAsset>>& MaterialTable::GetMaterialAssets() const
   {
     return m_materials;

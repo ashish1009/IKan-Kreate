@@ -7,7 +7,9 @@
 
 #include <yaml-cpp/yaml.h>
 #include "SceneSerializer.hpp"
+#include "Renderer/Mesh.hpp"
 #include "Scene/CoreEntity.hpp"
+#include "Asset/AssetManager.hpp"
 #include "Utils/YAMLSerializerHelper.h"
 
 namespace IKan {
@@ -261,6 +263,8 @@ namespace IKan {
       if (staticMeshComponent.staticMesh)
       {
         out << YAML::Key << "MeshHandle" << YAML::Value << staticMeshComponent.staticMesh;
+        Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(staticMeshComponent.staticMesh);
+        meshSource->SerializeMaterials();
       }
       else
       {

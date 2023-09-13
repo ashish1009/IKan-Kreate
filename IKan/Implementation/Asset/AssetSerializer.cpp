@@ -41,5 +41,14 @@ namespace IKan
     asset->handle = metadata.handle;
     return true;
   }
-  
+
+  void MeshMaterialSerializer::Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const
+  {
+    
+  }
+  bool MeshMaterialSerializer::TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const
+  {
+    return false;
+  }
+
 } // namespace IKan

@@ -63,7 +63,9 @@ namespace IKan
     ///   - index: material index
     ///   - material: material asset
     void SetMaterial(uint32_t index, Ref<MaterialAsset> material);
-    
+    /// This function serialzes the material
+    void Serialize();
+
     /// This function returns the materials
     std::map<uint32_t, Ref<MaterialAsset>>& GetMaterialAssets();
     /// This function returns the materials

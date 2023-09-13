@@ -6,6 +6,7 @@
 //
 
 #include "AssetImporter.hpp"
+#include "AssetManager.hpp"
 
 namespace IKan
 {
@@ -16,17 +17,23 @@ namespace IKan
     s_serializers[AssetType::Font] = CreateScope<FontSerializer>();
     s_serializers[AssetType::Scene] = CreateScope<SceneAssetSerializer>();
     s_serializers[AssetType::MeshSource] = CreateScope<MeshSourceSerializer>();
+    s_serializers[AssetType::MaterialAsset] = CreateScope<MeshMaterialSerializer>();
   }
   
   void AssetImporter::Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset)
   {
-    IK_ASSERT(false);
+    if (s_serializers.find(metadata.type) == s_serializers.end())
+    {
+      IK_LOG_WARN(LogModule::Asset, "There's currently no importer for assets of type {0}", metadata.filePath.stem().string());
+      return;
+    }
+    s_serializers[asset->GetAssetType()]->Serialize(metadata, asset);
   }
   
   void AssetImporter::Serialize(const Ref<Asset>& asset)
   {
-    IK_ASSERT(false);
-  }
+    const AssetMetadata& metadata = AssetManager::GetMetadata(asset->handle);
+    Serialize(metadata, asset);  }
   
   bool AssetImporter::TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset)
   {

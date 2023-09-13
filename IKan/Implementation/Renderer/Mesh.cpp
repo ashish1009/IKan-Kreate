@@ -351,7 +351,11 @@ namespace IKan
       m_materials->SetMaterial(materialIdx, materialAsset);
     }
   }
-
+  
+  void MeshSource::SerializeMaterials()
+  {
+    m_materials->Serialize();
+  }
   const std::vector<SubMesh>& MeshSource::GetSubMeshes() const
   {
     return m_submeshes;

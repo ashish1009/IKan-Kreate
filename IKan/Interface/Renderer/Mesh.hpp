@@ -75,6 +75,10 @@ namespace IKan
     /// This destructor destiory the loaded mesh and delete all the data
     virtual ~MeshSource();
     
+    /// This function serialzes the material
+    void SerializeMaterials();
+    
+    // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the material index
     uint32_t GetMaterialIndex() const;
     /// This function returns the submeshes

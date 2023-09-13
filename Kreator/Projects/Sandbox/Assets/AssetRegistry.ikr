@@ -59,9 +59,6 @@ Assets:
   - Handle: 2234008704
     FilePath: Meshes/Default/Capsule.fbx
     Type: MeshSource
-  - Handle: 2311477359
-    FilePath: Scenes/Light.ikscene
-    Type: Scene
   - Handle: 2568710277
     FilePath: Textures/PBR/Plastic/ao.png
     Type: Image
