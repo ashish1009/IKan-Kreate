@@ -106,14 +106,15 @@ namespace IKan
     ///   TAsset - Type of asset
     ///   TArgs  - Dynamic arguments for asset creation
     template<typename TAsset, typename... TArgs>
-    static AssetHandle CreateAsset(const std::string& fileName, TArgs&&... args)
+    static AssetHandle CreateAsset(const std::string& fileName, const UUID uuid, TArgs&&... args)
     {
       static_assert(std::is_base_of<Asset, TAsset>::value, "CreateAsset only works for types derived from Asset");
       
       Ref<TAsset> asset = TAsset::Create(std::forward<TArgs>(args)...);
       
       const auto& relPath = GetRelativePath(fileName);
-      asset->handle = Hash::GenerateFNV(relPath);
+      std::string hashString = relPath.string() + std::to_string(uuid);
+      asset->handle = Hash::GenerateFNV(hashString);
       
       AssetMetadata metadata;
       metadata.handle = asset->handle;

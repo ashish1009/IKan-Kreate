@@ -33,7 +33,8 @@ namespace IKan
   void AssetImporter::Serialize(const Ref<Asset>& asset)
   {
     const AssetMetadata& metadata = AssetManager::GetMetadata(asset->handle);
-    Serialize(metadata, asset);  }
+    Serialize(metadata, asset);
+  }
   
   bool AssetImporter::TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset)
   {

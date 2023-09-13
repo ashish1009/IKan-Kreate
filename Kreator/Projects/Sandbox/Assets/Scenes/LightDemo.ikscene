@@ -1,0 +1,50 @@
+Scene: LightDemo
+Entities:
+  - Entity: 6682289522701305302
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 1.41818404, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 3084129899
+    RigidBodyComponent:
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+  - Entity: 14279913416095581292
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, -1.71331418, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 3116057326
+    RigidBodyComponent:
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0

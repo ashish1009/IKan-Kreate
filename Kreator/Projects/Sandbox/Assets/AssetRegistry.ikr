@@ -20,9 +20,6 @@ Assets:
   - Handle: 447202830
     FilePath: Textures/PBR/Wall/normal.png
     Type: Image
-  - Handle: 560965872
-    FilePath: Meshes/Default/Cube.fbx
-    Type: MeshSource
   - Handle: 751491585
     FilePath: Textures/PBR/Wall/roughness.png
     Type: Image
@@ -41,6 +38,9 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
+  - Handle: 1448456998
+    FilePath: Scenes/LightDemo.ikscene
+    Type: Scene
   - Handle: 1454229622
     FilePath: Textures/PBR/Gold/albedo.png
     Type: Image

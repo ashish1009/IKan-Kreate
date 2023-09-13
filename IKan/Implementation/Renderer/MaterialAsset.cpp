@@ -6,6 +6,7 @@
 //
 
 #include "MaterialAsset.hpp"
+#include "Asset/AssetImporter.hpp"
 
 namespace IKan
 {
@@ -60,7 +61,7 @@ namespace IKan
   {
     for (const auto& [matIdx, material] : m_materials)
     {
-      
+      AssetImporter::Serialize(material);
     }
   }
   const std::map<uint32_t, Ref<MaterialAsset>>& MaterialTable::GetMaterialAssets() const
