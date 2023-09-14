@@ -20,6 +20,9 @@ Assets:
   - Handle: 447202830
     FilePath: Textures/PBR/Wall/normal.png
     Type: Image
+  - Handle: 560965872
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
   - Handle: 751491585
     FilePath: Textures/PBR/Wall/roughness.png
     Type: Image

@@ -1158,10 +1158,10 @@ namespace Kreator
         if (ImGui::MenuItem(name.c_str()))
         {
           newEntity = m_context->CreateEntity(name);
-          std::string file = Project::GetActive()->GetMeshPath("Default/");
+          std::string file = "Meshes/Default/";
           file += name;
           file += ".fbx";
-          auto meshSourceHandle = AssetManager::CreateAsset<MeshSource>(file, file);
+          auto meshSourceHandle = AssetManager::GetAssetHandleFromFilePath(file);
           newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
         }
       };
@@ -1174,10 +1174,10 @@ namespace Kreator
           if (ImGui::MenuItem(title.c_str()))
           {
             newEntity = m_context->CreateEntity(name);
-            std::string file = Project::GetActive()->GetMeshPath("Default/");
+            std::string file = "Meshes/Default/";
             file += name;
             file += ".fbx";
-            auto meshSourceHandle = AssetManager::CreateAsset<MeshSource>(file, file);
+            auto meshSourceHandle = AssetManager::GetAssetHandleFromFilePath(file);
             newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
 
             newEntity.AddComponent<RigidBodyComponent>();
