@@ -248,6 +248,11 @@ namespace IKan
     return metadata.handle;
   }
   
+  bool AssetManager::FileExists(AssetMetadata& metadata)
+  {
+    return Utils::FileSystem::Exists(Project::GetActive()->GetAssetDirectory() / metadata.filePath);
+  }
+
   std::filesystem::path AssetManager::GetRelativePath(const std::filesystem::path& filepath)
   {
     std::string temp = filepath.string();
@@ -317,7 +322,11 @@ namespace IKan
   {
     return s_memoryAssets.find(handle) != s_memoryAssets.end();
   }
-  
+  bool AssetManager::IsLoadedAsset(AssetHandle handle)
+  {
+    return s_loadedAssets.find(handle) != s_loadedAssets.end();
+  }
+
   bool AssetManager::IsAssetHandleValid(AssetHandle assetHandle)
   {
     return IsMemoryAsset(assetHandle) or GetMetadata(assetHandle).IsValid();

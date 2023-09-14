@@ -556,6 +556,8 @@ namespace Kreator
       Kreator_UI::BeginPropertyGrid();
       Kreator_UI::PropertyAssetReferenceSettings settings;
       Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", smc.staticMesh, nullptr, settings);
+      std::string meshHandle = std::to_string(smc.staticMesh);
+      UI::SetTooltip(meshHandle.c_str());
       
       // Materials
       auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
@@ -1158,10 +1160,10 @@ namespace Kreator
         if (ImGui::MenuItem(name.c_str()))
         {
           newEntity = m_context->CreateEntity(name);
-          std::string file = "Meshes/Default/";
+          std::string file = Project::GetActive()->GetMeshPath("Default/");
           file += name;
           file += ".fbx";
-          auto meshSourceHandle = AssetManager::GetAssetHandleFromFilePath(file);
+          const auto& meshSourceHandle = AssetManager::CreateAsset<MeshSource>(file, file);
           newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
         }
       };
@@ -1174,10 +1176,10 @@ namespace Kreator
           if (ImGui::MenuItem(title.c_str()))
           {
             newEntity = m_context->CreateEntity(name);
-            std::string file = "Meshes/Default/";
+            std::string file = Project::GetActive()->GetMeshPath("Default/");
             file += name;
             file += ".fbx";
-            auto meshSourceHandle = AssetManager::GetAssetHandleFromFilePath(file);
+            const auto& meshSourceHandle = AssetManager::CreateAsset<MeshSource>(file, file);
             newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
 
             newEntity.AddComponent<RigidBodyComponent>();

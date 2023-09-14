@@ -51,7 +51,10 @@ namespace IKan
     /// This function checks the asset is memory asset
     /// - Parameter handle: Asset handle
     static bool IsMemoryAsset(AssetHandle handle);
-    
+    /// This function checks the asset is loaded asset
+    /// - Parameter handle: Asset handle
+    static bool IsLoadedAsset(AssetHandle handle);
+
     /// This functuion checks is asset handle is valid
     /// - Parameter assetHandle: Asset handle
     static bool IsAssetHandleValid(AssetHandle assetHandle);
@@ -82,6 +85,10 @@ namespace IKan
     /// - Parameter filepath: Asset file path
     static AssetHandle ImportAsset(const std::filesystem::path& filepath);
     
+    /// This function check if file exists
+    /// - Parameter metadata: metadata
+    static bool FileExists(AssetMetadata& metadata);
+
     // Template APIs ------------------------------------------------------------------------------------------------
     /// This function creates a memory asset that need to be stored`
     /// - Parameter args: Arguments for asset creation
@@ -106,34 +113,39 @@ namespace IKan
     ///   TAsset - Type of asset
     ///   TArgs  - Dynamic arguments for asset creation
     template<typename TAsset, typename... TArgs>
-    static AssetHandle CreateAsset(const std::string& fileName, TArgs&&... args)
+    static AssetHandle CreateAsset(const std::string& filePath, TArgs&&... args)
     {
       static_assert(std::is_base_of<Asset, TAsset>::value, "CreateAsset only works for types derived from Asset");
-      
-      Ref<TAsset> asset = TAsset::Create(std::forward<TArgs>(args)...);
-      
-      const auto& relPath = GetRelativePath(fileName);
-      asset->handle = Hash::GenerateFNV(relPath);
-      
+
       AssetMetadata metadata;
-      metadata.handle = asset->handle;
-      metadata.filePath = relPath;
+      metadata.handle = AssetHandle();
+      metadata.filePath = AssetManager::GetRelativePath(filePath);
       metadata.isDataLoaded = true;
       metadata.type = TAsset::GetStaticType();
-      metadata.isMemoryAsset = true;
+      metadata.isMemoryAsset = false;
+
+      s_assetRegistry[metadata.filePath.string()] = metadata;
+      WriteRegistryToFile();
       
-      s_assetRegistry[metadata.filePath] = metadata;
-      s_memoryAssets[asset->handle] = asset;
+      Ref<TAsset> asset = TAsset::Create(std::forward<TArgs>(args)...);
+      asset->handle = metadata.handle;
+      s_loadedAssets[asset->handle] = asset;
+      AssetImporter::Serialize(metadata, asset);
+
       return asset->handle;
     }
     
     /// This function returns the asset from Asset handle
     /// - Parameter assetHandle: Asset Handle
-    template<typename T> static Ref<T> GetAsset(AssetHandle assetHandle)
+    template<typename T> static Ref<T> GetAsset(AssetHandle asse tHandle)
     {
       if (IsMemoryAsset(assetHandle))
       {
         return std::dynamic_pointer_cast<T>(s_memoryAssets[assetHandle]);
+      }
+      if (IsLoadedAsset(assetHandle))
+      {
+        return std::dynamic_pointer_cast<T>(s_loadedAssets[assetHandle]);
       }
       
       auto& metadata = GetMetadataInternal(assetHandle);
@@ -143,19 +155,12 @@ namespace IKan
       }
       
       Ref<Asset> asset = nullptr;
+      metadata.isDataLoaded = AssetImporter::TryLoadData(metadata, asset);
       if (!metadata.isDataLoaded)
       {
-        metadata.isDataLoaded = AssetImporter::TryLoadData(metadata, asset);
-        if (!metadata.isDataLoaded)
-        {
-          return nullptr;
-        }
-        s_loadedAssets[assetHandle] = asset;
+        return nullptr;
       }
-      else
-      {
-        asset = s_loadedAssets[assetHandle];
-      }
+      s_loadedAssets[assetHandle] = asset;
       return std::dynamic_pointer_cast<T>(asset);
     }
     
