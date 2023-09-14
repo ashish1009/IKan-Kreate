@@ -62,7 +62,7 @@ namespace IKan
     /// - Parameters:
     ///   - index: material index
     ///   - material: material asset
-    void SetMaterial(uint32_t index, Ref<MaterialAsset> material);
+    void SetMaterialAsset(uint32_t index, Ref<MaterialAsset> materialAsset);
     /// This function serialzes the material
     void Serialize();
 
@@ -72,7 +72,7 @@ namespace IKan
     const std::map<uint32_t, Ref<MaterialAsset>>& GetMaterialAssets() const;
     
   private:
-    std::map<uint32_t /* Material Index */, Ref<MaterialAsset>> m_materials;
+    std::map<uint32_t /* Material Index */, Ref<MaterialAsset>> m_materialAssetess;
     uint32_t m_materialCount = 0;
   };
 } // namespace IKan

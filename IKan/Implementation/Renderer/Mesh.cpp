@@ -346,9 +346,6 @@ namespace IKan
       } // For each texture index
       
       // Add the Material Asset
-      AssetHandle materialAssetHandle = AssetManager::CreateMemoryOnlyAsset<MaterialAsset>(m_baseMaterial, "PBR Static");
-      Ref<MaterialAsset> materialAsset = AssetManager::GetAsset<MaterialAsset>(materialAssetHandle);
-      m_materials->SetMaterial(materialIdx, materialAsset);
     }
   }
   

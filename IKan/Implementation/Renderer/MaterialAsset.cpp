@@ -53,25 +53,25 @@ namespace IKan
 
   }
 
-  void MaterialTable::SetMaterial(uint32_t index, Ref<MaterialAsset> material)
+  void MaterialTable::SetMaterialAsset(uint32_t index, Ref<MaterialAsset> materialAsset)
   {
-    m_materials[index] = material;
+    m_materialAssetess[index] = materialAsset;
   }
   void MaterialTable::Serialize()
   {
-    for (const auto& [matIdx, material] : m_materials)
+    for (const auto& [matIdx, materialAsset] : m_materialAssetess)
     {
-      AssetImporter::Serialize(material);
+      AssetImporter::Serialize(materialAsset);
     }
   }
   const std::map<uint32_t, Ref<MaterialAsset>>& MaterialTable::GetMaterialAssets() const
   {
-    return m_materials;
+    return m_materialAssetess;
   }
 
   std::map<uint32_t, Ref<MaterialAsset>>& MaterialTable::GetMaterialAssets()
   {
-    return m_materials;
+    return m_materialAssetess;
   }
 
 } // namespace IKan
