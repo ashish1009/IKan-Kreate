@@ -137,7 +137,7 @@ namespace IKan
     
     /// This function returns the asset from Asset handle
     /// - Parameter assetHandle: Asset Handle
-    template<typename T> static Ref<T> GetAsset(AssetHandle asse tHandle)
+    template<typename T> static Ref<T> GetAsset(AssetHandle assetHandle)
     {
       if (IsMemoryAsset(assetHandle))
       {

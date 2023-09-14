@@ -309,7 +309,7 @@ if (!Project::GetActive()) return
           
           RenderDebug();
           RenderFixTexts();
-          UpdateHoveredEntity();
+//          UpdateHoveredEntity();
           
           if (m_showMiniViewport)
           {

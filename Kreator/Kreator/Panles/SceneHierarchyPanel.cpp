@@ -179,6 +179,7 @@ namespace Kreator
     s_pencilIcon.reset();
     s_plusIcon.reset();
     s_gearIcon.reset();
+    
     IK_LOG_WARN("SceneHierarchyPanel", "Shutting down the Scene Hierarchy Panel");
   }
 
@@ -199,6 +200,12 @@ namespace Kreator
     {
       m_context->SetEntityDestroyedCallback([this](Entity entity) { OnExternalEntityDestroyed(entity); });
     }
+  }
+  
+  void SceneHierarchyPanel::OnProjectChanged(const Ref<Project>& project)
+  {
+    s_sceneMeshAssetPath = project->GetAssetPath("Scenes/");
+    Utils::FileSystem::CreateDirectory(s_sceneMeshAssetPath);
   }
   
   void SceneHierarchyPanel::OnImGuiRender(bool& isOpen)
@@ -1156,31 +1163,40 @@ namespace Kreator
     }
     if (ImGui::BeginMenu("3D"))
     {
-      auto menuForDefaultMesh = [this](Entity& newEntity, const std::string& name) {
+      auto createMeshEntity = [this](Entity& newEntity, const std::string& name) {
+        newEntity = m_context->CreateEntity(name);
+        std::string defaultMeshFile = Project::GetActive()->GetMeshPath("Default/");
+        defaultMeshFile += name;
+        defaultMeshFile += ".fbx";
+        
+        // Copy mesh asset path
+        std::string assetMeshFile = s_sceneMeshAssetPath;
+        assetMeshFile += name;
+        assetMeshFile += std::to_string(newEntity.GetUUID());
+        assetMeshFile += ".fbx";
+        
+        // Copy the Mesh as new mesh to have separate material
+        Utils::FileSystem::Copy(defaultMeshFile, assetMeshFile);
+        
+        const auto& meshSourceHandle = AssetManager::CreateAsset<MeshSource>(assetMeshFile, assetMeshFile);
+        newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
+      };
+      
+      auto menuForDefaultMesh = [this, createMeshEntity](Entity& newEntity, const std::string& name) {
         if (ImGui::MenuItem(name.c_str()))
         {
-          newEntity = m_context->CreateEntity(name);
-          std::string file = Project::GetActive()->GetMeshPath("Default/");
-          file += name;
-          file += ".fbx";
-          const auto& meshSourceHandle = AssetManager::CreateAsset<MeshSource>(file, file);
-          newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
+          createMeshEntity(newEntity, name);
         }
       };
       
-      auto beginMnuForDefaultMesh = [this, menuForDefaultMesh](Entity& newEntity, const std::string& name) {
+      auto beginMnuForDefaultMesh = [this, menuForDefaultMesh, createMeshEntity](Entity& newEntity, const std::string& name) {
         if (ImGui::BeginMenu(name.c_str()))
         {
           menuForDefaultMesh(newEntity, name);
           std::string title = "Rigid" + name;
           if (ImGui::MenuItem(title.c_str()))
           {
-            newEntity = m_context->CreateEntity(name);
-            std::string file = Project::GetActive()->GetMeshPath("Default/");
-            file += name;
-            file += ".fbx";
-            const auto& meshSourceHandle = AssetManager::CreateAsset<MeshSource>(file, file);
-            newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
+            createMeshEntity(newEntity, name);
 
             newEntity.AddComponent<RigidBodyComponent>();
             if (name == "Cube")

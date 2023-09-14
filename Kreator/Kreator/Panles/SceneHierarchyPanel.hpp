@@ -24,6 +24,8 @@ namespace Kreator
     /// @see Editor Panel
     virtual void SetSceneContext(const Ref<Scene>& scene) override;
     /// @see Editor Panel
+    virtual void OnProjectChanged(const Ref<Project>& project) override;
+    /// @see Editor Panel
     virtual void OnImGuiRender(bool& isOpen) override;
     
     /// This funciton initialise the scene hierarchy panel
@@ -86,5 +88,6 @@ namespace Kreator
     inline static Ref<Image> s_pencilIcon;
     inline static Ref<Image> s_plusIcon;
     inline static Ref<Image> s_gearIcon;
+    inline static std::filesystem::path s_sceneMeshAssetPath;
   };
 } // namespace Kreator

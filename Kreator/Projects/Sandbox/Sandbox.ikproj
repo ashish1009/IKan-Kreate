@@ -4,6 +4,3 @@ Project:
   MeshDirectory: Assets/Meshes
   MeshSourceDirectory: Assets/Meshes/Source
   AssetRegistry: Assets/AssetRegistry.ikr
-  StartScene: Scenes/Light.ikscene
-  AutoSave: false
-  AutoSaveInterval: 300
