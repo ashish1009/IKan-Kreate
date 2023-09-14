@@ -124,7 +124,7 @@ namespace IKan
       metadata.type = TAsset::GetStaticType();
       metadata.isMemoryAsset = false;
 
-      s_assetRegistry[metadata.filePath.string()] = metadata;
+      s_assetRegistry[metadata.handle] = metadata;
       WriteRegistryToFile();
       
       Ref<TAsset> asset = TAsset::Create(std::forward<TArgs>(args)...);

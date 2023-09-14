@@ -148,7 +148,7 @@ namespace IKan
         continue;
       }
       
-      s_assetRegistry[metadata.filePath] = metadata;
+      s_assetRegistry[metadata.handle] = metadata;
     }
     IK_LOG_TRACE(LogModule::Asset, "Loaded {0} asset entries", s_assetRegistry.Count());
   }
@@ -229,7 +229,7 @@ namespace IKan
     
     if (s_assetRegistry.Contains(path))
     {
-      return s_assetRegistry[path].handle;
+      return s_assetRegistry.GetMetadata(path).handle;
     }
     
     AssetType type = GetAssetTypeFromPath(path);
@@ -243,7 +243,7 @@ namespace IKan
     metadata.handle = Hash::GenerateFNV(relPath);
     metadata.filePath = relPath;
     metadata.type = type;
-    s_assetRegistry[metadata.filePath] = metadata;
+    s_assetRegistry[metadata.handle] = metadata;
     
     return metadata.handle;
   }
@@ -274,7 +274,7 @@ namespace IKan
   
   AssetHandle AssetManager::GetAssetHandleFromFilePath(const std::filesystem::path& filepath)
   {
-    return s_assetRegistry.Contains(filepath) ? s_assetRegistry[filepath].handle : AssetHandle(0);
+    return s_assetRegistry.Contains(filepath) ? s_assetRegistry.GetMetadata(filepath).handle : AssetHandle(0);
   }
   
   AssetType AssetManager::GetAssetTypeFromPath(const std::filesystem::path& path)
@@ -313,7 +313,7 @@ namespace IKan
   {
     if (s_assetRegistry.Contains(filepath))
     {
-      return s_assetRegistry[filepath];
+      return s_assetRegistry.GetMetadata(filepath);
     }
     return s_nullMetadata;
   }
@@ -345,9 +345,9 @@ namespace IKan
       return;
     }
     
-    s_assetRegistry.Remove(metadata.filePath);
-    metadata.filePath = s_assetRegistry.GetPathKey(newFilePath);
-    s_assetRegistry[metadata.filePath] = metadata;
+    s_assetRegistry.Remove(metadata.handle);
+    metadata.filePath = GetRelativePath(newFilePath);
+    s_assetRegistry[metadata.handle] = metadata;
     WriteRegistryToFile();
   }
   
@@ -357,9 +357,9 @@ namespace IKan
     if (!metadata.IsValid())
       return;
     
-    s_assetRegistry.Remove(metadata.filePath);
+    s_assetRegistry.Remove(metadata.handle);
     metadata.filePath = destinationPath / metadata.filePath.filename();
-    s_assetRegistry[metadata.filePath] = metadata;
+    s_assetRegistry[metadata.handle] = metadata;
     
     WriteRegistryToFile();
   }
@@ -370,7 +370,7 @@ namespace IKan
     if (!metadata.IsValid())
       return;
     
-    s_assetRegistry.Remove(metadata.filePath);
+    s_assetRegistry.Remove(metadata.handle);
     s_loadedAssets.erase(assetHandle);
     WriteRegistryToFile();
   }

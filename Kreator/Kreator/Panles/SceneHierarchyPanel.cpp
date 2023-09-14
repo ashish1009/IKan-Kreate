@@ -204,8 +204,6 @@ namespace Kreator
   
   void SceneHierarchyPanel::OnProjectChanged(const Ref<Project>& project)
   {
-    s_sceneMeshAssetPath = project->GetAssetPath("Scenes/");
-    Utils::FileSystem::CreateDirectory(s_sceneMeshAssetPath);
   }
   
   void SceneHierarchyPanel::OnImGuiRender(bool& isOpen)
@@ -1168,17 +1166,8 @@ namespace Kreator
         std::string defaultMeshFile = Project::GetActive()->GetMeshPath("Default/");
         defaultMeshFile += name;
         defaultMeshFile += ".fbx";
-        
-        // Copy mesh asset path
-        std::string assetMeshFile = s_sceneMeshAssetPath;
-        assetMeshFile += name;
-        assetMeshFile += std::to_string(newEntity.GetUUID());
-        assetMeshFile += ".fbx";
-        
-        // Copy the Mesh as new mesh to have separate material
-        Utils::FileSystem::Copy(defaultMeshFile, assetMeshFile);
-        
-        const auto& meshSourceHandle = AssetManager::CreateAsset<MeshSource>(assetMeshFile, assetMeshFile);
+                
+        const auto& meshSourceHandle = AssetManager::CreateAsset<MeshSource>(defaultMeshFile, defaultMeshFile);
         newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
       };
       

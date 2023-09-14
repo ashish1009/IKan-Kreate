@@ -16,46 +16,49 @@ namespace IKan
 #else
 #define ASSET_LOG(...)
 #endif
-  
-  std::filesystem::path AssetRegistry::GetPathKey(const std::filesystem::path& path) const
+    
+  AssetMetadata& AssetRegistry::operator[](const AssetHandle& handle)
   {
-    auto key = std::filesystem::relative(path, Project::GetAssetDirectory());
-    if (key.empty())
+    return m_assetRegistry[handle];
+  }
+
+  const AssetMetadata& AssetRegistry::GetMetadata(const std::filesystem::path &path) const
+  {
+    for (const auto& [handle, metadata] : m_assetRegistry)
     {
-      key = path.lexically_normal();
+      if (metadata.filePath == path)
+      {
+        return metadata;
+      }
     }
-    return key;
+    IK_ASSERT(false);
   }
-  
-  AssetMetadata& AssetRegistry::operator[](const std::filesystem::path& path)
+
+  const AssetMetadata& AssetRegistry::Get(const AssetHandle& handle) const
   {
-    auto key = GetPathKey(path);
-    ASSET_LOG("[ASSET] Retrieving key {0} (path = {1})", key.string(), path.string());
-    IK_ASSERT(!path.string().empty());
-    return m_assetRegistry[key];
+    return m_assetRegistry.at(handle);
   }
   
-  const AssetMetadata& AssetRegistry::Get(const std::filesystem::path& path) const
+  bool AssetRegistry::Contains(const AssetHandle& handle) const
   {
-    auto key = GetPathKey(path);
-    IK_ASSERT(m_assetRegistry.find(key) != m_assetRegistry.end());
-    ASSET_LOG("[ASSET] Retrieving const {0} (path = {1})", key.string(), path.string());
-    IK_ASSERT(!path.string().empty());
-    return m_assetRegistry.at(key);
+    return m_assetRegistry.find(handle) != m_assetRegistry.end();
   }
-  
+
   bool AssetRegistry::Contains(const std::filesystem::path& path) const
   {
-    auto key = GetPathKey(path);
-    ASSET_LOG("[ASSET] Contains key {0} (path = {1})", key.string(), path.string());
-    return m_assetRegistry.find(key) != m_assetRegistry.end();
+    for (const auto& [handle, metadata] : m_assetRegistry)
+    {
+      if (metadata.filePath == path)
+      {
+        return true;
+      }
+    }
+    return false;
   }
-  
-  size_t AssetRegistry::Remove(const std::filesystem::path& path)
+
+  size_t AssetRegistry::Remove(const AssetHandle& handle)
   {
-    auto key = GetPathKey(path);
-    ASSET_LOG("[ASSET] Removing key {0} (path = {1})", key.string(), path.string());
-    return m_assetRegistry.erase(key);
+    return m_assetRegistry.erase(handle);
   }
   
   void AssetRegistry::Clear()
