@@ -349,6 +349,13 @@ namespace IKan
   void MeshSource::AddNewMaterial(const std::filesystem::path& materialBaseDir, const std::string& materialName)
   {
     m_materials->CreateNewMaterialAsset(materialBaseDir, materialName);
+    m_materialIndex = m_materials->GetSize() - 1;
+  }
+  
+  void MeshSource::SetMaterialIndex(int32_t index)
+  {
+    IK_ASSERT(index < (int32_t)m_materials->GetSize());
+    m_materialIndex = index;
   }
   
   void MeshSource::SerializeMaterials()
@@ -390,7 +397,7 @@ namespace IKan
   {
     return m_materials;
   }
-  uint32_t MeshSource::GetMaterialIndex() const
+  int32_t MeshSource::GetMaterialIndex() const
   {
     return m_materialIndex;
   }

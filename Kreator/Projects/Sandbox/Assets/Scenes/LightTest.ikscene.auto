@@ -1,6 +1,6 @@
 Scene: LightTest.ikscene
 Entities:
-  - Entity: 4515900283389239290
+  - Entity: 11842383417334654374
     TagComponent:
       Tag: Cube
     Parent: 0
@@ -11,7 +11,7 @@ Entities:
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
-      MeshHandle: 14978739616298802633
+      MeshHandle: 15953659370622640816
     RigidBodyComponent:
       BodyType: 0
       LiniarDamping: 0

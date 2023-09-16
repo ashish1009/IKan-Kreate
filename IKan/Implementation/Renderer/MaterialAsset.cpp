@@ -57,7 +57,9 @@ namespace IKan
   
   void MaterialTable::CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName)
   {
-    std::filesystem::path materialAssetFile = materialBaseDir / materialName;
+    std::string materialNameWithExtension = materialName + std::string(".ikmat");
+    std::filesystem::path materialAssetFile = materialBaseDir / materialNameWithExtension;
+    
     AssetHandle materialAssetHandle = AssetManager::CreateAsset<MaterialAsset>(materialAssetFile, m_baseMaterial, materialName);
     m_materialAssetess[m_materialCount++] = AssetManager::GetAsset<MaterialAsset>(materialAssetHandle);
   }
@@ -85,6 +87,7 @@ namespace IKan
   
   uint32_t MaterialTable::GetSize() const
   {
+    IK_ASSERT(m_materialCount == m_materialAssetess.size());
     return static_cast<uint32_t>(m_materialAssetess.size());
   }
 

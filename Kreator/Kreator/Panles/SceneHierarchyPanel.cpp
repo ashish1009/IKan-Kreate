@@ -572,7 +572,7 @@ namespace Kreator
 
       // Materials
       std::vector<std::string> materialString = {"Base Material"};
-      int32_t selectedMaterialIndex = mesh->GetMaterialIndex() + 1;
+      
       if (mesh->GetMaterialTable()->GetSize() > 0)
       {
         auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
@@ -590,6 +590,17 @@ namespace Kreator
             materialString.push_back(materialName);
           }
         }
+        
+        // No Editor for base material
+        if (mesh->GetMaterialIndex() >= 0)
+        {
+          s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materials.at(mesh->GetMaterialIndex())->handle);
+          AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
+        }
+        else
+        {
+          AssetEditorManager::CloseEditor(s_currentOpenedMaterialAsset);
+        }
       }
 
       ImGui::InvisibleButton("Add Material", {ImGui::GetContentRegionAvail().x, 10});
@@ -601,18 +612,19 @@ namespace Kreator
         if (ImGui::MenuItem("Add Material"))
         {
           const auto& materialDir = Project::GetActive()->GetMaterialDirectory();
-          mesh->AddNewMaterial(materialDir, "Materrial #");
+          mesh->AddNewMaterial(materialDir, "Materrial");
         }
         ImGui::EndPopup();
       }
       
       ImGui::NextColumn();
-      Kreator_UI::PropertyDropdownNoLabel("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex);
+      // Drop down index should be plus 1 as first material is base material
+      int32_t selectedMaterialIndex = mesh->GetMaterialIndex() + 1;
+      if (Kreator_UI::PropertyDropdownNoLabel("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex))
+      {
+        mesh->SetMaterialIndex(selectedMaterialIndex - 1);
+      }
       Kreator_UI::EndPropertyGrid();
-
-      // Open Material Popup
-//      s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materials.at(selectedMaterialIndex)->handle);
-//      AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
     }, s_gearIcon);
     
     DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)

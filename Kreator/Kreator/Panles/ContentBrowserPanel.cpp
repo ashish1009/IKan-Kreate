@@ -143,7 +143,8 @@ namespace Kreator
     m_assetIconMap[".otf"] = m_assetIconMap.at(".ttf");
     
     m_assetIconMap[".ikscene"] = CBP_Utils::AssetPath("IKScene.png");
-    
+    m_assetIconMap[".ikmat"] = CBP_Utils::AssetPath("Material.png");
+
     m_assetIconMap[".fbx"] = CBP_Utils::AssetPath("Fbx.png");
     m_assetIconMap[".obj"] = CBP_Utils::AssetPath("Obj.png");
   }

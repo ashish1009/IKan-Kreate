@@ -83,9 +83,13 @@ namespace IKan
     /// This function serialzes the material
     void SerializeMaterials();
     
+    /// This function update the material index
+    /// - Parameter index: index
+    void SetMaterialIndex(int32_t index);
+    
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the material index
-    uint32_t GetMaterialIndex() const;
+    int32_t GetMaterialIndex() const;
     /// This function returns the submeshes
     const std::vector<SubMesh>& GetSubMeshes() const;
     /// This function returns the Vertices
