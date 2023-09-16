@@ -1,9 +1,13 @@
 Project:
   Name: Sandbox
   AssetDirectory: Assets
+  AssetRegistry: Assets/AssetRegistry.ikr
+  FontDirectory: Assets/Fonts
   MeshDirectory: Assets/Meshes
   MeshSourceDirectory: Assets/Meshes/Source
-  MaterialPath: ""
+  MaterialPath: Assets/Meshes/Materials
+  SceneDirectory: Assets/Scenes
+  TextureDirectory: Assets/Textures
   AssetRegistry: Assets/AssetRegistry.ikr
   StartScene: Scenes/LightTest.ikscene
   AutoSave: true

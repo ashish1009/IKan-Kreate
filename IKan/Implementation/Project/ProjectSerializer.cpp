@@ -28,6 +28,9 @@ namespace IKan
       out << YAML::Key << "Name" << YAML::Value << m_project->m_config.name;
       out << YAML::Key << "AssetDirectory" << YAML::Value << m_project->m_config.assetDirectory;
       out << YAML::Key << "MeshDirectory" << YAML::Value << m_project->m_config.meshPath;
+      out << YAML::Key << "FontDirectory" << YAML::Value << m_project->m_config.fontPath;
+      out << YAML::Key << "SceneDirectory" << YAML::Value << m_project->m_config.scenePath;
+      out << YAML::Key << "TextureDirectory" << YAML::Value << m_project->m_config.texturePath;
       out << YAML::Key << "MeshSourceDirectory" << YAML::Value << m_project->m_config.meshSourcePath;
       out << YAML::Key << "MaterialPath" << YAML::Value << m_project->m_config.materialPath;
       out << YAML::Key << "AssetRegistry" << YAML::Value << m_project->m_config.assetRegistryPath;
@@ -68,6 +71,9 @@ namespace IKan
     config.name = rootNode["Name"].as<std::string>();
     config.assetDirectory = rootNode["AssetDirectory"].as<std::string>();
     config.meshPath = rootNode["MeshDirectory"].as<std::string>();
+    config.fontPath = rootNode["FontDirectory"].as<std::string>();
+    config.scenePath = rootNode["SceneDirectory"].as<std::string>();
+    config.texturePath = rootNode["TextureDirectory"].as<std::string>();
     config.meshSourcePath = rootNode["MeshSourceDirectory"].as<std::string>();
     config.materialPath = rootNode["MaterialPath"].as<std::string>();
     config.assetRegistryPath = rootNode["AssetRegistry"].as<std::string>();

@@ -569,7 +569,7 @@ namespace Kreator
       }
       std::string meshHandle = std::to_string(smc.staticMesh);
       UI::SetTooltip(meshHandle.c_str());
-      
+
       // Materials
       std::vector<std::string> materialString = {"Base Material"};
       int32_t selectedMaterialIndex = mesh->GetMaterialIndex() + 1;
@@ -591,8 +591,23 @@ namespace Kreator
           }
         }
       }
+
+      ImGui::InvisibleButton("Add Material", {ImGui::GetContentRegionAvail().x, 10});
+      UI::ShiftCursor(0.0f, -9.0f);
+      ImGui::Text("Active Materials");
+      UI::SetTooltip("Right click to Add Material");
+      if (ImGui::BeginPopupContextWindow(nullptr, ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverItems))
+      {
+        if (ImGui::MenuItem("Add Material"))
+        {
+          const auto& materialDir = Project::GetActive()->GetMaterialDirectory();
+          mesh->AddNewMaterial(materialDir, "Materrial #");
+        }
+        ImGui::EndPopup();
+      }
       
-      Kreator_UI::PropertyDropdown("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex);
+      ImGui::NextColumn();
+      Kreator_UI::PropertyDropdownNoLabel("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex);
       Kreator_UI::EndPropertyGrid();
 
       // Open Material Popup

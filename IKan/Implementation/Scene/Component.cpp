@@ -6,6 +6,8 @@
 //
 
 #include "Component.hpp"
+#include "AssetManager.hpp"
+#include "Mesh.hpp"
 
 namespace IKan
 {

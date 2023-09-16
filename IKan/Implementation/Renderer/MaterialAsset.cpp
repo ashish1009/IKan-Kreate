@@ -7,6 +7,7 @@
 
 #include "MaterialAsset.hpp"
 #include "Asset/AssetImporter.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
@@ -35,7 +36,7 @@ namespace IKan
   MaterialAsset::MaterialAsset(const Ref<Material> &material, const std::string &name)
   : m_materialShaderPath(material->GetShader()->GetFilePath()), m_material(material)
   {
-    
+    m_material->SetName(name);
   }
   
   Ref<Material>& MaterialAsset::GetMaterial()
@@ -43,7 +44,8 @@ namespace IKan
     return m_material;
   }
 
-  MaterialTable::MaterialTable()
+  MaterialTable::MaterialTable(Ref<Material> baseMaterial)
+  : m_baseMaterial(baseMaterial)
   {
     
   }
@@ -51,6 +53,13 @@ namespace IKan
   MaterialTable::~MaterialTable()
   {
 
+  }
+  
+  void MaterialTable::CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName)
+  {
+    std::filesystem::path materialAssetFile = materialBaseDir / materialName;
+    AssetHandle materialAssetHandle = AssetManager::CreateAsset<MaterialAsset>(materialAssetFile, m_baseMaterial, materialName);
+    m_materialAssetess[m_materialCount++] = AssetManager::GetAsset<MaterialAsset>(materialAssetHandle);
   }
 
   void MaterialTable::SetMaterialAsset(uint32_t index, Ref<MaterialAsset> materialAsset)

@@ -271,7 +271,7 @@ namespace IKan
   void MeshSource::UploadMaterial()
   {
     // Create the Instance to store the materials
-    m_materials = CreateRef<MaterialTable>();
+    m_materials = CreateRef<MaterialTable>(m_baseMaterial);
     
     // If mesh do not have material then return
     if (!m_scene->HasMaterials())
@@ -344,6 +344,11 @@ namespace IKan
         } // If mesh exist in assim model
       } // For each texture indexbb
     }
+  }
+  
+  void MeshSource::AddNewMaterial(const std::filesystem::path& materialBaseDir, const std::string& materialName)
+  {
+    m_materials->CreateNewMaterialAsset(materialBaseDir, materialName);
   }
   
   void MeshSource::SerializeMaterials()

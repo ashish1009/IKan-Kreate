@@ -76,6 +76,21 @@ namespace IKan
     IK_ASSERT(s_activeProject);
     return std::filesystem::path(s_activeProject->GetConfig().projectDirectory) / s_activeProject->GetConfig().meshPath;
   }
+  std::filesystem::path Project::GetFontDirectory()
+  {
+    IK_ASSERT(s_activeProject);
+    return std::filesystem::path(s_activeProject->GetConfig().projectDirectory) / s_activeProject->GetConfig().fontPath;
+  }
+  std::filesystem::path Project::GetSceneDirectory()
+  {
+    IK_ASSERT(s_activeProject);
+    return std::filesystem::path(s_activeProject->GetConfig().projectDirectory) / s_activeProject->GetConfig().scenePath;
+  }
+  std::filesystem::path Project::GetTextureDirectory()
+  {
+    IK_ASSERT(s_activeProject);
+    return std::filesystem::path(s_activeProject->GetConfig().projectDirectory) / s_activeProject->GetConfig().texturePath;
+  }
   std::filesystem::path Project::GetMeshSourceDirectory()
   {
     IK_ASSERT(s_activeProject);
@@ -99,6 +114,18 @@ namespace IKan
   std::filesystem::path Project::GetMeshPath(const std::string& meshRelativePath)
   {
     return GetMeshDirectory() / meshRelativePath;
+  }
+  std::filesystem::path Project::GetFontPath(const std::string& fontRelativePath)
+  {
+    return GetFontDirectory() / fontRelativePath;
+  }
+  std::filesystem::path Project::GetScenePath(const std::string& sceneRelativePath)
+  {
+    return GetSceneDirectory() / sceneRelativePath;
+  }
+  std::filesystem::path Project::GetTexturePath(const std::string& textureRelativePath)
+  {
+    return GetTextureDirectory() / textureRelativePath;
   }
   std::filesystem::path Project::GetMeshSourcePath(const std::string& meshsourceRelativePath)
   {

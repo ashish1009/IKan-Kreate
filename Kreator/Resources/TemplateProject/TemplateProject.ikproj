@@ -2,5 +2,9 @@ Project:
   Name: $PROJECT_NAME$
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
+  FontDirectory: Assets/Fonts
   MeshDirectory: Assets/Meshes
   MeshSourceDirectory: Assets/Meshes/Source
+  MaterialPath: Assets/Meshes/Materials
+  SceneDirectory: Assets/Scenes
+  TextureDirectory: Assets/Textures

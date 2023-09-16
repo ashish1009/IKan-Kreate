@@ -54,10 +54,12 @@ namespace IKan
   {
   public:
     /// This creates material table
-    MaterialTable();
+    MaterialTable(Ref<Material> baseMaterial);
     /// This destroys the material table
     ~MaterialTable();
     
+    /// This function creates new material assets
+    void CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName);
     /// This function sets the material Asset in table
     /// - Parameters:
     ///   - index: material index
@@ -77,5 +79,6 @@ namespace IKan
   private:
     std::map<uint32_t /* Material Index */, Ref<MaterialAsset>> m_materialAssetess;
     uint32_t m_materialCount = 0;
+    Ref<Material> m_baseMaterial;
   };
 } // namespace IKan

@@ -20,9 +20,12 @@ namespace IKan
       std::string name = "New_Project";
       std::string assetDirectory;
       std::string assetRegistryPath;
+      std::string fontPath;
       std::string meshPath;
       std::string meshSourcePath;
       std::string materialPath;
+      std::string scenePath;
+      std::string texturePath;
 
       std::string startScene;
       bool enableAutoSave = false;
@@ -54,6 +57,12 @@ namespace IKan
     static std::filesystem::path GetAssetDirectory();
     /// This function returns the project Mesh path
     static std::filesystem::path GetMeshDirectory();
+    /// This function returns the project Font path
+    static std::filesystem::path GetFontDirectory();
+    /// This function returns the project Texture path
+    static std::filesystem::path GetTextureDirectory();
+    /// This function returns the project Scene path
+    static std::filesystem::path GetSceneDirectory();
     /// This function returns the project Mesh source path
     static std::filesystem::path GetMeshSourceDirectory();
     /// This function returns the project Mesh path
@@ -66,6 +75,15 @@ namespace IKan
     /// This function returns the absolute file path of asset
     /// - Parameter assetRelativePath: asset raltive path
     static std::filesystem::path GetMeshPath(const std::string& meshsourceRelativePath);
+    /// This function returns the absolute file path of asset
+    /// - Parameter assetRelativePath: asset raltive path
+    static std::filesystem::path GetFontPath(const std::string& fontRelativePath);
+    /// This function returns the absolute file path of asset
+    /// - Parameter assetRelativePath: asset raltive path
+    static std::filesystem::path GetScenePath(const std::string& sceneRelativePath);
+    /// This function returns the absolute file path of asset
+    /// - Parameter assetRelativePath: asset raltive path
+    static std::filesystem::path GetTexturePath(const std::string& textureRelativePath);
     /// This function returns the absolute file path of asset
     /// - Parameter assetRelativePath: asset raltive path
     static std::filesystem::path GetMeshSourcePath(const std::string& meshRelativePath);

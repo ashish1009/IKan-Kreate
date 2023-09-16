@@ -75,6 +75,11 @@ namespace IKan
     /// This destructor destiory the loaded mesh and delete all the data
     virtual ~MeshSource();
     
+    /// This function creates the new material
+    /// - Parameters:
+    ///   - materialBaseDir: Material serialize path
+    ///   - materialName: material name
+    void AddNewMaterial(const std::filesystem::path& materialBaseDir, const std::string& materialName);
     /// This function serialzes the material
     void SerializeMaterials();
     
