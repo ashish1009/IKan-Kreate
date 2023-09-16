@@ -565,13 +565,13 @@ namespace Kreator
       UI::SetTooltip(meshHandle.c_str());
       
       // Materials
+      std::vector<std::string> materialString = {"Base Material"};
+      int32_t selectedMaterialIndex = mesh->GetMaterialIndex() + 1;
       if (mesh->GetMaterialTable()->GetSize() > 0)
       {
         auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
-        int32_t selectedMaterialIndex = mesh->GetMaterialIndex();
         if (materials.size() > 0)
         {
-          std::vector<std::string> materialString;
           for (auto& [materialIdx, materialAsset] : materials)
           {
             auto& material = materialAsset->GetMaterial();
@@ -583,15 +583,15 @@ namespace Kreator
             }
             materialString.push_back(materialName);
           }
-          Kreator_UI::PropertyDropdown("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex);
         }
-        
-        // Open Material Popup
-        s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materials.at(selectedMaterialIndex)->handle);
-        AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
       }
       
+      Kreator_UI::PropertyDropdown("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex);
       Kreator_UI::EndPropertyGrid();
+
+      // Open Material Popup
+//      s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materials.at(selectedMaterialIndex)->handle);
+//      AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
     }, s_gearIcon);
     
     DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)

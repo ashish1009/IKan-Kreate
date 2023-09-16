@@ -145,7 +145,7 @@ namespace IKan
     Ref<Material> m_baseMaterial;
     Ref<MaterialTable> m_materials;
     
-    uint32_t m_materialIndex = 0;
+    int32_t m_materialIndex = -1;
 
     // Assimp
     const aiScene* m_scene;

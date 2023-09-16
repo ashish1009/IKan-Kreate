@@ -279,8 +279,6 @@ namespace IKan
       return;
     }
     
-    m_materialIndex = 0;
-    
     MESH_LOG("  Loading Materials for Mesh");
     MESH_LOG("    Number of Materials | {0}", m_scene->mNumMaterials);
         
@@ -362,7 +360,7 @@ namespace IKan
   }
   const Ref<Material>& MeshSource::GetBaseMaterial() const
   {
-    if (m_materials->GetMaterialAssets().size())
+    if (m_materialIndex >= 0)
     {
       return m_materials->GetMaterialAssets().at(m_materialIndex)->GetMaterial();
     }
