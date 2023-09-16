@@ -12,6 +12,7 @@
 
 #include "Mesh.hpp"
 #include "Asset/AssetManager.hpp"
+#include "Project/Project.hpp"
 
 namespace IKan
 {
@@ -343,9 +344,7 @@ namespace IKan
           m_baseMaterial->Set(textureShaderName, texture);
           m_baseMaterial->Set(textureShaderName + "Toggle", 1.0f);
         } // If mesh exist in assim model
-      } // For each texture index
-      
-      // Add the Material Asset
+      } // For each texture indexbb
     }
   }
   
@@ -363,7 +362,14 @@ namespace IKan
   }
   const Ref<Material>& MeshSource::GetBaseMaterial() const
   {
-    return m_materials->GetMaterialAssets().at(0)->GetMaterial();
+    if (m_materials->GetMaterialAssets().size())
+    {
+      return m_materials->GetMaterialAssets().at(m_materialIndex)->GetMaterial();
+    }
+    else
+    {
+      return m_baseMaterial;
+    }
   }
   const std::vector<Triangle>& MeshSource::GetTriangleCache(uint32_t submeshIndex) const
   {

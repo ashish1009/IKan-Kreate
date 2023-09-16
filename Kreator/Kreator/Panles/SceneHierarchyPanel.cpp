@@ -565,29 +565,33 @@ namespace Kreator
       UI::SetTooltip(meshHandle.c_str());
       
       // Materials
-      auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
-      int32_t selectedMaterialIndex = mesh->GetMaterialIndex();
-      if (materials.size() > 0)
+      if (mesh->GetMaterialTable()->GetSize() > 0)
       {
-        std::vector<std::string> materialString;
-        for (auto& [materialIdx, materialAsset] : materials)
+        auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
+        int32_t selectedMaterialIndex = mesh->GetMaterialIndex();
+        if (materials.size() > 0)
         {
-          auto& material = materialAsset->GetMaterial();
-          std::string materialName = material->GetName();
-          
-          if (materialName.empty())
+          std::vector<std::string> materialString;
+          for (auto& [materialIdx, materialAsset] : materials)
           {
-            materialName = fmt::format("Unnamed Material #{0}", materialIdx);
+            auto& material = materialAsset->GetMaterial();
+            std::string materialName = material->GetName();
+            
+            if (materialName.empty())
+            {
+              materialName = fmt::format("Unnamed Material #{0}", materialIdx);
+            }
+            materialString.push_back(materialName);
           }
-          materialString.push_back(materialName);
+          Kreator_UI::PropertyDropdown("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex);
         }
-        Kreator_UI::PropertyDropdown("Active Material", materialString, (uint32_t)materialString.size(), &selectedMaterialIndex);
+        
+        // Open Material Popup
+        s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materials.at(selectedMaterialIndex)->handle);
+        AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
       }
-      Kreator_UI::EndPropertyGrid();
       
-      // Open Material Popup
-      s_currentOpenedMaterialAsset = AssetManager::GetAsset<MaterialAsset>(materials.at(selectedMaterialIndex)->handle);
-      AssetEditorManager::OpenEditor(s_currentOpenedMaterialAsset);
+      Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
     
     DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)

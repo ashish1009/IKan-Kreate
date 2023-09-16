@@ -29,7 +29,7 @@ namespace IKan
      
     /// This function returns the material from asset
     Ref<Material>& GetMaterial();
-
+    
     /// This function creates a font instance
     /// - Parameter filePath: shader file path
     static Ref<MaterialAsset> Create(const std::string& materialShaderPath, const std::string &name);
@@ -66,6 +66,9 @@ namespace IKan
     /// This function serialzes the material
     void Serialize();
 
+    /// This function returns the size of material assets
+    uint32_t GetSize() const;
+    
     /// This function returns the materials
     std::map<uint32_t, Ref<MaterialAsset>>& GetMaterialAssets();
     /// This function returns the materials

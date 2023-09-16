@@ -22,7 +22,8 @@ namespace IKan
       std::string assetRegistryPath;
       std::string meshPath;
       std::string meshSourcePath;
-      
+      std::string materialPath;
+
       std::string startScene;
       bool enableAutoSave = false;
       int32_t autoSaveIntervalSeconds = 300;
@@ -55,6 +56,8 @@ namespace IKan
     static std::filesystem::path GetMeshDirectory();
     /// This function returns the project Mesh source path
     static std::filesystem::path GetMeshSourceDirectory();
+    /// This function returns the project Mesh path
+    static std::filesystem::path GetMaterialDirectory();
     /// This function returns the project asset
     static std::filesystem::path GetAssetRegistryPath();
     /// This function returns the absolute file path of asset
@@ -66,6 +69,9 @@ namespace IKan
     /// This function returns the absolute file path of asset
     /// - Parameter assetRelativePath: asset raltive path
     static std::filesystem::path GetMeshSourcePath(const std::string& meshRelativePath);
+    /// This function returns the absolute file path of asset
+    /// - Parameter assetRelativePath: asset raltive path
+    static std::filesystem::path GetMaterialPath(const std::string& materialRelativePath);
 
   private:
     Config m_config;

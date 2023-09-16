@@ -73,5 +73,10 @@ namespace IKan
   {
     return m_materialAssetess;
   }
+  
+  uint32_t MaterialTable::GetSize() const
+  {
+    return static_cast<uint32_t>(m_materialAssetess.size());
+  }
 
 } // namespace IKan
