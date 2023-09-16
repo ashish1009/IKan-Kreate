@@ -69,6 +69,9 @@ namespace IKan
     /// This function handle simulation stop
     void OnSimulationStop();
     
+    /// This function calls on scene close
+    void OnClose();
+    
     // Fundamentals ------------------------------------------------------------------------------------------------
     /// this function copy scene to target
     /// - Parameter target: target scene
@@ -138,7 +141,12 @@ namespace IKan
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion
     void SetEntityDestroyedCallback(const std::function<void(Entity)>& callback);
-
+    /// This function deletes the asset handles while scene save
+    /// - Parameter handle: handle
+    void AddUnsavedAssetHandles(AssetHandle handle);
+    /// This fuction clear all unsaved assets
+    void ClearUnsavedAssets();
+    
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the scene name
     const std::string& GetName() const;
@@ -194,6 +202,10 @@ namespace IKan
     /// This function check entity is selected
     /// - Parameter entity: Selected Entity
     bool IsEntitySelected(entt::entity entity) const;
+    
+    // Registry Callbacks --------------
+    void OnStaticMeshComponentConstruct(entt::registry& registry, entt::entity entity);
+    void OnStaticMeshComponentDestroy(entt::registry& registry, entt::entity entity);
 
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
@@ -210,6 +222,11 @@ namespace IKan
     EntityMap m_entityIDMap;
     std::vector<entt::entity> m_selectedEntities;
     std::function<void(Entity)> m_onEntityDestroyedCallback;
+    
+    // Project Registry Data ------------
+    // Store the current asset handle if we close the scene or project without saving scene then these
+    // need to remove from the Asset Regirtry
+    std::stack<AssetHandle> m_unsavedAssetHandles;
 
     // Physics Data
     PhysicsSettings m_physicsSettings;

@@ -355,7 +355,9 @@ namespace IKan
   {
     AssetMetadata metadata = GetMetadata(assetHandle);
     if (!metadata.IsValid())
+    {
       return;
+    }
     
     s_assetRegistry.Remove(metadata.handle);
     metadata.filePath = destinationPath / metadata.filePath.filename();
@@ -368,7 +370,9 @@ namespace IKan
   {
     AssetMetadata metadata = GetMetadata(assetHandle);
     if (!metadata.IsValid())
+    {
       return;
+    }
     
     s_assetRegistry.Remove(metadata.handle);
     s_loadedAssets.erase(assetHandle);

@@ -276,6 +276,9 @@ if (!Project::GetActive()) return
     m_viewportRenderer.reset();
     m_miniViewportRenderer.reset();
     
+    // Close the current Scene
+    CloseCurrentScene();
+    
     // Close the project
     Project::CloseActive();
     
@@ -1000,6 +1003,9 @@ if (!Project::GetActive()) return
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Creating new scene: {0}", name);
+
+    CloseCurrentScene();
+
     m_editorScene =  Scene::Create(name);
     m_sceneFilePath = std::string();
     
@@ -1015,6 +1021,8 @@ if (!Project::GetActive()) return
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Opening scene: {0}", filepath);
 
+    CloseCurrentScene();
+    
     if (!Utils::FileSystem::Exists(filepath))
     {
       IK_LOG_ERROR("Kreator Layer" ,"Tried loading a non-existing scene: {0}", filepath);
@@ -1074,6 +1082,14 @@ if (!Project::GetActive()) return
       SceneSerializer serializer(m_editorScene);
       serializer.Serialize(m_sceneFilePath + ".auto");
       m_timeSinceLastSave = 0.0f;
+    }
+  }
+  
+  void RendererLayer::CloseCurrentScene()
+  {
+    if (m_currentScene)
+    {
+      m_currentScene->OnClose();
     }
   }
 

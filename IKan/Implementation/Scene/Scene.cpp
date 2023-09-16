@@ -60,6 +60,9 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "  Name               {0}", m_name);
     IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity  {0}", m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
+    
+    m_registry.on_construct<StaticMeshComponent>().connect<&Scene::OnStaticMeshComponentConstruct>(this);
+    m_registry.on_destroy<StaticMeshComponent>().connect<&Scene::OnStaticMeshComponentDestroy>(this);
   }
   
   Scene::~Scene()
@@ -223,6 +226,17 @@ namespace IKan
   {
     IK_PROFILE();
     DestroyPhysicsWorld();
+  }
+  
+  void Scene::OnClose()
+  {
+    while (m_unsavedAssetHandles.size())
+    {
+      auto handle = m_unsavedAssetHandles.top();
+      m_unsavedAssetHandles.pop();
+      AssetManager::OnAssetDeleted(handle);
+      AssetManager::OnAssetDeleted(handle);
+    }
   }
   
   void Scene::DestroyPhysicsWorld()
@@ -594,6 +608,19 @@ namespace IKan
     m_onEntityDestroyedCallback = callback;
   }
   
+  void Scene::AddUnsavedAssetHandles(AssetHandle handle)
+  {
+    m_unsavedAssetHandles.push(handle);
+  }
+  
+  void Scene::ClearUnsavedAssets()
+  {
+    while (m_unsavedAssetHandles.size())
+    {
+      m_unsavedAssetHandles.pop();
+    }
+  }
+  
   Entity Scene::GetMainCameraEntity()
   {
     auto view = m_registry.view<CameraComponent>();
@@ -608,6 +635,16 @@ namespace IKan
       }
     }
     return {};
+  }
+  
+  void Scene::OnStaticMeshComponentConstruct(entt::registry& registry, entt::entity handle)
+  {
+  }
+  
+  void Scene::OnStaticMeshComponentDestroy(entt::registry& registry, entt::entity handle)
+  {
+    Entity entity(handle, this);
+    m_unsavedAssetHandles.push(entity.GetComponent<StaticMeshComponent>().staticMesh);
   }
   
   const std::string& Scene::GetName() const

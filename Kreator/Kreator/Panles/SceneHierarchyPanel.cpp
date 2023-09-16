@@ -563,11 +563,9 @@ namespace Kreator
       AssetHandle currentMeshAsset = smc.staticMesh;
       if (Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", currentMeshAsset, nullptr, settings))
       {
-        AssetManager::OnAssetDeleted(smc.staticMesh);
-        
         const auto& metadata = AssetManager::GetMetadata(currentMeshAsset);
         const auto& defaultMeshFile = AssetManager::GetFileSystemPathString(metadata);
-        smc.staticMesh = AssetManager::CreateAsset<MeshSource>(defaultMeshFile, defaultMeshFile);
+        smc.staticMesh = CreateMeshAsset(defaultMeshFile);
       }
       std::string meshHandle = std::to_string(smc.staticMesh);
       UI::SetTooltip(meshHandle.c_str());
@@ -1178,9 +1176,8 @@ namespace Kreator
         std::string defaultMeshFile = Project::GetActive()->GetMeshPath("Default/");
         defaultMeshFile += name;
         defaultMeshFile += ".fbx";
-                
-        const auto& meshSourceHandle = AssetManager::CreateAsset<MeshSource>(defaultMeshFile, defaultMeshFile);
-        newEntity.AddComponent<StaticMeshComponent>(meshSourceHandle);
+
+        newEntity.AddComponent<StaticMeshComponent>(CreateMeshAsset(defaultMeshFile));
       };
       
       auto menuForDefaultMesh = [this, createMeshEntity](Entity& newEntity, const std::string& name) {
@@ -1307,6 +1304,17 @@ namespace Kreator
     }
   }
 
+  AssetHandle SceneHierarchyPanel::CreateMeshAsset(const std::string& filePath)
+  {
+    AssetHandle handle = AssetManager::CreateAsset<MeshSource>(filePath, filePath);
+    
+    // Store the current asset handle if we close the scene or project without saving then these need to remove
+    // from registry
+    m_context->AddUnsavedAssetHandles(handle);
+    
+    return handle;
+  }
+  
   void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func)
   {
     m_selectionChangedCallback = func;

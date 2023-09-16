@@ -141,6 +141,8 @@ namespace Kreator
     void SaveScene();
     /// This function Saves the scene automatically
     void SaveSceneAuto();
+    /// This function closes the scene
+    void CloseCurrentScene();
     /// This function handle scene play
     void OnScenePlay();
     /// This function handle scene Stop

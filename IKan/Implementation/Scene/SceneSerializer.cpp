@@ -57,6 +57,9 @@ namespace IKan {
     
     std::ofstream fout(filepath);
     fout << out.c_str();
+    
+    // Clear all unsaved asset handles`
+    m_scene->ClearUnsavedAssets();
   }
   
   bool SceneSerializer::Deserialize(const std::string& filepath)

@@ -75,7 +75,11 @@ namespace Kreator
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle
     void OnEntityDestroyed(Entity entity);
-
+    
+    /// This function wraps to create mesh asset
+    /// - Parameter filePath: file path
+    AssetHandle CreateMeshAsset(const std::string& filePath);
+    
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
     bool m_isWindow;

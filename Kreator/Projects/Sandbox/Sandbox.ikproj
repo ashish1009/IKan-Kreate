@@ -5,6 +5,6 @@ Project:
   MeshSourceDirectory: Assets/Meshes/Source
   MaterialPath: ""
   AssetRegistry: Assets/AssetRegistry.ikr
-  StartScene: Scenes/Light.ikscene
+  StartScene: Scenes/LightTest.ikscene
   AutoSave: true
   AutoSaveInterval: 60
