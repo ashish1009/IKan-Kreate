@@ -615,5 +615,4 @@ namespace IKan {
       }
     }
   }
-  
 } // namespace IKan

@@ -250,6 +250,7 @@ namespace Kreator_UI
           }
           
           const auto& assetRegistry = AssetManager::GetAssetRegistry();
+          std::vector<std::string> visitedAsset;
           for (auto it = assetRegistry.cbegin(); it != assetRegistry.cend(); it++)
           {
             const auto& [path, metadata] = *it;
@@ -265,14 +266,19 @@ namespace Kreator_UI
             }
             
             const std::string assetName = metadata.isMemoryAsset ? metadata.filePath.string() : metadata.filePath.stem().string();
+            if (std::find(visitedAsset.begin(), visitedAsset.end(), assetName) != visitedAsset.end())
+            {
+              continue;
+            }
+            visitedAsset.emplace_back(assetName);
             
             if (s_assetSearchString[0] != 0 and !Kreator_UI::IsMatchingSearch(assetName, s_assetSearchString))
             {
               continue;
             }
             
-            bool is_selected = (current == metadata.handle);
-            if (ImGui::Selectable(assetName.c_str(), is_selected))
+            bool isSelected = (current == metadata.handle);
+            if (ImGui::Selectable(assetName.c_str(), isSelected))
             {
               current = metadata.handle;
               selected = metadata.handle;
@@ -283,7 +289,7 @@ namespace Kreator_UI
             {
               forwardFocus = false;
             }
-            else if (is_selected)
+            else if (isSelected)
             {
               ImGui::SetItemDefaultFocus();
             }

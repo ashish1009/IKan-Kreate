@@ -560,7 +560,15 @@ namespace Kreator
       
       Kreator_UI::BeginPropertyGrid();
       Kreator_UI::PropertyAssetReferenceSettings settings;
-      Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", smc.staticMesh, nullptr, settings);
+      AssetHandle currentMeshAsset = smc.staticMesh;
+      if (Kreator_UI::PropertyAssetReference<MeshSource>("Mesh", currentMeshAsset, nullptr, settings))
+      {
+        AssetManager::OnAssetDeleted(smc.staticMesh);
+        
+        const auto& metadata = AssetManager::GetMetadata(currentMeshAsset);
+        const auto& defaultMeshFile = AssetManager::GetFileSystemPathString(metadata);
+        smc.staticMesh = AssetManager::CreateAsset<MeshSource>(defaultMeshFile, defaultMeshFile);
+      }
       std::string meshHandle = std::to_string(smc.staticMesh);
       UI::SetTooltip(meshHandle.c_str());
       

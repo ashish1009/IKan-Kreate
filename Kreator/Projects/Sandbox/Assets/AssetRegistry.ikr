@@ -98,15 +98,9 @@ Assets:
   - Handle: 3918412116
     FilePath: Textures/PBR/Wall/albedo.png
     Type: Image
-  - Handle: 3641915063467298930
+  - Handle: 6895053205382636788
     FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
-  - Handle: 9362022772476939237
-    FilePath: Meshes/Default/Cube.fbx
-    Type: MeshSource
-  - Handle: 14659017503468193637
-    FilePath: Meshes/Default/Cube.fbx
-    Type: MeshSource
-  - Handle: 16226331248508301217
+  - Handle: 12761141277666290562
     FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
