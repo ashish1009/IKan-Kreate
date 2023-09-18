@@ -512,7 +512,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UpdateHoveredEntity()
   {
-    if (ImGuizmo::IsOver())
+    if (ImGuizmo::IsOver() and m_currentScene->GetSelectedEntity().size() > 0)
     {
       m_hoveredEntityID = (int32_t)m_currentScene->GetSelectedEntity().at(0);
       return;
