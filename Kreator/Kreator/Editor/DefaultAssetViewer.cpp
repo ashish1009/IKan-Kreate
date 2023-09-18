@@ -83,6 +83,7 @@ namespace Kreator
   
   void MaterialViewer::ShowTextureProperty(const std::string& name, Ref<Material>& material)
   {
+    ImGui::PushID(name.c_str());
     if (ImGui::CollapsingHeader(name.c_str(), nullptr, ImGuiTreeNodeFlags_DefaultOpen))
     {
       std::string textureString = "u_";
@@ -119,11 +120,9 @@ namespace Kreator
               break;
             }
             map = std::dynamic_pointer_cast<Image>(asset);
-            material->Set("u_AlbedoTextureToggle", true);
-            material->Set("u_AlbedoTexture", map);
+            material->Set(textureString, map);
           }
         }
-        
         ImGui::EndDragDropTarget();
       }
       ImGui::PopStyleVar();
@@ -147,7 +146,8 @@ namespace Kreator
       ImGui::SameLine();
       ImGui::BeginGroup();
       bool useFlag = static_cast<bool>(useMap);
-      if (ImGui::Checkbox("Use##AlbedoMap", &useFlag))
+      std::string useFlagStr = "Use##" + name;
+      if (ImGui::Checkbox(useFlagStr.c_str(), &useFlag))
       {
         useMap = static_cast<float>(useFlag);
       }
@@ -160,6 +160,7 @@ namespace Kreator
         ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(albedoColor), ImGuiColorEditFlags_NoInputs);
       }
     }
+    ImGui::PopID();
   }
   
   void MaterialViewer::Render()

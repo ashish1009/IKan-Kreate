@@ -964,8 +964,7 @@ namespace Kreator
   {
     if (target->handle != m_currentDirectory->handle and ImGui::BeginDragDropTarget())
     {
-      // TODO: Implement
-      IK_ASSERT(false);
+      // TODO: Implement later
     }
   }
   

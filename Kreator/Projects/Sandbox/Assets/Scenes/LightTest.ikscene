@@ -1,20 +1,20 @@
 Scene: LightTest
 Entities:
-  - Entity: 4876897629064591824
+  - Entity: 5958386990640811360
     TagComponent:
-      Tag: Base
+      Tag: Cube
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [0, 0, -1.78813934e-07]
+      Position: [0, 0.0184288621, 0]
       Rotation: [0, 0, 0]
-      Scale: [22.9329567, 0.254500568, 64.0589142]
+      Scale: [40, 0.253382385, 40]
     StaticMeshComponent:
-      MeshHandle: 6456762286884872329
+      MeshHandle: 5124209493122725883
       MaterialIndex: 0
       MaterialTable:
-        - MaterialAsset: 3412787250648898049
+        - MaterialAsset: 11790262727574029981
     RigidBodyComponent:
       BodyType: 0
       LiniarDamping: 0
@@ -22,53 +22,6 @@ Entities:
       AllowSleep: true
     Box3DColliderComponent:
       Size: [0.5, 0.5, 0.5]
-      PositionOffset: [0, 0, 0]
-      QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
-      MassDensity: 0
-  - Entity: 13185561869249577170
-    TagComponent:
-      Tag: Camera
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [0, 3.4000001, 42.4000015]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Camera:
-        ProjectionType: 0
-        PerspectiveFOV: 45
-        PerspectiveNear: 0.100000001
-        PerspectiveFar: 1000
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-  - Entity: 15868327671047780724
-    TagComponent:
-      Tag: Sphere
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [0, 1.40819931, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    StaticMeshComponent:
-      MeshHandle: 1400454087588487928
-      MaterialIndex: 0
-      MaterialTable:
-        - MaterialAsset: 2619569365362673392
-    RigidBodyComponent:
-      BodyType: 2
-      LiniarDamping: 0
-      AngularDamping: 0
-      AllowSleep: true
-    SphereColliderComponent:
-      Radius: 0.5
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
       FrictionCoefficient: 0.200000003

@@ -98,15 +98,9 @@ Assets:
   - Handle: 3918412116
     FilePath: Textures/PBR/Wall/albedo.png
     Type: Image
-  - Handle: 1400454087588487928
-    FilePath: Meshes/Default/Sphere.fbx
-    Type: MeshSource
-  - Handle: 2619569365362673392
-    FilePath: Meshes/Materials/Sphere1_Material#0.ikmat
-    Type: MaterialAsset
-  - Handle: 3412787250648898049
-    FilePath: Meshes/Materials/Cube0_Material#0.ikmat
-    Type: MaterialAsset
-  - Handle: 6456762286884872329
+  - Handle: 5124209493122725883
     FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
+  - Handle: 11790262727574029981
+    FilePath: Meshes/Materials/0_Material#0.ikmat
+    Type: MaterialAsset

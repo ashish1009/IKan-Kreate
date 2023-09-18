@@ -617,7 +617,7 @@ namespace Kreator
           {
             Utils::FileSystem::CreateDirectory(materialDir);
           }
-          std::string materialName = entity.GetName() + std::to_string((uint32_t)entity) + "_Material#" + std::to_string(size);
+          std::string materialName = std::to_string((uint32_t)entity) + "_Material#" + std::to_string(size);
           AssetHandle handle = mesh->AddNewMaterial(materialDir, materialName);
           
           m_context->AddUnsavedAssetHandles(AssetManager::GetMetadata(handle));
