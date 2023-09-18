@@ -84,6 +84,10 @@ namespace IKan
     const std::map<uint32_t, Ref<MaterialAsset>>& GetMaterialAssets() const;
     
   private:
+    // Member Functions ----------------------------------------------------------------------------------------------
+    void Initialize();
+
+    // Member Variables ----------------------------------------------------------------------------------------------
     std::map<uint32_t /* Material Index */, Ref<MaterialAsset>> m_materialAssetess;
     uint32_t m_materialCount = 0;
     Ref<Material> m_baseMaterial;

@@ -47,24 +47,31 @@ namespace IKan
   MaterialTable::MaterialTable(Ref<Material> baseMaterial)
   : m_baseMaterial(baseMaterial)
   {
-    
+    Initialize();
   }
   
   MaterialTable::MaterialTable(Ref<Shader> shader)
   : m_baseMaterial(Material::Create(shader, shader->GetName()))
   {
-    
+    Initialize();
   }
   
   MaterialTable::MaterialTable(const std::string& shaderFileName)
   : m_baseMaterial(Material::Create(shaderFileName, Utils::String::GetFileNameFromPath(shaderFileName)))
-  {
-    
+  {    
+    Initialize();
   }
   
   MaterialTable::~MaterialTable()
   {
 
+  }
+  
+  void MaterialTable::Initialize()
+  {
+    m_baseMaterial->Set("u_Material_AlbedoColor", glm::vec4(0.75f, 0.75f, 0.75f, 1.0f));
+    m_baseMaterial->Set("u_Material_Metalness", 0.5);
+    m_baseMaterial->Set("u_Material_Roughness", 0.5);
   }
   
   void MaterialTable::CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName)
