@@ -110,6 +110,16 @@ namespace Kreator
     UI::SetTooltip(shader.c_str());
     
     // Albedo
+    Kreator_UI::BeginPropertyGrid();
+    float& tilingFactor = material->Get<float>("u_TilingFactor");
+    if (tilingFactor == 0)
+    {
+      tilingFactor = 1.0f;
+    }
+    
+    Kreator_UI::Property("Tiling factor", tilingFactor, 1.0f, 1.0f, 1000.0f);
+    Kreator_UI::EndPropertyGrid();
+
     if (ImGui::CollapsingHeader("Albedo", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
     {
       ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));

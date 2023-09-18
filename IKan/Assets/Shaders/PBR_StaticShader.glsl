@@ -75,6 +75,9 @@ uniform float u_NormalTextureToggle;
 uniform float u_RoughnessTextureToggle;
 uniform float u_MetallicTextureToggle;
 
+// Texture tiling Factor
+uniform float u_TilingFactor;
+
 // Camera Params
 uniform vec3 u_CameraPosition;
 
@@ -95,16 +98,16 @@ void main()
 {
   // TODO: Make things in vertex Shader if possible
   // Setup Material property
-  m_Params.Albedo    = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, vs_Input.TexCoord).rgb : u_Material_AlbedoColor;
-  m_Params.Metalness = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, vs_Input.TexCoord).r : u_Material_Metalness;
-  m_Params.Roughness = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, vs_Input.TexCoord).r : u_Material_Roughness;
+  m_Params.Albedo    = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, vs_Input.TexCoord * u_TilingFactor).rgb * u_Material_AlbedoColor: u_Material_AlbedoColor;
+  m_Params.Metalness = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, vs_Input.TexCoord * u_TilingFactor).r : u_Material_Metalness;
+  m_Params.Roughness = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, vs_Input.TexCoord * u_TilingFactor).r : u_Material_Roughness;
   m_Params.Roughness = max(m_Params.Roughness, 0.05); // Minimum roughness of 0.05 to keep specular highlight
   
   // Normals (either from vertex or map)
   m_Params.Normal = normalize(vs_Input.Normal);
   if (u_NormalTextureToggle > 0.5)
   {
-    m_Params.Normal = 2.0 * texture(u_NormalTexture, vs_Input.TexCoord).rgb - 1.0f;
+    m_Params.Normal = 2.0 * texture(u_NormalTexture, vs_Input.TexCoord * u_TilingFactor).rgb - 1.0f;
     m_Params.Normal = normalize(vs_Input.WorldNormals * m_Params.Normal);
   }
   

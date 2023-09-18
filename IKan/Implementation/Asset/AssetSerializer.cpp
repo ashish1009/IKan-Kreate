@@ -81,7 +81,8 @@ namespace IKan
       out << YAML::Key << "u_Material_AlbedoColor" << YAML::Value << material->Get<glm::vec3>("u_Material_AlbedoColor");
       out << YAML::Key << "u_Material_Metalness" << YAML::Value << material->Get<float>("u_Material_Metalness");
       out << YAML::Key << "u_Material_Roughness" << YAML::Value << material->Get<float>("u_Material_Roughness");
-      
+      out << YAML::Key << "u_TilingFactor" << YAML::Value << material->Get<float>("u_TilingFactor");
+
       SERIALIZE_MATERIAL_TEX(u_AlbedoTexture);
       SERIALIZE_MATERIAL_TEX(u_NormalTexture);
       SERIALIZE_MATERIAL_TEX(u_RoughnessTexture);
