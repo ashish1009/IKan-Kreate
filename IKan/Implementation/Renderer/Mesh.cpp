@@ -346,10 +346,11 @@ namespace IKan
     }// For each texture index
   }
   
-  void MeshSource::AddNewMaterial(const std::filesystem::path& materialBaseDir, const std::string& materialName)
+  AssetHandle MeshSource::AddNewMaterial(const std::filesystem::path& materialBaseDir, const std::string& materialName)
   {
-    m_materials->CreateNewMaterialAsset(materialBaseDir, materialName);
+    AssetHandle handle = m_materials->CreateNewMaterialAsset(materialBaseDir, materialName);
     m_materialIndex = m_materials->GetSize() - 1;
+    return handle;
   }
   
   void MeshSource::AddNewMaterial(const AssetHandle &assetHandle)

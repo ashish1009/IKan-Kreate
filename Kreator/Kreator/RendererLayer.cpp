@@ -435,7 +435,7 @@ if (!Project::GetActive()) return
           }
           
           Entity selectedEntity = m_selectionContext[0].entity;
-          m_editorCamera.Focus(selectedEntity.Transform().Position());
+          m_editorCamera.Focus(selectedEntity.GetTransform().Position());
           break;
         }
           
@@ -1975,7 +1975,7 @@ if (!Project::GetActive()) return
 
       glm::mat4 transform;
       auto& selection = m_selectionContext[0];
-      TransformComponent& entityTransform_1 = selection.entity.Transform();
+      TransformComponent& entityTransform_1 = selection.entity.GetTransform();
 
 #ifdef WorldSpace
       glm::mat4 transform = m_currentScene->GetWorldSpaceTransformMatrix(selection.entity);
@@ -1999,7 +1999,7 @@ if (!Project::GetActive()) return
 
       for (auto& selection : m_selectionContext)
       {
-        TransformComponent& entityTransform = selection.entity.Transform();
+        TransformComponent& entityTransform = selection.entity.GetTransform();
         if (ImGuizmo::IsUsing())
         {
 #ifdef WorldSpace

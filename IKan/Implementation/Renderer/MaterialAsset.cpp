@@ -74,13 +74,15 @@ namespace IKan
     m_baseMaterial->Set("u_Material_Roughness", 0.5);
   }
   
-  void MaterialTable::CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName)
+  AssetHandle MaterialTable::CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName)
   {
     std::string materialNameWithExtension = materialName + std::string(".ikmat");
     std::filesystem::path materialAssetFile = materialBaseDir / materialNameWithExtension;
     
     AssetHandle materialAssetHandle = AssetManager::CreateAsset<MaterialAsset>(materialAssetFile, m_baseMaterial, materialName);
     m_materialAssetess[m_materialCount++] = AssetManager::GetAsset<MaterialAsset>(materialAssetHandle);
+    
+    return materialAssetHandle;
   }
   
   void MaterialTable::AddMaterialAsset(const AssetHandle &handle)

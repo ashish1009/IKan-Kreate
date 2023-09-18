@@ -7,6 +7,7 @@
 
 #include "Scene.hpp"
 #include "Scene/CoreEntity.hpp"
+#include "Project/Project.hpp"
 #include "Renderer/UI/Font.hpp"
 #include "Renderer/Renderer2D.hpp"
 #include "Renderer/SceneRenderer.hpp"
@@ -232,10 +233,20 @@ namespace IKan
   {
     while (m_unsavedAssetHandles.size())
     {
-      auto handle = m_unsavedAssetHandles.top();
+      const AssetMetadata& metadata = m_unsavedAssetHandles.top();
+      
+      // Hack to avoid mesh Deletion
+      if (metadata.type != AssetType::MeshSource)
+      {
+        bool deleted = Utils::FileSystem::DeleteFile(Project::GetActive()->GetAssetDirectory() / metadata.filePath);
+        if (!deleted)
+        {
+          IK_LOG_ERROR(LogModule::Scene, "Failed to delete folder {0}", metadata.filePath.string().c_str());
+          return;
+        }
+      }
+      AssetManager::OnAssetDeleted(metadata.handle);
       m_unsavedAssetHandles.pop();
-      AssetManager::OnAssetDeleted(handle);
-      AssetManager::OnAssetDeleted(handle);
     }
   }
   
@@ -511,7 +522,7 @@ namespace IKan
     {
       return;
     }
-    auto& transform = entity.Transform();
+    auto& transform = entity.GetTransform();
     glm::mat4 parentTransform = GetWorldSpaceTransformMatrix(parent);
     glm::mat4 localTransform = glm::inverse(parentTransform) * transform.Transform();
     glm::vec3 position, scale, rotation;
@@ -531,7 +542,7 @@ namespace IKan
     }
     
     glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
-    auto& entityTransform = entity.Transform();
+    auto& entityTransform = entity.GetTransform();
     
     glm::vec3 position, scale, rotation;
     Utils::Math::DecomposeTransform(transform, position, rotation, scale);
@@ -549,7 +560,7 @@ namespace IKan
     {
       transform = GetWorldSpaceTransformMatrix(parent);
     }
-    return transform * entity.Transform().Transform();
+    return transform * entity.GetTransform().Transform();
   }
   
   // TODO: Definitely cache this at some point
@@ -608,9 +619,9 @@ namespace IKan
     m_onEntityDestroyedCallback = callback;
   }
   
-  void Scene::AddUnsavedAssetHandles(AssetHandle handle)
+  void Scene::AddUnsavedAssetHandles(const AssetMetadata& metadata)
   {
-    m_unsavedAssetHandles.push(handle);
+    m_unsavedAssetHandles.push(metadata);
   }
   
   void Scene::ClearUnsavedAssets()
@@ -641,10 +652,11 @@ namespace IKan
   {
   }
   
-  void Scene::OnStaticMeshComponentDestroy(entt::registry& registry, entt::entity handle)
+  void Scene::OnStaticMeshComponentDestroy(entt::registry& registry, entt::entity entityHandle)
   {
-    Entity entity(handle, this);
-    m_unsavedAssetHandles.push(entity.GetComponent<StaticMeshComponent>().staticMesh);
+    Entity entity(entityHandle, this);
+    const auto& assetHandle = entity.GetComponent<StaticMeshComponent>().staticMesh;
+    m_unsavedAssetHandles.push(AssetManager::GetMetadata(assetHandle));
   }
   
   const std::string& Scene::GetName() const

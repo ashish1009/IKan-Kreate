@@ -69,7 +69,7 @@ namespace IKan
     /// - Parameters:
     ///   - materialBaseDir: material base directoru path
     ///   - materialName: material name
-    void CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName);
+    AssetHandle CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName);
     /// This function creates new material assets
     /// - Parameter handle: Asset handle
     void AddMaterialAsset(const AssetHandle& handle);

@@ -573,7 +573,8 @@ namespace Kreator
       // Materials
       std::vector<std::string> materialString = {"Base Material"};
       
-      if (mesh->GetMaterialTable()->GetSize() > 0)
+      auto size = mesh->GetMaterialTable()->GetSize();
+      if (size > 0)
       {
         auto& materials = mesh->GetMaterialTable()->GetMaterialAssets();
         if (materials.size() > 0)
@@ -611,8 +612,15 @@ namespace Kreator
       {
         if (ImGui::MenuItem("Add Material"))
         {
-          const auto& materialDir = Project::GetActive()->GetMaterialDirectory();
-          mesh->AddNewMaterial(materialDir, "Materrial");
+          const std::filesystem::path& materialDir = Project::GetActive()->GetMaterialDirectory();
+          if (!Utils::FileSystem::Exists(materialDir))
+          {
+            Utils::FileSystem::CreateDirectory(materialDir);
+          }
+          std::string materialName = entity.GetName() + std::to_string((uint32_t)entity) + "_Material#" + std::to_string(size);
+          AssetHandle handle = mesh->AddNewMaterial(materialDir, materialName);
+          
+          m_context->AddUnsavedAssetHandles(AssetManager::GetMetadata(handle));
         }
         ImGui::EndPopup();
       }
@@ -904,7 +912,7 @@ namespace Kreator
         if (ImGui::MenuItem("Joint"))
         {
           [[maybe_unused]] auto& jointComp = m_selectionContext.At(0).AddComponent<JointComponent>();
-          jointComp.worldAnchorPoint = m_selectionContext.At(0).Transform().Position();
+          jointComp.worldAnchorPoint = m_selectionContext.At(0).GetTransform().Position();
           ImGui::CloseCurrentPopup();
         }
       }
@@ -1337,7 +1345,7 @@ namespace Kreator
     
     // Store the current asset handle if we close the scene or project without saving then these need to remove
     // from registry
-    m_context->AddUnsavedAssetHandles(handle);
+    m_context->AddUnsavedAssetHandles(AssetManager::GetMetadata(handle));
     
     return handle;
   }

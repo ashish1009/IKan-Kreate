@@ -13,6 +13,7 @@
 #include "Camera/EditorCamera.hpp"
 #include "Scene/Component.hpp"
 #include "Asset/Asset.hpp"
+#include "Asset/AssetMetadata.hpp"
 #include "Physics/3D/PhysicsScene.hpp"
 
 namespace IKan
@@ -143,7 +144,7 @@ namespace IKan
     void SetEntityDestroyedCallback(const std::function<void(Entity)>& callback);
     /// This function deletes the asset handles while scene save
     /// - Parameter handle: handle
-    void AddUnsavedAssetHandles(AssetHandle handle);
+    void AddUnsavedAssetHandles(const AssetMetadata& handle);
     /// This fuction clear all unsaved assets
     void ClearUnsavedAssets();
     
@@ -226,7 +227,7 @@ namespace IKan
     // Project Registry Data ------------
     // Store the current asset handle if we close the scene or project without saving scene then these
     // need to remove from the Asset Regirtry
-    std::stack<AssetHandle> m_unsavedAssetHandles;
+    std::stack<AssetMetadata> m_unsavedAssetHandles;
 
     // Physics Data
     PhysicsSettings m_physicsSettings;

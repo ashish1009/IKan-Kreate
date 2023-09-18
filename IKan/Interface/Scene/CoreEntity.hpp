@@ -44,14 +44,14 @@ namespace IKan
 
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns transform comp of entity
-    TransformComponent& Transform();
+    TransformComponent& GetTransform();
     /// This function returns transform comp of entity
-    const glm::mat4& Transform() const;
+    const glm::mat4& GetTransform() const;
     
     /// This function returns name of entity
-    std::string& Name();
+    std::string& GetName();
     /// This function returns name of entity
-    const std::string& Name() const;
+    const std::string& GetName() const;
     
     /// This function returns the parent of entity
     Entity GetParent();

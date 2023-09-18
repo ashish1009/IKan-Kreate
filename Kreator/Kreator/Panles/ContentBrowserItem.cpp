@@ -474,7 +474,8 @@ namespace Kreator
     for (auto asset : m_directoryInfo->assets)
     {
       AssetManager::OnAssetDeleted(asset);
-    }  }
+    }
+  }
   
   bool ContentBrowserDirectory::Move(const std::filesystem::path& destination)
   {

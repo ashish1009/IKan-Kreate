@@ -110,7 +110,6 @@ namespace Kreator
     UI::SetTooltip(shader.c_str());
     
     // Albedo
-    bool modified = false;
     if (ImGui::CollapsingHeader("Albedo", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
     {
       ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
@@ -145,7 +144,6 @@ namespace Kreator
             albedoMap = std::dynamic_pointer_cast<Image>(asset);
             material->Set("u_AlbedoTextureToggle", true);
             material->Set("u_AlbedoTexture", albedoMap);
-            modified = true;
           }
         }
         
@@ -175,20 +173,11 @@ namespace Kreator
       if (ImGui::Checkbox("Use##AlbedoMap", &useFlag))
       {
         useAlbedoMap = static_cast<float>(useFlag);
-        modified = true;
       }
       ImGui::EndGroup();
       
       ImGui::SameLine();
-      if (ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(albedoColor), ImGuiColorEditFlags_NoInputs))
-      {
-        modified = true;
-      }
-      
-      if (modified)
-      {
-        AssetImporter::Serialize(m_asset);
-      }
+      ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(albedoColor), ImGuiColorEditFlags_NoInputs);
     }
   }
 } // namespace Kreator

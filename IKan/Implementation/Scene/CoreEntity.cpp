@@ -97,20 +97,20 @@ namespace IKan
     return entity.IsAncesterOf(*this);
   }
 
-  TransformComponent& Entity::Transform()
+  TransformComponent& Entity::GetTransform()
   {
     return m_scene->m_registry.get<TransformComponent>(m_entityHandle);
   }
-  const glm::mat4& Entity::Transform() const
+  const glm::mat4& Entity::GetTransform() const
   {
     return m_scene->m_registry.get<TransformComponent>(m_entityHandle).Transform();
   }
   
-  std::string& Entity::Name()
+  std::string& Entity::GetName()
   {
     return HasComponent<TagComponent>() ? GetComponent<TagComponent>().tag : s_noName;
   }
-  const std::string& Entity::Name() const
+  const std::string& Entity::GetName() const
   {
     return HasComponent<TagComponent>() ? GetComponent<TagComponent>().tag : s_noName;
   }
