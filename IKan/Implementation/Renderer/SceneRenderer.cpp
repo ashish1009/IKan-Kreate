@@ -136,7 +136,9 @@ namespace IKan
       material->Set("u_Transform", transform * submesh.transform);
       material->Bind();
       Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+      material->Unbind();
     } // for each submeshes
+    pipeline->Unbind();
   }
   
   void SceneRenderer::GeometryPass()

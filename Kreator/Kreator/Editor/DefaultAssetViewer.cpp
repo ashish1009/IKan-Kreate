@@ -74,14 +74,23 @@ namespace Kreator
         }
       }
       ImGui::SameLine();
-      ImGui::BeginGroup();
-      bool useFlag = static_cast<bool>(useMap);
-      std::string useFlagStr = "Use##" + name;
-      if (ImGui::Checkbox(useFlagStr.c_str(), &useFlag))
+      
+      // Show checkbox only of we have image
+      if (map)
       {
-        useMap = static_cast<float>(useFlag);
+        ImGui::BeginGroup();
+        bool useFlag = static_cast<bool>(useMap);
+        std::string useFlagStr = "Use##" + name;
+        if (ImGui::Checkbox(useFlagStr.c_str(), &useFlag))
+        {
+          useMap = static_cast<float>(useFlag);
+        }
+        ImGui::EndGroup();
       }
-      ImGui::EndGroup();
+      else
+      {
+        ImGui::NewLine();
+      }
       
       // Call the override function
       func();
