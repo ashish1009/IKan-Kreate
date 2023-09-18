@@ -1,12 +1,12 @@
 Material:
-  Handle: 3412787250648898049
-  Name: Cube0_Material#0
+  Handle: 2619569365362673392
+  Name: Sphere1_Material#0
   ShaderPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl
   u_Material_AlbedoColor: [0.75, 0.75, 0.75]
-  u_Material_Metalness: 0
-  u_Material_Roughness: 1
-  u_TilingFactor: 207
-  u_AlbedoTexture: 3918412116
+  u_Material_Metalness: 1
+  u_Material_Roughness: 0
+  u_TilingFactor: 1
+  u_AlbedoTexture: 3772138649
   u_AlbedoTextureToggle: 13.9660654
   u_NormalTexture: 0
   u_NormalTextureToggle: 0

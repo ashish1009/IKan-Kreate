@@ -1,4 +1,4 @@
-Scene: LightTest
+Scene: LightTest.ikscene
 Entities:
   - Entity: 4876897629064591824
     TagComponent:

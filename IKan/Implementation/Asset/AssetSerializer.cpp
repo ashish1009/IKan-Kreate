@@ -123,7 +123,8 @@ namespace IKan
     materialRef->Set("u_Material_AlbedoColor", material["u_Material_AlbedoColor"].as<glm::vec3>());
     materialRef->Set("u_Material_Metalness", material["u_Material_Metalness"].as<float>());
     materialRef->Set("u_Material_Roughness", material["u_Material_Roughness"].as<float>());
-    
+    materialRef->Set("u_TilingFactor", material["u_TilingFactor"].as<float>());
+
     DESERIALIZE_MATERIAL_TEX(u_AlbedoTexture);
     DESERIALIZE_MATERIAL_TEX(u_NormalTexture);
     DESERIALIZE_MATERIAL_TEX(u_RoughnessTexture);
