@@ -360,6 +360,10 @@ namespace IKan
   
   void MeshSource::SetMaterialIndex(int32_t index)
   {
+    if (index < 0)
+    {
+      return;
+    }
     IK_ASSERT(index < (int32_t)m_materials->GetSize());
     m_materialIndex = index;
   }
