@@ -50,18 +50,54 @@ namespace IKan
     out << YAML::Key << "Material" << YAML::Value;
     {
       out << YAML::BeginMap;
-//      out << YAML::Key << "Name" << YAML::Value << m_project->m_config.name;
-//      out << YAML::Key << "AssetDirectory" << YAML::Value << m_project->m_config.assetDirectory;
-//      out << YAML::Key << "MeshDirectory" << YAML::Value << m_project->m_config.meshPath;
-//      out << YAML::Key << "FontDirectory" << YAML::Value << m_project->m_config.fontPath;
-//      out << YAML::Key << "SceneDirectory" << YAML::Value << m_project->m_config.scenePath;
-//      out << YAML::Key << "TextureDirectory" << YAML::Value << m_project->m_config.texturePath;
-//      out << YAML::Key << "MeshSourceDirectory" << YAML::Value << m_project->m_config.meshSourcePath;
-//      out << YAML::Key << "MaterialPath" << YAML::Value << m_project->m_config.materialPath;
-//      out << YAML::Key << "AssetRegistry" << YAML::Value << m_project->m_config.assetRegistryPath;
-//      out << YAML::Key << "StartScene" << YAML::Value << m_project->m_config.startScene;
-//      out << YAML::Key << "AutoSave" << YAML::Value << m_project->m_config.enableAutoSave;
-//      out << YAML::Key << "AutoSaveInterval" << YAML::Value << m_project->m_config.autoSaveIntervalSeconds;
+      out << YAML::Key << "u_Material_AlbedoColor" << YAML::Value << material->Get<glm::vec3>("u_Material_AlbedoColor");
+      out << YAML::Key << "u_Material_Metalness" << YAML::Value << material->Get<float>("u_Material_Metalness");
+      out << YAML::Key << "u_Material_Roughness" << YAML::Value << material->Get<float>("u_Material_Roughness");
+      
+      Ref<Image> albedoMap = material->TryGetImage("u_AlbedoTexture");
+      if (albedoMap)
+      {
+        out << YAML::Key << "u_AlbedoTexture" << YAML::Value << albedoMap->handle;
+      }
+      else
+      {
+        out << YAML::Key << "u_AlbedoTexture" << YAML::Value << 0;
+      }
+      out << YAML::Key << "u_AlbedoTextureToggle" << YAML::Value << material->Get<float>("u_AlbedoTextureToggle");
+
+      Ref<Image> normalMap = material->TryGetImage("u_NormalTexture");
+      if (normalMap)
+      {
+        out << YAML::Key << "u_NormalTexture" << YAML::Value << normalMap->handle;
+      }
+      else
+      {
+        out << YAML::Key << "u_NormalTexture" << YAML::Value << 0;
+      }
+      out << YAML::Key << "u_NormalTextureToggle" << YAML::Value << material->Get<float>("u_NormalTextureToggle");
+
+      Ref<Image> roughnessMap = material->TryGetImage("u_RoughnessTexture");
+      if (roughnessMap)
+      {
+        out << YAML::Key << "u_RoughnessTexture" << YAML::Value << roughnessMap->handle;
+      }
+      else
+      {
+        out << YAML::Key << "u_RoughnessTexture" << YAML::Value << 0;
+      }
+      out << YAML::Key << "u_RoughnessTextureToggle" << YAML::Value << material->Get<float>("u_RoughnessTextureToggle");
+
+      Ref<Image> metallicMap = material->TryGetImage("u_MetallicTexture");
+      if (metallicMap)
+      {
+        out << YAML::Key << "u_MetallicTexture" << YAML::Value << metallicMap->handle;
+      }
+      else
+      {
+        out << YAML::Key << "u_MetallicTexture" << YAML::Value << 0;
+      }
+      out << YAML::Key << "u_MetallicTextureToggle" << YAML::Value << material->Get<float>("u_MetallicTextureToggle");
+
       out << YAML::EndMap;
     }
     out << YAML::EndMap;
