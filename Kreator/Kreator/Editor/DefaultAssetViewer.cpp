@@ -10,6 +10,85 @@
 
 namespace Kreator
 {
+  template <typename UIFunc>
+  static void ShowTextureProperty(const std::string& name, Ref<Material>& material, Ref<Image> defaultTexture, UIFunc func)
+  {
+    ImGui::PushID(name.c_str());
+    if (ImGui::CollapsingHeader(name.c_str(), nullptr, ImGuiTreeNodeFlags_DefaultOpen))
+    {
+      std::string textureString = "u_";
+      textureString += name;
+      textureString += "Texture";
+      std::string texturetoggleString = textureString + "Toggle";
+      
+      ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+      float& useMap = material->Get<float>(texturetoggleString);
+      
+      Ref<Image> map = material->TryGetImage(textureString);
+      bool hasMap = map != nullptr;
+      Ref<Image> UITexture = hasMap? map : defaultTexture;
+      UI::Image(UITexture, ImVec2(48, 48));
+      
+      if (ImGui::BeginDragDropTarget())
+      {
+        auto data = ImGui::AcceptDragDropPayload("asset_payload");
+        if (data)
+        {
+          int32_t count = data->DataSize / sizeof(AssetHandle);
+          
+          for (int32_t i = 0; i < count; i++)
+          {
+            if (count > 1)
+            {
+              break;
+            }
+            
+            AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+            Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+            if (!asset || asset->GetAssetType() != AssetType::Image)
+            {
+              break;
+            }
+            map = std::dynamic_pointer_cast<Image>(asset);
+            material->Set(textureString, map);
+          }
+        }
+        ImGui::EndDragDropTarget();
+      }
+      ImGui::PopStyleVar();
+      
+      if (ImGui::IsItemHovered())
+      {
+        if (hasMap)
+        {
+          ImGui::BeginTooltip();
+          ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+          ImGui::TextUnformatted(map->GetfilePath().c_str());
+          ImGui::PopTextWrapPos();
+          UI::Image(UITexture, ImVec2(384, 384));
+          ImGui::EndTooltip();
+        }
+        if (ImGui::IsItemClicked() and hasMap)
+        {
+          AssetEditorManager::OpenEditor(AssetManager::GetAsset<Asset>(map->handle));
+        }
+      }
+      ImGui::SameLine();
+      ImGui::BeginGroup();
+      bool useFlag = static_cast<bool>(useMap);
+      std::string useFlagStr = "Use##" + name;
+      if (ImGui::Checkbox(useFlagStr.c_str(), &useFlag))
+      {
+        useMap = static_cast<float>(useFlag);
+      }
+      ImGui::EndGroup();
+      
+      // Call the override function
+      func();
+    }
+    ImGui::PopID();
+  }
+  
   ImageViewer::ImageViewer()
   : AssetEditor("Edit Texture")
   {
@@ -81,88 +160,6 @@ namespace Kreator
     m_asset = nullptr;
   }
   
-  void MaterialViewer::ShowTextureProperty(const std::string& name, Ref<Material>& material)
-  {
-    ImGui::PushID(name.c_str());
-    if (ImGui::CollapsingHeader(name.c_str(), nullptr, ImGuiTreeNodeFlags_DefaultOpen))
-    {
-      std::string textureString = "u_";
-      textureString += name;
-      textureString += "Texture";
-      std::string texturetoggleString = textureString + "Toggle";
-      
-      ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
-      float& useMap = material->Get<float>(texturetoggleString);
-      
-      Ref<Image> map = material->TryGetImage(textureString);
-      bool hasMap = map != nullptr;
-      Ref<Image> UITexture = hasMap? map : m_checkerboardTex;
-      UI::Image(UITexture, ImVec2(48, 48));
-      
-      if (ImGui::BeginDragDropTarget())
-      {
-        auto data = ImGui::AcceptDragDropPayload("asset_payload");
-        if (data)
-        {
-          int32_t count = data->DataSize / sizeof(AssetHandle);
-          
-          for (int32_t i = 0; i < count; i++)
-          {
-            if (count > 1)
-            {
-              break;
-            }
-            
-            AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
-            Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
-            if (!asset || asset->GetAssetType() != AssetType::Image)
-            {
-              break;
-            }
-            map = std::dynamic_pointer_cast<Image>(asset);
-            material->Set(textureString, map);
-          }
-        }
-        ImGui::EndDragDropTarget();
-      }
-      ImGui::PopStyleVar();
-      
-      if (ImGui::IsItemHovered())
-      {
-        if (hasMap)
-        {
-          ImGui::BeginTooltip();
-          ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
-          ImGui::TextUnformatted(map->GetfilePath().c_str());
-          ImGui::PopTextWrapPos();
-          UI::Image(UITexture, ImVec2(384, 384));
-          ImGui::EndTooltip();
-        }
-        if (ImGui::IsItemClicked() and hasMap)
-        {
-          AssetEditorManager::OpenEditor(AssetManager::GetAsset<Asset>(map->handle));
-        }
-      }
-      ImGui::SameLine();
-      ImGui::BeginGroup();
-      bool useFlag = static_cast<bool>(useMap);
-      std::string useFlagStr = "Use##" + name;
-      if (ImGui::Checkbox(useFlagStr.c_str(), &useFlag))
-      {
-        useMap = static_cast<float>(useFlag);
-      }
-      ImGui::EndGroup();
-      
-      if (name == "Albedo")
-      {
-        ImGui::SameLine();
-        auto& albedoColor = material->Get<glm::vec3>("u_Material_AlbedoColor");
-        ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(albedoColor), ImGuiColorEditFlags_NoInputs);
-      }
-    }
-    ImGui::PopID();
-  }
-  
   void MaterialViewer::Render()
   {
     if (!m_asset)
@@ -199,14 +196,31 @@ namespace Kreator
       tilingFactor = 1.0f;
     }
     
-    Kreator_UI::Property("Metalness", material->Get<float>("u_Material_Metalness"), 0.01f, 0.0f, 1.0f);
-    Kreator_UI::Property("Roughness", material->Get<float>("u_Material_Roughness"), 0.01f, 0.0f, 1.0f);
     Kreator_UI::Property("Tiling factor", tilingFactor, 1.0f, 1.0f, 1000.0f);
     Kreator_UI::EndPropertyGrid();
     
-    ShowTextureProperty("Albedo", material);
-    ShowTextureProperty("Normal", material);
-    ShowTextureProperty("Metallic", material);
-    ShowTextureProperty("Roughness", material);
+    ShowTextureProperty("Albedo", material, m_checkerboardTex, [material]() {
+      ImGui::SameLine();
+      auto& albedoColor = material->Get<glm::vec3>("u_Material_AlbedoColor");
+      ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(albedoColor), ImGuiColorEditFlags_NoInputs);
+    });
+    
+    ShowTextureProperty("Normal", material, m_checkerboardTex, []() {});
+    ShowTextureProperty("Metallic", material, m_checkerboardTex, [material]() {
+      if (material->Get<float>("u_MetallicTextureToggle") < 0.5f)
+      {
+        ImGui::SameLine();
+        ImGui::PushItemWidth(-1);
+        Kreator_UI::DragFloat(UI::GenerateID(), &(material->Get<float>("u_Material_Roughness")), 0.01f, 0.0f, 1.0f);
+      }
+    });
+    ShowTextureProperty("Roughness", material, m_checkerboardTex, [material]() {
+      if (material->Get<float>("u_RoughnessTextureToggle") < 0.5f)
+      {
+        ImGui::SameLine();
+        ImGui::PushItemWidth(-1);
+        Kreator_UI::DragFloat(UI::GenerateID(), &(material->Get<float>("u_Material_Metalness")), 0.01f, 0.0f, 1.0f);
+      }
+    });
   }
 } // namespace Kreator
