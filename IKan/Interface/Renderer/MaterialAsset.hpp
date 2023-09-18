@@ -54,7 +54,14 @@ namespace IKan
   {
   public:
     /// This creates material table
+    /// - Parameter baseMaterial: Base material instance
     MaterialTable(Ref<Material> baseMaterial);
+    /// This creates material table
+    /// - Parameter baseMaterialShader: Base material shader instance
+    MaterialTable(Ref<Shader> baseMaterialShader);
+    /// This creates material table
+    /// - Parameter baseMaterialShaderFile: Base material shader file path
+    MaterialTable(const std::string& baseMaterialShaderFile);
     /// This destroys the material table
     ~MaterialTable();
     

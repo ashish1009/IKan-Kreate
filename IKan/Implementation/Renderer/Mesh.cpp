@@ -271,7 +271,7 @@ namespace IKan
   void MeshSource::UploadMaterial()
   {
     // Create the Instance to store the materials
-    m_materials = CreateRef<MaterialTable>(m_baseMaterial);
+    m_materials = CreateRef<MaterialTable>(CoreAssetPath("Shaders/PBR_StaticShader.glsl"));
     
     // If mesh do not have material then return
     if (!m_scene->HasMaterials())
@@ -342,8 +342,8 @@ namespace IKan
           m_baseMaterial->Set(textureShaderName, texture);
           m_baseMaterial->Set(textureShaderName + "Toggle", 1.0f);
         } // If mesh exist in assim model
-      } // For each texture indexbb
-    }
+      } // for each texture
+    }// For each texture index
   }
   
   void MeshSource::AddNewMaterial(const std::filesystem::path& materialBaseDir, const std::string& materialName)

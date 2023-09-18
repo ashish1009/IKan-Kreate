@@ -50,6 +50,18 @@ namespace IKan
     
   }
   
+  MaterialTable::MaterialTable(Ref<Shader> shader)
+  : m_baseMaterial(Material::Create(shader, shader->GetName()))
+  {
+    
+  }
+  
+  MaterialTable::MaterialTable(const std::string& shaderFileName)
+  : m_baseMaterial(Material::Create(shaderFileName, Utils::String::GetFileNameFromPath(shaderFileName)))
+  {
+    
+  }
+  
   MaterialTable::~MaterialTable()
   {
 

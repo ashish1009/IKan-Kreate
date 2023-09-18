@@ -85,7 +85,7 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 
 - v3.2.0.0  : IKan    - Full Screen quad
   - Full Quad Renderer
-
+- 
 - v3.3.0.0  : IKan    - Render Scene with camera 
 
 - v3.4.0.0  : IKan    - Render in frame buffer
@@ -161,10 +161,15 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 - V11.1.9.1 : All Joints, Improved Guizmo, Joint Rendering, Multiple Entity Selection
  ------------------------------------------------------------------------------------------------------------------
 
-## TODO  
+## TODO
+- Materials
+  - Material Serializer
+  - Serialize Mesh with Material and index
+  - Update shader of Materials
+  - Material Asset Viewer
+  
 - Parent Child Movement
 - Light
-- Materials
 - Sub texture in quad component
 - Script Integration
 - Collider for Submesh
