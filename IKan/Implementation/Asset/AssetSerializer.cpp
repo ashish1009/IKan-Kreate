@@ -50,6 +50,9 @@ namespace IKan
     out << YAML::Key << "Material" << YAML::Value;
     {
       out << YAML::BeginMap;
+      out << YAML::Key << "Name" << YAML::Value << material->GetName();
+      out << YAML::Key << "ShaderPath" << YAML::Value << Utils::FileSystem::IKanAbsolute(material->GetShader()->GetFilePath());
+
       out << YAML::Key << "u_Material_AlbedoColor" << YAML::Value << material->Get<glm::vec3>("u_Material_AlbedoColor");
       out << YAML::Key << "u_Material_Metalness" << YAML::Value << material->Get<float>("u_Material_Metalness");
       out << YAML::Key << "u_Material_Roughness" << YAML::Value << material->Get<float>("u_Material_Roughness");
@@ -104,10 +107,13 @@ namespace IKan
     
     std::ofstream fout(AssetManager::GetFileSystemPath(metadata));
     fout << out.c_str();
-
   }
+  
   bool MeshMaterialSerializer::TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const
   {
+//    asset = MaterialAsset::Create(, )
+
+    IK_ASSERT(false);
     return false;
   }
 

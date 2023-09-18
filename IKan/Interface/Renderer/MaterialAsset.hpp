@@ -66,7 +66,13 @@ namespace IKan
     ~MaterialTable();
     
     /// This function creates new material assets
+    /// - Parameters:
+    ///   - materialBaseDir: material base directoru path
+    ///   - materialName: material name
     void CreateNewMaterialAsset(const std::filesystem::path& materialBaseDir, const std::string& materialName);
+    /// This function creates new material assets
+    /// - Parameter handle: Asset handle
+    void AddMaterialAsset(const AssetHandle& handle);
     /// This function sets the material Asset in table
     /// - Parameters:
     ///   - index: material index

@@ -80,6 +80,7 @@ namespace IKan
     ///   - materialBaseDir: Material serialize path
     ///   - materialName: material name
     void AddNewMaterial(const std::filesystem::path& materialBaseDir, const std::string& materialName);
+    void AddNewMaterial(const AssetHandle& assetHandle);
     /// This function serialzes the material
     void SerializeMaterials();
     

@@ -82,6 +82,11 @@ namespace IKan
     AssetHandle materialAssetHandle = AssetManager::CreateAsset<MaterialAsset>(materialAssetFile, m_baseMaterial, materialName);
     m_materialAssetess[m_materialCount++] = AssetManager::GetAsset<MaterialAsset>(materialAssetHandle);
   }
+  
+  void MaterialTable::AddMaterialAsset(const AssetHandle &handle)
+  {
+    m_materialAssetess[m_materialCount++] = AssetManager::GetAsset<MaterialAsset>(handle);
+  }
 
   void MaterialTable::SetMaterialAsset(uint32_t index, Ref<MaterialAsset> materialAsset)
   {

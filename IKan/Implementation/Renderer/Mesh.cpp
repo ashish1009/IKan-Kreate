@@ -352,6 +352,12 @@ namespace IKan
     m_materialIndex = m_materials->GetSize() - 1;
   }
   
+  void MeshSource::AddNewMaterial(const AssetHandle &assetHandle)
+  {
+    m_materials->AddMaterialAsset(assetHandle);
+    m_materialIndex = m_materials->GetSize() - 1;
+  }
+  
   void MeshSource::SetMaterialIndex(int32_t index)
   {
     IK_ASSERT(index < (int32_t)m_materials->GetSize());

@@ -268,6 +268,20 @@ namespace IKan {
         out << YAML::Key << "MeshHandle" << YAML::Value << staticMeshComponent.staticMesh;
         Ref<MeshSource> meshSource = AssetManager::GetAsset<MeshSource>(staticMeshComponent.staticMesh);
         meshSource->SerializeMaterials();
+        out << YAML::Key << "MaterialIndex" << YAML::Value << meshSource->GetMaterialIndex();
+        
+        out << YAML::Key << "MaterialTable";
+        out << YAML::Value << YAML::BeginSeq;
+        if (meshSource->GetMaterialTable()->GetSize() > 0)
+        {
+          for (auto materialAssets : meshSource->GetMaterialTable()->GetMaterialAssets())
+          {
+            out << YAML::BeginMap; // MaterialTable
+            out << YAML::Key << "MaterialAsset" << YAML::Value << materialAssets.second->handle;
+            out << YAML::EndMap; // MaterialTable
+          }
+        }
+        out << YAML::EndSeq;
       }
       else
       {
@@ -528,6 +542,19 @@ namespace IKan {
       {
         auto& component = deserializedEntity.AddComponent<StaticMeshComponent>();
         component.staticMesh = staticMeshComponent["MeshHandle"].as<AssetHandle>();
+        if (component.staticMesh != 0)
+        {
+          auto meshSource = AssetManager::GetAsset<MeshSource>(component.staticMesh);
+          auto materialTable = staticMeshComponent["MaterialTable"];
+          if (materialTable)
+          {
+            for (auto materialAsset : materialTable)
+            {
+              meshSource->AddNewMaterial(materialAsset["MaterialAsset"].as<AssetHandle>());
+            }
+            meshSource->SetMaterialIndex(staticMeshComponent["MaterialIndex"].as<int32_t>());
+          }
+        }
       }
       
       // RigidBodyComponent ----------------------------------------------------------------------------------------------
