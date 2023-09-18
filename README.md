@@ -160,14 +160,13 @@ v(IKan Major Version).(IKan Minor Verision).(Kreator Major Version)(Kreator Mino
 - V11.0.9.0 : Grid, Joint, Select Mesh Outline
 - V11.1.9.1 : All Joints, Improved Guizmo, Joint Rendering, Multiple Entity Selection
  ------------------------------------------------------------------------------------------------------------------
+- V12.1.10.0 : - Materials
+               - Material Serializer
+               - Serialize Mesh with Material and index
+               - Material Asset Viewer
 
-## TODO
-- Materials
-  - Material Serializer
-  - Serialize Mesh with Material and index
-  - Update shader of Materials
-  - Material Asset Viewer
-  
+## TODO  
+- Update shader of Materials
 - Parent Child Movement
 - Light
 - Sub texture in quad component
