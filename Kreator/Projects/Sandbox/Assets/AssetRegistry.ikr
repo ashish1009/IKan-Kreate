@@ -56,6 +56,9 @@ Assets:
   - Handle: 2125606539
     FilePath: Textures/PBR/Wall/ao.png
     Type: Image
+  - Handle: 2141189091
+    FilePath: Scenes/LightTest.ikscene
+    Type: Scene
   - Handle: 2234008704
     FilePath: Meshes/Default/Capsule.fbx
     Type: MeshSource
@@ -95,9 +98,18 @@ Assets:
   - Handle: 3918412116
     FilePath: Textures/PBR/Wall/albedo.png
     Type: Image
-  - Handle: 13637661861849514226
+  - Handle: 497349582066516950
     FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
-  - Handle: 15075794918385315042
+  - Handle: 9303520303070902478
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
+  - Handle: 16009994310740090332
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
+  - Handle: 16708181656809176945
     FilePath: Meshes/Materials/Materrial.ikmat
     Type: MaterialAsset
+  - Handle: 18322536107208125730
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource

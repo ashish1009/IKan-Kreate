@@ -180,14 +180,7 @@ namespace IKan {
       
       auto& spriteRendererComponent = entity.GetComponent<SpriteRendererComponent>();
       out << YAML::Key << "Color" << YAML::Value << spriteRendererComponent.color;
-      if (spriteRendererComponent.texture)
-      {
-        out << YAML::Key << "TextureHandle" << YAML::Value << spriteRendererComponent.texture;
-      }
-      else
-      {
-        out << YAML::Key << "TextureHandle" << YAML::Value << 0;
-      }
+      out << YAML::Key << "TextureHandle" << YAML::Value << spriteRendererComponent.texture;
       out << YAML::Key << "TilingFactor" << YAML::Value << spriteRendererComponent.tilingFactor;
       
       out << YAML::EndMap; // SpriteRendererComponent
@@ -200,14 +193,7 @@ namespace IKan {
       
       auto& quadComponent = entity.GetComponent<QuadComponent>();
       out << YAML::Key << "Color" << YAML::Value << quadComponent.color;
-      if (quadComponent.texture)
-      {
-        out << YAML::Key << "TextureHandle" << YAML::Value << quadComponent.texture;
-      }
-      else
-      {
-        out << YAML::Key << "TextureHandle" << YAML::Value << 0;
-      }
+      out << YAML::Key << "TextureHandle" << YAML::Value << quadComponent.texture;
       out << YAML::Key << "TilingFactor" << YAML::Value << quadComponent.tilingFactor;
       
       out << YAML::EndMap; // QuadComponent
@@ -220,16 +206,8 @@ namespace IKan {
       
       auto& circleComponent = entity.GetComponent<CircleComponent>();
       out << YAML::Key << "Color" << YAML::Value << circleComponent.color;
-      if (circleComponent.texture)
-      {
-        out << YAML::Key << "TextureHandle" << YAML::Value << circleComponent.texture;
-      }
-      else
-      {
-        out << YAML::Key << "TextureHandle" << YAML::Value << 0;
-      }
-      out << YAML::Key << "TilingFactor" << YAML::Value << circleComponent.tilingFactor;
-      
+      out << YAML::Key << "TextureHandle" << YAML::Value << circleComponent.texture;
+      out << YAML::Key << "TilingFactor" << YAML::Value << circleComponent.tilingFactor;      
       out << YAML::Key << "Thickness" << YAML::Value << circleComponent.thickness;
       out << YAML::Key << "Fade" << YAML::Value << circleComponent.fade;
       
@@ -243,15 +221,7 @@ namespace IKan {
       
       auto& textComponent = entity.GetComponent<TextComponent>();
       out << YAML::Key << "TextString" << YAML::Value << textComponent.textString;
-      if (textComponent.assetHandle)
-      {
-        out << YAML::Key << "FontHandle" << YAML::Value << textComponent.assetHandle;
-      }
-      else
-      {
-        out << YAML::Key << "FontHandle" << YAML::Value << 0;
-      }
-      
+      out << YAML::Key << "FontHandle" << YAML::Value << textComponent.assetHandle;
       out << YAML::Key << "Color" << YAML::Value << textComponent.color;
       
       out << YAML::EndMap; // TextComponent

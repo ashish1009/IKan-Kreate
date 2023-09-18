@@ -159,4 +159,6 @@ namespace IKan
     out << YAML::BeginSeq << v.w << v.x << v.y << v.z << YAML::EndSeq;
     return out;
   }
+  
+#define IK_SERIALIZE_PROPERTY_ASSET(propName, propVal, outputData) outputData << YAML::Key << #propName << YAML::Value << (propVal ? (uint64_t)propVal->handle : 0);
 } // namespace IKan

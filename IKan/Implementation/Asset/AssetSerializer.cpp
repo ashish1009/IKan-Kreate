@@ -6,6 +6,7 @@
 //
 
 #include "AssetSerializer.hpp"
+#include "Utils/YAMLSerializerHelper.h"
 #include "Renderer/UI/Font.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include "Scene/Scene.hpp"
@@ -14,6 +15,14 @@
 
 namespace IKan
 {
+#define SERIALIZE_MATERIAL_TEX(Name) \
+  Ref<Image> map = material->TryGetImage(#Name); \
+  IK_SERIALIZE_PROPERTY_ASSET(#Name, map, out); \
+  \
+  std::string toggleMapName = #Name; \
+  toggleMapName += "Toggle"; \
+  out << YAML::Key << toggleMapName << YAML::Value << material->Get<float>(toggleMapName);
+
   bool ImageSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
   {
     asset = Image::Create(AssetManager::GetFileSystemPathString(metadata));
@@ -57,49 +66,10 @@ namespace IKan
       out << YAML::Key << "u_Material_Metalness" << YAML::Value << material->Get<float>("u_Material_Metalness");
       out << YAML::Key << "u_Material_Roughness" << YAML::Value << material->Get<float>("u_Material_Roughness");
       
-      Ref<Image> albedoMap = material->TryGetImage("u_AlbedoTexture");
-      if (albedoMap)
-      {
-        out << YAML::Key << "u_AlbedoTexture" << YAML::Value << albedoMap->handle;
-      }
-      else
-      {
-        out << YAML::Key << "u_AlbedoTexture" << YAML::Value << 0;
-      }
-      out << YAML::Key << "u_AlbedoTextureToggle" << YAML::Value << material->Get<float>("u_AlbedoTextureToggle");
-
-      Ref<Image> normalMap = material->TryGetImage("u_NormalTexture");
-      if (normalMap)
-      {
-        out << YAML::Key << "u_NormalTexture" << YAML::Value << normalMap->handle;
-      }
-      else
-      {
-        out << YAML::Key << "u_NormalTexture" << YAML::Value << 0;
-      }
-      out << YAML::Key << "u_NormalTextureToggle" << YAML::Value << material->Get<float>("u_NormalTextureToggle");
-
-      Ref<Image> roughnessMap = material->TryGetImage("u_RoughnessTexture");
-      if (roughnessMap)
-      {
-        out << YAML::Key << "u_RoughnessTexture" << YAML::Value << roughnessMap->handle;
-      }
-      else
-      {
-        out << YAML::Key << "u_RoughnessTexture" << YAML::Value << 0;
-      }
-      out << YAML::Key << "u_RoughnessTextureToggle" << YAML::Value << material->Get<float>("u_RoughnessTextureToggle");
-
-      Ref<Image> metallicMap = material->TryGetImage("u_MetallicTexture");
-      if (metallicMap)
-      {
-        out << YAML::Key << "u_MetallicTexture" << YAML::Value << metallicMap->handle;
-      }
-      else
-      {
-        out << YAML::Key << "u_MetallicTexture" << YAML::Value << 0;
-      }
-      out << YAML::Key << "u_MetallicTextureToggle" << YAML::Value << material->Get<float>("u_MetallicTextureToggle");
+      SERIALIZE_MATERIAL_TEX(u_AlbedoTexture);
+      SERIALIZE_MATERIAL_TEX(u_NormalTexture);
+      SERIALIZE_MATERIAL_TEX(u_RoughnessTexture);
+      SERIALIZE_MATERIAL_TEX(u_MetallicTexture);
 
       out << YAML::EndMap;
     }

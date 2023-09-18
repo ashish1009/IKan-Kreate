@@ -1,6 +1,6 @@
 Scene: LightTest
 Entities:
-  - Entity: 8599223826646979822
+  - Entity: 1146170917792762711
     TagComponent:
       Tag: Cube
     Parent: 0
@@ -11,10 +11,10 @@ Entities:
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
-      MeshHandle: 13637661861849514226
+      MeshHandle: 16009994310740090332
       MaterialIndex: 0
       MaterialTable:
-        - MaterialAsset: 15075794918385315042
+        - MaterialAsset: 16708181656809176945
     RigidBodyComponent:
       BodyType: 0
       LiniarDamping: 0
