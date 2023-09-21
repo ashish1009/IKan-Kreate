@@ -93,6 +93,13 @@ struct PBRParameters
 };
 PBRParameters m_Params;
 
+vec3 CalculateLight(vec3 F0)
+{
+  // reflectance equation
+  vec3 Lo = vec3(0.0);
+  return Lo;
+}
+
 /// Fragment Main Function
 void main()
 {
@@ -119,5 +126,21 @@ void main()
   m_Params.View = normalize(u_CameraPosition - vs_Input.WorldPosition);
   m_Params.NdotV = max(dot(m_Params.Normal, m_Params.View), 0.0f);
 
-  o_Color = vec4(m_Params.Albedo, 1.0f);
+  // Calculate reflectance at normal incidence
+  // Note: If dia-electric (like plastic) use F0 of 0.04 and
+  //       If it's a metal, use the albedo color as F0 (metallic workflow)
+  vec3 F0 = vec3(0.04);
+  F0 = mix(F0, m_Params.Albedo, m_Params.Metalness);
+
+  vec3 light = CalculateLight(F0);
+  
+  // Ambient lighting Even in dark there should be some Light
+  // TODO: Replace with direction light later?
+  // Change this factor with direction light
+  vec3 ambient = vec3(0.1) * m_Params.Albedo;
+
+  // Add the light in ambient
+  vec3 color = ambient + light;
+  
+  o_Color = vec4(color, 1.0f);
 }
