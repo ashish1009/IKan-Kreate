@@ -48,6 +48,8 @@ void main()
 #version 330 core
 layout (location = 0) out vec4 o_Color;
 
+const int MAX_LIGHTS = 10;
+
 in VS_OUT
 {
   vec3 WorldPosition;
@@ -81,6 +83,15 @@ uniform float u_TilingFactor;
 // Camera Params
 uniform vec3 u_CameraPosition;
 
+// Light Data
+struct LightData
+{
+  vec3 Position;
+  vec3 Radiance;
+};
+uniform float u_NumLights;
+uniform LightData u_lightData[MAX_LIGHTS];
+
 struct PBRParameters
 {
   vec3 Albedo;
@@ -97,6 +108,10 @@ vec3 CalculateLight(vec3 F0)
 {
   // reflectance equation
   vec3 Lo = vec3(0.0);
+  for(int i = 0; i < int(u_NumLights); ++i)
+  {
+    
+  }
   return Lo;
 }
 

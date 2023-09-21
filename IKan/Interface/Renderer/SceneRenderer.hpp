@@ -17,8 +17,17 @@ namespace IKan
 {
   class Texture;
   class Renderer2DData;
+
+  static constexpr uint32_t MAX_LIGHTS = 10;
   
-  struct SceneRendererCamera
+  // Should be same format as PBR Shader
+  struct PointLightData
+  {
+    glm::vec3 position;
+    glm::vec3 radiance;
+  };
+
+  struct SceneCameraData
   {
     glm::mat4 viewProjection;
     float distance;
@@ -31,7 +40,8 @@ namespace IKan
     uint32_t viewportWidth, viewportHeight;
     Ref<RenderPass> renderPass;
     Ref<Material> highlightMaterial;
-    SceneRendererCamera sceneCamera;
+    SceneCameraData sceneCamera;
+    std::vector<PointLightData> pointLights;
   };
   
   class SceneRenderer
@@ -49,9 +59,13 @@ namespace IKan
     ///   - height: new height of viewport
     void SetViewport(uint32_t width, uint32_t height);
     
+    /// This function adds the point light in scene
+    /// - Parameter pointLight: point light data
+    void AddPointLight(const PointLightData& pointLight);
+    
     /// This function begins the Batch for 2D Rendere (to be called each frame)
     /// - Parameter sceneCamera: Camera data
-    void BeginScene(const SceneRendererCamera& sceneCamera);
+    void BeginScene(const SceneCameraData& sceneCamera);
     /// This function Ends the current batch by rendering all the vertex
     void EndScene();
     

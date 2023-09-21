@@ -289,13 +289,12 @@ namespace IKan
   
   struct CommonLightData
   {
-    
+    bool active = true;
+    glm::vec3 radiance = glm::vec3(1.0f);
   };
   
   struct PointLightComponent : CommonLightData
   {
-    bool active = true;
-
     PointLightComponent();
     ~PointLightComponent();
     void Copy(const PointLightComponent& other);
@@ -312,5 +311,5 @@ namespace IKan
   using AllComponents =
   ComponentGroup<IDComponent, TagComponent, TransformComponent, RelationshipComponent, CameraComponent, SpriteRendererComponent, \
   QuadComponent, CircleComponent, TextComponent, StaticMeshComponent, RigidBodyComponent, Box3DColliderComponent, \
-  CapsuleColliderComponent, JointComponent>;
+  CapsuleColliderComponent, JointComponent, PointLightComponent>;
 } // namespace IKan

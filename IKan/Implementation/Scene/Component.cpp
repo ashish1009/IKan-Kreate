@@ -477,6 +477,7 @@ return *this; \
   void PointLightComponent::Copy(const PointLightComponent& other)
   {
     active = other.active;
+    radiance = other.radiance;
   }
 
 } // namespace IKan

@@ -371,7 +371,8 @@ namespace IKan {
       auto& pointLightComponent = entity.GetComponent<PointLightComponent>();
  
       out << YAML::Key << "Active" << YAML::Value << pointLightComponent.active;
-      
+      out << YAML::Key << "Radiance" << YAML::Value << pointLightComponent.radiance;
+
       out << YAML::EndMap; // PointLightComponent
     }
     out << YAML::EndMap; // Entity
@@ -632,6 +633,7 @@ namespace IKan {
       {
         auto& component = deserializedEntity.AddComponent<PointLightComponent>();
         component.active = pointLightComponent["Active"].as<bool>();
+        component.radiance = pointLightComponent["Radiance"].as<glm::vec3>();
       }
     }
   }

@@ -829,8 +829,8 @@ namespace Kreator
                                   {
       Kreator_UI::BeginPropertyGrid();
       Kreator_UI::Property("Active", plc.active);
+      Kreator_UI::PropertyColor("Radiance", plc.radiance);
       Kreator_UI::EndPropertyGrid();
-
     }, s_gearIcon);
   }
   

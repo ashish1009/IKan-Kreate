@@ -12,6 +12,7 @@ Entities:
       Scale: [1, 1, 1]
     PointLightComponent:
       Active: true
+      Radiance: [1, 1, 1]
   - Entity: 1170323037244525108
     TagComponent:
       Tag: Cube

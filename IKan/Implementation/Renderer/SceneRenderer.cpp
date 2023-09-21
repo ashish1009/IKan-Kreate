@@ -64,8 +64,16 @@ namespace IKan
       m_commonData->needResize = false;
     }
   }
+  
+  void SceneRenderer::AddPointLight(const PointLightData &pointLight)
+  {
+    if (m_commonData->pointLights.size() < MAX_LIGHTS)
+    {
+      m_commonData->pointLights.emplace_back(pointLight);
+    }
+  }
 
-  void SceneRenderer::BeginScene(const SceneRendererCamera& sceneCamera)
+  void SceneRenderer::BeginScene(const SceneCameraData& sceneCamera)
   {
     if (m_commonData->needResize)
     {
