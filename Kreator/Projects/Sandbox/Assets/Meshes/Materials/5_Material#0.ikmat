@@ -1,0 +1,16 @@
+Material:
+  Handle: 18074090235607856569
+  Name: 5_Material#0
+  ShaderPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl
+  u_Material_AlbedoColor: [0.786046505, 0.515500247, 0.515500247]
+  u_Material_Metalness: 0
+  u_Material_Roughness: 0
+  u_TilingFactor: 1
+  u_AlbedoTexture: 0
+  u_AlbedoTextureToggle: 0
+  u_NormalTexture: 0
+  u_NormalTextureToggle: 0
+  u_RoughnessTexture: 0
+  u_RoughnessTextureToggle: 0
+  u_MetallicTexture: 0
+  u_MetallicTextureToggle: 0

@@ -1,22 +1,61 @@
 Scene: LightTest
 Entities:
-  - Entity: 1546629751898886649
+  - Entity: 460092529162831474
     TagComponent:
-      Tag: Gold Sphere
-    Parent: 4035237942382686086
+      Tag: Point Light
+    Parent: 0
     Children:
-      - Handle: 14332944505225503283
+      []
     TransformComponent:
-      Position: [1.97650981, 4.00005817, -0.00128169917]
+      Position: [0, 3.65612602, -4.55216122]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    PointLightComponent:
+      Active: true
+  - Entity: 1170323037244525108
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-0.523708999, 1.69593155, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
-      MeshHandle: 13134307800222278519
+      MeshHandle: 16964828738886496022
       MaterialIndex: 0
       MaterialTable:
-        - MaterialAsset: 6703873424171747865
+        - MaterialAsset: 18074090235607856569
     RigidBodyComponent:
-      BodyType: 2
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    Box3DColliderComponent:
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+  - Entity: 5226710136638144024
+    TagComponent:
+      Tag: Gold Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [2.88169956, 1.71581233, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 18242526092258161101
+      MaterialIndex: 0
+      MaterialTable:
+        - MaterialAsset: 14405600240978536040
+    RigidBodyComponent:
+      BodyType: 0
       LiniarDamping: 0
       AngularDamping: 0
       AllowSleep: true
@@ -25,43 +64,43 @@ Entities:
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
       FrictionCoefficient: 0.200000003
-      Bounciness: 0.200000003
+      Bounciness: 0.100000001
       MassDensity: 0
-    JointComponent:
-      ConnectedEntity: 14332944505225503283
-      Type: 2
-      IsWorldSpace: true
-      IsCollisionEnabled: true
-      WorldAnchorPoint: [1.97652507, 4.00001526, -0.00134277903]
-      LocalAnchorPoint1: [0, 0, 0]
-      LocalAnchorPoint2: [0, 0, 0]
-      ConeLimit: false
-      ConeAngle: 0.785398185
-      WorldAxis: [0, 0, 1]
-      LocalAxis1: [0, 0, 0]
-      LocalAxis2: [0, 0, 0]
-      Limit: false
-      MinAngle: -0.785398185
-      MaxAngle: 0.785398185
-      Motor: true
-      Speed: 0.373500437
-      Torque: 18
-      SliderWorldAxis: [0, 0, 0]
-      SliderLocalAxis1: [0, 0, 0]
-      SliderLimit: false
-      SliderMinTranse: -2
-      SliderMaxTranse: 2
-      SliderMotor: false
-      SliderSpeed: 0
-      SliderForce: 0
-  - Entity: 3552918020652698750
+  - Entity: 5725584924611695430
+    TagComponent:
+      Tag: Plastic Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1.05390656, 1.70180869, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    StaticMeshComponent:
+      MeshHandle: 10567884882324931483
+      MaterialIndex: 0
+      MaterialTable:
+        - MaterialAsset: 8107084714790557332
+    RigidBodyComponent:
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+    SphereColliderComponent:
+      Radius: 0.5
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 0]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0
+  - Entity: 6867511041728260036
     TagComponent:
       Tag: Camera
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [0, 3.29999995, 18]
+      Position: [0, 2.5, 28]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -74,21 +113,21 @@ Entities:
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
-  - Entity: 4035237942382686086
+  - Entity: 8863288816124221625
     TagComponent:
-      Tag: Iron Rust Sphere
+      Tag: Sphere
     Parent: 0
     Children:
-      - Handle: 1546629751898886649
+      []
     TransformComponent:
-      Position: [-1.31786609, 4, 0]
+      Position: [-4.02739811, 1.71651447, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     StaticMeshComponent:
-      MeshHandle: 11785740769462360329
+      MeshHandle: 8767689045415563835
       MaterialIndex: 0
       MaterialTable:
-        - MaterialAsset: 14857404901237567665
+        - MaterialAsset: 5812570411305334541
     RigidBodyComponent:
       BodyType: 0
       LiniarDamping: 0
@@ -101,77 +140,23 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 0
-    JointComponent:
-      ConnectedEntity: 1546629751898886649
-      Type: 1
-      IsWorldSpace: true
-      IsCollisionEnabled: true
-      WorldAnchorPoint: [-1.31786609, 4, 0]
-      LocalAnchorPoint1: [0, 0, 0]
-      LocalAnchorPoint2: [0, 0, 0]
-      ConeLimit: false
-      ConeAngle: 0.785398185
-      WorldAxis: [0, 0, 0]
-      LocalAxis1: [0, 0, 0]
-      LocalAxis2: [0, 0, 0]
-      Limit: false
-      MinAngle: -0.785398185
-      MaxAngle: 0.785398185
-      Motor: false
-      Speed: 0
-      Torque: 0
-      SliderWorldAxis: [0, 0, 0]
-      SliderLocalAxis1: [0, 0, 0]
-      SliderLimit: false
-      SliderMinTranse: -2
-      SliderMaxTranse: 2
-      SliderMotor: false
-      SliderSpeed: 0
-      SliderForce: 0
-  - Entity: 11630312601712284099
+  - Entity: 13356770104463157541
     TagComponent:
-      Tag: Plastic Sphere
+      Tag: Base Cube
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [4.68384123, 4, -0.0023803236]
+      Position: [0, 0, 0]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Scale: [40, 0.300000012, 40]
     StaticMeshComponent:
-      MeshHandle: 3149751191239427699
+      MeshHandle: 6636747192013412736
       MaterialIndex: 0
       MaterialTable:
-        - MaterialAsset: 13486003824245696779
+        - MaterialAsset: 4601796742853337520
     RigidBodyComponent:
-      BodyType: 2
-      LiniarDamping: 0
-      AngularDamping: 0
-      AllowSleep: true
-    SphereColliderComponent:
-      Radius: 0.5
-      PositionOffset: [0, 0, 0]
-      QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.5
-      MassDensity: 0
-  - Entity: 14332944505225503283
-    TagComponent:
-      Tag: Gold Cube
-    Parent: 1546629751898886649
-    Children:
-      []
-    TransformComponent:
-      Position: [2.97159934, 6.19472933, -0.049012091]
-      Rotation: [0, 0.0558505431, -0.404916435]
-      Scale: [0.5, 3, 0.499991655]
-    StaticMeshComponent:
-      MeshHandle: 7454587222879787371
-      MaterialIndex: 0
-      MaterialTable:
-        - MaterialAsset: 13486003824245696779
-    RigidBodyComponent:
-      BodyType: 2
+      BodyType: 0
       LiniarDamping: 0
       AngularDamping: 0
       AllowSleep: true
@@ -182,42 +167,30 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 0
-  - Entity: 14667647528655289166
+  - Entity: 15171252711589308325
     TagComponent:
-      Tag: Brick Base
+      Tag: Rust Iron Sphere
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [-2.344172, 1.67214262, 0]
       Rotation: [0, 0, 0]
-      Scale: [40, 0.241217971, 40]
+      Scale: [1, 1, 1]
     StaticMeshComponent:
-      MeshHandle: 8970043670773641065
+      MeshHandle: 4270612629506004932
       MaterialIndex: 0
       MaterialTable:
-        - MaterialAsset: 3243894531104161941
+        - MaterialAsset: 8257003390942154235
     RigidBodyComponent:
       BodyType: 0
       LiniarDamping: 0
       AngularDamping: 0
       AllowSleep: true
-    Box3DColliderComponent:
-      Size: [0.5, 0.5, 0.5]
+    SphereColliderComponent:
+      Radius: 0.5
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 0]
-      FrictionCoefficient: 0.409999996
-      Bounciness: 0
-      MassDensity: 100
-  - Entity: 16349497609155346185
-    TagComponent:
-      Tag: Point Light
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    PointLightComponent:
-      Active: true
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 0

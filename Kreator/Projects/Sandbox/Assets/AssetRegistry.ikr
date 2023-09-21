@@ -98,36 +98,39 @@ Assets:
   - Handle: 3918412116
     FilePath: Textures/PBR/Wall/albedo.png
     Type: Image
-  - Handle: 1400732007460381777
-    FilePath: Meshes/Materials/4_Material#0.ikmat
-    Type: MaterialAsset
-  - Handle: 3149751191239427699
+  - Handle: 4270612629506004932
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
-  - Handle: 3243894531104161941
-    FilePath: Meshes/Materials/3_Material#0.ikmat
-    Type: MaterialAsset
-  - Handle: 6703873424171747865
-    FilePath: Meshes/Materials/1_Material#0.ikmat
-    Type: MaterialAsset
-  - Handle: 7454587222879787371
-    FilePath: Meshes/Default/Cube.fbx
-    Type: MeshSource
-  - Handle: 8970043670773641065
-    FilePath: Meshes/Default/Cube.fbx
-    Type: MeshSource
-  - Handle: 11191734738414791771
-    FilePath: Meshes/Default/Sphere.fbx
-    Type: MeshSource
-  - Handle: 11785740769462360329
-    FilePath: Meshes/Default/Sphere.fbx
-    Type: MeshSource
-  - Handle: 13134307800222278519
-    FilePath: Meshes/Default/Sphere.fbx
-    Type: MeshSource
-  - Handle: 13486003824245696779
-    FilePath: Meshes/Materials/4_Material#0.ikmat
-    Type: MaterialAsset
-  - Handle: 14857404901237567665
+  - Handle: 4601796742853337520
     FilePath: Meshes/Materials/0_Material#0.ikmat
     Type: MaterialAsset
+  - Handle: 5812570411305334541
+    FilePath: Meshes/Materials/6_Material#0.ikmat
+    Type: MaterialAsset
+  - Handle: 6636747192013412736
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
+  - Handle: 8107084714790557332
+    FilePath: Meshes/Materials/4_Material#0.ikmat
+    Type: MaterialAsset
+  - Handle: 8257003390942154235
+    FilePath: Meshes/Materials/2_Material#0.ikmat
+    Type: MaterialAsset
+  - Handle: 8767689045415563835
+    FilePath: Meshes/Default/Sphere.fbx
+    Type: MeshSource
+  - Handle: 10567884882324931483
+    FilePath: Meshes/Default/Sphere.fbx
+    Type: MeshSource
+  - Handle: 14405600240978536040
+    FilePath: Meshes/Materials/3_Material#0.ikmat
+    Type: MaterialAsset
+  - Handle: 16964828738886496022
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
+  - Handle: 18074090235607856569
+    FilePath: Meshes/Materials/5_Material#0.ikmat
+    Type: MaterialAsset
+  - Handle: 18242526092258161101
+    FilePath: Meshes/Default/Sphere.fbx
+    Type: MeshSource

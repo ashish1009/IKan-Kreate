@@ -175,6 +175,7 @@ if (!Project::GetActive()) return
     m_folder = Image::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
     m_projectIcon = Image::Create(KreatorResourcePath("Textures/Icons/Project.png"));
     m_cameraIcon = Image::Create(KreatorResourcePath("Textures/Icons/Camera.png"));
+    m_lightIcon = Image::Create(KreatorResourcePath("Textures/Icons/PointLight.png"));
     m_settingIcon = Image::Create(KreatorResourcePath("Textures/Icons/Gear.png"));
     
     // Scene Button
@@ -743,6 +744,19 @@ if (!Project::GetActive()) return
       Renderer2D::DrawFixedViewQuad(tc.Position(), tc.Scale(), m_cameraIcon, glm::vec4(1.0f), 1, (uint32_t)entity);
 #endif
     }
+    
+    auto lightEntities = m_currentScene->GetAllEntitiesWith<PointLightComponent>();
+    for (auto e : lightEntities)
+    {
+      Entity entity = { e, m_currentScene.get() };
+#ifdef WorldSpace
+      Renderer2D::DrawFixedViewQuad(m_currentScene->GetWorldSpaceTransform(entity).Transform(), m_cameraIcon);
+#else
+      const auto& tc = entity.GetComponent<TransformComponent>();
+      Renderer2D::DrawFixedViewQuad(tc.Position(), tc.Scale(), m_lightIcon, glm::vec4(1.0f), 1, (uint32_t)entity);
+#endif
+    }
+
   }
   
   void RendererLayer::ShowColliders(const glm::vec4& color)

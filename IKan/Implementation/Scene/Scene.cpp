@@ -189,6 +189,7 @@ namespace IKan
   
   void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
   {
+    // Submit the Meshes
     auto view = m_registry.view<TransformComponent, StaticMeshComponent>();
     for (const auto& entityHandle : view)
     {
@@ -204,7 +205,7 @@ namespace IKan
           renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(staticMeshComp.staticMesh), transformComp.Transform());
         }
       }
-    } // For each Quad Entity
+    } // For each MEsh Entity
   }
     
   void Scene::OnRuntimeStart()

@@ -229,7 +229,7 @@ namespace Kreator
     Ref<Image> m_newProject, m_folder;
     Ref<Image> m_applicationIcon, m_welcomeIcon;
     Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
-    Ref<Image> m_cameraIcon;
+    Ref<Image> m_cameraIcon, m_lightIcon;
     Ref<Image> m_settingIcon;
 
     // Project Data --------------------------------------
