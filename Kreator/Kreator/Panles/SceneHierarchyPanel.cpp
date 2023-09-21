@@ -711,7 +711,6 @@ namespace Kreator
                                             {
       Kreator_UI::BeginPropertyGrid();
       
-      
       Entity targetEntity = m_context->TryGetEntityWithUUID(fjc.connectedEntity);
       if (Kreator_UI::PropertyEntityReference("Connected Entity", targetEntity))
       {
@@ -825,6 +824,14 @@ namespace Kreator
       }
       Kreator_UI::EndPropertyGrid();
     }, s_gearIcon);
+    
+    DrawComponent<PointLightComponent>("Point Light", entity, [&](PointLightComponent& plc)
+                                  {
+      Kreator_UI::BeginPropertyGrid();
+      Kreator_UI::Property("Active", plc.active);
+      Kreator_UI::EndPropertyGrid();
+
+    }, s_gearIcon);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
@@ -913,6 +920,14 @@ namespace Kreator
         {
           [[maybe_unused]] auto& jointComp = m_selectionContext.At(0).AddComponent<JointComponent>();
           jointComp.worldAnchorPoint = m_selectionContext.At(0).GetTransform().Position();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.At(0).HasComponent<PointLightComponent>())
+      {
+        if (ImGui::MenuItem("Point Light"))
+        {
+          [[maybe_unused]] auto& jointComp = m_selectionContext.At(0).AddComponent<PointLightComponent>();
           ImGui::CloseCurrentPopup();
         }
       }
@@ -1175,19 +1190,18 @@ namespace Kreator
       newEntity = m_context->CreateEntity("Empty Entity");
     }
     
-    
     if (ImGui::MenuItem("Camera"))
     {
       newEntity = m_context->CreateEntity("Camera");
       newEntity.AddComponent<CameraComponent>();
     }
     
-    if (ImGui::MenuItem("Text"))
+    if (ImGui::MenuItem("Point Light"))
     {
-      newEntity = m_context->CreateEntity("Text");
-      newEntity.AddComponent<TextComponent>();
+      newEntity = m_context->CreateEntity("Point Light");
+      newEntity.AddComponent<PointLightComponent>();
     }
-    
+        
     if (ImGui::BeginMenu("2D"))
     {
       if (ImGui::MenuItem("Quad"))
@@ -1201,7 +1215,13 @@ namespace Kreator
         newEntity = m_context->CreateEntity("Circle");
         newEntity.AddComponent<CircleComponent>();
       }
-      
+    
+      if (ImGui::MenuItem("Text"))
+      {
+        newEntity = m_context->CreateEntity("Text");
+        newEntity.AddComponent<TextComponent>();
+      }
+
       ImGui::EndMenu();
     }
     if (ImGui::BeginMenu("3D"))

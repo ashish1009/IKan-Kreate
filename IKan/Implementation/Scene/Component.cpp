@@ -462,4 +462,21 @@ return *this; \
     sliderData = other.sliderData;
   }
 
+  // Point Light Component -------------------------------------------------------------------------------------
+  PointLightComponent::PointLightComponent()
+  {
+    COMP_LOG("Creating Point Light Component");
+  }
+  
+  PointLightComponent::~PointLightComponent()
+  {
+    COMP_LOG("Destroying Point Light Component");
+  }
+  COMP_COPY_MOVE_CONSTRUCTORS(PointLightComponent);
+  
+  void PointLightComponent::Copy(const PointLightComponent& other)
+  {
+    active = other.active;
+  }
+
 } // namespace IKan

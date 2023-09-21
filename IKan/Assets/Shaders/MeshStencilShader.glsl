@@ -48,6 +48,8 @@ void main()
 #version 330 core
 layout (location = 0) out vec4 o_Color;
 
+uniform vec3 u_Color;
+
 in VS_OUT
 {
   vec3 WorldPosition;
@@ -61,5 +63,5 @@ in VS_OUT
 /// Fragment Main Function
 void main()
 {
-  o_Color = vec4(1.0, 0.65, 0.01, 1.0);
+  o_Color = vec4(u_Color, 1.0);
 }

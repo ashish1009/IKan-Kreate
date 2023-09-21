@@ -191,7 +191,7 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(RigidBodyComponent);
   };
   
-  struct CommonCollider
+  struct CommonColliderData
   {
     glm::vec3 positionOffset;
     glm::quat quaternionOffset;
@@ -200,7 +200,7 @@ namespace IKan
     float massDensity;
   };
   
-  struct Box3DColliderComponent : CommonCollider
+  struct Box3DColliderComponent : CommonColliderData
   {
     glm::vec3 size = glm::vec3(0.5f);
     
@@ -210,7 +210,7 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(Box3DColliderComponent);
   };
   
-  struct SphereColliderComponent : CommonCollider
+  struct SphereColliderComponent : CommonColliderData
   {
     float radius = 0.5f;
     
@@ -220,7 +220,7 @@ namespace IKan
     DEFINE_COPY_MOVE_CONSTRUCTORS(SphereColliderComponent);
   };
   
-  struct CapsuleColliderComponent : CommonCollider
+  struct CapsuleColliderComponent : CommonColliderData
   {
     float radius = 0.5f;
     float height = 1.0f;
@@ -285,6 +285,21 @@ namespace IKan
     ~JointComponent();
     void Copy(const JointComponent& other);
     DEFINE_COPY_MOVE_CONSTRUCTORS(JointComponent);
+  };
+  
+  struct CommonLightData
+  {
+    
+  };
+  
+  struct PointLightComponent : CommonLightData
+  {
+    bool active = true;
+
+    PointLightComponent();
+    ~PointLightComponent();
+    void Copy(const PointLightComponent& other);
+    DEFINE_COPY_MOVE_CONSTRUCTORS(PointLightComponent);
   };
 
   template<typename... Component>

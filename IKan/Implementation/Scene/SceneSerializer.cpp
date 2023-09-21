@@ -362,6 +362,18 @@ namespace IKan {
 
       out << YAML::EndMap; // JointComponent
     }
+    
+    if (entity.HasComponent<PointLightComponent>())
+    {
+      out << YAML::Key << "PointLightComponent";
+      out << YAML::BeginMap; // PointLightComponent
+      
+      auto& pointLightComponent = entity.GetComponent<PointLightComponent>();
+ 
+      out << YAML::Key << "Active" << YAML::Value << pointLightComponent.active;
+      
+      out << YAML::EndMap; // PointLightComponent
+    }
     out << YAML::EndMap; // Entity
   }
   
@@ -612,6 +624,14 @@ namespace IKan {
         component.sliderData.motor = jointComponent["SliderMotor"].as<bool>();
         component.sliderData.initMotorSpeed = jointComponent["SliderSpeed"].as<float>();
         component.sliderData.initMaxMotorForce = jointComponent["SliderForce"].as<float>();
+      }
+      
+      // PointLightComponent --------------------------------------------------------------------------------------
+      auto pointLightComponent = entity["PointLightComponent"];
+      if (pointLightComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<PointLightComponent>();
+        component.active = pointLightComponent["Active"].as<bool>();
       }
     }
   }

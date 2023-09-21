@@ -125,6 +125,9 @@ Assets:
   - Handle: 13134307800222278519
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
+  - Handle: 13486003824245696779
+    FilePath: Meshes/Materials/4_Material#0.ikmat
+    Type: MaterialAsset
   - Handle: 14857404901237567665
     FilePath: Meshes/Materials/0_Material#0.ikmat
     Type: MaterialAsset
