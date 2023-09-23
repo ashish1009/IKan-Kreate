@@ -76,16 +76,18 @@ namespace IKan
   
   void Scene::OnUpdateEditor(TimeStep ts)
   {
-    
+    IK_PERFORMANCE_FUN();
   }
   
   void Scene::OnUpdateRuntime(TimeStep ts)
   {
+    IK_PERFORMANCE_FUN();
     m_physicsScene->OnUpdate(ts);
   }
   
   void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
   {
+    IK_PERFORMANCE_FUN();
     renderer->BeginScene({editorCamera.GetUnReversedViewProjection(), editorCamera.GetDistance()});
     Render3DEntities(renderer);
     renderer->EndScene();
@@ -117,6 +119,7 @@ namespace IKan
   
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
   {
+    IK_PERFORMANCE_FUN();
     renderer->BeginScene({editorCamera.GetUnReversedViewProjection(), editorCamera.GetDistance()});
     Render3DEntities(renderer);
     renderer->EndScene();

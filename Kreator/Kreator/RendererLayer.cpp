@@ -21,7 +21,10 @@ namespace Kreator
 {
 #define RETRUN_IF_NO_PROJECT() \
 if (!Project::GetActive()) return
-  
+
+#define RETRUN_IF_NO_SCENE() \
+if (!m_currentScene) return
+
   // Kretor Resource Path
 #define KreatorResourcePath(path) Utils::FileSystem::Absolute(m_clientResourcePath / path)
   
@@ -99,6 +102,7 @@ if (!Project::GetActive()) return
   
   void Viewport::UpdateMousePos()
   {
+    IK_PERFORMANCE_FUN();
     auto [mx, my] = ImGui::GetMousePos();
     mx -= bounds[0].x;
     my -= bounds[0].y;
@@ -256,8 +260,6 @@ if (!Project::GetActive()) return
     
     // Initilaize the Renderers
     Renderer2D::Initialize({1000, 1000, 1000000});
-    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
-    m_miniViewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
 
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
@@ -290,6 +292,7 @@ if (!Project::GetActive()) return
   void RendererLayer::OnUpdate(TimeStep ts)
   {
     RETRUN_IF_NO_PROJECT();
+    RETRUN_IF_NO_SCENE();
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
     switch (m_sceneState)
@@ -298,7 +301,6 @@ if (!Project::GetActive()) return
       {
         // Update Data
         AssetEditorManager::OnUpdate(ts);
-        m_viewport.UpdateMousePos();
         m_viewport.UpdateMousePos();
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
@@ -326,6 +328,7 @@ if (!Project::GetActive()) return
         // Render Mini Viewport
         if (m_showMiniViewport)
         {
+          IK_PERFORMANCE("Show Mini Viewport");
           m_miniViewportRenderer->BeginRenderPass();
           Renderer::Clear({0.26f, 0.26f, 0.29f, 0.3f});
 
@@ -337,6 +340,7 @@ if (!Project::GetActive()) return
         // Save Scene Auto
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
         {
+          IK_PERFORMANCE("Auto Save Scene");
           m_timeSinceLastSave += ts;
           if (m_timeSinceLastSave > project->GetConfig().autoSaveIntervalSeconds)
           {
@@ -513,6 +517,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::UpdateHoveredEntity()
   {
+    IK_PERFORMANCE_FUN();
     if (ImGuizmo::IsOver() and m_currentScene->GetSelectedEntity().size() > 0)
     {
       m_hoveredEntityID = (int32_t)m_currentScene->GetSelectedEntity().at(0);
@@ -527,6 +532,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::RenderMiniViewport()
   {
+    IK_PERFORMANCE_FUN();
     if (!m_miniViewportRenderer)
     {
       return;
@@ -576,6 +582,15 @@ if (!Project::GetActive()) return
     glm::vec3 rayDir = inverseView * glm::vec3(ray);
     
     return { rayPos, rayDir };
+  }
+  
+  void RendererLayer::CreateViewports(Ref<Scene> scene)
+  {
+    m_viewportRenderer.reset();
+    m_miniViewportRenderer.reset();
+    
+    m_viewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
+    m_miniViewportRenderer = CreateRef<SceneRenderer>(m_currentScene);
   }
   
   bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent& e)
@@ -704,6 +719,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::RenderDebug()
   {
+    IK_PERFORMANCE_FUN();
     Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
     
     if (m_showIcons)
@@ -853,6 +869,7 @@ if (!Project::GetActive()) return
   
   void RendererLayer::RenderFixTexts()
   {
+    IK_PERFORMANCE_FUN();
     static constexpr glm::vec3 position = { 5.0f, 5.0f, 0.3f };
     static constexpr glm::vec2 size = {0.3f, 0.3f};
     static constexpr glm::vec4 color = { 0.23f, 0.33f, 0.22f, 1.0f};
@@ -1032,6 +1049,8 @@ if (!Project::GetActive()) return
     
     m_panels.SetSceneContext(m_editorScene);
     UpdateWindowTitle(name);
+    
+    CreateViewports(m_currentScene);
   }
   
   void RendererLayer::OpenScene(const std::string& filepath)
@@ -1062,6 +1081,8 @@ if (!Project::GetActive()) return
     UpdateWindowTitle(path.filename().string());
     
     m_panels.SetSceneContext(m_currentScene);
+
+    CreateViewports(m_currentScene);
   }
   
   void RendererLayer::OpenScene()

@@ -195,11 +195,13 @@ namespace IKan
   
   void SceneRenderer::BeginRenderPass()
   {
+    IK_PERFORMANCE_FUN();
     m_commonData->renderPass->Begin();
   }
   
   void SceneRenderer::EndRenderPass()
   {
+    IK_PERFORMANCE_FUN();
     m_commonData->renderPass->End();
   }
   

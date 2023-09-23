@@ -110,6 +110,10 @@ namespace Kreator
     ///   - mx: mouse x
     ///   - my: mouse y
     std::pair<glm::vec3, glm::vec3> CastRay(const EditorCamera& camera, float mx, float my);
+    
+    /// This function creates the viewport instance for scene
+    /// - Parameter scene: scene reference
+    void CreateViewports(Ref<Scene> scene);
 
     // Project API ---------------------------------------
     /// This function Creates new project

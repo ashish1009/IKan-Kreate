@@ -49,6 +49,7 @@ namespace IKan
   
   void EditorCamera::OnUpdate(const TimeStep ts)
   {
+    IK_PERFORMANCE_FUN();
     const glm::vec2& mouse{ Input::GetMouseX(), Input::GetMouseY() };
     const glm::vec2 delta = (mouse - m_initialMousePosition) * 0.002f;
     
@@ -282,6 +283,7 @@ namespace IKan
   
   void EditorCamera::SetActive(bool active)
   {
+    IK_PERFORMANCE_FUN();
     m_isActive = active;
   }
   
