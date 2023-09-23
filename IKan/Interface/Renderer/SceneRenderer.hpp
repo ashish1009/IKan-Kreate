@@ -30,6 +30,7 @@ namespace IKan
 
   struct SceneCameraData
   {
+    glm::vec3 position;
     glm::mat4 viewProjection;
     float distance;
   };

@@ -1,7 +1,7 @@
 UserPrefs:
   ShowWelcomeScreen: true
-  Theme: 1
+  Theme: 0
   RecentProjects:
     - Name: Sandbox
       ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Projects/Sandbox/Sandbox.ikproj
-      LastOpened: 1695446953
+      LastOpened: 1695449121

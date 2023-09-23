@@ -85,14 +85,15 @@ namespace IKan
     m_physicsScene->OnUpdate(ts);
   }
   
-  void Scene::OnRenderEditor(const EditorCamera &editorCamera, const Ref<SceneRenderer> renderer)
+  void Scene::OnRenderEditor(const EditorCamera &camera, const Ref<SceneRenderer> renderer)
   {
     IK_PERFORMANCE_FUN();
-    renderer->BeginScene({editorCamera.GetUnReversedViewProjection(), editorCamera.GetDistance()});
+    renderer->BeginScene({ camera.GetPosition(), camera.GetUnReversedViewProjection(), camera.GetDistance()});
+    
     Render3DEntities(renderer);
     renderer->EndScene();
 
-    Renderer2D::BeginBatch(editorCamera.GetUnReversedViewProjection(), editorCamera.GetViewMatrix());
+    Renderer2D::BeginBatch(camera.GetUnReversedViewProjection(), camera.GetViewMatrix());
     Render2DEntities();
     Renderer2D::EndBatch();
   }
@@ -106,13 +107,17 @@ namespace IKan
     }
     
     const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
-    const auto& cameraTransform = cameraEntity.GetComponent<TransformComponent>().Transform();
+    const auto& cameraTransformComp = cameraEntity.GetComponent<TransformComponent>();
     
-    renderer->BeginScene({mainCamera.GetUnReversedProjectionMatrix() * glm::inverse(cameraTransform), 1});
+    renderer->BeginScene({
+      cameraTransformComp.Position(),
+      mainCamera.GetUnReversedProjectionMatrix() * glm::inverse(cameraTransformComp.Transform()),
+      1});
     Render3DEntities(renderer);
     renderer->EndScene();
 
-    Renderer2D::BeginBatch(mainCamera.GetUnReversedProjectionMatrix() * glm::inverse(cameraTransform), glm::inverse(cameraTransform));
+    Renderer2D::BeginBatch(mainCamera.GetUnReversedProjectionMatrix() * glm::inverse(cameraTransformComp.Transform()),
+                           glm::inverse(cameraTransformComp.Transform()));
     Render2DEntities();
     Renderer2D::EndBatch();
   }
@@ -120,7 +125,10 @@ namespace IKan
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, const Ref<SceneRenderer> renderer)
   {
     IK_PERFORMANCE_FUN();
-    renderer->BeginScene({editorCamera.GetUnReversedViewProjection(), editorCamera.GetDistance()});
+    renderer->BeginScene({
+      editorCamera.GetPosition(),
+      editorCamera.GetUnReversedViewProjection(),
+      editorCamera.GetDistance()});
     Render3DEntities(renderer);
     renderer->EndScene();
 

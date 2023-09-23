@@ -803,7 +803,10 @@ if (!m_currentScene) return
   void RendererLayer::ShowJoints(const glm::vec4 &color)
   {
     Renderer::EnableStencilPass();
-    m_viewportRenderer->BeginScene({m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetDistance()});
+    m_viewportRenderer->BeginScene({
+      m_editorCamera.GetPosition(),
+      m_editorCamera.GetUnReversedViewProjection(),
+      m_editorCamera.GetDistance()});
     
     static constexpr glm::vec3 unitScale = {1, 1, 1};
     static constexpr glm::mat4 unitMat(1.0f);

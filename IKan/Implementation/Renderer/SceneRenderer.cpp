@@ -159,9 +159,11 @@ namespace IKan
     {
       auto material = dc.oevrridenMaterial ? dc.oevrridenMaterial : dc.staticMesh->GetBaseMaterial();
       
-      // Submit the Light to PBR Shader
+      // Submit the Light and camera position to PBR Shader
       {
+        material->Set("u_CameraPosition", m_commonData->sceneCamera.position);
         material->Set("u_LightData", m_commonData->pointLights.at(0));
+        material->Set("u_NumLights", (float)m_commonData->numLightStored);
       }
       
       RenderMesh(dc.staticMesh->GetSubMeshes(), dc.staticMesh->GetPipeline(), material, dc.transform);
