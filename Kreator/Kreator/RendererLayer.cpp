@@ -259,7 +259,7 @@ if (!m_currentScene) return
     }
     
     // Initilaize the Renderers
-    Renderer2D::Initialize({1000, 1000, 1000000});
+    Renderer2D::Initialize({100, 100, 1000});
 
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
@@ -855,19 +855,7 @@ if (!m_currentScene) return
   
   void RendererLayer::ShowGrid(const glm::vec4 &color)
   {
-    for (int32_t i = -CamFarView; i < CamFarView; i++)
-    {
-      if (i == 0)
-      {
-        Renderer2D::DrawLine({i, 0, -CamFarView}, {i, 0, CamFarView}, {0, 1, 0, 0.6});
-        Renderer2D::DrawLine({-CamFarView, 0, i}, {CamFarView, 0, i}, {1, 0, 0, 0.6});
-      }
-      else
-      {
-        Renderer2D::DrawLine({i, 0, -CamFarView}, {i, 0, CamFarView}, color);
-        Renderer2D::DrawLine({-CamFarView, 0, i}, {CamFarView, 0, i}, color);
-      }
-    }
+    // TODO: Change Grid Logic
   }
   
   void RendererLayer::RenderFixTexts()
