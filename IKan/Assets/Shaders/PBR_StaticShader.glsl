@@ -86,11 +86,12 @@ uniform vec3 u_CameraPosition;
 // Light Data
 struct LightData
 {
+  float Active;
   vec3 Position;
   vec3 Radiance;
 };
 uniform float u_NumLights;
-uniform LightData u_lightData[MAX_LIGHTS];
+uniform LightData u_LightData[10];
 
 struct PBRParameters
 {
@@ -157,5 +158,5 @@ void main()
   // Add the light in ambient
   vec3 color = ambient + light;
   
-  o_Color = vec4(color, 1.0f);
+  o_Color = vec4(u_LightData[0].Radiance, 1.0f);
 }

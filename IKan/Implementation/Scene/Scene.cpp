@@ -189,15 +189,27 @@ namespace IKan
   
   void Scene::Render3DEntities(Ref<SceneRenderer> renderer)
   {
-    // Submit the Meshes
-    auto view = m_registry.view<TransformComponent, StaticMeshComponent>();
-    for (const auto& entityHandle : view)
+    // Submit the Lights
+    auto lightView = m_registry.view<TransformComponent, PointLightComponent>();
+    for (const auto& entityHandle : lightView)
     {
-      const auto& [transformComp, staticMeshComp] = view.get<TransformComponent, StaticMeshComponent>(entityHandle);
+      const auto& [transformComp, pointLight] = lightView.get<TransformComponent, PointLightComponent>(entityHandle);
+      if (pointLight.active)
+      {
+        renderer->SubmitPointLight({(float)pointLight.active, transformComp.Position(), pointLight.radiance});
+      }
+    } // For each MEsh Entity
+
+    // Submit the Meshes
+    auto meshView = m_registry.view<TransformComponent, StaticMeshComponent>();
+    for (const auto& entityHandle : meshView)
+    {
+      const auto& [transformComp, staticMeshComp] = meshView.get<TransformComponent, StaticMeshComponent>(entityHandle);
       if (staticMeshComp.staticMesh != 0)
       {
         if (IsEntitySelected(entityHandle))
         {
+          // TODO: Do it only for Editor
           renderer->SubmitSelectedMeshSource(AssetManager::GetAsset<MeshSource>(staticMeshComp.staticMesh), transformComp.Transform());
         }
         else
@@ -205,7 +217,7 @@ namespace IKan
           renderer->SubmitMeshSource(AssetManager::GetAsset<MeshSource>(staticMeshComp.staticMesh), transformComp.Transform());
         }
       }
-    } // For each MEsh Entity
+    } // For each Mesh Entity
   }
     
   void Scene::OnRuntimeStart()

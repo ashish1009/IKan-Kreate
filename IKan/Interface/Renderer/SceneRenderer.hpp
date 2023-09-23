@@ -23,6 +23,7 @@ namespace IKan
   // Should be same format as PBR Shader
   struct PointLightData
   {
+    float active; //  Not using bool as shader uniform dont support
     glm::vec3 position;
     glm::vec3 radiance;
   };
@@ -41,7 +42,10 @@ namespace IKan
     Ref<RenderPass> renderPass;
     Ref<Material> highlightMaterial;
     SceneCameraData sceneCamera;
-    std::vector<PointLightData> pointLights;
+    
+    // Light Data
+    uint32_t numLightStored = 0;
+    std::array<PointLightData, 1> pointLights;
   };
   
   class SceneRenderer
@@ -61,7 +65,7 @@ namespace IKan
     
     /// This function adds the point light in scene
     /// - Parameter pointLight: point light data
-    void AddPointLight(const PointLightData& pointLight);
+    void SubmitPointLight(const PointLightData& pointLight);
     
     /// This function begins the Batch for 2D Rendere (to be called each frame)
     /// - Parameter sceneCamera: Camera data

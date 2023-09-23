@@ -527,6 +527,10 @@ if (!Project::GetActive()) return
   
   void RendererLayer::RenderMiniViewport()
   {
+    if (!m_miniViewportRenderer)
+    {
+      return;
+    }
     static constexpr glm::mat4 unitMat4 = glm::mat4(1.0f);
     static constexpr glm::vec3 size = {1.0f/4.0f, -1.0f/4.0f, 1.0f};
     static constexpr glm::vec3 position = {0.88f, 0.88f, 0.0f};

@@ -65,12 +65,9 @@ namespace IKan
     }
   }
   
-  void SceneRenderer::AddPointLight(const PointLightData &pointLight)
+  void SceneRenderer::SubmitPointLight(const PointLightData &pointLight)
   {
-    if (m_commonData->pointLights.size() < MAX_LIGHTS)
-    {
-      m_commonData->pointLights.emplace_back(pointLight);
-    }
+    m_commonData->pointLights[m_commonData->numLightStored++] = pointLight;
   }
 
   void SceneRenderer::BeginScene(const SceneCameraData& sceneCamera)
@@ -81,6 +78,13 @@ namespace IKan
       m_commonData->renderPass->Resize(m_commonData->viewportWidth, m_commonData->viewportHeight);
     }
     m_commonData->sceneCamera = sceneCamera;
+    
+    // Reset all lights before scene begins
+    m_commonData->numLightStored = 0;
+    for (uint32_t i = 0; i < MAX_LIGHTS; i++)
+    {
+      m_commonData->pointLights[i].active = false;
+    }
   }
   
   void SceneRenderer::SubmitMeshSource(Ref<MeshSource> mesh, const glm::mat4& transform, const Ref<Material>& oevrridenMaterial)
@@ -154,6 +158,12 @@ namespace IKan
     for (const auto& dc : m_meshSourceDrawList)
     {
       auto material = dc.oevrridenMaterial ? dc.oevrridenMaterial : dc.staticMesh->GetBaseMaterial();
+      
+      // Submit the Light to PBR Shader
+      {
+        material->Set("u_LightData", m_commonData->pointLights.at(0));
+      }
+      
       RenderMesh(dc.staticMesh->GetSubMeshes(), dc.staticMesh->GetPipeline(), material, dc.transform);
     }
   }

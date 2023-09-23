@@ -7,12 +7,12 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 3.65612602, -4.55216122]
+      Position: [0, 3.65612602, -4.54820728]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     PointLightComponent:
       Active: true
-      Radiance: [1, 1, 1]
+      Radiance: [0.94092828, 0.429581523, 0.206448406]
   - Entity: 1170323037244525108
     TagComponent:
       Tag: Cube
@@ -114,6 +114,19 @@ Entities:
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
+  - Entity: 6965305058027211016
+    TagComponent:
+      Tag: Point Light
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [2.95486832, 3.3629241, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    PointLightComponent:
+      Active: true
+      Radiance: [0.214320257, 0.700421929, 0.174366668]
   - Entity: 8863288816124221625
     TagComponent:
       Tag: Sphere
