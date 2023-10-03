@@ -26,6 +26,9 @@ Assets:
   - Handle: 751491585
     FilePath: Textures/PBR/Wall/roughness.png
     Type: Image
+  - Handle: 851870536
+    FilePath: Meshes/Materials/1_Material#0.ikmat
+    Type: MaterialAsset
   - Handle: 895159525
     FilePath: Textures/PBR/RustedIron/metallic.png
     Type: Image
@@ -98,6 +101,12 @@ Assets:
   - Handle: 3918412116
     FilePath: Textures/PBR/Wall/albedo.png
     Type: Image
+  - Handle: 2990653255052705567
+    FilePath: Meshes/Materials/0_Material#0.ikmat
+    Type: MaterialAsset
+  - Handle: 3835501295070153634
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
   - Handle: 4270612629506004932
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
@@ -110,17 +119,35 @@ Assets:
   - Handle: 6636747192013412736
     FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
+  - Handle: 6730041007619593802
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
+  - Handle: 6983201329962818967
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
+  - Handle: 7559834866401561398
+    FilePath: Meshes/Materials/0_Material#0.ikmat
+    Type: MaterialAsset
   - Handle: 8107084714790557332
     FilePath: Meshes/Materials/4_Material#0.ikmat
     Type: MaterialAsset
+  - Handle: 8240297858903162943
+    FilePath: Meshes/Default/Sphere.fbx
+    Type: MeshSource
   - Handle: 8257003390942154235
     FilePath: Meshes/Materials/2_Material#0.ikmat
     Type: MaterialAsset
   - Handle: 8767689045415563835
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
+  - Handle: 10466813113735835105
+    FilePath: Meshes/Default/Cube.fbx
+    Type: MeshSource
   - Handle: 10567884882324931483
     FilePath: Meshes/Default/Sphere.fbx
+    Type: MeshSource
+  - Handle: 14348778942161591721
+    FilePath: Meshes/Default/Cube.fbx
     Type: MeshSource
   - Handle: 14405600240978536040
     FilePath: Meshes/Materials/3_Material#0.ikmat
