@@ -182,7 +182,7 @@ vec3 CalculateLight(vec3 F0)
       
       float distance = length(u_LightData[i].Position - vs_Input.WorldPosition);
       float attenuation = 1.0 / (distance * distance);
-      vec3 radiance = u_LightData[i].Radiance;// * attenuation;
+      vec3 radiance = u_LightData[i].Radiance * 10;
       
       // Cook-Torrance BRDF
       float NDF = DistributionGGX(N, H, m_Params.Roughness);
@@ -246,7 +246,7 @@ void main()
   vec3 F0 = vec3(0.04);
   F0 = mix(F0, m_Params.Albedo, m_Params.Metalness);
 
-  vec3 light = CalculateLight(F0);
+  vec3 light = vec3(0.0f); //CalculateLight(F0);
   
   // Ambient lighting Even in dark there should be some Light
   // TODO: Replace with direction light later?
