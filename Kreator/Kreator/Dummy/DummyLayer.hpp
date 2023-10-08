@@ -1,8 +1,8 @@
 //
-//  RendererLayer.hpp
+//  DummyLayer.hpp
 //  Kreator
 //
-//  Created by Ashish . on 29/07/23.
+//  Created by Ashish . on 08/10/23.
 //
 
 #pragma once
@@ -12,16 +12,16 @@
 
 namespace Kreator
 {
-  class RendererLayer : public Layer
+  class DummyLayer : public Layer
   {
   public:
     /// This is Renderer Layer's Default Constructor
     /// - Parameters:
     ///   - userPreferences: User preference
     ///   - clientResourcePath: Client resource path
-    RendererLayer(Ref<UserPreferences> userPreferences, const std::filesystem::path& clientResourcePath);
+    DummyLayer(Ref<UserPreferences> userPreferences, const std::filesystem::path& clientResourcePath);
     /// Default Destructor
-    virtual ~RendererLayer();
+    virtual ~DummyLayer();
     
     // Overriden APIs ------------------------------------------------------------------------------------------------
     /// This funciton initialises the layer, calls when we push layer in the application (To be called only once)
@@ -51,13 +51,13 @@ namespace Kreator
     std::filesystem::path GetClientResorucePath() const;
     
     /// This function returns the single instance of the renderer layer
-    static RendererLayer& Get();
+    static DummyLayer& Get();
     
   private:
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;
     
     // Single Instance -----------------------------------
-    static RendererLayer* s_instance;
+    static DummyLayer* s_instance;
   };
 } // namespace Kreator

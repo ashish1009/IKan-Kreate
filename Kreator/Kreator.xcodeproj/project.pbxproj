@@ -19,6 +19,7 @@
 		B24076D62A72375000221919 /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24076D52A72375000221919 /* Kreator.cpp */; };
 		B24077072A72591900221919 /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B24077062A72591900221919 /* libIKan.a */; };
 		B24A8A612AAB516500FABB45 /* DefaultMeshes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A8A5F2AAB516500FABB45 /* DefaultMeshes.cpp */; };
+		B25A1C982AD2BF2700ED66DC /* DummyLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B25A1C962AD2BF2700ED66DC /* DummyLayer.cpp */; };
 		B26B1AA22A7D1EBC00676419 /* KreatorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AA02A7D1EBC00676419 /* KreatorConsolePanel.cpp */; };
 		B26B1AA52A7D261000676419 /* Widget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AA32A7D261000676419 /* Widget.cpp */; };
 		B26B1AA82A7D5D6F00676419 /* ProjectSettingPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B26B1AA62A7D5D6F00676419 /* ProjectSettingPanel.cpp */; };
@@ -74,6 +75,8 @@
 		B24A8A5F2AAB516500FABB45 /* DefaultMeshes.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = DefaultMeshes.cpp; sourceTree = "<group>"; };
 		B24A8A602AAB516500FABB45 /* DefaultMeshes.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = DefaultMeshes.hpp; sourceTree = "<group>"; };
 		B24A8AC52AACDC6900FABB45 /* JointMeshShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = JointMeshShader.glsl; sourceTree = "<group>"; };
+		B25A1C962AD2BF2700ED66DC /* DummyLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = DummyLayer.cpp; sourceTree = "<group>"; };
+		B25A1C972AD2BF2700ED66DC /* DummyLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = DummyLayer.hpp; sourceTree = "<group>"; };
 		B26B1AA02A7D1EBC00676419 /* KreatorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorConsolePanel.cpp; sourceTree = "<group>"; };
 		B26B1AA12A7D1EBC00676419 /* KreatorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KreatorConsolePanel.hpp; sourceTree = "<group>"; };
 		B26B1AA32A7D261000676419 /* Widget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Widget.cpp; sourceTree = "<group>"; };
@@ -138,8 +141,8 @@
 		B24076D42A72375000221919 /* Kreator */ = {
 			isa = PBXGroup;
 			children = (
+				B25A1C952AD2BF1800ED66DC /* Dummy */,
 				B24076D52A72375000221919 /* Kreator.cpp */,
-				B24A8A4F2AAB0E2300FABB45 /* DummyApplication.hpp */,
 				B23365942A75355200BC7B8B /* RendererLayer.cpp */,
 				B23365952A75355200BC7B8B /* RendererLayer.hpp */,
 				B27B98C32AA9C173004A0388 /* Utils */,
@@ -177,6 +180,16 @@
 				B24A8AC52AACDC6900FABB45 /* JointMeshShader.glsl */,
 			);
 			path = Shader;
+			sourceTree = "<group>";
+		};
+		B25A1C952AD2BF1800ED66DC /* Dummy */ = {
+			isa = PBXGroup;
+			children = (
+				B24A8A4F2AAB0E2300FABB45 /* DummyApplication.hpp */,
+				B25A1C962AD2BF2700ED66DC /* DummyLayer.cpp */,
+				B25A1C972AD2BF2700ED66DC /* DummyLayer.hpp */,
+			);
+			path = Dummy;
 			sourceTree = "<group>";
 		};
 		B26B1A9F2A7D1EAF00676419 /* Panles */ = {
@@ -265,7 +278,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastUpgradeCheck = 1430;
+				LastUpgradeCheck = 1500;
 				TargetAttributes = {
 					B24076D12A72375000221919 = {
 						CreatedOnToolsVersion = 14.3.1;
@@ -301,6 +314,7 @@
 				B27B98C62AA9C184004A0388 /* EntitySelectionContext.cpp in Sources */,
 				B24A8A612AAB516500FABB45 /* DefaultMeshes.cpp in Sources */,
 				B23365962A75355200BC7B8B /* RendererLayer.cpp in Sources */,
+				B25A1C982AD2BF2700ED66DC /* DummyLayer.cpp in Sources */,
 				B26B1ABD2A7D62D600676419 /* UIProperty.cpp in Sources */,
 				B23918E22AA09A0500641BF8 /* UserPreference.cpp in Sources */,
 				B210632B2A7E240900A28BA0 /* ContentBrowserPanel.cpp in Sources */,
