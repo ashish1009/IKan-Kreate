@@ -54,6 +54,19 @@ namespace Kreator
     static RendererLayer& Get();
     
   private:
+    // Member Variables ----------------------------------------------------------------------------------------------
+    // Flags ---------------------------------------------
+    bool m_showIcons = true;
+    bool m_showColliders = true;
+    bool m_showMiniViewport = true;
+    bool m_showGrid = true;
+    
+    // Popups --------------------------------------------
+    bool m_showWelcomePopup = false;
+    bool m_showAboutPopup = false;
+    bool m_showStatisticsPanel = true;
+    bool m_showEditorPanel = true;
+    
     // Applicaiton Icons ---------------------------------
     Ref<Image> m_shadowTexture;
     Ref<Image> m_newProject, m_folder;
@@ -61,21 +74,67 @@ namespace Kreator
     Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
     Ref<Image> m_cameraIcon, m_lightIcon;
     Ref<Image> m_settingIcon;
-
+    
     // Project Data --------------------------------------
+    bool m_showCreateNewProjectPopup = false;
+    Ref<UserPreferences> m_userPreferences;
     std::filesystem::path m_allProjectsPath = "";
     std::filesystem::path m_templateProjectDir = "";
+    std::filesystem::path m_openProjectPath = "";
+    GUI_InputBuffer<255> m_projectNameBuffer;
     GUI_InputBuffer<512> m_projectFilePathBuffer;
     Ref<Image> m_projectIcon;
-
-    // Scene Data ----------------------------------------
-    Ref<Image> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
-
-    // Guizmo Data ---------------------------------------
-    Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
+    
+    // Editor Data ---------------------------------------
+    enum class FolderExplorerAction
+    {
+      None, NewPreoject, OpenProject, SaveScene, OpenScene
+    };
+    FolderExplorerAction m_folderExplorerAction;
+    PanelManager m_panels;
+    
+    // Camera Data ---------------------------------------
+    bool m_allowViewportCameraEvents = false;
+    EditorCamera m_editorCamera;
+    
+    // View port Data ------------------------------------
+    Viewport m_viewport;
     
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;
+    
+    // Renderers -----------------------------------------
+    Ref<SceneRenderer> m_viewportRenderer;
+    Ref<SceneRenderer> m_miniViewportRenderer;
+    
+    // Scene Data ----------------------------------------
+    bool m_showNewScenePopup = false;
+    float m_timeSinceLastSave = 0.0f;
+    std::string m_sceneFilePath;
+    Ref<Scene> m_editorScene, m_currentScene, m_runtimeScene, m_simulationScene;
+    Ref<Image> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
+    enum class SceneState
+    {
+      Edit = 0, Play = 1, Pause = 2, Simulate = 3
+    };
+    SceneState m_sceneState = SceneState::Edit;
+    struct SelectedSubmesh
+    {
+      Entity entity;
+      float distance = 0.0f;
+    };
+    std::vector<SelectedSubmesh> m_selectionContext;
+    int32_t m_hoveredEntityID = -1;
+    
+    // Guizmo Data ---------------------------------------
+    bool m_hoveredGuizmotoolbar = false;
+    int32_t m_gizmoType = -1; // -1 = no gizmo
+    uint32_t m_gizmoMode = 1;  //  0 = local, 1 = World
+    Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
+    
+    // Editor Data ---------------------------------------
+    Ref<Material> m_jointMaterial;
+    Ref<Image> m_checkerboardTex;
     
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

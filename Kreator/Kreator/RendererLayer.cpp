@@ -22,6 +22,8 @@ namespace Kreator
   // Kretor Resource Path
 #define KreatorResourcePath(path) Utils::FileSystem::Absolute(m_clientResourcePath / path)
 
+  static constexpr float CamFarView = 1000.0f;
+
   RendererLayer* RendererLayer::s_instance = nullptr;
   
   RendererLayer& RendererLayer::Get()
@@ -30,8 +32,8 @@ namespace Kreator
   }
 
   RendererLayer::RendererLayer(Ref<UserPreferences> userPreference, const std::filesystem::path& clientResourcePath)
-  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath)
-  {
+  : Layer("Kreator Renderer"), m_userPreferences(userPreference), m_clientResourcePath(clientResourcePath),
+  m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, CamFarView)  {
     IK_PROFILE();
     IK_ASSERT(!s_instance, "RendererLayer instance already created");
     // Copy the single instance of application
