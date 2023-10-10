@@ -41,9 +41,10 @@ namespace IKan
     caps.renderer = (const char*)glGetString(GL_RENDERER);
     caps.version  = (const char*)glGetString(GL_VERSION);
     
-    IK_LOG_TRACE(LogModule::Renderer, "  Multi Sample | Enabled ");
+    IK_LOG_TRACE(LogModule::Renderer, "  Multi Sample | Enabled (One Minus Alpha)");
     IK_LOG_TRACE(LogModule::Renderer, "  Blending     | Enabled ");
-    IK_LOG_TRACE(LogModule::Renderer, "  Depth        | Enabled (One Minus Alpha)");
+    IK_LOG_TRACE(LogModule::Renderer, "  Depth Test   | Enabled ");
+    IK_LOG_TRACE(LogModule::Renderer, "  Stencil Test | Enabled (Replace)");
     
     IK_LOG_TRACE(LogModule::Renderer, "  Vendor       | {0}", caps.vendor);
     IK_LOG_TRACE(LogModule::Renderer, "  Renderer     | {0}", caps.renderer);
