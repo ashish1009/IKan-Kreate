@@ -12,6 +12,21 @@
 
 namespace Kreator
 {
+  /// Stores the Viewport Data
+  struct Viewport
+  {
+    bool panelMouseHover;
+    bool panelFocused;
+    uint32_t width, height;
+    glm::vec2 bounds[2];
+    int32_t mousePosX = -1;
+    int32_t mousePosY = -1;
+    
+    void UpdateMousePos();
+    std::pair<float, float> GetMouseSpace();
+    std::pair<float, float> GetMousePos();
+  };
+
   class RendererLayer : public Layer
   {
   public:
@@ -54,6 +69,29 @@ namespace Kreator
     static RendererLayer& Get();
     
   private:
+    // Member Functions ----------------------------------------------------------------------------------------------
+    /// This function handles the key press event
+    /// - Parameter e: key events
+    bool OnKeyPressedEvent(KeyPressedEvent& e);
+    /// This function handles the mouse events
+    /// - Parameter e: Mouse Event
+    bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
+
+    // Scene Panel Manager Callbacks ----------------------
+    /// This function handles the entity selection
+    /// - Parameter entities: entities
+    void OnEntitySelected(SelectionContext entities);
+    /// This function handles the entity deletion
+    /// - Parameter entities: entities
+    void OnEntityDeleted(SelectionContext entities);
+
+    /// This function clear the selected Entity
+    /// - Note: To be called inside Render Pass Begin end End
+    void ClearSelectedEntity();
+    /// This function set the selected entity
+    /// - Parameter entity: Selected entity
+    void SetSelectedEntity(Entity entity);
+
     // Member Variables ----------------------------------------------------------------------------------------------
     // Flags ---------------------------------------------
     bool m_showIcons = true;
