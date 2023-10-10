@@ -84,13 +84,16 @@ namespace Kreator
     /// This function handles the entity deletion
     /// - Parameter entities: entities
     void OnEntityDeleted(SelectionContext entities);
-
     /// This function clear the selected Entity
     /// - Note: To be called inside Render Pass Begin end End
     void ClearSelectedEntity();
     /// This function set the selected entity
     /// - Parameter entity: Selected entity
     void SetSelectedEntity(Entity entity);
+
+    // Scene APIs ----------------------------------------
+    /// This function closes the scene
+    void CloseCurrentScene();
 
     // Member Variables ----------------------------------------------------------------------------------------------
     // Flags ---------------------------------------------

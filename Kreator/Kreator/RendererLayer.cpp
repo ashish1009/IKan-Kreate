@@ -151,12 +151,65 @@ namespace Kreator
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
 
+    // Decorate the Theme ------------------------------------------------------------------------------------------
+    // Set all the required Fonts
+    UI::Font regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
+    UI::Font boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
+    UI::Font italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
+    UI::Font sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
+    UI::Font hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
+    UI::Font semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
+    UI::Theme::ChangeFont({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
+    
+    // Set the Theme of ImGui as user preference
+    Kreator_UI::SetTheme(m_userPreferences->theme);
+
+    // Open or Create Project ---------------------------------------------------------------------------------------
+    if (Utils::FileSystem::Exists(m_userPreferences->startupProject))
+    {
+      if (m_userPreferences->showWelcomeScreen)
+      {
+        m_showWelcomePopup = true;
+      }
+      else
+      {
+        IK_ASSERT(false, "Open the Project");
+      }
+    }
+    else
+    {
+      m_showWelcomePopup = true;
+    }
+
+    // Initilaize the Renderers
+    Renderer2D::Initialize({100, 100, 1000});
+
+    // Register Default Asset Editor
+    AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
+    AssetEditorManager::RegisterEditor<MaterialViewer>(AssetType::MaterialAsset);
   }
   
   void RendererLayer::OnDetach()
   {
     IK_PROFILE();
     IK_LOG_WARN("Kreator Layer", "Detaching Kreator Renderer Layer from application");
+    
+    // Clear the Asset Editor
+    AssetEditorManager::Clear();
+    
+    // Shutdown the renderers
+    Renderer2D::Shutdown();
+    m_viewportRenderer.reset();
+    m_miniViewportRenderer.reset();
+    
+    // Close the current Scene
+    CloseCurrentScene();
+    
+    // Close the project
+    Project::CloseActive();
+    
+    // Destroy Default mesh if left
+    DefaultMesh::Shutdown();
   }
   
   void RendererLayer::OnUpdate(TimeStep ts)
@@ -243,6 +296,14 @@ namespace Kreator
   void RendererLayer::SetSelectedEntity(Entity entity)
   {
     m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity);
+  }
+
+  void RendererLayer::CloseCurrentScene()
+  {
+    if (m_currentScene)
+    {
+      m_currentScene->OnClose();
+    }
   }
 
 } // namespace Kreator
