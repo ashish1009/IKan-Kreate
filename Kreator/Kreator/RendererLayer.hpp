@@ -26,7 +26,7 @@ namespace Kreator
     std::pair<float, float> GetMouseSpace();
     std::pair<float, float> GetMousePos();
   };
-
+  
   class RendererLayer : public Layer
   {
   public:
@@ -76,7 +76,93 @@ namespace Kreator
     /// This function handles the mouse events
     /// - Parameter e: Mouse Event
     bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
-
+    /// This function Updates the viewports of all Kreator Data
+    void UpdateViewportSize();
+    /// This function updates the hovered Entity
+    void UpdateHoveredEntity();
+    /// This function returns the Imguizmo Snap value
+    float GetSnapValue();
+    /// This function updates the name of window tile
+    /// - Parameter sceneName: scene name
+    void UpdateWindowTitle(const std::string& sceneName);
+    /// This function renders the mini viewport
+    void RenderMiniViewport();
+    /// This function renders the debug icons, colliders and so on....
+    void RenderDebug();
+    /// This function show the icons
+    void ShowIcons();
+    /// This function renders the debug Colliders
+    /// - Parameter color: color of Collider
+    void ShowColliders(const glm::vec4& color);
+    /// This function renders the debug Joints
+    /// - Parameter color: color of Joints
+    void ShowJoints(const glm::vec4& color);
+    /// This function renders the debug Colliders
+    /// - Parameter color: color of grid
+    void ShowGrid(const glm::vec4& color);
+    /// This function renders the Fix Texts
+    void RenderFixTexts();
+    /// This function returns the space mouse position
+    std::pair<float, float> GetMouseViewportSpace();
+    /// This function cast ray from camera
+    /// - Parameters:
+    ///   - camera: Camera
+    ///   - mx: mouse x
+    ///   - my: mouse y
+    std::pair<glm::vec3, glm::vec3> CastRay(const EditorCamera& camera, float mx, float my);
+    
+    /// This function creates the viewport instance for scene
+    /// - Parameter scene: scene reference
+    void CreateViewports(Ref<Scene> scene);
+    
+    // Project API ---------------------------------------
+    /// This function Creates new project
+    /// - Parameter projectPath: Project File path
+    void CreateProject(const std::filesystem::path& projectPath);
+    /// This function Closed the current active project
+    /// - Parameter unloadProject: flag to unload the project
+    void CloseProject(bool unloadProject = true);
+    /// This function saves the Project
+    void SaveProject();
+    /// This function opens the Project from file path
+    /// - Parameter filepath: project file path
+    void OpenProject(const std::string& filepath);
+    /// This function Opens the project from popup
+    void OpenProject();
+    /// This funciton push the current project to recent project
+    /// - Parameter projectPath: Project to be pushed
+    void PushProjectToRecentProjects(std::filesystem::path projectPath);
+    
+    // Scene APIs ----------------------------------------
+    /// This function creates new scene
+    /// - Parameter name: Scene name
+    void NewScene(const std::string& name = "UntitledScene");
+    /// This function opens new scene with file from popup
+    void OpenScene();
+    /// This function Saves the scene at new location
+    void SaveSceneAs();
+    /// This function Saves the scene
+    void SaveScene();
+    /// This function Saves the scene automatically
+    void SaveSceneAuto();
+    /// This function closes the scene
+    void CloseCurrentScene();
+    /// This function handle scene play
+    void OnScenePlay();
+    /// This function handle scene Stop
+    void OnSceneStop();
+    /// This function handle scene Pause
+    void OnScenePause();
+    /// This function handle scene Resume
+    void OnSceneResume();
+    /// This function handle scene simuation start
+    void OnSceneStartSimulation();
+    /// This function handle scene simuation ends
+    void OnSceneStopSimulation();
+    /// This function checks is entity is selected
+    /// - Parameter e: Entity to be checked
+    bool IsEntitySelected(Entity e) const;
+    
     // Scene Panel Manager Callbacks ----------------------
     /// This function handles the entity selection
     /// - Parameter entities: entities
@@ -84,17 +170,51 @@ namespace Kreator
     /// This function handles the entity deletion
     /// - Parameter entities: entities
     void OnEntityDeleted(SelectionContext entities);
+    
     /// This function clear the selected Entity
     /// - Note: To be called inside Render Pass Begin end End
     void ClearSelectedEntity();
     /// This function set the selected entity
     /// - Parameter entity: Selected entity
     void SetSelectedEntity(Entity entity);
-
-    // Scene APIs ----------------------------------------
-    /// This function closes the scene
-    void CloseCurrentScene();
-
+    
+    // UI API --------------------------------------------
+    /// This function Creates main ImGui Window with Docking
+    void UI_StartMainWindowDocking();
+    /// This function Ends Main ImGui window with Docking
+    void UI_EndMainWindowDocking();
+    /// This functions shows primary Viewport
+    void UI_Viewport();
+    /// This function shows the Welcome screen
+    void UI_WelcomePopup();
+    /// This function shows new project popup
+    void UI_NewProjectPopup();
+    /// This function update the folder explorer output
+    void UI_FolderExplorer();
+    /// This function renders our title bar
+    float UI_DrawTitlebar();
+    /// This function handle the drag and Click on title bar
+    /// - Parameter titlebarHeight: Title bar height
+    void UI_TitlebarDragArea(float titlebarHeight);
+    /// This function renders the Menu bar for Title bar
+    void UI_MenuBar();
+    /// This function renders window buttons
+    void UI_WindowButtons();
+    /// This function shows the Statistics Panel
+    void UI_StatisticsPanel();
+    /// This function popup new scene widget
+    void UI_NewScene();
+    /// This function shows the Applicaton toolbar
+    void UI_SceneToolbar();
+    /// This function renders the Guizmo toolbar
+    void UI_GuizmoToolbar();
+    /// This function Update the Guizmo Renderer
+    void UI_UpdateGuizmo();
+    /// This function shows the About Application popup
+    void UI_AboutPopup();
+    /// This function renders the editor panel
+    void UI_EditorPanel();
+    
     // Member Variables ----------------------------------------------------------------------------------------------
     // Flags ---------------------------------------------
     bool m_showIcons = true;
