@@ -54,6 +54,26 @@ namespace Kreator
     static RendererLayer& Get();
     
   private:
+    // Applicaiton Icons ---------------------------------
+    Ref<Image> m_shadowTexture;
+    Ref<Image> m_newProject, m_folder;
+    Ref<Image> m_applicationIcon, m_welcomeIcon;
+    Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
+    Ref<Image> m_cameraIcon, m_lightIcon;
+    Ref<Image> m_settingIcon;
+
+    // Project Data --------------------------------------
+    std::filesystem::path m_allProjectsPath = "";
+    std::filesystem::path m_templateProjectDir = "";
+    GUI_InputBuffer<512> m_projectFilePathBuffer;
+    Ref<Image> m_projectIcon;
+
+    // Scene Data ----------------------------------------
+    Ref<Image> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
+
+    // Guizmo Data ---------------------------------------
+    Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
+    
     // Client Data ---------------------------------------
     std::filesystem::path m_clientResourcePath;
     
