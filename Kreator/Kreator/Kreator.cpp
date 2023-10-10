@@ -110,11 +110,34 @@ namespace Kreator
         IK_LOG_TRACE("Kreator App", "  Startup Project            : {0}", IKan::Utils::FileSystem::IKanAbsolute(userPreference->startupProject));
       }
 
+      IK_LOG_TRACE("Kreator App", " ++++++++++++           Initializing the Renderer Layer            +++++++++++++++");
+
+      // Create and Push the Rendere Layer --------------------------------------------------------
+      m_rendereLayer = CreateRef<RendererLayer>(userPreference, m_clientResourcePath);
+      PushLayer(m_rendereLayer);
+      
+      IK_LOG_TRACE("Kreator App", " ++++++++++++          Initializing the Application Data           +++++++++++++++");
+      
+      // Initialize the Kreator Modules -------------------------------------------------------------
+      // Should get initialized after layer initialize
+      FolderExplorer::Initialize();
+      Kreator_UI::Widgets::Initialize();
+      ApplicationSettingsSerializer::Initialize();
+      SceneHierarchyPanel::Initialize();
     }
 
     void OnShutdown() override
     {
       IK_PROFILE();
+
+      // Shutdown the Kreator Modules -------------------------------------------------------------
+      SceneHierarchyPanel::Shutdown();
+      Kreator_UI::Widgets::Shutdown();
+      FolderExplorer::Shutdown();
+      
+      // Destroy and Pop the Rendere Layer --------------------------------------------------------
+      PopLayer(m_rendereLayer);
+      m_rendereLayer.reset();
     }
     
   private:

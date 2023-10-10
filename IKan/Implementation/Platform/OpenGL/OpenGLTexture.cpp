@@ -247,6 +247,10 @@ namespace IKan
       IK_LOG_DEBUG(LogModule::Texture, "  Type               {0}", TextureUtils::IKanTypeName(type));
       IK_LOG_DEBUG(LogModule::Texture, "  Wrap               {0}", TextureUtils::IKanWrapName(wrap));
       IK_LOG_DEBUG(LogModule::Texture, "  Filter             {0}", TextureUtils::IKanFilterName(filter));
+      IK_LOG_DEBUG(LogModule::Texture, "  Total Size in GPU  {0} B ({1} KB, {2} MB",
+                   RendererStatistics::Get().textureBufferSize,
+                   RendererStatistics::Get().textureBufferSize / 1000,
+                   RendererStatistics::Get().textureBufferSize / 1000000);
     }
     else
     {
@@ -349,6 +353,10 @@ namespace IKan
       IK_LOG_DEBUG(LogModule::Texture, "  Type            {0}", TextureUtils::IKanTypeName(m_specification.type));
       IK_LOG_DEBUG(LogModule::Texture, "  Wrap            {0}", TextureUtils::IKanWrapName(m_specification.wrap));
       IK_LOG_DEBUG(LogModule::Texture, "  Filter          {0}", TextureUtils::IKanFilterName(m_specification.filter));
+      IK_LOG_DEBUG(LogModule::Texture, "  Total Size in GPU  {0} B ({1} KB, {2} MB",
+                   RendererStatistics::Get().textureBufferSize,
+                   RendererStatistics::Get().textureBufferSize / 1000,
+                   RendererStatistics::Get().textureBufferSize / 1000000);
     }
   }
   

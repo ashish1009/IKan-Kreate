@@ -14,7 +14,7 @@ namespace IKan
   {
   public:
     // Member Variables ----------------------------------------------------------------------------------------------
-    uint32_t vertexBufferSize = 0, indexBufferSize = 0, textureBufferSize = 0;
+    uint64_t vertexBufferSize = 0, indexBufferSize = 0, textureBufferSize = 0;
     uint32_t vertexCount  = 0, indexCount = 0;
     uint32_t drawCalls = 0;
     
