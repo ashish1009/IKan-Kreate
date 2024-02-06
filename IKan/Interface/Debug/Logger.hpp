@@ -22,11 +22,18 @@ namespace IKan
   {
     Core
   };
+  
+  /// This enum stores the Log level of engine
+  enum class LoggerLevel : uint8_t
+  {
+    Trace, Debug, Info, Warning, Error, Critical
+  };
 
   /// This structure stores the logger specificaion
   struct LoggerSpecificaion
   {
     LoggerType type;
+    LoggerLevel level = LoggerLevel::Trace;
     std::string loggerName = "IKAN";
     std::filesystem::path saveLogFilePath = "";
     spdlog::sink_ptr overrideSink = nullptr;
@@ -39,6 +46,7 @@ namespace IKan
   struct LoggerSpecBuilder
   {
     LoggerSpecBuilder& Type(LoggerType type);
+    LoggerSpecBuilder& level(LoggerLevel level);
     LoggerSpecBuilder& Name(const std::string& loggerName);
     LoggerSpecBuilder& SaveAt(const std::filesystem::path& saveLogFilePath);
     LoggerSpecBuilder& OverrideSink(spdlog::sink_ptr sink);
