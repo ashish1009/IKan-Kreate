@@ -8,6 +8,7 @@
 #pragma once
 
 #include <spdlog/spdlog.h>
+#include <spdlog/sinks/basic_file_sink.h>
 
 #include "Base/Configurations.h"
 
@@ -25,14 +26,27 @@ namespace IKan
   /// This structure stores the logger specificaion
   struct LoggerSpecificaion
   {
+    LoggerType type;
+    std::string loggerName = "IKAN";
+    std::filesystem::path saveLogFilePath = "";
+    spdlog::sink_ptr overrideSink = nullptr;
+    bool showOnConsile = false;
+
     static LoggerSpecBuilder Create();
   };
   
   /// This structure Builds the logger specificaion
   struct LoggerSpecBuilder
   {
-    LoggerSpecificaion loggerSpecification;
+    LoggerSpecBuilder& Type(LoggerType type);
+    LoggerSpecBuilder& Name(const std::string& loggerName);
+    LoggerSpecBuilder& SaveAt(const std::filesystem::path& saveLogFilePath);
+    LoggerSpecBuilder& OverrideSink(spdlog::sink_ptr sink);
+    LoggerSpecBuilder& ShowOnConsole();
     operator LoggerSpecificaion() const;
+    
+  private:
+    LoggerSpecificaion loggerSpecification;
   };
   
   /// This class Initializes the SPD logger for different modules.
