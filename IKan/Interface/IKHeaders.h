@@ -6,3 +6,16 @@
 //
 
 #pragma once
+
+// To remove documentation warning in entt::entity
+#pragma clang diagnostic ignored "-Wdocumentation"
+#pragma clang diagnostic ignored "-Wformat-security"
+
+// C++ Files
+#include <iostream>
+#include <unordered_map>
+
+// Engine Files
+#include <Base/Configurations.h>
+
+#include <Debug/Logger.hpp>

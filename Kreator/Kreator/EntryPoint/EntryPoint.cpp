@@ -13,7 +13,10 @@
 ///   - argv: Arguments ...
 int main(int argc, const char * argv[])
 {
-  // insert code here...
-  std::cout << "Hello, World!\n";
+  // Initialize the Core Engine
+  {
+    IKan::LoggerSpecificaion coreLogger = IKan::LoggerSpecificaion::Create();
+    IKan::Logger::Add(coreLogger);
+  }
   return 0;
 }
