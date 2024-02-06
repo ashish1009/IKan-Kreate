@@ -20,3 +20,4 @@
 #include <Base/Configurations.h>
 
 #include <Debug/Logger.hpp>
+#include <Debug/LoggerBuilder.hpp>
