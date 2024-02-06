@@ -19,13 +19,13 @@ namespace IKan
     return loggerSpecification;
   }
   
-  LoggerSpecBuilder& LoggerSpecBuilder::Type(LoggerType type)
+  LoggerSpecBuilder& LoggerSpecBuilder::Type(LogType type)
   {
     loggerSpecification.type = type;
     return *this;
   }
   
-  LoggerSpecBuilder& LoggerSpecBuilder::level(LoggerLevel level)
+  LoggerSpecBuilder& LoggerSpecBuilder::level(LogLevel level)
   {
     loggerSpecification.level = level;
     return *this;

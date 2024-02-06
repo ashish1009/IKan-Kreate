@@ -17,8 +17,10 @@ int main(int argc, const char * argv[])
 {
   // Initialize the Core Engine
   {
-    LoggerSpecificaion coreLogger = LoggerSpecificaion::Create().Type(LoggerType::Core).Name("KREATOR").SaveAt("").ShowOnConsole();
+    LoggerSpecificaion coreLogger = LoggerSpecificaion::Create().Type(LogType::Core).Name("KREATOR").SaveAt("../../../Log/Kreator.log").ShowOnConsole();
     Logger::Add(coreLogger);
+    
+    Logger::PrintMessage(LogType::Core, LogLevel::Trace, LogModule::None, "Testing Logger{0}", 1);
   }
   return 0;
 }

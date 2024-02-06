@@ -27,16 +27,16 @@ namespace IKan
     
     /// This funcion converts the Ikan logger level to spd logger level
     /// - Parameter level: Ikan Logger level
-    spdlog::level::level_enum GetSpdLevel(LoggerLevel level)
+    spdlog::level::level_enum GetSpdLevel(LogLevel level)
     {
       switch (level) 
       {
-        case LoggerLevel::Trace: return spdlog::level::trace;
-        case LoggerLevel::Debug: return spdlog::level::debug;
-        case LoggerLevel::Info: return spdlog::level::info;
-        case LoggerLevel::Warning: return spdlog::level::warn;
-        case LoggerLevel::Error: return spdlog::level::err;
-        case LoggerLevel::Critical: return spdlog::level::critical;
+        case LogLevel::Trace: return spdlog::level::trace;
+        case LogLevel::Debug: return spdlog::level::debug;
+        case LogLevel::Info: return spdlog::level::info;
+        case LogLevel::Warning: return spdlog::level::warn;
+        case LogLevel::Error: return spdlog::level::err;
+        case LogLevel::Critical: return spdlog::level::critical;
         default:
           break;
       }
@@ -67,11 +67,42 @@ namespace IKan
     {
       sink.emplace_back(CreateRef<spdlog::sinks::basic_file_sink_mt>(loggerSpec.saveLogFilePath, true /* Truncste the Log file */));
     }
-    LoggerUtils::SetPatternInSinks(sink, "[%T%e : %-8l] : %v%$");
+    LoggerUtils::SetPatternInSinks(sink, "[%T%e : %-8l : %v%$");
 
     // 3. Create the logger
     Ref<spdlog::logger> logger = CreateRef<spdlog::logger>(loggerSpec.loggerName, sink.begin(), sink.end());
     logger->set_level(LoggerUtils::GetSpdLevel(loggerSpec.level));
     logger->flush_on(LoggerUtils::GetSpdLevel(loggerSpec.level));
+    
+    s_loggers[loggerSpec.type] = logger;
+  }
+  
+  std::string Logger::GetModuleName(LogModule tag)
+  {
+    return LogModuleString[static_cast<size_t>(tag)];
+  }
+  
+  std::string Logger::GetModuleName(const std::string_view& tag)
+  {
+    return static_cast<std::string>(tag);
+  }
+  
+  Ref<spdlog::logger> Logger::GetLogger(LogType type)
+  {
+    if (s_loggers.find(type) != s_loggers.end())
+    {
+      return s_loggers.at(type);
+    }
+    return nullptr;
+  }
+
+  const Logger::TagDetails& Logger::GetTagDetails(const std::string& moduleName)
+  {
+    return (HasTag(moduleName)) ? s_tags.at(moduleName) : s_tags[static_cast<std::string>(moduleName)];
+  }
+  
+  bool Logger::HasTag(const std::string &moduleName)
+  {
+    return s_tags.find(moduleName) != s_tags.end();
   }
 } // namespace IKan

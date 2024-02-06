@@ -7,6 +7,19 @@
 
 #pragma once
 
+// Enum Creation Macro -----------------------------------------------------------------------------------------------
+/// Helper MACRO for Enum creation
+#define VAL(name) name ,
+#define STRING(name) #name,
+
+/// This MACRO Creates enum also store all the element as string in an array
+/// e.g. if Name is passed as "Test" then enum would be "enum class Test" and
+/// the Array that stores the enum element as string is "TestString[]", just
+/// pass the enum element as index in array,
+#define CreateEnum(Name) \
+enum class Name { Name(VAL) }; \
+static const char* Name##String[] = { Name(STRING) }; \
+
 // Constructors and Assignment Operators Defination ------------------------------------------------------------------
 /// This MACRO deletes the Constructors (Copy and Move ) and Operator = (Copy and Move) for any class x to make a
 /// class singleton.
