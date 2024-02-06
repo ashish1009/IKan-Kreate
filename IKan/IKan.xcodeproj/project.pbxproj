@@ -12,8 +12,8 @@
 		B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */; };
 		B2ED5CB22B724AAC007A7F36 /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5CB02B724AAC007A7F36 /* Logger.hpp */; };
 		B2ED5CB82B724B39007A7F36 /* Macros.h in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5CB62B724B39007A7F36 /* Macros.h */; };
-		B2ED5CBA2B724B5B007A7F36 /* IKHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5CB92B724B5B007A7F36 /* IKHeaders.h */; };
 		B2ED5CBC2B724B7F007A7F36 /* PrefixHeader.pch in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5CBB2B724B7F007A7F36 /* PrefixHeader.pch */; };
+		B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5CBF2B724D1D007A7F36 /* IKHeaders.h */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,8 +23,8 @@
 		B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
 		B2ED5CB02B724AAC007A7F36 /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
 		B2ED5CB62B724B39007A7F36 /* Macros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Macros.h; sourceTree = "<group>"; };
-		B2ED5CB92B724B5B007A7F36 /* IKHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKHeaders.h; sourceTree = "<group>"; };
 		B2ED5CBB2B724B7F007A7F36 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B2ED5CBF2B724D1D007A7F36 /* IKHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKHeaders.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +42,6 @@
 			isa = PBXGroup;
 			children = (
 				B2ED5CBB2B724B7F007A7F36 /* PrefixHeader.pch */,
-				B2ED5CB92B724B5B007A7F36 /* IKHeaders.h */,
 				B2ED5C962B723F52007A7F36 /* Assets */,
 				B2ED5C942B723F48007A7F36 /* Interface */,
 				B2ED5C952B723F4D007A7F36 /* Implementation */,
@@ -62,6 +61,7 @@
 		B2ED5C942B723F48007A7F36 /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				B2ED5CBF2B724D1D007A7F36 /* IKHeaders.h */,
 				B2ED5CB32B724B02007A7F36 /* Base */,
 				B2ED5CAD2B724A8D007A7F36 /* Debug */,
 				B2ED5C9B2B723F7D007A7F36 /* Core */,
@@ -148,8 +148,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2ED5CB22B724AAC007A7F36 /* Logger.hpp in Headers */,
-				B2ED5CBA2B724B5B007A7F36 /* IKHeaders.h in Headers */,
 				B2ED5CB82B724B39007A7F36 /* Macros.h in Headers */,
+				B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */,
 				B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */,
 				B2ED5CBC2B724B7F007A7F36 /* PrefixHeader.pch in Headers */,
 			);

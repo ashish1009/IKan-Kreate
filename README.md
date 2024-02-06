@@ -18,6 +18,14 @@ Make sure that you do a `--recursive` clone to fetch all of the submodules!
 IKan Library can be used separately independent to develop your own Editor/Game
 
 ### How to Use the library
+`{...} directory where IKan Engine is cloned`
+- Link the libikan.a in your project...
+- Include the IKHeaders.h to use all the interface files that are important
+
+#### Header Search Paths
+`{...} directory where IKan Engine is cloned`
+- {...}/Interface
+- {...}/Vendors/SpdLog/include
 
 ### Features
 
