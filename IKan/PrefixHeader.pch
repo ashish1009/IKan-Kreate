@@ -22,3 +22,4 @@
 
 // Engine Files
 #include "Base/Configurations.h"
+#include "Debug/Logger.hpp"

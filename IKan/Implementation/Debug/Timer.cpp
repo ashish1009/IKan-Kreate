@@ -9,7 +9,7 @@
 
 namespace IKan
 {
-  // Timer ----------------------------------------------------------------------------------------------------
+  // Timer ------------------------------------------------------------------------------------------------------------
   Timer::Timer()
   {
     Reset();
@@ -38,5 +38,20 @@ namespace IKan
   double Timer::ElapsedNanoSeconds() const
   {
     return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - m_startTime).count();
+  }
+  
+  // Scoped Timer -----------------------------------------------------------------------------------------------------
+  ScopedTimer::ScopedTimer(const char* functionName)
+  : m_functionName(functionName)
+  {
+    m_startTime = std::chrono::high_resolution_clock::now();
+  }
+  
+  ScopedTimer::~ScopedTimer()
+  {
+    m_endTime = std::chrono::high_resolution_clock::now();;
+    m_duration = m_endTime - m_startTime;
+        
+    IK_PROFILE_INFO("{0} : {1}", m_functionName, m_duration.count() * 1000);
   }
 } // namespace IKan
