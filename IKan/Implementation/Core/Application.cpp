@@ -17,21 +17,30 @@ namespace IKan
     s_instance = this;
     
     IK_LOG_INFO(LogModule::Application, "Initializing Core application data");
+    m_applicationImpl->Initialize(appSpec);
+    m_applicationImpl->SetOnUpdateCallback([this](TimeStep ts) { OnUpdate(ts); });
+    m_applicationImpl->SetOnImguiRenderCallback([this]() { OnImGuiRender(); });
   }
   Application::~Application()
   {
     IK_PROFILE();
     IK_LOG_INFO(LogModule::Application, "Destroying Core application data");
+    m_applicationImpl->Shutdown();
   }
   
   void Application::Run()
   {
+    OnInit();
     m_applicationImpl->Run();
+    OnShutdown();
   }
   
   void Application::HandleEvents(Event &event)
   {
     m_applicationImpl->HandleEvents(event);
+
+    // Client side event handler funciton
+    OnEvent(event);
   }
   
   void Application::Close()
@@ -49,6 +58,20 @@ namespace IKan
   {
     IK_PROFILE();
     m_applicationImpl->PopLayer(layer);
+  }
+
+  const ApplicationSpecification& Application::GetSpecification() const
+  {
+    return m_applicationImpl->GetSpecification();
+  }
+  TimeStep Application::GetTimestep() const
+  {
+    return m_applicationImpl->GetTimestep();
+  }
+
+  Application& Application::Get()
+  {
+    return *s_instance;
   }
 
 } // namespace IKan

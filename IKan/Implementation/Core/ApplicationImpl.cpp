@@ -9,6 +9,23 @@
 
 namespace IKan
 {
+  void Application::Impl::Initialize(const ApplicationSpecification& appSpec)
+  {
+    IK_PROFILE();
+    
+    // Copy the Specificaion
+    m_specification = appSpec;
+    
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
+    IK_LOG_INFO("", "                     Core Application Initialized                         ");
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
+  }
+  
+  void Application::Impl::Shutdown()
+  {
+    IK_PROFILE();
+  }
+  
   void Application::Impl::Run()
   {
     IK_PERFORMANCE("Application::Run");
@@ -22,6 +39,11 @@ namespace IKan
       {
         layer->OnUpdate(m_timeStep);
       }
+      
+      // Render the Gui for Application
+      ImGuiRender();
+      
+      m_onUpdateCallback(m_timeStep);
     }
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                           Ending Game Loop                               ");
@@ -30,6 +52,9 @@ namespace IKan
   
   void Application::Impl::HandleEvents(Event &event)
   {
+    EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<WindowCloseEvent>(IK_BIND_EVENT_FN(Application::Impl::WindowClose));
+
     // Event Handler for all layers
     for (auto& layer : m_layers)
     {
@@ -37,9 +62,29 @@ namespace IKan
     }
   }
   
+  bool Application::Impl::WindowClose([[maybe_unused]] WindowCloseEvent& window_close_event)
+  {
+    IK_PROFILE();
+    Close();
+    return false;
+  }
+
+  void Application::Impl::ImGuiRender()
+  {
+    // Render Imgui for all layers
+    for (auto& layer : m_layers)
+    {
+      layer->OnImGuiRender();
+    }
+    
+    m_onImguiRenderCallback();
+  }
+
   void Application::Impl::Close()
   {
     IK_PROFILE();
+    m_isRunning = false;
+    IK_LOG_TRACE(LogModule::Application, "Closing the Application");
   }
   
   void Application::Impl::PushLayer(const Ref<Layer>& layer)
@@ -52,5 +97,24 @@ namespace IKan
   {
     IK_PROFILE();
     m_layers.PopLayer(layer);
+  }
+  
+  void Application::Impl::SetOnUpdateCallback(const std::function<void(TimeStep)>& func)
+  {
+    m_onUpdateCallback = func;
+  }
+  void Application::Impl::SetOnImguiRenderCallback(const std::function<void()>& func)
+  {
+    m_onImguiRenderCallback = func;
+  }
+  
+  const ApplicationSpecification& Application::Impl::GetSpecification() const
+  {
+    return m_specification;
+  }
+  
+  TimeStep Application::Impl::GetTimestep() const
+  {
+    return m_timeStep;
   }
 } // namespace IKan

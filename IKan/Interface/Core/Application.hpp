@@ -55,6 +55,24 @@ namespace IKan
     /// - Parameter layer: Layer Reference pointer to be removed
     void PopLayer(const Ref<Layer>& layer);
     
+    // Virtual APIs ---------------------------------------------------------------------------------------------------
+    /// This function calls before game loop
+    virtual void OnInit() {}
+    /// This function calls After game loop
+    virtual void OnShutdown() {}
+    /// This function calls in Game Loop Running
+    virtual void OnUpdate(TimeStep ts) {}
+    /// This function calls when an event triggers
+    virtual void OnEvent(Event& event) {}
+    /// This function calls in Game Loop under Gui Layer
+    virtual void OnImGuiRender() {}
+
+    // Getters --------------------------------------------------------------------------------------------------------
+    /// This function returns the specification of application
+    const ApplicationSpecification& GetSpecification() const;
+    /// This function returns the time step of frame
+    TimeStep GetTimestep() const;
+    
     // Static APIs ----------------------------------------------------------------------------------------------------
     /// This function returns the reference of application instance.
     static Application& Get();
