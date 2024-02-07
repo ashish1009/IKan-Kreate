@@ -18,7 +18,7 @@ namespace IKan
 #define LogModule(f) \
 f(None) \
 f(Profiler) \
-f(Application) f(LayerStack) \
+f(Application) f(LayerStack) f(Window) \
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)

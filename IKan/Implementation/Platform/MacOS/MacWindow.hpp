@@ -1,5 +1,5 @@
 //
-//  Window.hpp
+//  MacWindow.hpp
 //  IKan
 //
 //  Created by Ashish . on 07/02/24.
@@ -7,76 +7,68 @@
 
 #pragma once
 
-#include "Event/Event.h"
-#include "Core/TimeStep.hpp"
+#include <GLFW/glfw3.h>
+#include "Core/Window.hpp"
 
 namespace IKan
 {
-  /// This structure storest the window specificaion for GLFW Window creation
-  struct WindowSpecification
-  {
-    std::string title = "Untitled Window";
-    uint32_t width = 0, height = 0;
-    bool isFullScreen = false;
-    bool hideTitleBar = false;
-#ifndef __APPLE__
-    bool isVsync = true;
-#endif
-  };
-  
-  /// This is the default virtual destructor of Abstract window class. Provides all the APIs to be used by Application
-  class Window
+  /// This is the implementation class for MAC GLFW Window
+  class MacWindow : public Window
   {
   public:
-    virtual ~Window() = default;
-
+    /// This is the constructor to create the window fror MAC OS
+    /// - Parameter windowSpec: Window specification provided by user
+    MacWindow(const WindowSpecification& windowSpec);
+    /// This is the default destructor of MAC Window
+    ~MacWindow();
+    
     // Fundamentals ---------------------------------------------------------------------------------------------------
     /// This function updates the window for each frame. This function to be called by application on each frame.
     /// It swap the context buffers. Also update the time of each frame
-    virtual void Update() = 0;
+    void Update() override;
     /// This function updates the event callback function and register it to the window instance
     /// - Parameter eventCallbackFn: function pointer to be registered in the window
     /// - Important: EventCallbackFn to be called every time any even triggered to window
-    virtual void SetEventFunction(const EventCallbackFn& eventCallbackFn) = 0;
+    void SetEventFunction(const EventCallbackFn& eventCallbackFn) override;
     
     // Controllers ----------------------------------------------------------------------------------------------------
     /// This function maximise the window to its full length based on the current monitor. Call when Window need to be
     /// maximised
-    virtual void Maximize() const = 0;
+    void Maximize() const override;
     /// This function restore the window to its original length based on the current monitor.
-    virtual void Restore() const = 0;
+    void Restore() const override;
     /// This function Minimize the window
-    virtual void Iconify() const = 0;
+    void Iconify() const override;
     /// This function places the window at the center of the screen
-    virtual void SetAtCenter() const = 0;
+    void SetAtCenter() const override;
     /// This function sets the posittion of window
     /// - Parameter pos: position of window
-    virtual void SetPosition(const glm::vec2& pos) const = 0;
+    void SetPosition(const glm::vec2& pos) const override;
     /// This function makes Window resizable if 'resizable' is true else Window can not be resized after calling this API
     /// - Parameter resizable: new flag as resizable
-    virtual void SetResizable(bool resizable) const = 0;
+    void SetResizable(bool resizable) const override;
     /// This function chnages the title of the window as 'newTitle'
     /// - Parameter newTitle: new title of the window
-    virtual void SetTitle(const std::string& newTitle) = 0;
+    void SetTitle(const std::string& newTitle) override;
     
     // Getters --------------------------------------------------------------------------------------------------------
     /// This function checks is window maximized
-    virtual bool IsMaximized() const = 0;
+    bool IsMaximized() const override;
     /// This function returns is window is active
-    virtual bool IsActive() const = 0;
+    bool IsActive() const override;
     /// This function returns is window is decoarated. When decorated then removes titlebar from the window
-    virtual bool IsTitleBarHidden() const = 0;
+    bool IsTitleBarHidden() const override;
     /// This function returns is the window is full screen
-    virtual bool IsFullscreen() const = 0;
+    bool IsFullscreen() const override;
     /// This function returns the width of window
-    virtual uint32_t GetWidth() const = 0;
+    uint32_t GetWidth() const override;
     /// This function returns the height of window
-    virtual uint32_t GetHeight() const = 0;
+    uint32_t GetHeight() const override;
     /// This function returns the current time step of this frame
-    virtual TimeStep GetTimestep() const = 0;
+    TimeStep GetTimestep() const override;
     /// This function returns the native window pointer (void*)
-    virtual void* GetNativeWindow() const = 0;
+    void* GetNativeWindow() const override;
     /// This function returns the title of the window
-    virtual const std::string& GetTitle() const = 0;
+    const std::string& GetTitle() const override;
   };
 } // namespace IKan
