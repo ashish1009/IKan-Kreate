@@ -5,16 +5,6 @@
       location = "group:README.md">
    </FileRef>
    <Group
-      location = "group:Log"
-      name = "Log">
-      <FileRef
-         location = "group:Kreator.log">
-      </FileRef>
-      <FileRef
-         location = "group:Profiler.log">
-      </FileRef>
-   </Group>
-   <Group
       location = "group:Resources"
       name = "Resources">
       <Group

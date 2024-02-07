@@ -12,7 +12,6 @@ namespace IKan
 {
   Application::Application(const ApplicationSpecification& appSpec)
   {
-    IK_PROFILE();
     IK_ASSERT(!s_instance, "Application instance already created");
     s_instance = this;
     
@@ -21,9 +20,9 @@ namespace IKan
     m_applicationImpl->SetOnUpdateCallback([this](TimeStep ts) { OnUpdate(ts); });
     m_applicationImpl->SetOnImguiRenderCallback([this]() { OnImGuiRender(); });
   }
+  
   Application::~Application()
   {
-    IK_PROFILE();
     IK_LOG_INFO(LogModule::Application, "Destroying Core application data");
     m_applicationImpl->Shutdown();
   }
@@ -45,18 +44,16 @@ namespace IKan
   
   void Application::Close()
   {
-    IK_PROFILE();
     m_applicationImpl->Close();
   }
   
   void Application::PushLayer(const Ref<Layer>& layer)
   {
-    IK_PROFILE();
     m_applicationImpl->PushLayer(layer);
   }
+  
   void Application::PopLayer(const Ref<Layer>& layer)
   {
-    IK_PROFILE();
     m_applicationImpl->PopLayer(layer);
   }
 
@@ -64,6 +61,7 @@ namespace IKan
   {
     return m_applicationImpl->GetSpecification();
   }
+  
   TimeStep Application::GetTimestep() const
   {
     return m_applicationImpl->GetTimestep();
@@ -83,5 +81,4 @@ namespace IKan
   {
     return *s_instance;
   }
-
 } // namespace IKan

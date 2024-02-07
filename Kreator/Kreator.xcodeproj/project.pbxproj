@@ -31,6 +31,8 @@
 		B2ED5CBE2B724C54007A7F36 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2ED5E182B738B23007A7F36 /* Kreator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Kreator.cpp; sourceTree = "<group>"; };
 		B2ED5E192B738B23007A7F36 /* Kreator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Kreator.hpp; sourceTree = "<group>"; };
+		B2ED5E382B73ADF6007A7F36 /* Profiler.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = Profiler.log; sourceTree = "<group>"; };
+		B2ED5E392B73ADF6007A7F36 /* Kreator.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = Kreator.log; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -49,6 +51,7 @@
 			isa = PBXGroup;
 			children = (
 				B2ED5CBE2B724C54007A7F36 /* PrefixHeader.pch */,
+				B2ED5E372B73ADF6007A7F36 /* Log */,
 				B2ED5C5D2B723E25007A7F36 /* Kreator */,
 				B2ED5C5C2B723E25007A7F36 /* Products */,
 				B2ED5C982B723F75007A7F36 /* Frameworks */,
@@ -87,6 +90,15 @@
 				B2ED5C992B723F76007A7F36 /* libIKan.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B2ED5E372B73ADF6007A7F36 /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				B2ED5E382B73ADF6007A7F36 /* Profiler.log */,
+				B2ED5E392B73ADF6007A7F36 /* Kreator.log */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

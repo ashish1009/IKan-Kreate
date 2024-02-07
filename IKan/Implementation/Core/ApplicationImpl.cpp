@@ -45,6 +45,7 @@ namespace IKan
   void Application::Impl::Run()
   {
     IK_PERFORMANCE("Application::Run");
+    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                          Starting Game Loop                              ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -126,6 +127,7 @@ namespace IKan
   {
     m_onUpdateCallback = func;
   }
+  
   void Application::Impl::SetOnImguiRenderCallback(const std::function<void()>& func)
   {
     m_onImguiRenderCallback = func;
