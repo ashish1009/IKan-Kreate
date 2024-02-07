@@ -16,7 +16,8 @@ namespace IKan
 {
   /// This enum stores the moule names of IKan Logs (Holds only IKan engine log module names)
 #define LogModule(f) \
-f(None)
+f(None) \
+f(Profiler)
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)
@@ -108,7 +109,36 @@ f(None)
     ///   - args: arguments (Log strings and other argumets to be printed via logs)
     template<typename... Args> static void PrintMessageWithoutTag(LogType type, LogLevel level, Args... args)
     {
+      // Get the Tag Details for a specific module
+      Ref<spdlog::logger> logger = GetLogger(type);
+      RETURN_IF(!logger);
+      
+      switch (level)
+      {
+        case LogLevel::Debug :
+          logger->debug(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Trace :
+          logger->trace(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Info :
+          logger->info(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Warning :
+          logger->warn(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Error :
+          logger->error(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Critical :
+          logger->critical(fmt::format(std::forward<Args>(args)...));
+          break;
+          
+        default:
+          assert(false);
+      } // Switch Log level
     }
+    
     DELETE_ALL_CONSTRUCTORS(Logger);
     
   private:
@@ -175,3 +205,5 @@ f(None)
     inline static std::map<std::string /* Module Name */, TagDetails> s_tags;
   };
 } // namespace IKan
+
+#include "Debug/LoggerAPI.h"

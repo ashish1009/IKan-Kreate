@@ -7,10 +7,14 @@
 
 #pragma once
 
+// Configurations -----------------------------------------------------------------------------------------------------
+/// Enables Log APIs
+#define IK_ENABLE_LOG 1
+
 // This MACRO Checks the condition and return if true
 #define RETURN_IF(condition) if (condition) return;
 
-// Enum Creation Macro -----------------------------------------------------------------------------------------------
+// Enum Creation Macro ------------------------------------------------------------------------------------------------
 /// Helper MACRO for Enum creation
 #define VAL(name) name ,
 #define STRING(name) #name,
@@ -23,7 +27,7 @@
 enum class Name { Name(VAL) }; \
 static const char* Name##String[] = { Name(STRING) }; \
 
-// Constructors and Assignment Operators Defination ------------------------------------------------------------------
+// Constructors and Assignment Operators Defination -------------------------------------------------------------------
 /// This MACRO deletes the Constructors (Copy and Move ) and Operator = (Copy and Move) for any class x to make a
 /// class singleton.
 /// - Note: This only deletes the copy move constructors. Default constructur still need to be set as private and
@@ -43,7 +47,7 @@ x(x&&) = delete; \
 x& operator =(const x&) = delete; \
 x& operator =(x&&) = delete; \
 
-// Typedefs --------------------------------------------------------------------------------------------------------
+// Typedefs -----------------------------------------------------------------------------------------------------------
 template<typename T> using Scope = std::unique_ptr<T>;
 template<typename T, typename ... Args> constexpr Scope<T>
 CreateScope(Args&& ... args)

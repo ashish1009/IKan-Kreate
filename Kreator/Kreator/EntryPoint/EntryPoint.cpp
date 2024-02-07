@@ -24,7 +24,7 @@ int main(int argc, const char * argv[])
     Logger::Add(profilerLogger);
   }
   
-  Logger::PrintMessage(LogType::Core, LogLevel::Trace, LogModule::None, "Testing Logger{0}", 1);
-  Logger::PrintMessage(LogType::Profiler, LogLevel::Trace, LogModule::None, "Testing Logger  {0}", 1);
+  IK_LOG_INFO(LogModule::None, "Testing Logger{0}", 1);
+  IK_PROFILE_INFO("xc {0}", 1);
   return 0;
 }

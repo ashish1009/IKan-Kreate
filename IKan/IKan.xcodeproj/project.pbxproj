@@ -29,6 +29,7 @@
 		B2ED5CBF2B724D1D007A7F36 /* IKHeaders.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = IKHeaders.h; sourceTree = "<group>"; };
 		B2ED5CC22B7265F0007A7F36 /* LoggerBuilder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LoggerBuilder.cpp; sourceTree = "<group>"; };
 		B2ED5CC32B7265F0007A7F36 /* LoggerBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LoggerBuilder.hpp; sourceTree = "<group>"; };
+		B2ED5CC62B733F58007A7F36 /* LoggerAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggerAPI.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -118,6 +119,7 @@
 			children = (
 				B2ED5CB02B724AAC007A7F36 /* Logger.hpp */,
 				B2ED5CC32B7265F0007A7F36 /* LoggerBuilder.hpp */,
+				B2ED5CC62B733F58007A7F36 /* LoggerAPI.h */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
