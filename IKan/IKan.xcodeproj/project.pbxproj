@@ -61,6 +61,7 @@
 		B2ED5E102B7370DA007A7F36 /* MouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
 		B2ED5E152B737147007A7F36 /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
 		B2ED5E162B73716E007A7F36 /* MouseCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseCodes.h; sourceTree = "<group>"; };
+		B2ED5E172B7385D5007A7F36 /* DesignHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DesignHelper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -179,6 +180,7 @@
 			isa = PBXGroup;
 			children = (
 				B2ED5CB62B724B39007A7F36 /* Configurations.h */,
+				B2ED5E172B7385D5007A7F36 /* DesignHelper.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
