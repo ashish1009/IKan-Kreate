@@ -11,11 +11,20 @@ namespace IKan
 {
   void Application::Impl::Run()
   {
-    // Updating all the attached layer
-    for (auto& layer : m_layers)
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
+    IK_LOG_INFO("", "                          Starting Game Loop                              ");
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
+    while (m_isRunning)
     {
-      layer->OnUpdate(m_timeStep);
+      // Updating all the attached layer
+      for (auto& layer : m_layers)
+      {
+        layer->OnUpdate(m_timeStep);
+      }
     }
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
+    IK_LOG_INFO("", "                           Ending Game Loop                               ");
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
   }
   
   void Application::Impl::HandleEvents(Event &event)

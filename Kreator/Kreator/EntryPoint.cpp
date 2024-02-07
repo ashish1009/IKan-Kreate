@@ -28,5 +28,10 @@ int main(int argc, const char * argv[])
   
   // Create Application
   Scope<Application> application = CreateApplication();
+  application->Run();
+  
+  // Shutdown the Engine
+  {
+  }
   return 0;
 }

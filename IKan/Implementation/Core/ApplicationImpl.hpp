@@ -33,6 +33,7 @@ namespace IKan
     
   private:
     // Member Variables -----------------------------------------------------------------------------------------------
+    bool m_isRunning = false;
     TimeStep m_timeStep;
     LayerStack m_layers;
   };

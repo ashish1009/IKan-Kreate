@@ -31,6 +31,9 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - Core
   - Logger
   - Profiler
+  - Application
+  - Layer
+  - Event and Input Handler
 
 ### Detailed Road Map
 - Base
@@ -40,9 +43,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Maths
   - YAML
 - Core
-  - Application
-  - Layer
-  - Event and Input Handler
   - Window 
 - Renderer
   - Graphics APIs
@@ -119,5 +119,4 @@ Editor Application using IKan Library to create Games
 - Mesh Loader
 - Mesh Material Loader
 - Scene Renderer
-- 
 ...
