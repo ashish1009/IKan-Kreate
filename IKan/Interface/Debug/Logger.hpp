@@ -129,45 +129,45 @@ f(None)
     {
       // Get the Tag Details for a specific module
       const TagDetails& tag = GetTagDetails(static_cast<std::string>(moduleName));
-      if (tag.isEnabled and tag.levelFilter <= level)
-      {
-        Ref<spdlog::logger> logger = GetLogger(type);
-        std::string logModuleFormat = "{0}"; // spdlogger will print Module Name as 0th argument
+      Ref<spdlog::logger> logger = GetLogger(type);
+      RETURN_IF (!tag.isEnabled or tag.levelFilter > level or !logger);
 
-        // Max Tag String space to be reserved in log
-        static constexpr uint32_t MaxTagLength = 25;
-        
-        // Align all the modules at 25 characters. If module name is smaller than 25 then add spaces
-        if (MaxTagLength > moduleName.size())
-        {
-          logModuleFormat += std::string(static_cast<size_t>(MaxTagLength - moduleName.size()), ' ');
-        }
-        logModuleFormat += "] | {1}"; // Completing the log format
-        
-        switch (level)
-        {
-          case LogLevel::Debug :
-            logger->debug(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
-            break;
-          case LogLevel::Trace :
-            logger->trace(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
-            break;
-          case LogLevel::Info :
-            logger->info(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
-            break;
-          case LogLevel::Warning :
-            logger->warn(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
-            break;
-          case LogLevel::Error :
-            logger->error(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
-            break;
-          case LogLevel::Critical :
-            logger->critical(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
-            break;
-          default:
-            assert(false);
-        } // Switch Log level
-      } // If Log enabled and passed level filter
+      // Print log module
+      std::string logModuleFormat = "{0}"; // spdlogger will print Module Name as 0th argument
+
+      // Max Tag String space to be reserved in log
+      static constexpr uint32_t MaxTagLength = 25;
+      
+      // Align all the modules at 25 characters. If module name is smaller than 25 then add spaces
+      if (MaxTagLength > moduleName.size())
+      {
+        logModuleFormat += std::string(static_cast<size_t>(MaxTagLength - moduleName.size()), ' ');
+      }
+      logModuleFormat += "] | {1}"; // Completing the log format
+      
+      switch (level)
+      {
+        case LogLevel::Debug :
+          logger->debug(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Trace :
+          logger->trace(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Info :
+          logger->info(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Warning :
+          logger->warn(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Error :
+          logger->error(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Critical :
+          logger->critical(logModuleFormat, moduleName, fmt::format(std::forward<Args>(args)...));
+          break;
+        default:
+          assert(false);
+      } // Switch Log level
     }
     
     // Member Functions -----------------------------------------------------------------------------------------------

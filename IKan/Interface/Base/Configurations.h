@@ -7,6 +7,9 @@
 
 #pragma once
 
+// This MACRO Checks the condition and return if true
+#define RETURN_IF(condition) if (condition) return;
+
 // Enum Creation Macro -----------------------------------------------------------------------------------------------
 /// Helper MACRO for Enum creation
 #define VAL(name) name ,
