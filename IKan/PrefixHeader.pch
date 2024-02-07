@@ -24,5 +24,6 @@
 #include "Base/Configurations.h"
 
 #include "Debug/Logger.hpp"
+#include "Debug/Timer.hpp"
 
 #include "Core/AssertAPI.h"

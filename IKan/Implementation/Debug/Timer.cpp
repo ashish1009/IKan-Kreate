@@ -52,7 +52,7 @@ namespace IKan
     m_endTime = std::chrono::high_resolution_clock::now();;
     m_duration = m_endTime - m_startTime;
         
-    IK_PROFILE_INFO("{0} : {1}", m_functionName, m_duration.count() * 1000);
+    IK_PROFILE_INFO("{0} : {1} ms", m_functionName, m_duration.count() * 1000);
   }
   
   // Performance Profiler -------------------------------------------------------------------------------------------

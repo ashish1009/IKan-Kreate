@@ -24,6 +24,7 @@ int main(int argc, const char * argv[])
     Logger::Add(profilerLogger);
   }
   
-  
+  // Create Application
+  Scope<Application> application = CreateScope<Application>(ApplicationSpecification());
   return 0;
 }

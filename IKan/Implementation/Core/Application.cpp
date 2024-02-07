@@ -11,6 +11,7 @@ namespace IKan
 {
   Application::Application(const ApplicationSpecification& appSpec)
   {
+    IK_PROFILE();
     IK_ASSERT(!s_instance, "Application instance already created");
     s_instance = this;
     
@@ -18,6 +19,7 @@ namespace IKan
   }
   Application::~Application()
   {
+    IK_PROFILE();
     IK_LOG_INFO(LogModule::Application, "Destroying Core application data");
   }
 } // namespace IKan

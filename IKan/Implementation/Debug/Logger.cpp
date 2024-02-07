@@ -67,7 +67,7 @@ namespace IKan
     {
       sink.emplace_back(CreateRef<spdlog::sinks::basic_file_sink_mt>(loggerSpec.saveLogFilePath, true /* Truncste the Log file */));
     }
-    LoggerUtils::SetPatternInSinks(sink, "[%T%e : %-8l : %v%$");
+    LoggerUtils::SetPatternInSinks(sink, "[%T:%e : %-8l : %v%$");
 
     // 3. Create the logger
     Ref<spdlog::logger> logger = CreateRef<spdlog::logger>(loggerSpec.loggerName, sink.begin(), sink.end());
