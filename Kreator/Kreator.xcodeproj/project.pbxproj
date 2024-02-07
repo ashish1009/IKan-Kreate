@@ -282,6 +282,7 @@
 					"${PROJECT_DIR}/Kreator",
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",
+					"${PROJECT_DIR}/../IKan/Vendors/Glm",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -300,6 +301,7 @@
 					"${PROJECT_DIR}/Kreator",
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",
+					"${PROJECT_DIR}/../IKan/Vendors/Glm",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

@@ -26,6 +26,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
 `{...} directory where IKan Engine is cloned`
 - {...}/Interface
 - {...}/Vendors/SpdLog/include
+- {...}/Vendors/Glm
 
 ### Features
 - Core

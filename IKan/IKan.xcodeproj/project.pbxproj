@@ -482,6 +482,7 @@
 					"${PROJECT_DIR}/interface",
 					"${PROJECT_DIR}/implementation",
 					"${PROJECT_DIR}/Vendors/SpdLog/include",
+					"${PROJECT_DIR}/Vendors/Glm",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -503,6 +504,7 @@
 					"${PROJECT_DIR}/interface",
 					"${PROJECT_DIR}/implementation",
 					"${PROJECT_DIR}/Vendors/SpdLog/include",
+					"${PROJECT_DIR}/Vendors/Glm",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
