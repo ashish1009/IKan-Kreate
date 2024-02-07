@@ -16,6 +16,9 @@ namespace IKan
   {
     IK_PROFILE();
     IK_LOG_INFO(LogModule::Window, "Creating MAC OS GLFW Window");
+    
+    // Copy the specificaiton to the window data
+    m_data.specification = windowSpec;
   }
   
   MacWindow::~MacWindow()
@@ -31,41 +34,41 @@ namespace IKan
   
   void MacWindow::Maximize() const
   {
-
+    
   }
   
   void MacWindow::Restore() const
   {
-
+    
   }
   
   void MacWindow::Iconify() const
   {
-
+    
   }
   
   void MacWindow::SetAtCenter() const
   {
-
+    
   }
   void MacWindow::SetPosition(const glm::vec2& pos) const
   {
-
+    
   }
   
   void MacWindow::SetResizable(bool resizable) const
   {
-
+    
   }
   
   void MacWindow::SetTitle(const std::string& title)
   {
-
+    
   }
   
   void MacWindow::SetEventFunction(const EventCallbackFn& eventCallbackFunction)
   {
-
+    
   }
   
   // Getters ---------------------------------------------------------------------------------------------------------
@@ -81,36 +84,36 @@ namespace IKan
   
   bool MacWindow::IsTitleBarHidden() const
   {
-    return false;
+    return m_data.specification.hideTitleBar;
   }
   
   bool MacWindow::IsFullscreen() const
   {
-    return false;
+    return m_data.specification.isFullScreen;
   }
   
   uint32_t MacWindow::GetWidth() const
   {
-    return 0;
+    return m_data.specification.width;
   }
   
   uint32_t MacWindow::GetHeight() const
   {
-    return 0;
+    return m_data.specification.height;
   }
   
   const std::string& MacWindow::GetTitle() const
   {
-    return std::string("");
+    return m_data.specification.title;
   }
   
   TimeStep MacWindow::GetTimestep() const
   {
-    return TimeStep();
+    return m_timeStep;
   }
   
   void* MacWindow::GetNativeWindow() const
   {
-    return nullptr;
+    return static_cast<void*>(m_window);
   }
 } // namespace IKan

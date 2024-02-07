@@ -12,6 +12,13 @@
 
 namespace IKan
 {
+  /// This struction stores the mac window data
+  struct MacWindowData
+  {
+    WindowSpecification specification;
+    EventCallbackFn eventCallbackFunction;
+  };
+
   /// This is the implementation class for MAC GLFW Window
   class MacWindow : public Window
   {
@@ -70,5 +77,12 @@ namespace IKan
     void* GetNativeWindow() const override;
     /// This function returns the title of the window
     const std::string& GetTitle() const override;
+    
+  private:
+    // Member Variables ----------------------------------------------------------------------------------------------
+    float m_lastFrameTime = 0.0f;
+    MacWindowData m_data;
+    GLFWwindow* m_window;
+    TimeStep m_timeStep;
   };
 } // namespace IKan
