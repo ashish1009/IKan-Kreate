@@ -28,6 +28,8 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - {...}/Vendors/SpdLog/include
 
 ### Features
+- Core
+  - Logger
 
 ### Detailed Road Map
 - Base
@@ -37,7 +39,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Maths
   - YAML
 - Core
-  - Logger
   - Profiler
   - Application
   - Layer
