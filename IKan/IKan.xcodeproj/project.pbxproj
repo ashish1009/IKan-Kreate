@@ -20,7 +20,18 @@
 		B2ED5CCA2B7346AC007A7F36 /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5CC82B7346AC007A7F36 /* Timer.hpp */; };
 		B2ED5CCE2B736963007A7F36 /* TimeStep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CCC2B736963007A7F36 /* TimeStep.cpp */; };
 		B2ED5CCF2B736963007A7F36 /* TimeStep.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5CCD2B736963007A7F36 /* TimeStep.hpp */; };
+		B2ED5E0B2B736AAE007A7F36 /* libGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ED5CEC2B736A50007A7F36 /* libGLFW.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B2ED5CEB2B736A50007A7F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2ED5CD92B736A50007A7F36;
+			remoteInfo = GLFW;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -39,6 +50,7 @@
 		B2ED5CCB2B734A94007A7F36 /* AssertAPI.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertAPI.h; sourceTree = "<group>"; };
 		B2ED5CCC2B736963007A7F36 /* TimeStep.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStep.cpp; sourceTree = "<group>"; };
 		B2ED5CCD2B736963007A7F36 /* TimeStep.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeStep.hpp; sourceTree = "<group>"; };
+		B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = GLFW/GLFW.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +58,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2ED5E0B2B736AAE007A7F36 /* libGLFW.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -61,6 +74,7 @@
 				B2ED5C952B723F4D007A7F36 /* Implementation */,
 				B2ED5CAC2B724986007A7F36 /* Vendors */,
 				B2ED5C872B723F31007A7F36 /* Products */,
+				B2ED5E0A2B736AAE007A7F36 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -122,6 +136,7 @@
 		B2ED5CAC2B724986007A7F36 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */,
 			);
 			path = Vendors;
 			sourceTree = "<group>";
@@ -160,6 +175,21 @@
 			children = (
 			);
 			path = Base;
+			sourceTree = "<group>";
+		};
+		B2ED5CE82B736A50007A7F36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2ED5CEC2B736A50007A7F36 /* libGLFW.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B2ED5E0A2B736AAE007A7F36 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -225,12 +255,28 @@
 			mainGroup = B2ED5C7D2B723F31007A7F36;
 			productRefGroup = B2ED5C872B723F31007A7F36 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B2ED5CE82B736A50007A7F36 /* Products */;
+					ProjectRef = B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B2ED5C852B723F31007A7F36 /* IKan */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B2ED5CEC2B736A50007A7F36 /* libGLFW.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGLFW.a;
+			remoteRef = B2ED5CEB2B736A50007A7F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B2ED5C832B723F31007A7F36 /* Sources */ = {
