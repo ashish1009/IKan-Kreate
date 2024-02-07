@@ -59,8 +59,50 @@ namespace IKan
     const char* m_functionName;
   };
   
-  // Call 'Profile()' in begining of any scope. It will compute the time and print
-  // the Profiler result at the end of Scope
+  // Performance Profiler ---------------------------------------------------------------------------------------------
+  /// This function store the runtime preformance of profiler
+  class PerformanceProfiler
+  {
+  public:
+    /// This is default constructor for performance profiler
+    PerformanceProfiler() = default;
+    /// This function set the frame timing
+    /// - Parameters:
+    ///   - name: function name
+    ///   - time: time
+    void SetPerFrameTiming(const char* name, float time);
+    /// This function clear the profiler
+    void Clear();
+    /// This function returs the performance data
+    const std::unordered_map<const char*, float>& GetPerFrameData() const;
+    
+    /// This function returns the singleton instance of Performance profiler
+    static PerformanceProfiler* Get();
+    /// This function destroy the singleton instance of Performance profiler
+    static void Destroy();
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(PerformanceProfiler);
+    
+  private:
+    inline static PerformanceProfiler* s_instance;
+    std::unordered_map<const char* /* function name */ , float /* Time */> m_perFrameData;
+  };
+  
+  /// This function store the preformance of profiler scoped
+  class ScopePerfTimer
+  {
+  public:
+    ScopePerfTimer(const char* name, PerformanceProfiler* profiler);
+    ~ScopePerfTimer();
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(ScopePerfTimer);
+  private:
+    const char* m_name;
+    PerformanceProfiler* m_profiler;
+    Timer m_timer;
+  };
+  
+#define IK_PERFORMANCE(name) IKan::ScopePerfTimer timer__LINE__(name, IKan::PerformanceProfiler::Get());
+#define IK_PERFORMANCE_FUN() IKan::ScopePerfTimer timer__LINE__(__PRETTY_FUNCTION__, IKan::PerformanceProfiler::Get());
 #define IK_PROFILE() IKan::ScopedTimer _scopedTimer__LINE__(__PRETTY_FUNCTION__);
-
 } // namespace IKan

@@ -54,4 +54,52 @@ namespace IKan
         
     IK_PROFILE_INFO("{0} : {1}", m_functionName, m_duration.count() * 1000);
   }
+  
+  // Performance Profiler -------------------------------------------------------------------------------------------
+  void PerformanceProfiler::SetPerFrameTiming(const char* name, float time)
+  {
+    if (m_perFrameData.find(name) == m_perFrameData.end())
+    {
+      m_perFrameData[name] = 0.0f;
+    }
+    
+    m_perFrameData[name] += time;
+  }
+  
+  void PerformanceProfiler::Clear()
+  {
+    m_perFrameData.clear();
+  }
+  
+  const std::unordered_map<const char*, float>& PerformanceProfiler::GetPerFrameData() const
+  {
+    return m_perFrameData;
+  }
+  
+  PerformanceProfiler* PerformanceProfiler::Get()
+  {
+    if (!s_instance)
+    {
+      s_instance = new PerformanceProfiler();
+    }
+    return s_instance;
+  }
+  
+  void PerformanceProfiler::Destroy()
+  {
+    delete s_instance;
+  }
+  
+  // Scope Performance Timer ----------------------------------------------------------------------------------------
+  ScopePerfTimer::ScopePerfTimer(const char* name, PerformanceProfiler* profiler)
+  : m_name(name), m_profiler(profiler)
+  {
+    
+  }
+  
+  ScopePerfTimer::~ScopePerfTimer()
+  {
+    float time = m_timer.ElapsedMiliSeconds();
+    m_profiler->SetPerFrameTiming(m_name, time);
+  }
 } // namespace IKan
