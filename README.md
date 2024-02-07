@@ -111,9 +111,9 @@ Editor Application using IKan Library to create Games
 ### TODO
 
 ## Releases
-
+  - v1.0.1.0 : Create and show Window (Without Renderer Context)
+   
 ## General Road Map
-- Window
 - Render First Quad
 - Batch Renderer
 - Text Renderer
