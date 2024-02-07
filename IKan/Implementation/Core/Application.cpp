@@ -6,3 +6,15 @@
 //
 
 #include "Application.hpp"
+
+namespace IKan
+{
+  Application::Application(const ApplicationSpecification& appSpec)
+  {
+    
+  }
+  Application::~Application()
+  {
+    
+  }
+} // namespace IKan
