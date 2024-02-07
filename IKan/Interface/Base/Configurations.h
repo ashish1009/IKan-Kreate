@@ -17,6 +17,14 @@
 // This MACRO Shifts the LSB bit of number 1 at position x
 #define BIT(x) (1 << x)
 
+// Force IK_FORCE_INLINE macro
+#ifdef __APPLE__
+#define IK_FORCE_INLINE inline __attribute__((always_inline))
+#else
+#define IK_FORCE_INLINE inline
+#endif
+
+
 // Enum Creation Macro ------------------------------------------------------------------------------------------------
 /// Helper MACRO for Enum creation
 #define VAL(name) name ,

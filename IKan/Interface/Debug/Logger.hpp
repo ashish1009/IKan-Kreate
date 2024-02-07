@@ -207,6 +207,28 @@ f(Application) f(LayerStack) f(Window) \
     inline static std::unordered_map<LogType, Ref<spdlog::logger>> s_loggers;
     inline static std::map<std::string /* Module Name */, TagDetails> s_tags;
   };
+
+  // Inline Functions -------------------------------------------------------------------------------------------------
+  IK_FORCE_INLINE std::string Logger::GetModuleName(LogModule tag)
+  {
+    return LogModuleString[static_cast<size_t>(tag)];
+  }
+  
+  IK_FORCE_INLINE std::string Logger::GetModuleName(const std::string_view& tag)
+  {
+    return static_cast<std::string>(tag);
+  }
+
+  IK_FORCE_INLINE const Logger::TagDetails& Logger::GetTagDetails(const std::string& moduleName)
+  {
+    return (HasTag(moduleName)) ? s_tags.at(moduleName) : s_tags[static_cast<std::string>(moduleName)];
+  }
+  
+  IK_FORCE_INLINE bool Logger::HasTag(const std::string &moduleName)
+  {
+    return s_tags.find(moduleName) != s_tags.end();
+  }
+
 } // namespace IKan
 
 #include "Debug/LoggerAPI.h"
