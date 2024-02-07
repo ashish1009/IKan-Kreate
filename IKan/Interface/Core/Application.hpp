@@ -102,6 +102,6 @@ namespace IKan
     class Impl;
     Pimpl<Impl> m_applicationImpl;
 
-    inline static Application* s_instance = nullptr;
+    inline static Application* s_instance {nullptr};
   };
 } // namespace IKan

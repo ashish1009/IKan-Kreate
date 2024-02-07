@@ -14,7 +14,7 @@
 // This MACRO Checks the condition and return if true
 #define RETURN_IF(condition) if (condition) return;
 
-// This MACRO Shifts the LSB bit of number 1 at position x ------------------------------------------------------------
+// This MACRO Shifts the LSB bit of number 1 at position x
 #define BIT(x) (1 << x)
 
 // Enum Creation Macro ------------------------------------------------------------------------------------------------

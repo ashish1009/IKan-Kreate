@@ -39,8 +39,8 @@ namespace IKan
     void PopOverlay(const Ref<Layer>& layer);
     
   private:
-    uint32_t m_layerInsertIndex = 0;
-    uint32_t m_totalLayers = 0;
+    uint32_t m_layerInsertIndex {0};
+    uint32_t m_totalLayers {0};
     std::vector<Ref<Layer>> m_layers;
   };
 } // namespace IKan

@@ -37,6 +37,6 @@ namespace IKan
     double FPS() const;
     
   private:
-    double m_time = 0.0f;
+    double m_time {0.0f};
   };
 } // namespace IKan

@@ -64,7 +64,7 @@ namespace IKan
     Window& GetWindow();
 
     // Member Variables -----------------------------------------------------------------------------------------------
-    bool m_isRunning = false;
+    bool m_isRunning {false};
     ApplicationSpecification m_specification;
     TimeStep m_timeStep;
     LayerStack m_layers;

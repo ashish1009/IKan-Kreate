@@ -84,7 +84,7 @@ namespace IKan
     void SetEventCallbacks();
 
     // Member Variables -----------------------------------------------------------------------------------------------
-    float m_lastFrameTime = 0.0f;
+    double m_lastFrameTime {0.0f};
     MacWindowData m_data;
     GLFWwindow* m_window;
     TimeStep m_timeStep;

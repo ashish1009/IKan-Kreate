@@ -54,6 +54,6 @@ namespace IKan
     DELETE_COPY_MOVE_CONSTRUCTORS(Layer)
     
   private:
-    std::string m_name = "Default";
+    std::string m_name {"Default"};
   };
 } // namespace IKan
