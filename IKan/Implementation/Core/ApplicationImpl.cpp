@@ -34,13 +34,13 @@ namespace IKan
   
   void Application::Impl::PushLayer(const Ref<Layer>& layer)
   {
-    m_layers.PushLayer(layer);
     IK_PROFILE();
+    m_layers.PushLayer(layer);
   }
   
   void Application::Impl::PopLayer(const Ref<Layer>& layer)
   {
-    m_layers.PopLayer(layer);
     IK_PROFILE();
+    m_layers.PopLayer(layer);
   }
 } // namespace IKan
