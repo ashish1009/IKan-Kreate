@@ -16,9 +16,7 @@ namespace IKan
   }
   LayerStack::~LayerStack()
   {
-    IK_PROFILE();
-    IK_LOG_TRACE(LogModule::LayerStack, "Destroying Layerstack");
-    
+    IK_PROFILE();    
     if (m_layers.size())
     {
       IK_LOG_TRACE(LogModule::LayerStack, "Deleting all Layers from Layerstack");

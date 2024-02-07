@@ -77,6 +77,15 @@ namespace IKan
     s_loggers[loggerSpec.type] = logger;
   }
   
+  void Logger::Shutdown()
+  {
+    for (auto& [type, logger] : s_loggers)
+    {
+      logger.reset();
+    }
+    s_loggers.clear();
+  }
+  
   std::string Logger::GetModuleName(LogModule tag)
   {
     return LogModuleString[static_cast<size_t>(tag)];

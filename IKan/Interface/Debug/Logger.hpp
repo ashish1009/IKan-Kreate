@@ -66,6 +66,8 @@ f(Application) f(LayerStack) \
     /// This function adds the logger instance in map
     /// - Parameter loggerSpec: logger specificaion
     static void Add(const LoggerSpecificaion& loggerSpec);
+    /// This function destroys all the loggeer instances
+    static void Shutdown();
     
     // Getters --------------------------------------------------------------------------------------------------------
     /// This function returns the name of Module in string. Converts from LogModule enum
