@@ -60,6 +60,7 @@
 		B2ED5E0F2B7370DA007A7F36 /* ApplicationEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ApplicationEvent.h; sourceTree = "<group>"; };
 		B2ED5E102B7370DA007A7F36 /* MouseEvent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MouseEvent.h; sourceTree = "<group>"; };
 		B2ED5E152B737147007A7F36 /* KeyCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KeyCodes.h; sourceTree = "<group>"; };
+		B2ED5E162B73716E007A7F36 /* MouseCodes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseCodes.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +132,7 @@
 				B2ED5CCD2B736963007A7F36 /* TimeStep.hpp */,
 				B2ED5C9D2B723F85007A7F36 /* Application.hpp */,
 				B2ED5E152B737147007A7F36 /* KeyCodes.h */,
+				B2ED5E162B73716E007A7F36 /* MouseCodes.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
