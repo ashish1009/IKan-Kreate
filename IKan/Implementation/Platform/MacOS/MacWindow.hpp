@@ -79,7 +79,11 @@ namespace IKan
     const std::string& GetTitle() const override;
     
   private:
-    // Member Variables ----------------------------------------------------------------------------------------------
+    // Member Functions -----------------------------------------------------------------------------------------------
+    /// This function sets the event callback fucntions to window data
+    void SetEventCallbacks();
+
+    // Member Variables -----------------------------------------------------------------------------------------------
     float m_lastFrameTime = 0.0f;
     MacWindowData m_data;
     GLFWwindow* m_window;

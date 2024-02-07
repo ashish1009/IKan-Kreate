@@ -29,6 +29,11 @@ namespace IKan
       m_window->Maximize();
     }
     
+    if (m_window->GetNativeWindow())
+    {
+      m_isRunning = true;
+    }
+    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialized                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
