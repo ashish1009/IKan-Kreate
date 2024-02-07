@@ -30,6 +30,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
 ### Features
 - Core
   - Logger
+  - Profiler
 
 ### Detailed Road Map
 - Base
@@ -39,7 +40,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Maths
   - YAML
 - Core
-  - Profiler
   - Application
   - Layer
   - Event and Input Handler

@@ -24,3 +24,5 @@
 #include <Debug/LoggerBuilder.hpp>
 
 #include <Core/AssertAPI.h>
+#include <Core/TimeStep.hpp>
+#include <Core/Application.hpp>
