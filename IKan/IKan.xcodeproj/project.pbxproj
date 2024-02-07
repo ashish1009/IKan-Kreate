@@ -27,6 +27,7 @@
 		B2ED5E142B7370DA007A7F36 /* MouseEvent.h in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5E102B7370DA007A7F36 /* MouseEvent.h */; };
 		B2ED5E1D2B738C58007A7F36 /* ApplicationImpl.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5E1B2B738C58007A7F36 /* ApplicationImpl.cpp */; };
 		B2ED5E1E2B738C58007A7F36 /* ApplicationImpl.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5E1C2B738C58007A7F36 /* ApplicationImpl.hpp */; };
+		B2ED5E222B738FE5007A7F36 /* Layer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5E202B738FE5007A7F36 /* Layer.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,7 @@
 		B2ED5E172B7385D5007A7F36 /* DesignHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DesignHelper.h; sourceTree = "<group>"; };
 		B2ED5E1B2B738C58007A7F36 /* ApplicationImpl.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ApplicationImpl.cpp; sourceTree = "<group>"; };
 		B2ED5E1C2B738C58007A7F36 /* ApplicationImpl.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ApplicationImpl.hpp; sourceTree = "<group>"; };
+		B2ED5E202B738FE5007A7F36 /* Layer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Layer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +140,7 @@
 				B2ED5C9D2B723F85007A7F36 /* Application.hpp */,
 				B2ED5E152B737147007A7F36 /* KeyCodes.h */,
 				B2ED5E162B73716E007A7F36 /* MouseCodes.h */,
+				B2ED5E202B738FE5007A7F36 /* Layer.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -241,6 +244,7 @@
 				B2ED5CCF2B736963007A7F36 /* TimeStep.hpp in Headers */,
 				B2ED5E112B7370DA007A7F36 /* Event.h in Headers */,
 				B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */,
+				B2ED5E222B738FE5007A7F36 /* Layer.hpp in Headers */,
 				B2ED5CBC2B724B7F007A7F36 /* PrefixHeader.pch in Headers */,
 				B2ED5E122B7370DA007A7F36 /* KeyEvent.h in Headers */,
 				B2ED5E1E2B738C58007A7F36 /* ApplicationImpl.hpp in Headers */,
