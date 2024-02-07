@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Core/Layer.hpp"
+
 namespace IKan
 {
   /// This structure stores the specifications to create the application
@@ -30,7 +32,30 @@ namespace IKan
     /// This is the default destructor of application
     virtual ~Application();
 
-    // Static APIs ---------------------------------------------------------------------------------------------------
+    // Fundamental APIs -----------------------------------------------------------------------------------------------
+    /// This function runs the Game loop of the application. This function is responsible for:
+    ///   - Updating the Application
+    ///   - Updating each Layer frame
+    ///   - Updating the window and Swap the buffers
+    ///   - Render the GUI by calling 'RenderGui()'
+    void Run();
+    /// This function handles all the events of window. Application is dispatching the events and perform the interupt
+    /// actions
+    /// - Parameter event: event abstract type
+    void HandleEvents(Event& event);
+    /// This Function responsible for closing the current applciation (IKan::Applciation) adn ends the game loop
+    void Close();
+    
+    /// This function Push the layer of type IKan::Layer in Core Application layer stack.
+    /// - Note: Also attach the layer (initialise it)
+    /// - Parameter layer: Layer Reference pointer to be added
+    void PushLayer(const Ref<Layer>& layer);
+    /// This function Pop the layer of type IKan::Layer from Core Application layer stack.
+    /// - Note: Also detach the layer (destroy it)
+    /// - Parameter layer: Layer Reference pointer to be removed
+    void PopLayer(const Ref<Layer>& layer);
+    
+    // Static APIs ----------------------------------------------------------------------------------------------------
     /// This function returns the reference of application instance.
     static Application& Get();
 

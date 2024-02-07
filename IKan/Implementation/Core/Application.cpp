@@ -23,4 +23,29 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_INFO(LogModule::Application, "Destroying Core application data");
   }
+  
+  void Application::Run()
+  {
+    m_applicationImpl->Run();
+  }
+  
+  void Application::HandleEvents(Event &event)
+  {
+    m_applicationImpl->HandleEvents(event);
+  }
+  
+  void Application::Close()
+  {
+    m_applicationImpl->Close();
+  }
+  
+  void Application::PushLayer(const Ref<Layer>& layer)
+  {
+    m_applicationImpl->PushLayer(layer);
+  }
+  void Application::PopLayer(const Ref<Layer>& layer)
+  {
+    m_applicationImpl->PopLayer(layer);
+  }
+
 } // namespace IKan
