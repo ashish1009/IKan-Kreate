@@ -22,6 +22,7 @@
 
 // Engine Files
 #include "Base/Configurations.h"
+#include "Base/DesignHelper.h"
 
 #include "Debug/Logger.hpp"
 #include "Debug/Timer.hpp"

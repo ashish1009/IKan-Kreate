@@ -47,6 +47,9 @@ namespace IKan
     DELETE_COPY_MOVE_CONSTRUCTORS(Application);
     
   private:
+    class Impl;
+    Pimpl<Impl> m_applicationImpl;
+
     inline static Application* s_instance = nullptr;
   };
 } // namespace IKan

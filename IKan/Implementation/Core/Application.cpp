@@ -6,6 +6,7 @@
 //
 
 #include "Application.hpp"
+#include "Core/ApplicationImpl.hpp"
 
 namespace IKan
 {
