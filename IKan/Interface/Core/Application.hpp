@@ -29,7 +29,14 @@ namespace IKan
     Application(const ApplicationSpecification& appSpec);
     /// This is the default destructor of application
     virtual ~Application();
-    
+
+    // Static APIs ---------------------------------------------------------------------------------------------------
+    /// This function returns the reference of application instance.
+    static Application& Get();
+
     DELETE_COPY_MOVE_CONSTRUCTORS(Application);
+    
+  private:
+    inline static Application* s_instance = nullptr;
   };
 } // namespace IKan
