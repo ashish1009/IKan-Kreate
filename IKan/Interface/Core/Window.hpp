@@ -79,4 +79,11 @@ namespace IKan
     /// This function returns the title of the window
     virtual const std::string& GetTitle() const = 0;
   };
+  
+  /// This is the abstact factory structure to create instance of window.
+  struct WindowFactory
+  {
+    [[nodiscard("Created window should not be discarded")]] static Ref<Window> Create(const WindowSpecification& windowSpec);
+  };
+
 } // namespace IKan
