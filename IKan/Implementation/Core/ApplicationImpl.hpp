@@ -9,6 +9,7 @@
 
 #include "Core/Application.hpp"
 #include "Core/Layer.hpp"
+#include "Core/LayerStack.hpp"
 #include "Event/Event.h"
 
 namespace IKan
@@ -29,5 +30,10 @@ namespace IKan
     void PushLayer(const Ref<Layer>& layer);
     /// @see Application
     void PopLayer(const Ref<Layer>& layer);
+    
+  private:
+    // Member Variables -----------------------------------------------------------------------------------------------
+    TimeStep m_timeStep;
+    LayerStack m_layers;
   };
 } // namespace IKan
