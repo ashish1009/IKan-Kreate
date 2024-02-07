@@ -85,7 +85,17 @@ namespace IKan
     }
     s_loggers.clear();
   }
-    
+  
+  std::string Logger::GetModuleName(LogModule tag)
+  {
+    return LogModuleString[static_cast<size_t>(tag)];
+  }
+  
+  std::string Logger::GetModuleName(const std::string_view& tag)
+  {
+    return static_cast<std::string>(tag);
+  }
+  
   Ref<spdlog::logger> Logger::GetLogger(LogType type)
   {
     if (s_loggers.find(type) != s_loggers.end())
@@ -93,5 +103,15 @@ namespace IKan
       return s_loggers.at(type);
     }
     return nullptr;
+  }
+
+  const Logger::TagDetails& Logger::GetTagDetails(const std::string& moduleName)
+  {
+    return (HasTag(moduleName)) ? s_tags.at(moduleName) : s_tags[static_cast<std::string>(moduleName)];
+  }
+  
+  bool Logger::HasTag(const std::string &moduleName)
+  {
+    return s_tags.find(moduleName) != s_tags.end();
   }
 } // namespace IKan
