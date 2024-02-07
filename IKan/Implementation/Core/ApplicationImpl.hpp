@@ -10,6 +10,7 @@
 #include "Core/Application.hpp"
 #include "Core/Layer.hpp"
 #include "Core/LayerStack.hpp"
+#include "Core/Window.hpp"
 #include "Event/Event.h"
 #include "Event/ApplicationEvent.h"
 
@@ -57,13 +58,18 @@ namespace IKan
     const ApplicationSpecification& GetSpecification() const;
     /// This function returns the time step of frame
     TimeStep GetTimestep() const;
+    /// This fuinction returns the native pointer Window native as void
+    void* GetWindowPtr() const;
+    /// This fuinction returns the iKan Window Instance as reference
+    Window& GetWindow();
 
     // Member Variables -----------------------------------------------------------------------------------------------
     bool m_isRunning = false;
     ApplicationSpecification m_specification;
     TimeStep m_timeStep;
     LayerStack m_layers;
-    
+    Ref<Window> m_window;
+
     std::function<void(TimeStep)> m_onUpdateCallback;
     std::function<void()> m_onImguiRenderCallback;
     

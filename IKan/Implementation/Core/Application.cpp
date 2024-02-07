@@ -68,6 +68,16 @@ namespace IKan
   {
     return m_applicationImpl->GetTimestep();
   }
+  
+  void* Application::GetWindowPtr() const
+  {
+    return m_applicationImpl->GetWindowPtr();
+  }
+  
+  Window& Application::GetWindow()
+  {
+    return m_applicationImpl->GetWindow();
+  }
 
   Application& Application::Get()
   {

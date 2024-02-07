@@ -16,6 +16,19 @@ namespace IKan
     // Copy the Specificaion
     m_specification = appSpec;
     
+    // Create the window
+    m_window = WindowFactory::Create(m_specification.windowSpecificaion);
+    
+    // Set the application callback to window
+    m_window->SetEventFunction(IK_BIND_EVENT_FN(Application::Impl::HandleEvents));
+    
+    // Control Window
+    m_window->SetResizable(m_specification.resizable);
+    if (m_specification.startMaximized)
+    {
+      m_window->Maximize();
+    }
+    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialized                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -24,6 +37,9 @@ namespace IKan
   void Application::Impl::Shutdown()
   {
     IK_PROFILE();
+
+    // Reset the window
+    m_window.reset();
   }
   
   void Application::Impl::Run()
@@ -34,6 +50,13 @@ namespace IKan
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     while (m_isRunning)
     {
+      IK_PERFORMANCE("Application::Run");
+      // Update the window swap buffers
+      m_window->Update();
+      
+      // Store the frame time difference
+      m_timeStep = m_window->GetTimestep();
+
       // Updating all the attached layer
       for (auto& layer : m_layers)
       {
@@ -116,5 +139,15 @@ namespace IKan
   TimeStep Application::Impl::GetTimestep() const
   {
     return m_timeStep;
+  }
+  
+  void* Application::Impl::GetWindowPtr() const
+  {
+    return m_window->GetNativeWindow();
+  }
+  
+  Window& Application::Impl::GetWindow()
+  {
+    return *(m_window.get());
   }
 } // namespace IKan

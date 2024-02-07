@@ -8,13 +8,18 @@
 #pragma once
 
 #include "Core/Layer.hpp"
+#include "Core/Window.hpp"
 
 namespace IKan
 {
   /// This structure stores the specifications to create the application
   struct ApplicationSpecification
   {
-    
+    std::string title = "New Application";
+    std::string coreAssetPath = "";
+    WindowSpecification windowSpecificaion;
+    bool startMaximized = false;
+    bool resizable = true;
   };
 
   /// This class is the core application for engine.
@@ -72,7 +77,11 @@ namespace IKan
     const ApplicationSpecification& GetSpecification() const;
     /// This function returns the time step of frame
     TimeStep GetTimestep() const;
-    
+    /// This fuinction returns the native pointer Window native as void
+    void* GetWindowPtr() const;
+    /// This fuinction returns the iKan Window Instance as reference
+    Window& GetWindow();
+
     // Static APIs ----------------------------------------------------------------------------------------------------
     /// This function returns the reference of application instance.
     static Application& Get();
