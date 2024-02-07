@@ -28,7 +28,7 @@ f(None)
   /// This enum stores the type of Logger to be used for spd
   enum class LogType : uint8_t
   {
-    Core
+    Core, Profiler, Editor
   };
   
   /// This enum stores the Log level of engine
