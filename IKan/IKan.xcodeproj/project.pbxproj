@@ -30,6 +30,8 @@
 		B2ED5E222B738FE5007A7F36 /* Layer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5E202B738FE5007A7F36 /* Layer.hpp */; };
 		B2ED5E272B7397A5007A7F36 /* LayerStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5E252B7397A5007A7F36 /* LayerStack.cpp */; };
 		B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5E262B7397A5007A7F36 /* LayerStack.hpp */; };
+		B2ED5E2C2B73A5C4007A7F36 /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5E2A2B73A5C4007A7F36 /* Window.cpp */; };
+		B2ED5E2D2B73A5C4007A7F36 /* Window.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5E2B2B73A5C4007A7F36 /* Window.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -72,6 +74,8 @@
 		B2ED5E202B738FE5007A7F36 /* Layer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Layer.hpp; sourceTree = "<group>"; };
 		B2ED5E252B7397A5007A7F36 /* LayerStack.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LayerStack.cpp; sourceTree = "<group>"; };
 		B2ED5E262B7397A5007A7F36 /* LayerStack.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LayerStack.hpp; sourceTree = "<group>"; };
+		B2ED5E2A2B73A5C4007A7F36 /* Window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		B2ED5E2B2B73A5C4007A7F36 /* Window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,6 +150,7 @@
 				B2ED5E162B73716E007A7F36 /* MouseCodes.h */,
 				B2ED5E202B738FE5007A7F36 /* Layer.hpp */,
 				B2ED5E262B7397A5007A7F36 /* LayerStack.hpp */,
+				B2ED5E2B2B73A5C4007A7F36 /* Window.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -158,6 +163,7 @@
 				B2ED5E1B2B738C58007A7F36 /* ApplicationImpl.cpp */,
 				B2ED5E1C2B738C58007A7F36 /* ApplicationImpl.hpp */,
 				B2ED5E252B7397A5007A7F36 /* LayerStack.cpp */,
+				B2ED5E2A2B73A5C4007A7F36 /* Window.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -248,6 +254,7 @@
 				B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */,
 				B2ED5E142B7370DA007A7F36 /* MouseEvent.h in Headers */,
 				B2ED5E132B7370DA007A7F36 /* ApplicationEvent.h in Headers */,
+				B2ED5E2D2B73A5C4007A7F36 /* Window.hpp in Headers */,
 				B2ED5CCF2B736963007A7F36 /* TimeStep.hpp in Headers */,
 				B2ED5E112B7370DA007A7F36 /* Event.h in Headers */,
 				B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */,
@@ -334,6 +341,7 @@
 				B2ED5E1D2B738C58007A7F36 /* ApplicationImpl.cpp in Sources */,
 				B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */,
 				B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */,
+				B2ED5E2C2B73A5C4007A7F36 /* Window.cpp in Sources */,
 				B2ED5CC42B7265F0007A7F36 /* LoggerBuilder.cpp in Sources */,
 				B2ED5CCE2B736963007A7F36 /* TimeStep.cpp in Sources */,
 				B2ED5CC92B7346AC007A7F36 /* Timer.cpp in Sources */,

@@ -9,6 +9,8 @@
 
 Scope<Application> CreateApplication()
 {
+  IK_PROFILE();
+  
   // Core Application Specificaion --------------------------------------------------------
   ApplicationSpecification appSpec;
 

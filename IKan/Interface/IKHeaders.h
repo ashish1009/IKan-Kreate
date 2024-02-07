@@ -23,8 +23,10 @@
 
 #include <Debug/Logger.hpp>
 #include <Debug/LoggerBuilder.hpp>
+#include <Debug/Timer.hpp>
 
 #include <Core/AssertAPI.h>
 #include <Core/TimeStep.hpp>
 #include <Core/Application.hpp>
 #include <Core/Layer.hpp>
+#include <Core/Window.hpp>
