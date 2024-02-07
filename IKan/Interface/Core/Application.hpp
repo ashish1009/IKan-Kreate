@@ -34,6 +34,16 @@ namespace IKan
     /// This function returns the reference of application instance.
     static Application& Get();
 
+    /// This function creates the application instance of type T class
+    /// - Parameter appSpec: application specificaions
+    /// - Note: T should derived from IKan::Application
+    template<typename T, typename ...Args>
+    [[nodiscard("Application created nerver used")]] static Scope<Application> CreateApplication(Args&& ...args)
+    {
+      static_assert(std::is_base_of<Application, T>::value, "Class is not Application !!");
+      return Scope<T>(new T(std::forward<Args>(args)...));
+    }
+
     DELETE_COPY_MOVE_CONSTRUCTORS(Application);
     
   private:

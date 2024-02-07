@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B2ED5C5F2B723E25007A7F36 /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */; };
 		B2ED5C9A2B723F76007A7F36 /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ED5C992B723F76007A7F36 /* libIKan.a */; };
+		B2ED5E1A2B738B23007A7F36 /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5E182B738B23007A7F36 /* Kreator.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -28,6 +29,8 @@
 		B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
 		B2ED5C992B723F76007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5CBE2B724C54007A7F36 /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B2ED5E182B738B23007A7F36 /* Kreator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Kreator.cpp; sourceTree = "<group>"; };
+		B2ED5E192B738B23007A7F36 /* Kreator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Kreator.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,17 +66,19 @@
 		B2ED5C5D2B723E25007A7F36 /* Kreator */ = {
 			isa = PBXGroup;
 			children = (
-				B2ED5C652B723E50007A7F36 /* EntryPoint */,
+				B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */,
+				B2ED5C652B723E50007A7F36 /* Application */,
 			);
 			path = Kreator;
 			sourceTree = "<group>";
 		};
-		B2ED5C652B723E50007A7F36 /* EntryPoint */ = {
+		B2ED5C652B723E50007A7F36 /* Application */ = {
 			isa = PBXGroup;
 			children = (
-				B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */,
+				B2ED5E182B738B23007A7F36 /* Kreator.cpp */,
+				B2ED5E192B738B23007A7F36 /* Kreator.hpp */,
 			);
-			path = EntryPoint;
+			path = Application;
 			sourceTree = "<group>";
 		};
 		B2ED5C982B723F75007A7F36 /* Frameworks */ = {
@@ -141,6 +146,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2ED5E1A2B738B23007A7F36 /* Kreator.cpp in Sources */,
 				B2ED5C5F2B723E25007A7F36 /* EntryPoint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -9,6 +9,8 @@
 
 using namespace IKan;
 
+extern Scope<Application> CreateApplication();
+
 /// This is the Entry point of the Kreator
 /// - Parameters:
 ///   - argc: Number of arguments passed from binary
@@ -25,6 +27,6 @@ int main(int argc, const char * argv[])
   }
   
   // Create Application
-  Scope<Application> application = CreateScope<Application>(ApplicationSpecification());
+  Scope<Application> application = CreateApplication();
   return 0;
 }
