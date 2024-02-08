@@ -128,4 +128,48 @@ namespace IKan
     friend class Shader;
     friend class OpenGLShader;
   };
+  
+  /// Stores the type of shader Uniform Resources. Non premitive data types like Sampler
+  class OpenGLShaderResourceDeclaration : public ShaderResourceDeclaration
+  {
+  public:
+    enum class Type
+    {
+      None, Texture2D, TextureCubeMap
+    };
+    
+    /// This constructor creates the resource uniform of shader
+    /// - Parameters:
+    ///   - type: type of
+    ///   - name: name of uniform
+    ///   - count: count of uniform
+    OpenGLShaderResourceDeclaration(Type type, const std::string& name, uint32_t count);
+    /// This is default destrcutro
+    virtual ~OpenGLShaderResourceDeclaration();
+    
+    /// This function returns the name of uniform
+    const std::string& GetName() const override;
+    /// This function returns the register of uniform
+    uint32_t GetRegister() const override;
+    /// This function returns the count of uniform
+    uint32_t GetCount() const override;
+    /// This function returns the type of uniform
+    Type GetType() const;
+    
+    /// This static function returns the type from string
+    /// - Parameter type: type in string
+    static Type StringToType(const std::string& type);
+    /// This static funciton returns the type of uniform resource in string
+    /// - Parameter type: type of uniform resource
+    static std::string TypeToString(Type type);
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLShaderResourceDeclaration);
+    
+  private:
+    std::string m_name;
+    uint32_t m_register, m_count;
+    Type m_type;
+    
+    friend class OpenGLShader;
+  };
 } // namespace IKan
