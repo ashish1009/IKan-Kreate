@@ -714,7 +714,7 @@ namespace IKan
   {
     return m_name;
   }
-  const std::string& OpenGLShader::GetFilePath() const
+  const std::filesystem::path& OpenGLShader::GetFilePath() const
   {
     return m_filePath;
   }

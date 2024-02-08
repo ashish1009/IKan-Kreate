@@ -50,7 +50,7 @@ namespace IKan
     virtual RendererID GetRendererID() const = 0;
     
     /// This function returns the Shader file path
-    virtual const std::string& GetFilePath() const = 0;
+    virtual const std::filesystem::path& GetFilePath() const = 0;
     /// This function returns the Shader Name
     virtual const std::string& GetName() const = 0;
     

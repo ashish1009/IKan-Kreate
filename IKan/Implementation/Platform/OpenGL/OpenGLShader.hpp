@@ -47,7 +47,7 @@ namespace IKan
     /// This function returns the Name of Shader
     const std::string& GetName() const override;
     /// This function returns the File Path of Shader
-    const std::string& GetFilePath() const override;
+    const std::filesystem::path& GetFilePath() const override;
     
     /// This function returns true if have the vertex shader buffer data
     bool HasVSMaterialUniformBuffer() const override;
