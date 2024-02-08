@@ -11,6 +11,7 @@
 #include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLRendererBuffer.hpp"
+#include "Platform/OpenGL/OpenGLPipeline.hpp"
 
 namespace IKan
 {
@@ -83,4 +84,15 @@ namespace IKan
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
   }
+  
+  Ref<Pipeline> PipelineFactory::Create(const PipelineSpecification& spec)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: 
+      case RendererType::Invalid:
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
+    }
+  }
+
 } // namespace IKan

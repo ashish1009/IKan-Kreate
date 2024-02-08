@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Renderer/Graphics/Specifications.h"
+
 class GLFWwindow;
 
 namespace IKan
@@ -16,6 +18,7 @@ namespace IKan
   class Shader;
   class VertexBuffer;
   class IndexBuffer;
+  class Pipeline;
 
   /// This is the Renderer Context Factory
   struct RendererContextFactory
@@ -67,4 +70,13 @@ namespace IKan
     /// - Note: Size of single indices is taken as size of uint32_t (4)
     [[nodiscard]] static Ref<IndexBuffer> CreateWithCount(void* data, uint32_t count);
   };
+  
+  /// This structure is the factory to create frame buffer based on the current API supported
+  struct PipelineFactory
+  {
+    /// This static function creates the Pipeline instance based on the current Supported API
+    /// - Parameter spec: Pipeline specificaion
+    [[nodiscard]] static Ref<Pipeline> Create(const PipelineSpecification& spec);
+  };
+
 } // namespace IKan
