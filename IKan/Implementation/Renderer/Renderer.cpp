@@ -6,6 +6,7 @@
 //
 
 #include "Renderer.hpp"
+#include "Renderer/Renderer2D.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 
@@ -25,6 +26,9 @@ namespace IKan
     
     // Create the Renderer API instance
     s_rendererData.rendererAPI = RendererAPIFactory::Create();
+    
+    // Initialize the Renderers
+    Renderer2D::Initialize({100, 100, 100});
   }
   
   void Renderer::Shutdown()
@@ -37,6 +41,9 @@ namespace IKan
     
     // Delete Shaders from library
     ShaderLibrary::Reset();
+    
+    // Shutdown the Renderers
+    Renderer2D::Shutdown();
   }
   
   // Renderer API ----------------------------------------------------------------------------------------------------
