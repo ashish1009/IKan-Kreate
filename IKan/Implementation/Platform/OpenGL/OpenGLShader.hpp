@@ -31,6 +31,8 @@ namespace IKan
     /// later by compiler.
     /// - Parameter sourceString: shader code as string
     void PreprocessShader(const std::string& sourceString);
+    /// This functions compiles all the shader codes and store their ID in Program ID (renderer_id).
+    void Compile();
 
     // Member Variables ---------------------------------------------------------------------------------------------
     RendererID m_rendererID;
