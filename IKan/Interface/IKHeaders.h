@@ -38,3 +38,5 @@
 #include <Core/Application.hpp>
 #include <Core/Layer.hpp>
 #include <Core/Window.hpp>
+
+#include <Renderer/Renderer.hpp>

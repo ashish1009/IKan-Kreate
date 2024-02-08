@@ -14,18 +14,21 @@ Scope<Application> CreateApplication()
   // Core Application Specificaion --------------------------------------------------------
   ApplicationSpecification appSpec;
 
-  // Core data
+  // Core Data
   appSpec.title = "Kreator";
   appSpec.coreAssetPath = "../../../IKan/Assets";
   
-  // Window Specification
+  // Renderer Data
+  appSpec.rendererType = RendererType::OpenGL;
+  
+  // Window Specification Data
   appSpec.windowSpecificaion.title = "Kreator";
   appSpec.windowSpecificaion.width = 2500;
   appSpec.windowSpecificaion.height = 1000;
   appSpec.windowSpecificaion.hideTitleBar = false;
   appSpec.windowSpecificaion.isFullScreen = false;
   
-  // Window Controller
+  // Window Controller Data
   appSpec.resizable = true;
   appSpec.startMaximized = true;
 

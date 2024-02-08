@@ -9,6 +9,7 @@
 
 #include "Core/Layer.hpp"
 #include "Core/Window.hpp"
+#include "Renderer/Renderer.hpp"
 
 namespace IKan
 {
@@ -17,6 +18,7 @@ namespace IKan
   {
     std::string title {"New Application"};
     std::string coreAssetPath {};
+    RendererType rendererType {RendererType::Invalid};
     WindowSpecification windowSpecificaion;
     bool startMaximized {false};
     bool resizable {true};
