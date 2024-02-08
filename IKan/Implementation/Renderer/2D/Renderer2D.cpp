@@ -18,6 +18,26 @@ namespace IKan
 #define BATCH_TRACE(...) IK_LOG_TRACE(LogModule::Renderer2D, __VA_ARGS__)
 #define BATCH_WARN(...) IK_LOG_WARN(LogModule::Renderer2D, __VA_ARGS__)
   
+  struct Renderer2DData
+  {
+    QuadBatchData quadData;
+    CircleBatchData circleData;
+    LineBatchData lineData;
+    FullScreenQuad fullScreenQuad;
+    
+    glm::mat4 cameraViewProjectionMatrix;
+    glm::mat4 cameraViewMatrix;
+    
+    void Destroy()
+    {
+      quadData.Destroy();
+      circleData.Destroy();
+      lineData.Destroy();
+      fullScreenQuad.Destroy();
+    }
+  };
+  static Renderer2DData s_data;
+
   void Renderer2D::Initialize(const Renderer2DBatchLimit& data)
   {
     IK_PROFILE();
