@@ -13,6 +13,7 @@
 #include "Platform/OpenGL/OpenGLRendererBuffer.hpp"
 #include "Platform/OpenGL/OpenGLPipeline.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
+#include "Platform/OpenGL/OpenGLFrameBuffer.hpp"
 
 namespace IKan
 {
@@ -153,4 +154,15 @@ namespace IKan
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
   }
+  
+  Ref<FrameBuffer> FrameBufferFactory::Create(const FrameBufferSpecification& spec)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL:
+      case RendererType::Invalid:
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
+    }
+  }
+
 } // namespace IKan

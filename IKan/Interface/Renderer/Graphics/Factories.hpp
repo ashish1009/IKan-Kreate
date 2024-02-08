@@ -20,6 +20,7 @@ namespace IKan
   class IndexBuffer;
   class Pipeline;
   class Texture;
+  class FrameBuffer;
 
   /// This is the Renderer Context Factory
   struct RendererContextFactory
@@ -101,6 +102,14 @@ namespace IKan
     ///         somewhere). This API will Load the texture again and new memory will be creted. So to avoid duplicate
     ///         memory for same texture use Library::GetTexture()
     [[nodiscard]] static Ref<Texture> Create(const ImageSpecificaion& spec);
+  };
+
+  /// This structure is the factory to create frame buffer based on the current API supported
+  struct FrameBufferFactory
+  {
+    /// This static function creates the Framebuffer instance based on the current Supported API
+    /// - Parameter spec: Frame buffer specification
+    [[nodiscard]] static Ref<FrameBuffer> Create(const FrameBufferSpecification& spec);
   };
 
 } // namespace IKan
