@@ -19,6 +19,7 @@ namespace IKan
   class VertexBuffer;
   class IndexBuffer;
   class Pipeline;
+  class Texture;
 
   /// This is the Renderer Context Factory
   struct RendererContextFactory
@@ -77,6 +78,29 @@ namespace IKan
     /// This static function creates the Pipeline instance based on the current Supported API
     /// - Parameter spec: Pipeline specificaion
     [[nodiscard]] static Ref<Pipeline> Create(const PipelineSpecification& spec);
+  };
+
+  /// This structure is the factory to create frame buffer based on the current API supported
+  struct TextureFactory
+  {
+    /// This static function creates the Texture instance based on the current Supported API
+    /// - Parameter spec: Texture specificaion
+    [[nodiscard]] static Ref<Texture> Create(const Texture2DSpecification& spec);
+    /// This API creates the Texture instance with white based on the Renderer API
+    /// - Parameter data : White data
+    [[nodiscard]] static Ref<Texture> Create(uint32_t data = 0xffffffff);
+    /// This static functions creates the Texture from image file
+    /// - Parameter filePath: path of texture file
+    /// - Note: Use Renderer::GetTexture() to reuse already loaded texture (if following texture is already used
+    ///         somewhere). This API will Load the texture again and new memory will be creted. So to avoid duplicate
+    ///         memory for same texture use Library::GetTexture()
+    [[nodiscard]] static Ref<Texture> Create(const std::string& filePath);
+    /// This static functions creates the Texture from image file
+    /// - Parameter spec: Texture specificaion
+    /// - Note: Use Renderer::GetTexture() to reuse already loaded texture (if following texture is already used
+    ///         somewhere). This API will Load the texture again and new memory will be creted. So to avoid duplicate
+    ///         memory for same texture use Library::GetTexture()
+    [[nodiscard]] static Ref<Texture> Create(const ImageSpecificaion& spec);
   };
 
 } // namespace IKan
