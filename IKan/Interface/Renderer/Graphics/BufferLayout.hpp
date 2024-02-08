@@ -23,12 +23,12 @@ namespace IKan
   /// This structur stores all the property of a element in a buffer.
   struct BufferElement
   {
-    std::string name = "";
-    ShaderDataType type = ShaderDataType::NoType;
-    uint32_t size = 0;
-    uint32_t count = 0;
-    size_t offset = 0;
-    bool normalized = false;
+    std::string name {};
+    ShaderDataType type {ShaderDataType::NoType};
+    uint32_t size {0};
+    uint32_t count {0};
+    size_t offset {0};
+    bool normalized {false};
     
     /// This Constructor creates the buffer element with arguments
     /// - Parameters:
@@ -67,7 +67,7 @@ namespace IKan
     void CalculateOffsetAndStride();
     
     std::vector<BufferElement> m_elements;
-    uint32_t m_stride = 0;
+    uint32_t m_stride {0};
   };
 
 } // namespace IKan
