@@ -47,14 +47,14 @@ IKan Library can be used separately independent to develop your own Editor/Game
     - Buffers
     - Pipeline
     - Texture
+    - Framebuffer
   - Renderer API
+
 ### Detailed Road Map
 - Utilities
   - Maths
   - YAML
 - Renderer
-  - Graphics APIs
-    - Framebuffer
   - Mesh
   - Material
   - Secne Rederer
