@@ -72,6 +72,9 @@
 		B2ED60482B74C547007A7F36 /* OpenGLPipeline.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60462B74C547007A7F36 /* OpenGLPipeline.hpp */; };
 		B2ED604D2B74D958007A7F36 /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED604B2B74D958007A7F36 /* MathUtils.cpp */; };
 		B2ED604E2B74D958007A7F36 /* MathUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED604C2B74D958007A7F36 /* MathUtils.hpp */; };
+		B2ED60552B74DAB8007A7F36 /* Texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60532B74DAB8007A7F36 /* Texture.hpp */; };
+		B2ED605B2B74DACD007A7F36 /* OpenGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60592B74DACD007A7F36 /* OpenGLTexture.cpp */; };
+		B2ED605C2B74DACD007A7F36 /* OpenGLTexture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED605A2B74DACD007A7F36 /* OpenGLTexture.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -172,6 +175,9 @@
 		B2ED604A2B74D560007A7F36 /* BatchQuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchQuadShader.glsl; sourceTree = "<group>"; };
 		B2ED604B2B74D958007A7F36 /* MathUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtils.cpp; sourceTree = "<group>"; };
 		B2ED604C2B74D958007A7F36 /* MathUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MathUtils.hpp; sourceTree = "<group>"; };
+		B2ED60532B74DAB8007A7F36 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
+		B2ED60592B74DACD007A7F36 /* OpenGLTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTexture.cpp; sourceTree = "<group>"; };
+		B2ED605A2B74DACD007A7F36 /* OpenGLTexture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLTexture.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -399,6 +405,7 @@
 				B2ED60322B74BA7F007A7F36 /* BufferLayout.hpp */,
 				B2ED60362B74BB9B007A7F36 /* RendererBuffer.hpp */,
 				B2ED60422B74C52D007A7F36 /* Pipeline.hpp */,
+				B2ED60532B74DAB8007A7F36 /* Texture.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -429,6 +436,8 @@
 				B2ED603A2B74BBA8007A7F36 /* OpenGLRendererBuffer.hpp */,
 				B2ED60452B74C547007A7F36 /* OpenGLPipeline.cpp */,
 				B2ED60462B74C547007A7F36 /* OpenGLPipeline.hpp */,
+				B2ED60592B74DACD007A7F36 /* OpenGLTexture.cpp */,
+				B2ED605A2B74DACD007A7F36 /* OpenGLTexture.hpp */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -503,6 +512,7 @@
 				B2ED60382B74BB9B007A7F36 /* RendererBuffer.hpp in Headers */,
 				B2ED600F2B74A912007A7F36 /* Shader.hpp in Headers */,
 				B2ED5E8D2B7498FF007A7F36 /* OpenGLRendererAPI.hpp in Headers */,
+				B2ED605C2B74DACD007A7F36 /* OpenGLTexture.hpp in Headers */,
 				B2ED5E352B73A811007A7F36 /* MacWindow.hpp in Headers */,
 				B2ED5E532B749097007A7F36 /* Factories.hpp in Headers */,
 				B2ED60482B74C547007A7F36 /* OpenGLPipeline.hpp in Headers */,
@@ -525,6 +535,7 @@
 				B2ED5E132B7370DA007A7F36 /* ApplicationEvent.h in Headers */,
 				B2ED5E2D2B73A5C4007A7F36 /* Window.hpp in Headers */,
 				B2ED5CCF2B736963007A7F36 /* TimeStep.hpp in Headers */,
+				B2ED60552B74DAB8007A7F36 /* Texture.hpp in Headers */,
 				B2ED5E112B7370DA007A7F36 /* Event.h in Headers */,
 				B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */,
 				B2ED60212B74AF5A007A7F36 /* OpenGLShaderUniforms.hpp in Headers */,
@@ -649,6 +660,7 @@
 				B2ED5CC42B7265F0007A7F36 /* LoggerBuilder.cpp in Sources */,
 				B2ED60202B74AF5A007A7F36 /* OpenGLShaderUniforms.cpp in Sources */,
 				B2ED5E422B748AFB007A7F36 /* Renderer.cpp in Sources */,
+				B2ED605B2B74DACD007A7F36 /* OpenGLTexture.cpp in Sources */,
 				B2ED5CCE2B736963007A7F36 /* TimeStep.cpp in Sources */,
 				B2ED600A2B74A5B6007A7F36 /* ImGuiLayer.cpp in Sources */,
 				B2ED603F2B74BD12007A7F36 /* RendererStats.cpp in Sources */,

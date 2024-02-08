@@ -48,7 +48,8 @@ namespace Kreator
     
     PipelineSpecification pipelineSpec;
     pipelineSpec.debugName = "Test Renderer";
-    pipelineSpec.vertexLayout = {
+    pipelineSpec.vertexLayout = 
+    {
       {"a_Position", ShaderDataType::Float3}
     };
     
