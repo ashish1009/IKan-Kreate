@@ -35,16 +35,57 @@ namespace IKan
     s_rendererData.rendererAPI = nullptr;
   }
   
+  // Renderer API ----------------------------------------------------------------------------------------------------
   void Renderer::SetCurrentRendererAPI(RendererType rendererType)
   {
     s_rendererData.rendererType = rendererType;
   }
-  
   RendererType Renderer::GetCurrentRendererAPI()
   {
     return s_rendererData.rendererType;
   }
   
+  // Renderer Controller ---------------------------------------------------------------------------------------------
+  void Renderer::Clear(const glm::vec4& color)
+  {
+    IK_PERFORMANCE("Renderer::Clear");
+    s_rendererData.rendererAPI->SetClearColor(color);
+    s_rendererData.rendererAPI->ClearBits();
+  }
+  void Renderer::ClearBits()
+  {
+    IK_PERFORMANCE("Renderer::ClearBits");
+    s_rendererData.rendererAPI->ClearBits();
+  }
+  void Renderer::ClearDepthBits()
+  {
+    s_rendererData.rendererAPI->ClearDepthBits();
+  }
+  void Renderer::EnableDepthPass()
+  {
+    s_rendererData.rendererAPI->EnableDepthPass();
+  }
+  void Renderer::DisableDepthPass()
+  {
+    s_rendererData.rendererAPI->DisableDepthPass();
+  }
+  void Renderer::DepthFunc(GlDepthFunc func)
+  {
+    s_rendererData.rendererAPI->DepthFunc(func);
+  }
+  void Renderer::EnableStencilPass()
+  {
+    s_rendererData.rendererAPI->EnableStencilPass();
+  }
+  void Renderer::DisableStencilPass()
+  {
+    s_rendererData.rendererAPI->DisableStencilPass();
+  }
+  void Renderer::SetViewport(uint32_t width, uint32_t height)
+  {
+    s_rendererData.rendererAPI->SetViewport(width, height);
+  }
+
   // Renderer Capabilities -------------------------------------------------------------------------------------------
   RendererCapabilities& RendererCapabilities::Get()
   {

@@ -30,9 +30,9 @@ namespace IKan
     /// This function clears the depth bits
     void ClearStencilBits() const override;
 
-    /// This function changes the bit value for depth bit
+    /// This function enables the depth pass
     void EnableDepthPass() const override;
-    /// This function changes the bit value for depth bit
+    /// This function disables the depth pass
     void DisableDepthPass() const override;
     /// This function change depth function
     /// - Parameter func: depth function type
