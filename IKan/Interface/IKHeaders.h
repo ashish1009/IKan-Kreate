@@ -55,5 +55,7 @@
 #include <Renderer/Graphics/RendererAPI.hpp>
 #include <Renderer/Graphics/RendererContext.hpp>
 #include <Renderer/Graphics/Shader.hpp>
+#include <Renderer/Graphics/RendererBuffer.hpp>
+#include <Renderer/Graphics/Pipeline.hpp>
 
 #include <UI/ImGuiLayer.hpp>

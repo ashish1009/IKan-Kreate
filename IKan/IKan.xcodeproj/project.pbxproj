@@ -167,6 +167,7 @@
 		B2ED60422B74C52D007A7F36 /* Pipeline.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Pipeline.hpp; sourceTree = "<group>"; };
 		B2ED60452B74C547007A7F36 /* OpenGLPipeline.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLPipeline.cpp; sourceTree = "<group>"; };
 		B2ED60462B74C547007A7F36 /* OpenGLPipeline.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLPipeline.hpp; sourceTree = "<group>"; };
+		B2ED604A2B74D560007A7F36 /* BatchQuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchQuadShader.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -236,6 +237,7 @@
 		B2ED5C962B723F52007A7F36 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B2ED60492B74D560007A7F36 /* Shaders */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -473,6 +475,14 @@
 				B2ED602C2B74B3AE007A7F36 /* libGlad.a */,
 			);
 			name = Products;
+			sourceTree = "<group>";
+		};
+		B2ED60492B74D560007A7F36 /* Shaders */ = {
+			isa = PBXGroup;
+			children = (
+				B2ED604A2B74D560007A7F36 /* BatchQuadShader.glsl */,
+			);
+			path = Shaders;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

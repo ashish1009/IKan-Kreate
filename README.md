@@ -29,6 +29,10 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - {...}/Vendors/Glm
 
 ### Features
+- Base
+  - Buffer
+- Utilities
+  - String
 - Core
   - Logger
   - Profiler
@@ -40,19 +44,15 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Graphics APIs
     - Context
     - Shader
+    - Buffers
+    - Pipeline
   - Renderer API
-
 ### Detailed Road Map
-- Base
-  - Buffer
 - Utilities
-  - String
   - Maths
   - YAML
 - Renderer
   - Graphics APIs
-    - Buffers
-    - Pipeline
     - Texture
     - Framebuffer
     - Render Pass

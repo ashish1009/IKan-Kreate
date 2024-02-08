@@ -7,6 +7,11 @@
 
 #include "KreatorLayer.hpp"
 
+static Ref<Shader> shader;
+static Ref<VertexBuffer> vertexBuffer;
+static Ref<IndexBuffer> indexBuffer;
+static Ref<Pipeline> pipeline;
+
 namespace Kreator
 {
   KreatorLayer::KreatorLayer()
@@ -28,13 +33,37 @@ namespace Kreator
     IK_LOG_INFO("Kreator Layer", "Attaching '{0} Layer' to application", GetName());
     
     // Testing Temp Shader
-    Ref<Shader> shader = ShaderLibrary::GetShader("/Users/ashish./iKan_storage/Github/Product/Kreator/IKan/Assets/Shaders/PBR_StaticShader.glsl");
+    shader = ShaderLibrary::GetShader("../../../IKan/Assets/Shaders/BatchQuadShader.glsl");
+    
+    float v[] = {
+      -0.5, -0.5, 0.0,
+       0.5, -0.5, 0.0,
+       0.5,  0.5, 0.0,
+       0.5,  0.5, 0.0,
+    };
+    
+    uint32_t i[] = {0, 1, 2, 2, 3, 0};
+    
+    vertexBuffer = VertexBufferFactory::Create(v, sizeof(v));
+    
+    PipelineSpecification pipelineSpec;
+    pipelineSpec.debugName = "Test Renderer";
+    pipelineSpec.vertexLayout = {
+      {"a_Position", ShaderDataType::Float3}
+    };
+    
+    pipeline = PipelineFactory::Create(pipelineSpec);
+    
+    indexBuffer = IndexBufferFactory::CreateWithCount(i, 6);
   }
-  
   void KreatorLayer::OnDetach()
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Detaching '{0} Layer' from application", GetName());
+    shader.reset();
+    vertexBuffer.reset();
+    indexBuffer.reset();
+    pipeline.reset();
   }
   
   void KreatorLayer::OnUpdate(TimeStep ts)
