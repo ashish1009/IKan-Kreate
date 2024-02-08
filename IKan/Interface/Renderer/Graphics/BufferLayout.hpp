@@ -37,4 +37,37 @@ namespace IKan
     ///   - normalized: flag is element normalized
     BufferElement(const std::string& name, ShaderDataType type, bool normalized = false);
   };
+  
+  // Buffer Layout ---------------------------------------------------------------------------------------------------
+  /// This class stores the layout of vertex Buffer in a vector (stores each elements)
+  class BufferLayout : public VectorIterator<BufferElement>
+  {
+  public:
+    /// This is the default constructor
+    BufferLayout();
+    /// This Costructor initialize the vector of layout elements with initializer list
+    BufferLayout(const std::initializer_list<BufferElement>& elements);
+    
+    /// Copy and Move constructors and operator
+    BufferLayout(const BufferLayout& other);
+    BufferLayout(BufferLayout&& other);
+    BufferLayout& operator=(const BufferLayout& other);
+    BufferLayout& operator=(BufferLayout&& other);
+
+    /// This function returns the elements vector
+    const std::vector<BufferElement>& GetElements() const;
+    /// This function returns the stride value
+    uint32_t GetStride() const;
+    
+    /// This funcion print the debug log
+    void DebugLog();
+        
+  private:
+    /// This function calculates the offset of element and update the stride value
+    void CalculateOffsetAndStride();
+    
+    std::vector<BufferElement> m_elements;
+    uint32_t m_stride = 0;
+  };
+
 } // namespace IKan

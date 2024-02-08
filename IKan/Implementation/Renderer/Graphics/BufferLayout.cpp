@@ -89,4 +89,79 @@ namespace IKan
   {
     
   }
+  
+  // Buffer Layout ---------------------------------------------------------------------------------------------------
+  BufferLayout::BufferLayout()
+  : VectorIterator<BufferElement>(m_elements)
+  {
+    
+  }
+  
+  BufferLayout::BufferLayout(const std::initializer_list<BufferElement>& elements)
+  : VectorIterator<BufferElement>(m_elements), m_elements(elements)
+  {
+    CalculateOffsetAndStride();
+  }
+  
+  void BufferLayout::CalculateOffsetAndStride()
+  {
+    size_t offset = 0;
+    m_stride = 0;
+    for (auto& element : m_elements)
+    {
+      element.offset = offset;
+      offset += element.size;
+      m_stride += element.size;
+    }
+  }
+  
+  const std::vector<BufferElement>& BufferLayout::GetElements() const
+  {
+    return m_elements;
+  }
+  
+  uint32_t BufferLayout::GetStride() const
+  {
+    return m_stride;
+  }
+  
+  BufferLayout::BufferLayout(const BufferLayout& other)
+  : VectorIterator<BufferElement>(m_elements), m_stride(other.m_stride)
+  {
+    for (const auto& elem : other.m_elements)
+    {
+      m_elements.emplace_back(elem);
+    }
+  }
+  BufferLayout& BufferLayout::operator=(const BufferLayout& other)
+  {
+    m_stride = other.m_stride;
+    m_elements.clear();
+    for (const auto& elem : other.m_elements)
+    {
+      m_elements.emplace_back(elem);
+    }
+    return *this;
+  }
+  BufferLayout& BufferLayout::operator=(BufferLayout&& other)
+  {
+    m_stride = other.m_stride;
+    m_elements.clear();
+    for (const auto& elem : other.m_elements)
+    {
+      m_elements.emplace_back(elem);
+    }
+    return *this;
+  }
+  
+  void BufferLayout::DebugLog()
+  {
+#ifdef IK_ENABLE_LOG
+    IK_LOG_DEBUG(LogModule::BufferLayout, "Vertex Attributes (Stride : {0})", std::to_string(GetStride()));
+    for (const auto& element : GetElements())
+    {
+      IK_LOG_DEBUG(LogModule::BufferLayout, "  {0} ({1})", element.name, BufferUtils::ShaderDataTypeToString(element.type));
+    }
+#endif
+  }
 } // namespace IKan
