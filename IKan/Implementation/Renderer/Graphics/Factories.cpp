@@ -89,7 +89,7 @@ namespace IKan
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
-      case RendererType::OpenGL: 
+      case RendererType::OpenGL: return CreateRef<OpenGLPipeline>(spec);
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
