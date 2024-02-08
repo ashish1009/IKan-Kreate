@@ -65,4 +65,20 @@ namespace IKan
     /// - Parameter name: name of uniform
     virtual ShaderUniformDeclaration* FindUniform(const std::string& name) = 0;
   };
+  
+  /// This Interface class stores the uniform resource like sampler 2D ...
+  class ShaderResourceDeclaration
+  {
+  public:
+    /// This is the default destructor
+    virtual ~ShaderResourceDeclaration() = default;
+    
+    /// This function returns the name of resrouce
+    virtual const std::string& GetName() const = 0;
+    /// This function returns the register ot resource
+    virtual uint32_t GetRegister() const = 0;
+    /// This function returns the count of array of resource
+    virtual uint32_t GetCount() const = 0;
+  };
+
 } // namespace IKan
