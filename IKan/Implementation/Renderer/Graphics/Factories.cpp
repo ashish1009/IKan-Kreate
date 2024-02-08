@@ -129,11 +129,16 @@ namespace IKan
     }
   }
   
-  Ref<Texture> TextureFactory::Create(const std::string& filePath)
+  Ref<Texture> TextureFactory::Create(const std::filesystem::path& filePath)
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
       case RendererType::OpenGL:
+      {
+        ImageSpecificaion spec;
+        spec.filePath = filePath;
+        return CreateRef<OpenGLImage>(spec);
+      }
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
@@ -143,7 +148,7 @@ namespace IKan
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
-      case RendererType::OpenGL:
+      case RendererType::OpenGL: return CreateRef<OpenGLImage>(spec);
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }

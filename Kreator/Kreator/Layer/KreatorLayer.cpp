@@ -11,6 +11,7 @@ static Ref<Shader> shader;
 static Ref<VertexBuffer> vertexBuffer;
 static Ref<IndexBuffer> indexBuffer;
 static Ref<Pipeline> pipeline;
+static Ref<Texture> texture;
 
 namespace Kreator
 {
@@ -36,10 +37,10 @@ namespace Kreator
     shader = ShaderLibrary::GetShader("../../../IKan/Assets/Shaders/BatchQuadShader.glsl");
     
     float v[] = {
-      -0.5, -0.5, 0.0,
-       0.5, -0.5, 0.0,
-       0.5,  0.5, 0.0,
-      -0.5,  0.5, 0.0,
+      -0.5, -0.5, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 0.0, 1.0,
+       0.5, -0.5, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 0.0, 1.0,
+       0.5,  0.5, 0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0,
+      -0.5,  0.5, 0.0, 1.0, 1.0, 1.0, 1.0, 0.0, 1.0, 0.0, 1.0,
     };
     
     uint32_t i[] = {0, 1, 2, 2, 3, 0};
@@ -50,12 +51,18 @@ namespace Kreator
     pipelineSpec.debugName = "Test Renderer";
     pipelineSpec.vertexLayout = 
     {
-      {"a_Position", ShaderDataType::Float3}
+      {"a_Position",      ShaderDataType::Float3},
+      {"a_Color",         ShaderDataType::Float4},
+      {"a_TexCoords",     ShaderDataType::Float2},
+      {"a_TexIndex",      ShaderDataType::Float},
+      {"a_TilingFactor",  ShaderDataType::Float}
     };
     
     pipeline = PipelineFactory::Create(pipelineSpec);
     
     indexBuffer = IndexBufferFactory::CreateWithCount(i, 6);
+    
+    texture = TextureFactory::Create("/Users/ashish./iKan_storage/Github/Projects/ikan_ws_recent_ecs_ray/kreator/editor/editor_assets/texture/basicTextures/checkerboard.png");
   }
   void KreatorLayer::OnDetach()
   {
@@ -74,6 +81,7 @@ namespace Kreator
     
     shader->Bind();
     shader->SetUniformMat4("u_ViewProjection", Utils::Math::UnitMat4);
+    texture->Bind();
     Renderer::DrawIndexed(pipeline, 6);
   }
   

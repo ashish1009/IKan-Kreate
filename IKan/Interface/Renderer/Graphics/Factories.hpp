@@ -94,7 +94,7 @@ namespace IKan
     /// - Note: Use Renderer::GetTexture() to reuse already loaded texture (if following texture is already used
     ///         somewhere). This API will Load the texture again and new memory will be creted. So to avoid duplicate
     ///         memory for same texture use Library::GetTexture()
-    [[nodiscard]] static Ref<Texture> Create(const std::string& filePath);
+    [[nodiscard]] static Ref<Texture> Create(const std::filesystem::path& filePath);
     /// This static functions creates the Texture from image file
     /// - Parameter spec: Texture specificaion
     /// - Note: Use Renderer::GetTexture() to reuse already loaded texture (if following texture is already used
