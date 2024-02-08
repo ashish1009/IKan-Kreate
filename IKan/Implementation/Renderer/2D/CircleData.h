@@ -1,5 +1,5 @@
 //
-//  QuadData.h
+//  CircleData.h
 //  IKan
 //
 //  Created by Ashish . on 08/02/24.
@@ -7,86 +7,28 @@
 
 #pragma once
 
-#include "Renderer/2D/BatchData.h"
-
 namespace IKan
 {
 #define BATCH_INFO(...) IK_LOG_INFO(LogModule::Renderer2D, __VA_ARGS__)
-  
-  /// This structures stores the Full Screen quad
-  struct FullScreenQuad
+  /// Batch Data to Rendering Circles
+  struct CircleBatchData : Shape2DCommonData
   {
-    /// Vertices of Full Screen Quad
-    static constexpr float vertices[] =
+    /// Single vertex of a Circle
+    struct Vertex : CommonVertex
     {
-      // positions        // texture Coords
-      -1.0f,  1.0f, 0.0f, 0.0f, 1.0f,
-      -1.0f, -1.0f, 0.0f, 0.0f, 0.0f,
-      1.0f,  1.0f, 0.0f, 1.0f, 1.0f,
-      1.0f, -1.0f, 0.0f, 1.0f, 0.0f,
+      glm::vec3 localPosition;
+      float thickness;
+      float fade;
     };
     
-    /// Pipelne to render full screen quad
-    Ref<Pipeline> pipeline;
-    Ref<VertexBuffer> vertexBuffer;
-    Ref<Texture> whiteTexture;
-    Ref<Shader> shader;
-    
-    /// This function initilaise the full screen quad data
-    void Initialize()
-    {
-      IK_PROFILE();
-      // Create vertes Buffer
-      vertexBuffer = VertexBufferFactory::Create((void*)&vertices, sizeof(vertices));
-      
-      // Create Pipeline specification
-      PipelineSpecification pipelineSpec;
-      pipelineSpec.debugName = "Full Screen Quad Pipeline";
-      shader = ShaderLibrary::GetShader(CoreAsset("Shaders/FSQuadShader.glsl"));
-      pipelineSpec.vertexLayout =
-      {
-        { "a_Position", ShaderDataType::Float3 },
-        { "a_TexCoord", ShaderDataType::Float2 },
-      };
-      
-      // Create the Pipeline instnace for full screen quad
-      pipeline = PipelineFactory::Create(pipelineSpec);
-      
-      // Create white texture
-      whiteTexture = TextureFactory::Create(0xffffffff);
-      
-      IK_LOG_INFO(LogModule::Renderer2D, "Initialized Fullscreen Quad Data ");
-      IK_LOG_INFO(LogModule::Renderer2D, "  Vertex Buffer used               {0} B", sizeof(vertices));
-      IK_LOG_INFO(LogModule::Renderer2D, "  Shader used                      {0}", shader->GetName());
-    }
-    
-    void Destroy()
-    {
-      if (pipeline and vertexBuffer and whiteTexture)
-      {
-        IK_PROFILE();
-        IK_LOG_INFO(LogModule::Renderer2D, "Destroying Fullscreen Quad Data ");
-        IK_LOG_INFO(LogModule::Renderer2D, "  Vertex Buffer used               {0} B", sizeof(vertices));
-        IK_LOG_INFO(LogModule::Renderer2D, "  Shader used                      {0}", shader->GetName());
-        
-        pipeline.reset();
-        vertexBuffer.reset();
-        whiteTexture.reset();
-        shader.reset();
-      }
-    }
-  };
-  
-  struct QuadBatchData : public Shape2DCommonData
-  {
     /// Base pointer of Vertex Data. This is start of Batch data for single draw call
-    CommonVertex* vertexBufferBasePtr = nullptr;
+    Vertex* vertexBufferBasePtr = nullptr;
     /// Incrememntal Vetrtex Data Pointer to store all the batch data in Buffer
-    CommonVertex* vertexBufferPtr = nullptr;
+    Vertex* vertexBufferPtr = nullptr;
     
     void StartBatch(const glm::mat4& camViewProjMat)
     {
-      IK_PERFORMANCE("Quad::StartBatch");
+      IK_PERFORMANCE("Circle::StartBatch");
       LoadCamToShader(shader, camViewProjMat);
       indexCount = 0;
       textureSlotIndex = 1;
@@ -95,7 +37,7 @@ namespace IKan
     
     void ResetBatch()
     {
-      IK_PERFORMANCE("Quad::ResetBatch");
+      IK_PERFORMANCE("Circle::ResetBatch");
       indexCount = 0;
       textureSlotIndex = 1;
       vertexBufferPtr = vertexBufferBasePtr;
@@ -103,7 +45,7 @@ namespace IKan
     
     void Flush()
     {
-      IK_PERFORMANCE("Quad::Flush");
+      IK_PERFORMANCE("Circle::Flush");
       if (indexCount)
       {
         // Set the vertex buffer data
@@ -122,28 +64,28 @@ namespace IKan
       }
     }
     
-    void Initialize(uint32_t maxQuads)
+    void Initialize(uint32_t maxCircles)
     {
       IK_PROFILE();
       // If data already allocated then reset first
       if (maxElement != 0)
       {
-        maxQuads += maxElement;
+        maxCircles += maxElement;
         this->Destroy();
       }
       
       // Initialize the Shape 2D Data
-      InitializeShapeData(maxQuads);
+      InitializeShapeData(maxCircles);
       
       // Allocating the memory for vertex Buffer Pointer
-      vertexBufferBasePtr = new Shape2DCommonData::CommonVertex[maxVertices];
+      vertexBufferBasePtr = new Vertex[maxVertices];
       
       // Create vertes Buffer
-      vertexBuffer = VertexBufferFactory::Create(maxVertices * sizeof(Shape2DCommonData::CommonVertex));
+      vertexBuffer = VertexBufferFactory::Create(maxVertices * sizeof(Vertex));
       
       // Create Pipeline specification
       PipelineSpecification pipelineSpec;
-      pipelineSpec.debugName = "Quad Pipeline";
+      pipelineSpec.debugName = "Circle Pipeline";
       pipelineSpec.vertexLayout =
       {
         { "a_Position",     ShaderDataType::Float3 },
@@ -152,6 +94,9 @@ namespace IKan
         { "a_TexIndex",     ShaderDataType::Float },
         { "a_TilingFactor", ShaderDataType::Float },
         { "a_ObjectID",     ShaderDataType::Int },
+        { "a_LocalPosition",ShaderDataType::Float3 },
+        { "a_Thickness",    ShaderDataType::Float },
+        { "a_Fade",         ShaderDataType::Float },
       };
       
       // Create the Pipeline instnace
@@ -178,10 +123,10 @@ namespace IKan
       delete[] indices;
       
       // Setup the Quad Shader. Copy the Same shader refernce which is stored in the Pipeline
-      shader = ShaderLibrary::GetShader(CoreAsset("Shaders/BatchQuadShader.glsl"));
+      shader = ShaderLibrary::GetShader(CoreAsset("Shaders/BatchCircleShader.glsl"));
       
       // Debug Logs
-      BATCH_INFO("Initialized Batch Renderer for Quad Data ");
+      BATCH_INFO("Initialized Batch Renderer for Circle Data ");
       BATCH_INFO("  Max Quads per Batch              {0}", maxElement);
       BATCH_INFO("  Max Texture Slots per Batch      {0}", MaxTextureSlotsInShader);
       BATCH_INFO("  Vertex Buffer used               {0} B", maxVertices * sizeof(Shape2DCommonData::CommonVertex));
@@ -194,14 +139,14 @@ namespace IKan
       IK_PROFILE();
       if (maxElement > 0)
       {
-        BATCH_INFO("Destrying Batch Renderer for Quad Data ");
-        BATCH_INFO("  Max Quads per Batch              {0}", maxElement);
+        BATCH_INFO("Destrying Batch Renderer for Circle Data ");
+        BATCH_INFO("  Max Circle per Batch             {0}", maxElement);
         BATCH_INFO("  Max Texture Slots per Batch      {0}", MaxTextureSlotsInShader);
         BATCH_INFO("  Vertex Buffer used               {0} B", maxVertices * sizeof(Shape2DCommonData::CommonVertex));
         BATCH_INFO("  Index Buffer used                {0} B", maxIndices * sizeof(uint32_t));
         BATCH_INFO("  Shader Used                      {0}", shader->GetName());
         
-        RendererStatistics::Get()._2d.maxQuads -= maxElement;
+        RendererStatistics::Get()._2d.maxCircles -= maxElement;
       }
       
       Shape2DCommonData::Destroy();
@@ -209,4 +154,5 @@ namespace IKan
       vertexBufferBasePtr = nullptr;
     }
   };
+  
 } // namespace IKan

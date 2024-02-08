@@ -9,6 +9,7 @@
 #include "Renderer/RendererStats.hpp"
 #include "Renderer/2D/BatchData.h"
 #include "Renderer/2D/QuadData.h"
+#include "Renderer/2D/CircleData.h"
 
 namespace IKan
 {
