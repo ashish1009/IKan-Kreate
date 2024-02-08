@@ -21,5 +21,4 @@ namespace IKan
     /// This function swaps the graphics buffer. This should be called each frame
     virtual void SwapBuffers() = 0;
   };
-
 } // namespace IKan
