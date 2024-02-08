@@ -16,6 +16,9 @@ namespace IKan
     // Copy the Specificaion
     m_specification = appSpec;
     
+    // Set the renrerer Type
+    Renderer::SetCurrentRendererAPI(appSpec.rendererType);
+    
     // Create the window
     m_window = WindowFactory::Create(m_specification.windowSpecificaion);
     

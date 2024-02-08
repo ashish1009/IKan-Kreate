@@ -73,14 +73,22 @@ namespace IKan
     
     // Set GLFW Callbacks
     SetEventCallbacks();
+
+    // Create the renderer context
+    m_context = RendererContextFactory::Create(m_window);
   }
   
   MacWindow::~MacWindow()
   {
     IK_PROFILE();
     IK_LOG_INFO(LogModule::Window, "Destroying MAC OS GLFW Window");
+
+    // Destroy GLFW Window
     glfwTerminate();
     glfwDestroyWindow(m_window);
+
+    // Destroy the Context
+    m_context.reset();
   }
   
   void MacWindow::SetEventCallbacks()
@@ -211,6 +219,8 @@ namespace IKan
   void MacWindow::Update()
   {
     IK_PERFORMANCE("MacWindow::Update");
+
+    m_context->SwapBuffers();
     glfwPollEvents();
     
     float currentFrameTime = static_cast<float>(glfwGetTime());

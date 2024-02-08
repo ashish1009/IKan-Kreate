@@ -9,6 +9,7 @@
 
 #include <GLFW/glfw3.h>
 #include "Core/Window.hpp"
+#include "Renderer/Graphics/RendererContext.hpp"
 
 namespace IKan
 {
@@ -87,6 +88,7 @@ namespace IKan
     double m_lastFrameTime {0.0f};
     MacWindowData m_data;
     GLFWwindow* m_window;
+    Scope<RendererContext> m_context;
     TimeStep m_timeStep;
   };
 } // namespace IKan
