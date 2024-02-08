@@ -7,6 +7,9 @@
 
 #pragma once
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include "Renderer/Graphics/Specifications.h"
 
 class GLFWwindow;
@@ -20,6 +23,7 @@ namespace IKan
   class IndexBuffer;
   class Pipeline;
   class Texture;
+  class CharTexture;
   class FrameBuffer;
 
   /// This is the Renderer Context Factory
@@ -110,6 +114,18 @@ namespace IKan
     /// This static function creates the Framebuffer instance based on the current Supported API
     /// - Parameter spec: Frame buffer specification
     [[nodiscard]] static Ref<FrameBuffer> Create(const FrameBufferSpecification& spec);
+  };
+
+  struct CharTextureFactory
+  {
+    /// This function creates Emptry Texture with user Defined Data of size height and Width
+    /// - Parameters:
+    ///   - face: face of char
+    ///   - size: size of char
+    ///   - bearing: bearing
+    ///   - advance: advance
+    ///   - charVal: character value
+    [[nodiscard]] static Ref<CharTexture> Create(const FT_Face& face, const glm::ivec2& size, const glm::ivec2& bearing, uint32_t advance, [[maybe_unused]] char charVal);
   };
 
 } // namespace IKan

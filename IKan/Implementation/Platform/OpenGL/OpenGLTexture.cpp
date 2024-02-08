@@ -450,4 +450,76 @@ namespace IKan
   {
     return m_name;
   }
+  
+  // Open GL Char Texture -------------------------------------------------------------------------------
+  OpenGLCharTexture::OpenGLCharTexture(const FT_Face& face, const glm::ivec2& size, const glm::ivec2& bearing, uint32_t advance, [[maybe_unused]] char charVal)
+  : m_size(size), m_bearing(bearing), m_advance(advance)
+  {
+    glGenTextures(1, &m_rendererID);
+    glBindTexture(GL_TEXTURE_2D, m_rendererID);
+    
+    // Create texture in the renderer Buffer
+    glTexImage2D(GL_TEXTURE_2D, 0, /* Level */ GL_RED, (GLsizei)face->glyph->bitmap.width, (GLsizei)face->glyph->bitmap.rows,
+                 0, /* Border */ GL_RED, GL_UNSIGNED_BYTE, face->glyph->bitmap.buffer );
+    
+    m_width = (uint32_t)face->glyph->bitmap.width;
+    m_height = (uint32_t)face->glyph->bitmap.rows;
+    
+    // set texture options
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+    glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+    
+#if CHAR_TEXTURE_LOG
+    IK_LOG_TRACE(LogModule::CharTexture, "Creating Open GL Char Texture to store Char {0} ( Renderer ID {1} )",
+                 charVal, m_rendererID);
+#endif
+    
+    // Increment the size in stats
+    m_dataSize = face->glyph->bitmap.width * face->glyph->bitmap.rows;
+    RendererStatistics::Get().textureBufferSize += m_dataSize;
+  }
+  
+  OpenGLCharTexture::~OpenGLCharTexture()
+  {
+    glDeleteTextures(1, &m_rendererID);
+    RendererStatistics::Get().textureBufferSize -= m_dataSize;
+  }
+  
+  void OpenGLCharTexture::Bind(uint32_t slot) const
+  {
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(GL_TEXTURE_2D, m_rendererID);
+  }
+  void OpenGLCharTexture::Unbind() const
+  {
+    glBindTexture(GL_TEXTURE_2D, 0);
+  }
+  
+  RendererID OpenGLCharTexture::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  uint32_t OpenGLCharTexture::GetWidth() const
+  {
+    return m_width;
+  }
+  uint32_t OpenGLCharTexture::GetHeight() const
+  {
+    return m_height;
+  }
+  glm::ivec2 OpenGLCharTexture::GetSize() const
+  {
+    return m_size;
+  }
+  glm::ivec2 OpenGLCharTexture::GetBearing() const
+  {
+    return m_bearing;
+  }
+  uint32_t OpenGLCharTexture::GetAdvance() const
+  {
+    return m_advance;
+  }
+
 } // namespace IKan
