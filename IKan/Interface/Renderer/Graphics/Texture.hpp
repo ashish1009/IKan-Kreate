@@ -40,4 +40,14 @@ namespace IKan
     virtual uint32_t GetHeight() const = 0;
   };
 
+  /// This is the interface class to create the Texture 2D for Framebuffers
+  class Texture2D : public Texture
+  {
+  public:
+    /// This is default virtual destructor for Texture
+    virtual ~Texture2D() = default;
+  };
+  
+  
+
 } // namespace IKan
