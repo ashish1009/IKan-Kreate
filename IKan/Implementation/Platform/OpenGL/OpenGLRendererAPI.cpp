@@ -14,12 +14,12 @@ namespace IKan
   OpenGLRendererAPI::OpenGLRendererAPI()
   {
     IK_PROFILE();
-
+    IK_LOG_INFO(LogModule::Renderer, "Creating Open GL Renderer API");
   }
   
   OpenGLRendererAPI::~OpenGLRendererAPI()
   {
     IK_PROFILE();
-
+    IK_LOG_INFO(LogModule::Renderer, "Destroying Open GL Renderer API");
   }
 } // namespace IKan

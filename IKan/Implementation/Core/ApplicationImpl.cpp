@@ -53,7 +53,7 @@ namespace IKan
     m_window.reset();
     
     // Shutdown all the Renderers
-    Renderer::Initialize();
+    Renderer::Shutdown();
   }
   
   void Application::Impl::Run()

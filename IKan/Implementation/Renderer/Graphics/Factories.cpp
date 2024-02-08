@@ -8,6 +8,7 @@
 #include "Factories.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Platform/OpenGL/OpenGLRendererContext.hpp"
+#include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 
 namespace IKan
 {
@@ -15,12 +16,19 @@ namespace IKan
   {
     switch(Renderer::GetCurrentRendererAPI())
     {
-      case RendererType::OpenGL:
-        return CreateScope<OpenGLRendererContext>(windowPtr);
+      case RendererType::OpenGL: return CreateScope<OpenGLRendererContext>(windowPtr);
       case RendererType::Invalid:
-      default:
-        IK_LOG_CRITICAL("[Graphics Factory]", "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
-        IK_ASSERT(false, "Invalid Renderer API");
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
+    }
+  }
+  
+  Scope<RendererAPI> RendererAPIFactory::Create()
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: return CreateScope<OpenGLRendererAPI>();
+      case RendererType::Invalid:
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
   }
 } // namespace IKan
