@@ -14,6 +14,7 @@ namespace IKan
   class RendererContext;
   class RendererAPI;
   class Shader;
+  class VertexBuffer;
 
   /// This is the Renderer Context Factory
   struct RendererContextFactory
@@ -37,4 +38,18 @@ namespace IKan
     /// - Parameter shaderFilePath: Shader Code file path
     [[nodiscard]] static Ref<Shader> Create(const std::filesystem::path& shaderFilePath);
   };
+  
+  struct VertexBufferFactory
+  {
+    /// This function creates the vertex buffer. Buffer data is passed and stored as static in GPU
+    /// - Parameters:
+    ///   - data: Data of vertex Buffer
+    ///   - size: Size of vertex Buffer
+    [[nodiscard]] static Ref<VertexBuffer> Create(void* data, uint32_t size);
+    /// This function creates the vertex buffer. Buffer size is passed to reserve the memory in GPU. Data to passed
+    /// later dynamically
+    /// - Parameter size: Size of vertex buffer
+    [[nodiscard]] static Ref<VertexBuffer> Create(uint32_t size);
+  };
+
 } // namespace IKan

@@ -10,6 +10,7 @@
 #include "Platform/OpenGL/OpenGLRendererContext.hpp"
 #include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 #include "Platform/OpenGL/OpenGLShader.hpp"
+#include "Platform/OpenGL/OpenGLRendererBuffer.hpp"
 
 namespace IKan
 {
@@ -38,6 +39,26 @@ namespace IKan
     switch (Renderer::GetCurrentRendererAPI())
     {
       case RendererType::OpenGL: return CreateRef<OpenGLShader>(shaderFilePath);
+      case RendererType::Invalid:
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
+    }
+  }
+  
+  Ref<VertexBuffer> VertexBufferFactory::Create(void *data, uint32_t size)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL:
+      case RendererType::Invalid:
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
+    }
+  }
+  
+  Ref<VertexBuffer> VertexBufferFactory::Create(uint32_t size)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: 
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
