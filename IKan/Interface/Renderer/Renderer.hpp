@@ -32,6 +32,8 @@ namespace IKan
     
     static RendererCapabilities& Get();
   };
+  
+  class Pipeline;
 
   /// This is the Wrapper class for all Renderer APIs (User and Graphics)
   /// Major responsibilities for Renderer is
@@ -88,6 +90,40 @@ namespace IKan
     ///   - height: new height of renderer viewport
     static void SetViewport(uint32_t width, uint32_t height);
     
+    // Draw Calls ---------------------------------------------------------------------------------------------------
+    /// This API draws a quad with pipeline and indexed count
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    static void DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count);
+    /// This API draws a quad with pipeline and indexed count
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    static void DrawIndexedStrip(const Ref<Pipeline>& pipeline, uint32_t count);
+    /// This API draws Lines Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - vertexCount: number of Indices
+    static void DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount);
+    /// This API draws Indexed Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    static void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count);
+    /// This function render the fullscreen quad
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer
+    static void DrawQuad(const Ref<Pipeline>& pipeline);
+    /// This function draw the index based vertex
+    /// - Parameters:
+    ///   - indexCount: index count
+    ///   - indicesData: indices data
+    ///   - baseVertex: base vertex
+    static void DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex);
+    /// This function render the fullscreen cube
+    /// - Parameter pipeline: pipeline
+    static void DrawFullscreenCube(const Ref<Pipeline>& pipeline);
+
     DELETE_ALL_CONSTRUCTORS(Renderer);
   };
 } // namespace IKan

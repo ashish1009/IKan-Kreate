@@ -95,6 +95,47 @@ namespace IKan
   {
     s_rendererData.rendererAPI->SetViewport(width, height);
   }
+  
+  // Draw Calls -----------------------------------------------------------------------------------------------------
+  void Renderer::DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count)
+  {
+    IK_PERFORMANCE("Renderer::DrawIndexed");
+    s_rendererData.rendererAPI->DrawIndexed(pipeline, count);
+  }
+  void Renderer::DrawIndexedStrip(const Ref<Pipeline>& pipeline, uint32_t count)
+  {
+    IK_PERFORMANCE("Renderer::DrawIndexedStrip");
+    s_rendererData.rendererAPI->DrawIndexedStrip(pipeline, count);
+  }
+  
+  void Renderer::DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount)
+  {
+    IK_PERFORMANCE("Renderer::DrawLines");
+    s_rendererData.rendererAPI->DrawLines(pipeline, vertexCount);
+  }
+  
+  void Renderer::DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count)
+  {
+    IK_PERFORMANCE("Renderer::DrawArrays");
+    s_rendererData.rendererAPI->DrawArrays(pipeline, count);
+  }
+  
+  void Renderer::DrawQuad(const Ref<Pipeline>& pipeline)
+  {
+    IK_PERFORMANCE("Renderer::DrawQuad");
+    s_rendererData.rendererAPI->DrawQuad(pipeline);
+  }
+  
+  void Renderer::DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex)
+  {
+    IK_PERFORMANCE("Renderer::DrawIndexedBaseVertex");
+    s_rendererData.rendererAPI->DrawIndexedBaseVertex(indexCount, indicesData, baseVertex);
+  }
+  void Renderer::DrawFullscreenCube(const Ref<Pipeline>& pipeline)
+  {
+    IK_PERFORMANCE("Renderer::DrawFullscreenCube");
+    s_rendererData.rendererAPI->DrawCube(pipeline);
+  }
 
   // Renderer Capabilities -------------------------------------------------------------------------------------------
   RendererCapabilities& RendererCapabilities::Get()

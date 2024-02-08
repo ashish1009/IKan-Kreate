@@ -8,6 +8,8 @@
 #include <glad/glad.h>
 #include "OpenGLRendererAPI.hpp"
 #include "Renderer/Renderer.hpp"
+#include "Renderer/RendererStats.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
 
 namespace IKan
 {
@@ -113,4 +115,71 @@ namespace IKan
   {
     glViewport(0, 0, width, height);
   }
+  
+  void OpenGLRendererAPI::DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count) const
+  {
+    pipeline->Bind();
+    glDrawElements(GL_TRIANGLES, (GLsizei)count, GL_UNSIGNED_INT, nullptr);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
+  void OpenGLRendererAPI::DrawIndexedStrip(const Ref<Pipeline>& pipeline, uint32_t count) const
+  {
+    pipeline->Bind();
+    glDrawElements(GL_TRIANGLE_STRIP, (GLsizei)count, GL_UNSIGNED_INT, nullptr);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
+  void OpenGLRendererAPI::DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount) const {
+    pipeline->Bind();
+    glDrawArrays(GL_LINES, 0, /* Vertex Offset */ (GLsizei)vertexCount);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
+  
+  void OpenGLRendererAPI::DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const
+  {
+    pipeline->Bind();
+    
+    glDrawArrays(GL_TRIANGLES, 0, (GLsizei)count);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
+  
+  void OpenGLRendererAPI::DrawQuad(const Ref<Pipeline>& pipeline) const
+  {
+    pipeline->Bind();
+    
+    glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
+  
+  void OpenGLRendererAPI::DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex) const
+  {
+    glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)indexCount, GL_UNSIGNED_INT, indicesData, (GLint)baseVertex);
+    glBindTexture(GL_TEXTURE_2D, 0);
+    
+    RendererStatistics::Get().drawCalls++;
+  }
+  
+  void OpenGLRendererAPI::DrawCube(const Ref<Pipeline>& pipeline) const
+  {
+    pipeline->Bind();
+    glDrawArrays(GL_TRIANGLES, 0, 36);
+    pipeline->Unbind();
+    
+    RendererStatistics::Get().drawCalls++;
+  }
+
 } // namespace IKan

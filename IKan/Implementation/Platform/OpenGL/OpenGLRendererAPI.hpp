@@ -48,5 +48,39 @@ namespace IKan
     ///   - width: new width of renderer viewport
     ///   - height: new height of renderer viewport
     void SetViewport(uint32_t width, uint32_t height) const override;
+    
+    /// This API draws a quad with pipeline and indexed count
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    void DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count) const override;
+    /// This API draws a quad with pipeline and indexed count
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    void DrawIndexedStrip(const Ref<Pipeline>& pipeline, uint32_t count) const override;
+    /// This API draws Lines Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - vertexCount: number of Indices (if 0 then use index buffer of Vertex array)
+    void DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount) const override;
+    /// This API draws Indexed Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const override;
+    /// This API draws Quad
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer
+    void DrawQuad(const Ref<Pipeline>& pipeline) const override;
+    /// This function draw the index based vertex
+    /// - Parameters:
+    ///   - indexCount: index count
+    ///   - indicesData: indices data
+    ///   - baseVertex: base vertex
+    void DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex) const override;
+    /// This API draws Cube
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer
+    void DrawCube(const Ref<Pipeline>& pipeline) const override;
+
   };
 } // namespace IKan
