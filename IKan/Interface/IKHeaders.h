@@ -60,5 +60,6 @@
 #include <Renderer/Graphics/Shader.hpp>
 #include <Renderer/Graphics/RendererBuffer.hpp>
 #include <Renderer/Graphics/Pipeline.hpp>
+#include <Renderer/Graphics/Texture.hpp>
 
 #include <UI/ImGuiLayer.hpp>
