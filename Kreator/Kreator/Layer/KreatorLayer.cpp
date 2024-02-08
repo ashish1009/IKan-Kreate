@@ -39,7 +39,7 @@ namespace Kreator
       -0.5, -0.5, 0.0,
        0.5, -0.5, 0.0,
        0.5,  0.5, 0.0,
-       0.5,  0.5, 0.0,
+      -0.5,  0.5, 0.0,
     };
     
     uint32_t i[] = {0, 1, 2, 2, 3, 0};
@@ -70,6 +70,10 @@ namespace Kreator
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     Renderer::Clear({0.2f, 0.22f, 0.222f, 1.0f});
+    
+    shader->Bind();
+    shader->SetUniformMat4("u_ViewProjection", glm::mat4(1.0f));
+    Renderer::DrawIndexed(pipeline, 6);
   }
   
   void KreatorLayer::OnEvent(Event& event)

@@ -79,6 +79,6 @@ void main()
   }
   if(texColor.a < 0.1)
     discard;
-  o_Color = texColor;
+  o_Color = vec4(1.0);
   o_IDBuffer = int(fs_in.ObjectID);
 }
