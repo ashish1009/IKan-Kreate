@@ -846,6 +846,7 @@
 					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
+					"${PROJECT_DIR}/Vendors/Freetype/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -871,6 +872,7 @@
 					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
+					"${PROJECT_DIR}/Vendors/Freetype/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
