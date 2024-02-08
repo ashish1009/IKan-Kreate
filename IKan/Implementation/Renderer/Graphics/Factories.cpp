@@ -48,7 +48,7 @@ namespace IKan
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
-      case RendererType::OpenGL:
+      case RendererType::OpenGL: return CreateRef<OpenGLVertexBuffer>(data, size);
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
@@ -58,7 +58,7 @@ namespace IKan
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
-      case RendererType::OpenGL: 
+      case RendererType::OpenGL: return CreateRef<OpenGLVertexBuffer>(size);
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
@@ -68,7 +68,7 @@ namespace IKan
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
-      case RendererType::OpenGL:
+      case RendererType::OpenGL: return CreateRef<OpenGLIndexBuffer>(data, size);
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
@@ -78,7 +78,7 @@ namespace IKan
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
-      case RendererType::OpenGL:
+      case RendererType::OpenGL: return CreateRef<OpenGLIndexBuffer>(data, count * SizeOfSingleIndices);
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
