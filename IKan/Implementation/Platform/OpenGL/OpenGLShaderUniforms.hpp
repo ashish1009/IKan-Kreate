@@ -1,5 +1,5 @@
 //
-//  ShaderUniforms.hpp
+//  OpenGLShaderUniforms.hpp
 //  IKan
 //
 //  Created by Ashish . on 08/02/24.

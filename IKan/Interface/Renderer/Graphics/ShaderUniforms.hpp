@@ -45,4 +45,24 @@ namespace IKan
     /// This function update the offset of the field
     virtual void SetOffset(uint32_t offset) = 0;
   };
+  
+  /// This Interface class stores all the uniforms of shader both Fundamental and Structures
+  class ShaderUniformBufferDeclaration
+  {
+  public:
+    /// This is the defualt destructor
+    virtual ~ShaderUniformBufferDeclaration() = default;
+    
+    /// This function returns the name of buffer
+    virtual const std::string& GetName() const = 0;
+    /// This function returns the register of buffer
+    virtual uint32_t GetRegister() const = 0;
+    /// This function returns the size of buffer
+    virtual uint32_t GetSize() const = 0;
+    /// This function returns all the declaration in buffer
+    virtual const std::vector<ShaderUniformDeclaration*>& GetUniformDeclarations() const = 0;
+    /// This function finds the uniform declaretion by name
+    /// - Parameter name: name of uniform
+    virtual ShaderUniformDeclaration* FindUniform(const std::string& name) = 0;
+  };
 } // namespace IKan
