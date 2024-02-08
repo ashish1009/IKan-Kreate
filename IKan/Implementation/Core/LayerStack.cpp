@@ -12,7 +12,6 @@ namespace IKan
   LayerStack::LayerStack()
   : VectorIterator<Ref<Layer>>(m_layers)
   {
-    IK_PROFILE();
   }
   LayerStack::~LayerStack()
   {

@@ -34,6 +34,9 @@ namespace IKan
       m_isRunning = true;
     }
     
+    // Initialize the Renderers
+    Renderer::Initialize();
+    
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialized                         ");
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
@@ -45,6 +48,9 @@ namespace IKan
 
     // Reset the window
     m_window.reset();
+    
+    // Shutdown all the Renderers
+    Renderer::Initialize();
   }
   
   void Application::Impl::Run()
@@ -93,7 +99,6 @@ namespace IKan
   
   bool Application::Impl::WindowClose([[maybe_unused]] WindowCloseEvent& window_close_event)
   {
-    IK_PROFILE();
     Close();
     return false;
   }
@@ -111,20 +116,17 @@ namespace IKan
 
   void Application::Impl::Close()
   {
-    IK_PROFILE();
     m_isRunning = false;
     IK_LOG_TRACE(LogModule::Application, "Closing the Application");
   }
   
   void Application::Impl::PushLayer(const Ref<Layer>& layer)
   {
-    IK_PROFILE();
     m_layers.PushLayer(layer);
   }
   
   void Application::Impl::PopLayer(const Ref<Layer>& layer)
   {
-    IK_PROFILE();
     m_layers.PopLayer(layer);
   }
   

@@ -85,6 +85,7 @@ namespace IKan
   
   void MacWindow::SetEventCallbacks()
   {
+    IK_PROFILE();
     // Call back for Window Resize Event -----------------------------------------------------------------------------
     glfwSetWindowSizeCallback( m_window,
 [](

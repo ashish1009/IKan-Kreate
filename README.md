@@ -123,4 +123,4 @@ Editor Application using IKan Library to create Games
 ...
 
 ## Outputs
-![](/Kreator/Outpus/Output.png)
+![](/Kreator/Outputs/Output.png)
