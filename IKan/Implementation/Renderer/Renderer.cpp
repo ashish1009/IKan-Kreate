@@ -7,6 +7,7 @@
 
 #include "Renderer.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
+#include "Renderer/Graphics/Shader.hpp"
 
 namespace IKan
 {
@@ -33,6 +34,9 @@ namespace IKan
     // Reset the Renderer API Data
     s_rendererData.rendererAPI.reset();
     s_rendererData.rendererAPI = nullptr;
+    
+    // Delete Shaders from library
+    ShaderLibrary::Reset();
   }
   
   // Renderer API ----------------------------------------------------------------------------------------------------
