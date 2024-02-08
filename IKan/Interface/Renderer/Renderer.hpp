@@ -12,11 +12,22 @@ namespace IKan
   /// Data type of Renderer ID
   using RendererID = uint32_t;
   
+  /// This enum stores the renderer Type supported by Ehgine
   enum class RendererType : uint8_t
   {
     Invalid, OpenGL
   };
   
+  /// Stores the capability of renderer
+  struct RendererCapabilities
+  {
+    std::string vendor;
+    std::string renderer;
+    std::string version;
+    
+    static RendererCapabilities& Get();
+  };
+
   /// This is the Wrapper class for all Renderer APIs (User and Graphics)
   /// Major responsibilities for Renderer is
   /// - Create Renderer API based on the renderer supported by the engine

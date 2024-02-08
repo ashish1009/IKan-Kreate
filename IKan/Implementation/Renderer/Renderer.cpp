@@ -44,4 +44,11 @@ namespace IKan
   {
     return s_rendererData.rendererType;
   }
+  
+  // Renderer Capabilities -------------------------------------------------------------------------------------------
+  RendererCapabilities& RendererCapabilities::Get()
+  {
+    static RendererCapabilities capabilities;
+    return capabilities;
+  }
 } // namespace IKan
