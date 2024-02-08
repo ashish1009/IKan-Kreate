@@ -74,7 +74,7 @@ namespace IKan
       maxVertices = maxElement * LineBatchData::VertexForSingleLine;
       
       // Allocating the memory for vertex Buffer Pointer
-      vertexBufferBasePtr = iknew LineBatchData::Vertex[maxVertices];
+      vertexBufferBasePtr = new LineBatchData::Vertex[maxVertices];
       
       // Create vertes Buffer
       vertexBuffer = VertexBufferFactory::Create(maxVertices * sizeof(LineBatchData::Vertex));
@@ -113,7 +113,7 @@ namespace IKan
       }
       
       CommonBatchData::Destroy();
-      ikdelete [] vertexBufferBasePtr;
+      delete [] vertexBufferBasePtr;
       vertexBufferBasePtr = nullptr;
     }
   };
