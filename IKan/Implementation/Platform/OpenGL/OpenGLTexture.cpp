@@ -175,4 +175,141 @@ namespace IKan
       }
     }
   } // namespace TextureUtils
+  
+  // Open GL Texture ------------------------------------------------------------------------------------
+  OpenGLTexture::OpenGLTexture(const Texture2DSpecification& spec)
+  : m_specification(spec)
+  {
+    // Get GL Texture Type
+    GLint textureType = TextureUtils::OpenGLTypeFromIKanType(m_specification.type);
+    
+    // Create Texture Buffer
+    glGenTextures(1, &m_rendererID);
+    glBindTexture(textureType, m_rendererID);
+    
+    // Check the channel of Image data if data is non zero
+    if (m_specification.data)
+    {
+      m_channel = m_specification.dataFormat == TextureFormat::RGBA ? 4 : 3;
+      IK_ASSERT((m_specification.size == (uint32_t)m_specification.width * (uint32_t)m_specification.height * m_channel), "Data must be entire texture");
+    }
+    
+    // Create texture in the renderer Buffer
+    GLint internalFormat = TextureUtils::OpenGLFormatFromIKanFormat(m_specification.internalFormat);
+    GLint dataFormat = TextureUtils::OpenGLFormatFromIKanFormat(m_specification.dataFormat);
+    GLint dataType = TextureUtils::GetTextureDataType(internalFormat);
+    
+    if (m_specification.type == TextureType::TextureCubemap)
+    {
+      for (uint32_t i = 0; i < 6; ++i)
+      {
+        glTexImage2D(GL_TEXTURE_CUBE_MAP_POSITIVE_X + i, 0, internalFormat, m_specification.width, m_specification.height, 0, dataFormat, dataType, m_specification.data);
+        glGenerateMipmap(GL_TEXTURE_CUBE_MAP);
+      }
+    }
+    else
+    {
+      glTexImage2D(textureType, 0, /* Level */ internalFormat, m_specification.width, m_specification.height, 0 /* Border */, dataFormat, dataType, m_specification.data);
+    }
+    // Set the Texture parametes
+    GLint filter = TextureUtils::OpenGLFilterFromIKanFilter(m_specification.filter);
+    GLint wrap = TextureUtils::OpenGLWrapFromIKanWrap(m_specification.wrap);
+    glTexParameteri(textureType, GL_TEXTURE_MIN_FILTER, filter);
+    glTexParameteri(textureType, GL_TEXTURE_MAG_FILTER, filter);
+    
+    glTexParameteri(textureType, GL_TEXTURE_WRAP_R, wrap);
+    glTexParameteri(textureType, GL_TEXTURE_WRAP_S, wrap);
+    glTexParameteri(textureType, GL_TEXTURE_WRAP_T, wrap);
+    
+    // Increment the size in stats
+    RendererStatistics::Get().textureBufferSize += m_specification.size;
+    
+    if (m_specification.data)
+    {
+      IK_LOG_DEBUG(LogModule::Texture, "Creating Open GL Texture 2D ");
+      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}", m_rendererID);
+      IK_LOG_DEBUG(LogModule::Texture, "  Size            {0} B", m_specification.size);
+      IK_LOG_DEBUG(LogModule::Texture, "  Channels        {0}", m_channel);
+      IK_LOG_DEBUG(LogModule::Texture, "  Internal Format {0}", TextureUtils::IKanFormatName(m_specification.internalFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Data Format     {0}", TextureUtils::IKanFormatName(m_specification.dataFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Type            {0}", TextureUtils::IKanTypeName(m_specification.type));
+      IK_LOG_DEBUG(LogModule::Texture, "  Wrap            {0}", TextureUtils::IKanWrapName(m_specification.wrap));
+      IK_LOG_DEBUG(LogModule::Texture, "  Filter          {0}", TextureUtils::IKanFilterName(m_specification.filter));
+      IK_LOG_DEBUG(LogModule::Texture, "  Total Size in GPU  {0} B ({1} KB, {2} MB)",
+                   RendererStatistics::Get().textureBufferSize,
+                   RendererStatistics::Get().textureBufferSize / 1000,
+                   RendererStatistics::Get().textureBufferSize / 1000000);
+    }
+  }
+  
+  OpenGLTexture::~OpenGLTexture()
+  {
+    if (m_specification.data)
+    {
+      IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Texture 2D ");
+      IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID     {0}", m_rendererID);
+      IK_LOG_DEBUG(LogModule::Texture, "  Size            {0} B", m_specification.size);
+      IK_LOG_DEBUG(LogModule::Texture, "  Channels        {0}", m_channel);
+      IK_LOG_DEBUG(LogModule::Texture, "  Internal Format {0}", TextureUtils::IKanFormatName(m_specification.internalFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Data Format     {0}", TextureUtils::IKanFormatName(m_specification.dataFormat));
+      IK_LOG_DEBUG(LogModule::Texture, "  Type            {0}", TextureUtils::IKanTypeName(m_specification.type));
+      IK_LOG_DEBUG(LogModule::Texture, "  Wrap            {0}", TextureUtils::IKanWrapName(m_specification.wrap));
+      IK_LOG_DEBUG(LogModule::Texture, "  Filter          {0}", TextureUtils::IKanFilterName(m_specification.filter));
+    }
+  }
+  
+  void OpenGLTexture::Bind(uint32_t slot) const
+  {
+    glActiveTexture(GL_TEXTURE0 + slot);
+    glBindTexture(TextureUtils::OpenGLTypeFromIKanType(m_specification.type), m_rendererID);
+  }
+  
+  void OpenGLTexture::Unbind() const
+  {
+    glBindTexture(GL_TEXTURE_2D, 0);
+  }
+  
+  void OpenGLTexture::AttachToFramebuffer(TextureAttachment attachmentType, uint32_t colorID, uint32_t depthID, uint32_t level) const
+  {
+    if (m_specification.type == TextureType::TextureCubemap)
+    {
+      if (m_specification.internalFormat == TextureFormat::DEPTH_COMPONENT)
+      {
+        glFramebufferTexture(GL_FRAMEBUFFER,
+                             TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID),
+                             m_rendererID,
+                             0 /* level */ );
+      }
+      else
+      {
+        glFramebufferTexture2D(GL_FRAMEBUFFER,
+                               TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID),
+                               GL_TEXTURE_CUBE_MAP_POSITIVE_X + depthID,
+                               m_rendererID,
+                               level);
+      }
+    }
+    else
+    {
+      glFramebufferTexture2D(GL_FRAMEBUFFER, /* target */
+                             TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID),
+                             GL_TEXTURE_2D,
+                             m_rendererID,
+                             0 /* level */ );
+    }
+  }
+  
+  RendererID OpenGLTexture::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  uint32_t OpenGLTexture::GetWidth() const
+  {
+    return m_specification.width;
+  }
+  uint32_t OpenGLTexture::GetHeight() const
+  {
+    return m_specification.height;
+  }
+  
 } // namespace IKan

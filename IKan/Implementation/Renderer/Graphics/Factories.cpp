@@ -12,6 +12,7 @@
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLRendererBuffer.hpp"
 #include "Platform/OpenGL/OpenGLPipeline.hpp"
+#include "Platform/OpenGL/OpenGLTexture.hpp"
 
 namespace IKan
 {
@@ -99,7 +100,7 @@ namespace IKan
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
-      case RendererType::OpenGL:
+      case RendererType::OpenGL: return CreateRef<OpenGLTexture>(spec);
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
@@ -110,6 +111,19 @@ namespace IKan
     switch (Renderer::GetCurrentRendererAPI())
     {
       case RendererType::OpenGL:
+      {
+        // White data
+        static uint32_t whiteTextureData = data;
+        
+        // Texture specificaion
+        Texture2DSpecification textureSpec;
+        textureSpec.width = 1;
+        textureSpec.height = 1;
+        textureSpec.data = &whiteTextureData;
+        textureSpec.size = sizeof(uint32_t);
+        
+        return CreateRef<OpenGLTexture>(textureSpec);
+      }
       case RendererType::Invalid:
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
