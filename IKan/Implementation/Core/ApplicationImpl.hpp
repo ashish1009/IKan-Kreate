@@ -13,7 +13,7 @@
 #include "Core/Window.hpp"
 #include "Event/Event.h"
 #include "Event/ApplicationEvent.h"
-#include "UI/ImguiLayer.hpp"
+#include "UI/ImGuiLayer.hpp"
 
 namespace IKan
 {

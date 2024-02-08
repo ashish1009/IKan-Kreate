@@ -37,6 +37,11 @@
 #include <Debug/LoggerBuilder.hpp>
 #include <Debug/Timer.hpp>
 
+#include <Event/Event.h>
+#include <Event/ApplicationEvent.h>
+#include <Event/MouseEvent.h>
+#include <Event/KeyEvent.h>
+
 #include <Core/AssertAPI.h>
 #include <Core/TimeStep.hpp>
 #include <Core/Application.hpp>
@@ -44,3 +49,7 @@
 #include <Core/Window.hpp>
 
 #include <Renderer/Renderer.hpp>
+#include <Renderer/Graphics/RendererAPI.hpp>
+#include <Renderer/Graphics/RendererContext.hpp>
+
+#include <UI/ImGuiLayer.hpp>

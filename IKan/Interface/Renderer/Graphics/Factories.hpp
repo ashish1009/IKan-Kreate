@@ -13,6 +13,7 @@ namespace IKan
 {
   class RendererContext;
   class RendererAPI;
+  class Shader;
 
   /// This is the Renderer Context Factory
   struct RendererContextFactory
@@ -27,5 +28,13 @@ namespace IKan
   {
     /// This function creates the Renderer API instance based on the Supported APIs
     [[nodiscard]] static Scope<RendererAPI> Create();
+  };
+  
+  /// This structure is the factory to create frame buffer based on the current API supported
+  struct ShaderFactory
+  {
+    /// This static function creates the Shader instance based on the current Supported API
+    /// - Parameter shaderFilePath: Shader Code file path
+    [[nodiscard]] static Ref<Shader> Create(const std::filesystem::path& shaderFilePath);
   };
 } // namespace IKan

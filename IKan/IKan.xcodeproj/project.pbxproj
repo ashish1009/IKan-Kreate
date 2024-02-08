@@ -49,6 +49,9 @@
 		B2ED60052B74A573007A7F36 /* libUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ED5EAE2B74A4B7007A7F36 /* libUI.a */; };
 		B2ED600A2B74A5B6007A7F36 /* ImGuiLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60082B74A5B6007A7F36 /* ImGuiLayer.cpp */; };
 		B2ED600B2B74A5B6007A7F36 /* ImGuiLayer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60092B74A5B6007A7F36 /* ImGuiLayer.hpp */; };
+		B2ED600F2B74A912007A7F36 /* Shader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED600D2B74A912007A7F36 /* Shader.hpp */; };
+		B2ED60122B74A920007A7F36 /* OpenGLShader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60102B74A920007A7F36 /* OpenGLShader.cpp */; };
+		B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60112B74A920007A7F36 /* OpenGLShader.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -118,6 +121,9 @@
 		B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UI.xcodeproj; path = UI/UI.xcodeproj; sourceTree = "<group>"; };
 		B2ED60082B74A5B6007A7F36 /* ImGuiLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiLayer.cpp; sourceTree = "<group>"; };
 		B2ED60092B74A5B6007A7F36 /* ImGuiLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiLayer.hpp; sourceTree = "<group>"; };
+		B2ED600D2B74A912007A7F36 /* Shader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Shader.hpp; sourceTree = "<group>"; };
+		B2ED60102B74A920007A7F36 /* OpenGLShader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLShader.cpp; sourceTree = "<group>"; };
+		B2ED60112B74A920007A7F36 /* OpenGLShader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLShader.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -334,6 +340,7 @@
 				B2ED5E512B749097007A7F36 /* Factories.hpp */,
 				B2ED5E482B749053007A7F36 /* RendererContext.hpp */,
 				B2ED5E872B7498DD007A7F36 /* RendererAPI.hpp */,
+				B2ED600D2B74A912007A7F36 /* Shader.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -353,6 +360,8 @@
 				B2ED5E582B74914F007A7F36 /* OpenGLRendererContext.hpp */,
 				B2ED5E8A2B7498FF007A7F36 /* OpenGLRendererAPI.cpp */,
 				B2ED5E8B2B7498FF007A7F36 /* OpenGLRendererAPI.hpp */,
+				B2ED60102B74A920007A7F36 /* OpenGLShader.cpp */,
+				B2ED60112B74A920007A7F36 /* OpenGLShader.hpp */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -389,6 +398,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2ED5CB22B724AAC007A7F36 /* Logger.hpp in Headers */,
+				B2ED600F2B74A912007A7F36 /* Shader.hpp in Headers */,
 				B2ED5E8D2B7498FF007A7F36 /* OpenGLRendererAPI.hpp in Headers */,
 				B2ED5E352B73A811007A7F36 /* MacWindow.hpp in Headers */,
 				B2ED5E532B749097007A7F36 /* Factories.hpp in Headers */,
@@ -397,6 +407,7 @@
 				B2ED5CC52B7265F0007A7F36 /* LoggerBuilder.hpp in Headers */,
 				B2ED5E4F2B749090007A7F36 /* Specifications.h in Headers */,
 				B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */,
+				B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */,
 				B2ED5CCA2B7346AC007A7F36 /* Timer.hpp in Headers */,
 				B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */,
 				B2ED5E4A2B749053007A7F36 /* RendererContext.hpp in Headers */,
@@ -503,6 +514,7 @@
 				B2ED5E592B74914F007A7F36 /* OpenGLRendererContext.cpp in Sources */,
 				B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */,
 				B2ED5E342B73A811007A7F36 /* MacWindow.cpp in Sources */,
+				B2ED60122B74A920007A7F36 /* OpenGLShader.cpp in Sources */,
 				B2ED5E1D2B738C58007A7F36 /* ApplicationImpl.cpp in Sources */,
 				B2ED5E552B74911C007A7F36 /* Factories.cpp in Sources */,
 				B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */,
