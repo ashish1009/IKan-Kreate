@@ -8,6 +8,7 @@
 #include "Renderer2D.hpp"
 #include "Renderer/RendererStats.hpp"
 #include "Renderer/2D/BatchData.h"
+#include "Renderer/2D/QuadData.h"
 
 namespace IKan
 {
