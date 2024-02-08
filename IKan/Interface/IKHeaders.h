@@ -44,6 +44,9 @@
 #include <Event/MouseEvent.h>
 #include <Event/KeyEvent.h>
 
+#include <Utils/StringUtils.hpp>
+#include <Utils/MathUtils.hpp>
+
 #include <Core/AssertAPI.h>
 #include <Core/TimeStep.hpp>
 #include <Core/Application.hpp>

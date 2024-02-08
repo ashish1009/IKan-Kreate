@@ -42,6 +42,7 @@
 #include "Debug/Timer.hpp"
 
 #include "Utils/StringUtils.hpp"
+#include "Utils/MathUtils.hpp"
 
 #include "Core/AssertAPI.h"
 #include "Core/Buffer.hpp"
