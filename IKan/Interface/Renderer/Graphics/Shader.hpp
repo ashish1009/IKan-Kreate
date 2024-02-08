@@ -112,4 +112,17 @@ namespace IKan
     ///   - value: Value of Uniform
     virtual void SetUniformFloat4(const std::string& name, const glm::vec4& value) = 0;
   };
+  
+  class ShaderLibrary
+  {
+  public:
+    /// This function reutrn the shader from library
+    /// - Parameter shaderFilePath: shader file path
+    static Ref<Shader> GetShader(const std::filesystem::path& shaderFilePath);
+    /// This function delete all the shaders from library
+    static void Reset();
+  private:
+    inline static std::unordered_map<std::string, Ref<Shader>> s_shaders;
+  };
+
 } // namespace IKan

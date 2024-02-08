@@ -39,6 +39,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - Renderer
   - Graphics APIs
     - Context
+    - Shader
   - Renderer API
 
 ### Detailed Road Map
@@ -52,7 +53,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Graphics APIs
     - Buffers
     - Pipeline
-    - Shader
     - Texture
     - Framebuffer
     - Render Pass
