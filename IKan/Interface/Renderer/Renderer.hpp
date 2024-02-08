@@ -18,6 +18,11 @@ namespace IKan
     Invalid, OpenGL
   };
   
+  enum class GlDepthFunc
+  {
+    Always, Never, Less, Equal, LEqual, Greater, LGreater, NotEqual
+  };
+  
   /// Stores the capability of renderer
   struct RendererCapabilities
   {

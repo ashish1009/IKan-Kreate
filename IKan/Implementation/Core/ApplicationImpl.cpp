@@ -120,7 +120,7 @@ namespace IKan
   void Application::Impl::Close()
   {
     m_isRunning = false;
-    IK_LOG_TRACE(LogModule::Application, "Closing the Application");
+    IK_LOG_INFO(LogModule::Application, "Closing the Application");
   }
   
   void Application::Impl::PushLayer(const Ref<Layer>& layer)
