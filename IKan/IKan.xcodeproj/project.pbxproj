@@ -79,6 +79,9 @@
 		B2ED60672B74DF5F007A7F36 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60622B74DF5F007A7F36 /* stb_image.cpp */; };
 		B2ED606A2B74E002007A7F36 /* FileSystemUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60682B74E002007A7F36 /* FileSystemUtils.cpp */; };
 		B2ED606B2B74E002007A7F36 /* FileSystemUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60692B74E002007A7F36 /* FileSystemUtils.hpp */; };
+		B2ED606F2B74F9D4007A7F36 /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED606D2B74F9D4007A7F36 /* FrameBuffer.hpp */; };
+		B2ED60722B74F9E2007A7F36 /* OpenGLFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60702B74F9E2007A7F36 /* OpenGLFrameBuffer.cpp */; };
+		B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60712B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -186,6 +189,9 @@
 		B2ED60622B74DF5F007A7F36 /* stb_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 		B2ED60682B74E002007A7F36 /* FileSystemUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystemUtils.cpp; sourceTree = "<group>"; };
 		B2ED60692B74E002007A7F36 /* FileSystemUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileSystemUtils.hpp; sourceTree = "<group>"; };
+		B2ED606D2B74F9D4007A7F36 /* FrameBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FrameBuffer.hpp; sourceTree = "<group>"; };
+		B2ED60702B74F9E2007A7F36 /* OpenGLFrameBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLFrameBuffer.cpp; sourceTree = "<group>"; };
+		B2ED60712B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLFrameBuffer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -415,6 +421,7 @@
 				B2ED60362B74BB9B007A7F36 /* RendererBuffer.hpp */,
 				B2ED60422B74C52D007A7F36 /* Pipeline.hpp */,
 				B2ED60532B74DAB8007A7F36 /* Texture.hpp */,
+				B2ED606D2B74F9D4007A7F36 /* FrameBuffer.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -447,6 +454,8 @@
 				B2ED60462B74C547007A7F36 /* OpenGLPipeline.hpp */,
 				B2ED60592B74DACD007A7F36 /* OpenGLTexture.cpp */,
 				B2ED605A2B74DACD007A7F36 /* OpenGLTexture.hpp */,
+				B2ED60702B74F9E2007A7F36 /* OpenGLFrameBuffer.cpp */,
+				B2ED60712B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -544,9 +553,11 @@
 				B2ED5E4F2B749090007A7F36 /* Specifications.h in Headers */,
 				B2ED60192B74AD56007A7F36 /* StringUtils.hpp in Headers */,
 				B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */,
+				B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */,
 				B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */,
 				B2ED5CCA2B7346AC007A7F36 /* Timer.hpp in Headers */,
 				B2ED601D2B74AF4C007A7F36 /* ShaderUniforms.hpp in Headers */,
+				B2ED606F2B74F9D4007A7F36 /* FrameBuffer.hpp in Headers */,
 				B2ED60402B74BD12007A7F36 /* RendererStats.hpp in Headers */,
 				B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */,
 				B2ED5E4A2B749053007A7F36 /* RendererContext.hpp in Headers */,
@@ -691,6 +702,7 @@
 				B2ED601C2B74AF4C007A7F36 /* ShaderUniforms.cpp in Sources */,
 				B2ED60472B74C547007A7F36 /* OpenGLPipeline.cpp in Sources */,
 				B2ED5CC92B7346AC007A7F36 /* Timer.cpp in Sources */,
+				B2ED60722B74F9E2007A7F36 /* OpenGLFrameBuffer.cpp in Sources */,
 				B2ED60302B74B814007A7F36 /* Shader.cpp in Sources */,
 				B2ED603B2B74BBA8007A7F36 /* OpenGLRendererBuffer.cpp in Sources */,
 				B2ED5E272B7397A5007A7F36 /* LayerStack.cpp in Sources */,

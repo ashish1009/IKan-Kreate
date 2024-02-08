@@ -46,6 +46,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
     - Shader
     - Buffers
     - Pipeline
+    - Texture
   - Renderer API
 ### Detailed Road Map
 - Utilities
@@ -53,9 +54,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - YAML
 - Renderer
   - Graphics APIs
-    - Texture
     - Framebuffer
-    - Render Pass
   - Mesh
   - Material
   - Secne Rederer
@@ -115,6 +114,7 @@ Editor Application using IKan Library to create Games
 ## Releases
   - v1.0.1.0 : Create and show Window (Without Renderer Context)
   - v2.0.2.0 : Render First Quad
+  - v2.1.2.0 : Render First textured Quad
    
 ## General Road Map
 - Batch Renderer

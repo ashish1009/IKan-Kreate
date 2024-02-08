@@ -71,4 +71,32 @@ namespace IKan
     TextureWrap wrap {TextureWrap::Repeat};
     TextureFilter filter {TextureFilter::Linear};
   };
+  
+  // Framebuffer specificaion ------------------------------------------------------------------------------
+  struct FrameBufferAttachments
+  {
+    /// Texture format type
+    enum class TextureFormat
+    {
+      None = 0,
+      RGBA8, RGBA16F,
+      R32I, RED,
+      Depth24Stencil,
+      DepthCubeMap
+    };
+    
+    FrameBufferAttachments() = default;
+    FrameBufferAttachments(std::initializer_list<TextureFormat> attachments)
+    : textureFormats(attachments) {}
+    std::vector<TextureFormat> textureFormats;
+  };
+  
+  /// This structure stores the Framebuffer specification
+  struct FrameBufferSpecification
+  {
+    std::string debugName {};
+    uint32_t width {2100}, height{900};
+    glm::vec4 color { 0.1f, 0.1f, 0.1f, 1.0f };
+    FrameBufferAttachments attachments;
+  };
 } // namespace IKan
