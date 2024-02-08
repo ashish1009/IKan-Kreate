@@ -63,4 +63,24 @@ namespace IKan
       default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
     }
   }
+  
+  Ref<IndexBuffer> IndexBufferFactory::CreateWithSize(void *data, uint32_t size)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL:
+      case RendererType::Invalid:
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
+    }
+  }
+  
+  Ref<IndexBuffer> IndexBufferFactory::CreateWithCount(void *data, uint32_t count)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL:
+      case RendererType::Invalid:
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
+    }
+  }
 } // namespace IKan

@@ -15,6 +15,7 @@ namespace IKan
   class RendererAPI;
   class Shader;
   class VertexBuffer;
+  class IndexBuffer;
 
   /// This is the Renderer Context Factory
   struct RendererContextFactory
@@ -51,5 +52,19 @@ namespace IKan
     /// - Parameter size: Size of vertex buffer
     [[nodiscard]] static Ref<VertexBuffer> Create(uint32_t size);
   };
-
+  
+  struct IndexBufferFactory
+  {
+    /// This function create the Index Buffer with Indices data and its size
+    /// - Parameters:
+    ///   - data: data to be filled in index buffer
+    ///   - size: size of data in index buffer
+    [[nodiscard]] static Ref<IndexBuffer> CreateWithSize(void* data, uint32_t size);
+    /// This function create the Index Buffer with Indices data and number of indices
+    /// - Parameters:
+    ///   - data: data to be filled in index buffer
+    ///   - count: number of indices in index buffer
+    /// - Note: Size of single indices is taken as size of uint32_t (4)
+    [[nodiscard]] static Ref<IndexBuffer> CreateWithCount(void* data, uint32_t count);
+  };
 } // namespace IKan
