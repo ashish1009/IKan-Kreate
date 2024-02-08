@@ -36,7 +36,8 @@ namespace IKan
 
     // Member Variables ---------------------------------------------------------------------------------------------
     RendererID m_rendererID;
-    std::string m_filePath, m_name;
+    std::filesystem::path m_filePath{};
+    std::string m_name{};
     std::unordered_map<GLenum /* GL Shader type */, std::string /* Shader code */> m_shaderSourceCodeMap;
   };
 } // namespace IKan
