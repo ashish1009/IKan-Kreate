@@ -42,11 +42,41 @@ namespace IKan
   {
     IK_PROFILE();
     BATCH_INFO("Initialising the Batch Renderer 2D ");
+    
+    AddQuadData(data.maxQuads);
+    AddCircleData(data.maxCircles);
+    AddLineData(data.maxLines);
+    s_data.fullScreenQuad.Initialize();
   }
   
   void Renderer2D::Shutdown()
   {
     IK_PROFILE();
     BATCH_INFO("Shutting Down the Batch Renderer 2D ");
+    
+    s_data.Destroy();
   }
+  
+  void Renderer2D::AddQuadData(uint32_t maxQuads)
+  {
+    IK_PROFILE();
+    RETURN_IF(maxQuads == 0);
+    s_data.quadData.Initialize(maxQuads);
+    RendererStatistics::Get()._2d.maxQuads = s_data.quadData.maxElement;
+  }
+  void Renderer2D::AddCircleData(uint32_t maxCircles)
+  {
+    IK_PROFILE();
+    RETURN_IF(maxCircles == 0);
+    s_data.circleData.Initialize(maxCircles);
+    RendererStatistics::Get()._2d.maxCircles = s_data.circleData.maxElement;
+  }
+  void Renderer2D::AddLineData(uint32_t maxLines)
+  {
+    IK_PROFILE();
+    RETURN_IF(maxLines == 0);
+    s_data.lineData.Initialize(maxLines);
+    RendererStatistics::Get()._2d.maxLines = s_data.lineData.maxElement;
+  }
+
 } // namespace IKan

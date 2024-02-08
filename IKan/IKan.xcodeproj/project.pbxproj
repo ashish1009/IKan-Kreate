@@ -113,6 +113,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -204,6 +205,8 @@
 		B2ED60842B7510DE007A7F36 /* AssetPathManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetPathManager.hpp; sourceTree = "<group>"; };
 		B2ED60872B75149B007A7F36 /* CircleData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleData.h; sourceTree = "<group>"; };
 		B2ED60882B75153E007A7F36 /* LineData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineData.h; sourceTree = "<group>"; };
+		B2ED60892B751633007A7F36 /* FSQuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FSQuadShader.glsl; sourceTree = "<group>"; };
+		B2ED608B2B751633007A7F36 /* BatchLineShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchLineShader.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -532,6 +535,9 @@
 			isa = PBXGroup;
 			children = (
 				B2ED604A2B74D560007A7F36 /* BatchQuadShader.glsl */,
+				B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */,
+				B2ED608B2B751633007A7F36 /* BatchLineShader.glsl */,
+				B2ED60892B751633007A7F36 /* FSQuadShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";

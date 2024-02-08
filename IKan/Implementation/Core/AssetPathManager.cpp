@@ -21,11 +21,8 @@ namespace IKan
     
     bool exist = std::filesystem::exists(absPath);
     bool shaders = std::filesystem::exists(absPath / "Shaders");
-    bool textures = std::filesystem::exists(absPath / "Textures");
-    bool fonts = std::filesystem::exists(absPath / "Fonts");
-    bool meshes = std::filesystem::exists(absPath / "Meshes");
 
-    IK_ASSERT(exist and fonts and shaders and textures and meshes, "Invalid Engine Directory");
+    IK_ASSERT(exist and shaders, "Invalid Engine Directory");
     s_assetPath = assetPath;
   }
 } // namespace IKan
