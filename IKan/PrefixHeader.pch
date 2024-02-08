@@ -43,6 +43,7 @@
 
 #include "Utils/StringUtils.hpp"
 #include "Utils/MathUtils.hpp"
+#include "Utils/FileSystemUtils.hpp"
 
 #include "Core/AssertAPI.h"
 #include "Core/Buffer.hpp"
