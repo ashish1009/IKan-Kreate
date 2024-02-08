@@ -54,6 +54,10 @@
 		B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60112B74A920007A7F36 /* OpenGLShader.hpp */; };
 		B2ED60182B74AD56007A7F36 /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60162B74AD56007A7F36 /* StringUtils.cpp */; };
 		B2ED60192B74AD56007A7F36 /* StringUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60172B74AD56007A7F36 /* StringUtils.hpp */; };
+		B2ED601C2B74AF4C007A7F36 /* ShaderUniforms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED601A2B74AF4C007A7F36 /* ShaderUniforms.cpp */; };
+		B2ED601D2B74AF4C007A7F36 /* ShaderUniforms.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED601B2B74AF4C007A7F36 /* ShaderUniforms.hpp */; };
+		B2ED60202B74AF5A007A7F36 /* ShaderUniforms.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED601E2B74AF5A007A7F36 /* ShaderUniforms.cpp */; };
+		B2ED60212B74AF5A007A7F36 /* ShaderUniforms.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED601F2B74AF5A007A7F36 /* ShaderUniforms.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -128,6 +132,10 @@
 		B2ED60112B74A920007A7F36 /* OpenGLShader.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLShader.hpp; sourceTree = "<group>"; };
 		B2ED60162B74AD56007A7F36 /* StringUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
 		B2ED60172B74AD56007A7F36 /* StringUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StringUtils.hpp; sourceTree = "<group>"; };
+		B2ED601A2B74AF4C007A7F36 /* ShaderUniforms.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderUniforms.cpp; sourceTree = "<group>"; };
+		B2ED601B2B74AF4C007A7F36 /* ShaderUniforms.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderUniforms.hpp; sourceTree = "<group>"; };
+		B2ED601E2B74AF5A007A7F36 /* ShaderUniforms.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ShaderUniforms.cpp; sourceTree = "<group>"; };
+		B2ED601F2B74AF5A007A7F36 /* ShaderUniforms.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ShaderUniforms.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -347,6 +355,7 @@
 				B2ED5E482B749053007A7F36 /* RendererContext.hpp */,
 				B2ED5E872B7498DD007A7F36 /* RendererAPI.hpp */,
 				B2ED600D2B74A912007A7F36 /* Shader.hpp */,
+				B2ED601B2B74AF4C007A7F36 /* ShaderUniforms.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -355,6 +364,7 @@
 			isa = PBXGroup;
 			children = (
 				B2ED5E542B74911C007A7F36 /* Factories.cpp */,
+				B2ED601A2B74AF4C007A7F36 /* ShaderUniforms.cpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -368,6 +378,8 @@
 				B2ED5E8B2B7498FF007A7F36 /* OpenGLRendererAPI.hpp */,
 				B2ED60102B74A920007A7F36 /* OpenGLShader.cpp */,
 				B2ED60112B74A920007A7F36 /* OpenGLShader.hpp */,
+				B2ED601E2B74AF5A007A7F36 /* ShaderUniforms.cpp */,
+				B2ED601F2B74AF5A007A7F36 /* ShaderUniforms.hpp */,
 			);
 			path = OpenGL;
 			sourceTree = "<group>";
@@ -432,6 +444,7 @@
 				B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */,
 				B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */,
 				B2ED5CCA2B7346AC007A7F36 /* Timer.hpp in Headers */,
+				B2ED601D2B74AF4C007A7F36 /* ShaderUniforms.hpp in Headers */,
 				B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */,
 				B2ED5E4A2B749053007A7F36 /* RendererContext.hpp in Headers */,
 				B2ED5E432B748AFB007A7F36 /* Renderer.hpp in Headers */,
@@ -442,6 +455,7 @@
 				B2ED5CCF2B736963007A7F36 /* TimeStep.hpp in Headers */,
 				B2ED5E112B7370DA007A7F36 /* Event.h in Headers */,
 				B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */,
+				B2ED60212B74AF5A007A7F36 /* ShaderUniforms.hpp in Headers */,
 				B2ED5E222B738FE5007A7F36 /* Layer.hpp in Headers */,
 				B2ED5CBC2B724B7F007A7F36 /* PrefixHeader.pch in Headers */,
 				B2ED5E892B7498DD007A7F36 /* RendererAPI.hpp in Headers */,
@@ -545,9 +559,11 @@
 				B2ED60182B74AD56007A7F36 /* StringUtils.cpp in Sources */,
 				B2ED5E2C2B73A5C4007A7F36 /* Window.cpp in Sources */,
 				B2ED5CC42B7265F0007A7F36 /* LoggerBuilder.cpp in Sources */,
+				B2ED60202B74AF5A007A7F36 /* ShaderUniforms.cpp in Sources */,
 				B2ED5E422B748AFB007A7F36 /* Renderer.cpp in Sources */,
 				B2ED5CCE2B736963007A7F36 /* TimeStep.cpp in Sources */,
 				B2ED600A2B74A5B6007A7F36 /* ImGuiLayer.cpp in Sources */,
+				B2ED601C2B74AF4C007A7F36 /* ShaderUniforms.cpp in Sources */,
 				B2ED5CC92B7346AC007A7F36 /* Timer.cpp in Sources */,
 				B2ED5E272B7397A5007A7F36 /* LayerStack.cpp in Sources */,
 			);
