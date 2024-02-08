@@ -37,6 +37,10 @@ namespace IKan
       m_isRunning = true;
     }
     
+    // Initialize the ImGui Layer if GUI is enabled
+    m_imguiLayer = CreateRef<UI::ImGuiLayer>(m_window);
+    m_layers.PushOverlay(m_imguiLayer);
+
     // Initialize the Renderers
     Renderer::Initialize();
     
@@ -108,6 +112,8 @@ namespace IKan
 
   void Application::Impl::ImGuiRender()
   {
+    m_imguiLayer->Begin();
+
     // Render Imgui for all layers
     for (auto& layer : m_layers)
     {
@@ -115,6 +121,8 @@ namespace IKan
     }
     
     m_onImguiRenderCallback();
+
+    m_imguiLayer->End();
   }
 
   void Application::Impl::Close()

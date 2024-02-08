@@ -13,6 +13,7 @@
 #include "Core/Window.hpp"
 #include "Event/Event.h"
 #include "Event/ApplicationEvent.h"
+#include "UI/ImguiLayer.hpp"
 
 namespace IKan
 {
@@ -62,6 +63,8 @@ namespace IKan
     void* GetWindowPtr() const;
     /// This fuinction returns the iKan Window Instance as reference
     Window& GetWindow();
+    /// This fuinction returns the ImGui Layer pointer Reference
+    UI::ImGuiLayer& GetImGuiLayer() const;
 
     // Member Variables -----------------------------------------------------------------------------------------------
     bool m_isRunning {false};
@@ -69,6 +72,7 @@ namespace IKan
     TimeStep m_timeStep;
     LayerStack m_layers;
     Ref<Window> m_window;
+    Ref<UI::ImGuiLayer> m_imguiLayer;
 
     std::function<void(TimeStep)> m_onUpdateCallback;
     std::function<void()> m_onImguiRenderCallback;
