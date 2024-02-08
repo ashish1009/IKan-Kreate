@@ -10,6 +10,7 @@
 		B2ED5C5F2B723E25007A7F36 /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */; };
 		B2ED5C9A2B723F76007A7F36 /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ED5C992B723F76007A7F36 /* libIKan.a */; };
 		B2ED5E1A2B738B23007A7F36 /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5E182B738B23007A7F36 /* Kreator.cpp */; };
+		B2ED5E912B74A190007A7F36 /* KreatorLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5E8F2B74A190007A7F36 /* KreatorLayer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -33,6 +34,8 @@
 		B2ED5E192B738B23007A7F36 /* Kreator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Kreator.hpp; sourceTree = "<group>"; };
 		B2ED5E382B73ADF6007A7F36 /* Profiler.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = Profiler.log; sourceTree = "<group>"; };
 		B2ED5E392B73ADF6007A7F36 /* Kreator.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = Kreator.log; sourceTree = "<group>"; };
+		B2ED5E8F2B74A190007A7F36 /* KreatorLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorLayer.cpp; sourceTree = "<group>"; };
+		B2ED5E902B74A190007A7F36 /* KreatorLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KreatorLayer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +108,8 @@
 		B2ED5E8E2B74A0F7007A7F36 /* Layer */ = {
 			isa = PBXGroup;
 			children = (
+				B2ED5E8F2B74A190007A7F36 /* KreatorLayer.cpp */,
+				B2ED5E902B74A190007A7F36 /* KreatorLayer.hpp */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
@@ -166,6 +171,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2ED5E912B74A190007A7F36 /* KreatorLayer.cpp in Sources */,
 				B2ED5E1A2B738B23007A7F36 /* Kreator.cpp in Sources */,
 				B2ED5C5F2B723E25007A7F36 /* EntryPoint.cpp in Sources */,
 			);

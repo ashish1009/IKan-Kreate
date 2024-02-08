@@ -35,12 +35,10 @@ namespace IKan
     IK_PROFILE();
     RETURN_IF(std::find(m_layers.begin(), m_layers.end(), layer) != m_layers.end());
     
-    m_layerInsertIndex++;
+    m_layers.emplace(m_layers.begin() + m_layerInsertIndex++, layer);
     m_totalLayers++;
-    IK_LOG_TRACE(LogModule::LayerStack, "Pushing the {0} Layer in the stack at position {1}. Total Layers added {2}",
-                 layer->GetName().c_str(), m_layerInsertIndex, m_totalLayers);
-    
-    m_layers.emplace(m_layers.begin() + m_layerInsertIndex, layer);
+
+    IK_LOG_TRACE(LogModule::LayerStack, "Pushing the {0} Layer in the stack at position {1}. Total Layers added {2}", layer->GetName().c_str(), m_layerInsertIndex, m_totalLayers);
     layer->OnAttach();
   }
   
@@ -55,20 +53,18 @@ namespace IKan
       m_layerInsertIndex--;
       m_totalLayers--;
     }
-    IK_LOG_TRACE(LogModule::LayerStack, "Poping the {0} Layer in the stack from the index {1}. Total Layers left {2}",
-                 layer->GetName().c_str(), m_layerInsertIndex, m_totalLayers);
+    IK_LOG_TRACE(LogModule::LayerStack, "Poping the {0} Layer in the stack from the index {1}. Total Layers left {2}", layer->GetName().c_str(), m_layerInsertIndex, m_totalLayers);
   }
   
   void LayerStack::PushOverlay(const Ref<Layer>& layer)
   {
     IK_PROFILE();
     RETURN_IF(std::find(m_layers.begin(), m_layers.end(), layer) != m_layers.end());
-    
-    m_totalLayers++;
-    IK_LOG_TRACE(LogModule::LayerStack, "Pushing the {0} Layer in the stack at the end. Total Layers added {1}",
-                 layer->GetName().c_str(), m_totalLayers);
-    
     m_layers.emplace_back(layer);
+
+    m_totalLayers++;
+    IK_LOG_TRACE(LogModule::LayerStack, "Pushing the {0} Layer in the stack at the end. Total Layers added {1}", layer->GetName().c_str(), m_totalLayers);
+
     layer->OnAttach();
   }
   
@@ -83,7 +79,6 @@ namespace IKan
       m_totalLayers--;
     }
     
-    IK_LOG_TRACE(LogModule::LayerStack, "Poping the {0} Layer in the stack from the end. Total Layers left {1}",
-                 layer->GetName().c_str(), --m_totalLayers);
+    IK_LOG_TRACE(LogModule::LayerStack, "Poping the {0} Layer in the stack from the end. Total Layers left {1}", layer->GetName().c_str(), --m_totalLayers);
   }
 } // namespace IKan

@@ -6,6 +6,7 @@
 //
 
 #include "Kreator.hpp"
+#include "Layer/KreatorLayer.hpp"
 
 namespace Kreator
 {
@@ -25,11 +26,21 @@ namespace Kreator
   void KreatorApp::OnInit()
   {
     IK_PROFILE();
+    IK_LOG_INFO("Kreator App", "Initializing the Renderer Application");
+    
+    // Create and Push the Rendere Layer --------------------------------------------------------
+    m_kreatorLayer = CreateRef<KreatorLayer>();
+    PushLayer(m_kreatorLayer);
   }
   
   void KreatorApp::OnShutdown()
   {
     IK_PROFILE();
+    IK_LOG_INFO("Kreator App", "Shutting Down the Renderer Application");
+
+    // Destroy and Pop the Rendere Layer --------------------------------------------------------
+    PopLayer(m_kreatorLayer);
+    m_kreatorLayer.reset();
   }
 } // namespace Kreator
 

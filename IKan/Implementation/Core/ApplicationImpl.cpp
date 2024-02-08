@@ -77,11 +77,7 @@ namespace IKan
       {
         layer->OnUpdate(m_timeStep);
       }
-      
-      {
-        Renderer::Clear({0.2f, 0.22f, 0.222f, 1.0f});
-      }
-      
+            
       // Render the Gui for Application
       ImGuiRender();
       
