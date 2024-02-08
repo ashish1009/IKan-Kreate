@@ -46,6 +46,7 @@
 		B2ED5E892B7498DD007A7F36 /* RendererAPI.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5E872B7498DD007A7F36 /* RendererAPI.hpp */; };
 		B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5E8A2B7498FF007A7F36 /* OpenGLRendererAPI.cpp */; };
 		B2ED5E8D2B7498FF007A7F36 /* OpenGLRendererAPI.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5E8B2B7498FF007A7F36 /* OpenGLRendererAPI.hpp */; };
+		B2ED60052B74A573007A7F36 /* libUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ED5EAE2B74A4B7007A7F36 /* libUI.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,13 @@
 			proxyType = 2;
 			remoteGlobalIDString = B2ED5CD92B736A50007A7F36;
 			remoteInfo = GLFW;
+		};
+		B2ED5EAD2B74A4B7007A7F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2ED5E9B2B74A4B7007A7F36;
+			remoteInfo = UI;
 		};
 /* End PBXContainerItemProxy section */
 
@@ -105,6 +113,7 @@
 		B2ED5E872B7498DD007A7F36 /* RendererAPI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererAPI.hpp; sourceTree = "<group>"; };
 		B2ED5E8A2B7498FF007A7F36 /* OpenGLRendererAPI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRendererAPI.cpp; sourceTree = "<group>"; };
 		B2ED5E8B2B7498FF007A7F36 /* OpenGLRendererAPI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLRendererAPI.hpp; sourceTree = "<group>"; };
+		B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UI.xcodeproj; path = UI/UI.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -112,6 +121,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2ED60052B74A573007A7F36 /* libUI.a in Frameworks */,
 				B2ED5E852B7496ED007A7F36 /* libGlad.a in Frameworks */,
 				B2ED5E0B2B736AAE007A7F36 /* libGLFW.a in Frameworks */,
 			);
@@ -204,6 +214,7 @@
 		B2ED5CAC2B724986007A7F36 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */,
 				B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */,
 				B2ED5E742B7496AE007A7F36 /* Glad.xcodeproj */,
 			);
@@ -340,6 +351,14 @@
 			path = OpenGL;
 			sourceTree = "<group>";
 		};
+		B2ED5EAA2B74A4B7007A7F36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2ED5EAE2B74A4B7007A7F36 /* libUI.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -424,6 +443,10 @@
 					ProductGroup = B2ED5CE82B736A50007A7F36 /* Products */;
 					ProjectRef = B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */;
 				},
+				{
+					ProductGroup = B2ED5EAA2B74A4B7007A7F36 /* Products */;
+					ProjectRef = B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -438,6 +461,13 @@
 			fileType = archive.ar;
 			path = libGLFW.a;
 			remoteRef = B2ED5CEB2B736A50007A7F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B2ED5EAE2B74A4B7007A7F36 /* libUI.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libUI.a;
+			remoteRef = B2ED5EAD2B74A4B7007A7F36 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */
@@ -599,6 +629,7 @@
 					"${PROJECT_DIR}/Vendors/Glm",
 					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/Vendors/Glad/include",
+					"${PROJECT_DIR}/Vendors/UI/ImGui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -623,6 +654,7 @@
 					"${PROJECT_DIR}/Vendors/Glm",
 					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 					"${PROJECT_DIR}/Vendors/Glad/include",
+					"${PROJECT_DIR}/Vendors/UI/ImGui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;

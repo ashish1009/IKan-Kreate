@@ -309,6 +309,7 @@
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
+					"${PROJECT_DIR}/../IKan/Vendors/UI/ImGui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -328,6 +329,7 @@
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
+					"${PROJECT_DIR}/../IKan/Vendors/UI/ImGui",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
