@@ -14,6 +14,8 @@
 // C++ Files
 #include <iostream>
 #include <filesystem>
+#include <fstream>
+#include <sstream>
 #include <unordered_map>
 #include <map>
 
@@ -51,5 +53,6 @@
 #include <Renderer/Renderer.hpp>
 #include <Renderer/Graphics/RendererAPI.hpp>
 #include <Renderer/Graphics/RendererContext.hpp>
+#include <Renderer/Graphics/Shader.hpp>
 
 #include <UI/ImGuiLayer.hpp>

@@ -17,6 +17,8 @@
 // C++ Files
 #include <iostream>
 #include <filesystem>
+#include <fstream>
+#include <sstream>
 #include <unordered_map>
 #include <map>
 
@@ -38,5 +40,7 @@
 
 #include "Debug/Logger.hpp"
 #include "Debug/Timer.hpp"
+
+#include "Utils/StringUtils.hpp"
 
 #include "Core/AssertAPI.h"

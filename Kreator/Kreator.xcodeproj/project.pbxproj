@@ -99,8 +99,8 @@
 		B2ED5E372B73ADF6007A7F36 /* Log */ = {
 			isa = PBXGroup;
 			children = (
-				B2ED5E382B73ADF6007A7F36 /* Profiler.log */,
 				B2ED5E392B73ADF6007A7F36 /* Kreator.log */,
+				B2ED5E382B73ADF6007A7F36 /* Profiler.log */,
 			);
 			path = Log;
 			sourceTree = "<group>";

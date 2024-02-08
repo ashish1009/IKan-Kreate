@@ -26,6 +26,9 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Attaching '{0} Layer' to application", GetName());
+    
+    // Testing Temp Shader
+    Ref<Shader> shader = ShaderFactory::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/IKan/Assets/Shaders/PBR_StaticShader.glsl");
   }
   
   void KreatorLayer::OnDetach()

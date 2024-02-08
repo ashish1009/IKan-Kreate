@@ -24,5 +24,10 @@ namespace IKan
     OpenGLShader(const std::filesystem::path& shaderFilePath);
     /// This is the default frame buffer destructor that delete the buffer
     ~OpenGLShader();
+    
+  private:
+    // Member Variables ---------------------------------------------------------------------------------------------
+    RendererID m_rendererID;
+    std::string m_filePath, m_name;
   };
 } // namespace IKan
