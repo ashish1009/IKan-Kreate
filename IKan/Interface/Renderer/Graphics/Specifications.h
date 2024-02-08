@@ -63,5 +63,12 @@ namespace IKan
     void* data {nullptr};
     uint32_t size {0};
   };
-
+  
+  struct ImageSpecificaion
+  {
+    bool invertVertically {true};
+    std::filesystem::path filePath {};
+    TextureWrap wrap {TextureWrap::Repeat};
+    TextureFilter filter {TextureFilter::Linear};
+  };
 } // namespace IKan
