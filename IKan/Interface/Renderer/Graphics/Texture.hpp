@@ -48,6 +48,16 @@ namespace IKan
     virtual ~Texture2D() = default;
   };
   
-  
-
+  /// This is the interface class to create Image
+  class Image : public Texture
+  {
+  public:
+    /// This is default virtual destructor for Texture
+    virtual ~Image() = default;
+    
+    /// This function returns the File Path of Texture NOTE: Return "" for white texture
+    virtual const std::string& GetfilePath() const = 0;
+    /// This function returns name of texture
+    virtual const std::string& GetName() const = 0;
+  };
 } // namespace IKan
