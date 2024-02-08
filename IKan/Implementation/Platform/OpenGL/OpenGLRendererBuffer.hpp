@@ -47,7 +47,7 @@ namespace IKan
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLVertexBuffer);
     
   private:
-    RendererID m_rendererID;
+    RendererID m_rendererID {0};
     uint32_t m_size {0};
   };
 
@@ -78,7 +78,7 @@ namespace IKan
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLIndexBuffer);
     
   private:
-    RendererID m_rendererID;
+    RendererID m_rendererID {0};
     uint32_t m_size {0};
   };
 } // namespace IKan

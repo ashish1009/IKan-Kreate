@@ -75,6 +75,8 @@
 		B2ED60552B74DAB8007A7F36 /* Texture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60532B74DAB8007A7F36 /* Texture.hpp */; };
 		B2ED605B2B74DACD007A7F36 /* OpenGLTexture.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60592B74DACD007A7F36 /* OpenGLTexture.cpp */; };
 		B2ED605C2B74DACD007A7F36 /* OpenGLTexture.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED605A2B74DACD007A7F36 /* OpenGLTexture.hpp */; };
+		B2ED60662B74DF5F007A7F36 /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60612B74DF5F007A7F36 /* stb_image.h */; };
+		B2ED60672B74DF5F007A7F36 /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60622B74DF5F007A7F36 /* stb_image.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -178,6 +180,8 @@
 		B2ED60532B74DAB8007A7F36 /* Texture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Texture.hpp; sourceTree = "<group>"; };
 		B2ED60592B74DACD007A7F36 /* OpenGLTexture.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLTexture.cpp; sourceTree = "<group>"; };
 		B2ED605A2B74DACD007A7F36 /* OpenGLTexture.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLTexture.hpp; sourceTree = "<group>"; };
+		B2ED60612B74DF5F007A7F36 /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
+		B2ED60622B74DF5F007A7F36 /* stb_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +288,7 @@
 		B2ED5CAC2B724986007A7F36 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				B2ED60602B74DF5F007A7F36 /* StbImage */,
 				B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */,
 				B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */,
 				B2ED5E742B7496AE007A7F36 /* Glad.xcodeproj */,
@@ -500,6 +505,15 @@
 			path = Shaders;
 			sourceTree = "<group>";
 		};
+		B2ED60602B74DF5F007A7F36 /* StbImage */ = {
+			isa = PBXGroup;
+			children = (
+				B2ED60612B74DF5F007A7F36 /* stb_image.h */,
+				B2ED60622B74DF5F007A7F36 /* stb_image.cpp */,
+			);
+			path = StbImage;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -519,6 +533,7 @@
 				B2ED603C2B74BBA8007A7F36 /* OpenGLRendererBuffer.hpp in Headers */,
 				B2ED5CB82B724B39007A7F36 /* Configurations.h in Headers */,
 				B2ED5E5A2B74914F007A7F36 /* OpenGLRendererContext.hpp in Headers */,
+				B2ED60662B74DF5F007A7F36 /* stb_image.h in Headers */,
 				B2ED5CC52B7265F0007A7F36 /* LoggerBuilder.hpp in Headers */,
 				B2ED5E4F2B749090007A7F36 /* Specifications.h in Headers */,
 				B2ED60192B74AD56007A7F36 /* StringUtils.hpp in Headers */,
@@ -650,6 +665,7 @@
 				B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */,
 				B2ED5E342B73A811007A7F36 /* MacWindow.cpp in Sources */,
 				B2ED60122B74A920007A7F36 /* OpenGLShader.cpp in Sources */,
+				B2ED60672B74DF5F007A7F36 /* stb_image.cpp in Sources */,
 				B2ED5E1D2B738C58007A7F36 /* ApplicationImpl.cpp in Sources */,
 				B2ED5E552B74911C007A7F36 /* Factories.cpp in Sources */,
 				B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */,

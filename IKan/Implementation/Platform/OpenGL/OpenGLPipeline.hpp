@@ -43,7 +43,7 @@ namespace IKan
     /// - Parameter layout: layout data
     void AddAttrib(const BufferLayout& layout);
     
-    RendererID m_rendererID;
+    RendererID m_rendererID {0};
     PipelineSpecification m_specification;
   };
 } // namespace IKan

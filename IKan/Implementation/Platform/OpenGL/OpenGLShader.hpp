@@ -225,8 +225,9 @@ namespace IKan
     void UploadUniformStruct(OpenGLShaderUniformDeclaration* uniform, std::byte* buffer, uint32_t offset);
     
     // Member Variables ---------------------------------------------------------------------------------------------
-    RendererID m_rendererID;
-    std::string m_filePath, m_name;
+    RendererID m_rendererID {0};
+    std::filesystem::path m_filePath {};
+    std::string m_name {};
     std::unordered_map<GLenum /* GL Shader type */, std::string /* Shader code */> m_shaderSourceCodeMap;
     std::unordered_map<std::string /* Attribute name */, int32_t /* Attribute location */> m_locationMap;
     
