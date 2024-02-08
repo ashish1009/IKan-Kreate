@@ -5,9 +5,77 @@
 //  Created by Ashish . on 08/02/24.
 //
 
+#include <glad/glad.h>
 #include "OpenGLRendererBuffer.hpp"
+#include "Renderer/RendererStats.hpp"
 
 namespace IKan
 {
+  OpenGLVertexBuffer::OpenGLVertexBuffer(void *data, uint32_t size)
+  : m_size(size)
+  {
+    glGenBuffers(1, &m_rendererID);
+    RendererStatistics::Get().vertexBufferSize += size;
+    
+    glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+    glBufferData(GL_ARRAY_BUFFER, m_size, data, GL_STATIC_DRAW);
+    
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "Creating Open GL Vertex Buffer with Data ");
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Renderer ID       {0}", m_rendererID);
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Size              {0} B", m_size);
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Total Size Used   {0} B", RendererStatistics::Get().vertexBufferSize);
+  }
   
+  OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
+  : m_size(size)
+  {
+    glGenBuffers(1, &m_rendererID);
+    RendererStatistics::Get().vertexBufferSize += m_size;
+    
+    glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+    glBufferData(GL_ARRAY_BUFFER, m_size, nullptr, GL_DYNAMIC_DRAW);
+    
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "Creating Open GL Vertex Buffer without Data ");
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Renderer ID       {0}", m_rendererID);
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Size              {0} B", m_size);
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Total Size Used   {0} B", RendererStatistics::Get().vertexBufferSize);
+  }
+  
+  OpenGLVertexBuffer::~OpenGLVertexBuffer()
+  {
+    RendererStatistics::Get().vertexBufferSize -= m_size;
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "Destroying Open GL Vertex Buffer ");
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Renderer ID       {0}", m_rendererID);
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Size              {0} B", m_size);
+    IK_LOG_DEBUG(LogModule::VertexBuffer, "  Total Size Left   {0} B", RendererStatistics::Get().vertexBufferSize);
+    
+    glDeleteBuffers(1, &m_rendererID);
+  }
+  
+  void OpenGLVertexBuffer::SetData(void* data, uint32_t size, uint32_t offset)
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+    glBufferSubData(GL_ARRAY_BUFFER, offset, size, data);
+  }
+  
+  void OpenGLVertexBuffer::Bind() const
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+  }
+  
+  void OpenGLVertexBuffer::Unbind() const
+  {
+    glBindBuffer(GL_ARRAY_BUFFER, 0);
+  }
+  
+  RendererID OpenGLVertexBuffer::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  uint32_t OpenGLVertexBuffer::GetSize() const
+  {
+    return m_size;
+  }
+
 } // namespace IKan

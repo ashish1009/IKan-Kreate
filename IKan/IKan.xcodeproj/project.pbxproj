@@ -62,7 +62,7 @@
 		B2ED60302B74B814007A7F36 /* Shader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED602F2B74B814007A7F36 /* Shader.cpp */; };
 		B2ED60332B74BA7F007A7F36 /* BufferLayout.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60312B74BA7F007A7F36 /* BufferLayout.cpp */; };
 		B2ED60342B74BA7F007A7F36 /* BufferLayout.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60322B74BA7F007A7F36 /* BufferLayout.hpp */; };
-		B2ED60382B74BB9B007A7F36 /* RendererBuffers.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60362B74BB9B007A7F36 /* RendererBuffers.hpp */; };
+		B2ED60382B74BB9B007A7F36 /* RendererBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60362B74BB9B007A7F36 /* RendererBuffer.hpp */; };
 		B2ED603B2B74BBA8007A7F36 /* OpenGLRendererBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60392B74BBA8007A7F36 /* OpenGLRendererBuffer.cpp */; };
 		B2ED603C2B74BBA8007A7F36 /* OpenGLRendererBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED603A2B74BBA8007A7F36 /* OpenGLRendererBuffer.hpp */; };
 		B2ED603F2B74BD12007A7F36 /* RendererStats.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED603D2B74BD12007A7F36 /* RendererStats.cpp */; };
@@ -156,7 +156,7 @@
 		B2ED602F2B74B814007A7F36 /* Shader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Shader.cpp; sourceTree = "<group>"; };
 		B2ED60312B74BA7F007A7F36 /* BufferLayout.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = BufferLayout.cpp; sourceTree = "<group>"; };
 		B2ED60322B74BA7F007A7F36 /* BufferLayout.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = BufferLayout.hpp; sourceTree = "<group>"; };
-		B2ED60362B74BB9B007A7F36 /* RendererBuffers.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererBuffers.hpp; sourceTree = "<group>"; };
+		B2ED60362B74BB9B007A7F36 /* RendererBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererBuffer.hpp; sourceTree = "<group>"; };
 		B2ED60392B74BBA8007A7F36 /* OpenGLRendererBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRendererBuffer.cpp; sourceTree = "<group>"; };
 		B2ED603A2B74BBA8007A7F36 /* OpenGLRendererBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLRendererBuffer.hpp; sourceTree = "<group>"; };
 		B2ED603D2B74BD12007A7F36 /* RendererStats.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RendererStats.cpp; sourceTree = "<group>"; };
@@ -385,7 +385,7 @@
 				B2ED600D2B74A912007A7F36 /* Shader.hpp */,
 				B2ED601B2B74AF4C007A7F36 /* ShaderUniforms.hpp */,
 				B2ED60322B74BA7F007A7F36 /* BufferLayout.hpp */,
-				B2ED60362B74BB9B007A7F36 /* RendererBuffers.hpp */,
+				B2ED60362B74BB9B007A7F36 /* RendererBuffer.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -474,7 +474,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2ED5CB22B724AAC007A7F36 /* Logger.hpp in Headers */,
-				B2ED60382B74BB9B007A7F36 /* RendererBuffers.hpp in Headers */,
+				B2ED60382B74BB9B007A7F36 /* RendererBuffer.hpp in Headers */,
 				B2ED600F2B74A912007A7F36 /* Shader.hpp in Headers */,
 				B2ED5E8D2B7498FF007A7F36 /* OpenGLRendererAPI.hpp in Headers */,
 				B2ED5E352B73A811007A7F36 /* MacWindow.hpp in Headers */,

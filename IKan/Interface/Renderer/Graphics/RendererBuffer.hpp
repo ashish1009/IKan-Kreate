@@ -9,7 +9,7 @@
 
 #include "Renderer/Renderer.hpp"
 #include "Renderer/Graphics/Factories.hpp"
-#include "Renderer/Graphics/Specifications.hpp"
+#include "Renderer/Graphics/Specifications.h"
 
 namespace IKan
 {
