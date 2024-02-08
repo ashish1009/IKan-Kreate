@@ -13,7 +13,7 @@ namespace IKan
 {
   struct PipelineSpecification
   {
-    std::string debugName;
+    std::string debugName {};
     BufferLayout vertexLayout;
   };
   
@@ -47,6 +47,21 @@ namespace IKan
     RED,
     R32I, RED_INTEGER,
     DEPTH_COMPONENT
+  };
+
+  struct Texture2DSpecification
+  {
+    int32_t width {1600};
+    int32_t height {900};
+    
+    TextureFormat internalFormat {TextureFormat::RGBA8};
+    TextureFormat dataFormat {TextureFormat::RGBA};
+    TextureType type {TextureType::Texture2D};
+    TextureWrap wrap {TextureWrap::Repeat};
+    TextureFilter filter {TextureFilter::Linear};
+    
+    void* data {nullptr};
+    uint32_t size {0};
   };
 
 } // namespace IKan
