@@ -39,6 +39,7 @@ namespace IKan
   OpenGLPipeline::OpenGLPipeline(const PipelineSpecification& spec)
   : m_specification(spec)
   {
+    IK_PROFILE();
     glGenVertexArrays(1, &m_rendererID);
     PIPELINE_LOG("Creating Open GL Pipeline (ID : {0})", m_rendererID);
     m_specification.vertexLayout.DebugLog();
@@ -47,12 +48,14 @@ namespace IKan
   
   OpenGLPipeline::~OpenGLPipeline()
   {
+    IK_PROFILE();
     PIPELINE_LOG("Destroying Open GL Pipeline (ID : {0})", m_rendererID);
     glDeleteVertexArrays(1, &m_rendererID);
   }
   
   void OpenGLPipeline::Invalidate()
   {
+    IK_PROFILE();
     glBindVertexArray(m_rendererID);
     AddAttrib(m_specification.vertexLayout);
   }

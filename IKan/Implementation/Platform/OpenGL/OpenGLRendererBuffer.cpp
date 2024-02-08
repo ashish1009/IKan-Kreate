@@ -14,6 +14,7 @@ namespace IKan
   OpenGLVertexBuffer::OpenGLVertexBuffer(void *data, uint32_t size)
   : m_size(size)
   {
+    IK_PROFILE();
     glGenBuffers(1, &m_rendererID);
     RendererStatistics::Get().vertexBufferSize += size;
     
@@ -29,6 +30,7 @@ namespace IKan
   OpenGLVertexBuffer::OpenGLVertexBuffer(uint32_t size)
   : m_size(size)
   {
+    IK_PROFILE();
     glGenBuffers(1, &m_rendererID);
     RendererStatistics::Get().vertexBufferSize += m_size;
     
@@ -43,6 +45,7 @@ namespace IKan
   
   OpenGLVertexBuffer::~OpenGLVertexBuffer()
   {
+    IK_PROFILE();
     RendererStatistics::Get().vertexBufferSize -= m_size;
     IK_LOG_DEBUG(LogModule::VertexBuffer, "Destroying Open GL Vertex Buffer ");
     IK_LOG_DEBUG(LogModule::VertexBuffer, "  Renderer ID       {0}", m_rendererID);
@@ -81,6 +84,7 @@ namespace IKan
   OpenGLIndexBuffer::OpenGLIndexBuffer(void *data, uint32_t size)
   : m_size(size)
   {
+    IK_PROFILE();
     glGenBuffers(1, &m_rendererID);
     RendererStatistics::Get().indexBufferSize += m_size;
     
@@ -96,6 +100,7 @@ namespace IKan
   
   OpenGLIndexBuffer::~OpenGLIndexBuffer()
   {
+    IK_PROFILE();
     RendererStatistics::Get().indexBufferSize -= m_size;
     glDeleteBuffers(1, &m_rendererID);
     

@@ -40,6 +40,7 @@ namespace IKan
   OpenGLFrameBuffer::OpenGLFrameBuffer(const FrameBufferSpecification& spec)
   : m_specification(spec)
   {
+    IK_PROFILE();
     FB_LOG("Creating Open GL Framebuffer");
     
     for (auto attchmentFormat : m_specification.attachments.textureFormats)
@@ -58,6 +59,7 @@ namespace IKan
   
   OpenGLFrameBuffer::~OpenGLFrameBuffer()
   {
+    IK_PROFILE();
     FB_LOG("Destroying Open GL Framebuffer with Renderer ID {0}", m_rendererID);
     
     m_depthAttachment.reset();
@@ -70,6 +72,7 @@ namespace IKan
   
   void OpenGLFrameBuffer::Invalidate(bool debugLogs)
   {
+    IK_PROFILE();
     if (debugLogs)
     {
       FB_LOG("Invalidating Open GL Framebuffer : {0}", m_specification.debugName);

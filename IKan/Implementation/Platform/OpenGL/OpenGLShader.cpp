@@ -238,6 +238,7 @@ namespace IKan
   
   void OpenGLShader::Parse()
   {
+    IK_PROFILE();
     // Holds the pointer of tokens either "struct" or "uniform"
     const char* token;
     for (auto& [domain, shaderCode] : m_shaderSourceCodeMap)
@@ -263,6 +264,7 @@ namespace IKan
 
   void OpenGLShader::ParseUniformStruct(const std::string &block, ShaderDomain domain)
   {
+    IK_PROFILE();
     // Log the parsing structure only once
     if (m_structs.size() == 0) 
     {
@@ -321,6 +323,7 @@ namespace IKan
   
   void OpenGLShader::ParseUniform(const std::string &statement, ShaderDomain domain)
   {
+    IK_PROFILE();
     // Store all the statements after keyword uniform
     std::vector<std::string> tokens = Utils::String::Tokenize(statement);
     uint32_t index = 1; // 0th is for keyword unifrom
@@ -409,6 +412,7 @@ namespace IKan
   
   ShaderStruct* OpenGLShader::FindStruct(const std::string& name)
   {
+    IK_PROFILE();
     for (ShaderStruct* s : m_structs)
     {
       if (s->GetName() == name)
@@ -421,6 +425,7 @@ namespace IKan
   
   void OpenGLShader::ResolveUniforms()
   {
+    IK_PROFILE();
     SHADER_LOG("  Resolving Uniform locations for '{0}'", m_name);
     
     // Uniform samplers for textures, cubemaps etc

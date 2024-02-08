@@ -181,6 +181,7 @@ namespace IKan
   OpenGLTexture::OpenGLTexture(const Texture2DSpecification& spec)
   : m_specification(spec)
   {
+    IK_PROFILE();
     // Get GL Texture Type
     GLint textureType = TextureUtils::OpenGLTypeFromIKanType(m_specification.type);
     
@@ -245,6 +246,7 @@ namespace IKan
   
   OpenGLTexture::~OpenGLTexture()
   {
+    IK_PROFILE();
     if (m_specification.data)
     {
       IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Texture 2D ");
@@ -317,6 +319,7 @@ namespace IKan
   OpenGLImage::OpenGLImage(const ImageSpecificaion& spec)
   : m_specification(spec)
   {
+    IK_PROFILE();
     m_name = m_specification.filePath.filename();
     
     // Invert Image
@@ -455,6 +458,7 @@ namespace IKan
   OpenGLCharTexture::OpenGLCharTexture(const FT_Face& face, const glm::ivec2& size, const glm::ivec2& bearing, uint32_t advance, [[maybe_unused]] char charVal)
   : m_size(size), m_bearing(bearing), m_advance(advance)
   {
+    IK_PROFILE();
     glGenTextures(1, &m_rendererID);
     glBindTexture(GL_TEXTURE_2D, m_rendererID);
     

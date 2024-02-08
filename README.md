@@ -33,6 +33,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Buffer
 - Utilities
   - String
+  - Maths
 - Core
   - Logger
   - Profiler
@@ -49,16 +50,18 @@ IKan Library can be used separately independent to develop your own Editor/Game
     - Texture
     - Framebuffer
   - Renderer API
+- UI
+  - ImGui UI Helper
 
 ### Detailed Road Map
 - Utilities
-  - Maths
   - YAML
 - Renderer
+  - Batch Renderer
+  - Text Renderer
   - Mesh
   - Material
-  - Secne Rederer
-  - Text Renderer
+  - Secne Renderer
   - Light
   - Shadow
   - IBL
@@ -66,8 +69,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Scene Camera
   - Editor Camera
   - Fixed Camera
-- UI
-  - ImGui UI Helper
 - ECS
   - Entity
   - Component
