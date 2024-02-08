@@ -10,6 +10,7 @@
 #include "Renderer/2D/BatchData.h"
 #include "Renderer/2D/QuadData.h"
 #include "Renderer/2D/CircleData.h"
+#include "Renderer/2D/LineData.h"
 
 namespace IKan
 {

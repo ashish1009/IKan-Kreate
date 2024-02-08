@@ -19,6 +19,7 @@ namespace IKan
     // Lambda to load the camera data to shdaer
     const std::function<void(Ref<Shader>, const glm::mat4&)> LoadCamToShader = [](Ref<Shader> shader, const glm::mat4& camViewProjMat)
     {
+      IK_PERFORMANCE("Bacth::LoadShaderData");
       shader->Bind();
       shader->SetUniformMat4("u_ViewProjection", camViewProjMat);
       shader->Unbind();

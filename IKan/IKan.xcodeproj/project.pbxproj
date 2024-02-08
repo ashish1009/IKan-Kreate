@@ -203,6 +203,7 @@
 		B2ED60832B7510DE007A7F36 /* AssetPathManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetPathManager.cpp; sourceTree = "<group>"; };
 		B2ED60842B7510DE007A7F36 /* AssetPathManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetPathManager.hpp; sourceTree = "<group>"; };
 		B2ED60872B75149B007A7F36 /* CircleData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = CircleData.h; sourceTree = "<group>"; };
+		B2ED60882B75153E007A7F36 /* LineData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LineData.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -551,6 +552,7 @@
 				B2ED60812B75047E007A7F36 /* BatchData.h */,
 				B2ED60822B750FE3007A7F36 /* QuadData.h */,
 				B2ED60872B75149B007A7F36 /* CircleData.h */,
+				B2ED60882B75153E007A7F36 /* LineData.h */,
 			);
 			path = 2D;
 			sourceTree = "<group>";
