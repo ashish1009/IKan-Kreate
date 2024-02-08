@@ -20,6 +20,7 @@ f(None) \
 f(Profiler) \
 f(Application) f(LayerStack) f(Window) \
 f(GraphicsContext) f(Renderer) \
+f(ImGui)
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)

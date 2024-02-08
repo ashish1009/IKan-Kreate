@@ -31,7 +31,7 @@ namespace Kreator
   void KreatorLayer::OnDetach()
   {
     IK_PROFILE();
-    IK_LOG_INFO("Kreator Layer", "Detaching '{0} Layer' to application", GetName());
+    IK_LOG_INFO("Kreator Layer", "Detaching '{0} Layer' from application", GetName());
   }
   
   void KreatorLayer::OnUpdate(TimeStep ts)
