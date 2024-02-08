@@ -7,7 +7,13 @@
 
 #pragma once
 
+#include "Renderer/Graphics/BufferLayout.hpp"
+
 namespace IKan
 {
-  
+  struct PipelineSpecification
+  {
+    std::string debugName;
+    BufferLayout vertexLayout;
+  };
 } // namespace IKan
