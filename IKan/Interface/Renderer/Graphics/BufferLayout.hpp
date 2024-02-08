@@ -18,4 +18,23 @@ namespace IKan
     Int, Int2, Int3, Int4,
     Bool
   };
+  
+  // Buffer Element ---------------------------------------------------------------------------------------------------
+  /// This structur stores all the property of a element in a buffer.
+  struct BufferElement
+  {
+    std::string name = "";
+    ShaderDataType type = ShaderDataType::NoType;
+    uint32_t size = 0;
+    uint32_t count = 0;
+    size_t offset = 0;
+    bool normalized = false;
+    
+    /// This Constructor creates the buffer element with arguments
+    /// - Parameters:
+    ///   - name: name of element
+    ///   - type: type of element
+    ///   - normalized: flag is element normalized
+    BufferElement(const std::string& name, ShaderDataType type, bool normalized = false);
+  };
 } // namespace IKan
