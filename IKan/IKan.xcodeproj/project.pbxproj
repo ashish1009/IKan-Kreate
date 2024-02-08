@@ -84,6 +84,8 @@
 		B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60712B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp */; };
 		B2ED60762B750100007A7F36 /* Renderer2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60742B750100007A7F36 /* Renderer2D.cpp */; };
 		B2ED607F2B750336007A7F36 /* Renderer2D.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED607E2B750336007A7F36 /* Renderer2D.hpp */; };
+		B2ED60852B7510DE007A7F36 /* AssetPathManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED60832B7510DE007A7F36 /* AssetPathManager.cpp */; };
+		B2ED60862B7510DE007A7F36 /* AssetPathManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED60842B7510DE007A7F36 /* AssetPathManager.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -197,6 +199,9 @@
 		B2ED60742B750100007A7F36 /* Renderer2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; name = Renderer2D.cpp; path = Implementation/Renderer/2D/Renderer2D.cpp; sourceTree = SOURCE_ROOT; };
 		B2ED607E2B750336007A7F36 /* Renderer2D.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = Renderer2D.hpp; sourceTree = "<group>"; };
 		B2ED60812B75047E007A7F36 /* BatchData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = BatchData.h; sourceTree = "<group>"; };
+		B2ED60822B750FE3007A7F36 /* QuadData.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = QuadData.h; sourceTree = "<group>"; };
+		B2ED60832B7510DE007A7F36 /* AssetPathManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetPathManager.cpp; sourceTree = "<group>"; };
+		B2ED60842B7510DE007A7F36 /* AssetPathManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetPathManager.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -283,6 +288,7 @@
 				B2ED5E262B7397A5007A7F36 /* LayerStack.hpp */,
 				B2ED5E2B2B73A5C4007A7F36 /* Window.hpp */,
 				B2ED60232B74AFD0007A7F36 /* Buffer.hpp */,
+				B2ED60842B7510DE007A7F36 /* AssetPathManager.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -296,6 +302,7 @@
 				B2ED5E1C2B738C58007A7F36 /* ApplicationImpl.hpp */,
 				B2ED5E252B7397A5007A7F36 /* LayerStack.cpp */,
 				B2ED5E2A2B73A5C4007A7F36 /* Window.cpp */,
+				B2ED60832B7510DE007A7F36 /* AssetPathManager.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -541,6 +548,7 @@
 			children = (
 				B2ED60742B750100007A7F36 /* Renderer2D.cpp */,
 				B2ED60812B75047E007A7F36 /* BatchData.h */,
+				B2ED60822B750FE3007A7F36 /* QuadData.h */,
 			);
 			path = 2D;
 			sourceTree = "<group>";
@@ -580,6 +588,7 @@
 				B2ED5E4A2B749053007A7F36 /* RendererContext.hpp in Headers */,
 				B2ED5E432B748AFB007A7F36 /* Renderer.hpp in Headers */,
 				B2ED600B2B74A5B6007A7F36 /* ImGuiLayer.hpp in Headers */,
+				B2ED60862B7510DE007A7F36 /* AssetPathManager.hpp in Headers */,
 				B2ED5E142B7370DA007A7F36 /* MouseEvent.h in Headers */,
 				B2ED5E132B7370DA007A7F36 /* ApplicationEvent.h in Headers */,
 				B2ED5E2D2B73A5C4007A7F36 /* Window.hpp in Headers */,
@@ -698,6 +707,7 @@
 				B2ED5E592B74914F007A7F36 /* OpenGLRendererContext.cpp in Sources */,
 				B2ED60332B74BA7F007A7F36 /* BufferLayout.cpp in Sources */,
 				B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */,
+				B2ED60852B7510DE007A7F36 /* AssetPathManager.cpp in Sources */,
 				B2ED5E342B73A811007A7F36 /* MacWindow.cpp in Sources */,
 				B2ED60122B74A920007A7F36 /* OpenGLShader.cpp in Sources */,
 				B2ED60672B74DF5F007A7F36 /* stb_image.cpp in Sources */,

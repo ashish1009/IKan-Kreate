@@ -15,7 +15,10 @@ namespace IKan
     
     // Copy the Specificaion
     m_specification = appSpec;
-    
+
+    // Set the core asset directory path
+    CoreAssetPath::SetPath(m_specification.coreAssetPath);
+
     // Set the renrerer Type
     Renderer::SetCurrentRendererAPI(appSpec.rendererType);
     

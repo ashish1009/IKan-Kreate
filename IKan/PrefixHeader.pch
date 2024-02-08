@@ -47,3 +47,4 @@
 
 #include "Core/AssertAPI.h"
 #include "Core/Buffer.hpp"
+#include "Core/AssetPathManager.hpp"
