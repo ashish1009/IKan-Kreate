@@ -56,7 +56,7 @@ namespace IKan
     virtual ~Image() = default;
     
     /// This function returns the File Path of Texture NOTE: Return "" for white texture
-    virtual const std::string& GetfilePath() const = 0;
+    virtual const std::filesystem::path& GetfilePath() const = 0;
     /// This function returns name of texture
     virtual const std::string& GetName() const = 0;
   };

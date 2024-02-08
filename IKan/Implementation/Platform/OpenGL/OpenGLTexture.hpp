@@ -49,4 +49,49 @@ namespace IKan
     int32_t m_channel {0};
   };
 
+  /// This is the Open GL Implementation class for Creating texture
+  class OpenGLImage : public Image
+  {
+  public:
+    /// Default Open GL Image Constructor
+    /// - Parameter spec: Open GL Image Specification
+    OpenGLImage(const ImageSpecificaion& spec);
+    /// Default destructor that delete the texture
+    virtual ~OpenGLImage();
+    
+    /// This function binds the texture at slot
+    /// - Parameter slot: shader slot where this texture to be binded
+    void Bind(uint32_t slot = 0) const override;
+    /// This function unbinds the texture
+    void Unbind() const override;
+    
+    /// This function attach the current Image to Framebuffer
+    /// - Parameters:
+    ///   - colorID : Color Attaachment ID to Framebuffer
+    ///   - depthID : Depth Attachment ID to Framebuffer
+    ///   - attachmentType: attachment type of texture
+    void AttachToFramebuffer(TextureAttachment attachmentType, uint32_t colorID = 0, uint32_t depthID = 0, uint32_t level = 0) const override {IK_ASSERT(false);}
+    
+    /// This function returns width of texture
+    uint32_t GetWidth() const override;
+    /// This function returns height of texture
+    uint32_t GetHeight() const override;
+    /// This function returns renderer ID of texture
+    RendererID GetRendererID() const override;
+    /// This function returns file path of texture
+    const std::filesystem::path& GetfilePath() const override;
+    /// This function returns name of texture
+    const std::string& GetName() const override;
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLImage);
+    
+  private:
+    RendererID m_rendererID {0};
+    ImageSpecificaion m_specification;
+    int32_t m_width {1600};
+    int32_t m_height {900};
+    int32_t m_channel {0};
+    uint32_t m_size {0};
+    std::string m_name {};
+  };
 } // namespace IKan
