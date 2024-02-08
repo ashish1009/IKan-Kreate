@@ -26,8 +26,15 @@ namespace IKan
     ~OpenGLShader();
     
   private:
+    // Member Functions ----------------------------------------------------------------------------------------------
+    /// This function reads the shader code in string and store all the shader present in the file in a map to be used
+    /// later by compiler.
+    /// - Parameter sourceString: shader code as string
+    void PreprocessShader(const std::string& sourceString);
+
     // Member Variables ---------------------------------------------------------------------------------------------
     RendererID m_rendererID;
     std::string m_filePath, m_name;
+    std::unordered_map<GLenum /* GL Shader type */, std::string /* Shader code */> m_shaderSourceCodeMap;
   };
 } // namespace IKan

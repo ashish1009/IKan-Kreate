@@ -11,6 +11,8 @@ namespace IKan::Utils
 {
   std::string String::ReadFromFile(const std::filesystem::path& filePath)
   {
+    IK_PROFILE();
+    
     // Output string after reading the file
     std::string result = "";
     
