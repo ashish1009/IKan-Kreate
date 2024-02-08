@@ -15,11 +15,11 @@ namespace IKan
   /// This structure stores the specifications to create the application
   struct ApplicationSpecification
   {
-    std::string title = "New Application";
-    std::string coreAssetPath = "";
+    std::string title {"New Application"};
+    std::string coreAssetPath {};
     WindowSpecification windowSpecificaion;
-    bool startMaximized = false;
-    bool resizable = true;
+    bool startMaximized {false};
+    bool resizable {true};
   };
 
   /// This class is the core application for engine.

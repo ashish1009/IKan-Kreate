@@ -15,12 +15,12 @@ namespace IKan
   /// This structure storest the window specificaion for GLFW Window creation
   struct WindowSpecification
   {
-    std::string title = "Untitled Window";
-    uint32_t width = 0, height = 0;
-    bool isFullScreen = false;
-    bool hideTitleBar = false;
+    std::string title {"Untitled Window"};
+    uint32_t width {0}, height {0};
+    bool isFullScreen {false};
+    bool hideTitleBar {false};
 #ifndef __APPLE__
-    bool isVsync = true;
+    bool isVsync {true};
 #endif
   };
   

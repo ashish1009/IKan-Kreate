@@ -70,7 +70,7 @@ return category; \
     }
     
   public:
-    bool m_isHandled = false;
+    bool m_isHandled {false};
   };
   
   /// This class is for dispatching the events dynamically at runtime. Event type to be checked with current event of
