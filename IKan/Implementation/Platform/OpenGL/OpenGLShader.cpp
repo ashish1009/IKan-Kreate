@@ -544,6 +544,24 @@ namespace IKan
     return location;
   }
   
+  void OpenGLShader::SetVSMaterialUniformBuffer(const Buffer& buffer)
+  {
+    glUseProgram(m_rendererID);
+    ResolveAndSetUniforms(m_vsMaterialUniformBuffer, buffer);
+  }
+  
+  void OpenGLShader::SetFSMaterialUniformBuffer(const Buffer& buffer)
+  {
+    glUseProgram(m_rendererID);
+    ResolveAndSetUniforms(m_fsMaterialUniformBuffer, buffer);
+  }
+  
+  void OpenGLShader::SetGSMaterialUniformBuffer(const Buffer& buffer)
+  {
+    glUseProgram(m_rendererID);
+    ResolveAndSetUniforms(m_gsMaterialUniformBuffer, buffer);
+  }
+  
   void OpenGLShader::ResolveAndSetUniforms(const Ref<OpenGLShaderUniformBufferDeclaration>& decl, const Buffer& buffer)
   {
     const std::vector<ShaderUniformDeclaration*>& uniforms = decl->GetUniformDeclarations();
@@ -682,7 +700,60 @@ namespace IKan
       }
     }
   }
-    
+  
+  void OpenGLShader::Bind() const
+  {
+    glUseProgram(m_rendererID);
+  }
+  void OpenGLShader::Unbind() const
+  {
+    glUseProgram(0);
+  };
+  
+  const std::string& OpenGLShader::GetName() const
+  {
+    return m_name;
+  }
+  const std::string& OpenGLShader::GetFilePath() const
+  {
+    return m_filePath;
+  }
+  RendererID OpenGLShader::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  bool OpenGLShader::HasVSMaterialUniformBuffer() const
+  {
+    return (bool)m_vsMaterialUniformBuffer;
+  }
+  bool OpenGLShader::HasFSMaterialUniformBuffer() const
+  {
+    return (bool)m_fsMaterialUniformBuffer;
+  }
+  bool OpenGLShader::HasGSMaterialUniformBuffer() const
+  {
+    return (bool)m_gsMaterialUniformBuffer;
+  }
+  
+  const ShaderUniformBufferDeclaration& OpenGLShader::GetVSMaterialUniformBuffer() const
+  {
+    return *m_vsMaterialUniformBuffer;
+  }
+  const ShaderUniformBufferDeclaration& OpenGLShader::GetFSMaterialUniformBuffer() const
+  {
+    return *m_fsMaterialUniformBuffer;
+  }
+  const ShaderUniformBufferDeclaration& OpenGLShader::GetGSMaterialUniformBuffer() const
+  {
+    return *m_gsMaterialUniformBuffer;
+  }
+  
+  const std::vector<ShaderResourceDeclaration*>& OpenGLShader::GetResources() const
+  {
+    return m_resources;
+  }
+  
   // Uniforms with name ----------------------------------------------------------------------------------------------
   void OpenGLShader::SetUniformInt1(const std::string& name, int32_t value)
   {
@@ -698,6 +769,40 @@ namespace IKan
     
     glUniform1iv(GetUniformLocation(name), (GLsizei)count, textureArraySlotData);
     delete[] textureArraySlotData;
+  }
+  void OpenGLShader::SetUniformMat4Array(const std::string& name, const glm::mat4& values, uint32_t count)
+  {
+    glUniformMatrix4fv(GetUniformLocation(name), (GLsizei)count, GL_FALSE, glm::value_ptr(values));
+  }
+  
+  void OpenGLShader::SetUniformMat4(const std::string& name, const glm::mat4& value)
+  {
+    glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(value));
+  }
+  
+  void OpenGLShader::SetUniformMat3(const std::string& name, const glm::mat3& value)
+  {
+    glUniformMatrix3fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(value));
+  }
+  
+  void OpenGLShader::SetUniformFloat1(const std::string& name, float value)
+  {
+    glUniform1f(GetUniformLocation(name), value);
+  }
+  
+  void OpenGLShader::SetUniformFloat2(const std::string& name, const glm::vec2& value)
+  {
+    glUniform2f(GetUniformLocation(name), value.x, value.y);
+  }
+  
+  void OpenGLShader::SetUniformFloat3(const  std::string& name, const glm::vec3& value)
+  {
+    glUniform3f(GetUniformLocation(name), value.x, value.y, value.z);
+  }
+  
+  void OpenGLShader::SetUniformFloat4(const std::string& name, const glm::vec4& value)
+  {
+    glUniform4f(GetUniformLocation(name), value.x, value.y, value.z, value.w);
   }
   
   // Uniforms with location -----------------------------------------------------------------------------------------
@@ -740,5 +845,4 @@ namespace IKan
   {
     glUniformMatrix4fv((GLint)location, (GLsizei)count, GL_FALSE, glm::value_ptr(values));
   }
-
 } // namespace IKan

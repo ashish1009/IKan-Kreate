@@ -26,6 +26,87 @@ namespace IKan
     /// This is the default frame buffer destructor that delete the buffer
     ~OpenGLShader();
     
+    /// This function binds the current Shader to the renderer
+    void Bind() const override;
+    /// This function unbinds the current Shader from the renderer
+    void Unbind() const override;
+    
+    /// This function set the vertex shader buffer data
+    /// - Parameter buffer: buffer data
+    void SetVSMaterialUniformBuffer(const Buffer& buffer) override;
+    /// This function set the fragment shader buffer data
+    /// - Parameter buffer: buffer data
+    void SetFSMaterialUniformBuffer(const Buffer& buffer) override;
+    /// This function set the geomatry shader buffer data
+    /// - Parameter buffer: buffer data
+    void SetGSMaterialUniformBuffer(const Buffer& buffer) override;
+    
+    /// This function returns the Renderer ID of Shader
+    RendererID GetRendererID() const override;
+    
+    /// This function returns the Name of Shader
+    const std::string& GetName() const override;
+    /// This function returns the File Path of Shader
+    const std::string& GetFilePath() const override;
+    
+    /// This function returns true if have the vertex shader buffer data
+    bool HasVSMaterialUniformBuffer() const override;
+    /// This function returns true if have the fragment shader buffer data
+    bool HasFSMaterialUniformBuffer() const override;
+    /// This function returns true if have the geomatry shader buffer data
+    bool HasGSMaterialUniformBuffer() const override;
+    
+    /// This function resturns the vertex Shader buffer data
+    const ShaderUniformBufferDeclaration& GetVSMaterialUniformBuffer() const override;
+    /// This function resturns the fragment Shader buffer data
+    const ShaderUniformBufferDeclaration& GetFSMaterialUniformBuffer() const override;
+    /// This function resturns the geomatry Shader buffer data
+    const ShaderUniformBufferDeclaration& GetGSMaterialUniformBuffer() const override;
+    
+    /// This function returns all the resources
+    const std::vector<ShaderResourceDeclaration*>& GetResources() const override;
+    
+    /// This functions uploads the Matrix 4x4 array value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - values: Value of Uniform
+    ///   - count: Size of Mat4 Array
+    void SetUniformMat4Array(const std::string& name, const glm::mat4& values, uint32_t count) override;
+    
+    /// This functions uploads the Matrix 4x4 value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - value: Value of Uniform
+    void SetUniformMat4(const std::string& name, const glm::mat4& value) override;
+    /// This functions uploads the Matrix 3x3 value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - value: Value of Uniform
+    void SetUniformMat3(const std::string& name, const glm::mat3& value) override;
+    
+    /// This functions uploads the Flaot value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - value: Value of Uniform
+    void SetUniformFloat1(const std::string& name, float value) override;
+    /// This functions uploads the Vec2 value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - value: Value of Uniform
+    void SetUniformFloat2(const std::string& name, const glm::vec2& value) override;
+    /// This functions uploads the Vec3 value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - value: Value of Uniform
+    void SetUniformFloat3(const std::string& name, const glm::vec3& value) override;
+    /// This functions uploads the Vec4 value to shader
+    /// - Parameters:
+    ///   - name: Name of Uniform
+    ///   - value: Value of Uniform
+    void SetUniformFloat4(const std::string& name, const glm::vec4& value) override;
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLShader);
+    
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
     /// This function reads the shader code in string and store all the shader present in the file in a map to be used
@@ -38,7 +119,7 @@ namespace IKan
     void Parse();
     /// This function resolves all the uniform present in the shader
     void ResolveUniforms();
-
+    
     /// This function parses the Uniforms that are structure in shader. It will just store the structures only
     /// - Parameters:
     ///   - block: block code of shader
@@ -49,7 +130,7 @@ namespace IKan
     ///   - statement: block fo code of shader
     ///   - domain domain of shader
     void ParseUniform(const std::string& statement, ShaderDomain domain);
-
+    
     /// This function finds the structure stored in shader
     /// - Parameter name: Name of structure
     ShaderStruct* FindStruct(const std::string& name);
@@ -142,17 +223,16 @@ namespace IKan
     ///   - location: location of field
     ///   - value: value to be uploaded
     void UploadUniformStruct(OpenGLShaderUniformDeclaration* uniform, std::byte* buffer, uint32_t offset);
-
+    
     // Member Variables ---------------------------------------------------------------------------------------------
     RendererID m_rendererID;
-    std::filesystem::path m_filePath{};
-    std::string m_name{};
+    std::string m_filePath, m_name;
     std::unordered_map<GLenum /* GL Shader type */, std::string /* Shader code */> m_shaderSourceCodeMap;
     std::unordered_map<std::string /* Attribute name */, int32_t /* Attribute location */> m_locationMap;
-
+    
     std::vector<ShaderStruct*> m_structs; // Stores the structure in the shader
     std::vector<ShaderResourceDeclaration*> m_resources; // Stores the resources of shader like sampler 2D
-
+    
     Ref<OpenGLShaderUniformBufferDeclaration> m_vsMaterialUniformBuffer; // Uniform data buffer of vertex shader
     Ref<OpenGLShaderUniformBufferDeclaration> m_fsMaterialUniformBuffer; // Uniform data buffer of pixel shader
     Ref<OpenGLShaderUniformBufferDeclaration> m_gsMaterialUniformBuffer; // Uniform data buffer of geometry shader
