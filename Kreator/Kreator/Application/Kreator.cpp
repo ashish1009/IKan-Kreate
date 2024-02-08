@@ -7,6 +7,32 @@
 
 #include "Kreator.hpp"
 
+namespace Kreator
+{
+  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec)
+  : Application(appSpec)
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator App", "Creating Kreator Application");
+  }
+  
+  KreatorApp::~KreatorApp()
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator App", "Destroying Kreator Application");
+  }
+  
+  void KreatorApp::OnInit()
+  {
+    IK_PROFILE();
+  }
+  
+  void KreatorApp::OnShutdown()
+  {
+    IK_PROFILE();
+  }
+} // namespace Kreator
+
 Scope<Application> CreateApplication()
 {
   IK_PROFILE();
@@ -33,5 +59,5 @@ Scope<Application> CreateApplication()
   appSpec.startMaximized = true;
 
   // Return the Application
-  return Application::CreateApplication<Application>(appSpec);
+  return Application::CreateApplication<Kreator::KreatorApp>(appSpec);
 }

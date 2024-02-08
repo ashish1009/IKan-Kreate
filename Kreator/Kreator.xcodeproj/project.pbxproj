@@ -71,6 +71,7 @@
 			children = (
 				B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */,
 				B2ED5C652B723E50007A7F36 /* Application */,
+				B2ED5E8E2B74A0F7007A7F36 /* Layer */,
 			);
 			path = Kreator;
 			sourceTree = "<group>";
@@ -99,6 +100,13 @@
 				B2ED5E392B73ADF6007A7F36 /* Kreator.log */,
 			);
 			path = Log;
+			sourceTree = "<group>";
+		};
+		B2ED5E8E2B74A0F7007A7F36 /* Layer */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Layer;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -59,26 +59,32 @@ namespace IKan
   }
   void Renderer::ClearDepthBits()
   {
+    IK_PERFORMANCE("Renderer::ClearDepthBits");
     s_rendererData.rendererAPI->ClearDepthBits();
   }
   void Renderer::EnableDepthPass()
   {
+    IK_PERFORMANCE("Renderer::EnableDepthPass");
     s_rendererData.rendererAPI->EnableDepthPass();
   }
   void Renderer::DisableDepthPass()
   {
+    IK_PERFORMANCE("Renderer::DisableDepthPass");
     s_rendererData.rendererAPI->DisableDepthPass();
   }
   void Renderer::DepthFunc(GlDepthFunc func)
   {
+    IK_PERFORMANCE("Renderer::DepthFunc");
     s_rendererData.rendererAPI->DepthFunc(func);
   }
   void Renderer::EnableStencilPass()
   {
+    IK_PERFORMANCE("Renderer::EnableStencilPass");
     s_rendererData.rendererAPI->EnableStencilPass();
   }
   void Renderer::DisableStencilPass()
   {
+    IK_PERFORMANCE("Renderer::DisableStencilPass");
     s_rendererData.rendererAPI->DisableStencilPass();
   }
   void Renderer::SetViewport(uint32_t width, uint32_t height)
