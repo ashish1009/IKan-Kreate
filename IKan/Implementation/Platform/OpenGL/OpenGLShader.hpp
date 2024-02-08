@@ -9,6 +9,7 @@
 
 #include <glad/glad.h>
 #include "Renderer/Graphics/Shader.hpp"
+#include "Platform/OpenGL/OpenGLShaderUniforms.hpp"
 
 namespace IKan
 {

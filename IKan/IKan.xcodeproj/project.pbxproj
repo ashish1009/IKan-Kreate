@@ -76,6 +76,13 @@
 			remoteGlobalIDString = B2ED5E9B2B74A4B7007A7F36;
 			remoteInfo = UI;
 		};
+		B2ED602B2B74B3AE007A7F36 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2ED5E742B7496AE007A7F36 /* Glad.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2ED5E662B7496AE007A7F36;
+			remoteInfo = Glad;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -427,6 +434,14 @@
 			path = Utils;
 			sourceTree = "<group>";
 		};
+		B2ED60282B74B3AE007A7F36 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2ED602C2B74B3AE007A7F36 /* libGlad.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -515,6 +530,10 @@
 			projectDirPath = "";
 			projectReferences = (
 				{
+					ProductGroup = B2ED60282B74B3AE007A7F36 /* Products */;
+					ProjectRef = B2ED5E742B7496AE007A7F36 /* Glad.xcodeproj */;
+				},
+				{
 					ProductGroup = B2ED5CE82B736A50007A7F36 /* Products */;
 					ProjectRef = B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */;
 				},
@@ -543,6 +562,13 @@
 			fileType = archive.ar;
 			path = libUI.a;
 			remoteRef = B2ED5EAD2B74A4B7007A7F36 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+		B2ED602C2B74B3AE007A7F36 /* libGlad.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGlad.a;
+			remoteRef = B2ED602B2B74B3AE007A7F36 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
 /* End PBXReferenceProxy section */

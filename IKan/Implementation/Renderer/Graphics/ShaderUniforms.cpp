@@ -18,7 +18,7 @@ namespace IKan
   {
     for (auto& field : m_fields)
     {
-      ikdelete field;
+      delete field;
     }
   }
   
