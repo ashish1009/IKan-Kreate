@@ -44,3 +44,4 @@
 #include "Utils/StringUtils.hpp"
 
 #include "Core/AssertAPI.h"
+#include "Core/Buffer.hpp"
