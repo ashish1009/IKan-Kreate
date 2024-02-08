@@ -9,7 +9,7 @@
 
 #include "Renderer/Renderer.hpp"
 #include "Renderer/Graphics/Factories.hpp"
-#include "Renderer/Graphics/Specifications.hpp"
+#include "Renderer/Graphics/Specifications.h"
 
 namespace IKan
 {
@@ -31,11 +31,7 @@ namespace IKan
     ///   - width: New width of FB
     ///   - height: New height of FB
     virtual void Resize(uint32_t width, uint32_t height) = 0;
-    
-    /// This funciton updates the specification color
-    /// - Parameter color: color
-    virtual void UpdateSpecificationColor(const glm::vec4& color) = 0;
-    
+        
     /// This function returns the Frame buffer specification
     virtual const FrameBufferSpecification& GetSpecification() const = 0;
     /// This function returns the Renderer ID

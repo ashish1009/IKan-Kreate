@@ -60,4 +60,12 @@ namespace IKan
     /// This function returns name of texture
     virtual const std::string& GetName() const = 0;
   };
+  
+  namespace TextureUtils
+  {
+    /// This function returns the Format name from Enum
+    /// - Parameter format: enum taken as uint
+    const char* IKanFormatName(TextureFormat format);
+  } // namespace TextureUtils
+
 } // namespace IKan
