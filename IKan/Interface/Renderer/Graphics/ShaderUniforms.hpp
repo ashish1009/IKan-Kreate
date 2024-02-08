@@ -81,4 +81,38 @@ namespace IKan
     virtual uint32_t GetCount() const = 0;
   };
 
+  /// This class stores the content of a structure used in shader
+  class ShaderStruct
+  {
+  public:
+    /// This constructor creates the structure instance for a shader
+    /// - Parameter name: name of structure
+    ShaderStruct(const std::string& name);
+    /// Destroy the structure
+    ~ShaderStruct();
+    
+    /// This function updates the offset value of structure
+    /// - Parameter offset: new offset
+    void SetOffset(uint32_t offset);
+    
+    /// This function returns the size of structure in bytes
+    uint32_t GetSize() const;
+    /// This function returns the offset of structure
+    uint32_t GetOffset() const;
+    /// This function returns the name of structure
+    const std::string& GetName() const;
+    /// This function returns the all the fields of structure
+    const std::vector<ShaderUniformDeclaration*>& GetFields() const;
+    
+    /// This function adds a new field in structure
+    void AddField(ShaderUniformDeclaration* field);
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(ShaderStruct)
+    
+  private:
+    std::string m_name {};
+    uint32_t m_size {0};
+    uint32_t m_offset {0};
+    std::vector<ShaderUniformDeclaration*> m_fields;
+  };
 } // namespace IKan
