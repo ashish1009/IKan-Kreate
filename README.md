@@ -50,6 +50,9 @@ IKan Library can be used separately independent to develop your own Editor/Game
     - Texture
     - Framebuffer
   - Renderer API
+  - Batch Renderer
+  - Font Loader
+  - Text Renderer
 - UI
   - ImGui UI Helper
 
@@ -57,8 +60,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - Utilities
   - YAML
 - Renderer
-  - Batch Renderer
-  - Text Renderer
   - Mesh
   - Material
   - Secne Renderer
@@ -116,6 +117,8 @@ Editor Application using IKan Library to create Games
   - v1.0.1.0 : Create and show Window (Without Renderer Context)
   - v2.0.2.0 : Render First Quad
   - v2.1.2.0 : Render First textured Quad
+  - v2.2.2.0 : Batch Renderer Quads, Circles and Lines
+  - v2.3.2.0 : Text Renderer
    
 ## General Road Map
 - Batch Renderer
