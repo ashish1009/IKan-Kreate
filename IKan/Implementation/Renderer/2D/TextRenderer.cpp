@@ -155,4 +155,84 @@ namespace IKan
     EndBatch();
     NextBatch();
   }
+  
+  void TextRenderer::RenderFixedViewText(const std::string& text, Ref<Font> font, glm::vec3 position,
+                                         const glm::vec2& scale, const glm::vec4& color, int32_t objectID)
+  {
+    RenderTextImpl(text, font, position, scale, color, objectID);
+  }
+  
+  void TextRenderer::RenderText(const std::string& text, Ref<Font> font, glm::vec3 position,
+                                const glm::vec2& originalScale, const glm::vec4& color, int32_t objectID)
+  {
+    glm::vec2 scale = { originalScale.x * 0.025, originalScale.y * 0.025 };
+    RenderTextImpl(text, font, position, scale, color, objectID);
+  }
+  
+  void TextRenderer::RenderTextImpl(const std::string& text, Ref<Font> font, glm::vec3 position,
+                                    const glm::vec2& scale, const glm::vec4& color, int32_t objectID)
+  {
+    IK_PERFORMANCE("TextRenderer::RenderTextImpl");
+    float originalPosX = position.x;
+    float slot = 0.0f;
+    for (std::string::const_iterator c = text.begin(); c != text.end(); c++)
+    {
+      if (s_textData->numSlotsUsed >= MaxTextureSlotsInShader)
+      {
+        Flush();
+      }
+      
+      Ref<CharTexture> ch = font->m_charTextureMap[*c];
+      
+      if (*c == '\n')
+      {
+        position.y -= scale.y * 40;
+        position.x = originalPosX;
+        continue;
+      }
+      
+      float xpos = position.x + ch->GetBearing().x * scale.x;
+      float ypos = position.y - (ch->GetSize().y - ch->GetBearing().y) * scale.y;
+      float zpos = position.z;
+      
+      float w = ch->GetSize().x * scale.x;
+      float h = ch->GetSize().y * scale.y;
+      
+      // update VBO for each character
+      glm::vec3 vertexPosition[TextData::VertexForSingleChar] =
+      {
+        { xpos,     ypos + h, zpos },
+        { xpos,     ypos    , zpos },
+        { xpos + w, ypos    , zpos },
+        
+        { xpos,     ypos + h, zpos },
+        { xpos + w, ypos    , zpos },
+        { xpos + w, ypos + h, zpos },
+      };
+      
+      // Each Vertex of Char
+      slot = (float)s_textData->numSlotsUsed;
+      for (size_t i = 0; i < TextData::VertexForSingleChar; i++)
+      {
+        s_textData->vertexBufferPtr->position      = vertexPosition[i];
+        s_textData->vertexBufferPtr->color         = color;
+        s_textData->vertexBufferPtr->textureIndex  = slot;
+        s_textData->vertexBufferPtr->textureCoord  = s_textData->baseTextureCoords[i];
+        s_textData->vertexBufferPtr->objectID      = objectID;
+        s_textData->vertexBufferPtr++;
+      }
+      
+      // now advance cursors for next glyph (note that advance is number of
+      // 1/64 pixels) bitshift by 6 to get value in pixels (2^6 = 64 (divide
+      // amount of 1/64th pixels by 64 to get amount of pixels))
+      position.x += (ch->GetAdvance() >> 6) * scale.x;
+      
+      // Renderer Vertex count stat
+      RendererStatistics::Get().vertexCount += TextData::VertexForSingleChar;
+      
+      s_textData->charTextures[s_textData->numSlotsUsed] = ch;
+      s_textData->numSlotsUsed++;
+    }
+  }
+
 }

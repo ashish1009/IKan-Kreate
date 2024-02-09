@@ -27,6 +27,27 @@ namespace IKan
     /// This function Ends the current batch by rendering all the vertex
     static void EndBatch();
 
+    /// This functions renders the Text in Window using postition and sclae
+    /// - Parameters:
+    ///   - text: Text to be rendereed
+    ///   - font: Font data
+    ///   - position: Text Poistion
+    ///   - scale: Text Poistion
+    ///   - color: Color of text
+    ///   - objectID: Pixel ID
+    static void RenderFixedViewText(const std::string &text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+                                    const glm::vec4& color, int32_t objectID = -1);
+    /// This functions renders the Text in Window using postition and sclae
+    /// - Parameters:
+    ///   - text: Text to be rendereed
+    ///   - font: Font data
+    ///   - position: Text Poistion
+    ///   - scale: Text Poistion
+    ///   - color: Color of text
+    ///   - objectID: Pixel ID&
+    static void RenderText(const std::string &text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+                           const glm::vec4& color, int32_t objectID  = -1);
+
     DELETE_ALL_CONSTRUCTORS(TextRenderer);
     
   private:
@@ -35,5 +56,15 @@ namespace IKan
     /// This function moves to next batch in single frame
     static void NextBatch();
 
+    /// This functions renders the Text in Window using postition and sclae
+    /// - Parameters:
+    ///   - text: Text to be rendereed
+    ///   - font: Font data
+    ///   - position: Text Poistion
+    ///   - scale: Text Poistion
+    ///   - color: Color of text
+    ///   - objectID: Pixel ID
+    static void RenderTextImpl(const std::string& text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+                               const glm::vec4& color, int32_t objectID);
   };
 } // namespace IKan

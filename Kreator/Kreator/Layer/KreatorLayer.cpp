@@ -42,6 +42,10 @@ namespace Kreator
     Renderer2D::DrawQuad({0.1, 0.2, 0.3}, Utils::Math::UnitVec2, Utils::Math::ZeroVec3, {0.2, 0.3, 0.3, 1.0});
     Renderer2D::DrawCircle({0, 0, 0}, 1.0f);
     Renderer2D::EndBatch();
+    
+    TextRenderer::BeginBatch(Utils::Math::UnitMat4);
+    
+    TextRenderer::EndBatch();
   }
   
   void KreatorLayer::OnEvent(Event& event)
