@@ -13,6 +13,8 @@
 		B2C0B6CD2B75F7340015A277 /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6CC2B75F7340015A277 /* libpng16.a */; };
 		B2C0B6D42B75F8EF0015A277 /* TextRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6D22B75F8EF0015A277 /* TextRenderer.cpp */; };
 		B2C0B6D52B75F8EF0015A277 /* TextRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6D32B75F8EF0015A277 /* TextRenderer.hpp */; };
+		B2C0B6D92B75FF300015A277 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6D72B75FF300015A277 /* Mesh.cpp */; };
+		B2C0B6DA2B75FF300015A277 /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6D82B75FF300015A277 /* Mesh.hpp */; };
 		B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C9C2B723F85007A7F36 /* Application.cpp */; };
 		B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5C9D2B723F85007A7F36 /* Application.hpp */; };
 		B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */; };
@@ -127,6 +129,9 @@
 		B2C0B6D22B75F8EF0015A277 /* TextRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TextRenderer.cpp; sourceTree = "<group>"; };
 		B2C0B6D32B75F8EF0015A277 /* TextRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextRenderer.hpp; sourceTree = "<group>"; };
 		B2C0B6D62B75FB520015A277 /* TextShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextShader.glsl; sourceTree = "<group>"; };
+		B2C0B6D72B75FF300015A277 /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		B2C0B6D82B75FF300015A277 /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
+		B2C0B6DB2B75FFA40015A277 /* AABB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -325,6 +330,7 @@
 				B2ED5E2B2B73A5C4007A7F36 /* Window.hpp */,
 				B2ED60232B74AFD0007A7F36 /* Buffer.hpp */,
 				B2ED60842B7510DE007A7F36 /* AssetPathManager.hpp */,
+				B2C0B6DB2B75FFA40015A277 /* AABB.h */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -445,6 +451,7 @@
 				B2ED603E2B74BD12007A7F36 /* RendererStats.hpp */,
 				B2ED607E2B750336007A7F36 /* Renderer2D.hpp */,
 				B2C0B6D32B75F8EF0015A277 /* TextRenderer.hpp */,
+				B2C0B6D82B75FF300015A277 /* Mesh.hpp */,
 				B2C0B6BE2B75F0AB0015A277 /* UI */,
 				B2ED5E452B749045007A7F36 /* Graphics */,
 			);
@@ -456,6 +463,7 @@
 			children = (
 				B2ED5E402B748AFB007A7F36 /* Renderer.cpp */,
 				B2ED603D2B74BD12007A7F36 /* RendererStats.cpp */,
+				B2C0B6D72B75FF300015A277 /* Mesh.cpp */,
 				B2C0B6C32B75F4E20015A277 /* UI */,
 				B2ED60802B750474007A7F36 /* 2D */,
 				B2ED5E4B2B749059007A7F36 /* Graphics */,
@@ -648,6 +656,7 @@
 				B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */,
 				B2ED60212B74AF5A007A7F36 /* OpenGLShaderUniforms.hpp in Headers */,
 				B2ED60442B74C52D007A7F36 /* Pipeline.hpp in Headers */,
+				B2C0B6DA2B75FF300015A277 /* Mesh.hpp in Headers */,
 				B2ED5E222B738FE5007A7F36 /* Layer.hpp in Headers */,
 				B2ED60252B74AFD0007A7F36 /* Buffer.hpp in Headers */,
 				B2ED5CBC2B724B7F007A7F36 /* PrefixHeader.pch in Headers */,
@@ -775,6 +784,7 @@
 				B2ED5E422B748AFB007A7F36 /* Renderer.cpp in Sources */,
 				B2ED605B2B74DACD007A7F36 /* OpenGLTexture.cpp in Sources */,
 				B2ED5CCE2B736963007A7F36 /* TimeStep.cpp in Sources */,
+				B2C0B6D92B75FF300015A277 /* Mesh.cpp in Sources */,
 				B2ED600A2B74A5B6007A7F36 /* ImGuiLayer.cpp in Sources */,
 				B2ED603F2B74BD12007A7F36 /* RendererStats.cpp in Sources */,
 				B2ED601C2B74AF4C007A7F36 /* ShaderUniforms.cpp in Sources */,
