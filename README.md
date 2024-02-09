@@ -53,6 +53,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Batch Renderer
   - Font Loader
   - Text Renderer
+  - Mesh
 - UI
   - ImGui UI Helper
 
@@ -60,7 +61,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - Utilities
   - YAML
 - Renderer
-  - Mesh
   - Material
   - Secne Renderer
   - Light
@@ -121,8 +121,6 @@ Editor Application using IKan Library to create Games
   - v2.3.2.0 : Text Renderer
    
 ## General Road Map
-- Batch Renderer
-- Text Renderer
 - Mesh Loader
 - Mesh Material Loader
 - Scene Renderer
