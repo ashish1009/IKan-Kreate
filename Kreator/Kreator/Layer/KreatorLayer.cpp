@@ -44,7 +44,7 @@ namespace Kreator
     Renderer2D::EndBatch();
     
     TextRenderer::BeginBatch(Utils::Math::UnitMat4);
-    
+    TextRenderer::RenderText("Sample Text", {-0.8, 0.6, 0}, {0.2, 0.2}, {1, 1, 1, 1});
     TextRenderer::EndBatch();
   }
   

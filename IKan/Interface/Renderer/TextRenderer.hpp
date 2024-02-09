@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Renderer/UI/Font.hpp"
+
 namespace IKan
 {
   class Font;
@@ -35,8 +37,8 @@ namespace IKan
     ///   - scale: Text Poistion
     ///   - color: Color of text
     ///   - objectID: Pixel ID
-    static void RenderFixedViewText(const std::string &text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
-                                    const glm::vec4& color, int32_t objectID = -1);
+    static void RenderFixedViewText(const std::string &text, glm::vec3 position, const glm::vec2& scale,
+                                    const glm::vec4& color, Ref<Font> font = Font::GetDefaultFont(), int32_t objectID = -1);
     /// This functions renders the Text in Window using postition and sclae
     /// - Parameters:
     ///   - text: Text to be rendereed
@@ -45,8 +47,8 @@ namespace IKan
     ///   - scale: Text Poistion
     ///   - color: Color of text
     ///   - objectID: Pixel ID&
-    static void RenderText(const std::string &text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
-                           const glm::vec4& color, int32_t objectID  = -1);
+    static void RenderText(const std::string &text, glm::vec3 position, const glm::vec2& scale,
+                           const glm::vec4& color, Ref<Font> font = Font::GetDefaultFont(), int32_t objectID  = -1);
 
     DELETE_ALL_CONSTRUCTORS(TextRenderer);
     

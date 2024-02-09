@@ -8,7 +8,6 @@
 #include "TextRenderer.hpp"
 #include "Renderer/Renderer.hpp"
 #include "Renderer/RendererStats.hpp"
-#include "Renderer/UI/Font.hpp"
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
 #include "Renderer/Graphics/RendererBuffer.hpp"
@@ -156,14 +155,14 @@ namespace IKan
     NextBatch();
   }
   
-  void TextRenderer::RenderFixedViewText(const std::string& text, Ref<Font> font, glm::vec3 position,
-                                         const glm::vec2& scale, const glm::vec4& color, int32_t objectID)
+  void TextRenderer::RenderFixedViewText(const std::string& text, glm::vec3 position, const glm::vec2& scale,
+                                         const glm::vec4& color, Ref<Font> font, int32_t objectID)
   {
     RenderTextImpl(text, font, position, scale, color, objectID);
   }
   
-  void TextRenderer::RenderText(const std::string& text, Ref<Font> font, glm::vec3 position,
-                                const glm::vec2& originalScale, const glm::vec4& color, int32_t objectID)
+  void TextRenderer::RenderText(const std::string& text, glm::vec3 position, const glm::vec2& originalScale,
+                                const glm::vec4& color, Ref<Font> font, int32_t objectID)
   {
     glm::vec2 scale = { originalScale.x * 0.025, originalScale.y * 0.025 };
     RenderTextImpl(text, font, position, scale, color, objectID);
