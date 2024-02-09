@@ -165,4 +165,14 @@ namespace IKan
     }
   }
 
+  Ref<CharTexture> CharTextureFactory::Create(const FT_Face &face, const glm::ivec2 &size, const glm::ivec2 &bearing,
+                                              uint32_t advance, [[maybe_unused]] char charVal)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: return CreateRef<OpenGLCharTexture>(face, size, bearing, advance, charVal);
+      default: IK_ASSERT(false, "Renderer API is not set or set as Invalid. (Renderer::SetRendererAPI(RendererType))");
+    }
+  }
+
 } // namespace IKan
