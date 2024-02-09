@@ -137,6 +137,38 @@ namespace IKan
     ///   - objectID: Pixel ID of Circle
     static void DrawCircle(const glm::mat4& transform, const glm::vec4& tintColor = glm::vec4(1.0f), const Ref<Texture>& texture = nullptr,
                            float tilingFactor = 1.0f, float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1);
+    
+    /// This function draws a line using two points in 3d Space
+    /// - Parameters:
+    ///   - p0: fisrt point
+    ///   - p1: second point
+    ///   - color: Color of line
+    static void DrawLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color);
+    /// This function draws a Recttangle using position and size of rectangle
+    /// - Parameters:
+    ///   - p0: Top left Point
+    ///   - p1: Bottom Right Point
+    ///   - color: Color of line
+    static void DrawRect(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color);
+    /// This function draws a Recttangle using position and size of rectangle
+    /// - Parameters:
+    ///   - p0: Top left Point
+    ///   - p1: Bottom Right Point
+    ///   - color: Color of line
+    static void DrawRect(const glm::vec3& p0, const glm::vec3& p1,
+                         const glm::vec3& p2, const glm::vec3& p3, const glm::vec4& color);
+    
+    /// This function draws a Recttangle using position and size of rectangle
+    /// - Parameters:
+    ///   - position: position of rectangle
+    ///   - size: size of rectang;e
+    ///   - color: Color of line
+    static void DrawRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color);
+    /// This function draws a Recttangle using position and size of rectangle
+    /// - Parameters:
+    ///   - transform: transform
+    ///   - color: Color of line
+    static void DrawRect(const glm::mat4& transform, const glm::vec4& color);
 
   private:
     /// This function is the helper function to rendere the quad
