@@ -107,7 +107,7 @@ namespace IKan
     ///   - thickness: thickneess of Circle
     ///   - fade: fade of Circle Edge
     ///   - objectID: Pixel ID of Circle
-    static void DrawCircle(const glm::vec3& position, float radius = 1.0f, const glm::vec3& rotation = Utils::Math::ZeroVec3,
+    static void DrawCircle(const glm::vec3& position, float radius, const glm::vec3& rotation = Utils::Math::ZeroVec3,
                            const glm::vec4& tintColor = Utils::Math::UnitVec4, 
                            const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f, float thickness = 1.0f,
                            float fade = (float)0.005f, int32_t objectID = -1);
