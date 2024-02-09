@@ -56,7 +56,7 @@ namespace IKan
     
     s_data.Destroy();
   }
-  
+
   void Renderer2D::AddQuadData(uint32_t maxQuads)
   {
     IK_PROFILE();
@@ -64,6 +64,7 @@ namespace IKan
     s_data.quadData.Initialize(maxQuads);
     RendererStatistics::Get()._2d.maxQuads = s_data.quadData.maxElement;
   }
+
   void Renderer2D::AddCircleData(uint32_t maxCircles)
   {
     IK_PROFILE();
@@ -71,12 +72,32 @@ namespace IKan
     s_data.circleData.Initialize(maxCircles);
     RendererStatistics::Get()._2d.maxCircles = s_data.circleData.maxElement;
   }
+
   void Renderer2D::AddLineData(uint32_t maxLines)
   {
     IK_PROFILE();
     RETURN_IF(maxLines == 0);
     s_data.lineData.Initialize(maxLines);
     RendererStatistics::Get()._2d.maxLines = s_data.lineData.maxElement;
+  }
+  
+  void Renderer2D::BeginBatch(const glm::mat4 &camViewProjMat, const glm::mat4 &cameraViewMat)
+  {
+    IK_PERFORMANCE("Renderer2D::BeginBatch");
+    s_data.cameraViewProjectionMatrix = camViewProjMat;
+    s_data.cameraViewMatrix = cameraViewMat;
+    
+    s_data.quadData.StartBatch(camViewProjMat);
+    s_data.circleData.StartBatch(camViewProjMat);
+    s_data.lineData.StartBatch(camViewProjMat);
+  }
+  
+  void Renderer2D::EndBatch()
+  {
+    IK_PERFORMANCE("Renderer2D::BeginBatch");
+    s_data.quadData.Flush();
+    s_data.circleData.Flush();
+    s_data.lineData.Flush();
   }
 
 } // namespace IKan

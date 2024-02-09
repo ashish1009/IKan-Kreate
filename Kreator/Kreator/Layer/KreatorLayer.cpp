@@ -37,6 +37,10 @@ namespace Kreator
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     Renderer::Clear({0.2f, 0.22f, 0.222f, 1.0f});
+    
+    Renderer2D::BeginBatch(Utils::Math::UnitMat4, Utils::Math::UnitMat4);
+    
+    Renderer2D::EndBatch();
   }
   
   void KreatorLayer::OnEvent(Event& event)

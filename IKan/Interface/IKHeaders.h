@@ -55,6 +55,7 @@
 #include <Core/Buffer.hpp>
 
 #include <Renderer/Renderer.hpp>
+#include <Renderer/Renderer2D.hpp>
 #include <Renderer/Graphics/RendererAPI.hpp>
 #include <Renderer/Graphics/RendererContext.hpp>
 #include <Renderer/Graphics/Shader.hpp>

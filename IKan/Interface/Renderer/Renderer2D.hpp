@@ -37,5 +37,14 @@ namespace IKan
     /// This funcition Adds the maxLines renderer data to prev allocaged data
     /// - Parameter maxLines: max maxLines to be renderered in single batch
     static void AddLineData(uint32_t maxLines);
+    
+    /// This function begins the Batch for 2D Rendere (to be called each frame)
+    /// - Parameters:
+    ///   - camViewProjMat: Camera View projection Matrix
+    ///   - cameraViewMat: Camera View Matrix
+    static void BeginBatch(const glm::mat4& camViewProjMat, const glm::mat4& cameraViewMat);
+    /// This function Ends the current batch by rendering all the vertex
+    static void EndBatch();
+
   };
 } // namespace IKan
