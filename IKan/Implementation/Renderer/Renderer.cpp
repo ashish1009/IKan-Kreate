@@ -7,6 +7,7 @@
 
 #include "Renderer.hpp"
 #include "Renderer/Renderer2D.hpp"
+#include "Renderer/TextRenderer.hpp"
 #include "Renderer/UI/Font.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
@@ -30,6 +31,7 @@ namespace IKan
     
     // Initialize the Renderers
     Renderer2D::Initialize({100, 100, 100});
+    TextRenderer::Initialize();
     Font::Initialize();
   }
   
@@ -46,6 +48,7 @@ namespace IKan
     
     // Shutdown the Renderers
     Renderer2D::Shutdown();
+    TextRenderer::Shutdown();
     Font::Shutdown();
   }
   
