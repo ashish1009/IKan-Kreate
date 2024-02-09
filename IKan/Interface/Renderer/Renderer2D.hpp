@@ -45,7 +45,60 @@ namespace IKan
     static void BeginBatch(const glm::mat4& camViewProjMat, const glm::mat4& cameraViewMat);
     /// This function Ends the current batch by rendering all the vertex
     static void EndBatch();
+    
+    /// This function draws Quad with color
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Quad
+    ///   - color: Color of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - objectID: Pixel/Entity ID of Quad
+    static void DrawQuad(const glm::mat4& transform, const glm::vec4& color = Utils::Math::UnitVec4, 
+                         const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f, int32_t objectID = -1);
+    /// This function draws Quad with color
+    /// - Parameters:
+    ///   - position: position of the quad
+    ///   - scale: scale of the quad
+    ///   - rotation: rotation of the quad (in degrees)
+    ///   - color: Color of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - objectID: Pixel/Entity ID of Quad
+    /// - Note: Low Performance API
+    static void DrawQuad(const glm::vec3& position, const glm::vec2& scale = Utils::Math::UnitVec2,
+                         const glm::vec3& rotation = Utils::Math::ZeroVec3, const glm::vec4& color = Utils::Math::UnitVec4,
+                         const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f, int32_t objectID = -1);
 
+    /// This function render the fullscreen quad
+    /// - Parameters:
+    ///   - texture: Texture to be loaded
+    ///   - slot: Slot to load the texture in shader
+    ///   - overrideShader: Override shader flag. if false then deafult shader is used
+    /// - Note: If true then bind your own shader
+    static void DrawFullscreenQuad(const Ref<Texture>& texture = nullptr, uint32_t slot = 0, bool overrideShader = false);
+
+    /// This functon draws Quad API with Texture with fixed camera with transform matrix
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - entityID: Pixel ID of Quad
+    static void DrawFixedViewQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor = Utils::Math::UnitVec4,
+                                  float tilingFactor = 1.0f, int32_t entityID = -1);
+    
+    /// This functon draws Quad API with Texture with fixed camera with transform position and scale
+    /// - Parameters:
+    ///   - position: Position matrix of Quad
+    ///   - position: Size matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tintColor: Color of Quad
+    ///   - tilingCactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - entityID: Pixel ID of Quad
+    static void DrawFixedViewQuad(const glm::vec3& position, const glm::vec2& scale, const Ref<Texture>& texture,
+                                  const glm::vec4& tintColor = Utils::Math::UnitVec4, float tilingFactor = 1.0f, int32_t entityID = -1);
+
+  private:
     /// This function is the helper function to rendere the quad
     /// - Parameters:
     ///   - transform: transform matrix of quad

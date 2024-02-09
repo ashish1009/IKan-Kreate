@@ -17,7 +17,12 @@ namespace IKan
 #define BATCH_INFO(...) IK_LOG_INFO(LogModule::Renderer2D, __VA_ARGS__)
 #define BATCH_TRACE(...) IK_LOG_TRACE(LogModule::Renderer2D, __VA_ARGS__)
 #define BATCH_WARN(...) IK_LOG_WARN(LogModule::Renderer2D, __VA_ARGS__)
-  
+
+  static constexpr glm::vec2 TextureCoords[] =
+  {
+    { 0.0f, 1.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, { 0.0f, 0.0f }
+  };
+
   struct Renderer2DData
   {
     QuadBatchData quadData;
@@ -98,6 +103,135 @@ namespace IKan
     s_data.quadData.Flush();
     s_data.circleData.Flush();
     s_data.lineData.Flush();
+  }
+  
+  void Renderer2D::DrawQuad(const glm::mat4& transform, const glm::vec4& tintColor, const Ref<Texture>& texture, float tilingFactor, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawQuad (With Transform)");
+    DrawTextureQuad(transform, texture ? texture : nullptr, TextureCoords, tilingFactor, tintColor, objectID );
+  }
+
+  void Renderer2D::DrawQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec3& rotation, const glm::vec4& color, const Ref<Texture>& texture, float tilingFactor, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawQuad (With PSR)");
+    auto transform = Utils::Math::GetTransformMatrix(position, rotation, glm::vec3(scale, 0.0f));
+    DrawTextureQuad(transform, texture, TextureCoords, tilingFactor, color, objectID);
+  }
+  
+  void Renderer2D::DrawFullscreenQuad(const Ref<Texture>& texture, uint32_t slot, bool overrideShader)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawFullscreenQuad");
+    // Bind the default Shader
+    if (!overrideShader)
+    {
+      s_data.fullScreenQuad.shader->Bind();
+    }
+    
+    if (texture)
+    {
+      texture->Bind(slot);
+    }
+    else
+    {
+      s_data.fullScreenQuad.whiteTexture->Bind();
+    }
+    Renderer::DrawQuad(s_data.fullScreenQuad.pipeline);
+    
+    // Unbind the default Shader
+    if (!overrideShader)
+    {
+      s_data.fullScreenQuad.shader->Unbind();
+    }
+  }
+  
+  void Renderer2D::DrawFixedViewQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& tintColor,
+                                     float tilingFactor, int32_t entityID)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawTextureQuad (With Transform)");
+    glm::vec3 position, rotation, scale;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    DrawFixedViewQuad(position, scale, texture, tintColor, tilingFactor, entityID);
+  }
+  
+  void Renderer2D::DrawFixedViewQuad(const glm::vec3& position, const glm::vec2& scale, const Ref<Texture>& texture,
+                                     const glm::vec4& tintColor, float tilingFactor, int32_t entityID)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawTextureQuad (With PSR)");
+    // If number of indices increase in batch then start new batch
+    if (s_data.quadData.indexCount >= s_data.quadData.maxIndices)
+    {
+      BATCH_WARN("Starts the new batch as number of indices ({0}) increases in the previous batch", s_data.quadData.indexCount);
+      EndBatch();
+      s_data.quadData.ResetBatch();
+    }
+    
+    float textureIndex = 0.0f;
+    if (texture)
+    {
+      // Find if texture is already loaded in current batch
+      for (size_t i = 1; i < s_data.quadData.textureSlotIndex; i++)
+      {
+        if (s_data.quadData.textureSlots[i].get() == texture.get())
+        {
+          // Found the current textue in the batch
+          textureIndex = (float)i;
+          break;
+        }
+      }
+      
+      // If current texture slot is not pre loaded then load the texture in proper slot
+      if (textureIndex == 0.0f)
+      {
+        // If number of slots increases max then start new batch
+        if (s_data.quadData.textureSlotIndex >= MaxTextureSlotsInShader)
+        {
+          BATCH_WARN("Starts the new batch as number of texture slot ({0}) increases in the previous batch", s_data.quadData.textureSlotIndex);
+          EndBatch();
+          s_data.quadData.ResetBatch();
+        }
+        
+        // Loading the current texture in the first free slot slot
+        textureIndex = (float)s_data.quadData.textureSlotIndex;
+        s_data.quadData.textureSlots[s_data.quadData.textureSlotIndex] = texture;
+        s_data.quadData.textureSlotIndex++;
+      }
+    }
+    
+    // get the fixed view from camera view matrix
+    glm::vec3 camRightWS =
+    {
+      s_data.cameraViewMatrix[0][0],
+      s_data.cameraViewMatrix[1][0],
+      s_data.cameraViewMatrix[2][0]
+    };
+    
+    glm::vec3 camUpWS =
+    {
+      s_data.cameraViewMatrix[0][1],
+      s_data.cameraViewMatrix[1][1],
+      s_data.cameraViewMatrix[2][1]
+    };
+    
+    for (size_t i = 0; i < Shape2DCommonData::VertexForSingleElement; i++)
+    {
+      s_data.quadData.vertexBufferPtr->position     = position + camRightWS *
+      s_data.quadData.vertexBasePosition[i].x * scale.x + camUpWS *
+      s_data.quadData.vertexBasePosition[i].y * -scale.y;
+      
+      s_data.quadData.vertexBufferPtr->color            = tintColor;
+      s_data.quadData.vertexBufferPtr->textureCoords    = TextureCoords[i];
+      s_data.quadData.vertexBufferPtr->textureIndex     = textureIndex;
+      s_data.quadData.vertexBufferPtr->tilingFactor     = tilingFactor;
+      s_data.quadData.vertexBufferPtr->pixelID          = entityID;
+      s_data.quadData.vertexBufferPtr++;
+    }
+    
+    s_data.quadData.indexCount += Shape2DCommonData::IndicesForSingleElement;
+    
+    // Update Stats
+    RendererStatistics::Get().indexCount += Shape2DCommonData::IndicesForSingleElement;
+    RendererStatistics::Get().vertexCount += Shape2DCommonData::VertexForSingleElement;
+    RendererStatistics::Get()._2d.quads++;
   }
   
   void Renderer2D::DrawTextureQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec2* textureCoords,
