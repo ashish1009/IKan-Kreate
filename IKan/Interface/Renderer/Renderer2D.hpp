@@ -46,5 +46,28 @@ namespace IKan
     /// This function Ends the current batch by rendering all the vertex
     static void EndBatch();
 
+    /// This function is the helper function to rendere the quad
+    /// - Parameters:
+    ///   - transform: transform matrix of quad
+    ///   - texture: texture to be binded in quad
+    ///   - textureCoords: texture coordinates
+    ///   - tilingFactor: tiling factor of texture
+    ///   - tintColor: color of quad
+    ///   - objectID: object/pixel id
+    static void DrawTextureQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec2* textureCoords,
+                                float tilingFactor, const glm::vec4& tintColor, int32_t objectID);
+    
+    /// This function is the helper function to rendere the circle
+    /// - Parameters:
+    ///   - transform: transform matrix of circle
+    ///   - texture: texture to be binded in circle
+    ///   - tilingFactor: tiling factor of texture
+    ///   - tintColor: color of circle
+    ///   - thickness: thickness of circle
+    ///   - fade: cirlce face
+    ///   - objectID: object/pixel id
+    static void DrawTextureCircle(const glm::mat4& transform, const Ref<Texture>& texture, float tilingFactor,
+                                  const glm::vec4& tintColor, float thickness, float fade, int32_t objectID);
+
   };
 } // namespace IKan
