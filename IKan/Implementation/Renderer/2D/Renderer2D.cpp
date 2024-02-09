@@ -234,6 +234,30 @@ namespace IKan
     RendererStatistics::Get()._2d.quads++;
   }
   
+  void Renderer2D::DrawCircle(const glm::vec3& position, float radius, const glm::vec3& rotation, const glm::vec4& color,
+                              const Ref<Texture>& texture, float tilingFactor, float thickness, float fade, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawCircle (With PSR)");
+    auto transform = Utils::Math::GetTransformMatrix(position, rotation, {radius, radius, radius});
+    DrawTextureCircle(transform, nullptr, 1.0f /* tiling factor */, color, thickness, fade, objectID);
+  }
+  
+  void Renderer2D::DrawCircle(const glm::vec3& position, const glm::vec2& radius, const glm::vec3& rotation, const glm::vec4& color,
+                              const Ref<Texture>& texture, float tilingFactor, float thickness, float fade, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawCircle (With PSR)");
+    auto transform = Utils::Math::GetTransformMatrix(position, rotation, glm::vec3(radius, 0.0f));
+    DrawTextureCircle(transform, nullptr, 1.0f /* tiling factor */, color, thickness, fade, objectID);
+  }
+
+  void Renderer2D::DrawCircle(const glm::mat4& transform, const glm::vec4& color, const Ref<Texture>& texture, float tilingFactor,
+                              float thickness, float fade, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawCircle (With Transform)");
+    DrawTextureCircle(transform, nullptr, 1.0f /* tiling factor */, color, thickness, fade, objectID);
+  }
+
+  
   void Renderer2D::DrawTextureQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec2* textureCoords,
                                    float tilingFactor, const glm::vec4& tintColor, int32_t objectID)
   {

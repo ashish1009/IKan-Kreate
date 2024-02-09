@@ -39,7 +39,7 @@ namespace Kreator
     Renderer::Clear({0.2f, 0.22f, 0.222f, 1.0f});
     
     Renderer2D::BeginBatch(Utils::Math::UnitMat4, Utils::Math::UnitMat4);
-    
+    Renderer2D::DrawQuad({0.1, 0.2, 0.3});
     Renderer2D::EndBatch();
   }
   

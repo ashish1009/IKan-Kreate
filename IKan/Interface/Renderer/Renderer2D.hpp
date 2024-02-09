@@ -98,6 +98,46 @@ namespace IKan
     static void DrawFixedViewQuad(const glm::vec3& position, const glm::vec2& scale, const Ref<Texture>& texture,
                                   const glm::vec4& tintColor = Utils::Math::UnitVec4, float tilingFactor = 1.0f, int32_t entityID = -1);
 
+    /// This function draws circle with color
+    /// - Parameters:
+    ///   - position: Center Circle
+    ///   - radius: radius
+    ///   - rotation: rotation
+    ///   - tintColor: Color of Circle
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void DrawCircle(const glm::vec3& position, float radius = 1.0f, const glm::vec3& rotation = Utils::Math::ZeroVec3,
+                           const glm::vec4& tintColor = Utils::Math::UnitVec4, 
+                           const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f, float thickness = 1.0f,
+                           float fade = (float)0.005f, int32_t objectID = -1);
+    
+    /// This function draws circle with color
+    /// - Parameters:
+    ///   - position: Center Circle
+    ///   - radius: radius
+    ///   - rotation: rotation
+    ///   - tintColor: Color of Circle
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void DrawCircle(const glm::vec3& position, const glm::vec2& radius = Utils::Math::UnitVec2,
+                           const glm::vec3& rotation = Utils::Math::ZeroVec3, const glm::vec4& tintColor = Utils::Math::UnitVec4,
+                           const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f,
+                           float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1);
+
+    /// This function draws circle with texture
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Circle
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - tintColor: Color of Quad
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void DrawCircle(const glm::mat4& transform, const glm::vec4& tintColor = glm::vec4(1.0f), const Ref<Texture>& texture = nullptr,
+                           float tilingFactor = 1.0f, float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1);
+
   private:
     /// This function is the helper function to rendere the quad
     /// - Parameters:
