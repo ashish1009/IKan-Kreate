@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
+		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
+		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
+		B2C0B6CD2B75F7340015A277 /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6CC2B75F7340015A277 /* libpng16.a */; };
 		B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C9C2B723F85007A7F36 /* Application.cpp */; };
 		B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5C9D2B723F85007A7F36 /* Application.hpp */; };
 		B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */; };
@@ -114,6 +118,10 @@
 
 /* Begin PBXFileReference section */
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
+		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
+		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
+		B2C0B6C72B75F7200015A277 /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = Vendors/Freetype/lib/libfreetype.a; sourceTree = "<group>"; };
+		B2C0B6CC2B75F7340015A277 /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = Vendors/Freetype/libpng/1.6.39/lib/libpng16.a; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -214,6 +222,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2C0B6CD2B75F7340015A277 /* libpng16.a in Frameworks */,
+				B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */,
 				B2ED60052B74A573007A7F36 /* libUI.a in Frameworks */,
 				B2ED5E852B7496ED007A7F36 /* libGlad.a in Frameworks */,
 				B2ED5E0B2B736AAE007A7F36 /* libGLFW.a in Frameworks */,
@@ -223,6 +233,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B2C0B6BE2B75F0AB0015A277 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B2C0B6C02B75F4DF0015A277 /* Font.hpp */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		B2C0B6C32B75F4E20015A277 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B2C0B6BF2B75F4DF0015A277 /* Font.cpp */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 		B2ED5C7D2B723F31007A7F36 = {
 			isa = PBXGroup;
 			children = (
@@ -371,6 +397,8 @@
 		B2ED5E0A2B736AAE007A7F36 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2C0B6CC2B75F7340015A277 /* libpng16.a */,
+				B2C0B6C72B75F7200015A277 /* libfreetype.a */,
 				B2ED5E842B7496ED007A7F36 /* libGlad.a */,
 			);
 			name = Frameworks;
@@ -411,6 +439,7 @@
 				B2ED5E412B748AFB007A7F36 /* Renderer.hpp */,
 				B2ED603E2B74BD12007A7F36 /* RendererStats.hpp */,
 				B2ED607E2B750336007A7F36 /* Renderer2D.hpp */,
+				B2C0B6BE2B75F0AB0015A277 /* UI */,
 				B2ED5E452B749045007A7F36 /* Graphics */,
 			);
 			path = Renderer;
@@ -421,6 +450,7 @@
 			children = (
 				B2ED5E402B748AFB007A7F36 /* Renderer.cpp */,
 				B2ED603D2B74BD12007A7F36 /* RendererStats.cpp */,
+				B2C0B6C32B75F4E20015A277 /* UI */,
 				B2ED60802B750474007A7F36 /* 2D */,
 				B2ED5E4B2B749059007A7F36 /* Graphics */,
 			);
@@ -591,6 +621,7 @@
 				B2ED607F2B750336007A7F36 /* Renderer2D.hpp in Headers */,
 				B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */,
 				B2ED5CCA2B7346AC007A7F36 /* Timer.hpp in Headers */,
+				B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */,
 				B2ED601D2B74AF4C007A7F36 /* ShaderUniforms.hpp in Headers */,
 				B2ED606F2B74F9D4007A7F36 /* FrameBuffer.hpp in Headers */,
 				B2ED60402B74BD12007A7F36 /* RendererStats.hpp in Headers */,
@@ -738,6 +769,7 @@
 				B2ED600A2B74A5B6007A7F36 /* ImGuiLayer.cpp in Sources */,
 				B2ED603F2B74BD12007A7F36 /* RendererStats.cpp in Sources */,
 				B2ED601C2B74AF4C007A7F36 /* ShaderUniforms.cpp in Sources */,
+				B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */,
 				B2ED60472B74C547007A7F36 /* OpenGLPipeline.cpp in Sources */,
 				B2ED5CC92B7346AC007A7F36 /* Timer.cpp in Sources */,
 				B2ED60722B74F9E2007A7F36 /* OpenGLFrameBuffer.cpp in Sources */,
@@ -886,6 +918,11 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendors/Freetype/lib",
+					"$(PROJECT_DIR)/Vendors/Freetype/libpng/1.6.39/lib",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -911,6 +948,11 @@
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Vendors/Freetype/lib",
+					"$(PROJECT_DIR)/Vendors/Freetype/libpng/1.6.39/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
