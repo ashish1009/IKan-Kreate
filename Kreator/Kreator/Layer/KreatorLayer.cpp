@@ -53,6 +53,20 @@ namespace Kreator
     TextRenderer::BeginBatch(Utils::Math::UnitMat4);
     TextRenderer::RenderText("Sample Text", {-0.8, 0.6, 0}, {0.2, 0.2}, {1, 1, 1, 1});
     TextRenderer::EndBatch();
+    
+    s->Bind();
+    s->SetUniformMat4("u_ViewProjection", Utils::Math::UnitMat4);
+    s->SetUniformMat4("u_Transform", Utils::Math::UnitMat4);
+    
+    m->GetPipeline()->Bind();
+    glm::mat4 rotation = glm::toMat4(glm::quat(glm::radians(glm::vec3(30, 30, 30))));
+    auto t = glm::translate(glm::mat4(1.0f), Utils::Math::ZeroVec3) * rotation * glm::scale(glm::mat4(1.0f), Utils::Math::UnitVec3);
+
+    for (const auto& sm : m->GetSubMeshes())
+    {
+      s->SetUniformMat4("u_Transform", t * sm.transform);
+      Renderer::DrawIndexedBaseVertex(sm.indexCount, (void*)(sizeof(uint32_t) * sm.baseIndex), sm.baseVertex);
+    }
   }
   
   void KreatorLayer::OnEvent(Event& event)
