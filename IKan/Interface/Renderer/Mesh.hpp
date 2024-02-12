@@ -60,7 +60,7 @@ namespace IKan
   public:
     /// This Constructor loads the mesh from assimp library and store the data
     /// - Parameter filePath: mesh model file path
-    Mesh(const std::string& filePath);
+    Mesh(const std::filesystem::path& filePath);
     /// This destructor destiory the loaded mesh and delete all the data
     virtual ~Mesh();
     
@@ -79,7 +79,7 @@ namespace IKan
     
     /// This Function creates the mesh from assimp library and store the data
     /// - Parameter filePath: mesh model file path
-    [[nodiscard]] static Ref<Mesh> Create(const std::string& filePath);
+    [[nodiscard]] static Ref<Mesh> Create(const std::filesystem::path& filePath);
     
     DELETE_COPY_MOVE_CONSTRUCTORS(Mesh);
     
@@ -98,7 +98,7 @@ namespace IKan
     void LoadGraphicsdata();
     
     // Member variables ----------------------------------------------------------------------------------------------
-    std::string m_filePath = "";
+    std::filesystem::path m_filePath = "";
     
     // To enclose in bouding box
     AABB m_boundinBox, m_worldBoundingBox;
