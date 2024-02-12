@@ -26,6 +26,8 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Attaching '{0} Layer' to application", GetName());
+    
+    Ref<Mesh> m = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/IKan/Assets/Meshes/Default/Cube.fbx");
   }
   void KreatorLayer::OnDetach()
   {

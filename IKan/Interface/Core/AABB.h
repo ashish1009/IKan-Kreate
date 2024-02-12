@@ -13,7 +13,7 @@ namespace IKan
   {
     glm::vec3 min, max;
     
-    AABB();
-    AABB(const glm::vec3& min, const glm::vec3& max);
+    AABB() {}
+    AABB(const glm::vec3& min, const glm::vec3& max) : min(min), max(max) {}
   };
 } // namespace IKan
