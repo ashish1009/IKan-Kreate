@@ -7,6 +7,14 @@
 
 #pragma once
 
+#include "Core/AABB.h"
+#include "Renderer/Graphics/Shader.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
+#include "Renderer/Graphics/RendererBuffer.hpp"
+
+class aiScene;
+class aiNode;
+
 namespace IKan
 {
   // Vertex of Static Submesh
@@ -45,5 +53,68 @@ namespace IKan
     glm::mat4 transform;
     
     std::string nodeName, meshName;
+  };
+  
+  class Mesh
+  {
+  public:
+    /// This Constructor loads the mesh from assimp library and store the data
+    /// - Parameter filePath: mesh model file path
+    Mesh(const std::string& filePath);
+    /// This destructor destiory the loaded mesh and delete all the data
+    virtual ~Mesh();
+    
+    // Getters -------------------------------------------------------------------------------------------------------
+    /// This function returns the submeshes
+    const std::vector<SubMesh>& GetSubMeshes() const;
+    /// This function returns the Vertices
+    const std::vector<glm::vec3>& GetVertices() const;
+    /// This function returns the Indices
+    const std::vector<Index>& GetIndices() const;
+    /// This function returns the submeshes
+    /// - Parameter submeshIndex: This function returns the triangle cache
+    const std::vector<Triangle>& GetTriangleCache(uint32_t submeshIndex) const;
+    /// This function returns the mesh pipeline
+    const Ref<Pipeline>& GetPipeline() const;
+    
+    /// This Function creates the mesh from assimp library and store the data
+    /// - Parameter filePath: mesh model file path
+    [[nodiscard]] static Ref<Mesh> Create(const std::string& filePath);
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(Mesh);
+    
+  private:
+    // Member functions ----------------------------------------------------------------------------------------------
+    /// This function store the certices and indices of the mesh
+    void StoreVerticesAndIndices();
+    /// This function rocesses a node in a recursive fashion. Processes each individual mesh located at the node and
+    /// repeats this process on its children nodes (if any).
+    /// - Parameters:
+    ///   - node: node pointer of submesh
+    ///   - parentTransform: parent node transform
+    ///   - level: level
+    void TraverseNodes(aiNode* node, const glm::mat4& parentTransform = glm::mat4(1.0f), uint32_t level = 0);
+    /// This function loads the graphics data in renderer buffers
+    void LoadGraphicsdata();
+    
+    // Member variables ----------------------------------------------------------------------------------------------
+    std::string m_filePath = "";
+    
+    // To enclose in bouding box
+    AABB m_boundinBox, m_worldBoundingBox;
+    
+    std::vector<SubMesh> m_submeshes;
+    std::vector<StaticVertex> m_staticVertices;
+    std::vector<Index> m_indices;
+    std::vector<glm::vec3> m_vertices;
+    std::unordered_map<uint32_t /*Submesh Index */, std::vector<Triangle>> m_triangleCache;
+    
+    // Graphics
+    Ref<Pipeline> m_pipeline;
+    Ref<VertexBuffer> m_vertexBuffer;
+    Ref<IndexBuffer> m_indexBuffer;
+    
+    // Assimp
+    const aiScene* m_scene;
   };
 } // namespace IKan
