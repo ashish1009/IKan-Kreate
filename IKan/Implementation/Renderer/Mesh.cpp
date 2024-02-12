@@ -59,6 +59,10 @@ namespace IKan
     
     // check for errors
     IK_ASSERT(!(!m_scene or m_scene->mFlags & AI_SCENE_FLAGS_INCOMPLETE or !m_scene->mRootNode), importer.GetErrorString());
+    
+    StoreVerticesAndIndices();
+    TraverseNodes(m_scene->mRootNode);
+    LoadGraphicsdata();
   }
   
   Mesh::~Mesh()
