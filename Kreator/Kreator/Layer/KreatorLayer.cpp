@@ -9,6 +9,9 @@
 
 namespace Kreator
 {
+  Ref<Mesh> m;
+  Ref<Shader> s;
+  
   KreatorLayer::KreatorLayer()
   : Layer("Kreator Renderer")
   {
@@ -27,12 +30,14 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Attaching '{0} Layer' to application", GetName());
     
-    Ref<Mesh> m = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/IKan/Assets/Meshes/Default/Cube.fbx");
+    m = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/IKan/Assets/Meshes/Default/Cube.fbx");
+    s = ShaderFactory::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
   }
   void KreatorLayer::OnDetach()
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Detaching '{0} Layer' from application", GetName());
+    m.reset();
   }
   
   void KreatorLayer::OnUpdate(TimeStep ts)
