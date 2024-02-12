@@ -32,4 +32,18 @@ namespace IKan
     Triangle(const StaticVertex& v0, const StaticVertex& v1, const StaticVertex& v2) : V0(v0), V1(v1), V2(v2) {}
   };
 
+  /// Stores submesh content
+  struct SubMesh 
+  {
+    uint32_t baseVertex;
+    uint32_t baseIndex;
+    uint32_t materialIndex;
+    uint32_t indexCount;
+    uint32_t vertexCount;
+    
+    AABB boundingBox;
+    glm::mat4 transform;
+    
+    std::string nodeName, meshName;
+  };
 } // namespace IKan
