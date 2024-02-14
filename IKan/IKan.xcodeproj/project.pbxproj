@@ -25,6 +25,8 @@
 		B2C0B70F2B7CDC5D0015A277 /* EditorCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B70D2B7CDC5D0015A277 /* EditorCamera.hpp */; };
 		B2C0B7182B7CDC7E0015A277 /* MacInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B7162B7CDC7E0015A277 /* MacInput.cpp */; };
 		B2C0B7192B7CDC7E0015A277 /* Input.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B7172B7CDC7E0015A277 /* Input.hpp */; };
+		B2C0B71F2B7CDEE30015A277 /* FixedCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B71D2B7CDEE30015A277 /* FixedCamera.cpp */; };
+		B2C0B7202B7CDEE30015A277 /* FixedCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */; };
 		B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C9C2B723F85007A7F36 /* Application.cpp */; };
 		B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5C9D2B723F85007A7F36 /* Application.hpp */; };
 		B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */; };
@@ -153,6 +155,8 @@
 		B2C0B70D2B7CDC5D0015A277 /* EditorCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorCamera.hpp; sourceTree = "<group>"; };
 		B2C0B7162B7CDC7E0015A277 /* MacInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MacInput.cpp; sourceTree = "<group>"; };
 		B2C0B7172B7CDC7E0015A277 /* Input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
+		B2C0B71D2B7CDEE30015A277 /* FixedCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FixedCamera.cpp; sourceTree = "<group>"; };
+		B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedCamera.hpp; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -286,6 +290,7 @@
 				B2C0B6E82B7C7E4C0015A277 /* Camera.cpp */,
 				B2C0B6FD2B7C88130015A277 /* SceneCamera.cpp */,
 				B2C0B70C2B7CDC5D0015A277 /* EditorCamera.cpp */,
+				B2C0B71D2B7CDEE30015A277 /* FixedCamera.cpp */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -296,6 +301,7 @@
 				B2C0B6E92B7C7E4C0015A277 /* Camera.hpp */,
 				B2C0B6FE2B7C88130015A277 /* SceneCamera.hpp */,
 				B2C0B70D2B7CDC5D0015A277 /* EditorCamera.hpp */,
+				B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -700,6 +706,7 @@
 				B2ED606F2B74F9D4007A7F36 /* FrameBuffer.hpp in Headers */,
 				B2ED60402B74BD12007A7F36 /* RendererStats.hpp in Headers */,
 				B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */,
+				B2C0B7202B7CDEE30015A277 /* FixedCamera.hpp in Headers */,
 				B2C0B6EB2B7C7E4C0015A277 /* Camera.hpp in Headers */,
 				B2ED5E4A2B749053007A7F36 /* RendererContext.hpp in Headers */,
 				B2ED5E432B748AFB007A7F36 /* Renderer.hpp in Headers */,
@@ -830,6 +837,7 @@
 				B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */,
 				B2ED60852B7510DE007A7F36 /* AssetPathManager.cpp in Sources */,
 				B2ED5E342B73A811007A7F36 /* MacWindow.cpp in Sources */,
+				B2C0B71F2B7CDEE30015A277 /* FixedCamera.cpp in Sources */,
 				B2ED60122B74A920007A7F36 /* OpenGLShader.cpp in Sources */,
 				B2ED60672B74DF5F007A7F36 /* stb_image.cpp in Sources */,
 				B2ED5E1D2B738C58007A7F36 /* ApplicationImpl.cpp in Sources */,
