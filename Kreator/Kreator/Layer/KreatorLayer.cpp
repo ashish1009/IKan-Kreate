@@ -39,6 +39,8 @@ namespace Kreator
     m = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/IKan/Assets/Meshes/Default/Cube.fbx");
     s = ShaderFactory::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
 #endif
+    
+    FixedCamera::SetViewport(Application::Get().GetWindow().GetWidth(), Application::Get().GetWindow().GetHeight());
   }
   void KreatorLayer::OnDetach()
   {
@@ -56,7 +58,7 @@ namespace Kreator
     camera.OnUpdate(ts);
     camera.SetActive(true);
     
-    Renderer::Clear({0.2f, 0.22f, 0.222f, 1.0f});
+    Renderer::Clear({0.2f, 0.2f, 0.2f, 1.0f});
 
     Renderer2D::BeginBatch(camera.GetUnReversedViewProjection(), camera.GetViewMatrix());
     Renderer2D::DrawQuad({-2, 2, 3}, Utils::Math::UnitVec2, Utils::Math::ZeroVec3, {0.2, 0.3, 0.3, 1.0});
@@ -82,6 +84,19 @@ namespace Kreator
       Renderer::DrawIndexedBaseVertex(sm.indexCount, (void*)(sizeof(uint32_t) * sm.baseIndex), sm.baseVertex);
     }
 #endif
+    
+    {
+      IK_PERFORMANCE("KreatorLayer::RenderSystemInfo");
+      static constexpr glm::vec3 position = { 5.0f, 5.0f, 0.3f };
+      static constexpr glm::vec2 size = {0.3f, 0.3f};
+      static constexpr glm::vec4 color = { 0.1f, 0.1f, 0.1f, 1.0f};
+      
+      TextRenderer::BeginBatch(FixedCamera::s_projection);
+      TextRenderer::RenderFixedViewText("(c) IKAN", { Application::Get().GetWindow().GetWidth()  - 80, 5.0f, 0.3f }, size, color, Font::GetDefaultFont());
+      TextRenderer::RenderFixedViewText(std::to_string((uint32_t)(ImGui::GetIO().Framerate)), position, size, color, Font::GetDefaultFont());
+      TextRenderer::EndBatch();
+    }
+
   }
   
   void KreatorLayer::OnEvent(Event& event)

@@ -64,8 +64,10 @@
 #include <Renderer/Graphics/RendererBuffer.hpp>
 #include <Renderer/Graphics/Pipeline.hpp>
 #include <Renderer/Graphics/Texture.hpp>
+#include <Renderer/UI/Font.hpp>
 
 #include <Camera/SceneCamera.hpp>
 #include <Camera/EditorCamera.hpp>
+#include <Camera/FixedCamera.hpp>
 
 #include <UI/ImGuiLayer.hpp>
