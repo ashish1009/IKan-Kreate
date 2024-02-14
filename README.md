@@ -56,33 +56,33 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Mesh
 - UI
   - ImGui UI Helper
-
-### Detailed Road Map
-- Utilities
-  - YAML
-- Renderer
-  - Material
-  - Secne Renderer
-  - Light
-  - Shadow
-  - IBL
 - Camera
   - Scene Camera
   - Editor Camera
   - Fixed Camera
-- ECS
+
+### Detailed Road Map
+- Renderer
+  - Material (Asset)
+  - Secne Renderer (ECS)
+  - Light
+  - Shadow
+  - IBL
+- ECS (Panels)
   - Entity
   - Component
   - Scene
   - Serializer
   - Script Manager
-- Editor
-  - Panel Manager
+- Utilities (ECS)
+  - YAML
 - Asset
   - Asset Manager
 - Project
   - Project Manager
-- Physics
+- Editor Panel (ECS, Project and Assets)
+  - Panel Manager
+- Physics (ECS and Editor Panel)
   - 3D Physics
 
 ### TODO
@@ -91,6 +91,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
 Editor Application using IKan Library to create Games
 
 ### Features
+- Renderer Layer
 
 ### Detailed Road Map
 - Renderer Layer
@@ -103,6 +104,7 @@ Editor Application using IKan Library to create Games
   - Asset Viewer
 - UI
   - UI Helper
+  - Guizmo
 - Panles
   - Scene Hierarchy
   - Content Browser
@@ -120,6 +122,7 @@ Editor Application using IKan Library to create Games
   - v2.2.2.0 : Batch Renderer Quads, Circles and Lines
   - v2.3.2.0 : Text Renderer
   - v3.0.2.0 : Mesh Loader
+  - v3.1.2.0 : Cameras
    
 ## Outputs
 ![](/Kreator/Outputs/Output.png)
