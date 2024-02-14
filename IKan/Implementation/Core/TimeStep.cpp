@@ -9,39 +9,34 @@
 
 namespace IKan
 {
-  TimeStep::TimeStep(double time)
+  TimeStep::TimeStep(float time)
   : m_time(time)
   {
     
   }
   
-  TimeStep::operator double() const
-  {
-    return m_time;
-  }
-  
   TimeStep::operator float() const
   {
-    return m_time;
+    return (float)m_time;
   }
 
-  double TimeStep::Seconds() const
+  float TimeStep::Seconds() const
   {
     return m_time;
   }
   
-  double TimeStep::MilliSeconds() const
+  float TimeStep::MilliSeconds() const
   {
     return Seconds() * 1000.0f;
   }
   
-  double TimeStep::MicroSeconds() const
+  float TimeStep::MicroSeconds() const
   {
     return MilliSeconds() * 1000.0f;
   }
   
-  double TimeStep::FPS() const
+  float TimeStep::FPS() const
   {
-    return (double)1.0f / m_time;
+    return (float)1.0f / m_time;
   }
 } // namespace IKan

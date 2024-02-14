@@ -17,26 +17,24 @@ namespace IKan
   public:
     /// This constructor creates the instance and store the time
     /// - Parameter time: Initial time to be set:
-    TimeStep(double time = 0.0f);
+    TimeStep(float time = 0.0f);
     /// This is the Defatult construtor for Timestep
     ~TimeStep() = default;
     
     /// This function returns the Time as float
-    operator double() const;
-    /// This function returns the Time as float
     operator float() const;
 
     /// This function returns the time step (Time took to render 1 Frame) in Seconds
-    double Seconds() const;
+    float Seconds() const;
     /// This function returns the time step (Time took to render 1 Frame) in mili Seconds
-    double MilliSeconds() const;
+    float MilliSeconds() const;
     /// This function returns the time step (Time took to render 1 Frame) in micro Seconds
-    double MicroSeconds() const;
+    float MicroSeconds() const;
     
     /// This function returns the FPS
-    double FPS() const;
+    float FPS() const;
     
   private:
-    double m_time {0.0f};
+    float m_time {0.0f};
   };
 } // namespace IKan
