@@ -41,7 +41,7 @@ namespace Kreator
 #endif
     sc = CreateRef<SceneCamera>();
     
-    Utils::Math::Print("Scene Camera Projecttion Matrix" ,sc->GetProjectionMatrix());
+    Utils::Math::Print("Scene Camera Projecttion Matrix", sc->GetProjectionMatrix());
   }
   void KreatorLayer::OnDetach()
   {
@@ -58,13 +58,13 @@ namespace Kreator
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     Renderer::Clear({0.2f, 0.22f, 0.222f, 1.0f});
-    
-    Renderer2D::BeginBatch(sc->GetUnReversedProjectionMatrix(), Utils::Math::UnitMat4);
-    Renderer2D::DrawQuad({0.1, 0.2, 0.3}, Utils::Math::UnitVec2, Utils::Math::ZeroVec3, {0.2, 0.3, 0.3, 1.0});
+    auto t = glm::translate(Utils::Math::UnitMat4, {0, 0, 10});
+    Renderer2D::BeginBatch(sc->GetUnReversedProjectionMatrix() * glm::inverse(t), glm::inverse(t));
+    Renderer2D::DrawQuad({-2, 2, 0.3}, Utils::Math::UnitVec2, Utils::Math::ZeroVec3, {0.2, 0.3, 0.3, 1.0});
     Renderer2D::DrawCircle({0, 0, 0}, 1.0f);
     Renderer2D::EndBatch();
     
-    TextRenderer::BeginBatch(sc->GetProjectionMatrix());
+    TextRenderer::BeginBatch(sc->GetUnReversedProjectionMatrix() * glm::inverse(t));
     TextRenderer::RenderText("Sample Text", {-0.8, 0.6, 0}, {0.2, 0.2}, {1, 1, 1, 1});
     TextRenderer::EndBatch();
     
