@@ -119,12 +119,7 @@ Editor Application using IKan Library to create Games
   - v2.1.2.0 : Render First textured Quad
   - v2.2.2.0 : Batch Renderer Quads, Circles and Lines
   - v2.3.2.0 : Text Renderer
+  - v3.0.2.0 : Mesh Loader
    
-## General Road Map
-- Mesh Loader
-- Mesh Material Loader
-- Scene Renderer
-...
-
 ## Outputs
 ![](/Kreator/Outputs/Output.png)

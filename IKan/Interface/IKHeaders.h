@@ -65,4 +65,6 @@
 #include <Renderer/Graphics/Pipeline.hpp>
 #include <Renderer/Graphics/Texture.hpp>
 
+#include <Camera/SceneCamera.hpp>
+
 #include <UI/ImGuiLayer.hpp>

@@ -21,6 +21,7 @@ f(Profiler) \
 f(Application) f(LayerStack) f(Window) f(IKan) \
 f(Renderer) f(Renderer2D) f(Renderer3D) f(Font) f(TextRenderer) f(Mesh) \
 f(GraphicsContext) f(Shader) f(BufferLayout) f(VertexBuffer) f(IndexBuffer) f(Pipeline) f(Texture) f(FrameBuffer) \
+f(SceneCamera) \
 f(ImGui) \
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
