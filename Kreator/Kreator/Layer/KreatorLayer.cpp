@@ -14,6 +14,8 @@ namespace Kreator
   Ref<Mesh> m;
   Ref<Shader> s;
 #endif
+  
+  static Ref<SceneCamera> sc;
 
   KreatorLayer::KreatorLayer()
   : Layer("Kreator Renderer")
@@ -37,6 +39,9 @@ namespace Kreator
     m = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/IKan/Assets/Meshes/Default/Cube.fbx");
     s = ShaderFactory::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
 #endif
+    sc = CreateRef<SceneCamera>();
+    
+    Utils::Math::Print("Scene Camera Projecttion Matrix" ,sc->GetProjectionMatrix());
   }
   void KreatorLayer::OnDetach()
   {
@@ -46,6 +51,7 @@ namespace Kreator
 #if TEST_MESH
     m.reset();
 #endif
+    sc.reset();
   }
   
   void KreatorLayer::OnUpdate(TimeStep ts)
@@ -53,12 +59,12 @@ namespace Kreator
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     Renderer::Clear({0.2f, 0.22f, 0.222f, 1.0f});
     
-    Renderer2D::BeginBatch(Utils::Math::UnitMat4, Utils::Math::UnitMat4);
+    Renderer2D::BeginBatch(sc->GetUnReversedProjectionMatrix(), Utils::Math::UnitMat4);
     Renderer2D::DrawQuad({0.1, 0.2, 0.3}, Utils::Math::UnitVec2, Utils::Math::ZeroVec3, {0.2, 0.3, 0.3, 1.0});
     Renderer2D::DrawCircle({0, 0, 0}, 1.0f);
     Renderer2D::EndBatch();
     
-    TextRenderer::BeginBatch(Utils::Math::UnitMat4);
+    TextRenderer::BeginBatch(sc->GetProjectionMatrix());
     TextRenderer::RenderText("Sample Text", {-0.8, 0.6, 0}, {0.2, 0.2}, {1, 1, 1, 1});
     TextRenderer::EndBatch();
     

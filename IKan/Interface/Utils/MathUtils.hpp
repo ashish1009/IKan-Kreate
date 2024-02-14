@@ -40,4 +40,8 @@ namespace IKan::Utils::Math
   ///   - outScale: Scale output
   ///  - Important: This function cost too much in CPU
   void DecomposeTransform(const glm::mat4& transform, glm::vec3& outTranslation, glm::vec3& outRotation, glm::vec3& outScale);
+  
+  // Debug Print APIs
+  void Print(const std::string& title, const glm::mat4& mat);
+  void Print(const glm::vec3& mat);
 } // namespace IKan::Utils::Math

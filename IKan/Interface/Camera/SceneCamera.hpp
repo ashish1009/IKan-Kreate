@@ -25,7 +25,7 @@ namespace IKan
     
     /// This constructor creates the Scene Camera instance
     /// - Parameter projType: Projection type
-    SceneCamera(ProjectionType projType = ProjectionType::Orthographic);
+    SceneCamera(ProjectionType projType = ProjectionType::Perspective);
     /// Default Scene Camera Desctructorr
     virtual ~SceneCamera() = default;
     
@@ -109,7 +109,7 @@ namespace IKan
     // Member variables
     ProjectionType m_projectionType = ProjectionType::Perspective;
     
-    uint32_t m_viewportWidth = 16, m_viewportHeight = 9;
+    uint32_t m_viewportWidth = 1600, m_viewportHeight = 900;
     
     float m_degPerspectiveFOV = 45.0f;
     float m_perspectiveNear = 0.1f, m_perspectiveFar = 1000.0f;

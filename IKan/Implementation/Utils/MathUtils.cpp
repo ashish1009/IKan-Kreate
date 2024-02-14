@@ -71,4 +71,32 @@ namespace IKan::Utils::Math
     }
   }
   
+  void Print(const std::string& title, const glm::mat4& mat)
+  {
+#ifdef IK_ENABLE_LOG
+    // Max Tag String space to be reserved in log
+    static constexpr uint32_t MaxValueLength = 10;
+
+    std::string result = title;
+
+    for (int i = 0; i < 4; i++)
+    {
+      result += "\n";
+      result += std::string(static_cast<size_t>(56), ' ');;
+      for (int j = 0; j < 4; j++)
+      {
+        std::string valString = std::to_string(mat[i][j]);
+        valString += std::string(static_cast<size_t>(MaxValueLength - valString.size()), ' ');
+        result += valString;
+      }
+    }
+    IK_LOG_TRACE("[Math Debug]", "{0}", result);
+
+#endif
+  }
+  void Print(const glm::vec3& mat)
+  {
+#ifdef IK_ENABLE_LOG
+#endif
+  }
 } // namespace IKan::Utils::Math
