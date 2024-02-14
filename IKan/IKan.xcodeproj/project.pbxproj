@@ -15,6 +15,8 @@
 		B2C0B6D52B75F8EF0015A277 /* TextRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6D32B75F8EF0015A277 /* TextRenderer.hpp */; };
 		B2C0B6D92B75FF300015A277 /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6D72B75FF300015A277 /* Mesh.cpp */; };
 		B2C0B6DA2B75FF300015A277 /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6D82B75FF300015A277 /* Mesh.hpp */; };
+		B2C0B6EA2B7C7E4C0015A277 /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6E82B7C7E4C0015A277 /* Camera.cpp */; };
+		B2C0B6EB2B7C7E4C0015A277 /* Camera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6E92B7C7E4C0015A277 /* Camera.hpp */; };
 		B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C9C2B723F85007A7F36 /* Application.cpp */; };
 		B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5C9D2B723F85007A7F36 /* Application.hpp */; };
 		B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */; };
@@ -133,6 +135,8 @@
 		B2C0B6D82B75FF300015A277 /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		B2C0B6DB2B75FFA40015A277 /* AABB.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AABB.h; sourceTree = "<group>"; };
 		B2C0B6E52B7A439F0015A277 /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
+		B2C0B6E82B7C7E4C0015A277 /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		B2C0B6E92B7C7E4C0015A277 /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -260,6 +264,22 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		B2C0B6E62B7C7E2F0015A277 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B2C0B6E82B7C7E4C0015A277 /* Camera.cpp */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		B2C0B6E72B7C7E340015A277 /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B2C0B6E92B7C7E4C0015A277 /* Camera.hpp */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 		B2ED5C7D2B723F31007A7F36 = {
 			isa = PBXGroup;
 			children = (
@@ -291,6 +311,7 @@
 				B2ED5E0C2B7370DA007A7F36 /* Event */,
 				B2ED5C9B2B723F7D007A7F36 /* Core */,
 				B2ED5E3D2B748AE0007A7F36 /* Renderer */,
+				B2C0B6E72B7C7E340015A277 /* Camera */,
 				B2ED60062B74A599007A7F36 /* UI */,
 			);
 			path = Interface;
@@ -304,6 +325,7 @@
 				B2ED60152B74AD3E007A7F36 /* Utils */,
 				B2ED5CA02B723F89007A7F36 /* Core */,
 				B2ED5E3F2B748AEA007A7F36 /* Renderer */,
+				B2C0B6E62B7C7E2F0015A277 /* Camera */,
 				B2ED60072B74A5A1007A7F36 /* UI */,
 				B2ED5E302B73A800007A7F36 /* Platform */,
 			);
@@ -645,6 +667,7 @@
 				B2ED606F2B74F9D4007A7F36 /* FrameBuffer.hpp in Headers */,
 				B2ED60402B74BD12007A7F36 /* RendererStats.hpp in Headers */,
 				B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */,
+				B2C0B6EB2B7C7E4C0015A277 /* Camera.hpp in Headers */,
 				B2ED5E4A2B749053007A7F36 /* RendererContext.hpp in Headers */,
 				B2ED5E432B748AFB007A7F36 /* Renderer.hpp in Headers */,
 				B2ED600B2B74A5B6007A7F36 /* ImGuiLayer.hpp in Headers */,
@@ -777,6 +800,7 @@
 				B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */,
 				B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */,
 				B2ED604D2B74D958007A7F36 /* MathUtils.cpp in Sources */,
+				B2C0B6EA2B7C7E4C0015A277 /* Camera.cpp in Sources */,
 				B2ED60182B74AD56007A7F36 /* StringUtils.cpp in Sources */,
 				B2ED60762B750100007A7F36 /* Renderer2D.cpp in Sources */,
 				B2ED606A2B74E002007A7F36 /* FileSystemUtils.cpp in Sources */,
