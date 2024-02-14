@@ -22,8 +22,7 @@ namespace IKan
     }
   } // namespace CameraUtils
   
-  EditorCamera::EditorCamera(const float degFov, const float width, const float height, const float nearP,
-                             const float farP)
+  EditorCamera::EditorCamera(const float degFov, const float width, const float height, const float nearP, const float farP)
   : Camera(glm::perspectiveFov(glm::radians(degFov), width, height, farP, nearP),
            glm::perspectiveFov(glm::radians(degFov), width, height, nearP, farP)),
   m_focalPoint(0.0f), m_verticalFOV(glm::radians(degFov)), m_nearClip(nearP), m_farClip(farP)
