@@ -45,4 +45,17 @@ namespace Kreator::UI
   ///  - Parameter otherFonts: other fonts
   void LoadFonts(const std::vector<IKan::UI::ImGuiFont>& otherFonts);
 
+  /// This function Returns the regular font
+  ImFont* GetRegularFont();
+  /// This function Returns the bold font
+  ImFont* GetBoldFont();
+  /// This function Returns the italic font
+  ImFont* GetItalicFont();
+  /// This function Returns the Fixed width font
+  ImFont* GetFixedWidthFont();
+  /// This function Returns the Huge Header font
+  ImFont* GetHugeHeaderFont();
+  /// This function Returns the Semi Header font
+  ImFont* GetSemiHeaderFont();
+
 } // namespace Kreator::UI

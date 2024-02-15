@@ -9,14 +9,27 @@
 
 namespace Kreator
 {
+  // Kretor Resource Path
+#define KreatorResourcePath(path) std::filesystem::absolute(m_clientResourcePath / path)
+
   KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath, Ref<UserPreferences> userPreferences)
   : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_userPreferences(userPreferences)
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
+    // Decorate the Application --------------------------------------------------------------------------------------
     // Set the Theme of ImGui as user preference
     Kreator::UI::SetThemeColors(m_userPreferences->theme);
+
+    // Set all the required Fonts
+    IKan::UI::ImGuiFont regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
+    IKan::UI::ImGuiFont boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
+    IKan::UI::ImGuiFont italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
+    IKan::UI::ImGuiFont sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
+    IKan::UI::ImGuiFont hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
+    IKan::UI::ImGuiFont semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
+    Kreator::UI::LoadFonts({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
 
     // Open or Create Project ---------------------------------------------------------------------------------------
     if (std::filesystem::exists(m_userPreferences->startupProject))

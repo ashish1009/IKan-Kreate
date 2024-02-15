@@ -112,11 +112,11 @@ namespace IKan::UI
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.Fonts->ClearFonts();
     
-    IK_LOG_TRACE(LogModule::ImGui, "Loading ImGui Fonts");
+    IK_LOG_INFO(LogModule::ImGui, "Loading ImGui Fonts");
     for (const auto& font : otherFonts)
     {
       io.Fonts->AddFontFromFileTTF(font.filePath.c_str(), font.size);
-      IK_LOG_TRACE(LogModule::ImGui, "  Font    {0} Size {1}", Utils::FileSystem::IKanAbsolute(font.filePath), font.size);
+      IK_LOG_INFO(LogModule::ImGui, "  Font    {0} Size {1}", Utils::FileSystem::IKanAbsolute(font.filePath), font.size);
     }
     
     // Default font is Regular

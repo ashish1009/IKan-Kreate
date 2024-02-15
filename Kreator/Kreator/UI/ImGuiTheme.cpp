@@ -182,4 +182,34 @@ namespace Kreator::UI
     imguiLayer.OnAttach();
     imguiLayer.LoadFonts(otherFonts);
   }
+  
+  ImFont* GetRegularFont()
+  {
+    return ImGui::GetIO().Fonts->Fonts[0];
+  }
+  ImFont* GetBoldFont()
+  {
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[1] : fonts[0];
+  }
+  ImFont* GetItalicFont()
+  {
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[2] : fonts[0];
+  }
+  ImFont* GetFixedWidthFont()
+  {
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[3] : fonts[0];
+  }
+  ImFont* GetHugeHeaderFont()
+  {
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[4] : fonts[0];
+  }
+  ImFont* GetSemiHeaderFont()
+  {
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[5] : fonts[0];
+  }
 } // Kreator::UI
