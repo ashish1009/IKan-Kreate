@@ -19,6 +19,8 @@ namespace Kreator
     
     void OnInit() override;
     void OnShutdown() override;
+    void OnUpdate(TimeStep ts) override;
+    void OnImGuiRender() override;
     
   private:
     Ref<Layer> m_kreatorLayer;

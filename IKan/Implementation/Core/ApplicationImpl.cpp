@@ -84,11 +84,11 @@ namespace IKan
       {
         layer->OnUpdate(m_timeStep);
       }
-            
-      // Render the Gui for Application
-      ImGuiRender();
       
       m_onUpdateCallback(m_timeStep);
+      
+      // Render the Gui for Application
+      ImGuiRender();
     }
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                           Ending Game Loop                               ");

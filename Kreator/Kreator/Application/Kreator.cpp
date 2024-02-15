@@ -7,6 +7,7 @@
 
 #include "Kreator.hpp"
 #include "Layer/KreatorLayer.hpp"
+#include "Editor/UserPreferences.hpp"
 
 namespace Kreator
 {
@@ -34,8 +35,29 @@ namespace Kreator
   void KreatorApp::OnInit()
   {
     IK_PROFILE();
+    // Create Persistance Directory ---------------------------------------------------------------
+    std::filesystem::path persistenceStoragePath = m_clientResourcePath / "UserData";
+    if (!std::filesystem::exists(persistenceStoragePath))
+    {
+      std::filesystem::create_directory(persistenceStoragePath);
+    }
+    
+    // User Preferences --------------------------------------------------------------------------
+    Ref<UserPreferences> userPreferences = CreateRef<UserPreferences>();
+    UserPreferencesSerializer serializer(userPreferences);
+    std::filesystem::path userPreferenceFile = persistenceStoragePath / "UserPreferences.yaml";
+    if (!std::filesystem::exists(userPreferenceFile))
+    {
+      serializer.Serialize(userPreferenceFile);
+    }
+    else
+    {
+      serializer.Deserialize(userPreferenceFile);
+    }
+    
     IK_LOG_INFO("Kreator App", "Initializing the Renderer Application");
-    IK_LOG_INFO("Kreator App", "  Kreator Resources Path          : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
+    IK_LOG_INFO("Kreator App", "  Kreator Resources Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
+    IK_LOG_INFO("Kreator App", "  User Data Path           : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath));
 
 #if 0
     // Create and Push the Rendere Layer --------------------------------------------------------
@@ -54,6 +76,16 @@ namespace Kreator
     PopLayer(m_kreatorLayer);
     m_kreatorLayer.reset();
 #endif
+  }
+  
+  void KreatorApp::OnUpdate(TimeStep ts)
+  {
+
+  }
+  
+  void KreatorApp::OnImGuiRender()
+  {
+
   }
 } // namespace Kreator
 
