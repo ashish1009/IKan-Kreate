@@ -17,6 +17,12 @@ namespace IKan
 
 namespace IKan::UI
 {
+  struct ImGuiFont
+  {
+    std::filesystem::path filePath {};
+    uint32_t size {0};
+  };
+
   /// This class creates and manages the ImGui Layer in application
   class ImGuiLayer : public Layer
   {
@@ -32,7 +38,10 @@ namespace IKan::UI
     void Begin();
     /// This function ends the rendering of imgui each frame NOTE: Call once per frame
     void End();
-    
+    /// This function overrides font of imgui with new font path
+    /// - Parameter fonts: fonts
+    void LoadFonts(const std::vector<UI::ImGuiFont>& fonts);
+
     // Vertual overridden ----------------------------------------------------------
     /// This funciton initialises the imgui layer. Creates the imgui layer using imgui file library
     void OnAttach() override;

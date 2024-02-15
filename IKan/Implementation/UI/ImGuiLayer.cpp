@@ -103,4 +103,23 @@ namespace IKan::UI
       glfwMakeContextCurrent(backupCurrentContext);
     }
   }
+  
+  void ImGuiLayer::LoadFonts(const std::vector<UI::ImGuiFont>& otherFonts)
+  {
+    IK_PERFORMANCE("ImGuiLayer::End");
+    RETURN_IF (otherFonts.size() == 0)
+    
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.Fonts->ClearFonts();
+    
+    IK_LOG_TRACE(LogModule::ImGui, "Loading ImGui Fonts");
+    for (const auto& font : otherFonts)
+    {
+      io.Fonts->AddFontFromFileTTF(font.filePath.c_str(), font.size);
+      IK_LOG_TRACE(LogModule::ImGui, "  Font    {0} Size {1}", Utils::FileSystem::IKanAbsolute(font.filePath), font.size);
+    }
+    
+    // Default font is Regular
+    io.FontDefault = io.Fonts->Fonts[0];
+  }
 } // namespace IKan::UI
