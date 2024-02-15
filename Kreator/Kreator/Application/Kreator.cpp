@@ -15,6 +15,14 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Creating Kreator Application");
+    
+    // Check Client Path is valid
+    bool exist = std::filesystem::exists(m_clientResourcePath);
+    bool tempalateProj = std::filesystem::exists(m_clientResourcePath / "TemplateProject");
+    bool fonts = std::filesystem::exists(m_clientResourcePath / "Fonts");
+    bool textures = std::filesystem::exists(m_clientResourcePath / "Textures");
+    
+    IK_ASSERT(exist and tempalateProj and fonts and textures, "Invalid Client Directory");
   }
   
   KreatorApp::~KreatorApp()
