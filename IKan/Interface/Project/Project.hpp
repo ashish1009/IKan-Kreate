@@ -24,9 +24,9 @@ namespace IKan
     std::filesystem::path texturePath;
     
     // Scene Serialize
-    std::string startScene;
-    bool enableAutoSave = false;
-    int32_t autoSaveIntervalSeconds = 300;
+    std::filesystem::path startScene{};
+    bool enableAutoSave {false};
+    int32_t autoSaveIntervalSeconds {300};
 
     // Not serialized
     std::string projectFileName;

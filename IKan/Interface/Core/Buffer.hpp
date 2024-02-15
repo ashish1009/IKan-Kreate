@@ -15,8 +15,8 @@ namespace IKan
   {
   public:
     // Member variables ----------------------------------------------------------------------------------------------
-    std::byte* data = nullptr;
-    uint32_t size = 0;
+    std::byte* data {nullptr};
+    uint32_t size {0};
     
     // Member Functions ----------------------------------------------------------------------------------------------
     constexpr Buffer() = default;

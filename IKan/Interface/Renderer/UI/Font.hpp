@@ -37,7 +37,7 @@ namespace IKan
     static Ref<Font> Create(const std::filesystem::path& filePath);
         
   private:
-    std::filesystem::path m_filePath;
+    std::filesystem::path m_filePath {};
     std::map<char, Ref<CharTexture>> m_charTextureMap;
     
     inline static Ref<Font> s_defaultFont;

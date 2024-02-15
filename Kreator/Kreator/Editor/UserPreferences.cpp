@@ -58,7 +58,8 @@ namespace Kreator
   {
     std::ifstream stream(filepath);
     IK_ASSERT(stream);
-    std::stringstream strStream;
+    
+    std::stringstream strStream {};
     strStream << stream.rdbuf();
     
     YAML::Node data = YAML::Load(strStream.str());
@@ -69,7 +70,7 @@ namespace Kreator
     m_preferences->theme = static_cast<UserPreferences::Theme>(rootNode["Theme"].as<uint32_t>());
     m_preferences->startupProject = rootNode["StartupProject"] ? rootNode["StartupProject"].as<std::string>() : "";
     
-    for (auto recentProject : rootNode["RecentProjects"])
+    for (const auto& recentProject : rootNode["RecentProjects"])
     {
       RecentProject entry;
       entry.name = recentProject["Name"].as<std::string>();
@@ -77,7 +78,6 @@ namespace Kreator
       entry.lastOpened = recentProject["LastOpened"] ? recentProject["LastOpened"].as<time_t>() : time(NULL);
       m_preferences->recentProjects[entry.lastOpened] = entry;
     }
-    
     stream.close();
     
     m_preferences->filePath = filepath.string();

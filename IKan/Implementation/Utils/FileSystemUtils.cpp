@@ -16,8 +16,9 @@ namespace IKan::Utils
     {
       return "";
     }
-    std::vector<std::string> dirs = Utils::String::SplitString(std::filesystem::absolute(path), '/');
-    std::filesystem::path result = "/";
+    
+    std::vector<std::string> dirs {Utils::String::SplitString(std::filesystem::absolute(path), '/')};
+    std::filesystem::path result {"/"};
     for (const std::string& dir : dirs)
     {
       result = (dir == ".." ? result.parent_path() : result / dir);

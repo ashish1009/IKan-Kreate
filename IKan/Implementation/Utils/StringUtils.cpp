@@ -14,7 +14,7 @@ namespace IKan::Utils
     IK_PROFILE();
     
     // Output string after reading the file
-    std::string result = "";
+    std::string result {};
     
     // Read the file and store the data in string
     std::ifstream in(filePath.string(), std::ios::in | std::ios::binary);
@@ -43,7 +43,7 @@ namespace IKan::Utils
   
   const char* String::FindToken(const char* str, const std::string& token)
   {
-    const char* t = str;
+    const char* t {str};
     while ((t = strstr(t, token.c_str()))) {
       // Check if left character of token is empty
       // using '/' as indicator of first character of line
@@ -65,7 +65,7 @@ namespace IKan::Utils
   
   std::string String::GetBlock(const char* str, const char** outPosition) {
     // get the end block brace of the string code
-    const char* end = strstr(str, "}");
+    const char* end {strstr(str, "}")};
     
     // if not found any end bkock statement "}" then return the same string
     if (!end)
@@ -110,9 +110,9 @@ namespace IKan::Utils
   
   std::vector<std::string> String::SplitString(const std::string& string, const std::string& delimiters)
   {
-    size_t start = 0;
+    size_t start {0};
     // Find the first occurance of splitter
-    size_t end = string.find_first_of(delimiters);
+    size_t end {string.find_first_of(delimiters)};
     
     // Stores the result
     std::vector<std::string> result;

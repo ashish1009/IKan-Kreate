@@ -18,10 +18,10 @@ namespace Kreator
     IK_LOG_INFO("Kreator App", "Creating Kreator Application");
     
     // Check Client Path is valid
-    bool exist = std::filesystem::exists(m_clientResourcePath);
-    bool tempalateProj = std::filesystem::exists(m_clientResourcePath / "TemplateProject");
-    bool fonts = std::filesystem::exists(m_clientResourcePath / "Fonts");
-    bool textures = std::filesystem::exists(m_clientResourcePath / "Textures");
+    bool exist {std::filesystem::exists(m_clientResourcePath)};
+    bool tempalateProj {std::filesystem::exists(m_clientResourcePath / "TemplateProject")};
+    bool fonts {std::filesystem::exists(m_clientResourcePath / "Fonts")};
+    bool textures {std::filesystem::exists(m_clientResourcePath / "Textures")};
     
     IK_ASSERT(exist and tempalateProj and fonts and textures, "Invalid Client Directory");
   }
@@ -36,16 +36,16 @@ namespace Kreator
   {
     IK_PROFILE();
     // Create Persistance Directory ---------------------------------------------------------------
-    std::filesystem::path persistenceStoragePath = m_clientResourcePath / "UserData";
+    std::filesystem::path persistenceStoragePath {m_clientResourcePath / "UserData"};
     if (!std::filesystem::exists(persistenceStoragePath))
     {
       std::filesystem::create_directory(persistenceStoragePath);
     }
     
     // User Preferences --------------------------------------------------------------------------
-    Ref<UserPreferences> userPreferences = CreateRef<UserPreferences>();
+    Ref<UserPreferences> userPreferences {CreateRef<UserPreferences>()};
     UserPreferencesSerializer serializer(userPreferences);
-    std::filesystem::path userPreferenceFile = persistenceStoragePath / "UserPreferences.yaml";
+    std::filesystem::path userPreferenceFile {persistenceStoragePath / "UserPreferences.yaml"};
     if (!std::filesystem::exists(userPreferenceFile))
     {
       serializer.Serialize(userPreferenceFile);
@@ -120,7 +120,7 @@ Scope<Application> CreateApplication()
 
   // Editor Data --------------------------------------------------------------------------
   // TODO: Extract from arguments
-  std::filesystem::path clientResourcePath = "../../../Kreator/Resources";
+  std::filesystem::path clientResourcePath {"../../../Kreator/Resources"};
   
   // Return the Application
   return IKan::Application::CreateApplication<Kreator::KreatorApp>(appSpec, clientResourcePath);

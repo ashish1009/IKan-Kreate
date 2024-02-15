@@ -48,6 +48,6 @@ namespace Kreator
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Client Data ---------------------------------------
-    std::filesystem::path m_clientResourcePath;
+    std::filesystem::path m_clientResourcePath {};
   };
 } // namespace Kreator

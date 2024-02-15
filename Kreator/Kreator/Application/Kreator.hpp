@@ -24,6 +24,6 @@ namespace Kreator
     
   private:
     Ref<Layer> m_kreatorLayer;
-    std::filesystem::path m_clientResourcePath;
+    std::filesystem::path m_clientResourcePath {};
   };
 } // namespace Kreator

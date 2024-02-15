@@ -67,7 +67,7 @@ namespace IKan
     const glm::mat4& GetUnReversedProjectionMatrix() const;
     
   private:
-    glm::mat4 m_projectionMatrix = glm::mat4(1.0f);
-    glm::mat4 m_unReversedProjectionMatrix = glm::mat4(1.0f);
+    glm::mat4 m_projectionMatrix {Utils::Math::UnitMat4};
+    glm::mat4 m_unReversedProjectionMatrix {Utils::Math::UnitMat4};
   };
 } // namespace IKan

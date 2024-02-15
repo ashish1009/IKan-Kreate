@@ -14,25 +14,25 @@ namespace Kreator
   /// This structure stores the recent project data
   struct RecentProject
   {
-    std::string name;
-    std::filesystem::path filePath;
+    std::string name {};
+    std::filesystem::path filePath {};
     time_t lastOpened;
   };
   
   struct UserPreferences
   {
-    bool showWelcomeScreen = true;
+    bool showWelcomeScreen {true};
     enum class Theme
     {
       Dark
     };
-    Theme theme = Theme::Dark;
+    Theme theme {Theme::Dark};
     
-    std::string startupProject;
+    std::filesystem::path startupProject {};
     std::map<time_t, RecentProject, std::greater<time_t>> recentProjects;
     
     // Not Serialized
-    std::string filePath;
+    std::filesystem::path filePath {};
   };
 
   /// This class serialise and deserialise the user preference

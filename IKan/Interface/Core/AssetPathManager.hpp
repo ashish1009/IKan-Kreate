@@ -26,6 +26,7 @@ namespace IKan
     /// This function validate the asset folder path and set the path
     /// - Parameter assetPath: core asset folder path
     static void SetPath(const std::filesystem::path &assetPath);
-    inline static std::filesystem::path s_assetPath;
+    
+    inline static std::filesystem::path s_assetPath {};
   };
 } // namespace IKan

@@ -11,7 +11,7 @@ namespace IKan::Utils::Math
 {
   glm::mat4 GetTransformMatrix(const glm::vec3& position, const glm::vec3& rotaiton, const glm::vec3& scale)
   {
-    glm::mat4 rotation = glm::toMat4(glm::quat(rotaiton));
+    glm::mat4 rotation {glm::toMat4(glm::quat(rotaiton))};
     return glm::translate(glm::mat4(1.0f), position) * rotation * glm::scale(glm::mat4(1.0f), scale);
   }
   void DecomposeTransform(const glm::mat4& transform, glm::vec3& outTranslation, glm::vec3& outRotation, glm::vec3& outScale)
@@ -75,9 +75,9 @@ namespace IKan::Utils::Math
   {
 #if IK_ENABLE_LOG
     // Max Tag String space to be reserved in log
-    static constexpr uint32_t MaxValueLength = 10;
+    static constexpr uint32_t MaxValueLength {10};
 
-    std::string result = title;
+    std::string result {title};
 
     for (int i = 0; i < 4; i++)
     {

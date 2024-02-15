@@ -18,7 +18,7 @@ namespace IKan
   /// This structure stores the renderer data
   struct RendererData
   {
-    RendererType rendererType = RendererType::Invalid;
+    RendererType rendererType {RendererType::Invalid};
     Scope<RendererAPI> rendererAPI;
   };
   static RendererData s_rendererData;

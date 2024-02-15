@@ -50,7 +50,7 @@ namespace IKan::UI
     DELETE_COPY_MOVE_CONSTRUCTORS(ImGuiLayer);
     
   private:
-    bool m_blockEvents = true;
+    bool m_blockEvents {true};
     Ref<Window> m_window;
   };
 } // namespace IKan::UI

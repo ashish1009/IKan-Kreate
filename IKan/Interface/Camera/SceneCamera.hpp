@@ -107,14 +107,14 @@ namespace IKan
     void RecalculateProjection();
     
     // Member variables
-    ProjectionType m_projectionType = ProjectionType::Perspective;
+    ProjectionType m_projectionType {ProjectionType::Perspective};
     
-    uint32_t m_viewportWidth = 1600, m_viewportHeight = 900;
+    uint32_t m_viewportWidth {1600}, m_viewportHeight {900};
     
-    float m_degPerspectiveFOV = 45.0f;
-    float m_perspectiveNear = 0.1f, m_perspectiveFar = 1000.0f;
+    float m_degPerspectiveFOV {45.0f};
+    float m_perspectiveNear {0.1f}, m_perspectiveFar {1000.0f};
     
-    float m_orthographicSize = 10.0f;
-    float m_orthographicNear = -1.0f, m_orthographicFar = 1.0f;
-  };
+    float m_orthographicSize {10.0f};
+    float m_orthographicNear {-1.0f}, m_orthographicFar {1.0f};
+    };
 } // namespace IKan

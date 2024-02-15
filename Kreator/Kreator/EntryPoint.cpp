@@ -19,19 +19,22 @@ int main(int argc, const char * argv[])
 {
   // Initialize the Core Engine
   {
-    LoggerSpecificaion coreLogger = LoggerSpecificaion::Create().Level(LogLevel::Trace).Type(LogType::Core).Name("KREATOR").SaveAt("../../../Kreator/Log/Kreator.log").ShowOnConsole();
+    const LoggerSpecificaion& coreLogger = LoggerSpecificaion::Create().Level(LogLevel::Trace).Type(LogType::Core).Name("KREATOR").SaveAt("../../../Kreator/Log/Kreator.log").ShowOnConsole();
     Logger::Add(coreLogger);
 
-    LoggerSpecificaion profilerLogger = LoggerSpecificaion::Create().Type(LogType::Profiler).Name("KREATOR").SaveAt("../../../Kreator/Log/Profiler.log");
+    const LoggerSpecificaion& profilerLogger = LoggerSpecificaion::Create().Type(LogType::Profiler).Name("KREATOR").SaveAt("../../../Kreator/Log/Profiler.log");
     Logger::Add(profilerLogger);
   }
   
-  // Create Application
-  Scope<Application> application = CreateApplication();
-  application->Run();
+  // Create and Run the Application
+  {
+    Scope<Application> application = CreateApplication();
+    application->Run();
+  }
   
   // Shutdown the Engine
   {
+    Logger::Shutdown();
   }
   return 0;
 }

@@ -98,7 +98,7 @@ namespace IKan
     void LoadGraphicsdata();
     
     // Member variables ----------------------------------------------------------------------------------------------
-    std::filesystem::path m_filePath = "";
+    std::filesystem::path m_filePath {};
     
     // To enclose in bouding box
     AABB m_boundinBox, m_worldBoundingBox;

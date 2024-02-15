@@ -47,12 +47,12 @@ f(Project) \
   /// This structure stores the logger specificaion
   struct LoggerSpecificaion
   {
-    LogType type;
-    LogLevel level = LogLevel::Trace;
-    std::string loggerName = "IKAN";
-    std::filesystem::path saveLogFilePath = "";
-    spdlog::sink_ptr overrideSink = nullptr;
-    bool showOnConsile = false;
+    LogType type {LogType::Core};
+    LogLevel level {LogLevel::Trace};
+    std::string loggerName {"IKAN"};
+    std::filesystem::path saveLogFilePath {};
+    spdlog::sink_ptr overrideSink {nullptr};
+    bool showOnConsile {false};
 
     static LoggerSpecBuilder Create();
   };
@@ -64,8 +64,8 @@ f(Project) \
     /// This structure stores the Log module details. A module log can be controlled independently
     struct TagDetails
     {
-      bool isEnabled = true;
-      LogLevel levelFilter = LogLevel::Trace;
+      bool isEnabled {true};
+      LogLevel levelFilter {LogLevel::Trace};
     };
 
     /// This function adds the logger instance in map
@@ -171,10 +171,10 @@ f(Project) \
       RETURN_IF (!tag.isEnabled or tag.levelFilter > level or !logger);
 
       // Print log module
-      std::string logModuleFormat = "{0}"; // spdlogger will print Module Name as 0th argument
+      std::string logModuleFormat {"{0}"}; // spdlogger will print Module Name as 0th argument
 
       // Max Tag String space to be reserved in log
-      static constexpr uint32_t MaxTagLength = 25;
+      static constexpr uint32_t MaxTagLength {25};
       
       // Align all the modules at 25 characters. If module name is smaller than 25 then add spaces
       if (MaxTagLength > moduleName.size())
