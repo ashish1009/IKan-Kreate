@@ -15,7 +15,9 @@ namespace Kreator
   {
   public:
     /// This is Renderer Layer's Default Constructor
-    KreatorLayer();
+    /// - Parameters:
+    ///   - clientResourcePath: Client resource path
+    KreatorLayer(const std::filesystem::path& clientResourcePath);
     /// Default Destructor
     ~KreatorLayer();
     
@@ -35,6 +37,17 @@ namespace Kreator
     /// This function handles all the events triggered for the layer. To be whenever an event is triggered in the window.
     /// - Parameter event: Event (Base class) intance. Dispatch event from Event Dispatcher
     /// - Note Core Application is taking care to call the EventHandler(event) API for all Layers
-    void OnEvent(Event& event) override;    
+    void OnEvent(Event& event) override;
+    
+  private:
+    // Member functions ----------------------------------------------------------------------------------------------
+    // Project API ---------------------------------------
+    /// This function Creates new project
+    /// - Parameter projectDir: Project Direcotry
+    void CreateProject(const std::filesystem::path& projectDir);
+
+    // Member variables ----------------------------------------------------------------------------------------------
+    // Client Data ---------------------------------------
+    std::filesystem::path m_clientResourcePath;
   };
 } // namespace Kreator

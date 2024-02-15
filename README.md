@@ -61,10 +61,10 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Scene Camera
   - Editor Camera
   - Fixed Camera
-
-### Detailed Road Map
 - Project
   - Project Manager
+
+### Detailed Road Map
 - Asset
   - Asset Manager
 - Renderer

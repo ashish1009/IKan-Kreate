@@ -9,8 +9,8 @@
 
 namespace Kreator
 {
-  KreatorLayer::KreatorLayer()
-  : Layer("Kreator Renderer")
+  KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath)
+  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath)
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
@@ -48,5 +48,15 @@ namespace Kreator
   void KreatorLayer::OnImGuiRender()
   {
     
+  }
+  
+  // Project API ---------------------------------------
+  void KreatorLayer::CreateProject(const std::filesystem::path& projectDir)
+  {
+    IK_PROFILE();
+    if (!std::filesystem::exists(projectDir))
+    {
+      IK_LOG_INFO("Kreator Layer", "Creating Project at {0} ", Utils::FileSystem::IKanAbsolute(projectDir));
+    }
   }
 } // namespace Kreator

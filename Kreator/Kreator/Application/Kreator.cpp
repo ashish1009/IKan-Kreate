@@ -10,8 +10,8 @@
 
 namespace Kreator
 {
-  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec)
-  : Application(appSpec)
+  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec, const std::filesystem::path& clientResourcePath)
+  : Application(appSpec), m_clientResourcePath(clientResourcePath)
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Creating Kreator Application");
@@ -27,9 +27,10 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Initializing the Renderer Application");
-    
+    IK_LOG_INFO("Kreator App", "  Kreator Resources Path          : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
+
     // Create and Push the Rendere Layer --------------------------------------------------------
-    m_kreatorLayer = CreateRef<KreatorLayer>();
+    m_kreatorLayer = CreateRef<KreatorLayer>(m_clientResourcePath);
     PushLayer(m_kreatorLayer);
   }
   
@@ -69,6 +70,10 @@ Scope<Application> CreateApplication()
   appSpec.resizable = true;
   appSpec.startMaximized = true;
 
+  // Editor Data --------------------------------------------------------------------------
+  // TODO: Extract from arguments
+  std::filesystem::path clientResourcePath = "../../../Kreator/Resources";
+  
   // Return the Application
-  return Application::CreateApplication<Kreator::KreatorApp>(appSpec);
+  return IKan::Application::CreateApplication<Kreator::KreatorApp>(appSpec, clientResourcePath);
 }
