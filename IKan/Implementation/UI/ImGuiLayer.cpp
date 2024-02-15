@@ -106,7 +106,7 @@ namespace IKan::UI
   
   void ImGuiLayer::LoadFonts(const std::vector<UI::ImGuiFont>& otherFonts)
   {
-    IK_PERFORMANCE("ImGuiLayer::End");
+    IK_PROFILE();
     RETURN_IF (otherFonts.size() == 0)
     
     ImGuiIO& io = ImGui::GetIO(); (void)io;

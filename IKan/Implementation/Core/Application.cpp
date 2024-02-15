@@ -76,6 +76,10 @@ namespace IKan
   {
     return m_applicationImpl->GetWindow();
   }
+  UI::ImGuiLayer& Application::GetImGuiLayer() const
+  {
+    return m_applicationImpl->GetImGuiLayer();
+  }
 
   Application& Application::Get()
   {

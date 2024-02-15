@@ -172,4 +172,14 @@ namespace Kreator::UI
     // Model
     colors[ImGuiCol_ModalWindowDimBg]       = ImGui::ColorConvertU32ToFloat4(UI::Color::WindowDimBg);
   }
+  
+  void LoadFonts(const std::vector<IKan::UI::ImGuiFont>& otherFonts)
+  {
+    IK_PROFILE();
+    auto& imguiLayer = Application::Get().GetImGuiLayer();
+    imguiLayer.OnDetach();
+    
+    imguiLayer.OnAttach();
+    imguiLayer.LoadFonts(otherFonts);
+  }
 } // Kreator::UI

@@ -10,6 +10,7 @@
 #include "Core/Layer.hpp"
 #include "Core/Window.hpp"
 #include "Renderer/Renderer.hpp"
+#include "UI/ImGuiLayer.hpp"
 
 namespace IKan
 {
@@ -83,6 +84,8 @@ namespace IKan
     void* GetWindowPtr() const;
     /// This fuinction returns the iKan Window Instance as reference
     Window& GetWindow();
+    /// This fuinction returns the ImGui Layer pointer Reference
+    UI::ImGuiLayer& GetImGuiLayer() const;
 
     // Static APIs ----------------------------------------------------------------------------------------------------
     /// This function returns the reference of application instance.

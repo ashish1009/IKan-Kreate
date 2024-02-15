@@ -41,4 +41,8 @@ namespace Kreator::UI
   
   /// This function changes theme color to dark
   void SetThemeColors(Kreator::UserPreferences::Theme theme);
+  /// This function changes the imgui font
+  ///  - Parameter otherFonts: other fonts
+  void LoadFonts(const std::vector<IKan::UI::ImGuiFont>& otherFonts);
+
 } // namespace Kreator::UI
