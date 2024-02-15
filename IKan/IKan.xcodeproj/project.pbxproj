@@ -27,6 +27,7 @@
 		B2C0B7192B7CDC7E0015A277 /* Input.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B7172B7CDC7E0015A277 /* Input.hpp */; };
 		B2C0B71F2B7CDEE30015A277 /* FixedCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B71D2B7CDEE30015A277 /* FixedCamera.cpp */; };
 		B2C0B7202B7CDEE30015A277 /* FixedCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */; };
+		B2C0B9FC2B7DC7C40015A277 /* libYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B73D2B7DC7340015A277 /* libYAML.a */; };
 		B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C9C2B723F85007A7F36 /* Application.cpp */; };
 		B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5C9D2B723F85007A7F36 /* Application.hpp */; };
 		B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */; };
@@ -109,6 +110,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B2C0B73C2B7DC7340015A277 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2C0B7382B7DC7330015A277 /* YAML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2C0B72A2B7DC7330015A277;
+			remoteInfo = YAML;
+		};
 		B2ED5CEB2B736A50007A7F36 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */;
@@ -157,6 +165,7 @@
 		B2C0B7172B7CDC7E0015A277 /* Input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
 		B2C0B71D2B7CDEE30015A277 /* FixedCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FixedCamera.cpp; sourceTree = "<group>"; };
 		B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedCamera.hpp; sourceTree = "<group>"; };
+		B2C0B7382B7DC7330015A277 /* YAML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YAML.xcodeproj; path = YAML/YAML.xcodeproj; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -257,6 +266,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2C0B9FC2B7DC7C40015A277 /* libYAML.a in Frameworks */,
 				B2C0B6CD2B75F7340015A277 /* libpng16.a in Frameworks */,
 				B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */,
 				B2ED60052B74A573007A7F36 /* libUI.a in Frameworks */,
@@ -312,6 +322,14 @@
 				B2C0B6F32B7C82940015A277 /* Renderer3D.cpp */,
 			);
 			path = 3D;
+			sourceTree = "<group>";
+		};
+		B2C0B7392B7DC7330015A277 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2C0B73D2B7DC7340015A277 /* libYAML.a */,
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 		B2ED5C7D2B723F31007A7F36 = {
@@ -411,6 +429,7 @@
 			isa = PBXGroup;
 			children = (
 				B2ED60602B74DF5F007A7F36 /* StbImage */,
+				B2C0B7382B7DC7330015A277 /* YAML.xcodeproj */,
 				B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */,
 				B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */,
 				B2ED5E742B7496AE007A7F36 /* Glad.xcodeproj */,
@@ -794,6 +813,10 @@
 					ProductGroup = B2ED5EAA2B74A4B7007A7F36 /* Products */;
 					ProjectRef = B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */;
 				},
+				{
+					ProductGroup = B2C0B7392B7DC7330015A277 /* Products */;
+					ProjectRef = B2C0B7382B7DC7330015A277 /* YAML.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -803,6 +826,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		B2C0B73D2B7DC7340015A277 /* libYAML.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libYAML.a;
+			remoteRef = B2C0B73C2B7DC7340015A277 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		B2ED5CEC2B736A50007A7F36 /* libGLFW.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1012,6 +1042,7 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
+					"${PROJECT_DIR}/Vendors/YAML/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1044,6 +1075,7 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
+					"${PROJECT_DIR}/Vendors/YAML/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

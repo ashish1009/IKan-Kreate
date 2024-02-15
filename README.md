@@ -95,6 +95,7 @@ Editor Application using IKan Library to create Games
 
 ### Detailed Road Map
 - Renderer Layer
+  - Title Bar
   - Welcome Screen
   - Open/New/Save - Project/Scene
 - Editor
