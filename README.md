@@ -34,6 +34,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - Utilities
   - String
   - Maths
+  - YAML
 - Core
   - Logger
   - Profiler
@@ -62,26 +63,24 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Fixed Camera
 
 ### Detailed Road Map
+- Project
+  - Project Manager
+- Asset
+  - Asset Manager
 - Renderer
   - Material (Asset)
   - Secne Renderer (ECS)
   - Light
   - Shadow
   - IBL
+- Editor Panel 
+  - Panel Manager
 - ECS (Panels)
   - Entity
   - Component
   - Scene
   - Serializer
   - Script Manager
-- Utilities (ECS)
-  - YAML
-- Asset
-  - Asset Manager
-- Project
-  - Project Manager
-- Editor Panel (ECS, Project and Assets)
-  - Panel Manager
 - Physics (ECS and Editor Panel)
   - 3D Physics
 

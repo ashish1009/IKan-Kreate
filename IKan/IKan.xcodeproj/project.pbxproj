@@ -28,6 +28,8 @@
 		B2C0B71F2B7CDEE30015A277 /* FixedCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B71D2B7CDEE30015A277 /* FixedCamera.cpp */; };
 		B2C0B7202B7CDEE30015A277 /* FixedCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */; };
 		B2C0B9FC2B7DC7C40015A277 /* libYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B73D2B7DC7340015A277 /* libYAML.a */; };
+		B2C0BA032B7DC9D10015A277 /* Project.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0BA012B7DC9D10015A277 /* Project.cpp */; };
+		B2C0BA042B7DC9D10015A277 /* Project.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0BA022B7DC9D10015A277 /* Project.hpp */; };
 		B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C9C2B723F85007A7F36 /* Application.cpp */; };
 		B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5C9D2B723F85007A7F36 /* Application.hpp */; };
 		B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */; };
@@ -167,6 +169,8 @@
 		B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedCamera.hpp; sourceTree = "<group>"; };
 		B2C0B7382B7DC7330015A277 /* YAML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YAML.xcodeproj; path = YAML/YAML.xcodeproj; sourceTree = "<group>"; };
 		B2C0B9FD2B7DC81F0015A277 /* YAMLSerializerUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YAMLSerializerUtils.h; sourceTree = "<group>"; };
+		B2C0BA012B7DC9D10015A277 /* Project.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Project.cpp; sourceTree = "<group>"; };
+		B2C0BA022B7DC9D10015A277 /* Project.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Project.hpp; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -333,6 +337,22 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B2C0B9FE2B7DC9850015A277 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				B2C0BA022B7DC9D10015A277 /* Project.hpp */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
+		B2C0B9FF2B7DC9930015A277 /* Project */ = {
+			isa = PBXGroup;
+			children = (
+				B2C0BA012B7DC9D10015A277 /* Project.cpp */,
+			);
+			path = Project;
+			sourceTree = "<group>";
+		};
 		B2ED5C7D2B723F31007A7F36 = {
 			isa = PBXGroup;
 			children = (
@@ -366,6 +386,7 @@
 				B2ED5E3D2B748AE0007A7F36 /* Renderer */,
 				B2C0B6E72B7C7E340015A277 /* Camera */,
 				B2ED60062B74A599007A7F36 /* UI */,
+				B2C0B9FE2B7DC9850015A277 /* Project */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -380,6 +401,7 @@
 				B2ED5E3F2B748AEA007A7F36 /* Renderer */,
 				B2C0B6E62B7C7E2F0015A277 /* Camera */,
 				B2ED60072B74A5A1007A7F36 /* UI */,
+				B2C0B9FF2B7DC9930015A277 /* Project */,
 				B2ED5E302B73A800007A7F36 /* Platform */,
 			);
 			path = Implementation;
@@ -747,6 +769,7 @@
 				B2ED60442B74C52D007A7F36 /* Pipeline.hpp in Headers */,
 				B2C0B6DA2B75FF300015A277 /* Mesh.hpp in Headers */,
 				B2ED5E222B738FE5007A7F36 /* Layer.hpp in Headers */,
+				B2C0BA042B7DC9D10015A277 /* Project.hpp in Headers */,
 				B2ED60252B74AFD0007A7F36 /* Buffer.hpp in Headers */,
 				B2ED5CBC2B724B7F007A7F36 /* PrefixHeader.pch in Headers */,
 				B2ED5E892B7498DD007A7F36 /* RendererAPI.hpp in Headers */,
@@ -874,6 +897,7 @@
 				B2ED60672B74DF5F007A7F36 /* stb_image.cpp in Sources */,
 				B2ED5E1D2B738C58007A7F36 /* ApplicationImpl.cpp in Sources */,
 				B2ED5E552B74911C007A7F36 /* Factories.cpp in Sources */,
+				B2C0BA032B7DC9D10015A277 /* Project.cpp in Sources */,
 				B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */,
 				B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */,
 				B2ED604D2B74D958007A7F36 /* MathUtils.cpp in Sources */,
