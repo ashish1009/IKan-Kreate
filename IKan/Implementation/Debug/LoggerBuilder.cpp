@@ -25,7 +25,7 @@ namespace IKan
     return *this;
   }
   
-  LoggerSpecBuilder& LoggerSpecBuilder::level(LogLevel level)
+  LoggerSpecBuilder& LoggerSpecBuilder::Level(LogLevel level)
   {
     loggerSpecification.level = level;
     return *this;

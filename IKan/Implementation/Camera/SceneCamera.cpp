@@ -28,7 +28,7 @@ namespace IKan
   : m_projectionType(projType)
   {
     IK_PROFILE();
-    IK_LOG_TRACE(LogModule::SceneCamera, "Creating {0} Scene Camera ...", CameraUtils::GetProjectionNameFromType(m_projectionType));
+    IK_LOG_INFO(LogModule::SceneCamera, "Creating {0} Scene Camera ...", CameraUtils::GetProjectionNameFromType(m_projectionType));
     RecalculateProjection();
   }
   

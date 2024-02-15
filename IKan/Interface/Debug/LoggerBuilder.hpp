@@ -15,7 +15,7 @@ namespace IKan
   struct LoggerSpecBuilder
   {
     LoggerSpecBuilder& Type(LogType type);
-    LoggerSpecBuilder& level(LogLevel level);
+    LoggerSpecBuilder& Level(LogLevel level);
     LoggerSpecBuilder& Name(const std::string& loggerName);
     LoggerSpecBuilder& SaveAt(const std::filesystem::path& saveLogFilePath);
     LoggerSpecBuilder& OverrideSink(spdlog::sink_ptr sink);
