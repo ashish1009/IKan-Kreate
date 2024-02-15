@@ -156,7 +156,7 @@ namespace IKan
   
   void BufferLayout::DebugLog()
   {
-#ifdef IK_ENABLE_LOG
+#if IK_ENABLE_LOG
     IK_LOG_DEBUG(LogModule::BufferLayout, "Vertex Attributes (Stride : {0})", std::to_string(GetStride()));
     for (const auto& element : GetElements())
     {

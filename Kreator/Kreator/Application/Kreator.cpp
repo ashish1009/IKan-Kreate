@@ -37,9 +37,11 @@ namespace Kreator
     IK_LOG_INFO("Kreator App", "Initializing the Renderer Application");
     IK_LOG_INFO("Kreator App", "  Kreator Resources Path          : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
 
+#if 0
     // Create and Push the Rendere Layer --------------------------------------------------------
     m_kreatorLayer = CreateRef<KreatorLayer>(m_clientResourcePath);
     PushLayer(m_kreatorLayer);
+#endif
   }
   
   void KreatorApp::OnShutdown()
@@ -47,9 +49,11 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Shutting Down the Renderer Application");
 
+#if 0
     // Destroy and Pop the Rendere Layer --------------------------------------------------------
     PopLayer(m_kreatorLayer);
     m_kreatorLayer.reset();
+#endif
   }
 } // namespace Kreator
 
@@ -71,8 +75,12 @@ Scope<Application> CreateApplication()
   appSpec.windowSpecificaion.title = "Kreator";
   appSpec.windowSpecificaion.width = 2500;
   appSpec.windowSpecificaion.height = 1000;
-  appSpec.windowSpecificaion.hideTitleBar = false;
+  appSpec.windowSpecificaion.hideTitleBar = true;
+#ifdef DEBUG
   appSpec.windowSpecificaion.isFullScreen = false;
+#else
+  appSpec.windowSpecificaion.isFullScreen = true;
+#endif
   
   // Window Controller Data
   appSpec.resizable = true;

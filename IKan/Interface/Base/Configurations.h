@@ -9,7 +9,11 @@
 
 // Configurations -----------------------------------------------------------------------------------------------------
 /// Enables Log APIs
+#ifdef DEBUG
 #define IK_ENABLE_LOG 1
+#else
+#define IK_ENABLE_LOG 0
+#endif
 
 // This MACRO Checks the condition and return if true
 #define RETURN_IF(condition) if (condition) return;

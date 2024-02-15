@@ -73,7 +73,7 @@ namespace IKan::Utils::Math
   
   void Print(const std::string& title, const glm::mat4& mat)
   {
-#ifdef IK_ENABLE_LOG
+#if IK_ENABLE_LOG
     // Max Tag String space to be reserved in log
     static constexpr uint32_t MaxValueLength = 10;
 
@@ -96,7 +96,7 @@ namespace IKan::Utils::Math
   }
   void Print(const glm::vec3& mat)
   {
-#ifdef IK_ENABLE_LOG
+#if IK_ENABLE_LOG
 #endif
   }
 } // namespace IKan::Utils::Math
