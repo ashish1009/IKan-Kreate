@@ -337,6 +337,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
 					"${PROJECT_DIR}/../IKan/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/../IKan/Vendors/Freetype/include",
+					"${PROJECT_DIR}/../IKan/Vendors/YAML/Yaml/include",
 				);
 				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/../IKan/Vendors/Assimp/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -359,6 +360,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
 					"${PROJECT_DIR}/../IKan/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/../IKan/Vendors/Freetype/include",
+					"${PROJECT_DIR}/../IKan/Vendors/YAML/Yaml/include",
 				);
 				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/../IKan/Vendors/Assimp/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";

@@ -166,6 +166,7 @@
 		B2C0B71D2B7CDEE30015A277 /* FixedCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FixedCamera.cpp; sourceTree = "<group>"; };
 		B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedCamera.hpp; sourceTree = "<group>"; };
 		B2C0B7382B7DC7330015A277 /* YAML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YAML.xcodeproj; path = YAML/YAML.xcodeproj; sourceTree = "<group>"; };
+		B2C0B9FD2B7DC81F0015A277 /* YAMLSerializerUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = YAMLSerializerUtils.h; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -633,6 +634,7 @@
 				B2ED60172B74AD56007A7F36 /* StringUtils.hpp */,
 				B2ED604C2B74D958007A7F36 /* MathUtils.hpp */,
 				B2ED60692B74E002007A7F36 /* FileSystemUtils.hpp */,
+				B2C0B9FD2B7DC81F0015A277 /* YAMLSerializerUtils.h */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -1042,7 +1044,7 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
-					"${PROJECT_DIR}/Vendors/YAML/include",
+					"${PROJECT_DIR}/Vendors/YAML/Yaml/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1075,7 +1077,7 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
-					"${PROJECT_DIR}/Vendors/YAML/include",
+					"${PROJECT_DIR}/Vendors/YAML/Yaml/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

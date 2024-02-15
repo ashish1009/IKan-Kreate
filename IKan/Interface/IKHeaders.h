@@ -46,6 +46,7 @@
 
 #include <Utils/StringUtils.hpp>
 #include <Utils/MathUtils.hpp>
+#include <Utils/YAMLSerializerUtils.h>
 
 #include <Core/AssertAPI.h>
 #include <Core/TimeStep.hpp>
