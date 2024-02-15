@@ -9,11 +9,28 @@
 
 namespace Kreator
 {
-  KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath)
-  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath)
+  KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath, Ref<UserPreferences> userPreferences)
+  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_userPreferences(userPreferences)
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
+    
+    // Open or Create Project ---------------------------------------------------------------------------------------
+    if (std::filesystem::exists(m_userPreferences->startupProject))
+    {
+      if (m_userPreferences->showWelcomeScreen)
+      {
+        m_showWelcomePopup = true;
+      }
+      else
+      {
+        IK_ASSERT(false, "Open Project. TODO: Implement Later ...");
+      }
+    }
+    else
+    {
+      m_showWelcomePopup = true;
+    }
   }
   
   KreatorLayer::~KreatorLayer()
@@ -47,7 +64,7 @@ namespace Kreator
   
   void KreatorLayer::OnImGuiRender()
   {
-    
+    UI_WelcomePopup();
   }
   
   // Project API ---------------------------------------

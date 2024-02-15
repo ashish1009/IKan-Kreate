@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Editor/UserPreferences.hpp"
+
 using namespace IKan;
 
 namespace Kreator
@@ -17,7 +19,8 @@ namespace Kreator
     /// This is Renderer Layer's Default Constructor
     /// - Parameters:
     ///   - clientResourcePath: Client resource path
-    KreatorLayer(const std::filesystem::path& clientResourcePath);
+    ///   - userPreferences: User preference
+    KreatorLayer(const std::filesystem::path& clientResourcePath, Ref<UserPreferences> userPreferences);
     /// Default Destructor
     ~KreatorLayer();
     
@@ -45,9 +48,17 @@ namespace Kreator
     /// This function Creates new project
     /// - Parameter projectDir: Project Direcotry
     void CreateProject(const std::filesystem::path& projectDir);
-
+    
+    // UI APIs -------------------------------------------
+    /// This function shows the Welcome screen Popup
+    void UI_WelcomePopup();
+    
     // Member variables ----------------------------------------------------------------------------------------------
-    // Client Data ---------------------------------------
+    // Popups --------------------------------------------
+    bool m_showWelcomePopup {false};
+
+    // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};
+    Ref<UserPreferences> m_userPreferences;
   };
 } // namespace Kreator

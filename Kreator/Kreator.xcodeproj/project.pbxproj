@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B248B8EC2B7E3B4500B9EC40 /* KreatorLayerUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8EB2B7E3B4500B9EC40 /* KreatorLayerUI.cpp */; };
 		B2C0B6CF2B75F7580015A277 /* libbz2.1.0.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6CE2B75F7580015A277 /* libbz2.1.0.8.tbd */; };
 		B2C0B6D12B75F7600015A277 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6D02B75F7600015A277 /* libz.tbd */; };
 		B2C0B6DF2B79DD210015A277 /* libpugixml.1.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */; };
@@ -38,6 +39,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B248B8EB2B7E3B4500B9EC40 /* KreatorLayerUI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorLayerUI.cpp; sourceTree = "<group>"; };
 		B2C0B6CE2B75F7580015A277 /* libbz2.1.0.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.8.tbd; path = usr/lib/libbz2.1.0.8.tbd; sourceTree = SDKROOT; };
 		B2C0B6D02B75F7600015A277 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugixml.1.13.dylib; path = ../IKan/Vendors/Assimp/lib/libpugixml.1.13.dylib; sourceTree = "<group>"; };
@@ -149,6 +151,7 @@
 			children = (
 				B2ED5E8F2B74A190007A7F36 /* KreatorLayer.cpp */,
 				B2ED5E902B74A190007A7F36 /* KreatorLayer.hpp */,
+				B248B8EB2B7E3B4500B9EC40 /* KreatorLayerUI.cpp */,
 			);
 			path = Layer;
 			sourceTree = "<group>";
@@ -212,6 +215,7 @@
 			files = (
 				B2ED5E912B74A190007A7F36 /* KreatorLayer.cpp in Sources */,
 				B2C0BA142B7E0F5D0015A277 /* UserPreferences.cpp in Sources */,
+				B248B8EC2B7E3B4500B9EC40 /* KreatorLayerUI.cpp in Sources */,
 				B2ED5E1A2B738B23007A7F36 /* Kreator.cpp in Sources */,
 				B2ED5C5F2B723E25007A7F36 /* EntryPoint.cpp in Sources */,
 			);

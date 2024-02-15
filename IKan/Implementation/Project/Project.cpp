@@ -16,7 +16,7 @@ namespace IKan
   void Project::SetActive(Ref<Project> project)
   {
     IK_PROFILE();
-    IK_ASSERT(project, "Null Project, Handle Later ...");
+    IK_ASSERT(project, "Null Project, TODO: Handle Later ...");
 
     // Set new project and initialise the asset manager
     s_activeProject = project;

@@ -59,11 +59,9 @@ namespace Kreator
     IK_LOG_INFO("Kreator App", "  Kreator Resources Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
     IK_LOG_INFO("Kreator App", "  User Data Path           : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath));
 
-#if 0
     // Create and Push the Rendere Layer --------------------------------------------------------
-    m_kreatorLayer = CreateRef<KreatorLayer>(m_clientResourcePath);
+    m_kreatorLayer = CreateRef<KreatorLayer>(m_clientResourcePath, userPreferences);
     PushLayer(m_kreatorLayer);
-#endif
   }
   
   void KreatorApp::OnShutdown()
@@ -71,11 +69,9 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Shutting Down the Renderer Application");
 
-#if 0
     // Destroy and Pop the Rendere Layer --------------------------------------------------------
     PopLayer(m_kreatorLayer);
     m_kreatorLayer.reset();
-#endif
   }
   
   void KreatorApp::OnUpdate(TimeStep ts)
