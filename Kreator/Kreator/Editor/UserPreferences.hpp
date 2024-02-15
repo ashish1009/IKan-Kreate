@@ -24,7 +24,7 @@ namespace Kreator
     bool showWelcomeScreen {true};
     enum class Theme
     {
-      Dark
+      Dark, Blue, Light
     };
     Theme theme {Theme::Dark};
     

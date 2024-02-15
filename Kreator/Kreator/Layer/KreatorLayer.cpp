@@ -15,6 +15,9 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
+    // Set the Theme of ImGui as user preference
+    Kreator::UI::SetThemeColors(m_userPreferences->theme);
+
     // Open or Create Project ---------------------------------------------------------------------------------------
     if (std::filesystem::exists(m_userPreferences->startupProject))
     {
