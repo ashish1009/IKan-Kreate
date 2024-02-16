@@ -387,7 +387,7 @@ namespace IKan
       delete (stbi_uc*)data;
       
       IK_LOG_DEBUG(LogModule::Texture, "Creating Open GL Image Texture from File ... ");
-      IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", Utils::FileSystem::IKanAbsolute(m_specification.filePath));
+      IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", Utils::FileSystem::IKanAbsolute(m_specification.filePath).string());
       IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID        {0}", m_rendererID);
       IK_LOG_DEBUG(LogModule::Texture, "  Width              {0}", m_width);
       IK_LOG_DEBUG(LogModule::Texture, "  Height             {0}", m_height);
@@ -412,7 +412,7 @@ namespace IKan
   OpenGLImage::~OpenGLImage()
   {
     IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Image Texture ");
-    IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", Utils::FileSystem::IKanAbsolute(m_specification.filePath));
+    IK_LOG_DEBUG(LogModule::Texture, "  File Path          {0}", Utils::FileSystem::IKanAbsolute(m_specification.filePath).string());
     IK_LOG_DEBUG(LogModule::Texture, "  Renderer ID        {0}", m_rendererID);
     
     RendererStatistics::Get().textureBufferSize -= m_size;

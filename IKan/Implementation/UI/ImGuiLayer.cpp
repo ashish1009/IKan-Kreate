@@ -116,7 +116,7 @@ namespace IKan::UI
     for (const auto& font : otherFonts)
     {
       io.Fonts->AddFontFromFileTTF(font.filePath.c_str(), font.size);
-      IK_LOG_INFO(LogModule::ImGui, "  Font    {0} Size {1}", Utils::FileSystem::IKanAbsolute(font.filePath), font.size);
+      IK_LOG_INFO(LogModule::ImGui, "  Font    {0} Size {1}", Utils::FileSystem::IKanAbsolute(font.filePath).string(), font.size);
     }
     
     // Default font is Regular

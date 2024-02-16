@@ -9,7 +9,7 @@
 
 namespace IKan::Utils
 {
-  std::string FileSystem::IKanAbsolute(const std::filesystem::path &path)
+  std::filesystem::path FileSystem::IKanAbsolute(const std::filesystem::path &path)
   {
     IK_PROFILE();
     if (path == "")

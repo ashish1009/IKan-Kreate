@@ -216,6 +216,33 @@ namespace Kreator::UI
     ImGuiID id = texture->GetRendererID();
     return ImGui::ImageButtonEx(id, INT2VOIDP(texture->GetRendererID()), size, uv0, uv1, bg_col, tint_col);
   }
+  bool InvisibleButton(const ImVec2& size)
+  {
+    UI::ScopedColor noTintButton(ImGuiCol_Button, IM_COL32(11, 11, 11, 0));
+    UI::ScopedColor noTintButtonHovered(ImGuiCol_ButtonHovered, IM_COL32(11, 11, 11, 0));
+    UI::ScopedColor noTintButtonActive(ImGuiCol_ButtonActive, IM_COL32(11, 11, 11, 0));
+    return ImGui::Button(GenerateID(), size);
+  }
+  
+  bool DrawRoundButton(const char* title, glm::vec3 color, float r)
+  {
+    ImGui::PushID(title);
+    UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, r);
+    
+    ImVec4 tintNormal = {color.r, color.g, color.b, 0.4};
+    ImVec4 tintHovered = {color.r, color.g, color.b, 0.3};
+    ImVec4 tintPressed = {color.r, color.g, color.b, 0.5};
+    
+    UI::ScopedColor button(ImGuiCol_Button, tintNormal);
+    UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, tintHovered);
+    UI::ScopedColor buttonavtive(ImGuiCol_ButtonActive, tintPressed);
+    
+    bool clicked = ImGui::Button(title);
+    
+    ImGui::PopID();
+    return clicked;
+  }
+
   // Draw APIs -------------------------------------------------------------------------------------------------------
   void DrawButtonImage(const Ref<IKan::Texture>& imageNormal, const Ref<IKan::Texture>& imageHovered,
                        const Ref<IKan::Texture>& imagePressed, const ImU32& tintNormal, const ImU32& tintHovered,

@@ -33,6 +33,10 @@ namespace Kreator
     // Set the Theme of ImGui as user preference
     Kreator::UI::SetThemeColors(m_userPreferences->theme);
 
+    // Save the default project path
+    std::filesystem::path defulatPath =  Utils::FileSystem::IKanAbsolute(m_clientResourcePath);
+    m_projectFilePathBuffer.MemCpy(defulatPath.string().data(), 0, defulatPath.string().size());
+
     // Open or Create Project ---------------------------------------------------------------------------------------
     if (std::filesystem::exists(m_userPreferences->startupProject))
     {
@@ -92,6 +96,7 @@ namespace Kreator
   void KreatorLayer::OnImGuiRender()
   {
     UI_WelcomePopup();
+    UI_NewProjectPopup();
   }
   
   // Project API ---------------------------------------
@@ -100,7 +105,7 @@ namespace Kreator
     IK_PROFILE();
     if (!std::filesystem::exists(projectDir))
     {
-      IK_LOG_INFO("Kreator Layer", "Creating Project at {0} ", Utils::FileSystem::IKanAbsolute(projectDir));
+      IK_LOG_INFO("Kreator Layer", "Creating Project at {0} ", Utils::FileSystem::IKanAbsolute(projectDir).string());
     }
   }
 } // namespace Kreator

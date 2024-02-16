@@ -140,7 +140,16 @@ namespace Kreator::UI
   bool TextureButton(const char* stringID, const Ref<Texture>& Texture, const ImVec2& size, const ImVec2& uv0 = ImVec2(0, 1),
                      const ImVec2& uv1 = ImVec2(1, 0), int frame_padding = -1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0),
                      const ImVec4& tint_col = ImVec4(1, 1, 1, 1));
-  
+  /// This function Draw invisible button
+  /// - Parameter size: size of button
+  bool InvisibleButton(const ImVec2& size);
+  /// This function creates the rounding button
+  /// - Parameters:
+  ///   - title: Title
+  ///   - color: Background color
+  ///   - rounding: Rounding of button
+  bool DrawRoundButton(const char* title, glm::vec3 color, float rounding);
+
   // Image -----------------------------------------------------------------------------------------------------------
   /// This function renders Texture in current ImGui window
   /// - Parameters:

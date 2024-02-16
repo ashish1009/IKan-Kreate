@@ -15,6 +15,6 @@ namespace IKan::Utils
   public:
     /// This function returns the absolute File/Directory path for Kreator
     /// - Parameter path: Current Relative File/Directory path passed
-    static std::string IKanAbsolute(const std::filesystem::path& path);
+    static std::filesystem::path IKanAbsolute(const std::filesystem::path& path);
   };
 } // namespace IKan::Utils

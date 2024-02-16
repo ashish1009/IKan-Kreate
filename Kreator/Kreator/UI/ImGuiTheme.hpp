@@ -58,4 +58,5 @@ namespace Kreator::UI
   /// This function Returns the Semi Header font
   ImFont* GetSemiHeaderFont();
 
+  glm::vec3 ColorVec3FromU32(ImU32 color);
 } // namespace Kreator::UI

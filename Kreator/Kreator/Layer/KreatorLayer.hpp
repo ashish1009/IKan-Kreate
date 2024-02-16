@@ -54,10 +54,13 @@ namespace Kreator
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup
     void UI_WelcomePopup();
-    
+    /// This function shows new project popup
+    void UI_NewProjectPopup();
+
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup {false};
+    bool m_showCreateNewProjectPopup {false};
 
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};
@@ -67,5 +70,9 @@ namespace Kreator
     Ref<Texture> m_shadowTexture;
     Ref<Texture> m_applicationIcon, m_welcomeIcon;
     Ref<Texture> m_newProjectIcon, m_folderIcon;
+    
+    // Project Data --------------------------------------
+    GUI_InputBuffer<255> m_projectNameBuffer;
+    GUI_InputBuffer<512> m_projectFilePathBuffer;
   };
 } // namespace Kreator

@@ -88,7 +88,7 @@ namespace Kreator::UI
     colors[ImGuiCol_Border]                 = ImGui::ColorConvertU32ToFloat4(UI::Color::BackgroundDark);
     
     // Borders
-    colors[ImGuiCol_Border]                 = ImVec4(0.43f, 0.43f, 0.50f, 0.5f);
+    colors[ImGuiCol_Border]                 = ImVec4(0.43f, 0.43f, 0.50f, 0.0f);
     colors[ImGuiCol_BorderShadow]           = ImVec4(0.00f, 0.00f, 0.00f, 0.0f);
     
     // Frame : Checkbox BG, Text BG, Drop Menue BG
@@ -211,5 +211,11 @@ namespace Kreator::UI
   {
     auto fonts = ImGui::GetIO().Fonts->Fonts;
     return fonts.size() > 1 ? fonts[5] : fonts[0];
+  }
+  
+  glm::vec3 ColorVec3FromU32(ImU32 color)
+  {
+    ImVec4 result = ImGui::ColorConvertU32ToFloat4(color);
+    return {result.x, result.y, result.z};
   }
 } // Kreator::UI
