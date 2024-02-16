@@ -71,4 +71,218 @@ namespace Kreator::UI
   /// This function create same line
   void NewLine();
 
+  // Rectangles API -------------------------------------------------------------------------------------------------
+  /// This function returns the ImGui Item Rectangle vertex
+  ImRect GetItemRect();
+  /// This function expand the ImGui Retangle
+  /// - Parameters:
+  ///   - rect: rectangle
+  ///   - x: expand x
+  ///   - y: expand y
+  ImRect RectExpanded(const ImRect& rect, float x, float y);
+  /// This function Offset the rectangle
+  /// - Parameters:
+  ///   - rect: rectangle pos
+  ///   - x: x offset
+  ///   - y: y offset
+  ImRect RectOffset(const ImRect& rect, float x, float y);
+  /// This function Offset the rectangle
+  /// - Parameters:
+  ///   - rect: rectangle pos
+  ///   - xy: offset
+  ImRect RectOffset(const ImRect& rect, const ImVec2& xy);
+
+  // Colors ----------------------------------------------------------------------------------------------------------
+  /// This function add the color to some value
+  /// - Parameters:
+  ///   - color: color
+  ///   - value: value
+  ImU32 ColorWithValue(const ImColor& color, float value);
+  /// This function adds the color with saturation
+  /// - Parameters:
+  ///   - color: color
+  ///   - saturation: saturation
+  ImU32 ColorWithSaturation(const ImColor& color, float saturation);
+  /// This function adds the color with Hue
+  /// - Parameters:
+  ///   - color: color
+  ///   - hue: hue
+  ImU32 ColorWithHue(const ImColor& color, float hue);
+  /// This finction multiply the color with some value
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedValue(const ImColor& color, float multiplier);
+  /// This finction multiply the color with some saturation
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedSaturation(const ImColor& color, float multiplier);
+  /// This finction multiply the color with some hue
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedHue(const ImColor& color, float multiplier);
+
+  // Buttons -----------------------------------------------------------------------------------------------------------
+  /// This function renders the Texture button
+  /// - Parameters:
+  ///   - Texture: Texture Texture
+  ///   - size: Button Size
+  bool TextureButton(const Ref<Texture>& Texture, const ImVec2& size, const ImVec2& uv0 = ImVec2(0, 1),
+                     const ImVec2& uv1 = ImVec2(1, 0), int frame_padding = -1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0),
+                     const ImVec4& tint_col = ImVec4(1, 1, 1, 1));
+  /// This function renders the Texture button
+  /// - Parameters:
+  ///   - stringID: string ID
+  ///   - Texture: Texture Texture
+  ///   - size: Buttoren Size
+  bool TextureButton(const char* stringID, const Ref<Texture>& Texture, const ImVec2& size, const ImVec2& uv0 = ImVec2(0, 1),
+                     const ImVec2& uv1 = ImVec2(1, 0), int frame_padding = -1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0),
+                     const ImVec4& tint_col = ImVec4(1, 1, 1, 1));
+  
+  // Image -----------------------------------------------------------------------------------------------------------
+  /// This function renders Texture in current ImGui window
+  /// - Parameters:
+  ///   - texture; Texture reference
+  ///   - size; size of Texture need to be rendered inside ImGui window (this size will be visible as texture)
+  ///   - uv0; Left
+  ///   - uv1; Right
+  void Image(const Ref<IKan::Texture>& texture, const ImVec2& size, const ImVec2& uv0 = {0, 1}, const ImVec2& uv1 = {1, 0}, const ImVec4& tintCol = {1, 1, 1, 1}, const ImVec4& borderCol = {0, 0, 0, 0});
+  /// This function renders the image button
+  /// - Parameters:
+  ///   - image: Image Texture
+  ///   - size: Button Size
+  bool ImageButton(const Ref<Texture>& image, const ImVec2& size, const ImVec2& uv0 = ImVec2(0, 1),
+                   const ImVec2& uv1 = ImVec2(1, 0), int frame_padding = -1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0),
+                   const ImVec4& tint_col = ImVec4(1, 1, 1, 1));
+  /// This function renders the image button
+  /// - Parameters:
+  ///   - stringID: string ID
+  ///   - image: Image Texture
+  ///   - size: Buttoren Size
+  bool ImageButton(const char* stringID, const Ref<Texture>& image, const ImVec2& size, const ImVec2& uv0 = ImVec2(0, 1),
+                   const ImVec2& uv1 = ImVec2(1, 0), int frame_padding = -1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0),
+                   const ImVec4& tint_col = ImVec4(1, 1, 1, 1));
+  
+  
+  // Draw APIs -------------------------------------------------------------------------------------------------------
+  /// This function Draw the button Texture
+  /// - Parameters:
+  ///   - TextureNormal: Button Texture texture
+  ///   - TextureHovered: Button Hovered Texture texture
+  ///   - TexturePressed: Button pressed Texture texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  ///   - rectMin: rect Min
+  ///   - rectMax: rext Max
+  void DrawButtonImage(const Ref<IKan::Texture>& TextureNormal, const Ref<IKan::Texture>& TextureHovered, const Ref<IKan::Texture>& TexturePressed,
+                       const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed, const ImVec2& rectMin, const ImVec2& rectMax);
+  /// This function Draw the button Texture
+  /// - Parameters:
+  ///   - TextureNormal: Button Texture texture
+  ///   - TextureHovered: Button Hovered Texture texture
+  ///   - TexturePressed: Button pressed Texture texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  ///   - rectangle: rectangle vertex
+  void DrawButtonImage(const Ref<IKan::Texture>& TextureNormal, const Ref<IKan::Texture>& TextureHovered, const Ref<IKan::Texture>& TexturePressed,
+                       const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed, const ImRect& rectangle);
+  /// This function Draw the button Texture
+  /// - Parameters:
+  ///   - Texture: Button Texture texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  ///   - rectMin: rect Min
+  ///   - rectMax: rext Max
+  void DrawButtonImage(const Ref<IKan::Texture>& Texture, const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed, const ImVec2& rectMin, const ImVec2& rectMax);
+  /// This function Draw the button Texture
+  /// - Parameters:
+  ///   - TextureNormal: Button Texture texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  ///   - rectangle: rectangle vertex
+  void DrawButtonImage(const Ref<IKan::Texture>& Texture, const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed, const ImRect& rectangle);
+  /// This function Draw the button Texture
+  /// - Parameters:
+  ///   - TextureNormal: Button Texture texture
+  ///   - TextureHovered: Button Hovered Texture texture
+  ///   - TexturePressed: Button pressed Texture texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  void DrawButtonImage(const Ref<IKan::Texture>& TextureNormal, const Ref<IKan::Texture>& TextureHovered, const Ref<IKan::Texture>& TexturePressed,
+                       const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed);
+  /// This function Draw the button Texture
+  /// - Parameters:
+  ///   - Texture: Button Texture texture
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  void DrawButtonImage(const Ref<IKan::Texture>& Texture, const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed);
+  /// This function draw the Activity outline
+  /// - Parameters:
+  ///   - rounding: Outline rounding
+  ///   - drawWhenInactive: Flag to draw when inactive
+  ///   - colourWhenActive: Color when active
+  void DrawItemActivityOutline(float rounding = 0.0f, bool drawWhenInactive = false, const ImColor& colourWhenActive = ImColor(80, 80, 80));
+  
+  /// This function renders the line in Ingui
+  void DrawUnderline(bool fullWidth = false, float offsetX = 0.0f, float offsetY = -1.0f);
+  
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - radius: radius of shadow
+  ///   - rectMin: rect min
+  ///   - rectMax: rect Max
+  void DrawShadow(const Ref<IKan::Texture>& shadowTexture, int radius, const ImVec2& rectMin, const ImVec2& rectMax,
+                  float alphMultiplier = 1.0f, float lengthStretch = 10.0f, bool drawLeft = true, bool drawRight = true,
+                  bool drawTop = true, bool drawBottom = true);
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - radius: radius of shadow
+  ///   - rectangle: rectangle Data
+  void DrawShadow(const Ref<IKan::Texture>& shadowTexture, int radius, const ImRect& rectangle, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
+                  bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - radius: radius of shadow
+  void DrawShadow(const Ref<IKan::Texture>& shadow_Texture, int radius, float alphMultiplier = 1.0f, float lengthStretch = 10.0f,
+                  bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - radius: radius of shadow
+  ///   - rectMin: rect min
+  ///   - rectMax: rect Max
+  void DrawShadowInner(const Ref<IKan::Texture>& shadowTexture, int radius, const ImVec2& rectMin, const ImVec2& rectMax, float alpha = 1.0f,
+                       float lengthStretch = 10.0f, bool drawLeft = true, bool drawRight = true, bool drawTop = true,
+                       bool drawBottom = true);
+  
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - radius: radius of shadow
+  ///   - rectangle: rectangle Data
+  void DrawShadowInner(const Ref<IKan::Texture>& shadowTexture, int radius, const ImRect& rectangle, float alpha = 1.0f, float lengthStretch = 10.0f,
+                       bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - radius: radius of shadow
+  void DrawShadowInner(const Ref<IKan::Texture>& shadowTexture, int radius, float alpha = 1.0f, float lengthStretch = 10.0f,
+                       bool drawLeft = true, bool drawRight = true, bool drawTop = true, bool drawBottom = true);
+  
+  // Imgui Customs ---------------------------------------------------------------------------------------------------
+  bool TreeNodeWithIcon(Ref<IKan::Texture> icon, ImGuiID id, ImGuiTreeNodeFlags flags, const char* label, const char* label_end, const ImColor& iconTint = IM_COL32_WHITE);
+  bool TreeNodeWithIcon(Ref<IKan::Texture> icon, const void* ptr_id, ImGuiTreeNodeFlags flags, const ImColor& iconTint, const char* fmt, ...);
+  bool TreeNodeWithIcon(Ref<IKan::Texture> icon, const char* label, ImGuiTreeNodeFlags flags, const ImColor& iconTint = IM_COL32_WHITE);
+
 } // namespace Kreator::UI

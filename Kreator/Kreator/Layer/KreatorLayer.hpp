@@ -13,6 +13,8 @@ using namespace IKan;
 
 namespace Kreator
 {
+  static const std::string KreatorVersion = "3.0";
+
   class KreatorLayer : public Layer
   {
   public:
@@ -64,5 +66,6 @@ namespace Kreator
     // Applicaiton Icons ---------------------------------
     Ref<Texture> m_shadowTexture;
     Ref<Texture> m_applicationIcon, m_welcomeIcon;
+    Ref<Texture> m_newProjectIcon, m_folderIcon;
   };
 } // namespace Kreator
