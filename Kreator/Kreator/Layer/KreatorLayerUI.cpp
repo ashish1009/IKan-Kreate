@@ -61,7 +61,19 @@ namespace Kreator
             auto* drawList = ImGui::GetWindowDrawList();
             drawList->AddImage(UI::GetTextureID(m_welcomeIcon), logoRectStart, logoRectMax, {0, 1}, {1, 0});
           }
-        } // Begin child Aboute
+          
+          // Welcome Header -------
+          {
+            UI::SetCursorPosY(logoSize + ImGui::GetCurrentWindow()->WindowPadding.y + 10);
+            {
+              UI::ScopedFont header(UI::GetHugeHeaderFont());
+              static std::string welcomeText = "Welcome to IKan-Kreate";
+              UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(welcomeText.c_str()).x / 2);
+              ImGui::Text("%s", welcomeText.c_str());
+            }
+          }
+
+        } // Begin child About
         ImGui::EndChild(); // About/New_Project
         ImGui::EndTable();
       } // Begin Table

@@ -69,4 +69,48 @@ namespace Kreator::UI
     }
   }
 
+  void ShiftCursorX(float distance)
+  {
+    ImGui::SetCursorPosX(ImGui::GetCursorPosX() + distance);
+  }
+  void ShiftCursorY(float distance)
+  {
+    ImGui::SetCursorPosY(ImGui::GetCursorPosY() + distance);
+  }
+  void ShiftCursor(float x, float y)
+  {
+    const ImVec2 cursor = ImGui::GetCursorPos();
+    ImGui::SetCursorPos(ImVec2(cursor.x + x, cursor.y + y));
+  }
+  void ShiftCursor(ImVec2 val)
+  {
+    const ImVec2 cursor = ImGui::GetCursorPos();
+    ImGui::SetCursorPos(ImVec2(cursor.x + val.x, cursor.y + val.y));
+  }
+  
+  void SetCursorPos(float x, float y)
+  {
+    ImGui::SetCursorPos({x, y});
+  }
+  void SetCursorPos(const ImVec2& val)
+  {
+    ImGui::SetCursorPos(val);
+  }
+  void SetCursorPosX(float x)
+  {
+    ImGui::SetCursorPosX(x);
+  }
+  void SetCursorPosY(float y)
+  {
+    ImGui::SetCursorPosY(y);
+  }
+  void SameLine(float offsetFromStartX, float spacing)
+  {
+    ImGui::SameLine(offsetFromStartX, spacing);
+  }
+  void NewLine()
+  {
+    ImGui::NewLine();
+  }
+
 } // namespace Kreator::UI

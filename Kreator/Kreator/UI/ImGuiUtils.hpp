@@ -38,5 +38,37 @@ namespace Kreator::UI
   /// This function Ends the disable
   void EndDisabled();
 
+  /// This function shift the cursor position for x
+  /// - Parameter distance: distance x
+  void ShiftCursorX(float distance);
+  /// This function shift the cursor position for y
+  /// - Parameter distance: distance y
+  void ShiftCursorY(float distance);
+  /// This function shift the cursor position
+  /// - Parameters:
+  ///   - x: x distance
+  ///   - y: y distance
+  void ShiftCursor(float x, float y);
+  /// This function shift the cursor position
+  /// - Parameters:
+  ///   - x: x value
+  ///   - y: y value
+  void SetCursorPos(float x, float y);
+  /// This function shift the cursor position
+  /// - Parameter val: New shift value
+  void SetCursorPos(const ImVec2& val);
+  /// This function shift the cursor position for x
+  /// - Parameter distance: val x
+  void SetCursorPosX(float x);
+  /// This function shift the cursor position for y
+  /// - Parameter distance: val y
+  void SetCursorPosY(float y);
+  /// This function create same line
+  /// - Parameters:
+  ///   - offsetFromStartX: offset from sstart point
+  ///   - spacing: space after last item
+  void SameLine(float offsetFromStartX = 0.0f, float spacing = -1.0f);
+  /// This function create same line
+  void NewLine();
 
 } // namespace Kreator::UI
