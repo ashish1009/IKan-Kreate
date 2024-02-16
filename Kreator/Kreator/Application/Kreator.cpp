@@ -8,6 +8,7 @@
 #include "Kreator.hpp"
 #include "Layer/KreatorLayer.hpp"
 #include "Editor/UserPreferences.hpp"
+#include "Editor/FolderExplorer.hpp"
 
 namespace Kreator
 {
@@ -62,12 +63,19 @@ namespace Kreator
     // Create and Push the Rendere Layer --------------------------------------------------------
     m_kreatorLayer = CreateRef<KreatorLayer>(m_clientResourcePath, userPreferences);
     PushLayer(m_kreatorLayer);
+    
+    // Initialize the Kreator Modules -------------------------------------------------------------
+    // Should get initialized after layer initialize
+    FolderExplorer::Initialize();
   }
   
   void KreatorApp::OnShutdown()
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Shutting Down the Renderer Application");
+
+    // Shutdown the Kreator Modules -------------------------------------------------------------
+    FolderExplorer::Shutdown();
 
     // Destroy and Pop the Rendere Layer --------------------------------------------------------
     PopLayer(m_kreatorLayer);
