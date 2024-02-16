@@ -60,5 +60,9 @@ namespace Kreator
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};
     Ref<UserPreferences> m_userPreferences;
+    
+    // Applicaiton Icons ---------------------------------
+    Ref<Texture> m_shadowTexture;
+    Ref<Texture> m_applicationIcon, m_welcomeIcon;
   };
 } // namespace Kreator

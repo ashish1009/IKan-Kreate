@@ -55,8 +55,6 @@ namespace Kreator
       serializer.Deserialize(userPreferenceFile);
     }
 
-    userPreferences->theme = UserPreferences::Theme::Dark;
-
     IK_LOG_INFO("Kreator App", "Initializing the Renderer Application");
     IK_LOG_INFO("Kreator App", "  Kreator Resources Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath));
     IK_LOG_INFO("Kreator App", "  User Data Path           : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath));

@@ -30,7 +30,11 @@ namespace Kreator::UI
     memcpy(s_bufferID, result.c_str(), 16);
     return s_bufferID;
   }
-  
+  ImTextureID GetTextureID(Ref<IKan::Texture> texture)
+  {
+    return (ImTextureID)INT2VOIDP(texture->GetRendererID());
+  }
+
   void SetNextWindowAtCenter()
   {
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();

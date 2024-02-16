@@ -21,6 +21,9 @@
 // This MACRO Shifts the LSB bit of number 1 at position x
 #define BIT(x) (1 << x)
 
+// This MACRO Cast uint32_t into void pointer
+#define INT2VOIDP(i)    (void*)(uintptr_t)(i)
+
 // Enum Creation Macro ------------------------------------------------------------------------------------------------
 /// Helper MACRO for Enum creation
 #define VAL(name) name ,

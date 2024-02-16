@@ -49,6 +49,11 @@ namespace Kreator
     {
       m_showWelcomePopup = true;
     }
+    
+    // Load Textures --------------------
+    // Set the Application Icon
+    m_applicationIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
+    m_welcomeIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/WelcomeIKan.png"));
   }
   
   KreatorLayer::~KreatorLayer()

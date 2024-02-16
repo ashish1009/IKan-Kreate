@@ -17,7 +17,10 @@ namespace Kreator::UI
   void PopID();
   /// This function generate unique ID for ImGui
   const char* GenerateID();
-  
+  /// This function returns the Texutre Renderer ID for ImGui
+  /// - Parameter texture: texture
+  ImTextureID GetTextureID(Ref<Texture> texture);
+
   /// This function set the next imgui window at center
   void SetNextWindowAtCenter();
   /// This function set the next imgui window at center with size
