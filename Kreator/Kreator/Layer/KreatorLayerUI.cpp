@@ -6,6 +6,7 @@
 //
 
 #include "KreatorLayer.hpp"
+#include "Editor/FolderExplorer.hpp"
 
 namespace Kreator
 {
@@ -201,6 +202,7 @@ namespace Kreator
         if (UI::DrawRoundButton("...", UI::ColorVec3FromU32(UI::Color::BackgroundDark), 5))
         {
           ImGui::CloseCurrentPopup();
+          FolderExplorer::Select();
         }
       }
 
@@ -226,5 +228,10 @@ namespace Kreator
       ImGui::PopStyleVar();
       ImGui::EndPopup();
     } // Begin Popup Model
+  }
+  
+  void KreatorLayer::UI_FolderExplorer()
+  {
+    std::filesystem::path explorerOutput = FolderExplorer::Explore();
   }
 } // namespace Kreator

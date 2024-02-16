@@ -97,6 +97,7 @@ namespace Kreator
   {
     UI_WelcomePopup();
     UI_NewProjectPopup();
+    UI_FolderExplorer();
   }
   
   // Project API ---------------------------------------

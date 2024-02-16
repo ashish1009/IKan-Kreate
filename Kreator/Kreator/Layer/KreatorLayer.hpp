@@ -56,6 +56,8 @@ namespace Kreator
     void UI_WelcomePopup();
     /// This function shows new project popup
     void UI_NewProjectPopup();
+    /// This function update the folder explorer output
+    void UI_FolderExplorer();
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
