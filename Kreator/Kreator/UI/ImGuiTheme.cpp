@@ -20,9 +20,9 @@ namespace Kreator::UI
         UI::Color::TextBrighter         = IM_COL32(255, 0, 0, 255);
         UI::Color::Muted                = IM_COL32(255, 0, 0, 255);
         UI::Color::Background           = IM_COL32(255, 0, 0, 255);
-        UI::Color::BackgroundPopup      = IM_COL32(255, 0, 0, 255);
+        UI::Color::BackgroundPopup      = IM_COL32(43, 43, 43, 255);
         UI::Color::BackgroundDark       = IM_COL32(255, 0, 0, 255);
-        UI::Color::WindowDimBg          = IM_COL32(255, 0, 0, 255);
+        UI::Color::WindowDimBg          = IM_COL32(25, 25, 25, 255);
         UI::Color::Titlebar             = IM_COL32(255, 0, 0, 255);
         UI::Color::TitleBarDark         = IM_COL32(255, 0, 0, 255);
         UI::Color::ActiveTab            = IM_COL32(255, 0, 0, 255);
@@ -39,9 +39,9 @@ namespace Kreator::UI
         UI::Color::TextBrighter         = IM_COL32(255, 0, 0, 255);
         UI::Color::Muted                = IM_COL32(255, 0, 0, 255);
         UI::Color::Background           = IM_COL32(255, 0, 0, 255);
-        UI::Color::BackgroundPopup      = IM_COL32(255, 0, 0, 255);
+        UI::Color::BackgroundPopup      = IM_COL32(43, 63, 91, 255);
         UI::Color::BackgroundDark       = IM_COL32(255, 0, 0, 255);
-        UI::Color::WindowDimBg          = IM_COL32(255, 0, 0, 255);
+        UI::Color::WindowDimBg          = IM_COL32(15, 25, 45, 255);
         UI::Color::Titlebar             = IM_COL32(255, 0, 0, 255);
         UI::Color::TitleBarDark         = IM_COL32(255, 0, 0, 255);
         UI::Color::ActiveTab            = IM_COL32(255, 0, 0, 255);
@@ -58,9 +58,9 @@ namespace Kreator::UI
         UI::Color::TextBrighter         = IM_COL32(255, 0, 0, 255);
         UI::Color::Muted                = IM_COL32(255, 0, 0, 255);
         UI::Color::Background           = IM_COL32(255, 0, 0, 255);
-        UI::Color::BackgroundPopup      = IM_COL32(255, 0, 0, 255);
+        UI::Color::BackgroundPopup      = IM_COL32(143, 143, 143, 255);
         UI::Color::BackgroundDark       = IM_COL32(255, 0, 0, 255);
-        UI::Color::WindowDimBg          = IM_COL32(255, 0, 0, 255);
+        UI::Color::WindowDimBg          = IM_COL32(115, 115, 115, 255);
         UI::Color::Titlebar             = IM_COL32(255, 0, 0, 255);
         UI::Color::TitleBarDark         = IM_COL32(255, 0, 0, 255);
         UI::Color::ActiveTab            = IM_COL32(255, 0, 0, 255);
@@ -88,7 +88,7 @@ namespace Kreator::UI
     colors[ImGuiCol_Border]                 = ImGui::ColorConvertU32ToFloat4(UI::Color::BackgroundDark);
     
     // Borders
-    colors[ImGuiCol_Border]                 = ImVec4(1, 0, 0, 1);
+    colors[ImGuiCol_Border]                 = ImVec4(0, 0, 0, 0);
     colors[ImGuiCol_BorderShadow]           = ImVec4(1, 0, 0, 1);
     
     // Frame : Checkbox BG, Text BG, Drop Menue BG
@@ -133,10 +133,10 @@ namespace Kreator::UI
     colors[ImGuiCol_SeparatorHovered]       = ImVec4(1, 0, 0, 1);
     
     // Resize
-    colors[ImGuiCol_ResizeGrip]             = ImVec4(1, 0, 0, 1);
-    colors[ImGuiCol_ResizeGripHovered]      = ImVec4(1, 0, 0, 1);
-    colors[ImGuiCol_ResizeGripActive]       = ImVec4(1, 0, 0, 1);
-    
+    colors[ImGuiCol_ResizeGrip]             = ImVec4(0.91f, 0.91f, 0.91f, 0.01f);
+    colors[ImGuiCol_ResizeGripHovered]      = ImVec4(0.81f, 0.81f, 0.81f, 0.01f);
+    colors[ImGuiCol_ResizeGripActive]       = ImVec4(0.46f, 0.46f, 0.46f, 0.01f);
+
     // Widget Tab Tabs
     colors[ImGuiCol_Tab]                    = ImGui::ColorConvertU32ToFloat4(UI::Color::Titlebar);
     colors[ImGuiCol_TabHovered]             = ImGui::ColorConvertU32ToFloat4(UI::Color::BackgroundPopup);
