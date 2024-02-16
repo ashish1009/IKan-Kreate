@@ -29,5 +29,11 @@ namespace Kreator::UI
   /// This function set the next imgui window size
   /// - Parameter size: size of next window
   void SetNextWindowSize(const ImVec2& size);
+  
+  /// This function begin disable
+  void BeginDisabled(bool disabled = true);
+  /// This function Ends the disable
+  void EndDisabled();
+
 
 } // namespace Kreator::UI

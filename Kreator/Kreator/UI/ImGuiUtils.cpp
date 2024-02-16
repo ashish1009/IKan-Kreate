@@ -9,8 +9,8 @@
 
 namespace Kreator::UI
 {
-  static int32_t s_UIContextID = 0;
-  static uint32_t s_counter = 0;
+  static int32_t s_UIContextID{0};
+  static uint32_t s_counter{0};
   static char s_bufferID[16] = "##";
 
   void PushID()
@@ -25,7 +25,7 @@ namespace Kreator::UI
   }
   const char* GenerateID()
   {
-    std::string result = "##";
+    std::string result {"##"};
     result += std::to_string(s_counter++);
     memcpy(s_bufferID, result.c_str(), 16);
     return s_bufferID;
@@ -49,4 +49,20 @@ namespace Kreator::UI
   {
     ImGui::SetNextWindowSize(size);
   }
+  
+  void BeginDisabled(bool disabled)
+  {
+    if (disabled)
+    {
+      ImGui::BeginDisabled(true);
+    }
+  }
+  void EndDisabled()
+  {
+    if (GImGui->DisabledStackSize > 0)
+    {
+      ImGui::EndDisabled();
+    }
+  }
+
 } // namespace Kreator::UI
