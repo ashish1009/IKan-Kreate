@@ -49,12 +49,12 @@ namespace Kreator
           // Draw Kreator Logo -----
           {
             const ImVec2 logoOffset(windowPadding.x, windowPadding.y);
-            const ImVec2 logoRectStart =
+            const ImVec2 logoRectStart
             {
               ImGui::GetItemRectMin().x + (ImGui::GetColumnWidth() / 2 - logoSize / 2),
               ImGui::GetItemRectMin().y
             };
-            const ImVec2 logoRectMax =
+            const ImVec2 logoRectMax
             {
               logoRectStart.x + logoSize,
               logoRectStart.y + logoSize

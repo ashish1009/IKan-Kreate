@@ -9,6 +9,7 @@
 #include "Layer/KreatorLayer.hpp"
 #include "Editor/UserPreferences.hpp"
 #include "Editor/FolderExplorer.hpp"
+#include "UI/ImGuiWidget.hpp"
 
 namespace Kreator
 {
@@ -68,6 +69,7 @@ namespace Kreator
     // Initialize the Kreator Modules -------------------------------------------------------------
     // Should get initialized after layer initialize
     FolderExplorer::Initialize();
+    UI::Widgets::Initialize();
   }
   
   void KreatorApp::OnShutdown()
@@ -77,6 +79,7 @@ namespace Kreator
 
     // Shutdown the Kreator Modules -------------------------------------------------------------
     FolderExplorer::Shutdown();
+    UI::Widgets::Shutdown();
 
     // Destroy and Pop the Rendere Layer --------------------------------------------------------
     PopLayer(m_kreatorLayer);
