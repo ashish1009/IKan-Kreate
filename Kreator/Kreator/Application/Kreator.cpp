@@ -12,8 +12,8 @@
 
 namespace Kreator
 {
-  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec, const std::filesystem::path& clientResourcePath)
-  : Application(appSpec), m_clientResourcePath(clientResourcePath)
+  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec, const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath)
+  : Application(appSpec), m_clientResourcePath(clientResourcePath), m_systemUserPath(systemUserPath)
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Creating Kreator Application");
@@ -61,7 +61,7 @@ namespace Kreator
     IK_LOG_INFO("Kreator App", "  User Data Path           : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath).string());
 
     // Create and Push the Rendere Layer --------------------------------------------------------
-    m_kreatorLayer = CreateRef<KreatorLayer>(m_clientResourcePath, userPreferences);
+    m_kreatorLayer = CreateRef<KreatorLayer>(m_clientResourcePath, m_systemUserPath, userPreferences);
     PushLayer(m_kreatorLayer);
     
     // Initialize the Kreator Modules -------------------------------------------------------------
@@ -125,7 +125,8 @@ Scope<Application> CreateApplication()
   // Editor Data --------------------------------------------------------------------------
   // TODO: Extract from arguments
   std::filesystem::path clientResourcePath {"../../../Kreator/Resources"};
-  
+  std::filesystem::path systemUserPath {"/Users/ashish./iKan_storage"};
+
   // Return the Application
-  return IKan::Application::CreateApplication<Kreator::KreatorApp>(appSpec, clientResourcePath);
+  return IKan::Application::CreateApplication<Kreator::KreatorApp>(appSpec, clientResourcePath, systemUserPath);
 }

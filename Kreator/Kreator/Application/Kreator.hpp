@@ -14,7 +14,7 @@ namespace Kreator
   class KreatorApp : public Application
   {
   public:
-    KreatorApp(const ApplicationSpecification& appSpec, const std::filesystem::path& clientResourcePath);
+    KreatorApp(const ApplicationSpecification& appSpec, const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath);
     ~KreatorApp();
     
     void OnInit() override;
@@ -24,6 +24,6 @@ namespace Kreator
     
   private:
     Ref<Layer> m_kreatorLayer;
-    std::filesystem::path m_clientResourcePath {};
+    std::filesystem::path m_clientResourcePath {}, m_systemUserPath {};
   };
 } // namespace Kreator

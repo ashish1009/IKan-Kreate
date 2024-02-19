@@ -21,6 +21,7 @@ namespace Kreator
     PopupType popupType {PopupType::Invalid};
 
     Ref<Texture> shadowTexture;
+    Ref<Texture> folderIcon;
   };
   static Scope<Data> s_fileExplorerData;
 
@@ -30,6 +31,7 @@ namespace Kreator
     IK_LOG_TRACE("FolderExplorer", "Initialising the FolderExplorer textures");
     s_fileExplorerData = CreateScope<Data>();
     s_fileExplorerData->shadowTexture = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/ShadowLineTop.png");
+    s_fileExplorerData->folderIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Folder.png");
   }
   
   void FolderExplorer::Shutdown()
@@ -50,7 +52,6 @@ namespace Kreator
     }
     
     UI::SetNextWindowAtCenterWithSize({900, 600});
-    UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(0.0f, 0.0f));
 
     if (ImGui::BeginPopupModal("Kreator File Viewer", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMove ))
     {
@@ -105,6 +106,48 @@ namespace Kreator
             ImGui::TableSetColumnIndex(0);
             ImGui::BeginChild("##folders_common");
             {
+              UI::ScopedColor header(ImGuiCol_Header, UI::Color::Titlebar);
+              if (ImGui::CollapsingHeader("System", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
+              {
+                UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+                UI::ScopedColorStack itemBg(ImGuiCol_Header, IM_COL32_DISABLE, ImGuiCol_HeaderActive, IM_COL32_DISABLE);
+                
+                static std::filesystem::path BaseDirectory = KreatorLayer::Get().GetSystemUserPath();
+                for (const auto& directory : std::filesystem::directory_iterator(BaseDirectory))
+                {
+                  const std::filesystem::path& path = directory.path();
+                  std::string name = path.filename().string();
+                  
+#ifdef __APPLE__
+                  if (name == ".DS_Store")
+                  {
+                    continue;
+                  }
+#endif
+                  std::string id = name + "_TreeNode";
+
+                  // ImGui item height hack
+                  auto* window = ImGui::GetCurrentWindow();
+                  window->DC.CurrLineSize.y = 20.0f;
+                  window->DC.CurrLineTextBaseOffset = 3.0f;
+
+                  bool open = UI::TreeNode(id, name, ImGuiTreeNodeFlags_SpanFullWidth, s_fileExplorerData->folderIcon);
+
+                  // Fixing slight overlap
+                  UI::ShiftCursorY(3.0f);
+
+                  if (open)
+                  {
+                  }
+                                  
+                  // Close Popup
+                  if (open)
+                  {
+                    ImGui::TreePop();
+                  }
+                }
+              }
+              
               // Draw side shadow
               ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
               ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);

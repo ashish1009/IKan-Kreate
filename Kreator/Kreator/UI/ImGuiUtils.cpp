@@ -9,32 +9,69 @@
 
 namespace Kreator::UI
 {
-  static int32_t s_UIContextID{0};
-  static uint32_t s_counter{0};
+  static int32_t s_UIContextID = 0;
+  static uint32_t s_counter = 0;
   static char s_bufferID[16] = "##";
-
+  static char s_labeledBufferID[1024];
+  
+  // Wrappers --------------------------------------------------------------------------------------------------------
+  ImTextureID GetTextureID(Ref<IKan::Texture> texture)
+  {
+    return (ImTextureID)INT2VOIDP(texture->GetRendererID());
+  }
   void PushID()
   {
     ImGui::PushID(s_UIContextID++);
     s_counter = 0;
-  }  
+  }
+  
   void PopID()
   {
     ImGui::PopID();
     s_UIContextID--;
   }
+  
   const char* GenerateID()
   {
-    std::string result {"##"};
+    std::string result = "##";
     result += std::to_string(s_counter++);
     memcpy(s_bufferID, result.c_str(), 16);
     return s_bufferID;
   }
-  ImTextureID GetTextureID(Ref<IKan::Texture> texture)
+  const char* GenerateLabelID(const std::string_view& label)
   {
-    return (ImTextureID)INT2VOIDP(texture->GetRendererID());
+    *fmt::format_to_n(s_labeledBufferID, std::size(s_labeledBufferID), "{}##{}", label, s_counter++).out = 0;
+    return s_labeledBufferID;
   }
-
+  
+  bool InvisibleButton(const ImVec2& size)
+  {
+    UI::ScopedColor noTintButton(ImGuiCol_Button, IM_COL32(11, 11, 11, 0));
+    UI::ScopedColor noTintButtonHovered(ImGuiCol_ButtonHovered, IM_COL32(11, 11, 11, 0));
+    UI::ScopedColor noTintButtonActive(ImGuiCol_ButtonActive, IM_COL32(11, 11, 11, 0));
+    return ImGui::Button(GenerateID(), size);
+  }
+  
+  bool DrawRoundButton(const char* title, glm::vec3 color, float r)
+  {
+    ImGui::PushID(title);
+    UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, r);
+    
+    
+    ImVec4 tintNormal = {color.r, color.g, color.b, 0.4};
+    ImVec4 tintHovered = {color.r, color.g, color.b, 0.3};
+    ImVec4 tintPressed = {color.r, color.g, color.b, 0.5};
+    
+    UI::ScopedColor button(ImGuiCol_Button, tintNormal);
+    UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, tintHovered);
+    UI::ScopedColor buttonavtive(ImGuiCol_ButtonActive, tintPressed);
+    
+    bool clicked = ImGui::Button(title);
+    
+    ImGui::PopID();
+    return clicked;
+  }
+  
   void SetNextWindowAtCenter()
   {
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();
@@ -54,21 +91,10 @@ namespace Kreator::UI
     ImGui::SetNextWindowSize(size);
   }
   
-  void BeginDisabled(bool disabled)
+  void SetCursor(const ImVec2& pos)
   {
-    if (disabled)
-    {
-      ImGui::BeginDisabled(true);
-    }
+    ImGui::SetCursorPos(pos);
   }
-  void EndDisabled()
-  {
-    if (GImGui->DisabledStackSize > 0)
-    {
-      ImGui::EndDisabled();
-    }
-  }
-
   void ShiftCursorX(float distance)
   {
     ImGui::SetCursorPosX(ImGui::GetCursorPosX() + distance);
@@ -112,7 +138,194 @@ namespace Kreator::UI
   {
     ImGui::NewLine();
   }
-
+  
+  bool IsItemHovered()
+  {
+    return ImGui::IsItemHovered();
+  }
+  bool IsItemDisabled()
+  {
+    return ImGui::GetItemFlags() & ImGuiItemFlags_Disabled;
+  }
+  
+  bool NavigatedTo()
+  {
+    ImGuiContext& g = *GImGui;
+    return g.NavJustMovedToId == g.LastItemData.ID;
+  }
+  
+  bool TreeNode(const std::string& id, const std::string& label, ImGuiTreeNodeFlags flags, const Ref<IKan::Texture>& icon)
+  {
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    if (window->SkipItems)
+    {
+      return false;
+    }
+    
+    return UI::TreeNodeWithIcon(icon, window->GetID(id.c_str()), flags, label.c_str(), NULL);
+  }
+  void SetTooltip(const std::string_view& text)
+  {
+    if (IsItemHovered())
+    {
+      UI::ScopedColor textCol(ImGuiCol_Text, UI::Color::TextBrighter);
+      ImGui::SetTooltip(text.data());
+    }
+  }
+  
+  // Begin End Util API ---------------------------------------------------------------------------------------------
+  bool BeginMenuBar(const ImRect& barRectangle)
+  {
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    if (window->SkipItems)
+    {
+      return false;
+    }
+    
+    IM_ASSERT(!window->DC.MenuBarAppending);
+    ImGui::BeginGroup(); // Backup position on layer 0
+    ImGui::PushID("##menubar");
+    
+    const ImVec2 padding = window->WindowPadding;
+    
+    // We don't clip with current window clipping rectangle as it is already set to the area below.
+    // However we clip with window full rect. We remove 1 worth of rounding to Max.x to that text
+    // in long menus and small windows don't tend to display over the lower-right rounded area, which
+    // looks particularly glitchy.
+    ImRect barRect = UI::RectOffset(barRectangle, 0.0f, padding.y);
+    ImRect clipRect(IM_ROUND(ImMax(window->Pos.x, barRect.Min.x + window->WindowBorderSize + window->Pos.x - 10.0f)),
+                    IM_ROUND(barRect.Min.y + window->WindowBorderSize + window->Pos.y),
+                    IM_ROUND(ImMax(barRect.Min.x + window->Pos.x, barRect.Max.x - ImMax(window->WindowRounding, window->WindowBorderSize))),
+                    IM_ROUND(barRect.Max.y + window->Pos.y));
+    
+    clipRect.ClipWith(window->OuterRectClipped);
+    ImGui::PushClipRect(clipRect.Min, clipRect.Max, false);
+    
+    // We overwrite CursorMaxPos because BeginGroup sets it to CursorPos (essentially the Emit Item
+    // hack in EndMenuBar() would need something analogous here, maybe a BeginGroupEx() with flags).
+    window->DC.CursorPos = window->DC.CursorMaxPos = ImVec2(barRect.Min.x + window->Pos.x, barRect.Min.y + window->Pos.y);
+    window->DC.LayoutType = ImGuiLayoutType_Horizontal;
+    window->DC.NavLayerCurrent = ImGuiNavLayer_Menu;
+    window->DC.MenuBarAppending = true;
+    ImGui::AlignTextToFramePadding();
+    
+    return true;
+  }
+  
+  void EndMenuBar()
+  {
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    RETURN_IF (window->SkipItems)
+    
+    ImGuiContext& g = *GImGui;
+    
+    // Nav: When a move request within one of our child menu failed, capture the request to
+    // navigate among our siblings.
+    if (ImGui::NavMoveRequestButNoResultYet() and
+        (g.NavMoveDir == ImGuiDir_Left or g.NavMoveDir == ImGuiDir_Right) and
+        (g.NavWindow->Flags & ImGuiWindowFlags_ChildMenu))
+    {
+      // Try to find out if the request is for one of our child menu
+      ImGuiWindow* navEarliestChild = g.NavWindow;
+      while (navEarliestChild->ParentWindow and (navEarliestChild->ParentWindow->Flags & ImGuiWindowFlags_ChildMenu))
+      {
+        navEarliestChild = navEarliestChild->ParentWindow;
+      }
+      
+      if (navEarliestChild->ParentWindow == window and
+          navEarliestChild->DC.ParentLayoutType == ImGuiLayoutType_Horizontal and
+          (g.NavMoveFlags & ImGuiNavMoveFlags_Forwarded) == 0)
+      {
+        // To do so we claim focus back, restore NavId and then process the movement request
+        // for yet another frame. This involve a one-frame delay which isn't very problematic
+        // in this situation. We could remove it by scoring in advance for multiple
+        // window (probably not worth bothering)
+        const ImGuiNavLayer layer = ImGuiNavLayer_Menu;
+        IM_ASSERT(window->DC.NavLayersActiveMaskNext & (1 << layer)); // Sanity check
+        
+        ImGui::FocusWindow(window);
+        ImGui::SetNavID(window->NavLastIds[layer], layer, 0, window->NavRectRel[layer]);
+        
+        g.NavDisableHighlight = true;
+        g.NavDisableMouseHover = g.NavMousePosDirty = true;
+        ImGui::NavMoveRequestForward(g.NavMoveDir, g.NavMoveClipDir, g.NavMoveFlags, g.NavMoveScrollFlags); // Repeat
+      }
+    }
+    
+    // Static Analysis false positive "warning C6011: Dereferencing NULL pointer 'window'"
+    // IM_ASSERT(window->Flags & ImGuiWindowFlags_MenuBar);
+    IM_MSVC_WARNING_SUPPRESS(6011);
+    
+    IM_ASSERT(window->DC.MenuBarAppending);
+    ImGui::PopClipRect();
+    ImGui::PopID();
+    
+    // Save horizontal position so next append can reuse it. This is kinda equivalent to a per-layer CursorPos.
+    window->DC.MenuBarOffset.x = window->DC.CursorPos.x - window->Pos.x;
+    g.GroupStack.back().EmitItem = false;
+    
+    ImGui::EndGroup(); // Restore position on layer 0
+    window->DC.LayoutType = ImGuiLayoutType_Vertical;
+    window->DC.NavLayerCurrent = ImGuiNavLayer_Main;
+    window->DC.MenuBarAppending = false;
+  }
+  void BeginDisabled(bool disabled)
+  {
+    if (disabled)
+      ImGui::BeginDisabled(true);
+  }
+  void EndDisabled()
+  {
+    if (GImGui->DisabledStackSize > 0)
+      ImGui::EndDisabled();
+  }
+  bool BeginPopup(const char* strID, ImGuiWindowFlags flags)
+  {
+    bool opened = false;
+    if (ImGui::BeginPopup(strID, flags))
+    {
+      opened = true;
+      // Fill background wiht nice gradient
+      const float padding = ImGui::GetStyle().WindowBorderSize;
+      const ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), -padding, -padding);
+      ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
+      
+      const ImColor col1 = ImGui::GetStyleColorVec4(ImGuiCol_PopupBg);// Colours::Theme::backgroundPopup;
+      const ImColor col2 = UI::ColorWithMultipliedValue(col1, 0.8f);
+      
+      ImGui::GetWindowDrawList()->AddRectFilledMultiColor(windowRect.Min, windowRect.Max, col1, col1, col2, col2);
+      ImGui::GetWindowDrawList()->AddRect(windowRect.Min, windowRect.Max, UI::ColorWithMultipliedValue(col1, 1.1f));
+      ImGui::PopClipRect();
+      
+      // Popped in EndPopup()
+      ImGui::PushStyleColor(ImGuiCol_HeaderHovered, IM_COL32(0, 0, 0, 80));
+      ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(1.0f, 1.0f));
+    }
+    
+    return opened;
+  }
+  
+  void EndPopup()
+  {
+    ImGui::PopStyleVar(); // WindowPadding;
+    ImGui::PopStyleColor(); // HeaderHovered;
+    ImGui::EndPopup();
+  }
+  bool BeginTreeNode(const char* name, bool defaultOpen)
+  {
+    ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_FramePadding;
+    if (defaultOpen)
+    {
+      treeNodeFlags |= ImGuiTreeNodeFlags_DefaultOpen;
+    }
+    return ImGui::TreeNodeEx(name, treeNodeFlags);
+  }
+  
+  void EndTreeNode()
+  {
+    ImGui::TreePop();
+  }
+  
   // Rectangles API -------------------------------------------------------------------------------------------------
   ImRect GetItemRect()
   {
@@ -143,7 +356,7 @@ namespace Kreator::UI
     result.Max.y += y;
     return result;
   }
-
+  
   // Colors ----------------------------------------------------------------------------------------------------------
   ImU32 ColorWithValue(const ImColor& color, float value)
   {
@@ -192,7 +405,7 @@ namespace Kreator::UI
     ImGui::ColorConvertRGBtoHSV(colRow.x, colRow.y, colRow.z, hue, sat, val);
     return ImColor::HSV(std::min(hue * multiplier, 1.0f), sat, val);
   }
-
+  
   // Image API -------------------------------------------------------------------------------------------------
   void Image(const Ref<IKan::Texture>& texture, const ImVec2& size, const ImVec2& uv0, const ImVec2& uv1, const ImVec4& tintCol, const ImVec4& borderCol)
   {
@@ -216,33 +429,6 @@ namespace Kreator::UI
     ImGuiID id = texture->GetRendererID();
     return ImGui::ImageButtonEx(id, INT2VOIDP(texture->GetRendererID()), size, uv0, uv1, bg_col, tint_col);
   }
-  bool InvisibleButton(const ImVec2& size)
-  {
-    UI::ScopedColor noTintButton(ImGuiCol_Button, IM_COL32(11, 11, 11, 0));
-    UI::ScopedColor noTintButtonHovered(ImGuiCol_ButtonHovered, IM_COL32(11, 11, 11, 0));
-    UI::ScopedColor noTintButtonActive(ImGuiCol_ButtonActive, IM_COL32(11, 11, 11, 0));
-    return ImGui::Button(GenerateID(), size);
-  }
-  
-  bool DrawRoundButton(const char* title, glm::vec3 color, float r)
-  {
-    ImGui::PushID(title);
-    UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, r);
-    
-    ImVec4 tintNormal = {color.r, color.g, color.b, 0.4};
-    ImVec4 tintHovered = {color.r, color.g, color.b, 0.3};
-    ImVec4 tintPressed = {color.r, color.g, color.b, 0.5};
-    
-    UI::ScopedColor button(ImGuiCol_Button, tintNormal);
-    UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, tintHovered);
-    UI::ScopedColor buttonavtive(ImGuiCol_ButtonActive, tintPressed);
-    
-    bool clicked = ImGui::Button(title);
-    
-    ImGui::PopID();
-    return clicked;
-  }
-
   // Draw APIs -------------------------------------------------------------------------------------------------------
   void DrawButtonImage(const Ref<IKan::Texture>& imageNormal, const Ref<IKan::Texture>& imageHovered,
                        const Ref<IKan::Texture>& imagePressed, const ImU32& tintNormal, const ImU32& tintHovered,
@@ -733,5 +919,5 @@ namespace Kreator::UI
     
     return TreeNodeWithIcon(icon, window->GetID(label), flags, label, NULL, iconTint);
   }
-
+  
 } // namespace Kreator::UI

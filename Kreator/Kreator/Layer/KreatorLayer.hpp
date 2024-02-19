@@ -22,7 +22,8 @@ namespace Kreator
     /// - Parameters:
     ///   - clientResourcePath: Client resource path
     ///   - userPreferences: User preference
-    KreatorLayer(const std::filesystem::path& clientResourcePath, Ref<UserPreferences> userPreferences);
+    ///   - systemUserPath: System user path
+    KreatorLayer(const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath, Ref<UserPreferences> userPreferences);
     /// Default Destructor
     ~KreatorLayer();
     
@@ -47,6 +48,8 @@ namespace Kreator
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the client file path
     const std::filesystem::path& GetClientResorucePath() const;
+    /// This function returns the system user storage path
+    const std::filesystem::path& GetSystemUserPath() const;
 
     /// This function returns the single instance of the renderer layer
     static KreatorLayer& Get();
@@ -73,6 +76,7 @@ namespace Kreator
 
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};
+    std::filesystem::path m_systemUserPath {};
     Ref<UserPreferences> m_userPreferences;
     
     // Applicaiton Icons ---------------------------------

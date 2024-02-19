@@ -11,16 +11,7 @@ using namespace IKan;
 
 namespace Kreator::UI
 {
-  /// This function push unque id for ImGui
-  void PushID();
-  /// This function pop last used id for ImGui
-  void PopID();
-  /// This function generate unique ID for ImGui
-  const char* GenerateID();
-  /// This function returns the Texutre Renderer ID for ImGui
-  /// - Parameter texture: texture
-  ImTextureID GetTextureID(Ref<Texture> texture);
-
+  // Wrappers --------------------------------------------------------------------------------------------------------
   /// This function set the next imgui window at center
   void SetNextWindowAtCenter();
   /// This function set the next imgui window at center with size
@@ -33,11 +24,6 @@ namespace Kreator::UI
   /// - Parameter size: size of next window
   void SetNextWindowSize(const ImVec2& size);
   
-  /// This function begin disable
-  void BeginDisabled(bool disabled = true);
-  /// This function Ends the disable
-  void EndDisabled();
-
   /// This function shift the cursor position for x
   /// - Parameter distance: distance x
   void ShiftCursorX(float distance);
@@ -63,6 +49,9 @@ namespace Kreator::UI
   /// This function shift the cursor position for y
   /// - Parameter distance: val y
   void SetCursorPosY(float y);
+  /// This function shift the cursor position
+  /// - Parameter val: New shift value
+  void SetCursor(const ImVec2& val);
   /// This function create same line
   /// - Parameters:
   ///   - offsetFromStartX: offset from sstart point
@@ -70,7 +59,67 @@ namespace Kreator::UI
   void SameLine(float offsetFromStartX = 0.0f, float spacing = -1.0f);
   /// This function create same line
   void NewLine();
-
+  /// This function checkes is imgui item hovered
+  bool IsItemHovered();
+  bool IsItemDisabled();
+  
+  /// This function returns the Texutre Renderer ID for ImGui
+  /// - Parameter texture: texture
+  ImTextureID GetTextureID(Ref<Texture> texture);
+  /// This function push unque id for ImGui
+  void PushID();
+  /// This function pop last used id for ImGui
+  void PopID();
+  /// This function generate unique ID for ImGui
+  const char* GenerateID();
+  /// This function generate Unique id for labeled widget
+  /// - Parameter label: Widget lable
+  const char* GenerateLabelID(const std::string_view& label);
+  
+  /// This function Draw invisible button
+  /// - Parameter size: size of button
+  bool InvisibleButton(const ImVec2& size);
+  /// This function creates the rounding button
+  /// - Parameters:
+  ///   - title: Title
+  ///   - color: Background color
+  ///   - rounding: Rounding of button
+  bool DrawRoundButton(const char* title, glm::vec3 color, float rounding);
+  
+  /// This function Check if navigated to current item, e.g. with arrow keys
+  bool NavigatedTo();
+  
+  /// This function renders the Tree node
+  /// - Parameters:
+  ///   - id: Item ID
+  ///   - label: Item Lable
+  ///   - flags: Item Flags
+  ///   - icon: Item Icon Texture
+  bool TreeNode(const std::string& id, const std::string& label, ImGuiTreeNodeFlags flags = 0, const Ref<Texture>& icon = nullptr);
+  /// This function show the tooltip messge
+  /// - Parameter text: message
+  void SetTooltip(const std::string_view& text);
+  
+  // Begin End -------------------------------------------------------------------------------------------------------
+  /// This function draws MenuBar which allows you to specify its rectangle
+  bool BeginMenuBar(const ImRect& barRectangle);
+  /// This function ends MenuBar
+  void EndMenuBar();
+  /// This function begin disable
+  void BeginDisabled(bool disabled = true);
+  /// This function Ends the disable
+  void EndDisabled();
+  /// This function begins the popup
+  /// - Parameter strID: string ID
+  bool BeginPopup(const char* strID, ImGuiWindowFlags flags = 0);
+  /// This function ends the popup
+  void EndPopup();
+  /// This function begins the tree node
+  /// - Parameter name: ndoe name
+  bool BeginTreeNode(const char* name, bool defaultOpen = true);
+  /// This function ends the tree node
+  void EndTreeNode();
+  
   // Rectangles API -------------------------------------------------------------------------------------------------
   /// This function returns the ImGui Item Rectangle vertex
   ImRect GetItemRect();
@@ -91,7 +140,7 @@ namespace Kreator::UI
   ///   - rect: rectangle pos
   ///   - xy: offset
   ImRect RectOffset(const ImRect& rect, const ImVec2& xy);
-
+  
   // Colors ----------------------------------------------------------------------------------------------------------
   /// This function add the color to some value
   /// - Parameters:
@@ -123,7 +172,7 @@ namespace Kreator::UI
   ///   - color: color
   ///   - multiplier: multiplier
   ImU32 ColorWithMultipliedHue(const ImColor& color, float multiplier);
-
+  
   // Buttons -----------------------------------------------------------------------------------------------------------
   /// This function renders the Texture button
   /// - Parameters:
@@ -140,16 +189,7 @@ namespace Kreator::UI
   bool TextureButton(const char* stringID, const Ref<Texture>& Texture, const ImVec2& size, const ImVec2& uv0 = ImVec2(0, 1),
                      const ImVec2& uv1 = ImVec2(1, 0), int frame_padding = -1, const ImVec4& bg_col = ImVec4(0, 0, 0, 0),
                      const ImVec4& tint_col = ImVec4(1, 1, 1, 1));
-  /// This function Draw invisible button
-  /// - Parameter size: size of button
-  bool InvisibleButton(const ImVec2& size);
-  /// This function creates the rounding button
-  /// - Parameters:
-  ///   - title: Title
-  ///   - color: Background color
-  ///   - rounding: Rounding of button
-  bool DrawRoundButton(const char* title, glm::vec3 color, float rounding);
-
+  
   // Image -----------------------------------------------------------------------------------------------------------
   /// This function renders Texture in current ImGui window
   /// - Parameters:
@@ -293,5 +333,5 @@ namespace Kreator::UI
   bool TreeNodeWithIcon(Ref<IKan::Texture> icon, ImGuiID id, ImGuiTreeNodeFlags flags, const char* label, const char* label_end, const ImColor& iconTint = IM_COL32_WHITE);
   bool TreeNodeWithIcon(Ref<IKan::Texture> icon, const void* ptr_id, ImGuiTreeNodeFlags flags, const ImColor& iconTint, const char* fmt, ...);
   bool TreeNodeWithIcon(Ref<IKan::Texture> icon, const char* label, ImGuiTreeNodeFlags flags, const ImColor& iconTint = IM_COL32_WHITE);
-
+  
 } // namespace Kreator::UI
