@@ -45,7 +45,7 @@ namespace Kreator::UI
         UI::Color::Titlebar             = IM_COL32(35, 45, 60, 255);
         UI::Color::TitleBarDark         = IM_COL32(25, 35, 50, 255);
         UI::Color::ActiveTab            = IM_COL32(71, 71, 95, 255);
-        UI::Color::PropertyField        = IM_COL32(25, 35, 45, 255);
+        UI::Color::PropertyField        = IM_COL32(15, 25, 35, 255);
         UI::Color::GroupHeader          = IM_COL32(17, 67, 87, 255);
         UI::Color::GroupHeaderHovered   = IM_COL32(32, 42, 62, 255);
         UI::Color::GroupHeaderActive    = IM_COL32(30, 40, 60, 255);

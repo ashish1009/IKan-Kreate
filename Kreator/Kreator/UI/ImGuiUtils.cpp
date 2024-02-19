@@ -52,7 +52,12 @@ namespace Kreator::UI
     return ImGui::Button(GenerateID(), size);
   }
   
-  bool DrawRoundButton(const char* title, glm::vec3 color, float r)
+  bool DrawRoundButton(const char* title, const ImU32& color, float r)
+  {
+    return DrawRoundButton(title, UI::ColorVec3FromU32(color), r);
+  }
+
+  bool DrawRoundButton(const char* title, const glm::vec3& color, float r)
   {
     ImGui::PushID(title);
     UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, r);
@@ -71,7 +76,7 @@ namespace Kreator::UI
     ImGui::PopID();
     return clicked;
   }
-  
+
   void SetNextWindowAtCenter()
   {
     ImVec2 center = ImGui::GetMainViewport()->GetCenter();

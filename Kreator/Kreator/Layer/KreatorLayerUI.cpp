@@ -199,7 +199,7 @@ namespace Kreator
         }
         
         ImGui::SameLine();
-        if (UI::DrawRoundButton("...", UI::ColorVec3FromU32(UI::Color::BackgroundDark), 5))
+        if (UI::DrawRoundButton("...", UI::Color::BackgroundDark, 5))
         {
           ImGui::CloseCurrentPopup();
           FolderExplorer::Select();
@@ -212,13 +212,13 @@ namespace Kreator
         ImGui::PushFont(boldFont);
         
         UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 90);
-        if ((UI::DrawRoundButton("Create", UI::ColorVec3FromU32(UI::Color::NiceThemeHighlight), 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+        if ((UI::DrawRoundButton("Create", UI::Color::NiceThemeHighlight, 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
         {
 //          ImGui::CloseCurrentPopup();
         }
         
         ImGui::SameLine();
-        if ((UI::DrawRoundButton("Cancel", UI::ColorVec3FromU32(UI::Color::NiceThemeHighlight), 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+        if ((UI::DrawRoundButton("Cancel", UI::Color::NiceThemeHighlight, 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
         {
 //          ImGui::CloseCurrentPopup();
         }

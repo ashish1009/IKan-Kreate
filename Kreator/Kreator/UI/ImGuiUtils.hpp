@@ -84,8 +84,14 @@ namespace Kreator::UI
   ///   - title: Title
   ///   - color: Background color
   ///   - rounding: Rounding of button
-  bool DrawRoundButton(const char* title, glm::vec3 color, float rounding);
-  
+  bool DrawRoundButton(const char* title, const glm::vec3& color, float rounding);
+  /// This function creates the rounding button
+  /// - Parameters:
+  ///   - title: Title
+  ///   - color: Background color
+  ///   - rounding: Rounding of button
+  bool DrawRoundButton(const char* title, const ImU32& color, float rounding);
+
   /// This function Check if navigated to current item, e.g. with arrow keys
   bool NavigatedTo();
   
