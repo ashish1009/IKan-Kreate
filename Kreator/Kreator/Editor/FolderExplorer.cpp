@@ -86,7 +86,6 @@ namespace Kreator
       
       // Viewer Table ---------------
       {
-        UI::ScopedColor bgColor(ImGuiCol_ChildBg, UI::Color::Background);
         UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
         UI::ScopedStyle padding(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 4.0f));
         UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(0.0f, 2.0f));
@@ -106,15 +105,32 @@ namespace Kreator
             ImGui::TableSetColumnIndex(0);
             ImGui::BeginChild("##folders_common");
             {
-              UI::ScopedColor header(ImGuiCol_Header, UI::Color::Titlebar);
+              UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+              
               if (ImGui::CollapsingHeader("System", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
               {
-                UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
-                UI::ScopedColorStack itemBg(ImGuiCol_Header, IM_COL32_DISABLE, ImGuiCol_HeaderActive, IM_COL32_DISABLE);
                 static std::filesystem::path BaseDirectory = KreatorLayer::Get().GetSystemUserPath();
                 DirectoryIterator(BaseDirectory);
               }
+
+              // Fixing slight overlap
+              UI::ShiftCursorY(20.0f);
               
+              if (ImGui::CollapsingHeader("IKan-Kreate", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
+              {
+                static std::filesystem::path IKanKreateDirectory = KreatorLayer::Get().GetIKanKreatorPath();
+                DirectoryIterator(IKanKreateDirectory);
+              }
+
+              // Fixing slight overlap
+              UI::ShiftCursorY(20.0f);
+              
+              if (ImGui::CollapsingHeader("Resources", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
+              {
+                static std::filesystem::path ClientResourceDirectory = KreatorLayer::Get().GetClientResorucePath();
+                DirectoryIterator(ClientResourceDirectory);
+              }
+
               // Draw side shadow
               ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
               ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
@@ -164,13 +180,20 @@ namespace Kreator
     {
       const std::filesystem::path& path = directory.path();
       std::string name = path.filename().string();
-      
-#ifdef __APPLE__
-      if (name == ".DS_Store")
+      auto i = name.at(0);
+#ifdef __APPLE__ // Ignore Apple .DS_Store files
+      if (name.at(0) == '.')
       {
         continue;
       }
 #endif
+      
+      // Show only directory
+      if (!directory.is_directory())
+      {
+        continue;
+      }
+      
       std::string id = name + "_TreeNode";
       
       // ImGui item height hack
