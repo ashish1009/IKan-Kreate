@@ -24,6 +24,7 @@ namespace Kreator
     std::filesystem::path selectedFilePath = "";
 
     GUI_InputBuffer<256> pathBuffer;
+    char searchBuffer[256];
 
     Ref<Texture> shadowTexture;
     Ref<Texture> folderIcon;
@@ -156,21 +157,25 @@ namespace Kreator
           {
             // Directory Content
             ImGui::TableSetColumnIndex(1);
-            const float topBarHeight = 32.0f;
+            const float topBarHeight = 38.0f;
             const float bottomBarHeight = 0.0f;
             ImGui::BeginChild("##directory_structure", ImVec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight() - topBarHeight - bottomBarHeight - 14 /* Separator offset */));
             {
-              ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
-              RenderTopBar(topBarHeight);
-              ImGui::PopStyleVar();
-              ImGui::Separator();
-              
+              // Top Bar
+              {
+                ImGui::PushStyleVar(ImGuiStyleVar_FrameBorderSize, 0.0f);
+                RenderTopBar(topBarHeight);
+                ImGui::PopStyleVar();
+                ImGui::Separator();
+              }
+              // Main Area
               {
                 UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
                 UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 5.0f));
                 
                 std::vector<std::filesystem::path> filesInCurrentDirectory;
-                
+                std::string searchString = Utils::String::ToLower(s_fileExplorerData->searchBuffer);
+
                 // Show Directories
                 for (const auto& directory : std::filesystem::directory_iterator(s_fileExplorerData->currentPath))
                 {
@@ -191,28 +196,31 @@ namespace Kreator
                   std::string name = directoryName.filename().string();
                   std::string id = name + "_TreeNode";
                   
-                  // ImGui item height hack
-                  auto* window = ImGui::GetCurrentWindow();
-                  window->DC.CurrLineSize.y = 20.0f;
-                  window->DC.CurrLineTextBaseOffset = 3.0f;
-                  
-                  ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
-                  | ((s_fileExplorerData->selectedFilePath == directory) ? ImGuiTreeNodeFlags_Selected : 0);
-                  
-                  bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->folderIcon);
-                  if (ImGui::IsItemClicked())
+                  if (Utils::String::ToLowerCopy(name).find(searchString) != std::string::npos)
                   {
-                  }
-                  
-                  // Fixing slight overlap
-                  UI::ShiftCursorY(3.0f);
-                  
-                  // If item clicked
-                  if (open)
-                  {
-                    ImGui::TreePop();
-                  }
-                }
+                    // ImGui item height hack
+                    auto* window = ImGui::GetCurrentWindow();
+                    window->DC.CurrLineSize.y = 20.0f;
+                    window->DC.CurrLineTextBaseOffset = 3.0f;
+                    
+                    ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
+                    | ((s_fileExplorerData->selectedFilePath == directory) ? ImGuiTreeNodeFlags_Selected : 0);
+                    
+                    bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->folderIcon);
+                    if (ImGui::IsItemClicked())
+                    {
+                    }
+                    
+                    // Fixing slight overlap
+                    UI::ShiftCursorY(3.0f);
+                    
+                    // If item clicked
+                    if (open)
+                    {
+                      ImGui::TreePop();
+                    }
+                  } // If search
+                } // Directory iterator
                 
                 // Show Files
                 for (const auto& files : filesInCurrentDirectory)
@@ -227,30 +235,33 @@ namespace Kreator
                   std::string name = directoryName.filename().string();
                   std::string id = name + "_TreeNode";
                   
-                  // ImGui item height hack
-                  auto* window = ImGui::GetCurrentWindow();
-                  window->DC.CurrLineSize.y = 20.0f;
-                  window->DC.CurrLineTextBaseOffset = 3.0f;
-                  
-                  ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
-                  | ((s_fileExplorerData->selectedFilePath == files) ? ImGuiTreeNodeFlags_Selected : 0);
-                  
-                  bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->fileIcon);
-                  if (ImGui::IsItemClicked())
+                  if (Utils::String::ToLowerCopy(name).find(searchString) != std::string::npos)
                   {
-                  }
-                  
-                  // Fixing slight overlap
-                  UI::ShiftCursorY(3.0f);
-                  
-                  // If item clicked
-                  if (open)
-                  {
-                    ImGui::TreePop();
-                  }
-                }
-              }
-            }
+                    // ImGui item height hack
+                    auto* window = ImGui::GetCurrentWindow();
+                    window->DC.CurrLineSize.y = 20.0f;
+                    window->DC.CurrLineTextBaseOffset = 3.0f;
+                    
+                    ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
+                    | ((s_fileExplorerData->selectedFilePath == files) ? ImGuiTreeNodeFlags_Selected : 0);
+                    
+                    bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->fileIcon);
+                    if (ImGui::IsItemClicked())
+                    {
+                    }
+                    
+                    // Fixing slight overlap
+                    UI::ShiftCursorY(3.0f);
+                    
+                    // If item clicked
+                    if (open)
+                    {
+                      ImGui::TreePop();
+                    }
+                  } // if search
+                } // File iterator
+              } // Main Area Scope
+            } // Right column
             ImGui::EndChild();
           } // right column
           UI::PopID();
@@ -301,8 +312,14 @@ namespace Kreator
       // Address bar
       {
         UI::ScopedColor muted(ImGuiCol_Text, UI::Color::TextDarker);
-        ImGui::SetNextItemWidth(550);
+        ImGui::SetNextItemWidth(300);
         ImGui::InputTextWithHint("##new_project_location", "Project Location", s_fileExplorerData->pathBuffer.Data(), s_fileExplorerData->pathBuffer.Size(), ImGuiInputTextFlags_ReadOnly);
+      }
+      
+      // Search bar
+      {
+        ImGui::SetNextItemWidth(200);
+        ImGui::InputTextWithHint("##regsearch", "Search ...", s_fileExplorerData->searchBuffer, 256);
       }
     }
     ImGui::EndHorizontal();

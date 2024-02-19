@@ -166,8 +166,7 @@ namespace IKan::Utils
   std::string String::ToLowerCopy(const std::string_view& string)
   {
     std::string result(string);
-    ToLower(result);
-    return result;
+    return ToLower(result);
   }
   
   std::string String::ToUpper(const std::string_view& string)
