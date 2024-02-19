@@ -334,16 +334,31 @@ namespace Kreator
       UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(10.0f, 0.0f));
       UI::ShiftCursorY(ImGui::GetWindowHeight() - 290);
       ImGui::Separator();
-      UI::ShiftCursor(8, 10);
       
-      ImGui::SetNextItemWidth(530);
-      ImGui::InputTextWithHint("## FileName", "File Name", s_fileExplorerData->fileBuffer, 256);
-      
+      if (s_fileExplorerData->popupType == PopupType::Save)
+      {
+        UI::ShiftCursor(8, 10);
+        ImGui::SetNextItemWidth(530);
+        ImGui::InputTextWithHint("## FileName", "File Name", s_fileExplorerData->fileBuffer, 256);
+        
+        ImGui::SameLine();
+        UI::DrawRoundButton(" Save ", UI::Color::NiceThemeHighlight, 5);
+      }
+      else
+      {
+        UI::ShiftCursor(ImGui::GetContentRegionAvail().x / 2 - 180, 10);
+        if (s_fileExplorerData->popupType == PopupType::Open)
+        {
+          UI::DrawRoundButton(" Open ", UI::Color::NiceThemeHighlight, 5);
+        }
+        else if (s_fileExplorerData->popupType == PopupType::Select)
+        {
+          UI::DrawRoundButton(" Select ", UI::Color::NiceThemeHighlight, 5);
+        }
+      }
+            
       ImGui::SameLine();
       UI::DrawRoundButton("Cancel", UI::Color::Muted, 5);
-      
-      ImGui::SameLine();
-      UI::DrawRoundButton(" Save ", UI::Color::NiceThemeHighlight, 5);
     }
   }
   
