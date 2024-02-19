@@ -18,8 +18,8 @@ namespace Kreator
     return *s_instance;
   }
 
-  KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath, Ref<UserPreferences> userPreferences)
-  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_systemUserPath(systemUserPath), m_userPreferences(userPreferences)
+  KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath, const std::filesystem::path& iKanKreatePath, Ref<UserPreferences> userPreferences)
+  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_systemUserPath(systemUserPath), m_iKanKreatePath(iKanKreatePath), m_userPreferences(userPreferences)
   {
     IK_PROFILE();
     IK_ASSERT(!s_instance, "RendererLayer instance already created");
@@ -128,5 +128,9 @@ namespace Kreator
   const std::filesystem::path& KreatorLayer::GetSystemUserPath() const
   {
     return m_systemUserPath;
+  }
+  const std::filesystem::path& KreatorLayer::GetIKanKreatorPath() const
+  {
+    return m_iKanKreatePath;
   }
 } // namespace Kreator

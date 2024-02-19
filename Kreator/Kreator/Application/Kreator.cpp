@@ -12,17 +12,17 @@
 
 namespace Kreator
 {
-  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec, const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath)
-  : Application(appSpec), m_clientResourcePath(clientResourcePath), m_systemUserPath(systemUserPath)
+  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec, const KreatorDirectories& kreatorDirectories)
+  : Application(appSpec), m_kreatorDirectories(kreatorDirectories)
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Creating Kreator Application");
     
     // Check Client Path is valid
-    bool exist {std::filesystem::exists(m_clientResourcePath)};
-    bool tempalateProj {std::filesystem::exists(m_clientResourcePath / "TemplateProject")};
-    bool fonts {std::filesystem::exists(m_clientResourcePath / "Fonts")};
-    bool textures {std::filesystem::exists(m_clientResourcePath / "Textures")};
+    bool exist {std::filesystem::exists(m_kreatorDirectories.clientResourcePath)};
+    bool tempalateProj {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "TemplateProject")};
+    bool fonts {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "Fonts")};
+    bool textures {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "Textures")};
     
     IK_ASSERT(exist and tempalateProj and fonts and textures, "Invalid Client Directory");
   }
@@ -37,7 +37,7 @@ namespace Kreator
   {
     IK_PROFILE();
     // Create Persistance Directory ---------------------------------------------------------------
-    std::filesystem::path persistenceStoragePath {m_clientResourcePath / "UserData"};
+    std::filesystem::path persistenceStoragePath {m_kreatorDirectories.clientResourcePath / "UserData"};
     if (!std::filesystem::exists(persistenceStoragePath))
     {
       std::filesystem::create_directory(persistenceStoragePath);
@@ -57,11 +57,11 @@ namespace Kreator
     }
 
     IK_LOG_INFO("Kreator App", "Initializing the Renderer Application");
-    IK_LOG_INFO("Kreator App", "  Kreator Resources Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_clientResourcePath).string());
+    IK_LOG_INFO("Kreator App", "  Kreator Resources Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_kreatorDirectories.clientResourcePath).string());
     IK_LOG_INFO("Kreator App", "  User Data Path           : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath).string());
 
     // Create and Push the Rendere Layer --------------------------------------------------------
-    m_kreatorLayer = CreateRef<KreatorLayer>(m_clientResourcePath, m_systemUserPath, userPreferences);
+    m_kreatorLayer = CreateRef<KreatorLayer>(m_kreatorDirectories.clientResourcePath, m_kreatorDirectories.systemUserPath, m_kreatorDirectories.iKanKreatePath, userPreferences);
     PushLayer(m_kreatorLayer);
     
     // Initialize the Kreator Modules -------------------------------------------------------------
@@ -124,9 +124,11 @@ Scope<Application> CreateApplication()
 
   // Editor Data --------------------------------------------------------------------------
   // TODO: Extract from arguments
-  std::filesystem::path clientResourcePath {"../../../Kreator/Resources"};
-  std::filesystem::path systemUserPath {"/Users/ashish./iKan_storage"};
+  Kreator::KreatorDirectories kreatorDirectories;
+  kreatorDirectories.clientResourcePath = "../../../Kreator/Resources";
+  kreatorDirectories.systemUserPath = "/Users/ashish./iKan_storage";
+  kreatorDirectories.iKanKreatePath = "/Users/ashish./iKan_storage/Github/Product/IKan-Kreate";
 
   // Return the Application
-  return IKan::Application::CreateApplication<Kreator::KreatorApp>(appSpec, clientResourcePath, systemUserPath);
+  return IKan::Application::CreateApplication<Kreator::KreatorApp>(appSpec, kreatorDirectories);
 }
