@@ -91,6 +91,13 @@ namespace Kreator
     GUI_InputBuffer<255> m_projectNameBuffer;
     GUI_InputBuffer<512> m_projectFilePathBuffer;
     
+    // Editor Data ---------------------------------------
+    enum class FolderExplorerAction
+    {
+      None, NewPreoject
+    };
+    FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
+    
     // Single Instance -----------------------------------
     static KreatorLayer* s_instance;
   };

@@ -203,6 +203,7 @@ namespace Kreator
         {
           ImGui::CloseCurrentPopup();
           FolderExplorer::Select(&m_showCreateNewProjectPopup);
+          m_folderExplorerAction = FolderExplorerAction::NewPreoject;
         }
       }
 
@@ -233,5 +234,18 @@ namespace Kreator
   {
     std::filesystem::path explorerOutput = FolderExplorer::Explore();
     RETURN_IF(explorerOutput == "");
+    
+    switch (m_folderExplorerAction)
+    {
+      case FolderExplorerAction::NewPreoject:
+      {
+        m_projectFilePathBuffer.MemCpy(explorerOutput.string().c_str(), 0, 255);
+        break;
+      }
+      case FolderExplorerAction::None:
+      default:
+        IK_ASSERT(false);
+        break;
+    }
   }
 } // namespace Kreator
