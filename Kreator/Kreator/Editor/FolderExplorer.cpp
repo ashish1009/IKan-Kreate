@@ -273,9 +273,13 @@ namespace Kreator
         | ((s_fileExplorerData->selectedFilePath == directory) ? ImGuiTreeNodeFlags_Selected : 0);
         
         bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->folderIcon);
-        if (ImGui::IsItemClicked())
+        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
         {
           ChangeCurrentDirectory(directory);
+        }
+        if (ImGui::IsItemClicked())
+        {
+          s_fileExplorerData->selectedFilePath = directory;
         }
         
         // Fixing slight overlap
