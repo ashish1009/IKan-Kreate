@@ -293,13 +293,13 @@ namespace Kreator
         bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->folderIcon);
         if (ImGui::IsItemHovered())
         {
-          if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
-          {
-            ChangeCurrentDirectory(directory);
-          }
           if (ImGui::IsItemClicked())
           {
             s_fileExplorerData->selectedPath = directory;
+          }
+          if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+          {
+            ChangeCurrentDirectory(directory);
           }
         }
         
@@ -491,6 +491,7 @@ namespace Kreator
   {
     s_fileExplorerData->currentPath = currentPath;
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
+    s_fileExplorerData->selectedPath = "";
   }
   
   void FolderExplorer::Select(bool *lastPopupFlag)
