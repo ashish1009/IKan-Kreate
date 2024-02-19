@@ -111,41 +111,8 @@ namespace Kreator
               {
                 UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
                 UI::ScopedColorStack itemBg(ImGuiCol_Header, IM_COL32_DISABLE, ImGuiCol_HeaderActive, IM_COL32_DISABLE);
-                
                 static std::filesystem::path BaseDirectory = KreatorLayer::Get().GetSystemUserPath();
-                for (const auto& directory : std::filesystem::directory_iterator(BaseDirectory))
-                {
-                  const std::filesystem::path& path = directory.path();
-                  std::string name = path.filename().string();
-                  
-#ifdef __APPLE__
-                  if (name == ".DS_Store")
-                  {
-                    continue;
-                  }
-#endif
-                  std::string id = name + "_TreeNode";
-
-                  // ImGui item height hack
-                  auto* window = ImGui::GetCurrentWindow();
-                  window->DC.CurrLineSize.y = 20.0f;
-                  window->DC.CurrLineTextBaseOffset = 3.0f;
-
-                  bool open = UI::TreeNode(id, name, ImGuiTreeNodeFlags_SpanFullWidth, s_fileExplorerData->folderIcon);
-
-                  // Fixing slight overlap
-                  UI::ShiftCursorY(3.0f);
-
-                  if (open)
-                  {
-                  }
-                                  
-                  // Close Popup
-                  if (open)
-                  {
-                    ImGui::TreePop();
-                  }
-                }
+                DirectoryIterator(BaseDirectory);
               }
               
               // Draw side shadow
@@ -189,6 +156,39 @@ namespace Kreator
     }
     ImGui::EndHorizontal();
     ImGui::EndChild();
+  }
+  
+  void FolderExplorer::DirectoryIterator(const std::filesystem::path& currentDirectory)
+  {
+    for (const auto& directory : std::filesystem::directory_iterator(currentDirectory))
+    {
+      const std::filesystem::path& path = directory.path();
+      std::string name = path.filename().string();
+      
+#ifdef __APPLE__
+      if (name == ".DS_Store")
+      {
+        continue;
+      }
+#endif
+      std::string id = name + "_TreeNode";
+      
+      // ImGui item height hack
+      auto* window = ImGui::GetCurrentWindow();
+      window->DC.CurrLineSize.y = 20.0f;
+      window->DC.CurrLineTextBaseOffset = 3.0f;
+      
+      bool open = UI::TreeNode(id, name, ImGuiTreeNodeFlags_SpanFullWidth, s_fileExplorerData->folderIcon);
+      
+      // Fixing slight overlap
+      UI::ShiftCursorY(3.0f);
+      
+      if (open)
+      {
+        DirectoryIterator(directory);
+        ImGui::TreePop();
+      }
+    }
   }
   
   void FolderExplorer::Select()

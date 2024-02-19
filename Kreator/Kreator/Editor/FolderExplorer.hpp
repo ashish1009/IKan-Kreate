@@ -29,12 +29,15 @@ namespace Kreator
     static void Open();
     /// This function set the popup to show save file widgwet
     static void Save();
-
+    
     DELETE_ALL_CONSTRUCTORS(FolderExplorer);
     
   private:
     /// This function renders the top bar of viewer
     /// - Parameter height: Height of top bar
     static void RenderTopBar(float height);
+    /// This function iterate the direcotries
+    /// - Parameter currentDirectory: current directory
+    static void DirectoryIterator(const std::filesystem::path& currentDirectory);
   };
 } // namespace Kreator
