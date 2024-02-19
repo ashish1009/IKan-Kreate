@@ -52,7 +52,7 @@ namespace Kreator
     UI::SetNextWindowAtCenterWithSize({900, 600});
     UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(0.0f, 0.0f));
 
-    if (ImGui::BeginPopupModal("Kreator File Viewer", nullptr, ImGuiWindowFlags_NoTitleBar| ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMove ))
+    if (ImGui::BeginPopupModal("Kreator File Viewer", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMove ))
     {
       // Viewer title bar ----------
       {
@@ -64,7 +64,7 @@ namespace Kreator
         const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
         const ImVec2 titlebarMax =
         {
-          ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth(),
+          ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth() - 16,
           ImGui::GetCursorScreenPos().y + titlebarHeight
         };
         

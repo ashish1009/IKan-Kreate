@@ -55,6 +55,7 @@
 #include <Core/Layer.hpp>
 #include <Core/Window.hpp>
 #include <Core/Buffer.hpp>
+#include <Core/UUID.hpp>
 
 #include <Renderer/Renderer.hpp>
 #include <Renderer/Renderer2D.hpp>
@@ -73,3 +74,5 @@
 #include <Camera/FixedCamera.hpp>
 
 #include <UI/ImGuiLayer.hpp>
+
+#include <Asset/Asset.hpp>
