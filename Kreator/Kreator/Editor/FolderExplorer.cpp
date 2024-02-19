@@ -315,7 +315,7 @@ namespace Kreator
         bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->fileIcon);
         if (ImGui::IsItemClicked())
         {
-          ChangeCurrentDirectory(file);
+          s_fileExplorerData->selectedFilePath = file;
         }
         
         // Fixing slight overlap
