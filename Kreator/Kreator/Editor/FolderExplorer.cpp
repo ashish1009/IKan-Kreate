@@ -274,6 +274,7 @@ namespace Kreator
         bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->folderIcon);
         if (ImGui::IsItemClicked())
         {
+          ChangeCurrentDirectory(directory);
         }
         
         // Fixing slight overlap
@@ -288,15 +289,15 @@ namespace Kreator
     } // Directory iterator
     
     // Show Files
-    for (const auto& files : filesInCurrentDirectory)
+    for (const auto& file : filesInCurrentDirectory)
     {
 #ifdef __APPLE__ // Ignore Apple .DS_Store files
-      if (files.filename().string().at(0) == '.')
+      if (file.filename().string().at(0) == '.')
       {
         continue;
       }
 #endif
-      auto directoryName = std::filesystem::relative(files, s_fileExplorerData->currentPath);
+      auto directoryName = std::filesystem::relative(file, s_fileExplorerData->currentPath);
       std::string name = directoryName.filename().string();
       std::string id = name + "_TreeNode";
       
@@ -308,11 +309,12 @@ namespace Kreator
         window->DC.CurrLineTextBaseOffset = 3.0f;
         
         ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
-        | ((s_fileExplorerData->selectedFilePath == files) ? ImGuiTreeNodeFlags_Selected : 0);
+        | ((s_fileExplorerData->selectedFilePath == file) ? ImGuiTreeNodeFlags_Selected : 0);
         
         bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->fileIcon);
         if (ImGui::IsItemClicked())
         {
+          ChangeCurrentDirectory(file);
         }
         
         // Fixing slight overlap
@@ -354,7 +356,10 @@ namespace Kreator
       window->DC.CurrLineTextBaseOffset = 3.0f;
       
       bool open = UI::TreeNode(id, name, ImGuiTreeNodeFlags_SpanFullWidth, s_fileExplorerData->folderIcon);
-      
+      if (ImGui::IsItemClicked())
+      {
+        ChangeCurrentDirectory(directory);
+      }
       // Fixing slight overlap
       UI::ShiftCursorY(3.0f);
       
@@ -364,6 +369,12 @@ namespace Kreator
         ImGui::TreePop();
       }
     }
+  }
+  
+  void FolderExplorer::ChangeCurrentDirectory(const std::filesystem::path &currentPath)
+  {
+    s_fileExplorerData->currentPath = currentPath;
+    s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
   }
   
   void FolderExplorer::Select()

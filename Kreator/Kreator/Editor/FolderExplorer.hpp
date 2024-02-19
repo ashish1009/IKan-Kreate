@@ -43,5 +43,9 @@ namespace Kreator
     static void RenderSideColumn();
     /// This funcion renders the main area
     static void RenderMainArea();
+    
+    /// This function changes the current directory path
+    /// - Parameter currentPath: current directory path
+    static void ChangeCurrentDirectory(const std::filesystem::path& currentPath);
   };
 } // namespace Kreator
