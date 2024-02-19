@@ -33,6 +33,10 @@ namespace Kreator
     Ref<Texture> folderIcon;
     Ref<Texture> backButton;
     Ref<Texture> fileIcon;
+    Ref<Texture> newFolder;
+    
+    bool createNewFolder = false;
+    char newFolderNameBuffer[256];
   };
   static Scope<Data> s_fileExplorerData;
 
@@ -45,6 +49,7 @@ namespace Kreator
     s_fileExplorerData->folderIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/CBP/Folder.png");
     s_fileExplorerData->backButton = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Back.png");
     s_fileExplorerData->fileIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/File.png");
+    s_fileExplorerData->newFolder = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/NewFolder.png");
 
     s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
@@ -172,15 +177,17 @@ namespace Kreator
       
       UI::ShiftCursor(8, 10);
       // Back button
-      if (browserButton("##back", s_fileExplorerData->backButton))
       {
-        if (s_fileExplorerData->currentPath != "/")
+        if (browserButton("##back", s_fileExplorerData->backButton))
         {
-          s_fileExplorerData->currentPath = s_fileExplorerData->currentPath.parent_path();
-          s_fileExplorerData->pathBuffer.Memset(0);
+          if (s_fileExplorerData->currentPath != "/")
+          {
+            s_fileExplorerData->currentPath = s_fileExplorerData->currentPath.parent_path();
+            s_fileExplorerData->pathBuffer.Memset(0);
+          }
         }
       }
-
+      
       // Address bar
       {
         UI::ScopedColor muted(ImGuiCol_Text, UI::Color::TextDarker);
@@ -192,6 +199,16 @@ namespace Kreator
       {
         ImGui::SetNextItemWidth(200);
         ImGui::InputTextWithHint("##regsearch", "Search ...", s_fileExplorerData->searchBuffer, 256);
+      }
+      
+      // New folder Icon
+      {
+        if (browserButton("##newFolder", s_fileExplorerData->newFolder))
+        {
+          s_fileExplorerData->createNewFolder = true;
+          static const std::string newFolder = "New Folder";
+          memcpy(s_fileExplorerData->newFolderNameBuffer, newFolder.c_str(), newFolder.size());
+        }
       }
     }
     ImGui::EndHorizontal();
@@ -274,13 +291,16 @@ namespace Kreator
         | ((s_fileExplorerData->selectedPath == directory) ? ImGuiTreeNodeFlags_Selected : 0);
         
         bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->folderIcon);
-        if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+        if (ImGui::IsItemHovered())
         {
-          ChangeCurrentDirectory(directory);
-        }
-        if (ImGui::IsItemClicked())
-        {
-          s_fileExplorerData->selectedPath = directory;
+          if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
+          {
+            ChangeCurrentDirectory(directory);
+          }
+          if (ImGui::IsItemClicked())
+          {
+            s_fileExplorerData->selectedPath = directory;
+          }
         }
         
         // Fixing slight overlap
@@ -293,6 +313,28 @@ namespace Kreator
         }
       } // If search
     } // Directory iterator
+    
+    {
+      if (s_fileExplorerData->createNewFolder)
+      {
+        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
+        UI::TreeNode("_NewFolder", " ", flags, s_fileExplorerData->folderIcon);
+        {
+          ImGui::SetKeyboardFocusHere();
+          ImGui::SetNextItemWidth(100);
+          
+          ImGui::SameLine();
+          UI::ShiftCursor(10, -5);
+          if (ImGui::InputText("##rename", s_fileExplorerData->newFolderNameBuffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
+          {
+            s_fileExplorerData->createNewFolder = false;
+            std::filesystem::path newFolderPath = s_fileExplorerData->currentPath / s_fileExplorerData->newFolderNameBuffer;
+            std::filesystem::create_directory(newFolderPath);
+            memset(s_fileExplorerData->newFolderNameBuffer, 0, 256);
+          }
+        }
+      }
+    }
     
     if (s_fileExplorerData->popupType != PopupType::Select)
     {
@@ -366,13 +408,16 @@ namespace Kreator
         {
           if (UI::DrawRoundButton(" Select ", UI::Color::NiceThemeHighlight, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
           {
-            ImGui::CloseCurrentPopup();
-            if (s_fileExplorerData->lastPopupFlag)
+            if (!s_fileExplorerData->createNewFolder and s_fileExplorerData->selectedPath != "")
             {
-              *s_fileExplorerData->lastPopupFlag = true;
+              ImGui::CloseCurrentPopup();
+              if (s_fileExplorerData->lastPopupFlag)
+              {
+                *s_fileExplorerData->lastPopupFlag = true;
+              }
+              
+              s_fileExplorerData->returnPath = s_fileExplorerData->selectedPath;
             }
-            
-            s_fileExplorerData->returnPath = s_fileExplorerData->selectedPath;
           }
         }
       }
@@ -445,7 +490,8 @@ namespace Kreator
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
     s_fileExplorerData->selectedPath = "";
     s_fileExplorerData->returnPath = "";
-
+    s_fileExplorerData->createNewFolder = false;
+    
     s_fileExplorerData->popupType = PopupType::Select;
   }
   
@@ -457,7 +503,8 @@ namespace Kreator
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
     s_fileExplorerData->selectedPath = "";
     s_fileExplorerData->returnPath = "";
-
+    s_fileExplorerData->createNewFolder = false;
+    
     s_fileExplorerData->popupType = PopupType::Open;
   }
   
@@ -469,6 +516,7 @@ namespace Kreator
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
     s_fileExplorerData->selectedPath = "";
     s_fileExplorerData->returnPath = "";
+    s_fileExplorerData->createNewFolder = false;
 
     s_fileExplorerData->popupType = PopupType::Save;
   }

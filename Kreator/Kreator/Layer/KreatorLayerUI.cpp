@@ -87,8 +87,8 @@ namespace Kreator
             auto button = [this](const char* title, Ref<Texture> icon, const std::string& buttonHelper) {
               auto textSize = ImGui::CalcTextSize(buttonHelper.c_str()).x;;
               
-              const float buttonHeight = 40.0f;
-              const float buttonWidth = textSize + buttonHeight + 80;
+              static const float buttonHeight = 40.0f;
+              static const float buttonWidth = textSize + buttonHeight + 80;
               
               // Minimize Button
               UI::ShiftCursorX(80);
@@ -104,9 +104,9 @@ namespace Kreator
                 logoRectStart.y + buttonHeight
               };
               
-              const ImU32 buttonColN = UI::ColorWithMultipliedValue(IM_COL32(222, 222, 222, 255), 0.9f);
-              const ImU32 buttonColH = UI::ColorWithMultipliedValue(IM_COL32(222, 222, 222, 255), 1.2f);
-              const ImU32 buttonColP = UI::ColorWithMultipliedValue(IM_COL32(222, 222, 222, 255), 1.0f);
+              static const ImU32 buttonColN = UI::ColorWithMultipliedValue(IM_COL32(222, 222, 222, 255), 0.9f);
+              static const ImU32 buttonColH = UI::ColorWithMultipliedValue(IM_COL32(222, 222, 222, 255), 1.2f);
+              static const ImU32 buttonColP = UI::ColorWithMultipliedValue(IM_COL32(222, 222, 222, 255), 1.0f);
               UI::DrawButtonImage(icon, buttonColN, buttonColH, buttonColP, ImRect{logoRectStart, logoRectMax});
               
               ImGui::SameLine(140);
