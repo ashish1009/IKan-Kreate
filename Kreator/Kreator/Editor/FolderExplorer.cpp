@@ -19,12 +19,16 @@ namespace Kreator
   {
     bool popup {false};
     PopupType popupType {PopupType::Invalid};
+    
     std::filesystem::path currentPath;
+    std::filesystem::path selectedFilePath = "";
+
     GUI_InputBuffer<256> pathBuffer;
 
     Ref<Texture> shadowTexture;
     Ref<Texture> folderIcon;
     Ref<Texture> backButton;
+    Ref<Texture> fileIcon;
   };
   static Scope<Data> s_fileExplorerData;
 
@@ -36,7 +40,8 @@ namespace Kreator
     s_fileExplorerData->shadowTexture = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/ShadowLineTop.png");
     s_fileExplorerData->folderIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/CBP/Folder.png");
     s_fileExplorerData->backButton = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Back.png");
-    
+    s_fileExplorerData->fileIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/File.png");
+
     s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
   }
@@ -159,6 +164,92 @@ namespace Kreator
               RenderTopBar(topBarHeight);
               ImGui::PopStyleVar();
               ImGui::Separator();
+              
+              {
+                UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+                UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 5.0f));
+                
+                std::vector<std::filesystem::path> filesInCurrentDirectory;
+                
+                // Show Directories
+                for (const auto& directory : std::filesystem::directory_iterator(s_fileExplorerData->currentPath))
+                {
+#ifdef __APPLE__ // Ignore Apple .DS_Store files
+                  if (directory.path().filename().string().at(0) == '.')
+                  {
+                    continue;
+                  }
+#endif
+                  // Tree Node
+                  if (!directory.is_directory())
+                  {
+                    filesInCurrentDirectory.push_back(directory);
+                    continue;
+                  }
+                  
+                  auto directoryName = std::filesystem::relative(directory.path(), s_fileExplorerData->currentPath);
+                  std::string name = directoryName.filename().string();
+                  std::string id = name + "_TreeNode";
+                  
+                  // ImGui item height hack
+                  auto* window = ImGui::GetCurrentWindow();
+                  window->DC.CurrLineSize.y = 20.0f;
+                  window->DC.CurrLineTextBaseOffset = 3.0f;
+                  
+                  ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
+                  | ((s_fileExplorerData->selectedFilePath == directory) ? ImGuiTreeNodeFlags_Selected : 0);
+                  
+                  bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->folderIcon);
+                  if (ImGui::IsItemClicked())
+                  {
+                  }
+                  
+                  // Fixing slight overlap
+                  UI::ShiftCursorY(3.0f);
+                  
+                  // If item clicked
+                  if (open)
+                  {
+                    ImGui::TreePop();
+                  }
+                }
+                
+                // Show Files
+                for (const auto& files : filesInCurrentDirectory)
+                {
+#ifdef __APPLE__ // Ignore Apple .DS_Store files
+                  if (files.filename().string().at(0) == '.')
+                  {
+                    continue;
+                  }
+#endif
+                  auto directoryName = std::filesystem::relative(files, s_fileExplorerData->currentPath);
+                  std::string name = directoryName.filename().string();
+                  std::string id = name + "_TreeNode";
+                  
+                  // ImGui item height hack
+                  auto* window = ImGui::GetCurrentWindow();
+                  window->DC.CurrLineSize.y = 20.0f;
+                  window->DC.CurrLineTextBaseOffset = 3.0f;
+                  
+                  ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
+                  | ((s_fileExplorerData->selectedFilePath == files) ? ImGuiTreeNodeFlags_Selected : 0);
+                  
+                  bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->fileIcon);
+                  if (ImGui::IsItemClicked())
+                  {
+                  }
+                  
+                  // Fixing slight overlap
+                  UI::ShiftCursorY(3.0f);
+                  
+                  // If item clicked
+                  if (open)
+                  {
+                    ImGui::TreePop();
+                  }
+                }
+              }
             }
             ImGui::EndChild();
           } // right column
