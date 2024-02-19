@@ -54,5 +54,16 @@ namespace IKan::Utils
     /// will be cosnider as break points Split point (\n).
     /// - Parameter string: broken strings vector
     static std::vector<std::string> GetLines(const std::string& string);
+    
+    /// This function returns the string as lower stirng
+    /// - Parameter string: String to be lower
+    static std::string ToLower(const std::string& string);
+    /// This function returns the copy string as lower
+    /// - Parameter string: String to be lower
+    static std::string ToLowerCopy(const std::string_view& string);
+    /// This function returns the string as upper stirng
+    /// - Parameter string: String to be upper
+    static std::string ToUpper(const std::string_view& string);
+
   };
 } // namespace IKan::Utils

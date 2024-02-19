@@ -152,4 +152,33 @@ namespace IKan::Utils
   {
     return SplitString(string, "\n");
   }
+  
+  std::string String::ToLower(const std::string& string)
+  {
+    std::string result;
+    for (const auto& character : string)
+    {
+      result += std::tolower(character);
+    }
+    return result;
+  }
+  
+  std::string String::ToLowerCopy(const std::string_view& string)
+  {
+    std::string result(string);
+    ToLower(result);
+    return result;
+  }
+  
+  std::string String::ToUpper(const std::string_view& string)
+  {
+    std::string result;
+    for (const auto& character : string)
+    {
+      result += std::toupper(character);
+    }
+    
+    return result;
+  }
+
 } // namespace IKan::Utils
