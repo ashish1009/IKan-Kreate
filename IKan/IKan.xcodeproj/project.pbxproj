@@ -7,6 +7,10 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B248B9072B8338BA00B9EC40 /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9052B8338BA00B9EC40 /* Asset.cpp */; };
+		B248B9082B8338BA00B9EC40 /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9062B8338BA00B9EC40 /* Asset.hpp */; };
+		B248B90C2B833BA000B9EC40 /* UUID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B90A2B833BA000B9EC40 /* UUID.cpp */; };
+		B248B90D2B833BA000B9EC40 /* UUID.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B90B2B833BA000B9EC40 /* UUID.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -145,6 +149,10 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B248B9052B8338BA00B9EC40 /* Asset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Asset.cpp; sourceTree = "<group>"; };
+		B248B9062B8338BA00B9EC40 /* Asset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Asset.hpp; sourceTree = "<group>"; };
+		B248B90A2B833BA000B9EC40 /* UUID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UUID.cpp; sourceTree = "<group>"; };
+		B248B90B2B833BA000B9EC40 /* UUID.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UUID.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -287,6 +295,22 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B248B9002B8338A400B9EC40 /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+				B248B9062B8338BA00B9EC40 /* Asset.hpp */,
+			);
+			path = Asset;
+			sourceTree = "<group>";
+		};
+		B248B9092B833B3400B9EC40 /* Asset */ = {
+			isa = PBXGroup;
+			children = (
+				B248B9052B8338BA00B9EC40 /* Asset.cpp */,
+			);
+			path = Asset;
+			sourceTree = "<group>";
+		};
 		B2C0B6BE2B75F0AB0015A277 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -393,6 +417,7 @@
 				B2C0B6E72B7C7E340015A277 /* Camera */,
 				B2ED60062B74A599007A7F36 /* UI */,
 				B2C0B9FE2B7DC9850015A277 /* Project */,
+				B248B9002B8338A400B9EC40 /* Asset */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -408,6 +433,7 @@
 				B2C0B6E62B7C7E2F0015A277 /* Camera */,
 				B2ED60072B74A5A1007A7F36 /* UI */,
 				B2C0B9FF2B7DC9930015A277 /* Project */,
+				B248B9092B833B3400B9EC40 /* Asset */,
 				B2ED5E302B73A800007A7F36 /* Platform */,
 			);
 			path = Implementation;
@@ -436,6 +462,7 @@
 				B2ED60842B7510DE007A7F36 /* AssetPathManager.hpp */,
 				B2C0B6DB2B75FFA40015A277 /* AABB.h */,
 				B2C0B7172B7CDC7E0015A277 /* Input.hpp */,
+				B248B90B2B833BA000B9EC40 /* UUID.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -450,6 +477,7 @@
 				B2ED5E252B7397A5007A7F36 /* LayerStack.cpp */,
 				B2ED5E2A2B73A5C4007A7F36 /* Window.cpp */,
 				B2ED60832B7510DE007A7F36 /* AssetPathManager.cpp */,
+				B248B90A2B833BA000B9EC40 /* UUID.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -734,6 +762,7 @@
 				B2C0B6F62B7C82940015A277 /* Renderer3D.hpp in Headers */,
 				B2ED600F2B74A912007A7F36 /* Shader.hpp in Headers */,
 				B2ED5E8D2B7498FF007A7F36 /* OpenGLRendererAPI.hpp in Headers */,
+				B248B9082B8338BA00B9EC40 /* Asset.hpp in Headers */,
 				B2ED605C2B74DACD007A7F36 /* OpenGLTexture.hpp in Headers */,
 				B2ED5E352B73A811007A7F36 /* MacWindow.hpp in Headers */,
 				B2ED5E532B749097007A7F36 /* Factories.hpp in Headers */,
@@ -771,6 +800,7 @@
 				B2ED60552B74DAB8007A7F36 /* Texture.hpp in Headers */,
 				B2ED5E112B7370DA007A7F36 /* Event.h in Headers */,
 				B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */,
+				B248B90D2B833BA000B9EC40 /* UUID.hpp in Headers */,
 				B2ED60212B74AF5A007A7F36 /* OpenGLShaderUniforms.hpp in Headers */,
 				B2C0B70F2B7CDC5D0015A277 /* EditorCamera.hpp in Headers */,
 				B2ED60442B74C52D007A7F36 /* Pipeline.hpp in Headers */,
@@ -902,6 +932,7 @@
 				B2C0B71F2B7CDEE30015A277 /* FixedCamera.cpp in Sources */,
 				B2ED60122B74A920007A7F36 /* OpenGLShader.cpp in Sources */,
 				B2ED60672B74DF5F007A7F36 /* stb_image.cpp in Sources */,
+				B248B90C2B833BA000B9EC40 /* UUID.cpp in Sources */,
 				B2ED5E1D2B738C58007A7F36 /* ApplicationImpl.cpp in Sources */,
 				B2ED5E552B74911C007A7F36 /* Factories.cpp in Sources */,
 				B2C0BA032B7DC9D10015A277 /* Project.cpp in Sources */,
@@ -913,6 +944,7 @@
 				B2ED60182B74AD56007A7F36 /* StringUtils.cpp in Sources */,
 				B2ED60762B750100007A7F36 /* Renderer2D.cpp in Sources */,
 				B2C0BA0B2B7DF6950015A277 /* ProjectSerializer.cpp in Sources */,
+				B248B9072B8338BA00B9EC40 /* Asset.cpp in Sources */,
 				B2ED606A2B74E002007A7F36 /* FileSystemUtils.cpp in Sources */,
 				B2ED5E2C2B73A5C4007A7F36 /* Window.cpp in Sources */,
 				B2ED5CC42B7265F0007A7F36 /* LoggerBuilder.cpp in Sources */,
