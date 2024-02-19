@@ -36,6 +36,9 @@ namespace Kreator
     s_fileExplorerData->shadowTexture = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/ShadowLineTop.png");
     s_fileExplorerData->folderIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/CBP/Folder.png");
     s_fileExplorerData->backButton = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Back.png");
+    
+    s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
   }
   
   void FolderExplorer::Shutdown()
@@ -194,6 +197,7 @@ namespace Kreator
       };
       
       UI::ShiftCursor(8, 10);
+      // Back button
       if (browserButton("##back", s_fileExplorerData->backButton))
       {
         if (s_fileExplorerData->currentPath != "/")
@@ -202,15 +206,13 @@ namespace Kreator
           s_fileExplorerData->pathBuffer.Memset(0);
         }
       }
-      
-      ImGui::SameLine();
-//      
-//      float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
-//      {
-//        UI::ScopedColor muted(ImGuiCol_Text, UI::Color::Muted);
-//        ImGui::SetNextItemWidth(addressBarWidth);
-//        ImGui::InputTextWithHint("##new_project_location", "Project Location", s_fileExplorerData->pathBuffer.Data(), s_fileExplorerData->pathBuffer.Size(), ImGuiInputTextFlags_ReadOnly);
-//      }
+
+      // Address bar
+      {
+        UI::ScopedColor muted(ImGuiCol_Text, UI::Color::TextDarker);
+        ImGui::SetNextItemWidth(550);
+        ImGui::InputTextWithHint("##new_project_location", "Project Location", s_fileExplorerData->pathBuffer.Data(), s_fileExplorerData->pathBuffer.Size(), ImGuiInputTextFlags_ReadOnly);
+      }
     }
     ImGui::EndHorizontal();
     ImGui::EndChild();
