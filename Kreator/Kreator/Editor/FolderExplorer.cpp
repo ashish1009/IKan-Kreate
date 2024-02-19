@@ -19,9 +19,12 @@ namespace Kreator
   {
     bool popup {false};
     PopupType popupType {PopupType::Invalid};
+    std::filesystem::path currentPath;
+    GUI_InputBuffer<256> pathBuffer;
 
     Ref<Texture> shadowTexture;
     Ref<Texture> folderIcon;
+    Ref<Texture> backButton;
   };
   static Scope<Data> s_fileExplorerData;
 
@@ -31,7 +34,8 @@ namespace Kreator
     IK_LOG_TRACE("FolderExplorer", "Initialising the FolderExplorer textures");
     s_fileExplorerData = CreateScope<Data>();
     s_fileExplorerData->shadowTexture = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/ShadowLineTop.png");
-    s_fileExplorerData->folderIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Folder.png");
+    s_fileExplorerData->folderIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/CBP/Folder.png");
+    s_fileExplorerData->backButton = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Back.png");
   }
   
   void FolderExplorer::Shutdown()
@@ -89,7 +93,6 @@ namespace Kreator
         UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
         UI::ScopedStyle padding(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 4.0f));
         UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(0.0f, 2.0f));
-        UI::ScopedStyle rouning(ImGuiStyleVar_FrameRounding, 15);
 
         ImGuiTableFlags tableFlags = ImGuiTableFlags_Resizable | ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV;
         if (ImGui::BeginTable(UI::GenerateID(), 2 /* Num Columns */, tableFlags, ImVec2(0.0f, 0.0f)))
@@ -97,6 +100,7 @@ namespace Kreator
           UI::PushID();
           // Left Column
           {
+            UI::ScopedStyle rouning(ImGuiStyleVar_FrameRounding, 15);
             ImGui::TableSetupColumn("Outliner", 0, 300.0f);
             ImGui::TableSetupColumn("Directory Structure", ImGuiTableColumnFlags_WidthStretch);
             ImGui::TableNextRow();
@@ -144,7 +148,7 @@ namespace Kreator
           {
             // Directory Content
             ImGui::TableSetColumnIndex(1);
-            const float topBarHeight = 26.0f;
+            const float topBarHeight = 32.0f;
             const float bottomBarHeight = 0.0f;
             ImGui::BeginChild("##directory_structure", ImVec2(ImGui::GetWindowWidth(), ImGui::GetWindowHeight() - topBarHeight - bottomBarHeight - 14 /* Separator offset */));
             {
@@ -166,9 +170,47 @@ namespace Kreator
   
   void FolderExplorer::RenderTopBar(float height)
   {
+    UI::ScopedStyle rouning(ImGuiStyleVar_FrameRounding, 5);
     ImGui::BeginChild("##top_bar", ImVec2(0, height));
     ImGui::BeginHorizontal("##top_bar", ImGui::GetWindowSize());
     {
+      // Render Icon Buttons
+      auto browserButton = [](const char* labelId, const Ref<Texture>& icon)
+      {
+        const ImU32 buttonCol = UI::Color::GroupHeader;
+        const ImU32 buttonColP = UI::ColorWithMultipliedValue(buttonCol, 0.6f);
+        const ImU32 buttonColH = UI::ColorWithMultipliedValue(buttonCol, 0.8f);
+        UI::ScopedColorStack buttonColors(ImGuiCol_Button, buttonCol, ImGuiCol_ButtonHovered, buttonColH, ImGuiCol_ButtonActive, buttonColP);
+        
+        const float iconSize = 24.0f;
+        const float iconPadding = 3.0f;
+        const bool clicked = ImGui::Button(labelId, ImVec2(iconSize, iconSize));
+        UI::DrawButtonImage(icon, UI::Color::TextDarker,
+                            UI::ColorWithMultipliedValue(UI::Color::TextDarker, 1.2f),
+                            UI::ColorWithMultipliedValue(UI::Color::TextDarker, 0.8f),
+                            UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
+        
+        return clicked;
+      };
+      
+      UI::ShiftCursor(8, 10);
+      if (browserButton("##back", s_fileExplorerData->backButton))
+      {
+        if (s_fileExplorerData->currentPath != "/")
+        {
+          s_fileExplorerData->currentPath = s_fileExplorerData->currentPath.parent_path();
+          s_fileExplorerData->pathBuffer.Memset(0);
+        }
+      }
+      
+      ImGui::SameLine();
+//      
+//      float addressBarWidth = s_fileExplorerData->popupType == PopupType::Save ? 330 : 550;
+//      {
+//        UI::ScopedColor muted(ImGuiCol_Text, UI::Color::Muted);
+//        ImGui::SetNextItemWidth(addressBarWidth);
+//        ImGui::InputTextWithHint("##new_project_location", "Project Location", s_fileExplorerData->pathBuffer.Data(), s_fileExplorerData->pathBuffer.Size(), ImGuiInputTextFlags_ReadOnly);
+//      }
     }
     ImGui::EndHorizontal();
     ImGui::EndChild();
@@ -180,7 +222,6 @@ namespace Kreator
     {
       const std::filesystem::path& path = directory.path();
       std::string name = path.filename().string();
-      auto i = name.at(0);
 #ifdef __APPLE__ // Ignore Apple .DS_Store files
       if (name.at(0) == '.')
       {
