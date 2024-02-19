@@ -332,7 +332,7 @@ namespace Kreator
     // Buttons and File name
     {
       UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(10.0f, 0.0f));
-      UI::ShiftCursorY(ImGui::GetWindowHeight() - 290);
+      UI::SetCursorPosY(520);
       ImGui::Separator();
       
       if (s_fileExplorerData->popupType == PopupType::Save)
@@ -349,16 +349,25 @@ namespace Kreator
         UI::ShiftCursor(ImGui::GetContentRegionAvail().x / 2 - 180, 10);
         if (s_fileExplorerData->popupType == PopupType::Open)
         {
-          UI::DrawRoundButton(" Open ", UI::Color::NiceThemeHighlight, 5);
+          if (UI::DrawRoundButton(" Open ", UI::Color::NiceThemeHighlight, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
+          {
+            ImGui::CloseCurrentPopup();
+          }
         }
         else if (s_fileExplorerData->popupType == PopupType::Select)
         {
-          UI::DrawRoundButton(" Select ", UI::Color::NiceThemeHighlight, 5);
+          if (UI::DrawRoundButton(" Select ", UI::Color::NiceThemeHighlight, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
+          {
+            ImGui::CloseCurrentPopup();
+          }
         }
       }
             
       ImGui::SameLine();
-      UI::DrawRoundButton("Cancel", UI::Color::Muted, 5);
+      if (UI::DrawRoundButton("Cancel", UI::Color::Muted, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape))
+      {
+        ImGui::CloseCurrentPopup();
+      }
     }
   }
   

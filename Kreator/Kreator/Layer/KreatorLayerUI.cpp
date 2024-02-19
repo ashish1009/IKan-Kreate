@@ -202,7 +202,7 @@ namespace Kreator
         if (UI::DrawRoundButton("...", UI::Color::BackgroundDark, 5))
         {
           ImGui::CloseCurrentPopup();
-          FolderExplorer::Select();
+          FolderExplorer::Save();
         }
       }
 
