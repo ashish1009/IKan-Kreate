@@ -12,10 +12,21 @@ namespace Kreator
   // Kretor Resource Path
 #define KreatorResourcePath(path) std::filesystem::absolute(m_clientResourcePath / path)
 
+  KreatorLayer* KreatorLayer::s_instance = nullptr;
+  KreatorLayer& KreatorLayer::Get()
+  {
+    return *s_instance;
+  }
+
   KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath, Ref<UserPreferences> userPreferences)
   : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_userPreferences(userPreferences)
   {
     IK_PROFILE();
+    IK_ASSERT(!s_instance, "RendererLayer instance already created");
+    
+    // Copy the single instance of application
+    s_instance = this;
+    
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
     // Decorate the Application --------------------------------------------------------------------------------------
@@ -108,5 +119,10 @@ namespace Kreator
     {
       IK_LOG_INFO("Kreator Layer", "Creating Project at {0} ", Utils::FileSystem::IKanAbsolute(projectDir).string());
     }
+  }
+  
+  const std::filesystem::path& KreatorLayer::GetClientResorucePath() const
+  {
+    return m_clientResourcePath;
   }
 } // namespace Kreator

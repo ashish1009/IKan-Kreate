@@ -44,6 +44,13 @@ namespace Kreator
     /// - Note Core Application is taking care to call the EventHandler(event) API for all Layers
     void OnEvent(Event& event) override;
     
+    // Getters -------------------------------------------------------------------------------------------------------
+    /// This function returns the client file path
+    const std::filesystem::path& GetClientResorucePath() const;
+
+    /// This function returns the single instance of the renderer layer
+    static KreatorLayer& Get();
+
   private:
     // Member functions ----------------------------------------------------------------------------------------------
     // Project API ---------------------------------------
@@ -76,5 +83,8 @@ namespace Kreator
     // Project Data --------------------------------------
     GUI_InputBuffer<255> m_projectNameBuffer;
     GUI_InputBuffer<512> m_projectFilePathBuffer;
+    
+    // Single Instance -----------------------------------
+    static KreatorLayer* s_instance;
   };
 } // namespace Kreator

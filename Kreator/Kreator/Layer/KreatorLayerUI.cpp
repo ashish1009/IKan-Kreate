@@ -127,7 +127,7 @@ namespace Kreator
             
             if (button("Open Project", m_folderIcon, "Open an exisiting Kreator Project"))
             {
-              ImGui::CloseCurrentPopup();
+//              ImGui::CloseCurrentPopup();
             }
           }
 
@@ -214,13 +214,13 @@ namespace Kreator
         UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 90);
         if ((UI::DrawRoundButton("Create", UI::ColorVec3FromU32(UI::Color::NiceThemeHighlight), 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
         {
-          ImGui::CloseCurrentPopup();
+//          ImGui::CloseCurrentPopup();
         }
         
         ImGui::SameLine();
         if ((UI::DrawRoundButton("Cancel", UI::ColorVec3FromU32(UI::Color::NiceThemeHighlight), 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
         {
-          ImGui::CloseCurrentPopup();
+//          ImGui::CloseCurrentPopup();
         }
         ImGui::PopFont();
       }

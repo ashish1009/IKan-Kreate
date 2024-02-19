@@ -15,9 +15,9 @@ namespace Kreator::UI
     switch (theme)
     {
       case Kreator::UserPreferences::Theme::Dark:
-        UI::Color::Text                 = IM_COL32(222, 222, 222, 255);
+        UI::Color::Text                 = IM_COL32(210, 210, 210, 255);
         UI::Color::TextDarker           = IM_COL32(128, 128, 128, 255);
-        UI::Color::TextBrighter         = IM_COL32(210, 210, 210, 255);
+        UI::Color::TextBrighter         = IM_COL32(222, 222, 222, 255);
         UI::Color::Muted                = IM_COL32(77, 77, 77, 255);
         UI::Color::Background           = IM_COL32(28, 28, 28, 255);
         UI::Color::BackgroundPopup      = IM_COL32(39, 39, 39, 255);
@@ -34,9 +34,9 @@ namespace Kreator::UI
         break;
         
       case Kreator::UserPreferences::Theme::Blue:
-        UI::Color::Text                 = IM_COL32(222, 222, 222, 255);
-        UI::Color::TextDarker           = IM_COL32(128, 128, 128, 255);
-        UI::Color::TextBrighter         = IM_COL32(210, 210, 210, 255);
+        UI::Color::Text                 = IM_COL32(210, 210, 210, 255);
+        UI::Color::TextDarker           = IM_COL32(158, 158, 158, 255);
+        UI::Color::TextBrighter         = IM_COL32(222, 222, 222, 255);
         UI::Color::Muted                = IM_COL32(97, 97, 97, 255);
         UI::Color::Background           = IM_COL32(28, 38, 53, 255);
         UI::Color::BackgroundPopup      = IM_COL32(33, 53, 71, 255);

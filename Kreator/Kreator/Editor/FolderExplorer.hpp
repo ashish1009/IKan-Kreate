@@ -31,5 +31,10 @@ namespace Kreator
     static void Save();
 
     DELETE_ALL_CONSTRUCTORS(FolderExplorer);
+    
+  private:
+    /// This function renders the top bar of viewer
+    /// - Parameter height: Height of top bar
+    static void RenderTopBar(float height);
   };
 } // namespace Kreator
