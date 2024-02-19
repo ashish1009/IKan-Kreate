@@ -11,6 +11,7 @@
 		B248B8F02B7E3EED00B9EC40 /* ImGuiTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8EE2B7E3EED00B9EC40 /* ImGuiTheme.cpp */; };
 		B248B8F32B7F19B600B9EC40 /* ImGuiUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8F12B7F19B600B9EC40 /* ImGuiUtils.cpp */; };
 		B248B8FC2B7F881D00B9EC40 /* FolderExplorer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8FA2B7F881D00B9EC40 /* FolderExplorer.cpp */; };
+		B248B8FF2B83388800B9EC40 /* ContentBrowserItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8FD2B83388800B9EC40 /* ContentBrowserItem.cpp */; };
 		B2C0B6CF2B75F7580015A277 /* libbz2.1.0.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6CE2B75F7580015A277 /* libbz2.1.0.8.tbd */; };
 		B2C0B6D12B75F7600015A277 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6D02B75F7600015A277 /* libz.tbd */; };
 		B2C0B6DF2B79DD210015A277 /* libpugixml.1.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */; };
@@ -51,6 +52,8 @@
 		B248B8F82B7F650600B9EC40 /* UI_InputBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UI_InputBuffer.hpp; sourceTree = "<group>"; };
 		B248B8FA2B7F881D00B9EC40 /* FolderExplorer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FolderExplorer.cpp; sourceTree = "<group>"; };
 		B248B8FB2B7F881D00B9EC40 /* FolderExplorer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FolderExplorer.hpp; sourceTree = "<group>"; };
+		B248B8FD2B83388800B9EC40 /* ContentBrowserItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContentBrowserItem.cpp; sourceTree = "<group>"; };
+		B248B8FE2B83388800B9EC40 /* ContentBrowserItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContentBrowserItem.hpp; sourceTree = "<group>"; };
 		B2C0B6CE2B75F7580015A277 /* libbz2.1.0.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.8.tbd; path = usr/lib/libbz2.1.0.8.tbd; sourceTree = SDKROOT; };
 		B2C0B6D02B75F7600015A277 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugixml.1.13.dylib; path = ../IKan/Vendors/Assimp/lib/libpugixml.1.13.dylib; sourceTree = "<group>"; };
@@ -107,6 +110,8 @@
 				B2C0BA132B7E0F5D0015A277 /* UserPreferences.hpp */,
 				B248B8FA2B7F881D00B9EC40 /* FolderExplorer.cpp */,
 				B248B8FB2B7F881D00B9EC40 /* FolderExplorer.hpp */,
+				B248B8FD2B83388800B9EC40 /* ContentBrowserItem.cpp */,
+				B248B8FE2B83388800B9EC40 /* ContentBrowserItem.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -247,6 +252,7 @@
 				B248B8EC2B7E3B4500B9EC40 /* KreatorLayerUI.cpp in Sources */,
 				B2ED5E1A2B738B23007A7F36 /* Kreator.cpp in Sources */,
 				B2ED5C5F2B723E25007A7F36 /* EntryPoint.cpp in Sources */,
+				B248B8FF2B83388800B9EC40 /* ContentBrowserItem.cpp in Sources */,
 				B248B8F32B7F19B600B9EC40 /* ImGuiUtils.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
