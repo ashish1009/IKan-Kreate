@@ -39,5 +39,9 @@ namespace Kreator
     /// This function iterate the direcotries
     /// - Parameter currentDirectory: current directory
     static void DirectoryIterator(const std::filesystem::path& currentDirectory);
+    /// This funcion renders the Size area
+    static void RenderSideColumn();
+    /// This funcion renders the main area
+    static void RenderMainArea();
   };
 } // namespace Kreator
