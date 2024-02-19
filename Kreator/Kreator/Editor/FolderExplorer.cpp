@@ -314,6 +314,7 @@ namespace Kreator
       } // If search
     } // Directory iterator
     
+    // Rename new folder
     {
       if (s_fileExplorerData->createNewFolder)
       {
@@ -381,6 +382,7 @@ namespace Kreator
    
     // Buttons and File name
     {
+      ImGui::PushFont(UI::GetBoldFont());
       UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(10.0f, 0.0f));
       UI::SetCursorPosY(520);
       ImGui::Separator();
@@ -393,7 +395,7 @@ namespace Kreator
         
         ImGui::SameLine();
         UI::DrawRoundButton(" Save ", UI::Color::NiceThemeHighlight, 5);
-      }
+      } // if Save
       else
       {
         UI::ShiftCursor(ImGui::GetContentRegionAvail().x / 2 - 180, 10);
@@ -403,7 +405,7 @@ namespace Kreator
           {
             ImGui::CloseCurrentPopup();
           }
-        }
+        } // if open
         else if (s_fileExplorerData->popupType == PopupType::Select)
         {
           if (UI::DrawRoundButton(" Select ", UI::Color::NiceThemeHighlight, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
@@ -418,20 +420,29 @@ namespace Kreator
               
               s_fileExplorerData->returnPath = s_fileExplorerData->selectedPath;
             }
-          }
+          } // if select
         }
-      }
+      } // else of if Save
             
       ImGui::SameLine();
       if (UI::DrawRoundButton("Cancel", UI::Color::Muted, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape))
       {
-        ImGui::CloseCurrentPopup();
-        if (s_fileExplorerData->lastPopupFlag)
+        if (!s_fileExplorerData->createNewFolder)
         {
-          *s_fileExplorerData->lastPopupFlag = true;
+          ImGui::CloseCurrentPopup();
+          if (s_fileExplorerData->lastPopupFlag)
+          {
+            *s_fileExplorerData->lastPopupFlag = true;
+          }
+        }
+        else
+        {
+          s_fileExplorerData->createNewFolder = false;
+          memset(s_fileExplorerData->newFolderNameBuffer, 0, 256);
         }
       }
-    }
+      ImGui::PopFont();
+    } // Button
   }
   
   void FolderExplorer::DirectoryIterator(const std::filesystem::path& currentDirectory)

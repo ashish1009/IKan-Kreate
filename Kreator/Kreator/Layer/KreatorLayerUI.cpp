@@ -208,17 +208,16 @@ namespace Kreator
 
       // Buttons
       {
-        auto boldFont = UI::GetBoldFont();
-        ImGui::PushFont(boldFont);
+        ImGui::PushFont(UI::GetBoldFont());
         
         UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 90);
-        if ((UI::DrawRoundButton("Create", UI::Color::NiceThemeHighlight, 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+        if ((UI::DrawRoundButton("Create", UI::Color::NiceThemeHighlight, 10)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
         {
 //          ImGui::CloseCurrentPopup();
         }
         
         ImGui::SameLine();
-        if ((UI::DrawRoundButton("Cancel", UI::Color::NiceThemeHighlight, 20)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+        if ((UI::DrawRoundButton("Cancel", UI::Color::Muted, 10)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
         {
 //          ImGui::CloseCurrentPopup();
         }
