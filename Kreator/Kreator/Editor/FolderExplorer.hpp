@@ -23,12 +23,14 @@ namespace Kreator
     static std::filesystem::path Explore();
     
     /// This function set the popup to show Select folder widgwet
-    /// - Parameters:
-    static void Select();
+    /// - Parameter lastPopupFlag: last popup flag pointer
+    static void Select(bool *lastPopupFlag = nullptr);
     /// This function set the popup to show open file widgwet
-    static void Open();
+    /// - Parameter lastPopupFlag: last popup flag pointer
+    static void Open(bool *lastPopupFlag = nullptr);
     /// This function set the popup to show save file widgwet
-    static void Save();
+    /// - Parameter lastPopupFlag: last popup flag pointer
+    static void Save(bool *lastPopupFlag = nullptr);
     
     DELETE_ALL_CONSTRUCTORS(FolderExplorer);
     

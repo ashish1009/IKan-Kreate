@@ -202,7 +202,7 @@ namespace Kreator
         if (UI::DrawRoundButton("...", UI::Color::BackgroundDark, 5))
         {
           ImGui::CloseCurrentPopup();
-          FolderExplorer::Save();
+          FolderExplorer::Select(&m_showCreateNewProjectPopup);
         }
       }
 
@@ -233,5 +233,6 @@ namespace Kreator
   void KreatorLayer::UI_FolderExplorer()
   {
     std::filesystem::path explorerOutput = FolderExplorer::Explore();
+    RETURN_IF(explorerOutput == "");
   }
 } // namespace Kreator

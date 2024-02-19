@@ -18,6 +18,7 @@ namespace Kreator
   struct Data
   {
     bool popup {false};
+    bool* lastPopupFlag;
     PopupType popupType {PopupType::Invalid};
     
     std::filesystem::path currentPath;
@@ -140,6 +141,7 @@ namespace Kreator
       } // Viewer Table Scope
       ImGui::EndPopup();
     } // Begin Popup
+    
     return returnPath;
   }
   
@@ -371,6 +373,10 @@ namespace Kreator
       if (UI::DrawRoundButton("Cancel", UI::Color::Muted, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape))
       {
         ImGui::CloseCurrentPopup();
+        if (s_fileExplorerData->lastPopupFlag)
+        {
+          *s_fileExplorerData->lastPopupFlag = true;
+        }
       }
     }
   }
@@ -423,21 +429,36 @@ namespace Kreator
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
   }
   
-  void FolderExplorer::Select()
+  void FolderExplorer::Select(bool *lastPopupFlag)
   {
     s_fileExplorerData->popup = true;
+    s_fileExplorerData->lastPopupFlag = lastPopupFlag;
+    s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
+    s_fileExplorerData->selectedFilePath = "";
+
     s_fileExplorerData->popupType = PopupType::Select;
   }
   
-  void FolderExplorer::Open()
+  void FolderExplorer::Open(bool *lastPopupFlag)
   {
     s_fileExplorerData->popup = true;
+    s_fileExplorerData->lastPopupFlag = lastPopupFlag;
+    s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
+    s_fileExplorerData->selectedFilePath = "";
+
     s_fileExplorerData->popupType = PopupType::Open;
   }
   
-  void FolderExplorer::Save()
+  void FolderExplorer::Save(bool *lastPopupFlag)
   {
     s_fileExplorerData->popup = true;
+    s_fileExplorerData->lastPopupFlag = lastPopupFlag;
+    s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
+    s_fileExplorerData->selectedFilePath = "";
+
     s_fileExplorerData->popupType = PopupType::Save;
   }
 } // namespace Kreator
