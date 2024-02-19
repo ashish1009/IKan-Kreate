@@ -21,8 +21,9 @@ namespace Kreator
     bool* lastPopupFlag;
     PopupType popupType {PopupType::Invalid};
     
-    std::filesystem::path currentPath;
-    std::filesystem::path selectedFilePath = "";
+    std::filesystem::path currentPath {};
+    std::filesystem::path selectedPath {};
+    std::filesystem::path returnPath {};
 
     GUI_InputBuffer<256> pathBuffer;
     char fileBuffer[256];
@@ -58,8 +59,6 @@ namespace Kreator
   
   std::filesystem::path FolderExplorer::Explore()
   {
-    std::filesystem::path returnPath {};
-    
     if (s_fileExplorerData->popup)
     {
       ImGui::OpenPopup("Kreator File Viewer");
@@ -142,7 +141,7 @@ namespace Kreator
       ImGui::EndPopup();
     } // Begin Popup
     
-    return returnPath;
+    return s_fileExplorerData->returnPath;
   }
   
   void FolderExplorer::RenderTopBar(float height)
@@ -272,7 +271,7 @@ namespace Kreator
         window->DC.CurrLineTextBaseOffset = 3.0f;
         
         ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
-        | ((s_fileExplorerData->selectedFilePath == directory) ? ImGuiTreeNodeFlags_Selected : 0);
+        | ((s_fileExplorerData->selectedPath == directory) ? ImGuiTreeNodeFlags_Selected : 0);
         
         bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->folderIcon);
         if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left))
@@ -281,7 +280,7 @@ namespace Kreator
         }
         if (ImGui::IsItemClicked())
         {
-          s_fileExplorerData->selectedFilePath = directory;
+          s_fileExplorerData->selectedPath = directory;
         }
         
         // Fixing slight overlap
@@ -295,45 +294,48 @@ namespace Kreator
       } // If search
     } // Directory iterator
     
-    // Show Files
-    for (const auto& file : filesInCurrentDirectory)
+    if (s_fileExplorerData->popupType != PopupType::Select)
     {
+      // Show Files
+      for (const auto& file : filesInCurrentDirectory)
+      {
 #ifdef __APPLE__ // Ignore Apple .DS_Store files
-      if (file.filename().string().at(0) == '.')
-      {
-        continue;
-      }
+        if (file.filename().string().at(0) == '.')
+        {
+          continue;
+        }
 #endif
-      auto directoryName = std::filesystem::relative(file, s_fileExplorerData->currentPath);
-      std::string name = directoryName.filename().string();
-      std::string id = name + "_TreeNode";
-      
-      if (Utils::String::ToLowerCopy(name).find(searchString) != std::string::npos)
-      {
-        // ImGui item height hack
-        auto* window = ImGui::GetCurrentWindow();
-        window->DC.CurrLineSize.y = 20.0f;
-        window->DC.CurrLineTextBaseOffset = 3.0f;
+        auto directoryName = std::filesystem::relative(file, s_fileExplorerData->currentPath);
+        std::string name = directoryName.filename().string();
+        std::string id = name + "_TreeNode";
         
-        ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
-        | ((s_fileExplorerData->selectedFilePath == file) ? ImGuiTreeNodeFlags_Selected : 0);
-        
-        bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->fileIcon);
-        if (ImGui::IsItemClicked())
+        if (Utils::String::ToLowerCopy(name).find(searchString) != std::string::npos)
         {
-          s_fileExplorerData->selectedFilePath = file;
-        }
-        
-        // Fixing slight overlap
-        UI::ShiftCursorY(3.0f);
-        
-        // If item clicked
-        if (open)
-        {
-          ImGui::TreePop();
-        }
-      } // if search
-    } // File iterator
+          // ImGui item height hack
+          auto* window = ImGui::GetCurrentWindow();
+          window->DC.CurrLineSize.y = 20.0f;
+          window->DC.CurrLineTextBaseOffset = 3.0f;
+          
+          ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding
+          | ((s_fileExplorerData->selectedPath == file) ? ImGuiTreeNodeFlags_Selected : 0);
+          
+          bool open = UI::TreeNode(id, name, flags, s_fileExplorerData->fileIcon);
+          if (ImGui::IsItemClicked())
+          {
+            s_fileExplorerData->selectedPath = file;
+          }
+          
+          // Fixing slight overlap
+          UI::ShiftCursorY(3.0f);
+          
+          // If item clicked
+          if (open)
+          {
+            ImGui::TreePop();
+          }
+        } // if search
+      } // File iterator
+    }
    
     // Buttons and File name
     {
@@ -365,6 +367,12 @@ namespace Kreator
           if (UI::DrawRoundButton(" Select ", UI::Color::NiceThemeHighlight, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
           {
             ImGui::CloseCurrentPopup();
+            if (s_fileExplorerData->lastPopupFlag)
+            {
+              *s_fileExplorerData->lastPopupFlag = true;
+            }
+            
+            s_fileExplorerData->returnPath = s_fileExplorerData->selectedPath;
           }
         }
       }
@@ -435,7 +443,8 @@ namespace Kreator
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
     s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
-    s_fileExplorerData->selectedFilePath = "";
+    s_fileExplorerData->selectedPath = "";
+    s_fileExplorerData->returnPath = "";
 
     s_fileExplorerData->popupType = PopupType::Select;
   }
@@ -446,7 +455,8 @@ namespace Kreator
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
     s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
-    s_fileExplorerData->selectedFilePath = "";
+    s_fileExplorerData->selectedPath = "";
+    s_fileExplorerData->returnPath = "";
 
     s_fileExplorerData->popupType = PopupType::Open;
   }
@@ -457,7 +467,8 @@ namespace Kreator
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
     s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
-    s_fileExplorerData->selectedFilePath = "";
+    s_fileExplorerData->selectedPath = "";
+    s_fileExplorerData->returnPath = "";
 
     s_fileExplorerData->popupType = PopupType::Save;
   }
