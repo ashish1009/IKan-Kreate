@@ -9,6 +9,9 @@
 
 namespace Kreator
 {
+#define RETRUN_IF_NO_PROJECT() \
+if (!Project::GetActive()) return
+
   // Kretor Resource Path
 #define KreatorResourcePath(path) std::filesystem::absolute(m_clientResourcePath / path)
   
@@ -97,6 +100,12 @@ namespace Kreator
     
     // Project Icon
     m_projectIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Project.png"));
+    
+    // Window Icons
+    m_iconClose = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Close.png"));
+    m_iconMinimize = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Minimize.png"));
+    m_iconMaximize = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Maximize.png"));
+    m_iconRestore = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Restore.png"));
   }
   
   KreatorLayer::~KreatorLayer()
@@ -135,6 +144,8 @@ namespace Kreator
     UI_NewProjectPopup();
     UI_FolderExplorer();
     
+    RETRUN_IF_NO_PROJECT();
+
     // Docked Windows-----------
     UI_StartMainWindowDocking();
     m_panels.OnImGuiRender();

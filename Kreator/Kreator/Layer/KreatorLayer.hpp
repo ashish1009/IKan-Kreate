@@ -91,6 +91,8 @@ namespace Kreator
     void UI_TitlebarDragArea(float titlebarHeight);
     /// This function renders the Menu bar for Title bar
     void UI_MenuBar();
+    /// This function renders window buttons
+    void UI_WindowButtons();
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
@@ -108,6 +110,7 @@ namespace Kreator
     Ref<Texture> m_applicationIcon, m_welcomeIcon;
     Ref<Texture> m_newProjectIcon, m_folderIcon;
     Ref<Texture> m_projectIcon;
+    Ref<Texture> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
 
     // Project Data --------------------------------------
     std::filesystem::path m_openProjectPath = "";
@@ -122,6 +125,8 @@ namespace Kreator
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
     
+    // Scene Data ----------------------------------------
+    std::string m_sceneFilePath{};
     enum class SceneState
     {
       Edit = 0, Play = 1, Pause = 2, Simulate = 3

@@ -478,28 +478,28 @@ namespace Kreator
     static const float titleBarHeight = 40.0f;
     
     // Draw the title Bar rectangle ---------------------------------------------------
-    static const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
-    static const ImVec2 titlebarMax =
+    const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
+    const ImVec2 titlebarMax =
     {
       ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth(),
       ImGui::GetCursorScreenPos().y + titleBarHeight
     };
     
-    static auto* drawList = ImGui::GetWindowDrawList();
+    auto* drawList = ImGui::GetWindowDrawList();
     drawList->AddRectFilled(titlebarMin, titlebarMax, UI::Color::Titlebar);
     
     // Drag and Control the window with user title bar ---------------------------------
     UI_TitlebarDragArea(titleBarHeight);
 
     // Draw Kreator Logo ---------------------------------------------------------------
-    static const int32_t logoWidth = titleBarHeight - 10;
-    static const int32_t logoHeight = titleBarHeight - 10;
-    static const ImVec2 logoRectStart =
+    const int32_t logoWidth = titleBarHeight - 10;
+    const int32_t logoHeight = titleBarHeight - 10;
+    const ImVec2 logoRectStart =
     {
       ImGui::GetItemRectMin().x,
       ImGui::GetItemRectMin().y
     };
-    static const ImVec2 logoRectMax =
+    const ImVec2 logoRectMax =
     {
       logoRectStart.x + logoWidth,
       logoRectStart.y + logoHeight
@@ -513,6 +513,84 @@ namespace Kreator
     UI::SetCursorPos(ImVec2(logoOffsetX, 4.0f));
     
     UI_MenuBar();
+
+    // Round Bar -------------------------------------------------------------------------
+    UI::SetCursorPosX(ImGui::GetWindowWidth() / 4);
+    UI::SetCursorPosY(titleBarHeight / 3);
+    
+    const ImVec2 roundBarMin = ImGui::GetCursorScreenPos();
+    const ImVec2 roundBarMax =
+    {
+      ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth() / 2,
+      ImGui::GetCursorScreenPos().y + 23
+    };
+    drawList->AddRectFilled(roundBarMin, roundBarMax, UI::Color::TitleBarDark, 10);
+    float roundBarRight = (3 * ImGui::GetWindowWidth()) / 4;
+    UI::ShiftCursorY(5);
+
+    const float underlineThickness = 1.0f;
+    // Project name --------------------------------------------------------------------
+    {
+      UI::ScopedColor textColor(ImGuiCol_Text, UI::Color::TextDarker);
+      UI::ShiftCursorX(10);
+      const std::string title = Project::GetActive()->GetConfig().name;
+      {
+        UI::ScopedFont boldFont(UI::GetBoldFont());
+        ImGui::Text(title.c_str());
+      }
+      UI::SetTooltip("Current project (" + Project::GetActive()->GetConfig().projectFileName + ")");
+      
+      // Get the Project Name rectangle (Expanded by 10 to have good space)
+      ImRect itemRect = UI::RectExpanded(UI::GetItemRect(), 10.0f, 2.0f);
+      // Make the Max + thickness of rectange as min of verticle line
+      itemRect.Min.x = itemRect.Max.x + underlineThickness;
+      // Make the new Min + Thickness of rectange as new Max of verticle line
+      itemRect.Max.x = itemRect.Min.x + underlineThickness;
+      
+      drawList->AddRectFilled(itemRect.Min, itemRect.Max, UI::Color::Muted, 2.0f);
+    }
+    
+    // Current Scene name ---------------------------------------------------------------
+    {
+      UI::ScopedColor textColor(ImGuiCol_Text, UI::Color::Text);
+      UI::SameLine();
+      
+      const std::string sceneName = "Current Scene";
+      UI::SetCursorPosX(roundBarRight - ImGui::CalcTextSize(sceneName.c_str()).x - 20);
+      {
+        if (m_sceneFilePath == "")
+        {
+          ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::Warning);
+        }
+        UI::ScopedFont boldFont(UI::GetBoldFont());
+        ImGui::Text(sceneName.c_str());
+        if (m_sceneFilePath == "")
+        {
+          ImGui::PopStyleColor();
+        }
+      }
+      if (m_sceneFilePath == "")
+      {
+        UI::SetTooltip("Unsaved Scene");
+      }
+      else
+      {
+        UI::SetTooltip("Current scene (" + m_sceneFilePath + ")");
+      }
+      
+      // Get the Project Name rectangle (Expanded by 10 to have good space)
+      ImRect itemRect = UI::RectExpanded(UI::GetItemRect(), 10.0f, 2.0f);
+      
+      // Make the new Min + Thickness of rectange as new Max of verticle line
+      itemRect.Max.x = itemRect.Min.x + underlineThickness;
+      
+      drawList->AddRectFilled(itemRect.Min, itemRect.Max, UI::Color::Muted, 2.0f);
+    }
+    
+    // Render the Window Buttons -------------------------------------------------------
+    UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
+    UI::SetCursorPosY(20.0f);
+    UI_WindowButtons();
 
     return titleBarHeight;
   }
@@ -575,7 +653,7 @@ namespace Kreator
   void KreatorLayer::UI_MenuBar()
   {
     // Menu Bar Rectactangle Size
-    static const ImRect menuBarRect =
+    const ImRect menuBarRect =
     {
       ImGui::GetCursorPos(), // Min Rect Coord
       {ImGui::GetContentRegionAvail().x, ImGui::GetFrameHeightWithSpacing()} // Max Rect Coord
@@ -633,5 +711,49 @@ namespace Kreator
     UI::EndMenuBar();
     ImGui::EndGroup();
   }
-
+  
+  void KreatorLayer::UI_WindowButtons()
+  {
+    // Window buttons
+    const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Color::Text, 0.9f);
+    const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Color::Text, 1.2f);
+    const ImU32 buttonColP = UI::Color::TextDarker;
+    const float buttonWidth = 14.0f;
+    const float buttonHeight = 14.0f;
+    const Window& window = Application::Get().GetWindow();
+    
+    // Minimize Button
+    {
+      const int iconHeight = m_iconMinimize->GetHeight();
+      const float padY = (buttonHeight - (float)iconHeight) / 2.0f;
+      
+      if (ImGui::InvisibleButton("Minimize", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        window.Iconify();
+      }
+      UI::DrawButtonImage(m_iconMinimize, buttonColN, buttonColH, buttonColP, UI::RectExpanded(UI::GetItemRect(), 0.0f, -padY));
+    }
+    
+    UI::SameLine();
+    // Maximize Button
+    {
+      bool isMaximized = window.IsMaximized();
+      if (ImGui::InvisibleButton("Maximize/Restore", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        (isMaximized) ? window.Restore() : window.Maximize();
+      }
+      UI::DrawButtonImage(isMaximized ? m_iconRestore : m_iconMaximize, buttonColN, buttonColH, buttonColP);
+    }
+    
+    UI::SameLine();
+    // Close Button
+    {
+      if (ImGui::InvisibleButton("Close", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        Application::Get().Close();
+      }
+      UI::DrawButtonImage(m_iconClose, UI::Color::Text, UI::ColorWithMultipliedValue(UI::Color::Text, 1.4f), buttonColP);
+    }
+  }
+  
 } // namespace Kreator
