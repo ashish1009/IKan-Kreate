@@ -76,6 +76,7 @@ namespace Kreator
     s_fileExplorerData->returnPath = "";
     
     UI::SetNextWindowAtCenterWithSize({900, 600});
+    UI::ScopedColor bgCol(ImGuiCol_ChildBg, UI::Color::Background);
 
     if (ImGui::BeginPopupModal("Kreator File Viewer", nullptr, ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoBackground | ImGuiWindowFlags_NoMove ))
     {
