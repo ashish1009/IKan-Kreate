@@ -92,6 +92,8 @@ Editor Application using IKan Library to create Games
 ### Features
 - Renderer Layer
   - Welcome Screen
+  - Title Bar
+  - Open/New/Save - Project
 - Editor
   - Folder Explorer
   - User Preference
@@ -100,8 +102,7 @@ Editor Application using IKan Library to create Games
 
 ### Detailed Road Map
 - Renderer Layer
-  - Title Bar
-  - Open/New/Save - Project/Scene
+  - Open/New/Save - Scene
 - Editor
   - Application Setting
   - Asset Viewer
@@ -127,6 +128,7 @@ Editor Application using IKan Library to create Games
   - v3.1.2.0 : Cameras
   - v4.0.3.0 : Project/UI/Welcome screen
   - v4.1.3.0 : Asset Manager with Project
+  - v4.1.4.0 : Title Bar
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)

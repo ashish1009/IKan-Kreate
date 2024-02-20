@@ -13,7 +13,7 @@ using namespace IKan;
 
 namespace Kreator
 {
-  static const std::string KreatorVersion = "3.0";
+  static const std::string KreatorVersion = "4.0";
 
   class KreatorLayer : public Layer
   {
