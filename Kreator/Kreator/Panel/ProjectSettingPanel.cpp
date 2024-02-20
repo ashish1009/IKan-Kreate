@@ -40,7 +40,14 @@ namespace Kreator
   void ProjectSettingsPanel::RenderGeneralSettings()
   {
     ImGui::PushID("GeneralSettings");
+    UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
+    if (UI::PropertyGridHeader("General", true, 4))
+    {
+      UI::BeginPropertyGrid(2, 2);
 
+      UI::EndPropertyGrid();
+      UI::PropertyGridHeaderEnd();
+    }
     ImGui::PopID();
   }
 } // namespace Kreator

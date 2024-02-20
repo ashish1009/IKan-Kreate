@@ -9,6 +9,49 @@
 
 namespace Kreator::UI
 {
+  bool PropertyGridHeader(const std::string& name, bool openByDefault, float height, float rounding)
+  {
+    ImGuiTreeNodeFlags treeNodeFlags =  ImGuiTreeNodeFlags_Framed
+    | ImGuiTreeNodeFlags_SpanAvailWidth
+    | ImGuiTreeNodeFlags_AllowItemOverlap
+    | ImGuiTreeNodeFlags_FramePadding;
+    
+    if (openByDefault)
+    {
+      treeNodeFlags |= ImGuiTreeNodeFlags_DefaultOpen;
+    }
+    bool open = false;
+    
+    UI::ScopedStyle headerRounding(ImGuiStyleVar_FrameRounding, rounding);
+    UI::ScopedStyle headerPaddingAndHeight(ImGuiStyleVar_FramePadding, ImVec2{ height, height });
+    
+    ImGui::PushID(name.c_str());
+    open = ImGui::TreeNodeEx("##dummy_id", treeNodeFlags, Utils::String::ToUpper(name).c_str());
+    ImGui::PopID();
+    
+    return open;
+  }
+  void PropertyGridHeaderEnd()
+  {
+    ImGui::TreePop();
+  }
+  
+  void BeginPropertyGrid(uint32_t columns, float height)
+  {
+    UI::PushID();
+    ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
+    ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(4.0f, height));
+    ImGui::Columns(columns);
+  }
+  void EndPropertyGrid()
+  {
+    ImGui::Columns(1);
+    UI::DrawUnderline();
+    ImGui::PopStyleVar(2); // ItemSpacing, FramePadding
+    UI::ShiftCursorY(18.0f);
+    UI::PopID();
+  }
+
   bool PropertyDropdown(const char* label, const char** options, int32_t optionCount, int32_t* selected)
   {
     const char* current = options[*selected];
