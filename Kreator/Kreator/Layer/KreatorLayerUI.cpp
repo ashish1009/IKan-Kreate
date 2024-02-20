@@ -433,24 +433,36 @@ namespace Kreator
   {
     static const float titleBarHeight = 40.0f;
     
-    const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
-    
     // Draw the title Bar rectangle ---------------------------------------------------
-    const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
-    const ImVec2 titlebarMax =
+    static const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
+    static const ImVec2 titlebarMax =
     {
       ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth(),
       ImGui::GetCursorScreenPos().y + titleBarHeight
     };
     
-    UI::SetCursorPos(ImVec2(windowPadding.x, windowPadding.y));
-    auto* drawList = ImGui::GetWindowDrawList();
+    static auto* drawList = ImGui::GetWindowDrawList();
     drawList->AddRectFilled(titlebarMin, titlebarMax, UI::Color::Titlebar);
     
     // Drag and Control the window with user title bar ---------------------------------
-    UI::SetCursorPos(windowPadding);
     UI_TitlebarDragArea(titleBarHeight);
 
+    // Draw Kreator Logo ---------------------------------------------------------------
+    static const int32_t logoWidth = titleBarHeight - 10;
+    static const int32_t logoHeight = titleBarHeight - 10;
+    static const ImVec2 logoRectStart =
+    {
+      ImGui::GetItemRectMin().x,
+      ImGui::GetItemRectMin().y
+    };
+    static const ImVec2 logoRectMax =
+    {
+      logoRectStart.x + logoWidth,
+      logoRectStart.y + logoHeight
+    };
+    drawList->AddImage(UI::GetTextureID(m_applicationIcon), logoRectStart, logoRectMax, {0, 1}, {1, 0});
+
+    
     return titleBarHeight;
   }
   
