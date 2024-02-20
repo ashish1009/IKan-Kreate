@@ -44,10 +44,6 @@ namespace IKan
     
     std::ofstream fout(filepath);
     fout << out.c_str();
-    
-    // Unserialized data
-    m_project->m_config.projectFileName = filepath.filename().string();
-    m_project->m_config.projectDirectory = filepath.parent_path().string();
   }
   
   bool ProjectSerializer::Deserialize(const std::filesystem::path& filepath)
@@ -87,6 +83,10 @@ namespace IKan
     config.startScene = rootNode["StartScene"].as<std::string>("");
     config.enableAutoSave = rootNode["AutoSave"].as<bool>(false);
     config.autoSaveIntervalSeconds = rootNode["AutoSaveInterval"].as<int>(300);
+    
+    // Unserialized data
+    config.projectFileName = filepath.filename().string();
+    config.projectDirectory = filepath.parent_path().string();
     
     return true;
   }

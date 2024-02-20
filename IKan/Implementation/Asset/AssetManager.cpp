@@ -6,6 +6,7 @@
 //
 
 #include "AssetManager.hpp"
+#include "Project/Project.hpp"
 
 namespace IKan
 {
@@ -13,9 +14,163 @@ namespace IKan
   
   void AssetManager::Initialize()
   {
+    IK_PROFILE()
+    IK_LOG_INFO(LogModule::Asset, "Initializing current Asset Manager");
+
+    s_assetRegistry.Clear();
+    AssetImporter::Initialize();
+
+    // Loads the asset reguistry file path (If present) and update the registry data in manager
+    LoadAssetRegistry();
+    
+    // Reload the assets. Process the directory recursively and write the asset data in registry file
+    ReloadAssets();
   }
   
   void AssetManager::Shutdown()
   {
+    IK_PROFILE();
+    IK_LOG_INFO(LogModule::Asset, "Shutting down current Asset Manager");
+
+    s_assetRegistry.Clear();
   }
+  
+  void AssetManager::LoadAssetRegistry()
+  {
+    IK_PROFILE();
+    IK_LOG_TRACE(LogModule::Asset, "Loading Asset Registry");
+    
+    const auto& assetRegistryPath = Project::GetAssetRegistryPath();
+    RETURN_IF (!std::filesystem::exists(assetRegistryPath))
+    
+    IK_ASSERT(false);
+  }
+  
+  void AssetManager::ReloadAssets()
+  {
+    IK_PROFILE();
+    IK_LOG_TRACE(LogModule::Asset, "Processing Asset path and load in Registry");
+    
+    ProcessDirectory(Project::GetAssetDirectory().string());
+    WriteRegistryToFile();
+  }
+
+  void AssetManager::ProcessDirectory(const std::string &directoryPath)
+  {
+    for (auto entry : std::filesystem::directory_iterator(directoryPath))
+    {
+      if (entry.is_directory())
+      {
+        ProcessDirectory(entry.path());
+      }
+      else
+      {
+        ImportAsset(entry.path());
+      }
+    }
+  }
+  
+  AssetHandle AssetManager::ImportAsset(const std::filesystem::path& filepath)
+  {
+    std::filesystem::path path = GetRelativePath(filepath);
+    if (s_assetRegistry.Contains(path))
+    {
+      return s_assetRegistry.GetMetadata(path).handle;
+    }
+    
+    AssetType type = GetAssetTypeFromPath(path);
+    if (type == AssetType::Invalid)
+    {
+      return static_cast<AssetHandle>(0);
+    }
+    
+    AssetMetadata metadata;
+    const auto& relPath = GetRelativePath(filepath);
+    metadata.handle = Hash::GenerateFNV(relPath);
+    metadata.filePath = relPath;
+    metadata.type = type;
+    s_assetRegistry[metadata.filePath] = metadata;
+    
+    return metadata.handle;
+  }
+
+  void AssetManager::WriteRegistryToFile()
+  {
+    IK_PROFILE();
+    IK_LOG_TRACE(LogModule::Asset, "Writting Assets in file");
+    // Sort assets by UUID to make project managment easier
+    struct AssetRegistryEntry
+    {
+      std::string filePath;
+      AssetType type;
+    };
+    
+    std::map<UUID, AssetRegistryEntry> sortedMap;
+    for (auto& [filepath, metadata] : s_assetRegistry)
+    {
+      if (!std::filesystem::exists(GetFileSystemPath(metadata)))
+      {
+        continue;
+      }
+      
+      if (metadata.isMemoryAsset)
+      {
+        continue;
+      }
+      
+      std::string pathToSerialize = metadata.filePath.string();
+      std::replace(pathToSerialize.begin(), pathToSerialize.end(), '\\', '/');
+      sortedMap[metadata.handle] = { pathToSerialize, metadata.type };
+    }
+    
+    IK_LOG_INFO(LogModule::Asset, "Serializing asset registry with {0} entries", sortedMap.size());
+    
+    YAML::Emitter out;
+    out << YAML::BeginMap;
+    
+    out << YAML::Key << "Assets" << YAML::BeginSeq;
+    for (auto& [handle, entry] : sortedMap)
+    {
+      IK_LOG_TRACE(LogModule::Asset, "  {0} : {1}", handle, entry.filePath);
+      out << YAML::BeginMap;
+      out << YAML::Key << "Handle" << YAML::Value << handle;
+      out << YAML::Key << "FilePath" << YAML::Value << entry.filePath;
+      out << YAML::Key << "Type" << YAML::Value << AssetUtils::AssetTypeToString(entry.type);
+      out << YAML::EndMap;
+    }
+    out << YAML::EndSeq;
+    out << YAML::EndMap;
+    
+    const std::string& assetRegistryPath = Project::GetAssetRegistryPath().string();
+    std::ofstream fout(assetRegistryPath);
+    fout << out.c_str();
+  }
+  
+  std::filesystem::path AssetManager::GetRelativePath(const std::filesystem::path& filepath)
+  {
+    std::string temp = filepath.string();
+    if (temp.find(Project::GetActive()->GetAssetDirectory().string()) != std::string::npos)
+    {
+      return std::filesystem::relative(filepath, Project::GetActive()->GetAssetDirectory());
+    }
+    return filepath;
+  }
+  AssetType AssetManager::GetAssetTypeFromPath(const std::filesystem::path& path)
+  {
+    return GetAssetTypeFromExtension(path.extension().string());
+  }
+  AssetType AssetManager::GetAssetTypeFromExtension(const std::string& extension)
+  {
+    std::string ext = Utils::String::ToLowerCopy(extension);
+    if (s_assetExtensionMap.find(ext) == s_assetExtensionMap.end())
+    {
+      return AssetType::Invalid;
+    }
+    return s_assetExtensionMap.at(ext.c_str());
+  }
+  std::filesystem::path AssetManager::GetFileSystemPath(const AssetMetadata& metadata)
+  {
+    return Project::GetAssetDirectory() / metadata.filePath;
+  }
+
 } // namespace IKan

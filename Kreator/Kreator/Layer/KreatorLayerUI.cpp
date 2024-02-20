@@ -186,6 +186,7 @@ namespace Kreator
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 7));
         
         ImGui::SetNextItemWidth(-1);
+        ImGui::SetKeyboardFocusHere();
         ImGui::InputTextWithHint("##new_project_name", "Project Name", m_projectNameBuffer.Data(), m_projectNameBuffer.Size());
         
         ImVec2 labelSize = ImGui::CalcTextSize("...", NULL, true);
