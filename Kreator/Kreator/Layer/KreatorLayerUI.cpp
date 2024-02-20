@@ -205,6 +205,20 @@ namespace Kreator
               ImGui::CloseCurrentPopup();
             }
           }
+          
+          // Theme Selection --------------------------------------------------
+          {
+            UI::SetCursorPosY(ImGui::GetWindowHeight() - 30);
+            int32_t theme = (int32_t)m_userPreferences->theme;
+            if (UI::PropertyDropdownNoLabel("Theme", {"Blue", "Dark", "Light"}, 3, &theme))
+            {
+              m_userPreferences->theme = static_cast<UserPreferences::Theme>(theme);
+              UserPreferencesSerializer serializer(m_userPreferences);
+              serializer.Serialize(m_userPreferences->filePath);
+              
+              UI::SetThemeColors(m_userPreferences->theme);
+            }
+          }
         }
         ImGui::EndChild(); // Recent project
         ImGui::EndTable();
