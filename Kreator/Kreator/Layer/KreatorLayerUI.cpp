@@ -10,6 +10,50 @@
 
 namespace Kreator
 {
+  // Kreator UI utils
+  namespace UI_Utils
+  {
+    // Hovered Item Color
+    static const ImU32 s_hoveredColor = UI::Color::HoveredItem;
+    
+    // Function to push Dark color on active
+    static const auto pushDarkTextIfActive = [](const char* menuName)
+    {
+      if (ImGui::IsPopupOpen(menuName))
+      {
+        ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::BackgroundDark);
+        return true;
+      }
+      return false;
+    };
+    
+    /// This function Create template for Menu Item in Menu Bar
+    /// - Parameters:
+    ///   - title: Title of Menu
+    ///   - func: function of Menu
+    ///   - pop_func: Pop item highlight
+    template<typename PopFunction, typename UIFunction>
+    void AddMenu(const char* title, PopFunction popItemHighlight, UIFunction menuFunc)
+    {
+      // Change Text colored to dark if item is opened
+      bool pushItemColor = pushDarkTextIfActive(title);
+      
+      if (ImGui::BeginMenu(title))
+      {
+        popItemHighlight();
+        {
+          UI::ScopedColor hovered(ImGuiCol_HeaderHovered, s_hoveredColor);
+          menuFunc();
+        }
+        ImGui::EndMenu();
+      }
+      if (pushItemColor)
+      {
+        ImGui::PopStyleColor();
+      }
+    }
+  } // namespace Utils
+  
   void KreatorLayer::UI_WelcomePopup()
   {
     if (m_showWelcomePopup)
@@ -462,7 +506,14 @@ namespace Kreator
     };
     drawList->AddImage(UI::GetTextureID(m_applicationIcon), logoRectStart, logoRectMax, {0, 1}, {1, 0});
 
+    // Draw the Menu Tab in Title bar --------------------------------------------------
+    ImGui::SetItemAllowOverlap();
     
+    static const float logoOffsetX = (6.0f * 2.0f) + 41.0f;
+    UI::SetCursorPos(ImVec2(logoOffsetX, 4.0f));
+    
+    UI_MenuBar();
+
     return titleBarHeight;
   }
   
@@ -520,4 +571,67 @@ namespace Kreator
       }
     }
   }
+  
+  void KreatorLayer::UI_MenuBar()
+  {
+    // Menu Bar Rectactangle Size
+    static const ImRect menuBarRect =
+    {
+      ImGui::GetCursorPos(), // Min Rect Coord
+      {ImGui::GetContentRegionAvail().x, ImGui::GetFrameHeightWithSpacing()} // Max Rect Coord
+    };
+    
+    ImGui::BeginGroup();
+    if (UI::BeginMenuBar(menuBarRect))
+    {
+      bool menuOpen = ImGui::IsPopupOpen("##menubar", ImGuiPopupFlags_AnyPopupId);
+      
+      // Push the Colors if Menu is active
+      if (menuOpen)
+      {
+        const ImU32 colActive = UI::ColorWithSaturation(UI::Color::Accent, 0.5f);
+        ImGui::PushStyleColor(ImGuiCol_Header, colActive);
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, colActive);
+      }
+      
+      // Function to Pop the highlight Color
+      static auto popItemHighlight = [&menuOpen]
+      {
+        if (menuOpen)
+        {
+          ImGui::PopStyleColor(2);
+          menuOpen = false;
+        }
+      };
+      
+      // Menu Items
+      UI_Utils::AddMenu("File", popItemHighlight, [this]() {
+
+      });
+      
+      UI_Utils::AddMenu("Edit", popItemHighlight, [this]() {
+        
+      });
+      
+      UI_Utils::AddMenu("View", popItemHighlight, [this]() {
+
+      });
+      
+      UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
+        
+      });
+      
+      UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
+        
+      });
+      
+      if (menuOpen)
+      {
+        ImGui::PopStyleColor(2);
+      }
+    }
+    UI::EndMenuBar();
+    ImGui::EndGroup();
+  }
+
 } // namespace Kreator

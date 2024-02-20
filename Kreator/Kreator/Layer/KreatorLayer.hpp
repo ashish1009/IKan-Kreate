@@ -89,6 +89,8 @@ namespace Kreator
     /// This function handle the drag and Click on title bar
     /// - Parameter titlebarHeight: Title bar height
     void UI_TitlebarDragArea(float titlebarHeight);
+    /// This function renders the Menu bar for Title bar
+    void UI_MenuBar();
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
