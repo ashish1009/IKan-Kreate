@@ -73,7 +73,61 @@ namespace IKan
       // Relocate the file if not present in directory
       if (!std::filesystem::exists(AssetManager::GetFileSystemPath(metadata)))
       {
-        IK_ASSERT(false, "Implement later");
+        IK_LOG_WARN("[AssetManager]", "Missing asset '{0}' detected in registry file, trying to locate...", metadata.filePath.string());
+        
+        std::string mostLikelyCandidate;
+        uint32_t bestScore = 0;
+
+        for (auto& pathEntry : std::filesystem::recursive_directory_iterator(Project::GetAssetDirectory()))
+        {
+          const std::filesystem::path& path = pathEntry.path();
+          if (path.filename() != metadata.filePath.filename())
+          {
+            continue;
+          }
+
+          if (bestScore > 0)
+          {
+            IK_LOG_WARN("[AssetManager]", "Multiple candidates found...");
+          }
+          
+          std::vector<std::string> candiateParts = Utils::String::SplitString(path.string(), "/\\");
+
+          uint32_t score = 0;
+          for (const auto& part : candiateParts)
+          {
+            if (filepath.find(part) != std::string::npos)
+            {
+              score++;
+            }
+          }
+
+          IK_LOG_WARN("[AssetManager]", "'{0}' has a score of {1}, best score is {2}", path.string(), score, bestScore);
+
+          if (bestScore > 0 and score == bestScore)
+          {
+            // TODO: How do we handle this?
+            // Probably prompt the user at this point?
+          }
+          
+          if (score <= bestScore)
+          {
+            continue;
+          }
+          
+          bestScore = score;
+          mostLikelyCandidate = path.string();
+        }
+        
+        if (mostLikelyCandidate.empty() && bestScore == 0)
+        {
+          IK_LOG_WARN("[AssetManager]", "Failed to locate a potential match for '{0}'", metadata.filePath.string());
+          continue;
+        }
+        
+        std::replace(mostLikelyCandidate.begin(), mostLikelyCandidate.end(), '\\', '/');
+        metadata.filePath = std::filesystem::relative(mostLikelyCandidate, Project::GetActive()->GetAssetDirectory());
+        IK_LOG_WARN("[AssetManager]", "Found most likely match '{0}'", metadata.filePath.string());
       }
       
       if (metadata.handle == static_cast<AssetHandle>(0))
