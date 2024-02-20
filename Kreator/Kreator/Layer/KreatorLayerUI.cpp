@@ -492,8 +492,8 @@ namespace Kreator
     UI_TitlebarDragArea(titleBarHeight);
 
     // Draw Kreator Logo ---------------------------------------------------------------
-    const int32_t logoWidth = titleBarHeight - 10;
-    const int32_t logoHeight = titleBarHeight - 10;
+    static const int32_t logoWidth = titleBarHeight - 10;
+    static const int32_t logoHeight = titleBarHeight - 10;
     const ImVec2 logoRectStart =
     {
       ImGui::GetItemRectMin().x,
@@ -715,16 +715,16 @@ namespace Kreator
   void KreatorLayer::UI_WindowButtons()
   {
     // Window buttons
-    const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Color::Text, 0.9f);
-    const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Color::Text, 1.2f);
-    const ImU32 buttonColP = UI::Color::TextDarker;
-    const float buttonWidth = 14.0f;
-    const float buttonHeight = 14.0f;
-    const Window& window = Application::Get().GetWindow();
+    static const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Color::Text, 0.9f);
+    static const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Color::Text, 1.2f);
+    static const ImU32 buttonColP = UI::Color::TextDarker;
+    static const float buttonWidth = 14.0f;
+    static const float buttonHeight = 14.0f;
+    static const Window& window = Application::Get().GetWindow();
     
     // Minimize Button
     {
-      const int iconHeight = m_iconMinimize->GetHeight();
+      static const int iconHeight = m_iconMinimize->GetHeight();
       const float padY = (buttonHeight - (float)iconHeight) / 2.0f;
       
       if (ImGui::InvisibleButton("Minimize", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
