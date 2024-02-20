@@ -80,6 +80,12 @@ namespace Kreator
     void UI_NewProjectPopup();
     /// This function update the folder explorer output
     void UI_FolderExplorer();
+    /// This function Creates main ImGui Window with Docking
+    void UI_StartMainWindowDocking();
+    /// This function Ends Main ImGui window with Docking
+    void UI_EndMainWindowDocking();
+    /// This function renders our title bar
+    float UI_DrawTitlebar();
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
@@ -111,6 +117,12 @@ namespace Kreator
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
     
+    enum class SceneState
+    {
+      Edit = 0, Play = 1, Pause = 2, Simulate = 3
+    };
+    SceneState m_sceneState {SceneState::Edit};
+
     // Single Instance -----------------------------------
     static KreatorLayer* s_instance;
   };

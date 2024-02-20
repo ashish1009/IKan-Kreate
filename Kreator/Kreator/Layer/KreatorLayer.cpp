@@ -130,11 +130,15 @@ namespace Kreator
   
   void KreatorLayer::OnImGuiRender()
   {
+    // Pop-up ------------------
     UI_WelcomePopup();
     UI_NewProjectPopup();
     UI_FolderExplorer();
     
+    // Docked Windows-----------
+    UI_StartMainWindowDocking();
     m_panels.OnImGuiRender();
+    UI_EndMainWindowDocking();
   }
 
   void KreatorLayer::CreateProject(const std::filesystem::path& projectDir)
