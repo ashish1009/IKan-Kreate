@@ -13,6 +13,7 @@ namespace Kreator
   
   void ProjectSettingsPanel::OnImGuiRender(bool& isOpen)
   {
+    IK_PERFORMANCE("ProjectSettingsPanel::OnImGuiRender");
     if (m_project == nullptr)
     {
       isOpen = false;

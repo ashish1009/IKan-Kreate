@@ -66,6 +66,7 @@ namespace Kreator
   
   std::filesystem::path FolderExplorer::Explore()
   {
+    IK_PERFORMANCE("FolderExplorer::Explore");
     if (s_fileExplorerData->popup)
     {
       ImGui::OpenPopup("Kreator File Viewer");

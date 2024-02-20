@@ -155,6 +155,7 @@ namespace Kreator
   
   void ContentBrowserPanel::OnImGuiRender(bool &isOpen)
   {
+    IK_PERFORMANCE("ContentBrowserPanel::OnImGuiRender");
     ImGui::Begin("Content Browser", &isOpen, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar);
     {
       m_isHovered = ImGui::IsWindowHovered(ImGuiHoveredFlags_RootAndChildWindows);

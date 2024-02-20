@@ -26,6 +26,7 @@ namespace Kreator
   
   void KreatorConsolePanel::OnImGuiRender(bool& isOpen)
   {
+    IK_PERFORMANCE("KreatorConsolePanel::OnImGuiRender");
     ImGui::Begin("Log", &isOpen);
     RenderMenu();
     ImGui::Separator();

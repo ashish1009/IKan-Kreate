@@ -56,6 +56,7 @@ namespace Kreator
   
   void KreatorLayer::UI_WelcomePopup()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_WelcomePopup");
     if (m_showWelcomePopup)
     {
       ImGui::OpenPopup("Welcome Screen");
@@ -274,6 +275,7 @@ namespace Kreator
   
   void KreatorLayer::UI_NewProjectPopup()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_NewProjectPopup");
     if (m_showCreateNewProjectPopup)
     {
       ImGui::OpenPopup("New Project");
@@ -374,6 +376,7 @@ namespace Kreator
   
   void KreatorLayer::UI_FolderExplorer()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_FolderExplorer");
     std::filesystem::path explorerOutput = FolderExplorer::Explore();
     RETURN_IF(explorerOutput == "");
     
@@ -406,6 +409,7 @@ namespace Kreator
   
   void KreatorLayer::UI_StartMainWindowDocking()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_StartMainWindowDocking");
     static bool optFullscreenPersistant = true;
     static ImGuiDockNodeFlags optFlags = ImGuiDockNodeFlags_None;
     bool optFullscreen = optFullscreenPersistant;
@@ -470,11 +474,13 @@ namespace Kreator
   
   void KreatorLayer::UI_EndMainWindowDocking()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_EndMainWindowDocking");
     ImGui::End();
   }
   
   float KreatorLayer::UI_DrawTitlebar()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_DrawTitlebar");
     static const float titleBarHeight = 40.0f;
     
     // Draw the title Bar rectangle ---------------------------------------------------
@@ -757,6 +763,7 @@ namespace Kreator
   }
   void KreatorLayer::UI_StatisticsPanel()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_StatisticsPanel");
     if (ImGui::Begin("Statistics"))
     {
       UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
@@ -855,5 +862,6 @@ namespace Kreator
         ImGui::EndTabBar();
       }
     }
-    ImGui::End();  }
+    ImGui::End(); 
+  }
 } // namespace Kreator

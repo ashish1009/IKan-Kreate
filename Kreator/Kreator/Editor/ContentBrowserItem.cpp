@@ -45,6 +45,7 @@ namespace Kreator
   
   CBItemActionResult ContentBrowserItem::OnRender()
   {
+    IK_PERFORMANCE("ContentBrowserItem::OnRender");
     CBItemActionResult result;
     
     const auto& editorSettings = ApplicationSettings::Get();
@@ -340,6 +341,7 @@ namespace Kreator
   
   void ContentBrowserItem::StartRenaming()
   {
+    IK_PROFILE();
     RETURN_IF (m_isRenaming)
     memset(s_renameBuffer, 0, MAX_INPUT_BUFFER_LENGTH);
     memcpy(s_renameBuffer, m_name.c_str(), m_name.size());
@@ -348,6 +350,7 @@ namespace Kreator
   
   void ContentBrowserItem::StopRenaming()
   {
+    IK_PROFILE();
     m_isRenaming = false;
     memset(s_renameBuffer, 0, MAX_INPUT_BUFFER_LENGTH);
   }

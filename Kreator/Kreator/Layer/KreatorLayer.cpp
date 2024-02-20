@@ -186,8 +186,10 @@ if (!Project::GetActive()) return
 
     // Docked Windows-----------
     UI_StartMainWindowDocking();
-    UI_StatisticsPanel();
     m_panels.OnImGuiRender();
+
+    // Should be rendered last
+    UI_StatisticsPanel();
     UI_EndMainWindowDocking();
   }
 

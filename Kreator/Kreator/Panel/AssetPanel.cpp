@@ -12,6 +12,7 @@ namespace Kreator
 {
   void AssetPanel::OnImGuiRender(bool& isOpen)
   {
+    IK_PERFORMANCE("ProjectSettingsPanel::OnImGuiRender");
     RETURN_IF (!isOpen)
     
     UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
