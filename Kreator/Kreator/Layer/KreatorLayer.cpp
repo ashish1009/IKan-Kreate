@@ -11,6 +11,24 @@ namespace Kreator
 {
   // Kretor Resource Path
 #define KreatorResourcePath(path) std::filesystem::absolute(m_clientResourcePath / path)
+  
+  namespace KreatorUtils
+  {
+    /// This function replace the project name
+    /// - Parameters:
+    ///   - str: Project file content
+    ///   - projectName: New project name
+    static void ReplaceProjectName(std::string& str, const std::string& projectName)
+    {
+      static const char* projectNameToken = "$PROJECT_NAME$";
+      size_t pos = 0;
+      while ((pos = str.find(projectNameToken, pos)) != std::string::npos)
+      {
+        str.replace(pos, strlen(projectNameToken), projectName);
+        pos += strlen(projectNameToken);
+      }
+    }
+  } // namespace Utils
 
   KreatorLayer* KreatorLayer::s_instance = nullptr;
   KreatorLayer& KreatorLayer::Get()
@@ -110,15 +128,54 @@ namespace Kreator
     UI_NewProjectPopup();
     UI_FolderExplorer();
   }
-  
-  // Project API ---------------------------------------
+
   void KreatorLayer::CreateProject(const std::filesystem::path& projectDir)
   {
     IK_PROFILE();
     if (!std::filesystem::exists(projectDir))
     {
       IK_LOG_INFO("Kreator Layer", "Creating Project at {0} ", Utils::FileSystem::IKanAbsolute(projectDir).string());
+      
+      // Close the current Project
+      if (Project::GetActive())
+      {
+        CloseProject();
+      }
+      
+      // Copy the template files
+      std::filesystem::path templateProjectDir = m_clientResourcePath / "TemplateProject";
+      if (Utils::FileSystem::Copy(templateProjectDir, projectDir))
+      {
+        // Open Template Project file
+        std::ifstream stream(projectDir / "TemplateProject.ikproj");
+        std::stringstream ss;
+        ss << stream.rdbuf();
+        stream.close();
+        
+        // Rename the Project name in file
+        std::string str = ss.str();
+        KreatorUtils::ReplaceProjectName(str, m_projectNameBuffer);
+        
+        // Open Project file again
+        std::ofstream ostream(projectDir / "TemplateProject.ikproj");
+        ostream << str;
+        ostream.close();
+        
+        // Rename the file name
+        std::string newProjectFileName = std::string(m_projectNameBuffer) + ProjectExtension;
+        Utils::FileSystem::Rename(projectDir / "TemplateProject.ikproj", projectDir / newProjectFileName);
+      }
+      else
+      {
+        IK_LOG_CRITICAL("Kreator Layer", "Directory could not be opened. Source directory : {0}. Destination directory : {1}",
+                        templateProjectDir.string(), projectDir.string());
+      }
     }
+  }
+  
+  void KreatorLayer::CloseProject()
+  {
+    IK_ASSERT(false);
   }
   
   const std::filesystem::path& KreatorLayer::GetClientResorucePath() const

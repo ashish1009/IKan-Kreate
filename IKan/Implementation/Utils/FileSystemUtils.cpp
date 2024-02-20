@@ -25,4 +25,28 @@ namespace IKan::Utils
     }
     return result;
   }
+  bool FileSystem::Copy(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath)
+  {
+    if (std::filesystem::exists(newFilepath))
+    {
+      return false;
+    }
+    
+    std::filesystem::copy(oldFilepath, newFilepath, std::filesystem::copy_options::recursive);
+    return true;
+  }
+  bool FileSystem::Rename(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath)
+  {
+    return Move(oldFilepath, newFilepath);
+  }
+  bool FileSystem::Move(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath)
+  {
+    if (std::filesystem::exists(newFilepath))
+    {
+      return false;
+    }
+    std::filesystem::rename(oldFilepath, newFilepath);
+    return true;
+  }
+
 } // namespace IKan::Utils

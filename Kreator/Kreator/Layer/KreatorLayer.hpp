@@ -62,7 +62,9 @@ namespace Kreator
     /// This function Creates new project
     /// - Parameter projectDir: Project Direcotry
     void CreateProject(const std::filesystem::path& projectDir);
-    
+    /// This function Closed the current active project
+    void CloseProject();
+
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup
     void UI_WelcomePopup();

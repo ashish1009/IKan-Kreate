@@ -16,5 +16,20 @@ namespace IKan::Utils
     /// This function returns the absolute File/Directory path for Kreator
     /// - Parameter path: Current Relative File/Directory path passed
     static std::filesystem::path IKanAbsolute(const std::filesystem::path& path);
+    /// This function Copies the File/Directory
+    /// - Parameters:
+    ///   - oldFilepath: Old Name of File/Directory
+    ///   - newFilepath: New Name of File/Directory
+    static bool Copy(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath);
+    /// This function rename the File/Folder
+    /// - Parameters:
+    ///   - oldName: Old Name of File/Folder
+    ///   - newName: New Name of File/Folder
+    static bool Rename(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath);
+    /// This function Moves the File/Directory
+    /// - Parameters:
+    ///   - oldFilepath: Old Name of File/Directory
+    ///   - newFilepath: New Name of File/Directory
+    static bool Move(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath);
   };
 } // namespace IKan::Utils

@@ -214,7 +214,14 @@ namespace Kreator
         UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 90);
         if ((UI::DrawRoundButton("Create", UI::Color::NiceThemeHighlight, 10)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
         {
-//          ImGui::CloseCurrentPopup();
+          std::filesystem::path fullProjectPath {};
+          if (strlen(m_projectFilePathBuffer.Data()) > 0)
+          {
+            fullProjectPath = std::filesystem::path(m_projectFilePathBuffer) / std::filesystem::path(m_projectNameBuffer);
+          }
+          
+          CreateProject(fullProjectPath);
+          ImGui::CloseCurrentPopup();
         }
         
         ImGui::SameLine();

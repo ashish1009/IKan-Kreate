@@ -76,3 +76,5 @@
 #include <UI/ImGuiLayer.hpp>
 
 #include <Asset/Asset.hpp>
+
+#include <Project/Project.hpp>
