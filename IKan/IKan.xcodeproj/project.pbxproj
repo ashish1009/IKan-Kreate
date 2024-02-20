@@ -32,6 +32,8 @@
 		B248B94A2B846ECC00B9EC40 /* AssetManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9482B846ECC00B9EC40 /* AssetManager.hpp */; };
 		B248B9502B84A65500B9EC40 /* EditorConsoleMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */; };
 		B248B9512B84A65500B9EC40 /* EditorConsoleMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */; };
+		B248B9542B84A69E00B9EC40 /* EditorConsoleSink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9522B84A69E00B9EC40 /* EditorConsoleSink.cpp */; };
+		B248B9552B84A69E00B9EC40 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9532B84A69E00B9EC40 /* EditorConsoleSink.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -195,6 +197,8 @@
 		B248B9482B846ECC00B9EC40 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
 		B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleMessage.cpp; sourceTree = "<group>"; };
 		B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleMessage.hpp; sourceTree = "<group>"; };
+		B248B9522B84A69E00B9EC40 /* EditorConsoleSink.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleSink.cpp; sourceTree = "<group>"; };
+		B248B9532B84A69E00B9EC40 /* EditorConsoleSink.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleSink.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -371,6 +375,7 @@
 				B248B9222B8466EA00B9EC40 /* EditorPanel.hpp */,
 				B248B92C2B8467BC00B9EC40 /* PanelManager.hpp */,
 				B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */,
+				B248B9532B84A69E00B9EC40 /* EditorConsoleSink.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -380,6 +385,7 @@
 			children = (
 				B248B92B2B8467BC00B9EC40 /* PanelManager.cpp */,
 				B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */,
+				B248B9522B84A69E00B9EC40 /* EditorConsoleSink.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -879,6 +885,7 @@
 				B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */,
 				B2ED607F2B750336007A7F36 /* Renderer2D.hpp in Headers */,
 				B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */,
+				B248B9552B84A69E00B9EC40 /* EditorConsoleSink.hpp in Headers */,
 				B2ED5CCA2B7346AC007A7F36 /* Timer.hpp in Headers */,
 				B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */,
 				B248B93A2B846CC000B9EC40 /* AssetMetadata.hpp in Headers */,
@@ -1046,6 +1053,7 @@
 				B2ED5E552B74911C007A7F36 /* Factories.cpp in Sources */,
 				B2C0BA032B7DC9D10015A277 /* Project.cpp in Sources */,
 				B248B9492B846ECC00B9EC40 /* AssetManager.cpp in Sources */,
+				B248B9542B84A69E00B9EC40 /* EditorConsoleSink.cpp in Sources */,
 				B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */,
 				B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */,
 				B248B9502B84A65500B9EC40 /* EditorConsoleMessage.cpp in Sources */,
