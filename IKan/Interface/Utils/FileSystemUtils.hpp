@@ -31,5 +31,14 @@ namespace IKan::Utils
     ///   - oldFilepath: Old Name of File/Directory
     ///   - newFilepath: New Name of File/Directory
     static bool Move(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath);
+    /// This function moves the file
+    /// - Parameters:
+    ///   - filepath: source
+    ///   - dest: destination
+    static bool MoveFile(const std::filesystem::path& filepath, const std::filesystem::path& dest);
+    /// This function deletes the File/Directory
+    /// - Parameter filepath: File/Directory path to be deleted
+    static bool Delete(const std::filesystem::path& filepath);
+
   };
 } // namespace IKan::Utils

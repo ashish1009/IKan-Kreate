@@ -142,4 +142,60 @@ namespace Kreator
     bool m_isRenaming = false;
     bool m_isDragging = false;
   };
+  
+  class ContentBrowserDirectory : public ContentBrowserItem
+  {
+  public:
+    ContentBrowserDirectory(const Ref<DirectoryInfo>& directoryInfo, const Ref<Texture>& icon);
+    virtual ~ContentBrowserDirectory() = default;
+    
+    Ref<DirectoryInfo>& GetDirectoryInfo() { return m_directoryInfo; }
+    
+    /// @see ContentBrowsetItem
+    virtual void Delete() override;
+    /// @see ContentBrowsetItem
+    virtual bool Move(const std::filesystem::path& destination) override;
+    
+  private:
+    /// @see ContentBrowsetItem
+    virtual void Activate(CBItemActionResult& actionResult) override;
+    /// @see ContentBrowsetItem
+    virtual void OnRenamed(const std::string& newName) override;
+    /// @see ContentBrowsetItem
+    virtual void UpdateDrop(CBItemActionResult& actionResult) override;
+    
+    /// This function updates the directory path
+    /// - Parameters:
+    ///   - directoryInfo: Directory Info
+    ///   - newParentPath: New path
+    ///   - newName: New name
+    void UpdateDirectoryPath(Ref<DirectoryInfo> directoryInfo, const std::filesystem::path& newParentPath,
+                             const std::filesystem::path& newName);
+    
+  private:
+    Ref<DirectoryInfo> m_directoryInfo;
+  };
+  
+  class ContentBrowserAsset : public ContentBrowserItem
+  {
+  public:
+    ContentBrowserAsset(const AssetMetadata& assetInfo, const Ref<Texture>& icon);
+    virtual ~ContentBrowserAsset() = default;
+    
+    const AssetMetadata& GetAssetInfo() const { return m_assetInfo; }
+    
+    /// @see ContentBrowsetItem
+    virtual void Delete() override;
+    /// @see ContentBrowsetItem
+    virtual bool Move(const std::filesystem::path& destination) override;
+    
+  private:
+    /// @see ContentBrowsetItem
+    virtual void Activate(CBItemActionResult& actionResult) override;
+    /// @see ContentBrowsetItem
+    virtual void OnRenamed(const std::string& newName) override;
+    
+  private:
+    AssetMetadata m_assetInfo;
+  };
 } // namespace Kreator

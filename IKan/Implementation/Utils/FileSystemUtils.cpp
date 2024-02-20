@@ -48,5 +48,20 @@ namespace IKan::Utils
     std::filesystem::rename(oldFilepath, newFilepath);
     return true;
   }
-
+  bool FileSystem::MoveFile(const std::filesystem::path& filepath, const std::filesystem::path& dest)
+  {
+    return Move(filepath, dest / filepath.filename());
+  }
+  bool FileSystem::Delete(const std::filesystem::path& filepath)
+  {
+    if (!std::filesystem::exists(filepath))
+    {
+      return false;
+    }
+    if (std::filesystem::is_directory(filepath))
+    {
+      return std::filesystem::remove_all(filepath) > 0;
+    }
+    return std::filesystem::remove(filepath);
+  }
 } // namespace IKan::Utils
