@@ -267,5 +267,85 @@ namespace IKan
   {
     return Project::GetAssetDirectory() / metadata.filePath;
   }
-
+  
+  AssetHandle AssetManager::GetAssetHandleFromFilePath(const std::filesystem::path& filepath)
+  {
+    return s_assetRegistry.Contains(filepath) ? s_assetRegistry.GetMetadata(filepath).handle : static_cast<AssetHandle>(0);
+  }
+  
+  const AssetMetadata& AssetManager::GetMetadata(AssetHandle handle)
+  {
+    return GetMetadataInternal(handle);
+  }
+  
+  const AssetMetadata& AssetManager::GetMetadata(const std::filesystem::path& filepath)
+  {
+    if (s_assetRegistry.Contains(filepath))
+    {
+      return s_assetRegistry.GetMetadata(filepath);
+    }
+    return NullMetadata;
+  }
+  
+  void AssetManager::OnAssetRenamed(AssetHandle assetHandle, const std::filesystem::path& newFilePath)
+  {
+    AssetMetadata metadata = GetMetadata(assetHandle);
+    RETURN_IF (!metadata.IsValid())
+    
+    s_assetRegistry.Remove(metadata.filePath);
+    metadata.filePath = GetRelativePath(newFilePath);
+    s_assetRegistry[metadata.filePath] = metadata;
+    WriteRegistryToFile();
+  }
+  
+  void AssetManager::OnAssetMoved(AssetHandle assetHandle, const std::filesystem::path& destinationPath)
+  {
+    AssetMetadata metadata = GetMetadata(assetHandle);
+    RETURN_IF (!metadata.IsValid())
+    
+    s_assetRegistry.Remove(metadata.filePath);
+    metadata.filePath = destinationPath / metadata.filePath.filename();
+    s_assetRegistry[metadata.filePath] = metadata;
+    
+    WriteRegistryToFile();
+  }
+  
+  void AssetManager::OnAssetDeleted(AssetHandle assetHandle)
+  {
+    AssetMetadata metadata = GetMetadata(assetHandle);
+    RETURN_IF (!metadata.IsValid())
+    
+    s_assetRegistry.Remove(metadata.filePath);
+    s_loadedAssets.erase(assetHandle);
+    WriteRegistryToFile();
+  }
+  
+  bool AssetManager::ReloadData(AssetHandle assetHandle)
+  {
+    auto& metadata = GetMetadataInternal(assetHandle);
+    Ref<Asset> asset;
+    metadata.isDataLoaded = AssetImporter::TryLoadData(metadata, asset);
+    if (metadata.isDataLoaded)
+    {
+      s_loadedAssets[assetHandle] = asset;
+    }
+    return metadata.isDataLoaded;
+  }
+  
+  const AssetRegistry& AssetManager::GetAssetRegistry()
+  {
+    return s_assetRegistry;
+  }
+  
+  AssetMetadata& AssetManager::GetMetadataInternal(AssetHandle handle)
+  {
+    for (auto& [filepath, metadata] : s_assetRegistry)
+    {
+      if (metadata.handle == handle)
+      {
+        return metadata;
+      }
+    }
+    return NullMetadata;
+  }
 } // namespace IKan
