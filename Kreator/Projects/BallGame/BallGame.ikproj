@@ -1,5 +1,5 @@
 Project:
-  Name: sdfasd
+  Name: BallGame
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
   FontDirectory: Assets/Fonts

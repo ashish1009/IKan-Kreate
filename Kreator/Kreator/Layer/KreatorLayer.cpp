@@ -91,6 +91,12 @@ namespace Kreator
     // Other Icons
     m_newProjectIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
     m_folderIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
+    
+    // Shadow Image
+    m_shadowTexture = TextureFactory::Create(KreatorResourcePath("Textures/Icons/ShadowLineTop.png"));
+    
+    // Project Icon
+    m_projectIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Project.png"));
   }
   
   KreatorLayer::~KreatorLayer()
@@ -218,6 +224,17 @@ namespace Kreator
 
     // Push the current project in recent list
     PushProjectToRecentProjects(filepath);
+  }
+  
+  void KreatorLayer::OpenProject()
+  {
+    IK_PROFILE();
+    RETURN_IF (m_openProjectPath == "")
+    
+    // stash the filepath away.  Actual opening of project is deferred until it is "safe" to do so.
+    m_projectFilePathBuffer.StrCpy(m_openProjectPath.string());
+    PushProjectToRecentProjects(m_openProjectPath);
+    OpenProject(m_openProjectPath);
   }
   
   void KreatorLayer::PushProjectToRecentProjects(const std::filesystem::path &projectPath)

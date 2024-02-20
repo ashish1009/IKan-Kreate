@@ -24,6 +24,7 @@ namespace Kreator
     UI::ScopedColor bgCol(ImGuiCol_ChildBg, UI::Color::BackgroundPopup);
     UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 10.0f));
     UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, 10);
+    UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(0.0f, 2.0f));
 
     if (ImGui::BeginPopupModal("Welcome Screen", nullptr,
                                ImGuiWindowFlags_AlwaysAutoResize | ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar |
@@ -142,8 +143,68 @@ namespace Kreator
           ImGui::SameLine();
           ImGui::TextUnformatted("Show this window again when Kreator Launches");
 
+          // Draw side shadow-----------------------------------------------------------------
+          ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
+          ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
+          UI::DrawShadowInner(m_shadowTexture, 12.0f, windowRect, 1.0f, windowRect.GetHeight() / 4.0f, false, true, false, false);
+          ImGui::PopClipRect();
         } // Begin child About
         ImGui::EndChild(); // About/New_Project
+        
+        // Recent Project
+        ImGui::TableSetColumnIndex(1);
+        ImGui::BeginChild("##Recent_Projects");
+        {
+          // Title of Popup --------------------------------------------------
+          {
+            UI::ScopedColor muted(ImGuiCol_Text, UI::Color::TextDarker);
+            
+            static const std::string title = "Recent Projects";
+            static const auto titleSize = ImGui::CalcTextSize(title.c_str());
+            
+            UI::ScopedFont version(UI::GetSemiHeaderFont());
+            UI::SetCursorPosY(10);
+            UI::SetCursorPosX(ImGui::GetColumnWidth() / 2 - titleSize.x / 1.4);
+            ImGui::Text(title.c_str());
+            ImGui::Separator();
+          }
+          
+          // Recent Project --------------------------------------------------
+          {
+            UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
+            UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 20.0f));
+            UI::ScopedFont semiHeader(UI::GetSemiHeaderFont());
+            
+            m_openProjectPath = "";
+            for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+            {
+              if (!std::filesystem::exists(it->second.filePath))
+              {
+                m_userPreferences->recentProjects.erase(it);
+                break;
+              }
+              
+              ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
+              bool open = UI::TreeNode("##Recent_Projects", it->second.name, flags, m_projectIcon);
+              if (ImGui::IsItemClicked())
+              {
+                m_openProjectPath = it->second.filePath;
+              }
+              
+              if(open)
+              {
+                ImGui::TreePop();
+              }
+            }
+            
+            if(m_openProjectPath != "")
+            {
+              OpenProject();
+              ImGui::CloseCurrentPopup();
+            }
+          }
+        }
+        ImGui::EndChild(); // Recent project
         ImGui::EndTable();
       } // Begin Table
       UI::PopID();

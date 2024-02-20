@@ -67,6 +67,8 @@ namespace Kreator
     /// This function opens the Project from file path
     /// - Parameter filepath: project file path
     void OpenProject(const std::filesystem::path& filepath);
+    /// This function Opens the project from popup
+    void OpenProject();
     /// This funciton push the current project to recent project
     /// - Parameter projectPath: Project to be pushed
     void PushProjectToRecentProjects(const std::filesystem::path& projectPath);
@@ -94,8 +96,10 @@ namespace Kreator
     Ref<Texture> m_shadowTexture;
     Ref<Texture> m_applicationIcon, m_welcomeIcon;
     Ref<Texture> m_newProjectIcon, m_folderIcon;
-    
+    Ref<Texture> m_projectIcon;
+
     // Project Data --------------------------------------
+    std::filesystem::path m_openProjectPath = "";
     GUI_InputBuffer<255> m_projectNameBuffer;
     GUI_InputBuffer<512> m_projectFilePathBuffer;
     

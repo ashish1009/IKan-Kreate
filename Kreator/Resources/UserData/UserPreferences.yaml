@@ -2,12 +2,6 @@ UserPrefs:
   ShowWelcomeScreen: true
   Theme: 0
   RecentProjects:
-    - Name: sdfasd
-      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/sdfasd/sdfasd.ikproj
-      LastOpened: 1708408132
-    - Name: sd
-      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/sd/sd.ikproj
-      LastOpened: 1708407735
-    - Name: Test
-      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Test/Test.ikproj
-      LastOpened: 1708407551
+    - Name: BallGame
+      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Projects/BallGame/BallGame.ikproj
+      LastOpened: 1708409057
