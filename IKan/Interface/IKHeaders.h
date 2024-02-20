@@ -83,3 +83,5 @@
 
 #include <Editor/EditorPanel.hpp>
 #include <Editor/PanelManager.hpp>
+#include <Editor/EditorConsolePanel.hpp>
+#include <Editor/EditorConsoleSink.hpp>

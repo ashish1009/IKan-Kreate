@@ -6,6 +6,7 @@
 //
 
 #include <iostream>
+#include <IKHeaders.h>
 
 using namespace IKan;
 
@@ -24,6 +25,9 @@ int main(int argc, const char * argv[])
 
     const LoggerSpecificaion& profilerLogger = LoggerSpecificaion::Create().Type(LogType::Profiler).Name("KREATOR").SaveAt("../../../Kreator/Log/Profiler.log");
     Logger::Add(profilerLogger);
+
+    const LoggerSpecificaion& editorConsoleLogger = LoggerSpecificaion::Create().Level(LogLevel::Trace).Type(LogType::Editor).Name("EDITOR").OverrideSink(CreateRef<EditorConsoleSink>(1));
+    Logger::Add(editorConsoleLogger);
   }
   
   // Create and Run the Application
