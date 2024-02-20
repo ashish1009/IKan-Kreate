@@ -106,6 +106,8 @@ namespace Kreator
     void UI_MenuBar();
     /// This function renders window buttons
     void UI_WindowButtons();
+    /// This function shows the Statistics Panel
+    void UI_StatisticsPanel();
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------

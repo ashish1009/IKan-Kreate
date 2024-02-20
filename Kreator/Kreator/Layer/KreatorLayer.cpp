@@ -186,6 +186,7 @@ if (!Project::GetActive()) return
 
     // Docked Windows-----------
     UI_StartMainWindowDocking();
+    UI_StatisticsPanel();
     m_panels.OnImGuiRender();
     UI_EndMainWindowDocking();
   }
