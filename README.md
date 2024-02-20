@@ -63,6 +63,8 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Fixed Camera
 - Project
   - Project Manager
+- Editor Panel 
+  - Panel Manager
 
 ### Detailed Road Map
 - Asset
@@ -73,8 +75,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Light
   - Shadow
   - IBL
-- Editor Panel 
-  - Panel Manager
 - ECS (Panels)
   - Entity
   - Component
@@ -91,21 +91,23 @@ Editor Application using IKan Library to create Games
 
 ### Features
 - Renderer Layer
+  - Welcome Screen
+- Editor
+  - Folder Explorer
+  - User Preference
+- UI
+  - UI Helper
 
 ### Detailed Road Map
 - Renderer Layer
   - Title Bar
-  - Welcome Screen
   - Open/New/Save - Project/Scene
 - Editor
-  - Folder Explorer
-  - User Preference
   - Application Setting
   - Asset Viewer
 - UI
-  - UI Helper
   - Guizmo
-- Panles
+- Panels
   - Scene Hierarchy
   - Content Browser
   - Scene Setting
@@ -123,6 +125,9 @@ Editor Application using IKan Library to create Games
   - v2.3.2.0 : Text Renderer
   - v3.0.2.0 : Mesh Loader
   - v3.1.2.0 : Cameras
-  - v4.0.3.0 : Project/UI
+  - v4.0.3.0 : Project/UI/Welcome screen
+
 ## Outputs
 ![](/Kreator/Outputs/Output.png)
+![](/Kreator/Outputs/WelcomeScreen.png)
+![](/Kreator/Outputs/FileViewer.png)
