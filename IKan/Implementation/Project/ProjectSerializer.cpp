@@ -44,6 +44,10 @@ namespace IKan
     
     std::ofstream fout(filepath);
     fout << out.c_str();
+    
+    // Unserialized data
+    m_project->m_config.projectFileName = filepath.filename().string();
+    m_project->m_config.projectDirectory = filepath.parent_path().string();
   }
   
   bool ProjectSerializer::Deserialize(const std::filesystem::path& filepath)

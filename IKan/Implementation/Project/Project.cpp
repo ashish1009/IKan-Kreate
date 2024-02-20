@@ -9,10 +9,6 @@
 
 namespace IKan
 {
-  Project::Project()
-  {
-  }
-
   void Project::SetActive(Ref<Project> project)
   {
     IK_PROFILE();

@@ -65,5 +65,8 @@ namespace IKan::Utils
     /// - Parameter string: String to be upper
     static std::string ToUpper(const std::string_view& string);
 
+    /// This function Removes the extention from file path
+    /// - Parameter filePath: File path from which extension to be removed
+    static std::string RemoveExtension(const std::string& filePath);
   };
 } // namespace IKan::Utils

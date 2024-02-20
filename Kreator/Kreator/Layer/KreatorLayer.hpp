@@ -64,6 +64,12 @@ namespace Kreator
     void CreateProject(const std::filesystem::path& projectDir);
     /// This function Closed the current active project
     void CloseProject();
+    /// This function opens the Project from file path
+    /// - Parameter filepath: project file path
+    void OpenProject(const std::filesystem::path& filepath);
+    /// This funciton push the current project to recent project
+    /// - Parameter projectPath: Project to be pushed
+    void PushProjectToRecentProjects(const std::filesystem::path& projectPath);
 
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup

@@ -180,4 +180,9 @@ namespace IKan::Utils
     return result;
   }
 
+  std::string String::RemoveExtension(const std::string& filePath)
+  {
+    return filePath.substr(0, filePath.find_last_of('.'));
+  }
+
 } // namespace IKan::Utils

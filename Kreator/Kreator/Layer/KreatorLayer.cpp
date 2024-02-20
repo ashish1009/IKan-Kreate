@@ -56,7 +56,7 @@ namespace Kreator
     IKan::UI::ImGuiFont hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
     IKan::UI::ImGuiFont semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
     
-    // Note: This API should be called before any other ImGui Decoration API 
+    // Note: This API should be called before any other ImGui Decoration API
     Kreator::UI::LoadFonts({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
 
     // Set the Theme of ImGui as user preference
@@ -164,13 +164,23 @@ namespace Kreator
         // Rename the file name
         std::string newProjectFileName = std::string(m_projectNameBuffer) + ProjectExtension;
         Utils::FileSystem::Rename(projectDir / "TemplateProject.ikproj", projectDir / newProjectFileName);
+        
+        // Create Required Directories
+        std::filesystem::create_directory(projectDir / "Assets/Textures");
+        std::filesystem::create_directory(projectDir / "Assets/Fonts");
+        std::filesystem::create_directory(projectDir / "Assets/Scenes");
+        std::filesystem::create_directory(projectDir / "Assets/Meshes");
+        std::filesystem::create_directory(projectDir / "Assets/Materials");
       }
       else
       {
         IK_LOG_CRITICAL("Kreator Layer", "Directory could not be opened. Source directory : {0}. Destination directory : {1}",
                         templateProjectDir.string(), projectDir.string());
       }
-    }
+    } // If project not exist
+    
+    std::filesystem::path projectFile = projectDir / (std::string(m_projectNameBuffer) + ProjectExtension);
+    OpenProject(projectFile);
   }
   
   void KreatorLayer::CloseProject()
@@ -178,6 +188,56 @@ namespace Kreator
     IK_ASSERT(false);
   }
   
+  void KreatorLayer::OpenProject(const std::filesystem::path &filepath)
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Opening Project {0}", Utils::FileSystem::IKanAbsolute(filepath).string());
+    
+    // Check if File exists
+    if (!std::filesystem::exists(filepath))
+    {
+      IK_ASSERT(false, "Tried to open a project that doesn't exist. Need to fix ...");
+    }
+
+    // Close the current Project
+    if (Project::GetActive())
+    {
+      CloseProject();
+    }
+
+    // Create new project fill the config with file data
+    Ref<Project> project = CreateRef<Project>();
+    ProjectSerializer serializer(project);
+    serializer.Deserialize(filepath);
+    Project::SetActive(project);
+    
+    // Push the current project in recent list
+    PushProjectToRecentProjects(filepath);
+  }
+  
+  void KreatorLayer::PushProjectToRecentProjects(const std::filesystem::path &projectPath)
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Pushing Project {0} in Recent list", Utils::FileSystem::IKanAbsolute(projectPath).string());
+    RecentProject projectEntry;
+    projectEntry.name = Utils::String::RemoveExtension(projectPath.filename().string());
+    projectEntry.filePath = projectPath;
+    projectEntry.lastOpened = time(NULL);
+    
+    for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+    {
+      if (it->second.name == projectEntry.name)
+      {
+        m_userPreferences->recentProjects.erase(it);
+        break;
+      }
+    }
+    
+    m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+    UserPreferencesSerializer serializer(m_userPreferences);
+    serializer.Serialize(m_userPreferences->filePath);
+  }
+
   const std::filesystem::path& KreatorLayer::GetClientResorucePath() const
   {
     return m_clientResourcePath;

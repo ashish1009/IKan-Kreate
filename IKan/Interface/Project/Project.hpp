@@ -39,7 +39,7 @@ namespace IKan
   {
   public:
     /// This constructor creates the project and creates the directories if needed
-    Project();
+    Project() = default;
 
     /// This funciton retusns the current project config
     const ProjectConfig& GetConfig() const;

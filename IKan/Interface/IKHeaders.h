@@ -78,3 +78,4 @@
 #include <Asset/Asset.hpp>
 
 #include <Project/Project.hpp>
+#include <Project/ProjectSerializer.hpp>
