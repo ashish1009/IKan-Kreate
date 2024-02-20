@@ -9,6 +9,7 @@
 #include "Panel/KreatorConsolePanel.hpp"
 #include "Panel/ContentBrowserPanel.hpp"
 #include "Panel/ProjectSettingPanel.hpp"
+#include "Panel/AssetPanel.hpp"
 
 namespace Kreator
 {
@@ -22,6 +23,7 @@ if (!Project::GetActive()) return
 #define CONSOLE_PANEL_ID "EditorConsolePanel"
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 #define PROJECT_SETTING_PANEL_ID "ProjectSetting"
+#define ASSET_MANAGER_PANEL_ID "Assets"
 
   namespace KreatorUtils
   {
@@ -73,49 +75,6 @@ if (!Project::GetActive()) return
     
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
-    // Decorate the Application --------------------------------------------------------------------------------------
-    // Set all the required Fonts
-    IKan::UI::ImGuiFont regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
-    IKan::UI::ImGuiFont boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
-    IKan::UI::ImGuiFont italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
-    IKan::UI::ImGuiFont sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
-    IKan::UI::ImGuiFont hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
-    IKan::UI::ImGuiFont semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
-    
-    // Note: This API should be called before any other ImGui Decoration API
-    Kreator::UI::LoadFonts({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
-
-    // Set the Theme of ImGui as user preference
-    Kreator::UI::SetThemeColors(m_userPreferences->theme);
-
-    // Save the default project path
-    std::filesystem::path defulatPath =  Utils::FileSystem::IKanAbsolute(m_clientResourcePath);
-    m_projectFilePathBuffer.MemCpy(defulatPath.string().data(), 0, defulatPath.string().size());
-
-    // Open or Create Project ---------------------------------------------------------------------------------------
-    if (std::filesystem::exists(m_userPreferences->startupProject))
-    {
-      if (m_userPreferences->showWelcomeScreen)
-      {
-        m_showWelcomePopup = true;
-      }
-      else
-      {
-        IK_ASSERT(false, "Open Project. TODO: Implement Later ...");
-      }
-    }
-    else
-    {
-      m_showWelcomePopup = true;
-    }
-    
-    // Add Panels -----------------------
-    m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
-    m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Setting", true);
-#if DEBUG == 1
-    m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
-#endif
-    
     // Load Textures --------------------
     // Set the Application Icon
     m_applicationIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
@@ -148,6 +107,50 @@ if (!Project::GetActive()) return
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Attaching '{0} Layer' to application", GetName());
+    
+    // Decorate the Application --------------------------------------------------------------------------------------
+    // Set all the required Fonts
+    IKan::UI::ImGuiFont regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
+    IKan::UI::ImGuiFont boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
+    IKan::UI::ImGuiFont italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
+    IKan::UI::ImGuiFont sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
+    IKan::UI::ImGuiFont hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
+    IKan::UI::ImGuiFont semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
+    
+    // Note: This API should be called before any other ImGui Decoration API
+    Kreator::UI::LoadFonts({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
+    
+    // Set the Theme of ImGui as user preference
+    Kreator::UI::SetThemeColors(m_userPreferences->theme);
+    
+    // Save the default project path
+    std::filesystem::path defulatPath =  Utils::FileSystem::IKanAbsolute(m_clientResourcePath);
+    m_projectFilePathBuffer.MemCpy(defulatPath.string().data(), 0, defulatPath.string().size());
+    
+    // Open or Create Project ---------------------------------------------------------------------------------------
+    if (std::filesystem::exists(m_userPreferences->startupProject))
+    {
+      if (m_userPreferences->showWelcomeScreen)
+      {
+        m_showWelcomePopup = true;
+      }
+      else
+      {
+        IK_ASSERT(false, "Open Project. TODO: Implement Later ...");
+      }
+    }
+    else
+    {
+      m_showWelcomePopup = true;
+    }
+    
+    // Add Panels -----------------------
+    m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
+    m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Setting", true);
+    m_panels.AddPanel<AssetPanel>(ASSET_MANAGER_PANEL_ID, "Assets", true);
+#if DEBUG == 1
+    m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
+#endif
   }
   
   void KreatorLayer::OnDetach()

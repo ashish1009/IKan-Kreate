@@ -41,9 +41,11 @@ namespace Kreator
   {
     ImGui::PushID("GeneralSettings");
     UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
+    UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 5);
+
     if (UI::PropertyGridHeader("General", true, 4))
     {
-      UI::BeginPropertyGrid(2, 2, 5);
+      UI::BeginPropertyGrid(2, 1, 5);
 
       {
         UI::ScopedDisable disable;

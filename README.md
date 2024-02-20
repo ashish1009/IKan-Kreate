@@ -104,6 +104,7 @@ Editor Application using IKan Library to create Games
 - Panels
   - Konsole Panel
   - Content Browser
+  - Project Setting
 
 ### Detailed Road Map
 - Renderer Layer
@@ -113,7 +114,6 @@ Editor Application using IKan Library to create Games
 - UI
   - Guizmo (ECS)
 - Panels
-  - Project Setting
   - Asset Information
   - Scene Hierarchy (ECS)
   - Scene Setting (ECS)
