@@ -92,6 +92,106 @@ namespace Kreator
   
   void KreatorConsolePanel::RenderConsole()
   {
+    UI::ScopedFont logFont(UI::GetFixedWidthFont());
+    ImGui::BeginChild("LogMessages");
+    {
+      UI::ScopedColor bgColor(ImGuiCol_ChildBg, UI::Color::Background);
+      
+      if (m_messageBufferBegin == 0)
+      {
+        m_displayMessageInspector = false;
+        m_selectedMessage = nullptr;
+      }
 
+      if (ImGui::IsMouseClicked(ImGuiMouseButton_Left) and !m_isMessageInspectorHovered)
+      {
+        m_displayMessageInspector = false;
+        m_selectedMessage = nullptr;
+      }
+
+      for (uint32_t i = 0; i < m_messageBufferBegin; i++)
+      {
+        const auto& msg = m_messageBuffer[i];
+        // Copying to replace the content ...
+        std::string messageText = msg.GetMessage();
+        
+        // If search result passes
+        if (s_searchFilter.PassFilter(messageText.c_str()))
+        {
+          if (m_messageFilters & (int16_t)msg.GetCategory())
+          {
+            UI::ScopedStyle windowPadding(ImGuiStyleVar_WindowPadding, ImVec2(10, 5));
+            // Alternate color
+            if (i % 2 == 0)
+            {
+              ImGui::PushStyleColor(ImGuiCol_ChildBg, UI::ColorWithMultipliedValue(UI::Color::Background, 0.8f));
+            }
+            
+            ImGui::BeginChild(i + 1, ImVec2(0, ImGui::GetFontSize() * 1.75F), false, ImGuiWindowFlags_NoScrollWithMouse | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_AlwaysUseWindowPadding);
+            
+            // Selec the message to popout
+            if (ImGui::IsWindowHovered() and ImGui::IsMouseClicked(ImGuiMouseButton_Left))
+            {
+              m_selectedMessage = &m_messageBuffer[i];
+              m_displayMessageInspector = true;
+            }
+            
+            // Right click popup
+            if (ImGui::BeginPopupContextWindow())
+            {
+              if (ImGui::MenuItem("Copy"))
+              {
+                ImGui::SetClipboardText(messageText.c_str());
+              }
+              ImGui::EndPopup();
+            }
+            
+            // Render Icons
+            ImGuiContext& g = *GImGui;
+            auto size = g.FontSize;
+            if (msg.GetCategory() == ConsoleMessage::Category::Info)
+            {
+              UI::Image(m_infoButtonTex, ImVec2(size, size), ImVec2(0, 1), ImVec2(1, 0), s_infoButtonOnTint);
+            }
+            else if (msg.GetCategory() == ConsoleMessage::Category::Warning)
+            {
+              UI::Image(m_warningButtonTex, ImVec2(size, size), ImVec2(0, 1), ImVec2(1, 0), s_warningButtonOnTint);
+            }
+            else if (msg.GetCategory() == ConsoleMessage::Category::Error)
+            {
+              UI::Image(m_errorButtonTex, ImVec2(size, size), ImVec2(0, 1), ImVec2(1, 0), s_errorButtonOnTint);
+            }
+            
+            ImGui::SameLine();
+            // Add ... after 200 characters
+            if (messageText.length() > 200)
+            {
+              size_t spacePos = messageText.find_first_of(' ', 200);
+              if (spacePos != std::string::npos)
+              {
+                messageText.replace(spacePos, messageText.length() - 1, "...");
+              }
+            }
+            // Print Message
+            ImGui::TextUnformatted(messageText.c_str());
+            
+            if (m_collapseMessages and msg.GetCount() > 1)
+            {
+              ImGui::SameLine(ImGui::GetWindowWidth() - 30);
+              ImGui::Text("%d", msg.GetCount());
+            }
+            
+            ImGui::EndChild();
+            
+            // Pop Alternate color
+            if (i % 2 == 0)
+            {
+              ImGui::PopStyleColor();
+            }
+          }
+        }
+      }
+    }
+    ImGui::EndChild();
   }
 } // namespace Kreator
