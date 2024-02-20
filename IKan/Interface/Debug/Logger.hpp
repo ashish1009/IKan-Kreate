@@ -23,6 +23,7 @@ f(Renderer) f(Renderer2D) f(Renderer3D) f(Font) f(TextRenderer) f(Mesh) \
 f(GraphicsContext) f(Shader) f(BufferLayout) f(VertexBuffer) f(IndexBuffer) f(Pipeline) f(Texture) f(FrameBuffer) \
 f(SceneCamera) f(EditorCamera)\
 f(ImGui) \
+f(Asset) \
 f(Project) \
 f(PanelManager) \
   
