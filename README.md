@@ -70,8 +70,8 @@ IKan Library can be used separately independent to develop your own Editor/Game
 
 ### Detailed Road Map
 - Renderer
-  - Material (Asset)
   - Secne Renderer (ECS)
+  - Material (Asset)
   - Light
   - Shadow
   - IBL
@@ -94,6 +94,7 @@ Editor Application using IKan Library to create Games
   - Welcome Screen
   - Title Bar
   - Open/New/Save - Project
+  - Viewport
 - Editor
   - Folder Explorer
   - User Preference
@@ -102,20 +103,19 @@ Editor Application using IKan Library to create Games
 
 ### Detailed Road Map
 - Renderer Layer
-  - Open/New/Save - Scene
-  - Viewport
+  - Open/New/Save - Scene ((ECS))
 - Editor
   - Application Setting
   - Asset Viewer
 - UI
-  - Guizmo
+  - Guizmo (ECS)
 - Panels
-  - Scene Hierarchy
-  - Content Browser
-  - Scene Setting
   - Konsole Panel
   - Project Setting
   - Asset Information
+  - Content Browser
+  - Scene Hierarchy (ECS)
+  - Scene Setting (ECS)
 
 ### TODO
 

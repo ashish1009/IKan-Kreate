@@ -30,6 +30,8 @@
 		B248B9462B846E2C00B9EC40 /* AssetRegistry.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9442B846E2C00B9EC40 /* AssetRegistry.hpp */; };
 		B248B9492B846ECC00B9EC40 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9472B846ECC00B9EC40 /* AssetManager.cpp */; };
 		B248B94A2B846ECC00B9EC40 /* AssetManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9482B846ECC00B9EC40 /* AssetManager.hpp */; };
+		B248B9502B84A65500B9EC40 /* EditorConsoleMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */; };
+		B248B9512B84A65500B9EC40 /* EditorConsoleMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -191,6 +193,8 @@
 		B248B9442B846E2C00B9EC40 /* AssetRegistry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetRegistry.hpp; sourceTree = "<group>"; };
 		B248B9472B846ECC00B9EC40 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
 		B248B9482B846ECC00B9EC40 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
+		B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleMessage.cpp; sourceTree = "<group>"; };
+		B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleMessage.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -366,6 +370,7 @@
 			children = (
 				B248B9222B8466EA00B9EC40 /* EditorPanel.hpp */,
 				B248B92C2B8467BC00B9EC40 /* PanelManager.hpp */,
+				B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -374,6 +379,7 @@
 			isa = PBXGroup;
 			children = (
 				B248B92B2B8467BC00B9EC40 /* PanelManager.cpp */,
+				B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -867,6 +873,7 @@
 				B2ED5CC52B7265F0007A7F36 /* LoggerBuilder.hpp in Headers */,
 				B248B93E2B846D0800B9EC40 /* AssetSerializer.hpp in Headers */,
 				B2ED5E4F2B749090007A7F36 /* Specifications.h in Headers */,
+				B248B9512B84A65500B9EC40 /* EditorConsoleMessage.hpp in Headers */,
 				B2ED60192B74AD56007A7F36 /* StringUtils.hpp in Headers */,
 				B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */,
 				B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */,
@@ -1041,6 +1048,7 @@
 				B248B9492B846ECC00B9EC40 /* AssetManager.cpp in Sources */,
 				B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */,
 				B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */,
+				B248B9502B84A65500B9EC40 /* EditorConsoleMessage.cpp in Sources */,
 				B2ED604D2B74D958007A7F36 /* MathUtils.cpp in Sources */,
 				B2C0B70E2B7CDC5D0015A277 /* EditorCamera.cpp in Sources */,
 				B2C0B6EA2B7C7E4C0015A277 /* Camera.cpp in Sources */,
