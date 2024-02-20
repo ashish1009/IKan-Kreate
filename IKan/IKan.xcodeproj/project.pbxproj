@@ -34,6 +34,8 @@
 		B248B9512B84A65500B9EC40 /* EditorConsoleMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */; };
 		B248B9542B84A69E00B9EC40 /* EditorConsoleSink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9522B84A69E00B9EC40 /* EditorConsoleSink.cpp */; };
 		B248B9552B84A69E00B9EC40 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9532B84A69E00B9EC40 /* EditorConsoleSink.hpp */; };
+		B248B9582B84A6E800B9EC40 /* EditorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9562B84A6E800B9EC40 /* EditorConsolePanel.cpp */; };
+		B248B9592B84A6E800B9EC40 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9572B84A6E800B9EC40 /* EditorConsolePanel.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -199,6 +201,8 @@
 		B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleMessage.hpp; sourceTree = "<group>"; };
 		B248B9522B84A69E00B9EC40 /* EditorConsoleSink.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleSink.cpp; sourceTree = "<group>"; };
 		B248B9532B84A69E00B9EC40 /* EditorConsoleSink.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleSink.hpp; sourceTree = "<group>"; };
+		B248B9562B84A6E800B9EC40 /* EditorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsolePanel.cpp; sourceTree = "<group>"; };
+		B248B9572B84A6E800B9EC40 /* EditorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsolePanel.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -376,6 +380,7 @@
 				B248B92C2B8467BC00B9EC40 /* PanelManager.hpp */,
 				B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */,
 				B248B9532B84A69E00B9EC40 /* EditorConsoleSink.hpp */,
+				B248B9572B84A6E800B9EC40 /* EditorConsolePanel.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -386,6 +391,7 @@
 				B248B92B2B8467BC00B9EC40 /* PanelManager.cpp */,
 				B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */,
 				B248B9522B84A69E00B9EC40 /* EditorConsoleSink.cpp */,
+				B248B9562B84A6E800B9EC40 /* EditorConsolePanel.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -870,6 +876,7 @@
 				B248B9322B84684400B9EC40 /* HashGenerator.hpp in Headers */,
 				B248B9422B846DC600B9EC40 /* AssetImporter.hpp in Headers */,
 				B2ED5E352B73A811007A7F36 /* MacWindow.hpp in Headers */,
+				B248B9592B84A6E800B9EC40 /* EditorConsolePanel.hpp in Headers */,
 				B2ED5E532B749097007A7F36 /* Factories.hpp in Headers */,
 				B2ED60482B74C547007A7F36 /* OpenGLPipeline.hpp in Headers */,
 				B2ED603C2B74BBA8007A7F36 /* OpenGLRendererBuffer.hpp in Headers */,
@@ -1072,6 +1079,7 @@
 				B2ED605B2B74DACD007A7F36 /* OpenGLTexture.cpp in Sources */,
 				B248B9292B84676700B9EC40 /* Scene.cpp in Sources */,
 				B2ED5CCE2B736963007A7F36 /* TimeStep.cpp in Sources */,
+				B248B9582B84A6E800B9EC40 /* EditorConsolePanel.cpp in Sources */,
 				B248B9352B846BBF00B9EC40 /* AssetType.cpp in Sources */,
 				B2C0B6D92B75FF300015A277 /* Mesh.cpp in Sources */,
 				B2ED600A2B74A5B6007A7F36 /* ImGuiLayer.cpp in Sources */,

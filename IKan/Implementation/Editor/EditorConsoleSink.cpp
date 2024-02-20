@@ -6,6 +6,7 @@
 //
 
 #include "EditorConsoleSink.hpp"
+#include "Editor/EditorConsolePanel.hpp"
 
 namespace IKan
 {
@@ -38,6 +39,7 @@ namespace IKan
         continue;
       }
       // PUSH Message in Editor Console
+      EditorConsolePanel::PushMessage(message);
     }
     
     m_messageCount = 0;
