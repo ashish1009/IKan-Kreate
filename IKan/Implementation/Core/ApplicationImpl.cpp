@@ -6,6 +6,7 @@
 //
 
 #include "ApplicationImpl.hpp"
+#include "Renderer/RendererStats.hpp"
 
 namespace IKan
 {
@@ -89,6 +90,10 @@ namespace IKan
       
       // Render the Gui for Application
       ImGuiRender();
+      
+      // Clear Runtime Performance profiler and stats
+      PerformanceProfiler::Get()->Clear();
+      RendererStatistics::Get().ResetEachFrame();
     }
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                           Ending Game Loop                               ");

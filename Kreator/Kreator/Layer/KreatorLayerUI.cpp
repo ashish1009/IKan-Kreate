@@ -797,12 +797,16 @@ namespace Kreator
 
           {
             ImGui::PushID("Perf Results");
-            UI::ScopedDisable disable;
             UI::BeginPropertyGrid(2, 1, 1);
+            
+            static float timeLimit = 0.0f;
+            UI::Property("Min Time Limit", timeLimit, 0.001f, 0.0f, 1000.0f);
+            
+            UI::ScopedDisable disable;
             const auto& perFrameData = PerformanceProfiler::Get()->GetPerFrameData();
             for (auto&& [name, time] : perFrameData)
             {
-              if (!UI::IsMatchingSearch(name, searchBuffer) and !UI::IsMatchingSearch(std::to_string(time), searchBuffer))
+              if ((!UI::IsMatchingSearch(name, searchBuffer) and !UI::IsMatchingSearch(std::to_string(time), searchBuffer)) or time < timeLimit)
               {
                 continue;
               }
