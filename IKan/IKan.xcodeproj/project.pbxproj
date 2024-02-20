@@ -22,6 +22,8 @@
 		B248B9362B846BBF00B9EC40 /* AssetType.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9342B846BBF00B9EC40 /* AssetType.hpp */; };
 		B248B9392B846CC000B9EC40 /* AssetMetadata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9372B846CC000B9EC40 /* AssetMetadata.cpp */; };
 		B248B93A2B846CC000B9EC40 /* AssetMetadata.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9382B846CC000B9EC40 /* AssetMetadata.hpp */; };
+		B248B93D2B846D0800B9EC40 /* AssetSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B93B2B846D0800B9EC40 /* AssetSerializer.cpp */; };
+		B248B93E2B846D0800B9EC40 /* AssetSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B93C2B846D0800B9EC40 /* AssetSerializer.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -175,6 +177,8 @@
 		B248B9342B846BBF00B9EC40 /* AssetType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetType.hpp; sourceTree = "<group>"; };
 		B248B9372B846CC000B9EC40 /* AssetMetadata.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetMetadata.cpp; sourceTree = "<group>"; };
 		B248B9382B846CC000B9EC40 /* AssetMetadata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMetadata.hpp; sourceTree = "<group>"; };
+		B248B93B2B846D0800B9EC40 /* AssetSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetSerializer.cpp; sourceTree = "<group>"; };
+		B248B93C2B846D0800B9EC40 /* AssetSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetSerializer.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -323,6 +327,7 @@
 				B248B9062B8338BA00B9EC40 /* Asset.hpp */,
 				B248B9342B846BBF00B9EC40 /* AssetType.hpp */,
 				B248B9382B846CC000B9EC40 /* AssetMetadata.hpp */,
+				B248B93C2B846D0800B9EC40 /* AssetSerializer.hpp */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -333,6 +338,7 @@
 				B248B9332B846BBF00B9EC40 /* AssetType.cpp */,
 				B248B9052B8338BA00B9EC40 /* Asset.cpp */,
 				B248B9372B846CC000B9EC40 /* AssetMetadata.cpp */,
+				B248B93B2B846D0800B9EC40 /* AssetSerializer.cpp */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -839,6 +845,7 @@
 				B2ED5E5A2B74914F007A7F36 /* OpenGLRendererContext.hpp in Headers */,
 				B2ED60662B74DF5F007A7F36 /* stb_image.h in Headers */,
 				B2ED5CC52B7265F0007A7F36 /* LoggerBuilder.hpp in Headers */,
+				B248B93E2B846D0800B9EC40 /* AssetSerializer.hpp in Headers */,
 				B2ED5E4F2B749090007A7F36 /* Specifications.h in Headers */,
 				B2ED60192B74AD56007A7F36 /* StringUtils.hpp in Headers */,
 				B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */,
@@ -998,6 +1005,7 @@
 				B248B9312B84684400B9EC40 /* HashGenerator.cpp in Sources */,
 				B2ED60332B74BA7F007A7F36 /* BufferLayout.cpp in Sources */,
 				B2C0B7182B7CDC7E0015A277 /* MacInput.cpp in Sources */,
+				B248B93D2B846D0800B9EC40 /* AssetSerializer.cpp in Sources */,
 				B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */,
 				B2ED60852B7510DE007A7F36 /* AssetPathManager.cpp in Sources */,
 				B2ED5E342B73A811007A7F36 /* MacWindow.cpp in Sources */,
