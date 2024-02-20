@@ -2,6 +2,6 @@ UserPrefs:
   ShowWelcomeScreen: true
   Theme: 0
   RecentProjects:
-    - Name: Test
-      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Test/Test.ikproj
-      LastOpened: 1708409739
+    - Name: BallGame
+      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Projects/BallGame/BallGame.ikproj
+      LastOpened: 1708410217

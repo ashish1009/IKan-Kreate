@@ -65,10 +65,10 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Project Manager
 - Editor Panel 
   - Panel Manager
-
-### Detailed Road Map
 - Asset
   - Asset Manager
+
+### Detailed Road Map
 - Renderer
   - Material (Asset)
   - Secne Renderer (ECS)
@@ -126,6 +126,7 @@ Editor Application using IKan Library to create Games
   - v3.0.2.0 : Mesh Loader
   - v3.1.2.0 : Cameras
   - v4.0.3.0 : Project/UI/Welcome screen
+  - v4.1.3.0 : Asset Manager with Project
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)
