@@ -2,4 +2,6 @@ UserPrefs:
   ShowWelcomeScreen: true
   Theme: 0
   RecentProjects:
-    []
+    - Name: Test
+      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources/Test/Test.ikproj
+      LastOpened: 1708404448
