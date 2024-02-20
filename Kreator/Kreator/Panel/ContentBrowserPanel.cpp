@@ -73,5 +73,41 @@ namespace Kreator
     IK_ASSERT(index >= 0 && index < m_selections.size());
     return m_selections[index];
   }
+
+  // Content Browser Item List -------------------------------------------------------------------------------------------
+  ContentBrowserItemList::ContentBrowserItemList()
+  : VectorIterator<Ref<ContentBrowserItem>>(items)
+  {
+    
+  }
   
+  ContentBrowserItemList& ContentBrowserItemList::operator=(const ContentBrowserItemList& other)
+  {
+    items = other.items;
+    return *this;
+  }
+  void ContentBrowserItemList::Clear()
+  {
+    items.clear();
+  }
+  void ContentBrowserItemList::Erase(AssetHandle handle)
+  {
+    size_t index = FindItem(handle);
+    RETURN_IF (index == InvalidItem)
+    
+    auto it = items.begin() + index;
+    items.erase(it);
+  }
+  
+  size_t ContentBrowserItemList::FindItem(AssetHandle handle) const
+  {
+    for (size_t i = 0; i < items.size(); i++)
+    {
+      if (items[i]->GetID() == handle)
+      {
+        return i;
+      }
+    }
+    return InvalidItem;
+  }
 } // namespace Kreator
