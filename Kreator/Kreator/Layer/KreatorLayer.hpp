@@ -107,7 +107,7 @@ namespace Kreator
     PanelManager m_panels;
     enum class FolderExplorerAction
     {
-      None, NewPreoject
+      None, NewPreoject, OpenProject
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
     

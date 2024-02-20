@@ -25,6 +25,8 @@ namespace Kreator
     std::filesystem::path selectedPath {};
     std::filesystem::path returnPath {};
 
+    std::string extenstionToBeOpened {};
+    
     GUI_InputBuffer<256> pathBuffer;
     char fileBuffer[256];
     char searchBuffer[256];
@@ -348,6 +350,10 @@ namespace Kreator
           continue;
         }
 #endif
+        if (s_fileExplorerData->popupType == PopupType::Open and file.extension() != s_fileExplorerData->extenstionToBeOpened)
+        {
+          continue;
+        }
         auto directoryName = std::filesystem::relative(file, s_fileExplorerData->currentPath);
         std::string name = directoryName.filename().string();
         std::string id = name + "_TreeNode";
@@ -404,6 +410,11 @@ namespace Kreator
           if (UI::DrawRoundButton(" Open ", UI::Color::NiceThemeHighlight, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
           {
             ImGui::CloseCurrentPopup();
+            if (s_fileExplorerData->lastPopupFlag)
+            {
+              *s_fileExplorerData->lastPopupFlag = true;
+            }
+            s_fileExplorerData->returnPath = s_fileExplorerData->selectedPath;
           }
         } // if open
         else if (s_fileExplorerData->popupType == PopupType::Select)
@@ -507,7 +518,7 @@ namespace Kreator
     s_fileExplorerData->popupType = PopupType::Select;
   }
   
-  void FolderExplorer::Open(bool *lastPopupFlag)
+  void FolderExplorer::Open(const std::string& extenstionToBeOpened, bool *lastPopupFlag)
   {
     s_fileExplorerData->popup = true;
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
@@ -518,6 +529,7 @@ namespace Kreator
     s_fileExplorerData->createNewFolder = false;
     
     s_fileExplorerData->popupType = PopupType::Open;
+    s_fileExplorerData->extenstionToBeOpened = extenstionToBeOpened;
   }
   
   void FolderExplorer::Save(bool *lastPopupFlag)
