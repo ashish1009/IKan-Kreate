@@ -98,22 +98,23 @@ Editor Application using IKan Library to create Games
 - Editor
   - Folder Explorer
   - User Preference
+  - Application Setting
 - UI
   - UI Helper
+- Panels
+  - Konsole Panel
+  - Content Browser
 
 ### Detailed Road Map
 - Renderer Layer
   - Open/New/Save - Scene ((ECS))
 - Editor
-  - Application Setting
   - Asset Viewer
 - UI
   - Guizmo (ECS)
 - Panels
-  - Konsole Panel
   - Project Setting
   - Asset Information
-  - Content Browser
   - Scene Hierarchy (ECS)
   - Scene Setting (ECS)
 
@@ -130,6 +131,8 @@ Editor Application using IKan Library to create Games
   - v4.0.3.0 : Project/UI/Welcome screen
   - v4.1.3.0 : Asset Manager with Project
   - v4.1.4.0 : Title Bar
+  - v4.2.4.1 : Editor Console
+  - v4.2.4.2 : Content Browser
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)

@@ -8,6 +8,7 @@
 #include "KreatorLayer.hpp"
 #include "Panel/KreatorConsolePanel.hpp"
 #include "Panel/ContentBrowserPanel.hpp"
+#include "Panel/ProjectSettingPanel.hpp"
 
 namespace Kreator
 {
@@ -20,6 +21,7 @@ if (!Project::GetActive()) return
   // Panel IDs
 #define CONSOLE_PANEL_ID "EditorConsolePanel"
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
+#define PROJECT_SETTING_PANEL_ID "ProjectSetting"
 
   namespace KreatorUtils
   {
@@ -109,6 +111,7 @@ if (!Project::GetActive()) return
     
     // Add Panels -----------------------
     m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
+    m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Setting", true);
 #if DEBUG == 1
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif

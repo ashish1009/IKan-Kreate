@@ -448,7 +448,6 @@ namespace Kreator
     if (ImGui::BeginDragDropTarget())
     {
       // TODO: Implement later
-      IK_ASSERT(false);
       ImGui::EndDragDropTarget();
     }
   }
