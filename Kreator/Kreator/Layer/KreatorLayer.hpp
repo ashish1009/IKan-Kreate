@@ -100,6 +100,7 @@ namespace Kreator
     GUI_InputBuffer<512> m_projectFilePathBuffer;
     
     // Editor Data ---------------------------------------
+    PanelManager m_panels;
     enum class FolderExplorerAction
     {
       None, NewPreoject

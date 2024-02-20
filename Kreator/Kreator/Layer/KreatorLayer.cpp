@@ -119,7 +119,7 @@ namespace Kreator
   
   void KreatorLayer::OnEvent(Event& event)
   {
-
+    m_panels.OnEvent(event);
   }
   
   void KreatorLayer::OnImGuiRender()
@@ -127,6 +127,8 @@ namespace Kreator
     UI_WelcomePopup();
     UI_NewProjectPopup();
     UI_FolderExplorer();
+    
+    m_panels.OnImGuiRender();
   }
 
   void KreatorLayer::CreateProject(const std::filesystem::path& projectDir)
@@ -211,6 +213,9 @@ namespace Kreator
     serializer.Deserialize(filepath);
     Project::SetActive(project);
     
+    // Update all panel project
+    m_panels.OnProjectChanged(project);
+
     // Push the current project in recent list
     PushProjectToRecentProjects(filepath);
   }

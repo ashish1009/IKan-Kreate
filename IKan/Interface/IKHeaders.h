@@ -56,6 +56,7 @@
 #include <Core/Window.hpp>
 #include <Core/Buffer.hpp>
 #include <Core/UUID.hpp>
+#include <Core/HashGenerator.hpp>
 
 #include <Renderer/Renderer.hpp>
 #include <Renderer/Renderer2D.hpp>
@@ -81,3 +82,4 @@
 #include <Project/ProjectSerializer.hpp>
 
 #include <Editor/EditorPanel.hpp>
+#include <Editor/PanelManager.hpp>

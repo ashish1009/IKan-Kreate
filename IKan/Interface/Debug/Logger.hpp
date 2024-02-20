@@ -24,6 +24,7 @@ f(GraphicsContext) f(Shader) f(BufferLayout) f(VertexBuffer) f(IndexBuffer) f(Pi
 f(SceneCamera) f(EditorCamera)\
 f(ImGui) \
 f(Project) \
+f(PanelManager) \
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)
