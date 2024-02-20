@@ -186,7 +186,10 @@ namespace Kreator
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 7));
         
         ImGui::SetNextItemWidth(-1);
-        ImGui::SetKeyboardFocusHere();
+        if (ImGui::IsItemHovered())
+        {
+          ImGui::SetKeyboardFocusHere();
+        }
         ImGui::InputTextWithHint("##new_project_name", "Project Name", m_projectNameBuffer.Data(), m_projectNameBuffer.Size());
         
         ImVec2 labelSize = ImGui::CalcTextSize("...", NULL, true);
@@ -210,27 +213,37 @@ namespace Kreator
 
       // Buttons
       {
+        UI::PushID();
+        ImGui::SetItemDefaultFocus();
         ImGui::PushFont(UI::GetBoldFont());
         
         UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 90);
-        if ((UI::DrawRoundButton("Create", UI::Color::NiceThemeHighlight, 10)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+        if (UI::DrawRoundButton("Create", UI::Color::NiceThemeHighlight, 10) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
         {
-          std::filesystem::path fullProjectPath {};
-          if (strlen(m_projectFilePathBuffer.Data()) > 0)
+          if (!m_projectNameBuffer.Empty())
           {
-            fullProjectPath = std::filesystem::path(m_projectFilePathBuffer) / std::filesystem::path(m_projectNameBuffer);
+            std::filesystem::path fullProjectPath {};
+            if (strlen(m_projectFilePathBuffer.Data()) > 0)
+            {
+              fullProjectPath = std::filesystem::path(m_projectFilePathBuffer) / std::filesystem::path(m_projectNameBuffer);
+            }
+            
+            CreateProject(fullProjectPath);
+            ImGui::CloseCurrentPopup();
           }
-          
-          CreateProject(fullProjectPath);
-          ImGui::CloseCurrentPopup();
         }
         
         ImGui::SameLine();
-        if ((UI::DrawRoundButton("Cancel", UI::Color::Muted, 10)) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
+        if (UI::DrawRoundButton("Cancel", UI::Color::Muted, 10) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape)))
         {
-//          ImGui::CloseCurrentPopup();
+          if (!Project::GetActive())
+          {
+            m_showWelcomePopup = true;
+          }
+          ImGui::CloseCurrentPopup();
         }
         ImGui::PopFont();
+        UI::PopID();
       }
 
       ImGui::PopStyleVar();

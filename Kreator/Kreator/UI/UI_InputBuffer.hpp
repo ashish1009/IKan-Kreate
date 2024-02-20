@@ -53,6 +53,11 @@ namespace IKan
       return SIZE;
     }
     
+    bool Empty() const
+    {
+      return (std::string)m_buffer == "";
+    }
+    
   private:
     char* m_buffer {nullptr};
   };
