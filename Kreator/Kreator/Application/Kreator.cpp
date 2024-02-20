@@ -9,6 +9,7 @@
 #include "Layer/KreatorLayer.hpp"
 #include "Editor/UserPreferences.hpp"
 #include "Editor/FolderExplorer.hpp"
+#include "Editor/ApplicationSettings.hpp"
 #include "UI/ImGuiWidget.hpp"
 
 namespace Kreator
@@ -69,6 +70,7 @@ namespace Kreator
     // Should get initialized after layer initialize
     FolderExplorer::Initialize();
     UI::Widgets::Initialize();
+    ApplicationSettingsSerializer::Initialize();
   }
   
   void KreatorApp::OnShutdown()
