@@ -6,6 +6,7 @@
 //
 
 #include "KreatorLayer.hpp"
+#include "Panel/KreatorConsolePanel.hpp"
 
 namespace Kreator
 {
@@ -15,6 +16,9 @@ if (!Project::GetActive()) return
   // Kretor Resource Path
 #define KreatorResourcePath(path) std::filesystem::absolute(m_clientResourcePath / path)
   
+  // Panel IDs
+#define CONSOLE_PANEL_ID "EditorConsolePanel"
+
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -100,6 +104,11 @@ if (!Project::GetActive()) return
     {
       m_showWelcomePopup = true;
     }
+    
+    // Add Panels -----------------------
+#if DEBUG == 1
+    m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
+#endif
     
     // Load Textures --------------------
     // Set the Application Icon
