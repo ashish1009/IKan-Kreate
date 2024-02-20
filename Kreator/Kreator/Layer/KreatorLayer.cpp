@@ -33,6 +33,21 @@ if (!Project::GetActive()) return
     }
   } // namespace Utils
 
+  // Viewport -----------------------------------------------------------------------------------------------------
+  void Viewport::UpdateMousePos()
+  {
+    IK_PERFORMANCE("Viewport::UpdateMousePos");
+    auto [mx, my] = ImGui::GetMousePos();
+    mx -= bounds[0].x;
+    my -= bounds[0].y;
+    
+    my = height - my;
+    
+    mousePosX = (int32_t)mx;
+    mousePosY = (int32_t)my;
+  }
+
+  // Kreator Layer ------------------------------------------------------------------------------------------------
   KreatorLayer* KreatorLayer::s_instance = nullptr;
   KreatorLayer& KreatorLayer::Get()
   {
@@ -129,6 +144,11 @@ if (!Project::GetActive()) return
   void KreatorLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
+    
+    // Update Data
+    m_viewport.UpdateMousePos();
+    
+    // Render
     Renderer::Clear({0.2f, 0.2f, 0.2f, 1.0f});
   }
   

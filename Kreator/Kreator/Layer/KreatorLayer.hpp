@@ -14,6 +14,19 @@ using namespace IKan;
 namespace Kreator
 {
   static const std::string KreatorVersion = "4.0";
+  
+  /// Stores the Viewport Data
+  struct Viewport
+  {
+    bool panelMouseHover;
+    bool panelFocused;
+    uint32_t width, height;
+    glm::vec2 bounds[2];
+    int32_t mousePosX = -1;
+    int32_t mousePosY = -1;
+    
+    void UpdateMousePos();
+  };
 
   class KreatorLayer : public Layer
   {
@@ -132,6 +145,9 @@ namespace Kreator
       Edit = 0, Play = 1, Pause = 2, Simulate = 3
     };
     SceneState m_sceneState {SceneState::Edit};
+
+    // View port Data ------------------------------------
+    Viewport m_viewport;
 
     // Single Instance -----------------------------------
     static KreatorLayer* s_instance;
