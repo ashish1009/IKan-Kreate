@@ -43,7 +43,48 @@ namespace IKan
     const auto& assetRegistryPath = Project::GetAssetRegistryPath();
     RETURN_IF (!std::filesystem::exists(assetRegistryPath))
     
-    IK_ASSERT(false);
+    std::ifstream stream(assetRegistryPath);
+    IK_ASSERT(stream);
+
+    std::stringstream strStream;
+    strStream << stream.rdbuf();
+    
+    YAML::Node data = YAML::Load(strStream.str());
+    auto handles = data["Assets"];
+    
+    if (!handles)
+    {
+      IK_LOG_ERROR(LogModule::Asset, "Asset Registry appears to be corrupted!");
+      return;
+    }
+
+    for (const auto& entry : handles)
+    {
+      // Relative file path from asset directory
+      std::string filepath = entry["FilePath"].as<std::string>();
+      
+      AssetMetadata metadata;
+      metadata.handle = entry["Handle"].as<uint64_t>();
+      metadata.filePath = filepath;
+      metadata.type = (AssetType)AssetUtils::AssetTypeFromString(entry["Type"].as<std::string>());
+
+      RETURN_IF (metadata.type == AssetType::Invalid)
+
+      // Relocate the file if not present in directory
+      if (!std::filesystem::exists(AssetManager::GetFileSystemPath(metadata)))
+      {
+        IK_ASSERT(false, "Implement later");
+      }
+      
+      if (metadata.handle == static_cast<AssetHandle>(0))
+      {
+        IK_LOG_WARN(LogModule::Asset, "AssetHandle for {0} is 0, this shouldn't happen.", metadata.filePath.c_str());
+        continue;
+      }
+      
+      s_assetRegistry[metadata.filePath] = metadata;
+    }
+    IK_LOG_INFO(LogModule::Asset, "Loaded {0} asset entries", s_assetRegistry.Count());
   }
   
   void AssetManager::ReloadAssets()
