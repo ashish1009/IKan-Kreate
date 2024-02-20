@@ -9,8 +9,6 @@
 
 namespace Kreator
 {
-#define MAX_INPUT_BUFFER_LENGTH 128
-
   /// This structure stores the Directory Info
   struct DirectoryInfo
   {
