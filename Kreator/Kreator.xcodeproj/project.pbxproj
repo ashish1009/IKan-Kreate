@@ -14,6 +14,7 @@
 		B248B8FF2B83388800B9EC40 /* ContentBrowserItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8FD2B83388800B9EC40 /* ContentBrowserItem.cpp */; };
 		B248B9162B835A7700B9EC40 /* ImGuiWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9142B835A7700B9EC40 /* ImGuiWidget.cpp */; };
 		B248B94D2B84840500B9EC40 /* ImGuiProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B94B2B84840500B9EC40 /* ImGuiProperty.cpp */; };
+		B248B95D2B84A85500B9EC40 /* KreatorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B95B2B84A85500B9EC40 /* KreatorConsolePanel.cpp */; };
 		B2C0B6CF2B75F7580015A277 /* libbz2.1.0.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6CE2B75F7580015A277 /* libbz2.1.0.8.tbd */; };
 		B2C0B6D12B75F7600015A277 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6D02B75F7600015A277 /* libz.tbd */; };
 		B2C0B6DF2B79DD210015A277 /* libpugixml.1.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */; };
@@ -60,6 +61,8 @@
 		B248B9152B835A7700B9EC40 /* ImGuiWidget.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiWidget.hpp; sourceTree = "<group>"; };
 		B248B94B2B84840500B9EC40 /* ImGuiProperty.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiProperty.cpp; sourceTree = "<group>"; };
 		B248B94C2B84840500B9EC40 /* ImGuiProperty.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiProperty.hpp; sourceTree = "<group>"; };
+		B248B95B2B84A85500B9EC40 /* KreatorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorConsolePanel.cpp; sourceTree = "<group>"; };
+		B248B95C2B84A85500B9EC40 /* KreatorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KreatorConsolePanel.hpp; sourceTree = "<group>"; };
 		B2C0B6CE2B75F7580015A277 /* libbz2.1.0.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.8.tbd; path = usr/lib/libbz2.1.0.8.tbd; sourceTree = SDKROOT; };
 		B2C0B6D02B75F7600015A277 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugixml.1.13.dylib; path = ../IKan/Vendors/Assimp/lib/libpugixml.1.13.dylib; sourceTree = "<group>"; };
@@ -113,6 +116,15 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		B248B95A2B84A84300B9EC40 /* Panel */ = {
+			isa = PBXGroup;
+			children = (
+				B248B95B2B84A85500B9EC40 /* KreatorConsolePanel.cpp */,
+				B248B95C2B84A85500B9EC40 /* KreatorConsolePanel.hpp */,
+			);
+			path = Panel;
+			sourceTree = "<group>";
+		};
 		B2C0BA112B7E0F510015A277 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +165,7 @@
 				B2ED5E8E2B74A0F7007A7F36 /* Layer */,
 				B2C0BA112B7E0F510015A277 /* Editor */,
 				B248B8ED2B7E3E8100B9EC40 /* UI */,
+				B248B95A2B84A84300B9EC40 /* Panel */,
 			);
 			path = Kreator;
 			sourceTree = "<group>";
@@ -262,6 +275,7 @@
 				B248B8EC2B7E3B4500B9EC40 /* KreatorLayerUI.cpp in Sources */,
 				B2ED5E1A2B738B23007A7F36 /* Kreator.cpp in Sources */,
 				B2ED5C5F2B723E25007A7F36 /* EntryPoint.cpp in Sources */,
+				B248B95D2B84A85500B9EC40 /* KreatorConsolePanel.cpp in Sources */,
 				B248B94D2B84840500B9EC40 /* ImGuiProperty.cpp in Sources */,
 				B248B9162B835A7700B9EC40 /* ImGuiWidget.cpp in Sources */,
 				B248B8FF2B83388800B9EC40 /* ContentBrowserItem.cpp in Sources */,
