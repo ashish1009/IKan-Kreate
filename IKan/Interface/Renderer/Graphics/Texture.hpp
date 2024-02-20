@@ -10,6 +10,7 @@
 #include "Renderer/Renderer.hpp"
 #include "Renderer/Graphics/Factories.hpp"
 #include "Renderer/Graphics/Specifications.h"
+#include "Asset/Asset.hpp"
 
 namespace IKan
 {
@@ -49,7 +50,7 @@ namespace IKan
   };
   
   /// This is the interface class to create Image
-  class Image : public Texture
+  class Image : public Texture, public Asset
   {
   public:
     /// This is default virtual destructor for Texture
@@ -59,6 +60,8 @@ namespace IKan
     virtual const std::filesystem::path& GetfilePath() const = 0;
     /// This function returns name of texture
     virtual const std::string& GetName() const = 0;
+    
+    ASSET_TYPE(Image);
   };
   
   class CharTexture

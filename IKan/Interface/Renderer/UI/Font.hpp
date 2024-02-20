@@ -7,12 +7,14 @@
 
 #pragma once
 
+#include "Asset/Asset.hpp"
+
 namespace IKan
 {
   class CharTexture;
   
   /// This class stores the font data
-  class Font
+  class Font : public Asset
   {
   public:
     /// This constructor creates a font instance
@@ -36,6 +38,8 @@ namespace IKan
     /// - Parameter filePath: font file path
     static Ref<Font> Create(const std::filesystem::path& filePath);
         
+    ASSET_TYPE(Font);
+
   private:
     std::filesystem::path m_filePath {};
     std::map<char, Ref<CharTexture>> m_charTextureMap;

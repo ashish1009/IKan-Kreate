@@ -668,11 +668,11 @@
 				B2ED5E412B748AFB007A7F36 /* Renderer.hpp */,
 				B2ED603E2B74BD12007A7F36 /* RendererStats.hpp */,
 				B2ED607E2B750336007A7F36 /* Renderer2D.hpp */,
+				B2C0B6F42B7C82940015A277 /* Renderer3D.hpp */,
 				B2C0B6D32B75F8EF0015A277 /* TextRenderer.hpp */,
 				B2C0B6D82B75FF300015A277 /* Mesh.hpp */,
 				B2C0B6BE2B75F0AB0015A277 /* UI */,
 				B2ED5E452B749045007A7F36 /* Graphics */,
-				B2C0B6F42B7C82940015A277 /* Renderer3D.hpp */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
