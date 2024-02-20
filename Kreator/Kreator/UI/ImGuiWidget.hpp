@@ -27,7 +27,9 @@ namespace Kreator::UI
     /// - Note: Press Escape to cancel the search
     static bool SearchWidget(char* searchString, uint32_t BuffSize = 128, const char* hint = "Search...",
                              bool* grabFocus = nullptr, float roundingVal = 10);
-    
+    /// This function renders the Setting Button
+    static bool OptionsButton();
+
   private:
     inline static Ref<Texture> s_searchIcon;
     inline static Ref<Texture> s_gearIcon;
