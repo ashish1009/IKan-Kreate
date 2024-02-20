@@ -187,8 +187,7 @@ namespace Kreator
         {
           if (s_fileExplorerData->currentPath != "/")
           {
-            s_fileExplorerData->currentPath = s_fileExplorerData->currentPath.parent_path();
-            s_fileExplorerData->pathBuffer.Memset(0);
+            ChangeCurrentDirectory(s_fileExplorerData->currentPath.parent_path());
           }
         }
       }
@@ -504,6 +503,7 @@ namespace Kreator
   void FolderExplorer::ChangeCurrentDirectory(const std::filesystem::path &currentPath)
   {
     s_fileExplorerData->currentPath = currentPath;
+    s_fileExplorerData->pathBuffer.Memset(0);
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
     s_fileExplorerData->selectedPath = "";
   }
