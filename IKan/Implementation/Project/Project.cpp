@@ -47,6 +47,14 @@ namespace IKan
   {
     return m_config;
   }
+  void Project::UpdateAutoSaveScene(bool flag)
+  {
+    m_config.enableAutoSave = flag;
+  }
+  void Project::UpdateAutoSaveSceneTimeInterval(int32_t time)
+  {
+    m_config.autoSaveIntervalSeconds = time;
+  }
 
   Ref<Project> Project::GetActive()
   {

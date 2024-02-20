@@ -32,7 +32,7 @@ namespace IKan
 
     // Not serialized
     std::string projectFileName;
-    std::filesystem::path projectDirectory;
+    std::filesystem::path projectDirectory;    
   };
   
   class Project
@@ -43,6 +43,12 @@ namespace IKan
 
     /// This funciton retusns the current project config
     const ProjectConfig& GetConfig() const;
+    /// This funcion update auto save scene
+    /// - Parameter flag: auto save flag
+    void UpdateAutoSaveScene(bool flag);
+    /// This funcion update auto save scene time interval
+    /// - Parameter time: auto save time interval
+    void UpdateAutoSaveSceneTimeInterval(int32_t time);
 
     /// This function returns the active project
     static Ref<Project> GetActive();
