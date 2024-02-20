@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Core/UUID.hpp"
+#include "Asset/AssetType.hpp"
 
 namespace IKan
 {
