@@ -86,6 +86,9 @@ namespace Kreator
     void UI_EndMainWindowDocking();
     /// This function renders our title bar
     float UI_DrawTitlebar();
+    /// This function handle the drag and Click on title bar
+    /// - Parameter titlebarHeight: Title bar height
+    void UI_TitlebarDragArea(float titlebarHeight);
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------

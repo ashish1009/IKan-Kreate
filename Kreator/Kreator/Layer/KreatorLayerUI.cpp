@@ -432,6 +432,80 @@ namespace Kreator
   float KreatorLayer::UI_DrawTitlebar()
   {
     static const float titleBarHeight = 40.0f;
+    
+    const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
+    
+    // Draw the title Bar rectangle ---------------------------------------------------
+    const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
+    const ImVec2 titlebarMax =
+    {
+      ImGui::GetCursorScreenPos().x + ImGui::GetWindowWidth(),
+      ImGui::GetCursorScreenPos().y + titleBarHeight
+    };
+    
+    UI::SetCursorPos(ImVec2(windowPadding.x, windowPadding.y));
+    auto* drawList = ImGui::GetWindowDrawList();
+    drawList->AddRectFilled(titlebarMin, titlebarMax, UI::Color::Titlebar);
+    
+    // Drag and Control the window with user title bar ---------------------------------
+    UI::SetCursorPos(windowPadding);
+    UI_TitlebarDragArea(titleBarHeight);
+
     return titleBarHeight;
+  }
+  
+  void KreatorLayer::UI_TitlebarDragArea(float titlebarHeight)
+  {
+    static float moveOffsetX;
+    static float moveOffsetY;
+    const float titleBarWidth = ImGui::GetContentRegionAvail().x;
+    
+    auto* rootWindow = ImGui::GetCurrentWindow()->RootWindow;
+    const float windowWidth = (int32_t)rootWindow->RootWindow->Size.x;
+    
+    if (ImGui::InvisibleButton("##titleBarDragZone", ImVec2(titleBarWidth, titlebarHeight * 2), ImGuiButtonFlags_PressedOnClick | ImGuiButtonFlags_AllowItemOverlap))
+    {
+      ImVec2 point = ImGui::GetMousePos();
+      ImRect rect = rootWindow->Rect();
+      
+      // Calculate the difference between the cursor pos and window pos
+      moveOffsetX = point.x - rect.Min.x;
+      moveOffsetY = point.y - rect.Min.y;
+    }
+    
+    const Window& window = Application::Get().GetWindow();
+    bool maximized = window.IsMaximized();
+    
+    // Maximize or restore on doublt click
+    if (ImGui::IsMouseDoubleClicked(ImGuiMouseButton_Left) and ImGui::IsItemHovered())
+    {
+      (maximized) ? window.Restore() : window.Maximize();
+    }
+    else if (ImGui::IsItemActive())
+    {
+      if (ImGui::IsMouseDragging(ImGuiMouseButton_Left))
+      {
+        if (maximized)
+        {
+          window.Restore();
+          
+          // Get the original size of window
+          [[maybe_unused]] int32_t newWidth = window.GetWidth();
+          [[maybe_unused]] int32_t newHeight = window.GetHeight();
+          
+          // Offset position proportionally to mouse position on titlebar
+          // This ensures we dragging window relatively to cursor position on titlebar
+          // correctly when window size changes
+          if (windowWidth - (float)newWidth > 0.0f)
+          {
+            moveOffsetX *= (float)newWidth / windowWidth;
+          }
+        }
+        
+        // Update the new position of window
+        ImVec2 point = ImGui::GetMousePos();
+        window.SetPosition({point.x - moveOffsetX, point.y - moveOffsetY});
+      }
+    }
   }
 } // namespace Kreator
