@@ -233,7 +233,6 @@ namespace Kreator
     
     // stash the filepath away.  Actual opening of project is deferred until it is "safe" to do so.
     m_projectFilePathBuffer.StrCpy(m_openProjectPath.string());
-    PushProjectToRecentProjects(m_openProjectPath);
     OpenProject(m_openProjectPath);
   }
   
