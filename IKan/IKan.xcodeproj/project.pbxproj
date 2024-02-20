@@ -28,6 +28,8 @@
 		B248B9422B846DC600B9EC40 /* AssetImporter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9402B846DC600B9EC40 /* AssetImporter.hpp */; };
 		B248B9452B846E2C00B9EC40 /* AssetRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9432B846E2C00B9EC40 /* AssetRegistry.cpp */; };
 		B248B9462B846E2C00B9EC40 /* AssetRegistry.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9442B846E2C00B9EC40 /* AssetRegistry.hpp */; };
+		B248B9492B846ECC00B9EC40 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9472B846ECC00B9EC40 /* AssetManager.cpp */; };
+		B248B94A2B846ECC00B9EC40 /* AssetManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9482B846ECC00B9EC40 /* AssetManager.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -187,6 +189,8 @@
 		B248B9402B846DC600B9EC40 /* AssetImporter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetImporter.hpp; sourceTree = "<group>"; };
 		B248B9432B846E2C00B9EC40 /* AssetRegistry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetRegistry.cpp; sourceTree = "<group>"; };
 		B248B9442B846E2C00B9EC40 /* AssetRegistry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetRegistry.hpp; sourceTree = "<group>"; };
+		B248B9472B846ECC00B9EC40 /* AssetManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetManager.cpp; sourceTree = "<group>"; };
+		B248B9482B846ECC00B9EC40 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -338,6 +342,7 @@
 				B248B93C2B846D0800B9EC40 /* AssetSerializer.hpp */,
 				B248B9402B846DC600B9EC40 /* AssetImporter.hpp */,
 				B248B9442B846E2C00B9EC40 /* AssetRegistry.hpp */,
+				B248B9482B846ECC00B9EC40 /* AssetManager.hpp */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -351,6 +356,7 @@
 				B248B93B2B846D0800B9EC40 /* AssetSerializer.cpp */,
 				B248B93F2B846DC600B9EC40 /* AssetImporter.cpp */,
 				B248B9432B846E2C00B9EC40 /* AssetRegistry.cpp */,
+				B248B9472B846ECC00B9EC40 /* AssetManager.cpp */,
 			);
 			path = Asset;
 			sourceTree = "<group>";
@@ -887,6 +893,7 @@
 				B2ED5E132B7370DA007A7F36 /* ApplicationEvent.h in Headers */,
 				B2ED5E2D2B73A5C4007A7F36 /* Window.hpp in Headers */,
 				B2C0B7002B7C88130015A277 /* SceneCamera.hpp in Headers */,
+				B248B94A2B846ECC00B9EC40 /* AssetManager.hpp in Headers */,
 				B2ED5CCF2B736963007A7F36 /* TimeStep.hpp in Headers */,
 				B2ED60552B74DAB8007A7F36 /* Texture.hpp in Headers */,
 				B2ED5E112B7370DA007A7F36 /* Event.h in Headers */,
@@ -1031,6 +1038,7 @@
 				B2ED5E1D2B738C58007A7F36 /* ApplicationImpl.cpp in Sources */,
 				B2ED5E552B74911C007A7F36 /* Factories.cpp in Sources */,
 				B2C0BA032B7DC9D10015A277 /* Project.cpp in Sources */,
+				B248B9492B846ECC00B9EC40 /* AssetManager.cpp in Sources */,
 				B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */,
 				B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */,
 				B2ED604D2B74D958007A7F36 /* MathUtils.cpp in Sources */,
