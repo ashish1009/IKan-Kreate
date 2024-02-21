@@ -171,7 +171,7 @@ namespace Kreator
       UI::PushID();
       if (ImGui::BeginTable(UI::GenerateID(), 2 /* Num Columns */, tableFlags, ImVec2(0.0f, 0.0f)))
       {
-        ImGui::TableSetupColumn("Outliner", 0, 300.0f);
+        ImGui::TableSetupColumn("Outliner", 0, 200.0f);
         ImGui::TableSetupColumn("Directory Structure", ImGuiTableColumnFlags_WidthStretch);
         ImGui::TableNextRow();
         
