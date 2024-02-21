@@ -72,5 +72,41 @@ namespace IKan
     
     ImGuiWindowFlags m_flags = 0;
     ImVec2 m_minSize, m_maxSize;
-  };  
+  };
+  
+  class AssetEditorManager
+  {
+  public:
+    /// This function unregisters the default Asset Editors
+    static void UnregisterAllEditors();
+    /// This function handles update of asset editor
+    /// - Parameter ts: time step
+    static void OnUpdate(TimeStep ts);
+    /// This function handles events for asset editor
+    /// - Parameter e: event
+    static void OnEvent(Event& e);
+    /// This function renders ImGui
+    static void OnImGuiRender();
+    /// This function Opens the Asset editor
+    /// - Parameter asset asset
+    static void OpenEditor(const Ref<Asset>& asset);
+    /// This function closes the Asset editor
+    /// - Parameter asset asset
+    static void CloseEditor(const Ref<Asset>& asset);
+    /// This function Opens the Asset editor
+    static void Clear();
+    
+    /// This function register an asset in map
+    template<typename T> static void RegisterEditor(AssetType type)
+    {
+      static_assert(std::is_base_of<AssetEditor, T>::value,
+                    "AssetEditorPanel::RegisterEditor requires template type to inherit from AssetEditor");
+      IK_ASSERT(s_editors.find(type) == s_editors.end(), "There's already an editor for that asset!");
+      s_editors[type] = CreateScope<T>();
+    }
+    
+  private:
+    static std::unordered_map<AssetType, Scope<AssetEditor>> s_editors;
+  };
+
 } // namespace IKan
