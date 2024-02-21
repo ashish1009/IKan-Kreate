@@ -521,7 +521,7 @@ namespace Kreator
   
   void ContentBrowserAsset::Activate(CBItemActionResult& actionResult)
   {
-    IK_ASSERT(false, "Implement Later")
+    AssetEditorManager::OpenEditor(AssetManager::GetAsset<Asset>(m_assetInfo.handle));
   }
   
   void ContentBrowserAsset::OnRenamed(const std::string& newName)

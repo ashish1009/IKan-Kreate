@@ -8,3 +8,18 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
+  - Handle: 2649989000
+    FilePath: Textures/wall/wall_metallic.png
+    Type: Image
+  - Handle: 2824556193
+    FilePath: Textures/wall/wall_roughness.png
+    Type: Image
+  - Handle: 3370051243
+    FilePath: Textures/wall/wall_ao.png
+    Type: Image
+  - Handle: 3535606318
+    FilePath: Textures/wall/wall_normal.png
+    Type: Image
+  - Handle: 4144005236
+    FilePath: Textures/wall/wall_albedo.png
+    Type: Image

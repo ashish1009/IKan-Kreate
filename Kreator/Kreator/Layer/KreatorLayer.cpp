@@ -10,6 +10,7 @@
 #include "Panel/ContentBrowserPanel.hpp"
 #include "Panel/ProjectSettingPanel.hpp"
 #include "Panel/AssetPanel.hpp"
+#include "Editor/AssetViewer.hpp"
 
 namespace Kreator
 {
@@ -151,18 +152,27 @@ if (!Project::GetActive()) return
 #if DEBUG == 1
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
+    
+    // Register Default Asset Editor
+    AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
   }
   
   void KreatorLayer::OnDetach()
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Detaching '{0} Layer' from application", GetName());
+    
+    // Clear the Asset Editor
+    AssetEditorManager::Clear();
   }
   
   void KreatorLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
+    // Update Asset Viewer
+    AssetEditorManager::OnUpdate(ts);
+
     // Update Data
     m_viewport.UpdateMousePos();
     
@@ -173,6 +183,7 @@ if (!Project::GetActive()) return
   void KreatorLayer::OnEvent(Event& event)
   {
     m_panels.OnEvent(event);
+    AssetEditorManager::OnEvent(event);
   }
   
   void KreatorLayer::OnImGuiRender()
@@ -188,9 +199,11 @@ if (!Project::GetActive()) return
     UI_StartMainWindowDocking();
     m_panels.OnImGuiRender();
 
-    // Should be rendered last
+    // Should be rendered last inside docker
     UI_StatisticsPanel();
     UI_EndMainWindowDocking();
+    
+    AssetEditorManager::OnImGuiRender();
   }
 
   void KreatorLayer::CreateProject(const std::filesystem::path& projectDir)

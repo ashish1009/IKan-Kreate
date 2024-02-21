@@ -35,7 +35,7 @@ namespace IKan
     /// @see: AssetSerializer
     virtual void Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
     /// @see: AssetSerializer
-    virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const override{ IK_ASSERT(false);};
+    virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const override;
   };
   
   class FontSerializer : public AssetSerializer
@@ -62,7 +62,7 @@ namespace IKan
     /// @see: AssetSerializer
     virtual void Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
     /// @see: AssetSerializer
-    virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const override{ IK_ASSERT(false);};
+    virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const override;
   };
   
   class MaterialSerializer : public AssetSerializer
