@@ -95,6 +95,10 @@ namespace Kreator
     void NewScene(const std::string& name = "UntitledScene");
     /// This function closes the scene
     void CloseCurrentScene();
+    /// This function Saves the scene at new location
+    void SaveSceneAs();
+    /// This function Saves the scene
+    void SaveScene();
 
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup
@@ -151,7 +155,7 @@ namespace Kreator
     EditorCamera m_editorCamera;
     enum class FolderExplorerAction
     {
-      None, NewPreoject, OpenProject
+      None, NewPreoject, OpenProject, SaveScene
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
     

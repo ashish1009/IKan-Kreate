@@ -11,6 +11,7 @@
 #include "Panel/ProjectSettingPanel.hpp"
 #include "Panel/AssetPanel.hpp"
 #include "Editor/AssetViewer.hpp"
+#include "Editor/FolderExplorer.hpp"
 
 namespace Kreator
 {
@@ -389,6 +390,26 @@ if (!Project::GetActive()) return
       m_currentScene->OnClose();
     }
   }
+  
+  void KreatorLayer::SaveSceneAs()
+  {
+    FolderExplorer::Save();
+    m_folderExplorerAction = FolderExplorerAction::SaveScene;
+  }
+  
+  void KreatorLayer::SaveScene()
+  {
+    IK_PROFILE();
+    if (!m_sceneFilePath.empty())
+    {
+      IK_ASSERT(false, "Implement later");
+    }
+    else
+    {
+      SaveSceneAs();
+    }
+  }
+
 
   const std::filesystem::path& KreatorLayer::GetClientResorucePath() const
   {
