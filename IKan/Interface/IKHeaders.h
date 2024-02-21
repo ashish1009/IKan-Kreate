@@ -88,3 +88,4 @@
 #include <Editor/PanelManager.hpp>
 #include <Editor/EditorConsolePanel.hpp>
 #include <Editor/EditorConsoleSink.hpp>
+#include <Editor/AssetEditor.hpp>

@@ -241,6 +241,31 @@ namespace IKan
     fout << out.c_str();
   }
   
+  bool AssetManager::IsMemoryAsset(AssetHandle handle)
+  {
+    return s_memoryAssets.find(handle) != s_memoryAssets.end();
+  }
+  bool AssetManager::IsLoadedAsset(AssetHandle handle)
+  {
+    return s_loadedAssets.find(handle) != s_loadedAssets.end();
+  }
+  bool AssetManager::IsAssetHandleValid(AssetHandle assetHandle)
+  {
+    return IsMemoryAsset(assetHandle) or GetMetadata(assetHandle).IsValid();
+  }
+  
+  AssetMetadata& AssetManager::GetMetadataInternal(AssetHandle handle)
+  {
+    for (auto& [filepath, metadata] : s_assetRegistry)
+    {
+      if (metadata.handle == handle)
+      {
+        return metadata;
+      }
+    }
+    return NullMetadata;
+  }
+  
   std::filesystem::path AssetManager::GetRelativePath(const std::filesystem::path& filepath)
   {
     std::string temp = filepath.string();
@@ -250,10 +275,16 @@ namespace IKan
     }
     return filepath;
   }
+  std::filesystem::path AssetManager::GetFileSystemPath(const AssetMetadata& metadata)
+  {
+    return Project::GetAssetDirectory() / metadata.filePath;
+  }
+  
   AssetType AssetManager::GetAssetTypeFromPath(const std::filesystem::path& path)
   {
     return GetAssetTypeFromExtension(path.extension().string());
   }
+  
   AssetType AssetManager::GetAssetTypeFromExtension(const std::string& extension)
   {
     std::string ext = Utils::String::ToLowerCopy(extension);
@@ -262,10 +293,6 @@ namespace IKan
       return AssetType::Invalid;
     }
     return s_assetExtensionMap.at(ext.c_str());
-  }
-  std::filesystem::path AssetManager::GetFileSystemPath(const AssetMetadata& metadata)
-  {
-    return Project::GetAssetDirectory() / metadata.filePath;
   }
   
   AssetHandle AssetManager::GetAssetHandleFromFilePath(const std::filesystem::path& filepath)
@@ -336,16 +363,5 @@ namespace IKan
   {
     return s_assetRegistry;
   }
-  
-  AssetMetadata& AssetManager::GetMetadataInternal(AssetHandle handle)
-  {
-    for (auto& [filepath, metadata] : s_assetRegistry)
-    {
-      if (metadata.handle == handle)
-      {
-        return metadata;
-      }
-    }
-    return NullMetadata;
-  }
+
 } // namespace IKan
