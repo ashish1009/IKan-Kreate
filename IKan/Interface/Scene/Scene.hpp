@@ -107,5 +107,6 @@ namespace IKan
     int32_t m_maxEntityID = -1;
     
     friend class SceneSerializer;
+    friend class Entity;
   };
 } // namespace IKan
