@@ -93,6 +93,8 @@ namespace Kreator
     /// This function creates new scene
     /// - Parameter name: Scene name
     void NewScene(const std::string& name = "UntitledScene");
+    /// This function closes the scene
+    void CloseCurrentScene();
 
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup

@@ -317,6 +317,16 @@ if (!Project::GetActive()) return
     // Update all panel project
     m_panels.OnProjectChanged(project);
 
+    // Create or open Scene
+    if (!project->GetConfig().startScene.empty())
+    {
+      IK_ASSERT(false, "Implement later");
+    }
+    else
+    {
+      NewScene();
+    }
+
     // Push the current project in recent list
     PushProjectToRecentProjects(filepath);
   }
@@ -358,6 +368,26 @@ if (!Project::GetActive()) return
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Creating new scene: {0}", name);
+    
+    // Close current scene
+    CloseCurrentScene();
+    
+    // Create new scene
+    m_editorScene = Scene::Create(name);
+    m_sceneFilePath = std::string();
+    m_currentScene = m_editorScene;
+
+    // Update the scenes in Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void KreatorLayer::CloseCurrentScene()
+  {
+    IK_PROFILE();
+    if (m_currentScene)
+    {
+      m_currentScene->OnClose();
+    }
   }
 
   const std::filesystem::path& KreatorLayer::GetClientResorucePath() const

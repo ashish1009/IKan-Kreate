@@ -561,7 +561,7 @@ namespace Kreator
       UI::ScopedColor textColor(ImGuiCol_Text, UI::Color::Text);
       UI::SameLine();
       
-      const std::string sceneName = "Current Scene";
+      const std::string sceneName = m_currentScene->GetName();
       UI::SetCursorPosX(roundBarRight - ImGui::CalcTextSize(sceneName.c_str()).x - 20);
       {
         if (m_sceneFilePath == "")

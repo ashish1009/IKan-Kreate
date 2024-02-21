@@ -25,6 +25,13 @@ namespace IKan
     Scene(const std::string& name, uint32_t maxEntityCapacity);
     /// This is the default destructor of EnTT Scene
     ~Scene();
+    
+    /// This function closes the current scene
+    void OnClose();
+
+    // Getters -----------------------------------------------------------------------------------------------------
+    /// This function returns the scene name
+    const std::string& GetName() const;
 
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
