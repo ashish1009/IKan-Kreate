@@ -42,6 +42,8 @@
 		B28CDFBD2B85D4170075DE7D /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B28CDFBB2B85D4170075DE7D /* SceneRenderer.hpp */; };
 		B28CDFC02B85FD0B0075DE7D /* Components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28CDFBE2B85FD0B0075DE7D /* Components.cpp */; };
 		B28CDFC12B85FD0B0075DE7D /* Components.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B28CDFBF2B85FD0B0075DE7D /* Components.hpp */; };
+		B28CDFC42B861D030075DE7D /* SceneSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28CDFC22B861D030075DE7D /* SceneSerializer.cpp */; };
+		B28CDFC52B861D030075DE7D /* SceneSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B28CDFC32B861D030075DE7D /* SceneSerializer.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -215,6 +217,8 @@
 		B28CDFBB2B85D4170075DE7D /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
 		B28CDFBE2B85FD0B0075DE7D /* Components.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Components.cpp; sourceTree = "<group>"; };
 		B28CDFBF2B85FD0B0075DE7D /* Components.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Components.hpp; sourceTree = "<group>"; };
+		B28CDFC22B861D030075DE7D /* SceneSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSerializer.cpp; sourceTree = "<group>"; };
+		B28CDFC32B861D030075DE7D /* SceneSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneSerializer.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -415,6 +419,7 @@
 			children = (
 				B28CDFBF2B85FD0B0075DE7D /* Components.hpp */,
 				B248B9282B84676700B9EC40 /* Scene.hpp */,
+				B28CDFC32B861D030075DE7D /* SceneSerializer.hpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -424,6 +429,7 @@
 			children = (
 				B28CDFBE2B85FD0B0075DE7D /* Components.cpp */,
 				B248B9272B84676700B9EC40 /* Scene.cpp */,
+				B28CDFC22B861D030075DE7D /* SceneSerializer.cpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -899,6 +905,7 @@
 				B2ED60482B74C547007A7F36 /* OpenGLPipeline.hpp in Headers */,
 				B2ED603C2B74BBA8007A7F36 /* OpenGLRendererBuffer.hpp in Headers */,
 				B2ED5CB82B724B39007A7F36 /* Configurations.h in Headers */,
+				B28CDFC52B861D030075DE7D /* SceneSerializer.hpp in Headers */,
 				B2ED5E5A2B74914F007A7F36 /* OpenGLRendererContext.hpp in Headers */,
 				B2ED60662B74DF5F007A7F36 /* stb_image.h in Headers */,
 				B2ED5CC52B7265F0007A7F36 /* LoggerBuilder.hpp in Headers */,
@@ -1073,6 +1080,7 @@
 				B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */,
 				B2ED60852B7510DE007A7F36 /* AssetPathManager.cpp in Sources */,
 				B2ED5E342B73A811007A7F36 /* MacWindow.cpp in Sources */,
+				B28CDFC42B861D030075DE7D /* SceneSerializer.cpp in Sources */,
 				B2C0B71F2B7CDEE30015A277 /* FixedCamera.cpp in Sources */,
 				B2ED60122B74A920007A7F36 /* OpenGLShader.cpp in Sources */,
 				B2ED60672B74DF5F007A7F36 /* stb_image.cpp in Sources */,

@@ -41,6 +41,11 @@ namespace IKan
     IK_PROFILE();
   }
 
+  void Scene::SetName(const std::string &name)
+  {
+    m_name = name;
+  }
+
   const std::string& Scene::GetName() const
   {
     return m_name;

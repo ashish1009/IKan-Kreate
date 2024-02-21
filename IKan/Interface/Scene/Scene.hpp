@@ -29,6 +29,11 @@ namespace IKan
     /// This function closes the current scene
     void OnClose();
 
+    // Setters -----------------------------------------------------------------------------------------------------
+    /// This function sets the scene name
+    /// - Parameter name: scene name
+    void SetName(const std::string& name);
+
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the scene name
     const std::string& GetName() const;
@@ -54,5 +59,7 @@ namespace IKan
     uint32_t m_registryCapacity = 0;
     uint32_t m_numEntities = 0;
     int32_t m_maxEntityID = -1;
+    
+    friend class SceneSerializer;
   };
 } // namespace IKan
