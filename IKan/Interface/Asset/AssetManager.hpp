@@ -80,6 +80,49 @@ namespace IKan
     /// This function returns the asset registry
     static const AssetRegistry& GetAssetRegistry();
     
+    // Template APIs ------------------------------------------------------------------------------------------------
+    template<typename T>
+    static Ref<T> GetAsset(AssetHandle assetHandle)
+    {
+      if (IsMemoryAsset(assetHandle))
+      {
+        return std::dynamic_pointer_cast<T>(s_memoryAssets[assetHandle]);
+      }
+      if (IsLoadedAsset(assetHandle))
+      {
+        return std::dynamic_pointer_cast<T>(s_loadedAssets[assetHandle]);
+      }
+      
+      auto& metadata = GetMetadataInternal(assetHandle);
+      if (!metadata.IsValid())
+      {
+        return nullptr;
+      }
+      
+      Ref<Asset> asset = nullptr;
+      if (!metadata.isDataLoaded)
+      {
+        metadata.isDataLoaded = AssetImporter::TryLoadData(metadata, asset);
+        if (!metadata.isDataLoaded)
+        {
+          return nullptr;
+        }
+        
+        s_loadedAssets[assetHandle] = asset;
+      }
+      else
+      {
+        asset = s_loadedAssets[assetHandle];
+      }
+      return std::dynamic_pointer_cast<T>(asset);
+    }
+    
+    template<typename T>
+    static Ref<T> GetAsset(const std::string& filepath)
+    {
+      return GetAsset<T>(GetAssetHandleFromFilePath(filepath));
+    }
+    
   private:
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This funciton loads the asset reguistry file path and update the registry data in manager
