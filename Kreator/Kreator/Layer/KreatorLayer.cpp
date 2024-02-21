@@ -185,6 +185,11 @@ if (!Project::GetActive()) return
         m_viewport.UpdateMousePos();
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
+        
+        // Render Main Viewport
+        m_editorScene->OnUpdateEditor();
+        m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
+
         break;
       }
       case SceneState::Simulate:
@@ -194,11 +199,20 @@ if (!Project::GetActive()) return
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
         
+        // Render Main Viewport
+        m_simulationScene->OnUpdateRuntime(ts);
+        m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
+        
         break;
       }
       case SceneState::Play:
       {
         Input::SetCursorMode(CursorMode::Locked);
+        
+        // Render Main Viewport
+        m_runtimeScene->OnUpdateRuntime(ts);
+        m_runtimeScene->OnRenderRuntime(ts, m_viewportRenderer);
+
         break;
       }
       case SceneState::Pause:
