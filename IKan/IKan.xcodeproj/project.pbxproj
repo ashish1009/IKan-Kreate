@@ -1257,6 +1257,7 @@
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
 					"${PROJECT_DIR}/Vendors/YAML/Yaml/include",
+					"${PROJECT_DIR}/Vendors/EnTT",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1290,6 +1291,7 @@
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
 					"${PROJECT_DIR}/Vendors/YAML/Yaml/include",
+					"${PROJECT_DIR}/Vendors/EnTT",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",

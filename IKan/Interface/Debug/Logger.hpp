@@ -25,6 +25,7 @@ f(SceneCamera) f(EditorCamera)\
 f(ImGui) \
 f(Asset) \
 f(Project) \
+f(Scene) \
 f(PanelManager) f(EditorConsolePanel)\
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
