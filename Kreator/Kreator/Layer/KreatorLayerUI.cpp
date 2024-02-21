@@ -896,7 +896,7 @@ namespace Kreator
     UpdateViewportSize();
     
     // Render viewport image
-//    UI::Image(m_viewportRenderer.GetFinalImage(), viewportSize);
+    UI::Image(m_viewportRenderer.GetFinalImage(), viewportSize);
     
     auto windowSize = ImGui::GetWindowSize();
     ImVec2 minBound = ImGui::GetWindowPos();

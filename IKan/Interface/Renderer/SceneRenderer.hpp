@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Renderer/Graphics/FrameBuffer.hpp"
+#include "Renderer/Graphics/Texture.hpp"
 #include "Camera/Camera.hpp"
 
 namespace IKan
@@ -44,7 +45,12 @@ namespace IKan
     ///   - height: height of viewport
     void SetViewportSize(uint32_t width, uint32_t height);
 
+    /// This function returns the final render pass image
+    Ref<Texture> GetFinalImage() const;
+
   private:
+    // Member functions ---------------------------------------------------------------------------------------------
+
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_debugName;
     uint32_t m_viewportWidth, m_viewportHeight;

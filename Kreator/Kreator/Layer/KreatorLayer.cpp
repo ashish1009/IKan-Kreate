@@ -177,7 +177,11 @@ if (!Project::GetActive()) return
     m_viewport.UpdateMousePos();
     
     // Render
-    Renderer::Clear({0.2f, 0.2f, 0.2f, 1.0f});
+    // TODO: Move to scene class
+    {
+      m_viewportRenderer.BeginScene({});
+      m_viewportRenderer.EndScene();
+    }
   }
   
   void KreatorLayer::OnEvent(Event& event)
