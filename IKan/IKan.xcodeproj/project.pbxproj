@@ -40,6 +40,8 @@
 		B28CDFB22B85C4990075DE7D /* AssetEditor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B28CDFB02B85C4990075DE7D /* AssetEditor.hpp */; };
 		B28CDFBC2B85D4170075DE7D /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28CDFBA2B85D4170075DE7D /* SceneRenderer.cpp */; };
 		B28CDFBD2B85D4170075DE7D /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B28CDFBB2B85D4170075DE7D /* SceneRenderer.hpp */; };
+		B28CDFC02B85FD0B0075DE7D /* Components.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28CDFBE2B85FD0B0075DE7D /* Components.cpp */; };
+		B28CDFC12B85FD0B0075DE7D /* Components.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B28CDFBF2B85FD0B0075DE7D /* Components.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -211,6 +213,8 @@
 		B28CDFB02B85C4990075DE7D /* AssetEditor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetEditor.hpp; sourceTree = "<group>"; };
 		B28CDFBA2B85D4170075DE7D /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
 		B28CDFBB2B85D4170075DE7D /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
+		B28CDFBE2B85FD0B0075DE7D /* Components.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Components.cpp; sourceTree = "<group>"; };
+		B28CDFBF2B85FD0B0075DE7D /* Components.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Components.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -409,6 +413,7 @@
 		B248B9252B84675100B9EC40 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				B28CDFBF2B85FD0B0075DE7D /* Components.hpp */,
 				B248B9282B84676700B9EC40 /* Scene.hpp */,
 			);
 			path = Scene;
@@ -417,6 +422,7 @@
 		B248B9262B84675A00B9EC40 /* Scene */ = {
 			isa = PBXGroup;
 			children = (
+				B28CDFBE2B85FD0B0075DE7D /* Components.cpp */,
 				B248B9272B84676700B9EC40 /* Scene.cpp */,
 			);
 			path = Scene;
@@ -927,6 +933,7 @@
 				B2ED5E132B7370DA007A7F36 /* ApplicationEvent.h in Headers */,
 				B2ED5E2D2B73A5C4007A7F36 /* Window.hpp in Headers */,
 				B2C0B7002B7C88130015A277 /* SceneCamera.hpp in Headers */,
+				B28CDFC12B85FD0B0075DE7D /* Components.hpp in Headers */,
 				B248B94A2B846ECC00B9EC40 /* AssetManager.hpp in Headers */,
 				B2ED5CCF2B736963007A7F36 /* TimeStep.hpp in Headers */,
 				B2ED60552B74DAB8007A7F36 /* Texture.hpp in Headers */,
@@ -1062,6 +1069,7 @@
 				B2ED60332B74BA7F007A7F36 /* BufferLayout.cpp in Sources */,
 				B2C0B7182B7CDC7E0015A277 /* MacInput.cpp in Sources */,
 				B248B93D2B846D0800B9EC40 /* AssetSerializer.cpp in Sources */,
+				B28CDFC02B85FD0B0075DE7D /* Components.cpp in Sources */,
 				B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */,
 				B2ED60852B7510DE007A7F36 /* AssetPathManager.cpp in Sources */,
 				B2ED5E342B73A811007A7F36 /* MacWindow.cpp in Sources */,
