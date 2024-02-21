@@ -71,6 +71,9 @@ namespace Kreator
 
   private:
     // Member functions ----------------------------------------------------------------------------------------------
+    /// This function Updates the viewports of all Kreator Data
+    void UpdateViewportSize();
+
     // Project API ---------------------------------------
     /// This function Creates new project
     /// - Parameter projectDir: Project Direcotry
@@ -108,6 +111,8 @@ namespace Kreator
     void UI_WindowButtons();
     /// This function shows the Statistics Panel
     void UI_StatisticsPanel();
+    /// This functions shows primary Viewport
+    void UI_Viewport();
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
@@ -134,6 +139,7 @@ namespace Kreator
     GUI_InputBuffer<512> m_projectFilePathBuffer;
     
     // Editor Data ---------------------------------------
+    bool m_allowViewportCameraEvents = false;
     PanelManager m_panels;
     enum class FolderExplorerAction
     {

@@ -197,6 +197,8 @@ if (!Project::GetActive()) return
 
     // Docked Windows-----------
     UI_StartMainWindowDocking();
+    UI_Viewport();
+    
     m_panels.OnImGuiRender();
 
     // Should be rendered last inside docker
@@ -204,6 +206,13 @@ if (!Project::GetActive()) return
     UI_EndMainWindowDocking();
     
     AssetEditorManager::OnImGuiRender();
+  }
+
+  void KreatorLayer::UpdateViewportSize()
+  {
+    m_viewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);
+    m_miniViewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);
+    FixedCamera::SetViewport(m_viewport.width, m_viewport.height);
   }
 
   void KreatorLayer::CreateProject(const std::filesystem::path& projectDir)
