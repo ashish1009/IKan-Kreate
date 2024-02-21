@@ -174,22 +174,40 @@ if (!Project::GetActive()) return
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
-    // Update Asset Viewer
-    AssetEditorManager::OnUpdate(ts);
-
-    // Update Data
-    m_viewport.UpdateMousePos();
-    
-    // Update Editor camera
-    m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
-    m_editorCamera.OnUpdate(ts);
-    
-    // Render
-    // TODO: Move to scene class
+    switch (m_sceneState)
     {
-      m_viewportRenderer.BeginScene({});
-      m_viewportRenderer.EndScene();
-    }
+      case SceneState::Edit:
+      {
+        // Update Asset Viewer
+        AssetEditorManager::OnUpdate(ts);
+        
+        // Update Data
+        m_viewport.UpdateMousePos();
+        m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+        m_editorCamera.OnUpdate(ts);
+        break;
+      }
+      case SceneState::Simulate:
+      {
+        // Update Data
+        m_viewport.UpdateMousePos();
+        m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+        m_editorCamera.OnUpdate(ts);
+        
+        break;
+      }
+      case SceneState::Play:
+      {
+        Input::SetCursorMode(CursorMode::Locked);
+        break;
+      }
+      case SceneState::Pause:
+      {
+        break;
+      }
+      default:
+        break;
+    };
   }
   
   void KreatorLayer::OnEvent(Event& event)
@@ -200,11 +218,15 @@ if (!Project::GetActive()) return
     if (m_sceneState != SceneState::Play)
     {
       m_panels.OnEvent(event);
-      AssetEditorManager::OnEvent(event);
       
       if (m_viewport.panelMouseHover)
       {
         m_editorCamera.OnEvent(event);
+      }
+      
+      if (m_sceneState == SceneState::Edit)
+      {
+        AssetEditorManager::OnEvent(event);
       }
     }
   }
@@ -222,10 +244,14 @@ if (!Project::GetActive()) return
     UI_StartMainWindowDocking();
     UI_Viewport();
     
-    m_panels.OnImGuiRender();
+    if (m_sceneState != SceneState::Play)
+    {
+      m_panels.OnImGuiRender();
 
-    // Should be rendered last inside docker
-    UI_StatisticsPanel();
+      // Should be rendered last inside docker
+      UI_StatisticsPanel();
+    }
+
     UI_EndMainWindowDocking();
     
     UI_NewScenePopup();
