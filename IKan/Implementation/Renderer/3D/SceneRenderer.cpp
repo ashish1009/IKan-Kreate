@@ -32,6 +32,16 @@ namespace IKan
     IK_LOG_INFO(LogModule::SceneRenderer, "Destroying Scene renderer for '{0}'", m_debugName);
   }
   
+  void SceneRenderer::BeginScene(const SceneRendererCamera& sceneCamera)
+  {
+    IK_PERFORMANCE("SceneRenderer::BeginScene");
+  }
+  
+  void SceneRenderer::EndScene()
+  {
+    IK_PERFORMANCE("SceneRenderer::EndScene");
+  }
+  
   void SceneRenderer::SetViewportSize(uint32_t width, uint32_t height)
   {
     IK_PERFORMANCE("SceneRenderer::SetViewportSize");

@@ -8,9 +8,20 @@
 #pragma once
 
 #include "Renderer/Graphics/FrameBuffer.hpp"
+#include "Camera/Camera.hpp"
 
 namespace IKan
 {
+  /// Scene renderer Camera Data
+  struct SceneRendererCamera
+  {
+    Camera camera;
+    glm::vec3 position;
+    glm::mat4 viewMatrix;
+    float near, far; //Non-reversed
+    float FOV;
+  };
+
   /// This class is responsible for Rendering Scene in Viewport
   class SceneRenderer
   {
@@ -20,6 +31,12 @@ namespace IKan
     SceneRenderer(const std::string& debugName);
     /// This is the default destructor of Scene Renderer
     ~SceneRenderer();
+
+    /// This funciton begins the scene renderering
+    /// - Parameter sceneCamera: Scene Renderer camera data
+    void BeginScene(const SceneRendererCamera& sceneCamera);
+    /// This funciton ends the scene renderering
+    void EndScene();
 
     /// This function updates the viewport size of scene rendere
     /// - Parameters:
