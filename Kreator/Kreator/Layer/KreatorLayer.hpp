@@ -58,6 +58,11 @@ namespace Kreator
     /// - Note Core Application is taking care to call the EventHandler(event) API for all Layers
     void OnEvent(Event& event) override;
     
+    // Scene Public APIs --------------------------------
+    /// This function opens new scene with file
+    /// - Parameter filepath: Scene filepath
+    void OpenScene(const std::filesystem::path& filepath);
+
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the client file path
     const std::filesystem::path& GetClientResorucePath() const;
