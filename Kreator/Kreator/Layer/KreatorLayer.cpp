@@ -235,10 +235,14 @@ if (!Project::GetActive()) return
   bool KreatorLayer::OnKeyPressedEvent(KeyPressedEvent& e)
   {
     bool leftCmd = Input::IsKeyPressed(Key::LeftSuper);
+    bool rightCmd = Input::IsKeyPressed(Key::RightSuper);
+    bool leftShift = Input::IsKeyPressed(Key::LeftShift);
+    bool rightShift = Input::IsKeyPressed(Key::RightShift);
+
     if (m_sceneState == SceneState::Edit)
     {
       // Scene -----------------------------------------------------------
-      if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right))
+      if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right) and !leftShift)
       {
         switch (e.GetKeyCode())
         {
@@ -254,7 +258,26 @@ if (!Project::GetActive()) return
           default:
             break;
         }
+      } // Scenes
+      
+      // Project -----------------------------------------------------------
+      if ((leftCmd or rightCmd) and (leftShift or rightShift))
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::N:
+            m_showCreateNewProjectPopup = true;
+            break;
+          case Key::O:
+            FolderExplorer::Open(ProjectExtension, "");
+            m_folderExplorerAction = FolderExplorerAction::OpenProject;
+            break;
+            
+          default:
+            break;
+        }
       }
+
     }
     return false;
   }
