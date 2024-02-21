@@ -698,7 +698,12 @@ namespace Kreator
       });
       
       UI_Utils::AddMenu("View", popItemHighlight, [this]() {
-
+        for (auto& [id, panelData] : m_panels.GetPanels())
+        {
+          ImGui::MenuItem(panelData.name, nullptr, &panelData.isOpen);
+        }
+        ImGui::Separator();
+        ImGui::MenuItem("Statistic Panel", nullptr, &m_showStatisticsPanel);
       });
       
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
@@ -764,7 +769,8 @@ namespace Kreator
   void KreatorLayer::UI_StatisticsPanel()
   {
     IK_PERFORMANCE("KreatorLayer::UI_StatisticsPanel");
-    if (ImGui::Begin("Statistics"))
+    RETURN_IF (!m_showStatisticsPanel)
+    if (ImGui::Begin("Statistics", &m_showStatisticsPanel))
     {
       UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
       UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 5);
@@ -834,25 +840,31 @@ namespace Kreator
           {
             if (ImGui::BeginTabItem("General Stats"))
             {
-              ImGui::Text("Draw Calls            : %d", stats.drawCalls);
-              ImGui::Text("Vertex Count          : %d", stats.vertexCount);
-              ImGui::Text("Vertex Buffer Size    : %d B", (uint32_t)(stats.vertexBufferSize/1000));
-              ImGui::Text("Index Count           : %d B", stats.indexCount);
-              ImGui::Text("Index Buffer Size     : %d B", (uint32_t)(stats.indexBufferSize / 1000));
-              ImGui::Text("Texture Buffer Size   : %d B", (uint32_t)(stats.textureBufferSize / 1000));
+              UI::ScopedDisable disable;
+              UI::BeginPropertyGrid(2, 1, 1);
+              UI::Property("Draw Calls", std::to_string(stats.drawCalls));
+              UI::Property("Vertex Count", std::to_string(stats.vertexCount));
+              UI::Property("Vertex Buffer Size", std::to_string((uint32_t)(stats.vertexBufferSize/1000)));
+              UI::Property("Index Count", std::to_string(stats.indexCount));
+              UI::Property("Index Buffer Size", std::to_string((uint32_t)(stats.indexBufferSize / 1000)));
+              UI::Property("Texture Buffer Size", std::to_string((uint32_t)(stats.textureBufferSize / 1000)));
+              UI::EndPropertyGrid();
               ImGui::EndTabItem();
             }
             
             if (ImGui::BeginTabItem("2D Stats"))
             {
-              ImGui::Text("Quads in this batch   : %d", stats._2d.quads);
-              ImGui::Text("Max Quad Per Batch    : %d", stats._2d.maxQuads);
-              ImGui::Text("Circles in this batch : %d", stats._2d.circles);
-              ImGui::Text("Max Circles Per Batch : %d", stats._2d.maxCircles);
-              ImGui::Text("Lines in this batch   : %d", stats._2d.lines);
-              ImGui::Text("Max Lines Per Batch   : %d", stats._2d.maxLines);
-              ImGui::Text("Chars in this batch   : %d", stats._2d.chars);
-              ImGui::Text("Max Char Per Batch    : %d", 16);
+              UI::ScopedDisable disable;
+              UI::BeginPropertyGrid(2, 1, 1);
+              UI::Property("Quads in this batch   ", std::to_string(stats._2d.quads));
+              UI::Property("Max Quad Per Batch    ", std::to_string(stats._2d.maxQuads));
+              UI::Property("Circles in this batch ", std::to_string(stats._2d.circles));
+              UI::Property("Max Circles Per Batch ", std::to_string(stats._2d.maxCircles));
+              UI::Property("Lines in this batch   ", std::to_string(stats._2d.lines));
+              UI::Property("Max Lines Per Batch   ", std::to_string(stats._2d.maxLines));
+              UI::Property("Chars in this batch   ", std::to_string(stats._2d.chars));
+              UI::Property("Max Char Per Batch    ", std::to_string(16));
+              UI::EndPropertyGrid();
               ImGui::EndTabItem();
             }
             ImGui::EndTabBar();

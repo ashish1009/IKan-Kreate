@@ -113,6 +113,7 @@ namespace Kreator
     // Popups --------------------------------------------
     bool m_showWelcomePopup {false};
     bool m_showCreateNewProjectPopup {false};
+    bool m_showStatisticsPanel {true};
 
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};
