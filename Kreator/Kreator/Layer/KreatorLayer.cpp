@@ -228,6 +228,7 @@ if (!Project::GetActive()) return
     UI_StatisticsPanel();
     UI_EndMainWindowDocking();
     
+    UI_NewScenePopup();
     AssetEditorManager::OnImGuiRender();
   }
   
@@ -241,6 +242,9 @@ if (!Project::GetActive()) return
       {
         switch (e.GetKeyCode())
         {
+          case Key::N:
+            m_showNewScenePopup = true;
+            break;
           case Key::O:
             OpenScene();
             break;

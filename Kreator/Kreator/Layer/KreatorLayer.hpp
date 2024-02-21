@@ -134,12 +134,15 @@ namespace Kreator
     void UI_StatisticsPanel();
     /// This functions shows primary Viewport
     void UI_Viewport();
+    /// This function popup new scene widget
+    void UI_NewScenePopup();
 
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup {false};
     bool m_showCreateNewProjectPopup {false};
     bool m_showStatisticsPanel {true};
+    bool m_showNewScenePopup {false};
 
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};
