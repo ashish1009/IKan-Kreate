@@ -28,4 +28,15 @@ namespace IKan
     UUID parentHandle = 0;
     std::vector<UUID> children;
   };
+  
+  template<typename... Component>
+  struct ComponentGroup
+  {
+    
+  };
+  
+  // Stores all the components present in Engine
+  using AllComponents =
+  ComponentGroup<IDComponent, TagComponent>;
+
 } // namespace IKan
