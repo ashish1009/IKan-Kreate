@@ -400,6 +400,16 @@ namespace Kreator
         }
         break;
       }
+      case FolderExplorerAction::SaveScene:
+      {
+        m_sceneFilePath = explorerOutput;
+        m_sceneFilePath += SceneExtension;
+        
+        SaveScene();
+
+        break;
+      }
+
       case FolderExplorerAction::None:
       default:
         IK_ASSERT(false);
@@ -581,7 +591,7 @@ namespace Kreator
       }
       else
       {
-        UI::SetTooltip("Current scene (" + m_sceneFilePath + ")");
+        UI::SetTooltip("Current scene (" + m_sceneFilePath.string() + ")");
       }
       
       // Get the Project Name rectangle (Expanded by 10 to have good space)

@@ -194,12 +194,18 @@ if (!Project::GetActive()) return
   
   void KreatorLayer::OnEvent(Event& event)
   {
-    m_panels.OnEvent(event);
-    AssetEditorManager::OnEvent(event);
-    
-    if (m_viewport.panelMouseHover)
+    EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(KreatorLayer::OnKeyPressedEvent));
+
+    if (m_sceneState != SceneState::Play)
     {
-      m_editorCamera.OnEvent(event);
+      m_panels.OnEvent(event);
+      AssetEditorManager::OnEvent(event);
+      
+      if (m_viewport.panelMouseHover)
+      {
+        m_editorCamera.OnEvent(event);
+      }
     }
   }
   
@@ -223,6 +229,27 @@ if (!Project::GetActive()) return
     UI_EndMainWindowDocking();
     
     AssetEditorManager::OnImGuiRender();
+  }
+  
+  bool KreatorLayer::OnKeyPressedEvent(KeyPressedEvent& e)
+  {
+    bool leftCmd = Input::IsKeyPressed(Key::LeftSuper);
+    if (m_sceneState == SceneState::Edit)
+    {
+      // Scene -----------------------------------------------------------
+      if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right))
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::S:
+            SaveScene();
+            break;
+          default:
+            break;
+        }
+      }
+    }
+    return false;
   }
 
   void KreatorLayer::UpdateViewportSize()
@@ -393,7 +420,7 @@ if (!Project::GetActive()) return
   
   void KreatorLayer::SaveSceneAs()
   {
-    FolderExplorer::Save();
+    FolderExplorer::Save(Project::GetSceneDirectory());
     m_folderExplorerAction = FolderExplorerAction::SaveScene;
   }
   
@@ -409,7 +436,6 @@ if (!Project::GetActive()) return
       SaveSceneAs();
     }
   }
-
 
   const std::filesystem::path& KreatorLayer::GetClientResorucePath() const
   {

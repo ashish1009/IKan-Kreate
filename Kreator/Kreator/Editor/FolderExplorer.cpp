@@ -122,7 +122,7 @@ namespace Kreator
           UI::PushID();
           // Left Column ------------------
           UI::ScopedStyle rouning(ImGuiStyleVar_FrameRounding, 5);
-          ImGui::TableSetupColumn("Outliner", 0, 300.0f);
+          ImGui::TableSetupColumn("Outliner", 0, 200.0f);
           ImGui::TableSetupColumn("Directory Structure", ImGuiTableColumnFlags_WidthStretch);
           ImGui::TableNextRow();
           
@@ -404,7 +404,15 @@ namespace Kreator
         ImGui::InputTextWithHint("## FileName", "File Name", s_fileExplorerData->fileBuffer, 256);
         
         ImGui::SameLine();
-        UI::DrawRoundButton(" Save ", UI::Color::NiceThemeHighlight, 5);
+        if (UI::DrawRoundButton(" Save ", UI::Color::NiceThemeHighlight, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
+        {
+          ImGui::CloseCurrentPopup();
+          if (s_fileExplorerData->lastPopupFlag)
+          {
+            *s_fileExplorerData->lastPopupFlag = true;
+          }
+          s_fileExplorerData->returnPath = s_fileExplorerData->currentPath / s_fileExplorerData->fileBuffer;
+        }
       } // if Save
       else
       {
@@ -537,11 +545,18 @@ namespace Kreator
     s_fileExplorerData->extenstionToBeOpened = extenstionToBeOpened;
   }
   
-  void FolderExplorer::Save(bool *lastPopupFlag)
+  void FolderExplorer::Save(const std::filesystem::path& basePath, bool *lastPopupFlag)
   {
     s_fileExplorerData->popup = true;
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
-    s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    if (basePath != "" and std::filesystem::exists(basePath))
+    {
+      s_fileExplorerData->currentPath = basePath;
+    }
+    else
+    {
+      s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    }
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
     s_fileExplorerData->selectedPath = "";
     s_fileExplorerData->returnPath = "";

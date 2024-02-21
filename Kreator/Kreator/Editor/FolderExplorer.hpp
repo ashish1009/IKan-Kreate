@@ -31,7 +31,8 @@ namespace Kreator
     static void Open(const std::string& extenstion, bool *lastPopupFlag = nullptr);
     /// This function set the popup to show save file widgwet
     /// - Parameter lastPopupFlag: last popup flag pointer
-    static void Save(bool *lastPopupFlag = nullptr);
+    /// - Parameter basePath: Base start path
+    static void Save(const std::filesystem::path& basePath = "", bool *lastPopupFlag = nullptr);
     
     DELETE_ALL_CONSTRUCTORS(FolderExplorer);
     

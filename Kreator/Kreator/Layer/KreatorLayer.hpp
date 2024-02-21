@@ -71,6 +71,9 @@ namespace Kreator
 
   private:
     // Member functions ----------------------------------------------------------------------------------------------
+    /// This function handles the key press event
+    /// - Parameter e: key events
+    bool OnKeyPressedEvent(KeyPressedEvent& e);
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
 
@@ -160,7 +163,7 @@ namespace Kreator
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
     
     // Scene Data ----------------------------------------
-    std::string m_sceneFilePath{};
+    std::filesystem::path m_sceneFilePath{};
     enum class SceneState
     {
       Edit = 0, Play = 1, Pause = 2, Simulate = 3
