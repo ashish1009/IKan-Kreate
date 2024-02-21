@@ -429,7 +429,10 @@ if (!Project::GetActive()) return
     IK_PROFILE();
     if (!m_sceneFilePath.empty())
     {
-      IK_ASSERT(false, "Implement later");
+      IK_LOG_INFO("Kreator Layer", "Saving the scene: {0}", m_sceneFilePath.c_str());
+      SceneSerializer serializer(m_editorScene);
+      serializer.Serialize(m_sceneFilePath);
+      m_timeSinceLastSave = 0.0f;
     }
     else
     {

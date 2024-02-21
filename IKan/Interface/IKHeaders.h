@@ -84,6 +84,9 @@
 #include <Asset/Asset.hpp>
 #include <Asset/AssetManager.hpp>
 
+#include <Scene/Scene.hpp>
+#include <Scene/SceneSerializer.hpp>
+
 #include <Project/Project.hpp>
 #include <Project/ProjectSerializer.hpp>
 

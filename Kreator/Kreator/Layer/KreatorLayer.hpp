@@ -163,6 +163,7 @@ namespace Kreator
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
     
     // Scene Data ----------------------------------------
+    float m_timeSinceLastSave = 0.0f;
     std::filesystem::path m_sceneFilePath{};
     enum class SceneState
     {
