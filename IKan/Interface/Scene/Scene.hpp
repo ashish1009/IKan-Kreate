@@ -26,8 +26,23 @@ namespace IKan
     /// This is the default destructor of EnTT Scene
     ~Scene();
     
+    /// This function handle runtime start
+    void OnRuntimeStart();
+    /// This function handle runtime stop
+    void OnRuntimeStop();
+    
+    /// This function handle simulation start
+    void OnSimulationStart();
+    /// This function handle simulation stop
+    void OnSimulationStop();
+    
     /// This function closes the current scene
     void OnClose();
+    
+    // Fundamentals ------------------------------------------------------------------------------------------------
+    /// this function copy scene to target
+    /// - Parameter target: target scene
+    void CopyTo(Ref<Scene>& target);
 
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name

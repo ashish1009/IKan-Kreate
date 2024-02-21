@@ -110,6 +110,23 @@ namespace Kreator
     /// This function Opens the project from popup
     void OpenScene();
 
+    /// This function handle scene play
+    void OnScenePlay();
+    /// This function handle scene Stop
+    void OnSceneStop();
+    /// This function handle scene Pause
+    void OnScenePause();
+    /// This function handle scene Resume
+    void OnSceneResume();
+    /// This function handle scene simuation start
+    void OnSceneStartSimulation();
+    /// This function handle scene simuation ends
+    void OnSceneStopSimulation();
+    
+    /// This function clear the selected Entity
+    /// - Note: To be called inside Render Pass Begin end End
+    void ClearSelection();
+
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup
     void UI_WelcomePopup();
@@ -136,7 +153,7 @@ namespace Kreator
     void UI_Viewport();
     /// This function popup new scene widget
     void UI_NewScenePopup();
-
+    
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup {false};

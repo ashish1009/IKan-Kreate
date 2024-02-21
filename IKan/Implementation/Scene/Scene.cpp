@@ -35,8 +35,30 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Destroying {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
   }
+  
+  void Scene::OnRuntimeStart()
+  {
+    IK_PROFILE();
+  }
+  void Scene::OnRuntimeStop()
+  {
+    IK_PROFILE();
+  }
+  void Scene::OnSimulationStart()
+  {
+    IK_PROFILE();
+  }
+  void Scene::OnSimulationStop()
+  {
+    IK_PROFILE();
+  }
 
   void Scene::OnClose()
+  {
+    IK_PROFILE();
+  }
+  
+  void Scene::CopyTo(Ref<Scene> &target)
   {
     IK_PROFILE();
   }

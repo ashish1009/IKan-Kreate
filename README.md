@@ -93,7 +93,7 @@ Editor Application using IKan Library to create Games
 - Renderer Layer
   - Welcome Screen
   - Title Bar
-  - Open/New/Save - Project
+  - Open/New/Save - Project/Scene
   - Viewport
 - Editor
   - Folder Explorer
@@ -109,8 +109,6 @@ Editor Application using IKan Library to create Games
   - Asset Debugger
 
 ### Detailed Road Map
-- Renderer Layer
-  - Open/New/Save - Scene ((ECS))
 - UI
   - Guizmo (ECS)
 - Panels

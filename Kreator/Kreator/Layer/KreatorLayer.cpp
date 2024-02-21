@@ -503,6 +503,115 @@ if (!Project::GetActive()) return
     // Update Panel Scene
     m_panels.SetSceneContext(m_currentScene);
   }
+  
+  void KreatorLayer::OnScenePlay()
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Scene Set to Play");
+    
+    // 0. Clear all selected Entities
+    ClearSelection();
+
+    // 1. Update Scene state
+    m_sceneState = SceneState::Play;
+    
+    // 2. Create Runtime Scene
+    m_runtimeScene = Scene::Create();
+    m_editorScene->CopyTo(m_runtimeScene);
+    m_runtimeScene->OnRuntimeStart();
+    
+    // 3. Update current scene reference
+    m_currentScene = m_runtimeScene;
+    
+    // 4. Update Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void KreatorLayer::OnSceneStop()
+  {
+    IK_PROFILE();
+    RETURN_IF(!m_runtimeScene);
+    
+    IK_LOG_INFO("Kreator Layer", "Scene Set to Edit");
+    
+    // 0. Clear all selected Entities
+    ClearSelection();
+
+    // 1. Update Scene state
+    m_sceneState = SceneState::Edit;
+    
+    // 2. Stop Runtime Scene
+    m_runtimeScene->OnRuntimeStop();
+    m_runtimeScene.reset();
+    m_runtimeScene = nullptr;
+    
+    // 3. Update current scene reference
+    m_currentScene = m_editorScene;
+    
+    // 4. Update Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void KreatorLayer::OnScenePause()
+  {
+    IK_PROFILE();
+  }
+  
+  void KreatorLayer::OnSceneResume()
+  {
+    IK_PROFILE();
+  }
+  
+  void KreatorLayer::OnSceneStartSimulation()
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Scene Set for Simulation");
+    
+    // 0. Clear all selected Entities
+    ClearSelection();
+
+    // 1. Update Scene state
+    m_sceneState = SceneState::Simulate;
+    
+    // 2. Stop Runtime Scene
+    m_simulationScene = Scene::Create();
+    m_editorScene->CopyTo(m_simulationScene);
+    m_simulationScene->OnSimulationStart();
+    
+    // 3. Update current scene reference
+    m_currentScene = m_simulationScene;
+    
+    // 4. Update Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void KreatorLayer::OnSceneStopSimulation()
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Scene Simulation stopped");
+    
+    // 0. Clear all selected Entities
+    ClearSelection();
+    
+    // 1. Update Scene state
+    m_sceneState = SceneState::Edit;
+    
+    // 2. Stop Runtime Scene
+    m_simulationScene->OnRuntimeStop();
+    m_simulationScene.reset();
+    m_simulationScene = nullptr;
+    
+    // 3. Update current scene reference
+    m_currentScene = m_editorScene;
+    
+    // 4. Update Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void KreatorLayer::ClearSelection()
+  {
+    
+  }
 
   const std::filesystem::path& KreatorLayer::GetClientResorucePath() const
   {
