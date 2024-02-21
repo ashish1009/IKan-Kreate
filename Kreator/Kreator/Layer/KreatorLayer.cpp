@@ -65,8 +65,11 @@ if (!Project::GetActive()) return
     return *s_instance;
   }
 
-  KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath, const std::filesystem::path& iKanKreatePath, Ref<UserPreferences> userPreferences)
-  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_systemUserPath(systemUserPath), m_iKanKreatePath(iKanKreatePath), m_userPreferences(userPreferences), m_viewportRenderer("Viewport"), m_miniViewportRenderer("Mini Viewport")
+  KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath, 
+                             const std::filesystem::path& iKanKreatePath, Ref<UserPreferences> userPreferences)
+  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_systemUserPath(systemUserPath), m_iKanKreatePath(iKanKreatePath), 
+  m_userPreferences(userPreferences), m_viewportRenderer("Viewport"), m_miniViewportRenderer("Mini Viewport"),
+  m_editorCamera(45.0f, 1280.0f, 720.0f, 0.1f, 10000.0f)
   {
     IK_PROFILE();
     IK_ASSERT(!s_instance, "RendererLayer instance already created");
@@ -176,6 +179,10 @@ if (!Project::GetActive()) return
     // Update Data
     m_viewport.UpdateMousePos();
     
+    // Update Editor camera
+    m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
+    m_editorCamera.OnUpdate(ts);
+    
     // Render
     // TODO: Move to scene class
     {
@@ -188,6 +195,11 @@ if (!Project::GetActive()) return
   {
     m_panels.OnEvent(event);
     AssetEditorManager::OnEvent(event);
+    
+    if (m_viewport.panelMouseHover)
+    {
+      m_editorCamera.OnEvent(event);
+    }
   }
   
   void KreatorLayer::OnImGuiRender()
@@ -214,6 +226,7 @@ if (!Project::GetActive()) return
 
   void KreatorLayer::UpdateViewportSize()
   {
+    m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
     m_viewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);
     m_miniViewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);
     FixedCamera::SetViewport(m_viewport.width, m_viewport.height);
@@ -339,6 +352,12 @@ if (!Project::GetActive()) return
     m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
     UserPreferencesSerializer serializer(m_userPreferences);
     serializer.Serialize(m_userPreferences->filePath);
+  }
+  
+  void KreatorLayer::NewScene(const std::string& name)
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Creating new scene: {0}", name);
   }
 
   const std::filesystem::path& KreatorLayer::GetClientResorucePath() const

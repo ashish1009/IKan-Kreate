@@ -89,6 +89,11 @@ namespace Kreator
     /// - Parameter projectPath: Project to be pushed
     void PushProjectToRecentProjects(const std::filesystem::path& projectPath);
 
+    // Scene APIs ----------------------------------------
+    /// This function creates new scene
+    /// - Parameter name: Scene name
+    void NewScene(const std::string& name = "UntitledScene");
+
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup
     void UI_WelcomePopup();
@@ -141,6 +146,7 @@ namespace Kreator
     // Editor Data ---------------------------------------
     bool m_allowViewportCameraEvents = false;
     PanelManager m_panels;
+    EditorCamera m_editorCamera;
     enum class FolderExplorerAction
     {
       None, NewPreoject, OpenProject
@@ -154,6 +160,7 @@ namespace Kreator
       Edit = 0, Play = 1, Pause = 2, Simulate = 3
     };
     SceneState m_sceneState {SceneState::Edit};
+    Ref<Scene> m_currentScene, m_editorScene, m_runtimeScene, m_simulationScene;
 
     // View port Data ------------------------------------
     Viewport m_viewport;
