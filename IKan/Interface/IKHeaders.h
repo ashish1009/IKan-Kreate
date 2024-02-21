@@ -64,12 +64,15 @@
 #include <Renderer/TextRenderer.hpp>
 #include <Renderer/RendererStats.hpp>
 #include <Renderer/Mesh.hpp>
+#include <Renderer/SceneRenderer.hpp>
+
 #include <Renderer/Graphics/RendererAPI.hpp>
 #include <Renderer/Graphics/RendererContext.hpp>
 #include <Renderer/Graphics/Shader.hpp>
 #include <Renderer/Graphics/RendererBuffer.hpp>
 #include <Renderer/Graphics/Pipeline.hpp>
 #include <Renderer/Graphics/Texture.hpp>
+
 #include <Renderer/UI/Font.hpp>
 
 #include <Camera/SceneCamera.hpp>

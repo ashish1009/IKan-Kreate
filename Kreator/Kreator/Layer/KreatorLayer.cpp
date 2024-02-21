@@ -66,7 +66,7 @@ if (!Project::GetActive()) return
   }
 
   KreatorLayer::KreatorLayer(const std::filesystem::path& clientResourcePath, const std::filesystem::path& systemUserPath, const std::filesystem::path& iKanKreatePath, Ref<UserPreferences> userPreferences)
-  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_systemUserPath(systemUserPath), m_iKanKreatePath(iKanKreatePath), m_userPreferences(userPreferences)
+  : Layer("Kreator Renderer"), m_clientResourcePath(clientResourcePath), m_systemUserPath(systemUserPath), m_iKanKreatePath(iKanKreatePath), m_userPreferences(userPreferences), m_viewportRenderer("Viewport"), m_miniViewportRenderer("Mini Viewport")
   {
     IK_PROFILE();
     IK_ASSERT(!s_instance, "RendererLayer instance already created");

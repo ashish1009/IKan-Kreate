@@ -151,6 +151,7 @@ namespace Kreator
 
     // View port Data ------------------------------------
     Viewport m_viewport;
+    SceneRenderer m_viewportRenderer, m_miniViewportRenderer;
 
     // Single Instance -----------------------------------
     static KreatorLayer* s_instance;
