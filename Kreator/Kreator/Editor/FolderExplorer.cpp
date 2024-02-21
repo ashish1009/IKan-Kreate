@@ -531,11 +531,18 @@ namespace Kreator
     s_fileExplorerData->popupType = PopupType::Select;
   }
   
-  void FolderExplorer::Open(const std::string& extenstionToBeOpened, bool *lastPopupFlag)
+  void FolderExplorer::Open(const std::string& extenstionToBeOpened, const std::filesystem::path& basePath, bool *lastPopupFlag)
   {
     s_fileExplorerData->popup = true;
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
-    s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    if (basePath != "" and std::filesystem::exists(basePath))
+    {
+      s_fileExplorerData->currentPath = basePath;
+    }
+    else
+    {
+      s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    }
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
     s_fileExplorerData->selectedPath = "";
     s_fileExplorerData->returnPath = "";

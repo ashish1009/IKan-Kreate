@@ -241,6 +241,9 @@ if (!Project::GetActive()) return
       {
         switch (e.GetKeyCode())
         {
+          case Key::O:
+            OpenScene();
+            break;
           case Key::S:
             SaveScene();
             break;
@@ -440,6 +443,12 @@ if (!Project::GetActive()) return
     }
   }
   
+  void KreatorLayer::OpenScene()
+  {
+    FolderExplorer::Open(SceneExtension, Project::GetSceneDirectory());
+    m_folderExplorerAction = FolderExplorerAction::OpenScene;
+  }
+
   void KreatorLayer::OpenScene(const std::filesystem::path &filepath)
   {
     IK_PROFILE();

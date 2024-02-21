@@ -107,6 +107,8 @@ namespace Kreator
     void SaveSceneAs();
     /// This function Saves the scene
     void SaveScene();
+    /// This function Opens the project from popup
+    void OpenScene();
 
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup
@@ -163,7 +165,7 @@ namespace Kreator
     EditorCamera m_editorCamera;
     enum class FolderExplorerAction
     {
-      None, NewPreoject, OpenProject, SaveScene
+      None, NewPreoject, OpenProject, SaveScene, OpenScene
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
     

@@ -174,7 +174,7 @@ namespace Kreator
             if (button("Open Project", m_folderIcon, "Open an exisiting Kreator Project"))
             {
               ImGui::CloseCurrentPopup();
-              FolderExplorer::Open(ProjectExtension, &m_showWelcomePopup);
+              FolderExplorer::Open(ProjectExtension, "", &m_showWelcomePopup);
               m_folderExplorerAction = FolderExplorerAction::OpenProject;
             }
           }
@@ -409,6 +409,19 @@ namespace Kreator
 
         break;
       }
+      case FolderExplorerAction::OpenScene:
+      {
+        if (explorerOutput.extension() == SceneExtension)
+        {
+          OpenScene(explorerOutput);
+        }
+        else
+        {
+          IK_ASSERT(false, "Implement later");
+        }
+        break;
+      }
+
 
       case FolderExplorerAction::None:
       default:

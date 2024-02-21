@@ -28,7 +28,7 @@ namespace Kreator
     /// This function set the popup to show open file widgwet
     /// - Parameter lastPopupFlag: last popup flag pointer
     /// - Parameter extenstion: externsion to be opened
-    static void Open(const std::string& extenstion, bool *lastPopupFlag = nullptr);
+    static void Open(const std::string& extenstion, const std::filesystem::path& basePath = "", bool *lastPopupFlag = nullptr);
     /// This function set the popup to show save file widgwet
     /// - Parameter lastPopupFlag: last popup flag pointer
     /// - Parameter basePath: Base start path
