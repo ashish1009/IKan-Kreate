@@ -40,7 +40,5 @@ namespace IKan
     virtual Ref<Texture> GetDepthAttachment() const = 0;
     /// This function returns the Color Attachment iDs
     virtual const std::vector<Ref<Texture>>& GetColorAttachments() const = 0;
-    /// This function returns the pixel id (RED_ID) index stored in fremebuffer
-    virtual uint32_t GetPixelIdIndex() const = 0;
   };
 } // namespace IKan

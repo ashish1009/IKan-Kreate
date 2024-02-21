@@ -14,6 +14,16 @@ namespace IKan
   {
     IK_PROFILE();
     IK_LOG_INFO(LogModule::SceneRenderer, "Creating Scene renderer for '{0}'", m_debugName);
+    
+    // Viewport Pass ----
+    FrameBufferSpecification fbSpec;
+    fbSpec.debugName = "Final Pass";
+    fbSpec.attachments =
+    {
+      FrameBufferAttachments::TextureFormat::RGBA8,
+      FrameBufferAttachments::TextureFormat::Depth24Stencil
+    };
+    m_viewportRenderPass = FrameBufferFactory::Create(fbSpec);
   }
   
   SceneRenderer::~SceneRenderer()

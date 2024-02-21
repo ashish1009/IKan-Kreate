@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Renderer/Graphics/FrameBuffer.hpp"
+
 namespace IKan
 {
   /// This class is responsible for Rendering Scene in Viewport
@@ -29,5 +31,7 @@ namespace IKan
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_debugName;
     uint32_t m_viewportWidth, m_viewportHeight;
+    
+    Ref<FrameBuffer> m_viewportRenderPass;
   };
 } // namespace IKan
