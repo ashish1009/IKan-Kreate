@@ -17,6 +17,8 @@
 namespace IKan
 {
   class Entity;
+  class TransformComponent;
+
   using EntityMap = std::unordered_map<UUID, Entity>;
   static const std::string SceneExtension = ".ikscene";
 
@@ -102,6 +104,29 @@ namespace IKan
     /// This function duplicate the entity
     /// - Parameter entity: entity to be duplicated
     [[nodiscard]] Entity DuplicateEntity(Entity entity);
+
+    /// This function parent set the parent of entity
+    /// - Parameters:
+    ///   - entity: Current entity
+    ///   - parent: parent entity
+    void ParentEntity(Entity entity, Entity parent);
+    /// This function removes the parent relation
+    /// - Parameter entity: parent entity
+    void UnparentEntity(Entity entity, bool convertToWorldSpace = true);
+
+    /// This function convert the entity to local space
+    /// - Parameter entity: Entity handle
+    void ConvertToLocalSpace(Entity entity);
+    /// This function convert the entity to world space
+    /// - Parameter entity: Entity handle
+    void ConvertToWorldSpace(Entity entity);
+    
+    /// This function return the world transform from entity
+    /// - Parameter entity: enitty handle
+    glm::mat4 GetWorldSpaceTransformMatrix(Entity entity);
+    /// This function return the world transform component
+    /// - Parameter entity: enitty handle
+    TransformComponent GetWorldSpaceTransform(Entity entity);
 
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name

@@ -231,9 +231,169 @@ namespace IKan
   
   Entity Scene::DuplicateEntity(Entity entity)
   {
-    IK_ASSERT(false);
+    IK_PROFILE();
+    auto parentNewEntity = [&entity, scene = this](Entity newEntity)
+    {
+      if (auto parent = entity.GetParent(); parent)
+      {
+        newEntity.SetParentUUID(parent.GetUUID());
+        parent.Children().push_back(newEntity.GetUUID());
+      }
+    };
+    
+    Entity newEntity;
+    if (entity.HasComponent<TagComponent>())
+    {
+      newEntity = CreateEntity(entity.GetComponent<TagComponent>().tag);
+    }
+    else
+    {
+      newEntity = CreateEntity("Empty Entity");
+    }
+    
+    CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    
+    auto childIds = entity.Children();
+    for (auto childId : childIds)
+    {
+      Entity childDuplicate = DuplicateEntity(GetEntityWithUUID(childId));
+      
+      // At this point childDuplicate is a child of entity, we need to remove it from that entity
+      UnparentEntity(childDuplicate, false);
+      
+      childDuplicate.SetParentUUID(newEntity.GetUUID());
+      newEntity.Children().push_back(childDuplicate.GetUUID());
+    }
+    
+    parentNewEntity(newEntity);
+    
+    return newEntity;
   }
   
+  void Scene::ParentEntity(Entity entity, Entity parent)
+  {
+    IK_PROFILE();
+    // If new parent is already child of 'entity'
+    if (parent.IsDescendantOf(entity))
+    {
+      // Unparent the 'parent' first
+      UnparentEntity(parent);
+      
+      // If Current 'entity' already have some parent
+      Entity newParent = TryGetEntityWithUUID(entity.GetParentUUID());
+      if (newParent)
+      {
+        // Unperent current entity
+        UnparentEntity(entity);
+        
+        // Set the 'newParent' as parent of 'parent' which was child of 'entity'
+        ParentEntity(parent, newParent);
+      }
+    }
+    else
+    {
+      // Get the previous parent of 'entity'
+      Entity previousParent = TryGetEntityWithUUID(entity.GetParentUUID());
+      
+      // If Current 'entity' already have some parent
+      if (previousParent)
+      {
+        // Unperent current entity
+        UnparentEntity(entity);
+      }
+    }
+    
+    // Update parent UUID of 'entity'
+    entity.SetParentUUID(parent.GetUUID());
+    // Update children of 'parent'
+    parent.Children().push_back(entity.GetUUID());
+    
+    // Update local space of 'entity'
+    ConvertToLocalSpace(entity);
+  }
+  
+  void Scene::UnparentEntity(Entity entity, bool convertToWorldSpace)
+  {
+    IK_PROFILE();
+    // Get the previous parent of 'entity'
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    RETURN_IF (!parent)
+    
+    // Remove the entity from 'parent's' children
+    auto& parentChildren = parent.Children();
+    parentChildren.erase(std::remove(parentChildren.begin(), parentChildren.end(), entity.GetUUID()), parentChildren.end());
+    
+    if (convertToWorldSpace)
+    {
+      ConvertToWorldSpace(entity);
+    }
+    
+    entity.SetParentUUID(0);
+  }
+
+  void Scene::ConvertToLocalSpace(Entity entity)
+  {
+    IK_PROFILE();
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    
+    RETURN_IF (!parent)
+    
+    auto& transform = entity.GetTransform();
+    glm::mat4 parentTransform = GetWorldSpaceTransformMatrix(parent);
+    glm::mat4 localTransform = parentTransform * transform.Transform();
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(localTransform, position, rotation, scale);
+    transform.UpdatePosition(position);
+    transform.UpdateScale(scale);
+    transform.UpdateRotation(rotation);
+  }
+  
+  void Scene::ConvertToWorldSpace(Entity entity)
+  {
+    IK_PROFILE();
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    
+    RETURN_IF (!parent)
+    
+    glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
+    auto& entityTransform = entity.GetTransform();
+    
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    entityTransform.UpdatePosition(position);
+    entityTransform.UpdateScale(scale);
+    entityTransform.UpdateRotation(rotation);
+  }
+  
+  glm::mat4 Scene::GetWorldSpaceTransformMatrix(Entity entity)
+  {
+    IK_PROFILE();
+    glm::mat4 transform(1.0f);
+    
+    Entity parent = TryGetEntityWithUUID(entity.GetParentUUID());
+    if (parent)
+    {
+      transform = GetWorldSpaceTransformMatrix(parent);
+    }
+    return transform * entity.GetTransform().Transform();
+  }
+  
+  // TODO: Definitely cache this at some point
+  TransformComponent Scene::GetWorldSpaceTransform(Entity entity)
+  {
+    IK_PROFILE();
+    glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
+    TransformComponent transformComponent = entity.GetComponent<TransformComponent>();
+    
+    glm::vec3 position, scale, rotation;
+    Utils::Math::DecomposeTransform(transform, position, rotation, scale);
+    transformComponent.UpdatePosition(position);
+    transformComponent.UpdateScale(scale);
+    transformComponent.UpdateRotation(rotation);
+    
+    return transformComponent;
+  }
+
   void Scene::SetName(const std::string &name)
   {
     m_name = name;
