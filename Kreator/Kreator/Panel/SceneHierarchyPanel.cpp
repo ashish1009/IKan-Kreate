@@ -734,6 +734,7 @@ namespace Kreator
         const auto& metadata = AssetManager::GetMetadata(currentMeshAsset);
         smc.mesh = metadata.handle;
       }
+      UI::EndPropertyGrid();
     }, s_gearIcon);
   }
   
@@ -744,12 +745,25 @@ namespace Kreator
     {
       newEntity = m_context->CreateEntity("Empty Entity");
     }
+    ImGui::Separator();
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
   {
     if (UI::BeginPopup("AddComponentPanel"))
     {
+      ImGui::Separator();
+      if (!m_selectionContext.At(0).HasComponent<MeshComponent>())
+      {
+        if (ImGui::MenuItem("Mesh"))
+        {
+          auto& meshComp = m_selectionContext.At(0).AddComponent<MeshComponent>();
+          meshComp.mesh = 0;
+          ImGui::CloseCurrentPopup();
+        }
+        ImGui::Separator();
+      }
+
       UI::EndPopup();
     }
   }
