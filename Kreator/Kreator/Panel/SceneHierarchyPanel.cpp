@@ -165,7 +165,7 @@ namespace Kreator
 
       // Headers
       {
-        static const float edgeOffset = 4.0f;
+        static constexpr float edgeOffset = 4.0f;
         static const ImU32 colActive = UI::ColorWithMultipliedValue(UI::Color::GroupHeader, 1.2f);
         UI::ScopedColorStack headerColor(ImGuiCol_HeaderHovered, colActive, ImGuiCol_HeaderActive, colActive);
         
@@ -191,7 +191,7 @@ namespace Kreator
         // We draw selection and hover for table rows manually
         UI::ScopedColorStack entitySelection(ImGuiCol_Header, IM_COL32_DISABLE, ImGuiCol_HeaderHovered, IM_COL32_DISABLE, ImGuiCol_HeaderActive, IM_COL32_DISABLE);
         
-        for (auto entity : m_context->GetRegistry().view<IDComponent, RelationshipComponent>())
+        for (const auto& entity : m_context->GetRegistry().view<IDComponent, RelationshipComponent>())
         {
           Entity e(entity, m_context.get());
           if (e.GetParentUUID() == 0)
@@ -215,6 +215,7 @@ namespace Kreator
   
   void SceneHierarchyPanel::DrawEntityNode(Entity entity, const std::string &searchFilter)
   {
+  
   }
   
   void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func)
@@ -261,5 +262,32 @@ namespace Kreator
     }
     
     m_context->DestroyEntity(entity);
+  }
+  
+  bool SceneHierarchyPanel::SearchEntityRecursive(Entity entity, const std::string_view& searchFilter, const uint32_t maxSearchDepth, uint32_t currentDepth)
+  {
+    if (searchFilter.empty())
+    {
+      return false;
+    }
+    
+    for (auto child : entity.Children())
+    {
+      Entity e = m_context->GetEntityWithUUID(child);
+      if (e.HasComponent<TagComponent>())
+      {
+        if (Kreator::UI::IsMatchingSearch(e.GetComponent<TagComponent>().tag, searchFilter))
+        {
+          return true;
+        }
+      }
+      
+      bool found = SearchEntityRecursive(e, searchFilter, maxSearchDepth, currentDepth + 1);
+      if (found)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 } // namespace Kreator
