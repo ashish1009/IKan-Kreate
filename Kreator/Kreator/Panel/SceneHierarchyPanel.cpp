@@ -405,6 +405,27 @@ namespace Kreator
     {
       ImGui::PopStyleColor();
     }
+    
+    // Drag & Drop -------------------------
+    if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
+    {
+      ImGui::Text(entity.GetComponent<TagComponent>().tag.c_str());
+      ImGui::SetDragDropPayload("scene_entity_hierarchy", &entity, sizeof(Entity));
+      ImGui::EndDragDropSource();
+    }
+    
+    if (ImGui::BeginDragDropTarget())
+    {
+      const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("scene_entity_hierarchy", ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
+      
+      if (payload)
+      {
+        Entity& droppedEntity = *(Entity*)payload->Data;
+        m_context->ParentEntity(droppedEntity, entity);
+      }
+      
+      ImGui::EndDragDropTarget();
+    }
 
     // Draw children ------------------------
     if (opened)
