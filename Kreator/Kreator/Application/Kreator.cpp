@@ -10,6 +10,7 @@
 #include "Editor/UserPreferences.hpp"
 #include "Editor/FolderExplorer.hpp"
 #include "Editor/ApplicationSettings.hpp"
+#include "Panel/SceneHierarchyPanel.hpp"
 #include "UI/ImGuiWidget.hpp"
 
 namespace Kreator
@@ -71,6 +72,7 @@ namespace Kreator
     FolderExplorer::Initialize();
     UI::Widgets::Initialize();
     ApplicationSettingsSerializer::Initialize();
+    SceneHierarchyPanel::Initialize();
   }
   
   void KreatorApp::OnShutdown()
@@ -81,7 +83,8 @@ namespace Kreator
     // Shutdown the Kreator Modules -------------------------------------------------------------
     FolderExplorer::Shutdown();
     UI::Widgets::Shutdown();
-
+    SceneHierarchyPanel::Shutdown();
+    
     // Destroy and Pop the Rendere Layer --------------------------------------------------------
     PopLayer(m_kreatorLayer);
     m_kreatorLayer.reset();

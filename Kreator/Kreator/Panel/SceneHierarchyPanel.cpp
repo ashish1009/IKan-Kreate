@@ -32,16 +32,8 @@ namespace Kreator
       ImGui::GetCursorScreenPos().y + height
     };
     
-    UI::SetCursorPos(ImVec2(windowPadding.x, windowPadding.y));
     auto* drawList = ImGui::GetWindowDrawList();
-    if (ImGui::IsWindowHovered())
-    {
-      drawList->AddRectFilled(titlebarMin, titlebarMax, UI::Color::Background);
-    }
-    else
-    {
-      drawList->AddRectFilled(titlebarMin, titlebarMax, UI::Color::Titlebar);
-    }
+    drawList->AddRectFilled(titlebarMin, titlebarMax, UI::Color::Titlebar);
     
     // Search box
     if (searchBuffer)
@@ -231,14 +223,6 @@ namespace Kreator
         ImGui::EndTable();
       } // Begin table
     }  // Table Scope
-  }
-  
-  void SceneHierarchyPanel::DrawComponents(Entity entity)
-  {
-    IK_PERFORMANCE("SceneHierarchyPanel::DrawComponents");
-    
-    static char searchedString[128];
-    DrawTitleBar(searchedString);
   }
   
   void SceneHierarchyPanel::DrawEntityNode(Entity entity, const std::string &searchFilter)
@@ -477,12 +461,96 @@ namespace Kreator
     }
   }
   
+  void SceneHierarchyPanel::DrawComponents(Entity entity)
+  {
+    IK_PERFORMANCE("SceneHierarchyPanel::DrawComponents");
+    
+    static constexpr float roundingVal = 5.0f;
+    UI::ScopedStyle rounding (ImGuiStyleVar_FrameRounding, roundingVal);
+
+    static char searchedString[128];
+    DrawTitleBar(searchedString);
+    
+    ImGui::AlignTextToFramePadding();
+    auto ID = entity.GetComponent<IDComponent>().ID;
+    ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+    UI::ShiftCursor(4.0f, 4.0f);
+
+    // + Button Data for Input Text Size and position
+    bool isHoveringID = false;
+    static const std::string buttonString = " ADD        ";
+    ImVec2 textSize = ImGui::CalcTextSize(buttonString.c_str());
+
+    static const float pad = 4.0f;
+    const float iconWidth = ImGui::GetFrameHeight() - pad * 2.0f;
+    const float iconHeight = iconWidth;
+
+    // Tag --------------------------------------
+    if (entity.HasComponent<TagComponent>())
+    {
+      auto& tag = entity.GetComponent<TagComponent>().tag;
+      char buffer[256];
+      memset(buffer, 0, 256);
+      memcpy(buffer, tag.c_str(), tag.length());
+      ImGui::PushItemWidth(contentRegionAvailable.x - textSize.x - iconWidth - pad * 2.0f);
+      
+      UI::ScopedStyle frameBorder(ImGuiStyleVar_FrameBorderSize, 0.0f);
+      UI::ScopedColor frameColour(ImGuiCol_FrameBg, UI::Color::Background);
+      
+      if (ImGui::InputText("##Tag", buffer, 256))
+      {
+        tag = std::string(buffer);
+      }
+      UI::DrawItemActivityOutline(roundingVal, false, UI::Color::Accent);
+      
+      isHoveringID = ImGui::IsItemHovered();
+      
+      ImGui::PopItemWidth();
+    }
+    
+    float lineHeight = GImGui->Font->FontSize + GImGui->Style.FramePadding.y * 2.0f;
+    textSize.x += GImGui->Style.FramePadding.x * 2.0f;
+    {
+      UI::ScopedColorStack addCompButtonColours(ImGuiCol_Button, IM_COL32(70, 70, 70, 200),
+                                                ImGuiCol_ButtonHovered, IM_COL32(70, 70, 70, 255),
+                                                ImGuiCol_ButtonActive, IM_COL32(70, 70, 70, 150));
+      
+      ImGui::SameLine(contentRegionAvailable.x - (textSize.x + GImGui->Style.FramePadding.x));
+      if (ImGui::Button(buttonString.c_str(), ImVec2(textSize.x + 4.0f, lineHeight + 2.0f)))
+      {
+        ImGui::OpenPopup("AddComponentPanel");
+      }
+      
+      ImVec2 iconPos = ImGui::GetItemRectMax();
+      iconPos.x -= iconWidth + pad;
+      iconPos.y -= iconHeight + pad;
+      ImGui::SetCursorScreenPos(iconPos);
+      UI::ShiftCursor(-5.0f, -1.0f);
+      
+      UI::Image(s_plusIcon, ImVec2(iconWidth, iconHeight));
+    }
+    ImGui::Spacing();
+    ImGui::Spacing();
+    ImGui::Spacing();
+    
+    AddComponentPopup();
+    ImGui::Separator();
+  }
+  
   void SceneHierarchyPanel::DrawCreateEntityMenu(Entity parent)
   {
     Entity newEntity;
     if (ImGui::MenuItem("Empty Entity"))
     {
       newEntity = m_context->CreateEntity("Empty Entity");
+    }
+  }
+  
+  void SceneHierarchyPanel::AddComponentPopup()
+  {
+    if (UI::BeginPopup("AddComponentPanel"))
+    {
+      UI::EndPopup();
     }
   }
   

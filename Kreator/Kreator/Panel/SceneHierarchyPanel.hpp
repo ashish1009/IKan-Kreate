@@ -60,6 +60,9 @@ namespace Kreator
     /// This function create menue for entiyt
     void DrawCreateEntityMenu(Entity parent = {});
 
+    /// This function shows the add component popup
+    void AddComponentPopup();
+
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle
     void OnExternalEntityDestroyed(const Entity& entity);
