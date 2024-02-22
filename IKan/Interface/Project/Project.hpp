@@ -49,6 +49,9 @@ namespace IKan
     /// This funcion update auto save scene time interval
     /// - Parameter time: auto save time interval
     void UpdateAutoSaveSceneTimeInterval(int32_t time);
+    /// This funcion update auto save scene time interval
+    /// - Parameter path: scene file path
+    void UpdateStartupScene(const std::filesystem::path path);
 
     /// This function returns the active project
     static Ref<Project> GetActive();

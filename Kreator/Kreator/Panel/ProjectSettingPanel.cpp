@@ -10,7 +10,7 @@
 namespace Kreator
 {
   static bool s_serializeProject = false;
-  
+
   void ProjectSettingsPanel::OnImGuiRender(bool& isOpen)
   {
     IK_PERFORMANCE("ProjectSettingsPanel::OnImGuiRender");
@@ -68,6 +68,16 @@ namespace Kreator
       {
         m_project->UpdateAutoSaveSceneTimeInterval(autoSaveIntervalSeconds);
         s_serializeProject = true;
+      }
+
+      std::filesystem::path startScene = m_project->GetConfig().startScene;
+      if (UI::PropertyAssetReference<IKan::Scene>("Startup Scene", m_defaultScene))
+      {
+        const auto& metadata = AssetManager::GetMetadata(m_defaultScene);
+        {
+          m_project->UpdateStartupScene(metadata.filePath);
+          s_serializeProject = true;
+        }
       }
 
       UI::EndPropertyGrid();
