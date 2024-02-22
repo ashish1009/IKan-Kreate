@@ -55,6 +55,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Font Loader
   - Text Renderer
   - Mesh
+  - Secne Renderer
 - UI
   - ImGui UI Helper
 - Camera
@@ -67,19 +68,19 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Panel Manager
 - Asset
   - Asset Manager
-
-### Detailed Road Map
-- Renderer
-  - Secne Renderer (ECS)
-  - Material (Asset)
-  - Light
-  - Shadow
-  - IBL
-- ECS (Panels)
+- ECS 
   - Entity
   - Component
   - Scene
   - Serializer
+
+### Detailed Road Map
+- Renderer
+  - Material (Asset)
+  - Light
+  - Shadow
+  - IBL
+- ECS 
   - Script Manager
 - Physics (ECS and Editor Panel)
   - 3D Physics
