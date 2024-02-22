@@ -1,3 +1,46 @@
 Scene: BallGame.ikscene
 Entities:
-  []
+  - Entity: 7963600985172376654
+    TagComponent:
+      Tag: Empty Entity
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Enable: true
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+  - Entity: 8015913124601739112
+    TagComponent:
+      Tag: Empty Entity
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Enable: true
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+  - Entity: 15187982166488362079
+    TagComponent:
+      Tag: Empty Entity
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Enable: true
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+  - Entity: 17704662197927797508
+    TagComponent:
+      Tag: Empty Entity
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Enable: true
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]

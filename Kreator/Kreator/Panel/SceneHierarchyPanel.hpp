@@ -80,6 +80,7 @@ namespace Kreator
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
     
+    // Entity Data
     SelectionContext m_selectionContext;
     Entity m_lastSelectedEntity;
     std::function<void(SelectionContext)> m_selectionChangedCallback, m_entityDeletedCallback;
