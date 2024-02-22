@@ -57,6 +57,25 @@ namespace Kreator
   
   void SceneHierarchyPanel::OnImGuiRender(bool& isOpen)
   {
+    IK_PERFORMANCE("SceneHierarchyPanel::OnImGuiRender");
+    {
+      UI::ScopedStyle padding(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+      ImGui::Begin("Scene Hierarchy", &isOpen);
+    }
+    
+    if (m_context)
+    {
+      ImGui::End();
+      
+      {
+        UI::ScopedStyle windowPadding(ImGuiStyleVar_WindowPadding, ImVec2(2.0, 4.0f));
+        ImGui::Begin("Properties");
+      }
+    }
+    
+    {
+      ImGui::End();
+    }
   }
   
   void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func)

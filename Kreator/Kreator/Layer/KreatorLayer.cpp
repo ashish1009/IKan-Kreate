@@ -9,6 +9,7 @@
 #include "Panel/KreatorConsolePanel.hpp"
 #include "Panel/ContentBrowserPanel.hpp"
 #include "Panel/ProjectSettingPanel.hpp"
+#include "Panel/SceneHierarchyPanel.hpp"
 #include "Panel/AssetPanel.hpp"
 #include "Editor/AssetViewer.hpp"
 #include "Editor/FolderExplorer.hpp"
@@ -26,6 +27,7 @@ if (!Project::GetActive()) return
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 #define PROJECT_SETTING_PANEL_ID "ProjectSetting"
 #define ASSET_MANAGER_PANEL_ID "Assets"
+#define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
 
   namespace KreatorUtils
   {
@@ -153,6 +155,11 @@ if (!Project::GetActive()) return
     m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
     m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Setting", true);
     m_panels.AddPanel<AssetPanel>(ASSET_MANAGER_PANEL_ID, "Assets", true);
+    
+    Ref<SceneHierarchyPanel> sceneHierarchyPanel = m_panels.AddPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID, "Scene Hierarchy", true, m_editorScene);
+    sceneHierarchyPanel->SetSelectionChangedCallback([this](SelectionContext entities) { OnEntitySelected(entities); });
+    sceneHierarchyPanel->SetEntityDeletedCallback([this](SelectionContext entities) { OnEntityDeleted(entities); });
+
 #if DEBUG == 1
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
