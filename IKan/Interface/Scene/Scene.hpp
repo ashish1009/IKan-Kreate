@@ -148,6 +148,13 @@ namespace IKan
     DELETE_COPY_MOVE_CONSTRUCTORS(Scene);
 
   private:
+    // Member Functions ---------------------------------------------------------------------------------------------
+    /// This function renders the scene insice pass
+    /// - Parameters:
+    ///   - renderer: Scene renderer instance
+    ///   - isEditing: flag is editing
+    void RenderScene(SceneRenderer& renderer, bool isEditing);
+
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
     std::string m_name {};

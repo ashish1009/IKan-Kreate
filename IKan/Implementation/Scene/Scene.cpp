@@ -77,42 +77,59 @@ namespace IKan
   void Scene::OnRenderEditor(const EditorCamera &camera, SceneRenderer& renderer)
   {
     IK_PERFORMANCE("Scene::OnRenderEditor");
+    
+    // Render 3D Scene
+    renderer.BeginScene({ camera, camera.GetPosition(), camera.GetViewMatrix(), camera.GetNearClip(), camera.GetFarClip(), camera.GetVerticalFOV()});
+    RenderScene(renderer, true);
+    renderer.EndScene();
   }
   void Scene::OnRenderRuntime(TimeStep ts, SceneRenderer& renderer)
   {
     IK_PERFORMANCE("Scene::OnRenderRuntime");
+    IK_ASSERT(false);
   }
   
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& camera, SceneRenderer& renderer)
   {
     IK_PERFORMANCE("Scene::OnRenderSimulation");
+    IK_ASSERT(false);
+  }
+  void Scene::RenderScene(SceneRenderer& renderer, bool isEditing)
+  {
+    IK_PERFORMANCE("Scene::RenderScene");
   }
   
   void Scene::OnRuntimeStart()
   {
     IK_PROFILE();
+    IK_ASSERT(false);
   }
   void Scene::OnRuntimeStop()
   {
     IK_PROFILE();
+    IK_ASSERT(false);
   }
   void Scene::OnSimulationStart()
   {
     IK_PROFILE();
+    IK_ASSERT(false);
   }
   void Scene::OnSimulationStop()
   {
     IK_PROFILE();
+    IK_ASSERT(false);
   }
   
   void Scene::OnClose()
   {
     IK_PROFILE();
+    IK_ASSERT(false);
   }
   
   void Scene::CopyTo(Ref<Scene> &target)
   {
     IK_PROFILE();
+    IK_ASSERT(false);
   }
   
   void Scene::SetViewportSize(uint32_t width, uint32_t height)

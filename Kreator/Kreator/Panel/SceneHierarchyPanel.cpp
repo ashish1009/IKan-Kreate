@@ -65,6 +65,7 @@ namespace Kreator
     
     if (m_context)
     {
+      RenderHierarchy();
       ImGui::End();
       
       {
@@ -76,6 +77,11 @@ namespace Kreator
     {
       ImGui::End();
     }
+  }
+  
+  void SceneHierarchyPanel::RenderHierarchy()
+  {
+    IK_PERFORMANCE("SceneHierarchyPanel::RenderHierarchy");
   }
   
   void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func)
@@ -123,6 +129,4 @@ namespace Kreator
     
     m_context->DestroyEntity(entity);
   }
-  
-
 } // namespace Kreator

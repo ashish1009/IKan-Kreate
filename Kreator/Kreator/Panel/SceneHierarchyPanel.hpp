@@ -47,6 +47,9 @@ namespace Kreator
 
   private:
     // Member Functions ---------------------------------------------------------------------------------------------
+    /// This function render the hierachy of scene
+    void RenderHierarchy();
+
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle
     void OnExternalEntityDestroyed(const Entity& entity);

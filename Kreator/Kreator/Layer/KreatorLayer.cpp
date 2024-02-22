@@ -665,11 +665,14 @@ if (!Project::GetActive()) return
   }
   void KreatorLayer::ClearSelectedEntity()
   {
+    IK_PROFILE();
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity({});
     IK_ASSERT(false)
   }
   void KreatorLayer::SetSelectedEntity(const Entity& entity)
   {
-    IK_ASSERT(false)
+    IK_PROFILE();
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity);
   }
   bool KreatorLayer::IsEntitySelected(Entity e) const
   {
