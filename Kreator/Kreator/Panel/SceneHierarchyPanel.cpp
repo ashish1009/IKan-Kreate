@@ -201,6 +201,13 @@ namespace Kreator
         }
       }
       
+      // Right click option
+      if (ImGui::BeginPopupContextWindow(nullptr, ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverItems))
+      {
+        DrawCreateEntityMenu({});
+        ImGui::EndPopup();
+      }
+
       ImGui::EndTable();
     } // Begin Table
   }
@@ -215,7 +222,16 @@ namespace Kreator
   
   void SceneHierarchyPanel::DrawEntityNode(Entity entity, const std::string &searchFilter)
   {
+    
+  }
   
+  void SceneHierarchyPanel::DrawCreateEntityMenu(Entity parent)
+  {
+    Entity newEntity;
+    if (ImGui::MenuItem("Empty Entity"))
+    {
+      newEntity = m_context->CreateEntity("Empty Entity");
+    }
   }
   
   void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func)
