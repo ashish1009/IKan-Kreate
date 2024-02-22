@@ -687,6 +687,9 @@ namespace Kreator
     AddComponentPopup();
     ImGui::Separator();
     
+    // For Asset Selector
+    static UI::PropertyAssetReferenceSettings settings;
+    
     DrawComponent<TransformComponent>("Transform", entity, [](TransformComponent& component)
                                       {
       UI::ScopedStyle spacing (ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
@@ -718,6 +721,20 @@ namespace Kreator
       UI::ShiftCursorY(18.0f);
 
     }, s_gearIcon, true, false);
+    
+    DrawComponent<MeshComponent>("Mesh", entity, [&](MeshComponent& smc)
+                                 {
+      UI::ScopedStyle headerRounding(ImGuiStyleVar_FrameRounding, 12);
+      UI::BeginPropertyGrid();
+      
+      Ref<Mesh> mesh = AssetManager::GetAsset<Mesh>(smc.mesh);
+      AssetHandle currentMeshAsset = smc.mesh;
+      if (UI::PropertyAssetReference<Mesh>("Mesh", currentMeshAsset, nullptr, settings))
+      {
+        const auto& metadata = AssetManager::GetMetadata(currentMeshAsset);
+        smc.mesh = metadata.handle;
+      }
+    }, s_gearIcon);
   }
   
   void SceneHierarchyPanel::DrawCreateEntityMenu(Entity parent)
