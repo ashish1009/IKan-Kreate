@@ -79,6 +79,14 @@ namespace IKan
     glm::vec3 position{0.0f}, rotation{0.0f}, scale{1.0f};
   };
   
+  struct MeshComponent
+  {
+    bool enable = true;
+    AssetHandle mesh;
+    
+    MeshComponent(AssetHandle m = AssetHandle()) : mesh(m) {}
+  };
+  
   template<typename... Component>
   struct ComponentGroup
   {
@@ -87,6 +95,6 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, TagComponent, TransformComponent>;
+  ComponentGroup<IDComponent, TagComponent, TransformComponent, MeshComponent>;
 
 } // namespace IKan
