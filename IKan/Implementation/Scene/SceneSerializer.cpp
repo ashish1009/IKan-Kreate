@@ -148,7 +148,20 @@ namespace IKan {
       
       out << YAML::EndMap; // TransformComponent
     }
-
+    
+    if (entity.HasComponent<MeshComponent>())
+    {
+      out << YAML::Key << "MeshComponent";
+      out << YAML::BeginMap; // MeshComponent
+      
+      auto& meshComponent = entity.GetComponent<MeshComponent>();
+      
+      out << YAML::Key << "Enable" << YAML::Value << meshComponent.enable;
+      out << YAML::Key << "MeshHandle" << YAML::Value << meshComponent.mesh;
+      
+      out << YAML::EndMap; // MeshComponent
+    }
+    
     out << YAML::EndMap; // Entity
   }
   
@@ -205,6 +218,15 @@ namespace IKan {
         }
         transform.UpdateScale(transformComponent["Scale"].as<glm::vec3>());
       }
-    }
+      
+      // MeshComponent ----------------------------------------------------------------------------------------------
+      auto meshComponent = entity["MeshComponent"];
+      if (meshComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<MeshComponent>();
+        component.enable = meshComponent["Enable"].as<bool>();
+        component.mesh = meshComponent["MeshHandle"].as<AssetHandle>();
+      }
+    } // For each entity
   }
 } // namespace IKan
