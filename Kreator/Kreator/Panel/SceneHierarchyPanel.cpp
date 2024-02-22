@@ -19,10 +19,78 @@ namespace Kreator
     ImGui::Spacing();
   }
   
+  template<typename T, typename UIFunction>
+  static void DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction, const Ref<Texture>& settingsIcon, bool defaultOpen = false, bool canBeRemoved = true)
+  {
+    UI::ScopedColor header(ImGuiCol_Header, UI::Color::Background);
+    UI::ScopedColor headerHovered(ImGuiCol_HeaderHovered, UI::Color::TitleBarDark);
+    UI::ScopedColor headerActive(ImGuiCol_HeaderActive, UI::Color::Background);
+    
+    if (entity.HasComponent<T>())
+    {
+      //  This fixes an issue where the first "+" button would display the "Remove" buttons for ALL components on an Entity.
+      //  This is due to ImGui::TreeNodeEx only pushing the id for it's children if it's actually open
+      ImGui::PushID((void*)typeid(T).hash_code());
+      auto& component = entity.GetComponent<T>();
+      ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+      
+      bool open = UI::PropertyGridHeader(name);
+      bool rightClicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
+      float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+      
+      bool resetValues = false;
+      bool removeComponent = false;
+      
+      ImGui::SameLine(contentRegionAvailable.x - lineHeight);
+      if (ImGui::InvisibleButton("##options", ImVec2{ lineHeight, lineHeight }) or rightClicked)
+      {
+        ImGui::OpenPopup("ComponentSettings");
+      }
+      UI::DrawButtonImage(settingsIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+      
+      if (UI::BeginPopup("ComponentSettings"))
+      {
+        if (ImGui::MenuItem("Reset"))
+          resetValues = true;
+        
+        if (canBeRemoved)
+        {
+          if (ImGui::MenuItem("Remove component"))
+          {
+            removeComponent = true;
+          }
+        }
+        
+        UI::EndPopup();
+      }
+      
+      if (open)
+      {
+        uiFunction(component);
+        UI::PropertyGridHeaderEnd();
+      }
+      
+      if (removeComponent or resetValues)
+      {
+        entity.RemoveComponent<T>();
+      }
+      
+      if (resetValues)
+      {
+        entity.AddComponent<T>();
+      }
+      
+      if(!open)
+      {
+        UI::ShiftCursorY(-(ImGui::GetStyle().ItemSpacing.y + 1.0f));
+      }
+      ImGui::PopID();
+    }
+  }
+  
   static void DrawTitleBar(char* searchBuffer)
   {
     static const float height = 30.0f;
-    const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
     
     // Draw the title Bar rectangle ---------------------------------------------------
     const ImVec2 titlebarMin = ImGui::GetCursorScreenPos();
@@ -466,7 +534,6 @@ namespace Kreator
     IK_PERFORMANCE("SceneHierarchyPanel::DrawComponents");
     
     static constexpr float roundingVal = 5.0f;
-    UI::ScopedStyle rounding (ImGuiStyleVar_FrameRounding, roundingVal);
 
     static char searchedString[128];
     DrawTitleBar(searchedString);
@@ -488,6 +555,7 @@ namespace Kreator
     // Tag --------------------------------------
     if (entity.HasComponent<TagComponent>())
     {
+      UI::ScopedStyle rounding (ImGuiStyleVar_FrameRounding, roundingVal);
       auto& tag = entity.GetComponent<TagComponent>().tag;
       char buffer[256];
       memset(buffer, 0, 256);
@@ -535,6 +603,11 @@ namespace Kreator
     
     AddComponentPopup();
     ImGui::Separator();
+    
+    DrawComponent<TransformComponent>("Transform", entity, [](TransformComponent& component)
+                                      {
+
+    }, s_gearIcon, true, false);
   }
   
   void SceneHierarchyPanel::DrawCreateEntityMenu(Entity parent)

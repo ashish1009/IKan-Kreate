@@ -11,6 +11,17 @@
 
 namespace IKan
 {
+  // ADDING A NEW COMPONENT
+  // ----------------------
+  // If you add a new type of component, there are several pieces of code that need updating:
+  //  1) Add new component here (obviously).
+  //  2) Create Proper Copy and Move Constructors if needed as scene might copy the entities
+  //  3) Add in AllComponents Macro
+  //  4) Add in Scene CopyTo Function
+  //  5) Update Scene::DuplicateEntity() to deal with the new component in whatever way is appropriate.
+  //  6) Update SceneSerializer to (de)serialize the new component.
+  //  7) Update SceneHierarchy Panel
+
   struct IDComponent
   {
     UUID ID = 0;
@@ -31,7 +42,6 @@ namespace IKan
   
   struct TransformComponent
   {
-    bool enable = true;
     enum Axis : uint8_t
     {
       X, Y, Z
