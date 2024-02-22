@@ -16,6 +16,8 @@
 
 namespace IKan
 {
+  class Entity;
+  using EntityMap = std::unordered_map<UUID, Entity>;
   static const std::string SceneExtension = ".ikscene";
 
   class Scene : public Asset
@@ -106,6 +108,9 @@ namespace IKan
     uint32_t m_numEntities = 0;
     int32_t m_maxEntityID = -1;
     
+    // Entity ---------------------------
+    EntityMap m_entityIDMap;
+
     friend class SceneSerializer;
     friend class Entity;
   };

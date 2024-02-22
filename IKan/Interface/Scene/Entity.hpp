@@ -11,6 +11,7 @@
 
 namespace IKan
 {
+  class TransformComponent;
   class Entity
   {
   public:
@@ -24,6 +25,11 @@ namespace IKan
     /// This is the Default Destructor for Entity
     ~Entity() = default;
     
+    /// This function returns transform comp of entity
+    TransformComponent& GetTransform();
+    /// This function returns transform comp of entity
+    const glm::mat4& GetTransform() const;
+
     /// This function returns name of entity
     std::string& GetName();
     /// This function returns name of entity

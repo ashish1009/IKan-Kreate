@@ -18,6 +18,15 @@ namespace IKan
     
   }
   
+  TransformComponent& Entity::GetTransform()
+  {
+    return m_scene->m_registry.get<TransformComponent>(m_entityHandle);
+  }
+  const glm::mat4& Entity::GetTransform() const
+  {
+    return m_scene->m_registry.get<TransformComponent>(m_entityHandle).Transform();
+  }
+  
   std::string& Entity::GetName()
   {
     return HasComponent<TagComponent>() ? GetComponent<TagComponent>().tag : NoName;
