@@ -214,6 +214,12 @@ namespace Kreator
     };
     SceneState m_sceneState {SceneState::Edit};
     Ref<Scene> m_currentScene, m_editorScene, m_runtimeScene, m_simulationScene;
+    struct SelectedEntity
+    {
+      Entity entity;
+      float distance = 0.0f;
+    };
+    std::vector<SelectedEntity> m_selectionContext;
 
     // View port Data ------------------------------------
     Viewport m_viewport;

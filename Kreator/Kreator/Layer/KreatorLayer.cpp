@@ -678,7 +678,21 @@ if (!Project::GetActive()) return
   
   void KreatorLayer::OnEntitySelected(const SelectionContext& entities)
   {
-    IK_ASSERT(false)
+    RETURN_IF (entities.Size() == 0)
+    
+    m_selectionContext.clear();
+    m_currentScene->ClearSelectedEntity();
+    for (const auto& entity : entities)
+    {
+      SelectedEntity selection;
+      selection.entity = entity;
+      
+      m_selectionContext.push_back(selection);
+      if (m_currentScene != m_runtimeScene)
+      {
+        m_currentScene->SetSelectedEntity(entity);
+      }
+    }
   }
   void KreatorLayer::OnEntityDeleted(const SelectionContext& entities)
   {
