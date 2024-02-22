@@ -435,7 +435,7 @@ if (!Project::GetActive()) return
     // Create or open Scene
     if (!project->GetConfig().startScene.empty())
     {
-      IK_ASSERT(false, "Implement later");
+      OpenScene((Project::GetAssetDirectory() / project->GetConfig().startScene).string());
     }
     else
     {
