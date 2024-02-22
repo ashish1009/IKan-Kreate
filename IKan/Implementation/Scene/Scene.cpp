@@ -129,7 +129,33 @@ namespace IKan
   void Scene::CopyTo(Ref<Scene> &target)
   {
     IK_PROFILE();
-    IK_ASSERT(false);
+    std::unordered_map<UUID, entt::entity> enttMap;
+    auto idComponents = m_registry.view<IDComponent>();
+    for (auto entity : idComponents)
+    {
+      auto uuid = m_registry.get<IDComponent>(entity).ID;
+      auto name = m_registry.get<TagComponent>(entity).tag;
+      Entity e = target->CreateEntityWithID(uuid, name);
+      enttMap[uuid] = e.m_entityHandle;
+    }
+    
+    CopyComponent<TagComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<RelationshipComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<TransformComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<MeshComponent>(target->m_registry, m_registry, enttMap);
+    
+    // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
+    // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
+    target->m_registry.sort<IDComponent>([&target](const auto lhs, const auto rhs)
+                                         {
+      auto lhsEntity = target->m_entityIDMap.find(lhs.ID);
+      auto rhsEntity = target->m_entityIDMap.find(rhs.ID);
+      return static_cast<uint32_t>(lhsEntity->second) < static_cast<uint32_t>(rhsEntity->second);
+    });
+    
+    target->m_viewportWidth = m_viewportWidth;
+    target->m_viewportHeight = m_viewportHeight;
+    target->m_name = m_name;
   }
   
   void Scene::SetViewportSize(uint32_t width, uint32_t height)
@@ -252,7 +278,8 @@ namespace IKan
     }
     
     CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
-    
+    CopyComponentIfExists<MeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+
     auto childIds = entity.Children();
     for (auto childId : childIds)
     {
