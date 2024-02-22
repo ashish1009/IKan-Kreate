@@ -18,6 +18,51 @@ namespace IKan
     
   }
   
+  void Entity::SetParent(Entity parent)
+  {
+    // Get the current Parent
+    Entity currentParent = GetParent();
+    RETURN_IF (currentParent == parent)
+    
+    // If this entity already have a parent then remove this child from existing parent
+    if (currentParent)
+    {
+      currentParent.RemoveChild(*this);
+    }
+    
+    // Updating the Parent UUID as 'parent' entities UUID
+    SetParentUUID(parent.GetUUID());
+    
+    if (parent)
+    {
+      // Add current entity in parent's children
+      auto& parentChildren = parent.Children();
+      UUID uuid = GetUUID();
+      if (std::find(parentChildren.begin(), parentChildren.end(), uuid) == parentChildren.end())
+      {
+        parentChildren.emplace_back(GetUUID());
+      }
+    }
+  }
+  
+  bool Entity::RemoveChild(Entity child)
+  {
+    UUID childId = child.GetUUID();
+    std::vector<UUID>& children = Children();
+    auto it = std::find(children.begin(), children.end(), childId);
+    if (it != children.end())
+    {
+      children.erase(it);
+      return true;
+    }
+    return false;
+  }
+  
+  void Entity::SetParentUUID(UUID parent)
+  {
+    GetComponent<RelationshipComponent>().parentHandle = parent;
+  }
+  
   TransformComponent& Entity::GetTransform()
   {
     return m_scene->m_registry.get<TransformComponent>(m_entityHandle);
@@ -39,6 +84,19 @@ namespace IKan
   UUID Entity::GetUUID() const
   {
     return GetComponent<IDComponent>().ID;
+  }
+  
+  Entity Entity::GetParent()
+  {
+    return m_scene->TryGetEntityWithUUID(GetParentUUID());
+  }
+  UUID Entity::GetParentUUID() const
+  {
+    return GetComponent<RelationshipComponent>().parentHandle;
+  }
+  std::vector<UUID>& Entity::Children()
+  {
+    return GetComponent<RelationshipComponent>().children;
   }
   
   Entity::operator uint32_t () const

@@ -87,6 +87,7 @@
 #include <Scene/Scene.hpp>
 #include <Scene/SceneSerializer.hpp>
 #include <Scene/Entity.hpp>
+#include <Scene/Components.hpp>
 
 #include <Project/Project.hpp>
 #include <Project/ProjectSerializer.hpp>
