@@ -76,6 +76,32 @@ namespace IKan
     /// this function copy scene to target
     /// - Parameter target: target scene
     void CopyTo(Ref<Scene>& target);
+    /// This function updates the viewport of Scene
+    /// - Parameters:
+    ///   - width: width of view port
+    ///   - height: width of view port
+    void SetViewportSize(uint32_t width, uint32_t height);
+
+    // Entity Manager ------------------------------------------------------------------------------------------------
+    /// This function creates an unique entity with UUID
+    /// - Parameter name: Name of entity
+    [[nodiscard]] Entity CreateEntity(const std::string& name);
+    /// This function creates an unique entity with UUID
+    /// - Parameters:
+    ///   - parent: Parent Entity Handle
+    ///   - name: Name of entity
+    [[nodiscard]] Entity CreateChildEntity(Entity parent, const std::string& name);
+    /// This function creates an unique entity with UUID
+    /// - Parameters:
+    ///   - uuid: Unique ID of entity
+    ///   - name: Name of entity
+    [[nodiscard]] Entity CreateEntityWithID(UUID uuid, const std::string& name);
+    /// This function destriy the entity
+    /// - Parameter entity: entity handle
+    void DestroyEntity(Entity entity);
+    /// This function duplicate the entity
+    /// - Parameter entity: entity to be duplicated
+    [[nodiscard]] Entity DuplicateEntity(Entity entity);
 
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name

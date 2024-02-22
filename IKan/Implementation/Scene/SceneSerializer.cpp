@@ -208,4 +208,5 @@ namespace IKan {
         transform.UpdateScale(transformComponent["Scale"].as<glm::vec3>());
       }
     }
+  }
 } // namespace IKan
