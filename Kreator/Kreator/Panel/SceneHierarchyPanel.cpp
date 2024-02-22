@@ -154,19 +154,12 @@ namespace Kreator
   {
     IK_PERFORMANCE("SceneHierarchyPanel::RenderHierarchy");
     
-    // Frame padding
-    const float edgeOffset = 4.0f;
+    static const float edgeOffset = 4.0f;
     UI::ShiftCursorX(edgeOffset * 3.0f);
     UI::ShiftCursorY(edgeOffset * 2.0f);
     
-    // Items stretched to width of panel
-    ImGui::SetNextItemWidth(ImGui::GetContentRegionAvail().x - edgeOffset * 3.0f);
-    
-    // Search box
     static char searchedString[128];
-    Kreator::UI::Widgets::SearchWidget(searchedString);
-    
-    ImGui::Spacing();
+    DrawSearchBar(searchedString);
     
     // Entity list ------------------------------------------------------------------------------------------------
     UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(4.0f, 0.0f));
@@ -398,6 +391,9 @@ namespace Kreator
       {
         UI::ScopedColor colText(ImGuiCol_Text, UI::Color::Text);
         UI::ScopedColorStack entitySelection(ImGuiCol_Header, UI::Color::GroupHeader, ImGuiCol_HeaderHovered, UI::Color::GroupHeader, ImGuiCol_HeaderActive, UI::Color::GroupHeader);
+        
+        // Select current entity
+        SetSelectedEntity(entity);
         
         // Empty Space Right click menu
         DrawCreateEntityMenu(entity);

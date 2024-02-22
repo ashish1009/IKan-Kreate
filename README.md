@@ -133,6 +133,7 @@ Editor Application using IKan Library to create Games
   - v4.2.4.2 : Content Browser
   - v4.2.4.3 : Info Panels
   - v4.3.4.4 : Debug Panels
+  - v5.0.5.0 : ECS 
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)
