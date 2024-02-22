@@ -696,14 +696,23 @@ if (!Project::GetActive()) return
   }
   void KreatorLayer::OnEntityDeleted(const SelectionContext& entities)
   {
-    IK_ASSERT(false)
+    IK_PROFILE();
+    RETURN_IF (m_selectionContext.size() == 0 or !entities.Find(m_selectionContext[0].entity))
+    ClearSelectedEntity();
   }
+  
   void KreatorLayer::ClearSelectedEntity()
   {
     IK_PROFILE();
     m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity({});
-    IK_ASSERT(false)
+    
+    if (m_currentScene)
+    {
+      m_currentScene->ClearSelectedEntity();
+    }
+    m_selectionContext.clear();
   }
+  
   void KreatorLayer::SetSelectedEntity(const Entity& entity)
   {
     IK_PROFILE();

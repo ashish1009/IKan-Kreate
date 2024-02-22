@@ -365,6 +365,32 @@ namespace Kreator
     const bool opened = UI::TreeNodeWithIcon(nullptr, ImGui::GetID(strID.c_str()), flags, name, nullptr);
     bool entityDeleted = false;
     
+    if (ImGui::BeginPopupContextItem())
+    {
+      {
+        UI::ScopedColor colText(ImGuiCol_Text, UI::Color::Text);
+        UI::ScopedColorStack entitySelection(ImGuiCol_Header, UI::Color::GroupHeader, ImGuiCol_HeaderHovered, UI::Color::GroupHeader, ImGuiCol_HeaderActive, UI::Color::GroupHeader);
+        
+        // Empty Space Right click menu
+        DrawCreateEntityMenu(entity);
+        
+        // Selected Entity Right click
+        if (m_selectionContext.Size() == 1)
+        {
+          ImGui::Separator();
+          if (ImGui::MenuItem("Delete"))
+          {
+            entityDeleted = true;
+          }
+          if (ImGui::MenuItem("Duplicate"))
+          {
+            SetSelectedEntity(m_context->DuplicateEntity(m_selectionContext.At(0)));
+          }
+        }
+      }
+      ImGui::EndPopup();
+    }
+
     // <> column 2 -------------------------------------------------------------------------------------------------
     ImGui::TableNextColumn();
     

@@ -195,8 +195,40 @@ namespace IKan
   
   void Scene::DestroyEntity(Entity entity)
   {
-    IK_ASSERT(false);
+    IK_PROFILE();
+    IK_LOG_TRACE(LogModule::Scene, "Deleting Entity from Scene");
+    IK_LOG_TRACE(LogModule::Scene, "  Name    {0}", entity.GetComponent<TagComponent>().tag.c_str());
+    IK_LOG_TRACE(LogModule::Scene, "  Handle  {0}", (uint32_t)entity);
+    IK_LOG_TRACE(LogModule::Scene, "  ID      {0}", (uint32_t)entity.GetComponent<IDComponent>().ID);
+    IK_LOG_TRACE(LogModule::Scene, "  Number of entities Added in Scene  {0}", m_numEntities);
+    IK_LOG_TRACE(LogModule::Scene, "  Max ID given to entity             {0}", m_maxEntityID);
+    
+    if (m_onEntityDestroyedCallback)
+    {
+      m_onEntityDestroyedCallback(entity);
+    }
+    
+    // Delete all children
+    for (size_t i = 0; i < entity.Children().size(); i++)
+    {
+      auto childId = entity.Children()[i];
+      Entity child = GetEntityWithUUID(childId);
+      DestroyEntity(child);
+    }
+    
+    // Delete This child from its parent if exist
+    auto parent = entity.GetParent();
+    if (parent)
+    {
+      parent.RemoveChild(entity);
+    }
+    
+    m_entityIDMap.erase(entity.GetUUID());
+    m_registry.destroy(entity.m_entityHandle);
+    
+    --m_numEntities;
   }
+  
   Entity Scene::DuplicateEntity(Entity entity)
   {
     IK_ASSERT(false);
