@@ -195,4 +195,133 @@ namespace Kreator::UI
     return clicked;
   }
 
+  bool Widgets::AssetSearchPopup(const char* ID, AssetType assetType, AssetHandle& selected, bool allowMemoryOnlyAssets,
+                                 bool* cleared, const char* hint /*= "Search Assets"*/, const ImVec2& size)
+  {
+    bool modified = false;
+    UI::ScopedColor popupBG(ImGuiCol_PopupBg, UI::ColorWithMultipliedValue(UI::Color::Background, 1.6f));
+    
+    AssetHandle current = selected;
+    ImGui::SetNextWindowSize({ size.x, 0.0f });
+    static bool grabFocus = true;
+    if (UI::BeginPopup(ID, ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoResize))
+    {
+      if (ImGui::GetCurrentWindow()->Appearing)
+      {
+        grabFocus = true;
+        memset(s_assetSearchString, 0, MAX_ASSET_INPUT);
+      }
+      
+      // Search widget
+      UI::ShiftCursor(0.0f, 2.0f);
+      ImGui::SetNextItemWidth(ImGui::GetWindowWidth() - ImGui::GetCursorPosX() * 2.0f);
+      SearchWidget(s_assetSearchString, MAX_ASSET_INPUT, hint, &grabFocus);
+      
+      bool searching = s_assetSearchString[0] != 0;
+      // Clear property button
+      if (cleared != nullptr)
+      {
+        UI::ScopedColorStack buttonColours(
+                                           ImGuiCol_Button, UI::ColorWithMultipliedValue(UI::Color::Muted, 1.0f),
+                                           ImGuiCol_ButtonHovered, UI::ColorWithMultipliedValue(UI::Color::Muted, 1.2f),
+                                           ImGuiCol_ButtonActive, UI::ColorWithMultipliedValue(UI::Color::Muted, 0.9f));
+        
+        UI::ScopedStyle border(ImGuiStyleVar_FrameBorderSize, 0.0f);
+        UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 10);
+        
+        ImGui::SetCursorPosX(0);
+        ImGui::PushItemFlag(ImGuiItemFlags_NoNav, searching);
+        
+        UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - ImGui::CalcTextSize("CLEAR").x / 2);
+        if (ImGui::Button("CLEAR"))
+        {
+          *cleared = true;
+          modified = true;
+        }
+        
+        ImGui::PopItemFlag();
+      }
+      
+      
+      // List of assets
+      {
+        UI::ScopedColor listBoxBg(ImGuiCol_FrameBg, IM_COL32_DISABLE);
+        UI::ScopedColor listBoxBorder(ImGuiCol_Border, IM_COL32_DISABLE);
+        
+        ImGuiID listID = ImGui::GetID("##SearchListBox");
+        if (ImGui::BeginListBox("##SearchListBox", ImVec2(-FLT_MIN, 0.0f)))
+        {
+          bool forwardFocus = false;
+          
+          ImGuiContext& g = *GImGui;
+          if (g.NavJustMovedToId != 0)
+          {
+            if (g.NavJustMovedToId == listID)
+            {
+              forwardFocus = true;
+              
+              // ActivateItem moves keyboard navigation focuse inside of the window
+              ImGui::ActivateItem(listID);
+              ImGui::SetKeyboardFocusHere(1);
+            }
+          }
+          
+          const auto& assetRegistry = AssetManager::GetAssetRegistry();
+          std::vector<std::string> visitedAsset;
+          for (auto it = assetRegistry.cbegin(); it != assetRegistry.cend(); it++)
+          {
+            const auto& [path, metadata] = *it;
+            
+            if (allowMemoryOnlyAssets != metadata.isMemoryAsset)
+            {
+              continue;
+            }
+            
+            if (metadata.type != assetType)
+            {
+              continue;
+            }
+            
+            const std::string assetName = metadata.isMemoryAsset ? metadata.filePath.string() : metadata.filePath.stem().string();
+            if (std::find(visitedAsset.begin(), visitedAsset.end(), assetName) != visitedAsset.end())
+            {
+              continue;
+            }
+            visitedAsset.emplace_back(assetName);
+            
+            if (s_assetSearchString[0] != 0 and !UI::IsMatchingSearch(assetName, s_assetSearchString))
+            {
+              continue;
+            }
+            
+            bool isSelected = (current == metadata.handle);
+            if (ImGui::Selectable(assetName.c_str(), isSelected))
+            {
+              current = metadata.handle;
+              selected = metadata.handle;
+              modified = true;
+            }
+            
+            if (forwardFocus)
+            {
+              forwardFocus = false;
+            }
+            else if (isSelected)
+            {
+              ImGui::SetItemDefaultFocus();
+            }
+          }
+          ImGui::EndListBox();
+        }
+      }
+      
+      if (modified)
+      {
+        ImGui::CloseCurrentPopup();
+      }
+      
+      UI::EndPopup();
+    }
+    return modified;
+  }
 } // namespace Kreator::UI

@@ -29,6 +29,10 @@ namespace Kreator::UI
                              bool* grabFocus = nullptr, float roundingVal = 10);
     /// This function renders the Setting Button
     static bool OptionsButton();
+    static bool AssetSearchPopup(const char* ID, AssetType assetType, AssetHandle& selected, bool allowMemoryOnlyAssets,
+                                 bool* cleared = nullptr, const char* hint = "Search Assets",
+                                 const ImVec2& size = ImVec2{ 250.0f, 350.0f });
+
 
   private:
     inline static Ref<Texture> s_searchIcon;
