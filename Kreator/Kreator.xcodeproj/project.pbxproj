@@ -29,6 +29,8 @@
 		B2C0B6E32B79DD370015A277 /* libminizip.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2C0B6DE2B79DD210015A277 /* libminizip.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B2C0B6E42B79DD370015A277 /* libpugixml.1.13.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B2C0BA142B7E0F5D0015A277 /* UserPreferences.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0BA122B7E0F5D0015A277 /* UserPreferences.cpp */; };
+		B2EB0F8C2B87057800DF1407 /* SceneHierarchyPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F8A2B87057800DF1407 /* SceneHierarchyPanel.cpp */; };
+		B2EB0F8F2B87062000DF1407 /* SelectionContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F8D2B87062000DF1407 /* SelectionContext.cpp */; };
 		B2ED5C5F2B723E25007A7F36 /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */; };
 		B2ED5C9A2B723F76007A7F36 /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2ED5C992B723F76007A7F36 /* libIKan.a */; };
 		B2ED5E1A2B738B23007A7F36 /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5E182B738B23007A7F36 /* Kreator.cpp */; };
@@ -86,6 +88,10 @@
 		B2C0B6DE2B79DD210015A277 /* libminizip.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libminizip.1.dylib; path = ../IKan/Vendors/Assimp/lib/libminizip.1.dylib; sourceTree = "<group>"; };
 		B2C0BA122B7E0F5D0015A277 /* UserPreferences.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UserPreferences.cpp; sourceTree = "<group>"; };
 		B2C0BA132B7E0F5D0015A277 /* UserPreferences.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UserPreferences.hpp; sourceTree = "<group>"; };
+		B2EB0F8A2B87057800DF1407 /* SceneHierarchyPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneHierarchyPanel.cpp; sourceTree = "<group>"; };
+		B2EB0F8B2B87057800DF1407 /* SceneHierarchyPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneHierarchyPanel.hpp; sourceTree = "<group>"; };
+		B2EB0F8D2B87062000DF1407 /* SelectionContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SelectionContext.cpp; sourceTree = "<group>"; };
+		B2EB0F8E2B87062000DF1407 /* SelectionContext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SelectionContext.hpp; sourceTree = "<group>"; };
 		B2ED5C5B2B723E25007A7F36 /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
 		B2ED5C992B723F76007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -144,6 +150,8 @@
 				B248B9682B84B1B900B9EC40 /* ProjectSettingPanel.hpp */,
 				B28CDFA62B84CFCF0075DE7D /* AssetPanel.cpp */,
 				B28CDFA72B84CFCF0075DE7D /* AssetPanel.hpp */,
+				B2EB0F8A2B87057800DF1407 /* SceneHierarchyPanel.cpp */,
+				B2EB0F8B2B87057800DF1407 /* SceneHierarchyPanel.hpp */,
 			);
 			path = Panel;
 			sourceTree = "<group>";
@@ -161,6 +169,8 @@
 				B248B95F2B84ABF500B9EC40 /* ApplicationSettings.hpp */,
 				B28CDFB72B85C5590075DE7D /* AssetViewer.cpp */,
 				B28CDFB82B85C5590075DE7D /* AssetViewer.hpp */,
+				B2EB0F8D2B87062000DF1407 /* SelectionContext.cpp */,
+				B2EB0F8E2B87062000DF1407 /* SelectionContext.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -297,6 +307,7 @@
 			files = (
 				B248B8FC2B7F881D00B9EC40 /* FolderExplorer.cpp in Sources */,
 				B2ED5E912B74A190007A7F36 /* KreatorLayer.cpp in Sources */,
+				B2EB0F8F2B87062000DF1407 /* SelectionContext.cpp in Sources */,
 				B248B8F02B7E3EED00B9EC40 /* ImGuiTheme.cpp in Sources */,
 				B2C0BA142B7E0F5D0015A277 /* UserPreferences.cpp in Sources */,
 				B248B8EC2B7E3B4500B9EC40 /* KreatorLayerUI.cpp in Sources */,
@@ -308,6 +319,7 @@
 				B28CDFB92B85C5590075DE7D /* AssetViewer.cpp in Sources */,
 				B248B9602B84ABF500B9EC40 /* ApplicationSettings.cpp in Sources */,
 				B248B9692B84B1B900B9EC40 /* ProjectSettingPanel.cpp in Sources */,
+				B2EB0F8C2B87057800DF1407 /* SceneHierarchyPanel.cpp in Sources */,
 				B248B9162B835A7700B9EC40 /* ImGuiWidget.cpp in Sources */,
 				B248B8FF2B83388800B9EC40 /* ContentBrowserItem.cpp in Sources */,
 				B248B8F32B7F19B600B9EC40 /* ImGuiUtils.cpp in Sources */,

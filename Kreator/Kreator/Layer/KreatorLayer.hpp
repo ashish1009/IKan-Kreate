@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Editor/UserPreferences.hpp"
+#include "Editor/SelectionContext.hpp"
 
 using namespace IKan;
 
@@ -123,9 +124,22 @@ namespace Kreator
     /// This function handle scene simuation ends
     void OnSceneStopSimulation();
     
+    // Scene Panel Manager Callbacks ----------------------
+    /// This function handles the entity selection
+    /// - Parameter entities: entities
+    void OnEntitySelected(const SelectionContext& entities);
+    /// This function handles the entity deletion
+    /// - Parameter entities: entities
+    void OnEntityDeleted(const SelectionContext& entities);
     /// This function clear the selected Entity
     /// - Note: To be called inside Render Pass Begin end End
-    void ClearSelection();
+    void ClearSelectedEntity();
+    /// This function set the selected entity
+    /// - Parameter entity: Selected entity
+    void SetSelectedEntity(const Entity& entity);
+    /// This function checks is entity is selected
+    /// - Parameter e: Entity to be checked
+    bool IsEntitySelected(Entity e) const;
 
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup
