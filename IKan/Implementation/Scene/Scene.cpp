@@ -176,6 +176,15 @@ namespace IKan
     return entity;
   }
   
+  void Scene::DestroyEntity(Entity entity)
+  {
+    IK_ASSERT(false);
+  }
+  Entity Scene::DuplicateEntity(Entity entity)
+  {
+    IK_ASSERT(false);
+  }
+  
   void Scene::SetName(const std::string &name)
   {
     m_name = name;
