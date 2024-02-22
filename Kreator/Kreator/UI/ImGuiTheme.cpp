@@ -155,7 +155,7 @@ namespace Kreator::UI
     colors[ImGuiCol_PlotHistogramHovered]   = ImVec4(0.00f, 1.60f, 0.00f, 1.0f);
     
     // Table
-    colors[ImGuiCol_TableHeaderBg]          = ImGui::ColorConvertU32ToFloat4(UI::Color::GroupHeader);
+    colors[ImGuiCol_TableHeaderBg]          = ImGui::ColorConvertU32ToFloat4(UI::Color::BackgroundPopup);
     colors[ImGuiCol_TableBorderLight]       = ImGui::ColorConvertU32ToFloat4(UI::Color::BackgroundDark);
     colors[ImGuiCol_TableBorderStrong]      = ImVec4(1.0f, 0.0f, 0.0f, 1.0f);
     colors[ImGuiCol_TableRowBg]             = ImGui::ColorConvertU32ToFloat4(UI::Color::Titlebar);

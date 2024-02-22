@@ -52,6 +52,11 @@ namespace Kreator
     /// This function draw selected component
     /// - Parameter entity: entity handle
     void DrawComponents(Entity entity);
+    /// This funciton renders the Entity Hierarchy
+    /// - Parameters:
+    ///   - entity entity handle
+    ///   - searchFilter swearch filter
+    void DrawEntityNode(Entity entity, const std::string& searchFilter);
 
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle

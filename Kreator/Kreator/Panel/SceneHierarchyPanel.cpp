@@ -16,6 +16,7 @@ namespace Kreator
     UI::ShiftCursor(contentRegionAvail / 3, 5);
     ImGui::SetNextItemWidth(contentRegionAvail / 3);
     Kreator::UI::Widgets::SearchWidget(searchBuffer);
+    ImGui::Spacing();
   }
   
   static void DrawTitleBar(char* searchBuffer)
@@ -140,8 +141,68 @@ namespace Kreator
     
     static char searchedString[128];
     DrawTitleBar(searchedString);
+
+    UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(4.0f, 0.0f));
+
+    // Alternate row Color
+    static const ImU32 colRowAlt = UI::ColorWithMultipliedValue(UI::Color::BackgroundDark, 1.3f);
+    UI::ScopedColor tableBGAlt(ImGuiCol_TableRowBgAlt, colRowAlt);
+
+    // Scrollable Table uses child window internally
+    UI::ScopedColor bgCol(ImGuiCol_ChildBg,  UI::ColorWithMultipliedValue(UI::Color::Titlebar, 0.8));
+    static ImGuiTableFlags tableFlags = ImGuiTableFlags_NoPadInnerX
+    | ImGuiTableFlags_Resizable
+    | ImGuiTableFlags_Reorderable
+    | ImGuiTableFlags_ScrollY
+    | ImGuiTableFlags_RowBg
+    | ImGuiTableFlags_Sortable;
     
-    ImGui::Spacing();
+    const int numColumns = 2;
+    if (ImGui::BeginTable("##SceneHierarchy-Table", numColumns, tableFlags, ImVec2(ImGui::GetContentRegionAvail())))
+    {
+      ImGui::TableSetupColumn("Label");
+      ImGui::TableSetupColumn("Visibility");
+
+      // Headers
+      {
+        static const float edgeOffset = 4.0f;
+        static const ImU32 colActive = UI::ColorWithMultipliedValue(UI::Color::GroupHeader, 1.2f);
+        UI::ScopedColorStack headerColor(ImGuiCol_HeaderHovered, colActive, ImGuiCol_HeaderActive, colActive);
+        
+        ImGui::TableSetupScrollFreeze(ImGui::TableGetColumnCount(), 1);
+        
+        ImGui::TableNextRow(ImGuiTableRowFlags_Headers, 22.0f);
+        for (int column = 0; column < ImGui::TableGetColumnCount(); column++)
+        {
+          ImGui::TableSetColumnIndex(column);
+          const char* columnName = ImGui::TableGetColumnName(column);
+          UI::ScopedID columnID(column);
+          
+          UI::ShiftCursor(edgeOffset * 3.0f, edgeOffset * 2.0f);
+          ImGui::TableHeader(columnName);
+          UI::ShiftCursor(-edgeOffset * 3.0f, -edgeOffset * 2.0f);
+        }
+        ImGui::SetCursorPosX(ImGui::GetCurrentTable()->OuterRect.Min.x);
+        UI::DrawUnderline(true, 0.0f, 5.0f);
+      } // Headers
+      
+      // List
+      {
+        // We draw selection and hover for table rows manually
+        UI::ScopedColorStack entitySelection(ImGuiCol_Header, IM_COL32_DISABLE, ImGuiCol_HeaderHovered, IM_COL32_DISABLE, ImGuiCol_HeaderActive, IM_COL32_DISABLE);
+        
+        for (auto entity : m_context->GetRegistry().view<IDComponent, RelationshipComponent>())
+        {
+          Entity e(entity, m_context.get());
+          if (e.GetParentUUID() == 0)
+          {
+            DrawEntityNode({ entity, m_context.get() }, searchedString);
+          }
+        }
+      }
+      
+      ImGui::EndTable();
+    } // Begin Table
   }
   
   void SceneHierarchyPanel::DrawComponents(Entity entity)
@@ -150,6 +211,10 @@ namespace Kreator
     
     static char searchedString[128];
     DrawTitleBar(searchedString);
+  }
+  
+  void SceneHierarchyPanel::DrawEntityNode(Entity entity, const std::string &searchFilter)
+  {
   }
   
   void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func)
