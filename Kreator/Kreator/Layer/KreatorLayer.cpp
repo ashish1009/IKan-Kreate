@@ -197,6 +197,16 @@ if (!Project::GetActive()) return
         m_editorScene->OnUpdateEditor();
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
 
+        // Save Scene Auto
+        if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
+        {
+          IK_PERFORMANCE("KreatorLayer::AutoSaveScene");
+          m_timeSinceLastSave += ts;
+          if (m_timeSinceLastSave > project->GetConfig().autoSaveIntervalSeconds)
+          {
+            SaveSceneAuto();
+          }
+        }
         break;
       }
       case SceneState::Simulate:
@@ -516,7 +526,18 @@ if (!Project::GetActive()) return
       SaveSceneAs();
     }
   }
-  
+  void KreatorLayer::SaveSceneAuto()
+  {
+    IK_PROFILE();
+    if (!m_sceneFilePath.empty())
+    {
+      SceneSerializer serializer(m_editorScene);
+      std::string modFilePath = m_sceneFilePath.string() + ".auto";
+      serializer.Serialize(modFilePath);
+      m_timeSinceLastSave = 0.0f;
+    }
+  }
+
   void KreatorLayer::OpenScene()
   {
     FolderExplorer::Open(SceneExtension, Project::GetSceneDirectory());

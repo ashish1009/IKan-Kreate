@@ -108,6 +108,8 @@ namespace Kreator
     void SaveSceneAs();
     /// This function Saves the scene
     void SaveScene();
+    /// This function Saves the scene automatically
+    void SaveSceneAuto();
     /// This function Opens the project from popup
     void OpenScene();
 
