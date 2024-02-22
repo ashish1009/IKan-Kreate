@@ -35,6 +35,13 @@ namespace IKan
     /// - Parameter parent: Parent UUID
     void SetParentUUID(UUID parent);
 
+    /// This function checks is entity is ancestor
+    /// - Parameter entity: entity
+    bool IsAncesterOf(Entity entity);
+    /// This function checks is entity is decendor
+    /// - Parameter entity: entity
+    bool IsDescendantOf(Entity entity);
+
     /// This function returns transform comp of entity
     TransformComponent& GetTransform();
     /// This function returns transform comp of entity
