@@ -83,8 +83,7 @@ namespace Kreator
     {
       // Viewer title bar ----------
       {
-        float titlebarHeight = 20.0f;
-        
+        static const float titlebarHeight = 20.0f;        
         const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
         
         // Draw the title Bar rectangle ---------------------------------------------------

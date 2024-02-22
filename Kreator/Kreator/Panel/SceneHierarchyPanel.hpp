@@ -49,6 +49,9 @@ namespace Kreator
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This function render the hierachy of scene
     void RenderHierarchy();
+    /// This function draw selected component
+    /// - Parameter entity: entity handle
+    void DrawComponents(Entity entity);
 
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle
@@ -61,8 +64,8 @@ namespace Kreator
     Ref<Scene> m_context;
     
     SelectionContext m_selectionContext;
+    Entity m_lastSelectedEntity;
     std::function<void(SelectionContext)> m_selectionChangedCallback, m_entityDeletedCallback;
-    
 
     inline static Ref<Texture> s_pencilIcon, s_plusIcon, s_gearIcon, s_reloadIcon;
   };
