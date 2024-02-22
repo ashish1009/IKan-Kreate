@@ -550,7 +550,7 @@ if (!Project::GetActive()) return
     IK_LOG_INFO("Kreator Layer", "Scene Set to Play");
     
     // 0. Clear all selected Entities
-    ClearSelection();
+    ClearSelectedEntity();
 
     // 1. Update Scene state
     m_sceneState = SceneState::Play;
@@ -575,7 +575,7 @@ if (!Project::GetActive()) return
     IK_LOG_INFO("Kreator Layer", "Scene Set to Edit");
     
     // 0. Clear all selected Entities
-    ClearSelection();
+    ClearSelectedEntity();
 
     // 1. Update Scene state
     m_sceneState = SceneState::Edit;
@@ -608,7 +608,7 @@ if (!Project::GetActive()) return
     IK_LOG_INFO("Kreator Layer", "Scene Set for Simulation");
     
     // 0. Clear all selected Entities
-    ClearSelection();
+    ClearSelectedEntity();
 
     // 1. Update Scene state
     m_sceneState = SceneState::Simulate;
@@ -631,7 +631,7 @@ if (!Project::GetActive()) return
     IK_LOG_INFO("Kreator Layer", "Scene Simulation stopped");
     
     // 0. Clear all selected Entities
-    ClearSelection();
+    ClearSelectedEntity();
     
     // 1. Update Scene state
     m_sceneState = SceneState::Edit;
@@ -648,9 +648,25 @@ if (!Project::GetActive()) return
     m_panels.SetSceneContext(m_currentScene);
   }
   
-  void KreatorLayer::ClearSelection()
+  void KreatorLayer::OnEntitySelected(const SelectionContext& entities)
   {
-    
+    IK_ASSERT(false)
+  }
+  void KreatorLayer::OnEntityDeleted(const SelectionContext& entities)
+  {
+    IK_ASSERT(false)
+  }
+  void KreatorLayer::ClearSelectedEntity()
+  {
+    IK_ASSERT(false)
+  }
+  void KreatorLayer::SetSelectedEntity(const Entity& entity)
+  {
+    IK_ASSERT(false)
+  }
+  bool KreatorLayer::IsEntitySelected(Entity e) const
+  {
+    IK_ASSERT(false)
   }
 
   const std::filesystem::path& KreatorLayer::GetClientResorucePath() const

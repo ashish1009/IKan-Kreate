@@ -107,10 +107,35 @@ namespace IKan
     /// This function sets the scene name
     /// - Parameter name: scene name
     void SetName(const std::string& name);
+    /// This function set the selected Entity
+    void SetSelectedEntity(entt::entity entity);
+    /// This function clears the selected entity
+    void ClearSelectedEntity();
+    /// This function set the entity deletion callback
+    /// - Parameter callback: callback funtion
+    void SetEntityDestroyedCallback(const std::function<void(const Entity&)>& callback);
 
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the scene name
     const std::string& GetName() const;
+    /// This function returns the reference of registry
+    entt::registry& GetRegistry();
+    /// This function returns the max ID given to entity
+    uint32_t GetMaxEntityId() const;
+    /// This function finds the main camera entity
+    Entity GetMainCameraEntity();
+    /// This function returns the selected entity handle
+    const std::vector<entt::entity>& GetSelectedEntity() const;
+
+    /// This function returns entity with id as specified, or empty entity if cannot be found - caller must check
+    /// - Parameter id: UUID of entity
+    Entity TryGetEntityWithUUID(UUID id) const;
+    /// This function return entity with id as specified. entity is expected to exist (runtime error if it doesn't)
+    /// - Parameter id: UUID for entity
+    Entity GetEntityWithUUID(UUID id) const;
+    /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
+    /// - Parameter entityHandle: handle for entity
+    Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
 
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
@@ -136,6 +161,8 @@ namespace IKan
     
     // Entity ---------------------------
     EntityMap m_entityIDMap;
+    std::vector<entt::entity> m_selectedEntities;
+    std::function<void(const Entity&)> m_onEntityDestroyedCallback;
 
     friend class SceneSerializer;
     friend class Entity;

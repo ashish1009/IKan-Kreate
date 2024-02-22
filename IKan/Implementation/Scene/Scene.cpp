@@ -17,7 +17,7 @@ namespace IKan
   {
     registry.reserve<Component...>(capacity);
   }
-
+  
   template<typename T>
   static void CopyComponentIfExists(entt::entity dst, entt::entity src, entt::registry& registry)
   {
@@ -40,7 +40,7 @@ namespace IKan
       [[maybe_unused]] auto& destComponent = dstRegistry.emplace_or_replace<T>(destEntity, srcComponent);
     }
   }
-
+  
   Ref<Scene> Scene::Create(const std::string& name, uint32_t maxEntityCapacity)
   {
     return CreateRef<Scene>(name, maxEntityCapacity);
@@ -104,7 +104,7 @@ namespace IKan
   {
     IK_PROFILE();
   }
-
+  
   void Scene::OnClose()
   {
     IK_PROFILE();
@@ -145,7 +145,7 @@ namespace IKan
     {
       IK_ASSERT(false, "Implement later");
     }
-
+    
     return entity;
   }
   
@@ -175,15 +175,62 @@ namespace IKan
     
     return entity;
   }
-
+  
   void Scene::SetName(const std::string &name)
   {
     m_name = name;
   }
-
+  void Scene::SetSelectedEntity(entt::entity entity)
+  {
+    m_selectedEntities.push_back(entity);
+  }
+  
+  void Scene::ClearSelectedEntity()
+  {
+    m_selectedEntities.clear();
+  }
+  const std::vector<entt::entity>& Scene::GetSelectedEntity() const
+  {
+    return m_selectedEntities;
+  }
+  
+  void Scene::SetEntityDestroyedCallback(const std::function<void(const Entity&)>& callback)
+  {
+    m_onEntityDestroyedCallback = callback;
+  }
+  
   const std::string& Scene::GetName() const
   {
     return m_name;
   }
-
-} // namespace IKan {
+  
+  entt::registry& Scene::GetRegistry()
+  {
+    return m_registry;
+  }
+  uint32_t Scene::GetMaxEntityId() const
+  {
+    return m_maxEntityID;
+  }
+  
+  Entity Scene::GetEntityWithUUID(UUID id) const
+  {
+    IK_ASSERT(m_entityIDMap.find(id) != m_entityIDMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+    return m_entityIDMap.at(id);
+  }
+  
+  Entity Scene::GetEntityWithEntityHandle(int32_t entityHandle) const
+  {
+    auto& ID = m_registry.get<IDComponent>(static_cast<entt::entity>(entityHandle)).ID;
+    return GetEntityWithUUID(ID);
+  }
+  
+  Entity Scene::TryGetEntityWithUUID(UUID id) const
+  {
+    if (const auto iter = m_entityIDMap.find(id); iter != m_entityIDMap.end())
+    {
+      return iter->second;
+    }
+    return Entity{};
+  }
+} // namespace IKan
