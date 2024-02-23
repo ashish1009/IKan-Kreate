@@ -19,14 +19,21 @@ namespace Kreator
   /// Stores the Viewport Data
   struct Viewport
   {
+    struct MouseViewportSpace
+    {
+      float spaceMouseX, spaceMouseY;
+    };
+
     bool panelMouseHover;
     bool panelFocused;
     uint32_t width, height;
     glm::vec2 bounds[2];
-    int32_t mousePosX = -1;
-    int32_t mousePosY = -1;
-    
-    void UpdateMousePos();
+    MouseViewportSpace mouseViewportSpace;
+
+    /// This function returns the space mouse position
+    void GetMouseViewportSpace();
+    /// This function check the mouse position inside viewport
+    bool IsMouseSpaceInViewport();
   };
 
   class KreatorLayer : public Layer
@@ -86,14 +93,9 @@ namespace Kreator
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
 
-    /// This function returns the space mouse position
-    std::pair<float, float> GetMouseViewportSpace();
     /// This function cast ray from camera
-    /// - Parameters:
-    ///   - camera: Camera
-    ///   - mx: mouse x
-    ///   - my: mouse y
-    std::pair<glm::vec3, glm::vec3> CastRay(const EditorCamera& camera, float mx, float my);
+    /// - Parameter camera: Camera
+    Ray CastRay(const EditorCamera& camera);
 
     /// This function renders the debug icons, colliders and so on....
     void RenderDebug();
@@ -245,7 +247,7 @@ namespace Kreator
     // View port Data ------------------------------------
     Viewport m_viewport;
     SceneRenderer m_viewportRenderer, m_miniViewportRenderer;
-
+    
     // Guizmo Data ---------------------------------------
     bool m_hoveredGuizmoToolbar = false;
 

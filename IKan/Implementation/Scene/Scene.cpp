@@ -135,7 +135,6 @@ namespace IKan
   void Scene::OnClose()
   {
     IK_PROFILE();
-    IK_ASSERT(false);
   }
   
   void Scene::CopyTo(Ref<Scene> &target)
