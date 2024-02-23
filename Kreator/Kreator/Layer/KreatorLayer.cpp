@@ -350,6 +350,8 @@ if (!m_currentScene) return
   
   bool KreatorLayer::OnKeyPressedEvent(KeyPressedEvent& e)
   {
+    bool leftCtrl = Input::IsKeyPressed(Key::LeftControl);
+    bool rightCtrl = Input::IsKeyPressed(Key::RightControl);
     bool leftCmd = Input::IsKeyPressed(Key::LeftSuper);
     bool rightCmd = Input::IsKeyPressed(Key::RightSuper);
     bool leftShift = Input::IsKeyPressed(Key::LeftShift);
@@ -358,7 +360,7 @@ if (!m_currentScene) return
     if (m_sceneState == SceneState::Edit)
     {
       // Scene -----------------------------------------------------------
-      if (leftCmd and !Input::IsMouseButtonPressed(MouseButton::Right) and !leftShift)
+      if ((leftCmd or rightCmd) and !Input::IsMouseButtonPressed(MouseButton::Right) and (!leftShift or !rightShift))
       {
         switch (e.GetKeyCode())
         {
@@ -389,6 +391,41 @@ if (!m_currentScene) return
             m_folderExplorerAction = FolderExplorerAction::OpenProject;
             break;
             
+          default:
+            break;
+        }
+      }
+
+      // Entity -----------------------------------------------------------
+      if (leftCtrl or rightCtrl)
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::D:
+          {
+            for (const auto& context : m_selectionContext)
+            {
+              SetSelectedEntity(m_currentScene->DuplicateEntity(context.entity));
+            }
+            break;
+          }
+          default:
+            break;
+        }
+      }
+      if (leftCmd)
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::D:
+          {
+            for (const auto& context : m_selectionContext)
+            {
+              m_currentScene->DestroyEntity(context.entity);
+            }
+            ClearSelectedEntity();
+            break;
+          }
           default:
             break;
         }
