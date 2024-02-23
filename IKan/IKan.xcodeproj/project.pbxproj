@@ -71,6 +71,8 @@
 		B2C0BA0C2B7DF6950015A277 /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0BA0A2B7DF6950015A277 /* ProjectSerializer.hpp */; };
 		B2EB0F7F2B8655E300DF1407 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F7D2B8655E300DF1407 /* Entity.cpp */; };
 		B2EB0F802B8655E300DF1407 /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2EB0F7E2B8655E300DF1407 /* Entity.hpp */; };
+		B2EB0F9B2B885DD300DF1407 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F992B885DD300DF1407 /* Material.cpp */; };
+		B2EB0F9C2B885DD300DF1407 /* Material.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2EB0F9A2B885DD300DF1407 /* Material.hpp */; };
 		B2ED5C9E2B723F85007A7F36 /* Application.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5C9C2B723F85007A7F36 /* Application.cpp */; };
 		B2ED5C9F2B723F85007A7F36 /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2ED5C9D2B723F85007A7F36 /* Application.hpp */; };
 		B2ED5CB12B724AAC007A7F36 /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2ED5CAF2B724AAC007A7F36 /* Logger.cpp */; };
@@ -253,6 +255,8 @@
 		B2C0BA0A2B7DF6950015A277 /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2EB0F7D2B8655E300DF1407 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		B2EB0F7E2B8655E300DF1407 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
+		B2EB0F992B885DD300DF1407 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
+		B2EB0F9A2B885DD300DF1407 /* Material.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Material.hpp; sourceTree = "<group>"; };
 		B2ED5C862B723F31007A7F36 /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2ED5C9C2B723F85007A7F36 /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2ED5C9D2B723F85007A7F36 /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
@@ -725,6 +729,7 @@
 				B2C0B6D32B75F8EF0015A277 /* TextRenderer.hpp */,
 				B2C0B6D82B75FF300015A277 /* Mesh.hpp */,
 				B28CDFBB2B85D4170075DE7D /* SceneRenderer.hpp */,
+				B2EB0F9A2B885DD300DF1407 /* Material.hpp */,
 				B2C0B6BE2B75F0AB0015A277 /* UI */,
 				B2ED5E452B749045007A7F36 /* Graphics */,
 			);
@@ -737,6 +742,7 @@
 				B2ED5E402B748AFB007A7F36 /* Renderer.cpp */,
 				B2ED603D2B74BD12007A7F36 /* RendererStats.cpp */,
 				B2C0B6D72B75FF300015A277 /* Mesh.cpp */,
+				B2EB0F992B885DD300DF1407 /* Material.cpp */,
 				B2C0B6C32B75F4E20015A277 /* UI */,
 				B2C0B6EF2B7C82740015A277 /* 3D */,
 				B2ED60802B750474007A7F36 /* 2D */,
@@ -931,6 +937,7 @@
 				B2ED601D2B74AF4C007A7F36 /* ShaderUniforms.hpp in Headers */,
 				B2C0BA0C2B7DF6950015A277 /* ProjectSerializer.hpp in Headers */,
 				B2ED606F2B74F9D4007A7F36 /* FrameBuffer.hpp in Headers */,
+				B2EB0F9C2B885DD300DF1407 /* Material.hpp in Headers */,
 				B2ED60402B74BD12007A7F36 /* RendererStats.hpp in Headers */,
 				B2ED5CC02B724D1D007A7F36 /* IKHeaders.h in Headers */,
 				B2C0B7202B7CDEE30015A277 /* FixedCamera.hpp in Headers */,
@@ -1114,6 +1121,7 @@
 				B2ED5E2C2B73A5C4007A7F36 /* Window.cpp in Sources */,
 				B2ED5CC42B7265F0007A7F36 /* LoggerBuilder.cpp in Sources */,
 				B2ED60202B74AF5A007A7F36 /* OpenGLShaderUniforms.cpp in Sources */,
+				B2EB0F9B2B885DD300DF1407 /* Material.cpp in Sources */,
 				B2ED5E422B748AFB007A7F36 /* Renderer.cpp in Sources */,
 				B2ED605B2B74DACD007A7F36 /* OpenGLTexture.cpp in Sources */,
 				B248B9292B84676700B9EC40 /* Scene.cpp in Sources */,
