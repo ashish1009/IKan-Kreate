@@ -29,7 +29,17 @@ void main()
 
 layout(location = 0) out vec4 o_Color;
 
+struct DirectionLight
+{
+  float enable;
+  float intensity;
+  
+  vec3 direction;
+  vec3 color;
+};
+uniform DirectionLight u_DirectionLight;
+
 void main()
 {
-  o_Color = vec4(0.32, 0.12, 0.23, 1.0f);
+  o_Color = vec4(0.2, 0.2, 0.2, 1.0f);
 }

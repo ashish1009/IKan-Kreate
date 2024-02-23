@@ -10,8 +10,9 @@
 #include "Renderer/Graphics/FrameBuffer.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include "Renderer/MaterialAsset.hpp"
-#include "Camera/Camera.hpp"
 #include "Renderer/Mesh.hpp"
+#include "Renderer/Light.hpp"
+#include "Camera/Camera.hpp"
 
 namespace IKan
 {
@@ -96,6 +97,7 @@ namespace IKan
     struct SceneData
     {
       SceneRendererCamera sceneCamera;
+      DirectionLight directionLight;
     };
 
     inline static SceneData s_sceneData;
