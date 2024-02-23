@@ -91,12 +91,24 @@ namespace IKan::Utils::Math
       }
     }
     IK_LOG_TRACE("[Math Debug]", "{0}", result);
-
 #endif
   }
-  void Print(const glm::vec3& mat)
+  void Print(const std::string& title, const glm::vec3& vec)
   {
 #if IK_ENABLE_LOG
+    // Max Tag String space to be reserved in log
+    static constexpr uint32_t MaxValueLength {10};
+    
+    std::string result {title};
+    
+    for (int i = 0; i < 3; i++)
+    {
+      result += " : ";
+      std::string valString = std::to_string(vec[i]);
+      valString += std::string(static_cast<size_t>(MaxValueLength - valString.size()), ' ');
+      result += valString;
+    }
+    IK_LOG_TRACE("[Math Debug]", "{0}", result);
 #endif
   }
 } // namespace IKan::Utils::Math

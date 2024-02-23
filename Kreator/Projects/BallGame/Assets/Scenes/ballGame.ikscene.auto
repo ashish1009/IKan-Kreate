@@ -1,4 +1,4 @@
-Scene: ballGame.ikscene
+Scene: ballGame.ikscene.auto
 Entities:
   - Entity: 14608632238475574359
     TagComponent:

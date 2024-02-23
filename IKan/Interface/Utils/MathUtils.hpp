@@ -43,5 +43,5 @@ namespace IKan::Utils::Math
   
   // Debug Print APIs
   void Print(const std::string& title, const glm::mat4& mat);
-  void Print(const glm::vec3& mat);
+  void Print(const std::string& title, const glm::vec3& vec);
 } // namespace IKan::Utils::Math
