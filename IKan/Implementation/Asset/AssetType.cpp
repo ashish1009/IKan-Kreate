@@ -30,7 +30,7 @@ namespace IKan
         case AssetType::Invalid:      return "Invalid";
         case AssetType::Image:        return "Image";
         case AssetType::Font:         return "Font";
-        case AssetType::Scene:   return "Scene";
+        case AssetType::Scene:        return "Scene";
         case AssetType::Mesh:         return "MeshSource";
         case AssetType::Material:     return "MaterialAsset";
       }
