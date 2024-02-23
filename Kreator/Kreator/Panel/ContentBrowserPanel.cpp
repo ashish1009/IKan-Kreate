@@ -72,7 +72,7 @@ namespace Kreator
   
   AssetHandle SelectionStack::operator[](size_t index) const
   {
-    IK_ASSERT(index >= 0 && index < m_selections.size());
+    IK_ASSERT(index >= 0 and index < m_selections.size());
     return m_selections[index];
   }
 
@@ -384,7 +384,7 @@ namespace Kreator
   
   void ContentBrowserPanel::RemoveDirectory(Ref<DirectoryInfo>& directory, bool removeFromParent)
   {
-    if (directory->parent && removeFromParent)
+    if (directory->parent and removeFromParent)
     {
       auto& childList = directory->parent->subDirectories;
       childList.erase(childList.find(directory->handle));
@@ -716,7 +716,7 @@ namespace Kreator
         m_breadCrumbData.clear();
         
         Ref<DirectoryInfo> current = m_currentDirectory;
-        while (current && current->parent != nullptr)
+        while (current and current->parent != nullptr)
         {
           m_breadCrumbData.push_back(current);
           current = current->parent;
@@ -875,7 +875,7 @@ namespace Kreator
   
   Ref<DirectoryInfo> ContentBrowserPanel::GetDirectory(const std::filesystem::path& filepath) const
   {
-    if (filepath.string() == "" || filepath.string() == ".")
+    if (filepath.string() == "" or filepath.string() == ".")
     {
       return m_baseDirectory;
     }

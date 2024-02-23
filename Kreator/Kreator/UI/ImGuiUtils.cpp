@@ -650,7 +650,7 @@ namespace Kreator::UI
     ImGuiLastItemData& lastItem = g.LastItemData;
     const ImGuiStyle& style = g.Style;
     const bool display_frame = (flags & ImGuiTreeNodeFlags_Framed) != 0;
-    const ImVec2 padding = (display_frame || (flags & ImGuiTreeNodeFlags_FramePadding)) ? style.FramePadding : ImVec2(style.FramePadding.x, ImMin(window->DC.CurrLineTextBaseOffset, style.FramePadding.y));
+    const ImVec2 padding = (display_frame or (flags & ImGuiTreeNodeFlags_FramePadding)) ? style.FramePadding : ImVec2(style.FramePadding.x, ImMin(window->DC.CurrLineTextBaseOffset, style.FramePadding.y));
     
     if (!label_end)
       label_end = ImGui::FindRenderedTextEnd(label);
@@ -678,7 +678,7 @@ namespace Kreator::UI
     
     // For regular tree nodes, we arbitrary allow to click past 2 worth of ItemSpacing
     ImRect interact_bb = frame_bb;
-    if (!display_frame && (flags & (ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_SpanFullWidth)) == 0)
+    if (!display_frame and (flags & (ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_SpanFullWidth)) == 0)
       interact_bb.Max.x = frame_bb.Min.x + text_width + style.ItemSpacing.x * 2.0f;
     
     // Store a flag for the current depth to tell if we will allow closing this node when navigating one of its child.
@@ -686,7 +686,7 @@ namespace Kreator::UI
     // This is currently only support 32 level deep and we are fine with (1 << Depth) overflowing into a zero.
     const bool is_leaf = (flags & ImGuiTreeNodeFlags_Leaf) != 0;
     bool is_open = ImGui::TreeNodeBehaviorIsOpen(id, flags);
-    if (is_open && !g.NavIdIsAlive && (flags & ImGuiTreeNodeFlags_NavLeftJumpsBackHere) && !(flags & ImGuiTreeNodeFlags_NoTreePushOnOpen))
+    if (is_open and !g.NavIdIsAlive and (flags & ImGuiTreeNodeFlags_NavLeftJumpsBackHere) and !(flags & ImGuiTreeNodeFlags_NoTreePushOnOpen))
       window->DC.TreeJumpToParentOnPopMask |= (1 << window->DC.TreeDepth);
     
     bool item_add = ImGui::ItemAdd(interact_bb, id);
@@ -695,7 +695,7 @@ namespace Kreator::UI
     
     if (!item_add)
     {
-      if (is_open && !(flags & ImGuiTreeNodeFlags_NoTreePushOnOpen))
+      if (is_open and !(flags & ImGuiTreeNodeFlags_NoTreePushOnOpen))
         ImGui::TreePushOverrideID(id);
       IMGUI_TEST_ENGINE_ITEM_INFO(lastItem.ID, label, lastItem.StatusFlags | (is_leaf ? 0 : ImGuiItemStatusFlags_Openable) | (is_open ? ImGuiItemStatusFlags_Opened : 0));
       return is_open;
@@ -712,8 +712,8 @@ namespace Kreator::UI
     // When clicking on the rest of the tree node we always disallow keyboard modifiers.
     const float arrow_hit_x1 = (text_pos.x - text_offset_x) - style.TouchExtraPadding.x;
     const float arrow_hit_x2 = (text_pos.x - text_offset_x) + (g.FontSize + padding.x * 2.0f) + style.TouchExtraPadding.x;
-    const bool is_mouse_x_over_arrow = (g.IO.MousePos.x >= arrow_hit_x1 && g.IO.MousePos.x < arrow_hit_x2);
-    if (window != g.HoveredWindow || !is_mouse_x_over_arrow)
+    const bool is_mouse_x_over_arrow = (g.IO.MousePos.x >= arrow_hit_x1 and g.IO.MousePos.x < arrow_hit_x2);
+    if (window != g.HoveredWindow or !is_mouse_x_over_arrow)
       button_flags |= ImGuiButtonFlags_NoKeyModifiers;
     
     // Open behaviors can be altered with the _OpenOnArrow and _OnOnDoubleClick flags.
@@ -740,28 +740,28 @@ namespace Kreator::UI
     bool toggled = false;
     if (!is_leaf)
     {
-      if (pressed && g.DragDropHoldJustPressedId != id)
+      if (pressed and g.DragDropHoldJustPressedId != id)
       {
-        if ((flags & (ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick)) == 0 || (g.NavActivateId == id))
+        if ((flags & (ImGuiTreeNodeFlags_OpenOnArrow | ImGuiTreeNodeFlags_OpenOnDoubleClick)) == 0 or (g.NavActivateId == id))
           toggled = true;
         if (flags & ImGuiTreeNodeFlags_OpenOnArrow)
-          toggled |= is_mouse_x_over_arrow && !g.NavDisableMouseHover; // Lightweight equivalent of IsMouseHoveringRect() since ButtonBehavior() already did the job
-        if ((flags & ImGuiTreeNodeFlags_OpenOnDoubleClick) && g.IO.MouseDoubleClicked[0])
+          toggled |= is_mouse_x_over_arrow and !g.NavDisableMouseHover; // Lightweight equivalent of IsMouseHoveringRect() since ButtonBehavior() already did the job
+        if ((flags & ImGuiTreeNodeFlags_OpenOnDoubleClick) and g.IO.MouseDoubleClicked[0])
           toggled = true;
       }
-      else if (pressed && g.DragDropHoldJustPressedId == id)
+      else if (pressed and g.DragDropHoldJustPressedId == id)
       {
         IM_ASSERT(button_flags & ImGuiButtonFlags_PressedOnDragDropHold);
         if (!is_open) // When using Drag and Drop "hold to open" we keep the node highlighted after opening, but never close it again.
           toggled = true;
       }
       
-      if (g.NavId == id && g.NavMoveDir == ImGuiDir_Left && is_open)
+      if (g.NavId == id and g.NavMoveDir == ImGuiDir_Left and is_open)
       {
         toggled = true;
         ImGui::NavMoveRequestCancel();
       }
-      if (g.NavId == id && g.NavMoveDir == ImGuiDir_Right && !is_open) // If there's something upcoming on the line we may want to give it the priority?
+      if (g.NavId == id and g.NavMoveDir == ImGuiDir_Right and !is_open) // If there's something upcoming on the line we may want to give it the priority?
       {
         toggled = true;
         ImGui::NavMoveRequestCancel();
@@ -789,7 +789,7 @@ namespace Kreator::UI
     if (display_frame)
     {
       // Framed type
-      const ImU32 bg_col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_HeaderActive : (hovered && !selected && !held && !pressed && !toggled) ? ImGuiCol_HeaderHovered : ImGuiCol_Header);
+      const ImU32 bg_col = ImGui::GetColorU32((held and hovered) ? ImGuiCol_HeaderActive : (hovered and !selected and !held and !pressed and !toggled) ? ImGuiCol_HeaderHovered : ImGuiCol_Header);
       
       ImGui::RenderFrame(frame_bb.Min, frame_bb.Max, bg_col, true, style.FrameRounding);
       ImGui::RenderNavHighlight(frame_bb, id, nav_highlight_flags);
@@ -847,13 +847,13 @@ namespace Kreator::UI
     else
     {
       // Unframed typed for tree nodes
-      if (hovered || selected)
+      if (hovered or selected)
       {
-        //if (held && hovered) HZ_CORE_WARN("held && hovered");
-        //if(hovered && !selected && !held && !pressed && !toggled) HZ_CORE_WARN("hovered && !selected && !held");
+        //if (held and hovered) HZ_CORE_WARN("held and hovered");
+        //if(hovered and !selected and !held and !pressed and !toggled) HZ_CORE_WARN("hovered and !selected and !held");
         //else if(!selected) HZ_CORE_WARN("ImGuiCol_Header");
         
-        const ImU32 bg_col = ImGui::GetColorU32((held && hovered) ? ImGuiCol_HeaderActive : (hovered && !selected && !held && !pressed && !toggled) ? ImGuiCol_HeaderHovered : ImGuiCol_Header);
+        const ImU32 bg_col = ImGui::GetColorU32((held and hovered) ? ImGuiCol_HeaderActive : (hovered and !selected and !held and !pressed and !toggled) ? ImGuiCol_HeaderHovered : ImGuiCol_Header);
         ImGui::RenderFrame(frame_bb.Min, frame_bb.Max, bg_col, false);
         ImGui::RenderNavHighlight(frame_bb, id, nav_highlight_flags);
       }
@@ -893,7 +893,7 @@ namespace Kreator::UI
       ImGui::RenderText(text_pos, label, label_end, false);
     }
     
-    if (is_open && !(flags & ImGuiTreeNodeFlags_NoTreePushOnOpen))
+    if (is_open and !(flags & ImGuiTreeNodeFlags_NoTreePushOnOpen))
       ImGui::TreePushOverrideID(id);
     IMGUI_TEST_ENGINE_ITEM_INFO(id, label, window->DC.ItemFlags | (is_leaf ? 0 : ImGuiItemStatusFlags_Openable) | (is_open ? ImGuiItemStatusFlags_Opened : 0));
     return is_open;

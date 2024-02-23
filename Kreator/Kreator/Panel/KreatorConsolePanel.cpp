@@ -199,7 +199,7 @@ namespace Kreator
         m_newMessageAdded = false;
       }
       
-      if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY() && !m_displayMessageInspector)
+      if (ImGui::GetScrollY() >= ImGui::GetScrollMaxY() and !m_displayMessageInspector)
       {
         ImGui::SetScrollHereY(1.0f);
       }

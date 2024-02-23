@@ -467,7 +467,7 @@ namespace Kreator
 
     if (isSelected)
     {
-      if (isWindowFocused || UI::NavigatedTo())
+      if (isWindowFocused or UI::NavigatedTo())
       {
         fillRowWithColor(UI::Color::Selection);
       }
@@ -510,7 +510,7 @@ namespace Kreator
     
     const float arrowHitX1 = (textPos.x - textOffsetX) - style.TouchExtraPadding.x;
     const float arrowHitX2 = (textPos.x - textOffsetX) + (g.FontSize + padding.x * 2.0f) + style.TouchExtraPadding.x;
-    const bool isMouseXOverSrrow = (g.IO.MousePos.x >= arrowHitX1 && g.IO.MousePos.x < arrowHitX2);
+    const bool isMouseXOverSrrow = (g.IO.MousePos.x >= arrowHitX1 and g.IO.MousePos.x < arrowHitX2);
     
     bool previousState = ImGui::TreeNodeBehaviorIsOpen(ImGui::GetID(strID.c_str()));
     if (isMouseXOverSrrow and isRowClicked)

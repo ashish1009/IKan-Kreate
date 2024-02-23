@@ -74,7 +74,7 @@ if (!m_currentScene) return
   {
     static auto CheckRayPassMesh = [](AssetHandle meshHandle, Entity entity, const glm::vec3& origin, const glm::vec3& direction) -> float {
       const auto& mesh = AssetManager::GetAsset<Mesh>(meshHandle);
-      if (!mesh || mesh->IsFlagSet(AssetFlag::Missing))
+      if (!mesh or mesh->IsFlagSet(AssetFlag::Missing))
       {
         return -1;
       }
@@ -83,7 +83,7 @@ if (!m_currentScene) return
       auto& submeshes = mesh->GetSubMeshes();
       for (uint32_t i = 0; i < submeshes.size(); i++)
       {
-        auto& submesh = submeshes[i];
+        const auto& submesh = submeshes[i];
         Ray ray =
         {
           glm::inverse(transform * submesh.transform) * glm::vec4(origin, 1.0f),

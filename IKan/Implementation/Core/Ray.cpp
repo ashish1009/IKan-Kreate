@@ -71,6 +71,6 @@ namespace IKan
     const float u = glm::dot(E2, DAO) * invdet;
     const float v = -glm::dot(E1, DAO) * invdet;
     t = glm::dot(AO, N) * invdet;
-    return (det >= 1e-6f && t >= 0.0f && u >= 0.0f && v >= 0.0f && (u + v) <= 1.0f);
+    return (det >= 1e-6f and t >= 0.0f and u >= 0.0f and v >= 0.0f and (u + v) <= 1.0f);
   }
 } // namespace IKan

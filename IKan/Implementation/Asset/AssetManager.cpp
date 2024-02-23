@@ -119,7 +119,7 @@ namespace IKan
           mostLikelyCandidate = path.string();
         }
         
-        if (mostLikelyCandidate.empty() && bestScore == 0)
+        if (mostLikelyCandidate.empty() and bestScore == 0)
         {
           IK_LOG_WARN("[AssetManager]", "Failed to locate a potential match for '{0}'", metadata.filePath.string());
           continue;

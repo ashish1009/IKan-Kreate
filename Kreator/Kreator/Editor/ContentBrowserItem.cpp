@@ -192,7 +192,7 @@ namespace Kreator
     
     if (!m_isRenaming)
     {
-      if (Input::IsKeyPressed(Key::F2) && m_isSelected)
+      if (Input::IsKeyPressed(Key::F2) and m_isSelected)
       {
         StartRenaming();
       }
@@ -213,7 +213,7 @@ namespace Kreator
       
       if (m_isSelected)
       {
-        const bool mouseDown = ImGui::IsMouseDown(ImGuiMouseButton_Left) && ImGui::IsItemHovered();
+        const bool mouseDown = ImGui::IsMouseDown(ImGuiMouseButton_Left) and ImGui::IsItemHovered();
         ImU32 colTransition = UI::ColorWithMultipliedValue(UI::Color::Selection, 0.8f);
         
         drawList->AddRect(itemRect.Min, itemRect.Max,
