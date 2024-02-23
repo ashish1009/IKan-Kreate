@@ -19,6 +19,9 @@ namespace Kreator
 #define RETRUN_IF_NO_PROJECT() \
 if (!Project::GetActive()) return
 
+#define RETRUN_IF_NO_SCENE() \
+if (!m_currentScene) return
+
   // Kretor Resource Path
 #define KreatorResourcePath(path) std::filesystem::absolute(m_clientResourcePath / path)
   
@@ -180,7 +183,8 @@ if (!Project::GetActive()) return
   void KreatorLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
-    
+    RETRUN_IF_NO_SCENE();
+
     switch (m_sceneState)
     {
       case SceneState::Edit:
@@ -341,6 +345,7 @@ if (!Project::GetActive()) return
 
   void KreatorLayer::UpdateViewportSize()
   {
+    RETRUN_IF_NO_SCENE();
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
     m_viewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);
     m_miniViewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);

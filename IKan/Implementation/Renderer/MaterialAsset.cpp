@@ -37,6 +37,7 @@ namespace IKan
   MaterialTable::MaterialTable(uint32_t materialCount)
   : m_materialCount(materialCount)
   {
+    m_materials[0] = CreateRef<MaterialAsset>();
   }
   
   MaterialTable::MaterialTable(Ref<MaterialTable> other)

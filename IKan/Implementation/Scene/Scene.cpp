@@ -106,10 +106,9 @@ namespace IKan
       {
         // Render Selected Mesh ---------------------------------------------
         Entity entity = {entityHandle, this};
-        renderer.SubmitMesh(meshComp.mesh, transformComp.Transform());
+        renderer.SubmitMesh(meshComp.mesh, transformComp.Transform(), meshComp.materialTable);
       }
     } // For each Mesh Entity
-
   }
   
   void Scene::OnRuntimeStart()

@@ -35,6 +35,7 @@ namespace IKan
   
   void SceneRenderer::BeginScene(const SceneRendererCamera& sceneCamera)
   {
+    s_sceneData.sceneCamera = sceneCamera;
     IK_PERFORMANCE("SceneRenderer::BeginScene");
   }
   
@@ -48,7 +49,7 @@ namespace IKan
       
       for (const auto& meshData : m_meshDrawList)
       {
-        RenderMeshGeometry(meshData.mesh, meshData.transform);
+        RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.materilTable->GetMaterial(0)->GetMaterial());
       }
     }
     m_viewportRenderPass->Unbind();
@@ -67,25 +68,30 @@ namespace IKan
     m_viewportHeight = height;
   }
   
-  void SceneRenderer::SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform)
+  void SceneRenderer::SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable)
   {
     IK_PERFORMANCE("SceneRenderer::SubmitMesh");
     const auto& mesh = AssetManager::GetAsset<Mesh>(meshHandle);
     RETURN_IF(!mesh);
-    m_meshDrawList.push_back({mesh, transform});
+    
+    m_meshDrawList.push_back({mesh, materilTable, transform});
   }
   
-  void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform)
+  void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material)
   {
-    RenderSubmesh(mesh, transform);
+    material->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
+    RenderSubmesh(mesh, transform, material);
   }
-  void SceneRenderer::RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform)
+  void SceneRenderer::RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material)
   {
     mesh->GetPipeline()->Bind();
     for (const SubMesh& submesh : mesh->GetSubMeshes())
     {
+      material->Set("u_Transform", transform * submesh.transform);
+      material->Bind();
       Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
     } // for each submeshes
+    material->Unbind();
     mesh->GetPipeline()->Unbind();
   }
 

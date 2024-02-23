@@ -9,6 +9,7 @@
 
 #include "Renderer/Graphics/FrameBuffer.hpp"
 #include "Renderer/Graphics/Texture.hpp"
+#include "Renderer/MaterialAsset.hpp"
 #include "Camera/Camera.hpp"
 #include "Renderer/Mesh.hpp"
 
@@ -50,7 +51,8 @@ namespace IKan
     /// - Parameters:
     ///   - meshHandle: mesh handle
     ///   - transform: mesh transform
-    void SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform);
+    ///   - materials: material table
+    void SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable);
 
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
@@ -61,13 +63,14 @@ namespace IKan
     /// - Parameters:
     ///   - mesh: Mesh to be render
     ///   - transform: mesh transform
-    void RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform);
+    ///   - material: material
+    void RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material);
     /// This function renders the submesh
     /// - Parameters:
     ///   - mesh: mesh
     ///   - transform: mesh transform
-    ///   - shaderMaterial: material
-    void RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform);
+    ///   - material: material
+    void RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material);
 
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_debugName;
@@ -76,10 +79,18 @@ namespace IKan
     struct MeshDrawData
     {
       Ref<Mesh> mesh;
+      Ref<MaterialTable> materilTable;
       glm::mat4 transform;
     };
     std::vector<MeshDrawData> m_meshDrawList;
     
     Ref<FrameBuffer> m_viewportRenderPass;
+
+    struct SceneData
+    {
+      SceneRendererCamera sceneCamera;
+    };
+
+    inline static SceneData s_sceneData;
   };
 } // namespace IKan

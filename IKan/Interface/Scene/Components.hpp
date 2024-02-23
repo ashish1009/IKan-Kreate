@@ -83,10 +83,10 @@ namespace IKan
   
   struct MeshComponent
   {
-    bool enable = true;
+    bool enable {true};
     AssetHandle mesh;
     
-    MaterialTable materialTable;
+    Ref<MaterialTable> materialTable {CreateRef<MaterialTable>()};
     
     MeshComponent(AssetHandle m = AssetHandle()) : mesh(m) {}
   };
