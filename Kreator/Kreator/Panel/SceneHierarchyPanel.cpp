@@ -746,6 +746,12 @@ namespace Kreator
       newEntity = m_context->CreateEntity("Empty Entity");
     }
     ImGui::Separator();
+
+    if (newEntity)
+    {
+      SetSelectedEntity(newEntity);
+    }
+
   }
   
   void SceneHierarchyPanel::AddComponentPopup()

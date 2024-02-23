@@ -1,8 +1,8 @@
 Scene: BallGame.ikscene
 Entities:
-  - Entity: 8015913124601739112
+  - Entity: 5835469187812784934
     TagComponent:
-      Tag: Empty Entity
+      Tag: Cylinder
     Parent: 0
     Children:
       []
@@ -12,4 +12,43 @@ Entities:
       Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
-      MeshHandle: 0
+      MeshHandle: 27450833
+  - Entity: 5874992173040729090
+    TagComponent:
+      Tag: Capsule
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 2234008704
+  - Entity: 8015913124601739112
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+  - Entity: 11708497097212896821
+    TagComponent:
+      Tag: Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 1336252552

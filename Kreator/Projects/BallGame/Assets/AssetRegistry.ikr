@@ -8,6 +8,9 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: MeshSource
+  - Handle: 2234008704
+    FilePath: Meshes/Default/Capsule.fbx
+    Type: MeshSource
   - Handle: 3013658672
     FilePath: Scenes/BallGame.ikscene
     Type: Scene

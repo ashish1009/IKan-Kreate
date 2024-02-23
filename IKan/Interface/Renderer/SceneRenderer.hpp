@@ -10,6 +10,7 @@
 #include "Renderer/Graphics/FrameBuffer.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include "Camera/Camera.hpp"
+#include "Renderer/Mesh.hpp"
 
 namespace IKan
 {
@@ -45,15 +46,39 @@ namespace IKan
     ///   - height: height of viewport
     void SetViewportSize(uint32_t width, uint32_t height);
 
+    /// This function submits the mesh in scene
+    /// - Parameters:
+    ///   - meshHandle: mesh handle
+    ///   - transform: mesh transform
+    void SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform);
+
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
 
   private:
     // Member functions ---------------------------------------------------------------------------------------------
+    /// This function renders the mesh in geometry
+    /// - Parameters:
+    ///   - mesh: Mesh to be render
+    ///   - transform: mesh transform
+    void RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform);
+    /// This function renders the submesh
+    /// - Parameters:
+    ///   - mesh: mesh
+    ///   - transform: mesh transform
+    ///   - shaderMaterial: material
+    void RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform);
 
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_debugName;
     uint32_t m_viewportWidth, m_viewportHeight;
+    
+    struct MeshDrawData
+    {
+      Ref<Mesh> mesh;
+      glm::mat4 transform;
+    };
+    std::vector<MeshDrawData> m_meshDrawList;
     
     Ref<FrameBuffer> m_viewportRenderPass;
   };

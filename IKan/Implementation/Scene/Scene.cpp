@@ -97,6 +97,19 @@ namespace IKan
   void Scene::RenderScene(SceneRenderer& renderer, bool isEditing)
   {
     IK_PERFORMANCE("Scene::RenderScene");
+    // Submit the Meshes --------------------------------------------------
+    auto meshView = m_registry.view<TransformComponent, MeshComponent>();
+    for (const auto& entityHandle : meshView)
+    {
+      const auto& [transformComp, meshComp] = meshView.get<TransformComponent, MeshComponent>(entityHandle);
+      if (meshComp.mesh != 0)
+      {
+        // Render Selected Mesh ---------------------------------------------
+        Entity entity = {entityHandle, this};
+        renderer.SubmitMesh(meshComp.mesh, transformComp.Transform());
+      }
+    } // For each Mesh Entity
+
   }
   
   void Scene::OnRuntimeStart()

@@ -6,6 +6,7 @@
 //
 
 #include "SceneRenderer.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
@@ -42,8 +43,20 @@ namespace IKan
     IK_PERFORMANCE("SceneRenderer::EndScene");
     
     m_viewportRenderPass->Bind();
-    Renderer::Clear({0.23f, 0.234f, 0.2345f, 1.0f});
+    {
+      Renderer::Clear({0.23f, 0.234f, 0.2345f, 1.0f});
+      
+      for (const auto& meshData : m_meshDrawList)
+      {
+        RenderMeshGeometry(meshData.mesh, meshData.transform);
+      }
+    }
     m_viewportRenderPass->Unbind();
+    
+    // Clear draw list
+    {
+      m_meshDrawList.clear();
+    }
   }
   
   void SceneRenderer::SetViewportSize(uint32_t width, uint32_t height)
@@ -54,6 +67,28 @@ namespace IKan
     m_viewportHeight = height;
   }
   
+  void SceneRenderer::SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform)
+  {
+    IK_PERFORMANCE("SceneRenderer::SubmitMesh");
+    const auto& mesh = AssetManager::GetAsset<Mesh>(meshHandle);
+    RETURN_IF(!mesh);
+    m_meshDrawList.push_back({mesh, transform});
+  }
+  
+  void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform)
+  {
+    RenderSubmesh(mesh, transform);
+  }
+  void SceneRenderer::RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform)
+  {
+    mesh->GetPipeline()->Bind();
+    for (const SubMesh& submesh : mesh->GetSubMeshes())
+    {
+      Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+    } // for each submeshes
+    mesh->GetPipeline()->Unbind();
+  }
+
   Ref<Texture> SceneRenderer::GetFinalImage() const
   {
     return m_viewportRenderPass->GetColorAttachments().at(0);
