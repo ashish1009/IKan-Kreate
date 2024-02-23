@@ -14,13 +14,13 @@
 namespace IKan
 {
   /// This class store the material of shader
-  class ShaderMaterial
+  class Material
   {
   public:
     /// @param shader shader instance
-    ShaderMaterial(const Ref<Shader>& shader, const std::string& name);
+    Material(const Ref<Shader>& shader, const std::string& name);
     /// Destructor
-    virtual ~ShaderMaterial();
+    virtual ~Material();
     
     /// This function binds the material and upload all the shader data. Binds all the loaded image to shader slot.
     /// To be called before rendering any scene
@@ -70,12 +70,12 @@ namespace IKan
     
     /// This function creates instance of Material with Shader instance
     /// - Parameter shader: shader instance
-    [[nodiscard]] static Ref<ShaderMaterial> Create(const Ref<Shader>& shader, const std::string& name);
+    [[nodiscard]] static Ref<Material> Create(const Ref<Shader>& shader, const std::string& name);
     /// This funciton creates instance of Material with sahder file path
     /// - Parameter shader_file_path: shader file path
-    [[nodiscard]] static Ref<ShaderMaterial> Create(const std::string& shaderFilePath, const std::string& name);
+    [[nodiscard]] static Ref<Material> Create(const std::filesystem::path& shaderFilePath, const std::string& name);
     
-    DELETE_COPY_MOVE_CONSTRUCTORS(ShaderMaterial);
+    DELETE_COPY_MOVE_CONSTRUCTORS(Material);
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
     /// This function finds the uniform from shader

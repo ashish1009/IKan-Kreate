@@ -10,35 +10,35 @@
 
 namespace IKan
 {
-  [[nodiscard]] Ref<ShaderMaterial> ShaderMaterial::Create(const Ref<Shader>& shader, const std::string& name)
+  [[nodiscard]] Ref<Material> Material::Create(const Ref<Shader>& shader, const std::string& name)
   {
-    return CreateRef<ShaderMaterial>(shader, name);
+    return CreateRef<Material>(shader, name);
   }
   
-  [[nodiscard]] Ref<ShaderMaterial> ShaderMaterial::Create(const std::string& shaderFilePath, const std::string& name)
+  [[nodiscard]] Ref<Material> Material::Create(const std::filesystem::path& shaderFilePath, const std::string& name)
   {
     auto shader = ShaderLibrary::GetShader(shaderFilePath);
-    return CreateRef<ShaderMaterial>(shader, name);
+    return CreateRef<Material>(shader, name);
   }
   
-  ShaderMaterial::ShaderMaterial(const Ref<Shader>& shader, const std::string& name)
+  Material::Material(const Ref<Shader>& shader, const std::string& name)
   : m_shader(shader), m_name(name)
   {
     IK_PROFILE();
-    IK_LOG_DEBUG(LogModule::ShaderMaterial, "Creating Material ...");
-    IK_LOG_DEBUG(LogModule::ShaderMaterial, "  Name                    | {0}", m_name);
-    IK_LOG_DEBUG(LogModule::ShaderMaterial, "  Shader                  | {0}", m_shader->GetName());
+    IK_LOG_DEBUG(LogModule::Material, "Creating Material ...");
+    IK_LOG_DEBUG(LogModule::Material, "  Name                    | {0}", m_name);
+    IK_LOG_DEBUG(LogModule::Material, "  Shader                  | {0}", m_shader->GetName());
     AllocateStorage();
   }
   
-  ShaderMaterial::~ShaderMaterial()
+  Material::~Material()
   {
     IK_PROFILE();
-    IK_LOG_DEBUG(LogModule::ShaderMaterial, "Desroying Material !!!");
-    IK_LOG_DEBUG(LogModule::ShaderMaterial, "  Shader | {0}", m_shader->GetName());
+    IK_LOG_DEBUG(LogModule::Material, "Desroying Material !!!");
+    IK_LOG_DEBUG(LogModule::Material, "  Shader | {0}", m_shader->GetName());
   }
   
-  void ShaderMaterial::AllocateStorage()
+  void Material::AllocateStorage()
   {
     IK_PROFILE();
     if (m_shader->HasVSMaterialUniformBuffer())
@@ -46,7 +46,7 @@ namespace IKan
       const auto& vsBuffer = m_shader->GetVSMaterialUniformBuffer();
       m_vsUniformStorageBuffer.Allocate(vsBuffer.GetSize());
       m_vsUniformStorageBuffer.ZeroInitialize();
-      IK_LOG_DEBUG(LogModule::ShaderMaterial, "  Vertex Shader Buffer    | {0} Bytes", vsBuffer.GetSize());
+      IK_LOG_DEBUG(LogModule::Material, "  Vertex Shader Buffer    | {0} Bytes", vsBuffer.GetSize());
     }
     
     if (m_shader->HasFSMaterialUniformBuffer())
@@ -54,7 +54,7 @@ namespace IKan
       const auto& psBuffer = m_shader->GetFSMaterialUniformBuffer();
       m_fsUniformStorageBuffer.Allocate(psBuffer.GetSize());
       m_fsUniformStorageBuffer.ZeroInitialize();
-      IK_LOG_DEBUG(LogModule::ShaderMaterial, "  Fragment Shader Buffer  | {0} Bytes", psBuffer.GetSize());
+      IK_LOG_DEBUG(LogModule::Material, "  Fragment Shader Buffer  | {0} Bytes", psBuffer.GetSize());
     }
     
     if (m_shader->HasGSMaterialUniformBuffer())
@@ -62,11 +62,11 @@ namespace IKan
       const auto& gsBuffer = m_shader->GetGSMaterialUniformBuffer();
       m_gsUniformStorageBuffer.Allocate(gsBuffer.GetSize());
       m_gsUniformStorageBuffer.ZeroInitialize();
-      IK_LOG_DEBUG(LogModule::ShaderMaterial, "  Geomatery Shader Buffer | {0} Bytes", gsBuffer.GetSize());
+      IK_LOG_DEBUG(LogModule::Material, "  Geomatery Shader Buffer | {0} Bytes", gsBuffer.GetSize());
     }
   }
   
-  ShaderUniformDeclaration* ShaderMaterial::FindUniformDeclaration(const std::string& name)
+  ShaderUniformDeclaration* Material::FindUniformDeclaration(const std::string& name)
   {
     IK_PERFORMANCE("ShaderMaterial::FindUniformDeclaration");
     if (m_vsUniformStorageBuffer)
@@ -108,7 +108,7 @@ namespace IKan
     return nullptr;
   }
   
-  Buffer& ShaderMaterial::GetUniformBufferTarget(ShaderUniformDeclaration* uniformDeclaration)
+  Buffer& Material::GetUniformBufferTarget(ShaderUniformDeclaration* uniformDeclaration)
   {
     IK_PERFORMANCE("ShaderMaterial::GetUniformBufferTarget");
     switch (uniformDeclaration->GetDomain())
@@ -121,7 +121,7 @@ namespace IKan
     }
   }
   
-  ShaderResourceDeclaration* ShaderMaterial::FindResourceDeclaration(const std::string& name)
+  ShaderResourceDeclaration* Material::FindResourceDeclaration(const std::string& name)
   {
     IK_PERFORMANCE("ShaderMaterial::FindResourceDeclaration");
     auto& resources = m_shader->GetResources();
@@ -136,7 +136,7 @@ namespace IKan
     return nullptr;
   }
   
-  void ShaderMaterial::Set(const std::string& name, const Ref<Texture>& image)
+  void Material::Set(const std::string& name, const Ref<Texture>& image)
   {
     IK_PERFORMANCE("ShaderMaterial::Set");
     auto decl = FindResourceDeclaration(name);
@@ -149,7 +149,7 @@ namespace IKan
     m_textures[slot] = image;
   }
   
-  Ref<Texture> ShaderMaterial:: TryGetImage(const std::string& name)
+  Ref<Texture> Material:: TryGetImage(const std::string& name)
   {
     IK_PERFORMANCE("ShaderMaterial::TryGetImage");
     auto decl = FindResourceDeclaration(name);
@@ -162,7 +162,7 @@ namespace IKan
     return nullptr;
   }
   
-  void ShaderMaterial::Bind()
+  void Material::Bind()
   {
     IK_PERFORMANCE("ShaderMaterial::Bind");
     m_shader->Bind();
@@ -185,14 +185,14 @@ namespace IKan
     BindImages();
   }
   
-  void ShaderMaterial::Unbind()
+  void Material::Unbind()
   {
     IK_PERFORMANCE("ShaderMaterial::Unbind");
     m_shader->Unbind();
     UnbindImages();
   }
   
-  void ShaderMaterial::BindImages()
+  void Material::BindImages()
   {
     IK_PERFORMANCE("ShaderMaterial::BindImages");
     for (size_t i = 0; i < m_textures.size(); i++)
@@ -205,7 +205,7 @@ namespace IKan
     }
   }
   
-  void ShaderMaterial::UnbindImages()
+  void Material::UnbindImages()
   {
     IK_PERFORMANCE("ShaderMaterial::UnbindImages");
     for (size_t i = 0; i < m_textures.size(); i++)
@@ -218,17 +218,17 @@ namespace IKan
     }
   }
   
-  void ShaderMaterial::SetName(const std::string& name)
+  void Material::SetName(const std::string& name)
   {
     m_name = name;
   }
   
-  const Ref<Shader>& ShaderMaterial::GetShader() const
+  const Ref<Shader>& Material::GetShader() const
   {
     return m_shader;
   }
   
-  const std::string& ShaderMaterial::GetName() const
+  const std::string& Material::GetName() const
   {
     return m_name;
   }

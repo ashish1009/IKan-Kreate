@@ -9,6 +9,7 @@
 
 #include "Core/UUID.hpp"
 #include "Asset/Asset.hpp"
+#include "Renderer/MaterialAsset.hpp"
 
 namespace IKan
 {
@@ -84,6 +85,8 @@ namespace IKan
   {
     bool enable = true;
     AssetHandle mesh;
+    
+    MaterialTable materialTable;
     
     MeshComponent(AssetHandle m = AssetHandle()) : mesh(m) {}
   };
