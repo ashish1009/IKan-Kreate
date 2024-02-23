@@ -41,7 +41,7 @@ namespace IKan
   void EditorCamera::Initialize()
   {
     IK_PROFILE();
-    constexpr glm::vec3 position = { 27.14, 18.15, 23.81 };
+    constexpr glm::vec3 position = { 2.14, 8.15, 0.81 };
     m_distance = glm::distance(position, m_focalPoint);
     
     m_yaw = 7.178;

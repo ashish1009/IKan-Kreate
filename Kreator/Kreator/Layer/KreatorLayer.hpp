@@ -83,6 +83,11 @@ namespace Kreator
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
 
+    /// This function renders the debug icons, colliders and so on....
+    void RenderDebug();
+    /// This function renders the system info
+    void RenderSystemInfo();
+
     // Project API ---------------------------------------
     /// This function Creates new project
     /// - Parameter projectDir: Project Direcotry
@@ -176,6 +181,9 @@ namespace Kreator
     bool m_showCreateNewProjectPopup {false};
     bool m_showStatisticsPanel {true};
     bool m_showNewScenePopup {false};
+    
+    // Debug Renderer ------------------------------------
+    bool m_renderSystemInfo = true;
 
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};

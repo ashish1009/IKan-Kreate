@@ -85,6 +85,9 @@ if (!m_currentScene) return
     
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
+    // Set debug renderer callback
+    m_viewportRenderer.SetDebugRenderer([this]() { RenderDebug(); });
+    
     // Load Textures --------------------
     // Set the Application Icon
     m_applicationIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
@@ -352,6 +355,30 @@ if (!m_currentScene) return
     FixedCamera::SetViewport(m_viewport.width, m_viewport.height);
   }
 
+  void KreatorLayer::RenderDebug()
+  {
+    IK_PERFORMANCE("KreatorLayer::RenderDebug");
+    
+    // Shows System info : Frame rate and Client name
+    if (m_renderSystemInfo)
+    {
+      RenderSystemInfo();
+    }
+  }
+  
+  void KreatorLayer::RenderSystemInfo()
+  {
+    IK_PERFORMANCE("KreatorLayer::RenderSystemInfo");
+    static constexpr glm::vec3 position = { 5.0f, 5.0f, 0.3f };
+    static constexpr glm::vec2 size = {0.3f, 0.3f};
+    static constexpr glm::vec4 color = { 0.63f, 0.52f, 0.32f, 0.6f};
+    
+    TextRenderer::BeginBatch(FixedCamera::s_projection);
+    TextRenderer::RenderFixedViewText("(c) IKAN", { m_viewport.width - 80, 5.0f, 0.3f }, size, color, Font::GetDefaultFont());
+    TextRenderer::RenderFixedViewText(std::to_string((uint32_t)(ImGui::GetIO().Framerate)), position, size, color, Font::GetDefaultFont());
+    TextRenderer::EndBatch();
+  }
+  
   void KreatorLayer::CreateProject(const std::filesystem::path& projectDir)
   {
     IK_PROFILE();
@@ -496,6 +523,15 @@ if (!m_currentScene) return
     m_editorScene = Scene::Create(name);
     m_sceneFilePath = std::string();
     m_currentScene = m_editorScene;
+    
+    // Add Default entities
+    {
+      // Default Cube Entity
+      static const std::string DefaultEntityMesh = "Meshes/Default/Cube.fbx";
+      Entity cubeEntity = m_currentScene->CreateEntity("Cube");
+      auto& mc = cubeEntity.AddComponent<MeshComponent>();
+      mc.mesh = AssetManager::GetAsset<Mesh>(DefaultEntityMesh)->handle;
+    }
 
     // Update the scenes in Panels
     m_panels.SetSceneContext(m_currentScene);

@@ -730,7 +730,7 @@ namespace Kreator
       });
       
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
-        
+        ImGui::MenuItem("Show System Info", nullptr, &m_renderSystemInfo);
       });
       
       UI_Utils::AddMenu("Help", popItemHighlight, [this]() {

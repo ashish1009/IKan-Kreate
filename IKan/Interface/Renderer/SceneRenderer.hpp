@@ -47,6 +47,10 @@ namespace IKan
     ///   - height: height of viewport
     void SetViewportSize(uint32_t width, uint32_t height);
 
+    /// This funcion set the callback for debug renderer
+    /// - Parameter func: callback funciton
+    void SetDebugRenderer(const std::function<void()>& func);
+
     /// This function submits the mesh in scene
     /// - Parameters:
     ///   - meshHandle: mesh handle
@@ -75,7 +79,10 @@ namespace IKan
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_debugName;
     uint32_t m_viewportWidth, m_viewportHeight;
-    
+
+    // Debug Renderer from client
+    std::function<void()> m_debugRenderer = []() {};
+
     struct MeshDrawData
     {
       Ref<Mesh> mesh;

@@ -52,6 +52,12 @@ namespace IKan
         RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.materilTable->GetMaterial(0)->GetMaterial());
       }
     }
+    
+    // Debug Renderer
+    {
+      // Debuig renderer callback
+      m_debugRenderer();
+    }
     m_viewportRenderPass->Unbind();
     
     // Clear draw list
@@ -68,6 +74,11 @@ namespace IKan
     m_viewportHeight = height;
   }
   
+  void SceneRenderer::SetDebugRenderer(const std::function<void()>& func)
+  {
+    m_debugRenderer = func;
+  }
+
   void SceneRenderer::SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable)
   {
     IK_PERFORMANCE("SceneRenderer::SubmitMesh");
