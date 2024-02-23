@@ -80,8 +80,20 @@ namespace Kreator
     /// This function handles the key press event
     /// - Parameter e: key events
     bool OnKeyPressedEvent(KeyPressedEvent& e);
+    /// This function handles the mouse events
+    /// - Parameter e: Mouse Event
+    bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
+
+    /// This function returns the space mouse position
+    std::pair<float, float> GetMouseViewportSpace();
+    /// This function cast ray from camera
+    /// - Parameters:
+    ///   - camera: Camera
+    ///   - mx: mouse x
+    ///   - my: mouse y
+    std::pair<glm::vec3, glm::vec3> CastRay(const EditorCamera& camera, float mx, float my);
 
     /// This function renders the debug icons, colliders and so on....
     void RenderDebug();
@@ -191,12 +203,13 @@ namespace Kreator
     std::filesystem::path m_iKanKreatePath {};
     Ref<UserPreferences> m_userPreferences;
     
-    // Applicaiton Icons ---------------------------------
+    // Applicaiton Textures ------------------------------
     Ref<Texture> m_shadowTexture;
     Ref<Texture> m_applicationIcon, m_welcomeIcon;
     Ref<Texture> m_newProjectIcon, m_folderIcon;
     Ref<Texture> m_projectIcon;
     Ref<Texture> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
+    Ref<Texture> m_gridTexture;
 
     // Project Data --------------------------------------
     std::filesystem::path m_openProjectPath = "";
@@ -232,6 +245,9 @@ namespace Kreator
     // View port Data ------------------------------------
     Viewport m_viewport;
     SceneRenderer m_viewportRenderer, m_miniViewportRenderer;
+
+    // Guizmo Data ---------------------------------------
+    bool m_hoveredGuizmoToolbar = false;
 
     // Single Instance -----------------------------------
     static KreatorLayer* s_instance;

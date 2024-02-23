@@ -168,6 +168,12 @@ namespace IKan
     ///   - maxEntityCapacity: Max Entity capacity to reserve
     static Ref<Scene> Create(const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
 
+    /// This funcrion returns all the components of type Components
+    template<typename... Components> auto GetAllEntitiesWith()
+    {
+      return m_registry.view<Components...>();
+    }
+
     ASSET_TYPE(Scene);
     
     DELETE_COPY_MOVE_CONSTRUCTORS(Scene);

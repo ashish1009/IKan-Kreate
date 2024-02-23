@@ -93,9 +93,10 @@ if (!m_currentScene) return
     m_applicationIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
     m_welcomeIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/WelcomeIKan.png"));
     
-    // Other Icons
+    // Other Textures
     m_newProjectIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
     m_folderIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
+    m_gridTexture = TextureFactory::Create(KreatorResourcePath("Textures/Editor/Grid.png"));
     
     // Shadow Image
     m_shadowTexture = TextureFactory::Create(KreatorResourcePath("Textures/Icons/ShadowLineTop.png"));
@@ -252,6 +253,7 @@ if (!m_currentScene) return
   {
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(KreatorLayer::OnKeyPressedEvent));
+    dispatcher.Dispatch<MouseButtonPressedEvent>(IK_BIND_EVENT_FN(KreatorLayer::OnMouseButtonPressed));
 
     if (m_sceneState != SceneState::Play)
     {
@@ -345,6 +347,79 @@ if (!m_currentScene) return
     }
     return false;
   }
+  
+  bool KreatorLayer::OnMouseButtonPressed(MouseButtonPressedEvent &e)
+  {
+    if (m_sceneState != SceneState::Play)
+    {
+      if (Input::IsKeyPressed(IKan::Key::LeftControl) or ImGuizmo::IsOver() or m_hoveredGuizmoToolbar or !m_viewport.panelMouseHover)
+      {
+        return false;
+      }
+      
+      auto [spaceMouseX, spaceMouseY] = GetMouseViewportSpace();
+      if (spaceMouseX < -1.0f or spaceMouseX > 1.0f or spaceMouseY < -1.0f or spaceMouseY > 1.0f)
+      {
+        return false;
+      }
+      
+      static auto CheckRayPassMesh = [this](AssetHandle meshHandle, Entity entity, const glm::vec3& origin, const glm::vec3& direction) {
+        auto mesh = AssetManager::GetAsset<Mesh>(meshHandle);
+        RETURN_IF (!mesh || mesh->IsFlagSet(AssetFlag::Missing))
+        
+        glm::mat4 transform = entity.GetComponent<TransformComponent>().Transform();
+        auto& submeshes = mesh->GetSubMeshes();
+        for (uint32_t i = 0; i < submeshes.size(); i++)
+        {
+          auto& submesh = submeshes[i];
+          Ray ray =
+          {
+            glm::inverse(transform * submesh.transform) * glm::vec4(origin, 1.0f),
+            glm::inverse(glm::mat3(transform * submesh.transform)) * direction
+          };
+          
+          float distance;
+          if (ray.IntersectsAABB(submesh.boundingBox, distance))
+          {
+            const auto& triangleCache = mesh->GetTriangleCache(i);
+            for (const auto& triangle : triangleCache)
+            {
+              if (ray.IntersectsTriangle(triangle.V0.position, triangle.V1.position, triangle.V2.position, distance))
+              {
+                m_selectionContext.push_back({entity, distance});
+                break;
+              }
+            } // For each triangle cache
+          } // Bounding box intersect
+        } // Each Submesh
+      };
+
+      // Clear all selected entity
+      ClearSelectedEntity();
+
+      const auto& camera = m_editorCamera;
+      auto [origin, direction] = CastRay(camera, spaceMouseX, spaceMouseY);
+      
+      // for each mesh entity
+      auto meshEntities = m_currentScene->GetAllEntitiesWith<MeshComponent>();
+      for (auto e : meshEntities)
+      {
+        Entity entity = { e, m_currentScene.get() };
+        auto& mc = entity.GetComponent<MeshComponent>();
+        CheckRayPassMesh(mc.mesh, entity, origin, direction);
+      } // Each Mesh Comp
+
+      std::sort(m_selectionContext.begin(), m_selectionContext.end(), [](auto& a, auto& b) {
+        return a.distance < b.distance;
+      });
+
+      if (m_selectionContext.size())
+      {
+        SetSelectedEntity(m_selectionContext[0].entity);
+      }
+    }
+    return false;
+  }
 
   void KreatorLayer::UpdateViewportSize()
   {
@@ -354,15 +429,48 @@ if (!m_currentScene) return
     m_miniViewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);
     FixedCamera::SetViewport(m_viewport.width, m_viewport.height);
   }
+  
+  std::pair<float, float> KreatorLayer::GetMouseViewportSpace()
+  {
+    auto [mx, my] = ImGui::GetMousePos();
+    const auto& viewportBounds = m_viewport.bounds;
+    mx -= viewportBounds[0].x;
+    my -= viewportBounds[0].y;
+    auto viewportWidth = viewportBounds[1].x - viewportBounds[0].x;
+    auto viewportHeight = viewportBounds[1].y - viewportBounds[0].y;
+    
+    return { (mx / viewportWidth) * 2.0f - 1.0f, ((my / viewportHeight) * 2.0f - 1.0f) * -1.0f };
+  }
+  
+  std::pair<glm::vec3, glm::vec3> KreatorLayer::CastRay(const EditorCamera& camera, float mx, float my)
+  {
+    glm::vec4 mouseClipPos = { mx, my, -1.0f, 1.0f };
+    
+    auto inverseProj = glm::inverse(camera.GetProjectionMatrix());
+    auto inverseView = glm::inverse(glm::mat3(camera.GetViewMatrix()));
+    
+    glm::vec4 ray = inverseProj * mouseClipPos;
+    glm::vec3 rayPos = camera.GetPosition();
+    glm::vec3 rayDir = inverseView * glm::vec3(ray);
+    
+    return { rayPos, rayDir };
+  }
 
   void KreatorLayer::RenderDebug()
   {
     IK_PERFORMANCE("KreatorLayer::RenderDebug");
-    
-    // Shows System info : Frame rate and Client name
-    if (m_renderSystemInfo)
+    if (m_sceneState != SceneState::Play)
     {
-      RenderSystemInfo();
+      Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
+      {
+      }
+      Renderer2D::EndBatch();
+
+      // Shows System info : Frame rate and Client name
+      if (m_renderSystemInfo)
+      {
+        RenderSystemInfo();
+      }
     }
   }
   
