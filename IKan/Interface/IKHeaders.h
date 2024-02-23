@@ -30,6 +30,7 @@
 // ImGui files
 #include <imgui.h>
 #include <imgui_internal.h>
+#include <ImGuizmo.h>
 
 // Engine Files
 #include <Base/Configurations.h>
@@ -57,7 +58,9 @@
 #include <Core/Buffer.hpp>
 #include <Core/UUID.hpp>
 #include <Core/Input.hpp>
+#include <Core/AABB.h>
 #include <Core/HashGenerator.hpp>
+#include <Core/Ray.hpp>
 
 #include <Renderer/Renderer.hpp>
 #include <Renderer/Renderer2D.hpp>
