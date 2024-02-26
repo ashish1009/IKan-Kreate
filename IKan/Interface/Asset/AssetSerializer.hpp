@@ -69,7 +69,7 @@ namespace IKan
   {
   public:
     /// @see: AssetSerializer
-    virtual void Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
+    virtual void Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const override;
     /// @see: AssetSerializer
     virtual bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const override{ IK_ASSERT(false);}
   };

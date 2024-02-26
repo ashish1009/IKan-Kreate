@@ -49,7 +49,11 @@ namespace IKan
       
       for (const auto& meshData : m_meshDrawList)
       {
-        RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.materilTable->GetMaterial(0)->GetMaterial());
+        // TODO: Get index from somewhere
+        if (meshData.materilTable->HasMaterial(0))
+        {
+          RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.materilTable->GetMaterial(0)->GetMaterial());
+        }
       }
     }
     
@@ -94,7 +98,6 @@ namespace IKan
     
     material->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
     material->Set("u_CameraPosition", s_sceneData.sceneCamera.position);
-    material->Set("u_TilingFactor", 1.0f);
     material->Set("u_NormalMatrix", glm::transpose(glm::inverse(glm::mat3(transform))));
     material->Set("u_DirectionLight", s_sceneData.directionLight);
 

@@ -9,6 +9,10 @@
 
 namespace IKan
 {
+  static const std::string MaterialExtension {".ikmat"};
+  static const std::string ProjectExtension {".ikproj"};
+  static const std::string SceneExtension {".ikscene"};
+
   /// Flag for action in assets
   enum class AssetFlag : uint16_t
   {

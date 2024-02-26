@@ -31,4 +31,27 @@ namespace IKan
     asset->handle = metadata.handle;
     return true;
   }
+  void MaterialSerializer::Serialize(const AssetMetadata &metadata, const Ref<Asset> &asset) const
+  {
+    Ref<MaterialAsset> material = std::dynamic_pointer_cast<MaterialAsset>(asset);
+
+    YAML::Emitter out;
+    out << YAML::BeginMap; // Material
+    out << YAML::Key << "Material" << YAML::Value;
+    {
+      out << YAML::BeginMap;
+
+      out << YAML::Key << "AlbedoColor" << YAML::Value <<  material->GetAlbedoColor();
+      out << YAML::Key << "Metallic" << YAML::Value <<  material->GetMetalness();
+      out << YAML::Key << "Roughness" << YAML::Value <<  material->GetRoughness();
+      out << YAML::Key << "DepthScale" << YAML::Value <<  material->GetDepthScale();
+      out << YAML::Key << "TilingFactor" << YAML::Value <<  material->GetTilingFactor();
+
+      out << YAML::EndMap;
+    }
+    out << YAML::EndMap; // Material
+
+    std::ofstream fout(AssetManager::GetFileSystemPath(metadata));
+    fout << out.c_str();
+  }
 } // namespace IKan

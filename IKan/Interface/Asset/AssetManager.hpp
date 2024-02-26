@@ -98,7 +98,7 @@ namespace IKan
       }
       else
       {
-        metadata.filePath = AssetManager::GetRelativePath(directoryPath + "/" + filename);
+        metadata.filePath = AssetManager::GetRelativePath(directoryPath + "/" + filename + MaterialExtension);
       }
       metadata.isDataLoaded = true;
       metadata.type = T::GetStaticType();
@@ -134,14 +134,14 @@ namespace IKan
       }
       
       s_assetRegistry[metadata.filePath.string()] = metadata;
-      
-      WriteRegistryToFile();
-      
-      Ref<T> asset = Ref<T>::Create(std::forward<Args>(args)...);
+            
+      Ref<T> asset = T::Create(std::forward<Args>(args)...);
       asset->handle = metadata.handle;
-      s_loadedAssets[asset->Handle] = asset;
+      s_loadedAssets[asset->handle] = asset;
       AssetImporter::Serialize(metadata, asset);
       
+      WriteRegistryToFile();
+
       return asset;
     }
 

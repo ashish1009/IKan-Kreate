@@ -6,9 +6,25 @@
 //
 
 #include "MaterialAsset.hpp"
+#include "Asset/AssetManager.hpp"
+#include "Project/Project.hpp"
 
 namespace IKan
 {
+  struct MaterialProperty
+  {
+    glm::vec3 color = {1.0f, 1.0f, 1.0f};
+    float metallic = 0.5f;
+    float roughness = 0.5f;
+    float depthScale = 0.001f;
+    float tilingFactor = 1.0f;
+  };
+  
+  Ref<MaterialAsset> MaterialAsset::Create()
+  {
+    return CreateRef<MaterialAsset>();
+  }
+  
   MaterialAsset::MaterialAsset()
   {
     IK_PROFILE();
@@ -29,15 +45,77 @@ namespace IKan
     IK_LOG_INFO(LogModule::MaterialAsset, "Destroying {0} Asset", m_material->GetName());
   }
   
+  glm::vec3& MaterialAsset::GetAlbedoColor()
+  {
+    return m_material->Get<MaterialProperty>("u_Material").color;
+  }
+  
+  void MaterialAsset::SetAlbedoColor(const glm::vec3& color)
+  {
+    auto& mat = m_material->Get<MaterialProperty>("u_Material");
+    mat.color = color;
+    return m_material->Set<MaterialProperty>("u_Material", mat);
+  }
+  
+  float& MaterialAsset::GetMetalness()
+  {
+    return m_material->Get<MaterialProperty>("u_Material").metallic;
+  }
+  
+  void MaterialAsset::SetMetalness(float value)
+  {
+    auto& mat = m_material->Get<MaterialProperty>("u_Material");
+    mat.metallic = value;
+    return m_material->Set<MaterialProperty>("u_Material", mat);
+  }
+  
+  float& MaterialAsset::GetRoughness()
+  {
+    return m_material->Get<MaterialProperty>("u_Material").roughness;
+  }
+  
+  void MaterialAsset::SetRoughness(float value)
+  {
+    auto& mat = m_material->Get<MaterialProperty>("u_Material");
+    mat.roughness = value;
+    return m_material->Set<MaterialProperty>("u_Material", mat);
+  }
+  
+  float& MaterialAsset::GetDepthScale()
+  {
+    return m_material->Get<MaterialProperty>("u_Material").roughness;
+  }
+  
+  void MaterialAsset::SetDepthScale(float value)
+  {
+    auto& mat = m_material->Get<MaterialProperty>("u_Material");
+    mat.depthScale = value;
+    return m_material->Set<MaterialProperty>("u_Material", mat);
+  }
+  
+  float& MaterialAsset::GetTilingFactor()
+  {
+    return m_material->Get<MaterialProperty>("u_Material").roughness;
+  }
+  
+  void MaterialAsset::SetTilingFactor(float value)
+  {
+    auto& mat = m_material->Get<MaterialProperty>("u_Material");
+    mat.tilingFactor = value;
+    return m_material->Set<MaterialProperty>("u_Material", mat);
+  }
+  
   Ref<Material> MaterialAsset::GetMaterial() const
   {
     return m_material;
   }
   
+  // Material Table --------------------------------------------------------------------------------------------------
+  
   MaterialTable::MaterialTable(uint32_t materialCount)
   : m_materialCount(materialCount)
   {
-    m_materials[0] = CreateRef<MaterialAsset>();
+    m_materials[0] = AssetManager::CreateNewAsset<MaterialAsset>("Default_Material", Project::GetMaterialDirectory());
   }
   
   MaterialTable::MaterialTable(Ref<MaterialTable> other)

@@ -23,9 +23,42 @@ namespace IKan
     /// Default destructor of material asset
     ~MaterialAsset();
     
+    /// This function returns the Albedo color
+    glm::vec3& GetAlbedoColor();
+    /// This function sets the Albedo color
+    /// - Parameter value: new value
+    void SetAlbedoColor(const glm::vec3& color);
+    
+    /// This function returns the Metalness
+    float& GetMetalness();
+    /// This function sets the Metalness
+    /// - Parameter value: new value
+    void SetMetalness(float value);
+    
+    /// This function returns the Roughness
+    float& GetRoughness();
+    /// This function sets the Roughness
+    /// - Parameter value: new value
+    void SetRoughness(float value);
+
+    /// This function returns the DepthScale
+    float& GetDepthScale();
+    /// This function sets the DepthScale
+    /// - Parameter value: new value
+    void SetDepthScale(float value);
+
+    /// This function returns the TilingFactor
+    float& GetTilingFactor();
+    /// This function sets the TilingFactor
+    /// - Parameter value: new value
+    void SetTilingFactor(float value);
+
     /// This function returns the material
     Ref<Material> GetMaterial() const;
 
+    /// This function create material asset
+    static Ref<MaterialAsset> Create();
+    
     ASSET_TYPE(Material);
     
   private:

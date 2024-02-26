@@ -91,8 +91,15 @@ struct DirectionLight
 };
 uniform DirectionLight u_DirectionLight;
 
-// Texture tiling Factor
-uniform float u_TilingFactor;
+struct Material
+{
+  vec3 albedoColor;
+  float metallic;
+  float roughness;
+  float depthScale;
+  float tilingFactor;
+};
+uniform Material u_Material;
 
 // Texture Uniforms
 uniform sampler2D u_AlbedoTexture;
@@ -217,7 +224,7 @@ vec3 CalculateDirectionLight(vec3 F0)
 
 void main()
 {
-  float tilingFactor = u_TilingFactor;
+  float tilingFactor = u_Material.tilingFactor;
   vec2 texCoords = vs_Input.TexCoord;
 
   m_Params.Albedo       = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, texCoords * tilingFactor).rgb * vec3(0.8f, 0.8f, 0.8f) : vec3(0.8f, 0.8f, 0.8f);
