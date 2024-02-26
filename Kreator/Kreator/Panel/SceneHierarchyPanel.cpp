@@ -775,7 +775,6 @@ namespace Kreator
             }
             ImGui::NextColumn();
           }
-          
           ImGui::PopID();
         }
         
@@ -798,7 +797,6 @@ namespace Kreator
     {
       SetSelectedEntity(newEntity);
     }
-
   }
   
   void SceneHierarchyPanel::AddComponentPopup()

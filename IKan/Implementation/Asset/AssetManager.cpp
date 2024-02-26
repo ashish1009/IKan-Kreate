@@ -366,7 +366,12 @@ namespace IKan
     }
     return metadata.isDataLoaded;
   }
-  
+
+  bool AssetManager::FileExists(AssetMetadata& metadata)
+  {
+    return std::filesystem::exists(Project::GetActive()->GetAssetDirectory() / metadata.filePath);
+  }
+
   const AssetRegistry& AssetManager::GetAssetRegistry()
   {
     return s_assetRegistry;

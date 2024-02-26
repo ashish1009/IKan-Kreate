@@ -77,10 +77,74 @@ namespace IKan
     /// - Parameter assetHandle: Asset handle for base
     static bool ReloadData(AssetHandle assetHandle);
     
+    /// This function checks is file exist for metadata
+    /// - Parameter metadata: metadata handle
+    static bool FileExists(AssetMetadata& metadata);
+
     /// This function returns the asset registry
     static const AssetRegistry& GetAssetRegistry();
     
     // Template APIs ------------------------------------------------------------------------------------------------
+    template<typename T, typename... Args>
+    static Ref<T> CreateNewAsset(const std::string& filename, const std::string& directoryPath, Args&&... args)
+    {
+      static_assert(std::is_base_of<Asset, T>::value, "CreateNewAsset only works for types derived from Asset");
+      
+      AssetMetadata metadata;
+      metadata.handle = AssetHandle();
+      if (directoryPath.empty() or directoryPath == ".")
+      {
+        metadata.filePath = filename;
+      }
+      else
+      {
+        metadata.filePath = AssetManager::GetRelativePath(directoryPath + "/" + filename);
+      }
+      metadata.isDataLoaded = true;
+      metadata.type = T::GetStaticType();
+      
+      if (FileExists(metadata))
+      {
+        bool foundAvailableFileName = false;
+        int current = 1;
+        
+        while (!foundAvailableFileName)
+        {
+          std::string nextFilePath = directoryPath + "/" + metadata.filePath.stem().string();
+          
+          if (current < 10)
+          {
+            nextFilePath += " (0" + std::to_string(current) + ")";
+          }
+          else
+          {
+            nextFilePath += " (" + std::to_string(current) + ")";
+          }
+          nextFilePath += metadata.filePath.extension().string();
+          
+          if (!std::filesystem::exists(nextFilePath))
+          {
+            foundAvailableFileName = true;
+            metadata.filePath = AssetManager::GetRelativePath(nextFilePath);
+            break;
+          }
+          
+          current++;
+        }
+      }
+      
+      s_assetRegistry[metadata.filePath.string()] = metadata;
+      
+      WriteRegistryToFile();
+      
+      Ref<T> asset = Ref<T>::Create(std::forward<Args>(args)...);
+      asset->handle = metadata.handle;
+      s_loadedAssets[asset->Handle] = asset;
+      AssetImporter::Serialize(metadata, asset);
+      
+      return asset;
+    }
+
     template<typename T>
     static Ref<T> GetAsset(AssetHandle assetHandle)
     {
