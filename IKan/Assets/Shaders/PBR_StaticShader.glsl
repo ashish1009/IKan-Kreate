@@ -71,10 +71,13 @@ in VS_OUT
 
 struct PBRParameters
 {
-  vec3 View;
+  vec3 Albedo;
   vec3 Normal;
   float Metalness;
   float Roughness;
+  float Ao;
+  vec3 View;
+  float NdotV;
 };
 PBRParameters m_Params;
 
@@ -179,7 +182,25 @@ vec3 CalculateLight(vec3 radiance, vec3 L, vec3 F0)
   float G   = GeometrySmith(N, V, L, m_Params.Roughness);
   vec3  F   = fresnelSchlick(clamp(dot(H, V), 0.0, 1.0), F0);
 
-  return vec3(0.0f);
+  vec3  numerator   = NDF * G * F;
+  float denominator = 4.0 * max(dot(N, V), 0.0) * max(dot(N, L), 0.0) + 0.0001; // + 0.0001 to prevent divide by zero
+  vec3  specular    = numerator / denominator;
+
+  // kS is equal to Fresnel
+  vec3 kS = F;
+  // for energy conservation, the diffuse and specular light can't be above 1.0 (unless the surface emits light);
+  // to preserve this relationship the diffuse component (kD) should equal 1.0 - kS.
+  vec3 kD = vec3(1.0) - kS;
+  // multiply kD by the inverse metalness such that only non-metals have diffuse lighting, or a linear blend if
+  // partly metal (pure metals have no diffuse light).
+  kD *= 1.0 - m_Params.Metalness;
+
+  // scale light by NdotL
+  float NdotL = max(dot(N, L), 0.0);
+  
+  // add to outgoing radiance Lo
+  // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
+  return (kD * m_Params.Albedo / PI + specular) * radiance * NdotL;
 }
 
 // Calculate the Direction light
@@ -199,15 +220,18 @@ void main()
   float tilingFactor = u_TilingFactor;
   vec2 texCoords = vs_Input.TexCoord;
 
-  m_Params.View         = normalize(vs_Input.CameraPosition - vs_Input.WorldPosition);
-  m_Params.Normal       = getNormalFromMap(tilingFactor, texCoords);
+  m_Params.Albedo       = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, texCoords * tilingFactor).rgb * vec3(0.8f, 0.8f, 0.8f) : vec3(0.8f, 0.8f, 0.8f);
   m_Params.Metalness    = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, texCoords * tilingFactor).r : 0.5f;
   m_Params.Roughness    = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, texCoords * tilingFactor).r : 0.5f;
+  m_Params.Ao           = (u_AoTextureToggle > 0.5) ? texture(u_AoTexture, texCoords * tilingFactor).r: 1.0f;
+  m_Params.View         = normalize(vs_Input.CameraPosition - vs_Input.WorldPosition);
+  m_Params.Normal       = getNormalFromMap(tilingFactor, texCoords);
 
   // Calculate reflectance at normal incidence
   // Note: If dia-electric (like plastic) use F0 of 0.04 and
   //       If it's a metal, use the albedo color as F0 (metallic workflow)
   vec3 F0 = vec3(0.04);
+  F0 = mix(F0, m_Params.Albedo, m_Params.Metalness);
 
   // Calculate the light affect
   vec3 lightResult = CalculateDirectionLight(F0);
