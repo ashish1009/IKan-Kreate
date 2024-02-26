@@ -12,6 +12,13 @@
 
 namespace IKan
 {
+#define TextureMapAPIs(title) \
+float& Get##title##MapToggle(); \
+void Set##title##MapToggle(float value); \
+Ref<Texture> Get##title##Map(); \
+void Set##title##Map(Ref<Texture> texture); \
+void Clear##title##Map(); \
+  
   class MaterialAsset : public Asset
   {
   public:
@@ -53,41 +60,12 @@ namespace IKan
     /// - Parameter value: new value
     void SetTilingFactor(float value);
 
-    /// This function returns the Albedo Map Toggle
-    float& GetAlbedoMapToggle();
-    /// This function sets the Albedo Map Toggle
-    /// - Parameter value: new value
-    void SetAlbedoMapToggle(float value);
-
-    /// This function returns the Normal Map Toggle
-    float& GetNormalMapToggle();
-    /// This function sets the Normal Map Toggle
-    /// - Parameter value: new value
-    void SetNormalMapToggle(float value);
-
-    /// This function returns the Metallic Map Toggle
-    float& GetMetallicMapToggle();
-    /// This function sets the Metallic Map Toggle
-    /// - Parameter value: new value
-    void SetMetallicMapToggle(float value);
-
-    /// This function returns the Roughness Map Toggle
-    float& GetRoughnessMapToggle();
-    /// This function sets the Roughness Map Toggle
-    /// - Parameter value: new value
-    void SetRoughnessMapToggle(float value);
-
-    /// This function returns the Depth Map Toggle
-    float& GetDepthMapToggle();
-    /// This function sets the Depth Map Toggle
-    /// - Parameter value: new value
-    void SetDepthMapToggle(float value);
-
-    /// This function returns the AO Map Toggle
-    float& GetAoMapToggle();
-    /// This function sets the AO Map Toggle
-    /// - Parameter value: new value
-    void SetAoMapToggle(float value);
+    TextureMapAPIs(Albedo);
+    TextureMapAPIs(Normal);
+    TextureMapAPIs(Metallic);
+    TextureMapAPIs(Roughness);
+    TextureMapAPIs(Depth);
+    TextureMapAPIs(Ao);
 
     /// This function returns the material
     Ref<Material> GetMaterial() const;

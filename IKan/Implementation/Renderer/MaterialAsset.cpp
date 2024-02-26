@@ -11,6 +11,13 @@
 
 namespace IKan
 {
+#define DefineTextureMapAPI(title) \
+float& MaterialAsset::Get##title##MapToggle() { std::string uniform = "u_"+std::string(#title)+"TextureToggle"; return m_material->Get<float>(uniform); } \
+void MaterialAsset::Set##title##MapToggle(float value) { std::string uniform = "u_"+std::string(#title)+"TextureToggle"; m_material->Set<float>(uniform, value); }\
+Ref<Texture> MaterialAsset::Get##title##Map() { std::string uniform = "u_"+std::string(#title)+"Texture"; return m_material->TryGetImage(uniform); } \
+void MaterialAsset::Set##title##Map(Ref<Texture> tex) { std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, tex); } \
+void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, nullptr); }
+
   struct MaterialProperty
   {
     glm::vec3 color = {1.0f, 1.0f, 1.0f};
@@ -30,6 +37,10 @@ namespace IKan
     IK_PROFILE();
     m_material = Material::Create(ShaderLibrary::GetShader(CoreAsset("Shaders/PBR_StaticShader.glsl")), "PBR_Material");
     IK_LOG_INFO(LogModule::MaterialAsset, "Creating {0} Asset", m_material->GetName());
+    
+    SetAlbedoColor({0.8f, 0.8f, 0.8f});
+    SetMetalness(0.5);
+    SetRoughness(0.5);
   }
   
   MaterialAsset::MaterialAsset(Ref<Material> material)
@@ -105,65 +116,12 @@ namespace IKan
     return m_material->Set<MaterialProperty>("u_Material", mat);
   }
   
-  float& MaterialAsset::GetAlbedoMapToggle()
-  {
-    return m_material->Get<float>("u_AlbedoTextureToggle");
-  }
-  
-  void MaterialAsset::SetAlbedoMapToggle(float value)
-  {
-    return m_material->Set<float>("u_AlbedoTextureToggle", value);
-  }
-
-  float& MaterialAsset::GetNormalMapToggle()
-  {
-    return m_material->Get<float>("u_NormalTextureToggle");
-  }
-  
-  void MaterialAsset::SetNormalMapToggle(float value)
-  {
-    return m_material->Set<float>("u_NormalTextureToggle", value);
-  }
-
-  float& MaterialAsset::GetMetallicMapToggle()
-  {
-    return m_material->Get<float>("u_MetallicTextureToggle");
-  }
-  
-  void MaterialAsset::SetMetallicMapToggle(float value)
-  {
-    return m_material->Set<float>("u_MetallicTextureToggle", value);
-  }
-
-  float& MaterialAsset::GetRoughnessMapToggle()
-  {
-    return m_material->Get<float>("u_RoughnessTextureToggle");
-  }
-  
-  void MaterialAsset::SetRoughnessMapToggle(float value)
-  {
-    return m_material->Set<float>("u_RoughnessTextureToggle", value);
-  }
-
-  float& MaterialAsset::GetDepthMapToggle()
-  {
-    return m_material->Get<float>("u_DepthTextureToggle");
-  }
-  
-  void MaterialAsset::SetDepthMapToggle(float value)
-  {
-    return m_material->Set<float>("u_DepthTextureToggle", value);
-  }
-
-  float& MaterialAsset::GetAoMapToggle()
-  {
-    return m_material->Get<float>("u_AoTextureToggle");
-  }
-  
-  void MaterialAsset::SetAoMapToggle(float value)
-  {
-    return m_material->Set<float>("u_AoTextureToggle", value);
-  }
+  DefineTextureMapAPI(Albedo)
+  DefineTextureMapAPI(Normal)
+  DefineTextureMapAPI(Metallic)
+  DefineTextureMapAPI(Roughness)
+  DefineTextureMapAPI(Depth)
+  DefineTextureMapAPI(Ao)
 
   Ref<Material> MaterialAsset::GetMaterial() const
   {
