@@ -94,6 +94,7 @@ namespace IKan
     material->Set("u_CameraPosition", s_sceneData.sceneCamera.position);
     material->Set("u_TilingFactor", 1.0f);
     material->Set("u_NormalMatrix", glm::transpose(glm::inverse(glm::mat3(transform))));
+    material->Set("u_DirectionLight", s_sceneData.directionLight);
 
     RenderSubmesh(mesh, transform, material);
   }
