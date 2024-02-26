@@ -52,12 +52,12 @@ namespace Kreator::UI
     return ImGui::Button(GenerateID(), size);
   }
   
-  bool DrawRoundButton(const char* title, const ImU32& color, float r)
+  bool DrawRoundButton(const char* title, const ImU32& color, float r, const glm::vec2& size)
   {
-    return DrawRoundButton(title, UI::ColorVec3FromU32(color), r);
+    return DrawRoundButton(title, UI::ColorVec3FromU32(color), r, size);
   }
 
-  bool DrawRoundButton(const char* title, const glm::vec3& color, float r)
+  bool DrawRoundButton(const char* title, const glm::vec3& color, float r, const glm::vec2& size)
   {
     ImGui::PushID(title);
     UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, r);
@@ -71,7 +71,7 @@ namespace Kreator::UI
     UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, tintHovered);
     UI::ScopedColor buttonavtive(ImGuiCol_ButtonActive, tintPressed);
     
-    bool clicked = ImGui::Button(title);
+    bool clicked = ImGui::Button(title, {size.x, size.y});
     
     ImGui::PopID();
     return clicked;

@@ -769,7 +769,7 @@ namespace Kreator
             
             ImGui::SameLine();
             float prevItemHeight = ImGui::GetItemRectSize().y;
-            if (ImGui::Button(UI::GenerateLabelID("X"), { prevItemHeight, prevItemHeight }))
+            if (UI::DrawRoundButton("X", UI::Color::Muted, 20, { prevItemHeight, prevItemHeight }))
             {
               smc.materialTable->ClearMaterial((uint32_t)i);
             }
@@ -792,6 +792,21 @@ namespace Kreator
       newEntity = m_context->CreateEntity("Empty Entity");
     }
     ImGui::Separator();
+    
+    static const std::filesystem::path DefaultMeshFile = "Meshes/Default/";
+    auto menuForDefaultMesh = [this](Entity& newEntity, const std::string& name) {
+      if (ImGui::MenuItem(name.c_str()))
+      {
+        newEntity = m_context->CreateEntity(name);
+        std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
+        newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
+      }
+    };
+
+    menuForDefaultMesh(newEntity, "Cube");
+    menuForDefaultMesh(newEntity, "Sphere");
+    menuForDefaultMesh(newEntity, "Cylinder");
+    menuForDefaultMesh(newEntity, "Capsule");
 
     if (newEntity)
     {
