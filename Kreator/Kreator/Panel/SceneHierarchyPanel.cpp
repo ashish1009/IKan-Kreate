@@ -735,6 +735,43 @@ namespace Kreator
         smc.mesh = metadata.handle;
       }
       UI::EndPropertyGrid();
+      
+      if (UI::BeginTreeNode("Materials"))
+      {
+        UI::BeginPropertyGrid();
+
+        for (size_t i = 0; i < smc.materialTable->GetMaterialCount(); i++)
+        {
+          bool hasMaterial = smc.materialTable->HasMaterial((uint32_t)i);
+          
+          std::string label = fmt::format("[Material {0}]", i);
+          
+          // Note: Fix for weird ImGui ID bug...
+          std::string id = fmt::format("{0}-{1}", label, i);
+          ImGui::PushID(id.c_str());
+          
+          UI::PropertyAssetReferenceSettings settings;
+          if (hasMaterial)
+          {
+            Ref<MaterialAsset> meshMaterialAsset = smc.materialTable->GetMaterial((uint32_t)i);
+            std::string meshMaterialName = meshMaterialAsset->GetMaterial()->GetName();
+            if (meshMaterialName.empty())
+            {
+              meshMaterialName = "Unnamed Material";
+            }
+            
+            AssetHandle materialAssetHandle = meshMaterialAsset->handle;
+            
+            UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), meshMaterialName.c_str(), materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
+              smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
+            }, settings);
+          }
+          ImGui::PopID();
+        }
+        
+        UI::EndPropertyGrid();
+        UI::EndTreeNode();
+      }
     }, s_gearIcon);
   }
   

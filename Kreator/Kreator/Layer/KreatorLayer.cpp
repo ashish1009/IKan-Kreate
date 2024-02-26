@@ -224,6 +224,9 @@ if (!m_currentScene) return
     
     // Clear the Asset Editor
     AssetEditorManager::Clear();
+    
+    // Close current Project
+    Project::CloseActive();
   }
   
   void KreatorLayer::OnUpdate(TimeStep ts)

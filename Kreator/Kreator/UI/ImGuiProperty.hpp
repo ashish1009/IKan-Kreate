@@ -189,4 +189,114 @@ namespace Kreator::UI
     
     return modified;
   }
+  
+  template<typename T, typename Fn>
+  static bool PropertyAssetReferenceTarget(const char* label, const char* assetName, AssetHandle& outHandle, Fn&& targetFunc, const PropertyAssetReferenceSettings& settings = {})
+  {
+    bool modified = false;
+    
+    ShiftCursor(10.0f, 9.0f);
+    ImGui::Text(label);
+    ImGui::NextColumn();
+    ShiftCursorY(4.0f);
+    ImGui::PushItemWidth(-1);
+    if (settings.noItemSpacing)
+    {
+      ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, { 0.0f, 0.0f });
+    }
+    
+    ImVec2 originalButtonTextAlign = ImGui::GetStyle().ButtonTextAlign;
+    ImGui::GetStyle().ButtonTextAlign = { 0.0f, 0.5f };
+    float width = ImGui::GetContentRegionAvail().x - settings.widthOffset;
+    UI::PushID();
+    
+    float itemHeight = 28.0f;
+    
+    std::string buttonText = "Null";
+    bool valid = true;
+    
+    if (AssetManager::IsAssetHandleValid(outHandle))
+    {
+      auto source = AssetManager::GetAsset<T>(outHandle);
+      valid = source && !source->IsFlagSet(AssetFlag::Invalid) && !source->IsFlagSet(AssetFlag::Missing);
+      if (source && !source->IsFlagSet(AssetFlag::Missing))
+      {
+        if (assetName)
+        {
+          buttonText = assetName;
+        }
+        else
+        {
+          buttonText = AssetManager::GetMetadata(outHandle).filePath.stem().string();
+          assetName = buttonText.c_str();
+        }
+      }
+      else
+      {
+        buttonText = "Missing";
+      }
+    }
+    
+    // PropertyAssetReferenceTarget could be called multiple times in same "context"
+    // and so we need a unique id for the asset search popup each time.
+    // notes
+    // - don't use GenerateID(), that's inviting id clashes, which would be super confusing.
+    // - don't store return from GenerateLabelId in a const char* here. Because its pointing to an internal
+    //   buffer which may get overwritten by the time you want to use it later on.
+    std::string assetSearchPopupID = GenerateLabelID("ARTSP");
+    {
+      UI::ScopedColor buttonLabelColor(ImGuiCol_Text, valid ? settings.buttonLabelColor : settings.buttonLabelColorError);
+      if (ImGui::Button(GenerateLabelID(buttonText), { width, itemHeight }))
+      {
+        ImGui::OpenPopup(assetSearchPopupID.c_str());
+      }
+    }
+    
+    ImGui::GetStyle().ButtonTextAlign = originalButtonTextAlign;
+    
+    bool clear = false;
+    if (Widgets::AssetSearchPopup(assetSearchPopupID.c_str(), T::GetStaticType(), outHandle, settings.allowMemoryOnlyAssets, &clear))
+    {
+      if (clear)
+        outHandle = 0;
+      
+      targetFunc(AssetManager::GetAsset<T>(outHandle));
+      modified = true;
+    }
+    
+    UI::PopID();
+    
+    if (!IsItemDisabled())
+    {
+      if (ImGui::BeginDragDropTarget())
+      {
+        auto data = ImGui::AcceptDragDropPayload("asset_payload");
+        
+        if (data)
+        {
+          AssetHandle assetHandle = *(AssetHandle*)data->Data;
+          s_propertyAssetReferenceAssetHandle = assetHandle;
+          Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+          if (asset && asset->GetAssetType() == T::GetStaticType())
+          {
+            targetFunc(std::dynamic_pointer_cast<T>(asset));
+            modified = true;
+          }
+        }
+      }
+      
+      DrawItemActivityOutline(2.0f, true, UI::Color::Accent);
+    }
+    
+    ImGui::PopItemWidth();
+    if (settings.advanceToNextColumn)
+    {
+      ImGui::NextColumn();
+    }
+    if (settings.noItemSpacing)
+    {
+      ImGui::PopStyleVar();
+    }
+    return modified;
+  }
 } // namespace Kreator::UI

@@ -32,6 +32,14 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_INFO(LogModule::Asset, "Shutting down current Asset Manager");
 
+    if (Project::GetActive())
+    {
+      // Write the asset data in registry file
+      WriteRegistryToFile();
+    }
+    
+    s_memoryAssets.clear();
+    s_loadedAssets.clear();
     s_assetRegistry.Clear();
   }
   
