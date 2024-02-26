@@ -90,6 +90,8 @@ namespace IKan
   
   void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material)
   {
+    RETURN_IF(!material);
+    
     material->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
     material->Set("u_CameraPosition", s_sceneData.sceneCamera.position);
     material->Set("u_TilingFactor", 1.0f);

@@ -263,7 +263,7 @@ namespace Kreator::UI
       targetFunc(AssetManager::GetAsset<T>(outHandle));
       modified = true;
     }
-    
+
     UI::PopID();
     
     if (!IsItemDisabled())
@@ -287,7 +287,7 @@ namespace Kreator::UI
       
       DrawItemActivityOutline(2.0f, true, UI::Color::Accent);
     }
-    
+
     ImGui::PopItemWidth();
     if (settings.advanceToNextColumn)
     {

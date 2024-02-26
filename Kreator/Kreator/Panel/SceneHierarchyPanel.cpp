@@ -724,7 +724,7 @@ namespace Kreator
     
     DrawComponent<MeshComponent>("Mesh", entity, [&](MeshComponent& smc)
                                  {
-      UI::ScopedStyle headerRounding(ImGuiStyleVar_FrameRounding, 12);
+      UI::ScopedStyle headerRounding(ImGuiStyleVar_FrameRounding, roundingVal);
       UI::BeginPropertyGrid();
       
       Ref<Mesh> mesh = AssetManager::GetAsset<Mesh>(smc.mesh);
@@ -761,18 +761,28 @@ namespace Kreator
             }
             
             AssetHandle materialAssetHandle = meshMaterialAsset->handle;
-            
+            settings.advanceToNextColumn = false;
+            settings.widthOffset = 40;
             UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), meshMaterialName.c_str(), materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
               smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
             }, settings);
+            
+            ImGui::SameLine();
+            float prevItemHeight = ImGui::GetItemRectSize().y;
+            if (ImGui::Button(UI::GenerateLabelID("X"), { prevItemHeight, prevItemHeight }))
+            {
+              smc.materialTable->ClearMaterial((uint32_t)i);
+            }
+            ImGui::NextColumn();
           }
+          
           ImGui::PopID();
         }
         
         UI::EndPropertyGrid();
         UI::EndTreeNode();
       }
-    }, s_gearIcon);
+    }, s_gearIcon, true);
   }
   
   void SceneHierarchyPanel::DrawCreateEntityMenu(Entity parent)
