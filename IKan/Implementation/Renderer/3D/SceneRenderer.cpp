@@ -91,6 +91,10 @@ namespace IKan
   void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material)
   {
     material->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
+    material->Set("u_CameraPosition", s_sceneData.sceneCamera.position);
+    material->Set("u_TilingFactor", 1.0f);
+    material->Set("u_NormalMatrix", glm::transpose(glm::inverse(glm::mat3(transform))));
+
     RenderSubmesh(mesh, transform, material);
   }
   void SceneRenderer::RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material)

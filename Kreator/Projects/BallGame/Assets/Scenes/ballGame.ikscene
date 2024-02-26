@@ -13,6 +13,19 @@ Entities:
     MeshComponent:
       Enable: true
       MeshHandle: 1336252552
+  - Entity: 7281134746549167974
+    TagComponent:
+      Tag: Cube other
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-4, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 2363676385
   - Entity: 11932337476939576269
     TagComponent:
       Tag: Capsule

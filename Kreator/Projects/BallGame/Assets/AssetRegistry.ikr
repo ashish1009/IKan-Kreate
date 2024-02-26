@@ -14,3 +14,6 @@ Assets:
   - Handle: 2234008704
     FilePath: Meshes/Default/Capsule.fbx
     Type: MeshSource
+  - Handle: 2363676385
+    FilePath: Meshes/Default/_Cube.fbx
+    Type: MeshSource

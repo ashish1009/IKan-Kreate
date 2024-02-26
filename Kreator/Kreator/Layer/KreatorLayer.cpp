@@ -301,6 +301,8 @@ if (!m_currentScene) return
   
   void KreatorLayer::OnEvent(Event& event)
   {
+    RETRUN_IF_NO_PROJECT();
+
     EventDispatcher dispatcher(event);
     dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(KreatorLayer::OnKeyPressedEvent));
     dispatcher.Dispatch<MouseButtonPressedEvent>(IK_BIND_EVENT_FN(KreatorLayer::OnMouseButtonPressed));
