@@ -105,6 +105,66 @@ namespace IKan
     return m_material->Set<MaterialProperty>("u_Material", mat);
   }
   
+  float& MaterialAsset::GetAlbedoMapToggle()
+  {
+    return m_material->Get<float>("u_AlbedoTextureToggle");
+  }
+  
+  void MaterialAsset::SetAlbedoMapToggle(float value)
+  {
+    return m_material->Set<float>("u_AlbedoTextureToggle", value);
+  }
+
+  float& MaterialAsset::GetNormalMapToggle()
+  {
+    return m_material->Get<float>("u_NormalTextureToggle");
+  }
+  
+  void MaterialAsset::SetNormalMapToggle(float value)
+  {
+    return m_material->Set<float>("u_NormalTextureToggle", value);
+  }
+
+  float& MaterialAsset::GetMetallicMapToggle()
+  {
+    return m_material->Get<float>("u_MetallicTextureToggle");
+  }
+  
+  void MaterialAsset::SetMetallicMapToggle(float value)
+  {
+    return m_material->Set<float>("u_MetallicTextureToggle", value);
+  }
+
+  float& MaterialAsset::GetRoughnessMapToggle()
+  {
+    return m_material->Get<float>("u_RoughnessTextureToggle");
+  }
+  
+  void MaterialAsset::SetRoughnessMapToggle(float value)
+  {
+    return m_material->Set<float>("u_RoughnessTextureToggle", value);
+  }
+
+  float& MaterialAsset::GetDepthMapToggle()
+  {
+    return m_material->Get<float>("u_DepthTextureToggle");
+  }
+  
+  void MaterialAsset::SetDepthMapToggle(float value)
+  {
+    return m_material->Set<float>("u_DepthTextureToggle", value);
+  }
+
+  float& MaterialAsset::GetAoMapToggle()
+  {
+    return m_material->Get<float>("u_AoTextureToggle");
+  }
+  
+  void MaterialAsset::SetAoMapToggle(float value)
+  {
+    return m_material->Set<float>("u_AoTextureToggle", value);
+  }
+
   Ref<Material> MaterialAsset::GetMaterial() const
   {
     return m_material;

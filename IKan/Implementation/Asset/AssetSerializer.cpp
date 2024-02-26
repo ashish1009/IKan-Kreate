@@ -47,6 +47,13 @@ namespace IKan
       out << YAML::Key << "DepthScale" << YAML::Value <<  material->GetDepthScale();
       out << YAML::Key << "TilingFactor" << YAML::Value <<  material->GetTilingFactor();
 
+      out << YAML::Key << "u_AlbedoTextureToggle" << YAML::Value <<  material->GetAlbedoMapToggle();
+      out << YAML::Key << "u_NormalTextureToggle" << YAML::Value <<  material->GetNormalMapToggle();
+      out << YAML::Key << "u_RoughnessTextureToggle" << YAML::Value <<  material->GetRoughnessMapToggle();
+      out << YAML::Key << "u_MetallicTextureToggle" << YAML::Value <<  material->GetMetallicMapToggle();
+      out << YAML::Key << "u_DepthTextureToggle" << YAML::Value <<  material->GetDepthMapToggle();
+      out << YAML::Key << "u_AoTextureToggle" << YAML::Value <<  material->GetAoMapToggle();
+
       out << YAML::EndMap;
     }
     out << YAML::EndMap; // Material
