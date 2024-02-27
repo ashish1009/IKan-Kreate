@@ -8,18 +8,9 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: Mesh
-  - Handle: 1363873247
-    FilePath: Materials/Default_Material.ikmat
-    Type: Material
   - Handle: 3013658672
     FilePath: Scenes/BallGame.ikscene
     Type: Scene
-  - Handle: 936840548322274620
-    FilePath: Materials/Default_Material (02).ikmat
-    Type: Material
-  - Handle: 1941148768267682506
-    FilePath: Materials/Default_Material (01).ikmat
-    Type: Material
-  - Handle: 8299890816593471385
-    FilePath: Materials/Default_Material (03).ikmat
+  - Handle: 5553775734407114539
+    FilePath: Materials/Default_Material.ikmat
     Type: Material

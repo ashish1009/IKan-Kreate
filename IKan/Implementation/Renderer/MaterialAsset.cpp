@@ -41,6 +41,8 @@ void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform 
     SetAlbedoColor({0.8f, 0.8f, 0.8f});
     SetMetalness(0.5);
     SetRoughness(0.5);
+    SetDepthScale(0.001);
+    SetTilingFactor(1.0f);
   }
   
   MaterialAsset::MaterialAsset(Ref<Material> material)
@@ -94,7 +96,7 @@ void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform 
   
   float& MaterialAsset::GetDepthScale()
   {
-    return m_material->Get<MaterialProperty>("u_Material").roughness;
+    return m_material->Get<MaterialProperty>("u_Material").depthScale;
   }
   
   void MaterialAsset::SetDepthScale(float value)
@@ -106,7 +108,7 @@ void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform 
   
   float& MaterialAsset::GetTilingFactor()
   {
-    return m_material->Get<MaterialProperty>("u_Material").roughness;
+    return m_material->Get<MaterialProperty>("u_Material").tilingFactor;
   }
   
   void MaterialAsset::SetTilingFactor(float value)
@@ -133,7 +135,7 @@ void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform 
   MaterialTable::MaterialTable(uint32_t materialCount)
   : m_materialCount(materialCount)
   {
-//    m_materials[0] = AssetManager::CreateNewAsset<MaterialAsset>("Default_Material", Project::GetMaterialDirectory());
+    m_materials[0] = AssetManager::CreateNewAsset<MaterialAsset>("Default_Material", Project::GetMaterialDirectory());
   }
   
   MaterialTable::MaterialTable(Ref<MaterialTable> other)

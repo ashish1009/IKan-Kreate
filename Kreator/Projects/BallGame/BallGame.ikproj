@@ -2,8 +2,11 @@ Project:
   Name: BallGame
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
-  FontDirectory: Assets/Fonts
   MeshDirectory: Assets/Meshes
-  MaterialPath: Assets/Materials
+  FontDirectory: Assets/Fonts
   SceneDirectory: Assets/Scenes
   TextureDirectory: Assets/Textures
+  MaterialPath: Assets/Materials
+  StartScene: Scenes/BallGame.ikscene
+  AutoSave: false
+  AutoSaveInterval: 60
