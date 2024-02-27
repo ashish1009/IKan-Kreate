@@ -17,8 +17,8 @@ namespace IKan
       if (assetType == "Image")               return AssetType::Image;
       if (assetType == "Font")                return AssetType::Font;
       if (assetType == "Scene")               return AssetType::Scene;
-      if (assetType == "MeshSource")          return AssetType::Mesh;
-      if (assetType == "MaterialAsset")       return AssetType::Material;
+      if (assetType == "Mesh")                return AssetType::Mesh;
+      if (assetType == "Material")            return AssetType::Material;
       IK_ASSERT(false, "Unknown Asset Type");
       return AssetType::Invalid;
     }
