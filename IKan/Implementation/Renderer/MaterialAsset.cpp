@@ -133,7 +133,7 @@ void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform 
   MaterialTable::MaterialTable(uint32_t materialCount)
   : m_materialCount(materialCount)
   {
-    m_materials[0] = AssetManager::CreateNewAsset<MaterialAsset>("Default_Material", Project::GetMaterialDirectory());
+//    m_materials[0] = AssetManager::CreateNewAsset<MaterialAsset>("Default_Material", Project::GetMaterialDirectory());
   }
   
   MaterialTable::MaterialTable(Ref<MaterialTable> other)
