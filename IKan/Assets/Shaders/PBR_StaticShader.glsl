@@ -227,10 +227,10 @@ void main()
   float tilingFactor = u_Material.tilingFactor;
   vec2 texCoords = vs_Input.TexCoord;
 
-  m_Params.Albedo       = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, texCoords * tilingFactor).rgb * vec3(0.8f, 0.8f, 0.8f) : vec3(0.8f, 0.8f, 0.8f);
-  m_Params.Metalness    = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, texCoords * tilingFactor).r : 0.5f;
-  m_Params.Roughness    = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, texCoords * tilingFactor).r : 0.5f;
-  m_Params.Ao           = (u_AoTextureToggle > 0.5) ? texture(u_AoTexture, texCoords * tilingFactor).r: 1.0f;
+  m_Params.Albedo       = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, texCoords * tilingFactor).rgb * u_Material.albedoColor : u_Material.albedoColor;
+  m_Params.Metalness    = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, texCoords * tilingFactor).r : u_Material.metallic;
+  m_Params.Roughness    = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, texCoords * tilingFactor).r : u_Material.roughness;
+  m_Params.Ao           = (u_AoTextureToggle > 0.5) ? texture(u_AoTexture, texCoords * tilingFactor).r : 1.0f;
   m_Params.View         = normalize(vs_Input.CameraPosition - vs_Input.WorldPosition);
   m_Params.Normal       = getNormalFromMap(tilingFactor, texCoords);
 
