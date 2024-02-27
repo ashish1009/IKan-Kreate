@@ -31,8 +31,8 @@ namespace IKan
         case AssetType::Image:        return "Image";
         case AssetType::Font:         return "Font";
         case AssetType::Scene:        return "Scene";
-        case AssetType::Mesh:         return "MeshSource";
-        case AssetType::Material:     return "MaterialAsset";
+        case AssetType::Mesh:         return "Mesh";
+        case AssetType::Material:     return "Material";
       }
       IK_ASSERT(false, "Unknown Asset Type");
       return "None";
