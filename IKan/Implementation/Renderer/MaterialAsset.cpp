@@ -14,8 +14,8 @@ namespace IKan
 #define DefineTextureMapAPI(title) \
 float& MaterialAsset::Get##title##MapToggle() { std::string uniform = "u_"+std::string(#title)+"TextureToggle"; return m_material->Get<float>(uniform); } \
 void MaterialAsset::Set##title##MapToggle(float value) { std::string uniform = "u_"+std::string(#title)+"TextureToggle"; m_material->Set<float>(uniform, value); }\
-Ref<Texture> MaterialAsset::Get##title##Map() { std::string uniform = "u_"+std::string(#title)+"Texture"; return m_material->TryGetImage(uniform); } \
-void MaterialAsset::Set##title##Map(Ref<Texture> tex) { std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, tex); } \
+Ref<Image> MaterialAsset::Get##title##Map() { std::string uniform = "u_"+std::string(#title)+"Texture"; return m_material->TryGetImage(uniform); } \
+void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, tex); } \
 void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, nullptr); }
 
   struct MaterialProperty
@@ -135,7 +135,7 @@ void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform 
   MaterialTable::MaterialTable(uint32_t materialCount)
   : m_materialCount(materialCount)
   {
-    m_materials[0] = AssetManager::CreateNewAsset<MaterialAsset>("Default_Material", Project::GetMaterialDirectory());
+//    m_materials[0] = AssetManager::CreateNewAsset<MaterialAsset>("Default_Material", Project::GetMaterialDirectory());
   }
   
   MaterialTable::MaterialTable(Ref<MaterialTable> other)

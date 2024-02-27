@@ -13,6 +13,14 @@
 
 namespace IKan
 {
+#define SerializeTextureMap(title, material) \
+{\
+Ref<Image> map = material->Get##title##Map(); \
+AssetHandle mapHandle = map ? map->handle : (AssetHandle)0; \
+std::string uniform = "u_"+std::string(#title)+"Texture"; \
+out << YAML::Key << uniform << YAML::Value << mapHandle; \
+}
+
   bool ImageSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
   {
     asset = std::dynamic_pointer_cast<Image>(TextureFactory::Create(AssetManager::GetFileSystemPath(metadata)));
@@ -54,6 +62,12 @@ namespace IKan
       out << YAML::Key << "u_DepthTextureToggle" << YAML::Value <<  material->GetDepthMapToggle();
       out << YAML::Key << "u_AoTextureToggle" << YAML::Value <<  material->GetAoMapToggle();
 
+      SerializeTextureMap(Albedo, material);
+      SerializeTextureMap(Normal, material);
+      SerializeTextureMap(Metallic, material);
+      SerializeTextureMap(Roughness, material);
+      SerializeTextureMap(Depth, material);
+      SerializeTextureMap(Ao, material);
       out << YAML::EndMap;
     }
     out << YAML::EndMap; // Material

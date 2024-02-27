@@ -62,11 +62,11 @@ namespace IKan
     /// - Parameters:
     ///   - name: name of uniform store in shader
     ///   - image: image data
-    void Set(const std::string& name, const Ref<Texture>& texture);
+    void Set(const std::string& name, const Ref<Image>& texture);
     /// This function returns the image from material
     /// - Parameters:
     ///   - name: name of uniform store in shader
-    Ref<Texture> TryGetImage(const std::string& name);
+    Ref<Image> TryGetImage(const std::string& name);
     
     /// This function creates instance of Material with Shader instance
     /// - Parameter shader: shader instance
@@ -103,6 +103,6 @@ namespace IKan
     Buffer m_fsUniformStorageBuffer;
     Buffer m_gsUniformStorageBuffer;
     
-    std::vector<Ref<Texture>> m_textures;
+    std::vector<Ref<Image>> m_textures;
   };
 } // namespace IKan

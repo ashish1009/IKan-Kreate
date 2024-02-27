@@ -15,8 +15,8 @@ namespace IKan
 #define TextureMapAPIs(title) \
 float& Get##title##MapToggle(); \
 void Set##title##MapToggle(float value); \
-Ref<Texture> Get##title##Map(); \
-void Set##title##Map(Ref<Texture> texture); \
+Ref<Image> Get##title##Map(); \
+void Set##title##Map(Ref<Image> texture); \
 void Clear##title##Map(); \
   
   class MaterialAsset : public Asset

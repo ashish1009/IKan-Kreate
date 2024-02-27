@@ -136,7 +136,7 @@ namespace IKan
     return nullptr;
   }
   
-  void Material::Set(const std::string& name, const Ref<Texture>& image)
+  void Material::Set(const std::string& name, const Ref<Image>& image)
   {
     IK_PERFORMANCE("ShaderMaterial::Set");
     auto decl = FindResourceDeclaration(name);
@@ -149,7 +149,7 @@ namespace IKan
     m_textures[slot] = image;
   }
   
-  Ref<Texture> Material:: TryGetImage(const std::string& name)
+  Ref<Image> Material:: TryGetImage(const std::string& name)
   {
     IK_PERFORMANCE("ShaderMaterial::TryGetImage");
     auto decl = FindResourceDeclaration(name);

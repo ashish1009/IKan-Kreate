@@ -10,3 +10,9 @@ Material:
   u_MetallicTextureToggle: 0
   u_DepthTextureToggle: 0
   u_AoTextureToggle: 0
+  u_AlbedoTexture: 0
+  u_NormalTexture: 0
+  u_MetallicTexture: 0
+  u_RoughnessTexture: 0
+  u_DepthTexture: 0
+  u_AoTexture: 0
