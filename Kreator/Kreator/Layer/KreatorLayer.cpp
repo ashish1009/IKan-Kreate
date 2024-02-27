@@ -629,7 +629,7 @@ if (!m_currentScene) return
     }
     else
     {
-      NewScene();
+      NewScene(Project::GetActive()->GetConfig().name);
     }
 
     // Push the current project in recent list
