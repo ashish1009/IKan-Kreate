@@ -791,6 +791,13 @@ namespace Kreator
     {
       newEntity = m_context->CreateEntity("Empty Entity");
     }
+    if (ImGui::MenuItem("Mesh"))
+    {
+      newEntity = m_context->CreateEntity("Mesh");
+      auto& meshComp = newEntity.AddComponent<MeshComponent>();
+      meshComp.mesh = 0;
+      meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default_Material.ikmat"));
+    }
     ImGui::Separator();
     
     static const std::filesystem::path DefaultMeshFile = "Meshes/Default/";
@@ -826,7 +833,7 @@ namespace Kreator
         {
           auto& meshComp = m_selectionContext.At(0).AddComponent<MeshComponent>();
           meshComp.mesh = 0;
-          meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>(Project::GetActive()->GetMaterialPath("Default_Material.ikmat")));
+          meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default_Material.ikmat"));
           ImGui::CloseCurrentPopup();
         }
         ImGui::Separator();
