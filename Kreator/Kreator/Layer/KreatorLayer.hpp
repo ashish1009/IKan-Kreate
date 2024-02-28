@@ -202,7 +202,9 @@ namespace Kreator
     void UI_SceneSettings();
     /// This function Update the Guizmo Renderer
     void UI_UpdateGuizmo();
-
+    /// This function renders the Guizmo toolbar
+    void UI_GuizmoToolbar();
+    
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup {false};
