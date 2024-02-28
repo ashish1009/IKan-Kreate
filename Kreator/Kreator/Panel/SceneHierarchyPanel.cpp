@@ -823,7 +823,7 @@ namespace Kreator
       newEntity = m_context->CreateEntity("Mesh");
       auto& meshComp = newEntity.AddComponent<MeshComponent>();
       meshComp.mesh = 0;
-      meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default_Material.ikmat"));
+      meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
     }
     ImGui::Separator();
     
@@ -834,7 +834,7 @@ namespace Kreator
         newEntity = m_context->CreateEntity(name);
         std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
         auto& mc = newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
-        mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default_Material.ikmat"));
+        mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
       }
     };
 
@@ -860,7 +860,7 @@ namespace Kreator
         {
           auto& meshComp = m_selectionContext.At(0).AddComponent<MeshComponent>();
           meshComp.mesh = 0;
-          meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default_Material.ikmat"));
+          meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
           ImGui::CloseCurrentPopup();
         }
         ImGui::Separator();

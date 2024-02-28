@@ -988,7 +988,7 @@ namespace Kreator
     ImGui::PushID("Environment");
     if (UI::PropertyGridHeader("Environment", true, 4, 5))
     {
-      UI::BeginPropertyGrid();
+      UI::BeginPropertyGrid(2, 1, 5);
       auto& directonLight = SceneRenderer::GetDirectionLight();
       bool useDirectionLight = directonLight.enable;
       if (UI::Property("Direction Light", useDirectionLight))

@@ -5,6 +5,9 @@ Assets:
   - Handle: 248437274
     FilePath: Textures/Pbr/rustedIron/rusted_iron_normal.png
     Type: Image
+  - Handle: 444052761
+    FilePath: Materials/Default.ikmat
+    Type: Material
   - Handle: 534439371
     FilePath: Textures/Pbr/bog/bog_height.png
     Type: Image
@@ -26,9 +29,6 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: Mesh
-  - Handle: 1363873247
-    FilePath: Materials/Default_Material.ikmat
-    Type: Material
   - Handle: 1691441168
     FilePath: Textures/Pbr/rustedIron/rusted_iron_albedo.png
     Type: Image
