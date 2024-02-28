@@ -100,6 +100,8 @@ Editor Application using IKan Library to create Games
   - Folder Explorer
   - User Preference
   - Application Setting
+  - Image Viewer
+  - Material Editor
 - UI
   - UI Helper
 - Panels
@@ -135,6 +137,7 @@ Editor Application using IKan Library to create Games
   - v5.0.5.0 : ECS 
   - v5.1.5.0 : Scene Renderer
   - v5.2.5.1 : Lights and Materials
+  - v5.3.5.2 : Material Editor and Serializer
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)
