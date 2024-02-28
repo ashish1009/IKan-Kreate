@@ -800,7 +800,7 @@ namespace Kreator
         newEntity = m_context->CreateEntity(name);
         std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
         auto& mc = newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
-        mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>(Project::GetActive()->GetMaterialPath("Default_Material.ikmat")));
+        mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default_Material.ikmat"));
       }
     };
 

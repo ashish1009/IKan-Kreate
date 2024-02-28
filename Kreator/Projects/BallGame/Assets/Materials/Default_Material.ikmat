@@ -4,15 +4,15 @@ Material:
   Roughness: 0.5
   DepthScale: 0.00100000005
   TilingFactor: 1
-  u_AlbedoTextureToggle: 0
-  u_NormalTextureToggle: 0
-  u_RoughnessTextureToggle: 0
-  u_MetallicTextureToggle: 0
-  u_DepthTextureToggle: 0
-  u_AoTextureToggle: 0
-  u_AlbedoTexture: 0
-  u_NormalTexture: 0
-  u_MetallicTexture: 0
-  u_RoughnessTexture: 0
-  u_DepthTexture: 0
-  u_AoTexture: 0
+  AlbedoTextureToggle: 0
+  NormalTextureToggle: 0
+  RoughnessTextureToggle: 0
+  MetallicTextureToggle: 0
+  DepthTextureToggle: 0
+  AoTextureToggle: 0
+  AlbedoTexture: 0
+  NormalTexture: 0
+  MetallicTexture: 0
+  RoughnessTexture: 0
+  DepthTexture: 0
+  AoTexture: 0
