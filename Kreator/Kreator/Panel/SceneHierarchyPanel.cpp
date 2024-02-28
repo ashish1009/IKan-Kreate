@@ -802,6 +802,16 @@ namespace Kreator
             }
             ImGui::NextColumn();
           }
+          else 
+          {
+            AssetHandle materialAssetHandle {};
+            settings.advanceToNextColumn = false;
+            settings.widthOffset = 40;
+            UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), "Empty", materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
+              smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
+            }, settings);
+
+          }
           ImGui::PopID();
         }
         

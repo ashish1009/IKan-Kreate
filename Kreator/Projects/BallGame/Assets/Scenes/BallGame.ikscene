@@ -14,7 +14,7 @@ Entities:
       Enable: true
       MeshHandle: 1336252552
       MaterialTable:
-        0: 1363873247
+        0: 444052761
   - Entity: 2579642811517955885
     TagComponent:
       Tag: Cube
@@ -29,8 +29,7 @@ Entities:
       Enable: true
       MeshHandle: 560965872
       MaterialTable:
-        0: 1363873247
-        1: 6461586421828513494
+        0: 444052761
   - Entity: 8318956322238503385
     TagComponent:
       Tag: Cylinder
@@ -45,4 +44,4 @@ Entities:
       Enable: true
       MeshHandle: 27450833
       MaterialTable:
-        0: 1363873247
+        0: 444052761
