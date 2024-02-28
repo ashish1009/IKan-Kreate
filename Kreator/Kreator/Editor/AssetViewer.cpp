@@ -166,8 +166,24 @@ namespace Kreator
           needsSerialize = true;
         }
 
+        ImGui::SameLine();
+        ImGui::SetNextItemWidth(100.0f);
+        ImGui::DragFloat("Emission", &materialProperty.emission, 0.01f, 0.0f, 20.0f);
+        if (ImGui::IsItemDeactivated())
+        {
+          needsSerialize = true;
+        }
+        
+        ImGui::SetCursorPos(nextRowCursorPos);
+
         UI::PropertyGridHeaderEnd();
       }
+    }
+    
+    if (needsSerialize)
+    {
+      IK_LOG_WARN("Material Editor", "Serializing Material...");
+      AssetImporter::Serialize(m_materialAsset);
     }
   }
 

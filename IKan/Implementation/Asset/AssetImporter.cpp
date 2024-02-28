@@ -6,6 +6,7 @@
 //
 
 #include "AssetImporter.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
@@ -35,7 +36,8 @@ namespace IKan
   void AssetImporter::Serialize(const Ref<Asset>& asset)
   {
     IK_PROFILE();
-    IK_ASSERT(false);
+    const AssetMetadata& metadata = AssetManager::GetMetadata(asset->handle);
+    Serialize(metadata, asset);
   }
   
   bool AssetImporter::TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset)

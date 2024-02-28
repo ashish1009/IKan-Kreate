@@ -71,7 +71,19 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
     mat.metallic = value;
     return m_material->Set<MaterialProperty>("u_Material", mat);
   }
+
+  float& MaterialAsset::GetEmission()
+  {
+    return m_material->Get<MaterialProperty>("u_Material").emission;
+  }
   
+  void MaterialAsset::SetEmission(float value)
+  {
+    auto& mat = m_material->Get<MaterialProperty>("u_Material");
+    mat.emission = value;
+    return m_material->Set<MaterialProperty>("u_Material", mat);
+  }
+
   float& MaterialAsset::GetRoughness()
   {
     return m_material->Get<MaterialProperty>("u_Material").roughness;

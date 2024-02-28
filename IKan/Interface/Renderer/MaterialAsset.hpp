@@ -21,6 +21,7 @@ void Set##title##Map(Ref<Image> texture); \
   struct MaterialProperty
   {
     glm::vec3 color = {1.0f, 1.0f, 1.0f};
+    float emission = 0.0f;
     float metallic = 0.5f;
     float roughness = 0.5f;
     float depthScale = 0.001f;
@@ -43,7 +44,13 @@ void Set##title##Map(Ref<Image> texture); \
     /// This function sets the Albedo color
     /// - Parameter value: new value
     void SetAlbedoColor(const glm::vec3& color);
-    
+
+    /// This function returns the Emmision
+    float& GetEmission();
+    /// This function sets the Emmision
+    /// - Parameter value: new value
+    void SetEmission(float value);
+
     /// This function returns the Metalness
     float& GetMetalness();
     /// This function sets the Metalness

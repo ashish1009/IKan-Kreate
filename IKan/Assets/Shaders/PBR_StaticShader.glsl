@@ -94,6 +94,7 @@ uniform DirectionLight u_DirectionLight;
 struct Material
 {
   vec3 albedoColor;
+  float emission;
   float metallic;
   float roughness;
   float depthScale;
@@ -242,6 +243,7 @@ void main()
 
   // Calculate the light affect
   vec3 lightResult = CalculateDirectionLight(F0);
+  lightResult += m_Params.Albedo * u_Material.emission;
 
   // Ambient light
   vec3 ambient = vec3(0.03);
