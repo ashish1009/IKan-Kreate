@@ -159,6 +159,18 @@ namespace IKan {
       out << YAML::Key << "Enable" << YAML::Value << meshComponent.enable;
       out << YAML::Key << "MeshHandle" << YAML::Value << meshComponent.mesh;
       
+      auto materialTable = meshComponent.materialTable;
+      if (materialTable->GetMaterialCount() > 0)
+      {
+        out << YAML::Key << "MaterialTable" << YAML::Value << YAML::BeginMap; // MaterialTable
+        
+        for (uint32_t i = 0; i < materialTable->GetMaterialCount(); i++)
+        {
+          AssetHandle handle = (materialTable->HasMaterial(i) ? materialTable->GetMaterial(i)->handle : (AssetHandle)0);
+          out << YAML::Key << i << YAML::Value << handle;
+        }
+        out << YAML::EndMap; // MaterialTable
+      }
       out << YAML::EndMap; // MeshComponent
     }
     
@@ -226,6 +238,20 @@ namespace IKan {
         auto& component = deserializedEntity.AddComponent<MeshComponent>();
         component.enable = meshComponent["Enable"].as<bool>();
         component.mesh = meshComponent["MeshHandle"].as<AssetHandle>();
+        
+        if (meshComponent["MaterialTable"])
+        {
+          YAML::Node materialTableNode = meshComponent["MaterialTable"];
+          for (auto materialEntry : materialTableNode)
+          {
+            uint32_t index = materialEntry.first.as<uint32_t>();
+            AssetHandle materialAsset = materialEntry.second.as<AssetHandle>();
+            if (materialAsset && AssetManager::IsAssetHandleValid(materialAsset))
+            {
+              component.materialTable->SetMaterial(index, AssetManager::GetAsset<MaterialAsset>(materialAsset));
+            }
+          }
+        }
       }
     } // For each entity
   }

@@ -1,3 +1,17 @@
 Scene: BallGame.ikscene
 Entities:
-  []
+  - Entity: 2579642811517955885
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      MaterialTable:
+        0: 1363873247
