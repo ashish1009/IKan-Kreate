@@ -88,6 +88,6 @@ namespace Kreator
     Entity m_lastSelectedEntity;
     std::function<void(SelectionContext)> m_selectionChangedCallback, m_entityDeletedCallback;
 
-    inline static Ref<Texture> s_pencilIcon, s_plusIcon, s_gearIcon, s_reloadIcon;
+    inline static Ref<Texture> s_pencilIcon, s_plusIcon, s_gearIcon, s_reloadIcon, s_closeEyeIcon, s_EyeIcon;
   };
 } // namespace Kreator

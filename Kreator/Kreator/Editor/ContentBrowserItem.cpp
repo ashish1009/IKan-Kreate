@@ -528,7 +528,8 @@ namespace Kreator
     else
     {
       AssetEditorManager::OpenEditor(AssetManager::GetAsset<Asset>(m_assetInfo.handle));
-    }  }
+    }
+  }
   
   void ContentBrowserAsset::OnRenamed(const std::string& newName)
   {

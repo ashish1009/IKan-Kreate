@@ -199,6 +199,8 @@ namespace Kreator
     s_plusIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Plus.png");
     s_gearIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Gear.png");
     s_reloadIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Rotate.png");
+    s_closeEyeIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/CloseEye.png");
+    s_EyeIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/Eye.png");
   }
   void SceneHierarchyPanel::Shutdown()
   {
@@ -789,7 +791,7 @@ namespace Kreator
               
               AssetHandle materialAssetHandle = meshMaterialAsset->handle;
               settings.advanceToNextColumn = false;
-              settings.widthOffset = 40;
+              settings.widthOffset = 80;
               UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), meshMaterialName.c_str(), materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
                 smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
               }, settings);
@@ -800,6 +802,25 @@ namespace Kreator
               {
                 smc.materialTable->ClearMaterial((uint32_t)i);
               }
+              ImGui::SameLine();
+              
+              static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+              static bool showMaterialEditor = false;
+              if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }))
+              {
+                showMaterialEditor = showMaterialEditor ? false : true;
+              }
+              UI::DrawButtonImage(showMaterialEditor ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+              
+              if (showMaterialEditor)
+              {
+                AssetEditorManager::OpenEditor(meshMaterialAsset);
+              }
+              else
+              {
+                AssetEditorManager::CloseEditor(meshMaterialAsset);
+              }
+
               ImGui::NextColumn();
             }
             else
