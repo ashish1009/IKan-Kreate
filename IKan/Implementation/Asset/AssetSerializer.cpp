@@ -92,7 +92,12 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
     YAML::Node root = YAML::Load(strStream.str());
     YAML::Node materialNode = root["Material"];
     
-    Ref<MaterialAsset> material = MaterialAsset::Create();
+    // Extract file name without extenstion
+    const std::string& fileNameWithExtenstion = metadata.filePath.filename().string();
+    auto lastDot = fileNameWithExtenstion.find_last_of('.');
+    std::string fileName = fileNameWithExtenstion.substr(0, lastDot);
+    
+    Ref<MaterialAsset> material = MaterialAsset::Create(fileName);
     
     IK_DESERIALIZE_PROPERTY(AlbedoColor, material->GetAlbedoColor(), materialNode, glm::vec3(0.8f));
     IK_DESERIALIZE_PROPERTY(Metalness, material->GetMetalness(), materialNode, 0.5f);

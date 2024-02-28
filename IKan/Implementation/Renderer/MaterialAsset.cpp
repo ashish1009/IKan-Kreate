@@ -17,15 +17,15 @@ void MaterialAsset::Set##title##MapToggle(float value) { std::string uniform = "
 Ref<Image> MaterialAsset::Get##title##Map() { std::string uniform = "u_"+std::string(#title)+"Texture"; return m_material->TryGetImage(uniform); } \
 void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, tex); } \
 
-  Ref<MaterialAsset> MaterialAsset::Create()
+  Ref<MaterialAsset> MaterialAsset::Create(const std::string& name)
   {
-    return CreateRef<MaterialAsset>();
+    return CreateRef<MaterialAsset>(name);
   }
   
-  MaterialAsset::MaterialAsset()
+  MaterialAsset::MaterialAsset(const std::string& name)
   {
     IK_PROFILE();
-    m_material = Material::Create(ShaderLibrary::GetShader(CoreAsset("Shaders/PBR_StaticShader.glsl")), "PBR_Material");
+    m_material = Material::Create(ShaderLibrary::GetShader(CoreAsset("Shaders/PBR_StaticShader.glsl")), name);
     IK_LOG_INFO(LogModule::MaterialAsset, "Creating {0} Asset", m_material->GetName());
     
     SetAlbedoColor({0.8f, 0.8f, 0.8f});

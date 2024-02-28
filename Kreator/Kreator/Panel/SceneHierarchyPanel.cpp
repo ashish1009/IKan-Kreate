@@ -51,7 +51,9 @@ namespace Kreator
       if (UI::BeginPopup("ComponentSettings"))
       {
         if (ImGui::MenuItem("Reset"))
+        {
           resetValues = true;
+        }
         
         if (canBeRemoved)
         {
@@ -736,7 +738,29 @@ namespace Kreator
       }
       UI::EndPropertyGrid();
       
-      if (UI::BeginTreeNode("Materials"))
+      bool open = UI::PropertyGridHeader("Material", true, 3, 5);
+      bool rightClicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
+      float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+
+      ImGui::SameLine(contentRegionAvailable.x - lineHeight);
+      if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }) or rightClicked)
+      {
+        ImGui::OpenPopup("CreateMaterial");
+      }
+      UI::DrawButtonImage(s_plusIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+
+      if (UI::BeginPopup("CreateMaterial"))
+      {
+        char buffer[256];
+        memset(buffer, 0, 256);
+        if (ImGui::InputText("##Tag", buffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
+        {
+          smc.materialTable->SetMaterial(smc.materialTable->GetMaterialCount(), AssetManager::CreateNewAsset<MaterialAsset>(buffer, Project::GetActive()->GetMaterialDirectory(), buffer));
+        }
+        UI::EndPopup();
+      }
+
+      if (open)
       {
         UI::BeginPropertyGrid();
 
@@ -779,8 +803,8 @@ namespace Kreator
         }
         
         UI::EndPropertyGrid();
-        UI::EndTreeNode();
-      }
+        UI::PropertyGridHeaderEnd();
+      } // property grid header
     }, s_gearIcon, true);
   }
   
