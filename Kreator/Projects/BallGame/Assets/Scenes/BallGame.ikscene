@@ -14,7 +14,7 @@ Entities:
       Enable: true
       MeshHandle: 1336252552
       MaterialTable:
-        0: 444052761
+        0: 4982622595928833722
   - Entity: 2579642811517955885
     TagComponent:
       Tag: Cube

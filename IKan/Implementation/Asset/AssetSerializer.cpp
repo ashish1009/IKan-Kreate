@@ -56,7 +56,6 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
       out << YAML::Key << "Emission" << YAML::Value <<  material->GetEmission();
       out << YAML::Key << "Roughness" << YAML::Value <<  material->GetRoughness();
       out << YAML::Key << "DepthScale" << YAML::Value <<  material->GetDepthScale();
-      out << YAML::Key << "TilingFactor" << YAML::Value <<  material->GetTilingFactor();
 
       out << YAML::Key << "AlbedoTextureToggle" << YAML::Value <<  material->GetAlbedoMapToggle();
       out << YAML::Key << "NormalTextureToggle" << YAML::Value <<  material->GetNormalMapToggle();
@@ -104,7 +103,6 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
     IK_DESERIALIZE_PROPERTY(Emission, material->GetEmission(), materialNode, 0.0f);
     IK_DESERIALIZE_PROPERTY(Roughness, material->GetRoughness(), materialNode, 0.5f);
     IK_DESERIALIZE_PROPERTY(DepthScale, material->GetDepthScale(), materialNode, 0.001f);
-    IK_DESERIALIZE_PROPERTY(TilingFactor, material->GetTilingFactor(), materialNode, 1.0f);
 
     material->SetAlbedoMapToggle(materialNode["AlbedoTextureToggle"] ? materialNode["AlbedoTextureToggle"].as<float>() : 0.0f);
     material->SetNormalMapToggle(materialNode["NormalTextureToggle"] ? materialNode["NormalTextureToggle"].as<float>() : 0.0f);

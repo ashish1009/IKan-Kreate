@@ -25,7 +25,6 @@ void Set##title##Map(Ref<Image> texture); \
     float metallic = 0.5f;
     float roughness = 0.5f;
     float depthScale = 0.001f;
-    float tilingFactor = 1.0f;
   };
   
   class MaterialAsset : public Asset
@@ -69,12 +68,6 @@ void Set##title##Map(Ref<Image> texture); \
     /// This function sets the DepthScale
     /// - Parameter value: new value
     void SetDepthScale(float value);
-
-    /// This function returns the TilingFactor
-    float& GetTilingFactor();
-    /// This function sets the TilingFactor
-    /// - Parameter value: new value
-    void SetTilingFactor(float value);
 
     TextureMapAPIs(Albedo);
     TextureMapAPIs(Normal);

@@ -59,6 +59,9 @@ Assets:
   - Handle: 3483877028
     FilePath: Textures/Pbr/bog/bog_preview.jpg
     Type: Image
+  - Handle: 4982622595928833722
+    FilePath: Materials/RustedIron.ikmat
+    Type: Material
   - Handle: 10765036989886449827
     FilePath: Materials/Wall.ikmat
     Type: Material

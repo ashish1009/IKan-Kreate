@@ -45,6 +45,7 @@ void main()
   vec3 N  = normalize(vs_out.WorldNormals);
   vec3 T  = normalize(vs_out.Binormal);
   vec3 B  = -normalize(vs_out.Tangent);
+  
   vs_out.TBN = mat3(T, B, N);
   vs_out.TangentViewPos = vs_out.TBN * u_CameraPosition;
 
@@ -98,9 +99,9 @@ struct Material
   float metallic;
   float roughness;
   float depthScale;
-  float tilingFactor;
 };
 uniform Material u_Material;
+uniform float u_TilingFactor;
 
 // Texture Uniforms
 uniform sampler2D u_AlbedoTexture;
@@ -225,7 +226,7 @@ vec3 CalculateDirectionLight(vec3 F0)
 
 void main()
 {
-  float tilingFactor = u_Material.tilingFactor;
+  float tilingFactor = 1.0;//u_TilingFactor;
   vec2 texCoords = vs_Input.TexCoord;
 
   m_Params.Albedo       = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, texCoords * tilingFactor).rgb * u_Material.albedoColor : u_Material.albedoColor;

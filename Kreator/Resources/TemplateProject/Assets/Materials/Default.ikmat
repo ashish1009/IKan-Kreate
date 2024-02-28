@@ -4,7 +4,6 @@ Material:
   Metallic: 0.5
   Roughness: 0.5
   DepthScale: 0.00100000005
-  TilingFactor: 1
   AlbedoTextureToggle: 0
   NormalTextureToggle: 0
   RoughnessTextureToggle: 0

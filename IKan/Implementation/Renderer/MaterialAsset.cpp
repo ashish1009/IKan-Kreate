@@ -32,7 +32,6 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
     SetMetalness(0.5);
     SetRoughness(0.5);
     SetDepthScale(0.001);
-    SetTilingFactor(1.0f);
   }
   
   MaterialAsset::MaterialAsset(Ref<Material> material)
@@ -105,18 +104,6 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   {
     auto& mat = m_material->Get<MaterialProperty>("u_Material");
     mat.depthScale = value;
-    return m_material->Set<MaterialProperty>("u_Material", mat);
-  }
-  
-  float& MaterialAsset::GetTilingFactor()
-  {
-    return m_material->Get<MaterialProperty>("u_Material").tilingFactor;
-  }
-  
-  void MaterialAsset::SetTilingFactor(float value)
-  {
-    auto& mat = m_material->Get<MaterialProperty>("u_Material");
-    mat.tilingFactor = value;
     return m_material->Set<MaterialProperty>("u_Material", mat);
   }
   
