@@ -54,4 +54,26 @@ namespace Kreator
     UI::EndDisabled();
     UI::EndPropertyGrid();
   }
+  
+  // Material Editor -------------------------------------------------------------------------------------------------
+  MaterialEditor::MaterialEditor()
+  : AssetEditor("Material Editor")
+  {
+    m_checkerboardTex = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Editor/CheckBoard.png");
+  }
+  
+  void MaterialEditor::SetAsset(const Ref<Asset>& asset)
+  {
+    m_materialAsset = std::dynamic_pointer_cast<MaterialAsset>(asset);
+  }
+  
+  void MaterialEditor::OnClose()
+  {
+    m_materialAsset = nullptr;
+  }
+  
+  void MaterialEditor::Render()
+  {
+  }
+
 } // namespace Kreator
