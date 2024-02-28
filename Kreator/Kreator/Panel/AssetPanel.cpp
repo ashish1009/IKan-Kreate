@@ -15,7 +15,6 @@ namespace Kreator
     IK_PERFORMANCE("ProjectSettingsPanel::OnImGuiRender");
     RETURN_IF (!isOpen)
     
-    UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
     UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 5);
 
     ImGui::Begin("Asset Manager", &isOpen);

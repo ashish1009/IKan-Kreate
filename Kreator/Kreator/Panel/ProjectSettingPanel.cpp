@@ -41,7 +41,6 @@ namespace Kreator
   void ProjectSettingsPanel::RenderGeneralSettings()
   {
     ImGui::PushID("GeneralSettings");
-    UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
     UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 5);
 
     if (UI::PropertyGridHeader("General", true, 4))

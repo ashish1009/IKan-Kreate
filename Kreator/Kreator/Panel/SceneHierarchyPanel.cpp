@@ -22,10 +22,6 @@ namespace Kreator
   template<typename T, typename UIFunction>
   static void DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction, const Ref<Texture>& settingsIcon, bool defaultOpen = false, bool canBeRemoved = true)
   {
-    UI::ScopedColor header(ImGuiCol_Header, UI::Color::Background);
-    UI::ScopedColor headerHovered(ImGuiCol_HeaderHovered, UI::Color::TitleBarDark);
-    UI::ScopedColor headerActive(ImGuiCol_HeaderActive, UI::Color::Background);
-    
     if (entity.HasComponent<T>())
     {
       //  This fixes an issue where the first "+" button would display the "Remove" buttons for ALL components on an Entity.
@@ -738,86 +734,92 @@ namespace Kreator
       }
       UI::EndPropertyGrid();
       
-      bool open = UI::PropertyGridHeader("Material", true, 3, 5);
-#if 0
-      bool rightClicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
-      float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
-
-      ImGui::SameLine(contentRegionAvailable.x - lineHeight);
-      if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }) or rightClicked)
       {
-        ImGui::OpenPopup("CreateMaterial");
-      }
-      UI::DrawButtonImage(s_plusIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
 
-      if (UI::BeginPopup("CreateMaterial"))
-      {
-        char buffer[256];
-        memset(buffer, 0, 256);
-        if (ImGui::InputText("##Tag", buffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
-        {
-          smc.materialTable->SetMaterial(smc.materialTable->GetMaterialCount(), AssetManager::CreateNewAsset<MaterialAsset>(buffer, Project::GetActive()->GetMaterialDirectory(), buffer));
-          ImGui::CloseCurrentPopup();
-        }
-        UI::EndPopup();
-      }
-#endif
-      
-      if (open)
-      {
-        UI::BeginPropertyGrid();
-
-        for (size_t i = 0; i < smc.materialTable->GetMaterialCount(); i++)
-        {
-          bool hasMaterial = smc.materialTable->HasMaterial((uint32_t)i);
-          
-          std::string label = fmt::format("[Material {0}]", i);
-          
-          // Note: Fix for weird ImGui ID bug...
-          std::string id = fmt::format("{0}-{1}", label, i);
-          ImGui::PushID(id.c_str());
-          
-          UI::PropertyAssetReferenceSettings settings;
-          if (hasMaterial)
-          {
-            Ref<MaterialAsset> meshMaterialAsset = smc.materialTable->GetMaterial((uint32_t)i);
-            std::string meshMaterialName = meshMaterialAsset->GetMaterial()->GetName();
-            if (meshMaterialName.empty())
-            {
-              meshMaterialName = "Unnamed Material";
-            }
-            
-            AssetHandle materialAssetHandle = meshMaterialAsset->handle;
-            settings.advanceToNextColumn = false;
-            settings.widthOffset = 40;
-            UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), meshMaterialName.c_str(), materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
-              smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
-            }, settings);
-            
-            ImGui::SameLine();
-            float prevItemHeight = ImGui::GetItemRectSize().y;
-            if (UI::DrawRoundButton("X", UI::Color::Muted, 20, { prevItemHeight, prevItemHeight }))
-            {
-              smc.materialTable->ClearMaterial((uint32_t)i);
-            }
-            ImGui::NextColumn();
-          }
-          else 
-          {
-            AssetHandle materialAssetHandle {};
-            settings.advanceToNextColumn = false;
-            settings.widthOffset = 40;
-            UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), "Empty", materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
-              smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
-            }, settings);
-
-          }
-          ImGui::PopID();
-        }
+        bool open = UI::PropertyGridHeader("Material", true, 3, 5);
         
-        UI::EndPropertyGrid();
-        UI::PropertyGridHeaderEnd();
-      } // property grid header
+#if 0
+        bool rightClicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
+        float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+        
+        ImGui::SameLine(contentRegionAvailable.x - lineHeight);
+        if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }) or rightClicked)
+        {
+          ImGui::OpenPopup("CreateMaterial");
+        }
+        UI::DrawButtonImage(s_plusIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+        
+        if (UI::BeginPopup("CreateMaterial"))
+        {
+          char buffer[256];
+          memset(buffer, 0, 256);
+          if (ImGui::InputText("##Tag", buffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
+          {
+            smc.materialTable->SetMaterial(smc.materialTable->GetMaterialCount(), AssetManager::CreateNewAsset<MaterialAsset>(buffer, Project::GetActive()->GetMaterialDirectory(), buffer));
+            ImGui::CloseCurrentPopup();
+          }
+          UI::EndPopup();
+        }
+#endif
+        
+        if (open)
+        {
+          UI::BeginPropertyGrid();
+          
+          for (size_t i = 0; i < smc.materialTable->GetMaterialCount(); i++)
+          {
+            bool hasMaterial = smc.materialTable->HasMaterial((uint32_t)i);
+            
+            std::string label = fmt::format("[Material {0}]", i);
+            
+            // Note: Fix for weird ImGui ID bug...
+            std::string id = fmt::format("{0}-{1}", label, i);
+            ImGui::PushID(id.c_str());
+            
+            UI::PropertyAssetReferenceSettings settings;
+            if (hasMaterial)
+            {
+              Ref<MaterialAsset> meshMaterialAsset = smc.materialTable->GetMaterial((uint32_t)i);
+              std::string meshMaterialName = meshMaterialAsset->GetMaterial()->GetName();
+              if (meshMaterialName.empty())
+              {
+                meshMaterialName = "Unnamed Material";
+              }
+              
+              AssetHandle materialAssetHandle = meshMaterialAsset->handle;
+              settings.advanceToNextColumn = false;
+              settings.widthOffset = 40;
+              UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), meshMaterialName.c_str(), materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
+                smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
+              }, settings);
+              
+              ImGui::SameLine();
+              float prevItemHeight = ImGui::GetItemRectSize().y;
+              if (UI::DrawRoundButton("X", UI::Color::Muted, 20, { prevItemHeight, prevItemHeight }))
+              {
+                smc.materialTable->ClearMaterial((uint32_t)i);
+              }
+              ImGui::NextColumn();
+            }
+            else
+            {
+              AssetHandle materialAssetHandle {};
+              settings.advanceToNextColumn = false;
+              settings.widthOffset = 40;
+              UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), "Empty", materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
+                smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
+              }, settings);
+              
+            }
+            ImGui::PopID();
+          }
+          
+          
+          UI::EndPropertyGrid();
+          UI::PropertyGridHeaderEnd();
+        } // property grid header
+      }
     }, s_gearIcon, true);
   }
   
@@ -851,7 +853,6 @@ namespace Kreator
     menuForDefaultMesh(newEntity, "Cube");
     menuForDefaultMesh(newEntity, "Sphere");
     menuForDefaultMesh(newEntity, "Cylinder");
-    menuForDefaultMesh(newEntity, "Capsule");
 
     if (newEntity)
     {

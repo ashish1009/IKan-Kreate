@@ -179,7 +179,6 @@ namespace Kreator
         ImGui::TableSetColumnIndex(0);
         ImGui::BeginChild("##folders_common");
         {
-          UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
           if (ImGui::CollapsingHeader("Content", nullptr, ImGuiTreeNodeFlags_DefaultOpen))
           {
             UI::ScopedStyle spacing(ImGuiStyleVar_ItemSpacing, ImVec2(0.0f, 0.0f));
