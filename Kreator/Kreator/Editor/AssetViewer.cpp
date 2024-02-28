@@ -152,17 +152,17 @@ namespace Kreator
         ImGui::PopStyleVar();
 
         ImGui::SetCursorPos(properCursorPos);
-        ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(materialProperty.color), ImGuiColorEditFlags_NoInputs);
-        if (ImGui::IsItemDeactivated())
-        {
-          needsSerialize = true;
-        }
-        
-        ImGui::SameLine();
         bool useAlbedo = material->Get<float>("u_AlbedoTextureToggle");
         if (ImGui::Checkbox("Use", &useAlbedo))
         {
           material->Set("u_AlbedoTextureToggle", useAlbedo ? 1.0f : 0.0f);
+          needsSerialize = true;
+        }
+        ImGui::SameLine();
+
+        ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(materialProperty.color), ImGuiColorEditFlags_NoInputs);
+        if (ImGui::IsItemDeactivated())
+        {
           needsSerialize = true;
         }
 
@@ -177,7 +177,432 @@ namespace Kreator
         ImGui::SetCursorPos(nextRowCursorPos);
 
         UI::PropertyGridHeaderEnd();
-      }
+      } // Albedo
+      
+      // Normal
+      if (UI::PropertyGridHeader("Normal", true, 4, 5))
+      {
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+        
+        Ref<Image> normalMap = material->TryGetImage("u_NormalTexture");
+        Ref<Texture> normalUITexture = normalMap ? normalMap : m_checkerboardTex;
+        
+        ImVec2 textureCursorPos = ImGui::GetCursorPos();
+        UI::Image(normalUITexture, ImVec2(64, 64));
+        if (ImGui::BeginDragDropTarget())
+        {
+          auto data = ImGui::AcceptDragDropPayload("asset_payload");
+          if (data)
+          {
+            int count = data->DataSize / sizeof(AssetHandle);
+            
+            for (int i = 0; i < count; i++)
+            {
+              if (count > 1)
+                break;
+              
+              AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+              Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+              if (!asset or asset->GetAssetType() != AssetType::Image)
+              {
+                break;
+              }
+              
+              normalMap = std::dynamic_pointer_cast<Image>(asset);
+              m_materialAsset->SetNormalMap(normalMap);
+              m_materialAsset->SetNormalMapToggle(true);
+              needsSerialize = true;
+            }
+          }
+          ImGui::EndDragDropTarget();
+        } // Drag Drop
+        ImGui::PopStyleVar();
+        
+        if (ImGui::IsItemHovered())
+        {
+          if (normalMap)
+          {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted(normalMap->GetfilePath().c_str());
+            ImGui::PopTextWrapPos();
+            UI::Image(normalUITexture, ImVec2(384, 384));
+            ImGui::EndTooltip();
+          }
+          if (ImGui::IsItemClicked())
+          {
+          }
+        }
+        
+        ImVec2 nextRowCursorPos = ImGui::GetCursorPos();
+        ImGui::SameLine();
+        ImVec2 properCursorPos = ImGui::GetCursorPos();
+        ImGui::SetCursorPos(textureCursorPos);
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+        if (normalMap and ImGui::Button("X", ImVec2(18, 18)))
+        {
+          m_materialAsset->SetNormalMap(nullptr);
+          m_materialAsset->SetNormalMapToggle(false);
+          needsSerialize = true;
+        }
+        ImGui::PopStyleVar();
+        
+        ImGui::SetCursorPos(properCursorPos);
+        bool useNormal = material->Get<float>("u_NormalTextureToggle");
+        if (ImGui::Checkbox("Use", &useNormal))
+        {
+          material->Set("u_NormalTextureToggle", useNormal ? 1.0f : 0.0f);
+          needsSerialize = true;
+        }
+        ImGui::SetCursorPos(nextRowCursorPos);
+        UI::PropertyGridHeaderEnd();
+      } // Normal
+      
+      // Metallic
+      if (UI::PropertyGridHeader("Metallic", true, 4, 5))
+      {
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+        
+        Ref<Image> metallicMap = material->TryGetImage("u_MetallicTexture");
+        Ref<Texture> metallicUITexture = metallicMap ? metallicMap : m_checkerboardTex;
+        
+        ImVec2 textureCursorPos = ImGui::GetCursorPos();
+        UI::Image(metallicUITexture, ImVec2(64, 64));
+        if (ImGui::BeginDragDropTarget())
+        {
+          auto data = ImGui::AcceptDragDropPayload("asset_payload");
+          if (data)
+          {
+            int count = data->DataSize / sizeof(AssetHandle);
+            
+            for (int i = 0; i < count; i++)
+            {
+              if (count > 1)
+                break;
+              
+              AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+              Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+              if (!asset or asset->GetAssetType() != AssetType::Image)
+              {
+                break;
+              }
+              
+              metallicMap = std::dynamic_pointer_cast<Image>(asset);
+              m_materialAsset->SetMetallicMap(metallicMap);
+              m_materialAsset->SetMetallicMapToggle(true);
+              needsSerialize = true;
+            }
+          }
+          ImGui::EndDragDropTarget();
+        } // Drag Drop
+        ImGui::PopStyleVar();
+        
+        if (ImGui::IsItemHovered())
+        {
+          if (metallicMap)
+          {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted(metallicMap->GetfilePath().c_str());
+            ImGui::PopTextWrapPos();
+            UI::Image(metallicUITexture, ImVec2(384, 384));
+            ImGui::EndTooltip();
+          }
+          if (ImGui::IsItemClicked())
+          {
+          }
+        }
+        
+        ImVec2 nextRowCursorPos = ImGui::GetCursorPos();
+        ImGui::SameLine();
+        ImVec2 properCursorPos = ImGui::GetCursorPos();
+        ImGui::SetCursorPos(textureCursorPos);
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+        if (metallicMap and ImGui::Button("X", ImVec2(18, 18)))
+        {
+          m_materialAsset->SetMetallicMap(nullptr);
+          m_materialAsset->SetMetallicMapToggle(false);
+          needsSerialize = true;
+        }
+        ImGui::PopStyleVar();
+        
+        ImGui::SetCursorPos(properCursorPos);
+        bool useMetallic = material->Get<float>("u_MetallicTextureToggle");
+        if (ImGui::Checkbox("Use", &useMetallic))
+        {
+          material->Set("u_MetallicTextureToggle", useMetallic ? 1.0f : 0.0f);
+          needsSerialize = true;
+        }
+        ImGui::SameLine();
+        
+        if (!metallicMap or !m_materialAsset->GetMetallicMapToggle())
+        {
+          if (ImGui::DragFloat("Metalness", &materialProperty.metallic, 0.01, 0.0f, 1.0f))
+          {
+            m_materialAsset->SetMetalness(materialProperty.metallic);
+            needsSerialize = true;
+          }
+        }
+        ImGui::SetCursorPos(nextRowCursorPos);
+        UI::PropertyGridHeaderEnd();
+      } // Metallic
+      
+      // Roughness
+      if (UI::PropertyGridHeader("Roughness", true, 4, 5))
+      {
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+        
+        Ref<Image> roughnessMap = material->TryGetImage("u_RoughnessTexture");
+        Ref<Texture> roughnessUITexture = roughnessMap ? roughnessMap : m_checkerboardTex;
+        
+        ImVec2 textureCursorPos = ImGui::GetCursorPos();
+        UI::Image(roughnessUITexture, ImVec2(64, 64));
+        if (ImGui::BeginDragDropTarget())
+        {
+          auto data = ImGui::AcceptDragDropPayload("asset_payload");
+          if (data)
+          {
+            int count = data->DataSize / sizeof(AssetHandle);
+            
+            for (int i = 0; i < count; i++)
+            {
+              if (count > 1)
+                break;
+              
+              AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+              Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+              if (!asset or asset->GetAssetType() != AssetType::Image)
+              {
+                break;
+              }
+              
+              roughnessMap = std::dynamic_pointer_cast<Image>(asset);
+              m_materialAsset->SetRoughnessMap(roughnessMap);
+              m_materialAsset->SetRoughnessMapToggle(true);
+              needsSerialize = true;
+            }
+          }
+          ImGui::EndDragDropTarget();
+        } // Drag Drop
+        ImGui::PopStyleVar();
+        
+        if (ImGui::IsItemHovered())
+        {
+          if (roughnessMap)
+          {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted(roughnessMap->GetfilePath().c_str());
+            ImGui::PopTextWrapPos();
+            UI::Image(roughnessUITexture, ImVec2(384, 384));
+            ImGui::EndTooltip();
+          }
+          if (ImGui::IsItemClicked())
+          {
+          }
+        }
+        
+        ImVec2 nextRowCursorPos = ImGui::GetCursorPos();
+        ImGui::SameLine();
+        ImVec2 properCursorPos = ImGui::GetCursorPos();
+        ImGui::SetCursorPos(textureCursorPos);
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+        if (roughnessMap and ImGui::Button("X", ImVec2(18, 18)))
+        {
+          m_materialAsset->SetRoughnessMap(nullptr);
+          m_materialAsset->SetRoughnessMapToggle(false);
+          needsSerialize = true;
+        }
+        ImGui::PopStyleVar();
+        
+        ImGui::SetCursorPos(properCursorPos);
+        bool useRoughness = material->Get<float>("u_RoughnessTextureToggle");
+        if (ImGui::Checkbox("Use", &useRoughness))
+        {
+          material->Set("u_RoughnessTextureToggle", useRoughness ? 1.0f : 0.0f);
+          needsSerialize = true;
+        }
+        ImGui::SameLine();
+        
+        if (!roughnessMap or !m_materialAsset->GetRoughnessMapToggle())
+        {
+          if (ImGui::DragFloat("Roughness", &materialProperty.roughness, 0.01, 0.0f, 1.0f))
+          {
+            m_materialAsset->SetRoughness(materialProperty.roughness);
+            needsSerialize = true;
+          }
+        }
+        ImGui::SetCursorPos(nextRowCursorPos);
+        UI::PropertyGridHeaderEnd();
+      } // Roughness
+      
+      // Depth
+      if (UI::PropertyGridHeader("Depth", true, 4, 5))
+      {
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+        
+        Ref<Image> depthMap = material->TryGetImage("u_DepthTexture");
+        Ref<Texture> depthUITexture = depthMap ? depthMap : m_checkerboardTex;
+        
+        ImVec2 textureCursorPos = ImGui::GetCursorPos();
+        UI::Image(depthUITexture, ImVec2(64, 64));
+        if (ImGui::BeginDragDropTarget())
+        {
+          auto data = ImGui::AcceptDragDropPayload("asset_payload");
+          if (data)
+          {
+            int count = data->DataSize / sizeof(AssetHandle);
+            
+            for (int i = 0; i < count; i++)
+            {
+              if (count > 1)
+                break;
+              
+              AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+              Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+              if (!asset or asset->GetAssetType() != AssetType::Image)
+              {
+                break;
+              }
+              
+              depthMap = std::dynamic_pointer_cast<Image>(asset);
+              m_materialAsset->SetDepthMap(depthMap);
+              m_materialAsset->SetDepthMapToggle(true);
+              needsSerialize = true;
+            }
+          }
+          ImGui::EndDragDropTarget();
+        } // Drag Drop
+        ImGui::PopStyleVar();
+        
+        if (ImGui::IsItemHovered())
+        {
+          if (depthMap)
+          {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted(depthMap->GetfilePath().c_str());
+            ImGui::PopTextWrapPos();
+            UI::Image(depthUITexture, ImVec2(384, 384));
+            ImGui::EndTooltip();
+          }
+          if (ImGui::IsItemClicked())
+          {
+          }
+        }
+        
+        ImVec2 nextRowCursorPos = ImGui::GetCursorPos();
+        ImGui::SameLine();
+        ImVec2 properCursorPos = ImGui::GetCursorPos();
+        ImGui::SetCursorPos(textureCursorPos);
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+        if (depthMap and ImGui::Button("X", ImVec2(18, 18)))
+        {
+          m_materialAsset->SetDepthMap(nullptr);
+          m_materialAsset->SetDepthMapToggle(false);
+          needsSerialize = true;
+        }
+        ImGui::PopStyleVar();
+        
+        ImGui::SetCursorPos(properCursorPos);
+        bool useDepth = material->Get<float>("u_DepthTextureToggle");
+        if (ImGui::Checkbox("Use", &useDepth))
+        {
+          material->Set("u_DepthTextureToggle", useDepth ? 1.0f : 0.0f);
+          needsSerialize = true;
+        }
+        ImGui::SameLine();
+        
+        if (depthMap and m_materialAsset->GetDepthMapToggle())
+        {
+          if (ImGui::DragFloat("Depth Scale", &materialProperty.depthScale))
+          {
+            m_materialAsset->SetDepthScale(materialProperty.depthScale);
+            needsSerialize = true;
+          }
+        }
+        ImGui::SetCursorPos(nextRowCursorPos);
+        UI::PropertyGridHeaderEnd();
+      } // Depth
+      
+      // Ao
+      if (UI::PropertyGridHeader("Ao", true, 4, 5))
+      {
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+        
+        Ref<Image> aoMap = material->TryGetImage("u_AoTexture");
+        Ref<Texture> aoUITexture = aoMap ? aoMap : m_checkerboardTex;
+        
+        ImVec2 textureCursorPos = ImGui::GetCursorPos();
+        UI::Image(aoUITexture, ImVec2(64, 64));
+        if (ImGui::BeginDragDropTarget())
+        {
+          auto data = ImGui::AcceptDragDropPayload("asset_payload");
+          if (data)
+          {
+            int count = data->DataSize / sizeof(AssetHandle);
+            
+            for (int i = 0; i < count; i++)
+            {
+              if (count > 1)
+                break;
+              
+              AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+              Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+              if (!asset or asset->GetAssetType() != AssetType::Image)
+              {
+                break;
+              }
+              
+              aoMap = std::dynamic_pointer_cast<Image>(asset);
+              m_materialAsset->SetAoMap(aoMap);
+              m_materialAsset->SetAoMapToggle(true);
+              needsSerialize = true;
+            }
+          }
+          ImGui::EndDragDropTarget();
+        } // Drag Drop
+        ImGui::PopStyleVar();
+        
+        if (ImGui::IsItemHovered())
+        {
+          if (aoMap)
+          {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted(aoMap->GetfilePath().c_str());
+            ImGui::PopTextWrapPos();
+            UI::Image(aoUITexture, ImVec2(384, 384));
+            ImGui::EndTooltip();
+          }
+          if (ImGui::IsItemClicked())
+          {
+          }
+        }
+        
+        ImVec2 nextRowCursorPos = ImGui::GetCursorPos();
+        ImGui::SameLine();
+        ImVec2 properCursorPos = ImGui::GetCursorPos();
+        ImGui::SetCursorPos(textureCursorPos);
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+        if (aoMap and ImGui::Button("X", ImVec2(18, 18)))
+        {
+          m_materialAsset->SetAoMap(nullptr);
+          m_materialAsset->SetAoMapToggle(false);
+          needsSerialize = true;
+        }
+        ImGui::PopStyleVar();
+        
+        ImGui::SetCursorPos(properCursorPos);
+        bool useAo = material->Get<float>("u_AoTextureToggle");
+        if (ImGui::Checkbox("Use", &useAo))
+        {
+          material->Set("u_AoTextureToggle", useAo ? 1.0f : 0.0f);
+          needsSerialize = true;
+        }
+        ImGui::SetCursorPos(nextRowCursorPos);
+        UI::PropertyGridHeaderEnd();
+      } // Ao
     }
     
     if (needsSerialize)
