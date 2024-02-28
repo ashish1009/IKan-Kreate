@@ -756,10 +756,11 @@ namespace Kreator
         if (ImGui::InputText("##Tag", buffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
         {
           smc.materialTable->SetMaterial(smc.materialTable->GetMaterialCount(), AssetManager::CreateNewAsset<MaterialAsset>(buffer, Project::GetActive()->GetMaterialDirectory(), buffer));
+          ImGui::CloseCurrentPopup();
         }
         UI::EndPopup();
       }
-
+      
       if (open)
       {
         UI::BeginPropertyGrid();

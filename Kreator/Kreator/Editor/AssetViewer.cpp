@@ -75,8 +75,12 @@ namespace Kreator
   void MaterialEditor::Render()
   {
     Ref<Material> material = m_materialAsset->GetMaterial();
-    ImGui::Text("Shader: %s", material->GetShader()->GetName().c_str());
-    ImGui::Separator();
+    {
+      UI::ScopedFont fixedSize(UI::GetFixedWidthFont());
+      ImGui::Text("Name   : %s", material->GetName().c_str());
+      ImGui::Text("Shader : %s", material->GetShader()->GetName().c_str());
+      ImGui::Separator();
+    }
     
     bool needsSerialize = false;
     // Materials ------------------------------------------------------------------------------

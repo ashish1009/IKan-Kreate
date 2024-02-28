@@ -59,3 +59,6 @@ Assets:
   - Handle: 3483877028
     FilePath: Textures/Pbr/bog/bog_preview.jpg
     Type: Image
+  - Handle: 6461586421828513494
+    FilePath: Materials/Wall.ikmat
+    Type: Material
