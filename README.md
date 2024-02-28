@@ -113,6 +113,9 @@ Editor Application using IKan Library to create Games
   - Scene Hierarchy (ECS)
 
 ### Detailed Road Map
+- Panel
+  - Show and hide entity (SHP)
+  - Show and hide components
 - UI
   - Guizmo (ECS)
   - Scene Setting (ECS)

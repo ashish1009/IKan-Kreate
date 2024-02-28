@@ -922,6 +922,11 @@ namespace Kreator
     // Render viewport image
     UI::Image(m_viewportRenderer.GetFinalImage(), viewportSize);
     
+    if (m_sceneState != SceneState::Play)
+    {
+      UI_UpdateGuizmo();
+    }
+
     auto windowSize = ImGui::GetWindowSize();
     ImVec2 minBound = ImGui::GetWindowPos();
     minBound.x += viewportOffset.x;
@@ -1007,5 +1012,71 @@ namespace Kreator
     ImGui::PopID();
     
     ImGui::End();
+  }
+  
+  void KreatorLayer::UI_UpdateGuizmo()
+  {
+    RETURN_IF (Input::IsKeyPressed(IKan::Key::LeftControl))
+    
+    if (m_gizmoType != -1 and m_selectionContext.size() and m_currentScene != m_runtimeScene)
+    {
+      float rw = (float)ImGui::GetWindowWidth();
+      float rh = (float)ImGui::GetWindowHeight();
+      ImGuizmo::SetOrthographic(false);
+      ImGuizmo::SetDrawlist();
+      ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, rw, rh);
+      
+      bool snap = Input::IsKeyPressed(Key::LeftShift);
+      float snapValue = GetSnapValue();
+      float snapValues[3] = { snapValue, snapValue, snapValue };
+      
+      if (Input::IsKeyPressed(Key::LeftAlt))
+      {
+        m_gizmoMode = 1;
+      }
+      else
+      {
+        m_gizmoMode = 0;
+      }
+      
+      auto& selection = m_selectionContext[0];
+      TransformComponent& entityTransform_1 = selection.entity.GetTransform();
+      
+      glm::mat4 transform = entityTransform_1.Transform();
+      ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
+                           glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
+                           (ImGuizmo::OPERATION)m_gizmoType,
+                           (ImGuizmo::MODE)m_gizmoMode,
+                           glm::value_ptr(transform),
+                           nullptr,
+                           snap ? snapValues : nullptr);
+      
+      glm::vec3 translation, rotation, scale;
+      Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+      
+      glm::vec3 deltaPosition = glm::vec3(0.0f);
+      if (m_gizmoType == ImGuizmo::OPERATION::TRANSLATE)
+      {
+        deltaPosition = translation - entityTransform_1.Position();
+      }
+      glm::vec3 deltaRotation = glm::vec3(0.0f);
+      if (m_gizmoType == ImGuizmo::OPERATION::ROTATE)
+      {
+        deltaRotation = rotation - entityTransform_1.Rotation();
+      }
+      glm::vec3 deltaScale = glm::vec3(0.0f);
+      if (m_gizmoType == ImGuizmo::OPERATION::SCALE)
+      {
+        deltaScale = scale - entityTransform_1.Scale();
+      }
+      
+      for (auto& selection : m_selectionContext)
+      {
+        if (ImGuizmo::IsUsing())
+        {
+          UpdateChildrenTransform(selection.entity, deltaPosition, deltaScale, deltaRotation);
+        } // If Guizmo using
+      } // for each selection context
+    } // if valid selection and guizmo
   }
 } // namespace Kreator

@@ -102,6 +102,16 @@ namespace Kreator
     /// This function renders the system info
     void RenderSystemInfo();
 
+    /// This function updates the transform of children entities
+    /// - Parameters:
+    ///   - entity: parent entity
+    ///   - position: position
+    ///   - scale: scale
+    ///   - rotation: rotation
+    void UpdateChildrenTransform(Entity entity, const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation);
+    /// This function returns the Imguizmo Snap value
+    float GetSnapValue();
+
     // Project API ---------------------------------------
     /// This function Creates new project
     /// - Parameter projectDir: Project Direcotry
@@ -190,7 +200,9 @@ namespace Kreator
     void UI_NewScenePopup();
     /// This funciton shows the scene settings
     void UI_SceneSettings();
-    
+    /// This function Update the Guizmo Renderer
+    void UI_UpdateGuizmo();
+
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
     bool m_showWelcomePopup {false};
@@ -253,6 +265,9 @@ namespace Kreator
     
     // Guizmo Data ---------------------------------------
     bool m_hoveredGuizmoToolbar = false;
+    int32_t m_gizmoType = -1; // -1 = no gizmo
+    uint32_t m_gizmoMode = 1; //  0 = local, 1 = World
+    Ref<Texture> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
 
     // Single Instance -----------------------------------
     static KreatorLayer* s_instance;

@@ -7,7 +7,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 0, 0]
+      Position: [1, 2, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -25,7 +25,7 @@ Entities:
     TransformComponent:
       Position: [0, 0, 0]
       Rotation: [0, 0, 0]
-      Scale: [3, 3, 3]
+      Scale: [5, 3, 5]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -39,7 +39,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-2, 0, 0]
+      Position: [-1, 2, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:

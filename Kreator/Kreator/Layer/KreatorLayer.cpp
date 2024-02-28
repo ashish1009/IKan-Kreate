@@ -151,6 +151,13 @@ if (!m_currentScene) return
     m_iconMinimize = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Minimize.png"));
     m_iconMaximize = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Maximize.png"));
     m_iconRestore = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Restore.png"));
+    
+    // Guizmo Button
+    m_selectToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Pointer.png"));
+    m_moveToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Move.png"));
+    m_rotateToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Rotate.png"));
+    m_scaleToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
+    m_gizmoModeTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/GuizmoMode.png"));
   }
   
   KreatorLayer::~KreatorLayer()
@@ -366,6 +373,40 @@ if (!m_currentScene) return
 
     if (m_sceneState == SceneState::Edit)
     {
+      // Guizmo -----------------------------------------------------------
+      if (leftCtrl and m_viewport.panelMouseHover and !Input::IsMouseButtonPressed(MouseButton::Right))
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::Q:
+            m_gizmoType = -1;
+            break;
+          case Key::W:
+            m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+            break;
+          case Key::E:
+            m_gizmoType = ImGuizmo::OPERATION::ROTATE;
+            break;
+          case Key::R:
+            m_gizmoType = ImGuizmo::OPERATION::SCALE;
+            break;
+          case Key::F:
+          {
+            if (m_selectionContext.size() == 0)
+            {
+              break;
+            }
+            
+            Entity selectedEntity = m_selectionContext[0].entity;
+            m_editorCamera.Focus(selectedEntity.GetTransform().Position());
+            break;
+          }
+            
+          default:
+            break;
+        }
+      }
+      
       // Scene -----------------------------------------------------------
       if ((leftCmd or rightCmd) and !Input::IsMouseButtonPressed(MouseButton::Right) and (!leftShift or !rightShift))
       {
@@ -539,6 +580,31 @@ if (!m_currentScene) return
     TextRenderer::EndBatch();
   }
   
+  void KreatorLayer::UpdateChildrenTransform(Entity entity, const glm::vec3& deltaPosition, const glm::vec3& deltaScale, const glm::vec3& deltaRotation)
+  {
+    TransformComponent& entityTransform = entity.GetTransform();
+    entityTransform.UpdatePosition(entityTransform.Position() + deltaPosition);
+    entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+    entityTransform.UpdateScale(entityTransform.Scale() + deltaScale);
+    
+    for (const auto& child : entity.Children())
+    {
+      Entity childEntity = m_currentScene->TryGetEntityWithUUID(child);
+      UpdateChildrenTransform(childEntity, deltaPosition, deltaScale, deltaRotation);
+    }
+  }
+  
+  float KreatorLayer::GetSnapValue()
+  {
+    switch (m_gizmoType)
+    {
+      case ImGuizmo::OPERATION::TRANSLATE: return 0.5f;
+      case ImGuizmo::OPERATION::ROTATE: return 45.0f;
+      case ImGuizmo::OPERATION::SCALE: return 0.5f;
+    }
+    return 0.0f;
+  }
+
   void KreatorLayer::CreateProject(const std::filesystem::path& projectDir)
   {
     IK_PROFILE();
