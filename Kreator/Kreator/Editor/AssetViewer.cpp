@@ -74,6 +74,58 @@ namespace Kreator
   
   void MaterialEditor::Render()
   {
+    Ref<Material> material = m_materialAsset->GetMaterial();
+    ImGui::Text("Shader: %s", material->GetShader()->GetName().c_str());
+    ImGui::Separator();
+    
+    bool needsSerialize = false;
+    // Materials ------------------------------------------------------------------------------
+    {
+      auto& materialProperty = material->Get<MaterialProperty>("u_Material");
+
+      // Albedo
+      if (UI::PropertyGridHeader("Albedo", true, 4, 5))
+      {
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
+        
+        Ref<Texture> albedoMap = material->TryGetImage("u_AlbedoTexture");
+        Ref<Texture> albedoUITexture = albedoMap ? albedoMap : m_checkerboardTex;
+
+        ImVec2 textureCursorPos = ImGui::GetCursorPos();
+        UI::Image(albedoUITexture, ImVec2(64, 64));
+        if (ImGui::BeginDragDropTarget())
+        {
+          auto data = ImGui::AcceptDragDropPayload("asset_payload");
+          if (data)
+          {
+            int count = data->DataSize / sizeof(AssetHandle);
+            
+            for (int i = 0; i < count; i++)
+            {
+              if (count > 1)
+                break;
+              
+              AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+              Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+              if (!asset or asset->GetAssetType() != AssetType::Image)
+              {
+                break;
+              }
+              
+              albedoMap = std::dynamic_pointer_cast<Image>(asset);
+              material->Set("u_AlbedoTexture", albedoMap);
+              needsSerialize = true;
+            }
+          }
+          
+          ImGui::EndDragDropTarget();
+        }
+
+        ImGui::PopStyleVar();
+
+        UI::PropertyGridHeaderEnd();
+      }
+    }
   }
 
 } // namespace Kreator

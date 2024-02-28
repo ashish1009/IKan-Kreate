@@ -18,15 +18,6 @@ Ref<Image> MaterialAsset::Get##title##Map() { std::string uniform = "u_"+std::st
 void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, tex); } \
 void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, nullptr); }
 
-  struct MaterialProperty
-  {
-    glm::vec3 color = {1.0f, 1.0f, 1.0f};
-    float metallic = 0.5f;
-    float roughness = 0.5f;
-    float depthScale = 0.001f;
-    float tilingFactor = 1.0f;
-  };
-  
   Ref<MaterialAsset> MaterialAsset::Create()
   {
     return CreateRef<MaterialAsset>();
@@ -125,7 +116,7 @@ void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform 
   DefineTextureMapAPI(Depth)
   DefineTextureMapAPI(Ao)
 
-  Ref<Material> MaterialAsset::GetMaterial() const
+  Ref<Material> MaterialAsset::GetMaterial()
   {
     return m_material;
   }

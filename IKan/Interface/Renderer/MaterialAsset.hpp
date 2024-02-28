@@ -18,6 +18,15 @@ void Set##title##MapToggle(float value); \
 Ref<Image> Get##title##Map(); \
 void Set##title##Map(Ref<Image> texture); \
 void Clear##title##Map(); \
+
+  struct MaterialProperty
+  {
+    glm::vec3 color = {1.0f, 1.0f, 1.0f};
+    float metallic = 0.5f;
+    float roughness = 0.5f;
+    float depthScale = 0.001f;
+    float tilingFactor = 1.0f;
+  };
   
   class MaterialAsset : public Asset
   {
@@ -68,7 +77,7 @@ void Clear##title##Map(); \
     TextureMapAPIs(Ao);
 
     /// This function returns the material
-    Ref<Material> GetMaterial() const;
+    Ref<Material> GetMaterial();
 
     /// This function create material asset
     static Ref<MaterialAsset> Create();
