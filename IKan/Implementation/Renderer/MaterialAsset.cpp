@@ -13,7 +13,7 @@ namespace IKan
 {
 #define DefineTextureMapAPI(title) \
 float& MaterialAsset::Get##title##MapToggle() { std::string uniform = "u_"+std::string(#title)+"TextureToggle"; return m_material->Get<float>(uniform); } \
-void MaterialAsset::Set##title##MapToggle(float value) { std::string uniform = "u_"+std::string(#title)+"TextureToggle"; m_material->Set<float>(uniform, value); }\
+void MaterialAsset::Set##title##MapToggle(float value) { std::string uniform = "u_"+std::string(#title)+"TextureToggle"; m_material->Set<float>(uniform, value); } \
 Ref<Image> MaterialAsset::Get##title##Map() { std::string uniform = "u_"+std::string(#title)+"Texture"; return m_material->TryGetImage(uniform); } \
 void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, tex); } \
 
@@ -184,10 +184,8 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   {
     m_materialCount = materialCount;
   }
-  
   void MaterialTable::Clear()
   {
     m_materials.clear();
   }
-
 } // namespace IKan

@@ -56,8 +56,9 @@ namespace IKan
     /// - Parameters:
     ///   - meshHandle: mesh handle
     ///   - transform: mesh transform
-    ///   - materials: material table
-    void SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable);
+    ///   - materilTable: Material table
+    ///   - tilingFactor: tiling factor
+    void SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable, float tilingFactor);
 
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
@@ -72,7 +73,8 @@ namespace IKan
     ///   - mesh: Mesh to be render
     ///   - transform: mesh transform
     ///   - material: material
-    void RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material);
+    ///   - tilingFactor: tiling factor
+    void RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, float tilingFactor, Ref<Material> material);
     /// This function renders the submesh
     /// - Parameters:
     ///   - mesh: mesh
@@ -91,6 +93,7 @@ namespace IKan
     {
       Ref<Mesh> mesh;
       Ref<MaterialTable> materilTable;
+      float tilingFactor;
       glm::mat4 transform;
     };
     std::vector<MeshDrawData> m_meshDrawList;

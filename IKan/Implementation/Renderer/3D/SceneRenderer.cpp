@@ -52,7 +52,7 @@ namespace IKan
         // TODO: Get index from somewhere
         if (meshData.materilTable->HasMaterial(0))
         {
-          RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.materilTable->GetMaterial(0)->GetMaterial());
+          RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
         }
       }
     }
@@ -83,19 +83,20 @@ namespace IKan
     m_debugRenderer = func;
   }
 
-  void SceneRenderer::SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable)
+  void SceneRenderer::SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable, float tilingFactor)
   {
     IK_PERFORMANCE("SceneRenderer::SubmitMesh");
     const auto& mesh = AssetManager::GetAsset<Mesh>(meshHandle);
     RETURN_IF(!mesh);
     
-    m_meshDrawList.push_back({mesh, materilTable, transform});
+    m_meshDrawList.push_back({mesh, materilTable, tilingFactor, transform});
   }
   
-  void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material)
+  void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, float tilingFactor, Ref<Material> material)
   {
     RETURN_IF(!material);
     
+    material->Set("u_TilingFactor", tilingFactor);
     material->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
     material->Set("u_CameraPosition", s_sceneData.sceneCamera.position);
     material->Set("u_NormalMatrix", glm::transpose(glm::inverse(glm::mat3(transform))));

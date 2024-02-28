@@ -743,10 +743,10 @@ namespace Kreator
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
 
         bool open = UI::PropertyGridHeader("Material", true, 3, 5);
-        
-        bool rightClicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
-        float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
-        
+
+        bool rightClicked = ImGui::IsItemClicked(ImGuiMouseButton_Right);
+        float lineHeight = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+
         ImGui::SameLine(contentRegionAvailable.x - lineHeight);
         if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }) or rightClicked)
         {
@@ -795,6 +795,7 @@ namespace Kreator
               AssetHandle materialAssetHandle = meshMaterialAsset->handle;
               settings.advanceToNextColumn = false;
               settings.widthOffset = 80;
+              UI::Property("Tiling Factor", smc.tilingFactor, 1.0f, 1.0f, 1000.0f);
               UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), meshMaterialName.c_str(), materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
                 smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
               }, settings);

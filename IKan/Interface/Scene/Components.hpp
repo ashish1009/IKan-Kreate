@@ -86,6 +86,7 @@ namespace IKan
     bool enable {true};
     AssetHandle mesh;
     
+    float tilingFactor = 1.0f;
     Ref<MaterialTable> materialTable {CreateRef<MaterialTable>()};
     
     MeshComponent(AssetHandle m = AssetHandle()) : mesh(m) {}

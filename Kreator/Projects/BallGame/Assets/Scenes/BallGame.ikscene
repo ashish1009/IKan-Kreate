@@ -13,6 +13,7 @@ Entities:
     MeshComponent:
       Enable: true
       MeshHandle: 1336252552
+      TilingFactor: 1
       MaterialTable:
         0: 4982622595928833722
   - Entity: 2579642811517955885
@@ -24,10 +25,11 @@ Entities:
     TransformComponent:
       Position: [0, 0, 0]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Scale: [3, 3, 3]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
+      TilingFactor: 15
       MaterialTable:
         0: 10765036989886449827
   - Entity: 8318956322238503385
@@ -37,11 +39,12 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1.79999995, 0, 0]
+      Position: [-2, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 27450833
+      TilingFactor: 1
       MaterialTable:
         0: 444052761

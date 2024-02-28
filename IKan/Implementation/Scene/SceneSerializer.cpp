@@ -158,7 +158,8 @@ namespace IKan {
       
       out << YAML::Key << "Enable" << YAML::Value << meshComponent.enable;
       out << YAML::Key << "MeshHandle" << YAML::Value << meshComponent.mesh;
-      
+      out << YAML::Key << "TilingFactor" << YAML::Value << meshComponent.tilingFactor;
+
       auto materialTable = meshComponent.materialTable;
       if (materialTable->GetMaterialCount() > 0)
       {
@@ -238,7 +239,8 @@ namespace IKan {
         auto& component = deserializedEntity.AddComponent<MeshComponent>();
         component.enable = meshComponent["Enable"].as<bool>();
         component.mesh = meshComponent["MeshHandle"].as<AssetHandle>();
-        
+        component.tilingFactor = meshComponent["TilingFactor"].as<float>();
+
         if (meshComponent["MaterialTable"])
         {
           YAML::Node materialTableNode = meshComponent["MaterialTable"];

@@ -106,7 +106,7 @@ namespace IKan
       {
         // Render Selected Mesh ---------------------------------------------
         Entity entity = {entityHandle, this};
-        renderer.SubmitMesh(meshComp.mesh, transformComp.Transform(), meshComp.materialTable);
+        renderer.SubmitMesh(meshComp.mesh, transformComp.Transform(), meshComp.materialTable, meshComp.tilingFactor);
       }
     } // For each Mesh Entity
   }
