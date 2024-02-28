@@ -109,12 +109,12 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
     material->SetAoMapToggle(materialNode["AoTextureToggle"] ? materialNode["AoTextureToggle"].as<float>() : 0.0f);
 
     AssetHandle albedoMap, normalMap, metalnessMap, roughnessMap, depthMap, aoMap;
-    IK_DESERIALIZE_PROPERTY(AlbedoMap, albedoMap, materialNode, (AssetHandle)0);
-    IK_DESERIALIZE_PROPERTY(NormalMap, normalMap, materialNode, (AssetHandle)0);
-    IK_DESERIALIZE_PROPERTY(MetalnessMap, metalnessMap, materialNode, (AssetHandle)0);
-    IK_DESERIALIZE_PROPERTY(RoughnessMap, roughnessMap, materialNode, (AssetHandle)0);
-    IK_DESERIALIZE_PROPERTY(DepthMap, depthMap, materialNode, (AssetHandle)0);
-    IK_DESERIALIZE_PROPERTY(AoMap, aoMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(AlbedoTexture, albedoMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(NormalTexture, normalMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(MetalnessTexture, metalnessMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(RoughnessTexture, roughnessMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(DepthTexture, depthMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(AoTexture, aoMap, materialNode, (AssetHandle)0);
 
     if (albedoMap)
     {
