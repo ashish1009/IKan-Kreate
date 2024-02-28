@@ -29,7 +29,7 @@ Entities:
       Enable: true
       MeshHandle: 560965872
       MaterialTable:
-        0: 444052761
+        0: 10765036989886449827
   - Entity: 8318956322238503385
     TagComponent:
       Tag: Cylinder

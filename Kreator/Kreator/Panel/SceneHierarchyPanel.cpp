@@ -736,12 +736,14 @@ namespace Kreator
       }
       UI::EndPropertyGrid();
       
+      // Materials
       {
+        static bool showMaterialEditor = false;
+
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
 
         bool open = UI::PropertyGridHeader("Material", true, 3, 5);
         
-#if 0
         bool rightClicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
         float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
         
@@ -758,12 +760,13 @@ namespace Kreator
           memset(buffer, 0, 256);
           if (ImGui::InputText("##Tag", buffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
           {
-            smc.materialTable->SetMaterial(smc.materialTable->GetMaterialCount(), AssetManager::CreateNewAsset<MaterialAsset>(buffer, Project::GetActive()->GetMaterialDirectory(), buffer));
+            // TODO: Later increase the material for now only 0 is used
+            smc.materialTable->SetMaterial(0, AssetManager::CreateNewAsset<MaterialAsset>(buffer, Project::GetActive()->GetMaterialDirectory(), buffer));
+            showMaterialEditor = true;
             ImGui::CloseCurrentPopup();
           }
           UI::EndPopup();
         }
-#endif
         
         if (open)
         {
@@ -805,7 +808,6 @@ namespace Kreator
               ImGui::SameLine();
               
               static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
-              static bool showMaterialEditor = false;
               if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }))
               {
                 showMaterialEditor = showMaterialEditor ? false : true;
