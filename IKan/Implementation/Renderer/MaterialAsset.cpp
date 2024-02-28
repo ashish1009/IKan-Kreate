@@ -16,7 +16,6 @@ float& MaterialAsset::Get##title##MapToggle() { std::string uniform = "u_"+std::
 void MaterialAsset::Set##title##MapToggle(float value) { std::string uniform = "u_"+std::string(#title)+"TextureToggle"; m_material->Set<float>(uniform, value); }\
 Ref<Image> MaterialAsset::Get##title##Map() { std::string uniform = "u_"+std::string(#title)+"Texture"; return m_material->TryGetImage(uniform); } \
 void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, tex); } \
-void MaterialAsset::Clear##title##Map() { IK_ASSERT(false); std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, nullptr); }
 
   Ref<MaterialAsset> MaterialAsset::Create()
   {

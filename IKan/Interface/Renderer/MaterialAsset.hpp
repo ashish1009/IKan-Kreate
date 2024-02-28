@@ -17,7 +17,6 @@ float& Get##title##MapToggle(); \
 void Set##title##MapToggle(float value); \
 Ref<Image> Get##title##Map(); \
 void Set##title##Map(Ref<Image> texture); \
-void Clear##title##Map(); \
 
   struct MaterialProperty
   {

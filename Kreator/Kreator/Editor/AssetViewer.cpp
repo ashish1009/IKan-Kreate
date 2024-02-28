@@ -88,7 +88,7 @@ namespace Kreator
       {
         ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(10, 10));
         
-        Ref<Texture> albedoMap = material->TryGetImage("u_AlbedoTexture");
+        Ref<Image> albedoMap = material->TryGetImage("u_AlbedoTexture");
         Ref<Texture> albedoUITexture = albedoMap ? albedoMap : m_checkerboardTex;
 
         ImVec2 textureCursorPos = ImGui::GetCursorPos();
@@ -113,15 +113,58 @@ namespace Kreator
               }
               
               albedoMap = std::dynamic_pointer_cast<Image>(asset);
-              material->Set("u_AlbedoTexture", albedoMap);
+              m_materialAsset->SetAlbedoMap(albedoMap);
+              m_materialAsset->SetAlbedoMapToggle(true);
               needsSerialize = true;
             }
           }
-          
           ImGui::EndDragDropTarget();
+        } // Drag Drop
+        ImGui::PopStyleVar();
+        
+        if (ImGui::IsItemHovered())
+        {
+          if (albedoMap)
+          {
+            ImGui::BeginTooltip();
+            ImGui::PushTextWrapPos(ImGui::GetFontSize() * 35.0f);
+            ImGui::TextUnformatted(albedoMap->GetfilePath().c_str());
+            ImGui::PopTextWrapPos();
+            UI::Image(albedoUITexture, ImVec2(384, 384));
+            ImGui::EndTooltip();
+          }
+          if (ImGui::IsItemClicked())
+          {
+          }
         }
 
+        ImVec2 nextRowCursorPos = ImGui::GetCursorPos();
+        ImGui::SameLine();
+        ImVec2 properCursorPos = ImGui::GetCursorPos();
+        ImGui::SetCursorPos(textureCursorPos);
+        ImGui::PushStyleVar(ImGuiStyleVar_FramePadding, ImVec2(0, 0));
+        if (albedoMap and ImGui::Button("X", ImVec2(18, 18)))
+        {
+          m_materialAsset->SetAlbedoMap(nullptr);
+          m_materialAsset->SetAlbedoMapToggle(false);
+          needsSerialize = true;
+        }
         ImGui::PopStyleVar();
+
+        ImGui::SetCursorPos(properCursorPos);
+        ImGui::ColorEdit3("Color##Albedo", glm::value_ptr(materialProperty.color), ImGuiColorEditFlags_NoInputs);
+        if (ImGui::IsItemDeactivated())
+        {
+          needsSerialize = true;
+        }
+        
+        ImGui::SameLine();
+        bool useAlbedo = material->Get<float>("u_AlbedoTextureToggle");
+        if (ImGui::Checkbox("Use", &useAlbedo))
+        {
+          material->Set("u_AlbedoTextureToggle", useAlbedo ? 1.0f : 0.0f);
+          needsSerialize = true;
+        }
 
         UI::PropertyGridHeaderEnd();
       }
