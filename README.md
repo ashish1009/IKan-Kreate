@@ -104,6 +104,8 @@ Editor Application using IKan Library to create Games
   - Material Editor
 - UI
   - UI Helper
+  - Guizmo (ECS)
+  - Scene Setting (ECS)
 - Panels
   - Konsole Panel
   - Content Browser
@@ -116,9 +118,6 @@ Editor Application using IKan Library to create Games
 - Panel
   - Show and hide entity (SHP)
   - Show and hide components
-- UI
-  - Guizmo (ECS)
-  - Scene Setting (ECS)
 
 ### TODO
 
@@ -141,6 +140,7 @@ Editor Application using IKan Library to create Games
   - v5.1.5.0 : Scene Renderer
   - v5.2.5.1 : Lights and Materials
   - v5.3.5.2 : Material Editor and Serializer
+  - v5.3.5.3 : Guizmo
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)
