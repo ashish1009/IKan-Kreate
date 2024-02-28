@@ -799,7 +799,8 @@ namespace Kreator
       {
         newEntity = m_context->CreateEntity(name);
         std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
-        newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
+        auto& mc = newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
+        mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>(Project::GetActive()->GetMaterialPath("Default_Material.ikmat")));
       }
     };
 
@@ -825,6 +826,7 @@ namespace Kreator
         {
           auto& meshComp = m_selectionContext.At(0).AddComponent<MeshComponent>();
           meshComp.mesh = 0;
+          meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>(Project::GetActive()->GetMaterialPath("Default_Material.ikmat")));
           ImGui::CloseCurrentPopup();
         }
         ImGui::Separator();

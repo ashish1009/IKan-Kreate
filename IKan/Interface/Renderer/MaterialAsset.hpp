@@ -84,7 +84,7 @@ void Clear##title##Map(); \
   public:
     /// This creates the material table
     /// - Parameter materialCount: material count
-    MaterialTable(uint32_t materialCount = 1);
+    MaterialTable();
     /// This copy the material table
     /// - Parameter other: material table
     MaterialTable(Ref<MaterialTable> other);

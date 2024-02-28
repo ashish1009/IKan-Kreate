@@ -1,0 +1,18 @@
+Material:
+  AlbedoColor: [0.800000012, 0.800000012, 0.800000012]
+  Metallic: 0.5
+  Roughness: 0.5
+  DepthScale: 0.00100000005
+  TilingFactor: 1
+  u_AlbedoTextureToggle: 0
+  u_NormalTextureToggle: 0
+  u_RoughnessTextureToggle: 0
+  u_MetallicTextureToggle: 0
+  u_DepthTextureToggle: 0
+  u_AoTextureToggle: 0
+  u_AlbedoTexture: 0
+  u_NormalTexture: 0
+  u_MetallicTexture: 0
+  u_RoughnessTexture: 0
+  u_DepthTexture: 0
+  u_AoTexture: 0
