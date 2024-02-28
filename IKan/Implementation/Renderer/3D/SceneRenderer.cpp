@@ -120,4 +120,9 @@ namespace IKan
   {
     return m_viewportRenderPass->GetColorAttachments().at(0);
   }
+  
+  DirectionLight& SceneRenderer::GetDirectionLight()
+  {
+    return s_sceneData.directionLight;
+  }
 } // namespace IKan

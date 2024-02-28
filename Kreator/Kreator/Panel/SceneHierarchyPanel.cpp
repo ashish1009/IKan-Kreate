@@ -739,6 +739,7 @@ namespace Kreator
       UI::EndPropertyGrid();
       
       bool open = UI::PropertyGridHeader("Material", true, 3, 5);
+#if 0
       bool rightClicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
       float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
 
@@ -760,6 +761,7 @@ namespace Kreator
         }
         UI::EndPopup();
       }
+#endif
       
       if (open)
       {

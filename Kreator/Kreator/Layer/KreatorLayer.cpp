@@ -343,7 +343,8 @@ if (!m_currentScene) return
     if (m_sceneState != SceneState::Play)
     {
       m_panels.OnImGuiRender();
-
+      // Scene setting panel : TODO: Move to Editor panel?
+      UI_SceneSettings();
       // Should be rendered last inside docker
       UI_StatisticsPanel();
     }

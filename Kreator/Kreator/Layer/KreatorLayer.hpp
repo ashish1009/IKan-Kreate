@@ -188,6 +188,8 @@ namespace Kreator
     void UI_Viewport();
     /// This function popup new scene widget
     void UI_NewScenePopup();
+    /// This funciton shows the scene settings
+    void UI_SceneSettings();
     
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups --------------------------------------------
@@ -195,6 +197,7 @@ namespace Kreator
     bool m_showCreateNewProjectPopup {false};
     bool m_showStatisticsPanel {true};
     bool m_showNewScenePopup {false};
+    bool m_showSceneSettings {true};
     
     // Debug Renderer ------------------------------------
     bool m_renderSystemInfo = true;

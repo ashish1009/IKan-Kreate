@@ -727,6 +727,7 @@ namespace Kreator
         }
         ImGui::Separator();
         ImGui::MenuItem("Statistic Panel", nullptr, &m_showStatisticsPanel);
+        ImGui::MenuItem("Scene Setting Panel", nullptr, &m_showSceneSettings);
       });
       
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
@@ -975,5 +976,36 @@ namespace Kreator
       ImGui::EndVertical();
       ImGui::EndPopup();
     }
+  }
+  
+  void KreatorLayer::UI_SceneSettings()
+  {
+    RETURN_IF (!m_showSceneSettings)
+    
+    ImGui::Begin("Scene Settings", &m_showSceneSettings);
+    
+    // Environment ------------------------------------------
+    ImGui::PushID("Environment");
+    if (UI::PropertyGridHeader("Environment", true, 4, 5))
+    {
+      UI::BeginPropertyGrid();
+      auto& directonLight = SceneRenderer::GetDirectionLight();
+      bool useDirectionLight = directonLight.enable;
+      if (UI::Property("Direction Light", useDirectionLight))
+      {
+        directonLight.enable = useDirectionLight;
+      }
+      if (directonLight.enable)
+      {
+        UI::PropertyColor("Radiance ", directonLight.color);
+        UI::Property("Direction ", directonLight.direction, 0.05, -1.0f, 1.0f);
+        UI::Property("Intensity ", directonLight.intensity);
+      }
+      UI::EndPropertyGrid();
+      UI::PropertyGridHeaderEnd();
+    }
+    ImGui::PopID();
+    
+    ImGui::End();
   }
 } // namespace Kreator

@@ -62,6 +62,9 @@ namespace IKan
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
 
+    /// This function pass the reference of Direction light to control from client
+    static DirectionLight& GetDirectionLight();
+
   private:
     // Member functions ---------------------------------------------------------------------------------------------
     /// This function renders the mesh in geometry
