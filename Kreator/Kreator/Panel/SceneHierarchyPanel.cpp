@@ -7,6 +7,7 @@
 
 #include "SceneHierarchyPanel.hpp"
 #include "Layer/KreatorLayer.hpp"
+#include "Editor/EntityUtils.hpp"
 
 namespace Kreator
 {
@@ -368,7 +369,12 @@ namespace Kreator
         // Right click option
         if (ImGui::BeginPopupContextWindow(nullptr, ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverItems))
         {
-          DrawCreateEntityMenu({});
+          Entity newEntity = ECS_Utils::DrawCreateEntityMenu(m_context, {});
+          if (newEntity)
+          {
+            SetSelectedEntity(newEntity);
+          }
+
           ImGui::EndPopup();
         }
         ImGui::EndTable();
@@ -531,7 +537,11 @@ namespace Kreator
         SetSelectedEntity(entity);
         
         // Empty Space Right click menu
-        DrawCreateEntityMenu(entity);
+        Entity newEntity = ECS_Utils::DrawCreateEntityMenu(m_context, entity);
+        if (newEntity)
+        {
+          SetSelectedEntity(newEntity);
+        }
         
         // Selected Entity Right click
         if (m_selectionContext.Size() == 1)
@@ -845,48 +855,6 @@ namespace Kreator
         } // property grid header
       }
     }, s_gearIcon, true);
-  }
-  
-  void SceneHierarchyPanel::DrawCreateEntityMenu(Entity parent)
-  {
-    Entity newEntity;
-    if (ImGui::MenuItem("Empty Entity"))
-    {
-      newEntity = m_context->CreateEntity("Empty Entity");
-    }
-    if (ImGui::MenuItem("Mesh"))
-    {
-      newEntity = m_context->CreateEntity("Mesh");
-      auto& meshComp = newEntity.AddComponent<MeshComponent>();
-      meshComp.mesh = 0;
-      meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
-    }
-    ImGui::Separator();
-    
-    static const std::filesystem::path DefaultMeshFile = "Meshes/Default/";
-    auto menuForDefaultMesh = [this](Entity& newEntity, const std::string& name) {
-      if (ImGui::MenuItem(name.c_str()))
-      {
-        newEntity = m_context->CreateEntity(name);
-        std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
-        auto& mc = newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
-        mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
-      }
-    };
-
-    menuForDefaultMesh(newEntity, "Cube");
-    menuForDefaultMesh(newEntity, "Sphere");
-    menuForDefaultMesh(newEntity, "Cylinder");
-
-    if (newEntity and parent)
-    {
-      m_context->ParentEntity(newEntity, parent);
-    }
-
-    if (newEntity)
-    {
-      SetSelectedEntity(newEntity);
-    }
   }
   
   void SceneHierarchyPanel::AddComponentPopup()

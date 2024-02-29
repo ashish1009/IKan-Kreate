@@ -62,7 +62,7 @@ namespace IKan
     
     if (m_isActive)
     {
-      if (Input::IsMouseButtonPressed(MouseButton::Right) and !Input::IsKeyPressed(Key::LeftControl))
+      if (Input::IsMouseButtonPressed(MouseButton::Right) and !Input::IsKeyPressed(Key::LeftControl) and Input::IsKeyPressed(Key::LeftAlt))
       {
         m_cameraMode = CameraMode::FLYCAM;
         CameraUtils::DisableMouse();
