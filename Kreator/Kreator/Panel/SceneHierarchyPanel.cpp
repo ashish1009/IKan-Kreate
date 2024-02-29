@@ -878,6 +878,11 @@ namespace Kreator
     menuForDefaultMesh(newEntity, "Sphere");
     menuForDefaultMesh(newEntity, "Cylinder");
 
+    if (newEntity and parent)
+    {
+      m_context->ParentEntity(newEntity, parent);
+    }
+
     if (newEntity)
     {
       SetSelectedEntity(newEntity);
