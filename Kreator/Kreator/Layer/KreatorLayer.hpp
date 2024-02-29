@@ -102,13 +102,6 @@ namespace Kreator
     /// This function renders the system info
     void RenderSystemInfo();
 
-    /// This function updates the transform of children entities
-    /// - Parameters:
-    ///   - entity: parent entity
-    ///   - position: position
-    ///   - scale: scale
-    ///   - rotation: rotation
-    void UpdateChildrenTransform(Entity entity, const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation);
     /// This function returns the Imguizmo Snap value
     float GetSnapValue();
 

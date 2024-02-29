@@ -700,7 +700,7 @@ namespace Kreator
     // For Asset Selector
     static UI::PropertyAssetReferenceSettings settings;
     
-    DrawComponent<TransformComponent>("Transform", entity, [](TransformComponent& component)
+    DrawComponent<TransformComponent>("Transform", entity, [this, entity](TransformComponent& component)
                                       {
       UI::ScopedStyle spacing (ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
       UI::ScopedStyle padding (ImGuiStyleVar_FramePadding, ImVec2(4.0f, 4.0f));
@@ -711,19 +711,28 @@ namespace Kreator
                               ImGui::GetContentRegionAvail().x - 100.0f);
       
       ImGui::TableNextRow();
+      auto prevPosition = component.Position();
       auto position = component.Position();
-      DrawVec3Control("Translation", position);
-      component.UpdatePosition(position);
+      if (DrawVec3Control("Translation", position))
+      {
+        ECS_Utils::UpdateChildrenTransform(m_context, entity, position - prevPosition, Utils::Math::ZeroVec3, Utils::Math::ZeroVec3);
+      }
       
       ImGui::TableNextRow();
       auto rotation = glm::degrees(component.Rotation());
-      DrawVec3Control("Rotation", rotation);
-      component.UpdateRotation(glm::radians(rotation));
+      auto prevRotation = glm::degrees(component.Rotation());
+      if (DrawVec3Control("Rotation", rotation))
+      {
+        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, Utils::Math::ZeroVec3, prevRotation - rotation);
+      }
       
       ImGui::TableNextRow();
       auto scale = component.Scale();
-      DrawVec3Control("Scale", scale, 1.0f);
-      component.UpdateScale(scale);
+      auto prevScale = component.Scale();
+      if (DrawVec3Control("Scale", scale, 1.0f))
+      {
+        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, prevScale - scale, Utils::Math::ZeroVec3);
+      }
       
       ImGui::EndTable();
       

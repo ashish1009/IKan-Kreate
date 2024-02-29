@@ -584,20 +584,6 @@ if (!m_currentScene) return
     TextRenderer::EndBatch();
   }
   
-  void KreatorLayer::UpdateChildrenTransform(Entity entity, const glm::vec3& deltaPosition, const glm::vec3& deltaScale, const glm::vec3& deltaRotation)
-  {
-    TransformComponent& entityTransform = entity.GetTransform();
-    entityTransform.UpdatePosition(entityTransform.Position() + deltaPosition);
-    entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
-    entityTransform.UpdateScale(entityTransform.Scale() + deltaScale);
-    
-    for (const auto& child : entity.Children())
-    {
-      Entity childEntity = m_currentScene->TryGetEntityWithUUID(child);
-      UpdateChildrenTransform(childEntity, deltaPosition, deltaScale, deltaRotation);
-    }
-  }
-  
   float KreatorLayer::GetSnapValue()
   {
     switch (m_gizmoType)

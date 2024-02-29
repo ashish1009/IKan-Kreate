@@ -47,4 +47,18 @@ namespace Kreator::ECS_Utils
     
     return newEntity;
   }
+  
+  void UpdateChildrenTransform(Ref<Scene> scene, Entity entity, const glm::vec3& deltaPosition, const glm::vec3& deltaScale, const glm::vec3& deltaRotation)
+  {
+    TransformComponent& entityTransform = entity.GetTransform();
+    entityTransform.UpdatePosition(entityTransform.Position() + deltaPosition);
+    entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+    entityTransform.UpdateScale(entityTransform.Scale() + deltaScale);
+    
+    for (const auto& child : entity.Children())
+    {
+      Entity childEntity = scene->TryGetEntityWithUUID(child);
+      UpdateChildrenTransform(scene, childEntity, deltaPosition, deltaScale, deltaRotation);
+    }
+  }
 } // namespace Kreator::ECS_Utils
