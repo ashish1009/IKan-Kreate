@@ -700,7 +700,7 @@ namespace Kreator
     // For Asset Selector
     static UI::PropertyAssetReferenceSettings settings;
     
-    DrawComponent<TransformComponent>("Transform", entity, [this, entity](TransformComponent& component)
+    DrawComponent<TransformComponent>("Transform", entity, [this, &entity](TransformComponent& component)
                                       {
       UI::ScopedStyle spacing (ImGuiStyleVar_ItemSpacing, ImVec2(8.0f, 8.0f));
       UI::ScopedStyle padding (ImGuiStyleVar_FramePadding, ImVec2(4.0f, 4.0f));
@@ -711,6 +711,7 @@ namespace Kreator
                               ImGui::GetContentRegionAvail().x - 100.0f);
       
       ImGui::TableNextRow();
+      
       auto prevPosition = component.Position();
       auto position = component.Position();
       if (DrawVec3Control("Translation", position))
@@ -733,8 +734,37 @@ namespace Kreator
       {
         ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, prevScale - scale, Utils::Math::ZeroVec3);
       }
-      
       ImGui::EndTable();
+
+      if (entity.Children().size())
+      {
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
+        if (UI::PropertyGridHeader("Delta Transform", false, 2, roundingVal))
+        {
+          ImGui::BeginTable("transformComponent", 2, ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_NoClip);
+          ImGui::TableSetupColumn("label_column", 0, 100.0f);
+          ImGui::TableSetupColumn("value_column", ImGuiTableColumnFlags_IndentEnable | ImGuiTableColumnFlags_NoClip,
+                                  ImGui::GetContentRegionAvail().x - 100.0f);
+          ImGui::TableNextRow();
+          auto position = component.Position();
+          DrawVec3Control("Translation", position);
+          component.UpdatePosition(position);
+          
+          ImGui::TableNextRow();
+          auto rotation = glm::degrees(component.Rotation());
+          DrawVec3Control("Rotation", rotation);
+          component.UpdateRotation(glm::radians(rotation));
+          
+          ImGui::TableNextRow();
+          auto scale = component.Scale();
+          DrawVec3Control("Scale", scale, 1.0f);
+          component.UpdateScale(scale);
+
+          ImGui::EndTable();
+
+          UI::PropertyGridHeaderEnd();
+        }
+      }      
       
       UI::ShiftCursorY(-8.0f);
       UI::ShiftCursorY(18.0f);
