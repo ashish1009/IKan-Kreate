@@ -87,7 +87,7 @@ namespace Kreator
     }
   }
   
-  static bool DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float columnWidth = 100.0f)
+  static bool DrawVec3Control(const std::string& label, glm::vec3& values, float resetValue = 0.0f, float minValue = 0.0f, float maxValue = 0.0f, float columnWidth = 100.0f)
   {
     bool modified = false;
     
@@ -124,9 +124,7 @@ namespace Kreator
       const ImVec2 buttonSize = { lineHeight + 2.0f, lineHeight };
       const float inputItemWidth = (ImGui::GetContentRegionAvail().x - spacingX) / 3.0f - buttonSize.x;
       
-      auto drawControl = [&] (const std::string& label, float& value, const ImVec4& colourN,
-                              const ImVec4& colourH,
-                              const ImVec4& colourP) {
+      auto drawControl = [&] (const std::string& label, float& value, const ImVec4& colourN, const ImVec4& colourH, const ImVec4& colourP) {
         {
           UI::ScopedStyle buttonFrame(ImGuiStyleVar_FramePadding, ImVec2(framePadding, 0.0f));
           UI::ScopedStyle buttonRounding(ImGuiStyleVar_FrameRounding, 1.0f);
@@ -147,7 +145,7 @@ namespace Kreator
         ImGui::SameLine(0.0f, outlineSpacing);
         ImGui::SetNextItemWidth(inputItemWidth);
         UI::ShiftCursorY(-2.0f);
-        modified |= ImGui::DragFloat(("##" + label).c_str(), &value, 0.1f, 0.0f, 0.0f, "%.2f");
+        modified |= ImGui::DragFloat(("##" + label).c_str(), &value, 0.1f, minValue, maxValue, "%.2f");
         
         if (!UI::IsItemDisabled())
         {
@@ -729,7 +727,7 @@ namespace Kreator
       ImGui::TableNextRow();
       auto scale = component.Scale();
       auto prevScale = component.Scale();
-      if (DrawVec3Control("Scale", scale, 1.0f))
+      if (DrawVec3Control("Scale", scale, 1.0f, 0.01f, 100000.0f))
       {
         ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, scale - prevScale, Utils::Math::ZeroVec3);
       }
@@ -756,7 +754,7 @@ namespace Kreator
           
           ImGui::TableNextRow();
           auto scale = component.Scale();
-          DrawVec3Control("Scale", scale, 1.0f);
+          DrawVec3Control("Scale", scale, 1.0f, 0.1f);
           component.UpdateScale(scale);
 
           ImGui::EndTable();

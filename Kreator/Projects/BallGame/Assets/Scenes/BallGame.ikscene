@@ -10,7 +10,7 @@ Entities:
     TransformComponent:
       Position: [1, 3, 2]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Scale: [4.69999981, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -26,7 +26,7 @@ Entities:
     TransformComponent:
       Position: [3, 0, 6]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Scale: [4.69999981, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -42,7 +42,7 @@ Entities:
     TransformComponent:
       Position: [5, 0, 2.5]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Scale: [4.69999981, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
