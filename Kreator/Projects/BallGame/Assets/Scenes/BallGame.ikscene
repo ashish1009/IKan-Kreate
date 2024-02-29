@@ -6,9 +6,10 @@ Entities:
     Parent: 0
     Children:
       - Handle: 13766822495794172938
+      - Handle: 17671997974037504265
     TransformComponent:
       Position: [1, 3, 2]
-      Rotation: [0, -0, 0]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
@@ -23,8 +24,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [3, 9, 6]
-      Rotation: [0, -0, 0]
+      Position: [3, 0, 6]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
@@ -35,11 +36,11 @@ Entities:
   - Entity: 17671997974037504265
     TagComponent:
       Tag: Cube2
-    Parent: 0
+    Parent: 7420744135819634013
     Children:
       []
     TransformComponent:
-      Position: [2, 1, 3]
+      Position: [5, 0, 2.5]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:

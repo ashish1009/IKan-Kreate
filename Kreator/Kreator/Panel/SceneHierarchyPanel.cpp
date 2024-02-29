@@ -711,7 +711,6 @@ namespace Kreator
                               ImGui::GetContentRegionAvail().x - 100.0f);
       
       ImGui::TableNextRow();
-      
       auto prevPosition = component.Position();
       auto position = component.Position();
       if (DrawVec3Control("Translation", position))
@@ -724,7 +723,7 @@ namespace Kreator
       auto prevRotation = glm::degrees(component.Rotation());
       if (DrawVec3Control("Rotation", rotation))
       {
-        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, Utils::Math::ZeroVec3, prevRotation - rotation);
+        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, Utils::Math::ZeroVec3, glm::radians(rotation) - glm::radians(prevRotation));
       }
       
       ImGui::TableNextRow();
@@ -732,7 +731,7 @@ namespace Kreator
       auto prevScale = component.Scale();
       if (DrawVec3Control("Scale", scale, 1.0f))
       {
-        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, prevScale - scale, Utils::Math::ZeroVec3);
+        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, scale - prevScale, Utils::Math::ZeroVec3);
       }
       ImGui::EndTable();
 
@@ -764,7 +763,7 @@ namespace Kreator
 
           UI::PropertyGridHeaderEnd();
         }
-      }      
+      }
       
       UI::ShiftCursorY(-8.0f);
       UI::ShiftCursorY(18.0f);
