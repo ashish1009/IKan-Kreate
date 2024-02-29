@@ -106,7 +106,15 @@ namespace IKan
       {
         // Render Selected Mesh ---------------------------------------------
         Entity entity = {entityHandle, this};
-        renderer.SubmitMesh(meshComp.mesh, transformComp.Transform(), meshComp.materialTable, meshComp.tilingFactor);
+        
+        if (IsEntitySelected(entity) and isEditing)
+        {
+          renderer.SubmitSelectedMesh(meshComp.mesh, transformComp.Transform(), meshComp.materialTable, meshComp.tilingFactor);
+        }
+        else
+        {
+          renderer.SubmitMesh(meshComp.mesh, transformComp.Transform(), meshComp.materialTable, meshComp.tilingFactor);
+        }
       }
     } // For each Mesh Entity
   }
@@ -479,6 +487,18 @@ namespace IKan
   {
     auto& ID = m_registry.get<IDComponent>(static_cast<entt::entity>(entityHandle)).ID;
     return GetEntityWithUUID(ID);
+  }
+  
+  bool Scene::IsEntitySelected(entt::entity entity) const
+  {
+    for (const auto& selectedEntity : m_selectedEntities)
+    {
+      if (selectedEntity == entity)
+      {
+        return true;
+      }
+    }
+    return false;
   }
   
   Entity Scene::TryGetEntityWithUUID(UUID id) const

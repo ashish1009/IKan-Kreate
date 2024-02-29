@@ -260,6 +260,7 @@
 		B2C0BA022B7DC9D10015A277 /* Project.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Project.hpp; sourceTree = "<group>"; };
 		B2C0BA092B7DF6950015A277 /* ProjectSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ProjectSerializer.cpp; sourceTree = "<group>"; };
 		B2C0BA0A2B7DF6950015A277 /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
+		B2CE3A2D2B9046E300C7F531 /* ColorShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = ColorShader.glsl; sourceTree = "<group>"; };
 		B2EB0F7D2B8655E300DF1407 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		B2EB0F7E2B8655E300DF1407 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		B2EB0F992B885DD300DF1407 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
@@ -886,6 +887,7 @@
 				B2ED608B2B751633007A7F36 /* BatchLineShader.glsl */,
 				B2ED60892B751633007A7F36 /* FSQuadShader.glsl */,
 				B2C0B6D62B75FB520015A277 /* TextShader.glsl */,
+				B2CE3A2D2B9046E300C7F531 /* ColorShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";

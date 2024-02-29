@@ -223,6 +223,8 @@ if (!m_currentScene) return
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
     AssetEditorManager::RegisterEditor<MaterialEditor>(AssetType::Material);
+    
+    SceneRenderer::Initialize();
   }
   
   void KreatorLayer::OnDetach()
@@ -235,6 +237,8 @@ if (!m_currentScene) return
     
     // Close current Project
     Project::CloseActive();
+    
+    SceneRenderer::Shutdown();
   }
   
   void KreatorLayer::OnUpdate(TimeStep ts)

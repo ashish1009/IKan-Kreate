@@ -30,6 +30,11 @@ namespace IKan
   class SceneRenderer
   {
   public:
+    /// This function initialize the Scene renderer
+    static void Initialize();
+    /// This function shuts down the Scene renderer
+    static void Shutdown();
+    
     /// This is the default constructor of Scene Renderer
     /// - Parameter debugName: debug name of renderer
     SceneRenderer(const std::string& debugName);
@@ -59,6 +64,13 @@ namespace IKan
     ///   - materilTable: Material table
     ///   - tilingFactor: tiling factor
     void SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable, float tilingFactor);
+    /// This function submits the mesh in scene
+    /// - Parameters:
+    ///   - mesh: mesh reference
+    ///   - transform: mesh transform
+    ///   - materialProperty: mesh material property
+    ///   - materialtextures: mesh material texctures
+    void SubmitSelectedMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable, float tilingFactor);
 
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
@@ -96,8 +108,8 @@ namespace IKan
       float tilingFactor;
       glm::mat4 transform;
     };
-    std::vector<MeshDrawData> m_meshDrawList;
-    
+    std::vector<MeshDrawData> m_meshDrawList, m_selectedMeshDrawList;
+
     Ref<FrameBuffer> m_viewportRenderPass;
 
     struct SceneData
@@ -105,6 +117,8 @@ namespace IKan
       SceneRendererCamera sceneCamera;
       DirectionLight directionLight;
     };
+
+    inline static Ref<Material> s_colorMaterial;
 
     inline static SceneData s_sceneData;
   };

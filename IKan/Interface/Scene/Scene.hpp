@@ -160,6 +160,9 @@ namespace IKan
     /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
     /// - Parameter entityHandle: handle for entity
     Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
+    /// This function check entity is selected
+    /// - Parameter entity: Selected Entity
+    bool IsEntitySelected(entt::entity entity) const;
 
     /// This function creates the instance of EnTT Scene
     /// - Parameters:

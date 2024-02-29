@@ -57,8 +57,6 @@ namespace Kreator
     ///   - entity entity handle
     ///   - searchFilter swearch filter
     void DrawEntityNode(Entity entity, const std::string& searchFilter);
-//    /// This function create menue for entiyt
-//    void DrawCreateEntityMenu(Entity parent = {});
 
     /// This function shows the add component popup
     void AddComponentPopup();

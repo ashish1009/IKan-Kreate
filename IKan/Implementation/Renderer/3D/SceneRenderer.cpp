@@ -10,6 +10,16 @@
 
 namespace IKan
 {
+  void SceneRenderer::Initialize()
+  {
+    s_colorMaterial = Material::Create(CoreAsset("Shaders/ColorShader.glsl"), "Color Shader");
+  }
+  
+  void SceneRenderer::Shutdown()
+  {
+    s_colorMaterial.reset();
+  }
+  
   SceneRenderer::SceneRenderer(const std::string& debugName)
   : m_debugName(debugName)
   {
@@ -46,13 +56,46 @@ namespace IKan
     m_viewportRenderPass->Bind();
     {
       Renderer::Clear({0.23f, 0.234f, 0.2345f, 1.0f});
-      
-      for (const auto& meshData : m_meshDrawList)
+     
+      // Geometry pass
       {
-        // TODO: Get index from somewhere
-        if (meshData.materilTable->HasMaterial(0))
+        for (const auto& meshData : m_meshDrawList)
         {
-          RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
+          // TODO: Get index from somewhere
+          if (meshData.materilTable->HasMaterial(0))
+          {
+            RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
+          }
+        }
+      }
+      
+      // Composit pass
+      {
+        for (const auto& selectedMeshData : m_selectedMeshDrawList)
+        {
+          // Render Outline Mesh ----------------------------------------------------------------------
+          Renderer::EnableStencilPass();
+          
+          static glm::vec4 selectedMeshColor = {0.5f, 0.3f, 0.2f, 0.7f};
+          s_colorMaterial->Set("u_ObjectColor", selectedMeshColor);
+          
+          // Hack to change size of mesh
+          static glm::vec3 p, r, s;
+          Utils::Math::DecomposeTransform(selectedMeshData.transform, p, r, s);
+          if (s.x < 1.0f) s.x += (s.x * 0.1f); else s.x += 0.1f;
+          if (s.y < 1.0f) s.y += (s.y * 0.1f); else s.y += 0.1f;
+          if (s.z < 1.0f) s.z += (s.z * 0.1f); else s.z += 0.1f;
+          //        s += 0.1;
+          auto modTransform = Utils::Math::GetTransformMatrix(p, r, s);
+          
+          // Render Outline
+          s_colorMaterial->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
+          RenderSubmesh(selectedMeshData.mesh, modTransform, s_colorMaterial);
+          
+          Renderer::DisableStencilPass();
+          
+          // Render Original Mesh
+          RenderMeshGeometry(selectedMeshData.mesh, selectedMeshData.transform, selectedMeshData.tilingFactor, selectedMeshData.materilTable->GetMaterial(0)->GetMaterial());
         }
       }
     }
@@ -67,6 +110,7 @@ namespace IKan
     // Clear draw list
     {
       m_meshDrawList.clear();
+      m_selectedMeshDrawList.clear();
     }
   }
   
@@ -91,7 +135,16 @@ namespace IKan
     
     m_meshDrawList.push_back({mesh, materilTable, tilingFactor, transform});
   }
-  
+
+  void SceneRenderer::SubmitSelectedMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable, float tilingFactor)
+  {
+    IK_PERFORMANCE("SceneRenderer::SubmitSelectedMesh");
+    const auto& mesh = AssetManager::GetAsset<Mesh>(meshHandle);
+    RETURN_IF(!mesh);
+    
+    m_selectedMeshDrawList.push_back({mesh, materilTable, tilingFactor, transform});
+  }
+
   void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, float tilingFactor, Ref<Material> material)
   {
     RETURN_IF(!material);
