@@ -78,6 +78,13 @@ namespace Kreator
     /// - Parameter entity: entity
     bool IsChildSelected(Entity entity);
 
+    /// This function draw entity selector
+    /// - Parameters:
+    ///   - title: title of property
+    ///   - entityID: Entity ID
+    ///   - outID: output ID
+    void DrawEntitySelector(const char* title, UUID entityID, UUID& outID, const UI::PropertyAssetReferenceSettings& settings = {});
+
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
     
