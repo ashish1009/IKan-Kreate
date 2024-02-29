@@ -542,29 +542,6 @@ namespace Kreator
         {
           SetSelectedEntity(newEntity);
         }
-        
-        // Selected Entity Right click
-        if (m_selectionContext.Size() == 1)
-        {
-          ImGui::Separator();
-          if (m_selectionContext.At(0).GetParent())
-          {
-            if (ImGui::MenuItem("Unparent"))
-            {
-              m_context->UnparentEntity(m_selectionContext.At(0));
-              ImGui::Separator();
-            }
-          }
-          
-          if (ImGui::MenuItem("Delete"))
-          {
-            entityDeleted = true;
-          }
-          if (ImGui::MenuItem("Duplicate"))
-          {
-            SetSelectedEntity(m_context->DuplicateEntity(m_selectionContext.At(0)));
-          }
-        }
       }
       ImGui::EndPopup();
     }

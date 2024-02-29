@@ -929,15 +929,21 @@ namespace Kreator
       UI::ScopedStyle itemSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(4.0f, 4.0f));
       if (ImGui::BeginPopupContextWindow(0))
       {
+#if 0
         if (m_selectionContext.size())
         {
-#if 0
           ECS_Utils::DrawCreateEntityMenu(m_currentScene, m_selectionContext.at(0).entity);
-#endif
         }
         else
+#endif
         {
-          ECS_Utils::DrawCreateEntityMenu(m_currentScene, {});
+          Entity newEntity = ECS_Utils::DrawCreateEntityMenu(m_currentScene, {});
+          if (newEntity)
+          {
+            ClearSelectedEntity();
+            m_selectionContext.push_back({newEntity, 0.0f});
+            SetSelectedEntity(newEntity);
+          }
         }
         ImGui::EndPopup(); // Right click
       }
