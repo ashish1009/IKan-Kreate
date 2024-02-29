@@ -23,15 +23,31 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [0, 0, -1]
       Rotation: [0, 0, 0]
-      Scale: [5, 3, 5]
+      Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
       TilingFactor: 15
       MaterialTable:
         0: 10765036989886449827
+  - Entity: 6950911941652217863
+    TagComponent:
+      Tag: Cube inside
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [1.5, 0, 1]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
   - Entity: 8318956322238503385
     TagComponent:
       Tag: Cylinder
@@ -45,6 +61,22 @@ Entities:
     MeshComponent:
       Enable: true
       MeshHandle: 27450833
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 10398060966593198652
+    TagComponent:
+      Tag: CubeNew
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [2.5, 1.5, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
         0: 444052761

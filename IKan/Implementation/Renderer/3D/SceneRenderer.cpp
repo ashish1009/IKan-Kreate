@@ -82,9 +82,9 @@ namespace IKan
           // Hack to change size of mesh
           static glm::vec3 p, r, s;
           Utils::Math::DecomposeTransform(selectedMeshData.transform, p, r, s);
-          if (s.x < 1.0f) s.x += (s.x * 0.1f); else s.x += 0.1f;
-          if (s.y < 1.0f) s.y += (s.y * 0.1f); else s.y += 0.1f;
-          if (s.z < 1.0f) s.z += (s.z * 0.1f); else s.z += 0.1f;
+          if (s.x < 1.0f) s.x += (s.x * 0.1f); else s.x += 0.05f;
+          if (s.y < 1.0f) s.y += (s.y * 0.1f); else s.y += 0.05f;
+          if (s.z < 1.0f) s.z += (s.z * 0.1f); else s.z += 0.05f;
           //        s += 0.1;
           auto modTransform = Utils::Math::GetTransformMatrix(p, r, s);
           
