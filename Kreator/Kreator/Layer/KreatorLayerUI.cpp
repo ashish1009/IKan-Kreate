@@ -7,6 +7,7 @@
 
 #include "KreatorLayer.hpp"
 #include "Editor/FolderExplorer.hpp"
+#include "Editor/EntityUtils.hpp"
 
 namespace Kreator
 {
@@ -921,6 +922,26 @@ namespace Kreator
     
     // Render viewport image
     UI::Image(m_viewportRenderer.GetFinalImage(), viewportSize);
+
+    // Right click Menu --------------------------------------------------------------------------------------
+    {
+      UI::ScopedStyle windowPaadding(ImGuiStyleVar_WindowPadding, ImVec2(10, 10));
+      UI::ScopedStyle itemSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(4.0f, 4.0f));
+      if (ImGui::BeginPopupContextWindow(0))
+      {
+        if (m_selectionContext.size())
+        {
+#if 0
+          ECS_Utils::DrawCreateEntityMenu(m_currentScene, m_selectionContext.at(0).entity);
+#endif
+        }
+        else
+        {
+          ECS_Utils::DrawCreateEntityMenu(m_currentScene, {});
+        }
+        ImGui::EndPopup(); // Right click
+      }
+    }
     
     if (m_sceneState != SceneState::Play)
     {
