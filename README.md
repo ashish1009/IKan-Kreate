@@ -115,12 +115,17 @@ Editor Application using IKan Library to create Games
   - Scene Hierarchy (ECS)
 
 ### Detailed Road Map
-- Panel
-  - Show and hide entity (SHP)
-  - Show and hide components
-
-### General Road Map
-  - Fix selected outline : Try Different combination of rendering mesh and selected mesh
+- Rotate and Scale Child entity with parent
+- Fix selected outline : Try Different combination of rendering mesh and selected mesh
+- Editor camera Side/Top/Front View
+- Axis / Grid
+- Show and hide entity (SHP)
+- Show and hide components
+- Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
+- Never edit/save default material, always create copy
+- Point Light
+- Shadow
+- Physics Material
 
 ### TODO
 
