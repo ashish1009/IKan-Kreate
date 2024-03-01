@@ -115,7 +115,6 @@ Editor Application using IKan Library to create Games
   - Scene Hierarchy (ECS)
 
 ### Mini Feature Road Map
-- Connect Parent child with line
 - Fix selected outline : Try Different combination of rendering mesh and selected mesh
 - Editor camera Side/Top/Front View
 - Axis / Grid
@@ -130,6 +129,7 @@ Editor Application using IKan Library to create Games
 
 ### Mini Feature Complete
 - Rotate Child entity with parent
+- Connect Parent child with line
 
 ### TODO
 

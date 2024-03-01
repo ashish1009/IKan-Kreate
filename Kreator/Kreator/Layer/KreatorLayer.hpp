@@ -70,7 +70,7 @@ namespace Kreator
     /// This function opens new scene with file
     /// - Parameter filepath: Scene filepath
     void OpenScene(const std::filesystem::path& filepath);
-
+    
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the client file path
     const std::filesystem::path& GetClientResorucePath() const;
@@ -78,10 +78,10 @@ namespace Kreator
     const std::filesystem::path& GetSystemUserPath() const;
     /// This function returns the system IKan-Kreator path
     const std::filesystem::path& GetIKanKreatorPath() const;
-
+    
     /// This function returns the single instance of the renderer layer
     static KreatorLayer& Get();
-
+    
   private:
     // Member functions ----------------------------------------------------------------------------------------------
     /// This function handles the key press event
@@ -92,19 +92,19 @@ namespace Kreator
     bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
     /// This function Updates the viewports of all Kreator Data
     void UpdateViewportSize();
-
+    
     /// This function cast ray from camera
     /// - Parameter camera: Camera
     Ray CastRay(const EditorCamera& camera);
-
+    
     /// This function renders the debug icons, colliders and so on....
     void RenderDebug();
     /// This function renders the system info
     void RenderSystemInfo();
-
+    
     /// This function returns the Imguizmo Snap value
     float GetSnapValue();
-
+    
     // Project API ---------------------------------------
     /// This function Creates new project
     /// - Parameter projectDir: Project Direcotry
@@ -119,7 +119,7 @@ namespace Kreator
     /// This funciton push the current project to recent project
     /// - Parameter projectPath: Project to be pushed
     void PushProjectToRecentProjects(const std::filesystem::path& projectPath);
-
+    
     // Scene APIs ----------------------------------------
     /// This function creates new scene
     /// - Parameter name: Scene name
@@ -134,7 +134,7 @@ namespace Kreator
     void SaveSceneAuto();
     /// This function Opens the project from popup
     void OpenScene();
-
+    
     /// This function handle scene play
     void OnScenePlay();
     /// This function handle scene Stop
@@ -164,7 +164,7 @@ namespace Kreator
     /// This function checks is entity is selected
     /// - Parameter e: Entity to be checked
     bool IsEntitySelected(Entity e) const;
-
+    
     // UI APIs -------------------------------------------
     /// This function shows the Welcome screen Popup
     void UI_WelcomePopup();
@@ -199,7 +199,7 @@ namespace Kreator
     void UI_GuizmoToolbar();
     
     // Member variables ----------------------------------------------------------------------------------------------
-    // Popups --------------------------------------------
+    // Popups/Panel --------------------------------------
     bool m_showWelcomePopup {false};
     bool m_showCreateNewProjectPopup {false};
     bool m_showStatisticsPanel {true};
@@ -207,7 +207,11 @@ namespace Kreator
     bool m_showSceneSettings {true};
     
     // Debug Renderer ------------------------------------
-    bool m_renderSystemInfo = true;
+    bool m_renderSystemInfo {true};
+    bool m_showRelationshipConnection {true};
+    
+    // Debug renderer colors -----------------------------
+    glm::vec4 m_relationshipColor = {0.4, 0.4, 0.4, 0.4};
 
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};

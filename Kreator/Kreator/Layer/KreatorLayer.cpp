@@ -560,6 +560,26 @@ if (!m_currentScene) return
     {
       Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
       {
+        // Relationship connection
+        if (m_showRelationshipConnection)
+        {
+          auto relationshipView = m_currentScene->GetAllEntitiesWith<RelationshipComponent>();
+          for (auto entityHandle : relationshipView)
+          {
+            Entity entity = { entityHandle, m_currentScene.get() };
+            const auto& tc = entity.GetComponent<TransformComponent>();
+            const auto& startPos = tc.Position();
+            
+            for (const auto& child : entity.Children())
+            {
+              Entity childEntity = m_currentScene->TryGetEntityWithUUID(child);
+              const auto& childTc = childEntity.GetComponent<TransformComponent>();
+              const auto& endPos = childTc.Position();
+              
+              Renderer2D::DrawLine(startPos, endPos, m_relationshipColor);
+            }
+          }
+        }
       }
       Renderer2D::EndBatch();
 

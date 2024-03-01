@@ -733,6 +733,7 @@ namespace Kreator
       
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
         ImGui::MenuItem("Show System Info", nullptr, &m_renderSystemInfo);
+        ImGui::MenuItem("Show Relationship Connection", nullptr, &m_showRelationshipConnection);
       });
       
       UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
@@ -1037,6 +1038,22 @@ namespace Kreator
       UI::EndPropertyGrid();
       UI::PropertyGridHeaderEnd();
     }
+    
+    // Debug -----------------------------------------------
+    if (UI::PropertyGridHeader("Debug", false, 4, 5))
+    {
+      UI::BeginPropertyGrid();
+      UI::Property("System Info ", m_renderSystemInfo);
+      UI::Property("Relationship Connection ", m_showRelationshipConnection);
+      if (m_showRelationshipConnection)
+      {
+        UI::PropertyColor("Connection Color", m_relationshipColor);
+      }
+      
+      UI::EndPropertyGrid();
+      UI::PropertyGridHeaderEnd();
+    }
+
     ImGui::PopID();
     
     ImGui::End();
