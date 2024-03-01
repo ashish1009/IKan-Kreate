@@ -262,6 +262,10 @@
 		B2C0BA0A2B7DF6950015A277 /* ProjectSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSerializer.hpp; sourceTree = "<group>"; };
 		B2CE3A2D2B9046E300C7F531 /* ColorShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = ColorShader.glsl; sourceTree = "<group>"; };
 		B2CE3A332B91FD2500C7F531 /* HdrBloomShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = HdrBloomShader.glsl; sourceTree = "<group>"; };
+		B2CE3A342B92084300C7F531 /* PrefilterShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PrefilterShader.glsl; sourceTree = "<group>"; };
+		B2CE3A352B92084300C7F531 /* SkymapShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = SkymapShader.glsl; sourceTree = "<group>"; };
+		B2CE3A362B92084300C7F531 /* EquirectangularToCubemapShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = EquirectangularToCubemapShader.glsl; sourceTree = "<group>"; };
+		B2CE3A372B92084300C7F531 /* IrradianceShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = IrradianceShader.glsl; sourceTree = "<group>"; };
 		B2EB0F7D2B8655E300DF1407 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		B2EB0F7E2B8655E300DF1407 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		B2EB0F992B885DD300DF1407 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
@@ -889,6 +893,10 @@
 				B2ED60892B751633007A7F36 /* FSQuadShader.glsl */,
 				B2C0B6D62B75FB520015A277 /* TextShader.glsl */,
 				B2CE3A2D2B9046E300C7F531 /* ColorShader.glsl */,
+				B2CE3A362B92084300C7F531 /* EquirectangularToCubemapShader.glsl */,
+				B2CE3A372B92084300C7F531 /* IrradianceShader.glsl */,
+				B2CE3A342B92084300C7F531 /* PrefilterShader.glsl */,
+				B2CE3A352B92084300C7F531 /* SkymapShader.glsl */,
 				B2CE3A332B91FD2500C7F531 /* HdrBloomShader.glsl */,
 			);
 			path = Shaders;
