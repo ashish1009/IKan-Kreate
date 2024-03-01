@@ -8,6 +8,7 @@
 #include "KreatorLayer.hpp"
 #include "Editor/FolderExplorer.hpp"
 #include "Editor/EntityUtils.hpp"
+#include "KreatorUtils.h"
 
 namespace Kreator
 {
@@ -978,6 +979,8 @@ namespace Kreator
     
     m_allowViewportCameraEvents = ImGui::IsMouseHoveringRect(minBound, maxBound);
 
+    UI_DropViewport();
+    
     ImGui::End();
     ImGui::PopStyleVar();
   }
@@ -1283,5 +1286,89 @@ namespace Kreator
     ImGui::EndVertical();
 
     ImGui::End();
+  }
+  
+  void KreatorLayer::UI_DropViewport()
+  {
+    if (ImGui::BeginDragDropTarget())
+    {
+      auto data = ImGui::AcceptDragDropPayload("asset_payload");
+      if (data)
+      {
+        uint64_t count = data->DataSize / sizeof(AssetHandle);
+        
+        for (uint64_t i = 0; i < count; i++)
+        {
+          AssetHandle assetHandle = *(((AssetHandle*)data->Data) + i);
+          const AssetMetadata& assetData = AssetManager::GetMetadata(assetHandle);
+          
+          // We can't really support dragging and dropping scenes when we're dropping multiple assets
+          if (count == 1 and assetData.type == AssetType::Scene)
+          {
+            OpenScene(assetData);
+            break;
+          }
+          
+          Ref<Asset> asset = AssetManager::GetAsset<Asset>(assetHandle);
+          if (asset)
+          {
+            if (asset->GetAssetType() == AssetType::Material)
+            {
+              auto [origin, direction] = CastRay(m_editorCamera);
+              
+              // for each mesh entity
+              auto meshEntities = m_currentScene->GetAllEntitiesWith<MeshComponent>();
+              for (auto e : meshEntities)
+              {
+                Entity entity = { e, m_currentScene.get() };
+                auto& mc = entity.GetComponent<MeshComponent>();
+                if (float distance = KreatorUtils::CheckRayPassMesh(mc.mesh, entity, origin, direction); distance != -1)
+                {
+                  mc.materialTable->SetMaterial(0, std::dynamic_pointer_cast<MaterialAsset>(asset));
+                  break;
+                }
+              } // Each Mesh Comp
+            }
+          }
+          else
+          {
+            m_showInvalidAssetMetadataPopup = true;
+            m_invalidAssetMetadataPopupData.metadata = assetData;
+          }
+        }// For Loop count
+      } // if data
+      ImGui::EndDragDropTarget();
+    } // Begin Drop
+  }
+  
+  void KreatorLayer::UI_InvalidAssetMetadataPopup()
+  {
+    if (m_showInvalidAssetMetadataPopup)
+    {
+      ImGui::OpenPopup("Invalid Asset Metadata");
+      m_showInvalidAssetMetadataPopup = false;
+    }
+    
+    ImVec2 center = ImGui::GetMainViewport()->GetCenter();
+    ImGui::SetNextWindowPos(center, ImGuiCond_Appearing, ImVec2(0.5f, 0.5f));
+    ImGui::SetNextWindowSize(ImVec2{ 400,0 });
+    if (ImGui::BeginPopupModal("Invalid Asset Metadata", nullptr, ImGuiWindowFlags_AlwaysAutoResize))
+    {
+      ImGui::TextWrapped("You tried to use an asset with invalid metadata. This can happen when an asset has a reference to another non-existent asset, or when as asset is empty.");
+      ImGui::Separator();
+      
+      auto& metadata = m_invalidAssetMetadataPopupData.metadata;
+      UI::BeginPropertyGrid();
+      const auto& filepath = metadata.filePath.string();
+      UI::Property("Asset Filepath", filepath);
+      UI::Property("Asset ID", fmt::format("{0}", (uint64_t)metadata.handle));
+      UI::EndPropertyGrid();
+      
+      if (ImGui::Button("OK"))
+      {
+        ImGui::CloseCurrentPopup();
+      }
+      ImGui::EndPopup();
+    }
   }
 } // namespace Kreator

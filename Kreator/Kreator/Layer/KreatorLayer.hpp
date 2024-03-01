@@ -136,9 +136,12 @@ namespace Kreator
     void SaveScene();
     /// This function Saves the scene automatically
     void SaveSceneAuto();
-    /// This function Opens the project from popup
+    /// This function Opens the scene from popup
     void OpenScene();
-    
+    /// This function Opens the scene from metadata
+    /// - Parameter assetMetadata: metadata
+    void OpenScene(const AssetMetadata& assetMetadata);
+
     /// This function handle scene play
     void OnScenePlay();
     /// This function handle scene Stop
@@ -203,6 +206,10 @@ namespace Kreator
     void UI_GuizmoToolbar();
     /// This function renders the Camera toolbar
     void UI_CameraToolbar();
+    /// This function handles the Drop content in viewport
+    void UI_DropViewport();
+    /// This function Popup invalid asset open
+    void UI_InvalidAssetMetadataPopup();
     
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups/Panel --------------------------------------
@@ -211,6 +218,7 @@ namespace Kreator
     bool m_showStatisticsPanel {true};
     bool m_showNewScenePopup {false};
     bool m_showSceneSettings {true};
+    bool m_showInvalidAssetMetadataPopup {false};
     
     // Debug Renderer ------------------------------------
     bool m_renderSystemInfo {true};
@@ -250,6 +258,10 @@ namespace Kreator
       None, NewPreoject, OpenProject, SaveScene, OpenScene
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
+    struct InvalidAssetMetadataPopupData
+    {
+      AssetMetadata metadata;
+    } m_invalidAssetMetadataPopupData;
 
     // Scene Data ----------------------------------------
     float m_timeSinceLastSave = 0.0f;

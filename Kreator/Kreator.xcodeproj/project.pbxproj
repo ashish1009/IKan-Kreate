@@ -91,6 +91,7 @@
 		B2C0BA132B7E0F5D0015A277 /* UserPreferences.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UserPreferences.hpp; sourceTree = "<group>"; };
 		B2CE3A2A2B90404F00C7F531 /* EntityUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntityUtils.cpp; sourceTree = "<group>"; };
 		B2CE3A2B2B90404F00C7F531 /* EntityUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityUtils.hpp; sourceTree = "<group>"; };
+		B2CE3A322B91E25000C7F531 /* KreatorUtils.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = KreatorUtils.h; sourceTree = "<group>"; };
 		B2EB0F8A2B87057800DF1407 /* SceneHierarchyPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneHierarchyPanel.cpp; sourceTree = "<group>"; };
 		B2EB0F8B2B87057800DF1407 /* SceneHierarchyPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneHierarchyPanel.hpp; sourceTree = "<group>"; };
 		B2EB0F8D2B87062000DF1407 /* SelectionContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SelectionContext.cpp; sourceTree = "<group>"; };
@@ -249,6 +250,7 @@
 				B2ED5E8F2B74A190007A7F36 /* KreatorLayer.cpp */,
 				B2ED5E902B74A190007A7F36 /* KreatorLayer.hpp */,
 				B248B8EB2B7E3B4500B9EC40 /* KreatorLayerUI.cpp */,
+				B2CE3A322B91E25000C7F531 /* KreatorUtils.h */,
 			);
 			path = Layer;
 			sourceTree = "<group>";

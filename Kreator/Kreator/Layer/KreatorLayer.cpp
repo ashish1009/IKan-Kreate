@@ -6,6 +6,7 @@
 //
 
 #include "KreatorLayer.hpp"
+#include "KreatorUtils.h"
 #include "Panel/KreatorConsolePanel.hpp"
 #include "Panel/ContentBrowserPanel.hpp"
 #include "Panel/ProjectSettingPanel.hpp"
@@ -68,44 +69,6 @@ if (!m_currentScene) return
     return (mouseViewportSpace.spaceMouseX >= -1.0f and mouseViewportSpace.spaceMouseX <= 1.0f and
             mouseViewportSpace.spaceMouseY >= -1.0f and mouseViewportSpace.spaceMouseY <= 1.0f);
   }
-
-  // Kreator Layer ------------------------------------------------------------------------------------------------
-  namespace KreatorUtils
-  {
-    static auto CheckRayPassMesh = [](AssetHandle meshHandle, Entity entity, const glm::vec3& origin, const glm::vec3& direction) -> float {
-      const auto& mesh = AssetManager::GetAsset<Mesh>(meshHandle);
-      if (!mesh or mesh->IsFlagSet(AssetFlag::Missing))
-      {
-        return -1;
-      }
-      
-      const glm::mat4& transform = entity.GetTransform().Transform();
-      auto& submeshes = mesh->GetSubMeshes();
-      for (uint32_t i = 0; i < submeshes.size(); i++)
-      {
-        const auto& submesh = submeshes[i];
-        Ray ray =
-        {
-          glm::inverse(transform * submesh.transform) * glm::vec4(origin, 1.0f),
-          glm::inverse(glm::mat3(transform * submesh.transform)) * direction
-        };
-        
-        float distance;
-        if (ray.IntersectsAABB(submesh.boundingBox, distance))
-        {
-          const auto& triangleCache = mesh->GetTriangleCache(i);
-          for (const auto& triangle : triangleCache)
-          {
-            if (ray.IntersectsTriangle(triangle.V0.position, triangle.V1.position, triangle.V2.position, distance))
-            {
-              return distance;
-            }
-          } // For each triangle cache
-        } // Bounding box intersect
-      } // Each Submesh
-      return -1;
-    };
-  } // namespace KreatorUtils
   
   KreatorLayer* KreatorLayer::s_instance = nullptr;
   KreatorLayer& KreatorLayer::Get()
@@ -807,6 +770,7 @@ if (!m_currentScene) return
   void KreatorLayer::CloseCurrentScene()
   {
     IK_PROFILE();
+    ClearSelectedEntity();
     if (m_currentScene)
     {
       m_currentScene->OnClose();
@@ -850,6 +814,12 @@ if (!m_currentScene) return
   {
     FolderExplorer::Open(SceneExtension, Project::GetSceneDirectory());
     m_folderExplorerAction = FolderExplorerAction::OpenScene;
+  }
+  
+  void KreatorLayer::OpenScene(const AssetMetadata& assetMetadata)
+  {
+    std::filesystem::path workingDirPath = Project::GetAssetDirectory() / assetMetadata.filePath;
+    OpenScene(workingDirPath.string());
   }
 
   void KreatorLayer::OpenScene(const std::filesystem::path &filepath)
