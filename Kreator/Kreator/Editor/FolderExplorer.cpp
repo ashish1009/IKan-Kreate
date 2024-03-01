@@ -430,7 +430,17 @@ namespace Kreator
         } // if open
         else if (s_fileExplorerData->popupType == PopupType::Select)
         {
-          if (UI::DrawRoundButton(" Select ", UI::Color::NiceThemeHighlight, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
+          ImU32 buttonColor = UI::Color::Muted;
+          if (s_fileExplorerData->selectedPath == "")
+          {
+            buttonColor = UI::Color::Muted;
+          }
+          else
+          {
+            buttonColor = UI::Color::NiceThemeHighlight;
+          }
+
+          if (UI::DrawRoundButton(" Select ", buttonColor, 5) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
           {
             if (!s_fileExplorerData->createNewFolder and s_fileExplorerData->selectedPath != "")
             {
@@ -517,11 +527,18 @@ namespace Kreator
     s_fileExplorerData->selectedPath = "";
   }
   
-  void FolderExplorer::Select(bool *lastPopupFlag)
+  void FolderExplorer::Select(const std::filesystem::path& basePath, bool *lastPopupFlag)
   {
     s_fileExplorerData->popup = true;
     s_fileExplorerData->lastPopupFlag = lastPopupFlag;
-    s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    if (basePath != "" and std::filesystem::exists(basePath))
+    {
+      s_fileExplorerData->currentPath = basePath;
+    }
+    else
+    {
+      s_fileExplorerData->currentPath = KreatorLayer::Get().GetIKanKreatorPath();
+    }
     s_fileExplorerData->pathBuffer.MemCpy(s_fileExplorerData->currentPath.c_str(), 0, s_fileExplorerData->currentPath.string().size());
     s_fileExplorerData->selectedPath = "";
     s_fileExplorerData->returnPath = "";

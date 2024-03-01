@@ -330,7 +330,7 @@ namespace Kreator
         if (UI::DrawRoundButton("...", UI::Color::BackgroundDark, 5))
         {
           ImGui::CloseCurrentPopup();
-          FolderExplorer::Select(&m_showCreateNewProjectPopup);
+          FolderExplorer::Select("", &m_showCreateNewProjectPopup);
           m_folderExplorerAction = FolderExplorerAction::NewPreoject;
         }
       }
@@ -342,7 +342,16 @@ namespace Kreator
         ImGui::PushFont(UI::GetBoldFont());
         
         UI::ShiftCursorX(ImGui::GetWindowWidth() / 2 - 90);
-        if (UI::DrawRoundButton("Create", UI::Color::NiceThemeHighlight, 10) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
+        ImU32 createButtonColor = UI::Color::Muted;
+        if (m_projectNameBuffer.Empty())
+        {
+          createButtonColor = UI::Color::Muted;
+        }
+        else
+        {
+          createButtonColor = UI::Color::NiceThemeHighlight;
+        }
+        if (UI::DrawRoundButton("Create", createButtonColor, 10) or (ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter)))
         {
           if (!m_projectNameBuffer.Empty())
           {

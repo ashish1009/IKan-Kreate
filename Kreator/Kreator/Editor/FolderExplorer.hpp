@@ -23,11 +23,13 @@ namespace Kreator
     static std::filesystem::path Explore();
     
     /// This function set the popup to show Select folder widgwet
+    /// - Parameter basePath: Base start path
     /// - Parameter lastPopupFlag: last popup flag pointer
-    static void Select(bool *lastPopupFlag = nullptr);
+    static void Select(const std::filesystem::path& basePath = "", bool *lastPopupFlag = nullptr);
     /// This function set the popup to show open file widgwet
-    /// - Parameter lastPopupFlag: last popup flag pointer
     /// - Parameter extenstion: externsion to be opened
+    /// - Parameter basePath: Base start path
+    /// - Parameter lastPopupFlag: last popup flag pointer
     static void Open(const std::string& extenstion, const std::filesystem::path& basePath = "", bool *lastPopupFlag = nullptr);
     /// This function set the popup to show save file widgwet
     /// - Parameter lastPopupFlag: last popup flag pointer
