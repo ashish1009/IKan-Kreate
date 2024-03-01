@@ -114,18 +114,22 @@ Editor Application using IKan Library to create Games
   - Asset Debugger
   - Scene Hierarchy (ECS)
 
-### Detailed Road Map
-- Rotate and Scale Child entity with parent
+### Mini Feature Road Map
+- Connect Parent child with line
 - Fix selected outline : Try Different combination of rendering mesh and selected mesh
 - Editor camera Side/Top/Front View
 - Axis / Grid
+- Never edit/save default material, always create copy
+- Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
 - Show and hide entity (SHP)
 - Show and hide components
-- Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
-- Never edit/save default material, always create copy
 - Point Light
 - Shadow
 - Physics Material
+- Scale Child entity with parent (Hold)
+
+### Mini Feature Complete
+- Rotate Child entity with parent
 
 ### TODO
 

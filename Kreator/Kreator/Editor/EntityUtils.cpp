@@ -71,54 +71,75 @@ namespace Kreator::ECS_Utils
       const auto& ePos = tc.Position();
       const auto& pPos = parentTc.Position();
 
-      // X - Axis
-      if (deltaRotation.x != 0.0f)
+      // Rotation ------------------------
       {
-        float distanceYZ = Utils::Math::GetDistance(ePos.y, ePos.z, pPos.y, pPos.z);
-        if (distanceYZ)
+        // X - Axis
+        if (deltaRotation.x != 0.0f)
         {
-          float mlDistanceYZ = (ePos.z - parentTc.Position().z) / distanceYZ;
-          float angleXZOffset = (ePos.y > parentTc.Position().y) ? asin(mlDistanceYZ) : M_PI - asin(mlDistanceYZ);
-          
-          float xPos = ePos.x;
-          float yPos = parentTc.Position().y + (distanceYZ * glm::cos(angleXZOffset + deltaRotation.x));
-          float zPos = parentTc.Position().z + (distanceYZ * glm::sin(angleXZOffset + deltaRotation.x));
-          
-          tc.UpdatePosition({xPos, yPos, zPos});
+          float distanceYZ = Utils::Math::GetDistance(ePos.y, ePos.z, pPos.y, pPos.z);
+          if (distanceYZ)
+          {
+            float mlDistanceYZ = (ePos.z - parentTc.Position().z) / distanceYZ;
+            float angleXZOffset = (ePos.y > parentTc.Position().y) ? asin(mlDistanceYZ) : M_PI - asin(mlDistanceYZ);
+            
+            float xPos = ePos.x;
+            float yPos = parentTc.Position().y + (distanceYZ * glm::cos(angleXZOffset + deltaRotation.x));
+            float zPos = parentTc.Position().z + (distanceYZ * glm::sin(angleXZOffset + deltaRotation.x));
+            
+            tc.UpdatePosition({xPos, yPos, zPos});
+          }
         }
-      }
-      
-      // Y - Axis
-      if (deltaRotation.y != 0.0f)
-      {
-        float distanceXZ = Utils::Math::GetDistance(ePos.x, ePos.z, pPos.x, pPos.z);
-        if (distanceXZ)
+        
+        // Y - Axis
+        if (deltaRotation.y != 0.0f)
         {
-          float mlDistanceXZ = (parentTc.Position().z - ePos.z) / distanceXZ;
-          float angleXZOffset = (ePos.x > parentTc.Position().x) ? asin(mlDistanceXZ) : M_PI - asin(mlDistanceXZ);
-          
-          float xPos = parentTc.Position().x + (distanceXZ * glm::cos(angleXZOffset + deltaRotation.y));
-          float yPos = ePos.y;
-          float zPos = parentTc.Position().z - (distanceXZ * glm::sin(angleXZOffset + deltaRotation.y));
-          
-          tc.UpdatePosition({xPos, yPos, zPos});
+          float distanceXZ = Utils::Math::GetDistance(ePos.x, ePos.z, pPos.x, pPos.z);
+          if (distanceXZ)
+          {
+            float mlDistanceXZ = (parentTc.Position().z - ePos.z) / distanceXZ;
+            float angleXZOffset = (ePos.x > parentTc.Position().x) ? asin(mlDistanceXZ) : M_PI - asin(mlDistanceXZ);
+            
+            float xPos = parentTc.Position().x + (distanceXZ * glm::cos(angleXZOffset + deltaRotation.y));
+            float yPos = ePos.y;
+            float zPos = parentTc.Position().z - (distanceXZ * glm::sin(angleXZOffset + deltaRotation.y));
+            
+            tc.UpdatePosition({xPos, yPos, zPos});
+          }
         }
-      }
-      
-      // Z - Axis
-      if (deltaRotation.z != 0.0f)
-      {
-        float distanceXY = Utils::Math::GetDistance(ePos.x, ePos.y, pPos.x, pPos.y);
-        if (distanceXY)
+        
+        // Z - Axis
+        if (deltaRotation.z != 0.0f)
         {
-          float mlDistanceXY = (ePos.x - parentTc.Position().x) / distanceXY;
-          float angleXYOffset = (ePos.y > parentTc.Position().y) ? acos(mlDistanceXY) : (2 * M_PI) - acos(mlDistanceXY);
-          
-          float xPos = parentTc.Position().x + (distanceXY * glm::cos(angleXYOffset + deltaRotation.z));
-          float yPos = parentTc.Position().y + (distanceXY * glm::sin(angleXYOffset + deltaRotation.z));
-          float zPos = ePos.z;
-          
-          tc.UpdatePosition({xPos, yPos, zPos});
+          float distanceXY = Utils::Math::GetDistance(ePos.x, ePos.y, pPos.x, pPos.y);
+          if (distanceXY)
+          {
+            float mlDistanceXY = (ePos.x - parentTc.Position().x) / distanceXY;
+            float angleXYOffset = (ePos.y > parentTc.Position().y) ? acos(mlDistanceXY) : (2 * M_PI) - acos(mlDistanceXY);
+            
+            float xPos = parentTc.Position().x + (distanceXY * glm::cos(angleXYOffset + deltaRotation.z));
+            float yPos = parentTc.Position().y + (distanceXY * glm::sin(angleXYOffset + deltaRotation.z));
+            float zPos = ePos.z;
+            
+            tc.UpdatePosition({xPos, yPos, zPos});
+          }
+        }
+      } // Rotation
+      
+      // Scale ---------------------
+      {
+        // X - Axis
+        if (deltaScale.x != 0.0f)
+        {
+        }
+        
+        // Y - Axis
+        if (deltaScale.y != 0.0f)
+        {
+        }
+        
+        // Z - Axis
+        if (deltaScale.z != 0.0f)
+        {
         }
       }
     }
