@@ -7,9 +7,57 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [10.485281, 4, 1.99999952]
-      Rotation: [0, 0.785398245, 0]
+      Position: [10.485281, 0.131599873, 1.28652728]
+      Rotation: [-2.77681899, 0.785398245, 0]
       Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 1299076476545351009
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      - Handle: 14967937651031371802
+    TransformComponent:
+      Position: [0, 0, 4]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 1770782055032476683
+    TagComponent:
+      Tag: Cubec
+    Parent: 3772482211849236384
+    Children:
+      []
+    TransformComponent:
+      Position: [-8.00000286, 7.11530447e-07, -1.62422657e-06]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 3680768160732373295
+    TagComponent:
+      Tag: Cube
+    Parent: 3772482211849236384
+    Children:
+      []
+    TransformComponent:
+      Position: [-5, 3.7252903e-09, 3]
+      Rotation: [2.98023224e-08, -5.96046448e-08, 0]
+      Scale: [0.99999994, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -21,9 +69,14 @@ Entities:
       Tag: Cube Center
     Parent: 0
     Children:
-      []
+      - Handle: 10264393408535488441
+      - Handle: 1770782055032476683
+      - Handle: 17832240695483205304
+      - Handle: 12514459389810633182
+      - Handle: 3680768160732373295
+      - Handle: 10068357727972918772
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [-5, 0, 1.1920929e-07]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -40,7 +93,71 @@ Entities:
       - Handle: 17671997974037504265
     TransformComponent:
       Position: [2, 2, 2]
-      Rotation: [0, 0.785398185, 0]
+      Rotation: [-2.77681899, 0.785398185, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 10068357727972918772
+    TagComponent:
+      Tag: Cube
+    Parent: 3772482211849236384
+    Children:
+      []
+    TransformComponent:
+      Position: [-5, 0, -3]
+      Rotation: [0, -0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 10264393408535488441
+    TagComponent:
+      Tag: Cubeb
+    Parent: 3772482211849236384
+    Children:
+      []
+    TransformComponent:
+      Position: [-4.99999952, 3, 9.31322575e-10]
+      Rotation: [0.00174546242, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 12514459389810633182
+    TagComponent:
+      Tag: Cubed
+    Parent: 3772482211849236384
+    Children:
+      []
+    TransformComponent:
+      Position: [-5, -3, 9.31322575e-10]
+      Rotation: [0, 0, 0]
+      Scale: [1, 0.99999994, 0.99999994]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 14967937651031371802
+    TagComponent:
+      Tag: Cube
+    Parent: 1299076476545351009
+    Children:
+      []
+    TransformComponent:
+      Position: [4, 0, 4]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
@@ -55,9 +172,25 @@ Entities:
     Children:
       - Handle: 74307149538884466
     TransformComponent:
-      Position: [6, 2, 6]
-      Rotation: [0, 0, 0]
+      Position: [6, 3.42690277, -1.73681056]
+      Rotation: [-2.77681899, 0, 0]
       Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 17832240695483205304
+    TagComponent:
+      Tag: Cubea
+    Parent: 3772482211849236384
+    Children:
+      []
+    TransformComponent:
+      Position: [-2, 1.22717142e-06, -2.88788215e-06]
+      Rotation: [0, 0, 0]
+      Scale: [1, 0.99999994, 0.99999994]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
