@@ -164,6 +164,9 @@ namespace IKan
     /// - Parameter entity: Selected Entity
     bool IsEntitySelected(entt::entity entity) const;
 
+    /// This function pass the reference of Direction light to control from client
+    DirectionLight& GetDirectionLight();
+    
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
     ///   - name: Name of Scene
@@ -203,7 +206,9 @@ namespace IKan
     EntityMap m_entityIDMap;
     std::vector<entt::entity> m_selectedEntities;
     std::function<void(const Entity&)> m_onEntityDestroyedCallback;
-
+    
+    // Environment ----------------------
+    DirectionLight m_directionLight;
     friend class SceneSerializer;
     friend class Entity;
   };

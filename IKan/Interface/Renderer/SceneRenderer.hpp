@@ -42,8 +42,10 @@ namespace IKan
     ~SceneRenderer();
 
     /// This funciton begins the scene renderering
-    /// - Parameter sceneCamera: Scene Renderer camera data
-    void BeginScene(const SceneRendererCamera& sceneCamera);
+    /// - Parameters:
+    ///   - sceneCamera: Scene Renderer camera data
+    ///   - directionLight: direction liht
+    void BeginScene(const SceneRendererCamera& sceneCamera, const DirectionLight& directionLight);
     /// This funciton ends the scene renderering
     void EndScene();
 
@@ -74,9 +76,6 @@ namespace IKan
 
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
-
-    /// This function pass the reference of Direction light to control from client
-    static DirectionLight& GetDirectionLight();
 
   private:
     // Member functions ---------------------------------------------------------------------------------------------
@@ -121,15 +120,13 @@ namespace IKan
 
     Ref<FrameBuffer> m_viewportRenderPass, m_geometryRenderPass;
 
-    struct SceneData
-    {
-      SceneRendererCamera sceneCamera;
-      DirectionLight directionLight;
-    };
+    // Environment Data
+    SceneRendererCamera sceneCamera;
 
     inline static Ref<Material> s_colorMaterial;
     inline static Ref<Shader> s_finalImageShader;
 
-    inline static SceneData s_sceneData;
+    inline static SceneRendererCamera s_sceneCamera;
+    inline static DirectionLight s_directionLight;
   };
 } // namespace IKan

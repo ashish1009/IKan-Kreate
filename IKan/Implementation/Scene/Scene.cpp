@@ -79,7 +79,7 @@ namespace IKan
     IK_PERFORMANCE("Scene::OnRenderEditor");
     
     // Render 3D Scene
-    renderer.BeginScene({ camera, camera.GetPosition(), camera.GetViewMatrix(), camera.GetNearClip(), camera.GetFarClip(), camera.GetVerticalFOV()});
+    renderer.BeginScene({ camera, camera.GetPosition(), camera.GetViewMatrix(), camera.GetNearClip(), camera.GetFarClip(), camera.GetVerticalFOV()}, m_directionLight);
     RenderScene(renderer, true);
     renderer.EndScene();
   }
@@ -508,5 +508,10 @@ namespace IKan
       return iter->second;
     }
     return Entity{};
+  }
+  
+  DirectionLight& Scene::GetDirectionLight()
+  {
+    return m_directionLight;
   }
 } // namespace IKan

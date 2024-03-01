@@ -58,9 +58,10 @@ namespace IKan
     IK_LOG_INFO(LogModule::SceneRenderer, "Destroying Scene renderer for '{0}'", m_debugName);
   }
   
-  void SceneRenderer::BeginScene(const SceneRendererCamera& sceneCamera)
+  void SceneRenderer::BeginScene(const SceneRendererCamera& sceneCamera, const DirectionLight& directionLight)
   {
-    s_sceneData.sceneCamera = sceneCamera;
+    s_sceneCamera = sceneCamera;
+    s_directionLight = directionLight;
     IK_PERFORMANCE("SceneRenderer::BeginScene");
   }
   
@@ -114,10 +115,10 @@ namespace IKan
     RETURN_IF(!material);
     
     material->Set("u_TilingFactor", tilingFactor);
-    material->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
-    material->Set("u_CameraPosition", s_sceneData.sceneCamera.position);
+    material->Set("u_ViewProjection", s_sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneCamera.viewMatrix);
+    material->Set("u_CameraPosition", s_sceneCamera.position);
     material->Set("u_NormalMatrix", glm::transpose(glm::inverse(glm::mat3(transform))));
-    material->Set("u_DirectionLight", s_sceneData.directionLight);
+    material->Set("u_DirectionLight", s_directionLight);
 
     RenderSubmesh(mesh, transform, material);
   }
@@ -189,7 +190,7 @@ namespace IKan
       auto modTransform = Utils::Math::GetTransformMatrix(p, r, s);
       
       // Render Outline
-      s_colorMaterial->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
+      s_colorMaterial->Set("u_ViewProjection", s_sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneCamera.viewMatrix);
       RenderSubmesh(selectedMeshData.mesh, modTransform, s_colorMaterial);
       
       Renderer::DisableStencilPass();
@@ -225,10 +226,5 @@ namespace IKan
   Ref<Texture> SceneRenderer::GetFinalImage() const
   {
     return m_viewportRenderPass->GetColorAttachments().at(0);
-  }
-  
-  DirectionLight& SceneRenderer::GetDirectionLight()
-  {
-    return s_sceneData.directionLight;
-  }
+  }  
 } // namespace IKan
