@@ -76,7 +76,6 @@ struct PBRParameters
   vec3 Normal;
   float Metalness;
   float Roughness;
-  float Ao;
   vec3 View;
   float NdotV;
 };
@@ -209,7 +208,7 @@ vec3 CalculateLight(vec3 radiance, vec3 L, vec3 F0)
   
   // add to outgoing radiance Lo
   // note that we already multiplied the BRDF by the Fresnel (kS) so we won't multiply by kS again
-  return (kD * m_Params.Albedo / PI + specular) * radiance * NdotL;
+  return ((kD * m_Params.Albedo / PI) + specular) * radiance * NdotL;
 }
 
 // Calculate the Direction light
@@ -232,7 +231,6 @@ void main()
   m_Params.Albedo       = (u_AlbedoTextureToggle > 0.5) ? texture(u_AlbedoTexture, texCoords * tilingFactor).rgb * u_Material.albedoColor : u_Material.albedoColor;
   m_Params.Metalness    = (u_MetallicTextureToggle > 0.5) ? texture(u_MetallicTexture, texCoords * tilingFactor).r : u_Material.metallic;
   m_Params.Roughness    = (u_RoughnessTextureToggle > 0.5) ? texture(u_RoughnessTexture, texCoords * tilingFactor).r : u_Material.roughness;
-  m_Params.Ao           = (u_AoTextureToggle > 0.5) ? texture(u_AoTexture, texCoords * tilingFactor).r : 1.0f;
   m_Params.View         = normalize(vs_Input.CameraPosition - vs_Input.WorldPosition);
   m_Params.Normal       = getNormalFromMap(tilingFactor, texCoords);
 

@@ -116,10 +116,13 @@ Editor Application using IKan Library to create Games
 
 ### Mini Feature Road Map
 - Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
+- Camera/Light Icons
+- Mini Viewport
 - Show and hide entity (SHP)
 - Show and hide components
 - Point Light
 - Shadow
+- Prefabs
 - Physics Material
 - Grid
 - Scale Child entity with parent (Hold)
@@ -131,6 +134,7 @@ Editor Application using IKan Library to create Games
 - Never edit/save default material, always create copy
 - Editor camera Side/Top/Front View
 - Axis
+- Drop Content inside Viewport
 
 ### TODO
 

@@ -62,14 +62,12 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
       out << YAML::Key << "RoughnessTextureToggle" << YAML::Value <<  material->GetRoughnessMapToggle();
       out << YAML::Key << "MetallicTextureToggle" << YAML::Value <<  material->GetMetallicMapToggle();
       out << YAML::Key << "DepthTextureToggle" << YAML::Value <<  material->GetDepthMapToggle();
-      out << YAML::Key << "AoTextureToggle" << YAML::Value <<  material->GetAoMapToggle();
 
       SerializeTextureMap(Albedo, material);
       SerializeTextureMap(Normal, material);
       SerializeTextureMap(Metallic, material);
       SerializeTextureMap(Roughness, material);
       SerializeTextureMap(Depth, material);
-      SerializeTextureMap(Ao, material);
       out << YAML::EndMap;
     }
     out << YAML::EndMap; // Material
@@ -99,7 +97,7 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
     Ref<MaterialAsset> material = MaterialAsset::Create(fileName);
     
     IK_DESERIALIZE_PROPERTY(AlbedoColor, material->GetAlbedoColor(), materialNode, glm::vec3(0.8f));
-    IK_DESERIALIZE_PROPERTY(Metalness, material->GetMetalness(), materialNode, 0.5f);
+    IK_DESERIALIZE_PROPERTY(Metallic, material->GetMetalness(), materialNode, 0.5f);
     IK_DESERIALIZE_PROPERTY(Emission, material->GetEmission(), materialNode, 0.0f);
     IK_DESERIALIZE_PROPERTY(Roughness, material->GetRoughness(), materialNode, 0.5f);
     IK_DESERIALIZE_PROPERTY(DepthScale, material->GetDepthScale(), materialNode, 0.001f);
@@ -109,7 +107,6 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
     material->SetRoughnessMapToggle(materialNode["RoughnessTextureToggle"] ? materialNode["RoughnessTextureToggle"].as<float>() : 0.0f);
     material->SetMetallicMapToggle(materialNode["MetallicTextureToggle"] ? materialNode["MetallicTextureToggle"].as<float>() : 0.0f);
     material->SetDepthMapToggle(materialNode["DepthTextureToggle"] ? materialNode["DepthTextureToggle"].as<float>() : 0.0f);
-    material->SetAoMapToggle(materialNode["AoTextureToggle"] ? materialNode["AoTextureToggle"].as<float>() : 0.0f);
 
     AssetHandle albedoMap, normalMap, metalnessMap, roughnessMap, depthMap, aoMap;
     IK_DESERIALIZE_PROPERTY(AlbedoTexture, albedoMap, materialNode, (AssetHandle)0);
@@ -117,7 +114,6 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
     IK_DESERIALIZE_PROPERTY(MetallicTexture, metalnessMap, materialNode, (AssetHandle)0);
     IK_DESERIALIZE_PROPERTY(RoughnessTexture, roughnessMap, materialNode, (AssetHandle)0);
     IK_DESERIALIZE_PROPERTY(DepthTexture, depthMap, materialNode, (AssetHandle)0);
-    IK_DESERIALIZE_PROPERTY(AoTexture, aoMap, materialNode, (AssetHandle)0);
 
     if (albedoMap)
     {
@@ -152,13 +148,6 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
       if (AssetManager::IsAssetHandleValid(depthMap))
       {
         material->SetDepthMap(AssetManager::GetAsset<Image>(depthMap));
-      }
-    }
-    if (aoMap)
-    {
-      if (AssetManager::IsAssetHandleValid(aoMap))
-      {
-        material->SetAoMap(AssetManager::GetAsset<Image>(aoMap));
       }
     }
     
