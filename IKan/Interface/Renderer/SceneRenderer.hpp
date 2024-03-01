@@ -135,9 +135,13 @@ namespace IKan
 
     inline static Ref<Material> s_colorMaterial;
     inline static Ref<Shader> s_finalImageShader, s_equiractangularToCubemapShader, s_irradianceShader, s_prefilterShader, s_skymapShader;
-    inline static Ref<Texture> s_envTexture, s_envCubemap, s_irradianceMap, s_prefilterMap;
 
     inline static SceneRendererCamera s_sceneCamera;
+    
+    // Environment
+    inline static bool s_isIBL = false;
+    inline static bool s_showIrradiance = true;
     inline static DirectionLight s_directionLight;
+    inline static Ref<Texture> s_envTexture, s_envCubemap, s_irradianceMap, s_prefilterMap;
   };
 } // namespace IKan

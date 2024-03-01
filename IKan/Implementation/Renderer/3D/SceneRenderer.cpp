@@ -7,6 +7,7 @@
 
 #include "SceneRenderer.hpp"
 #include "Renderer/Renderer2D.hpp"
+#include "Renderer/Renderer3D.hpp"
 #include "Asset/AssetManager.hpp"
 
 namespace IKan
@@ -160,6 +161,22 @@ namespace IKan
           {
             RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
           }
+        }
+      }
+      
+      // Skybox Renderer
+      {
+        // Render skybox (render as last to prevent overdraw)
+//        if (s_isIBL and s_envTexture)
+        {
+          s_skymapShader->Bind();
+          s_skymapShader->SetUniformMat4("u_Projection", s_sceneCamera.camera.GetProjectionMatrix());
+          s_skymapShader->SetUniformMat4("u_RotateView", glm::mat4(glm::mat3(s_sceneCamera.viewMatrix)));          
+//          s_showIrradiance ? s_irradianceMap->Bind() : s_envCubemap->Bind();
+          
+          Renderer::DepthFunc(GlDepthFunc::LEqual);
+          Renderer3D::DrawFullscreenCube();
+          Renderer::DepthFunc(GlDepthFunc::Less);
         }
       }
       
