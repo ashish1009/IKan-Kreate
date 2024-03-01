@@ -118,7 +118,6 @@ Editor Application using IKan Library to create Games
 - Fix selected outline : Try Different combination of rendering mesh and selected mesh
 - Editor camera Side/Top/Front View
 - Axis / Grid
-- Never edit/save default material, always create copy
 - Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
 - Show and hide entity (SHP)
 - Show and hide components
@@ -130,6 +129,7 @@ Editor Application using IKan Library to create Games
 ### Mini Feature Complete
 - Rotate Child entity with parent
 - Connect Parent child with line
+- Never edit/save default material, always create copy
 
 ### TODO
 
@@ -153,7 +153,7 @@ Editor Application using IKan Library to create Games
   - v5.2.5.1 : Lights and Materials
   - v5.3.5.2 : Material Editor and Serializer
   - v5.3.5.3 : Guizmo
-  - v5.3.5.4 : Guizmo
+  - v5.3.5.4 : Relationship connection
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)

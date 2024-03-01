@@ -235,6 +235,8 @@ namespace Kreator
   void SceneHierarchyPanel::OnProjectChanged(const Ref<Project>& project)
   {
     IK_PROFILE();
+    // Should be after loading the asset registry
+    s_defaultMaterialAsset = AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat")->handle;
   }
   
   void SceneHierarchyPanel::OnImGuiRender(bool& isOpen)
@@ -261,6 +263,18 @@ namespace Kreator
         }
         
         ImGui::EndDragDropTarget();
+      }
+      
+      if (m_selectedMeshMaterialAsset)
+      {
+        if (m_showMaterialEditor)
+        {
+          AssetEditorManager::OpenEditor(m_selectedMeshMaterialAsset);
+        }
+        else
+        {
+          AssetEditorManager::CloseEditor(m_selectedMeshMaterialAsset);
+        }
       }
       
       ImGui::End();
@@ -853,8 +867,6 @@ namespace Kreator
       
       // Materials
       {
-        static bool showMaterialEditor = false;
-
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
 
         bool open = UI::PropertyGridHeader("Material", true, 3, 5);
@@ -877,7 +889,7 @@ namespace Kreator
           {
             // TODO: Later increase the material for now only 0 is used
             smc.materialTable->SetMaterial(0, AssetManager::CreateNewAsset<MaterialAsset>(buffer, Project::GetActive()->GetMaterialDirectory(), buffer));
-            showMaterialEditor = true;
+            m_showMaterialEditor = true;
             ImGui::CloseCurrentPopup();
           }
           UI::EndPopup();
@@ -900,14 +912,14 @@ namespace Kreator
             UI::PropertyAssetReferenceSettings settings;
             if (hasMaterial)
             {
-              Ref<MaterialAsset> meshMaterialAsset = smc.materialTable->GetMaterial((uint32_t)i);
-              std::string meshMaterialName = meshMaterialAsset->GetMaterial()->GetName();
+              m_selectedMeshMaterialAsset = smc.materialTable->GetMaterial((uint32_t)i);
+              std::string meshMaterialName = m_selectedMeshMaterialAsset->GetMaterial()->GetName();
               if (meshMaterialName.empty())
               {
                 meshMaterialName = "Unnamed Material";
               }
               
-              AssetHandle materialAssetHandle = meshMaterialAsset->handle;
+              AssetHandle materialAssetHandle = m_selectedMeshMaterialAsset->handle;
               settings.advanceToNextColumn = false;
               settings.widthOffset = 80;
               UI::Property("Tiling Factor", smc.tilingFactor, 1.0f, 1.0f, 1000.0f);
@@ -921,35 +933,31 @@ namespace Kreator
               {
                 smc.materialTable->ClearMaterial((uint32_t)i);
               }
+
               ImGui::SameLine();
-              
               static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
               if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }))
               {
-                showMaterialEditor = showMaterialEditor ? false : true;
+                if (s_defaultMaterialAsset == m_selectedMeshMaterialAsset->handle)
+                {
+                  // TODO: Later increase the material for now only 0 is used
+                  // TODO: Might change to UUID if needed
+                  std::string materialName = entity.GetName() + "#" + std::to_string((uint32_t)entity);
+                  m_selectedMeshMaterialAsset = AssetManager::CreateNewAsset<MaterialAsset>(materialName, Project::GetActive()->GetMaterialDirectory(), materialName);
+                  smc.materialTable->SetMaterial(0, m_selectedMeshMaterialAsset);
+                }
+                m_showMaterialEditor = m_showMaterialEditor ? false : true;
               }
-              UI::DrawButtonImage(showMaterialEditor ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+              UI::DrawButtonImage(m_showMaterialEditor ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
               
-              if (showMaterialEditor)
-              {
-                AssetEditorManager::OpenEditor(meshMaterialAsset);
-              }
-              else
-              {
-                AssetEditorManager::CloseEditor(meshMaterialAsset);
-              }
-
               ImGui::NextColumn();
             }
             else
             {
               AssetHandle materialAssetHandle {};
-              settings.advanceToNextColumn = false;
-              settings.widthOffset = 40;
               UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), "Empty", materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
                 smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
               }, settings);
-              ImGui::NextColumn();
             }
             ImGui::PopID();
           }
@@ -993,6 +1001,8 @@ namespace Kreator
   void SceneHierarchyPanel::SetSelectedEntity(const Entity& entity, bool multipleSelection)
   {
     IK_PROFILE();
+    m_showMaterialEditor = false;
+    
     if (!multipleSelection)
     {
       m_selectionContext.Clear();

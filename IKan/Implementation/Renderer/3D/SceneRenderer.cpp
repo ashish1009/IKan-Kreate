@@ -96,7 +96,11 @@ namespace IKan
           Renderer::DisableStencilPass();
           
           // Render Original Mesh
-          RenderMeshGeometry(selectedMeshData.mesh, selectedMeshData.transform, selectedMeshData.tilingFactor, selectedMeshData.materilTable->GetMaterial(0)->GetMaterial());
+          // TODO: Get index from somewhere
+          if (selectedMeshData.materilTable->HasMaterial(0))
+          {
+            RenderMeshGeometry(selectedMeshData.mesh, selectedMeshData.transform, selectedMeshData.tilingFactor, selectedMeshData.materilTable->GetMaterial(0)->GetMaterial());
+          }
         }
       }
     }
