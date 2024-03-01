@@ -1044,6 +1044,7 @@ namespace Kreator
       if (useIBL)
       {
         m_currentScene->SetIBLFlag(useIBL);
+        SceneRenderer::SetIBLFlag(useIBL);
         static UI::PropertyAssetReferenceSettings settings;
         AssetHandle skyboxAsset = m_currentScene->GetSkyboxAsset();
         if (UI::PropertyAssetReference<Image>("Environment", skyboxAsset, nullptr, settings))
@@ -1060,6 +1061,7 @@ namespace Kreator
           UI::Property("Show Irradiance", useIrradiance);
           if (useIrradiance)
           {
+            SceneRenderer::SetIrradianceFlag(useIrradiance);
             m_currentScene->SetIrradianceFlag(useIrradiance);
           }
         }

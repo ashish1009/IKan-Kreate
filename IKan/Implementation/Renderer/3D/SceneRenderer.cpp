@@ -12,6 +12,18 @@
 
 namespace IKan
 {
+  // Set up projection and view matrices for capturing data onto the 6 cubemap face directions
+  static glm::mat4 CaptureProjection = glm::perspective(glm::radians(90.0f), 1.0f, 0.1f, 10.0f);
+  static glm::mat4 CaptureViews[] =
+  {
+    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3( 1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3(-1.0f,  0.0f,  0.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3( 0.0f,  1.0f,  0.0f), glm::vec3(0.0f,  0.0f,  1.0f)),
+    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3( 0.0f, -1.0f,  0.0f), glm::vec3(0.0f,  0.0f, -1.0f)),
+    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3( 0.0f,  0.0f,  1.0f), glm::vec3(0.0f, -1.0f,  0.0f)),
+    glm::lookAt(glm::vec3(0.0f, 0.0f, 0.0f), glm::vec3( 0.0f,  0.0f, -1.0f), glm::vec3(0.0f, -1.0f,  0.0f))
+  };
+
   void SceneRenderer::Initialize()
   {
     s_colorMaterial = Material::Create(CoreAsset("Shaders/ColorShader.glsl"), "Color Shader");
@@ -167,12 +179,12 @@ namespace IKan
       // Skybox Renderer
       {
         // Render skybox (render as last to prevent overdraw)
-//        if (s_isIBL and s_envTexture)
+        if (s_isIBL and s_envTexture)
         {
           s_skymapShader->Bind();
           s_skymapShader->SetUniformMat4("u_Projection", s_sceneCamera.camera.GetProjectionMatrix());
           s_skymapShader->SetUniformMat4("u_RotateView", glm::mat4(glm::mat3(s_sceneCamera.viewMatrix)));          
-//          s_showIrradiance ? s_irradianceMap->Bind() : s_envCubemap->Bind();
+          s_showIrradiance ? s_irradianceMap->Bind() : s_envCubemap->Bind();
           
           Renderer::DepthFunc(GlDepthFunc::LEqual);
           Renderer3D::DrawFullscreenCube();
@@ -279,5 +291,107 @@ namespace IKan
   void SceneRenderer::SubmitSkyboxImageImp()
   {
     IK_PROFILE();
+    
+    s_isIBL = true;
+    
+    // 1. Setup Capture framebuffer
+    FrameBufferSpecification fbSpec;
+    fbSpec.width = 512;
+    fbSpec.height = 512;
+    Ref<FrameBuffer> captureFB = FrameBufferFactory::Create(fbSpec);
+
+    // 2. Setup cubemap to render to and attach to framebuffer
+    Texture2DSpecification spec;
+    spec.width = 512;
+    spec.height = 512;
+    spec.internalFormat = TextureFormat::RGBA16F;
+    spec.dataFormat = TextureFormat::RGB;
+    spec.wrap = TextureWrap::ClampEdge;
+    spec.filter = TextureFilter::Linear;
+    spec.type = TextureType::TextureCubemap;
+    s_envCubemap = TextureFactory::Create(spec);
+
+    // 3. Convert HDR equirectangular environment map to cubemap equivalent
+    s_equiractangularToCubemapShader->Bind();
+    s_equiractangularToCubemapShader->SetUniformMat4("u_Projection", CaptureProjection);
+    
+    Renderer::SetViewport(512, 512);
+    captureFB->Bind();
+    for (unsigned int i = 0; i < 6; ++i)
+    {
+      s_equiractangularToCubemapShader->SetUniformMat4("u_View", CaptureViews[i]);
+      s_envCubemap->AttachToFramebuffer(TextureAttachment::Color, 0, i);
+      Renderer::ClearBits();
+      s_envTexture->Bind();
+      Renderer3D::DrawFullscreenCube();
+    }
+    captureFB->Unbind();
+    
+    // 4. Let OpenGL generate mipmaps from first mip face (combatting visible dots artifact)
+    s_envCubemap->Bind();
+    
+    // 5. Create an irradiance cubemap, and re-scale capture FBO to irradiance scale.
+    spec.width = 32;
+    spec.height =32;
+    s_irradianceMap = TextureFactory::Create(spec);
+    
+    captureFB->Bind();
+    
+    // 6. Solve diffuse integral by convolution to create an irradiance (cube)map.
+    s_irradianceShader->Bind();
+    s_irradianceShader->SetUniformMat4("u_Projection", CaptureProjection);
+    
+    captureFB->Bind();
+    Renderer::SetViewport(32, 32);
+    for (unsigned int i = 0; i < 6; ++i)
+    {
+      s_irradianceShader->SetUniformMat4("u_View", CaptureViews[i]);
+      s_irradianceMap->AttachToFramebuffer(TextureAttachment::Color, 0, i);
+      Renderer::ClearBits();
+      s_envCubemap->Bind();
+      Renderer3D::DrawFullscreenCube();
+    }
+    captureFB->Unbind();
+    
+    // 7. Create a pre-filter cubemap, and re-scale capture FBO to pre-filter scale.
+    spec.width = 128;
+    spec.height =128;
+    spec.filter =TextureFilter::LinearMipmapLinear;
+    s_prefilterMap = TextureFactory::Create(spec);
+    
+    // 8. Run a quasi monte-carlo simulation on the environment lighting to create a prefilter (cube)map.
+    s_prefilterShader->Bind();
+    s_prefilterShader->SetUniformMat4("u_Projection", CaptureProjection);
+    
+    captureFB->Bind();
+    unsigned int maxMipLevels = 5;
+    for (unsigned int mip = 0; mip < maxMipLevels; ++mip)
+    {
+      // reisze framebuffer according to mip-level size.
+      unsigned int mipWidth = static_cast<unsigned int>(128 * std::pow(0.5, mip));
+      unsigned int mipHeight = static_cast<unsigned int>(128 * std::pow(0.5, mip));
+      Renderer::SetViewport(mipWidth, mipHeight);
+      
+      float roughness = (float)mip / (float)(maxMipLevels - 1);
+      s_prefilterShader->SetUniformFloat1("u_Roughness", roughness);
+      for (unsigned int i = 0; i < 6; ++i)
+      {
+        s_prefilterShader->SetUniformMat4("u_View", CaptureViews[i]);
+        s_prefilterMap->AttachToFramebuffer(TextureAttachment::Color, 0, i, mip);
+        Renderer::ClearBits();
+        s_envCubemap->Bind();
+        Renderer3D::DrawFullscreenCube();
+      }
+    }
+    captureFB->Unbind();
+  }
+  
+  void SceneRenderer::SetIBLFlag(bool flag)
+  {
+    s_isIBL = flag;
+  }
+  void SceneRenderer::SetIrradianceFlag(bool flag)
+  {
+    s_showIrradiance = flag;
   }
 } // namespace IKan

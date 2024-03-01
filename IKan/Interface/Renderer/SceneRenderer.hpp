@@ -80,6 +80,12 @@ namespace IKan
     /// This function loads the skybox data and init the IBL
     /// - Parameter skyboxAsset: skybox image asset
     static void SubmitSkyboxImage(const AssetHandle& skyboxAsset);
+    /// This funcion set the IBL flag
+    /// - Parameter value: value
+    static void SetIBLFlag(bool flag);
+    /// This funcion set the Irradiance flag
+    /// - Parameter value: value
+    static void SetIrradianceFlag(bool flag);
 
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
@@ -139,8 +145,8 @@ namespace IKan
     inline static SceneRendererCamera s_sceneCamera;
     
     // Environment
-    inline static bool s_isIBL = false;
-    inline static bool s_showIrradiance = true;
+    inline static bool s_isIBL = true;
+    inline static bool s_showIrradiance = false;
     inline static DirectionLight s_directionLight;
     inline static Ref<Texture> s_envTexture, s_envCubemap, s_irradianceMap, s_prefilterMap;
   };
