@@ -28,13 +28,25 @@ namespace IKan
     
     // Viewport Pass ----
     FrameBufferSpecification fbSpec;
-    fbSpec.debugName = "Final Pass";
+    fbSpec.debugName = "Final Image Pass";
     fbSpec.attachments =
     {
       FrameBufferAttachments::TextureFormat::RGBA8,
       FrameBufferAttachments::TextureFormat::Depth24Stencil
     };
     m_viewportRenderPass = FrameBufferFactory::Create(fbSpec);
+    
+    // Geometry pass
+    fbSpec.debugName = "Geometry Pass";
+    fbSpec.attachments =
+    {
+      FrameBufferAttachments::TextureFormat::RGBA16F,
+      FrameBufferAttachments::TextureFormat::RGBA16F,
+      FrameBufferAttachments::TextureFormat::RGBA16F,
+      FrameBufferAttachments::TextureFormat::R32I,
+      FrameBufferAttachments::TextureFormat::Depth24Stencil,
+    };
+    m_geometryRenderPass = FrameBufferFactory::Create(fbSpec);
   }
   
   SceneRenderer::~SceneRenderer()
@@ -52,65 +64,9 @@ namespace IKan
   void SceneRenderer::EndScene()
   {
     IK_PERFORMANCE("SceneRenderer::EndScene");
-    
-    m_viewportRenderPass->Bind();
-    {
-      Renderer::Clear({0.23f, 0.234f, 0.2345f, 1.0f});
-     
-      // Geometry pass
-      {
-        for (const auto& meshData : m_meshDrawList)
-        {
-          // TODO: Get index from somewhere
-          if (meshData.materilTable->HasMaterial(0))
-          {
-            RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
-          }
-        }
-      }
-      
-      // Composit pass
-      {
-        for (const auto& selectedMeshData : m_selectedMeshDrawList)
-        {
-          // Render Outline Mesh ----------------------------------------------------------------------
-          Renderer::EnableStencilPass();
-          
-          static glm::vec4 selectedMeshColor = {0.5f, 0.3f, 0.2f, 0.7f};
-          s_colorMaterial->Set("u_ObjectColor", selectedMeshColor);
-          
-          // Hack to change size of mesh
-          static glm::vec3 p, r, s;
-          Utils::Math::DecomposeTransform(selectedMeshData.transform, p, r, s);
+    GeometryPass();
 
-          if (s.x < 1.0f) s.x += (s.x * 0.1f); else s.x += 0.05f;
-          if (s.y < 1.0f) s.y += (s.y * 0.1f); else s.y += 0.05f;
-          if (s.z < 1.0f) s.z += (s.z * 0.1f); else s.z += 0.05f;
-
-          auto modTransform = Utils::Math::GetTransformMatrix(p, r, s);
-          
-          // Render Outline
-          s_colorMaterial->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
-          RenderSubmesh(selectedMeshData.mesh, modTransform, s_colorMaterial);
-          
-          Renderer::DisableStencilPass();
-          
-          // Render Original Mesh
-          // TODO: Get index from somewhere
-          if (selectedMeshData.materilTable->HasMaterial(0))
-          {
-            RenderMeshGeometry(selectedMeshData.mesh, selectedMeshData.transform, selectedMeshData.tilingFactor, selectedMeshData.materilTable->GetMaterial(0)->GetMaterial());
-          }
-        }
-      }
-    }
-    
-    // Debug Renderer
-    {
-      // Debuig renderer callback
-      m_debugRenderer();
-    }
-    m_viewportRenderPass->Unbind();
+    FinalPass();
     
     // Clear draw list
     {
@@ -173,6 +129,90 @@ namespace IKan
     } // for each submeshes
     material->Unbind();
     mesh->GetPipeline()->Unbind();
+  }
+  
+  void SceneRenderer::GeometryPass()
+  {
+    IK_PERFORMANCE("SceneRenderer::GeometryPass");
+    m_geometryRenderPass->Bind();
+    {
+      Renderer::Clear({0.23f, 0.234f, 0.2345f, 1.0f});
+      
+      // Geometry pass
+      {
+        for (const auto& meshData : m_meshDrawList)
+        {
+          // TODO: Get index from somewhere
+          if (meshData.materilTable->HasMaterial(0))
+          {
+            RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
+          }
+        }
+      }
+      
+      // Composit pass
+      {
+        CompositePass();
+      }
+    }
+    
+    // Debug Renderer
+    {
+      // Debuig renderer callback
+      m_debugRenderer();
+    }
+    m_geometryRenderPass->Unbind();
+  }
+  
+  void SceneRenderer::CompositePass()
+  {
+    IK_PERFORMANCE("SceneRenderer::CompositePass");
+    for (const auto& selectedMeshData : m_selectedMeshDrawList)
+    {
+      // Render Outline Mesh ----------------------------------------------------------------------
+      Renderer::EnableStencilPass();
+      
+      static glm::vec4 selectedMeshColor = {0.5f, 0.3f, 0.2f, 0.7f};
+      s_colorMaterial->Set("u_ObjectColor", selectedMeshColor);
+      
+      // Hack to change size of mesh
+      static glm::vec3 p, r, s;
+      Utils::Math::DecomposeTransform(selectedMeshData.transform, p, r, s);
+      
+      if (s.x < 1.0f) s.x += (s.x * 0.1f); else s.x += 0.05f;
+      if (s.y < 1.0f) s.y += (s.y * 0.1f); else s.y += 0.05f;
+      if (s.z < 1.0f) s.z += (s.z * 0.1f); else s.z += 0.05f;
+      
+      auto modTransform = Utils::Math::GetTransformMatrix(p, r, s);
+      
+      // Render Outline
+      s_colorMaterial->Set("u_ViewProjection", s_sceneData.sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneData.sceneCamera.viewMatrix);
+      RenderSubmesh(selectedMeshData.mesh, modTransform, s_colorMaterial);
+      
+      Renderer::DisableStencilPass();
+      
+      // Render Original Mesh
+      // TODO: Get index from somewhere
+      if (selectedMeshData.materilTable->HasMaterial(0))
+      {
+        RenderMeshGeometry(selectedMeshData.mesh, selectedMeshData.transform, selectedMeshData.tilingFactor, selectedMeshData.materilTable->GetMaterial(0)->GetMaterial());
+      }
+    }
+  }
+  
+  void SceneRenderer::BloomPass()
+  {
+    IK_PERFORMANCE("SceneRenderer::BloomPass");
+  }
+  
+  void SceneRenderer::FinalPass()
+  {
+    IK_PERFORMANCE("SceneRenderer::FinalPass");
+    // Render Scene in main Viewport ----------------------------------------------------------
+    m_viewportRenderPass->Bind();
+    Renderer::ClearBits();
+    
+    m_viewportRenderPass->Unbind();
   }
 
   Ref<Texture> SceneRenderer::GetFinalImage() const

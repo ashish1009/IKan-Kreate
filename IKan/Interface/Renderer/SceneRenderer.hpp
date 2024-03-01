@@ -94,6 +94,15 @@ namespace IKan
     ///   - material: material
     void RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material);
 
+    /// This function render geometry Pass
+    void GeometryPass();
+    /// This function render composit Pass
+    void CompositePass();
+    /// This function passes the scene in bloom
+    void BloomPass();
+    /// This function renders the final pass image
+    void FinalPass();
+
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_debugName;
     uint32_t m_viewportWidth, m_viewportHeight;
@@ -110,7 +119,7 @@ namespace IKan
     };
     std::vector<MeshDrawData> m_meshDrawList, m_selectedMeshDrawList;
 
-    Ref<FrameBuffer> m_viewportRenderPass;
+    Ref<FrameBuffer> m_viewportRenderPass, m_geometryRenderPass;
 
     struct SceneData
     {
