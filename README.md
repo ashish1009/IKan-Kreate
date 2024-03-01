@@ -159,6 +159,7 @@ Editor Application using IKan Library to create Games
   - v5.3.5.2 : Material Editor and Serializer
   - v5.3.5.3 : Guizmo
   - v5.3.5.4 : Relationship connection
+  - v6.0.6.0 : IBL
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)
