@@ -1,4 +1,9 @@
 Scene: BallGame.ikscene
+Environment:
+  EnableDirectionLight: 1
+  LightDirection: [-0.200000003, -1, -0.300000012]
+  LightColor: [0.807017565, 0.495537132, 0.495537132]
+  LightIntensity: 1
 Entities:
   - Entity: 74307149538884466
     TagComponent:

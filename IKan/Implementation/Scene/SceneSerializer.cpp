@@ -35,6 +35,16 @@ namespace IKan {
     out << YAML::Key << "Scene";
     out << YAML::Value << m_scene->GetName();
     
+    out << YAML::Key << "Environment";
+    out << YAML::Value << YAML::BeginMap;
+    
+    out << YAML::Key << "EnableDirectionLight" << YAML::Value << m_scene->GetDirectionLight().enable;
+    out << YAML::Key << "LightDirection" << YAML::Value << m_scene->GetDirectionLight().direction;
+    out << YAML::Key << "LightColor" << YAML::Value << m_scene->GetDirectionLight().color;
+    out << YAML::Key << "LightIntensity" << YAML::Value << m_scene->GetDirectionLight().intensity;
+
+    out << YAML::EndMap;
+
     out << YAML::Key << "Entities";
     out << YAML::Value << YAML::BeginSeq;
     
@@ -81,6 +91,17 @@ namespace IKan {
     }
     
     m_scene->SetName(sceneName);
+
+    auto environment = data["Environment"];
+    if (environment)
+    {
+      auto& directionLight = m_scene->GetDirectionLight();
+      directionLight.enable = environment["EnableDirectionLight"].as<float>();
+      directionLight.color = environment["LightColor"].as<glm::vec3>();
+      directionLight.direction = environment["LightDirection"].as<glm::vec3>();
+      directionLight.intensity = environment["LightIntensity"].as<float>();
+
+    }
     
     auto entities = data["Entities"];
     if (entities)
