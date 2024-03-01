@@ -43,6 +43,10 @@ namespace IKan {
     out << YAML::Key << "LightColor" << YAML::Value << m_scene->GetDirectionLight().color;
     out << YAML::Key << "LightIntensity" << YAML::Value << m_scene->GetDirectionLight().intensity;
 
+    out << YAML::Key << "UseIBL" << YAML::Value << m_scene->UseIBL();
+    out << YAML::Key << "UseIrradiance" << YAML::Value << m_scene->UseIrradiance();
+    out << YAML::Key << "Skybox" << YAML::Value << m_scene->GetSkyboxAsset();
+
     out << YAML::EndMap;
 
     out << YAML::Key << "Entities";
@@ -100,6 +104,10 @@ namespace IKan {
       directionLight.color = environment["LightColor"].as<glm::vec3>();
       directionLight.direction = environment["LightDirection"].as<glm::vec3>();
       directionLight.intensity = environment["LightIntensity"].as<float>();
+
+      m_scene->SetIBLFlag(environment["UseIBL"].as<bool>());
+      m_scene->SetIrradianceFlag(environment["UseIrradiance"].as<bool>());
+      m_scene->SetSkyboxAsset(environment["Skybox"].as<AssetHandle>());
 
     }
     
