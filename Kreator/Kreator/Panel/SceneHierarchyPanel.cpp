@@ -730,7 +730,7 @@ namespace Kreator
       auto position = component.Position();
       if (DrawVec3Control("Translation", position))
       {
-        ECS_Utils::UpdateChildrenTransform(m_context, entity, position - prevPosition, Utils::Math::ZeroVec3, Utils::Math::ZeroVec3);
+        ECS_Utils::UpdateChildrenTransform(m_context, entity, position - prevPosition, Utils::Math::ZeroVec3, Utils::Math::ZeroVec3, entity);
       }
       
       ImGui::TableNextRow();
@@ -738,7 +738,7 @@ namespace Kreator
       auto prevRotation = glm::degrees(component.Rotation());
       if (DrawVec3Control("Rotation", rotation))
       {
-        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, Utils::Math::ZeroVec3, glm::radians(rotation) - glm::radians(prevRotation));
+        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, Utils::Math::ZeroVec3, glm::radians(rotation) - glm::radians(prevRotation), entity);
       }
       
       ImGui::TableNextRow();
@@ -746,7 +746,7 @@ namespace Kreator
       auto prevScale = component.Scale();
       if (DrawVec3Control("Scale", scale, 1.0f, 0.01f, 100000.0f))
       {
-        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, scale - prevScale, Utils::Math::ZeroVec3);
+        ECS_Utils::UpdateChildrenTransform(m_context, entity, Utils::Math::ZeroVec3, scale - prevScale, Utils::Math::ZeroVec3, entity);
       }
       ImGui::EndTable();
 

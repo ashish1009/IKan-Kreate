@@ -48,30 +48,40 @@ namespace Kreator::ECS_Utils
     return newEntity;
   }
   
-  void UpdateChildrenTransform(Ref<Scene> scene, Entity entity, const glm::vec3& deltaPosition, const glm::vec3& deltaScale, const glm::vec3& deltaRotation, bool controlledByParent)
+  void UpdateChildrenTransform(Ref<Scene> scene, Entity entity, const glm::vec3& deltaPosition, const glm::vec3& deltaScale, const glm::vec3& deltaRotation, Entity controllerParent)
   {
     TransformComponent& entityTransform = entity.GetTransform();
-    entityTransform.UpdatePosition(entityTransform.Position() + deltaPosition);
-    entityTransform.UpdateScale(entityTransform.Scale() + deltaScale);
-    entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
-
-    Entity parent = entity.GetFirstParent();
-    if (parent and controlledByParent)
+    if (deltaPosition.x or deltaPosition.y or deltaPosition.z)
     {
-      const auto& parentTc = parent.GetTransform();
+      entityTransform.UpdatePosition(entityTransform.Position() + deltaPosition);
+    }
+    if (deltaScale.x or deltaScale.y or deltaScale.z)
+    {
+      entityTransform.UpdateScale(entityTransform.Scale() + deltaScale);
+    }
+    if (deltaRotation.x or deltaRotation.y or deltaRotation.z)
+    {
+      entityTransform.UpdateRotation(entityTransform.Rotation() + deltaRotation);
+    }
+    
+    if (controllerParent and controllerParent != entity)
+    {
+      const auto& parentTc = controllerParent.GetTransform();
       auto& tc = entity.GetTransform();
       const auto& ePos = tc.Position();
-      const auto& parPos = parentTc.Position();
+      const auto& pPos = parentTc.Position();
 
       if (deltaRotation.y != 0.0f)
       {
-        float distance = Utils::Math::GetDistance(ePos.x, ePos.z, parPos.x, parPos.z);
+        float distanceXZ = Utils::Math::GetDistance(ePos.x, ePos.z, pPos.x, pPos.z);
+        float mlDistanceXZ = (parentTc.Position().z - ePos.z) / distanceXZ;
+        float angleXZOffset = (ePos.x > parentTc.Position().x) ? asin(mlDistanceXZ) : M_PI - asin(mlDistanceXZ);
 
-        float temp = (parentTc.Position().z - ePos.z) / distance;
-        float angle = (ePos.x > parentTc.Position().x) ? asin(temp) : M_PI - asin(temp);
-
-        tc.UpdatePosition(TransformComponent::Axis::X, parentTc.Position().x + (distance * glm::cos(angle + deltaRotation.y)));
-        tc.UpdatePosition(TransformComponent::Axis::Z, parentTc.Position().z - (distance * glm::sin(angle + deltaRotation.y)));
+        float xPos = parentTc.Position().x + (distanceXZ * glm::cos(angleXZOffset + deltaRotation.y));
+        float yPos = ePos.y;
+        float zPos = parentTc.Position().z - (distanceXZ * glm::sin(angleXZOffset + deltaRotation.y));
+        
+        tc.UpdatePosition({xPos, yPos, zPos});
       }
     }
     else
@@ -81,7 +91,7 @@ namespace Kreator::ECS_Utils
     for (const auto& child : entity.Children())
     {
       Entity childEntity = scene->TryGetEntityWithUUID(child);
-      UpdateChildrenTransform(scene, childEntity, deltaPosition, deltaScale, deltaRotation, true);
+      UpdateChildrenTransform(scene, childEntity, deltaPosition, deltaScale, deltaRotation, controllerParent);
     }
   }
 } // namespace Kreator::ECS_Utils
