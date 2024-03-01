@@ -1037,6 +1037,35 @@ namespace Kreator
     if (UI::PropertyGridHeader("Environment", true, 4, 5))
     {
       UI::BeginPropertyGrid(2, 1, 5);
+      
+      // IBL -----------
+      bool useIBL = m_currentScene->UseIBL();
+      UI::Property("IBL", useIBL);
+      if (useIBL)
+      {
+        m_currentScene->SetIBLFlag(useIBL);
+        static UI::PropertyAssetReferenceSettings settings;
+        AssetHandle skyboxAsset = m_currentScene->GetSkyboxAsset();
+        if (UI::PropertyAssetReference<Image>("Environment", skyboxAsset, nullptr, settings))
+        {
+          if (skyboxAsset)
+          {
+            m_currentScene->SetSkyboxAsset(skyboxAsset);
+            SceneRenderer::SubmitSkyboxImage(skyboxAsset);
+          }
+        }
+        if (skyboxAsset)
+        {
+          bool useIrradiance = m_currentScene->UseIrradiance();
+          UI::Property("Show Irradiance", useIrradiance);
+          if (useIrradiance)
+          {
+            m_currentScene->SetIrradianceFlag(useIrradiance);
+          }
+        }
+      }
+
+      // Direction Light ----
       auto& directonLight = m_currentScene->GetDirectionLight();
       bool useDirectionLight = directonLight.enable;
       if (UI::Property("Direction Light", useDirectionLight))

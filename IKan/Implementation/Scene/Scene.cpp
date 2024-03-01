@@ -463,6 +463,21 @@ namespace IKan
     m_onEntityDestroyedCallback = callback;
   }
   
+  void Scene::SetSkyboxAsset(AssetHandle handle)
+  {
+    m_skyboxAsset = handle;
+    SceneRenderer::SubmitSkyboxImage(m_skyboxAsset);
+  }
+  
+  void Scene::SetIBLFlag(bool value)
+  {
+    m_useIBL = value;
+  }
+  void Scene::SetIrradianceFlag(bool value)
+  {
+    m_useIrradiance = value;
+  }
+
   const std::string& Scene::GetName() const
   {
     return m_name;
@@ -510,6 +525,20 @@ namespace IKan
     return Entity{};
   }
   
+  AssetHandle Scene::GetSkyboxAsset() const
+  {
+    return m_skyboxAsset;
+  }
+  
+  bool Scene::UseIBL() const
+  {
+    return m_useIBL;
+  }
+  bool Scene::UseIrradiance() const
+  {
+    return m_useIrradiance;
+  }
+
   DirectionLight& Scene::GetDirectionLight()
   {
     return m_directionLight;

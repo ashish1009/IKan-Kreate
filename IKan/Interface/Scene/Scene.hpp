@@ -59,7 +59,7 @@ namespace IKan
     ///  - editorCamera: Editor Camera
     ///  - renderer: Scene renderer cintext
     void OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, SceneRenderer& renderer);
-
+    
     /// This function handle runtime start
     void OnRuntimeStart();
     /// This function handle runtime stop
@@ -82,7 +82,7 @@ namespace IKan
     ///   - width: width of view port
     ///   - height: width of view port
     void SetViewportSize(uint32_t width, uint32_t height);
-
+    
     // Entity Manager ------------------------------------------------------------------------------------------------
     /// This function creates an unique entity with UUID
     /// - Parameter name: Name of entity
@@ -103,7 +103,7 @@ namespace IKan
     /// This function duplicate the entity
     /// - Parameter entity: entity to be duplicated
     [[nodiscard]] Entity DuplicateEntity(Entity entity);
-
+    
     /// This function parent set the parent of entity
     /// - Parameters:
     ///   - entity: Current entity
@@ -112,7 +112,7 @@ namespace IKan
     /// This function removes the parent relation
     /// - Parameter entity: parent entity
     void UnparentEntity(Entity entity, bool convertToWorldSpace = true);
-
+    
     /// This function convert the entity to local space
     /// - Parameter entity: Entity handle
     void ConvertToLocalSpace(Entity entity);
@@ -126,7 +126,7 @@ namespace IKan
     /// This function return the world transform component
     /// - Parameter entity: enitty handle
     TransformComponent GetWorldSpaceTransform(Entity entity);
-
+    
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
     /// - Parameter name: scene name
@@ -138,6 +138,16 @@ namespace IKan
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion
     void SetEntityDestroyedCallback(const std::function<void(const Entity&)>& callback);
+    
+    /// This funcion sets the skybox asset handle
+    /// - Parameter handle: skybox handle
+    void SetSkyboxAsset(AssetHandle handle);
+    /// This funcion set the IBL flag
+    /// - Parameter value: value
+    void SetIBLFlag(bool value);
+    /// This funcion set the Irradiance flag
+    /// - Parameter value: value
+    void SetIrradianceFlag(bool value);
 
     // Getters -----------------------------------------------------------------------------------------------------
     /// This function returns the scene name
@@ -150,7 +160,7 @@ namespace IKan
     Entity GetMainCameraEntity();
     /// This function returns the selected entity handle
     const std::vector<entt::entity>& GetSelectedEntity() const;
-
+    
     /// This function returns entity with id as specified, or empty entity if cannot be found - caller must check
     /// - Parameter id: UUID of entity
     Entity TryGetEntityWithUUID(UUID id) const;
@@ -163,7 +173,14 @@ namespace IKan
     /// This function check entity is selected
     /// - Parameter entity: Selected Entity
     bool IsEntitySelected(entt::entity entity) const;
-
+    
+    /// This function returns the skybox asset
+    AssetHandle GetSkyboxAsset() const;
+    /// This function returns the IBL flag
+    bool UseIBL() const;
+    /// This function returns the Irradiance flag
+    bool UseIrradiance() const;
+    
     /// This function pass the reference of Direction light to control from client
     DirectionLight& GetDirectionLight();
     
@@ -172,17 +189,17 @@ namespace IKan
     ///   - name: Name of Scene
     ///   - maxEntityCapacity: Max Entity capacity to reserve
     static Ref<Scene> Create(const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
-
+    
     /// This funcrion returns all the components of type Components
     template<typename... Components> auto GetAllEntitiesWith()
     {
       return m_registry.view<Components...>();
     }
-
+    
     ASSET_TYPE(Scene);
     
     DELETE_COPY_MOVE_CONSTRUCTORS(Scene);
-
+    
   private:
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This function renders the scene insice pass
@@ -190,7 +207,7 @@ namespace IKan
     ///   - renderer: Scene renderer instance
     ///   - isEditing: flag is editing
     void RenderScene(SceneRenderer& renderer, bool isEditing);
-
+    
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
     std::string m_name {};
@@ -208,7 +225,11 @@ namespace IKan
     std::function<void(const Entity&)> m_onEntityDestroyedCallback;
     
     // Environment ----------------------
+    bool m_useIBL {true};
+    bool m_useIrradiance {false};
+    AssetHandle m_skyboxAsset;
     DirectionLight m_directionLight;
+    
     friend class SceneSerializer;
     friend class Entity;
   };
