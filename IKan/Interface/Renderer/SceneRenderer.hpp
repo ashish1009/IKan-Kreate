@@ -124,7 +124,7 @@ namespace IKan
     SceneRendererCamera sceneCamera;
 
     inline static Ref<Material> s_colorMaterial;
-    inline static Ref<Shader> s_finalImageShader;
+    inline static Ref<Shader> s_finalImageShader, s_equiractangularToCubemapShader, s_irradianceShader, s_prefilterShader, s_skymapShader;
 
     inline static SceneRendererCamera s_sceneCamera;
     inline static DirectionLight s_directionLight;

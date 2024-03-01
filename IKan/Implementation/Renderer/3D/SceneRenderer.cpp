@@ -14,13 +14,22 @@ namespace IKan
   void SceneRenderer::Initialize()
   {
     s_colorMaterial = Material::Create(CoreAsset("Shaders/ColorShader.glsl"), "Color Shader");
+
     s_finalImageShader = ShaderFactory::Create(CoreAsset("Shaders/HdrBloomShader.glsl"));
+    s_equiractangularToCubemapShader = ShaderFactory::Create("../../../IKan/Assets/Shaders/EquirectangularToCubemapShader.glsl");
+    s_irradianceShader = ShaderFactory::Create("../../../IKan/Assets/Shaders/IrradianceShader.glsl");
+    s_prefilterShader = ShaderFactory::Create("../../../IKan/Assets/Shaders/PrefilterShader.glsl");
+    s_skymapShader = ShaderFactory::Create("../../../IKan/Assets/Shaders/SkymapShader.glsl");
   }
   
   void SceneRenderer::Shutdown()
   {
     s_colorMaterial.reset();
     s_finalImageShader.reset();
+    s_equiractangularToCubemapShader.reset();
+    s_irradianceShader.reset();
+    s_prefilterShader.reset();
+    s_skymapShader.reset();
   }
   
   SceneRenderer::SceneRenderer(const std::string& debugName)
