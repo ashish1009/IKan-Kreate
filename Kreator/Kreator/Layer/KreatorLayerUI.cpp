@@ -1358,6 +1358,15 @@ namespace Kreator
                 }
               } // Each Mesh Comp
             }
+            else if (asset->GetAssetType() == AssetType::Image)
+            {
+              AssetHandle handle = asset->handle;
+              const auto& filepath = AssetManager::GetMetadata(handle).filePath;
+              if (filepath.extension() == ".hdr")
+              {
+                m_currentScene->SetSkyboxAsset(handle);
+              }
+            }
           }
           else
           {

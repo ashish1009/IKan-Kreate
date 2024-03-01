@@ -141,7 +141,8 @@ namespace Kreator
     
     m_assetIconMap[".png"] = CBP_Utils::AssetPath("Png.png");
     m_assetIconMap[".jpg"] = m_assetIconMap.at(".png");
-    
+    m_assetIconMap[".hdr"] = m_assetIconMap.at(".png");
+
     m_assetIconMap[".ttf"] = CBP_Utils::AssetPath("Font.png");
     m_assetIconMap[".ttc"] = m_assetIconMap.at(".ttf");
     m_assetIconMap[".otf"] = m_assetIconMap.at(".ttf");
