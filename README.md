@@ -58,6 +58,7 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Secne Renderer
   - Material (Asset)
   - Light
+  - IBL
 - UI
   - ImGui UI Helper
 - Camera
@@ -79,7 +80,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
 ### Detailed Road Map
 - Renderer
   - Shadow
-  - IBL
 - ECS 
   - Script Manager
 - Physics (ECS and Editor Panel)
@@ -114,6 +114,14 @@ Editor Application using IKan Library to create Games
   - Asset Debugger
   - Scene Hierarchy (ECS)
 
+### Mini Feature Complete
+- Rotate Child entity with parent
+- Connect Parent child with line
+- Never edit/save default material, always create copy
+- Editor camera Side/Top/Front View
+- Axis
+- Drop Content inside Viewport
+
 ### Mini Feature Road Map
 - Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
 - Camera/Light Icons
@@ -127,14 +135,6 @@ Editor Application using IKan Library to create Games
 - Grid
 - Scale Child entity with parent (Hold)
 - Fix selected outline size (Hold)
-
-### Mini Feature Complete
-- Rotate Child entity with parent
-- Connect Parent child with line
-- Never edit/save default material, always create copy
-- Editor camera Side/Top/Front View
-- Axis
-- Drop Content inside Viewport
 
 ### TODO
 

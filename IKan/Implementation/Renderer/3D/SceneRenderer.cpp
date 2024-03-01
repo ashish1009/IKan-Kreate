@@ -136,6 +136,17 @@ namespace IKan
   {
     RETURN_IF(!material);
     
+    if (s_isIBL and s_envTexture)
+    {
+      material->Set("u_IBLToggle", 1.0f);
+      material->Set("u_IrradianceMap", s_irradianceMap);
+      material->Set("u_PrefilterMap", s_prefilterMap);
+    }
+    else
+    {
+      material->Set("u_IBLToggle", 0.0f);
+    }
+
     material->Set("u_TilingFactor", tilingFactor);
     material->Set("u_ViewProjection", s_sceneCamera.camera.GetUnReversedProjectionMatrix() * s_sceneCamera.viewMatrix);
     material->Set("u_CameraPosition", s_sceneCamera.position);

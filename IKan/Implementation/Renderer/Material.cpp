@@ -142,11 +142,11 @@ namespace IKan
     auto decl = FindResourceDeclaration(name);
     
     uint32_t slot = decl->GetRegister();
-    if (m_textures.size() <= slot)
+    if (m_images.size() <= slot)
     {
-      m_textures.resize((size_t)slot + 1);
+      m_images.resize((size_t)slot + 1);
     }
-    m_textures[slot] = image;
+    m_images[slot] = image;
   }
   
   Ref<Image> Material:: TryGetImage(const std::string& name)
@@ -155,13 +155,39 @@ namespace IKan
     auto decl = FindResourceDeclaration(name);
     
     uint32_t slot = decl->GetRegister();
-    if (slot < m_textures.size())
+    if (slot < m_images.size())
     {
-      return m_textures.at(slot);
+      return m_images.at(slot);
     }
     return nullptr;
   }
+
+  void Material::Set(const std::string& name, const Ref<Texture>& texture)
+  {
+    IK_PERFORMANCE("ShaderMaterial::Set");
+    auto decl = FindResourceDeclaration(name);
+    
+    uint32_t slot = decl->GetRegister();
+    if (m_texture.size() <= slot)
+    {
+      m_texture.resize((size_t)slot + 1);
+    }
+    m_texture[slot] = texture;
+  }
   
+  Ref<Texture> Material:: TryGetTexture(const std::string& name)
+  {
+    IK_PERFORMANCE("ShaderMaterial::TryGetImage");
+    auto decl = FindResourceDeclaration(name);
+    
+    uint32_t slot = decl->GetRegister();
+    if (slot < m_texture.size())
+    {
+      return m_texture.at(slot);
+    }
+    return nullptr;
+  }
+
   void Material::Bind()
   {
     IK_PERFORMANCE("ShaderMaterial::Bind");
@@ -195,27 +221,47 @@ namespace IKan
   void Material::BindImages()
   {
     IK_PERFORMANCE("ShaderMaterial::BindImages");
-    for (size_t i = 0; i < m_textures.size(); i++)
+    for (size_t i = 0; i < m_images.size(); i++)
     {
-      auto& texture = m_textures[i];
+      auto& image = m_images[i];
+      if (image)
+      {
+        image->Bind((uint32_t)i);
+      }
+    }
+    
+    for (size_t i = 0; i < m_texture.size(); i++)
+    {
+      auto& texture = m_texture[i];
       if (texture)
       {
         texture->Bind((uint32_t)i);
       }
     }
+
   }
   
   void Material::UnbindImages()
   {
     IK_PERFORMANCE("ShaderMaterial::UnbindImages");
-    for (size_t i = 0; i < m_textures.size(); i++)
+    for (size_t i = 0; i < m_images.size(); i++)
     {
-      auto& texture = m_textures[i];
+      auto& image = m_images[i];
+      if (image)
+      {
+        image->Unbind();
+      }
+    }
+    
+    for (size_t i = 0; i < m_texture.size(); i++)
+    {
+      auto& texture = m_texture[i];
       if (texture)
       {
         texture->Unbind();
       }
     }
+
   }
   
   void Material::SetName(const std::string& name)

@@ -109,6 +109,11 @@ uniform sampler2D u_RoughnessTexture;
 uniform sampler2D u_MetallicTexture;
 uniform sampler2D u_DepthTexture;
 uniform sampler2D u_AoTexture;
+uniform float u_IBLToggle;
+
+// IBL
+uniform samplerCube u_IrradianceMap;
+uniform samplerCube u_PrefilterMap;
 
 // Texture Toggle
 uniform float u_AlbedoTextureToggle;
@@ -178,6 +183,11 @@ vec3 fresnelSchlick(float cosTheta, vec3 F0)
   return F0 + (1.0 - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
 }
 
+vec3 fresnelSchlickRoughness(float cosTheta, vec3 F0, float roughness)
+{
+  return F0 + (max(vec3(1.0 - roughness), F0) - F0) * pow(clamp(1.0 - cosTheta, 0.0, 1.0), 5.0);
+}
+
 // Calculate the light factor
 vec3 CalculateLight(vec3 radiance, vec3 L, vec3 F0)
 {
@@ -223,6 +233,27 @@ vec3 CalculateDirectionLight(vec3 F0)
   return vec3(0.0f);
 }
 
+vec3 CalculateIBL(vec3 F0)
+{
+  vec3 R = reflect(-m_Params.View, m_Params.Normal);
+  // ambient lighting (we now use IBL as the ambient term)
+  vec3 F = fresnelSchlickRoughness(max(dot(m_Params.Normal, m_Params.View), 0.0), F0, m_Params.Roughness);
+  
+  vec3 kS = F;
+  vec3 kD = 1.0 - kS;
+  kD *= 1.0 - m_Params.Metalness;
+  
+  vec3 irradiance = texture(u_IrradianceMap, m_Params.Normal).rgb;
+  vec3 diffuse      = irradiance * m_Params.Albedo;
+  
+  // sample both the pre-filter map and the BRDF lut and combine them together as per the Split-Sum approximation to get the IBL specular part.
+  const float MAX_REFLECTION_LOD = 4.0;
+  vec3 prefilteredColor = textureLod(u_PrefilterMap, R,  m_Params.Roughness * MAX_REFLECTION_LOD).rgb;
+  vec3 specular = prefilteredColor * F;
+  
+  return (kD * diffuse + specular);
+}
+
 void main()
 {
   float tilingFactor = u_TilingFactor;
@@ -245,7 +276,7 @@ void main()
   lightResult += m_Params.Albedo * u_Material.emission;
 
   // Ambient light
-  vec3 ambient = vec3(0.03) * m_Params.Albedo;
+  vec3 ambient = (u_IBLToggle > 0.5f) ? CalculateIBL(F0) : vec3(0.03) * m_Params.Albedo;
 
   // Final Light
   vec3 finalResult = lightResult + ambient;
