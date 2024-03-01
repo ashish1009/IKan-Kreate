@@ -245,7 +245,7 @@ void main()
   lightResult += m_Params.Albedo * u_Material.emission;
 
   // Ambient light
-  vec3 ambient = vec3(0.03);
+  vec3 ambient = vec3(0.03) * m_Params.Albedo;
 
   // Final Light
   vec3 finalResult = lightResult + ambient;

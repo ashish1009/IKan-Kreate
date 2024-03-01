@@ -536,7 +536,7 @@ if (!m_currentScene) return
         if (m_showCameraAxis)
         {
           RenderCameraAxis();
-        }
+        }        
       }
       Renderer2D::EndBatch();
 
@@ -583,17 +583,31 @@ if (!m_currentScene) return
   
   void KreatorLayer::RenderCameraAxis()
   {
+    static constexpr float Limit = 10000.0f;
+    
+    static const glm::vec3 XMin = {-Limit, 0.0f, 0.0f};
+    static const glm::vec3 XMax = { Limit, 0.0f, 0.0f};
+    static const glm::vec4 XCol = {0.5f, 0.0f, 0.0f, 0.5f};
+    
+    static const glm::vec3 YMin = {0.0f, -Limit, 0.0f};
+    static const glm::vec3 YMax = {0.0f,  Limit, 0.0f};
+    static const glm::vec4 YCol = {0.0f, 0.5f, 0.0f, 0.5f};
+
+    static const glm::vec3 ZMin = {0.0f, 0.0f, -Limit};
+    static const glm::vec3 ZMax = {0.0f, 0.0f,  Limit};
+    static const glm::vec4 ZCol = {0.0f, 0.0f, 0.5f, 0.5f};
+
     if (!m_editorCamera.IsRight())
     {
-      Renderer2D::DrawLine({-10000, 0, 0}, {10000, 0, 0}, {0.5, 0, 0, 0.5});
+      Renderer2D::DrawLine(XMin, XMax, XCol);
     }
     if (!m_editorCamera.IsTop() and !m_editorCamera.IsFree())
     {
-      Renderer2D::DrawLine({0, -10000, 0}, {0, 10000, 0}, {0, 0.5, 0, 0.5});
+      Renderer2D::DrawLine(YMin, YMax, YCol);
     }
     if (!m_editorCamera.IsFront())
     {
-      Renderer2D::DrawLine({0, 0, -10000}, {0, 0, 10000}, {0, 0, 0.5, 0.5});
+      Renderer2D::DrawLine(ZMin, ZMax, ZCol);
     }
   }
   
