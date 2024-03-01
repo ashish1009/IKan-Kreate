@@ -23,6 +23,9 @@ Assets:
   - Handle: 846778926
     FilePath: Textures/Pbr/bog/bog_ao.png
     Type: Image
+  - Handle: 1077863752
+    FilePath: Textures/Hdr/evening_road_01_puresky_8k.hdr
+    Type: Image
   - Handle: 1205302093
     FilePath: Textures/Pbr/rustedIron/rusted_iron_roughness.png
     Type: Image
@@ -55,6 +58,9 @@ Assets:
     Type: Image
   - Handle: 2772409314
     FilePath: Textures/Pbr/bog/bog_normal-ogl.png
+    Type: Image
+  - Handle: 2866126902
+    FilePath: Textures/Hdr/kloofendal_overcast_puresky_8k.hdr
     Type: Image
   - Handle: 3013658672
     FilePath: Scenes/BallGame.ikscene

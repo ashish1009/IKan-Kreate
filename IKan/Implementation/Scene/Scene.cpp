@@ -472,10 +472,12 @@ namespace IKan
   void Scene::SetIBLFlag(bool value)
   {
     m_useIBL = value;
+    SceneRenderer::SetIBLFlag(m_useIBL);
   }
   void Scene::SetIrradianceFlag(bool value)
   {
     m_useIrradiance = value;
+    SceneRenderer::SetIrradianceFlag(m_useIrradiance);
   }
 
   const std::string& Scene::GetName() const

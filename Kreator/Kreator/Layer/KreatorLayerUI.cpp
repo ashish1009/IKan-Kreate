@@ -1040,11 +1040,12 @@ namespace Kreator
       
       // IBL -----------
       bool useIBL = m_currentScene->UseIBL();
-      UI::Property("IBL", useIBL);
-      if (useIBL)
+      if (UI::Property("IBL", useIBL))
       {
         m_currentScene->SetIBLFlag(useIBL);
-        SceneRenderer::SetIBLFlag(useIBL);
+      }
+      if (useIBL)
+      {
         static UI::PropertyAssetReferenceSettings settings;
         AssetHandle skyboxAsset = m_currentScene->GetSkyboxAsset();
         if (UI::PropertyAssetReference<Image>("Environment", skyboxAsset, nullptr, settings))
@@ -1052,16 +1053,13 @@ namespace Kreator
           if (skyboxAsset)
           {
             m_currentScene->SetSkyboxAsset(skyboxAsset);
-            SceneRenderer::SubmitSkyboxImage(skyboxAsset);
           }
         }
         if (skyboxAsset)
         {
           bool useIrradiance = m_currentScene->UseIrradiance();
-          UI::Property("Show Irradiance", useIrradiance);
-          if (useIrradiance)
+          if (UI::Property("Show Irradiance", useIrradiance))
           {
-            SceneRenderer::SetIrradianceFlag(useIrradiance);
             m_currentScene->SetIrradianceFlag(useIrradiance);
           }
         }
