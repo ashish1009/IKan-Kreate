@@ -74,6 +74,13 @@ namespace IKan
     ///   - materialtextures: mesh material texctures
     void SubmitSelectedMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable, float tilingFactor);
 
+    /// This function loads the skybox data and init the IBL
+    /// - Parameter skyboxTexturePath: skybox image file path
+    static void SubmitSkyboxImage(const std::string& skyboxTexturePath);
+    /// This function loads the skybox data and init the IBL
+    /// - Parameter skyboxAsset: skybox image asset
+    static void SubmitSkyboxImage(const AssetHandle& skyboxAsset);
+
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
 
@@ -102,6 +109,9 @@ namespace IKan
     /// This function renders the final pass image
     void FinalPass();
 
+    /// This function loads the skybox image
+    static void SubmitSkyboxImageImp();
+
     // Member Variables ---------------------------------------------------------------------------------------------
     std::string m_debugName;
     uint32_t m_viewportWidth, m_viewportHeight;
@@ -125,6 +135,7 @@ namespace IKan
 
     inline static Ref<Material> s_colorMaterial;
     inline static Ref<Shader> s_finalImageShader, s_equiractangularToCubemapShader, s_irradianceShader, s_prefilterShader, s_skymapShader;
+    inline static Ref<Texture> s_envTexture, s_envCubemap, s_irradianceMap, s_prefilterMap;
 
     inline static SceneRendererCamera s_sceneCamera;
     inline static DirectionLight s_directionLight;

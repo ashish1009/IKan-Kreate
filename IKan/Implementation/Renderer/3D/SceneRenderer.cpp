@@ -235,5 +235,32 @@ namespace IKan
   Ref<Texture> SceneRenderer::GetFinalImage() const
   {
     return m_viewportRenderPass->GetColorAttachments().at(0);
-  }  
+  }
+  
+  void SceneRenderer::SubmitSkyboxImage(const AssetHandle& skyboxAsset)
+  {
+    IK_PROFILE();
+    ImageSpecificaion spec;
+    spec.filePath = AssetManager::GetFileSystemPath(AssetManager::GetMetadata(skyboxAsset));
+    spec.wrap = TextureWrap::ClampEdge;
+    spec.filter = TextureFilter::Linear;
+    s_envTexture = TextureFactory::Create(spec);
+    SubmitSkyboxImageImp();
+  }
+  
+  void SceneRenderer::SubmitSkyboxImage(const std::string& skyboxTexturePath)
+  {
+    IK_PROFILE();
+    ImageSpecificaion spec;
+    spec.filePath = skyboxTexturePath;
+    spec.wrap = TextureWrap::ClampEdge;
+    spec.filter = TextureFilter::Linear;
+    s_envTexture = TextureFactory::Create(spec);
+    SubmitSkyboxImageImp();
+  }
+  
+  void SceneRenderer::SubmitSkyboxImageImp()
+  {
+    IK_PROFILE();
+  }
 } // namespace IKan
