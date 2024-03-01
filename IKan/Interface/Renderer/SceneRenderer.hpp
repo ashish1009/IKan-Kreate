@@ -128,6 +128,7 @@ namespace IKan
     };
 
     inline static Ref<Material> s_colorMaterial;
+    inline static Ref<Shader> s_finalImageShader;
 
     inline static SceneData s_sceneData;
   };

@@ -6,6 +6,7 @@
 //
 
 #include "SceneRenderer.hpp"
+#include "Renderer/Renderer2D.hpp"
 #include "Asset/AssetManager.hpp"
 
 namespace IKan
@@ -13,11 +14,13 @@ namespace IKan
   void SceneRenderer::Initialize()
   {
     s_colorMaterial = Material::Create(CoreAsset("Shaders/ColorShader.glsl"), "Color Shader");
+    s_finalImageShader = ShaderFactory::Create(CoreAsset("Shaders/HdrBloomShader.glsl"));
   }
   
   void SceneRenderer::Shutdown()
   {
     s_colorMaterial.reset();
+    s_finalImageShader.reset();
   }
   
   SceneRenderer::SceneRenderer(const std::string& debugName)
@@ -154,12 +157,12 @@ namespace IKan
       {
         CompositePass();
       }
-    }
-    
-    // Debug Renderer
-    {
-      // Debuig renderer callback
-      m_debugRenderer();
+      
+      // Debug Renderer
+      {
+        // Debuig renderer callback
+        m_debugRenderer();
+      }
     }
     m_geometryRenderPass->Unbind();
   }
@@ -211,6 +214,10 @@ namespace IKan
     // Render Scene in main Viewport ----------------------------------------------------------
     m_viewportRenderPass->Bind();
     Renderer::ClearBits();
+    
+    s_finalImageShader->Bind();
+    Renderer2D::DrawFullscreenQuad(m_geometryRenderPass->GetColorAttachments().at(0), 0, true);
+    s_finalImageShader->Unbind();
     
     m_viewportRenderPass->Unbind();
   }
