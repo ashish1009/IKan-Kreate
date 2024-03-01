@@ -128,7 +128,7 @@ if (!m_currentScene) return
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
     // Set debug renderer callback
-    m_viewportRenderer.SetDebugRenderer([this]() { RenderDebug(); });
+    m_viewportRenderer.SetDebugRenderer([this]() { DebugRenderer(); });
     
     // Load Textures --------------------
     // Set the Application Icon
@@ -158,6 +158,11 @@ if (!m_currentScene) return
     m_rotateToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Rotate.png"));
     m_scaleToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
     m_gizmoModeTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/GuizmoMode.png"));
+    
+    // Camera Editor Icon
+    m_XIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/X.png"));
+    m_YIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Y.png"));
+    m_ZIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Z.png"));
   }
   
   KreatorLayer::~KreatorLayer()
@@ -553,32 +558,21 @@ if (!m_currentScene) return
     return { rayPos, rayDir };
   }
 
-  void KreatorLayer::RenderDebug()
+  void KreatorLayer::DebugRenderer()
   {
     IK_PERFORMANCE("KreatorLayer::RenderDebug");
     if (m_sceneState != SceneState::Play)
     {
       Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
       {
-        // Relationship connection
         if (m_showRelationshipConnection)
         {
-          auto relationshipView = m_currentScene->GetAllEntitiesWith<RelationshipComponent>();
-          for (auto entityHandle : relationshipView)
-          {
-            Entity entity = { entityHandle, m_currentScene.get() };
-            const auto& tc = entity.GetComponent<TransformComponent>();
-            const auto& startPos = tc.Position();
-            
-            for (const auto& child : entity.Children())
-            {
-              Entity childEntity = m_currentScene->TryGetEntityWithUUID(child);
-              const auto& childTc = childEntity.GetComponent<TransformComponent>();
-              const auto& endPos = childTc.Position();
-              
-              Renderer2D::DrawLine(startPos, endPos, m_relationshipColor);
-            }
-          }
+          RenderRelationshipConnection();
+        }
+        
+        if (m_showCameraAxis)
+        {
+          RenderCameraAxis();
         }
       }
       Renderer2D::EndBatch();
@@ -602,6 +596,42 @@ if (!m_currentScene) return
     TextRenderer::RenderFixedViewText("(c) IKAN", { m_viewport.width - 80, 5.0f, 0.3f }, size, color, Font::GetDefaultFont());
     TextRenderer::RenderFixedViewText(std::to_string((uint32_t)(ImGui::GetIO().Framerate)), position, size, color, Font::GetDefaultFont());
     TextRenderer::EndBatch();
+  }
+  
+  void KreatorLayer::RenderRelationshipConnection()
+  {
+    auto relationshipView = m_currentScene->GetAllEntitiesWith<RelationshipComponent>();
+    for (auto entityHandle : relationshipView)
+    {
+      Entity entity = { entityHandle, m_currentScene.get() };
+      const auto& tc = entity.GetComponent<TransformComponent>();
+      const auto& startPos = tc.Position();
+      
+      for (const auto& child : entity.Children())
+      {
+        Entity childEntity = m_currentScene->TryGetEntityWithUUID(child);
+        const auto& childTc = childEntity.GetComponent<TransformComponent>();
+        const auto& endPos = childTc.Position();
+        
+        Renderer2D::DrawLine(startPos, endPos, m_relationshipColor);
+      }
+    }
+  }
+  
+  void KreatorLayer::RenderCameraAxis()
+  {
+    if (!m_editorCamera.IsRight())
+    {
+      Renderer2D::DrawLine({-10000, 0, 0}, {10000, 0, 0}, {0.5, 0, 0, 0.5});
+    }
+    if (!m_editorCamera.IsTop() and !m_editorCamera.IsFree())
+    {
+      Renderer2D::DrawLine({0, -10000, 0}, {0, 10000, 0}, {0, 0.5, 0, 0.5});
+    }
+    if (!m_editorCamera.IsFront())
+    {
+      Renderer2D::DrawLine({0, 0, -10000}, {0, 0, 10000}, {0, 0, 0.5, 0.5});
+    }
   }
   
   float KreatorLayer::GetSnapValue()

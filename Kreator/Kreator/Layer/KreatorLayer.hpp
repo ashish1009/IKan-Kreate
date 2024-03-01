@@ -98,10 +98,14 @@ namespace Kreator
     Ray CastRay(const EditorCamera& camera);
     
     /// This function renders the debug icons, colliders and so on....
-    void RenderDebug();
+    void DebugRenderer();
     /// This function renders the system info
     void RenderSystemInfo();
-    
+    /// This function renders the relationship connection
+    void RenderRelationshipConnection();
+    /// This function renders the camera A
+    void RenderCameraAxis();
+
     /// This function returns the Imguizmo Snap value
     float GetSnapValue();
     
@@ -197,6 +201,8 @@ namespace Kreator
     void UI_UpdateGuizmo();
     /// This function renders the Guizmo toolbar
     void UI_GuizmoToolbar();
+    /// This function renders the Camera toolbar
+    void UI_CameraToolbar();
     
     // Member variables ----------------------------------------------------------------------------------------------
     // Popups/Panel --------------------------------------
@@ -209,7 +215,8 @@ namespace Kreator
     // Debug Renderer ------------------------------------
     bool m_renderSystemInfo {true};
     bool m_showRelationshipConnection {true};
-    
+    bool m_showCameraAxis {true};
+
     // Debug renderer colors -----------------------------
     glm::vec4 m_relationshipColor = {0.4, 0.4, 0.4, 0.4};
 
@@ -236,12 +243,14 @@ namespace Kreator
     bool m_allowViewportCameraEvents = false;
     PanelManager m_panels;
     EditorCamera m_editorCamera;
+    
+    Ref<Texture> m_XIcon, m_YIcon, m_ZIcon;
     enum class FolderExplorerAction
     {
       None, NewPreoject, OpenProject, SaveScene, OpenScene
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
-    
+
     // Scene Data ----------------------------------------
     float m_timeSinceLastSave = 0.0f;
     std::filesystem::path m_sceneFilePath{};

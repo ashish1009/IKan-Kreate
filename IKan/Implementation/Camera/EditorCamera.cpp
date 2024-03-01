@@ -72,26 +72,32 @@ namespace IKan
         
         if (Input::IsKeyPressed(Key::Q))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           m_positionDelta -= ts.MilliSeconds() * speed * glm::vec3{ 0.f, yawSign, 0.f };
         }
         if (Input::IsKeyPressed(Key::E))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           m_positionDelta += ts.MilliSeconds() * speed * glm::vec3{ 0.f, yawSign, 0.f };
         }
         if (Input::IsKeyPressed(Key::S))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           m_positionDelta -= ts.MilliSeconds() * speed * m_direction;
         }
         if (Input::IsKeyPressed(Key::W))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           m_positionDelta += ts.MilliSeconds() * speed * m_direction;
         }
         if (Input::IsKeyPressed(Key::A))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           m_positionDelta -= ts.MilliSeconds() * speed * m_rightDirection;
         }
         if (Input::IsKeyPressed(Key::D))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           m_positionDelta += ts.MilliSeconds() * speed * m_rightDirection;
         }
         
@@ -115,16 +121,19 @@ namespace IKan
         
         if (Input::IsMouseButtonPressed(MouseButton::Middle))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           CameraUtils::DisableMouse();
           MousePan(delta);
         }
         else if (Input::IsMouseButtonPressed(MouseButton::Left))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           CameraUtils::DisableMouse();
           MouseRotate(delta);
         }
         else if (Input::IsMouseButtonPressed(MouseButton::Right))
         {
+          m_cameraOrientation = CameraOrientation::Free;
           CameraUtils::DisableMouse();
           MouseZoom(delta.x + delta.y);
         }
@@ -165,6 +174,23 @@ namespace IKan
     }
     
     return glm::clamp(speed, MIN_SPEED, MAX_SPEED);
+  }
+  
+  bool EditorCamera::IsFront() const
+  {
+    return m_cameraOrientation == CameraOrientation::Front;
+  }
+  bool EditorCamera::IsTop() const
+  {
+    return m_cameraOrientation == CameraOrientation::Top;
+  }
+  bool EditorCamera::IsRight() const
+  {
+    return m_cameraOrientation == CameraOrientation::Right;
+  }
+  bool EditorCamera::IsFree() const
+  {
+    return m_cameraOrientation == CameraOrientation::Free;
   }
   
   void EditorCamera::UpdateCameraView()
@@ -299,6 +325,28 @@ namespace IKan
   void EditorCamera::SetNormalSpeed(float camSpeed)
   {
     m_normalSpeed = camSpeed;
+  }
+  
+  void EditorCamera::SetTop()
+  {
+    m_yaw = 6.28073406;
+    m_pitch = 1.57060242;
+    
+    m_cameraOrientation = CameraOrientation::Top;
+  }
+  void EditorCamera::SetFront()
+  {
+    m_yaw = 6.28402614;
+    m_pitch = 0.000839832763;
+    
+    m_cameraOrientation = CameraOrientation::Front;
+  }
+  void EditorCamera::SetRight()
+  {
+    m_yaw = 4.71208525;
+    m_pitch = 0.000142695979;
+    
+    m_cameraOrientation = CameraOrientation::Right;
   }
   
   glm::vec3 EditorCamera::GetUpDirection() const

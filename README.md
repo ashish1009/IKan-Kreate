@@ -115,21 +115,22 @@ Editor Application using IKan Library to create Games
   - Scene Hierarchy (ECS)
 
 ### Mini Feature Road Map
-- Fix selected outline : Try Different combination of rendering mesh and selected mesh
-- Editor camera Side/Top/Front View
-- Axis / Grid
 - Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
 - Show and hide entity (SHP)
 - Show and hide components
 - Point Light
 - Shadow
 - Physics Material
+- Grid
 - Scale Child entity with parent (Hold)
+- Fix selected outline size (Hold)
 
 ### Mini Feature Complete
 - Rotate Child entity with parent
 - Connect Parent child with line
 - Never edit/save default material, always create copy
+- Editor camera Side/Top/Front View
+- Axis
 
 ### TODO
 

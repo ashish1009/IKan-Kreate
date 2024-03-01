@@ -65,6 +65,13 @@ namespace IKan
     /// - Parameter camSpeed: camera speed
     void SetNormalSpeed(float camSpeed);
     
+    /// This funcion set the camera orientation at Front
+    void SetFront();
+    /// This funcion set the camera orientation at Top
+    void SetTop();
+    /// This funcion set the camera orientation at Right
+    void SetRight();
+    
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns if camera is active
     bool IsActive() const;
@@ -120,6 +127,15 @@ namespace IKan
     /// This function returns the speed of camera
     float GetCameraSpeed() const;
     
+    /// This funcion returns the camera orientation at Front
+    bool IsFront() const;
+    /// This funcion returns the camera orientation at Top
+    bool IsTop() const;
+    /// This funcion returns the camera orientation at Right
+    bool IsRight() const;
+    /// This funcion returns the camera orientation is free
+    bool IsFree() const;
+
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
     /// This function Updates the camera View
@@ -165,6 +181,12 @@ namespace IKan
     
     uint32_t m_viewportWidth{ 1280 }, m_viewportHeight{ 720 };
     
+    enum class CameraOrientation
+    {
+      Free, Top, Front, Right
+    };
+    CameraOrientation m_cameraOrientation = CameraOrientation::Free;
+
     constexpr static float MIN_SPEED{ 0.0005f }, MAX_SPEED{ 2.0f };
   };
 } // namespace IKan

@@ -743,6 +743,7 @@ namespace Kreator
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
         ImGui::MenuItem("Show System Info", nullptr, &m_renderSystemInfo);
         ImGui::MenuItem("Show Relationship Connection", nullptr, &m_showRelationshipConnection);
+        ImGui::MenuItem("Show Camera Axis", nullptr, &m_showCameraAxis);
       });
       
       UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
@@ -962,6 +963,7 @@ namespace Kreator
     if (m_sceneState != SceneState::Play)
     {
       UI_GuizmoToolbar();
+      UI_CameraToolbar();
       UI_UpdateGuizmo();
     }
 
@@ -1053,6 +1055,7 @@ namespace Kreator
     {
       UI::BeginPropertyGrid();
       UI::Property("System Info ", m_renderSystemInfo);
+      UI::Property("Axis ", m_showCameraAxis);
       UI::Property("Relationship Connection ", m_showRelationshipConnection);
       if (m_showRelationshipConnection)
       {
@@ -1169,11 +1172,10 @@ namespace Kreator
     {
       UI::ScopedStyle enableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(edgeOffset * 2.0f, 0));
       
-      const ImColor c_SelectedGizmoButtonColor = UI::Color::Accent;
-      const ImColor c_UnselectedGizmoButtonColor = UI::Color::TextBrighter;
+      static const ImColor SelectedGizmoButtonColor = UI::Color::Accent;
+      static const ImColor UnselectedGizmoButtonColor = UI::Color::TextBrighter;
       
-      auto gizmoButton = [&c_SelectedGizmoButtonColor, buttonSize, this](const Ref<Texture>& icon,
-                                                                         const ImColor& tint, float paddingY = 0.0f)
+      auto gizmoButton = [buttonSize, this](const Ref<Texture>& icon, const ImColor& tint, float paddingY = 0.0f)
       {
         const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
         const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
@@ -1183,31 +1185,25 @@ namespace Kreator
         return clicked;
       };
       
-      ImColor buttonTint = m_gizmoType == -1 ? c_SelectedGizmoButtonColor : c_UnselectedGizmoButtonColor;
+      ImColor buttonTint = m_gizmoType == -1 ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
       if (gizmoButton(m_selectToolTex, buttonTint, m_gizmoType != -1))
       {
         m_gizmoType = -1;
       }
       
-      buttonTint = m_gizmoType == ImGuizmo::OPERATION::TRANSLATE ?
-      c_SelectedGizmoButtonColor :
-      c_UnselectedGizmoButtonColor;
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::TRANSLATE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
       if (gizmoButton(m_moveToolTex, buttonTint))
       {
         m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
       }
       
-      buttonTint = m_gizmoType == ImGuizmo::OPERATION::ROTATE ?
-      c_SelectedGizmoButtonColor :
-      c_UnselectedGizmoButtonColor;
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::ROTATE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
       if (gizmoButton(m_rotateToolTex, buttonTint))
       {
         m_gizmoType = ImGuizmo::OPERATION::ROTATE;
       }
       
-      buttonTint = m_gizmoType == ImGuizmo::OPERATION::SCALE ?
-      c_SelectedGizmoButtonColor :
-      c_UnselectedGizmoButtonColor;
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::SCALE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
       if (gizmoButton(m_scaleToolTex, buttonTint))
       {
         m_gizmoType = ImGuizmo::OPERATION::SCALE;
@@ -1219,6 +1215,73 @@ namespace Kreator
     ImGui::Spring();
     ImGui::EndVertical();
     
+    ImGui::End();
+  }
+  
+  void KreatorLayer::UI_CameraToolbar()
+  {
+    UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+    UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
+    UI::ScopedStyle disablePadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    
+    auto viewportStart = ImGui::GetItemRectMin();
+    
+    const float buttonSize = 18.0f;
+    const float edgeOffset = 4.0f;
+    const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
+    const float numberOfButtons = 3.0f;
+    const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
+    
+    ImGui::SetNextWindowPos(ImVec2(viewportStart.x + ImGui::GetContentRegionAvail().x - windowWidth - edgeOffset, viewportStart.y + edgeOffset));
+    ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
+    ImGui::SetNextWindowBgAlpha(0.0f);
+    
+    ImGui::Begin("##camera_tools", 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking);
+    
+    // A hack to make icon panel appear smaller than minimum allowed by ImGui size
+    // Filling the background for the desired 26px height
+    const float desiredHeight = 26.0f;
+    ImRect background = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, -(windowHeight - desiredHeight) / 2.0f);
+    ImGui::GetWindowDrawList()->AddRectFilled(background.Min, background.Max, IM_COL32(15, 15, 15, 127), 4.0f);
+
+    ImGui::BeginVertical("##cameraV", ImGui::GetContentRegionAvail());
+    ImGui::Spring();
+    ImGui::BeginHorizontal("##cameraH", { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y });
+    ImGui::Spring();
+    
+    {
+      UI::ScopedStyle enableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(edgeOffset * 2.0f, 0));
+      
+      auto cameraButton = [buttonSize, this](const Ref<Texture>& icon, const ImColor& tint, float paddingY = 0.0f)
+      {
+        const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
+        const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
+        const bool clicked = UI::InvisibleButton(ImVec2(width, height));
+        UI::DrawButtonImage(icon, tint, tint, tint, UI::RectOffset(UI::GetItemRect(), 0.0f, paddingY));
+        m_hoveredGuizmoToolbar = ImGui::IsItemHovered();
+        return clicked;
+      };
+
+      if (cameraButton(m_XIcon, UI::Color::TextBrighter))
+      {
+        m_editorCamera.SetRight();
+      }
+      if (cameraButton(m_YIcon, UI::Color::TextBrighter))
+      {
+        m_editorCamera.SetTop();
+      }
+      if (cameraButton(m_ZIcon, UI::Color::TextBrighter))
+      {
+        m_editorCamera.SetFront();
+      }
+    }
+    
+    ImGui::Spring();
+    ImGui::EndHorizontal();
+    ImGui::Spring();
+    ImGui::EndVertical();
+
     ImGui::End();
   }
 } // namespace Kreator
