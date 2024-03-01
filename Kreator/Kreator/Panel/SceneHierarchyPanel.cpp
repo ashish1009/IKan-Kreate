@@ -708,6 +708,23 @@ namespace Kreator
       ImGui::TableSetupColumn("value_column", ImGuiTableColumnFlags_IndentEnable | ImGuiTableColumnFlags_NoClip,
                               ImGui::GetContentRegionAvail().x - 100.0f);
       
+#if 0
+      ImGui::TableNextRow();
+      auto position = component.Position();
+      DrawVec3Control("Translation", position);
+      component.UpdatePosition(position);
+      
+      ImGui::TableNextRow();
+      auto rotation = glm::degrees(component.Rotation());
+      DrawVec3Control("Rotation", rotation);
+      component.UpdateRotation(glm::radians(rotation));
+      
+      ImGui::TableNextRow();
+      auto scale = component.Scale();
+      DrawVec3Control("Scale", scale, 1.0f, 0.1f);
+      component.UpdateScale(scale);
+      ImGui::EndTable();
+#else
       ImGui::TableNextRow();
       auto prevPosition = component.Position();
       auto position = component.Position();
@@ -762,6 +779,8 @@ namespace Kreator
           UI::PropertyGridHeaderEnd();
         }
       }
+#endif
+
       
       UI::ShiftCursorY(-8.0f);
       UI::ShiftCursorY(18.0f);

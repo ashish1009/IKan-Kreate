@@ -140,7 +140,7 @@ namespace IKan {
       out << YAML::Key << "TransformComponent";
       out << YAML::BeginMap; // TransformComponent
       
-      auto& transform = entity.GetComponent<TransformComponent>();
+      auto& transform = entity.GetTransform();
       
       out << YAML::Key << "Position" << YAML::Value << transform.Position();
       out << YAML::Key << "Rotation" << YAML::Value << transform.Rotation();
@@ -215,7 +215,7 @@ namespace IKan {
       if (transformComponent)
       {
         // Entities always have transforms
-        auto& transform = deserializedEntity.GetComponent<TransformComponent>();
+        auto& transform = deserializedEntity.GetTransform();
         transform.UpdatePosition(transformComponent["Position"].as<glm::vec3>());
         const auto& rotationNode = transformComponent["Rotation"];
         // Rotations used to be stored as quaternions

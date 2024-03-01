@@ -21,6 +21,6 @@ namespace Kreator::ECS_Utils
   ///   - position: position
   ///   - scale: scale
   ///   - rotation: rotation
-  void UpdateChildrenTransform(Ref<Scene> scene, Entity entity, const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation);
+  void UpdateChildrenTransform(Ref<Scene> scene, Entity entity, const glm::vec3& position, const glm::vec3& scale, const glm::vec3& rotation, bool controlledByParent = false);
 
 } // namespace Kreator::ECS_Utils

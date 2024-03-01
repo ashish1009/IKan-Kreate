@@ -119,6 +119,9 @@ Editor Application using IKan Library to create Games
   - Show and hide entity (SHP)
   - Show and hide components
 
+### General Road Map
+  - Fix selected outline : Try Different combination of rendering mesh and selected mesh
+
 ### TODO
 
 ## Releases

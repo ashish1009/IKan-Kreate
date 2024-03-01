@@ -41,6 +41,14 @@ namespace IKan::Utils::Math
   ///  - Important: This function cost too much in CPU
   void DecomposeTransform(const glm::mat4& transform, glm::vec3& outTranslation, glm::vec3& outRotation, glm::vec3& outScale);
   
+  /// This function calculates the distance of 2 points
+  /// - Parameters:
+  ///   - x1: x1 description
+  ///   - y1: y1 description
+  ///   - x2: x2 description
+  ///   - y2: y2 description  
+  float GetDistance(float x1, float y1, float x2, float y2);
+
   // Debug Print APIs
   void Print(const std::string& title, const glm::mat4& mat);
   void Print(const std::string& title, const glm::vec3& vec);

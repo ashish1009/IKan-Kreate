@@ -1,32 +1,47 @@
 Scene: BallGame.ikscene
 Entities:
-  - Entity: 7420744135819634013
+  - Entity: 74307149538884466
     TagComponent:
-      Tag: Cube1
-    Parent: 0
+      Tag: Cube3
+    Parent: 17671997974037504265
     Children:
-      - Handle: 13766822495794172938
-      - Handle: 17671997974037504265
+      []
     TransformComponent:
-      Position: [1, 3, 2]
-      Rotation: [0, 0, 0]
-      Scale: [4.69999981, 1, 1]
+      Position: [10.485281, 4, 1.99999952]
+      Rotation: [0, 0.785398245, 0]
+      Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
         0: 444052761
-  - Entity: 13766822495794172938
+  - Entity: 3772482211849236384
     TagComponent:
-      Tag: Cube3
-    Parent: 7420744135819634013
+      Tag: Cube Center
+    Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [3, 0, 6]
+      Position: [0, 0, 0]
       Rotation: [0, 0, 0]
-      Scale: [4.69999981, 1, 1]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+  - Entity: 7420744135819634013
+    TagComponent:
+      Tag: Cube1
+    Parent: 0
+    Children:
+      - Handle: 17671997974037504265
+    TransformComponent:
+      Position: [2, 2, 2]
+      Rotation: [0, 0.785398185, 0]
+      Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -38,11 +53,11 @@ Entities:
       Tag: Cube2
     Parent: 7420744135819634013
     Children:
-      []
+      - Handle: 74307149538884466
     TransformComponent:
-      Position: [5, 0, 2.5]
+      Position: [6, 2, 6]
       Rotation: [0, 0, 0]
-      Scale: [4.69999981, 1, 1]
+      Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872

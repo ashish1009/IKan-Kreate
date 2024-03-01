@@ -123,6 +123,25 @@ namespace IKan
   {
     return m_scene->TryGetEntityWithUUID(GetParentUUID());
   }
+  
+  Entity Entity::GetFirstParent()
+  {
+    Entity parent = GetParent();;
+    if (parent)
+    {
+      Entity grandParent = parent.GetParent();
+      if (grandParent)
+      {
+        return parent.GetFirstParent();
+      }
+      else
+      {
+        return parent;
+      }
+    }
+    return parent;
+  }
+
   UUID Entity::GetParentUUID() const
   {
     return GetComponent<RelationshipComponent>().parentHandle;

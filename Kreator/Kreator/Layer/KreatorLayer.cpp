@@ -79,7 +79,7 @@ if (!m_currentScene) return
         return -1;
       }
       
-      const glm::mat4& transform = entity.GetComponent<TransformComponent>().Transform();
+      const glm::mat4& transform = entity.GetTransform().Transform();
       auto& submeshes = mesh->GetSubMeshes();
       for (uint32_t i = 0; i < submeshes.size(); i++)
       {

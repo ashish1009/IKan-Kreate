@@ -429,7 +429,7 @@ namespace IKan
   {
     IK_PROFILE();
     glm::mat4 transform = GetWorldSpaceTransformMatrix(entity);
-    TransformComponent transformComponent = entity.GetComponent<TransformComponent>();
+    TransformComponent transformComponent = entity.GetTransform();
     
     glm::vec3 position, scale, rotation;
     Utils::Math::DecomposeTransform(transform, position, rotation, scale);

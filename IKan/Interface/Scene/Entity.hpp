@@ -55,6 +55,8 @@ namespace IKan
     /// This function returns the UUID of Current entity
     UUID GetUUID() const;
     
+    /// This function returns the first parent of entity hier
+    Entity GetFirstParent();
     /// This function returns the parent of entity
     Entity GetParent();
     /// This function returns the parent UUID of entity
