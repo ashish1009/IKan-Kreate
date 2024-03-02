@@ -588,24 +588,36 @@ namespace IKan
   }
   void Scene::OnBox3DColliderComponentConstruct(entt::registry& registry, entt::entity entity)
   {
+    auto entityID = registry.get<IDComponent>(entity).ID;
+    IK_ASSERT(m_entityIDMap.find(entityID) != m_entityIDMap.end());
+    m_physicsScene->AddCollider(ColliderType::Box, m_entityIDMap.at(entityID));
   }
   void Scene::OnBox3DColliderComponentDestroy(entt::registry& registry, entt::entity entity)
   {
   }
   void Scene::OnSphereColliderComponentConstruct(entt::registry& registry, entt::entity entity)
   {
+    auto entityID = registry.get<IDComponent>(entity).ID;
+    IK_ASSERT(m_entityIDMap.find(entityID) != m_entityIDMap.end());
+    m_physicsScene->AddCollider(ColliderType::Sphere, m_entityIDMap.at(entityID));
   }
   void Scene::OnSphereColliderComponentDestroy(entt::registry& registry, entt::entity entity)
   {
   }
   void Scene::OnCapsuleColliderComponentConstruct(entt::registry& registry, entt::entity entity)
   {
+    auto entityID = registry.get<IDComponent>(entity).ID;
+    IK_ASSERT(m_entityIDMap.find(entityID) != m_entityIDMap.end());
+    m_physicsScene->AddCollider(ColliderType::Capsule, m_entityIDMap.at(entityID));
   }
   void Scene::OnCapsuleColliderComponentDestroy(entt::registry& registry, entt::entity entity)
   {
   }
   void Scene::OnJointComponentConstruct(entt::registry& registry, entt::entity entity)
   {
+    auto entityID = registry.get<IDComponent>(entity).ID;
+    IK_ASSERT(m_entityIDMap.find(entityID) != m_entityIDMap.end());
+    m_physicsScene->CreateJoint(m_entityIDMap.at(entityID));
   }
   void Scene::OnJointComponentDestroy(entt::registry& registry, entt::entity entity)
   {
