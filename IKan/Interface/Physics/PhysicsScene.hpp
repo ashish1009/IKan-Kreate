@@ -9,6 +9,7 @@
 
 #include <reactphysics3d/reactphysics3d.h>
 #include "Core/TimeStep.hpp"
+#include "Physics/ContactListener.hpp"
 
 namespace IKan
 {
@@ -40,5 +41,6 @@ namespace IKan
     reactphysics3d::PhysicsWorld* m_world = nullptr;
     
     Scene* m_scene;
+    ContactListener m_contactListener;
   };
 } // namespace IKan

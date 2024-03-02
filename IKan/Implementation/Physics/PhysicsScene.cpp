@@ -35,6 +35,9 @@ namespace IKan
     // Get a reference to the debug renderer
     DebugRenderer& debugRenderer = m_world->getDebugRenderer();
     debugRenderer.setIsDebugItemDisplayed(DebugRenderer::DebugItem::COLLISION_SHAPE, true);
+    
+    // Override contact listener
+    m_world->setEventListener(&m_contactListener);
   }
   
   PhysicsScene::~PhysicsScene()
