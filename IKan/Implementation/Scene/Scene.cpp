@@ -53,6 +53,7 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "Creating {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
     
+    // Component callbacks
     m_registry.on_construct<RigidBodyComponent>().connect<&Scene::OnRigidBodyComponentConstruct>(this);
     m_registry.on_destroy<RigidBodyComponent>().connect<&Scene::OnRigidBodyComponentDestroy>(this);
     
@@ -68,12 +69,15 @@ namespace IKan
     m_registry.on_construct<JointComponent>().connect<&Scene::OnJointComponentConstruct>(this);
     m_registry.on_destroy<JointComponent>().connect<&Scene::OnJointComponentDestroy>(this);
     
+    // Create physics scene
+    m_physicsScene = CreateRef<PhysicsScene>(m_physicsSettings, this);
   }
   
   Scene::~Scene()
   {
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Destroying {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
+    m_physicsScene.reset();
   }
   
   void Scene::OnUpdateEditor()
@@ -178,7 +182,11 @@ namespace IKan
     CopyComponent<RelationshipComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<TransformComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<MeshComponent>(target->m_registry, m_registry, enttMap);
-    
+    CopyComponent<RigidBodyComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<Box3DColliderComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<SphereColliderComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<JointComponent>(target->m_registry, m_registry, enttMap);
+
     // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
     // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
     target->m_registry.sort<IDComponent>([&target](const auto lhs, const auto rhs)
@@ -191,6 +199,13 @@ namespace IKan
     target->m_viewportWidth = m_viewportWidth;
     target->m_viewportHeight = m_viewportHeight;
     target->m_name = m_name;
+    target->m_physicsSettings = m_physicsSettings;
+    
+    if (m_physicsScene)
+    {
+      m_physicsScene.reset();
+    }
+    m_physicsScene = CreateRef<PhysicsScene>(m_physicsSettings, this);
   }
   
   void Scene::SetViewportSize(uint32_t width, uint32_t height)

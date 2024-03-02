@@ -208,7 +208,7 @@ namespace Kreator
     s_plusIcon.reset();
     s_gearIcon.reset();
     s_reloadIcon.reset();
-    IK_LOG_WARN("SceneHierarchyPanel", "Shutting down the Scene Hierarchy Panel");
+    IK_LOG_INFO("SceneHierarchyPanel", "Shutting down the Scene Hierarchy Panel");
   }
 
   SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& context)

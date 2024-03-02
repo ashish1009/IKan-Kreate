@@ -243,6 +243,10 @@ namespace IKan
     AssetHandle m_skyboxAsset;
     DirectionLight m_directionLight;
     
+    // Physics Data
+    PhysicsSettings m_physicsSettings;
+    Ref<PhysicsScene> m_physicsScene;
+
     friend class SceneSerializer;
     friend class Entity;
   };

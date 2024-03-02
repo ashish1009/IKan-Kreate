@@ -45,7 +45,7 @@ namespace Kreator
   void FolderExplorer::Initialize()
   {
     IK_PROFILE();
-    IK_LOG_TRACE("FolderExplorer", "Initialising the FolderExplorer textures");
+    IK_LOG_INFO("FolderExplorer", "Initialising the FolderExplorer textures");
     s_fileExplorerData = CreateScope<Data>();
     s_fileExplorerData->shadowTexture = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Icons/ShadowLineTop.png");
     s_fileExplorerData->folderIcon = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/CBP/Folder.png");
@@ -60,7 +60,7 @@ namespace Kreator
   void FolderExplorer::Shutdown()
   {
     IK_PROFILE();
-    IK_LOG_WARN("FolderExplorer", "Shutting Down the FolderExplorer textures");
+    IK_LOG_INFO("FolderExplorer", "Shutting Down the FolderExplorer textures");
     s_fileExplorerData.reset();
   }
   

@@ -11,6 +11,7 @@
 		B2000A5D2B9330F10017266F /* PhysicsScene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A5B2B9330F10017266F /* PhysicsScene.hpp */; };
 		B2000A652B9335820017266F /* ContactListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A632B9335820017266F /* ContactListener.cpp */; };
 		B2000A662B9335820017266F /* ContactListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A642B9335820017266F /* ContactListener.hpp */; };
+		B2000A722B9367E50017266F /* libReactPhysics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2CE3A852B931AD900C7F531 /* libReactPhysics.a */; };
 		B248B9072B8338BA00B9EC40 /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9052B8338BA00B9EC40 /* Asset.cpp */; };
 		B248B9082B8338BA00B9EC40 /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9062B8338BA00B9EC40 /* Asset.hpp */; };
 		B248B90C2B833BA000B9EC40 /* UUID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B90A2B833BA000B9EC40 /* UUID.cpp */; };
@@ -393,6 +394,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2000A722B9367E50017266F /* libReactPhysics.a in Frameworks */,
 				B2C0B9FC2B7DC7C40015A277 /* libYAML.a in Frameworks */,
 				B2C0B6CD2B75F7340015A277 /* libpng16.a in Frameworks */,
 				B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */,

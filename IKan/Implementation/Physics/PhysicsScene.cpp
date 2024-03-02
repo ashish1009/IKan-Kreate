@@ -43,7 +43,7 @@ namespace IKan
   PhysicsScene::~PhysicsScene()
   {
     IK_PROFILE();
-    IK_LOG_WARN(LogModule::Physics, "Destroying Physics Scene");
+    IK_LOG_INFO(LogModule::Physics, "Destroying Physics Scene");
     m_common.destroyPhysicsWorld(m_world);
   }
 

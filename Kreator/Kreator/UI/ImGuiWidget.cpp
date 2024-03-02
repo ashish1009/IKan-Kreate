@@ -83,7 +83,7 @@ namespace Kreator::UI
     s_gearIcon.reset();
     delete[] s_assetSearchString;
     
-    IK_LOG_WARN("Kreator UI", "Shutting Down Widgets Textures");
+    IK_LOG_INFO("Kreator UI", "Shutting Down Widgets Textures");
   }
   
   bool Widgets::SearchWidget(char* searchString, uint32_t BuffSize, const char* hint, bool* grabFocus, float roundingVal)

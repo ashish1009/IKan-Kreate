@@ -532,7 +532,7 @@ namespace Kreator
     
     if (needsSerialize)
     {
-      IK_LOG_WARN("Material Editor", "Serializing Material...");
+      IK_LOG_INFO("Material Editor", "Serializing Material...");
       AssetImporter::Serialize(m_materialAsset);
     }
   }
