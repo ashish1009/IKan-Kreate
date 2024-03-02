@@ -204,6 +204,116 @@ namespace IKan {
       out << YAML::EndMap; // MeshComponent
     }
     
+    if (entity.HasComponent<RigidBodyComponent>())
+    {
+      out << YAML::Key << "RigidBodyComponent";
+      out << YAML::BeginMap; // RigidBodyComponent
+      
+      auto& rigidBodyComponent = entity.GetComponent<RigidBodyComponent>();
+      out << YAML::Key << "Enable" << YAML::Value << rigidBodyComponent.enable;
+      out << YAML::Key << "BodyType" << YAML::Value << (uint32_t)rigidBodyComponent.bodyType;
+      out << YAML::Key << "LiniarDamping" << YAML::Value << rigidBodyComponent.linearDamping;
+      out << YAML::Key << "AngularDamping" << YAML::Value << rigidBodyComponent.angularDamping;
+      out << YAML::Key << "AllowSleep" << YAML::Value << rigidBodyComponent.allowSleep;
+      out << YAML::Key << "EnableGravity" << YAML::Value << rigidBodyComponent.enableGravity;
+      out << YAML::Key << "AngularAxisMove" << YAML::Value << rigidBodyComponent.angularAxisMove;
+      out << YAML::EndMap; // RigidBodyComponent
+    }
+    
+    if (entity.HasComponent<Box3DColliderComponent>())
+    {
+      out << YAML::Key << "Box3DColliderComponent";
+      out << YAML::BeginMap; // Box3DColliderComponent
+      
+      auto& box3DBodyComponent = entity.GetComponent<Box3DColliderComponent>();
+      out << YAML::Key << "Enable" << YAML::Value << box3DBodyComponent.enable;
+      out << YAML::Key << "Size" << YAML::Value << box3DBodyComponent.size;
+      out << YAML::Key << "PositionOffset" << YAML::Value << box3DBodyComponent.positionOffset;
+      out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(box3DBodyComponent.quaternionOffset);
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << box3DBodyComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << box3DBodyComponent.bounciness;
+      out << YAML::Key << "MassDensity" << YAML::Value << box3DBodyComponent.massDensity;
+      out << YAML::EndMap; // Box3DColliderComponent
+    }
+    
+    if (entity.HasComponent<SphereColliderComponent>())
+    {
+      out << YAML::Key << "SphereColliderComponent";
+      out << YAML::BeginMap; // SphereColliderComponent
+      
+      auto& sphereColliderComponent = entity.GetComponent<SphereColliderComponent>();
+      out << YAML::Key << "Enable" << YAML::Value << sphereColliderComponent.enable;
+      out << YAML::Key << "Radius" << YAML::Value << sphereColliderComponent.radius;
+      out << YAML::Key << "PositionOffset" << YAML::Value << sphereColliderComponent.positionOffset;
+      out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(sphereColliderComponent.quaternionOffset);
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << sphereColliderComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << sphereColliderComponent.bounciness;
+      out << YAML::Key << "MassDensity" << YAML::Value << sphereColliderComponent.massDensity;
+      out << YAML::EndMap; // SphereColliderComponent
+    }
+    
+    if (entity.HasComponent<CapsuleColliderComponent>())
+    {
+      out << YAML::Key << "CapsuleColliderComponent";
+      out << YAML::BeginMap; // CapsuleColliderComponent
+      
+      auto& capsuleColliderComponent = entity.GetComponent<CapsuleColliderComponent>();
+      out << YAML::Key << "Enable" << YAML::Value << capsuleColliderComponent.enable;
+      out << YAML::Key << "Radius" << YAML::Value << capsuleColliderComponent.radius;
+      out << YAML::Key << "Height" << YAML::Value << capsuleColliderComponent.height;
+      out << YAML::Key << "PositionOffset" << YAML::Value << capsuleColliderComponent.positionOffset;
+      out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(capsuleColliderComponent.quaternionOffset);
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << capsuleColliderComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << capsuleColliderComponent.bounciness;
+      out << YAML::Key << "MassDensity" << YAML::Value << capsuleColliderComponent.massDensity;
+      
+      out << YAML::EndMap; // CapsuleColliderComponent
+    }
+    
+    if (entity.HasComponent<JointComponent>())
+    {
+      out << YAML::Key << "JointComponent";
+      out << YAML::BeginMap; // JointComponent
+      
+      auto& jointComponent = entity.GetComponent<JointComponent>();
+      out << YAML::Key << "Enable" << YAML::Value << jointComponent.enable;
+      out << YAML::Key << "ConnectedEntity" << YAML::Value << jointComponent.connectedEntity;
+      out << YAML::Key << "Type" << YAML::Value << (uint32_t)jointComponent.type;
+      out << YAML::Key << "IsWorldSpace" << YAML::Value << jointComponent.isWorldSpace;
+      out << YAML::Key << "IsCollisionEnabled" << YAML::Value << jointComponent.isCollisionEnabled;
+      out << YAML::Key << "WorldAnchorPoint" << YAML::Value << jointComponent.worldAnchorPoint;
+      out << YAML::Key << "LocalAnchorPoint1" << YAML::Value << jointComponent.localAnchorPoint1;
+      out << YAML::Key << "LocalAnchorPoint2" << YAML::Value << jointComponent.localAnchorPoint2;
+      
+      out << YAML::Key << "ConeLimit" << YAML::Value << jointComponent.ballSocketData.coneLimit;
+      out << YAML::Key << "ConeAngle" << YAML::Value << jointComponent.ballSocketData.coneAngle;
+      
+      out << YAML::Key << "WorldAxis" << YAML::Value << jointComponent.hingeData.worldAxis;
+      out << YAML::Key << "LocalAxis1" << YAML::Value << jointComponent.hingeData.localAxis1;
+      out << YAML::Key << "LocalAxis2" << YAML::Value << jointComponent.hingeData.localAxis2;
+      
+      out << YAML::Key << "Limit" << YAML::Value << jointComponent.hingeData.limit;
+      out << YAML::Key << "MinAngle" << YAML::Value << jointComponent.hingeData.initMinAngleLimit;
+      out << YAML::Key << "MaxAngle" << YAML::Value << jointComponent.hingeData.initMaxAngleLimit;
+      
+      out << YAML::Key << "Motor" << YAML::Value << jointComponent.hingeData.motor;
+      out << YAML::Key << "Speed" << YAML::Value << jointComponent.hingeData.initMotorSpeed;
+      out << YAML::Key << "Torque" << YAML::Value << jointComponent.hingeData.initMaxMotorTorque;
+      
+      out << YAML::Key << "SliderWorldAxis" << YAML::Value << jointComponent.sliderData.worldAxis;
+      out << YAML::Key << "SliderLocalAxis1" << YAML::Value << jointComponent.sliderData.localAxis1;
+      
+      out << YAML::Key << "SliderLimit" << YAML::Value << jointComponent.sliderData.limit;
+      out << YAML::Key << "SliderMinTranse" << YAML::Value << jointComponent.sliderData.initMinTransLimit;
+      out << YAML::Key << "SliderMaxTranse" << YAML::Value << jointComponent.sliderData.initMaxTransLimit;
+      
+      out << YAML::Key << "SliderMotor" << YAML::Value << jointComponent.sliderData.motor;
+      out << YAML::Key << "SliderSpeed" << YAML::Value << jointComponent.sliderData.initMotorSpeed;
+      out << YAML::Key << "SliderForce" << YAML::Value << jointComponent.sliderData.initMaxMotorForce;
+      
+      out << YAML::EndMap; // JointComponent
+    }
+    
     out << YAML::EndMap; // Entity
   }
   
