@@ -112,6 +112,37 @@ namespace IKan
     static reactphysics3d::BodyType ReactPhysicsBodyType(BodyType type);
   };
   
+  struct CommonColliderData
+  {
+    bool enable = true;
+    glm::vec3 positionOffset;
+    glm::quat quaternionOffset;
+    float frictionCoefficient = 0.2;
+    float bounciness = 0.1;
+    float massDensity = 1.0;
+    
+    // User data pointer
+    void* userData;
+    
+    virtual ~CommonColliderData();
+  };
+  
+  struct Box3DColliderComponent : CommonColliderData
+  {
+    glm::vec3 size = glm::vec3(0.5f);
+  };
+  
+  struct SphereColliderComponent : CommonColliderData
+  {
+    float radius = 0.5f;
+  };
+  
+  struct CapsuleColliderComponent : CommonColliderData
+  {
+    float radius = 0.5f;
+    float height = 1.0f;
+  };
+
   template<typename... Component>
   struct ComponentGroup
   {
@@ -120,6 +151,7 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, TagComponent, TransformComponent, MeshComponent, RigidBodyComponent>;
+  ComponentGroup<IDComponent, TagComponent, TransformComponent, MeshComponent, RigidBodyComponent,
+  Box3DColliderComponent, SphereColliderComponent, CapsuleColliderComponent>;
 
 } // namespace IKan
