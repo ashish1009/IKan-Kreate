@@ -12,6 +12,8 @@
 		B2000A652B9335820017266F /* ContactListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A632B9335820017266F /* ContactListener.cpp */; };
 		B2000A662B9335820017266F /* ContactListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A642B9335820017266F /* ContactListener.hpp */; };
 		B2000A722B9367E50017266F /* libReactPhysics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2CE3A852B931AD900C7F531 /* libReactPhysics.a */; };
+		B2000A752B936CD00017266F /* PhysicsJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A732B936CD00017266F /* PhysicsJoint.cpp */; };
+		B2000A762B936CD00017266F /* PhysicsJoint.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A742B936CD00017266F /* PhysicsJoint.hpp */; };
 		B248B9072B8338BA00B9EC40 /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9052B8338BA00B9EC40 /* Asset.cpp */; };
 		B248B9082B8338BA00B9EC40 /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9062B8338BA00B9EC40 /* Asset.hpp */; };
 		B248B90C2B833BA000B9EC40 /* UUID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B90A2B833BA000B9EC40 /* UUID.cpp */; };
@@ -209,6 +211,8 @@
 		B2000A5B2B9330F10017266F /* PhysicsScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsScene.hpp; sourceTree = "<group>"; };
 		B2000A632B9335820017266F /* ContactListener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContactListener.cpp; sourceTree = "<group>"; };
 		B2000A642B9335820017266F /* ContactListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContactListener.hpp; sourceTree = "<group>"; };
+		B2000A732B936CD00017266F /* PhysicsJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsJoint.cpp; sourceTree = "<group>"; };
+		B2000A742B936CD00017266F /* PhysicsJoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsJoint.hpp; sourceTree = "<group>"; };
 		B248B9052B8338BA00B9EC40 /* Asset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Asset.cpp; sourceTree = "<group>"; };
 		B248B9062B8338BA00B9EC40 /* Asset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Asset.hpp; sourceTree = "<group>"; };
 		B248B90A2B833BA000B9EC40 /* UUID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UUID.cpp; sourceTree = "<group>"; };
@@ -411,6 +415,8 @@
 			isa = PBXGroup;
 			children = (
 				B2000A5A2B9330F10017266F /* PhysicsScene.cpp */,
+				B2000A732B936CD00017266F /* PhysicsJoint.cpp */,
+				B2000A742B936CD00017266F /* PhysicsJoint.hpp */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -1007,6 +1013,7 @@
 				B248B9512B84A65500B9EC40 /* EditorConsoleMessage.hpp in Headers */,
 				B2ED60192B74AD56007A7F36 /* StringUtils.hpp in Headers */,
 				B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */,
+				B2000A762B936CD00017266F /* PhysicsJoint.hpp in Headers */,
 				B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */,
 				B2ED607F2B750336007A7F36 /* Renderer2D.hpp in Headers */,
 				B2000A662B9335820017266F /* ContactListener.hpp in Headers */,
@@ -1221,6 +1228,7 @@
 				B2EB0FE42B889AAA00DF1407 /* Ray.cpp in Sources */,
 				B2ED60202B74AF5A007A7F36 /* OpenGLShaderUniforms.cpp in Sources */,
 				B2EB0F9B2B885DD300DF1407 /* Material.cpp in Sources */,
+				B2000A752B936CD00017266F /* PhysicsJoint.cpp in Sources */,
 				B2ED5E422B748AFB007A7F36 /* Renderer.cpp in Sources */,
 				B2EB0FF82B88D13600DF1407 /* Light.cpp in Sources */,
 				B2ED605B2B74DACD007A7F36 /* OpenGLTexture.cpp in Sources */,
