@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <reactphysics3d/reactphysics3d.h>
+
 #include "Core/UUID.hpp"
 #include "Asset/Asset.hpp"
 #include "Renderer/MaterialAsset.hpp"
@@ -92,6 +94,24 @@ namespace IKan
     MeshComponent(AssetHandle m = AssetHandle()) : mesh(m) {}
   };
   
+  struct RigidBodyComponent
+  {
+    bool enable = true;
+    enum class BodyType { Static, Kinametic, Dynamic };
+    BodyType bodyType = BodyType::Static;
+    
+    bool allowSleep = true;
+    bool enableGravity = true;
+    float linearDamping = 0.0f;
+    float angularDamping = 0.0f;
+    glm::vec3 angularAxisMove = glm::vec3(1.0f);
+    
+    // Storage : No Need to serialze. Need to decide later to copy or not
+    void* runtimeBody = nullptr;
+    
+    static reactphysics3d::BodyType ReactPhysicsBodyType(BodyType type);
+  };
+  
   template<typename... Component>
   struct ComponentGroup
   {
@@ -100,6 +120,6 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, TagComponent, TransformComponent, MeshComponent>;
+  ComponentGroup<IDComponent, TagComponent, TransformComponent, MeshComponent, RigidBodyComponent>;
 
 } // namespace IKan

@@ -156,4 +156,16 @@ transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
   {
     ADD_TRANSFORM(scale)
   }
+  
+  // Rigid Body Component -------------------------------------------------------------------------------------
+  reactphysics3d::BodyType RigidBodyComponent::ReactPhysicsBodyType(BodyType type)
+  {
+    switch (type)
+    {
+      case BodyType::Static: return reactphysics3d::BodyType::STATIC;
+      case BodyType::Kinametic: return reactphysics3d::BodyType::KINEMATIC;
+      case BodyType::Dynamic: return reactphysics3d::BodyType::DYNAMIC;
+      default: IK_ASSERT(false);
+    }
+  }
 } // namespace IKan
