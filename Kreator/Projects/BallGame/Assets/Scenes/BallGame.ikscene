@@ -40,6 +40,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 57219042666670176
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 1770782055032476683
     TagComponent:
       Tag: Cubec

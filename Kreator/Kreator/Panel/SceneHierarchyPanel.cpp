@@ -868,7 +868,6 @@ namespace Kreator
       // Materials
       {
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
-
         bool open = UI::PropertyGridHeader("Material", true, 3, 5);
 
         bool rightClicked = ImGui::IsItemClicked(ImGuiMouseButton_Right);
@@ -967,6 +966,247 @@ namespace Kreator
         } // property grid header
       }
     }, s_gearIcon, true);
+    
+    DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)
+                                      {
+      UI::BeginPropertyGrid();
+      
+      static const char* bodyTypeStrings[] = { "Static", "Kinametic", "Dynamic"};
+      int currentType = (int)rbc.bodyType;
+      UI::PropertyDropdown("Body Type", bodyTypeStrings, 3, &currentType);
+      rbc.bodyType = static_cast<RigidBodyComponent::BodyType>(currentType);
+      
+      UI::EndPropertyGrid();
+
+      {
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
+        if (UI::PropertyGridHeader("Constraints", true, 3, 5))
+        {
+          UI::BeginPropertyGrid();
+          
+          UI::Property("Allow Sleep", rbc.allowSleep);
+          UI::Property("Enable Gravity", rbc.enableGravity);
+          UI::Property("Linear Damping", rbc.linearDamping);
+          UI::Property("Angular Damping", rbc.angularDamping);
+          
+          bool lockX = rbc.angularAxisMove.x;
+          if (UI::Property("Allow Angular X", lockX))
+          {
+            rbc.angularAxisMove.x = lockX;
+          }
+          bool lockY = rbc.angularAxisMove.y;
+          if (UI::Property("Allow Angular Y", lockY))
+          {
+            rbc.angularAxisMove.y = lockY;
+          }
+          bool lockZ = rbc.angularAxisMove.z;
+          if (UI::Property("Allow Angular Z", lockZ))
+          {
+            rbc.angularAxisMove.z = lockZ;
+          }
+          UI::EndPropertyGrid();
+        }
+      }
+    }, s_gearIcon);
+    
+    DrawComponent<Box3DColliderComponent>("Box 3D Collider", entity, [&](Box3DColliderComponent& bcc)
+                                          {
+      UI::BeginPropertyGrid();
+      
+      // Physical
+      UI::Property("Size", bcc.size);
+      UI::Property("Position Offset", bcc.positionOffset);
+      auto quaternion = glm::eulerAngles(bcc.quaternionOffset);
+      UI::Property("Quaternion Offset", quaternion);
+      bcc.quaternionOffset = glm::quat(quaternion);
+      
+      UI::EndPropertyGrid();
+      
+      {
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
+        if (UI::PropertyGridHeader("Material", true, 3, 5))
+        {
+          ImGui::PushID("Cube Material");
+          UI::BeginPropertyGrid();
+          UI::Property("Friction Coefficient", bcc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+          UI::Property("Mass Density", bcc.massDensity, 0.1f, 0.0f, 10000.0f);
+          UI::Property("Bounciness", bcc.bounciness, 0.01f, 0.0f, 1.0f);
+          UI::EndPropertyGrid();
+          ImGui::PopID();
+        }
+      }
+    }, s_gearIcon);
+    
+    DrawComponent<SphereColliderComponent>("Sphere Collider", entity, [&](SphereColliderComponent& scc)
+                                           {
+      UI::BeginPropertyGrid();
+      
+      // Physical
+      UI::Property("Radius", scc.radius);
+      UI::Property("Position Offset", scc.positionOffset);
+      auto quaternion = glm::eulerAngles(scc.quaternionOffset);
+      UI::Property("Quaternion Offset", quaternion);
+      scc.quaternionOffset = glm::quat(quaternion);
+      
+      UI::EndPropertyGrid();
+      
+      {
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
+        if (UI::PropertyGridHeader("Material", true, 3, 5))
+        {
+          ImGui::PushID("Sphere Material");
+          UI::BeginPropertyGrid();
+          UI::Property("Friction Coefficient", scc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+          UI::Property("Mass Density", scc.massDensity, 0.1f, 0.0f, 10000.0f);
+          UI::Property("Bounciness", scc.bounciness, 0.01f, 0.0f, 1.0f);
+          UI::EndPropertyGrid();
+          ImGui::PopID();
+        }
+      }
+    }, s_gearIcon);
+    
+    DrawComponent<CapsuleColliderComponent>("Capsule Collider", entity, [&](CapsuleColliderComponent& ccc)
+                                            {
+      UI::BeginPropertyGrid();
+      
+      // Physical
+      UI::Property("Radius", ccc.radius);
+      UI::Property("height", ccc.height);
+      UI::Property("Position Offset", ccc.positionOffset);
+      auto quaternion = glm::eulerAngles(ccc.quaternionOffset);
+      UI::Property("Quaternion Offset", quaternion);
+      ccc.quaternionOffset = glm::quat(quaternion);
+      
+      UI::EndPropertyGrid();
+      
+      {
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
+        if (UI::PropertyGridHeader("Material", true, 3, 5))
+        {
+          ImGui::PushID("Capsue Material");
+          UI::BeginPropertyGrid();
+          UI::Property("Friction Coefficient", ccc.frictionCoefficient, 0.01, 0.0f, 1.0f);
+          UI::Property("Mass Density", ccc.massDensity, 0.1f, 0.0f, 10000.0f);
+          UI::Property("Bounciness", ccc.bounciness, 0.01f, 0.0f, 1.0f);
+          UI::EndPropertyGrid();
+          ImGui::PopID();
+        }
+      }
+    }, s_gearIcon);
+    
+    DrawComponent<JointComponent>("Joint", entity, [&](JointComponent& fjc)
+                                  {
+      UI::BeginPropertyGrid();
+      
+      DrawEntitySelector("Connected Entity", fjc.connectedEntity, fjc.connectedEntity);
+      
+#ifdef UseLocalSpace
+      UI::Property("Use world Space", fjc.isWorldSpace);
+#endif
+      UI::Property("Allow internal collision", fjc.isCollisionEnabled);
+      
+      int32_t selected = static_cast<int32_t>(fjc.type);
+      static std::vector<std::string> options = {"Fixed", "BallSocket", "Hinge", "Sldier"};
+      if (UI::PropertyDropdown("Type", options, (uint32_t)options.size(), &selected))
+      {
+        fjc.type = static_cast<JointComponent::Type>(selected);
+      }
+      
+      if (fjc.isWorldSpace)
+      {
+        UI::Property("World Anchor Point", fjc.worldAnchorPoint);
+      }
+      else
+      {
+        UI::Property("Local Anchor Point 1", fjc.localAnchorPoint1);
+        UI::Property("Local Anchor Point 2", fjc.localAnchorPoint2);
+      }
+      
+      if (fjc.type == IKan::JointComponent::Type::BallSocket)
+      {
+        UI::Property("Limit Cone", fjc.ballSocketData.coneLimit);
+        UI::SetTooltip("NOTE: Cone Axis is from Body 1 COM to Anchor Point");
+        if (fjc.ballSocketData.coneLimit)
+        {
+          auto rotation = glm::degrees(fjc.ballSocketData.coneAngle);
+          if (UI::Property("Cone Angle", rotation))
+          {
+            fjc.ballSocketData.coneAngle = glm::radians(rotation);
+          }
+        }
+      }
+      else if (fjc.type == IKan::JointComponent::Type::Hinge)
+      {
+        if (fjc.isWorldSpace)
+        {
+          UI::Property("World Anchor Axis", fjc.hingeData.worldAxis, 1.0f, 0.0f, 1.0f);
+        }
+        else
+        {
+          UI::Property("Local Anchor Axis 1", fjc.hingeData.localAxis1, 1.0f, 0.0f, 1.0f);
+          UI::Property("Local Anchor Axis 2", fjc.hingeData.localAxis2, 1.0f, 0.0f, 1.0f);
+        }
+        
+        UI::Property("Limit", fjc.hingeData.limit);
+        UI::Property("Motor", fjc.hingeData.motor);
+        if (fjc.hingeData.limit)
+        {
+          auto rotationMin = glm::degrees(fjc.hingeData.initMinAngleLimit);
+          if (UI::Property("Init Min Angle", rotationMin))
+          {
+            fjc.hingeData.initMinAngleLimit = glm::radians(rotationMin);
+          }
+          
+          auto rotationMax = glm::degrees(fjc.hingeData.initMaxAngleLimit);
+          if (UI::Property("Init Max Angle", rotationMax))
+          {
+            fjc.hingeData.initMaxAngleLimit = glm::radians(rotationMax);
+          }
+        }
+        
+        if (fjc.hingeData.motor)
+        {
+          auto rotation = glm::degrees(fjc.hingeData.initMotorSpeed);
+          if (UI::Property("Init Speed", rotation))
+          {
+            fjc.hingeData.initMotorSpeed = glm::radians(rotation);
+          }
+          UI::SetTooltip("Degree per seconds");
+          
+          UI::Property("Max Torque", fjc.hingeData.initMaxMotorTorque);
+          UI::SetTooltip("Newton-Meter");
+        }
+      }
+      
+      else if (fjc.type == IKan::JointComponent::Type::Slider)
+      {
+        if (fjc.isWorldSpace)
+        {
+          UI::Property("World Anchor Axis", fjc.sliderData.worldAxis, 1.0f, 0.0f, 1.0f);
+        }
+        else
+        {
+          UI::Property("Local Anchor Axis 1", fjc.sliderData.localAxis1, 1.0f, 0.0f, 1.0f);
+        }
+        
+        UI::Property("Limit", fjc.sliderData.limit);
+        UI::Property("Motor", fjc.sliderData.motor);
+        if (fjc.sliderData.limit)
+        {
+          UI::Property("Init Min Translation", fjc.sliderData.initMinTransLimit);
+          UI::Property("Init Min Translation", fjc.sliderData.initMaxTransLimit);
+        }
+        
+        if (fjc.sliderData.motor)
+        {
+          UI::Property("Init Speed", fjc.sliderData.initMotorSpeed);
+          UI::SetTooltip("Meter per seconds");
+          UI::Property("Max Force", fjc.sliderData.initMaxMotorForce);
+          UI::SetTooltip("Newton");
+        }
+      }
+      UI::EndPropertyGrid();
+    }, s_gearIcon);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
