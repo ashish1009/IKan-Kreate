@@ -619,7 +619,6 @@ if (!m_currentScene) return
   void KreatorLayer::ShowColliders()
   {
     IK_PERFORMANCE("KreatorLayer::ShowColliders");
-    RETURN_IF (m_sceneState != SceneState::Simulate)
     
     auto debugRenderer = m_currentScene->GetPhysicsDebugRenderer();
     auto triangle = debugRenderer.getTriangles();

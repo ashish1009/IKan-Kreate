@@ -986,6 +986,65 @@ namespace Kreator
         ImGui::Separator();
       }
 
+      if (!m_selectionContext.At(0).HasComponent<RigidBodyComponent>())
+      {
+        if (ImGui::MenuItem("Rigid Body"))
+        {
+          [[maybe_unused]] auto& rigidBodyComp = m_selectionContext.At(0).AddComponent<RigidBodyComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.At(0).HasComponent<Box3DColliderComponent>())
+      {
+        if (ImGui::MenuItem("Box 3D Collider"))
+        {
+          if (!m_selectionContext.At(0).HasComponent<RigidBodyComponent>())
+          {
+            m_selectionContext.At(0).AddComponent<RigidBodyComponent>();
+          }
+
+          [[maybe_unused]] auto& box3DColliderComp = m_selectionContext.At(0).AddComponent<Box3DColliderComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.At(0).HasComponent<SphereColliderComponent>())
+      {
+        if (ImGui::MenuItem("Sphere Collider"))
+        {
+          if (!m_selectionContext.At(0).HasComponent<RigidBodyComponent>())
+          {
+            m_selectionContext.At(0).AddComponent<RigidBodyComponent>();
+          }
+          [[maybe_unused]] auto& sphereColliderComp = m_selectionContext.At(0).AddComponent<SphereColliderComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.At(0).HasComponent<CapsuleColliderComponent>())
+      {
+        if (ImGui::MenuItem("Capsule Collider"))
+        {
+          if (!m_selectionContext.At(0).HasComponent<RigidBodyComponent>())
+          {
+            m_selectionContext.At(0).AddComponent<RigidBodyComponent>();
+          }
+          [[maybe_unused]] auto& capsuleColliderComp = m_selectionContext.At(0).AddComponent<CapsuleColliderComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+      if (!m_selectionContext.At(0).HasComponent<JointComponent>())
+      {
+        if (ImGui::MenuItem("Joint"))
+        {
+          if (!m_selectionContext.At(0).HasComponent<RigidBodyComponent>())
+          {
+            m_selectionContext.At(0).AddComponent<RigidBodyComponent>();
+          }
+          [[maybe_unused]] auto& jointComp = m_selectionContext.At(0).AddComponent<JointComponent>();
+          jointComp.worldAnchorPoint = m_selectionContext.At(0).GetTransform().Position();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+
       UI::EndPopup();
     }
   }

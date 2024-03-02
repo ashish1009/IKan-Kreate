@@ -117,7 +117,7 @@ namespace IKan
   {
     bool enable = true;
     glm::vec3 positionOffset;
-    glm::quat quaternionOffset;
+    glm::quat quaternionOffset = {0, 0, 0, 1};
     float frictionCoefficient = 0.2;
     float bounciness = 0.1;
     float massDensity = 1.0;
