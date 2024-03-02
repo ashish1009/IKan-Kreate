@@ -6,6 +6,7 @@
 //
 
 #include "PhysicsScene.hpp"
+#include "Physics/PhysicsJoint.hpp"
 #include "Scene/Scene.hpp"
 #include "Scene/Entity.hpp"
 #include "Scene/Components.hpp"
@@ -51,6 +52,7 @@ namespace IKan
   
   void PhysicsScene::AddBody(Entity entity)
   {
+    IK_PROFILE();
     auto& rbc = entity.GetComponent<RigidBodyComponent>();
     auto& tc = entity.GetComponent<TransformComponent>();
     
@@ -74,6 +76,7 @@ namespace IKan
   }
   void PhysicsScene::AddCollider(ColliderType type, Entity entity)
   {
+    IK_PROFILE();
     auto& rbc = entity.GetComponent<RigidBodyComponent>();
     auto& tc = entity.GetComponent<TransformComponent>();
 
@@ -181,6 +184,61 @@ namespace IKan
   }
   void PhysicsScene::CreateJoint(Entity entity)
   {
+    IK_PROFILE();
+    const auto& fjc = entity.GetComponent<JointComponent>();
+    Entity connectedEntity = m_scene->GetEntityWithUUID(fjc.connectedEntity);
     
+    const auto& rigidBodyComponent1 = entity.GetComponent<RigidBodyComponent>();
+    auto body1 = static_cast<RigidBody*>(rigidBodyComponent1.runtimeBody);
+    
+    IK_ASSERT(connectedEntity.HasComponent<RigidBodyComponent>());
+    const auto& rigidBodyComponent2 = connectedEntity.GetComponent<RigidBodyComponent>();
+    auto body2 = static_cast<RigidBody*>(rigidBodyComponent2.runtimeBody);
+    
+    PhysicsJoint joint(m_world, body1, body2, fjc.isWorldSpace, fjc.isCollisionEnabled);
+    
+    // Anchor point in world-space
+    Vector3 worldAnchorPoint({ fjc.worldAnchorPoint.x, fjc.worldAnchorPoint.y, fjc.worldAnchorPoint.z});
+    Vector3 localAnchorPoint1({ fjc.localAnchorPoint1.x, fjc.localAnchorPoint1.y, fjc.localAnchorPoint1.z});
+    Vector3 localAnchorPoint2({ fjc.localAnchorPoint2.x, fjc.localAnchorPoint2.y, fjc.localAnchorPoint2.z});
+    
+    joint.SetAnchors(worldAnchorPoint, localAnchorPoint1, localAnchorPoint2);
+    
+    switch (fjc.type)
+    {
+      case JointComponent::Type::Fixed:
+      {
+        joint.MakeFixed();
+        break;
+      }
+      case JointComponent::Type::BallSocket:
+      {
+        joint.MakeBallSocket(fjc.ballSocketData.coneLimit, fjc.ballSocketData.coneAngle);
+        break;
+      }
+      case JointComponent::Type::Hinge:
+      {
+        Vector3 worldAxis({ fjc.hingeData.worldAxis.x, fjc.hingeData.worldAxis.y, fjc.hingeData.worldAxis.z});
+        Vector3 localAxis1({ fjc.hingeData.localAxis1.x, fjc.hingeData.localAxis1.y, fjc.hingeData.localAxis1.z});
+        Vector3 localAxis2({ fjc.hingeData.localAxis2.x, fjc.hingeData.localAxis2.y, fjc.hingeData.localAxis2.z});
+        
+        joint.MakeHinge(worldAxis, localAxis1, localAxis2,
+                        fjc.hingeData.limit, fjc.hingeData.initMinAngleLimit, fjc.hingeData.initMaxAngleLimit,
+                        fjc.hingeData.motor, fjc.hingeData.initMotorSpeed, fjc.hingeData.initMaxMotorTorque);
+        break;
+      }
+        
+      case JointComponent::Type::Slider:
+      {
+        Vector3 worldAxis({ fjc.sliderData.worldAxis.x, fjc.sliderData.worldAxis.y, fjc.sliderData.worldAxis.z});
+        Vector3 localAxis1({ fjc.sliderData.localAxis1.x, fjc.sliderData.localAxis1.y, fjc.sliderData.localAxis1.z});
+        
+        joint.MakeSlider(worldAxis, localAxis1,
+                         fjc.sliderData.limit, fjc.sliderData.initMinTransLimit, fjc.sliderData.initMaxTransLimit,
+                         fjc.sliderData.motor, fjc.sliderData.initMotorSpeed, fjc.sliderData.initMaxMotorForce);
+      }
+      default:
+        break;
+    }
   }
 } // namespace IKan
