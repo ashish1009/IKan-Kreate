@@ -52,6 +52,22 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Creating {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
+    
+    m_registry.on_construct<RigidBodyComponent>().connect<&Scene::OnRigidBodyComponentConstruct>(this);
+    m_registry.on_destroy<RigidBodyComponent>().connect<&Scene::OnRigidBodyComponentDestroy>(this);
+    
+    m_registry.on_construct<Box3DColliderComponent>().connect<&Scene::OnBox3DColliderComponentConstruct>(this);
+    m_registry.on_destroy<Box3DColliderComponent>().connect<&Scene::OnBox3DColliderComponentDestroy>(this);
+    
+    m_registry.on_construct<SphereColliderComponent>().connect<&Scene::OnSphereColliderComponentConstruct>(this);
+    m_registry.on_destroy<SphereColliderComponent>().connect<&Scene::OnSphereColliderComponentDestroy>(this);
+    
+    m_registry.on_construct<CapsuleColliderComponent>().connect<&Scene::OnCapsuleColliderComponentConstruct>(this);
+    m_registry.on_destroy<CapsuleColliderComponent>().connect<&Scene::OnCapsuleColliderComponentDestroy>(this);
+    
+    m_registry.on_construct<JointComponent>().connect<&Scene::OnJointComponentConstruct>(this);
+    m_registry.on_destroy<JointComponent>().connect<&Scene::OnJointComponentDestroy>(this);
+    
   }
   
   Scene::~Scene()
@@ -298,7 +314,7 @@ namespace IKan
     
     CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<MeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
-
+    
     auto childIds = entity.Children();
     for (auto childId : childIds)
     {
@@ -376,7 +392,7 @@ namespace IKan
     
     entity.SetParentUUID(0);
   }
-
+  
   void Scene::ConvertToLocalSpace(Entity entity)
   {
     IK_PROFILE();
@@ -439,7 +455,7 @@ namespace IKan
     
     return transformComponent;
   }
-
+  
   void Scene::SetName(const std::string &name)
   {
     m_name = name;
@@ -479,7 +495,7 @@ namespace IKan
     m_useIrradiance = value;
     SceneRenderer::SetIrradianceFlag(m_useIrradiance);
   }
-
+  
   const std::string& Scene::GetName() const
   {
     return m_name;
@@ -540,9 +556,51 @@ namespace IKan
   {
     return m_useIrradiance;
   }
-
+  
   DirectionLight& Scene::GetDirectionLight()
   {
     return m_directionLight;
   }
+  
+  void Scene::OnRigidBodyComponentConstruct()
+  {
+    
+  }
+  void Scene::OnRigidBodyComponentDestroy()
+  {
+    
+  }
+  void Scene::OnBox3DColliderComponentConstruct()
+  {
+    
+  }
+  void Scene::OnBox3DColliderComponentDestroy()
+  {
+    
+  }
+  void Scene::OnSphereColliderComponentConstruct()
+  {
+    
+  }
+  void Scene::OnSphereColliderComponentDestroy()
+  {
+    
+  }
+  void Scene::OnCapsuleColliderComponentConstruct()
+  {
+    
+  }
+  void Scene::OnCapsuleColliderComponentDestroy()
+  {
+    
+  }
+  void Scene::OnJointComponentConstruct()
+  {
+    
+  }
+  void Scene::OnJointComponentDestroy()
+  {
+    
+  }
+
 } // namespace IKan

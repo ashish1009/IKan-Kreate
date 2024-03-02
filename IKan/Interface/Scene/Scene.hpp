@@ -209,6 +209,18 @@ namespace IKan
     ///   - isEditing: flag is editing
     void RenderScene(SceneRenderer& renderer, bool isEditing);
     
+    // Component creation and destroy callbacks
+    void OnRigidBodyComponentConstruct();
+    void OnRigidBodyComponentDestroy();
+    void OnBox3DColliderComponentConstruct();
+    void OnBox3DColliderComponentDestroy();
+    void OnSphereColliderComponentConstruct();
+    void OnSphereColliderComponentDestroy();
+    void OnCapsuleColliderComponentConstruct();
+    void OnCapsuleColliderComponentDestroy();
+    void OnJointComponentConstruct();
+    void OnJointComponentDestroy();
+    
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
     std::string m_name {};

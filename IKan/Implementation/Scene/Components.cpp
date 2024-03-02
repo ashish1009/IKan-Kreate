@@ -168,4 +168,10 @@ transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
       default: IK_ASSERT(false);
     }
   }
+  
+  // Collider common Data ----------------------------------------------------------------------------------
+  CommonColliderData::~CommonColliderData()
+  {
+    delete (Entity*)userData;
+  }
 } // namespace IKan

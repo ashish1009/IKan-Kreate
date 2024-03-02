@@ -12,6 +12,7 @@
 #include "Core/UUID.hpp"
 #include "Asset/Asset.hpp"
 #include "Renderer/MaterialAsset.hpp"
+#include "Scene/Entity.hpp"
 
 namespace IKan
 {
