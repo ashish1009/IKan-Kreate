@@ -142,6 +142,58 @@ namespace IKan
     float radius = 0.5f;
     float height = 1.0f;
   };
+  
+  struct BallSocketData
+  {
+    bool coneLimit = false;
+    float coneAngle = M_PI / 4;
+  };
+  
+  struct HingeData
+  {
+    glm::vec3 worldAxis = {0, 0, 0};
+    glm::vec3 localAxis1 = {0, 0, 0};
+    glm::vec3 localAxis2 = {0, 0, 0};
+    
+    bool limit = false;
+    float initMinAngleLimit = -M_PI / 4, initMaxAngleLimit = M_PI / 4;
+    
+    bool motor = false;
+    float initMotorSpeed = 0, initMaxMotorTorque = 0;
+  };
+  
+  struct SliderData
+  {
+    glm::vec3 worldAxis = {0, 0, 0};
+    glm::vec3 localAxis1 = {0, 0, 0};
+    
+    bool limit = false;
+    float initMinTransLimit = -2.0f, initMaxTransLimit = 2.0f;
+    
+    bool motor = false;
+    float initMotorSpeed = 0, initMaxMotorForce = 0;
+  };
+  
+  struct JointComponent
+  {
+    bool enable = true;
+    enum class Type
+    {
+      Fixed, BallSocket, Hinge, Slider
+    };
+    
+    UUID connectedEntity;
+    Type type = Type::Fixed;
+    bool isWorldSpace = true;
+    bool isCollisionEnabled = true;
+    glm::vec3 worldAnchorPoint = {0, 0, 0};
+    glm::vec3 localAnchorPoint1 = {0, 0, 0};
+    glm::vec3 localAnchorPoint2 = {0, 0, 0};
+    
+    BallSocketData ballSocketData;
+    HingeData hingeData;
+    SliderData sliderData;
+  };
 
   template<typename... Component>
   struct ComponentGroup
@@ -151,7 +203,7 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, TagComponent, TransformComponent, MeshComponent, RigidBodyComponent,
-  Box3DColliderComponent, SphereColliderComponent, CapsuleColliderComponent>;
+  ComponentGroup<IDComponent, TagComponent, TransformComponent, MeshComponent, 
+  RigidBodyComponent, Box3DColliderComponent, SphereColliderComponent, CapsuleColliderComponent, JointComponent>;
 
 } // namespace IKan
