@@ -394,6 +394,104 @@ namespace IKan {
           }
         }
       }
+      
+      // RigidBodyComponent -----------------------------------------------------------------------------------------
+      auto rigidBodyComponent = entity["RigidBodyComponent"];
+      if (rigidBodyComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<RigidBodyComponent>();
+        component.enable = rigidBodyComponent["Enable"].as<bool>();
+        component.bodyType = static_cast<RigidBodyComponent::BodyType>(rigidBodyComponent["BodyType"].as<uint32_t>());
+        component.linearDamping = rigidBodyComponent["LiniarDamping"].as<float>();
+        component.angularDamping = rigidBodyComponent["AngularDamping"].as<float>();
+        component.allowSleep = rigidBodyComponent["AllowSleep"].as<bool>();
+        component.enableGravity = rigidBodyComponent["EnableGravity"].as<bool>();
+        component.angularAxisMove = rigidBodyComponent["AngularAxisMove"].as<glm::vec3>();
+      }
+      
+      // Box3DColliderComponent -------------------------------------------------------------------------------------
+      auto box3DColliderComponent = entity["Box3DColliderComponent"];
+      if (box3DColliderComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<Box3DColliderComponent>();
+        component.enable = box3DColliderComponent["Enable"].as<bool>();
+        
+        component.size = box3DColliderComponent["Size"].as<glm::vec3>();
+        component.positionOffset = box3DColliderComponent["PositionOffset"].as<glm::vec3>();
+        component.quaternionOffset = glm::quat(box3DColliderComponent["QuaternionOffset"].as<glm::vec3>());
+        component.frictionCoefficient = box3DColliderComponent["FrictionCoefficient"].as<float>();
+        component.massDensity = box3DColliderComponent["MassDensity"].as<float>();
+        component.bounciness = box3DColliderComponent["Bounciness"].as<float>();
+      }
+      
+      // SphereColliderComponent ------------------------------------------------------------------------------------
+      auto sphereColliderComponent = entity["SphereColliderComponent"];
+      if (sphereColliderComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<SphereColliderComponent>();
+        component.enable = sphereColliderComponent["Enable"].as<bool>();
+        
+        component.radius = sphereColliderComponent["Radius"].as<float>();
+        component.positionOffset = sphereColliderComponent["PositionOffset"].as<glm::vec3>();
+        component.quaternionOffset = glm::quat(sphereColliderComponent["QuaternionOffset"].as<glm::vec3>());
+        component.frictionCoefficient = sphereColliderComponent["FrictionCoefficient"].as<float>();
+        component.massDensity = sphereColliderComponent["MassDensity"].as<float>();
+        component.bounciness = sphereColliderComponent["Bounciness"].as<float>();
+      }
+      
+      // CapsuleColliderComponent -----------------------------------------------------------------------------------
+      auto capsuleColliderComponent = entity["CapsuleColliderComponent"];
+      if (capsuleColliderComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<CapsuleColliderComponent>();
+        component.enable = capsuleColliderComponent["Enable"].as<bool>();
+        
+        component.radius = capsuleColliderComponent["Radius"].as<float>();
+        component.height = capsuleColliderComponent["Height"].as<float>();
+        component.positionOffset = capsuleColliderComponent["PositionOffset"].as<glm::vec3>();
+        component.quaternionOffset = glm::quat(capsuleColliderComponent["QuaternionOffset"].as<glm::vec3>());
+        component.frictionCoefficient = capsuleColliderComponent["FrictionCoefficient"].as<float>();
+        component.massDensity = capsuleColliderComponent["MassDensity"].as<float>();
+        component.bounciness = capsuleColliderComponent["Bounciness"].as<float>();
+      }
+      
+      // JointComponent ---------------------------------------------------------------------------------------------
+      auto jointComponent = entity["JointComponent"];
+      if (jointComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<JointComponent>();
+        component.enable = jointComponent["Enable"].as<bool>();
+        
+        component.connectedEntity = jointComponent["ConnectedEntity"].as<uint64_t>();
+        component.type = static_cast<JointComponent::Type>(jointComponent["Type"].as<uint32_t>());
+        component.isWorldSpace = jointComponent["IsWorldSpace"].as<bool>();
+        component.isCollisionEnabled = jointComponent["IsCollisionEnabled"].as<bool>();
+        component.worldAnchorPoint = jointComponent["WorldAnchorPoint"].as<glm::vec3>();
+        component.localAnchorPoint1 = jointComponent["LocalAnchorPoint1"].as<glm::vec3>();
+        component.localAnchorPoint2 = jointComponent["LocalAnchorPoint2"].as<glm::vec3>();
+        
+        component.ballSocketData.coneLimit = jointComponent["ConeLimit"].as<bool>();
+        component.ballSocketData.coneAngle = jointComponent["ConeAngle"].as<float>();
+        
+        component.hingeData.worldAxis = jointComponent["WorldAxis"].as<glm::vec3>();
+        component.hingeData.localAxis1 = jointComponent["LocalAxis1"].as<glm::vec3>();
+        component.hingeData.localAxis2 = jointComponent["LocalAxis2"].as<glm::vec3>();
+        component.hingeData.limit = jointComponent["Limit"].as<bool>();
+        component.hingeData.initMinAngleLimit = jointComponent["MinAngle"].as<float>();
+        component.hingeData.initMaxAngleLimit = jointComponent["MaxAngle"].as<float>();
+        component.hingeData.motor = jointComponent["Motor"].as<bool>();
+        component.hingeData.initMotorSpeed = jointComponent["Speed"].as<float>();
+        component.hingeData.initMaxMotorTorque = jointComponent["Torque"].as<float>();
+        
+        component.sliderData.worldAxis = jointComponent["SliderWorldAxis"].as<glm::vec3>();
+        component.sliderData.localAxis1 = jointComponent["SliderLocalAxis1"].as<glm::vec3>();
+        component.sliderData.limit = jointComponent["SliderLimit"].as<bool>();
+        component.sliderData.initMinTransLimit = jointComponent["SliderMinTranse"].as<float>();
+        component.sliderData.initMaxTransLimit = jointComponent["SliderMaxTranse"].as<float>();
+        component.sliderData.motor = jointComponent["SliderMotor"].as<bool>();
+        component.sliderData.initMotorSpeed = jointComponent["SliderSpeed"].as<float>();
+        component.sliderData.initMaxMotorForce = jointComponent["SliderForce"].as<float>();
+      }
     } // For each entity
   }
 } // namespace IKan
