@@ -577,45 +577,37 @@ namespace IKan
     return m_directionLight;
   }
   
-  void Scene::OnRigidBodyComponentConstruct()
+  void Scene::OnRigidBodyComponentConstruct(entt::registry& registry, entt::entity entity)
   {
-    
+    auto entityID = registry.get<IDComponent>(entity).ID;
+    IK_ASSERT(m_entityIDMap.find(entityID) != m_entityIDMap.end());
+    m_physicsScene->AddBody(m_entityIDMap.at(entityID));
   }
-  void Scene::OnRigidBodyComponentDestroy()
+  void Scene::OnRigidBodyComponentDestroy(entt::registry& registry, entt::entity entity)
   {
-    
   }
-  void Scene::OnBox3DColliderComponentConstruct()
+  void Scene::OnBox3DColliderComponentConstruct(entt::registry& registry, entt::entity entity)
   {
-    
   }
-  void Scene::OnBox3DColliderComponentDestroy()
+  void Scene::OnBox3DColliderComponentDestroy(entt::registry& registry, entt::entity entity)
   {
-    
   }
-  void Scene::OnSphereColliderComponentConstruct()
+  void Scene::OnSphereColliderComponentConstruct(entt::registry& registry, entt::entity entity)
   {
-    
   }
-  void Scene::OnSphereColliderComponentDestroy()
+  void Scene::OnSphereColliderComponentDestroy(entt::registry& registry, entt::entity entity)
   {
-    
   }
-  void Scene::OnCapsuleColliderComponentConstruct()
+  void Scene::OnCapsuleColliderComponentConstruct(entt::registry& registry, entt::entity entity)
   {
-    
   }
-  void Scene::OnCapsuleColliderComponentDestroy()
+  void Scene::OnCapsuleColliderComponentDestroy(entt::registry& registry, entt::entity entity)
   {
-    
   }
-  void Scene::OnJointComponentConstruct()
+  void Scene::OnJointComponentConstruct(entt::registry& registry, entt::entity entity)
   {
-    
   }
-  void Scene::OnJointComponentDestroy()
+  void Scene::OnJointComponentDestroy(entt::registry& registry, entt::entity entity)
   {
-    
   }
-
 } // namespace IKan

@@ -210,16 +210,16 @@ namespace IKan
     void RenderScene(SceneRenderer& renderer, bool isEditing);
     
     // Component creation and destroy callbacks
-    void OnRigidBodyComponentConstruct();
-    void OnRigidBodyComponentDestroy();
-    void OnBox3DColliderComponentConstruct();
-    void OnBox3DColliderComponentDestroy();
-    void OnSphereColliderComponentConstruct();
-    void OnSphereColliderComponentDestroy();
-    void OnCapsuleColliderComponentConstruct();
-    void OnCapsuleColliderComponentDestroy();
-    void OnJointComponentConstruct();
-    void OnJointComponentDestroy();
+    void OnRigidBodyComponentConstruct(entt::registry& registry, entt::entity entity);
+    void OnRigidBodyComponentDestroy(entt::registry& registry, entt::entity entity);
+    void OnBox3DColliderComponentConstruct(entt::registry& registry, entt::entity entity);
+    void OnBox3DColliderComponentDestroy(entt::registry& registry, entt::entity entity);
+    void OnSphereColliderComponentConstruct(entt::registry& registry, entt::entity entity);
+    void OnSphereColliderComponentDestroy(entt::registry& registry, entt::entity entity);
+    void OnCapsuleColliderComponentConstruct(entt::registry& registry, entt::entity entity);
+    void OnCapsuleColliderComponentDestroy(entt::registry& registry, entt::entity entity);
+    void OnJointComponentConstruct(entt::registry& registry, entt::entity entity);
+    void OnJointComponentDestroy(entt::registry& registry, entt::entity entity);
     
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
