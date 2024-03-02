@@ -76,14 +76,14 @@ IKan Library can be used separately independent to develop your own Editor/Game
   - Component
   - Scene
   - Serializer
+- Physics (ECS and Editor Panel)
+  - 3D Physics
 
 ### Detailed Road Map
 - Renderer
   - Shadow
 - ECS 
   - Script Manager
-- Physics (ECS and Editor Panel)
-  - 3D Physics
 
 ### TODO
 
@@ -160,6 +160,7 @@ Editor Application using IKan Library to create Games
   - v5.3.5.3 : Guizmo
   - v5.3.5.4 : Relationship connection
   - v6.0.6.0 : IBL
+  - v7.0.7.0 : Physics
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)

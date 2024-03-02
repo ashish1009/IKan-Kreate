@@ -90,6 +90,9 @@ if (!m_currentScene) return
     
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
+    // Increase Line render limit for Colliders
+    Renderer2D::AddLineData(10000);
+
     // Set debug renderer callback
     m_viewportRenderer.SetDebugRenderer([this]() { DebugRenderer(); });
     
@@ -122,6 +125,12 @@ if (!m_currentScene) return
     m_scaleToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
     m_gizmoModeTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/GuizmoMode.png"));
     
+    // Scene Button
+    m_playButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Play.png"));
+    m_stopButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Stop.png"));
+    m_simulateButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Simulate.png"));
+    m_pauseButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Pause.png"));
+
     // Camera Editor Icon
     m_XIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/X.png"));
     m_YIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Y.png"));

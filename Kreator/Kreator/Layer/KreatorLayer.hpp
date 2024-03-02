@@ -206,6 +206,8 @@ namespace Kreator
     void UI_UpdateGuizmo();
     /// This function renders the Guizmo toolbar
     void UI_GuizmoToolbar();
+    /// This function shows the Applicaton toolbar
+    void UI_SceneToolbar();
     /// This function renders the Camera toolbar
     void UI_CameraToolbar();
     /// This function handles the Drop content in viewport
@@ -282,6 +284,7 @@ namespace Kreator
       float distance = 0.0f;
     };
     std::vector<SelectedEntity> m_selectionContext;
+    Ref<Texture> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
 
     // View port Data ------------------------------------
     Viewport m_viewport;

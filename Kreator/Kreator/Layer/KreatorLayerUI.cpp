@@ -964,6 +964,7 @@ namespace Kreator
     
     if (m_sceneState != SceneState::Play)
     {
+      UI_SceneToolbar();
       UI_GuizmoToolbar();
       UI_CameraToolbar();
       UI_UpdateGuizmo();
@@ -1255,7 +1256,92 @@ namespace Kreator
     
     ImGui::End();
   }
-  
+  void KreatorLayer::UI_SceneToolbar()
+  {
+    UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+    UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
+    UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    UI::ScopedStyle disablePadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    
+    auto viewportStart = ImGui::GetItemRectMin();
+    
+    constexpr float buttonSize = 18.0f;
+    constexpr float edgeOffset = 4.0f;
+    constexpr float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
+    constexpr float numberOfButtons = 3.0f;
+    constexpr float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * numberOfButtons * 2.0f;
+    
+    ImGui::SetNextWindowPos(ImVec2(viewportStart.x + m_viewport.width / 2 - (numberOfButtons * buttonSize), viewportStart.y + edgeOffset));
+    ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
+    ImGui::SetNextWindowBgAlpha(0.0f);
+    ImGui::Begin("##scene_tool", 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking);
+    
+    // A hack to make icon panel appear smaller than minimum allowed by ImGui size
+    // Filling the background for the desired 26px height
+    constexpr float desiredHeight = 30.0f;
+    ImRect background = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, -(windowHeight - desiredHeight) / 2.0f);
+    ImGui::GetWindowDrawList()->AddRectFilled(background.Min, background.Max, IM_COL32(15, 15, 15, 127), 4.0f);
+    
+    ImGui::BeginVertical("##scene_tool_V", ImGui::GetContentRegionAvail());
+    ImGui::Spring();
+    ImGui::BeginHorizontal("##scene_tool_H", { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y });
+    ImGui::Spring();
+    {
+      UI::PushID();
+      auto playbackButton = [](const Ref<Texture>& icon, const ImColor& tint)
+      {
+        const float size = std::min((float)icon->GetHeight(), ImGui::GetWindowHeight() - 4.0f);
+        const float iconPadding = 0.0f;
+        const bool clicked = UI::InvisibleButton(ImVec2(size, size));
+        UI::DrawButtonImage(icon, tint,
+                            UI::ColorWithMultipliedValue(tint, 1.3f),
+                            UI::ColorWithMultipliedValue(tint, 0.8f),
+                            UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding));
+        
+        return clicked;
+      };
+      
+      // white buttons
+      const ImColor buttonTint = IM_COL32(192, 192, 192, 255);
+      
+      if (playbackButton(m_playButtonTex, buttonTint))
+      {
+        OnScenePlay();
+      }
+      
+      const ImColor tint = m_sceneState == SceneState::Simulate ? ImColor(1.0f, 0.75f, 0.75f, 1.0f) : buttonTint;
+      if (playbackButton(m_simulateButtonTex, tint))
+      {
+        if (m_sceneState == SceneState::Edit)
+        {
+          OnSceneStartSimulation();
+        }
+        else if (m_sceneState == SceneState::Simulate)
+        {
+          OnSceneStopSimulation();
+        }
+      }
+      
+      if (playbackButton(m_pauseButtonTex, buttonTint))
+      {
+        if (m_sceneState == SceneState::Simulate)
+        {
+          OnScenePause();
+        }
+        else if (m_sceneState == SceneState::Pause)
+        {
+          OnSceneResume();
+        }
+      }
+      UI::PopID();
+    }
+    ImGui::Spring();
+    ImGui::EndHorizontal();
+    ImGui::Spring();
+    ImGui::EndVertical();
+    
+    ImGui::End();
+  }
   void KreatorLayer::UI_CameraToolbar()
   {
     UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));

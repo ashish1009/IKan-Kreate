@@ -97,7 +97,11 @@ namespace IKan
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& camera, SceneRenderer& renderer)
   {
     IK_PERFORMANCE("Scene::OnRenderSimulation");
-    IK_ASSERT(false);
+    
+    // Render 3D Scene
+    renderer.BeginScene({ camera, camera.GetPosition(), camera.GetViewMatrix(), camera.GetNearClip(), camera.GetFarClip(), camera.GetVerticalFOV()}, m_directionLight);
+    RenderScene(renderer, false);
+    renderer.EndScene();
   }
   void Scene::RenderScene(SceneRenderer& renderer, bool isEditing)
   {
@@ -127,22 +131,24 @@ namespace IKan
   void Scene::OnRuntimeStart()
   {
     IK_PROFILE();
-    IK_ASSERT(false);
+    m_physicsScene = CreateRef<PhysicsScene>(m_physicsSettings, this);
+    ClearSelectedEntity();
   }
   void Scene::OnRuntimeStop()
   {
     IK_PROFILE();
-    IK_ASSERT(false);
+    m_physicsScene.reset();
   }
   void Scene::OnSimulationStart()
   {
     IK_PROFILE();
-    IK_ASSERT(false);
+    m_physicsScene = CreateRef<PhysicsScene>(m_physicsSettings, this);
+    ClearSelectedEntity();
   }
   void Scene::OnSimulationStop()
   {
     IK_PROFILE();
-    IK_ASSERT(false);
+    m_physicsScene.reset();
   }
   
   void Scene::OnClose()
