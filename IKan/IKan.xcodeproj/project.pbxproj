@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		B2000A5C2B9330F10017266F /* PhysicsScene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A5A2B9330F10017266F /* PhysicsScene.cpp */; };
 		B2000A5D2B9330F10017266F /* PhysicsScene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A5B2B9330F10017266F /* PhysicsScene.hpp */; };
+		B2000A652B9335820017266F /* ContactListener.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A632B9335820017266F /* ContactListener.cpp */; };
+		B2000A662B9335820017266F /* ContactListener.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A642B9335820017266F /* ContactListener.hpp */; };
 		B248B9072B8338BA00B9EC40 /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9052B8338BA00B9EC40 /* Asset.cpp */; };
 		B248B9082B8338BA00B9EC40 /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9062B8338BA00B9EC40 /* Asset.hpp */; };
 		B248B90C2B833BA000B9EC40 /* UUID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B90A2B833BA000B9EC40 /* UUID.cpp */; };
@@ -204,6 +206,8 @@
 /* Begin PBXFileReference section */
 		B2000A5A2B9330F10017266F /* PhysicsScene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsScene.cpp; sourceTree = "<group>"; };
 		B2000A5B2B9330F10017266F /* PhysicsScene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsScene.hpp; sourceTree = "<group>"; };
+		B2000A632B9335820017266F /* ContactListener.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContactListener.cpp; sourceTree = "<group>"; };
+		B2000A642B9335820017266F /* ContactListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContactListener.hpp; sourceTree = "<group>"; };
 		B248B9052B8338BA00B9EC40 /* Asset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Asset.cpp; sourceTree = "<group>"; };
 		B248B9062B8338BA00B9EC40 /* Asset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Asset.hpp; sourceTree = "<group>"; };
 		B248B90A2B833BA000B9EC40 /* UUID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UUID.cpp; sourceTree = "<group>"; };
@@ -413,6 +417,8 @@
 			isa = PBXGroup;
 			children = (
 				B2000A5B2B9330F10017266F /* PhysicsScene.hpp */,
+				B2000A632B9335820017266F /* ContactListener.cpp */,
+				B2000A642B9335820017266F /* ContactListener.hpp */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -1001,6 +1007,7 @@
 				B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */,
 				B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */,
 				B2ED607F2B750336007A7F36 /* Renderer2D.hpp in Headers */,
+				B2000A662B9335820017266F /* ContactListener.hpp in Headers */,
 				B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */,
 				B248B9552B84A69E00B9EC40 /* EditorConsoleSink.hpp in Headers */,
 				B2ED5CCA2B7346AC007A7F36 /* Timer.hpp in Headers */,
@@ -1180,6 +1187,7 @@
 				B28CDFC02B85FD0B0075DE7D /* Components.cpp in Sources */,
 				B2ED5E8C2B7498FF007A7F36 /* OpenGLRendererAPI.cpp in Sources */,
 				B2ED60852B7510DE007A7F36 /* AssetPathManager.cpp in Sources */,
+				B2000A652B9335820017266F /* ContactListener.cpp in Sources */,
 				B2ED5E342B73A811007A7F36 /* MacWindow.cpp in Sources */,
 				B28CDFC42B861D030075DE7D /* SceneSerializer.cpp in Sources */,
 				B2C0B71F2B7CDEE30015A277 /* FixedCamera.cpp in Sources */,
