@@ -18,6 +18,23 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Physics, "Creating Physics Scene");
     IK_LOG_TRACE(LogModule::Physics, "  Gravity {0} | {1} | {2}", setting.gravity.x, setting.gravity.y, setting.gravity.z);
+    
+    // Create the world settings
+    PhysicsWorld::WorldSettings settings;
+    settings.defaultVelocitySolverNbIterations = m_settings.solverVelocityIterations;
+    settings.defaultPositionSolverNbIterations = m_settings.solverPositionIterations;
+    settings.isSleepingEnabled = m_settings.isAllowSleep;
+    settings.gravity = Vector3(m_settings.gravity.x, m_settings.gravity.y, m_settings.gravity.z);
+    
+    // Create the physics world with your settings
+    m_world = m_common.createPhysicsWorld(settings);
+    
+    // Debug Renderer
+    m_world->setIsDebugRenderingEnabled(true);
+    
+    // Get a reference to the debug renderer
+    DebugRenderer& debugRenderer = m_world->getDebugRenderer();
+    debugRenderer.setIsDebugItemDisplayed(DebugRenderer::DebugItem::COLLISION_SHAPE, true);
   }
   
   PhysicsScene::~PhysicsScene()
