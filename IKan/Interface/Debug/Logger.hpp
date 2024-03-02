@@ -27,6 +27,7 @@ f(Asset) \
 f(Project) \
 f(Scene) f(SceneSerializer) \
 f(PanelManager) f(EditorConsolePanel)\
+f(Physics) \
   
   /// Generates enum with elements from above MACRO. Also creates an array named "logModuleString[]" that stores all
   /// the element of enum as const char* (string)

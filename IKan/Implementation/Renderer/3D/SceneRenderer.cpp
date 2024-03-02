@@ -26,6 +26,7 @@ namespace IKan
 
   void SceneRenderer::Initialize()
   {
+    IK_PROFILE();
     s_colorMaterial = Material::Create(CoreAsset("Shaders/ColorShader.glsl"), "Color Shader");
 
     s_finalImageShader = ShaderFactory::Create(CoreAsset("Shaders/HdrBloomShader.glsl"));
@@ -37,6 +38,7 @@ namespace IKan
   
   void SceneRenderer::Shutdown()
   {
+    IK_PROFILE();
     s_colorMaterial.reset();
     s_finalImageShader.reset();
     s_equiractangularToCubemapShader.reset();
