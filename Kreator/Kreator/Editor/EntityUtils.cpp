@@ -31,8 +31,23 @@ namespace Kreator::ECS_Utils
       {
         newEntity = scene->CreateEntity(name);
         std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
+        
         auto& mc = newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
         mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
+        
+        newEntity.AddComponent<RigidBodyComponent>();
+        if (name == "Cube")
+        {
+          newEntity.AddComponent<Box3DColliderComponent>();
+        }
+        else if (name == "Sphere")
+        {
+          newEntity.AddComponent<SphereColliderComponent>();
+        }
+        else if (name == "Cylinder")
+        {
+          newEntity.AddComponent<CapsuleColliderComponent>();
+        }
       }
     };
     
