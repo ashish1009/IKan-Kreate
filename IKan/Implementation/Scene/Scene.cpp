@@ -585,6 +585,9 @@ namespace IKan
   }
   void Scene::OnRigidBodyComponentDestroy(entt::registry& registry, entt::entity entity)
   {
+    auto entityID = registry.get<IDComponent>(entity).ID;
+    IK_ASSERT(m_entityIDMap.find(entityID) != m_entityIDMap.end());
+    m_physicsScene->DestroyBody(m_entityIDMap.at(entityID));
   }
   void Scene::OnBox3DColliderComponentConstruct(entt::registry& registry, entt::entity entity)
   {

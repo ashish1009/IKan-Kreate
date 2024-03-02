@@ -48,6 +48,9 @@ namespace IKan
     /// This function adds the rigid body in physics scene
     /// - Parameter entity: Entity
     void AddBody(Entity entity);
+    /// This function adds the rigid body in physics scene
+    /// - Parameter entity: Entity
+    void DestroyBody(Entity entity);
     /// This function adds the collider in physics scene
     /// - Parameters:
     ///   - type: collder type

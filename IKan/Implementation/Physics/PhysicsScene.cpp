@@ -74,6 +74,13 @@ namespace IKan
     body->setIsAllowedToSleep(rbc.allowSleep);
     body->setAngularLockAxisFactor({rbc.angularAxisMove.x, rbc.angularAxisMove.y, rbc.angularAxisMove.z});
   }
+  void PhysicsScene::DestroyBody(Entity entity)
+  {
+    IK_PROFILE();
+    auto& rbc = entity.GetComponent<RigidBodyComponent>();
+    RigidBody* body = (RigidBody*)rbc.runtimeBody;
+    m_world->destroyRigidBody(body);
+  }
   void PhysicsScene::AddCollider(ColliderType type, Entity entity)
   {
     IK_PROFILE();
