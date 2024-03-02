@@ -88,6 +88,7 @@ namespace IKan
   void Scene::OnUpdateRuntime(TimeStep ts)
   {
     IK_PERFORMANCE("Scene::OnUpdateRuntime");
+    m_physicsScene->OnUpdate(ts);
   }
   
   void Scene::OnRuntimeEventHandler(Event& event)
@@ -469,6 +470,11 @@ namespace IKan
     transformComponent.UpdateRotation(rotation);
     
     return transformComponent;
+  }
+  
+  const reactphysics3d::DebugRenderer& Scene::GetPhysicsDebugRenderer() const
+  {
+    return m_physicsScene->GetDebugRenderer();
   }
   
   void Scene::SetName(const std::string &name)

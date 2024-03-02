@@ -536,7 +536,12 @@ if (!m_currentScene) return
         if (m_showCameraAxis)
         {
           RenderCameraAxis();
-        }        
+        }
+        
+        if (m_showColliders)
+        {
+          ShowColliders();
+        }
       }
       Renderer2D::EndBatch();
 
@@ -608,6 +613,22 @@ if (!m_currentScene) return
     if (!m_editorCamera.IsFront())
     {
       Renderer2D::DrawLine(ZMin, ZMax, ZCol);
+    }
+  }
+  
+  void KreatorLayer::ShowColliders()
+  {
+    IK_PERFORMANCE("KreatorLayer::ShowColliders");
+    RETURN_IF (m_sceneState != SceneState::Simulate)
+    
+    auto debugRenderer = m_currentScene->GetPhysicsDebugRenderer();
+    auto triangle = debugRenderer.getTriangles();
+    
+    for (auto i = 0; i < debugRenderer.getNbTriangles(); i++)
+    {
+      Renderer2D::DrawLine({triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, {triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z}, m_colliderColor);
+      Renderer2D::DrawLine({triangle[i].point2.x, triangle[i].point2.y, triangle[i].point2.z}, {triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, m_colliderColor);
+      Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, m_colliderColor);
     }
   }
   

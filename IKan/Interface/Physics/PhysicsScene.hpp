@@ -45,6 +45,10 @@ namespace IKan
     /// This destructor destroy the physics scene
     ~PhysicsScene();
     
+    /// This function handles the physics update
+    /// - Parameter ts: time step
+    void OnUpdate(TimeStep ts);
+
     /// This function adds the rigid body in physics scene
     /// - Parameter entity: Entity
     void AddBody(Entity entity);
@@ -59,6 +63,9 @@ namespace IKan
     /// This function creates new joint in the entity
     /// - Parameter entity: entity
     void CreateJoint(Entity entity);
+
+    /// This function returns the physics Debug renderer
+    const reactphysics3d::DebugRenderer& GetDebugRenderer() const;
 
   private:
     PhysicsSettings m_settings;

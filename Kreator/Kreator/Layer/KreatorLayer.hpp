@@ -105,6 +105,8 @@ namespace Kreator
     void RenderRelationshipConnection();
     /// This function renders the camera A
     void RenderCameraAxis();
+    /// This function renders the debug Colliders
+    void ShowColliders();
 
     /// This function returns the Imguizmo Snap value
     float GetSnapValue();
@@ -141,7 +143,7 @@ namespace Kreator
     /// This function Opens the scene from metadata
     /// - Parameter assetMetadata: metadata
     void OpenScene(const AssetMetadata& assetMetadata);
-
+    
     /// This function handle scene play
     void OnScenePlay();
     /// This function handle scene Stop
@@ -224,9 +226,11 @@ namespace Kreator
     bool m_renderSystemInfo {true};
     bool m_showRelationshipConnection {true};
     bool m_showCameraAxis {true};
+    bool m_showColliders {true};
 
     // Debug renderer colors -----------------------------
     glm::vec4 m_relationshipColor = {0.4, 0.4, 0.4, 0.4};
+    glm::vec4 m_colliderColor = {0.1, 0.6, 0.3, 0.7};
 
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};

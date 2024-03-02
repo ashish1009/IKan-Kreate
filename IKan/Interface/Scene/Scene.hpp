@@ -128,6 +128,10 @@ namespace IKan
     /// - Parameter entity: enitty handle
     TransformComponent GetWorldSpaceTransform(Entity entity);
     
+    // Physics Wrapeprs ---------------------------------------------------------------------------------------------
+    /// This function returns the physics Debug renderer
+    const reactphysics3d::DebugRenderer& GetPhysicsDebugRenderer() const;
+
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
     /// - Parameter name: scene name

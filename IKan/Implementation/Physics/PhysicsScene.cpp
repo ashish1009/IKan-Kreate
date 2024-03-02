@@ -50,6 +50,41 @@ namespace IKan
     m_common.destroyPhysicsWorld(m_world);
   }
   
+  void PhysicsScene::OnUpdate(TimeStep ts)
+  {
+    IK_PERFORMANCE("PhysicsScene::OnUpdate");
+    // Change the number of iterations of the velocity solver
+    m_world->setNbIterationsVelocitySolver(15);
+    // Change the number of iterations of the position solver
+    m_world->setNbIterationsPositionSolver(8);
+    
+    // Update the Dynamics world with a constant time step
+    m_world->update(ts);
+    
+    // Get Transform
+    auto view = m_scene->GetAllEntitiesWith<RigidBodyComponent>();
+    for (auto entityHandle : view)
+    {
+      Entity entity = { entityHandle, m_scene };
+      
+      auto& rbc = entity.GetComponent<RigidBodyComponent>();
+      if (rbc.bodyType == RigidBodyComponent::BodyType::Dynamic or rbc.bodyType == RigidBodyComponent::BodyType::Kinametic)
+      {
+        auto& tc = entity.GetComponent<TransformComponent>();
+        RigidBody* body = (RigidBody*)rbc.runtimeBody;
+        if (body != nullptr)
+        {
+          const auto& tramsform = body->getTransform();
+          tc.UpdatePosition({tramsform.getPosition().x, tramsform.getPosition().y, tramsform.getPosition().z});
+          
+          glm::quat q(tramsform.getOrientation().w, tramsform.getOrientation().x, tramsform.getOrientation().y, tramsform.getOrientation().z);
+          const glm::vec3 angles = glm::eulerAngles(q);
+          tc.UpdateRotation(angles);
+        }
+      } // if (rb2d.type == b2_dynamicBody or rb2d.type == b2_kinematicBody)
+    } // for (auto e : view)
+  }
+  
   void PhysicsScene::AddBody(Entity entity)
   {
     IK_PROFILE();
@@ -248,4 +283,10 @@ namespace IKan
         break;
     }
   }
+  
+  const DebugRenderer& PhysicsScene::GetDebugRenderer() const
+  {
+    return m_world->getDebugRenderer();
+  }
+
 } // namespace IKan

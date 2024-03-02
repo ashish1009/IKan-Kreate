@@ -745,6 +745,7 @@ namespace Kreator
         ImGui::MenuItem("Show System Info", nullptr, &m_renderSystemInfo);
         ImGui::MenuItem("Show Relationship Connection", nullptr, &m_showRelationshipConnection);
         ImGui::MenuItem("Show Camera Axis", nullptr, &m_showCameraAxis);
+        ImGui::MenuItem("Show Collider", nullptr, &m_showColliders);
       });
       
       UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
@@ -1092,6 +1093,11 @@ namespace Kreator
       if (m_showRelationshipConnection)
       {
         UI::PropertyColor("Connection Color", m_relationshipColor);
+      }
+      UI::Property("Show Collider ", m_showColliders);
+      if (m_showColliders)
+      {
+        UI::PropertyColor("Collider Color", m_colliderColor);
       }
       
       UI::EndPropertyGrid();
