@@ -24,6 +24,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 9402355752634732605
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 1299076476545351009
     TagComponent:
       Tag: Blue Mesh
@@ -42,7 +58,7 @@ Entities:
         0: 57219042666670176
     RigidBodyComponent:
       Enable: true
-      BodyType: 0
+      BodyType: 2
       LiniarDamping: 0
       AngularDamping: 0
       AllowSleep: true
@@ -72,6 +88,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 18340628829998291222
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 3680768160732373295
     TagComponent:
       Tag: Cubee
@@ -88,6 +120,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 18340628829998291222
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 3772482211849236384
     TagComponent:
       Tag: Green Mesh
@@ -109,6 +157,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 18340628829998291222
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 7420744135819634013
     TagComponent:
       Tag: Red Mesh
@@ -125,6 +189,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 9402355752634732605
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 10068357727972918772
     TagComponent:
       Tag: Cubef
@@ -141,6 +221,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 18340628829998291222
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 10264393408535488441
     TagComponent:
       Tag: Cubeb
@@ -157,6 +253,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 18340628829998291222
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 12514459389810633182
     TagComponent:
       Tag: Cubed
@@ -173,6 +285,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 18340628829998291222
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 14967937651031371802
     TagComponent:
       Tag: Cube
@@ -189,6 +317,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 57219042666670176
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 17671997974037504265
     TagComponent:
       Tag: Cube2
@@ -205,6 +349,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 9402355752634732605
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 17832240695483205304
     TagComponent:
       Tag: Cubea
@@ -221,6 +381,22 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 18340628829998291222
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 17877783016366768251
     TagComponent:
       Tag: Cube
@@ -237,3 +413,19 @@ Entities:
       TilingFactor: 1
       MaterialTable:
         0: 13269400347190587610
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1

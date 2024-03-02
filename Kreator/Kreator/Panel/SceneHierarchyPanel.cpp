@@ -849,7 +849,7 @@ namespace Kreator
         }
       }
       
-    }, s_gearIcon, true, false);
+    }, s_gearIcon, false, false);
     
     DrawComponent<MeshComponent>("Mesh", entity, [&](MeshComponent& smc)
                                  {
@@ -965,7 +965,7 @@ namespace Kreator
           UI::PropertyGridHeaderEnd();
         } // property grid header
       }
-    }, s_gearIcon, true);
+    }, s_gearIcon);
     
     DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)
                                       {
@@ -980,7 +980,7 @@ namespace Kreator
 
       {
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
-        if (UI::PropertyGridHeader("Constraints", true, 3, 5))
+        if (UI::PropertyGridHeader("Constraints", false, 3, 5))
         {
           UI::BeginPropertyGrid();
           
@@ -1005,6 +1005,7 @@ namespace Kreator
             rbc.angularAxisMove.z = lockZ;
           }
           UI::EndPropertyGrid();
+          UI::PropertyGridHeaderEnd();
         }
       }
     }, s_gearIcon);
@@ -1024,7 +1025,7 @@ namespace Kreator
       
       {
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
-        if (UI::PropertyGridHeader("Material", true, 3, 5))
+        if (UI::PropertyGridHeader("Material", false, 3, 5))
         {
           ImGui::PushID("Cube Material");
           UI::BeginPropertyGrid();
@@ -1033,6 +1034,7 @@ namespace Kreator
           UI::Property("Bounciness", bcc.bounciness, 0.01f, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
+          UI::PropertyGridHeaderEnd();
         }
       }
     }, s_gearIcon);
@@ -1052,7 +1054,7 @@ namespace Kreator
       
       {
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
-        if (UI::PropertyGridHeader("Material", true, 3, 5))
+        if (UI::PropertyGridHeader("Material", false, 3, 5))
         {
           ImGui::PushID("Sphere Material");
           UI::BeginPropertyGrid();
@@ -1061,6 +1063,7 @@ namespace Kreator
           UI::Property("Bounciness", scc.bounciness, 0.01f, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
+          UI::PropertyGridHeaderEnd();
         }
       }
     }, s_gearIcon);
@@ -1081,7 +1084,7 @@ namespace Kreator
       
       {
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
-        if (UI::PropertyGridHeader("Material", true, 3, 5))
+        if (UI::PropertyGridHeader("Material", false, 3, 5))
         {
           ImGui::PushID("Capsue Material");
           UI::BeginPropertyGrid();
@@ -1090,6 +1093,7 @@ namespace Kreator
           UI::Property("Bounciness", ccc.bounciness, 0.01f, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
+          UI::PropertyGridHeaderEnd();
         }
       }
     }, s_gearIcon);
