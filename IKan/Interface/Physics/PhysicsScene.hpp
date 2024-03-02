@@ -49,25 +49,14 @@ namespace IKan
     /// - Parameter ts: time step
     void OnUpdate(TimeStep ts);
 
-    /// This function adds the rigid body in physics scene
-    /// - Parameter entity: Entity
-    void AddBody(Entity entity);
-    /// This function adds the rigid body in physics scene
-    /// - Parameter entity: Entity
-    void DestroyBody(Entity entity);
-    /// This function adds the collider in physics scene
-    /// - Parameters:
-    ///   - type: collder type
-    ///   - body: body pointer
-    void AddCollider(ColliderType type, Entity entity);
-    /// This function creates new joint in the entity
-    /// - Parameter entity: entity
-    void CreateJoint(Entity entity);
-
     /// This function returns the physics Debug renderer
     const reactphysics3d::DebugRenderer& GetDebugRenderer() const;
 
   private:
+    /// This function creates new joint in the entity
+    /// - Parameter entity: entity
+    void CreateJoint(Entity entity);
+
     PhysicsSettings m_settings;
     
     reactphysics3d::PhysicsCommon m_common;

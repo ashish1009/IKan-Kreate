@@ -68,6 +68,15 @@ Assets:
   - Handle: 3483877028
     FilePath: Textures/Pbr/bog/bog_preview.jpg
     Type: Image
+  - Handle: 57219042666670176
+    FilePath: Materials/Cube#1.ikmat
+    Type: Material
+  - Handle: 9402355752634732605
+    FilePath: Materials/Cube2#10.ikmat
+    Type: Material
+  - Handle: 13269400347190587610
+    FilePath: Materials/Cube#12.ikmat
+    Type: Material
   - Handle: 18340628829998291222
     FilePath: Materials/Cube Center#4.ikmat
     Type: Material

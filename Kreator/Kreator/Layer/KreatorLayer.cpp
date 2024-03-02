@@ -230,14 +230,6 @@ if (!m_currentScene) return
         m_editorScene->OnUpdateEditor();
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
-        // Hover Mesh
-        {
-          if (m_viewport.IsMouseSpaceInViewport())
-          {
-            
-          }
-        }
-
         // Save Scene Auto
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
         {

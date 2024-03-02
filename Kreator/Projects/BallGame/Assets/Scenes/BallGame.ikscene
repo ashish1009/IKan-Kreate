@@ -23,10 +23,10 @@ Entities:
       MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
-        0: 444052761
+        0: 9402355752634732605
   - Entity: 1299076476545351009
     TagComponent:
-      Tag: Cube
+      Tag: Blue Mesh
     Parent: 0
     Children:
       - Handle: 14967937651031371802
@@ -39,7 +39,7 @@ Entities:
       MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
-        0: 444052761
+        0: 57219042666670176
   - Entity: 1770782055032476683
     TagComponent:
       Tag: Cubec
@@ -74,7 +74,7 @@ Entities:
         0: 18340628829998291222
   - Entity: 3772482211849236384
     TagComponent:
-      Tag: Cube Center
+      Tag: Green Mesh
     Parent: 0
     Children:
       - Handle: 10264393408535488441
@@ -95,7 +95,7 @@ Entities:
         0: 18340628829998291222
   - Entity: 7420744135819634013
     TagComponent:
-      Tag: Cube1
+      Tag: Red Mesh
     Parent: 0
     Children:
       - Handle: 17671997974037504265
@@ -108,7 +108,7 @@ Entities:
       MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
-        0: 444052761
+        0: 9402355752634732605
   - Entity: 10068357727972918772
     TagComponent:
       Tag: Cubef
@@ -172,7 +172,7 @@ Entities:
       MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
-        0: 444052761
+        0: 57219042666670176
   - Entity: 17671997974037504265
     TagComponent:
       Tag: Cube2
@@ -188,7 +188,7 @@ Entities:
       MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
-        0: 444052761
+        0: 9402355752634732605
   - Entity: 17832240695483205304
     TagComponent:
       Tag: Cubea
@@ -212,7 +212,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [0.300000012, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -220,4 +220,4 @@ Entities:
       MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
-        0: 444052761
+        0: 13269400347190587610
