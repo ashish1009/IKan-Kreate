@@ -13,6 +13,7 @@
 #include "Core/TimeStep.hpp"
 #include "Camera/EditorCamera.hpp"
 #include "Renderer/SceneRenderer.hpp"
+#include "Physics/PhysicsScene.hpp"
 
 namespace IKan
 {
