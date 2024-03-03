@@ -259,7 +259,7 @@ namespace Kreator
     PanelManager m_panels;
     EditorCamera m_editorCamera;
     
-    Ref<Texture> m_XIcon, m_YIcon, m_ZIcon;
+    Ref<Texture> m_XIcon, m_YIcon, m_ZIcon, m_cameraIcon;
     enum class FolderExplorerAction
     {
       None, NewPreoject, OpenProject, SaveScene, OpenScene

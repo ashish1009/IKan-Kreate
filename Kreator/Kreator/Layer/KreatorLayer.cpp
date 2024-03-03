@@ -135,6 +135,7 @@ if (!m_currentScene) return
     m_XIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/X.png"));
     m_YIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Y.png"));
     m_ZIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Z.png"));
+    m_cameraIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Camera.png"));
   }
   
   KreatorLayer::~KreatorLayer()

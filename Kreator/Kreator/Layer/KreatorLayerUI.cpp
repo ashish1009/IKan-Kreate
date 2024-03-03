@@ -746,6 +746,7 @@ namespace Kreator
         ImGui::MenuItem("Show Relationship Connection", nullptr, &m_showRelationshipConnection);
         ImGui::MenuItem("Show Camera Axis", nullptr, &m_showCameraAxis);
         ImGui::MenuItem("Show Collider", nullptr, &m_showColliders);
+        ImGui::MenuItem("Show Mini viewport", nullptr, &m_showMiniViewport);
       });
       
       UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
@@ -1101,6 +1102,8 @@ namespace Kreator
         UI::PropertyColor("Collider Color", m_colliderColor);
       }
       
+      UI::Property("Mini Viewport", m_showMiniViewport);
+
       UI::EndPropertyGrid();
       UI::PropertyGridHeaderEnd();
     }
@@ -1354,7 +1357,7 @@ namespace Kreator
     const float buttonSize = 18.0f;
     const float edgeOffset = 4.0f;
     const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
-    const float numberOfButtons = 3.0f;
+    const float numberOfButtons = 4.0f;
     const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
     
     ImGui::SetNextWindowPos(ImVec2(viewportStart.x + ImGui::GetContentRegionAvail().x - windowWidth - edgeOffset, viewportStart.y + edgeOffset));
@@ -1398,6 +1401,14 @@ namespace Kreator
       if (cameraButton(m_ZIcon, UI::Color::TextBrighter))
       {
         m_editorCamera.SetFront();
+      }
+      
+      static const ImColor SelectedGizmoButtonColor = UI::Color::Accent;
+      static const ImColor UnselectedGizmoButtonColor = UI::Color::TextBrighter;
+      ImColor buttonTint = m_showMiniViewport ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
+      if (cameraButton(m_cameraIcon, UI::Color::TextBrighter))
+      {
+        m_showMiniViewport = m_showMiniViewport ? false : true;
       }
     }
     
