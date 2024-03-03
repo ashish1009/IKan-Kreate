@@ -913,7 +913,6 @@ if (!m_currentScene) return
       Entity cubeEntity = m_currentScene->CreateEntity("Cube");
       auto& mc = cubeEntity.AddComponent<MeshComponent>();
       mc.mesh = AssetManager::GetAsset<Mesh>(DefaultEntityMesh)->handle;
-      mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
       cubeEntity.AddComponent<RigidBodyComponent>();
       cubeEntity.AddComponent<Box3DColliderComponent>();
     }
