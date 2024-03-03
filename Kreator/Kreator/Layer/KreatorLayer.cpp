@@ -359,7 +359,7 @@ if (!m_currentScene) return
     bool leftShift = Input::IsKeyPressed(Key::LeftShift);
     bool rightShift = Input::IsKeyPressed(Key::RightShift);
 
-    if (m_sceneState == SceneState::Edit)
+    if (m_sceneState != SceneState::Play)
     {
       // Guizmo -----------------------------------------------------------
       if (leftCtrl and m_viewport.panelMouseHover and !Input::IsMouseButtonPressed(MouseButton::Right))
@@ -395,92 +395,93 @@ if (!m_currentScene) return
         }
       }
       
-      // Scene -----------------------------------------------------------
-      if ((leftCmd or rightCmd) and !Input::IsMouseButtonPressed(MouseButton::Right) and (!leftShift or !rightShift))
+      if (m_sceneState == SceneState::Edit)
       {
-        switch (e.GetKeyCode())
+        // Scene -----------------------------------------------------------
+        if ((leftCmd or rightCmd) and !Input::IsMouseButtonPressed(MouseButton::Right) and (!leftShift or !rightShift))
         {
-          case Key::N:
-            m_showNewScenePopup = true;
-            break;
-          case Key::O:
-            OpenScene();
-            break;
-          case Key::S:
-            SaveScene();
-            break;
-          default:
-            break;
-        }
-      } // Scenes
-      
-      // Project -----------------------------------------------------------
-      if ((leftCmd or rightCmd) and (leftShift or rightShift))
-      {
-        switch (e.GetKeyCode())
-        {
-          case Key::N:
-            m_showCreateNewProjectPopup = true;
-            break;
-          case Key::O:
-            FolderExplorer::Open(ProjectExtension, "");
-            m_folderExplorerAction = FolderExplorerAction::OpenProject;
-            break;
-            
-          default:
-            break;
-        }
-      }
-
-      // Entity -----------------------------------------------------------
-      if (leftCtrl or rightCtrl)
-      {
-        switch (e.GetKeyCode())
-        {
-          case Key::D:
+          switch (e.GetKeyCode())
           {
-            if (m_selectionContext.size())
+            case Key::N:
+              m_showNewScenePopup = true;
+              break;
+            case Key::O:
+              OpenScene();
+              break;
+            case Key::S:
+              SaveScene();
+              break;
+            default:
+              break;
+          }
+        } // Scenes
+        
+        // Project -----------------------------------------------------------
+        if ((leftCmd or rightCmd) and (leftShift or rightShift))
+        {
+          switch (e.GetKeyCode())
+          {
+            case Key::N:
+              m_showCreateNewProjectPopup = true;
+              break;
+            case Key::O:
+              FolderExplorer::Open(ProjectExtension, "");
+              m_folderExplorerAction = FolderExplorerAction::OpenProject;
+              break;
+              
+            default:
+              break;
+          }
+        }
+        
+        // Entity -----------------------------------------------------------
+        if (leftCtrl or rightCtrl)
+        {
+          switch (e.GetKeyCode())
+          {
+            case Key::D:
             {
-              std::vector<Entity> duplicateEntities;
-              duplicateEntities.resize(m_selectionContext.size());
+              if (m_selectionContext.size())
+              {
+                std::vector<Entity> duplicateEntities;
+                duplicateEntities.resize(m_selectionContext.size());
+                for (const auto& context : m_selectionContext)
+                {
+                  duplicateEntities.push_back(m_currentScene->DuplicateEntity(context.entity));
+                }
+                
+                ClearSelectedEntity();
+                for (const auto& entity : duplicateEntities)
+                {
+                  SetSelectedEntity(entity, true);
+                }
+              }
+              break;
+            }
+            default:
+              break;
+          }
+        }
+        if (leftCmd)
+        {
+          switch (e.GetKeyCode())
+          {
+            case Key::D:
+            {
               for (const auto& context : m_selectionContext)
               {
-                duplicateEntities.push_back(m_currentScene->DuplicateEntity(context.entity));
+                m_currentScene->DestroyEntity(context.entity);
               }
-              
               ClearSelectedEntity();
-              for (const auto& entity : duplicateEntities)
-              {
-                SetSelectedEntity(entity, true);
-              }
+              break;
             }
-            break;
+            default:
+              break;
           }
-          default:
-            break;
         }
-      }
-      if (leftCmd)
-      {
-        switch (e.GetKeyCode())
-        {
-          case Key::D:
-          {
-            for (const auto& context : m_selectionContext)
-            {
-              m_currentScene->DestroyEntity(context.entity);
-            }
-            ClearSelectedEntity();
-            break;
-          }
-          default:
-            break;
-        }
-      }
-
-    }
-    
-    if (m_sceneState == SceneState::Play)
+      } // Edit
+    } // Play
+    else
     {
       if (Input::IsKeyPressed(Key::Escape))
       {
