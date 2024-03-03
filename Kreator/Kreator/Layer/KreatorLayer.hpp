@@ -169,7 +169,8 @@ namespace Kreator
     void ClearSelectedEntity();
     /// This function set the selected entity
     /// - Parameter entity: Selected entity
-    void SetSelectedEntity(const Entity& entity);
+    /// - Parameter multipleSelection: multiple selection flag
+    void SetSelectedEntity(const Entity& entity, bool multipleSelection = false);
     /// This function checks is entity is selected
     /// - Parameter e: Entity to be checked
     bool IsEntitySelected(Entity e) const;

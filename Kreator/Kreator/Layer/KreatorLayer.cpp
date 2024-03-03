@@ -439,9 +439,20 @@ if (!m_currentScene) return
         {
           case Key::D:
           {
-            for (const auto& context : m_selectionContext)
+            if (m_selectionContext.size())
             {
-              SetSelectedEntity(m_currentScene->DuplicateEntity(context.entity));
+              std::vector<Entity> duplicateEntities;
+              duplicateEntities.resize(m_selectionContext.size());
+              for (const auto& context : m_selectionContext)
+              {
+                duplicateEntities.push_back(m_currentScene->DuplicateEntity(context.entity));
+              }
+              
+              ClearSelectedEntity();
+              for (const auto& entity : duplicateEntities)
+              {
+                SetSelectedEntity(entity, true);
+              }
             }
             break;
           }
@@ -597,13 +608,15 @@ if (!m_currentScene) return
         } // Each Mesh Comp
         Renderer2D::EndBatch();
       }
-
+    }
+    
+#ifdef DEBUG
       // Shows System info : Frame rate and Client name
       if (m_renderSystemInfo)
       {
         RenderSystemInfo();
       }
-    }
+#endif
   }
   
   void KreatorLayer::RenderSystemInfo()
@@ -1078,10 +1091,10 @@ if (!m_currentScene) return
     m_selectionContext.clear();
   }
   
-  void KreatorLayer::SetSelectedEntity(const Entity& entity)
+  void KreatorLayer::SetSelectedEntity(const Entity& entity, bool multipleSelection)
   {
     IK_PROFILE();
-    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity);
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity, multipleSelection);
   }
   bool KreatorLayer::IsEntitySelected(Entity e) const
   {
