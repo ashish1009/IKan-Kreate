@@ -300,8 +300,8 @@ namespace Kreator
     IK_LOG_INFO("SceneHierarchyPanel", "Shutting down the Scene Hierarchy Panel");
   }
 
-  SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& context)
-  : m_context(context)
+  SceneHierarchyPanel::SceneHierarchyPanel(const Ref<Scene>& context, bool isWindow)
+  : m_context(context), m_isWindow(isWindow)
   {
     IK_PROFILE();
     IK_LOG_INFO("Scene Hierarchy Panel", "Creating Scene Hierarchy Panel instance");
@@ -331,6 +331,7 @@ namespace Kreator
   void SceneHierarchyPanel::OnImGuiRender(bool& isOpen)
   {
     IK_PERFORMANCE("SceneHierarchyPanel::OnImGuiRender");
+    if (m_isWindow)
     {
       UI::ScopedStyle padding(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
       ImGui::Begin("Scene Hierarchy", &isOpen);
@@ -390,6 +391,7 @@ namespace Kreator
       }
     }
     
+    if (m_isWindow)
     {
       ImGui::End();
     }

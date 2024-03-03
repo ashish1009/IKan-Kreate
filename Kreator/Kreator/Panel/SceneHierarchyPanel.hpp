@@ -24,7 +24,7 @@ namespace Kreator
     SceneHierarchyPanel() = default;
     /// Constructor with scene instance
     /// - Parameter scene: Scene context
-    SceneHierarchyPanel(const Ref<Scene>& scene);
+    SceneHierarchyPanel(const Ref<Scene>& scene, bool isWindow = true);
     
     /// @see Editor Panel
     virtual void SetSceneContext(const Ref<Scene>& scene) override;
@@ -87,7 +87,8 @@ namespace Kreator
 
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
-    
+    bool m_isWindow;
+
     // Entity Data
     SelectionContext m_selectionContext;
     Entity m_lastSelectedEntity;

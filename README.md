@@ -116,6 +116,9 @@ Editor Application using IKan Library to create Games
 
 ### Road Map
 - Prefabs
+- Physics Material via Asset
+- Fix Mesh Material Asset
+- Environment via Asset 
 - Show and hide entity (SHP)
 - Show and hide components
 - Point Light

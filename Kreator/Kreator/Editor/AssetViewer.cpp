@@ -537,4 +537,26 @@ namespace Kreator
     }
   }
 
+  PrefabEditor::PrefabEditor()
+  : AssetEditor("Prefab Editor"), m_sceneHierarchyPanel(nullptr, false)
+  {
+  }
+  
+  void PrefabEditor::SetAsset(const Ref<Asset>& asset)
+  {
+    m_prefab = std::dynamic_pointer_cast<Prefab>(asset);
+    m_sceneHierarchyPanel.SetSceneContext(m_prefab->GetScene());
+  }
+
+  void PrefabEditor::OnClose()
+  {
+  }
+  
+  void PrefabEditor::Render()
+  {
+    // Need to do this in order to ensure that the scene hierarchy panel doesn't close immediately.
+    // There's been some structural changes since the addition of the PanelManager.
+    bool isOpen = true;
+    m_sceneHierarchyPanel.OnImGuiRender(isOpen);
+  }
 } // namespace Kreator

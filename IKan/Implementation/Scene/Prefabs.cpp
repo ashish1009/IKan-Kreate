@@ -71,4 +71,9 @@ namespace IKan
     }
     return newEntity;
   }
+  
+  Ref<Scene> Prefab::GetScene() const
+  {
+    return m_scene;
+  }
 } // namespace IKan

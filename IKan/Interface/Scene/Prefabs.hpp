@@ -25,7 +25,8 @@ namespace IKan
     ///  - entity: entity
     ///  - serialize: serialize flag
     void Create(Entity entity, bool serialize = true);
-
+    /// This function returns the prefab scene
+    Ref<Scene> GetScene() const;
     /// This funcion creats the prefab asset
     static Ref<Prefab> Create();
     ASSET_TYPE(Prefab);

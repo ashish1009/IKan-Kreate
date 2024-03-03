@@ -201,7 +201,8 @@ if (!m_currentScene) return
     // Register Default Asset Editor
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
     AssetEditorManager::RegisterEditor<MaterialEditor>(AssetType::Material);
-    
+    AssetEditorManager::RegisterEditor<PrefabEditor>(AssetType::Prefab);
+
     SceneRenderer::Initialize();
   }
   
