@@ -249,5 +249,6 @@ namespace IKan
 
     friend class SceneSerializer;
     friend class Entity;
+    friend class Prefab;
   };
 } // namespace IKan

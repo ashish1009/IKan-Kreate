@@ -30,6 +30,7 @@ namespace IKan
     Scene,
     Mesh,
     Material,
+    Prefab,
   };
   
   /// Map to store the asset with its Extension
@@ -53,7 +54,10 @@ namespace IKan
     { ".obj", AssetType::Mesh },
     
     // Material
-    { ".ikmat", AssetType::Material }
+    { ".ikmat", AssetType::Material } ,
+    
+    // Prefab
+    { ".ikprefab", AssetType::Prefab}
   };
   
   namespace AssetUtils

@@ -135,5 +135,6 @@ namespace IKan
     entt::entity m_entityHandle{ entt::null };
     Scene* m_scene = nullptr;
     friend class Scene;
+    friend class Prefab;
   };
 } // namespace IKan

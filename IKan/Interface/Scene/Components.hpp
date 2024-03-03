@@ -208,6 +208,12 @@ namespace IKan
     HingeData hingeData;
     SliderData sliderData;
   };
+  
+  struct PrefabComponent
+  {
+    UUID PrefabID = 0;
+    UUID EntityID = 0;
+  };
 
   template<typename... Component>
   struct ComponentGroup
@@ -218,6 +224,7 @@ namespace IKan
   // Stores all the components present in Engine
   using AllComponents =
   ComponentGroup<IDComponent, TagComponent, TransformComponent, CameraComponent, MeshComponent, 
-  RigidBodyComponent, Box3DColliderComponent, SphereColliderComponent, CapsuleColliderComponent, JointComponent>;
+  RigidBodyComponent, Box3DColliderComponent, SphereColliderComponent, CapsuleColliderComponent, JointComponent,
+  PrefabComponent>;
 
 } // namespace IKan
