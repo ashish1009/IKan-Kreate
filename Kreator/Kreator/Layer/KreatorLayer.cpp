@@ -582,6 +582,21 @@ if (!m_currentScene) return
         Renderer2D::DrawQuad(position, borderSize, Utils::Math::ZeroVec3, Utils::Math::UnitVec4);
         Renderer2D::EndBatch();
       }
+      
+      // CameraIcon
+      if (m_sceneHaveMainCamera)
+      {
+        Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
+        auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
+        for (auto e : cameraEntities)
+        {
+          Entity entity = { e, m_currentScene.get() };
+          const auto& tc = entity.GetComponent<TransformComponent>();
+          
+          Renderer2D::DrawFixedViewQuad(tc.Transform(), m_cameraIcon, Utils::Math::UnitVec4, 1, entity);
+        } // Each Mesh Comp
+        Renderer2D::EndBatch();
+      }
 
       // Shows System info : Frame rate and Client name
       if (m_renderSystemInfo)

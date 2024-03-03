@@ -163,6 +163,7 @@ Limit the values in Slider for all componentt
   - v5.3.5.4 : Relationship connection
   - v6.0.6.0 : IBL
   - v7.0.7.0 : Physics
+  - v7.1.7.2 : Scene Camera
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)
