@@ -107,7 +107,9 @@ namespace Kreator
     void RenderCameraAxis();
     /// This function renders the debug Colliders
     void ShowColliders();
-    
+    /// This function renders the camera controller path
+    void ShowCameraControllerPath();;
+
     /// This function returns the Imguizmo Snap value
     float GetSnapValue();
     
@@ -225,6 +227,7 @@ namespace Kreator
     bool m_showSceneSettings {true};
     bool m_showInvalidAssetMetadataPopup {false};
     bool m_showMiniViewport {true};
+    bool m_showDebugCameraControllerPath {true};
 
     // Debug Renderer ------------------------------------
     bool m_renderSystemInfo {true};
@@ -235,6 +238,7 @@ namespace Kreator
     // Debug renderer colors -----------------------------
     glm::vec4 m_relationshipColor = {0.4, 0.4, 0.4, 0.4};
     glm::vec4 m_colliderColor = {0.1, 0.6, 0.3, 0.7};
+    glm::vec4 m_cameraControllerColor = {0.1, 0.3, 0.7, 0.7};
 
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};

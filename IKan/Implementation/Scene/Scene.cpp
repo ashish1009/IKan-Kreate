@@ -73,6 +73,7 @@ namespace IKan
   {
     IK_PERFORMANCE("Scene::OnUpdateRuntime");
     m_physicsScene->OnUpdate(ts);
+    UpdateCameraControllers(ts);
   }
   
   void Scene::OnRuntimeEventHandler(Event& event)
@@ -584,6 +585,7 @@ namespace IKan
   
   Entity Scene::TryGetEntityWithUUID(UUID id) const
   {
+    IK_PROFILE();
     if (const auto iter = m_entityIDMap.find(id); iter != m_entityIDMap.end())
     {
       return iter->second;
@@ -593,6 +595,7 @@ namespace IKan
   
   void Scene::UpdateCamerasViewport()
   {
+    IK_PROFILE();
     auto view = m_registry.view<CameraComponent>();
     for (auto entity : view)
     {
@@ -619,5 +622,20 @@ namespace IKan
   {
     return m_directionLight;
   }
-  
+
+  void Scene::UpdateCameraControllers(TimeStep ts)
+  {
+    IK_PERFORMANCE("Scene::InstantiateScript");
+    m_registry.view<CameraComponent>().each([=](auto entity, auto& cc)
+                                            {
+      if (cc.controller.GetEntity())
+      {
+        cc.controller.OnUpdate(ts);
+      }
+      else
+      {
+        cc.controller.Initialize(Entity{ entity, this }, this);
+      }
+    });
+  }
 } // namespace IKan

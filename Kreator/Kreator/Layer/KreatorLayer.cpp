@@ -586,6 +586,12 @@ if (!m_currentScene) return
         {
           ShowColliders();
         }
+        
+        if (m_showDebugCameraControllerPath and m_sceneHaveMainCamera)
+        {
+          ShowCameraControllerPath();
+        }
+
       }
       Renderer2D::EndBatch();
       
@@ -704,6 +710,36 @@ if (!m_currentScene) return
       Renderer2D::DrawLine({triangle[i].point3.x, triangle[i].point3.y, triangle[i].point3.z}, {triangle[i].point1.x, triangle[i].point1.y, triangle[i].point1.z}, m_colliderColor);
     }
   }
+  
+  void KreatorLayer::ShowCameraControllerPath()
+  {
+    auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
+    for (auto e : cameraEntities)
+    {
+      Entity entity = { e, m_currentScene.get() };
+      const auto& cc = entity.GetComponent<CameraComponent>();
+      
+      Entity FollowEntity = m_currentScene->TryGetEntityWithUUID(cc.controller.GetFollowEntity());
+      if (FollowEntity)
+      {
+        const auto& followTc = FollowEntity.GetComponent<TransformComponent>();
+        
+        auto drawCircle = [this](const glm::vec3& position, float radius) {
+          static glm::vec3 rotation = {glm::radians(90.0f), 0.0f, 0.0f};
+          Renderer2D::DrawCircle(position, 2.0f * radius, rotation, m_cameraControllerColor, nullptr, 1.0f, 0.01f);
+        };
+        
+        const auto& topOrbit = cc.controller.GetTopOrbit();
+        const auto& midOrbit = cc.controller.GetMidOrbit();
+        const auto& bottomOrbit = cc.controller.GetBottomOrbit();
+        
+        drawCircle({followTc.Position().x, followTc.Position().y + topOrbit.height, followTc.Position().z}, topOrbit.radius);
+        drawCircle({followTc.Position().x, followTc.Position().y + midOrbit.height, followTc.Position().z}, midOrbit.radius);
+        drawCircle({followTc.Position().x, followTc.Position().y + bottomOrbit.height, followTc.Position().z}, bottomOrbit.radius);
+      }
+    } // Each Mesh Comp
+  }
+
   
   float KreatorLayer::GetSnapValue()
   {

@@ -217,7 +217,10 @@ namespace IKan
     ///   - renderer: Scene renderer instance
     ///   - isEditing: flag is editing
     void RenderScene(SceneRenderer& renderer, bool isEditing);
-    
+    /// This function Updates the camera controllers
+    /// - Parameter ts: time step of each frame
+    void UpdateCameraControllers(TimeStep ts);
+
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
     std::string m_name {};

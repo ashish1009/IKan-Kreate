@@ -916,9 +916,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 40.3651123]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Position: [-1.64319897, 10.9325104, 3.47405028]
+      Rotation: [0.209928781, 0.0392053984, -6.5242709e-09]
+      Scale: [0.99999994, 0.999999881, 0.99999994]
     CameraComponent:
       Enable: true
       Camera:
@@ -930,7 +930,7 @@ Entities:
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
-      CC_Follow: 4130729855813769003
+      CC_Follow: 5267137587135657326
       CC_TopRadius: 3
       CC_TopHeight: 4
       CC_MidRadius: 5

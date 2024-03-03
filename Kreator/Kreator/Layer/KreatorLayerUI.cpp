@@ -747,6 +747,7 @@ namespace Kreator
         ImGui::MenuItem("Show Camera Axis", nullptr, &m_showCameraAxis);
         ImGui::MenuItem("Show Collider", nullptr, &m_showColliders);
         ImGui::MenuItem("Show Mini viewport", nullptr, &m_showMiniViewport);
+        ImGui::MenuItem("Show Camera Path", nullptr, &m_showDebugCameraControllerPath);
       });
       
       UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
@@ -1101,7 +1102,12 @@ namespace Kreator
       {
         UI::PropertyColor("Collider Color", m_colliderColor);
       }
-      
+      UI::Property("Show Camera Path ", m_showDebugCameraControllerPath);
+      if (m_showDebugCameraControllerPath)
+      {
+        UI::PropertyColor("Camera Path Color", m_cameraControllerColor);
+      }
+
       UI::Property("Mini Viewport", m_showMiniViewport);
 
       UI::EndPropertyGrid();
