@@ -171,6 +171,7 @@ namespace IKan
     
     CopyComponent<TagComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<RelationshipComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<CameraComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<TransformComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<MeshComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<RigidBodyComponent>(target->m_registry, m_registry, enttMap);
@@ -319,6 +320,7 @@ namespace IKan
     }
     
     CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<CameraComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<MeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<RigidBodyComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<Box3DColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);

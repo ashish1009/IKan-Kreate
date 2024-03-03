@@ -215,7 +215,7 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, TagComponent, TransformComponent, MeshComponent, 
+  ComponentGroup<IDComponent, TagComponent, TransformComponent, CameraComponent, MeshComponent, 
   RigidBodyComponent, Box3DColliderComponent, SphereColliderComponent, CapsuleColliderComponent, JointComponent>;
 
 } // namespace IKan
