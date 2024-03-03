@@ -91,7 +91,16 @@ namespace IKan
   void Scene::OnRenderRuntime(TimeStep ts, SceneRenderer& renderer)
   {
     IK_PERFORMANCE("Scene::OnRenderRuntime");
-    IK_ASSERT(false);
+    Entity cameraEntity = GetMainCameraEntity();
+    RETURN_IF (!cameraEntity)
+    
+    const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
+    const auto& cameraTransformComp = cameraEntity.GetComponent<TransformComponent>();
+    
+    // Render 3D Scene
+    renderer.BeginScene({ mainCamera, cameraTransformComp.Position(), glm::inverse(cameraTransformComp.Transform()), 0.01f, 10000.0f, mainCamera.GetRadPerspectiveVerticalFOV() }, m_directionLight);
+    RenderScene(renderer, false);
+    renderer.EndScene();
   }
   
   void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& camera, SceneRenderer& renderer)
@@ -205,6 +214,8 @@ namespace IKan
     RETURN_IF(m_viewportWidth == width and m_viewportHeight == height)
     m_viewportWidth = width;
     m_viewportHeight = height;
+    
+    UpdateCamerasViewport();
   }
   
   Entity Scene::CreateEntity(const std::string& name)
@@ -528,6 +539,22 @@ namespace IKan
     return m_maxEntityID;
   }
   
+  Entity Scene::GetMainCameraEntity()
+  {
+    IK_PERFORMANCE("Scene::GetMainCameraEntity");
+    auto view = m_registry.view<CameraComponent>();
+    for (const auto& entity : view)
+    {
+      auto& comp = view.get<CameraComponent>(entity);
+      if (comp.primary)
+      {
+        IK_ASSERT(comp.camera.GetOrthographicSize() or comp.camera.GetDegPerspectiveVerticalFOV(), "Camera is not fully initialized");
+        return { entity, this };
+      }
+    }
+    return {};
+  }
+  
   Entity Scene::GetEntityWithUUID(UUID id) const
   {
     IK_ASSERT(m_entityIDMap.find(id) != m_entityIDMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
@@ -559,6 +586,16 @@ namespace IKan
       return iter->second;
     }
     return Entity{};
+  }
+  
+  void Scene::UpdateCamerasViewport()
+  {
+    auto view = m_registry.view<CameraComponent>();
+    for (auto entity : view)
+    {
+      auto& comp = view.get<CameraComponent>(entity);
+      comp.camera.SetViewportSize(m_viewportWidth, m_viewportHeight);
+    }
   }
   
   AssetHandle Scene::GetSkyboxAsset() const

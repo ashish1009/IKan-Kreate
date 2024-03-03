@@ -453,6 +453,14 @@ if (!m_currentScene) return
       }
 
     }
+    
+    if (m_sceneState == SceneState::Play)
+    {
+      if (Input::IsKeyPressed(Key::Escape))
+      {
+        OnSceneStop();
+      }
+    }
     return false;
   }
   

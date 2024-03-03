@@ -179,6 +179,9 @@ namespace IKan
     /// - Parameter entity: Selected Entity
     bool IsEntitySelected(entt::entity entity) const;
     
+    /// This function Updates the camera viewport
+    void UpdateCamerasViewport();
+
     /// This function returns the skybox asset
     AssetHandle GetSkyboxAsset() const;
     /// This function returns the IBL flag

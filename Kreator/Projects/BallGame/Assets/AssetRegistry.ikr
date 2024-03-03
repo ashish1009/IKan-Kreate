@@ -71,6 +71,9 @@ Assets:
   - Handle: 57219042666670176
     FilePath: Materials/Cube#1.ikmat
     Type: Material
+  - Handle: 77938096155612735
+    FilePath: Materials/Sphere#19.ikmat
+    Type: Material
   - Handle: 7717248359124282659
     FilePath: Materials/Base#13.ikmat
     Type: Material

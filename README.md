@@ -138,6 +138,8 @@ Editor Application using IKan Library to create Games
 
 ### TODO
 
+Limit the values in Slider for all componentt 
+
 ## Releases
   - v1.0.1.0 : Create and show Window (Without Renderer Context)
   - v2.0.2.0 : Render First Quad
