@@ -65,6 +65,9 @@ Assets:
   - Handle: 3013658672
     FilePath: Scenes/BallGame.ikscene
     Type: Scene
+  - Handle: 3126955659
+    FilePath: Scenes/TestScene.ikscene
+    Type: Scene
   - Handle: 3483877028
     FilePath: Textures/Pbr/bog/bog_preview.jpg
     Type: Image

@@ -283,11 +283,14 @@ namespace IKan
   {
     IK_PROFILE();
     ImageSpecificaion spec;
-    spec.filePath = AssetManager::GetFileSystemPath(AssetManager::GetMetadata(skyboxAsset));
-    spec.wrap = TextureWrap::ClampEdge;
-    spec.filter = TextureFilter::Linear;
-    s_envTexture = TextureFactory::Create(spec);
-    SubmitSkyboxImageImp();
+    if (const AssetMetadata& assetMetadata = AssetManager::GetMetadata(skyboxAsset); assetMetadata.IsValid())
+    {
+      spec.filePath = AssetManager::GetFileSystemPath(assetMetadata);
+      spec.wrap = TextureWrap::ClampEdge;
+      spec.filter = TextureFilter::Linear;
+      s_envTexture = TextureFactory::Create(spec);
+      SubmitSkyboxImageImp();
+    }
   }
   
   void SceneRenderer::SubmitSkyboxImage(const std::string& skyboxTexturePath)
