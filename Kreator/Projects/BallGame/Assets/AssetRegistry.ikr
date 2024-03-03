@@ -71,6 +71,9 @@ Assets:
   - Handle: 3483877028
     FilePath: Textures/Pbr/bog/bog_preview.jpg
     Type: Image
+  - Handle: 3588836444
+    FilePath: Scenes/PhysicsTestScene.ikscene
+    Type: Scene
   - Handle: 57219042666670176
     FilePath: Materials/Cube#1.ikmat
     Type: Material

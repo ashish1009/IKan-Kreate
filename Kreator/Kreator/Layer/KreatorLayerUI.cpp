@@ -724,7 +724,83 @@ namespace Kreator
       
       // Menu Items
       UI_Utils::AddMenu("File", popItemHighlight, [this]() {
-
+        if (ImGui::MenuItem("Create Project...", "Cmd + Shift + N"))
+        {
+          m_showCreateNewProjectPopup = true;
+        }
+        if (ImGui::MenuItem("Open Project...", "Cmd + Shift + O"))
+        {
+          FolderExplorer::Open(ProjectExtension, "", nullptr);
+          m_folderExplorerAction = FolderExplorerAction::OpenProject;
+        }
+        if (ImGui::BeginMenu("Open Recent"))
+        {
+          size_t i = 0;
+          for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+          {
+            if (i > 10)
+            {
+              break;
+            }
+            
+            if (std::filesystem::exists(it->second.filePath))
+            {
+              if (ImGui::MenuItem(it->second.name.c_str()))
+              {
+                // stash filepath away and defer actual opening of project until it is "safe" to do so
+                m_projectFilePathBuffer.StrCpy(it->second.filePath.string().data());
+                
+                RecentProject projectEntry;
+                projectEntry.name = it->second.name;
+                projectEntry.filePath = it->second.filePath;
+                projectEntry.lastOpened = time(NULL);
+                
+                it = m_userPreferences->recentProjects.erase(it);
+                
+                m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+                
+                UserPreferencesSerializer preferencesSerializer(m_userPreferences);
+                preferencesSerializer.Serialize(m_userPreferences->filePath);
+                
+                OpenProject(projectEntry.filePath);
+                break;
+              }
+            }
+            else
+            {
+              m_userPreferences->recentProjects.erase(it);
+              UserPreferencesSerializer serializer(m_userPreferences);
+              serializer.Serialize(m_userPreferences->filePath);
+              break;
+            }
+            
+            i++;
+          }
+          ImGui::EndMenu();
+        }
+        ImGui::Separator();
+        if (ImGui::MenuItem("New Scene", "Cmd+N"))
+        {
+          m_showNewScenePopup = true;
+        }
+        if (ImGui::MenuItem("Open Scene", "Cmd+O"))
+        {
+          OpenScene();
+        }
+        if (ImGui::MenuItem("Save Scene", "Cmd+S"))
+        {
+          SaveScene();
+        }
+        if (ImGui::MenuItem("Save Scene As", "Cmd+Shift+S"))
+        {
+          SaveSceneAs();
+        }
+        
+        ImGui::Separator();
+        if (ImGui::MenuItem("Exit", "Cmd + Q"))
+        {
+          Application::Get().Close();
+        }
       });
       
       UI_Utils::AddMenu("Edit", popItemHighlight, [this]() {
