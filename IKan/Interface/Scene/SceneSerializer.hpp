@@ -31,17 +31,6 @@ namespace IKan
     /// - Parameter file_path: path which need to be loaded
     bool Deserialize(const std::filesystem::path& filepath);
 
-    /// This function serialises the entity
-    /// - Parameters:
-    ///   - out: yamal out
-    ///   - entity: entity handle
-    void SerializeEntity(YAML::Emitter& out, Entity entity);
-    /// This function deserialises the entity
-    /// - Parameters:
-    ///   - entitiesNode: yamal root node
-    ///   - scene: Scene context
-    void DeserializeEntities(YAML::Node& entitiesNode, Ref<Scene> scene);
-
   private:
     Ref<Scene> m_scene;
   };

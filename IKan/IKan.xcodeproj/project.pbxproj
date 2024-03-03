@@ -16,6 +16,8 @@
 		B2000A762B936CD00017266F /* PhysicsJoint.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A742B936CD00017266F /* PhysicsJoint.hpp */; };
 		B2000A822B9486510017266F /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A802B9486510017266F /* CameraController.cpp */; };
 		B2000A832B9486510017266F /* CameraController.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A812B9486510017266F /* CameraController.hpp */; };
+		B2000A8B2B9499E80017266F /* EntitySerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A892B9499E80017266F /* EntitySerializer.cpp */; };
+		B2000A8C2B9499E80017266F /* EntitySerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A8A2B9499E80017266F /* EntitySerializer.hpp */; };
 		B248B9072B8338BA00B9EC40 /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9052B8338BA00B9EC40 /* Asset.cpp */; };
 		B248B9082B8338BA00B9EC40 /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9062B8338BA00B9EC40 /* Asset.hpp */; };
 		B248B90C2B833BA000B9EC40 /* UUID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B90A2B833BA000B9EC40 /* UUID.cpp */; };
@@ -217,6 +219,8 @@
 		B2000A742B936CD00017266F /* PhysicsJoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsJoint.hpp; sourceTree = "<group>"; };
 		B2000A802B9486510017266F /* CameraController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraController.cpp; sourceTree = "<group>"; };
 		B2000A812B9486510017266F /* CameraController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CameraController.hpp; sourceTree = "<group>"; };
+		B2000A892B9499E80017266F /* EntitySerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntitySerializer.cpp; sourceTree = "<group>"; };
+		B2000A8A2B9499E80017266F /* EntitySerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntitySerializer.hpp; sourceTree = "<group>"; };
 		B248B9052B8338BA00B9EC40 /* Asset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Asset.cpp; sourceTree = "<group>"; };
 		B248B9062B8338BA00B9EC40 /* Asset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Asset.hpp; sourceTree = "<group>"; };
 		B248B90A2B833BA000B9EC40 /* UUID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UUID.cpp; sourceTree = "<group>"; };
@@ -495,6 +499,8 @@
 				B248B9282B84676700B9EC40 /* Scene.hpp */,
 				B28CDFC32B861D030075DE7D /* SceneSerializer.hpp */,
 				B2EB0F7E2B8655E300DF1407 /* Entity.hpp */,
+				B2000A892B9499E80017266F /* EntitySerializer.cpp */,
+				B2000A8A2B9499E80017266F /* EntitySerializer.hpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1065,6 +1071,7 @@
 				B2C0B70F2B7CDC5D0015A277 /* EditorCamera.hpp in Headers */,
 				B2ED60442B74C52D007A7F36 /* Pipeline.hpp in Headers */,
 				B2EB0FA42B885E5700DF1407 /* MaterialAsset.hpp in Headers */,
+				B2000A8C2B9499E80017266F /* EntitySerializer.hpp in Headers */,
 				B2C0B6DA2B75FF300015A277 /* Mesh.hpp in Headers */,
 				B2ED5E222B738FE5007A7F36 /* Layer.hpp in Headers */,
 				B2C0BA042B7DC9D10015A277 /* Project.hpp in Headers */,
@@ -1245,6 +1252,7 @@
 				B248B9352B846BBF00B9EC40 /* AssetType.cpp in Sources */,
 				B2C0B6D92B75FF300015A277 /* Mesh.cpp in Sources */,
 				B2ED600A2B74A5B6007A7F36 /* ImGuiLayer.cpp in Sources */,
+				B2000A8B2B9499E80017266F /* EntitySerializer.cpp in Sources */,
 				B248B9392B846CC000B9EC40 /* AssetMetadata.cpp in Sources */,
 				B2ED603F2B74BD12007A7F36 /* RendererStats.cpp in Sources */,
 				B2ED601C2B74AF4C007A7F36 /* ShaderUniforms.cpp in Sources */,
