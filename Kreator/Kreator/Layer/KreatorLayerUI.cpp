@@ -919,6 +919,7 @@ namespace Kreator
   
   void KreatorLayer::UI_Viewport()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_Viewport")
     ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::Begin("Viewport");
     
@@ -1032,6 +1033,7 @@ namespace Kreator
   
   void KreatorLayer::UI_SceneSettings()
   {
+    IK_PERFORMANCE("KreatorLayer::UI_SceneSettings")
     RETURN_IF (!m_showSceneSettings)
     
     ImGui::Begin("Scene Settings", &m_showSceneSettings);

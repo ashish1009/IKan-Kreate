@@ -304,6 +304,7 @@ namespace IKan
   
   void EditorCamera::SetViewportSize(uint32_t width, uint32_t height)
   {
+    IK_PROFILE()
     RETURN_IF(m_viewportWidth == width and m_viewportHeight == height);
     
     SetPerspectiveProjectionMatrix(m_verticalFOV, (float)width, (float)height, m_nearClip, m_farClip);

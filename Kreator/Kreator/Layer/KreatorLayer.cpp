@@ -543,6 +543,7 @@ if (!m_currentScene) return
 
   void KreatorLayer::UpdateViewportSize()
   {
+    IK_PROFILE()
     RETRUN_IF_NO_SCENE();
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
     m_currentScene->SetViewportSize(m_viewport.width, m_viewport.height);
@@ -553,6 +554,7 @@ if (!m_currentScene) return
   
   Ray KreatorLayer::CastRay(const EditorCamera& camera)
   {
+    IK_PROFILE()
     glm::vec4 mouseClipPos = { m_viewport.mouseViewportSpace.spaceMouseX, m_viewport.mouseViewportSpace.spaceMouseY, -1.0f, 1.0f };
     
     auto inverseProj = glm::inverse(camera.GetProjectionMatrix());
@@ -597,6 +599,8 @@ if (!m_currentScene) return
       
       if (m_showMiniViewport and m_sceneHaveMainCamera)
       {
+        IK_PERFORMANCE("KreatorLayer::MiniViewport");
+
         static constexpr glm::mat4 unitMat4 = glm::mat4(1.0f);
         static constexpr glm::vec3 size = {1.0f/4.0f, -1.0f/4.0f, 1.0f};
         static constexpr glm::vec3 borderSize = {1.0f/4.0f + 0.01, -1.0f/4.0f - 0.01, 1.0f};
@@ -611,6 +615,7 @@ if (!m_currentScene) return
       // CameraIcon
       if (m_sceneHaveMainCamera)
       {
+        IK_PERFORMANCE("KreatorLayer::CameraIcon");
         Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
         auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
         for (auto e : cameraEntities)
@@ -648,6 +653,7 @@ if (!m_currentScene) return
   
   void KreatorLayer::RenderRelationshipConnection()
   {
+    IK_PERFORMANCE("KreatorLayer::RenderRelationshipConnection");
     auto relationshipView = m_currentScene->GetAllEntitiesWith<RelationshipComponent>();
     for (auto entityHandle : relationshipView)
     {
@@ -668,6 +674,7 @@ if (!m_currentScene) return
   
   void KreatorLayer::RenderCameraAxis()
   {
+    IK_PERFORMANCE("KreatorLayer::RenderCameraAxis");
     static constexpr float Limit = 10000.0f;
     
     static const glm::vec3 XMin = {-Limit, 0.0f, 0.0f};
@@ -713,6 +720,7 @@ if (!m_currentScene) return
   
   void KreatorLayer::ShowCameraControllerPath()
   {
+    IK_PERFORMANCE("KreatorLayer::ShowCameraControllerPath");
     auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
     for (auto e : cameraEntities)
     {
@@ -740,7 +748,6 @@ if (!m_currentScene) return
     } // Each Mesh Comp
   }
 
-  
   float KreatorLayer::GetSnapValue()
   {
     switch (m_gizmoType)
