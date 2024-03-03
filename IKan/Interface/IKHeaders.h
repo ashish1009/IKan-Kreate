@@ -96,8 +96,6 @@
 #include <Project/Project.hpp>
 #include <Project/ProjectSerializer.hpp>
 
-#include <Physics/PhysicsMaterial.hpp>
-
 #include <Editor/EditorPanel.hpp>
 #include <Editor/PanelManager.hpp>
 #include <Editor/EditorConsolePanel.hpp>
