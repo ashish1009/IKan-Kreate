@@ -1294,19 +1294,9 @@ namespace Kreator
       UI::Property("Quaternion Offset", quaternion);
       bcc.quaternionOffset = glm::quat(quaternion);
       
+      UI::PropertyAssetReference<PhysicsMaterial>("Material", bcc.material);
+
       UI::EndPropertyGrid();
-      
-      {
-        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
-        if (UI::PropertyGridHeader("Material", false, 3, 5))
-        {
-          ImGui::PushID("Cube Material");
-          UI::BeginPropertyGrid();
-          UI::EndPropertyGrid();
-          ImGui::PopID();
-          UI::PropertyGridHeaderEnd();
-        }
-      }
     }, s_gearIcon);
     
     DrawComponent<SphereColliderComponent>("Sphere Collider", entity, [&](SphereColliderComponent& scc)
@@ -1319,20 +1309,9 @@ namespace Kreator
       auto quaternion = glm::eulerAngles(scc.quaternionOffset);
       UI::Property("Quaternion Offset", quaternion);
       scc.quaternionOffset = glm::quat(quaternion);
-      
+      UI::PropertyAssetReference<PhysicsMaterial>("Material", scc.material);
+
       UI::EndPropertyGrid();
-      
-      {
-        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
-        if (UI::PropertyGridHeader("Material", false, 3, 5))
-        {
-          ImGui::PushID("Sphere Material");
-          UI::BeginPropertyGrid();
-          UI::EndPropertyGrid();
-          ImGui::PopID();
-          UI::PropertyGridHeaderEnd();
-        }
-      }
     }, s_gearIcon);
     
     DrawComponent<CapsuleColliderComponent>("Capsule Collider", entity, [&](CapsuleColliderComponent& ccc)
@@ -1346,20 +1325,9 @@ namespace Kreator
       auto quaternion = glm::eulerAngles(ccc.quaternionOffset);
       UI::Property("Quaternion Offset", quaternion);
       ccc.quaternionOffset = glm::quat(quaternion);
-      
+      UI::PropertyAssetReference<PhysicsMaterial>("Material", ccc.material);
+
       UI::EndPropertyGrid();
-      
-      {
-        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
-        if (UI::PropertyGridHeader("Material", false, 3, 5))
-        {
-          ImGui::PushID("Capsue Material");
-          UI::BeginPropertyGrid();
-          UI::EndPropertyGrid();
-          ImGui::PopID();
-          UI::PropertyGridHeaderEnd();
-        }
-      }
     }, s_gearIcon);
     
     DrawComponent<JointComponent>("Joint", entity, [&](JointComponent& fjc)
