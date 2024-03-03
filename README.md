@@ -79,12 +79,6 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - Physics (ECS and Editor Panel)
   - 3D Physics
 
-### Detailed Road Map
-- Renderer
-  - Shadow
-- ECS 
-  - Script Manager
-
 ### TODO
 
 ## Kreator 
@@ -96,16 +90,22 @@ Editor Application using IKan Library to create Games
   - Title Bar
   - Open/New/Save - Project/Scene
   - Viewport
+- UI
+  - UI Helper
+  - Guizmo (ECS)
+  - Scene Setting (ECS)
 - Editor
   - Folder Explorer
   - User Preference
   - Application Setting
   - Image Viewer
   - Material Editor
-- UI
-  - UI Helper
-  - Guizmo (ECS)
-  - Scene Setting (ECS)
+  - Rotate Child entity with parent
+  - Relationship lines for entities
+  - Editor camera Side/Top/Front View and Axis
+  - Drop Content inside Viewport
+  - Mini Viewport
+  - Camera Icon and controller
 - Panels
   - Konsole Panel
   - Content Browser
@@ -114,31 +114,19 @@ Editor Application using IKan Library to create Games
   - Asset Debugger
   - Scene Hierarchy (ECS)
 
-### Mini Feature Complete
-- Rotate Child entity with parent
-- Connect Parent child with line
-- Never edit/save default material, always create copy
-- Editor camera Side/Top/Front View
-- Axis
-- Drop Content inside Viewport
-- Mini Viewport
-
-### Mini Feature Road Map
-- Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
-- Camera/Light Icons
+### Road Map
+- Prefabs
 - Show and hide entity (SHP)
 - Show and hide components
 - Point Light
+- Light Icons (After Point Light)
 - Shadow
-- Prefabs
-- Physics Material
 - Grid
+- Scripts
 - Scale Child entity with parent (Hold)
 - Fix selected outline size (Hold)
 
 ### TODO
-
-Limit the values in Slider for all componentt 
 
 ## Releases
   - v1.0.1.0 : Create and show Window (Without Renderer Context)
@@ -163,7 +151,8 @@ Limit the values in Slider for all componentt
   - v5.3.5.4 : Relationship connection
   - v6.0.6.0 : IBL
   - v7.0.7.0 : Physics
-  - v7.1.7.2 : Scene Camera
+  - v7.1.7.1 : Scene Camera
+  - v7.2.7.2 : Camera controller
 
 ## Outputs
 ![](/Kreator/Outputs/Output.png)

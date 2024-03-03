@@ -14,7 +14,7 @@ using namespace IKan;
 
 namespace Kreator
 {
-  static const std::string KreatorVersion = "7.2";
+  static const std::string KreatorVersion = "8.0";
   
   /// Stores the Viewport Data
   struct Viewport
