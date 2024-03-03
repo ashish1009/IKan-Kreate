@@ -20,6 +20,11 @@ namespace IKan
       dstRegistry.emplace_or_replace<T>(dst, srcComponent);
     }
   }
+  
+  Ref<Prefab> Prefab::Create()
+  {
+    return CreateRef<Prefab>();
+  }
 
   Prefab::Prefab()
   {

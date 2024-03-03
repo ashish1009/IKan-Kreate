@@ -10,6 +10,9 @@
 #include "Renderer/Mesh.hpp"
 #include "Renderer/Graphics/Texture.hpp"
 #include "Scene/Scene.hpp"
+#include "Scene/Prefabs.hpp"
+#include "Scene/Components.hpp"
+#include "Scene/EntitySerializer.hpp"
 
 namespace IKan
 {
@@ -154,6 +157,60 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
     asset = material;
     asset->handle = metadata.handle;
     
+    return true;
+  }
+  
+  void PrefabSerializer::Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset) const
+  {
+    Ref<Prefab> prefab = std::dynamic_pointer_cast<Prefab>(asset);
+    
+    YAML::Emitter out;
+    
+    out << YAML::BeginMap;
+    out << YAML::Key << "Prefab";
+    out << YAML::Value << YAML::BeginSeq;
+    
+    prefab->m_scene->m_registry.each([&](auto entityID)
+                                     {
+      Entity entity = { entityID, prefab->m_scene.get() };
+      if (!entity or !entity.HasComponent<IDComponent>())
+      {
+        return;
+      }
+      
+      EntitySerializer::SerializeEntity(out, entity);
+    });
+    
+    out << YAML::EndSeq;
+    out << YAML::EndMap;
+    
+    std::ofstream fout(AssetManager::GetFileSystemPath(metadata));
+    fout << out.c_str();
+  }
+  
+  bool PrefabSerializer::TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const
+  {
+    std::ifstream stream(AssetManager::GetFileSystemPath(metadata));
+    if (!stream.is_open())
+    {
+      return false;
+    }
+    
+    std::stringstream strStream;
+    strStream << stream.rdbuf();
+    
+    YAML::Node data = YAML::Load(strStream.str());
+    if (!data["Prefab"])
+    {
+      return false;
+    }
+    
+    YAML::Node prefabNode = data["Prefab"];
+    Ref<Prefab> prefab = Prefab::Create();
+    EntitySerializer::DeserializeEntities(prefab->m_scene, prefabNode);
+    
+    asset = prefab;
+    asset->handle = metadata.handle;
     return true;
   }
 } // namespace IKan

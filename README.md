@@ -123,6 +123,7 @@ Editor Application using IKan Library to create Games
 - Shadow
 - Grid
 - Scripts
+- Make Environment and Physics material as Asset
 - Scale Child entity with parent (Hold)
 - Fix selected outline size (Hold)
 

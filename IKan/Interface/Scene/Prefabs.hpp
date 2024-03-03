@@ -26,6 +26,8 @@ namespace IKan
     ///  - serialize: serialize flag
     void Create(Entity entity, bool serialize = true);
 
+    /// This funcion creats the prefab asset
+    static Ref<Prefab> Create();
     ASSET_TYPE(Prefab);
 
   private:
@@ -37,5 +39,6 @@ namespace IKan
     Entity m_entity;
     
     friend class Scene;
+    friend class PrefabSerializer;
   };
 } // namespace IKan
