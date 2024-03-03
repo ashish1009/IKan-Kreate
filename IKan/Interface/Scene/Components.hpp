@@ -12,6 +12,7 @@
 #include "Core/UUID.hpp"
 #include "Asset/Asset.hpp"
 #include "Renderer/MaterialAsset.hpp"
+#include "Camera/SceneCamera.hpp"
 #include "Scene/Entity.hpp"
 
 namespace IKan
@@ -82,6 +83,16 @@ namespace IKan
     glm::quat quaternion;
     glm::mat4 transform;
     glm::vec3 position{0.0f}, rotation{0.0f}, scale{1.0f};
+  };
+  
+  struct CameraComponent
+  {
+    bool enable = true;
+    SceneCamera camera;
+    
+    bool primary = true;
+    operator SceneCamera& ();
+    operator const SceneCamera& () const;
   };
   
   struct MeshComponent
