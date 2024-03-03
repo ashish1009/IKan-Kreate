@@ -168,6 +168,95 @@ namespace Kreator
     return modified;
   }
   
+  struct PropertyFloatData
+  {
+    std::string title;
+    float resetValue = 0.0f;
+    float min = 0.0f, max = 0.0f;
+  };
+
+  static bool DrawFloat2Control(const std::string& label, float& value1, float& value2, const PropertyFloatData& data1,
+                                const PropertyFloatData& data2, float columnWidth = 100.0f)
+  {
+    bool modified = false;
+    
+    UI::ScopedStyle framePdding(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 2));
+    UI::ScopedStyle framerounding(ImGuiStyleVar_FrameRounding, 0);
+    
+    UI::PushID();
+    ImGui::TableSetColumnIndex(0);
+    UI::ShiftCursor(0.0f, 7.0f);
+    
+    ImGui::Text(label.c_str());
+    UI::DrawUnderline(false, 0.0f, 2.0f);
+    
+    ImGui::TableSetColumnIndex(1);
+    UI::ShiftCursor(7.0f, 0.0f);
+    
+    {
+      const float spacingX = 5.0f;
+      UI::ScopedStyle itemSpacing(ImGuiStyleVar_ItemSpacing, ImVec2{ spacingX, 0.0f });
+      UI::ScopedStyle padding(ImGuiStyleVar_WindowPadding, ImVec2{ 0.0f, 2.0f });
+      
+      {
+        // Begin XYZ area
+        UI::ScopedColor padding(ImGuiCol_Border, IM_COL32(0, 0, 0, 0));
+        UI::ScopedStyle frame(ImGuiCol_FrameBg, IM_COL32(0, 0, 0, 0));
+        
+        ImGui::BeginChild(ImGui::GetID((label + "fr").c_str()),
+                          ImVec2(ImGui::GetContentRegionAvail().x - spacingX, ImGui::GetFrameHeightWithSpacing() + 10.0f),
+                          ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoScrollWithMouse);
+      }
+      const float framePadding = 2.0f;
+      const float outlineSpacing = 1.0f;
+      const float lineHeight = GImGui->Font->FontSize + framePadding * 2.0f;
+      const ImVec2 buttonSize = { 50, lineHeight };
+      const float inputItemWidth = (ImGui::GetContentRegionAvail().x - spacingX) / 2.0f - buttonSize.x;
+      
+      auto drawControl = [&] (const std::string& label, float& value, float resetValue, float min, float max, const ImVec4& colourN,
+                              const ImVec4& colourH, const ImVec4& colourP) {
+        {
+          UI::ScopedStyle buttonFrame(ImGuiStyleVar_FramePadding, ImVec2(framePadding, 0.0f));
+          UI::ScopedStyle buttonRounding(ImGuiStyleVar_FrameRounding, 1.0f);
+          UI::ScopedColorStack buttonColours(ImGuiCol_Button, colourN,
+                                             ImGuiCol_ButtonHovered, colourH,
+                                             ImGuiCol_ButtonActive, colourP);
+          
+          UI::ScopedFont boldFont(UI::GetBoldFont());
+          
+          UI::ShiftCursorY(2.0f);
+          if (ImGui::Button(label.c_str(), buttonSize))
+          {
+            value = resetValue;
+            modified = true;
+          }
+        }
+        
+        ImGui::SameLine(0.0f, outlineSpacing);
+        ImGui::SetNextItemWidth(inputItemWidth);
+        UI::ShiftCursorY(-2.0f);
+        modified |= ImGui::DragFloat(("##" + label).c_str(), &value, 0.1f, min, max);
+        
+        if (!UI::IsItemDisabled())
+        {
+          UI::DrawItemActivityOutline(2.0f, true, UI::Color::Accent);
+        }
+      };
+      
+      drawControl(data1.title, value1, data1.resetValue, data1.min, data1.max, ImVec4{ 0.2f, 0.2f, 0.2f, 1.0f },
+                  ImVec4{ 0.3f, 0.3f, 0.3f, 1.0f }, ImVec4{ 0.1f, 0.1f, 0.1f, 1.0f });
+      
+      ImGui::SameLine(0.0f, outlineSpacing);
+      drawControl(data2.title, value2, data2.resetValue, data2.min, data2.max, ImVec4{ 0.2f, 0.2f, 0.2f, 1.0f },
+                  ImVec4{ 0.3f, 0.3f, 0.3f, 1.0f }, ImVec4{ 0.1f, 0.1f, 0.1f, 1.0f });
+      
+      ImGui::EndChild();
+    }
+    UI::PopID();
+    
+    return modified;
+  }
+  
   static void DrawTitleBar(char* searchBuffer)
   {
     static const float height = 30.0f;
@@ -907,6 +996,83 @@ namespace Kreator
         }
       }
       UI::EndPropertyGrid();
+      
+      {
+        ImGui::PushID("CameraController");
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
+        bool open = UI::PropertyGridHeader("Controller", true, 3, 5);
+        ImVec2 contentRegionAvailable = ImGui::GetContentRegionAvail();
+        
+        bool rightClicked  = ImGui::IsItemClicked(ImGuiMouseButton_Right);
+        float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+        
+        ImGui::SameLine(contentRegionAvailable.x - 10);
+        if (ImGui::InvisibleButton("##options", ImVec2{ lineHeight, lineHeight }) or rightClicked)
+        {
+          cc.controller.ResetView();
+        }
+        UI::DrawButtonImage(s_reloadIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255),
+                            IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+        
+        if (open)
+        {
+          UI::BeginPropertyGrid();
+          
+          UUID followID = 0;
+          DrawEntitySelector("Follow", cc.controller.GetFollowEntity(), followID);
+          if (followID > 0)
+          {
+            cc.controller.SetFollowEntity(followID);
+          }
+          UI::EndPropertyGrid();
+          
+          Entity followEntity = m_context->TryGetEntityWithUUID(cc.controller.GetFollowEntity());
+          if (followEntity)
+          {
+            UI::BeginPropertyGrid();
+            float sensitivity = cc.controller.GetSensitivity();
+            if (UI::Property("Sensitivity", sensitivity))
+            {
+              cc.controller.SetSensitivity(sensitivity);
+            }
+            UI::EndPropertyGrid();
+            
+            ImGui::BeginTable("ControllerOrbits", 2, ImGuiTableFlags_SizingFixedFit | ImGuiTableFlags_BordersInnerV | ImGuiTableFlags_NoClip);
+            ImGui::TableSetupColumn("label_column", 0, 80.0f);
+            ImGui::TableSetupColumn("value_column", ImGuiTableColumnFlags_IndentEnable | ImGuiTableColumnFlags_NoClip,
+                                    ImGui::GetContentRegionAvail().x - 100.0f);
+            
+            CameraController::Orbit topOrbit = cc.controller.GetTopOrbit();
+            CameraController::Orbit bottomOrbit = cc.controller.GetBottomOrbit();
+            CameraController::Orbit midOrbit = cc.controller.GetMidOrbit();
+            
+            ImGui::TableNextRow();
+            if (DrawFloat2Control("Top Orbit", topOrbit.radius, topOrbit.height, {"Radius", 1, 1, 1000},
+                                  {"Height", 1, midOrbit.height, 10000}))
+            {
+              cc.controller.SetTopOrbit(topOrbit);
+            }
+            
+            ImGui::TableNextRow();
+            if (DrawFloat2Control("Mid Orbit", midOrbit.radius, midOrbit.height, {"Radius", 1, 1, 1000},
+                                  {"Height", 1, bottomOrbit.height, topOrbit.height}))
+            {
+              cc.controller.SetMidOrbit(midOrbit);
+            }
+            
+            ImGui::TableNextRow();
+            if (DrawFloat2Control("Bottom Orbit", bottomOrbit.radius, bottomOrbit.height, {"Radius", 1, 1, 1000},
+                                  {"Height", 0, -10000, midOrbit.height}))
+            {
+              cc.controller.SetBottomOrbit(bottomOrbit);
+            }
+            ImGui::EndTable();
+          }
+          
+          UI::PropertyGridHeaderEnd();
+        }
+        ImGui::PopID();
+      } // Scope end
     }, s_gearIcon);
     
     DrawComponent<MeshComponent>("Mesh", entity, [&](MeshComponent& smc)

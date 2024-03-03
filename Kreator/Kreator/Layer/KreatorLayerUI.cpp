@@ -1412,9 +1412,17 @@ namespace Kreator
         ImColor buttonTint = m_showMiniViewport ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
         if (cameraButton(m_cameraIcon, buttonTint))
         {
-          m_showMiniViewport = m_showMiniViewport ? false : true;
           SetSelectedEntity(camera);
-          m_editorCamera.Focus(camera.GetTransform().Position());
+          
+          if (Input::IsKeyPressed(Key::LeftAlt))
+          {
+            m_showMiniViewport = m_showMiniViewport ? false : true;
+          }
+          
+          if (Input::IsKeyPressed(Key::LeftShift))
+          {
+            m_editorCamera.Focus(camera.GetTransform().Position());
+          }
         }
       }
     }
