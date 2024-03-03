@@ -82,6 +82,7 @@
 		B2C0BA042B7DC9D10015A277 /* Project.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0BA022B7DC9D10015A277 /* Project.hpp */; };
 		B2C0BA0B2B7DF6950015A277 /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0BA092B7DF6950015A277 /* ProjectSerializer.cpp */; };
 		B2C0BA0C2B7DF6950015A277 /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0BA0A2B7DF6950015A277 /* ProjectSerializer.hpp */; };
+		B2E182EB2B94D43B0051FA51 /* PhysicsMaterial.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2E182E92B94D43B0051FA51 /* PhysicsMaterial.hpp */; };
 		B2EB0F7F2B8655E300DF1407 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F7D2B8655E300DF1407 /* Entity.cpp */; };
 		B2EB0F802B8655E300DF1407 /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2EB0F7E2B8655E300DF1407 /* Entity.hpp */; };
 		B2EB0F9B2B885DD300DF1407 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F992B885DD300DF1407 /* Material.cpp */; };
@@ -299,6 +300,7 @@
 		B2CE3A362B92084300C7F531 /* EquirectangularToCubemapShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = EquirectangularToCubemapShader.glsl; sourceTree = "<group>"; };
 		B2CE3A372B92084300C7F531 /* IrradianceShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = IrradianceShader.glsl; sourceTree = "<group>"; };
 		B2CE3A7E2B931AD900C7F531 /* ReactPhysics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactPhysics.xcodeproj; path = ReactPhysics/ReactPhysics.xcodeproj; sourceTree = "<group>"; };
+		B2E182E92B94D43B0051FA51 /* PhysicsMaterial.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsMaterial.hpp; sourceTree = "<group>"; };
 		B2EB0F7D2B8655E300DF1407 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		B2EB0F7E2B8655E300DF1407 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		B2EB0F992B885DD300DF1407 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
@@ -439,6 +441,7 @@
 				B2000A5B2B9330F10017266F /* PhysicsScene.hpp */,
 				B2000A632B9335820017266F /* ContactListener.cpp */,
 				B2000A642B9335820017266F /* ContactListener.hpp */,
+				B2E182E92B94D43B0051FA51 /* PhysicsMaterial.hpp */,
 			);
 			path = Physics;
 			sourceTree = "<group>";
@@ -1005,6 +1008,7 @@
 				B2ED604E2B74D958007A7F36 /* MathUtils.hpp in Headers */,
 				B2ED5CB22B724AAC007A7F36 /* Logger.hpp in Headers */,
 				B2C0B6D52B75F8EF0015A277 /* TextRenderer.hpp in Headers */,
+				B2E182EB2B94D43B0051FA51 /* PhysicsMaterial.hpp in Headers */,
 				B2ED60382B74BB9B007A7F36 /* RendererBuffer.hpp in Headers */,
 				B248B9462B846E2C00B9EC40 /* AssetRegistry.hpp in Headers */,
 				B2C0B6F62B7C82940015A277 /* Renderer3D.hpp in Headers */,
