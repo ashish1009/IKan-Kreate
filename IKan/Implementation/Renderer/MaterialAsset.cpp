@@ -17,16 +17,16 @@ void MaterialAsset::Set##title##MapToggle(float value) { std::string uniform = "
 Ref<Image> MaterialAsset::Get##title##Map() { std::string uniform = "u_"+std::string(#title)+"Texture"; return m_material->TryGetImage(uniform); } \
 void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"+std::string(#title)+"Texture"; m_material->Set(uniform, tex); } \
 
-  Ref<MaterialAsset> MaterialAsset::Create(const std::string& name)
+  Ref<MaterialAsset> MaterialAsset::Create()
   {
-    return CreateRef<MaterialAsset>(name);
+    return CreateRef<MaterialAsset>();
   }
   
-  MaterialAsset::MaterialAsset(const std::string& name)
+  MaterialAsset::MaterialAsset()
   {
     IK_PROFILE();
-    m_material = Material::Create(ShaderLibrary::GetShader(CoreAsset("Shaders/PBR_StaticShader.glsl")), name);
-    IK_LOG_INFO(LogModule::MaterialAsset, "Creating {0} Asset", m_material->GetName());
+    m_material = Material::Create(ShaderLibrary::GetShader(CoreAsset("Shaders/PBR_StaticShader.glsl")));
+    IK_LOG_INFO(LogModule::MaterialAsset, "Creating Material Asset");
     
     SetAlbedoColor({0.8f, 0.8f, 0.8f});
     SetMetalness(0.5);
@@ -38,13 +38,13 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   : m_material(material)
   {
     IK_PROFILE();
-    IK_LOG_INFO(LogModule::MaterialAsset, "Creating {0} Asset", m_material->GetName());
+    IK_LOG_INFO(LogModule::MaterialAsset, "Creating Material Asset");
   }
   
   MaterialAsset::~MaterialAsset()
   {
     IK_PROFILE();
-    IK_LOG_INFO(LogModule::MaterialAsset, "Destroying {0} Asset", m_material->GetName());
+    IK_LOG_INFO(LogModule::MaterialAsset, "Destroying Material Asset");
   }
   
   glm::vec3& MaterialAsset::GetAlbedoColor()

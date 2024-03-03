@@ -253,6 +253,11 @@ namespace Kreator
                     }
                   }
                 }
+                if (ImGui::MenuItem("Material"))
+                {
+                  CreateAsset<MaterialAsset>("NewMaterial.ikmat");
+                }
+
                 ImGui::EndMenu();
               }
               

@@ -77,7 +77,6 @@ namespace Kreator
     Ref<Material> material = m_materialAsset->GetMaterial();
     {
       UI::ScopedFont fixedSize(UI::GetFixedWidthFont());
-      ImGui::Text("Name   : %s", material->GetName().c_str());
       ImGui::Text("Shader : %s", material->GetShader()->GetName().c_str());
       ImGui::Separator();
     }

@@ -1174,7 +1174,7 @@ namespace Kreator
             // TODO: Later increase the material for now only 0 is used
             std::string filename = buffer;
             filename += MaterialExtension;
-            smc.materialTable->SetMaterial(0, AssetManager::CreateNewAsset<MaterialAsset>(filename, Project::GetActive()->GetMaterialDirectory(), buffer));
+            smc.materialTable->SetMaterial(0, AssetManager::CreateNewAsset<MaterialAsset>(filename, Project::GetActive()->GetMaterialDirectory()));
             m_showMaterialEditor = true;
             ImGui::CloseCurrentPopup();
           }
@@ -1199,17 +1199,11 @@ namespace Kreator
             if (hasMaterial)
             {
               m_selectedMeshMaterialAsset = smc.materialTable->GetMaterial((uint32_t)i);
-              std::string meshMaterialName = m_selectedMeshMaterialAsset->GetMaterial()->GetName();
-              if (meshMaterialName.empty())
-              {
-                meshMaterialName = "Unnamed Material";
-              }
-              
               AssetHandle materialAssetHandle = m_selectedMeshMaterialAsset->handle;
               settings.advanceToNextColumn = false;
               settings.widthOffset = 80;
               UI::Property("Tiling Factor", smc.tilingFactor, 1.0f, 1.0f, 1000.0f);
-              UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), meshMaterialName.c_str(), materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
+              UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), nullptr, materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
                 smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
               }, settings);
               
@@ -1229,7 +1223,7 @@ namespace Kreator
                   // TODO: Later increase the material for now only 0 is used
                   // TODO: Might change to UUID if needed
                   std::string materialName = entity.GetName() + "#" + std::to_string((uint32_t)entity) + MaterialExtension;
-                  m_selectedMeshMaterialAsset = AssetManager::CreateNewAsset<MaterialAsset>(materialName, Project::GetActive()->GetMaterialDirectory(), materialName);
+                  m_selectedMeshMaterialAsset = AssetManager::CreateNewAsset<MaterialAsset>(materialName, Project::GetActive()->GetMaterialDirectory());
                   smc.materialTable->SetMaterial(0, m_selectedMeshMaterialAsset);
                 }
                 m_showMaterialEditor = m_showMaterialEditor ? false : true;

@@ -27,7 +27,7 @@ namespace IKan
   void SceneRenderer::Initialize()
   {
     IK_PROFILE();
-    s_colorMaterial = Material::Create(CoreAsset("Shaders/ColorShader.glsl"), "Color Shader");
+    s_colorMaterial = Material::Create(CoreAsset("Shaders/ColorShader.glsl"));
 
     s_finalImageShader = ShaderFactory::Create(CoreAsset("Shaders/HdrBloomShader.glsl"));
     s_equiractangularToCubemapShader = ShaderFactory::Create("../../../IKan/Assets/Shaders/EquirectangularToCubemapShader.glsl");

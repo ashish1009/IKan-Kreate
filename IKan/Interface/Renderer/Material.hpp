@@ -18,7 +18,7 @@ namespace IKan
   {
   public:
     /// @param shader shader instance
-    Material(const Ref<Shader>& shader, const std::string& name);
+    Material(const Ref<Shader>& shader);
     /// Destructor
     virtual ~Material();
     
@@ -27,15 +27,9 @@ namespace IKan
     void Bind();
     /// This function unbinds the material. To be called after rendering any scene
     void Unbind();
-    
-    /// This function update the material name
-    /// - Parameter name: name
-    void SetName(const std::string& name);
-    
+        
     /// This function returns the name of Material
     const Ref<Shader>& GetShader() const;
-    /// This function returns the shader binded to Material
-    const std::string& GetName() const;
     
     /// This fucntion uploads the date to material of type T
     /// - Parameters:
@@ -80,10 +74,10 @@ namespace IKan
 
     /// This function creates instance of Material with Shader instance
     /// - Parameter shader: shader instance
-    [[nodiscard]] static Ref<Material> Create(const Ref<Shader>& shader, const std::string& name);
+    [[nodiscard]] static Ref<Material> Create(const Ref<Shader>& shader);
     /// This funciton creates instance of Material with sahder file path
     /// - Parameter shader_file_path: shader file path
-    [[nodiscard]] static Ref<Material> Create(const std::filesystem::path& shaderFilePath, const std::string& name);
+    [[nodiscard]] static Ref<Material> Create(const std::filesystem::path& shaderFilePath);
     
     DELETE_COPY_MOVE_CONSTRUCTORS(Material);
   private:
@@ -107,7 +101,6 @@ namespace IKan
     
     // Member Functions ----------------------------------------------------------------------------------------------
     Ref<Shader> m_shader;
-    std::string m_name;
     
     Buffer m_vsUniformStorageBuffer;
     Buffer m_fsUniformStorageBuffer;

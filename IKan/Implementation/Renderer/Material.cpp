@@ -10,23 +10,22 @@
 
 namespace IKan
 {
-  [[nodiscard]] Ref<Material> Material::Create(const Ref<Shader>& shader, const std::string& name)
+  [[nodiscard]] Ref<Material> Material::Create(const Ref<Shader>& shader)
   {
-    return CreateRef<Material>(shader, name);
+    return CreateRef<Material>(shader);
   }
   
-  [[nodiscard]] Ref<Material> Material::Create(const std::filesystem::path& shaderFilePath, const std::string& name)
+  [[nodiscard]] Ref<Material> Material::Create(const std::filesystem::path& shaderFilePath)
   {
     auto shader = ShaderLibrary::GetShader(shaderFilePath);
-    return CreateRef<Material>(shader, name);
+    return CreateRef<Material>(shader);
   }
   
-  Material::Material(const Ref<Shader>& shader, const std::string& name)
-  : m_shader(shader), m_name(name)
+  Material::Material(const Ref<Shader>& shader)
+  : m_shader(shader)
   {
     IK_PROFILE();
     IK_LOG_DEBUG(LogModule::Material, "Creating Material ...");
-    IK_LOG_DEBUG(LogModule::Material, "  Name                    | {0}", m_name);
     IK_LOG_DEBUG(LogModule::Material, "  Shader                  | {0}", m_shader->GetName());
     AllocateStorage();
   }
@@ -262,18 +261,8 @@ namespace IKan
     }
   }
   
-  void Material::SetName(const std::string& name)
-  {
-    m_name = name;
-  }
-  
   const Ref<Shader>& Material::GetShader() const
   {
     return m_shader;
-  }
-  
-  const std::string& Material::GetName() const
-  {
-    return m_name;
   }
 } // namespace ikan

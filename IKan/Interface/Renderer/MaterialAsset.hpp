@@ -31,8 +31,7 @@ void Set##title##Map(Ref<Image> texture); \
   {
   public:
     /// Default constructor of material asset
-    /// - Parameter name: name of material
-    MaterialAsset(const std::string& name);
+    MaterialAsset();
     /// Construct material asset with material instance
     /// - Parameter material: material instance
     MaterialAsset(Ref<Material> material);
@@ -80,8 +79,7 @@ void Set##title##Map(Ref<Image> texture); \
     Ref<Material> GetMaterial();
 
     /// This function create material asset
-    /// - Parameter name: name of material
-    static Ref<MaterialAsset> Create(const std::string& name);
+    static Ref<MaterialAsset> Create();
     
     ASSET_TYPE(Material);
     
