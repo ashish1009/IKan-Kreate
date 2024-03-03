@@ -320,7 +320,12 @@ namespace IKan
     
     CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<MeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
-    
+    CopyComponentIfExists<RigidBodyComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<Box3DColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<SphereColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<CapsuleColliderComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<JointComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+
     auto childIds = entity.Children();
     for (auto childId : childIds)
     {

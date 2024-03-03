@@ -269,6 +269,38 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 12315000300272384669
+    TagComponent:
+      Tag: Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0.300000012, 4.88967276, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 13269400347190587610
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 12514459389810633182
     TagComponent:
       Tag: Cubed
@@ -436,7 +468,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0.300000012, 0, 0]
+      Position: [0.300000012, 4.93991375, -2.88193464]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -460,4 +492,4 @@ Entities:
       QuaternionOffset: [0, -0, 3.1415925]
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
-      MassDensity: 1
+      MassDensity: 100000
