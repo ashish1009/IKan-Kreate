@@ -1087,9 +1087,9 @@ namespace Kreator
         {
           ImGui::PushID("Cube Material");
           UI::BeginPropertyGrid();
-          UI::Property("Friction Coefficient", bcc.frictionCoefficient, 0.01, 0.0f, 1.0f);
-          UI::Property("Mass Density", bcc.massDensity, 0.1f, 0.0f, 10000.0f);
-          UI::Property("Bounciness", bcc.bounciness, 0.01f, 0.0f, 1.0f);
+          UI::Property("Mass Density", bcc.massDensity, 1.0f, 0.0f, 10000.0f);
+          UI::PropertySlider("Friction Coefficient", bcc.frictionCoefficient, 0.0f, 1.0f);
+          UI::PropertySlider("Bounciness", bcc.bounciness, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
           UI::PropertyGridHeaderEnd();
@@ -1116,9 +1116,9 @@ namespace Kreator
         {
           ImGui::PushID("Sphere Material");
           UI::BeginPropertyGrid();
-          UI::Property("Friction Coefficient", scc.frictionCoefficient, 0.01, 0.0f, 1.0f);
-          UI::Property("Mass Density", scc.massDensity, 0.1f, 0.0f, 10000.0f);
-          UI::Property("Bounciness", scc.bounciness, 0.01f, 0.0f, 1.0f);
+          UI::Property("Mass Density", scc.massDensity, 0.0f, 10000.0f);
+          UI::PropertySlider("Friction Coefficient", scc.frictionCoefficient, 0.0f, 1.0f);
+          UI::PropertySlider("Bounciness", scc.bounciness, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
           UI::PropertyGridHeaderEnd();
@@ -1146,9 +1146,9 @@ namespace Kreator
         {
           ImGui::PushID("Capsue Material");
           UI::BeginPropertyGrid();
-          UI::Property("Friction Coefficient", ccc.frictionCoefficient, 0.01, 0.0f, 1.0f);
-          UI::Property("Mass Density", ccc.massDensity, 0.1f, 0.0f, 10000.0f);
-          UI::Property("Bounciness", ccc.bounciness, 0.01f, 0.0f, 1.0f);
+          UI::Property("Mass Density", ccc.massDensity, 0.0f, 10000.0f);
+          UI::PropertySlider("Friction Coefficient", ccc.frictionCoefficient, 0.0f, 1.0f);
+          UI::PropertySlider("Bounciness", ccc.bounciness, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
           UI::PropertyGridHeaderEnd();

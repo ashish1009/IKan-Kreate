@@ -107,7 +107,7 @@ namespace Kreator
     void RenderCameraAxis();
     /// This function renders the debug Colliders
     void ShowColliders();
-
+    
     /// This function returns the Imguizmo Snap value
     float GetSnapValue();
     
@@ -223,7 +223,8 @@ namespace Kreator
     bool m_showNewScenePopup {false};
     bool m_showSceneSettings {true};
     bool m_showInvalidAssetMetadataPopup {false};
-    
+    bool m_showMiniViewport {true};
+
     // Debug Renderer ------------------------------------
     bool m_renderSystemInfo {true};
     bool m_showRelationshipConnection {true};
@@ -270,6 +271,7 @@ namespace Kreator
     } m_invalidAssetMetadataPopupData;
 
     // Scene Data ----------------------------------------
+    bool m_sceneHaveMainCamera {false};
     float m_timeSinceLastSave = 0.0f;
     std::filesystem::path m_sceneFilePath{};
     enum class SceneState

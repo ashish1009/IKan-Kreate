@@ -231,6 +231,7 @@ if (!m_currentScene) return
         AssetEditorManager::OnUpdate(ts);
         
         // Update Data
+        m_sceneHaveMainCamera = m_currentScene->GetMainCameraEntity() ? true : false;
         m_viewport.GetMouseViewportSpace();
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
@@ -239,6 +240,12 @@ if (!m_currentScene) return
         m_editorScene->OnUpdateEditor();
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
         
+        // Mini viewport data render
+        if (m_showMiniViewport and m_sceneHaveMainCamera)
+        {
+          m_editorScene->OnRenderRuntime(ts, m_miniViewportRenderer);
+        }
+
         // Save Scene Auto
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
         {
@@ -254,6 +261,7 @@ if (!m_currentScene) return
       case SceneState::Simulate:
       {
         // Update Data
+        m_sceneHaveMainCamera = m_currentScene->GetMainCameraEntity() ? true : false;
         m_viewport.GetMouseViewportSpace();
         m_editorCamera.SetActive(m_allowViewportCameraEvents or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
@@ -262,6 +270,12 @@ if (!m_currentScene) return
         m_simulationScene->OnUpdateRuntime(ts);
         m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
         
+        // Mini viewport data render
+        if (m_showMiniViewport and m_sceneHaveMainCamera)
+        {
+          m_editorScene->OnRenderRuntime(ts, m_miniViewportRenderer);
+        }
+
         break;
       }
       case SceneState::Play:
@@ -553,6 +567,19 @@ if (!m_currentScene) return
         }
       }
       Renderer2D::EndBatch();
+      
+      if (m_showMiniViewport and m_sceneHaveMainCamera)
+      {
+        static constexpr glm::mat4 unitMat4 = glm::mat4(1.0f);
+        static constexpr glm::vec3 size = {1.0f/4.0f, -1.0f/4.0f, 1.0f};
+        static constexpr glm::vec3 borderSize = {1.0f/4.0f + 0.01, -1.0f/4.0f - 0.01, 1.0f};
+        static constexpr glm::vec3 position = {0.85f, -0.85f, 0.0f};
+        
+        Renderer2D::BeginBatch(unitMat4, unitMat4);
+        Renderer2D::DrawQuad(position, size, Utils::Math::ZeroVec3, Utils::Math::UnitVec4, m_miniViewportRenderer.GetFinalImage());
+        Renderer2D::DrawQuad(position, borderSize, Utils::Math::ZeroVec3, {1, 1, 1, 1});
+        Renderer2D::EndBatch();
+      }
 
       // Shows System info : Frame rate and Client name
       if (m_renderSystemInfo)
