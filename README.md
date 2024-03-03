@@ -121,11 +121,11 @@ Editor Application using IKan Library to create Games
 - Editor camera Side/Top/Front View
 - Axis
 - Drop Content inside Viewport
+- Mini Viewport
 
 ### Mini Feature Road Map
 - Viewport controlling Entity (delete, move, duplicate, copy, paste ...) may be by some key
 - Camera/Light Icons
-- Mini Viewport
 - Show and hide entity (SHP)
 - Show and hide components
 - Point Light

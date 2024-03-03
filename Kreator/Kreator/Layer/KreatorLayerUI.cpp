@@ -1347,6 +1347,8 @@ namespace Kreator
   }
   void KreatorLayer::UI_CameraToolbar()
   {
+    Entity camera = m_currentScene->GetMainCameraEntity();
+    
     UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
     UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
     UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
@@ -1357,7 +1359,7 @@ namespace Kreator
     const float buttonSize = 18.0f;
     const float edgeOffset = 4.0f;
     const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
-    const float numberOfButtons = 4.0f;
+    const float numberOfButtons = camera ? 4.0f : 3.0f;
     const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
     
     ImGui::SetNextWindowPos(ImVec2(viewportStart.x + ImGui::GetContentRegionAvail().x - windowWidth - edgeOffset, viewportStart.y + edgeOffset));
@@ -1403,12 +1405,17 @@ namespace Kreator
         m_editorCamera.SetFront();
       }
       
-      static const ImColor SelectedGizmoButtonColor = UI::Color::Accent;
-      static const ImColor UnselectedGizmoButtonColor = UI::Color::TextBrighter;
-      ImColor buttonTint = m_showMiniViewport ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
-      if (cameraButton(m_cameraIcon, buttonTint))
+      if (camera)
       {
-        m_showMiniViewport = m_showMiniViewport ? false : true;
+        static const ImColor SelectedGizmoButtonColor = UI::Color::Accent;
+        static const ImColor UnselectedGizmoButtonColor = UI::Color::TextBrighter;
+        ImColor buttonTint = m_showMiniViewport ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
+        if (cameraButton(m_cameraIcon, buttonTint))
+        {
+          m_showMiniViewport = m_showMiniViewport ? false : true;
+          SetSelectedEntity(camera);
+          m_editorCamera.Focus(camera.GetTransform().Position());
+        }
       }
     }
     
