@@ -14,6 +14,8 @@
 		B2000A722B9367E50017266F /* libReactPhysics.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2CE3A852B931AD900C7F531 /* libReactPhysics.a */; };
 		B2000A752B936CD00017266F /* PhysicsJoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A732B936CD00017266F /* PhysicsJoint.cpp */; };
 		B2000A762B936CD00017266F /* PhysicsJoint.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A742B936CD00017266F /* PhysicsJoint.hpp */; };
+		B2000A822B9486510017266F /* CameraController.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2000A802B9486510017266F /* CameraController.cpp */; };
+		B2000A832B9486510017266F /* CameraController.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A812B9486510017266F /* CameraController.hpp */; };
 		B248B9072B8338BA00B9EC40 /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9052B8338BA00B9EC40 /* Asset.cpp */; };
 		B248B9082B8338BA00B9EC40 /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9062B8338BA00B9EC40 /* Asset.hpp */; };
 		B248B90C2B833BA000B9EC40 /* UUID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B90A2B833BA000B9EC40 /* UUID.cpp */; };
@@ -213,6 +215,8 @@
 		B2000A642B9335820017266F /* ContactListener.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContactListener.hpp; sourceTree = "<group>"; };
 		B2000A732B936CD00017266F /* PhysicsJoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = PhysicsJoint.cpp; sourceTree = "<group>"; };
 		B2000A742B936CD00017266F /* PhysicsJoint.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsJoint.hpp; sourceTree = "<group>"; };
+		B2000A802B9486510017266F /* CameraController.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CameraController.cpp; sourceTree = "<group>"; };
+		B2000A812B9486510017266F /* CameraController.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CameraController.hpp; sourceTree = "<group>"; };
 		B248B9052B8338BA00B9EC40 /* Asset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Asset.cpp; sourceTree = "<group>"; };
 		B248B9062B8338BA00B9EC40 /* Asset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Asset.hpp; sourceTree = "<group>"; };
 		B248B90A2B833BA000B9EC40 /* UUID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UUID.cpp; sourceTree = "<group>"; };
@@ -529,6 +533,7 @@
 				B2C0B6FD2B7C88130015A277 /* SceneCamera.cpp */,
 				B2C0B70C2B7CDC5D0015A277 /* EditorCamera.cpp */,
 				B2C0B71D2B7CDEE30015A277 /* FixedCamera.cpp */,
+				B2000A802B9486510017266F /* CameraController.cpp */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -540,6 +545,7 @@
 				B2C0B6FE2B7C88130015A277 /* SceneCamera.hpp */,
 				B2C0B70D2B7CDC5D0015A277 /* EditorCamera.hpp */,
 				B2C0B71E2B7CDEE30015A277 /* FixedCamera.hpp */,
+				B2000A812B9486510017266F /* CameraController.hpp */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -1046,6 +1052,7 @@
 				B2C0B7002B7C88130015A277 /* SceneCamera.hpp in Headers */,
 				B28CDFC12B85FD0B0075DE7D /* Components.hpp in Headers */,
 				B2EB0FE52B889AAA00DF1407 /* Ray.hpp in Headers */,
+				B2000A832B9486510017266F /* CameraController.hpp in Headers */,
 				B248B94A2B846ECC00B9EC40 /* AssetManager.hpp in Headers */,
 				B2ED5CCF2B736963007A7F36 /* TimeStep.hpp in Headers */,
 				B2ED60552B74DAB8007A7F36 /* Texture.hpp in Headers */,
@@ -1252,6 +1259,7 @@
 				B2ED60302B74B814007A7F36 /* Shader.cpp in Sources */,
 				B248B9452B846E2C00B9EC40 /* AssetRegistry.cpp in Sources */,
 				B2C0B6D42B75F8EF0015A277 /* TextRenderer.cpp in Sources */,
+				B2000A822B9486510017266F /* CameraController.cpp in Sources */,
 				B2ED603B2B74BBA8007A7F36 /* OpenGLRendererBuffer.cpp in Sources */,
 				B2C0B6F52B7C82940015A277 /* Renderer3D.cpp in Sources */,
 				B2ED5E272B7397A5007A7F36 /* LayerStack.cpp in Sources */,
