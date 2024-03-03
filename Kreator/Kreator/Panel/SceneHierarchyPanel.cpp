@@ -586,7 +586,7 @@ namespace Kreator
     
     if (isRowClicked)
     {
-      bool multipleSelection = Input::IsKeyPressed(IKan::Key::LeftControl);
+      bool multipleSelection = Input::IsKeyPressed(IKan::Key::LeftSuper);
       SetSelectedEntity(entity, multipleSelection);
       ImGui::FocusWindow(ImGui::GetCurrentWindow());
     }

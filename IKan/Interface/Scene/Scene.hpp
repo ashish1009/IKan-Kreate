@@ -235,7 +235,7 @@ namespace IKan
     // Environment ----------------------
     bool m_useIBL {true};
     bool m_useIrradiance {false};
-    AssetHandle m_skyboxAsset;
+    AssetHandle m_skyboxAsset {0};
     DirectionLight m_directionLight;
     
     // Physics Data
