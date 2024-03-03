@@ -14,7 +14,7 @@
 
 namespace IKan
 {
-  static const std::string IKanVersion = "8.0";
+  static const std::string IKanVersion = "7.3";
   
   /// This structure stores the specifications to create the application
   struct ApplicationSpecification

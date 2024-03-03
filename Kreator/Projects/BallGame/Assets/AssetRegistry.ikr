@@ -86,6 +86,9 @@ Assets:
   - Handle: 9402355752634732605
     FilePath: Materials/Cube2#10.ikmat
     Type: Material
+  - Handle: 10122777639672010441
+    FilePath: Prefabs/GreenMesh.ikprefab
+    Type: Prefab
   - Handle: 13269400347190587610
     FilePath: Materials/Cube#12.ikmat
     Type: Material
