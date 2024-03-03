@@ -8,15 +8,212 @@ Environment:
   UseIrradiance: false
   Skybox: 0
 Entities:
+  - Entity: 81551777376820334
+    TagComponent:
+      Tag: Cube
+    Parent: 1559353662426615942
+    Children:
+      []
+    TransformComponent:
+      Position: [-3, 0, 2.98023224e-08]
+      Rotation: [-0.0750491619, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 1559353662426615942
     TagComponent:
       Tag: Cube
     Parent: 0
     Children:
+      - Handle: 11221283148885144719
+      - Handle: 3841345615736572615
+      - Handle: 18411524937171379592
+      - Handle: 7383260911939204359
+      - Handle: 81551777376820334
+      - Handle: 4412704929990262516
+    TransformComponent:
+      Position: [0, 0, 2.98023224e-08]
+      Rotation: [-0.0750491619, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 3841345615736572615
+    TagComponent:
+      Tag: Cube
+    Parent: 1559353662426615942
+    Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
-      Rotation: [0, 0, 0]
+      Position: [0, 0.22493726, 2.99155712]
+      Rotation: [-0.0750491619, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 4412704929990262516
+    TagComponent:
+      Tag: Cube
+    Parent: 1559353662426615942
+    Children:
+      []
+    TransformComponent:
+      Position: [3, 0, 2.98023224e-08]
+      Rotation: [-0.0750491619, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 7383260911939204359
+    TagComponent:
+      Tag: Cube
+    Parent: 1559353662426615942
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 2.99155521, -0.224936366]
+      Rotation: [-0.0750491619, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 11221283148885144719
+    TagComponent:
+      Tag: Cube
+    Parent: 1559353662426615942
+    Children:
+      []
+    TransformComponent:
+      Position: [0, -0.224936783, -2.99155402]
+      Rotation: [-0.0750491619, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 18411524937171379592
+    TagComponent:
+      Tag: Cube
+    Parent: 1559353662426615942
+    Children:
+      []
+    TransformComponent:
+      Position: [0, -2.99155521, 0.224936664]
+      Rotation: [-0.0750491619, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
       Enable: true

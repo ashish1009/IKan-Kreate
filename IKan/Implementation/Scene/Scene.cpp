@@ -272,7 +272,7 @@ namespace IKan
     return entity;
   }
   
-  void Scene::DestroyEntity(Entity entity)
+  void Scene::DestroyEntity(Entity entity, bool firstCall)
   {
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Deleting Entity from Scene");
@@ -292,14 +292,17 @@ namespace IKan
     {
       auto childId = entity.Children()[i];
       Entity child = GetEntityWithUUID(childId);
-      DestroyEntity(child);
+      DestroyEntity(child, false);
     }
     
     // Delete This child from its parent if exist
-    auto parent = entity.GetParent();
-    if (parent)
+    if (firstCall)
     {
-      parent.RemoveChild(entity);
+      auto parent = entity.GetParent();
+      if (parent)
+      {
+        parent.RemoveChild(entity);
+      }
     }
     
     m_entityIDMap.erase(entity.GetUUID());

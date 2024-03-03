@@ -99,8 +99,10 @@ namespace IKan
     ///   - name: Name of entity
     [[nodiscard]] Entity CreateEntityWithID(UUID uuid, const std::string& name);
     /// This function destriy the entity
-    /// - Parameter entity: entity handle
-    void DestroyEntity(Entity entity);
+    /// - Parameters:
+    ///  - entity: entity handle
+    ///  - firstCall: remove from parent only for first call
+    void DestroyEntity(Entity entity, bool firstCall = true);
     /// This function duplicate the entity
     /// - Parameter entity: entity to be duplicated
     [[nodiscard]] Entity DuplicateEntity(Entity entity);
