@@ -273,7 +273,7 @@ if (!m_currentScene) return
         // Mini viewport data render
         if (m_showMiniViewport and m_sceneHaveMainCamera)
         {
-          m_editorScene->OnRenderRuntime(ts, m_miniViewportRenderer);
+          m_simulationScene->OnRenderRuntime(ts, m_miniViewportRenderer);
         }
 
         break;
@@ -525,6 +525,7 @@ if (!m_currentScene) return
   {
     RETRUN_IF_NO_SCENE();
     m_editorCamera.SetViewportSize(m_viewport.width, m_viewport.height);
+    m_currentScene->SetViewportSize(m_viewport.width, m_viewport.height);
     m_viewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);
     m_miniViewportRenderer.SetViewportSize(m_viewport.width, m_viewport.height);
     FixedCamera::SetViewport(m_viewport.width, m_viewport.height);
@@ -577,7 +578,7 @@ if (!m_currentScene) return
         
         Renderer2D::BeginBatch(unitMat4, unitMat4);
         Renderer2D::DrawQuad(position, size, Utils::Math::ZeroVec3, Utils::Math::UnitVec4, m_miniViewportRenderer.GetFinalImage());
-        Renderer2D::DrawQuad(position, borderSize, Utils::Math::ZeroVec3, {1, 1, 1, 1});
+        Renderer2D::DrawQuad(position, borderSize, Utils::Math::ZeroVec3, Utils::Math::UnitVec4);
         Renderer2D::EndBatch();
       }
 
