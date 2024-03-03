@@ -19,6 +19,7 @@ namespace IKan
 {
   class Entity;
   class TransformComponent;
+  class Prefab;
 
   using EntityMap = std::unordered_map<UUID, Entity>;
 
@@ -130,6 +131,15 @@ namespace IKan
     /// - Parameter entity: enitty handle
     TransformComponent GetWorldSpaceTransform(Entity entity);
     
+    /// This function creates the prefab
+    /// - Parameter prefab: prefab
+    Entity Instantiate(Ref<Prefab> prefab, const glm::vec3* translation = nullptr, const glm::vec3* rotation = nullptr, const glm::vec3* scale = nullptr);
+    /// This funcion creates prefab entity
+    /// - Parameters:
+    ///   - entity: entity
+    ///   - parent: parent
+    Entity CreatePrefabEntity(Entity entity, Entity parent, const glm::vec3* translation = nullptr, const glm::vec3* rotation = nullptr, const glm::vec3* scale = nullptr);
+
     // Physics Wrapeprs ---------------------------------------------------------------------------------------------
     /// This function returns the physics Debug renderer
     const reactphysics3d::DebugRenderer& GetPhysicsDebugRenderer() const;

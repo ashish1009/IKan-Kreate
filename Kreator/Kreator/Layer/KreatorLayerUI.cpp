@@ -1569,6 +1569,12 @@ namespace Kreator
                 m_currentScene->SetSkyboxAsset(handle);
               }
             }
+            else if (asset->GetAssetType() == AssetType::Prefab)
+            {
+              Ref<Prefab> prefab = std::dynamic_pointer_cast<Prefab>(asset);
+              m_editorScene->Instantiate(prefab);
+            }
+
           }
           else
           {

@@ -8,6 +8,7 @@
 #include "Scene.hpp"
 #include "Scene/Components.hpp"
 #include "Scene/Entity.hpp"
+#include "Scene/Prefabs.hpp"
 
 namespace IKan 
 {
@@ -28,6 +29,16 @@ namespace IKan
     }
   }
   
+  template<typename T>
+  static void CopyComponentIfExists(entt::entity dst, entt::registry& dstRegistry, entt::entity src, entt::registry& srcRegistry)
+  {    
+    if (srcRegistry.has<T>(src))
+    {
+      auto& srcComponent = srcRegistry.get<T>(src);
+      dstRegistry.emplace_or_replace<T>(dst, srcComponent);
+    }
+  }
+
   template<typename T>
   static void CopyComponent(entt::registry& dstRegistry, entt::registry& srcRegistry, const std::unordered_map<UUID, entt::entity>& enttMap)
   {
@@ -483,6 +494,67 @@ namespace IKan
     transformComponent.UpdateRotation(rotation);
     
     return transformComponent;
+  }
+  
+  Entity Scene::Instantiate(Ref<Prefab> prefab, const glm::vec3* translation, const glm::vec3* rotation, const glm::vec3* scale)
+  {
+    IK_PROFILE();
+    
+    Entity result;
+    
+    // TODO: we need a better way of retrieving the "root" entity
+    auto entities = prefab->m_scene->GetAllEntitiesWith<RelationshipComponent>();
+    for (auto e : entities)
+    {
+      Entity entity = { e, prefab->m_scene.get() };
+      if (!entity.GetParent())
+      {
+        result = CreatePrefabEntity(entity, {}, translation, rotation, scale);
+        break;
+      }
+    }
+    return result;
+  }
+  
+  Entity Scene::CreatePrefabEntity(Entity entity, Entity parent, const glm::vec3* translation, const glm::vec3* rotation, const glm::vec3* scale)
+  {
+    IK_PROFILE();
+    Entity newEntity = CreateEntity("PrefabEntity");
+    if (parent)
+    {
+      newEntity.SetParent(parent);
+    }
+    
+    CopyComponentIfExists<TagComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<PrefabComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<TransformComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<MeshComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<RigidBodyComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<Box3DColliderComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<SphereColliderComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<CapsuleColliderComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<JointComponent>(newEntity, m_registry, entity, entity.m_scene->m_registry);
+    
+    if (translation)
+    {
+      newEntity.GetTransform().UpdatePosition(*translation);
+    }
+    if (rotation)
+    {
+      newEntity.GetTransform().UpdateRotation(*rotation);
+    }
+    if (scale)
+    {
+      newEntity.GetTransform().UpdateScale(*scale);
+    }
+        
+    // Create children
+    for (auto childId : entity.Children())
+    {
+      CreatePrefabEntity(entity.m_scene->GetEntityWithUUID(childId), newEntity);
+    }
+        
+    return newEntity;
   }
   
   const reactphysics3d::DebugRenderer& Scene::GetPhysicsDebugRenderer() const
