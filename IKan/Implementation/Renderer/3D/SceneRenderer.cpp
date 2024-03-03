@@ -189,6 +189,11 @@ namespace IKan
           {
             RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
           }
+          else
+          {
+            static const auto& defaultMaterial = AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat");
+            RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, defaultMaterial->GetMaterial());
+          }
         }
       }
       
@@ -254,6 +259,11 @@ namespace IKan
       if (selectedMeshData.materilTable->HasMaterial(0))
       {
         RenderMeshGeometry(selectedMeshData.mesh, selectedMeshData.transform, selectedMeshData.tilingFactor, selectedMeshData.materilTable->GetMaterial(0)->GetMaterial());
+      }
+      else
+      {
+        static const auto& defaultMaterial = AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat");
+        RenderMeshGeometry(selectedMeshData.mesh, selectedMeshData.transform, selectedMeshData.tilingFactor, defaultMaterial->GetMaterial());
       }
     }
   }
