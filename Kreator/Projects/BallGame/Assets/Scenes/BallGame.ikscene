@@ -930,6 +930,14 @@ Entities:
         OrthographicNear: -1
         OrthographicFar: 1
       Primary: true
+      CC_Follow: 4130729855813769003
+      CC_TopRadius: 3
+      CC_TopHeight: 4
+      CC_MidRadius: 5
+      CC_MidHeight: 2
+      CC_BottomRadius: 4
+      CC_BottomHeight: 0
+      CC_Sensitivity: 45
   - Entity: 9987987739998273464
     TagComponent:
       Tag: Cube

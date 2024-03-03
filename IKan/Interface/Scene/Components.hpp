@@ -13,6 +13,7 @@
 #include "Asset/Asset.hpp"
 #include "Renderer/MaterialAsset.hpp"
 #include "Camera/SceneCamera.hpp"
+#include "Camera/CameraController.hpp"
 #include "Scene/Entity.hpp"
 
 namespace IKan
@@ -89,7 +90,8 @@ namespace IKan
   {
     bool enable = true;
     SceneCamera camera;
-    
+    CameraController controller;
+
     bool primary = true;
     operator SceneCamera& ();
     operator const SceneCamera& () const;

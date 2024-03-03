@@ -200,6 +200,17 @@ namespace IKan {
       out << YAML::EndMap; // Camera
       out << YAML::Key << "Primary" << YAML::Value << cameraComponent.primary;
             
+      // Camera controller
+      out << YAML::Key << "CC_Follow" << YAML::Value << cameraComponent.controller.GetFollowEntity();
+      
+      out << YAML::Key << "CC_TopRadius" << YAML::Value << cameraComponent.controller.GetTopOrbit().radius;
+      out << YAML::Key << "CC_TopHeight" << YAML::Value << cameraComponent.controller.GetTopOrbit().height;
+      out << YAML::Key << "CC_MidRadius" << YAML::Value << cameraComponent.controller.GetMidOrbit().radius;
+      out << YAML::Key << "CC_MidHeight" << YAML::Value << cameraComponent.controller.GetMidOrbit().height;
+      out << YAML::Key << "CC_BottomRadius" << YAML::Value << cameraComponent.controller.GetBottomOrbit().radius;
+      out << YAML::Key << "CC_BottomHeight" << YAML::Value << cameraComponent.controller.GetBottomOrbit().height;
+      out << YAML::Key << "CC_Sensitivity" << YAML::Value << cameraComponent.controller.GetSensitivity();
+
       out << YAML::EndMap; // CameraComponent
     }
     
@@ -439,7 +450,25 @@ namespace IKan {
           }
         }
         component.primary = cameraComponent["Primary"].as<bool>();
+       
+        // Controller
+        component.controller.Initialize(deserializedEntity, m_scene.get());
+        component.controller.SetFollowEntity(cameraComponent["CC_Follow"].as<UUID>());
         
+        float radius, height;
+        radius = cameraComponent["CC_TopRadius"].as<float>();
+        height = cameraComponent["CC_TopHeight"].as<float>();
+        component.controller.SetTopOrbit({radius, height});
+        
+        radius = cameraComponent["CC_MidRadius"].as<float>();
+        height = cameraComponent["CC_MidHeight"].as<float>();
+        component.controller.SetMidOrbit({radius, height});
+        
+        radius = cameraComponent["CC_BottomRadius"].as<float>();
+        height = cameraComponent["CC_BottomHeight"].as<float>();
+        component.controller.SetBottomOrbit({radius, height});
+        
+        component.controller.SetSensitivity(cameraComponent["CC_Sensitivity"].as<float>());
       }
       
       // MeshComponent ----------------------------------------------------------------------------------------------
