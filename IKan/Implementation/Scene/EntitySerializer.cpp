@@ -50,6 +50,18 @@ namespace IKan
       out << YAML::EndSeq;
     }
     
+    if (entity.HasComponent<PrefabComponent>())
+    {
+      out << YAML::Key << "PrefabComponent";
+      out << YAML::BeginMap; // PrefabComponent
+      
+      auto& prefabComponent = entity.GetComponent<PrefabComponent>();
+      out << YAML::Key << "Prefab" << YAML::Value << prefabComponent.PrefabID;
+      out << YAML::Key << "Entity" << YAML::Value << prefabComponent.EntityID;
+      
+      out << YAML::EndMap; // PrefabComponent
+    }
+    
     if (entity.HasComponent<TransformComponent>())
     {
       out << YAML::Key << "TransformComponent";
@@ -272,6 +284,15 @@ namespace IKan
         }
       }
       
+      auto prefabComponent = entity["PrefabComponent"];
+      if (prefabComponent)
+      {
+        auto& pb = deserializedEntity.AddComponent<PrefabComponent>();
+        
+        pb.PrefabID = prefabComponent["Prefab"].as<uint64_t>();
+        pb.EntityID = prefabComponent["Entity"].as<uint64_t>();
+      }
+
       // TransformComponent ------------------------------------------------------------------------------------------
       auto transformComponent = entity["TransformComponent"];
       if (transformComponent)

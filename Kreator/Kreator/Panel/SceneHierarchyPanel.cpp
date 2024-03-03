@@ -426,10 +426,11 @@ namespace Kreator
       | ImGuiTableFlags_RowBg
       | ImGuiTableFlags_Sortable;
       
-      const int numColumns = 2;
+      const int numColumns = 3;
       if (ImGui::BeginTable("##SceneHierarchy-Table", numColumns, tableFlags, ImVec2(ImGui::GetContentRegionAvail())))
       {
         ImGui::TableSetupColumn("Label");
+        ImGui::TableSetupColumn("Type");
         ImGui::TableSetupColumn("Visibility");
         
         // Headers
@@ -487,6 +488,7 @@ namespace Kreator
   
   void SceneHierarchyPanel::DrawEntityNode(Entity entity, const std::string &searchFilter)
   {
+    static const float edgeOffset = 4.0f;
     const char* name = entity.GetComponent<TagComponent>().tag.c_str();
     constexpr uint32_t maxSearchDepth = 10;
     bool hasChildMatchingSearch = SearchEntityRecursive(entity, searchFilter, maxSearchDepth);
@@ -600,6 +602,26 @@ namespace Kreator
     {
       ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::BackgroundDark);
     }
+    bool missingMesh = entity.HasComponent<MeshComponent>() and (AssetManager::IsAssetHandleValid(entity.GetComponent<MeshComponent>().mesh)
+                                                                 and AssetManager::GetAsset<Mesh>(entity.GetComponent<MeshComponent>().mesh) 
+                                                                 and AssetManager::GetAsset<Mesh>(entity.GetComponent<MeshComponent>().mesh)->IsFlagSet(AssetFlag::Missing));
+    if (missingMesh)
+    {
+      ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.9f, 0.4f, 0.3f, 1.0f));
+    }
+    bool isPrefab = entity.HasComponent<PrefabComponent>();
+    if (isPrefab)
+    {
+      isPrefab = AssetManager::IsAssetHandleValid(entity.GetComponent<PrefabComponent>().PrefabID);
+      if (!isPrefab)
+      {
+        entity.RemoveComponent<PrefabComponent>();
+      }
+    }
+    if (isPrefab && !isSelected)
+    {
+      ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.32f, 0.7f, 0.87f, 1.0f));
+    }
 
     // Tree node ----------------------
     ImGuiContext& g = *GImGui;
@@ -639,6 +661,23 @@ namespace Kreator
         // Select current entity
         SetSelectedEntity(entity);
         
+        if (isPrefab)
+        {
+          if (ImGui::MenuItem("Update Prefab"))
+          {
+            AssetHandle prefabAssetHandle = entity.GetComponent<PrefabComponent>().PrefabID;
+            Ref<Prefab> prefab = AssetManager::GetAsset<Prefab>(prefabAssetHandle);
+            if (prefab)
+            {
+              prefab->Create(entity);
+            }
+            else
+            {
+              IK_LOG_ERROR("SceneHierarchyPanel", "Prefab has invalid asset handle: {0}", prefabAssetHandle);
+            }
+          }
+        }
+
         // Empty Space Right click menu
         Entity newEntity = ECS_Utils::DrawCreateEntityMenu(m_context, entity);
         if (newEntity)
@@ -672,9 +711,6 @@ namespace Kreator
       ImGui::EndPopup();
     }
 
-    // <> column 2 -------------------------------------------------------------------------------------------------
-    ImGui::TableNextColumn();
-    
     if (isRowClicked)
     {
       bool multipleSelection = Input::IsKeyPressed(IKan::Key::LeftSuper);
@@ -683,6 +719,11 @@ namespace Kreator
     }
     
     if (isSelected)
+    {
+      ImGui::PopStyleColor();
+    }
+    
+    if (missingMesh)
     {
       ImGui::PopStyleColor();
     }
@@ -707,6 +748,24 @@ namespace Kreator
       
       ImGui::EndDragDropTarget();
     }
+
+    // <> column 2 -------------------------------------------------------------------------------------------------
+    ImGui::TableNextColumn();
+    if (isPrefab)
+    {
+      UI::ShiftCursorX(edgeOffset * 3.0f);
+      
+      if (isSelected)
+      {
+        ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::BackgroundDark);
+      }
+      
+      ImGui::TextUnformatted("Prefab");
+      ImGui::PopStyleColor();
+    }
+    
+    // <> column 3 -------------------------------------------------------------------------------------------------
+    ImGui::TableNextColumn();
 
     // Draw children ------------------------
     if (opened)

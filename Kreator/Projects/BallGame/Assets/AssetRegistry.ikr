@@ -89,8 +89,8 @@ Assets:
   - Handle: 13269400347190587610
     FilePath: Materials/Cube#12.ikmat
     Type: Material
-  - Handle: 14342558051617332047
-    FilePath: Prefabs/NewPrefab.ikprefab
+  - Handle: 15143050058977420473
+    FilePath: Prefabs/Test.ikprefab
     Type: Prefab
   - Handle: 18340628829998291222
     FilePath: Materials/Cube Center#4.ikmat
