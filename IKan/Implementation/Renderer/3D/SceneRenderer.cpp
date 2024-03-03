@@ -291,6 +291,10 @@ namespace IKan
       s_envTexture = TextureFactory::Create(spec);
       SubmitSkyboxImageImp();
     }
+    else
+    {
+      s_isIBL = false;
+    }
   }
   
   void SceneRenderer::SubmitSkyboxImage(const std::string& skyboxTexturePath)

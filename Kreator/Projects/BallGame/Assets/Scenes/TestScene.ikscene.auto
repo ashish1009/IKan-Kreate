@@ -1,4 +1,4 @@
-Scene: TestScene.ikscene
+Scene: TestScene.ikscene.auto
 Environment:
   EnableDirectionLight: 1
   LightDirection: [-0.200000003, -1, -0.300000012]

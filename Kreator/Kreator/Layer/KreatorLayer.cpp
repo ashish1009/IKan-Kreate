@@ -91,7 +91,7 @@ if (!m_currentScene) return
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
     
     // Increase Line render limit for Colliders
-    Renderer2D::AddLineData(10000);
+    Renderer2D::AddLineData(100000);
 
     // Set debug renderer callback
     m_viewportRenderer.SetDebugRenderer([this]() { DebugRenderer(); });
@@ -256,7 +256,7 @@ if (!m_currentScene) return
           {
             SaveSceneAuto();
           }
-        }
+        }        
         break;
       }
       case SceneState::Simulate:
@@ -505,7 +505,14 @@ if (!m_currentScene) return
       }
       
       // Clear all selected entity
-      ClearSelectedEntity();
+      if (!Input::IsKeyPressed(IKan::Key::LeftSuper))
+      {
+        ClearSelectedEntity();
+      }
+      else
+      {
+        m_selectionContext.clear();
+      }
 
       auto [origin, direction] = CastRay(m_editorCamera);
       
@@ -527,7 +534,7 @@ if (!m_currentScene) return
 
       if (m_selectionContext.size())
       {
-        SetSelectedEntity(m_selectionContext[0].entity);
+        SetSelectedEntity(m_selectionContext[0].entity, Input::IsKeyPressed(Key::LeftSuper));
       }
     }
     return false;
@@ -861,6 +868,8 @@ if (!m_currentScene) return
       auto& mc = cubeEntity.AddComponent<MeshComponent>();
       mc.mesh = AssetManager::GetAsset<Mesh>(DefaultEntityMesh)->handle;
       mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
+      cubeEntity.AddComponent<RigidBodyComponent>();
+      cubeEntity.AddComponent<Box3DColliderComponent>();
     }
 
     // Update the scenes in Panels
