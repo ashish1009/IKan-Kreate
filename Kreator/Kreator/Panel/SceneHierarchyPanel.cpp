@@ -1287,6 +1287,15 @@ namespace Kreator
         }
         ImGui::Separator();
       }
+      
+      if (!m_selectionContext.At(0).HasComponent<CameraComponent>())
+      {
+        if (ImGui::MenuItem("Camera"))
+        {
+          [[maybe_unused]] auto& cameraComp = m_selectionContext.At(0).AddComponent<CameraComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
 
       if (!m_selectionContext.At(0).HasComponent<RigidBodyComponent>())
       {
