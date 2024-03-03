@@ -152,6 +152,8 @@ namespace Kreator
     
     m_assetIconMap[".fbx"] = CBP_Utils::AssetPath("Fbx.png");
     m_assetIconMap[".obj"] = CBP_Utils::AssetPath("Obj.png");
+
+    m_assetIconMap[".ikprefab"] = CBP_Utils::AssetPath("PrefabIcon.png");
   }
   
   void ContentBrowserPanel::OnImGuiRender(bool &isOpen)
@@ -312,6 +314,19 @@ namespace Kreator
             RenderDeleteDialogue();
           }
           ImGui::EndChild(); // Main Area
+          
+          if (ImGui::BeginDragDropTarget())
+          {
+            auto data = ImGui::AcceptDragDropPayload("scene_entity_hierarchy");
+            if (data)
+            {
+              Entity& e = *(Entity*)data->Data;
+              Ref<Prefab> prefab = CreateAsset<Prefab>("NewPrefab.ikprefab");
+              prefab->Create(e);
+            }
+            ImGui::EndDragDropTarget();
+          }
+
         }
         ImGui::EndChild(); // folders_common
         ImGui::EndTable();

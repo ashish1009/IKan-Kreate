@@ -7,6 +7,6 @@ Project:
   SceneDirectory: Assets/Scenes
   TextureDirectory: Assets/Textures
   MaterialPath: Assets/Materials
-  StartScene: Scenes/PhysicsTestScene.ikscene
+  StartScene: Scenes/TestScene.ikscene
   AutoSave: true
   AutoSaveInterval: 60

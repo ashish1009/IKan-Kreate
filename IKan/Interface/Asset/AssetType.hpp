@@ -54,7 +54,7 @@ namespace IKan
     { ".obj", AssetType::Mesh },
     
     // Material
-    { ".ikmat", AssetType::Material } ,
+    { ".ikmat", AssetType::Material },
     
     // Prefab
     { ".ikprefab", AssetType::Prefab}

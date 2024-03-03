@@ -801,6 +801,7 @@ if (!m_currentScene) return
         std::filesystem::create_directory(projectDir / "Assets/Scenes");
         std::filesystem::create_directory(projectDir / "Assets/Meshes");
         std::filesystem::create_directory(projectDir / "Assets/Materials");
+        std::filesystem::create_directory(projectDir / "Assets/Prefabs");
       }
       else
       {

@@ -20,6 +20,7 @@ namespace IKan
     s_serializers[AssetType::Scene] = CreateScope<SceneAssetSerializer>();
     s_serializers[AssetType::Mesh] = CreateScope<MeshSerializer>();
     s_serializers[AssetType::Material] = CreateScope<MaterialSerializer>();
+    s_serializers[AssetType::Prefab] = CreateScope<PrefabSerializer>();
   }
   
   void AssetImporter::Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset)

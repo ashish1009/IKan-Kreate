@@ -142,6 +142,28 @@ namespace Kreator
     /// This function Uopdate the Refresh button function
     void Refresh();
     
+    // NOTE: This should only be used within the ContentBrowserPanel!
+    //     For creating a new asset outside the content browser, use AssetManager::CreateNewAsset!
+    template<typename T, typename... Args>
+    Ref<T> CreateAsset(const std::string& filename, Args&&... args)
+    {
+      Ref<T> asset = AssetManager::CreateNewAsset<T>(filename, m_currentDirectory->filePath.string(), std::forward<Args>(args)...);
+      if (!asset)
+      {
+        return nullptr;
+      }
+      
+      m_currentDirectory->assets.push_back(asset->handle);
+      ChangeDirectory(m_currentDirectory);
+      
+      auto& item = m_currentItems[m_currentItems.FindItem(asset->handle)];
+      m_selectionStack.Select(asset->handle);
+      item->SetSelected(true);
+      item->StartRenaming();
+      
+      return asset;
+    }
+
     // Member Variables ---------------------------------------------------------------------------------------------
     bool m_isHovered;
     bool m_isFocused;

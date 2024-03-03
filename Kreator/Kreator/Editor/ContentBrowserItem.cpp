@@ -534,7 +534,7 @@ namespace Kreator
   void ContentBrowserAsset::OnRenamed(const std::string& newName)
   {
     auto filepath = AssetManager::GetFileSystemPath(m_assetInfo);
-    std::filesystem::path newFilepath = fmt::format("{0}\\{1}{2}", filepath.parent_path().string(),
+    std::filesystem::path newFilepath = fmt::format("{0}/{1}{2}", filepath.parent_path().string(),
                                                     newName, filepath.extension().string());
     
     if (Utils::FileSystem::Rename(filepath, newFilepath))

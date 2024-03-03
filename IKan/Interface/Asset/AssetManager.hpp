@@ -99,7 +99,7 @@ namespace IKan
       }
       else
       {
-        metadata.filePath = AssetManager::GetRelativePath(directoryPath + "/" + filename + MaterialExtension);
+        metadata.filePath = AssetManager::GetRelativePath(directoryPath + "/" + filename);
       }
       metadata.isDataLoaded = true;
       metadata.type = T::GetStaticType();

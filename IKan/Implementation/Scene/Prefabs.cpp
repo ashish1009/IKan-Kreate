@@ -8,6 +8,7 @@
 #include "Prefabs.hpp"
 #include "Scene/Components.hpp"
 #include "Asset/AssetImporter.hpp"
+#include "Asset/AssetManager.hpp"
 
 namespace IKan
 {
@@ -42,14 +43,14 @@ namespace IKan
     
     if (serialize)
     {
-      AssetImporter::Serialize(Ref<Prefab>(this));
+      AssetImporter::Serialize(AssetManager::GetAsset<Prefab>(handle));
     }
   }
   
   Entity Prefab::CreatePrefabFromEntity(Entity entity)
   {
     Entity newEntity = m_scene->CreateEntity("PrefabEntity");
-    m_entity.AddComponent<PrefabComponent>(handle, newEntity.GetComponent<IDComponent>().ID);
+    newEntity.AddComponent<PrefabComponent>(handle, newEntity.GetComponent<IDComponent>().ID);
     
     CopyComponentIfExists<TagComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
     CopyComponentIfExists<TransformComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
@@ -65,10 +66,9 @@ namespace IKan
     {
       Entity childDuplicate = CreatePrefabFromEntity(entity.m_scene->GetEntityWithUUID(childId));
       
-      childDuplicate.SetParentUUID(m_entity.GetUUID());
-      m_entity.Children().push_back(childDuplicate.GetUUID());
+      childDuplicate.SetParentUUID(newEntity.GetUUID());
+      newEntity.Children().push_back(childDuplicate.GetUUID());
     }
     return newEntity;
   }
-
 } // namespace IKan

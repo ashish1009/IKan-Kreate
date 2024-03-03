@@ -1111,7 +1111,9 @@ namespace Kreator
           if (ImGui::InputText("##Tag", buffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
           {
             // TODO: Later increase the material for now only 0 is used
-            smc.materialTable->SetMaterial(0, AssetManager::CreateNewAsset<MaterialAsset>(buffer, Project::GetActive()->GetMaterialDirectory(), buffer));
+            std::string filename = buffer;
+            filename += MaterialExtension;
+            smc.materialTable->SetMaterial(0, AssetManager::CreateNewAsset<MaterialAsset>(filename, Project::GetActive()->GetMaterialDirectory(), buffer));
             m_showMaterialEditor = true;
             ImGui::CloseCurrentPopup();
           }
@@ -1165,7 +1167,7 @@ namespace Kreator
                 {
                   // TODO: Later increase the material for now only 0 is used
                   // TODO: Might change to UUID if needed
-                  std::string materialName = entity.GetName() + "#" + std::to_string((uint32_t)entity);
+                  std::string materialName = entity.GetName() + "#" + std::to_string((uint32_t)entity) + MaterialExtension;
                   m_selectedMeshMaterialAsset = AssetManager::CreateNewAsset<MaterialAsset>(materialName, Project::GetActive()->GetMaterialDirectory(), materialName);
                   smc.materialTable->SetMaterial(0, m_selectedMeshMaterialAsset);
                 }
