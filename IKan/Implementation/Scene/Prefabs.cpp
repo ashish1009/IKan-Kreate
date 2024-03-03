@@ -38,18 +38,28 @@ namespace IKan
 
   void Prefab::Create(Entity entity, bool serialize)
   {
-    m_entity = m_scene->CreateEntity("PrefabEntity");
-    m_entity.AddComponent<PrefabComponent>(handle, m_entity.GetComponent<IDComponent>().ID);
+    m_entity = CreatePrefabFromEntity(entity);
     
-    CopyComponentIfExists<TagComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    CopyComponentIfExists<TransformComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    CopyComponentIfExists<CameraComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    CopyComponentIfExists<MeshComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    CopyComponentIfExists<RigidBodyComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    CopyComponentIfExists<Box3DColliderComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    CopyComponentIfExists<SphereColliderComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    CopyComponentIfExists<CapsuleColliderComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    CopyComponentIfExists<JointComponent>(m_entity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    if (serialize)
+    {
+      AssetImporter::Serialize(Ref<Prefab>(this));
+    }
+  }
+  
+  Entity Prefab::CreatePrefabFromEntity(Entity entity)
+  {
+    Entity newEntity = m_scene->CreateEntity("PrefabEntity");
+    m_entity.AddComponent<PrefabComponent>(handle, newEntity.GetComponent<IDComponent>().ID);
+    
+    CopyComponentIfExists<TagComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<TransformComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<CameraComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<MeshComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<RigidBodyComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<Box3DColliderComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<SphereColliderComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<CapsuleColliderComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+    CopyComponentIfExists<JointComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
     
     for (auto childId : entity.Children())
     {
@@ -58,10 +68,7 @@ namespace IKan
       childDuplicate.SetParentUUID(m_entity.GetUUID());
       m_entity.Children().push_back(childDuplicate.GetUUID());
     }
-    
-    if (serialize)
-    {
-      AssetImporter::Serialize(Ref<Prefab>(this));
-    }
+    return newEntity;
   }
+
 } // namespace IKan
