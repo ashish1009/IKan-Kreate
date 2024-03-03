@@ -17,6 +17,7 @@ namespace IKan
   
   void AssetEditor::OnImGuiRender()
   {
+    IK_PERFORMANCE("AssetEditor::OnImGuiRender");
     if (!m_isOpen)
     {
       return;

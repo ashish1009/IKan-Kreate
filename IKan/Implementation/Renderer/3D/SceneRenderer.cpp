@@ -84,9 +84,9 @@ namespace IKan
   
   void SceneRenderer::BeginScene(const SceneRendererCamera& sceneCamera, const DirectionLight& directionLight)
   {
+    IK_PERFORMANCE("SceneRenderer::BeginScene");
     s_sceneCamera = sceneCamera;
     s_directionLight = directionLight;
-    IK_PERFORMANCE("SceneRenderer::BeginScene");
   }
   
   void SceneRenderer::EndScene()
@@ -105,6 +105,7 @@ namespace IKan
   
   void SceneRenderer::SetViewportSize(uint32_t width, uint32_t height)
   {
+    IK_PROFILE()
     IK_PERFORMANCE("SceneRenderer::SetViewportSize");
     RETURN_IF(m_viewportWidth == width and m_viewportHeight == height);
     m_viewportWidth = width;
@@ -136,6 +137,7 @@ namespace IKan
 
   void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, float tilingFactor, Ref<Material> material)
   {
+    IK_PERFORMANCE("SceneRenderer::RenderMeshGeometry");
     RETURN_IF(!material);
     
     if (s_isIBL and s_envTexture)
@@ -159,6 +161,7 @@ namespace IKan
   }
   void SceneRenderer::RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material)
   {
+    IK_PERFORMANCE("SceneRenderer::RenderSubmesh");
     mesh->GetPipeline()->Bind();
     for (const SubMesh& submesh : mesh->GetSubMeshes())
     {

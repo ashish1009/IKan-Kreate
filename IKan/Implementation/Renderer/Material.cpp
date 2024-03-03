@@ -238,7 +238,6 @@ namespace IKan
         texture->Bind((uint32_t)i);
       }
     }
-
   }
   
   void Material::UnbindImages()
@@ -261,7 +260,6 @@ namespace IKan
         texture->Unbind();
       }
     }
-
   }
   
   void Material::SetName(const std::string& name)

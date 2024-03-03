@@ -255,6 +255,7 @@ namespace IKan
   
   void OpenGLFrameBuffer::Resize(uint32_t width, uint32_t height)
   {
+    IK_PROFILE();
     RETURN_IF(m_specification.width == width and m_specification.height == height);
     
     glGetIntegerv(GL_VIEWPORT, s_rendererViewport);

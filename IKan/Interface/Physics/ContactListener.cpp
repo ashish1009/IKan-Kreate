@@ -17,6 +17,7 @@ namespace IKan
 {
   void ContactListener::onContact(const CollisionCallback::CallbackData& callbackData)
   {
+    IK_PERFORMANCE("ContactListener::onContact");
     // For each contact pair
     for (uint8_t pairIdx = 0; pairIdx < callbackData.getNbContactPairs(); pairIdx++)
     {
@@ -40,6 +41,7 @@ namespace IKan
   }
   void ContactListener::onTrigger(const OverlapCallback::CallbackData& callbackData)
   {
-    
+    IK_PERFORMANCE("ContactListener::onTrigger");
+
   }
 } // namespace IKan

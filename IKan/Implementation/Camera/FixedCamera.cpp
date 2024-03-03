@@ -11,6 +11,7 @@ namespace IKan
 {
   void FixedCamera::SetViewport(float width, float height)
   {
+    IK_PROFILE();
     RETURN_IF (s_viewportWidth == width and s_viewportHeight == height)
     s_viewportWidth = width;
     s_viewportHeight = height;

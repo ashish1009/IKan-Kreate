@@ -22,6 +22,7 @@ namespace IKan
   
   bool Ray::IntersectsAABB(const AABB& aabb, float& t) const
   {
+    IK_PROFILE();
     glm::vec3 dirfrac;
     // r.dir is unit direction vector of ray
     dirfrac.x = 1.0f / Direction.x;
@@ -61,6 +62,7 @@ namespace IKan
   
   bool Ray::IntersectsTriangle(const glm::vec3& a, const glm::vec3& b, const glm::vec3& c, float& t) const
   {
+    IK_PROFILE();
     const glm::vec3 E1 = b - a;
     const glm::vec3 E2 = c - a;
     const glm::vec3 N = cross(E1, E2);

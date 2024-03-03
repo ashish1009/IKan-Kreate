@@ -124,12 +124,13 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   MaterialTable::MaterialTable()
   : m_materialCount(1)
   {
-
+    IK_PROFILE();
   }
   
   MaterialTable::MaterialTable(Ref<MaterialTable> other)
   : m_materialCount(other->m_materialCount)
   {
+    IK_PROFILE();
     const auto& meshMaterials = other->GetMaterials();
     for (auto[index, materialAsset] : meshMaterials)
     {
@@ -150,6 +151,7 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
 
   void MaterialTable::SetMaterial(uint32_t index, Ref<MaterialAsset> material)
   {
+    IK_PROFILE();
     m_materials[index] = material;
     if (index >= m_materialCount)
     {
@@ -159,6 +161,7 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
 
   void MaterialTable::ClearMaterial(uint32_t index)
   {
+    IK_PROFILE();
     IK_ASSERT(HasMaterial(index));
     m_materials.erase(index);
     if (index >= m_materialCount)

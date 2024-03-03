@@ -278,27 +278,16 @@ namespace IKan
     {
       if (m_specification.internalFormat == TextureFormat::DEPTH_COMPONENT)
       {
-        glFramebufferTexture(GL_FRAMEBUFFER,
-                             TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID),
-                             m_rendererID,
-                             0 /* level */ );
+        glFramebufferTexture(GL_FRAMEBUFFER, TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID), m_rendererID, 0 /* level */ );
       }
       else
       {
-        glFramebufferTexture2D(GL_FRAMEBUFFER,
-                               TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID),
-                               GL_TEXTURE_CUBE_MAP_POSITIVE_X + depthID,
-                               m_rendererID,
-                               level);
+        glFramebufferTexture2D(GL_FRAMEBUFFER, TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID), GL_TEXTURE_CUBE_MAP_POSITIVE_X + depthID, m_rendererID, level);
       }
     }
     else
     {
-      glFramebufferTexture2D(GL_FRAMEBUFFER, /* target */
-                             TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID),
-                             GL_TEXTURE_2D,
-                             m_rendererID,
-                             0 /* level */ );
+      glFramebufferTexture2D(GL_FRAMEBUFFER, /* target */ TextureUtils::IkanAttachmentToOpenGL(attachmentType, colorID), GL_TEXTURE_2D, m_rendererID, 0 /* level */ );
     }
   }
   

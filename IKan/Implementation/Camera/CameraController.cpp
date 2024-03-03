@@ -15,6 +15,7 @@ namespace IKan
 {
   CameraController::CameraController()
   {
+    IK_PROFILE();
     const auto& window = Application::Get().GetWindow();
     m_windowSize = {window.GetWidth(), window.GetHeight()};
     m_halfWindowHeight = m_windowSize.y / 2.0f;
@@ -23,6 +24,7 @@ namespace IKan
   
   CameraController::CameraController(const CameraController& other)
   {
+    IK_PROFILE();
     m_followEntity = other.m_followEntity;
     
     m_centerPosition = other.m_centerPosition;
@@ -41,6 +43,7 @@ namespace IKan
   
   void CameraController::Initialize(Entity entity, Scene* scene)
   {
+    IK_PROFILE();
     m_entity = entity;
     m_scene = scene;
   }
@@ -125,6 +128,7 @@ namespace IKan
   
   void CameraController::ResetView()
   {
+    IK_PROFILE();
     auto& tc = m_entity.GetComponent<TransformComponent>();
     
     Entity followEntity = m_scene->TryGetEntityWithUUID(m_followEntity);

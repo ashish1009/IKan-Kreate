@@ -88,6 +88,7 @@ namespace IKan
     template<typename T, typename... Args>
     static Ref<T> CreateNewAsset(const std::string& filename, const std::string& directoryPath, Args&&... args)
     {
+      IK_PROFILE();
       static_assert(std::is_base_of<Asset, T>::value, "CreateNewAsset only works for types derived from Asset");
       
       AssetMetadata metadata;
@@ -148,6 +149,7 @@ namespace IKan
     template<typename T>
     static Ref<T> GetAsset(AssetHandle assetHandle)
     {
+      IK_PROFILE();
       if (IsMemoryAsset(assetHandle))
       {
         return std::dynamic_pointer_cast<T>(s_memoryAssets[assetHandle]);

@@ -22,6 +22,7 @@ namespace IKan {
   
   void SceneSerializer::Serialize(const std::filesystem::path& filepath)
   {
+    IK_PROFILE();
     IK_LOG_TRACE(LogModule::SceneSerializer, "Serializing the Scene {0}", filepath.filename().string());
     
     const std::string filename = filepath.filename();
@@ -76,6 +77,7 @@ namespace IKan {
   
   bool SceneSerializer::Deserialize(const std::filesystem::path& filepath)
   {
+    IK_PROFILE();
     std::ifstream stream(filepath);
     IK_ASSERT(stream);
     
@@ -131,6 +133,7 @@ namespace IKan {
   
   void SceneSerializer::SerializeEntity(YAML::Emitter& out, Entity entity)
   {
+    IK_PROFILE();
     UUID uuid = entity.GetComponent<IDComponent>().ID;
     out << YAML::BeginMap; // Entity
     out << YAML::Key << "Entity";
@@ -355,6 +358,7 @@ namespace IKan {
   
   void SceneSerializer::DeserializeEntities(YAML::Node& entitiesNode, Ref<Scene> scene)
   {
+    IK_PROFILE();
     for (auto entity : entitiesNode)
     {
       uint64_t uuid = entity["Entity"].as<uint64_t>();

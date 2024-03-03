@@ -27,6 +27,7 @@ namespace IKan::Utils
   }
   bool FileSystem::Copy(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath)
   {
+    IK_PROFILE();
     if (std::filesystem::exists(newFilepath))
     {
       return false;
@@ -37,10 +38,12 @@ namespace IKan::Utils
   }
   bool FileSystem::Rename(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath)
   {
+    IK_PROFILE();
     return Move(oldFilepath, newFilepath);
   }
   bool FileSystem::Move(const std::filesystem::path& oldFilepath, const std::filesystem::path& newFilepath)
   {
+    IK_PROFILE();
     if (std::filesystem::exists(newFilepath))
     {
       return false;
@@ -50,10 +53,12 @@ namespace IKan::Utils
   }
   bool FileSystem::MoveFile(const std::filesystem::path& filepath, const std::filesystem::path& dest)
   {
+    IK_PROFILE();
     return Move(filepath, dest / filepath.filename());
   }
   bool FileSystem::Delete(const std::filesystem::path& filepath)
   {
+    IK_PROFILE();
     if (!std::filesystem::exists(filepath))
     {
       return false;

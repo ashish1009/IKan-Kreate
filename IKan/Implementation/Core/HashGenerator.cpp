@@ -11,6 +11,7 @@ namespace IKan
 {
   uint32_t Hash::GenerateFNV(const char* str)
   {
+    IK_PROFILE();
     constexpr uint32_t FNV_PRIME = 16777619u;
     constexpr uint32_t OFFSET_BASIS = 2166136261u;
     
@@ -26,6 +27,7 @@ namespace IKan
   
   uint32_t Hash::GenerateFNV(const std::string& string)
   {
+    IK_PROFILE();
     return GenerateFNV(string.c_str());
   }
 } // namespace IKan

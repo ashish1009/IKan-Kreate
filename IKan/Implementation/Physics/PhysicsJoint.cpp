@@ -12,11 +12,12 @@ namespace IKan
   PhysicsJoint::PhysicsJoint(PhysicsWorld* world, RigidBody *body1, RigidBody *body2, bool worldSpace, bool allowCollision)
   : world(world), body1(body1), body2(body2), worldSpace(worldSpace), allowCollision(allowCollision)
   {
-    
+    IK_PROFILE();
   }
   
   void PhysicsJoint::SetAnchors(const Vector3& worldAnchorPoint, const Vector3& localAnchorPoint1, const Vector3& localAnchorPoint2)
   {
+    IK_PROFILE();
     this->worldAnchorPoint = worldAnchorPoint;
     this->localAnchorPoint1 = localAnchorPoint1;
     this->localAnchorPoint2 = localAnchorPoint2;
@@ -24,6 +25,7 @@ namespace IKan
   
   void PhysicsJoint::MakeFixed()
   {
+    IK_PROFILE();
     if (worldSpace)
     {
       FixedJointInfo jointInfo(body1, body2, worldAnchorPoint);
@@ -40,6 +42,7 @@ namespace IKan
   
   void PhysicsJoint::MakeBallSocket(bool coneLimit, float coneAngle)
   {
+    IK_PROFILE();
     BallAndSocketJointInfo* jointInfo;
     if (worldSpace)
     {
@@ -62,6 +65,7 @@ namespace IKan
                                bool limit, decimal initMinAngleLimit, decimal initMaxAngleLimit,
                                bool motor, decimal initMotorSpeed, decimal initMaxMotorTorque)
   {
+    IK_PROFILE();
     HingeJointInfo* jointInfo;
     if (worldSpace)
     {
@@ -94,6 +98,7 @@ namespace IKan
                                 bool limit, decimal initMinTransLimit, decimal initMaxTransLimit,
                                 bool motor, decimal initMotorSpeed, decimal initMaxMotorForce)
   {
+    IK_PROFILE();
     SliderJointInfo* jointInfo;
     if (worldSpace)
     {

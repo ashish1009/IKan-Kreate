@@ -175,6 +175,7 @@ namespace IKan
   
   AssetHandle AssetManager::ImportAsset(const std::filesystem::path& filepath)
   {
+    IK_PROFILE()
     std::filesystem::path path = GetRelativePath(filepath);
     if (s_assetRegistry.Contains(path))
     {
