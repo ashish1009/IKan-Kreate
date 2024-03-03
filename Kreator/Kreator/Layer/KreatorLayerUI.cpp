@@ -1406,7 +1406,7 @@ namespace Kreator
       static const ImColor SelectedGizmoButtonColor = UI::Color::Accent;
       static const ImColor UnselectedGizmoButtonColor = UI::Color::TextBrighter;
       ImColor buttonTint = m_showMiniViewport ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
-      if (cameraButton(m_cameraIcon, UI::Color::TextBrighter))
+      if (cameraButton(m_cameraIcon, buttonTint))
       {
         m_showMiniViewport = m_showMiniViewport ? false : true;
       }
