@@ -1218,6 +1218,14 @@ namespace Kreator
               static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
               if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }))
               {
+                if (s_defaultMaterialAsset == m_selectedMeshMaterialAsset->handle)
+                {
+                  // TODO: Later increase the material for now only 0 is used
+                  // TODO: Might change to UUID if needed
+                  std::string materialName = entity.GetName() + "#" + std::to_string((uint32_t)entity) + MaterialExtension;
+                  m_selectedMeshMaterialAsset = AssetManager::CreateNewAsset<MaterialAsset>(materialName, Project::GetActive()->GetMaterialDirectory());
+                  smc.materialTable->SetMaterial(0, m_selectedMeshMaterialAsset);
+                }
                 m_showMaterialEditor = m_showMaterialEditor ? false : true;
               }
               UI::DrawButtonImage(m_showMaterialEditor ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
@@ -1302,6 +1310,9 @@ namespace Kreator
         {
           ImGui::PushID("Cube Material");
           UI::BeginPropertyGrid();
+          UI::Property("Mass Density", bcc.massDensity, 1.0f, 0.0f, 10000.0f);
+          UI::PropertySlider("Friction Coefficient", bcc.frictionCoefficient, 0.0f, 1.0f);
+          UI::PropertySlider("Bounciness", bcc.bounciness, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
           UI::PropertyGridHeaderEnd();
@@ -1328,6 +1339,9 @@ namespace Kreator
         {
           ImGui::PushID("Sphere Material");
           UI::BeginPropertyGrid();
+          UI::Property("Mass Density", scc.massDensity, 0.0f, 10000.0f);
+          UI::PropertySlider("Friction Coefficient", scc.frictionCoefficient, 0.0f, 1.0f);
+          UI::PropertySlider("Bounciness", scc.bounciness, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
           UI::PropertyGridHeaderEnd();
@@ -1355,6 +1369,9 @@ namespace Kreator
         {
           ImGui::PushID("Capsue Material");
           UI::BeginPropertyGrid();
+          UI::Property("Mass Density", ccc.massDensity, 0.0f, 10000.0f);
+          UI::PropertySlider("Friction Coefficient", ccc.frictionCoefficient, 0.0f, 1.0f);
+          UI::PropertySlider("Bounciness", ccc.bounciness, 0.0f, 1.0f);
           UI::EndPropertyGrid();
           ImGui::PopID();
           UI::PropertyGridHeaderEnd();

@@ -7,11 +7,9 @@
 
 #include "PhysicsScene.hpp"
 #include "Physics/PhysicsJoint.hpp"
-#include "Physics/PhysicsMaterial.hpp"
 #include "Scene/Scene.hpp"
 #include "Scene/Entity.hpp"
 #include "Scene/Components.hpp"
-#include "Asset/AssetManager.hpp"
 
 using namespace reactphysics3d;
 
@@ -94,10 +92,10 @@ namespace IKan
         
         // Get the current material of the collider
         reactphysics3d::Material& material = collider->getMaterial();
-        const auto& physicsMaterial = AssetManager::GetAsset<PhysicsMaterial>(bcc.material);
-        material.setBounciness(physicsMaterial->bounciness);
-        material.setFrictionCoefficient(physicsMaterial->frictionCoefficient);
-        material.setMassDensity(physicsMaterial->massDensity);
+        
+        material.setBounciness(bcc.bounciness);
+        material.setFrictionCoefficient(bcc.frictionCoefficient);
+        material.setMassDensity(bcc.massDensity);
         
         body->updateMassPropertiesFromColliders();
       } // Box3d Collider
@@ -127,10 +125,10 @@ namespace IKan
         
         // Get the current material of the collider
         reactphysics3d::Material& material = collider->getMaterial();
-        const auto& physicsMaterial = AssetManager::GetAsset<PhysicsMaterial>(scc.material);
-        material.setBounciness(physicsMaterial->bounciness);
-        material.setFrictionCoefficient(physicsMaterial->frictionCoefficient);
-        material.setMassDensity(physicsMaterial->massDensity);
+        
+        material.setBounciness(scc.bounciness);
+        material.setFrictionCoefficient(scc.frictionCoefficient);
+        material.setMassDensity(scc.massDensity);
       } // Sphere Collider
       
       // Capsule -----------------------------------------------------------------------------------------------------
@@ -158,10 +156,10 @@ namespace IKan
         
         // Get the current material of the collider
         reactphysics3d::Material& material = collider->getMaterial();
-        const auto& physicsMaterial = AssetManager::GetAsset<PhysicsMaterial>(ccc.material);
-        material.setBounciness(physicsMaterial->bounciness);
-        material.setFrictionCoefficient(physicsMaterial->frictionCoefficient);
-        material.setMassDensity(physicsMaterial->massDensity);
+        
+        material.setBounciness(ccc.bounciness);
+        material.setFrictionCoefficient(ccc.frictionCoefficient);
+        material.setMassDensity(ccc.massDensity);
       } // Capsule Collider
     } // Each Rigid Body
     

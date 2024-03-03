@@ -164,7 +164,9 @@ namespace IKan
       out << YAML::Key << "Size" << YAML::Value << box3DBodyComponent.size;
       out << YAML::Key << "PositionOffset" << YAML::Value << box3DBodyComponent.positionOffset;
       out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(box3DBodyComponent.quaternionOffset);
-      out << YAML::Key << "Material" << YAML::Value << box3DBodyComponent.material;
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << box3DBodyComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << box3DBodyComponent.bounciness;
+      out << YAML::Key << "MassDensity" << YAML::Value << box3DBodyComponent.massDensity;
       out << YAML::EndMap; // Box3DColliderComponent
     }
     
@@ -178,7 +180,9 @@ namespace IKan
       out << YAML::Key << "Radius" << YAML::Value << sphereColliderComponent.radius;
       out << YAML::Key << "PositionOffset" << YAML::Value << sphereColliderComponent.positionOffset;
       out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(sphereColliderComponent.quaternionOffset);
-      out << YAML::Key << "Material" << YAML::Value << sphereColliderComponent.material;
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << sphereColliderComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << sphereColliderComponent.bounciness;
+      out << YAML::Key << "MassDensity" << YAML::Value << sphereColliderComponent.massDensity;
       out << YAML::EndMap; // SphereColliderComponent
     }
     
@@ -193,8 +197,10 @@ namespace IKan
       out << YAML::Key << "Height" << YAML::Value << capsuleColliderComponent.height;
       out << YAML::Key << "PositionOffset" << YAML::Value << capsuleColliderComponent.positionOffset;
       out << YAML::Key << "QuaternionOffset" << YAML::Value << glm::eulerAngles(capsuleColliderComponent.quaternionOffset);
-      out << YAML::Key << "Material" << YAML::Value << capsuleColliderComponent.material;
-
+      out << YAML::Key << "FrictionCoefficient" << YAML::Value << capsuleColliderComponent.frictionCoefficient;
+      out << YAML::Key << "Bounciness" << YAML::Value << capsuleColliderComponent.bounciness;
+      out << YAML::Key << "MassDensity" << YAML::Value << capsuleColliderComponent.massDensity;
+      
       out << YAML::EndMap; // CapsuleColliderComponent
     }
     
@@ -421,7 +427,9 @@ namespace IKan
         component.size = box3DColliderComponent["Size"].as<glm::vec3>();
         component.positionOffset = box3DColliderComponent["PositionOffset"].as<glm::vec3>();
         component.quaternionOffset = glm::quat(box3DColliderComponent["QuaternionOffset"].as<glm::vec3>());
-        component.material = box3DColliderComponent["Material"].as<AssetHandle>();
+        component.frictionCoefficient = box3DColliderComponent["FrictionCoefficient"].as<float>();
+        component.massDensity = box3DColliderComponent["MassDensity"].as<float>();
+        component.bounciness = box3DColliderComponent["Bounciness"].as<float>();
       }
       
       // SphereColliderComponent ------------------------------------------------------------------------------------
@@ -434,7 +442,9 @@ namespace IKan
         component.radius = sphereColliderComponent["Radius"].as<float>();
         component.positionOffset = sphereColliderComponent["PositionOffset"].as<glm::vec3>();
         component.quaternionOffset = glm::quat(sphereColliderComponent["QuaternionOffset"].as<glm::vec3>());
-        component.material = sphereColliderComponent["Material"].as<AssetHandle>();
+        component.frictionCoefficient = sphereColliderComponent["FrictionCoefficient"].as<float>();
+        component.massDensity = sphereColliderComponent["MassDensity"].as<float>();
+        component.bounciness = sphereColliderComponent["Bounciness"].as<float>();
       }
       
       // CapsuleColliderComponent -----------------------------------------------------------------------------------
@@ -448,7 +458,9 @@ namespace IKan
         component.height = capsuleColliderComponent["Height"].as<float>();
         component.positionOffset = capsuleColliderComponent["PositionOffset"].as<glm::vec3>();
         component.quaternionOffset = glm::quat(capsuleColliderComponent["QuaternionOffset"].as<glm::vec3>());
-        component.material = capsuleColliderComponent["Material"].as<AssetHandle>();
+        component.frictionCoefficient = capsuleColliderComponent["FrictionCoefficient"].as<float>();
+        component.massDensity = capsuleColliderComponent["MassDensity"].as<float>();
+        component.bounciness = capsuleColliderComponent["Bounciness"].as<float>();
       }
       
       // JointComponent ---------------------------------------------------------------------------------------------

@@ -19,7 +19,6 @@ namespace IKan
       if (assetType == "Scene")               return AssetType::Scene;
       if (assetType == "Mesh")                return AssetType::Mesh;
       if (assetType == "Material")            return AssetType::Material;
-      if (assetType == "PhysicsMaterial")     return AssetType::PhysicsMaterial;
       if (assetType == "Prefab")              return AssetType::Prefab;
       IK_ASSERT(false, "Unknown Asset Type");
       return AssetType::Invalid;
@@ -29,14 +28,13 @@ namespace IKan
     {
       switch (assetType)
       {
-        case AssetType::Invalid:          return "Invalid";
-        case AssetType::Image:            return "Image";
-        case AssetType::Font:             return "Font";
-        case AssetType::Scene:            return "Scene";
-        case AssetType::Mesh:             return "Mesh";
-        case AssetType::Material:         return "Material";
-        case AssetType::PhysicsMaterial:  return "PhysicsMaterial";
-        case AssetType::Prefab:           return "Prefab";
+        case AssetType::Invalid:      return "Invalid";
+        case AssetType::Image:        return "Image";
+        case AssetType::Font:         return "Font";
+        case AssetType::Scene:        return "Scene";
+        case AssetType::Mesh:         return "Mesh";
+        case AssetType::Material:     return "Material";
+        case AssetType::Prefab:       return "Prefab";
       }
       IK_ASSERT(false, "Unknown Asset Type");
       return "None";

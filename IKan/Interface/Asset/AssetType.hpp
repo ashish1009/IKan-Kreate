@@ -31,7 +31,6 @@ namespace IKan
     Mesh,
     Material,
     Prefab,
-    PhysicsMaterial
   };
   
   /// Map to store the asset with its Extension
@@ -56,7 +55,6 @@ namespace IKan
     
     // Material
     { ".ikmat", AssetType::Material },
-    { ".ikphymat", AssetType::PhysicsMaterial },
     
     // Prefab
     { ".ikprefab", AssetType::Prefab}
