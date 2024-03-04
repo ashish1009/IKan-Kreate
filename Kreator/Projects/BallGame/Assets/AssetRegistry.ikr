@@ -8,6 +8,9 @@ Assets:
   - Handle: 231274074
     FilePath: Textures/Hdr/Night/Star.hdr
     Type: Image
+  - Handle: 233528456
+    FilePath: Textures/Pbr/Ground/DryRock/dry-rocky-ground_normal-ogl.png
+    Type: Image
   - Handle: 444052761
     FilePath: Materials/Default.ikmat
     Type: Material
@@ -17,8 +20,17 @@ Assets:
   - Handle: 560965872
     FilePath: Meshes/Default/Cube.fbx
     Type: Mesh
+  - Handle: 677070044
+    FilePath: Textures/Pbr/Ground/Bog/bog_normal-ogl.png
+    Type: Image
   - Handle: 690120167
     FilePath: Textures/Hdr/Day/BrightWhiteLight.hdr
+    Type: Image
+  - Handle: 942861086
+    FilePath: Textures/Pbr/Ground/Forest/forest_floor_albedo.png
+    Type: Image
+  - Handle: 1062582993
+    FilePath: Textures/Pbr/Ground/Forest/forest_floor_Normal-ogl.png
     Type: Image
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
@@ -32,6 +44,21 @@ Assets:
   - Handle: 2027506804
     FilePath: Textures/Hdr/Evening/LightBlue.hdr
     Type: Image
+  - Handle: 2104473943
+    FilePath: Textures/Pbr/Ground/DryRock/dry-rocky-ground_albedo.png
+    Type: Image
+  - Handle: 2592160278
+    FilePath: Textures/Pbr/Ground/PatchyShadow/patchy-meadow1_albedo.png
+    Type: Image
+  - Handle: 2787595035
+    FilePath: Textures/Pbr/Ground/Bog/bog_albedo.png
+    Type: Image
+  - Handle: 2788124441
+    FilePath: Textures/Pbr/Ground/PatchyShadow/patchy-meadow1_normal-ogl.png
+    Type: Image
+  - Handle: 3013658672
+    FilePath: Scenes/BallGame.ikscene
+    Type: Scene
   - Handle: 3508957159
     FilePath: Textures/Hdr/Day/GrassCloud.hdr
     Type: Image
