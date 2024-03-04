@@ -1549,16 +1549,27 @@ namespace Kreator
               
               // for each mesh entity
               auto meshEntities = m_currentScene->GetAllEntitiesWith<MeshComponent>();
+              std::vector<SelectedEntity> hoveredContext;
               for (auto e : meshEntities)
               {
                 Entity entity = { e, m_currentScene.get() };
                 auto& mc = entity.GetComponent<MeshComponent>();
                 if (float distance = KreatorUtils::CheckRayPassMesh(mc.mesh, entity, origin, direction); distance != -1)
                 {
-                  mc.materialTable->SetMaterial(0, std::dynamic_pointer_cast<MaterialAsset>(asset));
-                  break;
+                  hoveredContext.push_back({entity, distance});
                 }
               } // Each Mesh Comp
+              
+              std::sort(hoveredContext.begin(), hoveredContext.end(), [](auto& a, auto& b) {
+                return a.distance < b.distance;
+              });
+              
+              if (hoveredContext.size())
+              {
+                auto& mc = hoveredContext[0].entity.GetComponent<MeshComponent>();
+                mc.materialTable->SetMaterial(0, std::dynamic_pointer_cast<MaterialAsset>(asset));
+              }
+
             }
             else if (asset->GetAssetType() == AssetType::Image)
             {

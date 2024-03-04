@@ -37,7 +37,7 @@ namespace Kreator::ECS_Utils
         newEntity = scene->CreateEntity(name);
         std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
         
-        auto& mc = newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
+        newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
         
         newEntity.AddComponent<RigidBodyComponent>();
         if (name == "Cube")
