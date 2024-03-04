@@ -158,7 +158,7 @@ namespace Kreator
         bool useAlbedo = material->Get<float>("u_AlbedoTextureToggle");
         if (ImGui::Checkbox("Use", &useAlbedo))
         {
-          material->Set("u_AlbedoTextureToggle", useAlbedo ? 1.0f : 0.0f);
+          material->Set("u_AlbedoTextureToggle", useAlbedo and albedoMap ? 1.0f : 0.0f);
           needsSerialize = true;
         }
         ImGui::SameLine();
@@ -254,7 +254,7 @@ namespace Kreator
         bool useNormal = material->Get<float>("u_NormalTextureToggle");
         if (ImGui::Checkbox("Use", &useNormal))
         {
-          material->Set("u_NormalTextureToggle", useNormal ? 1.0f : 0.0f);
+          material->Set("u_NormalTextureToggle", useNormal and normalMap ? 1.0f : 0.0f);
           needsSerialize = true;
         }
         ImGui::SetCursorPos(nextRowCursorPos);
@@ -333,7 +333,7 @@ namespace Kreator
         bool useMetallic = material->Get<float>("u_MetallicTextureToggle");
         if (ImGui::Checkbox("Use", &useMetallic))
         {
-          material->Set("u_MetallicTextureToggle", useMetallic ? 1.0f : 0.0f);
+          material->Set("u_MetallicTextureToggle", useMetallic and metallicMap ? 1.0f : 0.0f);
           needsSerialize = true;
         }
         ImGui::SameLine();
@@ -422,7 +422,7 @@ namespace Kreator
         bool useRoughness = material->Get<float>("u_RoughnessTextureToggle");
         if (ImGui::Checkbox("Use", &useRoughness))
         {
-          material->Set("u_RoughnessTextureToggle", useRoughness ? 1.0f : 0.0f);
+          material->Set("u_RoughnessTextureToggle", useRoughness and roughnessMap ? 1.0f : 0.0f);
           needsSerialize = true;
         }
         ImGui::SameLine();
@@ -439,6 +439,7 @@ namespace Kreator
         UI::PropertyGridHeaderEnd();
       } // Roughness
       
+#if 0
       // Depth
       if (UI::PropertyGridHeader("Depth", true, 4, 5))
       {
@@ -511,7 +512,7 @@ namespace Kreator
         bool useDepth = material->Get<float>("u_DepthTextureToggle");
         if (ImGui::Checkbox("Use", &useDepth))
         {
-          material->Set("u_DepthTextureToggle", useDepth ? 1.0f : 0.0f);
+          material->Set("u_DepthTextureToggle", useDepth and depthMap ? 1.0f : 0.0f);
           needsSerialize = true;
         }
         ImGui::SameLine();
@@ -527,6 +528,7 @@ namespace Kreator
         ImGui::SetCursorPos(nextRowCursorPos);
         UI::PropertyGridHeaderEnd();
       } // Depth
+#endif
     }
     
     if (needsSerialize)

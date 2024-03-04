@@ -23,7 +23,7 @@ Entities:
       MeshHandle: 560965872
       TilingFactor: 10
       MaterialTable:
-        0: 3195674320786575285
+        0: 9163040385863931958
     RigidBodyComponent:
       Enable: true
       BodyType: 0
