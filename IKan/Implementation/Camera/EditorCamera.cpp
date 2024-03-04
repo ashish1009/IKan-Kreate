@@ -44,8 +44,8 @@ namespace IKan
     constexpr glm::vec3 position = { 2.14, 8.15, 0.81 };
     m_distance = glm::distance(position, m_focalPoint);
     
-    m_yaw = 7.178;
-    m_pitch = 0.456f;
+    m_yaw = 5.42974997;
+    m_pitch = 0.173911989;
     
     m_position = CalculatePosition();
     const glm::quat orientation = GetOrientation();
