@@ -773,7 +773,17 @@ namespace Kreator
     static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
     if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ 1.3f * lineHeight, 1.3f * lineHeight }))
     {
-      visibility = visibility ? false : true;
+      auto changeChildVisibility = [&](Entity e, auto&& changeChildVisibility) -> void {
+        auto& v = e.GetComponent<VisibilityComponent>().isVisible;
+        v = v ? false : true;
+        for (const auto& c : e.Children())
+        {
+          Entity child = m_context->GetEntityWithUUID(c); // Has to be present
+          changeChildVisibility(child, changeChildVisibility);
+        }
+      };
+      
+      changeChildVisibility(entity, changeChildVisibility);
     }
     UI::DrawButtonImage(visibility ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
 

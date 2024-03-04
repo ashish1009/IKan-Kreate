@@ -659,16 +659,20 @@ if (!m_currentScene) return
     for (auto entityHandle : relationshipView)
     {
       Entity entity = { entityHandle, m_currentScene.get() };
-      const auto& tc = entity.GetComponent<TransformComponent>();
-      const auto& startPos = tc.Position();
-      
-      for (const auto& child : entity.Children())
+      const auto& vc = entity.GetComponent<VisibilityComponent>();
+      if (vc.isVisible)
       {
-        Entity childEntity = m_currentScene->TryGetEntityWithUUID(child);
-        const auto& childTc = childEntity.GetComponent<TransformComponent>();
-        const auto& endPos = childTc.Position();
+        const auto& tc = entity.GetComponent<TransformComponent>();
+        const auto& startPos = tc.Position();
         
-        Renderer2D::DrawLine(startPos, endPos, m_relationshipColor);
+        for (const auto& child : entity.Children())
+        {
+          Entity childEntity = m_currentScene->TryGetEntityWithUUID(child);
+          const auto& childTc = childEntity.GetComponent<TransformComponent>();
+          const auto& endPos = childTc.Position();
+          
+          Renderer2D::DrawLine(startPos, endPos, m_relationshipColor);
+        }
       }
     }
   }

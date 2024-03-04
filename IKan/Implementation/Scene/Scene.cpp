@@ -124,6 +124,7 @@ namespace IKan
     RenderScene(renderer, false);
     renderer.EndScene();
   }
+
   void Scene::RenderScene(SceneRenderer& renderer, bool isEditing)
   {
     IK_PERFORMANCE("Scene::RenderScene");
@@ -135,7 +136,7 @@ namespace IKan
       const auto& transformComp = entity.GetComponent<TransformComponent>();
       const auto& meshComp = entity.GetComponent<MeshComponent>();
       const auto& visibilityComp = entity.GetComponent<VisibilityComponent>();
-      if (meshComp.mesh != 0 and visibilityComp.isVisible)
+      if (meshComp.mesh != 0 and (visibilityComp.isVisible or (!visibilityComp.isVisible and !isEditing)))
       {
         // Render Selected Mesh ---------------------------------------------
         Entity entity = {entityHandle, this};
