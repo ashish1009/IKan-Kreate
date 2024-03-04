@@ -140,11 +140,9 @@ namespace IKan
       m_frontVector = glm::normalize(followPos - m_position);
       m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
       m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
-    }
-    
-    m_position = tc.Position();
-    
-    tc.UpdateTransform(glm::inverse(glm::lookAt(m_position, m_position + m_frontVector, m_upVector)));
+      m_position = tc.Position();
+      tc.UpdateTransform(glm::inverse(glm::lookAt(m_position, m_position + m_frontVector, m_upVector)));
+    }    
   }
   
   void CameraController::SetFollowEntity(UUID uuid)

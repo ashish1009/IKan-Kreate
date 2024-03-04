@@ -1,0 +1,16 @@
+Material:
+  AlbedoColor: [0.800000012, 0.800000012, 0.800000012]
+  Metallic: 0.5
+  Emission: 0
+  Roughness: 0.5
+  DepthScale: 0.00100000005
+  AlbedoTextureToggle: 1
+  NormalTextureToggle: 1
+  RoughnessTextureToggle: 1
+  MetallicTextureToggle: 1
+  DepthTextureToggle: 0
+  AlbedoTexture: 1083633243
+  NormalTexture: 1819808669
+  MetallicTexture: 4235993095
+  RoughnessTexture: 3227943412
+  DepthTexture: 0

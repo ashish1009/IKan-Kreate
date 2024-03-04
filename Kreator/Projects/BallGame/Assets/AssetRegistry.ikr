@@ -11,6 +11,9 @@ Assets:
   - Handle: 233528456
     FilePath: Textures/Pbr/Ground/DryRock/dry-rocky-ground_normal-ogl.png
     Type: Image
+  - Handle: 300983307
+    FilePath: Textures/Pbr/Walls/GreyBrick/stone-house-siding_normal-ogl.png
+    Type: Image
   - Handle: 441124039
     FilePath: Textures/Pbr/Ground/DryRock/dry-rocky-ground_metallic.png
     Type: Image
@@ -29,17 +32,38 @@ Assets:
   - Handle: 690120167
     FilePath: Textures/Hdr/Day/BrightWhiteLight.hdr
     Type: Image
+  - Handle: 709455838
+    FilePath: Textures/Pbr/Walls/GreyBrick/stone-house-siding_height.png
+    Type: Image
+  - Handle: 876725249
+    FilePath: Textures/Pbr/Concrete/WornPain/wornpaintedcement-metalness.png
+    Type: Image
   - Handle: 942861086
     FilePath: Textures/Pbr/Ground/Forest/forest_floor_albedo.png
     Type: Image
   - Handle: 1062582993
     FilePath: Textures/Pbr/Ground/Forest/forest_floor_Normal-ogl.png
     Type: Image
+  - Handle: 1083633243
+    FilePath: Textures/Pbr/Wood/BambooWood/bamboo-wood-semigloss-albedo.png
+    Type: Image
+  - Handle: 1321806264
+    FilePath: Textures/Pbr/Walls/TileStone/stacked-stone-siding_albedo.png
+    Type: Image
+  - Handle: 1330438992
+    FilePath: Textures/Pbr/Walls/GreyBrick/stone-house-siding_metallic.png
+    Type: Image
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: Mesh
+  - Handle: 1372636770
+    FilePath: Textures/Pbr/Walls/TileStone/stacked-stone-siding_height.png
+    Type: Image
   - Handle: 1622114070
     FilePath: Textures/Pbr/Ground/Forest/forest_floor_Metallic.png
+    Type: Image
+  - Handle: 1819808669
+    FilePath: Textures/Pbr/Wood/BambooWood/bamboo-wood-semigloss-normal.png
     Type: Image
   - Handle: 1827760963
     FilePath: Textures/Pbr/Ground/Bog/bog_metallic.png
@@ -56,11 +80,20 @@ Assets:
   - Handle: 2104473943
     FilePath: Textures/Pbr/Ground/DryRock/dry-rocky-ground_albedo.png
     Type: Image
+  - Handle: 2205850407
+    FilePath: Textures/Pbr/Walls/TileStone/stacked-stone-siding_normal-ogl.png
+    Type: Image
   - Handle: 2323962980
     FilePath: Textures/Pbr/Ground/PatchyGrass/patchy-meadow1_metallic.png
     Type: Image
+  - Handle: 2539277065
+    FilePath: Textures/Pbr/Walls/SmoothLightBrown/smooth-temple-blocks_normal-ogl.png
+    Type: Image
   - Handle: 2592160278
     FilePath: Textures/Pbr/Ground/PatchyGrass/patchy-meadow1_albedo.png
+    Type: Image
+  - Handle: 2742404178
+    FilePath: Textures/Pbr/Concrete/WornPain/wornpaintedcement-albedo.png
     Type: Image
   - Handle: 2787595035
     FilePath: Textures/Pbr/Ground/Bog/bog_albedo.png
@@ -71,6 +104,18 @@ Assets:
   - Handle: 3013658672
     FilePath: Scenes/BallGame.ikscene
     Type: Scene
+  - Handle: 3182463654
+    FilePath: Textures/Pbr/Walls/SmoothLightBrown/smooth-temple-blocks_albedo.png
+    Type: Image
+  - Handle: 3227943412
+    FilePath: Textures/Pbr/Wood/BambooWood/bamboo-wood-semigloss-roughness.png
+    Type: Image
+  - Handle: 3307459612
+    FilePath: Textures/Pbr/Walls/GreyBrick/stone-house-siding_albedo.png
+    Type: Image
+  - Handle: 3401244051
+    FilePath: Textures/Pbr/Concrete/WornPain/wornpaintedcement-roughness.png
+    Type: Image
   - Handle: 3508957159
     FilePath: Textures/Hdr/Day/GrassCloud.hdr
     Type: Image
@@ -80,6 +125,30 @@ Assets:
   - Handle: 3652631683
     FilePath: Textures/Hdr/Morning/Cloud.hdr
     Type: Image
+  - Handle: 3998712062
+    FilePath: Textures/Pbr/Walls/SmoothLightBrown/smooth-temple-blocks_metallic.png
+    Type: Image
+  - Handle: 4040357588
+    FilePath: Textures/Pbr/Walls/SmoothLightBrown/smooth-temple-blocks_height.png
+    Type: Image
+  - Handle: 4101327156
+    FilePath: Textures/Pbr/Walls/TileStone/stacked-stone-siding_metallic.png
+    Type: Image
+  - Handle: 4206310016
+    FilePath: Textures/Pbr/Concrete/WornPain/wornpaintedcement-norrmal.png
+    Type: Image
+  - Handle: 4235993095
+    FilePath: Textures/Pbr/Wood/BambooWood/bamboo-wood-semigloss-metal.png
+    Type: Image
+  - Handle: 8953154583405910258
+    FilePath: Materials/BambooWood.ikmat
+    Type: Material
   - Handle: 9163040385863931958
     FilePath: Materials/Ground.ikmat
+    Type: Material
+  - Handle: 9755886144217281842
+    FilePath: Materials/GreyBrick.ikmat
+    Type: Material
+  - Handle: 10172274066066273285
+    FilePath: Materials/WornPaint.ikmat
     Type: Material

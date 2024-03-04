@@ -1507,7 +1507,6 @@ namespace Kreator
         {
           auto& meshComp = m_selectionContext.At(0).AddComponent<MeshComponent>();
           meshComp.mesh = 0;
-          meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
           ImGui::CloseCurrentPopup();
         }
         ImGui::Separator();

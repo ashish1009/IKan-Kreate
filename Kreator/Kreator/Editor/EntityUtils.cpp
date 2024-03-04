@@ -27,7 +27,6 @@ namespace Kreator::ECS_Utils
       newEntity = scene->CreateEntity("Mesh");
       auto& meshComp = newEntity.AddComponent<MeshComponent>();
       meshComp.mesh = 0;
-      meshComp.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
     }
     ImGui::Separator();
     
@@ -39,7 +38,6 @@ namespace Kreator::ECS_Utils
         std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
         
         auto& mc = newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
-        mc.materialTable->SetMaterial(0, AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat"));
         
         newEntity.AddComponent<RigidBodyComponent>();
         if (name == "Cube")
