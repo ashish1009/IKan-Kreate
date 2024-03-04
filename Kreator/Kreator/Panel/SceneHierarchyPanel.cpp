@@ -21,8 +21,10 @@ namespace Kreator
   }
   
   template<typename T, typename UIFunction>
-  static void DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction, const Ref<Texture>& settingsIcon, bool defaultOpen = false, bool canBeRemoved = true)
+  static void DrawComponent(const std::string& name, Entity entity, UIFunction uiFunction, const Ref<Texture>& settingsIcon, char* searchBuffer, bool defaultOpen = false, bool canBeRemoved = true)
   {
+    RETURN_IF(!Kreator::UI::IsMatchingSearch(name, searchBuffer));
+    
     if (entity.HasComponent<T>())
     {
       //  This fixes an issue where the first "+" button would display the "Remove" buttons for ALL components on an Entity.
@@ -949,7 +951,7 @@ namespace Kreator
       UI::ShiftCursorY(-8.0f);
       UI::ShiftCursorY(18.0f);
 
-    }, s_gearIcon, true, false);
+    }, s_gearIcon, searchedString, true, false);
 
     DrawComponent<RelationshipComponent>("Relation", entity, [&](RelationshipComponent& rc)
                                  {
@@ -999,7 +1001,7 @@ namespace Kreator
         }
       }
       
-    }, s_gearIcon, false, false);
+    }, s_gearIcon, searchedString, false, false);
     
     DrawComponent<CameraComponent>("Camera", entity, [this](CameraComponent& cc)
                                    {
@@ -1134,7 +1136,7 @@ namespace Kreator
         }
         ImGui::PopID();
       } // Scope end
-    }, s_gearIcon);
+    }, s_gearIcon, searchedString);
     
     DrawComponent<MeshComponent>("Mesh", entity, [&](MeshComponent& smc)
                                  {
@@ -1246,7 +1248,7 @@ namespace Kreator
           UI::PropertyGridHeaderEnd();
         } // property grid header
       }
-    }, s_gearIcon);
+    }, s_gearIcon, searchedString);
     
     DrawComponent<RigidBodyComponent>("Rigid Body", entity, [&](RigidBodyComponent& rbc)
                                       {
@@ -1289,7 +1291,7 @@ namespace Kreator
           UI::PropertyGridHeaderEnd();
         }
       }
-    }, s_gearIcon);
+    }, s_gearIcon, searchedString);
     
     DrawComponent<Box3DColliderComponent>("Box 3D Collider", entity, [&](Box3DColliderComponent& bcc)
                                           {
@@ -1318,7 +1320,7 @@ namespace Kreator
           UI::PropertyGridHeaderEnd();
         }
       }
-    }, s_gearIcon);
+    }, s_gearIcon, searchedString);
     
     DrawComponent<SphereColliderComponent>("Sphere Collider", entity, [&](SphereColliderComponent& scc)
                                            {
@@ -1347,7 +1349,7 @@ namespace Kreator
           UI::PropertyGridHeaderEnd();
         }
       }
-    }, s_gearIcon);
+    }, s_gearIcon, searchedString);
     
     DrawComponent<CapsuleColliderComponent>("Capsule Collider", entity, [&](CapsuleColliderComponent& ccc)
                                             {
@@ -1377,7 +1379,7 @@ namespace Kreator
           UI::PropertyGridHeaderEnd();
         }
       }
-    }, s_gearIcon);
+    }, s_gearIcon, searchedString);
     
     DrawComponent<JointComponent>("Joint", entity, [&](JointComponent& fjc)
                                   {
@@ -1491,7 +1493,7 @@ namespace Kreator
         }
       }
       UI::EndPropertyGrid();
-    }, s_gearIcon);
+    }, s_gearIcon, searchedString);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()

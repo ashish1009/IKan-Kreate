@@ -8,22 +8,83 @@ Environment:
   UseIrradiance: true
   Skybox: 1893579592
 Entities:
+  - Entity: 5227051758720136816
+    TagComponent:
+      Tag: PrimaryCamera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, -10]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Enable: true
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      CC_Follow: 1091816383152339147
+      CC_TopRadius: 3
+      CC_TopHeight: 4
+      CC_MidRadius: 5
+      CC_MidHeight: 2
+      CC_BottomRadius: 4
+      CC_BottomHeight: 0
+      CC_Sensitivity: 45
   - Entity: 9098878189250181179
+    TagComponent:
+      Tag: Ground
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, -5, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1000, 1, 1000]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 100
+      MaterialTable:
+        0: 9163040385863931958
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 13780855540493820210
     TagComponent:
       Tag: Cube
     Parent: 0
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [0, 0, -0.400000006]
       Rotation: [0, 0, 0]
-      Scale: [1000, 1, 1000]
+      Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
-      TilingFactor: 1000
+      TilingFactor: 1
       MaterialTable:
-        0: 9163040385863931958
+        0: 444052761
     RigidBodyComponent:
       Enable: true
       BodyType: 0
