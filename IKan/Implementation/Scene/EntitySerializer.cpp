@@ -283,7 +283,7 @@ namespace IKan
       auto visibilityComponent = entity["VisibilityComponent"];
       if (visibilityComponent)
       {
-        auto& vc = deserializedEntity.AddComponent<VisibilityComponent>();
+        auto& vc = deserializedEntity.GetComponent<VisibilityComponent>();
         vc.isVisible = visibilityComponent["Visibility"].as<bool>();
       }
       

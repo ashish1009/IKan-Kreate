@@ -8,6 +8,40 @@ Environment:
   UseIrradiance: true
   Skybox: 1893579592
 Entities:
+  - Entity: 38212970955697060
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-35.9996643, -0.999905109, 2.52227044]
+      Rotation: [0, 0, 0]
+      Scale: [4, 1, 2]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 654776206556185623
     VisibilityComponent:
       Visibility: true
@@ -17,7 +51,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1.0000006, 13.9998035, 97.5003433]
+      Position: [-1.0000006, 13.9998035, 12.5003357]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -26,6 +60,40 @@ Entities:
       TilingFactor: 5
       MaterialTable:
         0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 743514310792895675
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-31, -3.82661819e-05, 13.5]
+      Rotation: [0, 0, 0]
+      Scale: [2, 9, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -51,7 +119,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-3, 17.500082, 95.499855]
+      Position: [-3, 17.500082, 10.4998474]
       Rotation: [0, 0, 0]
       Scale: [2, 8, 0.200000003]
     MeshComponent:
@@ -60,6 +128,40 @@ Entities:
       TilingFactor: 20
       MaterialTable:
         0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 1420663001498693696
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Left Wall
+    Parent: 12006793525758451154
+    Children:
+      []
+    TransformComponent:
+      Position: [-18, 9.75, 0.999786377]
+      Rotation: [0, 0, 0]
+      Scale: [1, 2.5, 7]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -85,7 +187,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [14.625, 3.37517786, 97.4999695]
+      Position: [14.625, 3.37517786, 12.399971]
       Rotation: [0, 0, 0]
       Scale: [5, 0.200000003, 4]
     MeshComponent:
@@ -119,7 +221,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-9, 15.9999552, 95.5000687]
+      Position: [-9, 15.9999552, 10.500061]
       Rotation: [0, 0, 0]
       Scale: [2, 11, 0.200000003]
     MeshComponent:
@@ -153,7 +255,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1, 9.00023746, 95.4998093]
+      Position: [1, 9.00023746, 10.4998016]
       Rotation: [0, 0, 0]
       Scale: [22, 1, 0.100000001]
     MeshComponent:
@@ -162,6 +264,40 @@ Entities:
       TilingFactor: 20
       MaterialTable:
         0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 1996083569856263942
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-35.9996643, 9.48905945e-05, 4.52227116]
+      Rotation: [0, 0, 0]
+      Scale: [4, 1, 2]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -187,7 +323,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03205395, 16.9999981, 94.5001068]
+      Position: [4.03205395, 16.9999981, 9.50009918]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -221,7 +357,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-7, 16.4999714, 95.5000992]
+      Position: [-7, 16.4999714, 10.5000916]
       Rotation: [0, 0, 0]
       Scale: [2, 10, 0.200000003]
     MeshComponent:
@@ -255,7 +391,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4, 11.9999685, 95.5000687]
+      Position: [4, 11.9999685, 10.500061]
       Rotation: [0, 0, 0]
       Scale: [16, 1, 0.100000001]
     MeshComponent:
@@ -289,7 +425,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-14.9731407, 5.87519407, 95.4999771]
+      Position: [-14.9731407, 5.87519407, 10.3999786]
       Rotation: [0, 0, 0]
       Scale: [5.92017555, 5.12499952, 0.100000001]
     MeshComponent:
@@ -323,7 +459,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-10.9996643, -3.99990511, 97.500061]
+      Position: [-10.9996643, -3.99990511, 12.4000626]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -357,9 +493,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 15.0000677, 89.4999161]
+      Position: [-18.0000076, 15.0000677, 9.99990845]
       Rotation: [0, 0, 0]
-      Scale: [1, 12.9999981, 22]
+      Scale: [1, 12.9999981, 11]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -391,7 +527,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-5.00000048, -1.00002527, 97.5001068]
+      Position: [-5.00000048, -1.00002527, 12.4001083]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -400,6 +536,40 @@ Entities:
       TilingFactor: 5
       MaterialTable:
         0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 2991115764243978595
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-38, -3.81469727e-05, 9.5]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 1, 8]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -425,7 +595,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [3, 11.0003471, 95.4995728]
+      Position: [3, 11.0003471, 10.4995651]
       Rotation: [0, 0, 0]
       Scale: [18, 1, 0.100000001]
     MeshComponent:
@@ -459,7 +629,75 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [9.00289154, 6.00029278, 97.5024338]
+      Position: [9.00289154, 6.00029278, 12.4024353]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 3266198868618527298
+    VisibilityComponent:
+      Visibility: false
+    TagComponent:
+      Tag: Cube
+    Parent: 12836950147943255590
+    Children:
+      []
+    TransformComponent:
+      Position: [8.5, 5, -14]
+      Rotation: [0, 0, 0]
+      Scale: [6.5, 6.4000001, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 10
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 3430783286683196156
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-32.9971085, 3.99995089, 11.4025879]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -493,16 +731,120 @@ Entities:
     Children:
       - Handle: 13780855540493820210
       - Handle: 13036184168500338314
-      - Handle: 6557678601113267883
-      - Handle: 14565302825503852198
-      - Handle: 5195751022273639401
-      - Handle: 12006793525758451154
-      - Handle: 15632144982410339178
-      - Handle: 15816623905512646286
+      - Handle: 3741986551281131836
+      - Handle: 13214264800647126703
     TransformComponent:
-      Position: [0, 0, 85]
+      Position: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+  - Entity: 3741986551281131836
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Ground Floor
+    Parent: 3628902883925067605
+    Children:
+      - Handle: 6557678601113267883
+      - Handle: 15816623905512646286
+      - Handle: 5195751022273639401
+      - Handle: 3795286509536933355
+      - Handle: 6165577193084240308
+    TransformComponent:
+      Position: [0, 0.200000003, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+  - Entity: 3751237747093556258
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-38, -3.00003815, 6.5]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 1, 14]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 3795286509536933355
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Ground Floor Out Stair
+    Parent: 3741986551281131836
+    Children:
+      - Handle: 3938838277243471285
+      - Handle: 3430783286683196156
+      - Handle: 12072587245354569111
+      - Handle: 16165294935383319666
+      - Handle: 10583566290744241781
+      - Handle: 6435170350757899256
+      - Handle: 9854511727899000234
+      - Handle: 11772612731093099027
+      - Handle: 1996083569856263942
+      - Handle: 38212970955697060
+      - Handle: 12007633902772935980
+      - Handle: 16307979296947875496
+      - Handle: 10348002612701486502
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+  - Entity: 3938838277243471285
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-35.9996643, 3.00009489, 11.4000626]
+      Rotation: [0, 0, 0]
+      Scale: [4, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 4396664693841291892
     VisibilityComponent:
       Visibility: true
@@ -512,9 +854,43 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1, 18.0002041, 95.4997864]
+      Position: [-1, 18.0002041, 10.4997787]
       Rotation: [0, 0, 0]
       Scale: [2, 7, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 4441102260749351011
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-22, 1.49996185, 13.5]
+      Rotation: [0, 0, 0]
+      Scale: [8, 12, 0.200000003]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -546,9 +922,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 2.00006008, 78.0000763]
+      Position: [-18.0000076, 2.00006008, -12.5999222]
       Rotation: [0, 0, 0]
-      Scale: [1, 12.999999, 15]
+      Scale: [1, 12.999999, 3.75]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -575,14 +951,14 @@ Entities:
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Left First floor Wall Group
-    Parent: 3628902883925067605
+      Tag: Ground floor Left Wall Group
+    Parent: 3741986551281131836
     Children:
       - Handle: 4671653309321784290
       - Handle: 12218125353355454767
       - Handle: 10893038559861363235
     TransformComponent:
-      Position: [-18.2999992, 0, 85]
+      Position: [-18.2999992, 0, -0.0999984741]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 5227051758720136816
@@ -594,7 +970,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, -10]
+      Position: [0, 0, -85]
       Rotation: [0, 3.14159274, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -625,7 +1001,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [7, 14.9999819, 95.500061]
+      Position: [7, 14.9999819, 10.5000534]
       Rotation: [0, 0, 0]
       Scale: [10, 1, 0.100000001]
     MeshComponent:
@@ -650,6 +1026,64 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 6007094689909654511
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-38, -1.00003815, 8.5]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 1, 10]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 6165577193084240308
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Ground Floor Out Walls Group
+    Parent: 3741986551281131836
+    Children:
+      - Handle: 14865179178825904361
+      - Handle: 3751237747093556258
+      - Handle: 11708789325934305492
+      - Handle: 6007094689909654511
+      - Handle: 2991115764243978595
+      - Handle: 18064902385341757419
+      - Handle: 13723812800670161732
+      - Handle: 10104191887559345449
+      - Handle: 15260473287982298993
+      - Handle: 743514310792895675
+      - Handle: 9072549833194001928
+      - Handle: 16542206338283438174
+      - Handle: 4441102260749351011
+    TransformComponent:
+      Position: [-31.6000004, 0, -0.300000012]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
   - Entity: 6252479258380241270
     VisibilityComponent:
       Visibility: true
@@ -659,9 +1093,43 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [11, 6.99996853, 97.5001984]
+      Position: [11, 6.99996853, 12.4001999]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 6435170350757899256
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-22, 8.00577068, 11.3997116]
+      Rotation: [0, 0, 0]
+      Scale: [8, 1, 4]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -689,7 +1157,7 @@ Entities:
       Visibility: true
     TagComponent:
       Tag: Ground Stairs Group
-    Parent: 3628902883925067605
+    Parent: 3741986551281131836
     Children:
       - Handle: 2675054827476876562
       - Handle: 15068876173452837735
@@ -703,9 +1171,9 @@ Entities:
       - Handle: 9215906125337687666
       - Handle: 6252479258380241270
       - Handle: 3054173911874538996
-      - Handle: 10508313986746797193
+      - Handle: 14157124297515031169
     TransformComponent:
-      Position: [3.99999928, 5.00000811, 84.9999771]
+      Position: [3.99999928, 5.00000811, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 6770436042359797550
@@ -717,7 +1185,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [11.75, -0.5, 97.4999695]
+      Position: [11.75, -0.5, 12.399971]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 8, 4]
     MeshComponent:
@@ -751,7 +1219,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-14.7520905, 18.5001163, 95.499733]
+      Position: [-14.7520905, 18.5001163, 10.4997253]
       Rotation: [0, 0, 0]
       Scale: [5.5, 6, 0.100000001]
     MeshComponent:
@@ -785,7 +1253,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03205395, 18.0000458, 92.4993286]
+      Position: [4.03205395, 18.0000458, 7.49932098]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -819,7 +1287,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 10.0000515, 95.5]
+      Position: [2, 10.0000515, 10.4999924]
       Rotation: [0, 0, 0]
       Scale: [20, 1, 0.100000001]
     MeshComponent:
@@ -853,7 +1321,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 40]
+      Position: [0, 0, -30.6774464]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -887,7 +1355,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [9.49998569, 16.0000172, 97.5001602]
+      Position: [9.49998569, 16.0000172, 12.5001526]
       Rotation: [0, 0, 0]
       Scale: [15, 1, 4]
     MeshComponent:
@@ -921,7 +1389,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03132153, 19.9991951, 88.500267]
+      Position: [4.03132153, 19.9991951, 3.5002594]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -955,7 +1423,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03132153, 20.9988937, 86.5053406]
+      Position: [4.03132153, 20.9988937, 1.50533295]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -989,7 +1457,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-4.99986029, 11.9991875, 97.5000916]
+      Position: [-4.99986029, 11.9991875, 12.5000839]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1014,9 +1482,43 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 9098878189250181179
+  - Entity: 9072549833194001928
     VisibilityComponent:
       Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-29, 0.499961853, 13.5]
+      Rotation: [0, 0, 0]
+      Scale: [2, 10, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 9098878189250181179
+    VisibilityComponent:
+      Visibility: false
     TagComponent:
       Tag: Ground
     Parent: 0
@@ -1057,7 +1559,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [15.0005455, 7.99984932, 97.5001984]
+      Position: [15.0005455, 7.99984932, 12.4001999]
       Rotation: [0, 0, 0]
       Scale: [6, 1, 4]
     MeshComponent:
@@ -1091,7 +1593,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2.99999928, 2.99965072, 97.5001755]
+      Position: [2.99999928, 2.99965072, 12.400177]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1120,14 +1622,14 @@ Entities:
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: First Floor
-    Parent: 15632144982410339178
+      Tag: First Floor Base
+    Parent: 13214264800647126703
     Children:
       []
     TransformComponent:
-      Position: [0, 8.40000534, 83]
+      Position: [-3, 8.40000534, -1.99924469]
       Rotation: [0, 0, 0]
-      Scale: [36, 0.200000003, 25]
+      Scale: [42, 0.200000003, 25]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -1159,7 +1661,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [5, 12.9999866, 95.5000153]
+      Position: [5, 12.9999866, 10.5000076]
       Rotation: [0, 0, 0]
       Scale: [14, 1, 0.100000001]
     MeshComponent:
@@ -1193,7 +1695,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 19.0003357, 93.4993057]
+      Position: [2, 19.0003357, 8.4992981]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 4]
     MeshComponent:
@@ -1202,6 +1704,74 @@ Entities:
       TilingFactor: 20
       MaterialTable:
         0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 9853619826724383960
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Left Wall
+    Parent: 12006793525758451154
+    Children:
+      []
+    TransformComponent:
+      Position: [-18, 17.7600002, 0.999786377]
+      Rotation: [0, 0, 0]
+      Scale: [1, 7.5, 7]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 9854511727899000234
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-35.9996643, 2.00009489, 8.40006256]
+      Rotation: [0, 0, 0]
+      Scale: [4, 1, 2]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -1227,7 +1797,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-8.99710655, 9.99959373, 97.5027618]
+      Position: [-8.99710655, 9.99959373, 12.5027542]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1261,7 +1831,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1.0000006, 1.00577044, 97.4997101]
+      Position: [-1.0000006, 1.00577044, 12.3997116]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1270,6 +1840,40 @@ Entities:
       TilingFactor: 5
       MaterialTable:
         0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 10104191887559345449
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-36, -1.00003815, 13.5]
+      Rotation: [0, 0, 0]
+      Scale: [4, 7, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -1295,7 +1899,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 20.9999619, 91.5002136]
+      Position: [6, 20.9999619, 6.50020599]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 8]
     MeshComponent:
@@ -1320,16 +1924,50 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 10508313986746797193
+  - Entity: 10348002612701486502
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Cube
-    Parent: 6557678601113267883
+      Tag: Stair
+    Parent: 3795286509536933355
     Children:
       []
     TransformComponent:
-      Position: [7.00006247, 4.99969149, 97.5001984]
+      Position: [-35.9996643, -3.99990511, -3.5]
+      Rotation: [0, 0, 0]
+      Scale: [4, 1, 2]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 10583566290744241781
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-27.0000019, 7.00067711, 11.4001694]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1363,7 +2001,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 18.0000515, 94.4998932]
+      Position: [6, 18.0000515, 9.49988556]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 2]
     MeshComponent:
@@ -1397,7 +2035,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [14.625, 5.87517786, 95.4999695]
+      Position: [14.625, 5.87517786, 10.399971]
       Rotation: [0, 0, 0]
       Scale: [5.25, 5.12499952, 0.100000001]
     MeshComponent:
@@ -1431,7 +2069,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-6.99999952, 11.0001354, 97.5000458]
+      Position: [-6.99999952, 11.0001354, 12.5000381]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1465,7 +2103,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18, 4.71825027, 89.1250458]
+      Position: [-18, 4.71825027, -7.07819557]
       Rotation: [0, 0, 0]
       Scale: [1, 7.5, 7.25]
     MeshComponent:
@@ -1499,7 +2137,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [11.5, 18.5001163, 95.499733]
+      Position: [11.5, 18.5001163, 10.4997253]
       Rotation: [0, 0, 0]
       Scale: [11, 6, 0.100000001]
     MeshComponent:
@@ -1533,7 +2171,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 18.0000515, 94.4998932]
+      Position: [2, 18.0000515, 9.49988556]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 2]
     MeshComponent:
@@ -1558,20 +2196,159 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 11708789325934305492
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-38, -2.00003815, 7.5]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 1, 12]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 11772612731093099027
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-35.9996643, 1.00009489, 6.52227116]
+      Rotation: [0, 0, 0]
+      Scale: [4, 1, 2]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 12006793525758451154
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Left Second Floor Wall Group
-    Parent: 3628902883925067605
+      Tag: First Floor Left Wall Group
+    Parent: 13214264800647126703
     Children:
       - Handle: 2935374345107658973
       - Handle: 17462057736370469507
       - Handle: 16152840656304028640
+      - Handle: 17495126736697623675
+      - Handle: 9853619826724383960
+      - Handle: 1420663001498693696
     TransformComponent:
-      Position: [-18.2000008, 13.0000277, 84.9999847]
+      Position: [-18.2000008, 13.0000277, -2.28881836e-05]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+  - Entity: 12007633902772935980
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-35.9996643, -1.99990511, 0.522270441]
+      Rotation: [0, 0, 0]
+      Scale: [4, 1, 2]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 12072587245354569111
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-31, 4.99996424, 11.400116]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 12080169501945457102
     VisibilityComponent:
       Visibility: true
@@ -1581,7 +2358,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.99999857, 4.00003242, 97.5001144]
+      Position: [4.99999857, 4.00003242, 12.400116]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1615,7 +2392,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-11, 15.4998264, 95.5002747]
+      Position: [-11, 15.4998264, 10.500267]
       Rotation: [0, 0, 0]
       Scale: [2, 12, 0.200000003]
     MeshComponent:
@@ -1649,9 +2426,9 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 1.99998534, 96.4999924]
+      Position: [-18.0000076, 1.99998534, 5.8999939]
       Rotation: [0, 0, 0]
-      Scale: [1, 13, 7.5]
+      Scale: [1, 13, 19]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -1683,7 +2460,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1, 18.5001163, 95.499733]
+      Position: [1, 18.5001163, 10.4997253]
       Rotation: [0, 0, 0]
       Scale: [2, 6, 0.200000003]
     MeshComponent:
@@ -1717,7 +2494,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-3.00000167, 13.0011749, 97.4989243]
+      Position: [-3.00000167, 13.0011749, 12.4989166]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1742,6 +2519,20 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 12836950147943255590
+    VisibilityComponent:
+      Visibility: false
+    TagComponent:
+      Tag: Front Walls group
+    Parent: 13214264800647126703
+    Children:
+      - Handle: 17670578570045294565
+      - Handle: 15304750079779561277
+      - Handle: 3266198868618527298
+    TransformComponent:
+      Position: [0, 0, -17]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
   - Entity: 13036184168500338314
     VisibilityComponent:
       Visibility: true
@@ -1751,7 +2542,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [17.5962257, 8.49966431, 85.5007629]
+      Position: [17.5962257, 8.49966431, 0.500762939]
       Rotation: [0, 0, 0]
       Scale: [1, 26, 30]
     MeshComponent:
@@ -1776,6 +2567,22 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 13214264800647126703
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 3628902883925067605
+    Children:
+      - Handle: 14565302825503852198
+      - Handle: 15632144982410339178
+      - Handle: 9588196012614309815
+      - Handle: 12006793525758451154
+      - Handle: 12836950147943255590
+    TransformComponent:
+      Position: [0, 14.3999996, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
   - Entity: 13324006071561882375
     VisibilityComponent:
       Visibility: true
@@ -1785,7 +2592,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 19.9999981, 92.5000458]
+      Position: [2, 19.9999981, 7.50003815]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 6]
     MeshComponent:
@@ -1819,7 +2626,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-15.001545, 8.39987564, 97.500679]
+      Position: [-15.001545, 8.39987564, 12.5006714]
       Rotation: [0, 0, 0]
       Scale: [6, 0.200000003, 4]
     MeshComponent:
@@ -1853,7 +2660,41 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 19.0003357, 93.4993057]
+      Position: [6, 19.0003357, 8.4992981]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 13723812800670161732
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-38, 1.99996185, 11.5]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 4]
     MeshComponent:
@@ -1887,7 +2728,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-5, 17.0003395, 95.4994583]
+      Position: [-5, 17.0003395, 10.4994507]
       Rotation: [0, 0, 0]
       Scale: [2, 9, 0.200000003]
     MeshComponent:
@@ -1921,7 +2762,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [7.4505806e-08, 8.50052261, 99.9997406]
+      Position: [7.4505806e-08, 8.50052261, 14.9997406]
       Rotation: [0, 0, 0]
       Scale: [36, 26, 1]
     MeshComponent:
@@ -1930,6 +2771,40 @@ Entities:
       TilingFactor: 20
       MaterialTable:
         0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 14157124297515031169
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 6557678601113267883
+    Children:
+      []
+    TransformComponent:
+      Position: [6.99999857, 5.00003242, 12.400116]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -1955,7 +2830,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-10.9994688, 9.00049782, 97.5002899]
+      Position: [-10.9994688, 9.00049782, 12.5002823]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -1989,7 +2864,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 19.9999981, 92.5000458]
+      Position: [6, 19.9999981, 7.50003815]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 6]
     MeshComponent:
@@ -2023,7 +2898,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-3.00000167, 0.000677465403, 97.5001678]
+      Position: [-3.00000167, 0.000677465403, 12.4001694]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -2053,7 +2928,7 @@ Entities:
       Visibility: true
     TagComponent:
       Tag: First Stairs Group
-    Parent: 3628902883925067605
+    Parent: 13214264800647126703
     Children:
       - Handle: 14159979393781190509
       - Handle: 9939117715947352361
@@ -2070,9 +2945,43 @@ Entities:
       - Handle: 8788723699992475751
       - Handle: 13572575593345534631
     TransformComponent:
-      Position: [3.99999928, 18, 85.0000076]
+      Position: [3.99999928, 18, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+  - Entity: 14865179178825904361
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-38, -4.00003815, 5.50020599]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 1, 16]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 15068876173452837735
     VisibilityComponent:
       Visibility: true
@@ -2082,7 +2991,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-8.99710655, -3.00004911, 97.5025864]
+      Position: [-8.99710655, -3.00004911, 12.4025879]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -2091,6 +3000,74 @@ Entities:
       TilingFactor: 5
       MaterialTable:
         0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 15260473287982298993
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-33, -0.500038028, 13.5]
+      Rotation: [0, 0, 0]
+      Scale: [2, 8, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 15304750079779561277
+    VisibilityComponent:
+      Visibility: false
+    TagComponent:
+      Tag: Cube
+    Parent: 12836950147943255590
+    Children:
+      []
+    TransformComponent:
+      Position: [-6.25, 2, -14]
+      Rotation: [0, 0, 0]
+      Scale: [23, 13, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -2116,7 +3093,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.00000024, 1.99964559, 97.5002213]
+      Position: [1.00000024, 1.99964559, 12.4002228]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -2145,10 +3122,9 @@ Entities:
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: First Floor Group
-    Parent: 3628902883925067605
+      Tag: First Floor Walls Group
+    Parent: 13214264800647126703
     Children:
-      - Handle: 9588196012614309815
       - Handle: 1577757478528875796
       - Handle: 8339082795134779645
       - Handle: 2993631179637255673
@@ -2174,15 +3150,15 @@ Entities:
       - Handle: 12145664856025680527
       - Handle: 6917404596294505594
     TransformComponent:
-      Position: [0, 0, 85]
+      Position: [0, 0, -7.62939453e-06]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 15816623905512646286
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Ground Floor Group
-    Parent: 3628902883925067605
+      Tag: Ground Floor Walls Group
+    Parent: 3741986551281131836
     Children:
       - Handle: 18196074048552676981
       - Handle: 10755854728910485890
@@ -2190,7 +3166,7 @@ Entities:
       - Handle: 1434217049710200861
       - Handle: 6770436042359797550
     TransformComponent:
-      Position: [0, 0, 85]
+      Position: [0, 0, -0.0999984741]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 16152840656304028640
@@ -2202,7 +3178,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18, 17.7182865, 76.499794]
+      Position: [-18, 17.7182865, -8.50021362]
       Rotation: [0, 0, 0]
       Scale: [1, 7.5, 4]
     MeshComponent:
@@ -2211,6 +3187,40 @@ Entities:
       TilingFactor: 20
       MaterialTable:
         0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 16165294935383319666
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-29, 5.99997473, 11.4001083]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -2236,9 +3246,43 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.00000024, 14.99928, 97.501091]
+      Position: [1.00000024, 14.99928, 12.5010834]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 16307979296947875496
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 3795286509536933355
+    Children:
+      []
+    TransformComponent:
+      Position: [-35.9996643, -2.99990511, -1.47772956]
+      Rotation: [0, 0, 0]
+      Scale: [4, 1, 2]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -2270,9 +3314,43 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 14.0000849, 95.4998856]
+      Position: [6, 14.0000849, 10.4998779]
       Rotation: [0, 0, 0]
       Scale: [12, 1, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 16542206338283438174
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-27, 0.999961853, 13.5]
+      Rotation: [0, 0, 0]
+      Scale: [2, 11, 0.200000003]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -2304,7 +3382,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 15.0001402, 72.5001755]
+      Position: [-18.0000076, 15.0001402, -12.4998322]
       Rotation: [0, 0, 0]
       Scale: [1, 13, 4]
     MeshComponent:
@@ -2313,6 +3391,108 @@ Entities:
       TilingFactor: 20
       MaterialTable:
         0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 17495126736697623675
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Left Wall
+    Parent: 12006793525758451154
+    Children:
+      []
+    TransformComponent:
+      Position: [-18.0000076, 15.0001402, -4.49983215]
+      Rotation: [0, 0, 0]
+      Scale: [1, 13, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 17670578570045294565
+    VisibilityComponent:
+      Visibility: false
+    TagComponent:
+      Tag: Cube
+    Parent: 12836950147943255590
+    Children:
+      []
+    TransformComponent:
+      Position: [14.5, 2, -14]
+      Rotation: [0, 0, 0]
+      Scale: [5.4375, 13, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 10
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 18064902385341757419
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: First Floor
+    Parent: 6165577193084240308
+    Children:
+      []
+    TransformComponent:
+      Position: [-38, 0.999961853, 10.5]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 1, 6]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -2338,7 +3518,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 20.9999619, 91.5002136]
+      Position: [2, 20.9999619, 6.50020599]
       Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 8]
     MeshComponent:
@@ -2372,7 +3552,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-6.99999952, -2.00003576, 97.5001144]
+      Position: [-6.99999952, -2.00003576, 12.400116]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -2399,14 +3579,14 @@ Entities:
       MassDensity: 1
   - Entity: 18196074048552676981
     VisibilityComponent:
-      Visibility: true
+      Visibility: false
     TagComponent:
       Tag: Ground Floor
     Parent: 15816623905512646286
     Children:
       []
     TransformComponent:
-      Position: [0, 1.9999299, 95.5]
+      Position: [0, 1.9999299, 10.4000015]
       Rotation: [0, 0, 0]
       Scale: [24, 13, 0.100000001]
     MeshComponent:
@@ -2440,7 +3620,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03205395, 18.9999256, 90.5003815]
+      Position: [4.03205395, 18.9999256, 5.50037384]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:

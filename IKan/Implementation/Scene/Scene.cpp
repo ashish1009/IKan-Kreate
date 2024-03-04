@@ -276,6 +276,7 @@ namespace IKan
     
     // Add Mendatory Components
     entity.AddComponent<IDComponent>(uuid);
+    entity.AddComponent<VisibilityComponent>();
     entity.AddComponent<TransformComponent>(); // By default Unit transform
     entity.AddComponent<TagComponent>(name);
     entity.AddComponent<RelationshipComponent>(); // By default No parent and No child
@@ -417,7 +418,7 @@ namespace IKan
     parent.Children().push_back(entity.GetUUID());
     
     // Update local space of 'entity'
-    ConvertToLocalSpace(entity);
+//    ConvertToLocalSpace(entity);
   }
   
   void Scene::UnparentEntity(Entity entity, bool convertToWorldSpace)
@@ -433,7 +434,7 @@ namespace IKan
     
     if (convertToWorldSpace)
     {
-      ConvertToWorldSpace(entity);
+//      ConvertToWorldSpace(entity);
     }
     
     entity.SetParentUUID(0);

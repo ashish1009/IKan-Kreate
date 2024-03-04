@@ -14,6 +14,9 @@ Assets:
   - Handle: 300983307
     FilePath: Textures/Pbr/Walls/GreyBrick/stone-house-siding_normal-ogl.png
     Type: Image
+  - Handle: 394486730
+    FilePath: Scenes/CrashScene.ikscene
+    Type: Scene
   - Handle: 441124039
     FilePath: Textures/Pbr/Ground/DryRock/dry-rocky-ground_metallic.png
     Type: Image
@@ -161,6 +164,9 @@ Assets:
   - Handle: 4235993095
     FilePath: Textures/Pbr/Wood/BambooWood/bamboo-wood-semigloss-metal.png
     Type: Image
+  - Handle: 1083144822458326309
+    FilePath: Prefabs/X_Stairs.ikprefab
+    Type: Prefab
   - Handle: 8953154583405910258
     FilePath: Materials/BambooWood.ikmat
     Type: Material

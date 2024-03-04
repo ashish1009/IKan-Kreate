@@ -1,0 +1,87 @@
+Scene: CrashScene.ikscene.auto
+Environment:
+  EnableDirectionLight: 1
+  LightDirection: [-0.200000003, -1, -0.300000012]
+  LightColor: [1, 1, 1]
+  LightIntensity: 1
+  UseIBL: true
+  UseIrradiance: false
+  Skybox: 1893579592
+Entities:
+  - Entity: 1627210148120949537
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, -40]
+      Rotation: [0, -3.14159274, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Enable: true
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      CC_Follow: 2214009388125589339
+      CC_TopRadius: 3
+      CC_TopHeight: 4
+      CC_MidRadius: 5
+      CC_MidHeight: 2
+      CC_BottomRadius: 4
+      CC_BottomHeight: 0
+      CC_Sensitivity: 45
+  - Entity: 2725874213614952924
+    VisibilityComponent:
+      Visibility: false
+    TagComponent:
+      Tag: Reference Cube
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 1
+      MaterialTable:
+        0: 0
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 12201804402648754531
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: House
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]

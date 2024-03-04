@@ -1,0 +1,509 @@
+Prefab:
+  - Entity: 4212126417245574170
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 4212126417245574170
+    TransformComponent:
+      Position: [6.99999857, 5.00003242, 12.400116]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 13030128510327280848
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 13030128510327280848
+    TransformComponent:
+      Position: [9.00289154, 6.00029278, 12.4024353]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 13746291271941942925
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 13746291271941942925
+    TransformComponent:
+      Position: [11, 6.99996853, 12.4001999]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 8835455830896576011
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 8835455830896576011
+    TransformComponent:
+      Position: [15.0005455, 7.99984932, 12.4001999]
+      Rotation: [0, 0, 0]
+      Scale: [6, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 4326547924900478512
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 4326547924900478512
+    TransformComponent:
+      Position: [4.99999857, 4.00003242, 12.400116]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 9801208196699454187
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 9801208196699454187
+    TransformComponent:
+      Position: [2.99999928, 2.99965072, 12.400177]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 750994658740553159
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 750994658740553159
+    TransformComponent:
+      Position: [1.00000024, 1.99964559, 12.4002228]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 1173033633804346236
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 1173033633804346236
+    TransformComponent:
+      Position: [-1.0000006, 1.00577044, 12.3997116]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 5493048436335166593
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 5493048436335166593
+    TransformComponent:
+      Position: [-3.00000167, 0.000677465403, 12.4001694]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 2570122672700455845
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 2570122672700455845
+    TransformComponent:
+      Position: [-5.00000048, -1.00002527, 12.4001083]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 5126754013743951783
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 5126754013743951783
+    TransformComponent:
+      Position: [-6.99999952, -2.00003576, 12.400116]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 16991981794516538245
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 16991981794516538245
+    TransformComponent:
+      Position: [-8.99710655, -3.00004911, 12.4025879]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 11468288035593589270
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Stair
+    Parent: 1549951660333655003
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 11468288035593589270
+    TransformComponent:
+      Position: [-10.9996643, -3.99990511, 12.4000626]
+      Rotation: [0, 0, 0]
+      Scale: [2, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 1549951660333655003
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Ground Stairs Group
+    Parent: 0
+    Children:
+      - Handle: 11468288035593589270
+      - Handle: 16991981794516538245
+      - Handle: 5126754013743951783
+      - Handle: 2570122672700455845
+      - Handle: 5493048436335166593
+      - Handle: 1173033633804346236
+      - Handle: 750994658740553159
+      - Handle: 9801208196699454187
+      - Handle: 4326547924900478512
+      - Handle: 8835455830896576011
+      - Handle: 13746291271941942925
+      - Handle: 13030128510327280848
+      - Handle: 4212126417245574170
+    PrefabComponent:
+      Prefab: 1083144822458326309
+      Entity: 1549951660333655003
+    TransformComponent:
+      Position: [3.99999928, 5.00000811, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
