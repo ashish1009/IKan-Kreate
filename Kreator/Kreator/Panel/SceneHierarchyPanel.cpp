@@ -511,7 +511,7 @@ namespace Kreator
     const ImVec2 rowAreaMin = ImGui::TableGetCellBgRect(ImGui::GetCurrentTable(), 0).Min;
     const ImVec2 rowAreaMax =
     {
-      ImGui::TableGetCellBgRect(ImGui::GetCurrentTable(), ImGui::TableGetColumnCount() - 1).Max.x,
+      ImGui::TableGetCellBgRect(ImGui::GetCurrentTable(), ImGui::TableGetColumnCount() - 2).Max.x,
       rowAreaMin.y + rowHeight
     };
 
@@ -768,6 +768,15 @@ namespace Kreator
     
     // <> column 3 -------------------------------------------------------------------------------------------------
     ImGui::TableNextColumn();
+    auto& visibility = entity.GetComponent<VisibilityComponent>().isVisible;
+    
+    static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+    if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ 1.3f * lineHeight, 1.3f * lineHeight }))
+    {
+      visibility = visibility ? false : true;
+    }
+    UI::DrawButtonImage(visibility ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+
 
     // Draw children ------------------------
     if (opened)
@@ -1220,14 +1229,6 @@ namespace Kreator
               static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
               if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }))
               {
-                if (s_defaultMaterialAsset == m_selectedMeshMaterialAsset->handle)
-                {
-                  // TODO: Later increase the material for now only 0 is used
-                  // TODO: Might change to UUID if needed
-                  std::string materialName = entity.GetName() + "#" + std::to_string((uint32_t)entity) + MaterialExtension;
-                  m_selectedMeshMaterialAsset = AssetManager::CreateNewAsset<MaterialAsset>(materialName, Project::GetActive()->GetMaterialDirectory());
-                  smc.materialTable->SetMaterial(0, m_selectedMeshMaterialAsset);
-                }
                 m_showMaterialEditor = m_showMaterialEditor ? false : true;
               }
               UI::DrawButtonImage(m_showMaterialEditor ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
