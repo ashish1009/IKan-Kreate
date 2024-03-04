@@ -47,11 +47,20 @@ Assets:
   - Handle: 942861086
     FilePath: Textures/Pbr/Ground/Forest/forest_floor_albedo.png
     Type: Image
+  - Handle: 990023299
+    FilePath: Textures/Pbr/Ground/DryDirt/dry-dirt1-normal.png
+    Type: Image
   - Handle: 1062582993
     FilePath: Textures/Pbr/Ground/Forest/forest_floor_Normal-ogl.png
     Type: Image
   - Handle: 1083633243
     FilePath: Textures/Pbr/Wood/BambooWood/bamboo-wood-semigloss-albedo.png
+    Type: Image
+  - Handle: 1106169344
+    FilePath: Textures/Pbr/Ground/DryDirt/dry-dirt1-metalness.png
+    Type: Image
+  - Handle: 1211199561
+    FilePath: Textures/Pbr/Ground/DryDirt/dry-dirt1-height2.png
     Type: Image
   - Handle: 1235469545
     FilePath: Textures/Pbr/Concrete/Pocked/pockedconcrete1-albedo.png
@@ -70,6 +79,9 @@ Assets:
     Type: Image
   - Handle: 1448308655
     FilePath: Textures/Pbr/Concrete/Pocked/pockedconcrete1-normal.png
+    Type: Image
+  - Handle: 1527819421
+    FilePath: Textures/Pbr/Ground/DryDirt/dry-dirt1-albedo.png
     Type: Image
   - Handle: 1622114070
     FilePath: Textures/Pbr/Ground/Forest/forest_floor_Metallic.png
@@ -164,9 +176,9 @@ Assets:
   - Handle: 4235993095
     FilePath: Textures/Pbr/Wood/BambooWood/bamboo-wood-semigloss-metal.png
     Type: Image
-  - Handle: 1083144822458326309
-    FilePath: Prefabs/X_Stairs.ikprefab
-    Type: Prefab
+  - Handle: 4709183315756673984
+    FilePath: Materials/DryDirt.ikmat
+    Type: Material
   - Handle: 8953154583405910258
     FilePath: Materials/BambooWood.ikmat
     Type: Material
@@ -179,6 +191,9 @@ Assets:
   - Handle: 10172274066066273285
     FilePath: Materials/WornPaint.ikmat
     Type: Material
+  - Handle: 12522336537669527938
+    FilePath: Prefabs/X_Stairs.ikprefab
+    Type: Prefab
   - Handle: 13003761611621757239
     FilePath: Materials/PockedConcrete.ikmat
     Type: Material

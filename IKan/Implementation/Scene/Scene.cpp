@@ -595,7 +595,10 @@ namespace IKan
   void Scene::SetSkyboxAsset(AssetHandle handle)
   {
     m_skyboxAsset = handle;
-    SceneRenderer::SubmitSkyboxImage(m_skyboxAsset);
+    if (m_useIBL)
+    {
+      SceneRenderer::SubmitSkyboxImage(m_skyboxAsset);
+    }
   }
   
   void Scene::SetIBLFlag(bool value)

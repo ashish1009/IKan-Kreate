@@ -7,6 +7,6 @@ Project:
   SceneDirectory: Assets/Scenes
   TextureDirectory: Assets/Textures
   MaterialPath: Assets/Materials
-  StartScene: Scenes/BallGame.ikscene
+  StartScene: Scenes/CrashScene.ikscene
   AutoSave: true
   AutoSaveInterval: 60

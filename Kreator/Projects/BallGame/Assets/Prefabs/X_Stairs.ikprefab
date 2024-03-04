@@ -1,18 +1,18 @@
 Prefab:
-  - Entity: 4212126417245574170
+  - Entity: 3652665927207989940
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 4212126417245574170
+      Prefab: 12522336537669527938
+      Entity: 3652665927207989940
     TransformComponent:
-      Position: [6.99999857, 5.00003242, 12.400116]
-      Rotation: [0, 0, 0]
+      Position: [-6.99986458, 5.00003242, -25.000082]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -36,20 +36,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 13030128510327280848
+  - Entity: 10706140202043234017
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 13030128510327280848
+      Prefab: 12522336537669527938
+      Entity: 10706140202043234017
     TransformComponent:
-      Position: [9.00289154, 6.00029278, 12.4024353]
-      Rotation: [0, 0, 0]
+      Position: [-9.0033884, 6.00029278, -25.0026093]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -73,20 +73,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 13746291271941942925
+  - Entity: 4602336181787244715
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 13746291271941942925
+      Prefab: 12522336537669527938
+      Entity: 4602336181787244715
     TransformComponent:
-      Position: [11, 6.99996853, 12.4001999]
-      Rotation: [0, 0, 0]
+      Position: [-10.9991188, 6.99996853, -24.9998074]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -110,20 +110,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 8835455830896576011
+  - Entity: 4362738123990082332
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 8835455830896576011
+      Prefab: 12522336537669527938
+      Entity: 4362738123990082332
     TransformComponent:
-      Position: [15.0005455, 7.99984932, 12.4001999]
-      Rotation: [0, 0, 0]
+      Position: [-15.0005178, 7.99984932, -25.0001678]
+      Rotation: [0, 3.14159274, 0]
       Scale: [6, 1, 4]
     MeshComponent:
       Enable: true
@@ -147,20 +147,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 4326547924900478512
+  - Entity: 9276962792446831373
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 4326547924900478512
+      Prefab: 12522336537669527938
+      Entity: 9276962792446831373
     TransformComponent:
-      Position: [4.99999857, 4.00003242, 12.400116]
-      Rotation: [0, 0, 0]
+      Position: [-4.99568129, 4.00003242, -24.9992447]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -184,20 +184,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 9801208196699454187
+  - Entity: 16099301922018584857
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 9801208196699454187
+      Prefab: 12522336537669527938
+      Entity: 16099301922018584857
     TransformComponent:
-      Position: [2.99999928, 2.99965072, 12.400177]
-      Rotation: [0, 0, 0]
+      Position: [-2.99951935, 2.99965072, -25.0001125]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -221,20 +221,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 750994658740553159
+  - Entity: 1099525779408954206
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 750994658740553159
+      Prefab: 12522336537669527938
+      Entity: 1099525779408954206
     TransformComponent:
-      Position: [1.00000024, 1.99964559, 12.4002228]
-      Rotation: [0, 0, 0]
+      Position: [-0.999927282, 1.99964559, -25.0002041]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -258,20 +258,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 1173033633804346236
+  - Entity: 5630511515579790460
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 1173033633804346236
+      Prefab: 12522336537669527938
+      Entity: 5630511515579790460
     TransformComponent:
-      Position: [-1.0000006, 1.00577044, 12.3997116]
-      Rotation: [0, 0, 0]
+      Position: [1.00414801, 1.00577044, -24.9998894]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -295,20 +295,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 5493048436335166593
+  - Entity: 8328053758450405771
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 5493048436335166593
+      Prefab: 12522336537669527938
+      Entity: 8328053758450405771
     TransformComponent:
-      Position: [-3.00000167, 0.000677465403, 12.4001694]
-      Rotation: [0, 0, 0]
+      Position: [2.99993896, 0.000677465403, -25.0001621]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -332,20 +332,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 2570122672700455845
+  - Entity: 7882595048945037190
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 2570122672700455845
+      Prefab: 12522336537669527938
+      Entity: 7882595048945037190
     TransformComponent:
-      Position: [-5.00000048, -1.00002527, 12.4001083]
-      Rotation: [0, 0, 0]
+      Position: [5.00006437, -1.00002527, -25.0001068]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -369,20 +369,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 5126754013743951783
+  - Entity: 9274740080711144630
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 5126754013743951783
+      Prefab: 12522336537669527938
+      Entity: 9274740080711144630
     TransformComponent:
-      Position: [-6.99999952, -2.00003576, 12.400116]
-      Rotation: [0, 0, 0]
+      Position: [6.99998856, -2.00003576, -25.0000935]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -406,20 +406,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 16991981794516538245
+  - Entity: 15877183551585821575
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 16991981794516538245
+      Prefab: 12522336537669527938
+      Entity: 15877183551585821575
     TransformComponent:
-      Position: [-8.99710655, -3.00004911, 12.4025879]
-      Rotation: [0, 0, 0]
+      Position: [8.99722385, -3.00004911, -25.0026188]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -443,20 +443,20 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 11468288035593589270
+  - Entity: 3548929861444731559
     VisibilityComponent:
       Visibility: true
     TagComponent:
       Tag: Stair
-    Parent: 1549951660333655003
+    Parent: 4902236387196086659
     Children:
       []
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 11468288035593589270
+      Prefab: 12522336537669527938
+      Entity: 3548929861444731559
     TransformComponent:
-      Position: [-10.9996643, -3.99990511, 12.4000626]
-      Rotation: [0, 0, 0]
+      Position: [10.9998226, -3.99990511, -25.0001297]
+      Rotation: [0, 3.14159274, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -480,30 +480,30 @@ Prefab:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 1549951660333655003
+  - Entity: 4902236387196086659
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Ground Stairs Group
+      Tag: Staris
     Parent: 0
     Children:
-      - Handle: 11468288035593589270
-      - Handle: 16991981794516538245
-      - Handle: 5126754013743951783
-      - Handle: 2570122672700455845
-      - Handle: 5493048436335166593
-      - Handle: 1173033633804346236
-      - Handle: 750994658740553159
-      - Handle: 9801208196699454187
-      - Handle: 4326547924900478512
-      - Handle: 8835455830896576011
-      - Handle: 13746291271941942925
-      - Handle: 13030128510327280848
-      - Handle: 4212126417245574170
+      - Handle: 3548929861444731559
+      - Handle: 15877183551585821575
+      - Handle: 9274740080711144630
+      - Handle: 7882595048945037190
+      - Handle: 8328053758450405771
+      - Handle: 5630511515579790460
+      - Handle: 1099525779408954206
+      - Handle: 16099301922018584857
+      - Handle: 9276962792446831373
+      - Handle: 4362738123990082332
+      - Handle: 4602336181787244715
+      - Handle: 10706140202043234017
+      - Handle: 3652665927207989940
     PrefabComponent:
-      Prefab: 1083144822458326309
-      Entity: 1549951660333655003
+      Prefab: 12522336537669527938
+      Entity: 4902236387196086659
     TransformComponent:
-      Position: [3.99999928, 5.00000811, 0]
+      Position: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
