@@ -190,6 +190,7 @@ namespace IKan
       enttMap[uuid] = e.m_entityHandle;
     }
     
+    CopyComponent<VisibilityComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<TagComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<RelationshipComponent>(target->m_registry, m_registry, enttMap);
     CopyComponent<CameraComponent>(target->m_registry, m_registry, enttMap);
@@ -346,6 +347,7 @@ namespace IKan
       newEntity = CreateEntity("Empty Entity");
     }
     
+    CopyComponentIfExists<VisibilityComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<CameraComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
     CopyComponentIfExists<MeshComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);

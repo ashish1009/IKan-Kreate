@@ -28,10 +28,16 @@ namespace IKan
   //  5) Update Scene::DuplicateEntity() to deal with the new component in whatever way is appropriate.
   //  6) Update SceneSerializer to (de)serialize the new component.
   //  7) Update SceneHierarchy Panel
+  //  8) Update Prefab serializer
 
   struct IDComponent
   {
     UUID ID = 0;
+  };
+  
+  struct VisibilityComponent
+  {
+    bool isVisible = true;
   };
   
   struct TagComponent
@@ -223,7 +229,7 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, TagComponent, TransformComponent, CameraComponent, MeshComponent, 
+  ComponentGroup<IDComponent, VisibilityComponent, TagComponent, TransformComponent, CameraComponent, MeshComponent,
   RigidBodyComponent, Box3DColliderComponent, SphereColliderComponent, CapsuleColliderComponent, JointComponent,
   PrefabComponent>;
 

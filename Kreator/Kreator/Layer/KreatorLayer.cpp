@@ -247,7 +247,7 @@ if (!m_currentScene) return
         {
           m_editorScene->OnRenderRuntime(ts, m_miniViewportRenderer);
         }
-
+        
         // Save Scene Auto
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
         {
@@ -1002,6 +1002,15 @@ if (!m_currentScene) return
     
     // Update Panel Scene
     m_panels.SetSceneContext(m_currentScene);
+    
+#if 0 // hack to manage components
+    for (auto e : m_currentScene->GetAllEntitiesWith<IDComponent>())
+    {
+      Entity en {e, m_currentScene.get()};
+      en.AddComponent<VisibilityComponent>();
+    }
+#endif
+
   }
   
   void KreatorLayer::OnScenePlay()

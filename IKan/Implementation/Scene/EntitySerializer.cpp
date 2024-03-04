@@ -21,7 +21,17 @@ namespace IKan
     out << YAML::BeginMap; // Entity
     out << YAML::Key << "Entity";
     out << YAML::Value << uuid;
-    
+
+    if (entity.HasComponent<VisibilityComponent>())
+    {
+      out << YAML::Key << "VisibilityComponent";
+      out << YAML::BeginMap; // VisibilityComponent
+      
+      out << YAML::Key << "Visibility" << YAML::Value << entity.GetComponent<VisibilityComponent>().isVisible;
+      
+      out << YAML::EndMap; // VisibilityComponent
+    }
+
     if (entity.HasComponent<TagComponent>())
     {
       out << YAML::Key << "TagComponent";
@@ -269,6 +279,14 @@ namespace IKan
       
       Entity deserializedEntity = scene->CreateEntityWithID(uuid, name);
       
+      // VisibilityComponent ---------------------------------------------------------------------------------------
+      auto visibilityComponent = entity["VisibilityComponent"];
+      if (visibilityComponent)
+      {
+        auto& vc = deserializedEntity.AddComponent<VisibilityComponent>();
+        vc.isVisible = visibilityComponent["Visibility"].as<bool>();
+      }
+      
       // RelationshipComponent ---------------------------------------------------------------------------------------
       auto& relationshipComponent = deserializedEntity.GetComponent<RelationshipComponent>();
       uint64_t parentHandle = entity["Parent"] ? entity["Parent"].as<uint64_t>() : 0;
@@ -284,6 +302,7 @@ namespace IKan
         }
       }
       
+      // PrefabComponent ---------------------------------------------------------------------------------------
       auto prefabComponent = entity["PrefabComponent"];
       if (prefabComponent)
       {
