@@ -131,8 +131,11 @@ namespace IKan
     auto meshView = m_registry.view<TransformComponent, MeshComponent>();
     for (const auto& entityHandle : meshView)
     {
-      const auto& [transformComp, meshComp] = meshView.get<TransformComponent, MeshComponent>(entityHandle);
-      if (meshComp.mesh != 0)
+      Entity entity{entityHandle, this};
+      const auto& transformComp = entity.GetComponent<TransformComponent>();
+      const auto& meshComp = entity.GetComponent<MeshComponent>();
+      const auto& visibilityComp = entity.GetComponent<VisibilityComponent>();
+      if (meshComp.mesh != 0 and visibilityComp.isVisible)
       {
         // Render Selected Mesh ---------------------------------------------
         Entity entity = {entityHandle, this};
