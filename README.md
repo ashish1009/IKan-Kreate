@@ -115,19 +115,19 @@ Editor Application using IKan Library to create Games
   - Scene Hierarchy (ECS)
 
 ### Road Map
-- Physics Material via Asset
-- Fix Mesh Material Asset
-- Environment via Asset 
-- Show and hide entity (SHP)
+- Collections of entities
+- Show and hide entity 
 - Show and hide components
-- Point Light
-- Light Icons (After Point Light)
-- Shadow
-- Grid
 - Scripts
-- Make Environment and Physics material as Asset
-- Scale Child entity with parent (Hold)
-- Fix selected outline size (Hold)
+- Point Light (Later : While Shadow)
+- Light Icons (Later : After Point Light)
+- Shadow (Later : While Shadow light)
+- Make Environment and Physics material as Asset (Later : While Shadow)
+- Physics Material via Asset (Later)
+- Scale Child entity with parent (Later)
+- Fix Mesh Material Asset : Some default color, metalness and roughness to store in component instead of creating new file for each entity? (Later)
+- Fix selected outline size (Later)
+- Grid (Later)
 
 ### TODO
 
