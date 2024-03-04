@@ -553,7 +553,7 @@ Entities:
       Scale: [1, 1, 1]
   - Entity: 5227051758720136816
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: PrimaryCamera
     Parent: 0
@@ -652,7 +652,7 @@ Entities:
       MassDensity: 1
   - Entity: 6557678601113267883
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Ground Stairs Group
     Parent: 3628902883925067605
@@ -778,7 +778,7 @@ Entities:
       MassDensity: 1
   - Entity: 8524298289375043812
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Player
     Parent: 0
@@ -948,7 +948,7 @@ Entities:
       MassDensity: 1
   - Entity: 9098878189250181179
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Ground
     Parent: 0
@@ -1676,7 +1676,7 @@ Entities:
       MassDensity: 1
   - Entity: 13036184168500338314
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Right Wall
     Parent: 3628902883925067605
@@ -1846,7 +1846,7 @@ Entities:
       MassDensity: 1
   - Entity: 13780855540493820210
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Back Wall
     Parent: 3628902883925067605

@@ -768,10 +768,11 @@ namespace Kreator
     
     // <> column 3 -------------------------------------------------------------------------------------------------
     ImGui::TableNextColumn();
-    auto& visibility = entity.GetComponent<VisibilityComponent>().isVisible;
+    ImGui::PushID(entity);
+    const auto& visibility = entity.GetComponent<VisibilityComponent>().isVisible;
     
     static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
-    if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ 1.3f * lineHeight, 1.3f * lineHeight }))
+    if (ImGui::InvisibleButton("##Visibility", ImVec2{ 1.3f * lineHeight, 1.3f * lineHeight }))
     {
       auto changeChildVisibility = [&](Entity e, auto&& changeChildVisibility) -> void {
         auto& v = e.GetComponent<VisibilityComponent>().isVisible;
@@ -786,7 +787,7 @@ namespace Kreator
       changeChildVisibility(entity, changeChildVisibility);
     }
     UI::DrawButtonImage(visibility ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
-
+    ImGui::PopID();
 
     // Draw children ------------------------
     if (opened)

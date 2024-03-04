@@ -340,7 +340,7 @@ namespace Kreator
         
         if (!metallicMap or !m_materialAsset->GetMetallicMapToggle())
         {
-          if (ImGui::DragFloat("Metalness", &materialProperty.metallic, 0.01, 0.0f, 1.0f))
+          if (ImGui::SliderFloat("Metallic", &materialProperty.metallic, 0.0f, 1.0f))
           {
             m_materialAsset->SetMetalness(materialProperty.metallic);
             needsSerialize = true;
@@ -429,7 +429,7 @@ namespace Kreator
         
         if (!roughnessMap or !m_materialAsset->GetRoughnessMapToggle())
         {
-          if (ImGui::DragFloat("Roughness", &materialProperty.roughness, 0.01, 0.0f, 1.0f))
+          if (ImGui::SliderFloat("Roughness ", &materialProperty.roughness, 0.0f, 1.0f))
           {
             m_materialAsset->SetRoughness(materialProperty.roughness);
             needsSerialize = true;

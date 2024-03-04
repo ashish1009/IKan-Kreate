@@ -113,11 +113,9 @@ Editor Application using IKan Library to create Games
   - Asset Viewer
   - Asset Debugger
   - Scene Hierarchy (ECS)
+  - Show and hide entity 
 
 ### Road Map
-- Collections of entities
-- Show and hide entity 
-- Show and hide components
 - Scripts
 - Point Light (Later : While Shadow)
 - Light Icons (Later : After Point Light)
@@ -128,6 +126,8 @@ Editor Application using IKan Library to create Games
 - Fix Mesh Material Asset : Some default color, metalness and roughness to store in component instead of creating new file for each entity? (Later)
 - Fix selected outline size (Later)
 - Grid (Later)
+- Collections of entities (Later if needed)
+- Show and hide components (Later if needed)
 
 ### TODO
 
