@@ -10,7 +10,7 @@ Environment:
 Entities:
   - Entity: 654776206556185623
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -40,9 +40,105 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 898829439425592926
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [-3, 17.5, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [2, 8, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 1557851745124641616
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [-9, 16, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [2, 11, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 1577757478528875796
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [1, 9, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [22, 1, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 2215160407427830980
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -72,9 +168,105 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 2435985376578116347
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [-7, 16.5, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [2, 10, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 2452878833535804765
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [4, 12, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [16, 1, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 2620639337902174712
+    TagComponent:
+      Tag: Ground Floor
+    Parent: 15816623905512646286
+    Children:
+      []
+    TransformComponent:
+      Position: [-14.9731407, 5.87522697, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [5.92017555, 5.12499952, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 10
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 2675054827476876562
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -104,9 +296,41 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 2935374345107658973
+    TagComponent:
+      Tag: Left Wall
+    Parent: 12006793525758451154
+    Children:
+      []
+    TransformComponent:
+      Position: [-18.0000076, 15.000001, 89.5]
+      Rotation: [0, -0, 0]
+      Scale: [1, 12.9999981, 22]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 2979820497437843542
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -136,9 +360,41 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 2993631179637255673
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [3, 11, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [18, 1, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 3054173911874538996
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -170,29 +426,63 @@ Entities:
       MassDensity: 1
   - Entity: 3628902883925067605
     TagComponent:
-      Tag: House Parent
+      Tag: House
     Parent: 0
     Children:
       - Handle: 13780855540493820210
       - Handle: 13036184168500338314
-      - Handle: 4671653309321784290
       - Handle: 6557678601113267883
       - Handle: 14565302825503852198
-      - Handle: 9588196012614309815
+      - Handle: 5195751022273639401
+      - Handle: 12006793525758451154
+      - Handle: 15632144982410339178
+      - Handle: 15816623905512646286
     TransformComponent:
       Position: [0, 0, 85]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
-  - Entity: 4671653309321784290
+  - Entity: 4396664693841291892
     TagComponent:
-      Tag: Left Wall
-    Parent: 3628902883925067605
+      Tag: First Floor
+    Parent: 15632144982410339178
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 8.5, 85.5]
-      Rotation: [0, 0, 0]
-      Scale: [1, 26, 30]
+      Position: [-1, 18, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [2, 7, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 4671653309321784290
+    TagComponent:
+      Tag: Left Wall
+    Parent: 5195751022273639401
+    Children:
+      []
+    TransformComponent:
+      Position: [-18.0000076, 2.00000048, 78]
+      Rotation: [0, -0, 0]
+      Scale: [1, 12.999999, 15]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -215,6 +505,18 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 5195751022273639401
+    TagComponent:
+      Tag: Left First floor Wall Group
+    Parent: 3628902883925067605
+    Children:
+      - Handle: 4671653309321784290
+      - Handle: 12218125353355454767
+      - Handle: 10893038559861363235
+    TransformComponent:
+      Position: [-18.2999992, 0, 85]
+      Rotation: [0, -0, 0]
+      Scale: [1, 1, 1]
   - Entity: 5227051758720136816
     TagComponent:
       Tag: PrimaryCamera
@@ -244,9 +546,41 @@ Entities:
       CC_BottomRadius: 4
       CC_BottomHeight: 0
       CC_Sensitivity: 45
+  - Entity: 5727026161375482070
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [7, 15, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [10, 1, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 6252479258380241270
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -278,7 +612,7 @@ Entities:
       MassDensity: 1
   - Entity: 6557678601113267883
     TagComponent:
-      Tag: First Stairs Parent
+      Tag: Ground Stairs Group
     Parent: 3628902883925067605
     Children:
       - Handle: 2675054827476876562
@@ -298,9 +632,41 @@ Entities:
       Position: [3.99999928, 5, 85]
       Rotation: [0, -0, 0]
       Scale: [1, 1, 1]
+  - Entity: 6917404596294505594
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [-14.7520905, 18.5, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [5.5, 6, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 8284731066321589216
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -330,22 +696,22 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 8524298289375043812
+  - Entity: 8339082795134779645
     TagComponent:
-      Tag: Reference Cube
-    Parent: 0
+      Tag: First Floor
+    Parent: 15632144982410339178
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 40]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Position: [2, 10, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [20, 1, 0.100000001]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
-      TilingFactor: 1
+      TilingFactor: 20
       MaterialTable:
-        0: 444052761
+        0: 13003761611621757239
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -362,16 +728,48 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 8524298289375043812
+    TagComponent:
+      Tag: Player
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 40]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 1336252552
+      TilingFactor: 1
+      MaterialTable:
+        0: 444052761
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    SphereColliderComponent:
+      Enable: true
+      Radius: 0.5
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 8540429668044528831
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
     TransformComponent:
-      Position: [3.99998593, 15.999958, 97.5001526]
+      Position: [9.49998569, 15.999958, 97.5001526]
       Rotation: [0, -0, 0]
-      Scale: [4, 1, 4]
+      Scale: [15, 1, 4]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
@@ -396,7 +794,7 @@ Entities:
       MassDensity: 1
   - Entity: 8706544570066916004
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -428,7 +826,7 @@ Entities:
       MassDensity: 1
   - Entity: 8788723699992475751
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -460,7 +858,7 @@ Entities:
       MassDensity: 1
   - Entity: 9046179299565781016
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -524,7 +922,7 @@ Entities:
       MassDensity: 1
   - Entity: 9215906125337687666
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -556,7 +954,7 @@ Entities:
       MassDensity: 1
   - Entity: 9265283285516553835
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -589,7 +987,7 @@ Entities:
   - Entity: 9588196012614309815
     TagComponent:
       Tag: First Floor
-    Parent: 3628902883925067605
+    Parent: 15632144982410339178
     Children:
       []
     TransformComponent:
@@ -601,7 +999,71 @@ Entities:
       MeshHandle: 560965872
       TilingFactor: 20
       MaterialTable:
-        0: 10172274066066273285
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 9606105453080302712
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [5, 13, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [14, 1, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 9790696042013462138
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [2, 19, 93.5]
+      Rotation: [0, -0, 0]
+      Scale: [0.100000001, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -620,7 +1082,7 @@ Entities:
       MassDensity: 1
   - Entity: 9939117715947352361
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -652,7 +1114,7 @@ Entities:
       MassDensity: 1
   - Entity: 10012052399548437132
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -666,6 +1128,38 @@ Entities:
       TilingFactor: 5
       MaterialTable:
         0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 10185056875095402814
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [6, 21, 91.5]
+      Rotation: [0, -0, 0]
+      Scale: [0.100000001, 1, 8]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -714,9 +1208,73 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 10675896899799708859
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [6, 18, 94.5]
+      Rotation: [0, -0, 0]
+      Scale: [0.100000001, 1, 2]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 10755854728910485890
+    TagComponent:
+      Tag: Ground Floor
+    Parent: 15816623905512646286
+    Children:
+      []
+    TransformComponent:
+      Position: [14.625, 5.875, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [5.25, 5.12499952, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 10
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 10763067471755918970
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -746,9 +1304,117 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 10893038559861363235
+    TagComponent:
+      Tag: Left Wall
+    Parent: 5195751022273639401
+    Children:
+      []
+    TransformComponent:
+      Position: [-18, 4.71832752, 89.125]
+      Rotation: [0, -0, 0]
+      Scale: [1, 7.5, 7.25]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 11009691208909481205
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [11.5, 18.5, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [11, 6, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 11370889807284693208
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [2, 18, 94.5]
+      Rotation: [0, -0, 0]
+      Scale: [0.100000001, 1, 2]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 12006793525758451154
+    TagComponent:
+      Tag: Left Second Floor Wall Group
+    Parent: 3628902883925067605
+    Children:
+      - Handle: 2935374345107658973
+      - Handle: 17462057736370469507
+      - Handle: 16152840656304028640
+    TransformComponent:
+      Position: [-18.2000008, 13, 85]
+      Rotation: [0, -0, 0]
+      Scale: [1, 1, 1]
   - Entity: 12080169501945457102
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -778,9 +1444,105 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 12145664856025680527
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [-11, 15.5, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [2, 12, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 12218125353355454767
+    TagComponent:
+      Tag: Left Wall
+    Parent: 5195751022273639401
+    Children:
+      []
+    TransformComponent:
+      Position: [-18.0000076, 2, 96.5]
+      Rotation: [0, -0, 0]
+      Scale: [1, 13, 7.5]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 12407273068100850478
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [1, 18.5, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [2, 6, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 12637598765977416176
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -842,6 +1604,134 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 13324006071561882375
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [2, 20, 92.5]
+      Rotation: [0, -0, 0]
+      Scale: [0.100000001, 1, 6]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 13572575593345534631
+    TagComponent:
+      Tag: Stair
+    Parent: 14565302825503852198
+    Children:
+      []
+    TransformComponent:
+      Position: [-15.001545, 8.39999962, 97.5005493]
+      Rotation: [0, -0, 0]
+      Scale: [6, 0.200000003, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 5
+      MaterialTable:
+        0: 8953154583405910258
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 13577969351235389362
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [6, 19, 93.5]
+      Rotation: [0, -0, 0]
+      Scale: [0.100000001, 1, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 13765158970327820710
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [-5, 17, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [2, 9, 0.200000003]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 13780855540493820210
     TagComponent:
       Tag: Back Wall
@@ -876,12 +1766,12 @@ Entities:
       MassDensity: 1
   - Entity: 14159979393781190509
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
     TransformComponent:
-      Position: [-10.9997864, 9.00005341, 97.5000381]
+      Position: [-10.9994688, 9.00045013, 97.5002289]
       Rotation: [0, -0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -906,9 +1796,41 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 14508172674342346817
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [6, 20, 92.5]
+      Rotation: [0, -0, 0]
+      Scale: [0.100000001, 1, 6]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 14532006507986891260
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -940,7 +1862,7 @@ Entities:
       MassDensity: 1
   - Entity: 14565302825503852198
     TagComponent:
-      Tag: Second Stairs Parent
+      Tag: First Stairs Group
     Parent: 3628902883925067605
     Children:
       - Handle: 14159979393781190509
@@ -956,13 +1878,14 @@ Entities:
       - Handle: 18300236661262093015
       - Handle: 8706544570066916004
       - Handle: 8788723699992475751
+      - Handle: 13572575593345534631
     TransformComponent:
       Position: [3.99999928, 18, 85]
       Rotation: [0, -0, 0]
       Scale: [1, 1, 1]
   - Entity: 15068876173452837735
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -994,7 +1917,7 @@ Entities:
       MassDensity: 1
   - Entity: 15511796795288404373
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -1024,9 +1947,87 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 15632144982410339178
+    TagComponent:
+      Tag: First Floor Group
+    Parent: 3628902883925067605
+    Children:
+      - Handle: 9588196012614309815
+      - Handle: 1577757478528875796
+      - Handle: 8339082795134779645
+      - Handle: 2993631179637255673
+      - Handle: 2452878833535804765
+      - Handle: 9606105453080302712
+      - Handle: 16534027980828393810
+      - Handle: 5727026161375482070
+      - Handle: 11009691208909481205
+      - Handle: 10675896899799708859
+      - Handle: 13577969351235389362
+      - Handle: 14508172674342346817
+      - Handle: 10185056875095402814
+      - Handle: 18132946186215319161
+      - Handle: 13324006071561882375
+      - Handle: 9790696042013462138
+      - Handle: 11370889807284693208
+      - Handle: 12407273068100850478
+      - Handle: 4396664693841291892
+      - Handle: 898829439425592926
+      - Handle: 13765158970327820710
+      - Handle: 2435985376578116347
+      - Handle: 1557851745124641616
+      - Handle: 12145664856025680527
+      - Handle: 6917404596294505594
+    TransformComponent:
+      Position: [0, 0, 85]
+      Rotation: [0, -0, 0]
+      Scale: [1, 1, 1]
+  - Entity: 15816623905512646286
+    TagComponent:
+      Tag: Ground Floor Group
+    Parent: 3628902883925067605
+    Children:
+      - Handle: 18196074048552676981
+      - Handle: 10755854728910485890
+      - Handle: 2620639337902174712
+    TransformComponent:
+      Position: [0, 0, 85]
+      Rotation: [0, -0, 0]
+      Scale: [1, 1, 1]
+  - Entity: 16152840656304028640
+    TagComponent:
+      Tag: Left Wall
+    Parent: 12006793525758451154
+    Children:
+      []
+    TransformComponent:
+      Position: [-18, 17.7183342, 76.5]
+      Rotation: [0, -0, 0]
+      Scale: [1, 7.5, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 16169922295799184169
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
@@ -1056,9 +2057,105 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 16534027980828393810
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [6, 14, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [12, 1, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 17462057736370469507
+    TagComponent:
+      Tag: Left Wall
+    Parent: 12006793525758451154
+    Children:
+      []
+    TransformComponent:
+      Position: [-18.0000076, 15.000001, 72.5]
+      Rotation: [0, -0, 0]
+      Scale: [1, 13, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 9755886144217281842
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 18132946186215319161
+    TagComponent:
+      Tag: First Floor
+    Parent: 15632144982410339178
+    Children:
+      []
+    TransformComponent:
+      Position: [2, 21, 91.5]
+      Rotation: [0, -0, 0]
+      Scale: [0.100000001, 1, 8]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 18176092194880107831
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 6557678601113267883
     Children:
       []
@@ -1088,9 +2185,41 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 18196074048552676981
+    TagComponent:
+      Tag: Ground Floor
+    Parent: 15816623905512646286
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 2, 95.5]
+      Rotation: [0, -0, 0]
+      Scale: [24, 13, 0.100000001]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 18300236661262093015
     TagComponent:
-      Tag: Cube
+      Tag: Stair
     Parent: 14565302825503852198
     Children:
       []
