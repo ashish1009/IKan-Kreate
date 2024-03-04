@@ -524,7 +524,8 @@ if (!m_currentScene) return
       {
         Entity entity = { e, m_currentScene.get() };
         auto& mc = entity.GetComponent<MeshComponent>();
-        if (float distance = KreatorUtils::CheckRayPassMesh(mc.mesh, entity, origin, direction); distance != -1)
+        auto& vc = entity.GetComponent<VisibilityComponent>();
+        if (float distance = KreatorUtils::CheckRayPassMesh(mc.mesh, entity, origin, direction); distance != -1 and vc.isVisible)
         {
           m_selectionContext.push_back({entity, distance});
         }

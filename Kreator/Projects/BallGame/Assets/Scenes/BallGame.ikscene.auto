@@ -17,8 +17,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1.0000006, 14, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [-1.0000006, 13.9998035, 97.5003433]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -51,13 +51,47 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-3, 17.5, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [-3, 17.500082, 95.499855]
+      Rotation: [0, 0, 0]
       Scale: [2, 8, 0.200000003]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
       TilingFactor: 20
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
+  - Entity: 1434217049710200861
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Ground Floor
+    Parent: 15816623905512646286
+    Children:
+      []
+    TransformComponent:
+      Position: [14.625, 3.37517786, 97.4999695]
+      Rotation: [0, 0, 0]
+      Scale: [5, 0.200000003, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 10
       MaterialTable:
         0: 13003761611621757239
     RigidBodyComponent:
@@ -85,8 +119,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-9, 16, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [-9, 15.9999552, 95.5000687]
+      Rotation: [0, 0, 0]
       Scale: [2, 11, 0.200000003]
     MeshComponent:
       Enable: true
@@ -119,8 +153,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1, 9, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [1, 9.00023746, 95.4998093]
+      Rotation: [0, 0, 0]
       Scale: [22, 1, 0.100000001]
     MeshComponent:
       Enable: true
@@ -153,8 +187,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03205395, 17, 94.5001526]
-      Rotation: [0, -0, 0]
+      Position: [4.03205395, 16.9999981, 94.5001068]
+      Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
       Enable: true
@@ -187,8 +221,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-7, 16.5, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [-7, 16.4999714, 95.5000992]
+      Rotation: [0, 0, 0]
       Scale: [2, 10, 0.200000003]
     MeshComponent:
       Enable: true
@@ -221,8 +255,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4, 12, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [4, 11.9999685, 95.5000687]
+      Rotation: [0, 0, 0]
       Scale: [16, 1, 0.100000001]
     MeshComponent:
       Enable: true
@@ -255,8 +289,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-14.9731407, 5.87522697, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [-14.9731407, 5.87519407, 95.4999771]
+      Rotation: [0, 0, 0]
       Scale: [5.92017555, 5.12499952, 0.100000001]
     MeshComponent:
       Enable: true
@@ -289,8 +323,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-10.9996643, -3.99996185, 97.5000381]
-      Rotation: [0, -0, 0]
+      Position: [-10.9996643, -3.99990511, 97.500061]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -323,8 +357,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 15.000001, 89.5]
-      Rotation: [0, -0, 0]
+      Position: [-18.0000076, 15.0000677, 89.4999161]
+      Rotation: [0, 0, 0]
       Scale: [1, 12.9999981, 22]
     MeshComponent:
       Enable: true
@@ -357,8 +391,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-5.00000048, -1, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [-5.00000048, -1.00002527, 97.5001068]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -391,8 +425,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [3, 11, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [3, 11.0003471, 95.4995728]
+      Rotation: [0, 0, 0]
       Scale: [18, 1, 0.100000001]
     MeshComponent:
       Enable: true
@@ -425,8 +459,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [9.00289154, 6, 97.5026016]
-      Rotation: [0, -0, 0]
+      Position: [9.00289154, 6.00029278, 97.5024338]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -478,8 +512,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1, 18, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [-1, 18.0002041, 95.4997864]
+      Rotation: [0, 0, 0]
       Scale: [2, 7, 0.200000003]
     MeshComponent:
       Enable: true
@@ -512,8 +546,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 2.00000048, 78]
-      Rotation: [0, -0, 0]
+      Position: [-18.0000076, 2.00006008, 78.0000763]
+      Rotation: [0, 0, 0]
       Scale: [1, 12.999999, 15]
     MeshComponent:
       Enable: true
@@ -549,7 +583,7 @@ Entities:
       - Handle: 10893038559861363235
     TransformComponent:
       Position: [-18.2999992, 0, 85]
-      Rotation: [0, -0, 0]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 5227051758720136816
     VisibilityComponent:
@@ -591,8 +625,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [7, 15, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [7, 14.9999819, 95.500061]
+      Rotation: [0, 0, 0]
       Scale: [10, 1, 0.100000001]
     MeshComponent:
       Enable: true
@@ -625,8 +659,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [11, 7, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [11, 6.99996853, 97.5001984]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -671,9 +705,43 @@ Entities:
       - Handle: 3054173911874538996
       - Handle: 10508313986746797193
     TransformComponent:
-      Position: [3.99999928, 5, 85]
-      Rotation: [0, -0, 0]
+      Position: [3.99999928, 5.00000811, 84.9999771]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+  - Entity: 6770436042359797550
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Ground Floor
+    Parent: 15816623905512646286
+    Children:
+      []
+    TransformComponent:
+      Position: [12.125, -0.5, 97.4999695]
+      Rotation: [0, 0, 0]
+      Scale: [0.100000001, 8, 4]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 560965872
+      TilingFactor: 10
+      MaterialTable:
+        0: 13003761611621757239
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 0
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    Box3DColliderComponent:
+      Enable: true
+      Size: [0.5, 0.5, 0.5]
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.100000001
+      MassDensity: 1
   - Entity: 6917404596294505594
     VisibilityComponent:
       Visibility: true
@@ -683,8 +751,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-14.7520905, 18.5, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [-14.7520905, 18.5001163, 95.499733]
+      Rotation: [0, 0, 0]
       Scale: [5.5, 6, 0.100000001]
     MeshComponent:
       Enable: true
@@ -717,8 +785,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03205395, 18, 92.4994049]
-      Rotation: [0, -0, 0]
+      Position: [4.03205395, 18.0000458, 92.4993286]
+      Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
       Enable: true
@@ -751,8 +819,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 10, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [2, 10.0000515, 95.5]
+      Rotation: [0, 0, 0]
       Scale: [20, 1, 0.100000001]
     MeshComponent:
       Enable: true
@@ -819,8 +887,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [9.49998569, 15.999958, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [9.49998569, 16.0000172, 97.5001602]
+      Rotation: [0, 0, 0]
       Scale: [15, 1, 4]
     MeshComponent:
       Enable: true
@@ -853,8 +921,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03132153, 19.9992676, 88.5001526]
-      Rotation: [0, -0, 0]
+      Position: [4.03132153, 19.9991951, 88.500267]
+      Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
       Enable: true
@@ -887,8 +955,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03132153, 20.9992676, 86.5001526]
-      Rotation: [0, -0, 0]
+      Position: [4.03132153, 20.9988937, 86.5053406]
+      Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
       Enable: true
@@ -921,8 +989,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-4.99986029, 11.9992828, 97.5000076]
-      Rotation: [0, -0, 0]
+      Position: [-4.99986029, 11.9991875, 97.5000916]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -989,8 +1057,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [15.0005455, 7.99996185, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [15.0005455, 7.99984932, 97.5001984]
+      Rotation: [0, 0, 0]
       Scale: [6, 1, 4]
     MeshComponent:
       Enable: true
@@ -1023,8 +1091,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2.99999928, 3, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [2.99999928, 2.99965072, 97.5001755]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -1057,8 +1125,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 8.39999962, 83]
-      Rotation: [0, -0, 0]
+      Position: [0, 8.40000534, 83]
+      Rotation: [0, 0, 0]
       Scale: [36, 0.200000003, 25]
     MeshComponent:
       Enable: true
@@ -1091,8 +1159,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [5, 13, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [5, 12.9999866, 95.5000153]
+      Rotation: [0, 0, 0]
       Scale: [14, 1, 0.100000001]
     MeshComponent:
       Enable: true
@@ -1125,8 +1193,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 19, 93.5]
-      Rotation: [0, -0, 0]
+      Position: [2, 19.0003357, 93.4993057]
+      Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 4]
     MeshComponent:
       Enable: true
@@ -1159,8 +1227,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-8.99710655, 10, 97.5026016]
-      Rotation: [0, -0, 0]
+      Position: [-8.99710655, 9.99959373, 97.5027618]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -1193,8 +1261,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1.0000006, 1, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [-1.0000006, 1.00577044, 97.4997101]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -1227,8 +1295,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 21, 91.5]
-      Rotation: [0, -0, 0]
+      Position: [6, 20.9999619, 91.5002136]
+      Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 8]
     MeshComponent:
       Enable: true
@@ -1261,8 +1329,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [7.00006247, 5.00003862, 97.5000381]
-      Rotation: [0, -0, 0]
+      Position: [7.00006247, 4.99969149, 97.5001984]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -1295,8 +1363,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 18, 94.5]
-      Rotation: [0, -0, 0]
+      Position: [6, 18.0000515, 94.4998932]
+      Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 2]
     MeshComponent:
       Enable: true
@@ -1329,8 +1397,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [14.625, 5.875, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [14.625, 5.87517786, 95.4999695]
+      Rotation: [0, 0, 0]
       Scale: [5.25, 5.12499952, 0.100000001]
     MeshComponent:
       Enable: true
@@ -1363,8 +1431,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-6.99999952, 11, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [-6.99999952, 11.0001354, 97.5000458]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -1397,8 +1465,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18, 4.71832752, 89.125]
-      Rotation: [0, -0, 0]
+      Position: [-18, 4.71825027, 89.1250458]
+      Rotation: [0, 0, 0]
       Scale: [1, 7.5, 7.25]
     MeshComponent:
       Enable: true
@@ -1431,8 +1499,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [11.5, 18.5, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [11.5, 18.5001163, 95.499733]
+      Rotation: [0, 0, 0]
       Scale: [11, 6, 0.100000001]
     MeshComponent:
       Enable: true
@@ -1465,8 +1533,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 18, 94.5]
-      Rotation: [0, -0, 0]
+      Position: [2, 18.0000515, 94.4998932]
+      Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 2]
     MeshComponent:
       Enable: true
@@ -1501,8 +1569,8 @@ Entities:
       - Handle: 17462057736370469507
       - Handle: 16152840656304028640
     TransformComponent:
-      Position: [-18.2000008, 13, 85]
-      Rotation: [0, -0, 0]
+      Position: [-18.2000008, 13.0000277, 84.9999847]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 12080169501945457102
     VisibilityComponent:
@@ -1513,8 +1581,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.99999857, 4, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [4.99999857, 4.00003242, 97.5001144]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -1547,8 +1615,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-11, 15.5, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [-11, 15.4998264, 95.5002747]
+      Rotation: [0, 0, 0]
       Scale: [2, 12, 0.200000003]
     MeshComponent:
       Enable: true
@@ -1581,8 +1649,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 2, 96.5]
-      Rotation: [0, -0, 0]
+      Position: [-18.0000076, 1.99998534, 96.4999924]
+      Rotation: [0, 0, 0]
       Scale: [1, 13, 7.5]
     MeshComponent:
       Enable: true
@@ -1615,8 +1683,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1, 18.5, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [1, 18.5001163, 95.499733]
+      Rotation: [0, 0, 0]
       Scale: [2, 6, 0.200000003]
     MeshComponent:
       Enable: true
@@ -1649,8 +1717,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-3.00000167, 13, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [-3.00000167, 13.0011749, 97.4989243]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -1676,14 +1744,14 @@ Entities:
       MassDensity: 1
   - Entity: 13036184168500338314
     VisibilityComponent:
-      Visibility: true
+      Visibility: false
     TagComponent:
       Tag: Right Wall
     Parent: 3628902883925067605
     Children:
       []
     TransformComponent:
-      Position: [17.5962257, 8.49962139, 85.5014954]
+      Position: [17.5962257, 8.49966431, 85.5007629]
       Rotation: [0, 0, 0]
       Scale: [1, 26, 30]
     MeshComponent:
@@ -1717,8 +1785,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 20, 92.5]
-      Rotation: [0, -0, 0]
+      Position: [2, 19.9999981, 92.5000458]
+      Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 6]
     MeshComponent:
       Enable: true
@@ -1751,8 +1819,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-15.001545, 8.39999962, 97.5005493]
-      Rotation: [0, -0, 0]
+      Position: [-15.001545, 8.39987564, 97.500679]
+      Rotation: [0, 0, 0]
       Scale: [6, 0.200000003, 4]
     MeshComponent:
       Enable: true
@@ -1785,8 +1853,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 19, 93.5]
-      Rotation: [0, -0, 0]
+      Position: [6, 19.0003357, 93.4993057]
+      Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 4]
     MeshComponent:
       Enable: true
@@ -1819,8 +1887,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-5, 17, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [-5, 17.0003395, 95.4994583]
+      Rotation: [0, 0, 0]
       Scale: [2, 9, 0.200000003]
     MeshComponent:
       Enable: true
@@ -1853,8 +1921,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [7.4505806e-08, 8.5, 100]
-      Rotation: [0, -0, 0]
+      Position: [7.4505806e-08, 8.50052261, 99.9997406]
+      Rotation: [0, 0, 0]
       Scale: [36, 26, 1]
     MeshComponent:
       Enable: true
@@ -1887,8 +1955,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-10.9994688, 9.00045013, 97.5002289]
-      Rotation: [0, -0, 0]
+      Position: [-10.9994688, 9.00049782, 97.5002899]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -1921,8 +1989,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 20, 92.5]
-      Rotation: [0, -0, 0]
+      Position: [6, 19.9999981, 92.5000458]
+      Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 6]
     MeshComponent:
       Enable: true
@@ -1955,8 +2023,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-3.00000167, -7.74860382e-06, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [-3.00000167, 0.000677465403, 97.5001678]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -2002,8 +2070,8 @@ Entities:
       - Handle: 8788723699992475751
       - Handle: 13572575593345534631
     TransformComponent:
-      Position: [3.99999928, 18, 85]
-      Rotation: [0, -0, 0]
+      Position: [3.99999928, 18, 85.0000076]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 15068876173452837735
     VisibilityComponent:
@@ -2014,8 +2082,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-8.99710655, -3, 97.5026016]
-      Rotation: [0, -0, 0]
+      Position: [-8.99710655, -3.00004911, 97.5025864]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -2048,8 +2116,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.00000024, 2, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [1.00000024, 1.99964559, 97.5002213]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -2107,7 +2175,7 @@ Entities:
       - Handle: 6917404596294505594
     TransformComponent:
       Position: [0, 0, 85]
-      Rotation: [0, -0, 0]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 15816623905512646286
     VisibilityComponent:
@@ -2119,9 +2187,11 @@ Entities:
       - Handle: 18196074048552676981
       - Handle: 10755854728910485890
       - Handle: 2620639337902174712
+      - Handle: 1434217049710200861
+      - Handle: 6770436042359797550
     TransformComponent:
       Position: [0, 0, 85]
-      Rotation: [0, -0, 0]
+      Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 16152840656304028640
     VisibilityComponent:
@@ -2132,8 +2202,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18, 17.7183342, 76.5]
-      Rotation: [0, -0, 0]
+      Position: [-18, 17.7182865, 76.499794]
+      Rotation: [0, 0, 0]
       Scale: [1, 7.5, 4]
     MeshComponent:
       Enable: true
@@ -2166,8 +2236,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.00000024, 15, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [1.00000024, 14.99928, 97.501091]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -2200,8 +2270,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [6, 14, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [6, 14.0000849, 95.4998856]
+      Rotation: [0, 0, 0]
       Scale: [12, 1, 0.100000001]
     MeshComponent:
       Enable: true
@@ -2234,8 +2304,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-18.0000076, 15.000001, 72.5]
-      Rotation: [0, -0, 0]
+      Position: [-18.0000076, 15.0001402, 72.5001755]
+      Rotation: [0, 0, 0]
       Scale: [1, 13, 4]
     MeshComponent:
       Enable: true
@@ -2268,8 +2338,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [2, 21, 91.5]
-      Rotation: [0, -0, 0]
+      Position: [2, 20.9999619, 91.5002136]
+      Rotation: [0, 0, 0]
       Scale: [0.100000001, 1, 8]
     MeshComponent:
       Enable: true
@@ -2302,8 +2372,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-6.99999952, -2, 97.5001526]
-      Rotation: [0, -0, 0]
+      Position: [-6.99999952, -2.00003576, 97.5001144]
+      Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
       Enable: true
@@ -2336,8 +2406,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 2, 95.5]
-      Rotation: [0, -0, 0]
+      Position: [0, 1.9999299, 95.5]
+      Rotation: [0, 0, 0]
       Scale: [24, 13, 0.100000001]
     MeshComponent:
       Enable: true
@@ -2370,8 +2440,8 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [4.03205395, 19, 90.5001526]
-      Rotation: [0, -0, 0]
+      Position: [4.03205395, 18.9999256, 90.5003815]
+      Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
       Enable: true
