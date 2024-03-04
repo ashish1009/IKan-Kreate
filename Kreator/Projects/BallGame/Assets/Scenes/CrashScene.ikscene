@@ -1049,7 +1049,7 @@ Entities:
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Staris
+      Tag: Stairs
     Parent: 11541812271697802667
     Children:
       - Handle: 17796071578921618581
@@ -2273,7 +2273,7 @@ Entities:
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Staris
+      Tag: Stairs
     Parent: 5245540253082548437
     Children:
       - Handle: 10678869871027049791

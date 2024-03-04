@@ -653,7 +653,7 @@ namespace Kreator
     
     const bool opened = UI::TreeNodeWithIcon(nullptr, ImGui::GetID(strID.c_str()), flags, name, nullptr);
     bool entityDeleted = false;
-    
+    bool entityDuplicated = false;
     if (ImGui::BeginPopupContextItem())
     {
       {
@@ -706,7 +706,7 @@ namespace Kreator
           }
           if (ImGui::MenuItem("Duplicate"))
           {
-            SetSelectedEntity(m_context->DuplicateEntity(m_selectionContext.At(0)));
+            entityDuplicated = true;
           }
         }
       }
@@ -794,7 +794,10 @@ namespace Kreator
     {
       for (auto child : entity.Children())
       {
-        DrawEntityNode(m_context->GetEntityWithUUID(child), searchFilter);
+        if (Entity e = m_context->TryGetEntityWithUUID(child); e)
+        {
+          DrawEntityNode(e, searchFilter);
+        }
       }
       ImGui::TreePop();
     }
@@ -803,6 +806,11 @@ namespace Kreator
     if (entityDeleted)
     {
       OnEntityDestroyed(entity);
+    }
+    
+    if (entityDuplicated)
+    {
+      SetSelectedEntity(m_context->DuplicateEntity(entity));
     }
   }
   
