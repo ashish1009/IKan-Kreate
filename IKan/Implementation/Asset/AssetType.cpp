@@ -20,7 +20,6 @@ namespace IKan
       if (assetType == "Mesh")                return AssetType::Mesh;
       if (assetType == "Material")            return AssetType::Material;
       if (assetType == "Prefab")              return AssetType::Prefab;
-      if (assetType == "NodeGraph")           return AssetType::NodeGraph;
       IK_ASSERT(false, "Unknown Asset Type");
       return AssetType::Invalid;
     }
@@ -36,7 +35,6 @@ namespace IKan
         case AssetType::Mesh:         return "Mesh";
         case AssetType::Material:     return "Material";
         case AssetType::Prefab:       return "Prefab";
-        case AssetType::NodeGraph:    return "NodeGraph";
       }
       IK_ASSERT(false, "Unknown Asset Type");
       return "None";

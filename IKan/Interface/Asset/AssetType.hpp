@@ -12,7 +12,6 @@ namespace IKan
   static const std::string MaterialExtension {".ikmat"};
   static const std::string ProjectExtension {".ikproj"};
   static const std::string SceneExtension {".ikscene"};
-  static const std::string NodeGraphExtension {".iknodegraph"};
 
   /// Flag for action in assets
   enum class AssetFlag : uint16_t
@@ -32,7 +31,6 @@ namespace IKan
     Mesh,
     Material,
     Prefab,
-    NodeGraph,
   };
   
   /// Map to store the asset with its Extension
@@ -45,7 +43,7 @@ namespace IKan
     { ".hdr", AssetType::Image },
     
     // Scene
-    { SceneExtension, AssetType::Scene },
+    { ".ikscene", AssetType::Scene },
     { ".ikscene.auto", AssetType::Scene },
     
     // Fonts
@@ -56,13 +54,10 @@ namespace IKan
     { ".obj", AssetType::Mesh },
     
     // Material
-    { MaterialExtension, AssetType::Material },
+    { ".ikmat", AssetType::Material },
     
     // Prefab
-    { ".ikprefab", AssetType::Prefab},
-    
-    // NodeGraph
-    { NodeGraphExtension, AssetType::NodeGraph},
+    { ".ikprefab", AssetType::Prefab}
   };
   
   namespace AssetUtils

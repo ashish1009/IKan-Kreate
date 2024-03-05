@@ -87,7 +87,6 @@
 		B2E183082B96D7EA0051FA51 /* Nodes.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2E183062B96D7EA0051FA51 /* Nodes.hpp */; };
 		B2E183162B96E3550051FA51 /* NodeEditorModel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E183142B96E3550051FA51 /* NodeEditorModel.cpp */; };
 		B2E183172B96E3550051FA51 /* NodeEditorModel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2E183152B96E3550051FA51 /* NodeEditorModel.hpp */; };
-		B2E183202B96F22D0051FA51 /* NodeAsset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2E1831E2B96F22D0051FA51 /* NodeAsset.hpp */; };
 		B2EB0F7F2B8655E300DF1407 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F7D2B8655E300DF1407 /* Entity.cpp */; };
 		B2EB0F802B8655E300DF1407 /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2EB0F7E2B8655E300DF1407 /* Entity.hpp */; };
 		B2EB0F9B2B885DD300DF1407 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F992B885DD300DF1407 /* Material.cpp */; };
@@ -310,7 +309,6 @@
 		B2E183062B96D7EA0051FA51 /* Nodes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Nodes.hpp; sourceTree = "<group>"; };
 		B2E183142B96E3550051FA51 /* NodeEditorModel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeEditorModel.cpp; sourceTree = "<group>"; };
 		B2E183152B96E3550051FA51 /* NodeEditorModel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NodeEditorModel.hpp; sourceTree = "<group>"; };
-		B2E1831E2B96F22D0051FA51 /* NodeAsset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NodeAsset.hpp; sourceTree = "<group>"; };
 		B2EB0F7D2B8655E300DF1407 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		B2EB0F7E2B8655E300DF1407 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		B2EB0F992B885DD300DF1407 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
@@ -625,7 +623,6 @@
 			children = (
 				B2E183062B96D7EA0051FA51 /* Nodes.hpp */,
 				B2E183152B96E3550051FA51 /* NodeEditorModel.hpp */,
-				B2E1831E2B96F22D0051FA51 /* NodeAsset.hpp */,
 			);
 			path = NodeEditor;
 			sourceTree = "<group>";
@@ -1070,7 +1067,6 @@
 				B2E183082B96D7EA0051FA51 /* Nodes.hpp in Headers */,
 				B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */,
 				B2ED607F2B750336007A7F36 /* Renderer2D.hpp in Headers */,
-				B2E183202B96F22D0051FA51 /* NodeAsset.hpp in Headers */,
 				B2000A662B9335820017266F /* ContactListener.hpp in Headers */,
 				B2ED60132B74A920007A7F36 /* OpenGLShader.hpp in Headers */,
 				B248B9552B84A69E00B9EC40 /* EditorConsoleSink.hpp in Headers */,
