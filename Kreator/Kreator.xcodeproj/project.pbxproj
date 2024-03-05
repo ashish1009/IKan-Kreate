@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B22FB4962B97345E00A5EEA1 /* NodeGraphEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22FB4942B97345E00A5EEA1 /* NodeGraphEditor.cpp */; };
 		B248B8EC2B7E3B4500B9EC40 /* KreatorLayerUI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8EB2B7E3B4500B9EC40 /* KreatorLayerUI.cpp */; };
 		B248B8F02B7E3EED00B9EC40 /* ImGuiTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8EE2B7E3EED00B9EC40 /* ImGuiTheme.cpp */; };
 		B248B8F32B7F19B600B9EC40 /* ImGuiUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B8F12B7F19B600B9EC40 /* ImGuiUtils.cpp */; };
@@ -54,6 +55,8 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B22FB4942B97345E00A5EEA1 /* NodeGraphEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = NodeGraphEditor.cpp; sourceTree = "<group>"; };
+		B22FB4952B97345E00A5EEA1 /* NodeGraphEditor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NodeGraphEditor.hpp; sourceTree = "<group>"; };
 		B248B8EB2B7E3B4500B9EC40 /* KreatorLayerUI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorLayerUI.cpp; sourceTree = "<group>"; };
 		B248B8EE2B7E3EED00B9EC40 /* ImGuiTheme.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiTheme.cpp; sourceTree = "<group>"; };
 		B248B8EF2B7E3EED00B9EC40 /* ImGuiTheme.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiTheme.hpp; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				B2EB0F8E2B87062000DF1407 /* SelectionContext.hpp */,
 				B2CE3A2A2B90404F00C7F531 /* EntityUtils.cpp */,
 				B2CE3A2B2B90404F00C7F531 /* EntityUtils.hpp */,
+				B22FB4942B97345E00A5EEA1 /* NodeGraphEditor.cpp */,
+				B22FB4952B97345E00A5EEA1 /* NodeGraphEditor.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -315,6 +320,7 @@
 				B248B8FC2B7F881D00B9EC40 /* FolderExplorer.cpp in Sources */,
 				B2ED5E912B74A190007A7F36 /* KreatorLayer.cpp in Sources */,
 				B2EB0F8F2B87062000DF1407 /* SelectionContext.cpp in Sources */,
+				B22FB4962B97345E00A5EEA1 /* NodeGraphEditor.cpp in Sources */,
 				B248B8F02B7E3EED00B9EC40 /* ImGuiTheme.cpp in Sources */,
 				B2C0BA142B7E0F5D0015A277 /* UserPreferences.cpp in Sources */,
 				B248B8EC2B7E3B4500B9EC40 /* KreatorLayerUI.cpp in Sources */,

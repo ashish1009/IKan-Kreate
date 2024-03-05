@@ -108,3 +108,4 @@
 
 #include <Editor/NodeGraph/Nodes.hpp>
 #include <Editor/NodeGraph/NodeGraphAsset.hpp>
+#include <Editor/NodeGraph/NodeGraphModel.hpp>
