@@ -326,8 +326,6 @@ namespace Kreator
   void SceneHierarchyPanel::OnProjectChanged(const Ref<Project>& project)
   {
     IK_PROFILE();
-    // Should be after loading the asset registry
-    s_defaultMaterialAsset = AssetManager::GetAsset<MaterialAsset>("Materials/Default.ikmat")->handle;
   }
   
   void SceneHierarchyPanel::OnImGuiRender(bool& isOpen)

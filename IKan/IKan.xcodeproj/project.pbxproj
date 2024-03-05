@@ -22,6 +22,7 @@
 		B2000A902B949AAA0017266F /* Prefabs.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2000A8E2B949AAA0017266F /* Prefabs.hpp */; };
 		B22FB48E2B972D1900A5EEA1 /* Nodes.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22FB48C2B972D1800A5EEA1 /* Nodes.cpp */; };
 		B22FB48F2B972D1900A5EEA1 /* Nodes.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22FB48D2B972D1800A5EEA1 /* Nodes.hpp */; };
+		B22FB4932B972EA800A5EEA1 /* NodeGraphAsset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22FB4912B972EA800A5EEA1 /* NodeGraphAsset.hpp */; };
 		B248B9072B8338BA00B9EC40 /* Asset.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B9052B8338BA00B9EC40 /* Asset.cpp */; };
 		B248B9082B8338BA00B9EC40 /* Asset.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9062B8338BA00B9EC40 /* Asset.hpp */; };
 		B248B90C2B833BA000B9EC40 /* UUID.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B90A2B833BA000B9EC40 /* UUID.cpp */; };
@@ -229,6 +230,7 @@
 		B2000A8E2B949AAA0017266F /* Prefabs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Prefabs.hpp; sourceTree = "<group>"; };
 		B22FB48C2B972D1800A5EEA1 /* Nodes.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Nodes.cpp; sourceTree = "<group>"; };
 		B22FB48D2B972D1800A5EEA1 /* Nodes.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Nodes.hpp; sourceTree = "<group>"; };
+		B22FB4912B972EA800A5EEA1 /* NodeGraphAsset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = NodeGraphAsset.hpp; sourceTree = "<group>"; };
 		B248B9052B8338BA00B9EC40 /* Asset.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Asset.cpp; sourceTree = "<group>"; };
 		B248B9062B8338BA00B9EC40 /* Asset.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Asset.hpp; sourceTree = "<group>"; };
 		B248B90A2B833BA000B9EC40 /* UUID.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UUID.cpp; sourceTree = "<group>"; };
@@ -451,6 +453,7 @@
 			isa = PBXGroup;
 			children = (
 				B22FB48D2B972D1800A5EEA1 /* Nodes.hpp */,
+				B22FB4912B972EA800A5EEA1 /* NodeGraphAsset.hpp */,
 			);
 			path = NodeGraph;
 			sourceTree = "<group>";
@@ -1027,6 +1030,7 @@
 				B2ED604E2B74D958007A7F36 /* MathUtils.hpp in Headers */,
 				B2ED5CB22B724AAC007A7F36 /* Logger.hpp in Headers */,
 				B2C0B6D52B75F8EF0015A277 /* TextRenderer.hpp in Headers */,
+				B22FB4932B972EA800A5EEA1 /* NodeGraphAsset.hpp in Headers */,
 				B2ED60382B74BB9B007A7F36 /* RendererBuffer.hpp in Headers */,
 				B248B9462B846E2C00B9EC40 /* AssetRegistry.hpp in Headers */,
 				B2C0B6F62B7C82940015A277 /* Renderer3D.hpp in Headers */,

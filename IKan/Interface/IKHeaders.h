@@ -107,3 +107,4 @@
 #include <Editor/AssetEditor.hpp>
 
 #include <Editor/NodeGraph/Nodes.hpp>
+#include <Editor/NodeGraph/NodeGraphAsset.hpp>

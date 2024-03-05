@@ -99,6 +99,5 @@ namespace Kreator
     Ref<MaterialAsset> m_selectedMeshMaterialAsset;
 
     inline static Ref<Texture> s_pencilIcon, s_plusIcon, s_gearIcon, s_reloadIcon, s_closeEyeIcon, s_EyeIcon;
-    inline static AssetHandle s_defaultMaterialAsset;
   };
 } // namespace Kreator

@@ -147,13 +147,13 @@ namespace Kreator
     m_assetIconMap[".ttc"] = m_assetIconMap.at(".ttf");
     m_assetIconMap[".otf"] = m_assetIconMap.at(".ttf");
     
-    m_assetIconMap[".ikscene"] = CBP_Utils::AssetPath("IKScene.png");
-    m_assetIconMap[".ikmat"] = CBP_Utils::AssetPath("Material.png");
+    m_assetIconMap[SceneExtension] = CBP_Utils::AssetPath("IKScene.png");
+    m_assetIconMap[MaterialExtension] = CBP_Utils::AssetPath("Material.png");
     
     m_assetIconMap[".fbx"] = CBP_Utils::AssetPath("Fbx.png");
     m_assetIconMap[".obj"] = CBP_Utils::AssetPath("Obj.png");
 
-    m_assetIconMap[".ikprefab"] = CBP_Utils::AssetPath("PrefabIcon.png");
+    m_assetIconMap[PrefabExtenstion] = CBP_Utils::AssetPath("PrefabIcon.png");
   }
   
   void ContentBrowserPanel::OnImGuiRender(bool &isOpen)
@@ -255,7 +255,8 @@ namespace Kreator
                 }
                 if (ImGui::MenuItem("Material"))
                 {
-                  CreateAsset<MaterialAsset>("NewMaterial.ikmat");
+                  std::string newMaterialName = "NewMaterial" + MaterialExtension;
+                  CreateAsset<MaterialAsset>(newMaterialName);
                 }
 
                 ImGui::EndMenu();
@@ -326,7 +327,8 @@ namespace Kreator
             if (data)
             {
               Entity& e = *(Entity*)data->Data;
-              Ref<Prefab> prefab = CreateAsset<Prefab>("NewPrefab.ikprefab");
+              std::string prefabName = "NewPrefab" + PrefabExtenstion;
+              Ref<Prefab> prefab = CreateAsset<Prefab>(prefabName);
               prefab->Create(e);
             }
             ImGui::EndDragDropTarget();
