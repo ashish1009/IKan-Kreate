@@ -97,4 +97,50 @@ namespace IKan
     {
     }
   };
+  
+  namespace Nodes
+  {
+    using Registry = std::map<std::string, std::map<std::string, std::function<Node* ()>>>;
+    
+    class AbstractFactory
+    {
+    public:
+      virtual ~AbstractFactory() = default;
+      
+      /// This funcion spawns the node
+      /// - Parameters:
+      ///   - categiory: node category
+      ///   - type: type of node
+      virtual Node* SpawnNode(const std::string& category, const std::string& type) = 0;
+    };
+    
+    template<class T>
+    class Factory : public AbstractFactory
+    {
+    public:
+      static const Registry s_registry;
+      
+      /// This function Spawns the node
+      /// - Parameters:
+      ///   - categiory: node category
+      ///   - type: type of node
+      template<class ST> [[nodiscard]] static Node* SpawnNodeStatic(const std::string& category, const std::string& type)
+      {
+        return ST::SpawnNodeStatic();
+      };
+    };
+    
+    //! Create your own Factory subclass if you need a different selection of nodes for your custom graph
+    //! Create and register custom node spawn functions in .cpp file
+    class NodeFactory : public Factory<NodeFactory>
+    {
+      /// This function Spawns the node
+      /// - Parameters:
+      ///   - categiory: node category
+      ///   - type: type of node
+      [[nodiscard]] static Node* SpawnNodeStatic(const std::string& category, const std::string& type);
+      /// @see AbstractFactory
+      [[nodiscard]] Node* SpawnNode(const std::string& category, const std::string& type) override { return SpawnNodeStatic(category, type); }
+    };
+  } // namespace Nodes
 } // namespace IKan
