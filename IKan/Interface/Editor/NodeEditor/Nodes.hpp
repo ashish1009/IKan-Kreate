@@ -44,24 +44,6 @@ namespace IKan
     Simple,
     Comment
   };
-  
-  //! Set colour for your pin / value types
-  inline ImColor GetIconColor(PinType type)
-  {
-    switch (type)
-    {
-      default:
-      case PinType::Flow:     return ImColor(200, 200, 200);
-      case PinType::Bool:     return ImColor(220, 48, 48);
-      case PinType::Int:      return ImColor(68, 201, 156);
-      case PinType::Float:    return ImColor(147, 226, 74);
-      case PinType::Audio:    return ImColor(102, 204, 163);
-      case PinType::String:   return ImColor(194, 75, 227);
-      case PinType::Object:   return ImColor(51, 150, 215);
-      case PinType::Function: return ImColor(200, 200, 200);
-      case PinType::Delegate: return ImColor(255, 48, 48);
-    }
-  };
 
   struct Node;
   
@@ -149,7 +131,6 @@ namespace IKan
       };
     };
     
-    // Might mode to Editor / Kreator
     //! Create your own Factory subclass if you need a different selection of nodes for your custom graph
     //! Create and register custom node spawn functions in .cpp file
     class DemoFactory : public Factory<DemoFactory>

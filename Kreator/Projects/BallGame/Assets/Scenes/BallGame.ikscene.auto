@@ -17,7 +17,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-35.9996643, -0.999905109, 2.52227044]
+      Position: [-35.9996643, -0.999905109, 2.40006256]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -289,7 +289,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-35.9996643, 9.48905945e-05, 4.52227116]
+      Position: [-35.9996643, 9.48905945e-05, 4.40006256]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -656,7 +656,7 @@ Entities:
       MassDensity: 1
   - Entity: 3266198868618527298
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Cube
     Parent: 12836950147943255590
@@ -1933,7 +1933,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-35.9996643, -3.99990511, -3.5]
+      Position: [-35.9996643, -3.99990511, -3.59993744]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -2239,7 +2239,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-35.9996643, 1.00009489, 6.52227116]
+      Position: [-35.9996643, 1.00009489, 6.40006256]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -2290,7 +2290,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-35.9996643, -1.99990511, 0.522270441]
+      Position: [-35.9996643, -1.99990511, 0.400062561]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -2521,7 +2521,7 @@ Entities:
       MassDensity: 1
   - Entity: 12836950147943255590
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Front Walls group
     Parent: 13214264800647126703
@@ -3052,14 +3052,14 @@ Entities:
       MassDensity: 1
   - Entity: 15304750079779561277
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Cube
     Parent: 12836950147943255590
     Children:
       []
     TransformComponent:
-      Position: [-6.25, 2, -14]
+      Position: [-6, 2, -14]
       Rotation: [0, 0, 0]
       Scale: [23, 13, 1]
     MeshComponent:
@@ -3280,7 +3280,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-35.9996643, -2.99990511, -1.47772956]
+      Position: [-35.9996643, -2.99990511, -1.59993744]
       Rotation: [0, 0, 0]
       Scale: [4, 1, 2]
     MeshComponent:
@@ -3443,7 +3443,7 @@ Entities:
       MassDensity: 1
   - Entity: 17670578570045294565
     VisibilityComponent:
-      Visibility: false
+      Visibility: true
     TagComponent:
       Tag: Cube
     Parent: 12836950147943255590
