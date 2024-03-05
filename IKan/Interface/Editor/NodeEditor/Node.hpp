@@ -50,16 +50,16 @@ namespace IKan
   struct Pin
   {
     UUID ID;
-    Node* node;
-    std::string name;
-    PinType type;
-    PinKind kind;
-    StorageKind storage;
+    Node* Node;
+    std::string Name;
+    PinType     Type;
+    PinKind     Kind;
+    StorageKind Storage;
     
-    choc::value::Value value;
+    choc::value::Value Value;
     
     Pin(UUID id, const char* name, PinType type, StorageKind storageKind = StorageKind::Value, choc::value::Value defaultValue = choc::value::Value()) :
-    ID(id), node(nullptr), name(name), type(type), kind(PinKind::Input), storage(storageKind), value(defaultValue)
+    ID(id), Node(nullptr), Name(name), Type(type), Kind(PinKind::Input), Storage(storageKind), Value(defaultValue)
     {
     }
   };
@@ -67,33 +67,18 @@ namespace IKan
   struct Node
   {
     UUID ID;
-    std::string Category, name;
-    std::vector<Pin> inputs;
-    std::vector<Pin> outputs;
-    ImColor color;
-    NodeType type;
-    ImVec2 size;
+    std::string Category, Name;
+    std::vector<Pin> Inputs;
+    std::vector<Pin> Outputs;
+    ImColor Color;
+    NodeType Type;
+    ImVec2 Size;
     
-    std::string state;
-    std::string savedState;
+    std::string State;
+    std::string SavedState;
     
     Node(UUID id, const char* name, ImColor color = ImColor(255, 255, 255)) :
-    ID(id), name(name), color(color), type(NodeType::Blueprint), size(0, 0)
-    {
-    }
-  };
-
-  struct Link
-  {
-    UUID ID;
-    
-    UUID startPinID;
-    UUID endPinID;
-    
-    ImColor Color;
-    
-    Link(UUID id, UUID startPinId, UUID endPinId) :
-    ID(id), startPinID(startPinId), endPinID(endPinId), color(255, 255, 255)
+    ID(id), Name(name), Color(color), Type(NodeType::Blueprint), Size(0, 0)
     {
     }
   };
