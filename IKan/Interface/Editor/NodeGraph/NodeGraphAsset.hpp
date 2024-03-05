@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "Editor/NodeGraph/Nodes.hpp"
 #include "Asset/Asset.hpp"
 
 namespace IKan
@@ -16,6 +17,8 @@ namespace IKan
   public:
     std::vector<Node> nodes;
     std::vector<Link> links;
+    
+    static Ref<NodeGraph> Create() {return CreateRef<NodeGraph>();}
 
     ASSET_TYPE(NodeGraph)
   };

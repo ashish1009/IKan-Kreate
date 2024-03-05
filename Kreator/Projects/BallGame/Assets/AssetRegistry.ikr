@@ -86,6 +86,9 @@ Assets:
   - Handle: 1622114070
     FilePath: Textures/Pbr/Ground/Forest/forest_floor_Metallic.png
     Type: Image
+  - Handle: 1770923597
+    FilePath: NodeGraphs/TestNode.iknodegraph
+    Type: NodeGraph
   - Handle: 1819808669
     FilePath: Textures/Pbr/Wood/BambooWood/bamboo-wood-semigloss-normal.png
     Type: Image

@@ -24,5 +24,7 @@ namespace Kreator
     virtual void OnClose() override;
     /// @see AssetEditor
     virtual void Render() override;
+    
+    Ref<NodeGraph> m_graphAsset = nullptr;
   };
 } // namespace Kreator

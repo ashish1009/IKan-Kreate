@@ -13,6 +13,7 @@
 #include "Scene/Prefabs.hpp"
 #include "Scene/Components.hpp"
 #include "Scene/EntitySerializer.hpp"
+#include "Editor/NodeGraph/NodeGraphAsset.hpp"
 
 namespace IKan
 {
@@ -206,6 +207,31 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
     
     asset = prefab;
     asset->handle = metadata.handle;
+    return true;
+  }
+  
+  void NodeGraphSerializer::Serialize(const AssetMetadata &metadata, const Ref<Asset> &asset) const
+  {
+    
+  }
+  
+  bool NodeGraphSerializer::TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset) const
+  {
+    std::ifstream stream(AssetManager::GetFileSystemPath(metadata));
+    if (!stream.is_open())
+    {
+      return false;
+    }
+    
+    std::stringstream strStream;
+    strStream << stream.rdbuf();
+    
+    YAML::Node data = YAML::Load(strStream.str());
+    
+    Ref<NodeGraph> graph = NodeGraph::Create();
+    asset = graph;
+    asset->handle = metadata.handle;
+    
     return true;
   }
 } // namespace IKan

@@ -14,6 +14,7 @@
 #include "Panel/AssetPanel.hpp"
 #include "Editor/AssetViewer.hpp"
 #include "Editor/FolderExplorer.hpp"
+#include "Editor/NodeGraphEditor.hpp"
 
 namespace Kreator
 {
@@ -202,6 +203,7 @@ if (!m_currentScene) return
     AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
     AssetEditorManager::RegisterEditor<MaterialEditor>(AssetType::Material);
     AssetEditorManager::RegisterEditor<PrefabEditor>(AssetType::Prefab);
+    AssetEditorManager::RegisterEditor<NodeGraphEditor>(AssetType::NodeGraph);
 
     SceneRenderer::Initialize();
   }
@@ -808,6 +810,7 @@ if (!m_currentScene) return
         std::filesystem::create_directory(projectDir / "Assets/Meshes");
         std::filesystem::create_directory(projectDir / "Assets/Materials");
         std::filesystem::create_directory(projectDir / "Assets/Prefabs");
+        std::filesystem::create_directory(projectDir / "Assets/NodeGraphs");
       }
       else
       {

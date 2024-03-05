@@ -23,6 +23,7 @@ namespace Kreator
   void NodeGraphEditor::SetAsset(const Ref<Asset>& asset)
   {
     IK_PROFILE();
+    m_graphAsset = std::dynamic_pointer_cast<NodeGraph>(asset);
   }
   void NodeGraphEditor::OnClose()
   {
@@ -31,6 +32,8 @@ namespace Kreator
   void NodeGraphEditor::Render()
   {
     IK_PERFORMANCE("NodeGraphEditor::Render")
+    ImGui::Begin("Canvas", nullptr, ImGuiWindowFlags_NoCollapse);
+    ImGui::End();
   }
 
 } // namespace Kreator
