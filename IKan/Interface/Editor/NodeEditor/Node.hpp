@@ -37,13 +37,6 @@ namespace IKan
     Value = 0,
     Array
   };
-  
-  enum class NodeType
-  {
-    Blueprint,
-    Simple,
-    Comment
-  };
 
   struct Node;
   
@@ -60,25 +53,6 @@ namespace IKan
     
     Pin(UUID id, const char* name, PinType type, StorageKind storageKind = StorageKind::Value, choc::value::Value defaultValue = choc::value::Value()) :
     ID(id), Node(nullptr), Name(name), Type(type), Kind(PinKind::Input), Storage(storageKind), Value(defaultValue)
-    {
-    }
-  };
-  
-  struct Node
-  {
-    UUID ID;
-    std::string Category, Name;
-    std::vector<Pin> Inputs;
-    std::vector<Pin> Outputs;
-    ImColor Color;
-    NodeType Type;
-    ImVec2 Size;
-    
-    std::string State;
-    std::string SavedState;
-    
-    Node(UUID id, const char* name, ImColor color = ImColor(255, 255, 255)) :
-    ID(id), Name(name), Color(color), Type(NodeType::Blueprint), Size(0, 0)
     {
     }
   };
