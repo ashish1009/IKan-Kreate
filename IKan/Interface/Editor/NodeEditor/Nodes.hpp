@@ -133,7 +133,7 @@ namespace IKan
     
     //! Create your own Factory subclass if you need a different selection of nodes for your custom graph
     //! Create and register custom node spawn functions in .cpp file
-    class DemoFactory : public Factory<DemoFactory>
+    class NodeFactory : public Factory<NodeFactory>
     {
     public:
       /// This function Spawns the node
