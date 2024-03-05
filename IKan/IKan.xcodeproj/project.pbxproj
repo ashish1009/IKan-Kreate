@@ -721,8 +721,8 @@
 		B2ED5CAC2B724986007A7F36 /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				B2CE3A7E2B931AD900C7F531 /* ReactPhysics.xcodeproj */,
 				B2ED60602B74DF5F007A7F36 /* StbImage */,
+				B2CE3A7E2B931AD900C7F531 /* ReactPhysics.xcodeproj */,
 				B2C0B7382B7DC7330015A277 /* YAML.xcodeproj */,
 				B2ED5EA92B74A4B7007A7F36 /* UI.xcodeproj */,
 				B2ED5CE72B736A50007A7F36 /* GLFW.xcodeproj */,
