@@ -83,8 +83,6 @@
 		B2C0BA0B2B7DF6950015A277 /* ProjectSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0BA092B7DF6950015A277 /* ProjectSerializer.cpp */; };
 		B2C0BA0C2B7DF6950015A277 /* ProjectSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0BA0A2B7DF6950015A277 /* ProjectSerializer.hpp */; };
 		B2E182EB2B94D43B0051FA51 /* PhysicsMaterial.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2E182E92B94D43B0051FA51 /* PhysicsMaterial.hpp */; };
-		B2E183072B96D7EA0051FA51 /* Node.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2E183052B96D7EA0051FA51 /* Node.cpp */; };
-		B2E183082B96D7EA0051FA51 /* Node.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2E183062B96D7EA0051FA51 /* Node.hpp */; };
 		B2EB0F7F2B8655E300DF1407 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F7D2B8655E300DF1407 /* Entity.cpp */; };
 		B2EB0F802B8655E300DF1407 /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2EB0F7E2B8655E300DF1407 /* Entity.hpp */; };
 		B2EB0F9B2B885DD300DF1407 /* Material.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2EB0F992B885DD300DF1407 /* Material.cpp */; };
@@ -303,8 +301,6 @@
 		B2CE3A372B92084300C7F531 /* IrradianceShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = IrradianceShader.glsl; sourceTree = "<group>"; };
 		B2CE3A7E2B931AD900C7F531 /* ReactPhysics.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = ReactPhysics.xcodeproj; path = ReactPhysics/ReactPhysics.xcodeproj; sourceTree = "<group>"; };
 		B2E182E92B94D43B0051FA51 /* PhysicsMaterial.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = PhysicsMaterial.hpp; sourceTree = "<group>"; };
-		B2E183052B96D7EA0051FA51 /* Node.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Node.cpp; sourceTree = "<group>"; };
-		B2E183062B96D7EA0051FA51 /* Node.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Node.hpp; sourceTree = "<group>"; };
 		B2EB0F7D2B8655E300DF1407 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		B2EB0F7E2B8655E300DF1407 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		B2EB0F992B885DD300DF1407 /* Material.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Material.cpp; sourceTree = "<group>"; };
@@ -481,7 +477,6 @@
 		B248B91B2B8466D700B9EC40 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
-				B2E182FF2B96D7D70051FA51 /* NodeEditor */,
 				B248B9222B8466EA00B9EC40 /* EditorPanel.hpp */,
 				B248B92C2B8467BC00B9EC40 /* PanelManager.hpp */,
 				B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */,
@@ -495,7 +490,6 @@
 		B248B9202B8466DE00B9EC40 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
-				B2E183092B96D7EE0051FA51 /* NodeEditor */,
 				B248B92B2B8467BC00B9EC40 /* PanelManager.cpp */,
 				B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */,
 				B248B9522B84A69E00B9EC40 /* EditorConsoleSink.cpp */,
@@ -612,22 +606,6 @@
 				B2CE3A852B931AD900C7F531 /* libReactPhysics.a */,
 			);
 			name = Products;
-			sourceTree = "<group>";
-		};
-		B2E182FF2B96D7D70051FA51 /* NodeEditor */ = {
-			isa = PBXGroup;
-			children = (
-				B2E183062B96D7EA0051FA51 /* Node.hpp */,
-			);
-			path = NodeEditor;
-			sourceTree = "<group>";
-		};
-		B2E183092B96D7EE0051FA51 /* NodeEditor */ = {
-			isa = PBXGroup;
-			children = (
-				B2E183052B96D7EA0051FA51 /* Node.cpp */,
-			);
-			path = NodeEditor;
 			sourceTree = "<group>";
 		};
 		B2ED5C7D2B723F31007A7F36 = {
@@ -1058,7 +1036,6 @@
 				B2ED60192B74AD56007A7F36 /* StringUtils.hpp in Headers */,
 				B2ED5E282B7397A5007A7F36 /* LayerStack.hpp in Headers */,
 				B2000A762B936CD00017266F /* PhysicsJoint.hpp in Headers */,
-				B2E183082B96D7EA0051FA51 /* Node.hpp in Headers */,
 				B2ED60732B74F9E2007A7F36 /* OpenGLFrameBuffer.hpp in Headers */,
 				B2ED607F2B750336007A7F36 /* Renderer2D.hpp in Headers */,
 				B2000A662B9335820017266F /* ContactListener.hpp in Headers */,
@@ -1299,7 +1276,6 @@
 				B2ED60722B74F9E2007A7F36 /* OpenGLFrameBuffer.cpp in Sources */,
 				B248B9412B846DC600B9EC40 /* AssetImporter.cpp in Sources */,
 				B2ED60302B74B814007A7F36 /* Shader.cpp in Sources */,
-				B2E183072B96D7EA0051FA51 /* Node.cpp in Sources */,
 				B248B9452B846E2C00B9EC40 /* AssetRegistry.cpp in Sources */,
 				B2C0B6D42B75F8EF0015A277 /* TextRenderer.cpp in Sources */,
 				B2000A822B9486510017266F /* CameraController.cpp in Sources */,
@@ -1454,7 +1430,6 @@
 					"${PROJECT_DIR}/Vendors/YAML/Yaml/include",
 					"${PROJECT_DIR}/Vendors/EnTT",
 					"${PROJECT_DIR}/Vendors/ReactPhysics/ReactPhysics3D/include",
-					"${PROJECT_DIR}/Vendors/Choc",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1491,7 +1466,6 @@
 					"${PROJECT_DIR}/Vendors/YAML/Yaml/include",
 					"${PROJECT_DIR}/Vendors/EnTT",
 					"${PROJECT_DIR}/Vendors/ReactPhysics/ReactPhysics3D/include",
-					"${PROJECT_DIR}/Vendors/Choc",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
