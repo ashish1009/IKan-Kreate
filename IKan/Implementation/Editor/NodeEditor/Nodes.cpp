@@ -203,7 +203,28 @@ namespace IKan
   
   namespace Nodes
   {
-    template <typename NodeFactory> const Registry Factory<NodeFactory>::s_registry =
+    Node* Nodes::DemoFactory::SpawnNodeStatic(const std::string& category, const std::string& type)
+    {
+      auto cat = s_registry.find(category);
+      if (cat != s_registry.end())
+      {
+        auto nodes = cat->second.find(type);
+        if (nodes != cat->second.end())
+        {
+          return nodes->second();
+        }
+        else
+        {
+          IK_LOG_ERROR("SpawnNodeStatic", "Category {0} does not contain node type {1}", category, type);
+          return nullptr;
+        }
+      }
+      
+      IK_LOG_ERROR("SpawnNodeStatic",  "Category {0} does not exist", category);
+      return nullptr;
+    }
+
+    template <typename DemoFactory> const Registry Factory<DemoFactory>::s_registry =
     {
       {NODE_CATEGORY(Utility),  {
         DECLARE_NODE(Utility, Comment),
