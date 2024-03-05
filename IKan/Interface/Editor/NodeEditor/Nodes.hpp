@@ -1,5 +1,5 @@
 //
-//  Node.hpp
+//  Nodes.hpp
 //  IKan
 //
 //  Created by Ashish . on 05/03/24.
@@ -67,7 +67,7 @@ namespace IKan
   struct Node
   {
     UUID ID;
-    std::string Category, name;
+    std::string category, name;
     std::vector<Pin> inputs;
     std::vector<Pin> outputs;
     ImColor color;
@@ -118,7 +118,8 @@ namespace IKan
     class Factory : public AbstractFactory
     {
     public:
-      static const Registry Registry;
+      static const Registry s_registry;
+      static int a;
 
       /// This function Spawns the node
       /// - Parameters:
@@ -134,6 +135,7 @@ namespace IKan
     //! Create and register custom node spawn functions in .cpp file
     class NodeFactory : public Factory<NodeFactory>
     {
+    public:
       /// This function Spawns the node
       /// - Parameters:
       ///   - categiory: node category
