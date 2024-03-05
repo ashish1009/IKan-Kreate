@@ -200,3 +200,6 @@ Assets:
   - Handle: 13840019623806741120
     FilePath: Materials/RedBrick.ikmat
     Type: Material
+  - Handle: 18122436099583057493
+    FilePath: Prefabs/StarirOut.ikprefab
+    Type: Prefab
