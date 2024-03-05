@@ -474,6 +474,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/YAML/Yaml/include",
 					"${PROJECT_DIR}/../IKan/Vendors/EnTT",
 					"${PROJECT_DIR}/../IKan/Vendors/ReactPhysics/ReactPhysics3D/include",
+					"${PROJECT_DIR}/../IKan/Vendors/Choc",
 				);
 				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/../IKan/Vendors/Assimp/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -501,6 +502,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/YAML/Yaml/include",
 					"${PROJECT_DIR}/../IKan/Vendors/EnTT",
 					"${PROJECT_DIR}/../IKan/Vendors/ReactPhysics/ReactPhysics3D/include",
+					"${PROJECT_DIR}/../IKan/Vendors/Choc",
 				);
 				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/../IKan/Vendors/Assimp/lib";
 				ONLY_ACTIVE_ARCH = YES;
