@@ -31,6 +31,7 @@
 #include <imgui.h>
 #include <imgui_internal.h>
 #include <ImGuizmo.h>
+#include <imgui_node_editor.h>
 
 // Engine Files
 #include <Base/Configurations.h>

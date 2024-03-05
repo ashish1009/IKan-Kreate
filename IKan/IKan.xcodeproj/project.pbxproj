@@ -1430,6 +1430,7 @@
 					"${PROJECT_DIR}/Vendors/YAML/Yaml/include",
 					"${PROJECT_DIR}/Vendors/EnTT",
 					"${PROJECT_DIR}/Vendors/ReactPhysics/ReactPhysics3D/include",
+					"${PROJECT_DIR}/Vendors/UI/ImGuiNodeEditor",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1466,6 +1467,7 @@
 					"${PROJECT_DIR}/Vendors/YAML/Yaml/include",
 					"${PROJECT_DIR}/Vendors/EnTT",
 					"${PROJECT_DIR}/Vendors/ReactPhysics/ReactPhysics3D/include",
+					"${PROJECT_DIR}/Vendors/UI/ImGuiNodeEditor",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
