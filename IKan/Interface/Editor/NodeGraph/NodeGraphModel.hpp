@@ -8,14 +8,15 @@
 #pragma once
 
 #include "Nodes.hpp"
+#include "NodeGraphAsset.hpp"
 
 namespace IKan
 {
-  class NodeEditorModel
+  class NodeEditorModelBase
   {
   public:
-    NodeEditorModel() = default;
-    virtual ~NodeEditorModel() = default;
+    NodeEditorModelBase() = default;
+    virtual ~NodeEditorModelBase() = default;
     
     // Graph Model Interface -------------------------------------------------------------------------------
     /// This funciton returns the nodes
@@ -128,7 +129,7 @@ namespace IKan
     std::function<bool(Ref<Asset>& graphAsset)> onCompile = nullptr;
     std::function<void()> onPlay = nullptr, onStop = nullptr;
     
-    DELETE_COPY_MOVE_CONSTRUCTORS(NodeEditorModel);
+    DELETE_COPY_MOVE_CONSTRUCTORS(NodeEditorModelBase);
     
   protected:
     // Assigns relationship between pins and nodes
@@ -162,5 +163,50 @@ namespace IKan
     virtual void Serialize() = 0;
     virtual void Deserialize() = 0;
     virtual Nodes::AbstractFactory* GetNodeFactory() = 0;
+  };
+  
+  inline bool operator==(NodeEditorModelBase::LinkQueryResult a, NodeEditorModelBase::LinkQueryResult b)
+  {
+    return a.reason == b.reason;
+  }
+  
+  inline bool operator!=(NodeEditorModelBase::LinkQueryResult a, NodeEditorModelBase::LinkQueryResult b)
+  {
+    return !(a == b);
+  }
+  
+  class NodeEditorModel : public NodeEditorModelBase
+  {
+  public:
+    /// Default constructor of node editor model
+    /// - Parameter graphAsset: node graph asset
+    explicit NodeEditorModel(Ref<NodeGraph> graphAsset);
+    /// Default destructor of node editor model
+    ~NodeEditorModel() = default;
+    
+    /// @see NodeEditorModelBase
+    std::vector<Node>& GetNodes() override;
+    /// @see NodeEditorModelBase
+    std::vector<Link>& GetLinks() override;
+    /// @see NodeEditorModelBase
+    const std::vector<Node>& GetNodes() const override;
+    /// @see NodeEditorModelBase
+    const std::vector<Link>& GetLinks() const override;
+    /// @see NodeEditorModelBase
+    const Nodes::Registry& GetNodeTypes() const override;
+    
+  private:
+    /// @see NodeEditorModelBase
+    void Serialize() override;
+    /// @see NodeEditorModelBase
+    void Deserialize() override;
+    /// @see NodeEditorModelBase
+    Nodes::AbstractFactory* GetNodeFactory() override;
+    /// @see NodeEditorModelBase
+    void OnCompileGraph() override;
+    
+  private:
+    Nodes::NodeFactory m_nodeFactory;
+    Ref<NodeGraph> m_graphAsset = nullptr;
   };
 } // namespace IKan

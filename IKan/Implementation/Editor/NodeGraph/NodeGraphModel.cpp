@@ -1,5 +1,5 @@
 //
-//  NodeEditorModel.cpp
+//  NodeEditorModelBase.cpp
 //  IKan
 //
 //  Created by Ashish . on 05/03/24.
@@ -7,11 +7,12 @@
 
 #include <text/choc_StringUtilities.h>
 #include "NodeGraphModel.hpp"
+#include "Asset/AssetImporter.hpp"
 
 namespace IKan
 {
   // IDs ----------------------------------------------------------------------------------
-  uintptr_t NodeEditorModel::GetIDFromString(const std::string& idString) const
+  uintptr_t NodeEditorModelBase::GetIDFromString(const std::string& idString) const
   {
     std::stringstream stream(idString);
     uintptr_t ret;
@@ -19,7 +20,7 @@ namespace IKan
     return ret;
   }
   
-  void NodeEditorModel::AssignIds(Node* node)
+  void NodeEditorModelBase::AssignIds(Node* node)
   {
     node->ID = UUID();
     
@@ -34,7 +35,7 @@ namespace IKan
     }
   }
   
-  void NodeEditorModel::OnNodeSpawned(Node* node)
+  void NodeEditorModelBase::OnNodeSpawned(Node* node)
   {
     if (node)
     {
@@ -44,7 +45,7 @@ namespace IKan
   }
   
   // Find Items ----------------------------------------------------------------------------------
-  Node* NodeEditorModel::FindNode(UUID id)
+  Node* NodeEditorModelBase::FindNode(UUID id)
   {
     for (auto& node : GetNodes())
     {
@@ -57,7 +58,7 @@ namespace IKan
     return nullptr;
   }
   
-  const Node* NodeEditorModel::FindNode(UUID id) const
+  const Node* NodeEditorModelBase::FindNode(UUID id) const
   {
     for (auto& node : GetNodes())
     {
@@ -70,7 +71,7 @@ namespace IKan
     return nullptr;
   }
   
-  Link* NodeEditorModel::FindLink(UUID id)
+  Link* NodeEditorModelBase::FindLink(UUID id)
   {
     for (auto& link : GetLinks())
     {
@@ -83,7 +84,7 @@ namespace IKan
     return nullptr;
   }
   
-  const Link* NodeEditorModel::FindLink(UUID id) const
+  const Link* NodeEditorModelBase::FindLink(UUID id) const
   {
     for (auto& link : GetLinks())
     {
@@ -96,7 +97,7 @@ namespace IKan
     return nullptr;
   }
   
-  Pin* NodeEditorModel::FindPin(UUID id)
+  Pin* NodeEditorModelBase::FindPin(UUID id)
   {
     if (!id)
     {
@@ -125,7 +126,7 @@ namespace IKan
     return nullptr;
   }
   
-  const Pin* NodeEditorModel::FindPin(UUID id) const
+  const Pin* NodeEditorModelBase::FindPin(UUID id) const
   {
     if (!id)
       return nullptr;
@@ -153,7 +154,7 @@ namespace IKan
   }
   
   // Links ----------------------------------------------------------------------------------
-  Link* NodeEditorModel::GetLinkConnectedToPin(UUID id)
+  Link* NodeEditorModelBase::GetLinkConnectedToPin(UUID id)
   {
     if (!id)
     {
@@ -171,7 +172,7 @@ namespace IKan
     return nullptr;
   }
   
-  const Link* NodeEditorModel::GetLinkConnectedToPin(UUID id) const
+  const Link* NodeEditorModelBase::GetLinkConnectedToPin(UUID id) const
   {
     if (!id)
     {
@@ -189,12 +190,12 @@ namespace IKan
     return nullptr;
   }
   
-  bool NodeEditorModel::IsPinLinked(UUID id)
+  bool NodeEditorModelBase::IsPinLinked(UUID id)
   {
     return GetLinkConnectedToPin(id) != nullptr;
   }
   
-  void NodeEditorModel::DeleteDeadLinks(UUID nodeId)
+  void NodeEditorModelBase::DeleteDeadLinks(UUID nodeId)
   {
     auto wasConnectedToTheNode = [&](const Link& link)
     {
@@ -214,7 +215,7 @@ namespace IKan
       OnLinkDeleted();
   }
   
-  NodeEditorModel::LinkQueryResult NodeEditorModel::CanCreateLink(Pin* startPin, Pin* endPin)
+  NodeEditorModelBase::LinkQueryResult NodeEditorModelBase::CanCreateLink(Pin* startPin, Pin* endPin)
   {
     if (!startPin)                                  return LinkQueryResult::Reason::InvalidStartPin;
     else if (!endPin)                               return LinkQueryResult::Reason::InvalidEndPin;
@@ -227,7 +228,7 @@ namespace IKan
     return LinkQueryResult::Reason::CanConnect;
   }
   
-  void NodeEditorModel::CreateLink(Pin* startPin, Pin* endPin)
+  void NodeEditorModelBase::CreateLink(Pin* startPin, Pin* endPin)
   {
     auto& links = GetLinks();
     
@@ -237,7 +238,7 @@ namespace IKan
     OnLinkCreated();
   }
   
-  void NodeEditorModel::RemoveLink(UUID linkId)
+  void NodeEditorModelBase::RemoveLink(UUID linkId)
   {
     auto& links = GetLinks();
     
@@ -251,7 +252,7 @@ namespace IKan
   }
   
   // Nodes ----------------------------------------------------------------------------------
-  void NodeEditorModel::RemoveNode(UUID nodeId)
+  void NodeEditorModelBase::RemoveNode(UUID nodeId)
   {
     auto& nodes = GetNodes();
     
@@ -265,7 +266,7 @@ namespace IKan
     }
   }
   
-  void NodeEditorModel::BuildNode(Node* node)
+  void NodeEditorModelBase::BuildNode(Node* node)
   {
     for (auto& input : node->inputs)
     {
@@ -280,13 +281,13 @@ namespace IKan
     }
   }
   
-  void NodeEditorModel::BuildNodes()
+  void NodeEditorModelBase::BuildNodes()
   {
     for (auto& node : GetNodes())
       BuildNode(&node);
   }
   
-  Node* NodeEditorModel::CreateNode(const std::string& category, const std::string& typeID)
+  Node* NodeEditorModelBase::CreateNode(const std::string& category, const std::string& typeID)
   {
     std::string safeTypeName = choc::text::replace(typeID, " ", "_");
     std::string safeCategory = choc::text::replace(category, " ", "_");
@@ -300,20 +301,64 @@ namespace IKan
   }
   
   // Serialization ----------------------------------------------------------------------------------
-  void NodeEditorModel::SaveAll()
+  void NodeEditorModelBase::SaveAll()
   {
     Serialize();
   }
   
-  void NodeEditorModel::LoadAll()
+  void NodeEditorModelBase::LoadAll()
   {
     Deserialize();
     BuildNodes();
   }
   
   // Model Interface ----------------------------------------------------------------------------------
-  void NodeEditorModel::CompileGraph()
+  void NodeEditorModelBase::CompileGraph()
   {
     OnCompileGraph();
   }
+  
+  std::vector<Node>& NodeEditorModel::GetNodes()
+  {
+    return m_graphAsset->nodes;
+  }
+  std::vector<Link>& NodeEditorModel::GetLinks()
+  {
+    return m_graphAsset->links;
+  }
+  const std::vector<Node>& NodeEditorModel::GetNodes() const 
+  {
+    return m_graphAsset->nodes;
+  }
+  const std::vector<Link>& NodeEditorModel::GetLinks() const
+  {
+    return m_graphAsset->links;
+  }
+  
+  const Nodes::Registry& NodeEditorModel::GetNodeTypes() const
+  {
+    return m_nodeFactory.s_registry;
+  }
+
+  void NodeEditorModel::Serialize() 
+  {
+    AssetImporter::Serialize(m_graphAsset);
+  }
+  void NodeEditorModel::Deserialize()
+  {
+    BuildNodes();
+  }
+  
+  Nodes::AbstractFactory* NodeEditorModel::GetNodeFactory()
+  {
+    return &m_nodeFactory;
+  }
+
+  void NodeEditorModel::OnCompileGraph()
+  {
+    IK_LOG_INFO("NodeGraph", "Compiling graph...");
+    SaveAll();
+    IK_ASSERT(false);
+  }
+
 } // namespace IKan
