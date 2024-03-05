@@ -446,6 +446,20 @@
 			path = Physics;
 			sourceTree = "<group>";
 		};
+		B22FB48A2B972C5A00A5EEA1 /* NodeGraph */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NodeGraph;
+			sourceTree = "<group>";
+		};
+		B22FB48B2B972C6500A5EEA1 /* NodeGraph */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = NodeGraph;
+			sourceTree = "<group>";
+		};
 		B248B9002B8338A400B9EC40 /* Asset */ = {
 			isa = PBXGroup;
 			children = (
@@ -477,6 +491,7 @@
 		B248B91B2B8466D700B9EC40 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B22FB48A2B972C5A00A5EEA1 /* NodeGraph */,
 				B248B9222B8466EA00B9EC40 /* EditorPanel.hpp */,
 				B248B92C2B8467BC00B9EC40 /* PanelManager.hpp */,
 				B248B94F2B84A65500B9EC40 /* EditorConsoleMessage.hpp */,
@@ -490,6 +505,7 @@
 		B248B9202B8466DE00B9EC40 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B22FB48B2B972C6500A5EEA1 /* NodeGraph */,
 				B248B92B2B8467BC00B9EC40 /* PanelManager.cpp */,
 				B248B94E2B84A65500B9EC40 /* EditorConsoleMessage.cpp */,
 				B248B9522B84A69E00B9EC40 /* EditorConsoleSink.cpp */,
