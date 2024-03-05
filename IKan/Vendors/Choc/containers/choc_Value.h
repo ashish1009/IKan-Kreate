@@ -2178,6 +2178,8 @@ struct ValueView::Iterator
 
     ValueView value;
     uint32_t index, numElements;
+  
+    Iterator(ValueView value, uint32_t index, uint32_t numElements) : value(value), index(index), numElements(numElements) {}
 };
 
 inline ValueView::Iterator ValueView::begin() const   { return { *this, 0, size() }; }

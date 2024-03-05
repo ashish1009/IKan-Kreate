@@ -54,6 +54,7 @@
 #include <Core/AssertAPI.h>
 #include <Core/TimeStep.hpp>
 #include <Core/Application.hpp>
+#include <Core/LayerStack.hpp>
 #include <Core/Layer.hpp>
 #include <Core/Window.hpp>
 #include <Core/Buffer.hpp>
@@ -97,8 +98,12 @@
 #include <Project/Project.hpp>
 #include <Project/ProjectSerializer.hpp>
 
+#include <Physics/PhysicsScene.hpp>
+
 #include <Editor/EditorPanel.hpp>
 #include <Editor/PanelManager.hpp>
 #include <Editor/EditorConsolePanel.hpp>
 #include <Editor/EditorConsoleSink.hpp>
 #include <Editor/AssetEditor.hpp>
+
+#include <Editor/NodeGraph/Nodes.hpp>
