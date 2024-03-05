@@ -13,27 +13,32 @@ namespace Kreator
   ImageViewer::ImageViewer()
   : AssetEditor("Edit Texture")
   {
+    IK_PROFILE();
     SetMinSize(200, 600);
     SetMaxSize(1000, 1000);
   }
   
   ImageViewer::~ImageViewer()
   {
+    IK_PROFILE();
     OnClose();
   }
   
   void ImageViewer::SetAsset(const Ref<Asset>& asset)
   {
+    IK_PROFILE();
     m_asset = std::dynamic_pointer_cast<Image>(asset);
   }
   
   void ImageViewer::OnClose()
   {
+    IK_PROFILE();
     m_asset = nullptr;
   }
   
   void ImageViewer::Render()
   {
+    IK_PERFORMANCE("ImageViewer::Render")
     if (!m_asset)
     {
       SetOpen(false);
@@ -59,21 +64,25 @@ namespace Kreator
   MaterialEditor::MaterialEditor()
   : AssetEditor("Material Editor")
   {
+    IK_PROFILE();
     m_checkerboardTex = TextureFactory::Create(KreatorLayer::Get().GetClientResorucePath() / "Textures/Editor/CheckBoard.png");
   }
   
   void MaterialEditor::SetAsset(const Ref<Asset>& asset)
   {
+    IK_PROFILE();
     m_materialAsset = std::dynamic_pointer_cast<MaterialAsset>(asset);
   }
   
   void MaterialEditor::OnClose()
   {
+    IK_PROFILE();
     m_materialAsset = nullptr;
   }
   
   void MaterialEditor::Render()
   {
+    IK_PERFORMANCE("MaterialEditor::Render");
     Ref<Material> material = m_materialAsset->GetMaterial();
     {
       UI::ScopedFont fixedSize(UI::GetFixedWidthFont());
@@ -541,20 +550,24 @@ namespace Kreator
   PrefabEditor::PrefabEditor()
   : AssetEditor("Prefab Editor"), m_sceneHierarchyPanel(nullptr, false)
   {
+    IK_PROFILE();
   }
   
   void PrefabEditor::SetAsset(const Ref<Asset>& asset)
   {
+    IK_PROFILE();
     m_prefab = std::dynamic_pointer_cast<Prefab>(asset);
     m_sceneHierarchyPanel.SetSceneContext(m_prefab->GetScene());
   }
 
   void PrefabEditor::OnClose()
   {
+    IK_PROFILE();
   }
   
   void PrefabEditor::Render()
   {
+    IK_PERFORMANCE("PrefabEditor::Render");
     // Need to do this in order to ensure that the scene hierarchy panel doesn't close immediately.
     // There's been some structural changes since the addition of the PanelManager.
     bool isOpen = true;
