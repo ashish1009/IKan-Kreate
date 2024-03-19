@@ -69,7 +69,6 @@
 #include <Renderer/TextRenderer.hpp>
 #include <Renderer/RendererStats.hpp>
 #include <Renderer/Mesh.hpp>
-#include <Renderer/SceneRenderer.hpp>
 
 #include <Renderer/Graphics/RendererAPI.hpp>
 #include <Renderer/Graphics/RendererContext.hpp>
@@ -85,27 +84,3 @@
 #include <Camera/FixedCamera.hpp>
 
 #include <UI/ImGuiLayer.hpp>
-
-#include <Asset/Asset.hpp>
-#include <Asset/AssetManager.hpp>
-
-#include <Scene/Scene.hpp>
-#include <Scene/SceneSerializer.hpp>
-#include <Scene/Entity.hpp>
-#include <Scene/Components.hpp>
-#include <Scene/Prefabs.hpp>
-
-#include <Project/Project.hpp>
-#include <Project/ProjectSerializer.hpp>
-
-#include <Physics/PhysicsScene.hpp>
-
-#include <Editor/EditorPanel.hpp>
-#include <Editor/PanelManager.hpp>
-#include <Editor/EditorConsolePanel.hpp>
-#include <Editor/EditorConsoleSink.hpp>
-#include <Editor/AssetEditor.hpp>
-
-#include <Editor/NodeGraph/Nodes.hpp>
-#include <Editor/NodeGraph/NodeGraphAsset.hpp>
-#include <Editor/NodeGraph/NodeGraphModel.hpp>

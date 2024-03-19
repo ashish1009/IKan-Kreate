@@ -6,8 +6,6 @@
 //
 
 #include "MaterialAsset.hpp"
-#include "Asset/AssetManager.hpp"
-#include "Project/Project.hpp"
 
 namespace IKan
 {

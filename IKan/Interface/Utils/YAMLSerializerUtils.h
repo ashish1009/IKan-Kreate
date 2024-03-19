@@ -9,7 +9,6 @@
 
 #include <yaml-cpp/yaml.h>
 #include "Core/AssertAPI.h"
-#include "Asset/Asset.hpp"
 
 namespace YAML
 {
@@ -109,24 +108,7 @@ namespace YAML
       rhs.z = node[3].as<float>();
       return true;
     }
-  }; 
-  
-  template<>
-  struct convert<IKan::AssetHandle>
-  {
-    static Node encode(const IKan::AssetHandle& rhs)
-    {
-      Node node;
-      node.push_back((uint64_t)rhs);
-      return node;
-    }
-    
-    static bool decode(const Node& node, IKan::AssetHandle& rhs)
-    {
-      rhs = node.as<uint64_t>();
-      return true;
-    }
-  };
+  };   
 } // namespace YAML
 
 namespace IKan
