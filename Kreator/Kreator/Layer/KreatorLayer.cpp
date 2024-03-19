@@ -111,6 +111,18 @@ if (!m_currentScene) return
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Destroying Kreator Renderer Layer instance");
+    
+    // Decorate the Application --------------------------------------------------------------------------------------
+    // Set all the required Fonts
+    IKan::UI::ImGuiFont regularFontFilePath = {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14};
+    IKan::UI::ImGuiFont boldFontFilePath = {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14};
+    IKan::UI::ImGuiFont italicFontFilePath = {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14};
+    IKan::UI::ImGuiFont sameWidthFont = {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10};
+    IKan::UI::ImGuiFont hugeheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40};
+    IKan::UI::ImGuiFont semiheader = {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18};
+    
+    // Note: This API should be called before any other ImGui Decoration API
+    Kreator::UI::LoadFonts({regularFontFilePath, boldFontFilePath, italicFontFilePath, sameWidthFont, hugeheader, semiheader});
   }
   
   void KreatorLayer::OnAttach()
