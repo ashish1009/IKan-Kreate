@@ -22,6 +22,16 @@
          </FileRef>
       </Group>
    </Group>
+   <Group
+      location = "group:Kreator/Log"
+      name = "Log">
+      <FileRef
+         location = "group:Profiler.log">
+      </FileRef>
+      <FileRef
+         location = "group:Kreator.log">
+      </FileRef>
+   </Group>
    <FileRef
       location = "group:Kreator/Kreator.xcodeproj">
    </FileRef>

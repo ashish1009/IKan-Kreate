@@ -105,12 +105,15 @@ namespace IKan
   {
     IK_PROFILE();
     
-    IK_LOG_INFO(LogModule::TextRenderer, "Shutting down the Text Renderer ");
-    IK_LOG_INFO(LogModule::TextRenderer, "  Vertex Buffer Used  {0} B",
-                TextData::VertexForSingleChar * sizeof(TextData::Vertex) * MaxTextureSlotsInShader);
-    IK_LOG_INFO(LogModule::TextRenderer, "  Shader used         {0}", s_textData->shader->GetName());
-    
-    s_textData.reset();
+    if (s_textData)
+    {
+      IK_LOG_INFO(LogModule::TextRenderer, "Shutting down the Text Renderer ");
+      IK_LOG_INFO(LogModule::TextRenderer, "  Vertex Buffer Used  {0} B",
+                  TextData::VertexForSingleChar * sizeof(TextData::Vertex) * MaxTextureSlotsInShader);
+      IK_LOG_INFO(LogModule::TextRenderer, "  Shader used         {0}", s_textData->shader->GetName());
+      
+      s_textData.reset();
+    }
   }
   
   void TextRenderer::BeginBatch(const glm::mat4 &camViewProjMat)

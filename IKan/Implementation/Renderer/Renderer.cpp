@@ -42,8 +42,11 @@ namespace IKan
     IK_PROFILE();
     
     // Reset the Renderer API Data
-    s_rendererData.rendererAPI.reset();
-    s_rendererData.rendererAPI = nullptr;
+    if (s_rendererData.rendererAPI)
+    {
+      s_rendererData.rendererAPI.reset();
+      s_rendererData.rendererAPI = nullptr;
+    }
     
     // Delete Shaders from library
     ShaderLibrary::Reset();

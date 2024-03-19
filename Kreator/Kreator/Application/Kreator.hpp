@@ -11,10 +11,17 @@ using namespace IKan;
 
 namespace Kreator
 {
+  struct KreatorDirectories
+  {
+    std::filesystem::path systemUserPath{};
+    std::filesystem::path iKanKreatePath{};
+    std::filesystem::path clientResourcePath{};
+  };
+
   class KreatorApp : public Application
   {
   public:
-    KreatorApp(const ApplicationSpecification& appSpec);
+    KreatorApp(const ApplicationSpecification& appSpec, const KreatorDirectories& kreatorDirectories);
     ~KreatorApp();
     
     void OnInit() override;
@@ -23,5 +30,7 @@ namespace Kreator
     void OnImGuiRender() override;
     
   private:
+    Ref<Layer> m_kreatorLayer;
+    KreatorDirectories m_kreatorDirectories;
   };
 } // namespace Kreator

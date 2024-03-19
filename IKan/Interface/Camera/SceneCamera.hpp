@@ -116,5 +116,5 @@ namespace IKan
     
     float m_orthographicSize {10.0f};
     float m_orthographicNear {-1.0f}, m_orthographicFar {1.0f};
-    };
+  };
 } // namespace IKan
