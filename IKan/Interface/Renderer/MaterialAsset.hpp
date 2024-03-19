@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "Asset/Asset.hpp"
 #include "Renderer/Material.hpp"
 
 namespace IKan
@@ -26,7 +27,7 @@ void Set##title##Map(Ref<Image> texture); \
     float depthScale = 0.001f;
   };
   
-  class MaterialAsset
+  class MaterialAsset : public Asset
   {
   public:
     /// Default constructor of material asset
@@ -79,7 +80,9 @@ void Set##title##Map(Ref<Image> texture); \
 
     /// This function create material asset
     static Ref<MaterialAsset> Create();
-        
+    
+    ASSET_TYPE(Material);
+    
   private:
     Ref<Material> m_material;
   };

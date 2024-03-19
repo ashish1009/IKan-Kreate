@@ -28,7 +28,6 @@ namespace Kreator
     s_instance = this;
     
     IK_LOG_INFO("Kreator Layer", "Creating Kreator Renderer Layer instance");
-
   }
   
   KreatorLayer::~KreatorLayer()
