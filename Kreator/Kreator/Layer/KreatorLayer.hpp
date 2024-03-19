@@ -13,6 +13,26 @@ using namespace IKan;
 
 namespace Kreator
 {
+  /// Stores the Viewport Data
+  struct Viewport
+  {
+    struct MouseViewportSpace
+    {
+      float spaceMouseX, spaceMouseY;
+    };
+    
+    bool panelMouseHover;
+    bool panelFocused;
+    uint32_t width, height;
+    glm::vec2 bounds[2];
+    MouseViewportSpace mouseViewportSpace;
+    
+    /// This function returns the space mouse position
+    void GetMouseViewportSpace();
+    /// This function check the mouse position inside viewport
+    bool IsMouseSpaceInViewport();
+  };
+
   class KreatorLayer : public Layer
   {
   public:
@@ -48,13 +68,36 @@ namespace Kreator
     static KreatorLayer& Get();
 
   private:
+    // Member functions ----------------------------------------------------------------------------------------------
+    /// This function renders the debug icons, colliders and so on....
+    void DebugRenderer();
+
     // Member variables ----------------------------------------------------------------------------------------------
     // Application Data ----------------------------------
     std::filesystem::path m_clientResourcePath {};
     std::filesystem::path m_systemUserPath {};
     std::filesystem::path m_iKanKreatePath {};
     Ref<UserPreferences> m_userPreferences;
-    
+
+    // Applicaiton Textures ------------------------------
+    Ref<Texture> m_shadowTexture;
+    Ref<Texture> m_applicationIcon, m_welcomeIcon;
+    Ref<Texture> m_newProjectIcon, m_folderIcon;
+    Ref<Texture> m_projectIcon;
+    Ref<Texture> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
+    Ref<Texture> m_gridTexture;
+    Ref<Texture> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
+    Ref<Texture> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
+    Ref<Texture> m_XIcon, m_YIcon, m_ZIcon, m_cameraIcon;
+
+    // Editor Data ---------------------------------------
+    bool m_allowViewportCameraEvents = false;
+    EditorCamera m_editorCamera;
+
+    // View port Data ------------------------------------
+    Viewport m_viewport;
+    SceneRenderer m_viewportRenderer, m_miniViewportRenderer;
+
     // Single Instance -----------------------------------
     static KreatorLayer* s_instance;
   };
