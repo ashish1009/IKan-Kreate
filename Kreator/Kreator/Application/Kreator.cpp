@@ -64,7 +64,7 @@ Scope<Application> CreateApplication()
   appSpec.windowSpecificaion.title = "Kreator";
   appSpec.windowSpecificaion.width = 2500;
   appSpec.windowSpecificaion.height = 1000;
-  appSpec.windowSpecificaion.hideTitleBar = true;
+  appSpec.windowSpecificaion.hideTitleBar = false;
 #ifdef DEBUG
   appSpec.windowSpecificaion.isFullScreen = false;
 #else
@@ -74,14 +74,17 @@ Scope<Application> CreateApplication()
   // Window Controller Data
   appSpec.resizable = true;
   appSpec.startMaximized = true;
-  
+
+  // Ini file
+  appSpec.iniFilePath = "../../../Kreator/Kreator.ini";
+
   // Editor Data --------------------------------------------------------------------------
   // TODO: Extract from arguments
   Kreator::KreatorDirectories kreatorDirectories;
   kreatorDirectories.clientResourcePath = "../../../Kreator/Resources";
   kreatorDirectories.systemUserPath = "/Users/ashish./iKan_storage";
   kreatorDirectories.iKanKreatePath = "/Users/ashish./iKan_storage/Github/Product/IKan-Kreate";
-  
+
   // Return the Application
   return IKan::Application::CreateApplication<Kreator::KreatorApp>(appSpec, kreatorDirectories);
 }

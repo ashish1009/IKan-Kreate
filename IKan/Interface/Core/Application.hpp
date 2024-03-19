@@ -21,6 +21,7 @@ namespace IKan
   {
     std::string title {"New Application"};
     std::string coreAssetPath {};
+    std::filesystem::path iniFilePath {};
     RendererType rendererType {RendererType::Invalid};
     WindowSpecification windowSpecificaion;
     bool startMaximized {false};

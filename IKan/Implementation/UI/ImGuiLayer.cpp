@@ -125,8 +125,9 @@ namespace IKan::UI
     io.FontDefault = io.Fonts->Fonts[0];
   }
   
-  void ImGuiLayer::SetIniFilePath(const std::string& iniFilepath)
+  void ImGuiLayer::SetIniFilePath(const std::filesystem::path& iniFilepath)
   {
+    IK_LOG_INFO(LogModule::ImGui, "ImGui .ini file path {0}", iniFilepath.string().c_str());
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.IniFilename = iniFilepath.c_str();
   }

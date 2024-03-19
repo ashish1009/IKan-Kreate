@@ -12,41 +12,43 @@ namespace IKan
 {
   void Application::Impl::Initialize(const ApplicationSpecification& appSpec)
   {
-//    IK_PROFILE();
-//    
-//    // Copy the Specificaion
-//    m_specification = appSpec;
-//
-//    // Set the core asset directory path
-//    CoreAssetPath::SetPath(m_specification.coreAssetPath);
-//
-//    // Set the renrerer Type
-//    Renderer::SetCurrentRendererAPI(appSpec.rendererType);
-//    
-//    // Create the window
-//    m_window = WindowFactory::Create(m_specification.windowSpecificaion);
-//    
-//    // Set the application callback to window
-//    m_window->SetEventFunction(IK_BIND_EVENT_FN(Application::Impl::HandleEvents));
-//    
-//    // Control Window
-//    m_window->SetResizable(m_specification.resizable);
-//    if (m_specification.startMaximized)
-//    {
-//      m_window->Maximize();
-//    }
-//    
-//    if (m_window->GetNativeWindow())
-//    {
-//      m_isRunning = true;
-//    }
-//    
-//    // Initialize the ImGui Layer if GUI is enabled
-//    m_imguiLayer = CreateRef<UI::ImGuiLayer>(m_window);
-//    m_layers.PushOverlay(m_imguiLayer);
-//
-//    // Initialize the Renderers
-//    Renderer::Initialize();
+    IK_PROFILE();
+    
+    // Copy the Specificaion
+    m_specification = appSpec;
+
+    // Set the core asset directory path
+    CoreAssetPath::SetPath(m_specification.coreAssetPath);
+
+    // Set the renrerer Type
+    Renderer::SetCurrentRendererAPI(appSpec.rendererType);
+    
+    // Create the window
+    m_window = WindowFactory::Create(m_specification.windowSpecificaion);
+    
+    // Set the application callback to window
+    m_window->SetEventFunction(IK_BIND_EVENT_FN(Application::Impl::HandleEvents));
+    
+    // Control Window
+    m_window->SetResizable(m_specification.resizable);
+    if (m_specification.startMaximized)
+    {
+      m_window->Maximize();
+    }
+    
+    if (m_window->GetNativeWindow())
+    {
+      m_isRunning = true;
+    }
+    
+    // Initialize the ImGui Layer if GUI is enabled
+    m_imguiLayer = CreateRef<UI::ImGuiLayer>(m_window);
+    m_layers.PushOverlay(m_imguiLayer);
+    
+    m_imguiLayer->SetIniFilePath(m_specification.iniFilePath);
+
+    // Initialize the Renderers
+    Renderer::Initialize();
     
     IK_LOG_INFO("", "--------------------------------------------------------------------------");
     IK_LOG_INFO("", "                     Core Application Initialized                         ");
