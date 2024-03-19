@@ -7,6 +7,7 @@
 
 #include "Kreator.hpp"
 #include "Layer/KreatorLayer.hpp"
+#include "Editor/UserPreferences.hpp"
 
 namespace Kreator
 {
@@ -15,6 +16,14 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Creating Kreator Application");
+    
+    // Check Client Path is valid
+    bool exist {std::filesystem::exists(m_kreatorDirectories.clientResourcePath)};
+    bool tempalateProj {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "TemplateProject")};
+    bool fonts {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "Fonts")};
+    bool textures {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "Textures")};
+    
+    IK_ASSERT(exist and tempalateProj and fonts and textures, "Invalid Client Directory");
   }
   
   KreatorApp::~KreatorApp()
@@ -27,12 +36,45 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Initializing the Kreator Application");
+
+    // Create Persistance Directory ---------------------------------------------------------------
+    std::filesystem::path persistenceStoragePath {m_kreatorDirectories.clientResourcePath / "UserData"};
+    if (!std::filesystem::exists(persistenceStoragePath))
+    {
+      std::filesystem::create_directory(persistenceStoragePath);
+    }
+    
+    // User Preferences --------------------------------------------------------------------------
+    Ref<UserPreferences> userPreferences {CreateRef<UserPreferences>()};
+    UserPreferencesSerializer serializer(userPreferences);
+    std::filesystem::path userPreferenceFile {persistenceStoragePath / "UserPreferences.yaml"};
+    if (!std::filesystem::exists(userPreferenceFile))
+    {
+      serializer.Serialize(userPreferenceFile);
+    }
+    else
+    {
+      serializer.Deserialize(userPreferenceFile);
+    }
+
+    IK_LOG_INFO("Kreator App", "Initializing the Renderer Application");
+    IK_LOG_INFO("Kreator App", "  Kreator Resources Path   : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_kreatorDirectories.clientResourcePath).string());
+    IK_LOG_INFO("Kreator App", "  User Data Path           : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath).string());
+
+    // Create and Push the Rendere Layer --------------------------------------------------------
+    m_kreatorLayer = CreateRef<KreatorLayer>(m_kreatorDirectories.clientResourcePath, m_kreatorDirectories.systemUserPath, 
+                                             m_kreatorDirectories.iKanKreatePath, userPreferences);
+    PushLayer(m_kreatorLayer);
   }
   
   void KreatorApp::OnShutdown()
   {
     IK_PROFILE();
     IK_LOG_INFO("Kreator App", "Shutting Down the Kreator Application");
+    
+    // Destroy and Pop the Rendere Layer --------------------------------------------------------
+    PopLayer(m_kreatorLayer);
+    m_kreatorLayer.reset();
   }
   
   void KreatorApp::OnUpdate(TimeStep ts)

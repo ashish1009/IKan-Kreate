@@ -1,7 +1,5 @@
 UserPrefs:
   ShowWelcomeScreen: true
-  Theme: 0
+  Theme: 1
   RecentProjects:
-    - Name: BallGame
-      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Projects/BallGame/BallGame.ikproj
-      LastOpened: 1709646816
+    []
