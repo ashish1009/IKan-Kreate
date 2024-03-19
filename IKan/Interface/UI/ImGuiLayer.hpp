@@ -41,6 +41,10 @@ namespace IKan::UI
     /// This function overrides font of imgui with new font path
     /// - Parameter fonts: fonts
     void LoadFonts(const std::vector<UI::ImGuiFont>& fonts);
+    /// This function the save location of ini file path
+    /// - Parameter iniFilepath: file path relative to executable
+    /// - Note: Directory must exist.
+    void SetIniFilePath(const std::string& iniFilepath);
 
     // Vertual overridden ----------------------------------------------------------
     /// This funciton initialises the imgui layer. Creates the imgui layer using imgui file library

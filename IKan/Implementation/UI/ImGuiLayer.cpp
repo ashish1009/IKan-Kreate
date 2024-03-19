@@ -124,4 +124,10 @@ namespace IKan::UI
     // Default font is Regular
     io.FontDefault = io.Fonts->Fonts[0];
   }
+  
+  void ImGuiLayer::SetIniFilePath(const std::string& iniFilepath)
+  {
+    ImGuiIO& io = ImGui::GetIO(); (void)io;
+    io.IniFilename = iniFilepath.c_str();
+  }
 } // namespace IKan::UI
