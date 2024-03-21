@@ -8,6 +8,10 @@
 #include "Kreator.hpp"
 #include "Layer/KreatorLayer.hpp"
 #include "Editor/UserPreferences.hpp"
+#include "Editor/FolderExplorer.hpp"
+#include "Editor/ApplicationSettings.hpp"
+#include "Panel/SceneHierarchyPanel.hpp"
+#include "UI/ImGuiWidget.hpp"
 
 namespace Kreator
 {
@@ -35,8 +39,6 @@ namespace Kreator
   void KreatorApp::OnInit()
   {
     IK_PROFILE();
-    IK_LOG_INFO("Kreator App", "Initializing the Kreator Application");
-
     // Create Persistance Directory ---------------------------------------------------------------
     std::filesystem::path persistenceStoragePath {m_kreatorDirectories.clientResourcePath / "UserData"};
     if (!std::filesystem::exists(persistenceStoragePath))
@@ -62,15 +64,26 @@ namespace Kreator
     IK_LOG_INFO("Kreator App", "  User Data Path           : {0}", IKan::Utils::FileSystem::IKanAbsolute(persistenceStoragePath).string());
 
     // Create and Push the Rendere Layer --------------------------------------------------------
-    m_kreatorLayer = CreateRef<KreatorLayer>(m_kreatorDirectories.clientResourcePath, m_kreatorDirectories.systemUserPath, 
-                                             m_kreatorDirectories.iKanKreatePath, userPreferences);
+    m_kreatorLayer = CreateRef<KreatorLayer>(m_kreatorDirectories.clientResourcePath, m_kreatorDirectories.systemUserPath, m_kreatorDirectories.iKanKreatePath, userPreferences);
     PushLayer(m_kreatorLayer);
+    
+    // Initialize the Kreator Modules -------------------------------------------------------------
+    // Should get initialized after layer initialize
+    FolderExplorer::Initialize();
+    UI::Widgets::Initialize();
+    ApplicationSettingsSerializer::Initialize();
+    SceneHierarchyPanel::Initialize();
   }
   
   void KreatorApp::OnShutdown()
   {
     IK_PROFILE();
-    IK_LOG_INFO("Kreator App", "Shutting Down the Kreator Application");
+    IK_LOG_INFO("Kreator App", "Shutting Down the Renderer Application");
+
+    // Shutdown the Kreator Modules -------------------------------------------------------------
+    FolderExplorer::Shutdown();
+    UI::Widgets::Shutdown();
+    SceneHierarchyPanel::Shutdown();
     
     // Destroy and Pop the Rendere Layer --------------------------------------------------------
     PopLayer(m_kreatorLayer);
@@ -94,7 +107,7 @@ Scope<Application> CreateApplication()
   
   // Core Application Specificaion --------------------------------------------------------
   ApplicationSpecification appSpec;
-  
+
   // Core Data
   appSpec.title = "Kreator";
   appSpec.coreAssetPath = "../../../IKan/Assets";
@@ -106,7 +119,7 @@ Scope<Application> CreateApplication()
   appSpec.windowSpecificaion.title = "Kreator";
   appSpec.windowSpecificaion.width = 2500;
   appSpec.windowSpecificaion.height = 1000;
-  appSpec.windowSpecificaion.hideTitleBar = false;
+  appSpec.windowSpecificaion.hideTitleBar = true;
 #ifdef DEBUG
   appSpec.windowSpecificaion.isFullScreen = false;
 #else

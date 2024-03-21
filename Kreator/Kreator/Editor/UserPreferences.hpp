@@ -2,7 +2,7 @@
 //  UserPreferences.hpp
 //  Kreator
 //
-//  Created by Ashish . on 19/03/24.
+//  Created by Ashish . on 15/02/24.
 //
 
 #pragma once
@@ -34,7 +34,7 @@ namespace Kreator
     // Not Serialized
     std::filesystem::path filePath {};
   };
-  
+
   /// This class serialise and deserialise the user preference
   class UserPreferencesSerializer
   {

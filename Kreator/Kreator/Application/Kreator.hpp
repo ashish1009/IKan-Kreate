@@ -16,9 +16,7 @@ namespace Kreator
     std::filesystem::path systemUserPath{};
     std::filesystem::path iKanKreatePath{};
     std::filesystem::path clientResourcePath{};
-    std::filesystem::path iniFilePath{};
   };
-
   class KreatorApp : public Application
   {
   public:

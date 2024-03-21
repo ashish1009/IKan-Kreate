@@ -1,5 +1,7 @@
 UserPrefs:
   ShowWelcomeScreen: true
-  Theme: 1
+  Theme: 0
   RecentProjects:
-    []
+    - Name: FirstGame
+      ProjectPath: /Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Projects/FirstGame/FirstGame.ikproj
+      LastOpened: 1710994411

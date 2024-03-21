@@ -25,15 +25,15 @@ int main(int argc, const char * argv[])
 
     const LoggerSpecificaion& profilerLogger = LoggerSpecificaion::Create().Type(LogType::Profiler).Name("KREATOR").SaveAt("../../../Kreator/Log/Profiler.log");
     Logger::Add(profilerLogger);
+
+    const LoggerSpecificaion& editorConsoleLogger = LoggerSpecificaion::Create().Level(LogLevel::Trace).Type(LogType::Editor).Name("EDITOR").OverrideSink(CreateRef<EditorConsoleSink>(1));
+    Logger::Add(editorConsoleLogger);
   }
   
   // Create and Run the Application
   {
     Scope<Application> application = CreateApplication();
-    if (application)
-    {
-      application->Run();
-    }
+    application->Run();
   }
   
   // Shutdown the Engine
