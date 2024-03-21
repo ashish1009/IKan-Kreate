@@ -76,3 +76,34 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 14260832018517698876
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-0, 0.5, 4]
+      Rotation: [-0.124354996, -0, -0]
+      Scale: [1, 0.999999821, 0.999999821]
+    CameraComponent:
+      Enable: true
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      CC_Follow: 3877423165992472633
+      CC_TopRadius: 3
+      CC_TopHeight: 1
+      CC_MidRadius: 4
+      CC_MidHeight: 0.5
+      CC_BottomRadius: 3.5
+      CC_BottomHeight: 0
+      CC_Sensitivity: 45

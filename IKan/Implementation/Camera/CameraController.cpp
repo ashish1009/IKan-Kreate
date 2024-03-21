@@ -88,8 +88,8 @@ namespace IKan
       static float heightPerMouseMoveY = 0.0f;
       if (delta.y > 0.0f)
       {
-        heightPerMouseMoveY = (m_topOrbit.height - m_midOrbit.height) * ( m_sensitivity / 360.0f ) / m_halfWindowHeight;
-        radiusPerMouseMoveY = (m_topOrbit.radius - m_midOrbit.radius) * ( m_sensitivity / 360.0f ) / m_halfWindowHeight;
+        heightPerMouseMoveY = (m_topOrbit.height - m_midOrbit.height) / m_halfWindowHeight;
+        radiusPerMouseMoveY = (m_topOrbit.radius - m_midOrbit.radius) / m_halfWindowHeight;
       }
       else
       {

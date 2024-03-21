@@ -95,7 +95,7 @@ namespace IKan
     // Data to be copied
     UUID m_followEntity;
     
-    Orbit m_topOrbit {3, 4}, m_midOrbit {5, 2}, m_bottomOrbit {4, 0};
+    Orbit m_topOrbit {3, 1}, m_midOrbit {5, 0.5}, m_bottomOrbit {4, 0};
     
     glm::vec2 m_centerPosition {};
     glm::vec2 m_windowSize {};
