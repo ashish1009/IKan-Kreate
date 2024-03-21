@@ -57,6 +57,8 @@ namespace IKan::UI
     // Setup Platform/Renderer bindings
     ImGui_ImplGlfw_InitForOpenGL(window, true);
     ImGui_ImplOpenGL3_Init("#version 410");
+    
+    ImGui::LoadIniSettingsFromDisk(m_initFilePath.string().c_str());
   }
   
   void ImGuiLayer::OnDetach()
@@ -85,6 +87,8 @@ namespace IKan::UI
     ImGui_ImplOpenGL3_NewFrame();
     ImGui_ImplGlfw_NewFrame();
     
+    ImGui::SaveIniSettingsToDisk(m_initFilePath.string().c_str());
+
     ImGui::NewFrame();
     ImGuizmo::BeginFrame();
   }
@@ -127,6 +131,7 @@ namespace IKan::UI
   
   void ImGuiLayer::SetIniFilePath(const std::filesystem::path& iniFilepath)
   {
+    m_initFilePath = iniFilepath;
     IK_LOG_INFO(LogModule::ImGui, "ImGui .ini file path {0}", iniFilepath.string().c_str());
     ImGuiIO& io = ImGui::GetIO(); (void)io;
     io.IniFilename = iniFilepath.c_str();

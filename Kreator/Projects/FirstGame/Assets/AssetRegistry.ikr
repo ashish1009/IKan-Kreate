@@ -11,3 +11,9 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: Mesh
+  - Handle: 1851547197
+    FilePath: Scenes/GameScene.ikscene
+    Type: Scene
+  - Handle: 4261890557
+    FilePath: Textures/Env/Morning/Cloudy.hdr
+    Type: Image

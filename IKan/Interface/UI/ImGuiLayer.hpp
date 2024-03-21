@@ -65,5 +65,6 @@ namespace IKan::UI
   private:
     bool m_blockEvents {true};
     Ref<Window> m_window;
+    std::filesystem::path m_initFilePath{};
   };
 } // namespace IKan::UI
