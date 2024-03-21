@@ -59,57 +59,14 @@ namespace IKan
     Entity followEntity = m_scene->TryGetEntityWithUUID(m_followEntity);
     if (followEntity)
     {
-      const auto& followPos = followEntity.GetComponent<TransformComponent>().Position();
-      
-      // Radius of orbit that mouse will follow around Y Axis
-      static float currentRadius = m_midOrbit.radius;
-      
-      // Mouse Move delta
-      const glm::vec2 mouse{ Input::GetMouseX(), Input::GetMouseY() };
-      glm::vec2 delta = (mouse - m_centerPosition);
-      
-      // X Mouse Move -----------------------------------------------
-      float angleMouseMovedAroundYAxis = glm::radians(delta.x * m_anglePerMouseMoveX);
-      tc.UpdatePosition(TransformComponent::Axis::X, followPos.x + (currentRadius * glm::sin(angleMouseMovedAroundYAxis)));
-      tc.UpdatePosition(TransformComponent::Axis::Z, followPos.z + (currentRadius * glm::cos(angleMouseMovedAroundYAxis)));
-      
-      // Y Mouse Move -----------------------------------------------
-      static float radiusPerMouseMoveY = 0.0f;
-      static float heightPerMouseMoveY = 0.0f;
-      if (delta.y > 0.0f)
+      switch (m_cameraViewType)
       {
-        heightPerMouseMoveY = (m_topOrbit.height - m_midOrbit.height) / m_halfWindowHeight;
-        radiusPerMouseMoveY = (m_topOrbit.radius - m_midOrbit.radius) / m_halfWindowHeight;
+        case ViewType::TPP:     UpdateTPP(followEntity); break;
+        case ViewType::FPP:
+        case ViewType::FlyCam:
+        default: break;
       }
-      else
-      {
-        heightPerMouseMoveY = (m_midOrbit.height - m_bottomOrbit.height) / m_halfWindowHeight;
-        radiusPerMouseMoveY = (m_midOrbit.radius - m_bottomOrbit.radius) / m_halfWindowHeight;
-      }
-      
-      // Uptate the position offset for Y Axis
-      float positionOffsetY = followPos.y + m_midOrbit.height + (delta.y * heightPerMouseMoveY);
-
-      // Update the current tracing radius of Camera
-      currentRadius = m_midOrbit.radius + (delta.y * radiusPerMouseMoveY);
-
-      // Check the Max and min height limit to limit the mouse movement
-      if (positionOffsetY > followPos.y + m_topOrbit.height)
-      {
-        m_centerPosition.y = m_halfWindowHeight + (mouse.y - m_windowSize.y);
-        positionOffsetY = followPos.y + m_topOrbit.height;
-        currentRadius = m_topOrbit.radius;
-      }
-      else if (positionOffsetY < followPos.y + m_bottomOrbit.height)
-      {
-        m_centerPosition.y = m_halfWindowHeight - (0 - mouse.y);
-        positionOffsetY = followPos.y + m_bottomOrbit.height;
-        currentRadius = m_bottomOrbit.radius;
-      }
-
-      // Update the Y position of camera
-      tc.UpdatePosition(TransformComponent::Axis::Y, positionOffsetY);
-    }
+    } // if Follow entity
     
     m_position = tc.Position();
     
@@ -152,6 +109,61 @@ namespace IKan
       m_position = tc.Position();
       tc.UpdateTransform(glm::inverse(glm::lookAt(m_position, m_position + m_frontVector, m_upVector)));
     }    
+  }
+  
+  void CameraController::UpdateTPP(Entity followEntity)
+  {
+    auto& tc = m_entity.GetComponent<TransformComponent>();
+    const auto& followPos = followEntity.GetComponent<TransformComponent>().Position();
+    
+    // Radius of orbit that mouse will follow around Y Axis
+    static float currentRadius = m_midOrbit.radius;
+    
+    // Mouse Move delta
+    const glm::vec2 mouse{ Input::GetMouseX(), Input::GetMouseY() };
+    glm::vec2 delta = (mouse - m_centerPosition);
+    
+    // X Mouse Move -----------------------------------------------
+    float angleMouseMovedAroundYAxis = glm::radians(delta.x * m_anglePerMouseMoveX);
+    tc.UpdatePosition(TransformComponent::Axis::X, followPos.x + (currentRadius * glm::sin(angleMouseMovedAroundYAxis)));
+    tc.UpdatePosition(TransformComponent::Axis::Z, followPos.z + (currentRadius * glm::cos(angleMouseMovedAroundYAxis)));
+    
+    // Y Mouse Move -----------------------------------------------
+    static float radiusPerMouseMoveY = 0.0f;
+    static float heightPerMouseMoveY = 0.0f;
+    if (delta.y > 0.0f)
+    {
+      heightPerMouseMoveY = (m_topOrbit.height - m_midOrbit.height) / m_halfWindowHeight;
+      radiusPerMouseMoveY = (m_topOrbit.radius - m_midOrbit.radius) / m_halfWindowHeight;
+    }
+    else
+    {
+      heightPerMouseMoveY = (m_midOrbit.height - m_bottomOrbit.height) / m_halfWindowHeight;
+      radiusPerMouseMoveY = (m_midOrbit.radius - m_bottomOrbit.radius) / m_halfWindowHeight;
+    }
+    
+    // Uptate the position offset for Y Axis
+    float positionOffsetY = followPos.y + m_midOrbit.height + (delta.y * heightPerMouseMoveY);
+    
+    // Update the current tracing radius of Camera
+    currentRadius = m_midOrbit.radius + (delta.y * radiusPerMouseMoveY);
+    
+    // Check the Max and min height limit to limit the mouse movement
+    if (positionOffsetY > followPos.y + m_topOrbit.height)
+    {
+      m_centerPosition.y = m_halfWindowHeight + (mouse.y - m_windowSize.y);
+      positionOffsetY = followPos.y + m_topOrbit.height;
+      currentRadius = m_topOrbit.radius;
+    }
+    else if (positionOffsetY < followPos.y + m_bottomOrbit.height)
+    {
+      m_centerPosition.y = m_halfWindowHeight - (0 - mouse.y);
+      positionOffsetY = followPos.y + m_bottomOrbit.height;
+      currentRadius = m_bottomOrbit.radius;
+    }
+    
+    // Update the Y position of camera
+    tc.UpdatePosition(TransformComponent::Axis::Y, positionOffsetY);
   }
   
   void CameraController::SetFollowEntity(UUID uuid)

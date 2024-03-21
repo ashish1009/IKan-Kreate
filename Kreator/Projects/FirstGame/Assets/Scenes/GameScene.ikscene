@@ -17,7 +17,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [0, 6.80678272, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -40,7 +40,7 @@ Entities:
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
       FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      Bounciness: 0.374000013
       MassDensity: 1
   - Entity: 10093978384651384885
     VisibilityComponent:

@@ -103,6 +103,9 @@ namespace IKan
   private:
     /// This function updates the vector of camera
     void UpdateVectors();
+    /// This function updates the TPP View of camera
+    /// - Parameter followEntity: Follow entity
+    void UpdateTPP(Entity followEntity);
     
     // Data to be copied
     UUID m_followEntity;
