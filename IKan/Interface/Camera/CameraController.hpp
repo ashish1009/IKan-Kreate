@@ -22,6 +22,11 @@ namespace IKan
       float height;
     };
     
+    enum class ViewType
+    {
+      TPP, FPP, FlyCam
+    };
+    
     /// Default constructor
     CameraController();
     
@@ -74,6 +79,9 @@ namespace IKan
     /// This function returns the SetSensitivity
     float GetSensitivity() const;
     
+    /// This function returns the CameraViewType
+    ViewType GetCameraViewType() const;
+    
     /// This function sets the top radius
     /// - Parameter value: Orbit value
     void SetTopOrbit(const Orbit& value);
@@ -87,6 +95,10 @@ namespace IKan
     /// This function sets the SetSensitivity
     /// - Parameter value: sensitivity value
     void SetSensitivity(float value);
+    
+    /// This function sets the camera view type
+    /// - Parameter type: type
+    void SetCameraViewType(ViewType type);
     
   private:
     /// This function updates the vector of camera
@@ -114,5 +126,7 @@ namespace IKan
     
     float m_anglePerMouseMoveX {};
     float m_sensitivity = 45.0f;
+    
+    ViewType m_cameraViewType {ViewType::TPP};
   };
 } // namespace IKan

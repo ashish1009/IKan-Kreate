@@ -204,6 +204,11 @@ namespace IKan
     return m_sensitivity;
   }
   
+  CameraController::ViewType CameraController::GetCameraViewType() const
+  {
+    return m_cameraViewType;
+  }
+  
   void CameraController::SetTopOrbit(const CameraController::Orbit&  value)
   {
     m_topOrbit = value;
@@ -223,5 +228,9 @@ namespace IKan
   void CameraController::SetSensitivity(float value)
   {
     m_sensitivity = value;
+  }
+  void CameraController::SetCameraViewType(CameraController::ViewType value)
+  {
+    m_cameraViewType = value;
   }
 } // namespace IKan

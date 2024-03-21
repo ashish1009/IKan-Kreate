@@ -117,8 +117,10 @@ namespace IKan
       out << YAML::Key << "CC_MidHeight" << YAML::Value << cameraComponent.controller.GetMidOrbit().height;
       out << YAML::Key << "CC_BottomRadius" << YAML::Value << cameraComponent.controller.GetBottomOrbit().radius;
       out << YAML::Key << "CC_BottomHeight" << YAML::Value << cameraComponent.controller.GetBottomOrbit().height;
-      out << YAML::Key << "CC_Sensitivity" << YAML::Value << cameraComponent.controller.GetSensitivity();
       
+      out << YAML::Key << "CC_Sensitivity" << YAML::Value << cameraComponent.controller.GetSensitivity();
+      out << YAML::Key << "CC_ViewType" << YAML::Value << (uint32_t)cameraComponent.controller.GetCameraViewType();
+
       out << YAML::EndMap; // CameraComponent
     }
     
@@ -396,6 +398,7 @@ namespace IKan
         component.controller.SetBottomOrbit({radius, height});
         
         component.controller.SetSensitivity(cameraComponent["CC_Sensitivity"].as<float>());
+        component.controller.SetCameraViewType((CameraController::ViewType)cameraComponent["CC_ViewType"].as<uint32_t>());
       }
       
       // MeshComponent ----------------------------------------------------------------------------------------------

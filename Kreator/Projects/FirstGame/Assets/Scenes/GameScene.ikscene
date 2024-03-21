@@ -107,3 +107,4 @@ Entities:
       CC_BottomRadius: 3.5
       CC_BottomHeight: 0
       CC_Sensitivity: 45
+      CC_ViewType: 0
