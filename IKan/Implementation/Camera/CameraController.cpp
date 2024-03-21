@@ -66,17 +66,7 @@ namespace IKan
       
       // Mouse Move delta
       const glm::vec2 mouse{ Input::GetMouseX(), Input::GetMouseY() };
-      const glm::vec2 delta = (mouse - m_centerPosition);
-      
-      // Check the Max and min height limit to limit the mouse movement
-      if (tc.Position().y >= followPos.y + m_topOrbit.height)
-      {
-        m_centerPosition.y = m_halfWindowHeight + (mouse.y - m_windowSize.y);
-      }
-      if (tc.Position().y <= followPos.y + m_bottomOrbit.height)
-      {
-        m_centerPosition.y = m_halfWindowHeight - (0 - mouse.y);
-      }
+      glm::vec2 delta = (mouse - m_centerPosition);
       
       // X Mouse Move -----------------------------------------------
       float angleMouseMovedAroundYAxis = glm::radians(delta.x * m_anglePerMouseMoveX);
@@ -97,9 +87,28 @@ namespace IKan
         radiusPerMouseMoveY = (m_midOrbit.radius - m_bottomOrbit.radius) / m_halfWindowHeight;
       }
       
+      // Uptate the position offset for Y Axis
       float positionOffsetY = followPos.y + m_midOrbit.height + (delta.y * heightPerMouseMoveY);
-      tc.UpdatePosition(TransformComponent::Axis::Y, positionOffsetY);
+
+      // Update the current tracing radius of Camera
       currentRadius = m_midOrbit.radius + (delta.y * radiusPerMouseMoveY);
+
+      // Check the Max and min height limit to limit the mouse movement
+      if (positionOffsetY > followPos.y + m_topOrbit.height)
+      {
+        m_centerPosition.y = m_halfWindowHeight + (mouse.y - m_windowSize.y);
+        positionOffsetY = followPos.y + m_topOrbit.height;
+        currentRadius = m_topOrbit.radius;
+      }
+      else if (positionOffsetY < followPos.y + m_bottomOrbit.height)
+      {
+        m_centerPosition.y = m_halfWindowHeight - (0 - mouse.y);
+        positionOffsetY = followPos.y + m_bottomOrbit.height;
+        currentRadius = m_bottomOrbit.radius;
+      }
+
+      // Update the Y position of camera
+      tc.UpdatePosition(TransformComponent::Axis::Y, positionOffsetY);
     }
     
     m_position = tc.Position();
