@@ -62,7 +62,7 @@ namespace IKan
       switch (m_cameraViewType)
       {
         case ViewType::TPP:     UpdateTPP(followEntity); break;
-        case ViewType::FPP:
+        case ViewType::FPP:     UpdateFPP(followEntity); break;
         case ViewType::FlyCam:
         default: break;
       }
@@ -113,6 +113,12 @@ namespace IKan
   
   void CameraController::UpdateTPP(Entity followEntity)
   {
+    if (followEntity.HasComponent<MeshComponent>())
+    {
+      // Disable mesh rendering for FPP
+      followEntity.GetComponent<MeshComponent>().enable = true;
+    }
+    
     auto& tc = m_entity.GetComponent<TransformComponent>();
     const auto& followPos = followEntity.GetComponent<TransformComponent>().Position();
     
@@ -164,6 +170,26 @@ namespace IKan
     
     // Update the Y position of camera
     tc.UpdatePosition(TransformComponent::Axis::Y, positionOffsetY);
+  }
+  
+  void CameraController::UpdateFPP(Entity followEntity)
+  {
+    if (followEntity.HasComponent<MeshComponent>())
+    {
+      // Disable mesh rendering for FPP
+      followEntity.GetComponent<MeshComponent>().enable = false;
+      
+      // Set the camera position as current entity positon
+      auto& tc = m_entity.GetComponent<TransformComponent>();
+      auto followPos = followEntity.GetComponent<TransformComponent>().Position();
+      
+      // Hack to fix z position 0
+      if (followPos.z == 0.0f)
+      {
+        followPos.z -= 0.0001f;
+      }
+      tc.UpdatePosition(followPos);
+    }
   }
   
   void CameraController::SetFollowEntity(UUID uuid)
@@ -244,5 +270,6 @@ namespace IKan
   void CameraController::SetCameraViewType(CameraController::ViewType value)
   {
     m_cameraViewType = value;
+    ResetView();
   }
 } // namespace IKan

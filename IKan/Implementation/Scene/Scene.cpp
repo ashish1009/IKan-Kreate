@@ -136,7 +136,7 @@ namespace IKan
       const auto& transformComp = entity.GetComponent<TransformComponent>();
       const auto& meshComp = entity.GetComponent<MeshComponent>();
       const auto& visibilityComp = entity.GetComponent<VisibilityComponent>();
-      if (meshComp.mesh != 0 and (visibilityComp.isVisible or (!visibilityComp.isVisible and !isEditing)))
+      if (meshComp.mesh != 0 and meshComp.enable and (visibilityComp.isVisible or (!visibilityComp.isVisible and !isEditing)))
       {
         // Render Selected Mesh ---------------------------------------------
         Entity entity = {entityHandle, this};

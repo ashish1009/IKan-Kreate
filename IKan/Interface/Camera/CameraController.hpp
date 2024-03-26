@@ -106,7 +106,10 @@ namespace IKan
     /// This function updates the TPP View of camera
     /// - Parameter followEntity: Follow entity
     void UpdateTPP(Entity followEntity);
-    
+    /// This function updates the FPP View of camera
+    /// - Parameter followEntity: Follow entity
+    void UpdateFPP(Entity followEntity);
+
     // Data to be copied
     UUID m_followEntity;
     

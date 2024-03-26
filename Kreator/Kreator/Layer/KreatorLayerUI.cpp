@@ -1045,9 +1045,10 @@ namespace Kreator
     {
       UI_SceneToolbar();
       UI_GuizmoToolbar();
-      UI_CameraToolbar();
       UI_UpdateGuizmo();
     }
+
+    UI_CameraToolbar();
 
     auto windowSize = ImGui::GetWindowSize();
     ImVec2 minBound = ImGui::GetWindowPos();
@@ -1432,7 +1433,13 @@ namespace Kreator
   void KreatorLayer::UI_CameraToolbar()
   {
     Entity camera = m_currentScene->GetMainCameraEntity();
-    
+    Entity followEntity;
+    if (camera and camera.HasComponent<CameraComponent>())
+    {
+      auto& cameraController = camera.GetComponent<CameraComponent>().controller;
+      followEntity = m_currentScene->TryGetEntityWithUUID(cameraController.GetFollowEntity());
+    }
+
     UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
     UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
     UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
@@ -1443,7 +1450,8 @@ namespace Kreator
     const float buttonSize = 18.0f;
     const float edgeOffset = 4.0f;
     const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
-    const float numberOfButtons = camera ? 4.0f : 3.0f;
+    const float numberOfButtons = camera ? (followEntity ? 5.0f : 4.0f) : 3.0f;
+    
     const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
     
     ImGui::SetNextWindowPos(ImVec2(viewportStart.x + ImGui::GetContentRegionAvail().x - windowWidth - edgeOffset, viewportStart.y + edgeOffset));
@@ -1466,7 +1474,7 @@ namespace Kreator
     {
       UI::ScopedStyle enableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(edgeOffset * 2.0f, 0));
       
-      auto cameraButton = [buttonSize, this](const Ref<Texture>& icon, const ImColor& tint, float paddingY = 0.0f)
+      static auto cameraButton = [buttonSize, this](const Ref<Texture>& icon, const ImColor& tint, float paddingY = 0.0f)
       {
         const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
         const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
@@ -1475,7 +1483,7 @@ namespace Kreator
         m_hoveredGuizmoToolbar = ImGui::IsItemHovered();
         return clicked;
       };
-
+      
       if (cameraButton(m_XIcon, UI::Color::TextBrighter))
       {
         m_editorCamera.SetRight();
@@ -1508,8 +1516,27 @@ namespace Kreator
             m_editorCamera.Focus(camera.GetTransform().Position());
           }
         }
-      }
-    }
+        
+        auto& cameraController = camera.GetComponent<CameraComponent>().controller;
+        if (followEntity)
+        {
+          if (cameraController.GetCameraViewType() == CameraController::ViewType::FPP)
+          {
+            if (UI::DrawRoundButton("FPP", {0.2, 0.2, 0.2}, 1))
+            {
+              cameraController.SetCameraViewType(CameraController::ViewType::TPP);
+            }
+          }
+          else
+          {
+            if (UI::DrawRoundButton("TPP", {0.2, 0.2, 0.2}, 1))
+            {
+              cameraController.SetCameraViewType(CameraController::ViewType::FPP);
+            }
+          } // else of FPP
+        } // if follow entity
+      } // if camera
+    } // Scope
     
     ImGui::Spring();
     ImGui::EndHorizontal();
