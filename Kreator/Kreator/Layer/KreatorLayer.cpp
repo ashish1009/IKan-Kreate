@@ -480,8 +480,15 @@ if (!m_currentScene) return
               break;
           }
         }
-      } // Edit
-    } // Play
+      } // if Edit
+      else if (m_sceneState == SceneState::Simulate)
+      {
+        if (Input::IsKeyPressed(Key::Escape))
+        {
+          OnSceneStopSimulation();
+        }
+      }
+    } // if not Play
     else
     {
       if (Input::IsKeyPressed(Key::Escape))

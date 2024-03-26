@@ -17,7 +17,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 6.80678272, 0]
+      Position: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -104,7 +104,7 @@ Entities:
       CC_TopHeight: 1
       CC_MidRadius: 4
       CC_MidHeight: 0.5
-      CC_BottomRadius: 3.5
+      CC_BottomRadius: 3
       CC_BottomHeight: 0
       CC_Sensitivity: 45
       CC_ViewType: 0
