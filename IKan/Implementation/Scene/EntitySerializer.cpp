@@ -109,6 +109,7 @@ namespace IKan
       out << YAML::Key << "Primary" << YAML::Value << cameraComponent.primary;
       
       // Camera controller
+#ifdef CamCon
       out << YAML::Key << "CC_Follow" << YAML::Value << cameraComponent.controller.GetFollowEntity();
       
       out << YAML::Key << "CC_TopRadius" << YAML::Value << cameraComponent.controller.GetTopOrbit().radius;
@@ -120,7 +121,7 @@ namespace IKan
       
       out << YAML::Key << "CC_Sensitivity" << YAML::Value << cameraComponent.controller.GetSensitivity();
       out << YAML::Key << "CC_ViewType" << YAML::Value << (uint32_t)cameraComponent.controller.GetCameraViewType();
-
+#endif
       out << YAML::EndMap; // CameraComponent
     }
     
@@ -381,6 +382,7 @@ namespace IKan
         component.primary = cameraComponent["Primary"].as<bool>();
         
         // Controller
+#ifdef CamCon
         component.controller.Initialize(deserializedEntity, scene.get());
         component.controller.SetFollowEntity(cameraComponent["CC_Follow"].as<UUID>());
         
@@ -399,6 +401,7 @@ namespace IKan
         
         component.controller.SetSensitivity(cameraComponent["CC_Sensitivity"].as<float>());
         component.controller.SetCameraViewType((CameraController::ViewType)cameraComponent["CC_ViewType"].as<uint32_t>());
+#endif
       }
       
       // MeshComponent ----------------------------------------------------------------------------------------------

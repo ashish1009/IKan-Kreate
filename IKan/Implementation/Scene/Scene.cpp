@@ -711,6 +711,7 @@ namespace IKan
     IK_PERFORMANCE("Scene::InstantiateScript");
     m_registry.view<CameraComponent>().each([=](auto entity, auto& cc)
                                             {
+#ifdef CamCon
       if (cc.controller.GetEntity())
       {
         cc.controller.OnUpdate(ts);
@@ -719,6 +720,7 @@ namespace IKan
       {
         cc.controller.Initialize(Entity{ entity, this }, this);
       }
+#endif
     });
   }
 } // namespace IKan
