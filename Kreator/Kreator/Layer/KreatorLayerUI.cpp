@@ -1272,10 +1272,11 @@ namespace Kreator
     
     auto viewportStart = ImGui::GetItemRectMin();
     
-    const float buttonSize = 18.0f;
-    const float edgeOffset = 4.0f;
-    const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
-    const float numberOfButtons = 4.0f;
+    constexpr float buttonSize = 18.0f;
+    constexpr float edgeOffset = 4.0f;
+    constexpr float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
+    
+    const int32_t numberOfButtons = 4.0f;
     const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
     
     ImGui::SetNextWindowPos(ImVec2(viewportStart.x + 14, viewportStart.y + edgeOffset));
@@ -1352,11 +1353,14 @@ namespace Kreator
     
     auto viewportStart = ImGui::GetItemRectMin();
     
+    bool hasCamera = m_currentScene->GetMainCameraEntity();
+    
     constexpr float buttonSize = 18.0f;
     constexpr float edgeOffset = 4.0f;
     constexpr float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
-    constexpr float numberOfButtons = 3.0f;
-    constexpr float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * numberOfButtons * 2.0f;
+
+    const uint32_t numberOfButtons = hasCamera ? 3.0f : 2.0f;
+    const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * numberOfButtons * 2.0f;
     
     ImGui::SetNextWindowPos(ImVec2(viewportStart.x + m_viewport.width / 2 - (numberOfButtons * buttonSize), viewportStart.y + edgeOffset));
     ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
@@ -1391,9 +1395,12 @@ namespace Kreator
       // white buttons
       const ImColor buttonTint = IM_COL32(192, 192, 192, 255);
       
-      if (playbackButton(m_playButtonTex, buttonTint))
+      if (hasCamera)
       {
-        OnScenePlay();
+        if (playbackButton(m_playButtonTex, buttonTint))
+        {
+          OnScenePlay();
+        }
       }
       
       const ImColor tint = m_sceneState == SceneState::Simulate ? ImColor(1.0f, 0.75f, 0.75f, 1.0f) : buttonTint;
@@ -1448,11 +1455,11 @@ namespace Kreator
     
     auto viewportStart = ImGui::GetItemRectMin();
     
-    const float buttonSize = 18.0f;
-    const float edgeOffset = 4.0f;
-    const float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
-    const float numberOfButtons = camera ? (followEntity ? 5.0f : 4.0f) : 3.0f;
+    constexpr float buttonSize = 18.0f;
+    constexpr float edgeOffset = 4.0f;
+    constexpr float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
     
+    const int32_t numberOfButtons = camera ? (followEntity ? 5.0f : 4.0f) : 3.0f;
     const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
     
     ImGui::SetNextWindowPos(ImVec2(viewportStart.x + ImGui::GetContentRegionAvail().x - windowWidth - edgeOffset, viewportStart.y + edgeOffset));
