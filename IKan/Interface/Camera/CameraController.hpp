@@ -101,8 +101,10 @@ namespace IKan
     void SetCameraViewType(ViewType type);
     
   private:
-    /// This function updates the vector of camera
-    void UpdateVectors();
+    /// This function updates the vector of camera for TPP
+    void UpdateVectorsForTPP();
+    /// This function updates the vector of camera for FPP
+    void UpdateVectorsForFPP();
     /// This function updates the TPP View of camera
     /// - Parameter followEntity: Follow entity
     void UpdateTPP(Entity followEntity);
@@ -135,12 +137,14 @@ namespace IKan
     glm::vec2 m_mousePos{};
     
     float m_angleMouseMovedAroundYAxis{0.0f};
+    float m_angleMouseMovedAroundXAxis{0.0f};
     float m_radiusPerMouseMoveY{0.0f};
     float m_heightPerMouseMoveY{0.0f};
     
     float m_anglePerMouseMoveX {};
+    float m_anglePerMouseMoveY {};
     float m_sensitivity {45.0f};
     
-    ViewType m_cameraViewType {ViewType::TPP};
+    ViewType m_cameraViewType {ViewType::FPP};
   };
 } // namespace IKan

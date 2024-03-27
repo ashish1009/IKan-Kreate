@@ -53,9 +53,8 @@ namespace IKan
     IK_PERFORMANCE("CameraController::OnUpdate");
     
     m_anglePerMouseMoveX = m_sensitivity / m_windowSize.x;
-    
-    auto& tc = m_entity.GetComponent<TransformComponent>();
-    
+    m_anglePerMouseMoveY = m_sensitivity / m_windowSize.y;
+
     Entity followEntity = m_scene->TryGetEntityWithUUID(m_followEntity);
     if (followEntity)
     {
@@ -65,6 +64,7 @@ namespace IKan
 
       // X Angle per mouse move
       m_angleMouseMovedAroundYAxis = glm::radians(m_mouseDelta.x * m_anglePerMouseMoveX);
+      m_angleMouseMovedAroundXAxis = glm::radians(m_mouseDelta.y * m_anglePerMouseMoveY);
 
       // Y Mouse Move angle and radius
       if (m_mouseDelta.y > 0.0f)
@@ -86,11 +86,6 @@ namespace IKan
         default: break;
       }
     } // if Follow entity
-    
-    m_position = tc.Position();
-    
-    UpdateVectors();
-    tc.UpdateTransform(glm::inverse(glm::lookAt(m_position, m_position + m_frontVector, m_upVector)));
   }
   
   void CameraController::EventHandler(Event& event)
@@ -98,40 +93,9 @@ namespace IKan
     
   }
   
-  void CameraController::UpdateVectors()
-  {
-    IK_PERFORMANCE("CameraController::UpdateVectors");
-    Entity followEntity = m_scene->TryGetEntityWithUUID(m_followEntity);
-    if (followEntity)
-    {
-      const auto& followPos = followEntity.GetComponent<TransformComponent>().Position();
-      m_frontVector = glm::normalize(followPos - m_position);
-      m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
-      m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
-    }
-  }
-  
-  void CameraController::ResetView()
-  {
-    IK_PROFILE();
-    auto& tc = m_entity.GetComponent<TransformComponent>();
-    
-    Entity followEntity = m_scene->TryGetEntityWithUUID(m_followEntity);
-    if (followEntity)
-    {
-      const auto& followPos = followEntity.GetComponent<TransformComponent>().Position();
-      tc.UpdatePosition({followPos.x, followPos.y + m_midOrbit.height, followPos.z + m_midOrbit.radius});
-      
-      m_frontVector = glm::normalize(followPos - m_position);
-      m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
-      m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
-      m_position = tc.Position();
-      tc.UpdateTransform(glm::inverse(glm::lookAt(m_position, m_position + m_frontVector, m_upVector)));
-    }    
-  }
-  
   void CameraController::UpdateTPP(Entity followEntity)
   {
+    IK_PERFORMANCE("CameraController::UpdateTPP");
     if (followEntity.HasComponent<MeshComponent>())
     {
       // Disable mesh rendering for FPP
@@ -171,10 +135,17 @@ namespace IKan
     
     // Update the Y position of camera
     tc.UpdatePosition(TransformComponent::Axis::Y, positionOffsetY);
+    m_position = tc.Position();
+    
+    UpdateVectorsForTPP();
+    
+    // Need to update transform matrix as we change the view matrix
+    tc.UpdateTransform(glm::inverse(glm::lookAt(m_position, m_position + m_frontVector, m_upVector)));
   }
   
   void CameraController::UpdateFPP(Entity followEntity)
   {
+    IK_PERFORMANCE("CameraController::UpdateFPP");
     if (followEntity.HasComponent<MeshComponent>())
     {
       // Disable mesh rendering for FPP
@@ -189,8 +160,72 @@ namespace IKan
     followPos.z += 0.0001f;
     
     tc.UpdatePosition(followPos);
+    m_position = tc.Position();
+    
+    // X mouse move -----------------
+    tc.UpdateRotation(TransformComponent::Axis::Y, m_angleMouseMovedAroundYAxis);
+    
+    // Y Mouse Move -----------------
+    IK_LOG_INFO("", "{0}", glm::degrees(m_angleMouseMovedAroundXAxis));
+    // Check the Max and min height limit to limit the mouse movement
+//    if (positionOffsetY > followPos.y + m_topOrbit.height)
+//    {
+//      m_centerPosition.y = m_halfWindowHeight + (m_mousePos.y - m_windowSize.y);
+//      positionOffsetY = followPos.y + m_topOrbit.height;
+//      currentRadius = m_topOrbit.radius;
+//    }
+//    else if (positionOffsetY < followPos.y + m_bottomOrbit.height)
+//    {
+//      m_centerPosition.y = m_halfWindowHeight - (0 - m_mousePos.y);
+//      positionOffsetY = followPos.y + m_bottomOrbit.height;
+//      currentRadius = m_bottomOrbit.radius;
+//    }
+    tc.UpdateRotation(TransformComponent::Axis::X, m_angleMouseMovedAroundXAxis);
+    UpdateVectorsForFPP();
   }
   
+  void CameraController::UpdateVectorsForTPP()
+  {
+    IK_PERFORMANCE("CameraController::UpdateVectorsForTPP");
+    Entity followEntity = m_scene->TryGetEntityWithUUID(m_followEntity);
+    if (followEntity)
+    {
+      const auto& followPos = followEntity.GetComponent<TransformComponent>().Position();
+      m_frontVector = glm::normalize(followPos - m_position);
+      m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
+      m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
+    }
+  }
+  
+  void CameraController::UpdateVectorsForFPP()
+  {
+    IK_PERFORMANCE("CameraController::UpdateVectorsForFPP");
+    auto& tc = m_entity.GetComponent<TransformComponent>();
+    const glm::mat4 invertedTC = glm::inverse(tc.Transform());
+    
+    m_frontVector = normalize(glm::vec3(invertedTC[2]));
+    m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
+    m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
+  }
+  
+  void CameraController::ResetView()
+  {
+    IK_PROFILE();
+    auto& tc = m_entity.GetComponent<TransformComponent>();
+    
+    Entity followEntity = m_scene->TryGetEntityWithUUID(m_followEntity);
+    if (followEntity)
+    {
+      const auto& followPos = followEntity.GetComponent<TransformComponent>().Position();
+      tc.UpdatePosition({followPos.x, followPos.y + m_midOrbit.height, followPos.z + m_midOrbit.radius});
+      
+      m_frontVector = glm::normalize(followPos - m_position);
+      m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
+      m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
+      m_position = tc.Position();
+      tc.UpdateTransform(glm::inverse(glm::lookAt(m_position, m_position + m_frontVector, m_upVector)));
+    }
+  }
   void CameraController::SetFollowEntity(UUID uuid)
   {
     m_followEntity = uuid;
