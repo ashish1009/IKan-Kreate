@@ -50,18 +50,18 @@ return *this; \
   // Transform Component --------------------------------------------------------------------------------------------
 #define UPDATE_TRANSFORM(param) \
 switch (axis) { \
-case Axis::X: param.x = value; break; \
-case Axis::Y: param.y = value; break; \
-case Axis::Z: param.z = value; break; \
+case Utils::Math::Axis::X: param.x = value; break; \
+case Utils::Math::Axis::Y: param.y = value; break; \
+case Utils::Math::Axis::Z: param.z = value; break; \
 default: IK_ASSERT(false) \
 } \
 transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
   
 #define ADD_TRANSFORM(param) \
 switch (axis) { \
-case Axis::X: param.x += value; break; \
-case Axis::Y: param.y += value; break; \
-case Axis::Z: param.z += value; break; \
+case Utils::Math::Axis::X: param.x += value; break; \
+case Utils::Math::Axis::Y: param.y += value; break; \
+case Utils::Math::Axis::Z: param.z += value; break; \
 default: IK_ASSERT(false) \
 } \
 transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
@@ -99,15 +99,15 @@ transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
     Utils::Math::DecomposeTransform(this->transform, position, rotation, scale);
   }
   
-  void TransformComponent::UpdatePosition(TransformComponent::Axis axis, float value)
+  void TransformComponent::UpdatePosition(Utils::Math::Axis axis, float value)
   {
     UPDATE_TRANSFORM(position)
   }
-  void TransformComponent::UpdateRotation(TransformComponent::Axis axis, float value)
+  void TransformComponent::UpdateRotation(Utils::Math::Axis axis, float value)
   {
     UPDATE_TRANSFORM(rotation)
   }
-  void TransformComponent::UpdateScale(TransformComponent::Axis axis, float value)
+  void TransformComponent::UpdateScale(Utils::Math::Axis axis, float value)
   {
     UPDATE_TRANSFORM(scale)
   }
@@ -144,15 +144,15 @@ transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
     transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
   }
   
-  void TransformComponent::AddPosition(Axis axis, float value)
+  void TransformComponent::AddPosition(Utils::Math::Axis axis, float value)
   {
     ADD_TRANSFORM(position)
   }
-  void TransformComponent::AddRotation(Axis axis, float value)
+  void TransformComponent::AddRotation(Utils::Math::Axis axis, float value)
   {
     ADD_TRANSFORM(rotation)
   }
-  void TransformComponent::AddScale(Axis axis, float value)
+  void TransformComponent::AddScale(Utils::Math::Axis axis, float value)
   {
     ADD_TRANSFORM(scale)
   }

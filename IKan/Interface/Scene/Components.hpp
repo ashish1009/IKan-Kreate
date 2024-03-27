@@ -10,6 +10,7 @@
 #include <reactphysics3d/reactphysics3d.h>
 
 #include "Core/UUID.hpp"
+#include "Utils/MathUtils.hpp"
 #include "Asset/Asset.hpp"
 #include "Renderer/MaterialAsset.hpp"
 #include "Camera/SceneCamera.hpp"
@@ -55,11 +56,6 @@ namespace IKan
   
   struct TransformComponent
   {
-    enum Axis : uint8_t
-    {
-      X, Y, Z
-    };
-    
     const glm::mat4& Transform() const;
     const glm::vec3& Position() const;
     const glm::vec3& Rotation() const;
@@ -68,17 +64,17 @@ namespace IKan
     
     void UpdateTransform(const glm::mat4& transform);
     
-    void UpdatePosition(Axis axis, float value);
-    void UpdateRotation(Axis axis, float value);
-    void UpdateScale(Axis axis, float value);
+    void UpdatePosition(Utils::Math::Axis axis, float value);
+    void UpdateRotation(Utils::Math::Axis axis, float value);
+    void UpdateScale(Utils::Math::Axis axis, float value);
     
     void UpdatePosition(const glm::vec3& value);
     void UpdateRotation(const glm::vec3& value);
     void UpdateScale(const glm::vec3& value);
     
-    void AddPosition(Axis axis, float value);
-    void AddRotation(Axis axis, float value);
-    void AddScale(Axis axis, float value);
+    void AddPosition(Utils::Math::Axis axis, float value);
+    void AddRotation(Utils::Math::Axis axis, float value);
+    void AddScale(Utils::Math::Axis axis, float value);
     
     void AddPosition(const glm::vec3& value);
     void AddRotation(const glm::vec3& value);

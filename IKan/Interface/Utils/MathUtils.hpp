@@ -9,6 +9,11 @@
 
 namespace IKan::Utils::Math
 {
+  enum Axis : uint8_t
+  {
+    X, Y, Z
+  };
+  
   static constexpr glm::vec2 ZeroVec2 {0.0f};
   static constexpr glm::vec3 ZeroVec3 {0.0f};
   static constexpr glm::vec4 ZeroVec4 {0.0f};
