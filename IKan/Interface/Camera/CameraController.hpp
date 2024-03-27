@@ -130,8 +130,16 @@ namespace IKan
     glm::vec3 m_worldUpVector = {0.0f, 1.0f, 0.0f};
     glm::vec3 m_rightVector;
     
+    // mouse data
+    glm::vec2 m_mouseDelta{};
+    glm::vec2 m_mousePos{};
+    
+    float m_angleMouseMovedAroundYAxis{0.0f};
+    float m_radiusPerMouseMoveY{0.0f};
+    float m_heightPerMouseMoveY{0.0f};
+    
     float m_anglePerMouseMoveX {};
-    float m_sensitivity = 45.0f;
+    float m_sensitivity {45.0f};
     
     ViewType m_cameraViewType {ViewType::TPP};
   };

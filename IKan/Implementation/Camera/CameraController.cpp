@@ -59,6 +59,25 @@ namespace IKan
     Entity followEntity = m_scene->TryGetEntityWithUUID(m_followEntity);
     if (followEntity)
     {
+      // Mouse Move delta
+      m_mousePos = { Input::GetMouseX(), Input::GetMouseY() };
+      m_mouseDelta = (m_mousePos - m_centerPosition);
+
+      // X Angle per mouse move
+      m_angleMouseMovedAroundYAxis = glm::radians(m_mouseDelta.x * m_anglePerMouseMoveX);
+
+      // Y Mouse Move angle and radius
+      if (m_mouseDelta.y > 0.0f)
+      {
+        m_heightPerMouseMoveY = (m_topOrbit.height - m_midOrbit.height) / m_halfWindowHeight;
+        m_radiusPerMouseMoveY = (m_topOrbit.radius - m_midOrbit.radius) / m_halfWindowHeight;
+      }
+      else
+      {
+        m_heightPerMouseMoveY = (m_midOrbit.height - m_bottomOrbit.height) / m_halfWindowHeight;
+        m_radiusPerMouseMoveY = (m_midOrbit.radius - m_bottomOrbit.radius) / m_halfWindowHeight;
+      }
+
       switch (m_cameraViewType)
       {
         case ViewType::TPP:     UpdateTPP(followEntity); break;
@@ -125,45 +144,27 @@ namespace IKan
     // Radius of orbit that mouse will follow around Y Axis
     static float currentRadius = m_midOrbit.radius;
     
-    // Mouse Move delta
-    const glm::vec2 mouse{ Input::GetMouseX(), Input::GetMouseY() };
-    glm::vec2 delta = (mouse - m_centerPosition);
-    
-    // X Mouse Move -----------------------------------------------
-    float angleMouseMovedAroundYAxis = glm::radians(delta.x * m_anglePerMouseMoveX);
-    tc.UpdatePosition(TransformComponent::Axis::X, followPos.x + (currentRadius * glm::sin(angleMouseMovedAroundYAxis)));
-    tc.UpdatePosition(TransformComponent::Axis::Z, followPos.z + (currentRadius * glm::cos(angleMouseMovedAroundYAxis)));
-    
-    // Y Mouse Move -----------------------------------------------
-    static float radiusPerMouseMoveY = 0.0f;
-    static float heightPerMouseMoveY = 0.0f;
-    if (delta.y > 0.0f)
-    {
-      heightPerMouseMoveY = (m_topOrbit.height - m_midOrbit.height) / m_halfWindowHeight;
-      radiusPerMouseMoveY = (m_topOrbit.radius - m_midOrbit.radius) / m_halfWindowHeight;
-    }
-    else
-    {
-      heightPerMouseMoveY = (m_midOrbit.height - m_bottomOrbit.height) / m_halfWindowHeight;
-      radiusPerMouseMoveY = (m_midOrbit.radius - m_bottomOrbit.radius) / m_halfWindowHeight;
-    }
-    
+    // X Mouse Move ---
+    tc.UpdatePosition(TransformComponent::Axis::X, followPos.x + (currentRadius * glm::sin(m_angleMouseMovedAroundYAxis)));
+    tc.UpdatePosition(TransformComponent::Axis::Z, followPos.z + (currentRadius * glm::cos(m_angleMouseMovedAroundYAxis)));
+        
+    // Y Mouse Move ---
     // Uptate the position offset for Y Axis
-    float positionOffsetY = followPos.y + m_midOrbit.height + (delta.y * heightPerMouseMoveY);
+    float positionOffsetY = followPos.y + m_midOrbit.height + (m_mouseDelta.y * m_heightPerMouseMoveY);
     
     // Update the current tracing radius of Camera
-    currentRadius = m_midOrbit.radius + (delta.y * radiusPerMouseMoveY);
+    currentRadius = m_midOrbit.radius + (m_mouseDelta.y * m_radiusPerMouseMoveY);
     
     // Check the Max and min height limit to limit the mouse movement
     if (positionOffsetY > followPos.y + m_topOrbit.height)
     {
-      m_centerPosition.y = m_halfWindowHeight + (mouse.y - m_windowSize.y);
+      m_centerPosition.y = m_halfWindowHeight + (m_mousePos.y - m_windowSize.y);
       positionOffsetY = followPos.y + m_topOrbit.height;
       currentRadius = m_topOrbit.radius;
     }
     else if (positionOffsetY < followPos.y + m_bottomOrbit.height)
     {
-      m_centerPosition.y = m_halfWindowHeight - (0 - mouse.y);
+      m_centerPosition.y = m_halfWindowHeight - (0 - m_mousePos.y);
       positionOffsetY = followPos.y + m_bottomOrbit.height;
       currentRadius = m_bottomOrbit.radius;
     }
@@ -178,18 +179,16 @@ namespace IKan
     {
       // Disable mesh rendering for FPP
       followEntity.GetComponent<MeshComponent>().enable = false;
-      
-      // Set the camera position as current entity positon
-      auto& tc = m_entity.GetComponent<TransformComponent>();
-      auto followPos = followEntity.GetComponent<TransformComponent>().Position();
-      
-      // Hack to fix z position 0
-      if (followPos.z == 0.0f)
-      {
-        followPos.z -= 0.0001f;
-      }
-      tc.UpdatePosition(followPos);
     }
+    
+    // Set the camera position as current entity positon
+    auto& tc = m_entity.GetComponent<TransformComponent>();
+    auto followPos = followEntity.GetComponent<TransformComponent>().Position();
+    
+    // Hack to fix z position 0
+    followPos.z += 0.0001f;
+    
+    tc.UpdatePosition(followPos);
   }
   
   void CameraController::SetFollowEntity(UUID uuid)

@@ -1046,9 +1046,8 @@ namespace Kreator
       UI_SceneToolbar();
       UI_GuizmoToolbar();
       UI_UpdateGuizmo();
+      UI_CameraToolbar();
     }
-
-    UI_CameraToolbar();
 
     auto windowSize = ImGui::GetWindowSize();
     ImVec2 minBound = ImGui::GetWindowPos();
