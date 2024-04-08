@@ -1168,7 +1168,7 @@ namespace Kreator
         }
         ImGui::PopID();
       } // Scope end
-    }, s_gearIcon, searchedString);
+    }, s_gearIcon, searchedString, true);
     
     DrawComponent<MeshComponent>("Mesh", entity, [&](MeshComponent& smc)
                                  {

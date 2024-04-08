@@ -102,7 +102,11 @@ namespace IKan
     
   private:
     // Member Functions ---------------------------------
-    
+    /// This function updates the TPP View of camera
+    void UpdateTPP();
+    /// This function updates the FPP View of camera
+    void UpdateFPP();
+
     // Member Variables ---------------------------------
     // Common -------------------
     /// Note: No Need to copy these two as they initialize in runtime scene

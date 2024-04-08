@@ -741,7 +741,7 @@ if (!m_currentScene) return
       const auto& cc = entity.GetComponent<CameraComponent>();
       
       Entity FollowEntity = cc.controller.GetFollowEntity();
-      if (FollowEntity)
+      if (FollowEntity and cc.controller.GetCameraViewType() == CameraController::ViewType::TPP)
       {
         const auto& followTc = FollowEntity.GetComponent<TransformComponent>();
         

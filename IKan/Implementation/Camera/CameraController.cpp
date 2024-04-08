@@ -48,17 +48,85 @@ namespace IKan
   void CameraController::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("CameraController::OnUpdate");
+    
+    switch (m_cameraViewType)
+    {
+      case ViewType::TPP:     
+      {
+        UpdateTPP();
+        break;
+      }
+      case ViewType::FPP:
+      {
+        UpdateFPP();
+        break;
+      }
+      default: 
+        IK_ASSERT("Invalid View Type");
+    }
   }
   
   void CameraController::EventHandler(Event& event)
   {
     
   }
+
+  void CameraController::UpdateTPP()
+  {
+    IK_PERFORMANCE("CameraController::UpdateTPP");
+    if (m_followEntity.HasComponent<MeshComponent>())
+    {
+      // Disable mesh rendering for FPP
+      m_followEntity.GetComponent<MeshComponent>().enable = true;
+    }
+  }
+  
+  void CameraController::UpdateFPP()
+  {
+    IK_PERFORMANCE("CameraController::UpdateFPP");
+    if (m_followEntity.HasComponent<MeshComponent>())
+    {
+      // Disable mesh rendering for FPP
+      m_followEntity.GetComponent<MeshComponent>().enable = false;
+    }
+  }
   
   void CameraController::ResetView()
   {
     IK_PROFILE();
+    auto& tc = m_entity.GetComponent<TransformComponent>();
+    if (m_followEntity)
+    {
+      const auto& followPos = m_followEntity.GetComponent<TransformComponent>().Position();
+      
+      switch (m_cameraViewType)
+      {
+        case ViewType::TPP:
+        {
+          tc.UpdatePosition({followPos.x, followPos.y + m_midOrbit.height, followPos.z + m_midOrbit.radius});
+          if (m_followEntity.HasComponent<MeshComponent>())
+          {
+            // Disable mesh rendering for FPP
+            m_followEntity.GetComponent<MeshComponent>().enable = true;
+          }
+          break;
+        }
+        case ViewType::FPP:
+        {
+          tc.UpdatePosition(followPos);
+          if (m_followEntity.HasComponent<MeshComponent>())
+          {
+            // Disable mesh rendering for FPP
+            m_followEntity.GetComponent<MeshComponent>().enable = false;
+          }
+          break;
+        }
+        default: 
+          IK_ASSERT("Invalid View Type");
+      }
+    }
   }
+  
   void CameraController::SetFollowEntity(UUID uuid)
   {
     m_followEntityID = uuid;
