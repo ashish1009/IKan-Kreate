@@ -1537,9 +1537,7 @@ namespace Kreator
         if (ImGui::MenuItem("Camera"))
         {
           [[maybe_unused]] auto& cameraComp = m_selectionContext.At(0).AddComponent<CameraComponent>();
-#ifdef CamCon
           cameraComp.controller.Initialize(m_selectionContext.At(0), m_context.get());
-#endif
           ImGui::CloseCurrentPopup();
         }
       }

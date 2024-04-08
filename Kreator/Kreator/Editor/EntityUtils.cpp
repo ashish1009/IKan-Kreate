@@ -21,9 +21,7 @@ namespace Kreator::ECS_Utils
       newEntity = scene->CreateEntity("Camera");
       auto& cc = newEntity.AddComponent<CameraComponent>();
       cc.camera.SetProjectionType(IKan::SceneCamera::ProjectionType::Perspective);
-#ifdef CamCon
       cc.controller.Initialize(newEntity, scene.get());
-#endif
     }
     if (ImGui::MenuItem("Mesh"))
     {

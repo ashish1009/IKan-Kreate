@@ -92,9 +92,8 @@ namespace IKan
   {
     bool enable = true;
     SceneCamera camera;
-#ifdef CamCon
     CameraController controller;
-#endif
+
     bool primary = true;
     operator SceneCamera& ();
     operator const SceneCamera& () const;
