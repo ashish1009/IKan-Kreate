@@ -734,14 +734,13 @@ if (!m_currentScene) return
   void KreatorLayer::ShowCameraControllerPath()
   {
     IK_PERFORMANCE("KreatorLayer::ShowCameraControllerPath");
-#ifdef CamCon
     auto cameraEntities = m_currentScene->GetAllEntitiesWith<CameraComponent>();
     for (auto e : cameraEntities)
     {
       Entity entity = { e, m_currentScene.get() };
       const auto& cc = entity.GetComponent<CameraComponent>();
       
-      Entity FollowEntity = m_currentScene->TryGetEntityWithUUID(cc.controller.GetFollowEntity());
+      Entity FollowEntity = cc.controller.GetFollowEntity();
       if (FollowEntity)
       {
         const auto& followTc = FollowEntity.GetComponent<TransformComponent>();
@@ -760,7 +759,6 @@ if (!m_currentScene) return
         drawCircle({followTc.Position().x, followTc.Position().y + bottomOrbit.height, followTc.Position().z}, bottomOrbit.radius);
       }
     } // Each Mesh Comp
-#endif
   }
 
   float KreatorLayer::GetSnapValue()

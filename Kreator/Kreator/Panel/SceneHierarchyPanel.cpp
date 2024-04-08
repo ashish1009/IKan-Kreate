@@ -1086,7 +1086,6 @@ namespace Kreator
       }
       UI::EndPropertyGrid();
       
-#ifdef CamCon
       {
         ImGui::PushID("CameraController");
         UI::ScopedColor header(ImGuiCol_Header, UI::Color::BackgroundPopup);
@@ -1108,15 +1107,21 @@ namespace Kreator
         {
           UI::BeginPropertyGrid();
           
+          int32_t selectedViewType = (int32_t)cc.controller.GetCameraViewType();
+          if (UI::PropertyDropdown("View Type", {"TPP", "FPP"}, 2, &selectedViewType))
+          {
+            cc.controller.SetCameraViewType((CameraController::ViewType)selectedViewType);
+          }
+          
           UUID followID = 0;
-          DrawEntitySelector("Follow", cc.controller.GetFollowEntity(), followID);
+          DrawEntitySelector("Follow", cc.controller.GetFollowEntityID(), followID);
           if (followID > 0)
           {
             cc.controller.SetFollowEntity(followID);
           }
           UI::EndPropertyGrid();
           
-          Entity followEntity = m_context->TryGetEntityWithUUID(cc.controller.GetFollowEntity());
+          Entity followEntity = cc.controller.GetFollowEntity();
           if (followEntity)
           {
             UI::BeginPropertyGrid();
@@ -1163,7 +1168,6 @@ namespace Kreator
         }
         ImGui::PopID();
       } // Scope end
-#endif
     }, s_gearIcon, searchedString);
     
     DrawComponent<MeshComponent>("Mesh", entity, [&](MeshComponent& smc)

@@ -1440,13 +1440,11 @@ namespace Kreator
   {
     Entity camera = m_currentScene->GetMainCameraEntity();
     Entity followEntity;
-#ifdef CamCon
     if (camera and camera.HasComponent<CameraComponent>())
     {
       auto& cameraController = camera.GetComponent<CameraComponent>().controller;
-      followEntity = m_currentScene->TryGetEntityWithUUID(cameraController.GetFollowEntity());
+      followEntity = cameraController.GetFollowEntity();
     }
-#endif
 
     UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
     UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
@@ -1525,7 +1523,6 @@ namespace Kreator
           }
         }
         
-#ifdef CamCon
         auto& cameraController = camera.GetComponent<CameraComponent>().controller;
         if (followEntity)
         {
@@ -1544,7 +1541,6 @@ namespace Kreator
             }
           } // else of FPP
         } // if follow entity
-#endif
       } // if camera
     } // Scope
     
