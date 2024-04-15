@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Scene/Entity.hpp"
+#include "Event/ApplicationEvent.h"
 
 namespace IKan
 {
@@ -106,6 +107,9 @@ namespace IKan
     void UpdateTPP();
     /// This function updates the FPP View of camera
     void UpdateFPP();
+    /// This function dispatched in event dispatcher and trigger when window close event evoked
+    /// - Parameter windowResizeEvent: Window close event instacnce
+    bool WindowResize([[maybe_unused]] WindowResizeEvent& windowResizeEvent);
 
     // Member Variables ---------------------------------
     // Common -------------------
@@ -120,6 +124,16 @@ namespace IKan
 
     float m_sensitivity {45.0f};
 
+    // TPP Data -----------------
+    Orbit m_topOrbit {4.0f, 1.0f}, m_midOrbit {5.0f, 0.5f}, m_bottomOrbit {4.0f, 0.0f};
+    
+    // FPP Data -----------------
+
+    // Window Data
+    glm::vec2 m_centrePosition {};
+    glm::vec2 m_windowSize {};
+    float m_windowHalfHeight = 0.0f;
+
     // No need to copy, gets updated in runtime
     glm::vec3 m_position = {0, 0, 0};
     glm::vec3 m_frontVector = {0.0f, 0.0f, -1.0f};
@@ -127,9 +141,8 @@ namespace IKan
     glm::vec3 m_worldUpVector = {0.0f, 1.0f, 0.0f};
     glm::vec3 m_rightVector;
 
-    // TPP Data -----------------
-    Orbit m_topOrbit {4.0f, 1.0f}, m_midOrbit {5.0f, 0.5f}, m_bottomOrbit {4.0f, 0.0f};
-
-    // FPP Data -----------------
+    // Mouse Data
+    glm::vec2 m_mousePos{};
+    glm::vec2 m_mouseDelta{};
   };
 } // namespace IKan

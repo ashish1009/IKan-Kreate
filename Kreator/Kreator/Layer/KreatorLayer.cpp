@@ -320,6 +320,18 @@ if (!m_currentScene) return
       {
         AssetEditorManager::OnEvent(event);
       }
+      if (m_sceneState == SceneState::Edit)
+      {
+        m_currentScene->OnEditorEventHandler(event);
+      }
+      else
+      {
+        m_currentScene->OnRuntimeEventHandler(event);
+      }
+    }
+    else
+    {
+      m_currentScene->OnRuntimeEventHandler(event);
     }
   }
   

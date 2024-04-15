@@ -89,6 +89,17 @@ namespace IKan
   
   void Scene::OnRuntimeEventHandler(Event& event)
   {
+    m_registry.view<CameraComponent>().each([&](auto entity, auto& cc)
+                                            {
+      cc.controller.EventHandler(event);
+    });
+  }
+  void Scene::OnEditorEventHandler(Event& event)
+  {
+    m_registry.view<CameraComponent>().each([&](auto entity, auto& cc)
+                                            {
+      cc.controller.EventHandler(event);
+    });
   }
   
   void Scene::OnRenderEditor(const EditorCamera &camera, SceneRenderer& renderer)

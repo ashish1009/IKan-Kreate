@@ -17,6 +17,11 @@ namespace IKan
   {
     IK_PROFILE();
     IK_LOG_INFO(LogModule::SceneCamera, "Creating Camera controller for scene camera");
+    
+    const auto& window = Application::Get().GetWindow();
+    m_windowSize = {window.GetWidth(), window.GetHeight()};
+    m_windowHalfHeight = m_windowSize.y / 2.0f;
+    m_centrePosition = m_windowSize / 2.0f;
   }
   
   CameraController::CameraController(const CameraController& other)
@@ -34,7 +39,11 @@ namespace IKan
     m_bottomOrbit = other.m_bottomOrbit;
     
     m_sensitivity = other.m_sensitivity;
-
+    
+    m_centrePosition = other.m_centrePosition;
+    m_windowSize = other.m_windowSize;
+    m_windowHalfHeight =  other.m_windowHalfHeight;
+    
     // To add other required to copy date here
   }
   
@@ -45,30 +54,66 @@ namespace IKan
     m_scene = scene;
   }
   
+  static glm::vec2 extracted(const glm::vec2 &m_centerPosition) {
+    return m_centerPosition;
+  }
+  
   void CameraController::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("CameraController::OnUpdate");
     
-    switch (m_cameraViewType)
+    if (m_followEntity)
     {
-      case ViewType::TPP:     
+      // Mouse Move delta
+      m_mousePos = { Input::GetMouseX(), Input::GetMouseY() };
+      
+      // Shift the center position of Y Axis as we need not to wrap the camera if mouse goes out of window
+      if (m_mousePos.y < 0.0f)
       {
-        UpdateTPP();
-        break;
+        m_centrePosition.y = m_windowHalfHeight + m_mousePos.y;
       }
-      case ViewType::FPP:
+      else if (m_mousePos.y > m_windowSize.y)
       {
-        UpdateFPP();
-        break;
+        m_centrePosition.y = m_mousePos.y - m_windowHalfHeight;
       }
-      default: 
-        IK_ASSERT("Invalid View Type");
+      else
+      {
+        m_centrePosition.y = m_windowHalfHeight;
+      }
+      
+      m_mouseDelta = (m_mousePos - extracted(m_centrePosition));
+      IK_LOG_INFO("", "{0}, {1}, {2}", m_mouseDelta.x, m_mouseDelta.y, m_centrePosition.y);
+            
+      switch (m_cameraViewType)
+      {
+        case ViewType::TPP:
+        {
+          UpdateTPP();
+          break;
+        }
+        case ViewType::FPP:
+        {
+          UpdateFPP();
+          break;
+        }
+        default:
+          IK_ASSERT("Invalid View Type");
+      }
     }
   }
   
   void CameraController::EventHandler(Event& event)
   {
-    
+    EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<WindowResizeEvent>(IK_BIND_EVENT_FN(CameraController::WindowResize));
+  }
+  
+  bool CameraController::WindowResize(WindowResizeEvent &windowResizeEvent)
+  {
+    m_windowSize = {windowResizeEvent.GetWidth(), windowResizeEvent.GetHeight()};
+    m_windowHalfHeight = m_windowSize.y / 2.0f;
+    m_centrePosition = m_windowSize / 2.0f;
+    return false;
   }
 
   void CameraController::UpdateTPP()

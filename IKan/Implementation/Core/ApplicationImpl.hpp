@@ -44,7 +44,7 @@ namespace IKan
     /// This function begin the ImGui Renderer and render ImGui for all the layers and finally ends the imgui rendering
     void ImGuiRender();
     /// This function dispatched in event dispatcher and trigger when window close event evoked
-    /// - Parameter window_close_event: Window close event instacnce
+    /// - Parameter windowCloseEvent: Window close event instacnce
     bool WindowClose([[maybe_unused]] WindowCloseEvent& windowCloseEvent);
 
     /// This function sets the OnUpdate callback

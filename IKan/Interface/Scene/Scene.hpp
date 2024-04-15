@@ -44,7 +44,10 @@ namespace IKan
     /// This dunction handles the events of the scene
     /// - Parameter event: event triggered
     void OnRuntimeEventHandler(Event& event);
-    
+    /// This dunction handles the events of the scene
+    /// - Parameter event: event triggered
+    void OnEditorEventHandler(Event& event);
+
     /// This function renders the scene for editor
     /// - Parameters:
     ///  - editorCamera: Editor Camera
