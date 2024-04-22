@@ -32,9 +32,8 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_INFO(LogModule::SceneCamera, "Copying Camera controller for scene camera");
     
-    m_followEntity = other.m_followEntity;
     m_followEntityID = other.m_followEntityID;
-    
+
     m_cameraViewType = other.m_cameraViewType;
     
     m_topOrbit = other.m_topOrbit;
@@ -66,30 +65,13 @@ namespace IKan
     {
       // Mouse Move delta
       m_mousePos = { Input::GetMouseX(), Input::GetMouseY() };
-      
-      // Shift the center position of Y Axis as we need not to wrap the camera if mouse goes out of window
-      if (m_mousePos.y < 0.0f)
-      {
-        m_centrePosition.y = m_windowHalfHeight + m_mousePos.y;
-      }
-      else if (m_mousePos.y > m_windowSize.y)
-      {
-        m_centrePosition.y = m_mousePos.y - m_windowHalfHeight;
-      }
-      else
-      {
-        m_centrePosition.y = m_windowHalfHeight;
-      }
-      
+            
       // Update the mouse delta based on center position
       m_mouseDelta = (m_mousePos - m_centrePosition);
       
       // Get the angle moved with mouse position
-      m_angleMovedAroundXAxis = m_mouseDelta.x * m_angleFactor.x;
-      m_angleMovedAroundYAxis = m_mouseDelta.y * m_angleFactor.y;
-
-//      IK_LOG_INFO("", "{0}, {1}", glm::degrees(m_angleMovedAroundXAxis), glm::degrees(m_angleMovedAroundYAxis));
-//      IK_LOG_INFO("", "{0}, {1}", m_windowSize.x, m_windowSize.y );
+      m_angleMovedAroundYAxis = m_mouseDelta.x * m_angleFactor.x;
+      m_angleMovedAroundXAxis = m_mouseDelta.y * m_angleFactor.y;
 
       // Update the camera
       switch (m_cameraViewType)
@@ -106,6 +88,13 @@ namespace IKan
         }
         default:
           IK_ASSERT("Invalid View Type");
+      }
+    } // if followEntity
+    else
+    {
+      if (m_followEntityID != 0)
+      {
+        m_followEntity = m_scene->TryGetEntityWithUUID(m_followEntityID);
       }
     }
   }
@@ -136,6 +125,53 @@ namespace IKan
       // Disable mesh rendering for FPP
       m_followEntity.GetComponent<MeshComponent>().enable = true;
     }
+
+    auto& tc = m_entity.GetComponent<TransformComponent>();
+    const auto& followPos = m_followEntity.GetComponent<TransformComponent>().Position();
+
+    // Radius of orbit that mouse will follow around Y Axis
+    static float currentRadius = m_midOrbit.radius;
+
+    // X Mouse Move ---
+    float xAxisDelta = followPos.x + (currentRadius * glm::sin(m_angleMovedAroundYAxis));
+    float zAxisDelta = followPos.z + (currentRadius * glm::cos(m_angleMovedAroundYAxis));
+
+    // Y Mouse Move ---
+    if (m_mouseDelta.y > 0.0f)
+    {
+      m_heightPerMouseMoveY = (m_topOrbit.height - m_midOrbit.height) / m_windowHalfHeight;
+      m_radiusPerMouseMoveY = (m_topOrbit.radius - m_midOrbit.radius) / m_windowHalfHeight;
+    }
+    else
+    {
+      m_heightPerMouseMoveY = (m_midOrbit.height - m_bottomOrbit.height) / m_windowHalfHeight;
+      m_radiusPerMouseMoveY = (m_midOrbit.radius - m_bottomOrbit.radius) / m_windowHalfHeight;
+    }
+
+    // Uptate the position offset for Y Axis
+    float yAxisDelta = followPos.y + m_midOrbit.height + (m_mouseDelta.y * m_heightPerMouseMoveY);
+    
+    // Update the current tracing radius of Camera
+    currentRadius = m_midOrbit.radius + (m_mouseDelta.y * m_radiusPerMouseMoveY);
+
+    // Check the Max and min height limit to limit the mouse movement
+    if (yAxisDelta > followPos.y + m_topOrbit.height)
+    {
+      m_centrePosition.y = m_windowHalfHeight + (m_mousePos.y - m_windowSize.y);
+      yAxisDelta = followPos.y + m_topOrbit.height;
+      currentRadius = m_topOrbit.radius;
+    }
+    else if (yAxisDelta < followPos.y + m_bottomOrbit.height)
+    {
+      m_centrePosition.y = m_windowHalfHeight - (0 - m_mousePos.y);
+      yAxisDelta = followPos.y + m_bottomOrbit.height;
+      currentRadius = m_bottomOrbit.radius;
+    }
+    
+    // Update the position of camera
+    tc.UpdatePosition({xAxisDelta, yAxisDelta, zAxisDelta});
+
+    m_position = tc.Position();
   }
   
   void CameraController::UpdateFPP()
@@ -146,6 +182,21 @@ namespace IKan
       // Disable mesh rendering for FPP
       m_followEntity.GetComponent<MeshComponent>().enable = false;
     }
+    
+    // Shift the center position of Y Axis as we need not to wrap the camera if mouse goes out of window
+    if (m_mousePos.y < 0.0f)
+    {
+      m_centrePosition.y = m_windowHalfHeight + m_mousePos.y;
+    }
+    else if (m_mousePos.y > m_windowSize.y)
+    {
+      m_centrePosition.y = m_mousePos.y - m_windowHalfHeight;
+    }
+    else
+    {
+      m_centrePosition.y = m_windowHalfHeight;
+    }
+
   }
   
   void CameraController::ResetView()

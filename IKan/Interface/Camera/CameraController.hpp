@@ -118,7 +118,7 @@ namespace IKan
     Scene* m_scene;
 
     Entity m_followEntity;
-    UUID m_followEntityID;
+    UUID m_followEntityID = 0;
 
     ViewType m_cameraViewType {ViewType::FPP};
 
@@ -127,7 +127,9 @@ namespace IKan
 
     // TPP Data -----------------
     Orbit m_topOrbit {4.0f, 1.0f}, m_midOrbit {5.0f, 0.5f}, m_bottomOrbit {4.0f, 0.0f};
-    
+    float m_radiusPerMouseMoveY{0.0f};
+    float m_heightPerMouseMoveY{0.0f};
+
     // FPP Data -----------------
 
     // Window Data
