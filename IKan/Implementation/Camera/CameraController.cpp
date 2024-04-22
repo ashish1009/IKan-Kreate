@@ -172,6 +172,16 @@ namespace IKan
     tc.UpdatePosition({xAxisDelta, yAxisDelta, zAxisDelta});
 
     m_position = tc.Position();
+    
+    // Update Vectors
+    {
+      m_frontVector = glm::normalize(followPos - m_position);
+      m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
+      m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
+    }
+    
+    // Need to update transform matrix as we change the view matrix
+    tc.UpdateTransform(glm::inverse(glm::lookAt(m_position, m_position + m_frontVector, m_upVector)));
   }
   
   void CameraController::UpdateFPP()
@@ -196,7 +206,6 @@ namespace IKan
     {
       m_centrePosition.y = m_windowHalfHeight;
     }
-
   }
   
   void CameraController::ResetView()
