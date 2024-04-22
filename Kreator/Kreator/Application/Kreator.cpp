@@ -117,8 +117,8 @@ Scope<Application> CreateApplication()
   
   // Window Specification Data
   appSpec.windowSpecificaion.title = "Kreator";
-  appSpec.windowSpecificaion.width = 2500;
-  appSpec.windowSpecificaion.height = 1000;
+  appSpec.windowSpecificaion.width = 1600;
+  appSpec.windowSpecificaion.height = 900;
   appSpec.windowSpecificaion.hideTitleBar = true;
 #ifdef DEBUG
   appSpec.windowSpecificaion.isFullScreen = false;

@@ -123,6 +123,7 @@ namespace IKan
     ViewType m_cameraViewType {ViewType::FPP};
 
     float m_sensitivity {45.0f};
+    glm::vec2 m_angleFactor;
 
     // TPP Data -----------------
     Orbit m_topOrbit {4.0f, 1.0f}, m_midOrbit {5.0f, 0.5f}, m_bottomOrbit {4.0f, 0.0f};
@@ -144,5 +145,8 @@ namespace IKan
     // Mouse Data
     glm::vec2 m_mousePos{};
     glm::vec2 m_mouseDelta{};
+    
+    float m_angleMovedAroundYAxis{0.0f};
+    float m_angleMovedAroundXAxis{0.0f};
   };
 } // namespace IKan
