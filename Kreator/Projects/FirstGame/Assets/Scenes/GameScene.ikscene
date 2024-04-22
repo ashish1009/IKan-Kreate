@@ -21,7 +21,7 @@ Entities:
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
-      Enable: true
+      Enable: false
       MeshHandle: 1336252552
       TilingFactor: 1
       MaterialTable:
@@ -51,7 +51,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-2.67113209, 1.49804461, -4]
+      Position: [0, -4, -4]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -110,6 +110,38 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
+  - Entity: 7647617868747213965
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Camera
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [-2.01088881, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    CameraComponent:
+      Enable: true
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
+      CC_Follow: 3877423165992472633
+      CC_TopRadius: 4
+      CC_TopHeight: 1
+      CC_MidRadius: 5
+      CC_MidHeight: 0.5
+      CC_BottomRadius: 4
+      CC_BottomHeight: 0
+      CC_Sensitivity: 45
+      CC_ViewType: 1
   - Entity: 10093978384651384885
     VisibilityComponent:
       Visibility: true
@@ -178,38 +210,6 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.100000001
       MassDensity: 1
-  - Entity: 14336801200278010328
-    VisibilityComponent:
-      Visibility: true
-    TagComponent:
-      Tag: Camera
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [-2.01088881, 0.5, 5]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-    CameraComponent:
-      Enable: true
-      Camera:
-        ProjectionType: 0
-        PerspectiveFOV: 45
-        PerspectiveNear: 0.100000001
-        PerspectiveFar: 1000
-        OrthographicSize: 10
-        OrthographicNear: -1
-        OrthographicFar: 1
-      Primary: true
-      CC_Follow: 3877423165992472633
-      CC_TopRadius: 4
-      CC_TopHeight: 1
-      CC_MidRadius: 5
-      CC_MidHeight: 0.5
-      CC_BottomRadius: 4
-      CC_BottomHeight: 0
-      CC_Sensitivity: 45
-      CC_ViewType: 0
   - Entity: 16031161758652533763
     VisibilityComponent:
       Visibility: true

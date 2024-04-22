@@ -65,7 +65,7 @@ namespace IKan
     {
       // Mouse Move delta
       m_mousePos = { Input::GetMouseX(), Input::GetMouseY() };
-            
+
       // Update the mouse delta based on center position
       m_mouseDelta = (m_mousePos - m_centrePosition);
       
@@ -193,18 +193,35 @@ namespace IKan
       m_followEntity.GetComponent<MeshComponent>().enable = false;
     }
     
-    // Shift the center position of Y Axis as we need not to wrap the camera if mouse goes out of window
-    if (m_mousePos.y < 0.0f)
+    // Check the Max and min height limit to limit the mouse movement
+    float sensitivityRadians = glm::radians(m_sensitivity);
+    if (m_angleMovedAroundXAxis > sensitivityRadians)
     {
-      m_centrePosition.y = m_windowHalfHeight + m_mousePos.y;
+      m_centrePosition.y = m_windowHalfHeight + (m_mousePos.y - m_windowSize.y);
+      m_angleMovedAroundXAxis = sensitivityRadians;
     }
-    else if (m_mousePos.y > m_windowSize.y)
+    else if (m_angleMovedAroundXAxis < -sensitivityRadians)
     {
-      m_centrePosition.y = m_mousePos.y - m_windowHalfHeight;
+      m_centrePosition.y = m_windowHalfHeight - (0 - m_mousePos.y);
+      m_angleMovedAroundXAxis = -sensitivityRadians;
     }
-    else
+
+    auto& tc = m_entity.GetComponent<TransformComponent>();
+    const auto& followPos = m_followEntity.GetComponent<TransformComponent>().Position();
+    
+    // Update the position and angle of camera
+    tc.UpdatePosition(followPos);
+    tc.UpdateRotation({m_angleMovedAroundXAxis, m_angleMovedAroundYAxis, 0.0f});
+
+    m_position = tc.Position();
+    
+    // Update Vectors
     {
-      m_centrePosition.y = m_windowHalfHeight;
+      const glm::mat4 invertedTC = glm::inverse(tc.Transform());
+      
+      m_frontVector = normalize(glm::vec3(invertedTC[2]));
+      m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
+      m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
     }
   }
   
