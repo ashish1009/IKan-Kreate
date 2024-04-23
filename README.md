@@ -27,3 +27,11 @@ IKan Library can be used separately independent to develop your own Editor/Game
 - {...}/Interface
 - {...}/Vendors/SpdLog/include
 - {...}/Vendors/Glm
+
+## TODO
+- Change all Child component property at one place
+- FPP Camera
+  - Fix Up Down mouse sensitivuty
+  - Fix Initial center position
+- TPP
+  - If anything comes between camera and Player make its alpha less than 0  

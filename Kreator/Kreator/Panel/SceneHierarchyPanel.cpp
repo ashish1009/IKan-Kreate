@@ -1303,8 +1303,8 @@ namespace Kreator
           
           UI::Property("Allow Sleep", rbc.allowSleep);
           UI::Property("Enable Gravity", rbc.enableGravity);
-          UI::Property("Linear Damping", rbc.linearDamping);
-          UI::Property("Angular Damping", rbc.angularDamping);
+          UI::Property("Linear Damping", rbc.linearDamping, 0.1f, 0.0f);
+          UI::Property("Angular Damping", rbc.angularDamping, 0.1f, 0.0f);
           
           bool lockX = rbc.angularAxisMove.x;
           if (UI::Property("Allow Angular X", lockX))

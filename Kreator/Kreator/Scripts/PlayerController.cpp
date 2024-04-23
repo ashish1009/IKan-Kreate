@@ -66,6 +66,7 @@ namespace Kreator
     const glm::vec3& frontVector = cc.controller.GetFrontVector();
     const glm::vec3& rightVector = cc.controller.GetRightVector();
     
+    IK_LOG_INFO("", "{0} {1} {2}", m_body->getLinearVelocity().x, m_body->getLinearVelocity().y, m_body->getLinearVelocity().z);
     if (Input::IsKeyPressed(up))
     {
       reactphysics3d::Vector3 force = {frontVector.x, frontVector.y, frontVector.z};
@@ -90,6 +91,7 @@ namespace Kreator
   
   void PlayerController::MoveEntity(TimeStep ts, Key up, Key down, Key left, Key right)
   {
+    IK_ASSERT(false);
     if (Input::IsKeyPressed(up))
     {
       

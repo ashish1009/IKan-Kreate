@@ -211,7 +211,7 @@ namespace IKan
     
     // Update the position and angle of camera
     tc.UpdatePosition(followPos);
-    tc.UpdateRotation({m_angleMovedAroundXAxis, m_angleMovedAroundYAxis, 0.0f});
+    tc.UpdateRotation({-m_angleMovedAroundXAxis, m_angleMovedAroundYAxis, 0.0f});
 
     m_position = tc.Position();
     
@@ -219,7 +219,8 @@ namespace IKan
     {
       const glm::mat4 invertedTC = glm::inverse(tc.Transform());
       
-      m_frontVector = normalize(glm::vec3(invertedTC[2]));
+      m_frontVector = {normalize(glm::vec3(invertedTC[2]))};
+      m_frontVector.z *= -1.0f; // Fix the camera Fron
       m_rightVector = glm::normalize(glm::cross(m_frontVector, m_worldUpVector));
       m_upVector    = glm::normalize(glm::cross(m_rightVector, m_frontVector));
     }

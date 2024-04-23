@@ -17,7 +17,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-8.5, 0.5, -2.5]
+      Position: [0.5, 0.5, -52.5]
       Rotation: [0, 0, 0]
       Scale: [28, 10, 0.5]
     MeshComponent:
@@ -39,8 +39,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 3877423165992472633
     VisibilityComponent:
@@ -78,7 +78,7 @@ Entities:
       MassDensity: 1
     NativeScriptComponent:
       Enable: true
-      ScriptName: IKan::ScriptableEntity
+      ScriptName: Kreator::PlayerController
   - Entity: 4434590074120014168
     VisibilityComponent:
       Visibility: true
@@ -88,7 +88,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [5.25, -2, 9]
+      Position: [14.25, -2, -41]
       Rotation: [0, 0, 0]
       Scale: [0.5, 5, 3.5]
     MeshComponent:
@@ -110,8 +110,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 5045031083579890534
     VisibilityComponent:
@@ -122,7 +122,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-10, -1.5, 0]
+      Position: [-1, -1.5, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 6, 4]
     MeshComponent:
@@ -144,8 +144,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 5789406066915172160
     VisibilityComponent:
@@ -156,7 +156,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [5.25000095, 0.500000119, 1.00000072]
+      Position: [14.250001, 0.500000119, -49]
       Rotation: [0, 0, 0]
       Scale: [0.5, 10, 6.5]
     MeshComponent:
@@ -178,8 +178,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 6438993056543568111
     VisibilityComponent:
@@ -198,7 +198,7 @@ Entities:
       - Handle: 14637051816856272290
       - Handle: 12593452678850768105
     TransformComponent:
-      Position: [-10, 0, 0]
+      Position: [0, 0, -50.25]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 6984672940448642989
@@ -212,27 +212,27 @@ Entities:
       - Handle: 15720936217886729936
       - Handle: 4434590074120014168
     TransformComponent:
-      Position: [5.25, 0, 0]
+      Position: [14.25, 0, -50]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 7040473850335091550
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Stair Shet
+      Tag: Stair Shed
     Parent: 7446230005173938649
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [-10.5, 5, -50.25]
       Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
+      Scale: [5, 1, 4]
     MeshComponent:
       Enable: true
       MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
-        0: 0
+        0: 15653452155775326291
     RigidBodyComponent:
       Enable: true
       BodyType: 0
@@ -246,8 +246,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 7446230005173938649
     VisibilityComponent:
@@ -262,7 +262,7 @@ Entities:
       - Handle: 6984672940448642989
       - Handle: 7040473850335091550
     TransformComponent:
-      Position: [-10, 0, 10]
+      Position: [0, 0, -40]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 7647617868747213965
@@ -306,7 +306,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-6, -2.5, 0]
+      Position: [3, -2.5, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 4, 4]
     MeshComponent:
@@ -328,8 +328,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 10093978384651384885
     VisibilityComponent:
@@ -374,7 +374,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [1.1920929e-07, -4, 0]
+      Position: [9, -4, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 1, 4]
     MeshComponent:
@@ -396,8 +396,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 11507259264782381789
     VisibilityComponent:
@@ -408,7 +408,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-22.25, 0.5, 4.25]
+      Position: [-13.25, 0.5, -45.75]
       Rotation: [0, 0, 0]
       Scale: [0.5, 10, 13]
     MeshComponent:
@@ -430,8 +430,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 12555138463603313109
     VisibilityComponent:
@@ -442,7 +442,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-4, -3, 0]
+      Position: [5, -3, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 3, 4]
     MeshComponent:
@@ -464,8 +464,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 12593452678850768105
     VisibilityComponent:
@@ -476,7 +476,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-14, -0.5, 0]
+      Position: [-5, -0.5, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 8, 4]
     MeshComponent:
@@ -498,8 +498,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 14637051816856272290
     VisibilityComponent:
@@ -510,7 +510,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-16, 0, -1.49011612e-08]
+      Position: [-7, 0, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 9, 4]
     MeshComponent:
@@ -532,8 +532,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 15720936217886729936
     VisibilityComponent:
@@ -544,7 +544,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [5.25, 3, 7.5]
+      Position: [14.25, 3, -42.5]
       Rotation: [0, 0, 0]
       Scale: [0.5, 5, 6.5]
     MeshComponent:
@@ -566,8 +566,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 16064729607520728596
     VisibilityComponent:
@@ -578,7 +578,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-8, -2, 0]
+      Position: [1, -2, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 5, 4]
     MeshComponent:
@@ -600,8 +600,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 16214202867462180377
     VisibilityComponent:
@@ -612,7 +612,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-1.99999988, -3.5, 0]
+      Position: [7, -3.5, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 2, 4]
     MeshComponent:
@@ -634,8 +634,8 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
   - Entity: 17274257628597583245
     VisibilityComponent:
@@ -646,7 +646,7 @@ Entities:
     Children:
       - Handle: 7446230005173938649
     TransformComponent:
-      Position: [-10, 20, 0]
+      Position: [0, 20, -50]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
   - Entity: 17294626425449562702
@@ -658,7 +658,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-12, -1, 0]
+      Position: [-3, -1, -50.25]
       Rotation: [0, 0, 0]
       Scale: [2, 7, 4]
     MeshComponent:
@@ -680,6 +680,6 @@ Entities:
       Size: [0.5, 0.5, 0.5]
       PositionOffset: [0, 0, 0]
       QuaternionOffset: [0, -0, 3.1415925]
-      FrictionCoefficient: 0.200000003
-      Bounciness: 0.100000001
+      FrictionCoefficient: 1
+      Bounciness: 0
       MassDensity: 1
