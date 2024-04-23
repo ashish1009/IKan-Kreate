@@ -145,12 +145,15 @@ namespace Kreator
     return false;
   }
   
-  void PlayerController::OnContact(Entity* collidedEntity, const reactphysics3d::Vector3& worldContactPoint)
+  void PlayerController::OnContact(Entity* collidedEntity, const reactphysics3d::CollisionCallback::ContactPoint& contactPoint,
+                                   const reactphysics3d::Collider* collider)
   {
+    reactphysics3d::Vector3 worldContactPoint = collider->getLocalToWorldTransform() * contactPoint.getLocalPointOnCollider1();
     IK_LOG_INFO("", "{0}, {1}, {2}", worldContactPoint.x, worldContactPoint.y, worldContactPoint.z);
   }
   
-  void PlayerController::OnTrigger(Entity* collidedEntity, const reactphysics3d::Vector3& worldContactPoint)
+  void PlayerController::OnTrigger(Entity* collidedEntity, const reactphysics3d::CollisionCallback::ContactPoint& contactPoint,
+                                   const reactphysics3d::Collider* collider)
   {
     
   }

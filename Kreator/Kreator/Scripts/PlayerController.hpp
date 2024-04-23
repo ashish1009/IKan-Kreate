@@ -23,8 +23,8 @@ namespace Kreator
     void RenderGui() override;
     void Copy(void* script) override;
     void EventHandler(Event& event) override;
-    void OnContact(Entity* collidedEntity, const reactphysics3d::Vector3& worldContactPoint) override;
-    void OnTrigger(Entity* collidedEntity, const reactphysics3d::Vector3& worldContactPoint) override;
+    void OnContact(Entity* collidedEntity, const reactphysics3d::CollisionCallback::ContactPoint& contactPoint, const reactphysics3d::Collider* collider) override;
+    void OnTrigger(Entity* collidedEntity, const reactphysics3d::CollisionCallback::ContactPoint& contactPoint, const reactphysics3d::Collider* collider) override;
     
   private:
     bool OnKeyPressed(KeyPressedEvent& e);
