@@ -233,6 +233,9 @@ namespace IKan
     /// This function Updates the camera controllers
     /// - Parameter ts: time step of each frame
     void UpdateCameraControllers(TimeStep ts);
+    /// This function Insantiates all the native script
+    /// - Parameter ts: time step of each frame
+    void InstantiateScript(TimeStep ts);
 
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------

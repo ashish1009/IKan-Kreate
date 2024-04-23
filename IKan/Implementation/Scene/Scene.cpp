@@ -85,10 +85,19 @@ namespace IKan
     IK_PERFORMANCE("Scene::OnUpdateRuntime");
     m_physicsScene->OnUpdate(ts);
     UpdateCameraControllers(ts);
+    InstantiateScript(ts);
   }
   
   void Scene::OnRuntimeEventHandler(Event& event)
   {
+    m_registry.view<NativeScriptComponent>().each([&](auto entity, auto& nsc)
+                                                  {
+      if (nsc.script)
+      {
+        nsc.script->EventHandler(event);
+      }
+    });
+
     m_registry.view<CameraComponent>().each([&](auto entity, auto& cc)
                                             {
       cc.controller.EventHandler(event);
@@ -718,10 +727,10 @@ namespace IKan
   {
     return m_directionLight;
   }
-
+  
   void Scene::UpdateCameraControllers(TimeStep ts)
   {
-    IK_PERFORMANCE("Scene::InstantiateScript");
+    IK_PERFORMANCE("Scene::UpdateCameraControllers");
     m_registry.view<CameraComponent>().each([=](auto entity, auto& cc)
                                             {
       if (cc.controller.GetEntity())
@@ -734,4 +743,26 @@ namespace IKan
       }
     });
   }
+  
+  void Scene::InstantiateScript(TimeStep ts)
+  {
+    IK_PERFORMANCE("Scene::InstantiateScript");
+    m_registry.view<NativeScriptComponent>().each([=](auto entity, auto& nsc)
+                                                  {
+      if (!nsc.script)
+      {
+        ScriptManager::UpdateScript(&nsc, nsc.scriptName);
+      }
+      else
+      {
+        if (!nsc.script->m_scene)
+        {
+          nsc.script->m_scene = this;
+          nsc.script->Create(Entity{ entity, this });
+        }
+        nsc.script->Update(ts);
+      }
+    });
+  }
+
 } // namespace IKan
