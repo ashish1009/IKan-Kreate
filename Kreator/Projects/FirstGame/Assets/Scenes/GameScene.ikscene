@@ -78,7 +78,7 @@ Entities:
       MassDensity: 1
     NativeScriptComponent:
       Enable: true
-      ScriptName: IKan::ScriptableEntity
+      ScriptName: Kreator::PlayerController
   - Entity: 4434590074120014168
     VisibilityComponent:
       Visibility: true
