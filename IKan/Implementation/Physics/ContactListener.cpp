@@ -37,7 +37,8 @@ namespace IKan
         {
           if (entityA->HasComponent<NativeScriptComponent>())
           {
-            entityA->GetComponent<NativeScriptComponent>().script->OnContact(entityB, contactPoint);
+            Vector3 worldContactPoint = contactPair.getCollider1()->getLocalToWorldTransform() * contactPoint.getLocalPointOnCollider1();
+            entityA->GetComponent<NativeScriptComponent>().script->OnContact(entityB, worldContactPoint);
           }
         }
         
@@ -46,7 +47,8 @@ namespace IKan
         {
           if (entityB->HasComponent<NativeScriptComponent>())
           {
-            entityB->GetComponent<NativeScriptComponent>().script->OnContact(entityA, contactPoint);
+            Vector3 worldContactPoint = contactPair.getCollider2()->getLocalToWorldTransform() * contactPoint.getLocalPointOnCollider2();
+            entityB->GetComponent<NativeScriptComponent>().script->OnContact(entityA, worldContactPoint);
           }
         }
 

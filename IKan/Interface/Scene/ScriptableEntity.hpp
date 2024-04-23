@@ -36,8 +36,8 @@ return false;                                                   \
     virtual void Copy(void* script) {}
     virtual void RenderGui() {}
     
-    virtual void OnContact(Entity* collidedEntity, const reactphysics3d::CollisionCallback::ContactPoint& contactPoint) {}
-    virtual void OnTrigger(Entity* collidedEntity, const reactphysics3d::CollisionCallback::ContactPoint& contactPoint) {}
+    virtual void OnContact(Entity* collidedEntity, const reactphysics3d::Vector3& worldContactPoint) {}
+    virtual void OnTrigger(Entity* collidedEntity, const reactphysics3d::Vector3& worldContactPoint) {}
     
   protected:
     virtual void Create(Entity entity);
