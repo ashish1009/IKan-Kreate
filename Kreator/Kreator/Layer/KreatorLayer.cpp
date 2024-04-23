@@ -14,6 +14,7 @@
 #include "Panel/AssetPanel.hpp"
 #include "Editor/AssetViewer.hpp"
 #include "Editor/FolderExplorer.hpp"
+#include "Scripts/ScriptManager.hpp"
 
 namespace Kreator
 {
@@ -203,7 +204,11 @@ if (!m_currentScene) return
     AssetEditorManager::RegisterEditor<MaterialEditor>(AssetType::Material);
     AssetEditorManager::RegisterEditor<PrefabEditor>(AssetType::Prefab);
 
+    // Initialize scene Renderer
     SceneRenderer::Initialize();
+    
+    // Initialize Kreator Scripts
+    ScriptManager::Initialize();
   }
   
   void KreatorLayer::OnDetach()

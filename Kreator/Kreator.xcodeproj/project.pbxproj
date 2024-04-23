@@ -26,6 +26,7 @@
 		B22FA9282BABEAB0005D5E08 /* ImGuiWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22FA9102BABEAB0005D5E08 /* ImGuiWidget.cpp */; };
 		B22FA9292BABEAB0005D5E08 /* ImGuiTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22FA9152BABEAB0005D5E08 /* ImGuiTheme.cpp */; };
 		B22FA92A2BABEAB0005D5E08 /* ImGuiProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22FA9162BABEAB0005D5E08 /* ImGuiProperty.cpp */; };
+		B28F990A2BD7D60E004BD807 /* ScriptManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28F99082BD7D60E004BD807 /* ScriptManager.cpp */; };
 		B2C0B6CF2B75F7580015A277 /* libbz2.1.0.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6CE2B75F7580015A277 /* libbz2.1.0.8.tbd */; };
 		B2C0B6D12B75F7600015A277 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6D02B75F7600015A277 /* libz.tbd */; };
 		B2C0B6DF2B79DD210015A277 /* libpugixml.1.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */; };
@@ -95,6 +96,8 @@
 		B22FA9152BABEAB0005D5E08 /* ImGuiTheme.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiTheme.cpp; sourceTree = "<group>"; };
 		B22FA9162BABEAB0005D5E08 /* ImGuiProperty.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiProperty.cpp; sourceTree = "<group>"; };
 		B22FA9172BABEAB0005D5E08 /* ImGuiUtils.hpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.h; path = ImGuiUtils.hpp; sourceTree = "<group>"; };
+		B28F99082BD7D60E004BD807 /* ScriptManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ScriptManager.cpp; sourceTree = "<group>"; };
+		B28F99092BD7D60E004BD807 /* ScriptManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ScriptManager.hpp; sourceTree = "<group>"; };
 		B2C0B6CE2B75F7580015A277 /* libbz2.1.0.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.8.tbd; path = usr/lib/libbz2.1.0.8.tbd; sourceTree = SDKROOT; };
 		B2C0B6D02B75F7600015A277 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		B2C0B6DC2B79DD210015A277 /* libpugixml.1.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugixml.1.13.dylib; path = ../IKan/Vendors/Assimp/lib/libpugixml.1.13.dylib; sourceTree = "<group>"; };
@@ -199,6 +202,15 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		B28F99072BD7D600004BD807 /* Scripts */ = {
+			isa = PBXGroup;
+			children = (
+				B28F99082BD7D60E004BD807 /* ScriptManager.cpp */,
+				B28F99092BD7D60E004BD807 /* ScriptManager.hpp */,
+			);
+			path = Scripts;
+			sourceTree = "<group>";
+		};
 		B2ED5C522B723E25007A7F36 = {
 			isa = PBXGroup;
 			children = (
@@ -223,6 +235,7 @@
 				B2ED5C5E2B723E25007A7F36 /* EntryPoint.cpp */,
 				B22FA8FA2BABEAB0005D5E08 /* Application */,
 				B22FA8EA2BABEAB0005D5E08 /* Layer */,
+				B28F99072BD7D600004BD807 /* Scripts */,
 				B22FA8FD2BABEAB0005D5E08 /* Editor */,
 				B22FA8EF2BABEAB0005D5E08 /* Panel */,
 				B22FA90C2BABEAB0005D5E08 /* UI */,
@@ -311,6 +324,7 @@
 				B22FA91D2BABEAB0005D5E08 /* ProjectSettingPanel.cpp in Sources */,
 				B22FA9252BABEAB0005D5E08 /* ApplicationSettings.cpp in Sources */,
 				B22FA92A2BABEAB0005D5E08 /* ImGuiProperty.cpp in Sources */,
+				B28F990A2BD7D60E004BD807 /* ScriptManager.cpp in Sources */,
 				B22FA91E2BABEAB0005D5E08 /* KreatorConsolePanel.cpp in Sources */,
 				B22FA91B2BABEAB0005D5E08 /* AssetPanel.cpp in Sources */,
 				B22FA9182BABEAB0005D5E08 /* KreatorLayerUI.cpp in Sources */,

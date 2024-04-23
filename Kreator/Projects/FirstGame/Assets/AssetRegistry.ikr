@@ -2,21 +2,75 @@ Assets:
   - Handle: 27450833
     FilePath: Meshes/Default/Cylinder.fbx
     Type: Mesh
+  - Handle: 170672768
+    FilePath: Textures/PBR/Wood/Ply/streaky-plywood_albedo.png
+    Type: Image
   - Handle: 444052761
     FilePath: Materials/Default.ikmat
     Type: Material
+  - Handle: 554137855
+    FilePath: Textures/PBR/Walls/Wall1/dirty-flat-stonework_albedo.png
+    Type: Image
   - Handle: 560965872
     FilePath: Meshes/Default/Cube.fbx
     Type: Mesh
+  - Handle: 731442487
+    FilePath: Textures/PBR/Ground/Light/dry-dirt2-metalness.png
+    Type: Image
+  - Handle: 1280946879
+    FilePath: Textures/PBR/Rock/Yellow/coral1_albedo.png
+    Type: Image
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: Mesh
+  - Handle: 1339646592
+    FilePath: Textures/PBR/Rock/Yellow/coral1_normal-ogl.png
+    Type: Image
+  - Handle: 1451087695
+    FilePath: Textures/PBR/Walls/Wall1/dirty-flat-stonework_metallic.png
+    Type: Image
+  - Handle: 1566500416
+    FilePath: Textures/PBR/Walls/Wall1/dirty-flat-stonework_normal-ogl.png
+    Type: Image
   - Handle: 1851547197
     FilePath: Scenes/GameScene.ikscene
     Type: Scene
+  - Handle: 2417403865
+    FilePath: Textures/PBR/Ground/Dark/dry-dirt1-normal.png
+    Type: Image
+  - Handle: 2628804762
+    FilePath: Textures/PBR/Ground/Dark/dry-dirt1-metalness.png
+    Type: Image
+  - Handle: 2656899552
+    FilePath: Textures/PBR/Ground/Light/dry-dirt2-albedo.png
+    Type: Image
+  - Handle: 2847800063
+    FilePath: Textures/PBR/Wood/Ply/streaky-plywood_normal-ogl.png
+    Type: Image
+  - Handle: 3190248540
+    FilePath: Textures/PBR/Wood/Ply/streaky-plywood_metallic.png
+    Type: Image
+  - Handle: 3789037975
+    FilePath: Textures/PBR/Ground/Dark/dry-dirt1-albedo.png
+    Type: Image
+  - Handle: 3961875983
+    FilePath: Textures/PBR/Rock/Yellow/coral1_metallic.png
+    Type: Image
+  - Handle: 4230819658
+    FilePath: Textures/PBR/Ground/Light/dry-dirt2-normal.png
+    Type: Image
   - Handle: 4261890557
     FilePath: Textures/Env/Morning/Cloudy.hdr
     Type: Image
-  - Handle: 16645236527105545227
-    FilePath: Prefabs/Player.ikprefab
-    Type: Prefab
+  - Handle: 6550541645190713924
+    FilePath: Materials/DarkGreyBrick.ikmat
+    Type: Material
+  - Handle: 11266621251588899875
+    FilePath: Materials/Ground.ikmat
+    Type: Material
+  - Handle: 15653452155775326291
+    FilePath: Materials/BrownPly.ikmat
+    Type: Material
+  - Handle: 15759259292596495831
+    FilePath: Materials/YellowRock.ikmat
+    Type: Material
