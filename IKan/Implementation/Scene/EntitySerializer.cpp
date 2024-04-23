@@ -259,6 +259,18 @@ namespace IKan
       out << YAML::EndMap; // JointComponent
     }
     
+    if (entity.HasComponent<NativeScriptComponent>()) 
+    {
+      out << YAML::Key << "NativeScriptComponent";
+      out << YAML::BeginMap; // NativeScriptComponent
+      
+      auto& sc = entity.GetComponent<NativeScriptComponent>();
+      out << YAML::Key << "Enable" << YAML::Value << sc.enable;
+      out << YAML::Key << "ScriptName" << YAML::Value << sc.scriptName;
+      
+      out << YAML::EndMap; // NativeScriptComponent
+    }
+    
     out << YAML::EndMap; // Entity
   }
   
@@ -521,6 +533,16 @@ namespace IKan
         component.sliderData.initMotorSpeed = jointComponent["SliderSpeed"].as<float>();
         component.sliderData.initMaxMotorForce = jointComponent["SliderForce"].as<float>();
       }
+      
+      // NativeScriptCoomponent -------------------------------------------------------------------------------------
+      auto scriptComponent = entity["NativeScriptComponent"];
+      if (scriptComponent)
+      {
+        std::string scriptName = scriptComponent["ScriptName"].as<std::string>();
+        auto& sc = deserializedEntity.AddComponent<NativeScriptComponent>(scriptName);
+        sc.enable = scriptComponent["Enable"].as<bool>();
+        ScriptManager::UpdateScript(&sc, scriptName);
+      } // if (script_component)
     } // For each entity
   }
 } // namespace IKan
