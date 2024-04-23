@@ -784,7 +784,17 @@ namespace Kreator
       
       changeChildVisibility(entity, changeChildVisibility);
     }
-    UI::DrawButtonImage(visibility ? s_EyeIcon : s_closeEyeIcon, IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150), UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
+    
+    ImU32 normalColor = IM_COL32(160, 160, 160, 200);
+    ImU32 hoveredColor = IM_COL32(160, 160, 160, 255);
+    ImU32 pressedColor = IM_COL32(160, 160, 160, 150);
+    if (isSelected)
+    {
+      normalColor = IM_COL32(10, 10, 10, 200);
+      hoveredColor = IM_COL32(10, 10, 10, 255);
+      pressedColor = IM_COL32(10, 10, 10, 150);
+    }
+    UI::DrawButtonImage(visibility ? s_EyeIcon : s_closeEyeIcon, normalColor, hoveredColor, pressedColor, UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f));
     ImGui::PopID();
 
     // Draw children ------------------------
