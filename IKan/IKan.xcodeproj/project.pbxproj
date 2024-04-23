@@ -480,7 +480,6 @@
 		B22FA8882BA9BC83005D5E08 /* Physics */ = {
 			isa = PBXGroup;
 			children = (
-				B22FA8892BA9BC83005D5E08 /* ContactListener.cpp */,
 				B22FA88A2BA9BC83005D5E08 /* ContactListener.hpp */,
 				B22FA88B2BA9BC83005D5E08 /* PhysicsScene.hpp */,
 			);
@@ -516,6 +515,7 @@
 				B22FA8B22BA9BC9D005D5E08 /* PhysicsJoint.cpp */,
 				B22FA8B32BA9BC9D005D5E08 /* PhysicsScene.cpp */,
 				B22FA8B42BA9BC9D005D5E08 /* PhysicsJoint.hpp */,
+				B22FA8892BA9BC83005D5E08 /* ContactListener.cpp */,
 			);
 			path = Physics;
 			sourceTree = "<group>";

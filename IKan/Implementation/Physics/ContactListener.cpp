@@ -6,8 +6,6 @@
 //
 
 #include "ContactListener.hpp"
-
-#include "ContactListener.hpp"
 #include "Scene/Entity.hpp"
 #include "Scene/Components.hpp"
 
@@ -31,9 +29,27 @@ namespace IKan
         CollisionCallback::ContactPoint contactPoint = contactPair.getContactPoint(contactPointIdx);
         
         // Get the Collided Entities
-        [[maybe_unused]] IKan::Entity* entityA = (IKan::Entity*)(contactPair.getCollider1()->getUserData());
-        [[maybe_unused]] IKan::Entity* entityB = (IKan::Entity*)(contactPair.getCollider2()->getUserData());
+        IKan::Entity* entityA = (IKan::Entity*)(contactPair.getCollider1()->getUserData());
+        IKan::Entity* entityB = (IKan::Entity*)(contactPair.getCollider2()->getUserData());
                
+        // Collider callback for Entity A
+        if (entityA)
+        {
+          if (entityA->HasComponent<NativeScriptComponent>())
+          {
+            entityA->GetComponent<NativeScriptComponent>().script->OnContact(entityB, contactPoint);
+          }
+        }
+        
+        // Collider callback for Entity B
+        if (entityB)
+        {
+          if (entityB->HasComponent<NativeScriptComponent>())
+          {
+            entityB->GetComponent<NativeScriptComponent>().script->OnContact(entityA, contactPoint);
+          }
+        }
+
         // Get the contact point on the first collider and convert it in world-space
         [[maybe_unused]] Vector3 worldPoint = contactPair.getCollider1()->getLocalToWorldTransform() * contactPoint.getLocalPointOnCollider1();
       }
@@ -42,6 +58,5 @@ namespace IKan
   void ContactListener::onTrigger(const OverlapCallback::CallbackData& callbackData)
   {
     IK_PERFORMANCE("ContactListener::onTrigger");
-
   }
 } // namespace IKan

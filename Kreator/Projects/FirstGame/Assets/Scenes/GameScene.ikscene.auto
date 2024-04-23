@@ -63,8 +63,8 @@ Entities:
     RigidBodyComponent:
       Enable: true
       BodyType: 2
-      LiniarDamping: 0
-      AngularDamping: 0
+      LiniarDamping: 1
+      AngularDamping: 1
       AllowSleep: true
       EnableGravity: true
       AngularAxisMove: [1, 1, 1]
