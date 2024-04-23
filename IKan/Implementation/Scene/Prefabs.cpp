@@ -61,7 +61,8 @@ namespace IKan
     CopyComponentIfExists<SphereColliderComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
     CopyComponentIfExists<CapsuleColliderComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
     CopyComponentIfExists<JointComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
-    
+    CopyComponentIfExists<NativeScriptComponent>(newEntity, m_scene->m_registry, entity, entity.m_scene->m_registry);
+
     for (auto childId : entity.Children())
     {
       Entity childDuplicate = CreatePrefabFromEntity(entity.m_scene->GetEntityWithUUID(childId));

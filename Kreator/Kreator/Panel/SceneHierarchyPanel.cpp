@@ -1518,6 +1518,56 @@ namespace Kreator
       }
       UI::EndPropertyGrid();
     }, s_gearIcon, searchedString);
+    
+    DrawComponent<NativeScriptComponent>("Native Script", entity, [&](NativeScriptComponent& nsc)
+                                         {
+      UI::BeginPropertyGrid();
+      
+      // All the Scripts stored in Engine
+      const auto& scriptsMap = ScriptManager::GetScripts();
+      
+      // Extract the script names from map
+      std::vector<std::string> scriptNames;
+      
+      // First Select option should be select script
+      scriptNames.push_back("Select Script");
+      
+      int32_t currentScript = 0;
+      int32_t scriptIdx = 1;
+      for (const auto& [name, loaderFun] : scriptsMap)
+      {
+        scriptNames.push_back(name);
+        if (name == nsc.scriptName)
+        {
+          currentScript = scriptIdx;
+        }
+        scriptIdx++;
+      }
+      
+      // If Some Script presnet then popup Dropdown to select script for this entity
+      if (scriptNames.size())
+      {
+        if (UI::PropertyDropdown("Scripts", scriptNames, (int32_t)scriptNames.size(), &currentScript))
+        {
+          if (currentScript > 0)
+          {
+            nsc.scriptName = scriptNames[currentScript];
+          }
+          else
+          {
+            nsc.scriptName = "IKan::ScriptableEntity";
+          }
+          ScriptManager::UpdateScript(&nsc, nsc.scriptName);
+        }
+      }
+      UI::EndPropertyGrid();
+      
+      if (nsc.script)
+      {
+        nsc.script->RenderGui();
+      }
+      
+    }, s_gearIcon, searchedString);
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
@@ -1601,6 +1651,16 @@ namespace Kreator
           }
           [[maybe_unused]] auto& jointComp = m_selectionContext.At(0).AddComponent<JointComponent>();
           jointComp.worldAnchorPoint = m_selectionContext.At(0).GetTransform().Position();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+
+      if (!m_selectionContext.At(0).HasComponent<NativeScriptComponent>())
+      {
+        if (ImGui::MenuItem("Script"))
+        {
+          [[maybe_unused]] auto& scriptComp = m_selectionContext.At(0).AddComponent<NativeScriptComponent>();
+          ScriptManager::UpdateScript(&scriptComp, "IKan::ScriptableEntity");
           ImGui::CloseCurrentPopup();
         }
       }

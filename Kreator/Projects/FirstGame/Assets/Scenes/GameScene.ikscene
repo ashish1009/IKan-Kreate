@@ -21,7 +21,7 @@ Entities:
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
-      Enable: false
+      Enable: true
       MeshHandle: 1336252552
       TilingFactor: 1
       MaterialTable:
@@ -42,6 +42,9 @@ Entities:
       FrictionCoefficient: 0.200000003
       Bounciness: 0.374000013
       MassDensity: 1
+    NativeScriptComponent:
+      Enable: true
+      ScriptName: IKan::ScriptableEntity
   - Entity: 4477209380548464542
     VisibilityComponent:
       Visibility: true
@@ -119,7 +122,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-2.01088881, 0, 0]
+      Position: [-2.01088881, 0.5, 5]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     CameraComponent:
@@ -141,7 +144,7 @@ Entities:
       CC_BottomRadius: 4
       CC_BottomHeight: 0
       CC_Sensitivity: 45
-      CC_ViewType: 1
+      CC_ViewType: 0
   - Entity: 10093978384651384885
     VisibilityComponent:
       Visibility: true
