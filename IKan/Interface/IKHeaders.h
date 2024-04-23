@@ -18,6 +18,7 @@
 #include <sstream>
 #include <unordered_map>
 #include <map>
+#include <cxxabi.h>
 
 // glm math library
 #define GLM_ENABLE_EXPERIMENTAL

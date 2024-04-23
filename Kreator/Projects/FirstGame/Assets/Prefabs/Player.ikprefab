@@ -1,0 +1,38 @@
+Prefab:
+  - Entity: 982255222477565870
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Player
+    Parent: 0
+    Children:
+      []
+    PrefabComponent:
+      Prefab: 16645236527105545227
+      Entity: 982255222477565870
+    TransformComponent:
+      Position: [-2.01088881, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 1336252552
+      TilingFactor: 1
+      MaterialTable:
+        0: 0
+    RigidBodyComponent:
+      Enable: true
+      BodyType: 2
+      LiniarDamping: 0
+      AngularDamping: 0
+      AllowSleep: true
+      EnableGravity: true
+      AngularAxisMove: [1, 1, 1]
+    SphereColliderComponent:
+      Enable: true
+      Radius: 0.5
+      PositionOffset: [0, 0, 0]
+      QuaternionOffset: [0, -0, 3.1415925]
+      FrictionCoefficient: 0.200000003
+      Bounciness: 0.374000013
+      MassDensity: 1

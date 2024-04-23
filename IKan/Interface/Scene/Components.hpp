@@ -16,6 +16,7 @@
 #include "Camera/SceneCamera.hpp"
 #include "Camera/CameraController.hpp"
 #include "Scene/Entity.hpp"
+#include "Scene/ScriptableEntity.hpp"
 
 namespace IKan
 {
@@ -216,6 +217,42 @@ namespace IKan
     UUID PrefabID = 0;
     UUID EntityID = 0;
   };
+  
+  struct NativeScriptComponent
+  {
+    bool enable = true;
+    Ref<ScriptableEntity> script;
+    std::string scriptName;
+    
+    /// This function binds the script in Entity
+    /// - Parameter args: Arguments for constructor of class T
+    /// - Note : T type of class to be binded as script
+    template<typename T, typename... Args> void Bind(Args... args)
+    {
+      static_assert(std::is_base_of<ScriptableEntity, T>::value, "NativeScriptComponent::Bind requires T to inherit from ScriptableEntity");
+      script = static_cast<Ref<ScriptableEntity>>(CreateRef<T>(std::forward<Args>(args)...));
+      
+      // Store the script name
+      int32_t status;
+      std::string tName = typeid(T).name();
+      char *demangledName = abi::__cxa_demangle(tName.c_str(), NULL, NULL, &status);
+      scriptName = (std::string)demangledName;
+      
+      // Delete the allocated memory
+      if(status == 0)
+      {
+        std::free(demangledName);
+      }
+    }
+    
+    void Copy(const NativeScriptComponent& other);
+    NativeScriptComponent(std::string name = "IKan::ScriptableEntity");
+    
+    NativeScriptComponent(const NativeScriptComponent&);
+    NativeScriptComponent(NativeScriptComponent&&);
+    NativeScriptComponent& operator=(const NativeScriptComponent&);
+    NativeScriptComponent& operator =(NativeScriptComponent&&);
+  };
 
   template<typename... Component>
   struct ComponentGroup
@@ -227,6 +264,6 @@ namespace IKan
   using AllComponents =
   ComponentGroup<IDComponent, VisibilityComponent, TagComponent, TransformComponent, CameraComponent, MeshComponent,
   RigidBodyComponent, Box3DColliderComponent, SphereColliderComponent, CapsuleColliderComponent, JointComponent,
-  PrefabComponent>;
+  PrefabComponent, NativeScriptComponent>;
 
 } // namespace IKan

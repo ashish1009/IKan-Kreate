@@ -184,4 +184,24 @@ transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
   {
     delete (Entity*)userData;
   }
+  
+  // Native Script Component ----------------------------------------------------------------------------------
+  NativeScriptComponent::NativeScriptComponent(const NativeScriptComponent& other) { Copy(other); }
+  NativeScriptComponent::NativeScriptComponent(NativeScriptComponent&& other) { Copy(other); }
+  NativeScriptComponent& NativeScriptComponent::operator=(const NativeScriptComponent& other) { Copy(other); return *this; }
+  NativeScriptComponent& NativeScriptComponent::operator=(NativeScriptComponent&& other) { Copy(other); return *this; }
+  
+  NativeScriptComponent::NativeScriptComponent(std::string name)
+  : scriptName(name)
+  {
+  }
+  
+  void NativeScriptComponent::Copy(const NativeScriptComponent &other)
+  {
+    scriptName = other.scriptName;
+    
+    ScriptManager::UpdateScript(this, scriptName);
+    script->Copy((void*)other.script.get());
+  }
+
 } // namespace IKan

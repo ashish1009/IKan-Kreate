@@ -17,3 +17,6 @@ Assets:
   - Handle: 4261890557
     FilePath: Textures/Env/Morning/Cloudy.hdr
     Type: Image
+  - Handle: 16645236527105545227
+    FilePath: Prefabs/Player.ikprefab
+    Type: Prefab

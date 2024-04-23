@@ -24,8 +24,7 @@ namespace IKan
     m_centrePosition = m_windowSize / 2.0f;
     
     float sensitivityRadians = glm::radians(m_sensitivity);
-    m_angleFactor.x = (float)(sensitivityRadians * 2) / m_windowSize.x;
-    m_angleFactor.y = (float)(M_PI_2) / m_windowSize.y;
+    m_angleFactor = (float)(sensitivityRadians * 2) / m_windowSize;
   }
   
   CameraController::CameraController(const CameraController& other)

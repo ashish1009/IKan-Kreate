@@ -67,6 +67,8 @@
 		B248B90D2B833BA000B9EC40 /* UUID.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B90B2B833BA000B9EC40 /* UUID.hpp */; };
 		B248B9312B84684400B9EC40 /* HashGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B248B92F2B84684400B9EC40 /* HashGenerator.cpp */; };
 		B248B9322B84684400B9EC40 /* HashGenerator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B248B9302B84684400B9EC40 /* HashGenerator.hpp */; };
+		B28F99002BD76A6A004BD807 /* ScriptableEntity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B28F98FE2BD76A6A004BD807 /* ScriptableEntity.cpp */; };
+		B28F99012BD76A6A004BD807 /* ScriptableEntity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B28F98FF2BD76A6A004BD807 /* ScriptableEntity.hpp */; };
 		B2C0B6C12B75F4DF0015A277 /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2C0B6BF2B75F4DF0015A277 /* Font.cpp */; };
 		B2C0B6C22B75F4DF0015A277 /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2C0B6C02B75F4DF0015A277 /* Font.hpp */; };
 		B2C0B6CB2B75F7200015A277 /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2C0B6C72B75F7200015A277 /* libfreetype.a */; };
@@ -272,6 +274,8 @@
 		B248B90B2B833BA000B9EC40 /* UUID.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UUID.hpp; sourceTree = "<group>"; };
 		B248B92F2B84684400B9EC40 /* HashGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HashGenerator.cpp; sourceTree = "<group>"; };
 		B248B9302B84684400B9EC40 /* HashGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashGenerator.hpp; sourceTree = "<group>"; };
+		B28F98FE2BD76A6A004BD807 /* ScriptableEntity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ScriptableEntity.cpp; sourceTree = "<group>"; };
+		B28F98FF2BD76A6A004BD807 /* ScriptableEntity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ScriptableEntity.hpp; sourceTree = "<group>"; };
 		B2C0B6AF2B75165C0015A277 /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2C0B6BF2B75F4DF0015A277 /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2C0B6C02B75F4DF0015A277 /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
@@ -432,6 +436,7 @@
 				B22FA8702BA9BC83005D5E08 /* Scene.hpp */,
 				B22FA8712BA9BC83005D5E08 /* Prefabs.hpp */,
 				B22FA8722BA9BC83005D5E08 /* Entity.hpp */,
+				B28F98FF2BD76A6A004BD807 /* ScriptableEntity.hpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -536,6 +541,7 @@
 				B22FA8C12BA9BC9D005D5E08 /* Entity.cpp */,
 				B22FA8C22BA9BC9D005D5E08 /* Components.cpp */,
 				B22FA8C32BA9BC9D005D5E08 /* SceneSerializer.cpp */,
+				B28F98FE2BD76A6A004BD807 /* ScriptableEntity.cpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -1050,6 +1056,7 @@
 				B2C0B7192B7CDC7E0015A277 /* Input.hpp in Headers */,
 				B2ED5E142B7370DA007A7F36 /* MouseEvent.h in Headers */,
 				B2ED5E132B7370DA007A7F36 /* ApplicationEvent.h in Headers */,
+				B28F99012BD76A6A004BD807 /* ScriptableEntity.hpp in Headers */,
 				B22FA8582BA95270005D5E08 /* MaterialAsset.hpp in Headers */,
 				B22FA8982BA9BC84005D5E08 /* Asset.hpp in Headers */,
 				B2EB0FF92B88D13600DF1407 /* Light.hpp in Headers */,
@@ -1260,6 +1267,7 @@
 				B22FA85B2BA95284005D5E08 /* MaterialAsset.cpp in Sources */,
 				B2C0B6FF2B7C88130015A277 /* SceneCamera.cpp in Sources */,
 				B2ED60472B74C547007A7F36 /* OpenGLPipeline.cpp in Sources */,
+				B28F99002BD76A6A004BD807 /* ScriptableEntity.cpp in Sources */,
 				B2ED5CC92B7346AC007A7F36 /* Timer.cpp in Sources */,
 				B22FA8D62BA9BC9D005D5E08 /* EntitySerializer.cpp in Sources */,
 				B2ED60722B74F9E2007A7F36 /* OpenGLFrameBuffer.cpp in Sources */,
