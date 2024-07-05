@@ -11,6 +11,10 @@
 		B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292832C381C8B0093F4DA /* Logger.hpp */; };
 		B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2928A2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp */; };
 		B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2928B2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp */; };
+		B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292912C38637E0093F4DA /* FileSystemUtils.cpp */; };
+		B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292922C38637E0093F4DA /* FileSystemUtils.hpp */; };
+		B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292952C3863F30093F4DA /* StringUtils.cpp */; };
+		B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292962C3863F30093F4DA /* StringUtils.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -20,6 +24,11 @@
 		B2D292832C381C8B0093F4DA /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
 		B2D2928A2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LoggerSpecificationBuilder.cpp; sourceTree = "<group>"; };
 		B2D2928B2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LoggerSpecificationBuilder.hpp; sourceTree = "<group>"; };
+		B2D2928E2C385B0F0093F4DA /* IKHeaders.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = IKHeaders.h; sourceTree = "<group>"; };
+		B2D292912C38637E0093F4DA /* FileSystemUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FileSystemUtils.cpp; sourceTree = "<group>"; };
+		B2D292922C38637E0093F4DA /* FileSystemUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileSystemUtils.hpp; sourceTree = "<group>"; };
+		B2D292952C3863F30093F4DA /* StringUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
+		B2D292962C3863F30093F4DA /* StringUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StringUtils.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -54,6 +63,8 @@
 		B2D2927F2C381C680093F4DA /* Interface */ = {
 			isa = PBXGroup;
 			children = (
+				B2D2928E2C385B0F0093F4DA /* IKHeaders.h */,
+				B2D292902C3863660093F4DA /* Utils */,
 				B2D292812C381C7C0093F4DA /* Debug */,
 			);
 			path = Interface;
@@ -62,6 +73,7 @@
 		B2D292802C381C6D0093F4DA /* Implementation */ = {
 			isa = PBXGroup;
 			children = (
+				B2D2928F2C3863600093F4DA /* Utils */,
 				B2D292862C381C8F0093F4DA /* Debug */,
 			);
 			path = Implementation;
@@ -85,6 +97,24 @@
 			path = Debug;
 			sourceTree = "<group>";
 		};
+		B2D2928F2C3863600093F4DA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292912C38637E0093F4DA /* FileSystemUtils.cpp */,
+				B2D292952C3863F30093F4DA /* StringUtils.cpp */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
+		B2D292902C3863660093F4DA /* Utils */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292922C38637E0093F4DA /* FileSystemUtils.hpp */,
+				B2D292962C3863F30093F4DA /* StringUtils.hpp */,
+			);
+			path = Utils;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -92,6 +122,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
+				B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */,
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
 				B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */,
 			);
@@ -154,6 +186,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */,
+				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
 				B2D292842C381C8B0093F4DA /* Logger.cpp in Sources */,
 			);
