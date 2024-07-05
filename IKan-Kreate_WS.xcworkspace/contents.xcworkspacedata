@@ -22,4 +22,7 @@
          </FileRef>
       </Group>
    </Group>
+   <FileRef
+      location = "group:Kreator/Kreator.xcodeproj">
+   </FileRef>
 </Workspace>
