@@ -11,7 +11,7 @@
 ///   - argv: Arguments ...
 int main(int argc, const char * argv[])
 {
-  // Debug print for executable arguments and version
+  // Debug print for executable arguments
   std::cout << "  Executing : " << argv[0] << "\n";
   return 0;
 }

@@ -25,4 +25,7 @@
    <FileRef
       location = "group:Kreator/Kreator.xcodeproj">
    </FileRef>
+   <FileRef
+      location = "group:IKan/IKan.xcodeproj">
+   </FileRef>
 </Workspace>
