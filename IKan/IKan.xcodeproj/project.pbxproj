@@ -6,9 +6,20 @@
 	objectVersion = 56;
 	objects = {
 
+/* Begin PBXBuildFile section */
+		B2D292842C381C8B0093F4DA /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292822C381C8B0093F4DA /* Logger.cpp */; };
+		B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292832C381C8B0093F4DA /* Logger.hpp */; };
+		B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2928A2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp */; };
+		B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2928B2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp */; };
+/* End PBXBuildFile section */
+
 /* Begin PBXFileReference section */
 		B2D292702C38180E0093F4DA /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D2927E2C3818430093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		B2D292822C381C8B0093F4DA /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
+		B2D292832C381C8B0093F4DA /* Logger.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Logger.hpp; sourceTree = "<group>"; };
+		B2D2928A2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LoggerSpecificationBuilder.cpp; sourceTree = "<group>"; };
+		B2D2928B2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LoggerSpecificationBuilder.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -26,6 +37,8 @@
 			isa = PBXGroup;
 			children = (
 				B2D2927E2C3818430093F4DA /* PrefixHeader.pch */,
+				B2D2927F2C381C680093F4DA /* Interface */,
+				B2D292802C381C6D0093F4DA /* Implementation */,
 				B2D292712C38180E0093F4DA /* Products */,
 			);
 			sourceTree = "<group>";
@@ -38,6 +51,40 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B2D2927F2C381C680093F4DA /* Interface */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292812C381C7C0093F4DA /* Debug */,
+			);
+			path = Interface;
+			sourceTree = "<group>";
+		};
+		B2D292802C381C6D0093F4DA /* Implementation */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292862C381C8F0093F4DA /* Debug */,
+			);
+			path = Implementation;
+			sourceTree = "<group>";
+		};
+		B2D292812C381C7C0093F4DA /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292832C381C8B0093F4DA /* Logger.hpp */,
+				B2D2928B2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
+		B2D292862C381C8F0093F4DA /* Debug */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292822C381C8B0093F4DA /* Logger.cpp */,
+				B2D2928A2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp */,
+			);
+			path = Debug;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -45,6 +92,8 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
+				B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -105,6 +154,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
+				B2D292842C381C8B0093F4DA /* Logger.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -237,7 +288,10 @@
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Vendors/SpdLog/include";
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/Interface",
+					"${PROJECT_DIR}/Vendors/SpdLog/include",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};
@@ -254,7 +308,10 @@
 				GCC_ENABLE_CPP_RTTI = YES;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/PrefixHeader.pch";
-				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/Vendors/SpdLog/include";
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/Interface",
+					"${PROJECT_DIR}/Vendors/SpdLog/include",
+				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
 			};

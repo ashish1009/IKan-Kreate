@@ -18,6 +18,8 @@ Make sure that you do a `--recursive` clone to fetch all of the submodules!
 IKan Library can be used independently to develop your own Editor/Game
 
 ### How to Use the library
+`{...} directory where IKan Engine is cloned`
+  - Link the libikan.a in your project...
 
 ### Preprocessors
 
