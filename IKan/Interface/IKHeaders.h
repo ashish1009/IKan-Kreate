@@ -16,10 +16,15 @@
 #include <string>
 #include <filesystem>
 #include <vector>
+#include <unordered_map>
+#include <map>
 
 // Engine Files
+#include <Base/Defines.h>
+
 #include <Debug/Logger.hpp>
 #include <Debug/LoggerSpecificationBuilder.hpp>
+#include <Debug/LoggerAPIs.h>
 
 #include <Utils/FileSystemUtils.hpp>
 #include <Utils/StringUtils.hpp>

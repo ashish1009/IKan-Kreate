@@ -36,8 +36,9 @@ namespace IKan
     /// - Returns: Logger specification builder reference
     LoggerSpecificationBuilder& OverrideSink(const spdlog::sink_ptr sink);
     /// This function sets the flag to show logs in console in logger specification
+    /// - Parameter flag: flag to show logs on console
     /// - Returns: Logger specification builder reference
-    LoggerSpecificationBuilder& ShowOnConsole();
+    LoggerSpecificationBuilder& ShowOnConsole(bool flag);
     
     /// This operator overload returns the logger specification instance
     operator LoggerSpecification() const;

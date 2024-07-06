@@ -149,4 +149,31 @@ namespace IKan
     return "";
   }
 
+  std::string_view Logger::GetModuleName(LogModule tag)
+  {
+    return LogModuleString[static_cast<size_t>(tag)];
+  }
+  
+  std::shared_ptr<spdlog::logger> Logger::GetLogger(LogType type, LogLevel level)
+  {
+    if (s_loggerDataMap.find(type) != s_loggerDataMap.end())
+    {
+      const std::unordered_map<LogLevel, std::shared_ptr<spdlog::logger>>& loggerForType = s_loggerDataMap.at(type);
+      if (loggerForType.find(level) != loggerForType.end())
+      {
+        return loggerForType.at(level);
+      }
+    }
+    return nullptr;
+  }
+
+  const Logger::TagDetails& Logger::GetTagDetails(std::string_view moduleName)
+  {
+    return (HasTag(moduleName)) ? s_tags.at(moduleName) : s_tags[moduleName];
+  }
+  
+  bool Logger::HasTag(std::string_view moduleName)
+  {
+    return s_tags.find(moduleName) != s_tags.end();
+  }
 } // namespace IKan

@@ -30,6 +30,7 @@
 		B2D292952C3863F30093F4DA /* StringUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
 		B2D292962C3863F30093F4DA /* StringUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StringUtils.hpp; sourceTree = "<group>"; };
 		B2D2929A2C39144F0093F4DA /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		B2D2929B2C3915BF0093F4DA /* LoggerAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggerAPIs.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -86,6 +87,7 @@
 			children = (
 				B2D292832C381C8B0093F4DA /* Logger.hpp */,
 				B2D2928B2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp */,
+				B2D2929B2C3915BF0093F4DA /* LoggerAPIs.h */,
 			);
 			path = Debug;
 			sourceTree = "<group>";

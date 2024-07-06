@@ -9,6 +9,12 @@
 
 namespace IKan
 {
+  // Configurations --------------------------------------------------------------------------------------------------
+#ifdef DEBUG
+#define IK_ENABLE_LOG
+#define IK_DEBUG
+#endif
+
   // Enum Creation Macro ---------------------------------------------------------------------------------------------
   /// Helper MACRO for Enum creation
 #define VAL(name) name ,
@@ -29,4 +35,5 @@ namespace IKan
 #define CreateEnum(Name) \
 enum class Name { Name(VAL) }; \
 static const char* Name##String[] = { Name(STRING) }; \
+
 } // namespace IKan

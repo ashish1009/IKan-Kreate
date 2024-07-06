@@ -28,6 +28,12 @@
 		B2D292562C37F4D20093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292602C380F250093F4DA /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
 		B2D292882C381CBA0093F4DA /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2D2929C2C391AF30093F4DA /* KREATOR_Critical.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = KREATOR_Critical.log; sourceTree = "<group>"; };
+		B2D2929D2C391AF30093F4DA /* KREATOR_Debug.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = KREATOR_Debug.log; sourceTree = "<group>"; };
+		B2D2929E2C391AF30093F4DA /* KREATOR_Error.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = KREATOR_Error.log; sourceTree = "<group>"; };
+		B2D2929F2C391AF30093F4DA /* KREATOR_Info.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = KREATOR_Info.log; sourceTree = "<group>"; };
+		B2D292A02C391AF30093F4DA /* KREATOR_Trace.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = KREATOR_Trace.log; sourceTree = "<group>"; };
+		B2D292A12C391AF30093F4DA /* KREATOR_Warning.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = KREATOR_Warning.log; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -46,6 +52,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D292562C37F4D20093F4DA /* PrefixHeader.pch */,
+				B2D292A22C391AF30093F4DA /* Log */,
 				B2D292522C37F4860093F4DA /* Kreator */,
 				B2D292492C37EE5A0093F4DA /* Products */,
 				B2D292872C381CB90093F4DA /* Frameworks */,
@@ -74,6 +81,19 @@
 				B2D292882C381CBA0093F4DA /* libIKan.a */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		B2D292A22C391AF30093F4DA /* Log */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292A02C391AF30093F4DA /* KREATOR_Trace.log */,
+				B2D2929D2C391AF30093F4DA /* KREATOR_Debug.log */,
+				B2D2929F2C391AF30093F4DA /* KREATOR_Info.log */,
+				B2D292A12C391AF30093F4DA /* KREATOR_Warning.log */,
+				B2D2929E2C391AF30093F4DA /* KREATOR_Error.log */,
+				B2D2929C2C391AF30093F4DA /* KREATOR_Critical.log */,
+			);
+			path = Log;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

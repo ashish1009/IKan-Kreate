@@ -29,9 +29,9 @@ namespace IKan
     loggerSpecification.name = loggerName;
     return *this;
   }
-  LoggerSpecificationBuilder& LoggerSpecificationBuilder::ShowOnConsole()
+  LoggerSpecificationBuilder& LoggerSpecificationBuilder::ShowOnConsole(bool flag)
   {
-    loggerSpecification.showOnConsole = true;
+    loggerSpecification.showOnConsole = flag;
     return *this;
   }
   LoggerSpecificationBuilder& LoggerSpecificationBuilder::SaveAt(const std::filesystem::path& saveLogDirectoryPath)
