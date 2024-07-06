@@ -28,3 +28,4 @@
 
 #include "Debug/Logger.hpp"
 #include "Debug/LoggerAPIs.h"
+#include "Debug/Timer.hpp"

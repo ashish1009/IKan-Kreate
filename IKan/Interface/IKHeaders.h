@@ -26,6 +26,7 @@
 #include <Debug/Logger.hpp>
 #include <Debug/LoggerSpecificationBuilder.hpp>
 #include <Debug/LoggerAPIs.h>
+#include <Debug/Timer.hpp>
 
 #include <Utils/FileSystemUtils.hpp>
 #include <Utils/StringUtils.hpp>

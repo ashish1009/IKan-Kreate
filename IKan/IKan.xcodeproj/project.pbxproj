@@ -15,6 +15,8 @@
 		B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292922C38637E0093F4DA /* FileSystemUtils.hpp */; };
 		B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292952C3863F30093F4DA /* StringUtils.cpp */; };
 		B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292962C3863F30093F4DA /* StringUtils.hpp */; };
+		B2D292A62C391E6E0093F4DA /* Timer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292A42C391E6E0093F4DA /* Timer.cpp */; };
+		B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292A52C391E6E0093F4DA /* Timer.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,6 +34,8 @@
 		B2D2929A2C39144F0093F4DA /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 		B2D2929B2C3915BF0093F4DA /* LoggerAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggerAPIs.h; sourceTree = "<group>"; };
 		B2D292A32C391CE90093F4DA /* AssertAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertAPIs.h; sourceTree = "<group>"; };
+		B2D292A42C391E6E0093F4DA /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
+		B2D292A52C391E6E0093F4DA /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -89,6 +93,7 @@
 				B2D292832C381C8B0093F4DA /* Logger.hpp */,
 				B2D2928B2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp */,
 				B2D2929B2C3915BF0093F4DA /* LoggerAPIs.h */,
+				B2D292A52C391E6E0093F4DA /* Timer.hpp */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -98,6 +103,7 @@
 			children = (
 				B2D292822C381C8B0093F4DA /* Logger.cpp */,
 				B2D2928A2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp */,
+				B2D292A42C391E6E0093F4DA /* Timer.cpp */,
 			);
 			path = Debug;
 			sourceTree = "<group>";
@@ -139,6 +145,7 @@
 				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
 				B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */,
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
+				B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */,
 				B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -203,6 +210,7 @@
 				B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */,
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
+				B2D292A62C391E6E0093F4DA /* Timer.cpp in Sources */,
 				B2D292842C381C8B0093F4DA /* Logger.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

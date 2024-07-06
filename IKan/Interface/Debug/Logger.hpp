@@ -105,6 +105,8 @@ f(None) \
       PrintMessageImpl(type, level, moduleName, std::forward<Args>(args)...);
     }
     
+    DELETE_ALL_CONSTRUCTORS(Logger);
+    
   private:
     // Member Functions ----------------------------------------------------------------------------------------------
     /// This function validates the logger specification data
