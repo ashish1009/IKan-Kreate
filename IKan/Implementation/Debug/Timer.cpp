@@ -34,4 +34,19 @@ namespace IKan
   {
     return std::chrono::duration_cast<std::chrono::nanoseconds>(std::chrono::high_resolution_clock::now() - m_time).count();
   }
+  
+  // Scoped Timer -----------------------------------------------------------------------------------------------------
+  ScopedTimer::ScopedTimer(const char* functionName)
+  : m_startTime(std::chrono::high_resolution_clock::now()), m_functionName(functionName)
+  {
+    
+  }
+  
+  ScopedTimer::~ScopedTimer()
+  {
+    m_endTime = std::chrono::high_resolution_clock::now();
+    m_duration = m_endTime - m_startTime;
+    
+    IK_PROFILE_INFO("{0} ms : {1}", m_duration.count() * 1000, m_functionName);
+  }
 } // namespace IKan

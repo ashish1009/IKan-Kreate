@@ -48,14 +48,14 @@ int main(int argc, const char * argv[])
 #define TEST_LOGGER 1
 #if TEST_LOGGER
     {
+      IK_PROFILE();
+      
       IK_LOG_TRACE(LogModule::None, "Test Logger TRACE {0}", 1);
       IK_LOG_DEBUG(LogModule::None, "Test Logger DEBUG {0}", 1);
       IK_LOG_INFO(LogModule::None, "Test Logger INFO {0}", 1);
       IK_LOG_WARN(LogModule::None, "Test Logger WARN {0}", 1);
       IK_LOG_ERROR(LogModule::None, "Test Logger ERROR {0}", 1);
       IK_LOG_CRITICAL(LogModule::None, "Test Logger CRITICAL {0}", 1);
-      
-      IK_PROFILE_TRACE("Test Profiler Log");
     }
 #endif
   }

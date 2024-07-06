@@ -36,4 +36,32 @@ namespace IKan
   private:
     std::chrono::time_point<std::chrono::high_resolution_clock> m_time;
   };
+  
+  // ScopedTimer ------------------------------------------------------------------------------------------------------
+  /// This class starts the timer on creating instance of Scoped timer. Shows the elapsed time of scope where
+  /// ScopedTimer is initialised.
+  /// - Instantiate the Profiler with function name in any scope. It will print the execution time of the function or
+  ///   Just call the Macro PROFILE().
+  /// - Important: Scope should be inside called after Profile Logger is created
+  class ScopedTimer
+  {
+  public:
+    /// This Constructor instantiate the function name that need to be profiled
+    /// - Parameter - Function name to be profiled
+    ScopedTimer(const char* functionName);
+    /// This destructor shows the results of profile of a scope
+    ~ScopedTimer();
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(ScopedTimer);
+    
+  private:
+    std::chrono::time_point<std::chrono::steady_clock> m_endTime;
+    std::chrono::duration<float> m_duration;
+    
+    const std::chrono::time_point<std::chrono::steady_clock> m_startTime;
+    const char* m_functionName;
+  };
+#define IK_PROFILE() IKan::ScopedTimer _scopedTimer__LINE__(__PRETTY_FUNCTION__);
+#define IK_NAMED_PROFILE(name) IKan::ScopedTimer _scopedTimer__LINE__(name);
+
 } // namespace IKan

@@ -155,14 +155,14 @@ namespace IKan
     return LogModuleString[static_cast<size_t>(tag)];
   }
   
-  std::shared_ptr<spdlog::logger> Logger::GetLogger(LogType type, LogLevel level)
+  std::shared_ptr<spdlog::logger> Logger::GetLogger(LogType type, LogLevel logLevel)
   {
     if (s_loggerDataMap.find(type) != s_loggerDataMap.end())
     {
       const std::unordered_map<LogLevel, std::shared_ptr<spdlog::logger>>& loggerForType = s_loggerDataMap.at(type);
-      if (loggerForType.find(level) != loggerForType.end())
+      if (loggerForType.find(logLevel) != loggerForType.end())
       {
-        return loggerForType.at(level);
+        return loggerForType.at(logLevel);
       }
     }
     return nullptr;

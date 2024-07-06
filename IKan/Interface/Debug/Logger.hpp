@@ -111,41 +111,43 @@ f(None) \
     ///   - level: Log level (Trace, Info ....)
     ///   - moduleName: Tag of Module name as string view
     ///   - args: arguments (Log strings and other argumets to be printed via logs)
-    template<typename... Args> static void PrintMessageWithoutTag(LogType type, LogLevel level, Args... args)
+    template<typename... Args> static void PrintMessageWithoutTag(LogType type, LogLevel logLevel, Args... args)
     {
-      // Get the Tag Details for a specific module
-      std::shared_ptr<spdlog::logger> logger = GetLogger(type, level);
-      if (!logger)
+      for (int8_t level = (int8_t)logLevel; level >= (int8_t)LogLevel::Trace; level--)
       {
-        return;
+        // Get the Tag Details for a specific module
+        std::shared_ptr<spdlog::logger> logger = GetLogger(type, (LogLevel)level);
+        if (!logger)
+        {
+          continue;
+        }
+        
+        switch (logLevel)
+        {
+          case LogLevel::Debug :
+            logger->debug(fmt::format(std::forward<Args>(args)...));
+            break;
+          case LogLevel::Trace :
+            logger->trace(fmt::format(std::forward<Args>(args)...));
+            break;
+          case LogLevel::Info :
+            logger->info(fmt::format(std::forward<Args>(args)...));
+            break;
+          case LogLevel::Warning :
+            logger->warn(fmt::format(std::forward<Args>(args)...));
+            break;
+          case LogLevel::Error :
+            logger->error(fmt::format(std::forward<Args>(args)...));
+            break;
+          case LogLevel::Critical :
+            logger->critical(fmt::format(std::forward<Args>(args)...));
+            break;
+            
+          default:
+            assert(false);
+        } // Switch Log level
       }
-      
-      switch (level)
-      {
-        case LogLevel::Debug :
-          logger->debug(fmt::format(std::forward<Args>(args)...));
-          break;
-        case LogLevel::Trace :
-          logger->trace(fmt::format(std::forward<Args>(args)...));
-          break;
-        case LogLevel::Info :
-          logger->info(fmt::format(std::forward<Args>(args)...));
-          break;
-        case LogLevel::Warning :
-          logger->warn(fmt::format(std::forward<Args>(args)...));
-          break;
-        case LogLevel::Error :
-          logger->error(fmt::format(std::forward<Args>(args)...));
-          break;
-        case LogLevel::Critical :
-          logger->critical(fmt::format(std::forward<Args>(args)...));
-          break;
-          
-        default:
-          assert(false);
-      } // Switch Log level
     }
-    
     
     DELETE_ALL_CONSTRUCTORS(Logger);
     
@@ -178,13 +180,13 @@ f(None) \
         return;
       }
       
-      for (uint8_t level = (uint8_t)logLevel; level >= (uint8_t)LogLevel::Trace; level--)
+      for (int8_t level = (int8_t)logLevel; level >= (int8_t)LogLevel::Trace; level--)
       {
         // Get the logger
         std::shared_ptr<spdlog::logger> logger = GetLogger(type, (LogLevel)level);
         if (tag.levelFilter > (LogLevel)level or !logger)
         {
-          return;
+          continue;
         }
         
         // Print log module
