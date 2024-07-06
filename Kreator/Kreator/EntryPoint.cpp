@@ -54,6 +54,8 @@ int main(int argc, const char * argv[])
       IK_LOG_WARN(LogModule::None, "Test Logger WARN {0}", 1);
       IK_LOG_ERROR(LogModule::None, "Test Logger ERROR {0}", 1);
       IK_LOG_CRITICAL(LogModule::None, "Test Logger CRITICAL {0}", 1);
+      
+      IK_PROFILE_TRACE("Test Profiler Log");
     }
 #endif
   }

@@ -105,6 +105,48 @@ f(None) \
       PrintMessageImpl(type, level, moduleName, std::forward<Args>(args)...);
     }
     
+    /// This function Prints the Log based on the tag details, Type and Log level
+    /// - Parameters:
+    ///   - type: Type of logger (core, client ....)
+    ///   - level: Log level (Trace, Info ....)
+    ///   - moduleName: Tag of Module name as string view
+    ///   - args: arguments (Log strings and other argumets to be printed via logs)
+    template<typename... Args> static void PrintMessageWithoutTag(LogType type, LogLevel level, Args... args)
+    {
+      // Get the Tag Details for a specific module
+      std::shared_ptr<spdlog::logger> logger = GetLogger(type, level);
+      if (!logger)
+      {
+        return;
+      }
+      
+      switch (level)
+      {
+        case LogLevel::Debug :
+          logger->debug(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Trace :
+          logger->trace(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Info :
+          logger->info(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Warning :
+          logger->warn(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Error :
+          logger->error(fmt::format(std::forward<Args>(args)...));
+          break;
+        case LogLevel::Critical :
+          logger->critical(fmt::format(std::forward<Args>(args)...));
+          break;
+          
+        default:
+          assert(false);
+      } // Switch Log level
+    }
+    
+    
     DELETE_ALL_CONSTRUCTORS(Logger);
     
   private:
