@@ -30,3 +30,5 @@
 
 #include <Utils/FileSystemUtils.hpp>
 #include <Utils/StringUtils.hpp>
+
+#include <Core/Application.hpp>
