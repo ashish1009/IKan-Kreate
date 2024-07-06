@@ -29,6 +29,7 @@
 		B2D292922C38637E0093F4DA /* FileSystemUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileSystemUtils.hpp; sourceTree = "<group>"; };
 		B2D292952C3863F30093F4DA /* StringUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
 		B2D292962C3863F30093F4DA /* StringUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StringUtils.hpp; sourceTree = "<group>"; };
+		B2D2929A2C39144F0093F4DA /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -64,6 +65,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D2928E2C385B0F0093F4DA /* IKHeaders.h */,
+				B2D292992C39143C0093F4DA /* Base */,
 				B2D292902C3863660093F4DA /* Utils */,
 				B2D292812C381C7C0093F4DA /* Debug */,
 			);
@@ -113,6 +115,14 @@
 				B2D292962C3863F30093F4DA /* StringUtils.hpp */,
 			);
 			path = Utils;
+			sourceTree = "<group>";
+		};
+		B2D292992C39143C0093F4DA /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2929A2C39144F0093F4DA /* Defines.h */,
+			);
+			path = Base;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

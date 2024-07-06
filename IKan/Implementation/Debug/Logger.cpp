@@ -104,7 +104,7 @@ namespace IKan
   
   void Logger::Shutdown()
   {
-    std::cout << "[Logger WARN] : Destroying Logger !\n";
+    std::cout << "[Logger WARN] : Destroying Loggers !\n";
     s_loggerDataMap.clear();
   }
   
