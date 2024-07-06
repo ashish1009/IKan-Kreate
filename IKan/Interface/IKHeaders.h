@@ -21,6 +21,7 @@
 
 // Engine Files
 #include <Base/Defines.h>
+#include <Base/AssertAPIs.h>
 
 #include <Debug/Logger.hpp>
 #include <Debug/LoggerSpecificationBuilder.hpp>

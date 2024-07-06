@@ -11,6 +11,7 @@ namespace IKan
 {
   // Configurations --------------------------------------------------------------------------------------------------
 #ifdef DEBUG
+#define IK_ENABLE_ASSERT
 #define IK_ENABLE_LOG
 #define IK_DEBUG
 #endif
