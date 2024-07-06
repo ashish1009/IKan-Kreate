@@ -143,6 +143,7 @@ namespace IKan
     switch (level)
     {
       case LogType::Core:     return "Core";
+      case LogType::Profiler: return "Profiler";
       default:
         assert(false);
     }

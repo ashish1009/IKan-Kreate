@@ -26,7 +26,7 @@ f(None) \
   /// This enum stores the type of logger
   enum class LogType : uint8_t
   {
-    Core
+    Core, Profiler
   };
   
   enum class LogLevel : uint8_t
