@@ -27,10 +27,10 @@ namespace IKan
     /// - Parameter loggerName: Logger name
     /// - Returns: Logger specification builder reference
     LoggerSpecificationBuilder& Name(std::string_view loggerName);
-    /// This function updates the log save file path in logger specification
-    /// - Parameter saveLogFilePath: Log save file path
+    /// This function updates the log save directory path in logger specification
+    /// - Parameter saveLogDirectoryPath: Log save directory path
     /// - Returns: Logger specification builder reference
-    LoggerSpecificationBuilder& SaveAt(const std::filesystem::path& saveLogFilePath);
+    LoggerSpecificationBuilder& SaveAt(const std::filesystem::path& saveLogDirectoryPath);
     /// This function updates the overriden logger sink pointer in logger specification
     /// - Parameter sink: overriden logger sing pointer
     /// - Returns: Logger specification builder reference

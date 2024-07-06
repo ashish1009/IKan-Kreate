@@ -34,9 +34,9 @@ namespace IKan
     loggerSpecification.showOnConsole = true;
     return *this;
   }
-  LoggerSpecificationBuilder& LoggerSpecificationBuilder::SaveAt(const std::filesystem::path& saveLogFilePath)
+  LoggerSpecificationBuilder& LoggerSpecificationBuilder::SaveAt(const std::filesystem::path& saveLogDirectoryPath)
   {
-    loggerSpecification.filePath = saveLogFilePath;
+    loggerSpecification.saveDirectory = saveLogDirectoryPath;
     return *this;
   }
   LoggerSpecificationBuilder& LoggerSpecificationBuilder::OverrideSink(const spdlog::sink_ptr sink)
