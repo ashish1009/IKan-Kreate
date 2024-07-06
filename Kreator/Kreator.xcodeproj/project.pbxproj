@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292602C380F250093F4DA /* EntryPoint.cpp */; };
 		B2D292892C381CBA0093F4DA /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D292882C381CBA0093F4DA /* libIKan.a */; };
+		B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292B72C3943F00093F4DA /* Kreator.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -35,6 +36,8 @@
 		B2D292AC2C3921180093F4DA /* KREATOR_Trace.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = KREATOR_Trace.log; sourceTree = "<group>"; };
 		B2D292AD2C3921180093F4DA /* KREATOR_Warning.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = KREATOR_Warning.log; sourceTree = "<group>"; };
 		B2D292AE2C3921180093F4DA /* PROFILER_Trace.log */ = {isa = PBXFileReference; lastKnownFileType = text; path = PROFILER_Trace.log; sourceTree = "<group>"; };
+		B2D292B72C3943F00093F4DA /* Kreator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Kreator.cpp; sourceTree = "<group>"; };
+		B2D292B82C3943F00093F4DA /* Kreator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Kreator.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +75,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D292602C380F250093F4DA /* EntryPoint.cpp */,
+				B2D292B62C3943DD0093F4DA /* Application */,
 			);
 			path = Kreator;
 			sourceTree = "<group>";
@@ -96,6 +100,15 @@
 				B2D292AE2C3921180093F4DA /* PROFILER_Trace.log */,
 			);
 			path = Log;
+			sourceTree = "<group>";
+		};
+		B2D292B62C3943DD0093F4DA /* Application */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292B72C3943F00093F4DA /* Kreator.cpp */,
+				B2D292B82C3943F00093F4DA /* Kreator.hpp */,
+			);
+			path = Application;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -175,6 +188,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */,
 				B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

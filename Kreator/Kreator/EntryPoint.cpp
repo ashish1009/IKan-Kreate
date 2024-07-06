@@ -8,6 +8,9 @@
 // IKan Engine namespace
 using namespace IKan;
 
+// External function to create application
+extern std::unique_ptr<Application> CreateApplication(int argc, const char * argv[]);
+
 /// This function is the Entry point of the Kreator
 /// - Parameters:
 ///   - argc: Number of arguments passed from binary
@@ -16,7 +19,8 @@ int main(int argc, const char * argv[])
 {
   // Debug print for executable arguments
   std::cout << "  Executing : " << argv[0] << "\n";
-  
+  std::cout << "    IKan    : " << Application::GetVersion() << "\n";
+
   // User arguments
   if (argc > 1)
   {
@@ -58,6 +62,12 @@ int main(int argc, const char * argv[])
       IK_LOG_CRITICAL(LogModule::None, "Test Logger CRITICAL {0}", 1);
     }
 #endif
+  }
+  
+  // Core Application
+  {
+    std::unique_ptr<Application> application = CreateApplication(argc, argv);
+    IK_ASSERT(application, "Application is not created");
   }
   
   // Shutdown the Core Engine

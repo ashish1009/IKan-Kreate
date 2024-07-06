@@ -40,7 +40,21 @@ namespace IKan
     // Getters --------------------------------------------------------------------------------------------------------
 
     // Static APIs ----------------------------------------------------------------------------------------------------
+    /// This function returns the IKan version
+    static const std::string& GetVersion();
+    
+    /// This function returns the single application instance
     static Application& Get();
+
+    /// This function creates the application instance of type T class
+    /// - Parameter args: arguments to be passed in application class
+    /// - Returns: unique pointer of Application <T>
+    template<typename T, typename ...Args> [[nodiscard("Application created nerver used")]]
+    static std::unique_ptr<Application> CreateApplication(Args&& ...args)
+    {
+      static_assert(std::is_base_of<Application, T>::value, "Class is not Application !!");
+      return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+    }
 
     DELETE_COPY_MOVE_CONSTRUCTORS(Application);
 
@@ -48,6 +62,9 @@ namespace IKan
     // Member Functions -----------------------------------------------------------------------------------------------
 
     // Member Variables -----------------------------------------------------------------------------------------------
+    ApplicationSpecification m_specification;
+
+    // Single Instance
     inline static Application* s_instance;
   };
 } // namespace IKan
