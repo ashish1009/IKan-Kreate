@@ -41,12 +41,37 @@ namespace IKan
   {
     
   }
-  
   ScopedTimer::~ScopedTimer()
   {
     m_endTime = std::chrono::high_resolution_clock::now();
     m_duration = m_endTime - m_startTime;
     
     IK_PROFILE_INFO("{0} ms : {1}", m_duration.count() * 1000, m_functionName);
+  }
+  
+  // Performance Profiler --------------------------------------------------------------------------------------------
+  void PerformanceProfiler::SetPerFrameTiming(const char* name, float time)
+  {
+    // Store the function in map
+    if (m_perFrameData.find(name) == m_perFrameData.end())
+    {
+      m_perFrameData[name] = 0.0f;
+    }
+    
+    // Add the elapsed time if called for same function
+    m_perFrameData[name] += time;
+  }
+  void PerformanceProfiler::Clear()
+  {
+    m_perFrameData.clear();
+  }
+  const std::unordered_map<const char*, float>& PerformanceProfiler::GetPerFrameData() const
+  {
+    return m_perFrameData;
+  }
+  PerformanceProfiler& PerformanceProfiler::Get()
+  {
+    static PerformanceProfiler s_instance;
+    return s_instance;
   }
 } // namespace IKan
