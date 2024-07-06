@@ -74,4 +74,16 @@ namespace IKan
     static PerformanceProfiler s_instance;
     return s_instance;
   }
+  
+  // Scope Performance Timer -----------------------------------------------------------------------------------------
+  ScopePerfTimer::ScopePerfTimer(const char* name)
+  : m_name(name)
+  {
+    
+  }
+  ScopePerfTimer::~ScopePerfTimer()
+  {
+    float time = m_timer.ElapsedMiliSeconds();
+    PerformanceProfiler::Get().SetPerFrameTiming(m_name, time);
+  }
 } // namespace IKan

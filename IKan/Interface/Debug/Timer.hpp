@@ -92,4 +92,26 @@ namespace IKan
     
     std::unordered_map<const char* /* function name */, float /* elapsed time */> m_perFrameData;
   };
+  
+  // Scope Performance Timer -----------------------------------------------------------------------------------------
+  /// This class stores the preformance of scoped profiler
+  /// - Note: Use IK_PERFORMANCE(name) or IK_PERFORMANCE_FUN() to store the performance data for a scope
+  class ScopePerfTimer
+  {
+  public:
+    /// This constructor creates scoped profiler for a function
+    /// - Parameter name: function name
+    ScopePerfTimer(const char* name);
+    /// This destructor updates the elapsed time of funcion on scope ends
+    ~ScopePerfTimer();
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(ScopePerfTimer);
+    
+  private:
+    const char* m_name;
+    Timer m_timer;
+  };
+  
+#define IK_PERFORMANCE(name) IKan::ScopePerfTimer timer__LINE__(name);
+#define IK_PERFORMANCE_FUN() IKan::ScopePerfTimer timer__LINE__(__PRETTY_FUNCTION__);
 } // namespace IKan
