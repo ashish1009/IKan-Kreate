@@ -34,12 +34,14 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 
 ## Road Map
 - Application and Layer
-  - #Logger
+  - # Logger
+  - # Timer
   - Core Application
   - Base Layer 
   - Layer Manager
 - Window creation
   - Window class
+  - Time step 
   - Even Handler
   - Input Handler
 - GUI Layer 

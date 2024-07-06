@@ -33,6 +33,20 @@ namespace IKan
           break;
       }
     }
+    
+    /// This function returns the log type string from LogType enum.
+    /// - Parameter type: Log type enum
+    std::string_view GetLogTypeString(LogType level)
+    {
+      switch (level)
+      {
+        case LogType::Core:     return "Core";
+        case LogType::Profiler: return "Profiler";
+        default:
+          assert(false);
+      }
+      return "";
+    }
   } // namespace LoggerUtils
   
   // Logger Specification APIs ---------------------------------------------------------------------------------------
@@ -52,7 +66,7 @@ namespace IKan
     
     std::cout << "[Logger INFO] : Creating Logger \n";
     std::cout << "[Logger INFO] :   Name      : " << specification.name << " \n";
-    std::cout << "[Logger INFO] :   Type      : " << GetLogTypeString(specification.type) << " \n";
+    std::cout << "[Logger INFO] :   Type      : " << LoggerUtils::GetLogTypeString(specification.type) << " \n";
     std::cout << "[Logger INFO] :   Level     : " << GetLogLevelString(specification.level) << " \n";
     
     // 2. Initialize the sings for logger
@@ -133,17 +147,6 @@ namespace IKan
       case LogLevel::Warning:   return "Warning";
       case LogLevel::Error:     return "Error";
       case LogLevel::Critical:  return "Critical";
-      default:
-        assert(false);
-    }
-    return "";
-  }
-  std::string_view Logger::GetLogTypeString(LogType level)
-  {
-    switch (level)
-    {
-      case LogType::Core:     return "Core";
-      case LogType::Profiler: return "Profiler";
       default:
         assert(false);
     }

@@ -45,7 +45,7 @@ int main(int argc, const char * argv[])
                    Name("PROFILER").
                    SaveAt("../../../Kreator/Log"));
     
-#define TEST_LOGGER 1
+#define TEST_LOGGER 0
 #if TEST_LOGGER
     {
       IK_PROFILE();

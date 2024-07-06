@@ -71,9 +71,6 @@ f(None) \
     /// This function returns the log level string from LogLevel enum.
     /// - Parameter level: Log level enum
     static std::string_view GetLogLevelString(LogLevel level);
-    /// This function returns the log type string from LogType enum.
-    /// - Parameter type: Log type enum
-    static std::string_view GetLogTypeString(LogType type);
     /// This function returns the name of Module in string. Converts from LogModule enum
     /// - Parameter tag: Tag name as enum
     static std::string_view GetModuleName(LogModule tag);
