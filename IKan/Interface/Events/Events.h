@@ -107,4 +107,7 @@ return category; \
   private:
     Event& m_event;
   };
+  
+  // Using Typedefs
+  using EventCallbackFn = std::function<void(Event&)>;
 } // namespace IKan

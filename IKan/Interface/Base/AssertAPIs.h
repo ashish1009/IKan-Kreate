@@ -51,3 +51,8 @@ IK_GET_ASSERT_MACRO(__VA_ARGS__)(__VA_ARGS__)\
 #define IK_ASSERT(...)
 
 #endif
+
+#define IK_FORCE_ASSERT(...) \
+IK_EXPAND_VARGS(\
+IK_GET_ASSERT_MACRO(__VA_ARGS__)(__VA_ARGS__)\
+)
