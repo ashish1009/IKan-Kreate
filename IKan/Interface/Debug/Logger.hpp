@@ -40,7 +40,7 @@ f(Application) f(Layers) \
   {
     LogType type {LogType::Core};
     LogLevel level {LogLevel::Trace};
-    std::string name {"IKAN"};
+    std::string_view name {"IKAN"};
     std::filesystem::path saveDirectory {""};
     spdlog::sink_ptr overrideSink {nullptr};
     bool showOnConsole {false};

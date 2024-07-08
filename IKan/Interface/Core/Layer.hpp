@@ -46,7 +46,7 @@ namespace IKan
     
     // Getter --------------------------------------------------------------------------------------------------------
     /// This function returns the name of layer
-    const std::string& GetName() const
+    std::string_view GetName() const
     {
       return m_name;
     }
@@ -54,6 +54,6 @@ namespace IKan
     DELETE_COPY_MOVE_CONSTRUCTORS(Layer)
     
   private:
-    std::string m_name {"Default"};
+    std::string_view m_name {"Default"};
   };
 } // namespace IKan

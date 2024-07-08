@@ -101,7 +101,7 @@ namespace IKan
     }
     
     // 3. Create the logger
-    Ref<spdlog::logger> logger = CreateRef<spdlog::logger>(specification.name, sinks.begin(), sinks.end());
+    Ref<spdlog::logger> logger = CreateRef<spdlog::logger>(specification.name.data(), sinks.begin(), sinks.end());
     if (logger)
     {
       logger->set_level(LoggerUtils::GetSpdLevel(specification.level));

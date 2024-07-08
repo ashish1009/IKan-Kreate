@@ -43,7 +43,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - Window creation
   - # Time step 
   - # Even Handler
-  - Window class
+  - # Window class
   - Input Handler
 - GUI Layer 
   - ImGui Layer

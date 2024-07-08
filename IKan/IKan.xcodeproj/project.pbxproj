@@ -22,6 +22,7 @@
 		B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292C12C3BB5A60093F4DA /* TimeStep.cpp */; };
 		B2D292C92C3BCD930093F4DA /* LayerStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292C72C3BCD910093F4DA /* LayerStack.cpp */; };
 		B2D294A42C3BD0F90093F4DA /* libGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2939B2C3BD05D0093F4DA /* libGLFW.a */; };
+		B2D294A72C3BDEA40093F4DA /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D294A52C3BDE9F0093F4DA /* Window.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -66,6 +67,8 @@
 		B2D292C72C3BCD910093F4DA /* LayerStack.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LayerStack.cpp; sourceTree = "<group>"; };
 		B2D292C82C3BCD910093F4DA /* LayerStack.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LayerStack.hpp; sourceTree = "<group>"; };
 		B2D293962C3BD05C0093F4DA /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = GLFW/GLFW.xcodeproj; sourceTree = "<group>"; };
+		B2D294A52C3BDE9F0093F4DA /* Window.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Window.cpp; sourceTree = "<group>"; };
+		B2D294A62C3BDE9F0093F4DA /* Window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -181,6 +184,7 @@
 				B2D292C22C3BB5A60093F4DA /* TimeStep.hpp */,
 				B2D292C62C3BCD0A0093F4DA /* Layer.hpp */,
 				B2D292C82C3BCD910093F4DA /* LayerStack.hpp */,
+				B2D294A62C3BDE9F0093F4DA /* Window.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -191,6 +195,7 @@
 				B2D292B22C3940320093F4DA /* Application.cpp */,
 				B2D292C12C3BB5A60093F4DA /* TimeStep.cpp */,
 				B2D292C72C3BCD910093F4DA /* LayerStack.cpp */,
+				B2D294A52C3BDE9F0093F4DA /* Window.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
 				B2D292C92C3BCD930093F4DA /* LayerStack.cpp in Sources */,
 				B2D292B42C3940320093F4DA /* Application.cpp in Sources */,
+				B2D294A72C3BDEA40093F4DA /* Window.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
 				B2D292A62C391E6E0093F4DA /* Timer.cpp in Sources */,
