@@ -80,7 +80,7 @@ namespace IKan
     // Show on console
     if(specification.showOnConsole)
     {
-      sinks.emplace_back(std::make_shared<spdlog::sinks::stdout_color_sink_mt>());
+      sinks.emplace_back(CreateRef<spdlog::sinks::stdout_color_sink_mt>());
     }
     // Save file path
     if (specification.saveDirectory != "")
@@ -90,7 +90,7 @@ namespace IKan
       filepath += Logger::GetLogLevelString(specification.level);
       filepath += ".log";
       
-      sinks.emplace_back(std::make_shared<spdlog::sinks::basic_file_sink_mt>(filepath, true /* Truncste the Log file */));
+      sinks.emplace_back(CreateRef<spdlog::sinks::basic_file_sink_mt>(filepath, true /* Truncste the Log file */));
       std::cout << "[Logger INFO] :   FilePath  : " << Utils::FileSystem::IKanAbsolute(filepath) << " \n";
     }
     
@@ -101,7 +101,7 @@ namespace IKan
     }
     
     // 3. Create the logger
-    std::shared_ptr<spdlog::logger> logger = std::make_shared<spdlog::logger>(specification.name, sinks.begin(), sinks.end());
+    Ref<spdlog::logger> logger = CreateRef<spdlog::logger>(specification.name, sinks.begin(), sinks.end());
     if (logger)
     {
       logger->set_level(LoggerUtils::GetSpdLevel(specification.level));
@@ -127,7 +127,7 @@ namespace IKan
     // If in type is already present
     if (s_loggerDataMap.find(specification.type) != s_loggerDataMap.end())
     {
-      const std::unordered_map<LogLevel, std::shared_ptr<spdlog::logger>>& loggerForType = s_loggerDataMap.at(specification.type);
+      const std::unordered_map<LogLevel, Ref<spdlog::logger>>& loggerForType = s_loggerDataMap.at(specification.type);
       if (loggerForType.find(specification.level) != loggerForType.end())
       {
         std::cout << "[Logger ERROR] : Invalid Logger speficiation Data. Level : " << Logger::GetLogLevelString(specification.level) << " already stored for curretn logger \n";
@@ -158,11 +158,11 @@ namespace IKan
     return LogModuleString[static_cast<size_t>(tag)];
   }
   
-  std::shared_ptr<spdlog::logger> Logger::GetLogger(LogType type, LogLevel logLevel)
+  Ref<spdlog::logger> Logger::GetLogger(LogType type, LogLevel logLevel)
   {
     if (s_loggerDataMap.find(type) != s_loggerDataMap.end())
     {
-      const std::unordered_map<LogLevel, std::shared_ptr<spdlog::logger>>& loggerForType = s_loggerDataMap.at(type);
+      const std::unordered_map<LogLevel, Ref<spdlog::logger>>& loggerForType = s_loggerDataMap.at(type);
       if (loggerForType.find(logLevel) != loggerForType.end())
       {
         return loggerForType.at(logLevel);

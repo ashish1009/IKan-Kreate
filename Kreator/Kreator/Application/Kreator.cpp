@@ -7,7 +7,7 @@
 
 #include "Kreator.hpp"
 
-std::unique_ptr<Application> CreateApplication(int argc, const char * argv[])
+Scope<Application> CreateApplication(int argc, const char * argv[])
 {
   // Create application specification ------------------------------
   ApplicationSpecification applicationSpec;

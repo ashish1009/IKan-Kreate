@@ -9,7 +9,7 @@
 using namespace IKan;
 
 // External function to create application
-extern std::unique_ptr<Application> CreateApplication(int argc, const char * argv[]);
+extern Scope<Application> CreateApplication(int argc, const char * argv[]);
 
 /// This function is the Entry point of the Kreator
 /// - Parameters:
@@ -66,7 +66,7 @@ int main(int argc, const char * argv[])
   
   // Core Application
   {
-    std::unique_ptr<Application> application = CreateApplication(argc, argv);
+    Scope<Application> application = CreateApplication(argc, argv);
     IK_ASSERT(application, "Application is not created");
     
     application->Run();

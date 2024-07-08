@@ -81,10 +81,10 @@ namespace IKan
     /// - Parameter args: arguments to be passed in application class
     /// - Returns: unique pointer of Application <T>
     template<typename T, typename ...Args> [[nodiscard("Application created nerver used")]]
-    static std::unique_ptr<Application> CreateApplication(Args&& ...args)
+    static Scope<Application> CreateApplication(Args&& ...args)
     {
       static_assert(std::is_base_of<Application, T>::value, "Class is not Application !!");
-      return std::unique_ptr<T>(new T(std::forward<Args>(args)...));
+      return Scope<T>(new T(std::forward<Args>(args)...));
     }
 
     DELETE_COPY_MOVE_CONSTRUCTORS(Application);

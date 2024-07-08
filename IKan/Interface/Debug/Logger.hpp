@@ -79,7 +79,7 @@ f(Application) \
     /// - Parameters:
     ///   - type: Logger type
     ///   - level: log level of current type
-    static std::shared_ptr<spdlog::logger> GetLogger(LogType type, LogLevel level);
+    static Ref<spdlog::logger> GetLogger(LogType type, LogLevel level);
 
     // Print Log tempalted APIs ---------------------------------------------------------------------------------------
     /// This function Prints the Log based on the tag details, Type and Log level
@@ -114,7 +114,7 @@ f(Application) \
       for (int8_t level = (int8_t)logLevel; level >= (int8_t)LogLevel::Trace; level--)
       {
         // Get the Tag Details for a specific module
-        std::shared_ptr<spdlog::logger> logger = GetLogger(type, (LogLevel)level);
+        Ref<spdlog::logger> logger = GetLogger(type, (LogLevel)level);
         if (!logger)
         {
           continue;
@@ -181,7 +181,7 @@ f(Application) \
       for (int8_t level = (int8_t)logLevel; level >= (int8_t)LogLevel::Trace; level--)
       {
         // Get the logger
-        std::shared_ptr<spdlog::logger> logger = GetLogger(type, (LogLevel)level);
+        Ref<spdlog::logger> logger = GetLogger(type, (LogLevel)level);
         if (tag.levelFilter > (LogLevel)level or !logger)
         {
           continue;
@@ -227,7 +227,7 @@ f(Application) \
     }
 
     // Member Variables ----------------------------------------------------------------------------------------------
-    inline static std::unordered_map<LogType, std::unordered_map<LogLevel, std::shared_ptr<spdlog::logger>>> s_loggerDataMap;
+    inline static std::unordered_map<LogType, std::unordered_map<LogLevel, Ref<spdlog::logger>>> s_loggerDataMap;
     inline static std::map<std::string_view /* Module Name */, TagDetails> s_tags;
   };
 } // namespace IKan
