@@ -7,6 +7,8 @@
 
 #include "Renderer.hpp"
 
+#include "Renderer/Graphics/RendererAPI.hpp"
+
 namespace IKan
 {
   // Renderer Utils --------------------------------------------------------------------------------------------------
@@ -34,18 +36,27 @@ namespace IKan
   {
     RendererType rendererType {RendererType::Invalid};
     Scope<RenderCommandQueue> commandQueue;
+    Scope<RendererAPI> rendererAPI;
 
     /// This function destroys the renderer data
     void Shutdown()
     {
       rendererType = RendererType::Invalid;
-      
+      rendererAPI.reset();
+
       // Execute all commands before destory
       commandQueue->Execute();
       commandQueue.reset();
     }
   };
   static RendererData s_rendererData;
+
+  // Renderer Capabilities -------------------------------------------------------------------------------------------
+  RendererCapabilities& RendererCapabilities::Get()
+  {
+    static RendererCapabilities capabilities;
+    return capabilities;
+  }
 
   // Renderer APIs ---------------------------------------------------------------------------------------------------
   void Renderer::Initialize()
@@ -64,6 +75,9 @@ namespace IKan
     
     // Create Render Command Queue before using any Renderer APIs
     s_rendererData.commandQueue = CreateScope<RenderCommandQueue>();
+    
+    // Create Renderer API instance
+    s_rendererData.rendererAPI = RendererAPIFactory::Create();
   }
   void Renderer::Shutdown()
   {
@@ -99,5 +113,28 @@ namespace IKan
   {
     IK_ASSERT(s_rendererData.commandQueue, "Render Command Queue is NULL");
     return s_rendererData.commandQueue.get();
+  }
+  
+  // Renderer Controller ---------------------------------------------------------------------------------------------
+  void Renderer::Clear(const glm::vec4& color)
+  {
+    IK_PERFORMANCE("Renderer::Clear");
+    s_rendererData.rendererAPI->SetClearColor(color);
+    s_rendererData.rendererAPI->ClearBits();
+  }
+  void Renderer::ClearBits()
+  {
+    IK_PERFORMANCE("Renderer::ClearBits");
+    s_rendererData.rendererAPI->ClearBits();
+  }
+  void Renderer::ClearColorBits()
+  {
+    IK_PERFORMANCE("Renderer::ClearColorBits");
+    s_rendererData.rendererAPI->ClearColorBits();
+  }
+  void Renderer::ClearDepthBits()
+  {
+    IK_PERFORMANCE("Renderer::ClearDepthBits");
+    s_rendererData.rendererAPI->ClearDepthBits();
   }
 } // namespace IKan

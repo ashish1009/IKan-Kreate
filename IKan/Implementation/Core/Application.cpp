@@ -43,6 +43,9 @@ namespace IKan
 
     // Initialize the Renderer
     Renderer::Initialize();
+    
+    // Execute all commands from queue
+    Renderer::WaitAndRender();
   }
   
   Application::~Application()
@@ -85,6 +88,8 @@ namespace IKan
           {
             layer->OnUpdate(m_timeStep);
           }
+          
+          Renderer::Clear({0.2, 0.1, 0.3, 1.0});
         }
         
         // Cliient virtual override update function
@@ -102,6 +107,8 @@ namespace IKan
         // Store the frame time difference
         m_timeStep = m_window->GetTimestep();
 
+        // Execute all commands from queue before game loop
+        Renderer::WaitAndRender();
       }
     }
     IK_LOG_WARN("", "--------------------------------------------------------------------------");
@@ -177,13 +184,20 @@ namespace IKan
     IK_PROFILE();
     // Initialize the client side application
     OnInit();
+    
+    // Execute all commands from queue before game loop
+    Renderer::WaitAndRender();
   }
   
   void Application::FlushAfterGameLoop()
   {
     IK_PROFILE();
+    
     // Shutdown the client side application
     OnShutdown();
+    
+    // Execute all commands from queue after game loop
+    Renderer::WaitAndRender();
   }
   
   void Application::HandleEvents(Event &event)

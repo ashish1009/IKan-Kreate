@@ -9,6 +9,7 @@
 
 #include "Renderer/Renderer.hpp"
 #include "Platform/OpenGL/OpenGLRendererContext.hpp"
+#include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 
 namespace IKan
 {
@@ -17,6 +18,21 @@ namespace IKan
     switch(Renderer::GetCurrentRendererAPI())
     {
       case RendererType::OpenGL: return CreateScope<OpenGLRendererContext>(windowPtr);
+      case RendererType::Invalid:
+      default:
+        IK_LOG_CRITICAL(LogModule::Renderer, "Renderer API Type is not set or set as invalid."
+                        "Call Renderer::SetCurrentRendererAPI(RendererType) before any Renderer Initialization to set Renderer API type."
+                        "'RendererType should not be RendererType::Invalid'");
+        IK_ASSERT(false , "Renderer API type is not set!")
+    }
+    return nullptr;
+  }
+  
+  Scope<RendererAPI> RendererAPIFactory::Create()
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: return CreateScope<OpenGLRendererAPI>();
       case RendererType::Invalid:
       default:
         IK_LOG_CRITICAL(LogModule::Renderer, "Renderer API Type is not set or set as invalid."

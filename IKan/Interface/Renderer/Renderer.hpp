@@ -50,6 +50,19 @@ namespace IKan
     /// This function returns the current renderer API type
     static RendererType GetCurrentRendererAPI();
 
+    // Renderer Controller --------------------------------------------------------------------------------------------
+    /// This funciton Clears all the Renderer Bits and set the Clear color to new color
+    /// - Parameter color: New color of renderer Clear color
+    static void Clear(const glm::vec4& color);
+    /// This funciton Clears all the Color Bits
+    static void ClearColorBits();
+    /// This funciton Clears all the Depth Bits
+    static void ClearDepthBits();
+    /// This funciton Clears all the Stencil Bits
+    static void ClearStencilBits();
+    /// This funciton Clears all the Bits
+    static void ClearBits();
+
     // Render Command Queue -------------------------------------------------------------------------------------------
     /// This function submits the Renderer command in Queue
     /// - Parameter func: Function pointer lambda

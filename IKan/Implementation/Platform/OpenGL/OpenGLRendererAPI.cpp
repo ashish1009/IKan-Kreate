@@ -16,7 +16,7 @@ namespace IKan
   OpenGLRendererAPI::OpenGLRendererAPI()
   {
     IK_PROFILE();
-    IK_LOG_INFO(LogModule::Renderer, "Creating Open GL Renderer API.");
+    IK_LOG_INFO(LogModule::Renderer, "Creating Open GL Renderer API instance.");
     
     // Enable Depth
     glEnable(GL_DEPTH_TEST);
@@ -43,7 +43,7 @@ namespace IKan
   OpenGLRendererAPI::~OpenGLRendererAPI()
   {
     IK_PROFILE();
-    IK_LOG_WARN(LogModule::Renderer, "Destroying Open GL Renderer API.");
+    IK_LOG_WARN(LogModule::Renderer, "Destroying Open GL Renderer API instance.");
   }
   
   void OpenGLRendererAPI::SetClearColor(const glm::vec4& color) const
