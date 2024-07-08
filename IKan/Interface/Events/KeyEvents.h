@@ -25,6 +25,8 @@ namespace IKan
     EVENT_CLASS_CATEGORY(EventCategoryKeyboard | EventCategoryInput);
     
   protected:
+    /// This constructor creates the keyboard even instance
+    /// - Parameter keyCode: key code of event
     KeyEvent(Key keyCode)
     : m_keyCode(keyCode)
     {
@@ -35,7 +37,7 @@ namespace IKan
     Key m_keyCode;
   };
   
-  /// This class handles the events from when key button is pressed
+  /// This class handles the events when key button is pressed
   class KeyPressedEvent : public KeyEvent
   {
   public:
@@ -61,7 +63,7 @@ namespace IKan
     int32_t m_repeatedCount = 0;
   };
   
-  /// This class handles the events from when key button is released
+  /// This class handles the events when key button is released
   class KeyReleasedEvent : public KeyEvent
   {
   public:
@@ -76,7 +78,7 @@ namespace IKan
     EVENT_CLASS_TYPE(KeyReleased);
   };
   
-  /// This class handles the events from when key button is typed
+  /// This class handles the events when key button is typed
   class KeyTypedEvent : public KeyEvent
   {
   public:
