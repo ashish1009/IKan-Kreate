@@ -7,8 +7,6 @@
 
 #include "Renderer.hpp"
 
-#include "Renderer/Graphics/RendererAPI.hpp"
-
 namespace IKan
 {
   // Renderer Utils --------------------------------------------------------------------------------------------------

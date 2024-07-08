@@ -39,7 +39,6 @@
 		B2D296782C3C069B0093F4DA /* libUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2951B2C3C00560093F4DA /* libUI.a */; };
 		B2D2967B2C3C0AEA0093F4DA /* Input.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2967A2C3C0AEA0093F4DA /* Input.hpp */; };
 		B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D296792C3C0AEA0093F4DA /* MacInput.cpp */; };
-		B2D2967F2C3C0C1B0093F4DA /* RendererAPI.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2967E2C3C0C1B0093F4DA /* RendererAPI.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -116,7 +115,6 @@
 		B2D296752C3C01D40093F4DA /* ImGuiLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiLayer.hpp; sourceTree = "<group>"; };
 		B2D296792C3C0AEA0093F4DA /* MacInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MacInput.cpp; sourceTree = "<group>"; };
 		B2D2967A2C3C0AEA0093F4DA /* Input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
-		B2D2967E2C3C0C1B0093F4DA /* RendererAPI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererAPI.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -332,10 +330,9 @@
 		B2D294B22C3BF2F80093F4DA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				B2D294BA2C3BF63F0093F4DA /* RendererContext.hpp */,
 				B2D294F22C3BF7060093F4DA /* Specifications.hpp */,
 				B2D294EE2C3BF6FB0093F4DA /* Factories.hpp */,
-				B2D294BA2C3BF63F0093F4DA /* RendererContext.hpp */,
-				B2D2967E2C3C0C1B0093F4DA /* RendererAPI.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -408,7 +405,6 @@
 				B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */,
 				B2D294F82C3BF7BD0093F4DA /* OpenGLRendererContext.hpp in Headers */,
 				B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */,
-				B2D2967F2C3C0C1B0093F4DA /* RendererAPI.hpp in Headers */,
 				B2D292B52C3940320093F4DA /* Application.hpp in Headers */,
 				B2D294BB2C3BF63F0093F4DA /* RendererContext.hpp in Headers */,
 			);
