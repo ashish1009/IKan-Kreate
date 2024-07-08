@@ -39,6 +39,9 @@ namespace IKan
     void Shutdown()
     {
       rendererType = RendererType::Invalid;
+      
+      // Execute all commands before destory
+      commandQueue->Execute();
       commandQueue.reset();
     }
   };
@@ -83,5 +86,18 @@ namespace IKan
   RendererType Renderer::GetCurrentRendererAPI()
   {
     return s_rendererData.rendererType;
+  }
+  
+  // Render Command Queue --------------------------------------------------------------------------------------------
+  void Renderer::WaitAndRender()
+  {
+    IK_PERFORMANCE("Renderer::WaitAndRender");
+    IK_ASSERT(s_rendererData.commandQueue, "Render Command Queue is NULL");
+    s_rendererData.commandQueue->Execute();
+  }
+  RenderCommandQueue* Renderer::GetRenderCommandQueue()
+  {
+    IK_ASSERT(s_rendererData.commandQueue, "Render Command Queue is NULL");
+    return s_rendererData.commandQueue.get();
   }
 } // namespace IKan

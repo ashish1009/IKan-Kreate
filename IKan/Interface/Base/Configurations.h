@@ -17,7 +17,7 @@ namespace IKan
 #endif
   
   // MACRO to execute render commands in a queue
-#define RENDER_COMMAND_QUEUE 1
+#define RENDER_COMMAND_QUEUE_ENABLED 1
 
   // This MACRO Shifts the LSB bit of number 1 at position x
 #define BIT(x) (1 << x)

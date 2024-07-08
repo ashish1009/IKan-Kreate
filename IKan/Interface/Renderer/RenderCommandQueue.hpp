@@ -21,9 +21,22 @@ namespace IKan
     /// This destructor destroys the queue buffer of renderer commands
     ~RenderCommandQueue();
     
+    /// This function allocates the memory for fucntion pointer in queue
+    /// - Parameters:
+    ///   - func: Render Command function pointer
+    ///   - size: size of function
+    /// - Returns: Allocated memory pointer
+    void* Allocate(RenderCommandFn func, uint32_t size);
+    
+    /// This function executes the render commands in queue
+    void Execute();
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(RenderCommandQueue);
+
   private:
     uint8_t* m_commandBuffer {nullptr};
     uint8_t* m_commandBufferPtr {nullptr};
+    uint64_t m_commandBufferSize {0};
     uint32_t m_commandCount {0};
   };
 } // namespace IKan

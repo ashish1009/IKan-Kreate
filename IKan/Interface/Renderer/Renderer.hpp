@@ -50,6 +50,32 @@ namespace IKan
     /// This function returns the current renderer API type
     static RendererType GetCurrentRendererAPI();
 
+    // Render Command Queue -------------------------------------------------------------------------------------------
+    /// This function submits the Renderer command in Queue
+    /// - Parameter func: Function pointer lambda
+    template<typename FuncT> static void Submit(FuncT&& func)
+    {
+#if RENDER_COMMAND_QUEUE_ENABLED
+      auto renderCmd = [](void* ptr) 
+      {
+        auto pFunc = (FuncT*)ptr;
+        (*pFunc)();
+        
+        pFunc->~FuncT();
+      };
+      void* storageBuffer = GetRenderCommandQueue()->Allocate(renderCmd, sizeof(func));
+      new (storageBuffer) FuncT(std::forward<FuncT>(func));
+#else
+      func();
+#endif
+    }
+    
+    /// This funcion executes all the renderer commands in queue
+    static void WaitAndRender();
+
     DELETE_ALL_CONSTRUCTORS(Renderer);
+    
+  private:
+    static RenderCommandQueue* GetRenderCommandQueue();
   };
 } // namespace IKan
