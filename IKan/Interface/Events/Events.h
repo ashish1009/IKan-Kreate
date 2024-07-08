@@ -55,4 +55,40 @@ namespace IKan
   public:
     bool isHandled {false};
   };
+  
+  /// This class dispatches the event handler function based on the triggered event in window. Registers the callback
+  /// function to be called on event trigger.
+  class EventDispatcher
+  {
+  public:
+    /// This constructor creates the event dispatcher instance, stores the event reference in the dispatcher
+    ///  - Parameter event: Event reference triggered from window callback.
+    EventDispatcher(Event& event)
+    : m_event(event)
+    {
+      
+    }
+    
+    /// This function Dispatches the event dynamically
+    ///  - Once an event callback is triggered, it checks the triggered event's type (base class 'Event') with the
+    ///    explicit event type 'T'. If same then executes the Function F (Function pointer passed to Dispatcher)
+    ///  - Parameter func: Function pointer to be triggered when even dispatches.
+    ///  - Important: Event Should be Dispached using this function only. All Event handler takes only base Instance of
+    ///               Event. This Dispatcher dispatches the function binded to a specific Event. So checked all the
+    ///               triggered events at same time and return the calling on Function Binded as Funciton pointer <F>
+    template<typename T, typename F> bool Dispatch(const F& func)
+    {
+      if (m_event.GetType() == T::GetStaticType())
+      {
+        m_event.isHandled |= func(static_cast<T&>(m_event));
+        return true;
+      }
+      return false;
+    }
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(EventDispatcher);
+
+  private:
+    Event& m_event;
+  };
 } // namespace IKan
