@@ -21,6 +21,13 @@
             location = "group:CodingGuidelines.md">
          </FileRef>
       </Group>
+      <Group
+         location = "group:/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Resources/ReleaseNotes"
+         name = "ReleaseNotes">
+         <FileRef
+            location = "group:/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Resources/ReleaseNotes/v1.0.1.0.md">
+         </FileRef>
+      </Group>
    </Group>
    <FileRef
       location = "group:Kreator/Kreator.xcodeproj">

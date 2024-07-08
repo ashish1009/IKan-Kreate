@@ -31,18 +31,19 @@ Kreator is an editor used to develop games using IKan Library and other submodul
 
 ## Release
 v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
+- v1.0.1.0 
 
 ## Road Map
 - Application and Layer
   - # Logger
   - # Timer
-  - Core Application
-  - Base Layer 
-  - Layer Manager
+  - # Core Application
+  - # Base Layer 
+  - # Layer Manager
 - Window creation
-  - Window class
   - # Time step 
   - # Even Handler
+  - Window class
   - Input Handler
 - GUI Layer 
   - ImGui Layer

@@ -113,5 +113,5 @@ namespace IKan
   };
   
 #define IK_PERFORMANCE(name) IKan::ScopePerfTimer timer__LINE__(name);
-#define IK_PERFORMANCE_FUN() IKan::ScopePerfTimer timer__LINE__(__PRETTY_FUNCTION__);
+#define IK_PERFORMANCE_FUNC() IKan::ScopePerfTimer timer__LINE__(__PRETTY_FUNCTION__);
 } // namespace IKan
