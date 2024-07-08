@@ -50,6 +50,8 @@
 		B2D292C12C3BB5A60093F4DA /* TimeStep.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStep.cpp; sourceTree = "<group>"; };
 		B2D292C22C3BB5A60093F4DA /* TimeStep.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeStep.hpp; sourceTree = "<group>"; };
 		B2D292C42C3BCB960093F4DA /* DesignHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DesignHelper.h; sourceTree = "<group>"; };
+		B2D292C52C3BCD0A0093F4DA /* Layer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Layer.cpp; sourceTree = "<group>"; };
+		B2D292C62C3BCD0A0093F4DA /* Layer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Layer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -160,6 +162,8 @@
 				B2D292BE2C3BB07E0093F4DA /* KeyCodes.h */,
 				B2D292BF2C3BB1180093F4DA /* MouseCodes.h */,
 				B2D292C22C3BB5A60093F4DA /* TimeStep.hpp */,
+				B2D292C52C3BCD0A0093F4DA /* Layer.cpp */,
+				B2D292C62C3BCD0A0093F4DA /* Layer.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
