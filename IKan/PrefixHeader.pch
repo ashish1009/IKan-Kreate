@@ -22,6 +22,14 @@
 #include <unordered_map>
 #include <map>
 
+// glm math library
+#define GLM_ENABLE_EXPERIMENTAL
+#include <glm/glm.hpp>
+#include <glm/gtc/type_ptr.hpp>
+#include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtx/matrix_decompose.hpp>
+#include <glm/gtx/quaternion.hpp>
+
 // Engine Files
 #include "Base/Defines.h"
 #include "Base/AssertAPIs.h"
