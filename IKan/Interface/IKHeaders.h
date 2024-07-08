@@ -27,6 +27,10 @@
 #include <glm/gtx/matrix_decompose.hpp>
 #include <glm/gtx/quaternion.hpp>
 
+// UI Vendor files
+#include <imgui.h>
+#include <imgui_internal.h>
+
 // Engine Files
 #include <Base/Defines.h>
 #include <Base/AssertAPIs.h>

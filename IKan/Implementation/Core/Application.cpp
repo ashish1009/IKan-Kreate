@@ -8,7 +8,7 @@
 #include "Application.hpp"
 
 /// IKan Engine Version
-static const std::string IKanVersion = "1.1";
+static const std::string IKanVersion = "1.2";
 
 namespace IKan
 {

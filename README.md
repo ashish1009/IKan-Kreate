@@ -23,8 +23,15 @@ IKan Library can be used independently to develop your own Editor/Game
   - Include the IKHeaders.h to use all the interface files that are important
 
 ### Preprocessors
+  - `IK_ENABLE_LOG` : To enable logger in Engine 
+  - `IK_ENABLE_ASSERT` : To enable assert in Engine 
 
 ### Header Search Paths
+`{...} directory where IKan Engine is cloned`
+  - {...}/Interface
+  - {...}/Vendors/SpdLog/include
+  - {...}/Vendors/Glm
+  - {...}/Vendors/UI/ImGui
 
 ## Kreator
 Kreator is an editor used to develop games using IKan Library and other submodules
