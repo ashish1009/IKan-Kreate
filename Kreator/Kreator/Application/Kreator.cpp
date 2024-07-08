@@ -12,6 +12,7 @@ Scope<Application> CreateApplication(int argc, const char * argv[])
   // Create application specification ------------------------------
   ApplicationSpecification applicationSpec;
   applicationSpec.name = "Kreator";
+  applicationSpec.rendererType = RendererType::OpenGL;
 
   // Window Specification Data
   applicationSpec.windowSpecification.title = "Kreator";

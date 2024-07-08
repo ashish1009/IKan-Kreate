@@ -21,6 +21,9 @@ namespace IKan
     
     IK_LOG_INFO(LogModule::Application, "Initializing Core application data. Version : {0}", IKanVersion);
     
+    // Set the renrerer Type
+    Renderer::SetCurrentRendererAPI(m_specification.rendererType);
+
     // Create the window
     m_window = WindowFactory::Create(m_specification.windowSpecification);
     
@@ -32,6 +35,9 @@ namespace IKan
     {
       m_isRunning = true;
     }
+    
+    // Initialize the Renderer
+    Renderer::Initialize();
   }
   
   Application::~Application()
@@ -39,6 +45,8 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Application, "Destroying Core application data");
 
+    m_window.reset();
+    Renderer::Shutdown();
     s_instance = nullptr;
   }
   

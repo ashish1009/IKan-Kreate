@@ -6,6 +6,7 @@
 //
 
 #include "Window.hpp"
+
 #include "Platform/MacOS/MacWindow.hpp"
 
 namespace IKan

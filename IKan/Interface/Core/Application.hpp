@@ -11,6 +11,7 @@
 #include "Core/LayerStack.hpp"
 #include "Core/Window.hpp"
 #include "Events/ApplicationEvents.h"
+#include "Renderer/Renderer.hpp"
 
 namespace IKan
 {
@@ -19,6 +20,7 @@ namespace IKan
   {
     std::string name {"IKan"};
     WindowSpecification windowSpecification;
+    RendererType rendererType {RendererType::Invalid};
   };
   
   /// This class is the base Application for IKan Engine.

@@ -25,6 +25,8 @@
 		B2D294A72C3BDEA40093F4DA /* Window.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D294A52C3BDE9F0093F4DA /* Window.cpp */; };
 		B2D294AC2C3BE22C0093F4DA /* MacWindow.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294AB2C3BE22C0093F4DA /* MacWindow.hpp */; };
 		B2D294AD2C3BE22C0093F4DA /* MacWindow.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D294AA2C3BE22C0093F4DA /* MacWindow.cpp */; };
+		B2D294B62C3BF30B0093F4DA /* Renderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D294B42C3BF30B0093F4DA /* Renderer.cpp */; };
+		B2D294B72C3BF30B0093F4DA /* Renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294B52C3BF30B0093F4DA /* Renderer.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -73,6 +75,8 @@
 		B2D294A62C3BDE9F0093F4DA /* Window.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Window.hpp; sourceTree = "<group>"; };
 		B2D294AA2C3BE22C0093F4DA /* MacWindow.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MacWindow.cpp; sourceTree = "<group>"; };
 		B2D294AB2C3BE22C0093F4DA /* MacWindow.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MacWindow.hpp; sourceTree = "<group>"; };
+		B2D294B42C3BF30B0093F4DA /* Renderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer.cpp; sourceTree = "<group>"; };
+		B2D294B52C3BF30B0093F4DA /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +120,7 @@
 				B2D292812C381C7C0093F4DA /* Debug */,
 				B2D292BA2C3BA9150093F4DA /* Events */,
 				B2D292B02C3940160093F4DA /* Core */,
+				B2D294B02C3BF2D90093F4DA /* Renderer */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -126,6 +131,7 @@
 				B2D2928F2C3863600093F4DA /* Utils */,
 				B2D292862C381C8F0093F4DA /* Debug */,
 				B2D292B12C3940200093F4DA /* Core */,
+				B2D294B12C3BF2EB0093F4DA /* Renderer */,
 				B2D294A82C3BE21A0093F4DA /* Platform */,
 			);
 			path = Implementation;
@@ -256,6 +262,38 @@
 			path = MacOS;
 			sourceTree = "<group>";
 		};
+		B2D294B02C3BF2D90093F4DA /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				B2D294B52C3BF30B0093F4DA /* Renderer.hpp */,
+				B2D294B22C3BF2F80093F4DA /* Graphics */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		B2D294B12C3BF2EB0093F4DA /* Renderer */ = {
+			isa = PBXGroup;
+			children = (
+				B2D294B42C3BF30B0093F4DA /* Renderer.cpp */,
+				B2D294B32C3BF2FF0093F4DA /* Graphics */,
+			);
+			path = Renderer;
+			sourceTree = "<group>";
+		};
+		B2D294B22C3BF2F80093F4DA /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
+		B2D294B32C3BF2FF0093F4DA /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Graphics;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -264,6 +302,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
+				B2D294B72C3BF30B0093F4DA /* Renderer.hpp in Headers */,
 				B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */,
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
 				B2D294AC2C3BE22C0093F4DA /* MacWindow.hpp in Headers */,
@@ -350,6 +389,7 @@
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
 				B2D292C92C3BCD930093F4DA /* LayerStack.cpp in Sources */,
 				B2D292B42C3940320093F4DA /* Application.cpp in Sources */,
+				B2D294B62C3BF30B0093F4DA /* Renderer.cpp in Sources */,
 				B2D294A72C3BDEA40093F4DA /* Window.cpp in Sources */,
 				B2D294AD2C3BE22C0093F4DA /* MacWindow.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
