@@ -35,3 +35,5 @@
 #include <Events/ApplicationEvents.h>
 
 #include <Core/Application.hpp>
+#include <Core/MouseCodes.h>
+#include <Core/KeyCodes.h>
