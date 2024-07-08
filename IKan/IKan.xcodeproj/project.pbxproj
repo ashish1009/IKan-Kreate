@@ -29,6 +29,9 @@
 		B2D294B72C3BF30B0093F4DA /* Renderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294B52C3BF30B0093F4DA /* Renderer.hpp */; };
 		B2D294BB2C3BF63F0093F4DA /* RendererContext.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294BA2C3BF63F0093F4DA /* RendererContext.hpp */; };
 		B2D294EC2C3BF6C10093F4DA /* libGlad.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D294DA2C3BF66F0093F4DA /* libGlad.a */; };
+		B2D294EF2C3BF6FB0093F4DA /* Factories.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294EE2C3BF6FB0093F4DA /* Factories.hpp */; };
+		B2D294F02C3BF6FB0093F4DA /* Factories.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D294ED2C3BF6FB0093F4DA /* Factories.cpp */; };
+		B2D294F32C3BF7060093F4DA /* Specifications.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294F22C3BF7060093F4DA /* Specifications.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -88,6 +91,9 @@
 		B2D294B52C3BF30B0093F4DA /* Renderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer.hpp; sourceTree = "<group>"; };
 		B2D294BA2C3BF63F0093F4DA /* RendererContext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererContext.hpp; sourceTree = "<group>"; };
 		B2D294D52C3BF66E0093F4DA /* Glad.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = Glad.xcodeproj; path = Glad/Glad.xcodeproj; sourceTree = "<group>"; };
+		B2D294ED2C3BF6FB0093F4DA /* Factories.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Factories.cpp; sourceTree = "<group>"; };
+		B2D294EE2C3BF6FB0093F4DA /* Factories.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Factories.hpp; sourceTree = "<group>"; };
+		B2D294F22C3BF7060093F4DA /* Specifications.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Specifications.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -297,6 +303,8 @@
 			isa = PBXGroup;
 			children = (
 				B2D294BA2C3BF63F0093F4DA /* RendererContext.hpp */,
+				B2D294F22C3BF7060093F4DA /* Specifications.hpp */,
+				B2D294EE2C3BF6FB0093F4DA /* Factories.hpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -304,6 +312,7 @@
 		B2D294B32C3BF2FF0093F4DA /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
+				B2D294ED2C3BF6FB0093F4DA /* Factories.cpp */,
 			);
 			path = Graphics;
 			sourceTree = "<group>";
@@ -324,8 +333,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
+				B2D294F32C3BF7060093F4DA /* Specifications.hpp in Headers */,
 				B2D294B72C3BF30B0093F4DA /* Renderer.hpp in Headers */,
 				B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */,
+				B2D294EF2C3BF6FB0093F4DA /* Factories.hpp in Headers */,
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
 				B2D294AC2C3BE22C0093F4DA /* MacWindow.hpp in Headers */,
 				B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */,
@@ -421,6 +432,7 @@
 			files = (
 				B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */,
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
+				B2D294F02C3BF6FB0093F4DA /* Factories.cpp in Sources */,
 				B2D292C92C3BCD930093F4DA /* LayerStack.cpp in Sources */,
 				B2D292B42C3940320093F4DA /* Application.cpp in Sources */,
 				B2D294B62C3BF30B0093F4DA /* Renderer.cpp in Sources */,
