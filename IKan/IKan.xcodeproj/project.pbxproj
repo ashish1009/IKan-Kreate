@@ -32,6 +32,8 @@
 		B2D294EF2C3BF6FB0093F4DA /* Factories.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294EE2C3BF6FB0093F4DA /* Factories.hpp */; };
 		B2D294F02C3BF6FB0093F4DA /* Factories.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D294ED2C3BF6FB0093F4DA /* Factories.cpp */; };
 		B2D294F32C3BF7060093F4DA /* Specifications.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294F22C3BF7060093F4DA /* Specifications.hpp */; };
+		B2D294F82C3BF7BD0093F4DA /* OpenGLRendererContext.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D294F72C3BF7BD0093F4DA /* OpenGLRendererContext.hpp */; };
+		B2D294F92C3BF7BD0093F4DA /* OpenGLRendererContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D294F62C3BF7BD0093F4DA /* OpenGLRendererContext.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -94,6 +96,8 @@
 		B2D294ED2C3BF6FB0093F4DA /* Factories.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Factories.cpp; sourceTree = "<group>"; };
 		B2D294EE2C3BF6FB0093F4DA /* Factories.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Factories.hpp; sourceTree = "<group>"; };
 		B2D294F22C3BF7060093F4DA /* Specifications.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Specifications.hpp; sourceTree = "<group>"; };
+		B2D294F62C3BF7BD0093F4DA /* OpenGLRendererContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRendererContext.cpp; sourceTree = "<group>"; };
+		B2D294F72C3BF7BD0093F4DA /* OpenGLRendererContext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLRendererContext.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -267,6 +271,7 @@
 		B2D294A82C3BE21A0093F4DA /* Platform */ = {
 			isa = PBXGroup;
 			children = (
+				B2D294F52C3BF7B30093F4DA /* OpenGL */,
 				B2D294A92C3BE2200093F4DA /* MacOS */,
 			);
 			path = Platform;
@@ -325,6 +330,15 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
+		B2D294F52C3BF7B30093F4DA /* OpenGL */ = {
+			isa = PBXGroup;
+			children = (
+				B2D294F62C3BF7BD0093F4DA /* OpenGLRendererContext.cpp */,
+				B2D294F72C3BF7BD0093F4DA /* OpenGLRendererContext.hpp */,
+			);
+			path = OpenGL;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -340,6 +354,7 @@
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
 				B2D294AC2C3BE22C0093F4DA /* MacWindow.hpp in Headers */,
 				B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */,
+				B2D294F82C3BF7BD0093F4DA /* OpenGLRendererContext.hpp in Headers */,
 				B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */,
 				B2D292B52C3940320093F4DA /* Application.hpp in Headers */,
 				B2D294BB2C3BF63F0093F4DA /* RendererContext.hpp in Headers */,
@@ -430,6 +445,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D294F92C3BF7BD0093F4DA /* OpenGLRendererContext.cpp in Sources */,
 				B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */,
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
 				B2D294F02C3BF6FB0093F4DA /* Factories.cpp in Sources */,

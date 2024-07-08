@@ -78,6 +78,9 @@ namespace IKan
     }
     SetResizable(m_data.specification.resizable);
     SetAtCenter();
+    
+    // Create the renderer context.
+    m_context = RendererContextFactory::Create(m_window);
   }
   
   MacWindow::~MacWindow()
@@ -233,7 +236,14 @@ namespace IKan
   
   void MacWindow::Update()
   {
-
+    IK_PERFORMANCE("MacWindow::Update");
+    
+    m_context->SwapBuffers();
+    glfwPollEvents();
+    
+    float currentFrameTime = static_cast<float>(glfwGetTime());
+    m_timeStep = currentFrameTime - m_lastFrameTime;
+    m_lastFrameTime = currentFrameTime;
   }
   
   void MacWindow::Maximize() const
