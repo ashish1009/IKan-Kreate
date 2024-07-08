@@ -15,7 +15,7 @@ namespace IKan
   /// This enum stores the module names of IKan Logs (Holds only IKan engine log module names)
 #define LogModule(f) \
 f(None) \
-f(Application) \
+f(Application) f(Layers) \
 
   /// Generates enum with elements from above MACRO. Also creates an array named "LogModuleString[]" that stores all
   /// the element of enum as const char* (string)

@@ -51,7 +51,14 @@ namespace IKan
       
       if (!m_minimized)
       {
-        
+        // Updating all the attached layer
+        {
+          IK_PERFORMANCE("Application::LayersUpdate");
+          for (Layer* layer : m_layers)
+          {
+            layer->OnUpdate(m_timeStep);
+          }
+        }
       }
     }
     IK_LOG_WARN("", "--------------------------------------------------------------------------");
@@ -66,7 +73,24 @@ namespace IKan
     // Flush the pending task after game loop ends
     FlushAfterGameLoop();
   }
+
+  void Application::Close()
+  {
+    IK_PROFILE();
+    IK_LOG_WARN(LogModule::Application, "Closing the Application");
+    m_isRunning = false;
+  }
+
+  void Application::PushLayer(Layer* layer)
+  {
+    m_layers.PushLayer(layer);
+  }
   
+  void Application::PopLayer(Layer* layer)
+  {
+    m_layers.PopLayer(layer);
+  }
+
   const std::string& Application::GetVersion()
   {
     return IKanVersion;

@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Core/TimeStep.hpp"
+#include "Core/LayerStack.hpp"
 #include "Events/ApplicationEvents.h"
 
 namespace IKan
@@ -45,6 +46,15 @@ namespace IKan
     void Run();
     /// This function closes the current applciation (IKan::Applciation) and ends the game loop
     void Close();
+
+    /// This function Pushes the layer of type IKan::Layer in Core Application layer stack.
+    /// - Note: Also attach the layer
+    /// - Parameter layer: Pointer of layer pointer to be added
+    void PushLayer(Layer* layer);
+    /// This function Pops the layer of type IKan::Layer from Core Application layer stack.
+    /// - Note: Also detach the layer
+    /// - Parameter layer: Pointer of layer pointer to be removed
+    void PopLayer(Layer* layer);
 
     // Virtual APIs ---------------------------------------------------------------------------------------------------
     /// This function calls before game loop
@@ -101,6 +111,7 @@ namespace IKan
     bool m_minimized {false};
     ApplicationSpecification m_specification;
     TimeStep m_timeStep;
+    LayerStack m_layers;
 
     // Single Instance
     inline static Application* s_instance {nullptr};
