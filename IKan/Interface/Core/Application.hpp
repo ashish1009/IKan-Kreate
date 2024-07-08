@@ -112,6 +112,20 @@ namespace IKan
     /// This function flushes the pending task after game loop ends
     void FlushAfterGameLoop();
 
+    /// This function handles all the events of window. Application is dispatching the events and perform the interupt
+    /// actions
+    /// - Parameter event: event abstract type
+    void HandleEvents(Event& event);
+    /// This function dispatches in event dispatcher and trigger when window is closed
+    /// - Parameter windowCloseEvent: Window close event instacnce
+    bool WindowClose([[maybe_unused]] WindowCloseEvent& windowCloseEvent);
+    /// This function dispatches in event dispatcher and trigger when window is minimized
+    /// - Parameter windowMinimizeEvent: Window minimize event instacnce
+    bool WindowMinimize(WindowMinimizeEvent& windowMinimizeEvent);
+    /// This function dispatches in event dispatcher and trigger when window is mazimized
+    /// - Parameter windowMaximizeEvent: Window maximize event instacnce
+    bool WindowMaximize(WindowMaximizeEvent& windowMaximizeEvent);
+
     // Member Variables -----------------------------------------------------------------------------------------------
     bool m_isRunning {false};
     bool m_minimized {false};

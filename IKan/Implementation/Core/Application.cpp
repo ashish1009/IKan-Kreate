@@ -23,6 +23,9 @@ namespace IKan
     
     // Create the window
     m_window = WindowFactory::Create(m_specification.windowSpecification);
+    
+    // Set the application callback to window
+    m_window->SetEventFunction(IK_BIND_EVENT_FN(Application::HandleEvents));
   }
   
   Application::~Application()
@@ -139,5 +142,42 @@ namespace IKan
     IK_PROFILE();
     // Shutdown the client side application
     OnShutdown();
+  }
+  
+  void Application::HandleEvents(Event &event)
+  {
+    EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<WindowCloseEvent>(IK_BIND_EVENT_FN(Application::WindowClose));
+    dispatcher.Dispatch<WindowMinimizeEvent>(IK_BIND_EVENT_FN(Application::WindowMinimize));
+    dispatcher.Dispatch<WindowMaximizeEvent>(IK_BIND_EVENT_FN(Application::WindowMaximize));
+    
+    // Event Handler for all layers
+    for (Layer* layer : m_layers)
+    {
+      layer->OnEvent(event);
+    }
+    
+    // Client side event handler funciton
+    OnEvent(event);
+  }
+  
+  bool Application::WindowClose([[maybe_unused]] WindowCloseEvent& windowCloseEvent)
+  {
+    IK_PROFILE();
+    IK_LOG_WARN(LogModule::Application, "Closing the Window from application");
+    Close();
+    return false;
+  }
+  
+  bool Application::WindowMinimize(WindowMinimizeEvent& windowMinimizeEvent)
+  {
+    m_minimized = windowMinimizeEvent.IsMinimized();
+    return false;
+  }
+  
+  bool Application::WindowMaximize(WindowMaximizeEvent &windowResizeEvent)
+  {
+    m_minimized = false;
+    return false;
   }
 } // namespace IKan
