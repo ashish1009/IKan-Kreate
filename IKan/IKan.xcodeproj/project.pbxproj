@@ -49,6 +49,7 @@
 		B2D292C02C3BB2B90093F4DA /* MouseEvents.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MouseEvents.h; sourceTree = "<group>"; };
 		B2D292C12C3BB5A60093F4DA /* TimeStep.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = TimeStep.cpp; sourceTree = "<group>"; };
 		B2D292C22C3BB5A60093F4DA /* TimeStep.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TimeStep.hpp; sourceTree = "<group>"; };
+		B2D292C42C3BCB960093F4DA /* DesignHelper.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = DesignHelper.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +148,7 @@
 			children = (
 				B2D2929A2C39144F0093F4DA /* Defines.h */,
 				B2D292A32C391CE90093F4DA /* AssertAPIs.h */,
+				B2D292C42C3BCB960093F4DA /* DesignHelper.h */,
 			);
 			path = Base;
 			sourceTree = "<group>";
