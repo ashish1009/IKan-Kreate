@@ -36,22 +36,22 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 
 ## Road Map
 - Application and Layer
-  - # Logger
-  - # Timer
-  - # Core Application
-  - # Base Layer 
-  - # Layer Manager
+  - ~ Logger
+  - ~ Timer
+  - ~ Core Application
+  - ~ Base Layer 
+  - ~ Layer Manager
 - Window creation
-  - # Time step 
-  - # Even Handler
-  - # Window class
+  - ~ Time step 
+  - ~ Even Handler
+  - ~ Window class
   - Input Handler
 - GUI Layer 
   - ImGui Layer
 - Renderer
-  - # Renderer Base class
+  - ~ Renderer Base class
 - Graphic APIs
-    - # Renderer Context
+    - ~ Renderer Context
     - Renderer API
     - Rednerer Buffers
     - Pipeline
