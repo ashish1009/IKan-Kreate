@@ -26,6 +26,12 @@ namespace IKan
     
     // Set the application callback to window
     m_window->SetEventFunction(IK_BIND_EVENT_FN(Application::HandleEvents));
+    
+    // Start game loop if window is created
+    if (m_window)
+    {
+      m_isRunning = true;
+    }
   }
   
   Application::~Application()
@@ -65,6 +71,13 @@ namespace IKan
             layer->OnUpdate(m_timeStep);
           }
         }
+        
+        // Update the window swap buffers
+        m_window->Update();
+        
+        // Store the frame time difference
+        m_timeStep = m_window->GetTimestep();
+
       }
     }
     IK_LOG_WARN("", "--------------------------------------------------------------------------");
