@@ -15,12 +15,79 @@ namespace IKan
 {
   MacWindow::MacWindow(const WindowSpecification& windowSpec)
   {
+    IK_PROFILE();
+    IK_LOG_INFO(LogModule::Window, "Creating MAC OS GLFW Window.");
 
+    // Copy the specification to the window data.
+    m_data.specification = windowSpec;
+
+    // Initialize the GLFW Library.
+    [[maybe_unused]] bool glfwInitialized = GLFW_TRUE == glfwInit();
+    IK_ASSERT(glfwInitialized, "Can not initialise the GLFW library !");
+    
+    // Configure the GLFW Context Version.
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 4);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
+    glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
+    glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
+    glfwWindowHint(GLFW_SAMPLES, 100);
+    
+    // If flag is true then this removes titlebar.
+    glfwWindowHint(GLFW_DECORATED, !m_data.specification.hideTitleBar);
+
+    // Params to create the GLFW window
+    int32_t width = static_cast<int32_t>(m_data.specification.width);
+    int32_t height = static_cast<int32_t>(m_data.specification.height);
+    
+    IK_ASSERT(width > 0 or height > 0, "Window size can not be zero !");
+    
+    GLFWmonitor* primaryMonitor = nullptr;
+    GLFWwindow* sharedMonitor = nullptr;
+    
+    // Overwrite the data if full screen is enabled.
+    if (m_data.specification.isFullScreen)
+    {
+      primaryMonitor = glfwGetPrimaryMonitor();
+      const GLFWvidmode* mode = glfwGetVideoMode(primaryMonitor);
+      width = mode->width;
+      height = mode->height;
+    }
+    
+    // Create the GLFW Window.
+    IK_ASSERT(0 != width or 0 != height, "Null width and height of window !");
+    m_window = glfwCreateWindow(width, height, m_data.specification.title.data(), primaryMonitor, sharedMonitor);
+    
+    // If window is not created succesfully then terminate!
+    if (nullptr == m_window)
+    {
+      glfwTerminate();
+      IK_ASSERT(false, "Unable to create the window !");
+    }
+    glfwSwapInterval(1);
+    
+    // Set the user defined pointer to GLFW Window, this pointer will be retrieved when an interrupt will be triggered.
+    glfwSetWindowUserPointer(m_window, &m_data);
+    
+    // Set GLFW callbacks.
+    SetEventCallbacks();
+    
+    // Window controlls from client.
+    if (m_data.specification.startMaximized)
+    {
+      Maximize();
+    }
+    SetResizable(m_data.specification.resizable);
+    SetAtCenter();
   }
   
   MacWindow::~MacWindow()
   {
-
+    IK_PROFILE();
+    IK_LOG_WARN(LogModule::Window, "Destroying MAC OS GLFW Window.");
+    
+    // Destroy GLFW Window
+    glfwTerminate();
+    glfwDestroyWindow(m_window);
   }
   
   void MacWindow::SetEventCallbacks()

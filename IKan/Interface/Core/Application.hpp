@@ -9,6 +9,7 @@
 
 #include "Core/TimeStep.hpp"
 #include "Core/LayerStack.hpp"
+#include "Core/Window.hpp"
 #include "Events/ApplicationEvents.h"
 
 namespace IKan
@@ -16,7 +17,8 @@ namespace IKan
   /// This structure stores the application specification data
   struct ApplicationSpecification
   {
-    
+    std::string name {"IKan"};
+    WindowSpecification windowSpecification;
   };
   
   /// This class is the base Application for IKan Engine.
@@ -79,6 +81,10 @@ namespace IKan
     bool IsMinimized() const;
     /// This function returns the time step of frame
     TimeStep GetTimestep() const;
+    /// This fuinction returns the native pointer Window native as void
+    void* GetNativeWindow() const;
+    /// This fuinction returns the iKan Window Instance as reference
+    Window* GetWindow() const;
 
     // Static APIs ----------------------------------------------------------------------------------------------------
     /// This function returns the IKan version
@@ -112,6 +118,7 @@ namespace IKan
     ApplicationSpecification m_specification;
     TimeStep m_timeStep;
     LayerStack m_layers;
+    Scope<Window> m_window;
 
     // Single Instance
     inline static Application* s_instance {nullptr};

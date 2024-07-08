@@ -8,7 +8,7 @@
 #include "Application.hpp"
 
 /// IKan Engine Version
-static const std::string IKanVersion = "1.0";
+static const std::string IKanVersion = "1.1";
 
 namespace IKan
 {
@@ -20,6 +20,9 @@ namespace IKan
     s_instance = this;
     
     IK_LOG_INFO(LogModule::Application, "Initializing Core application data. Version : {0}", IKanVersion);
+    
+    // Create the window
+    m_window = WindowFactory::Create(m_specification.windowSpecification);
   }
   
   Application::~Application()
@@ -113,6 +116,15 @@ namespace IKan
   TimeStep Application::GetTimestep() const
   {
     return m_timeStep;
+  }
+  void* Application::GetNativeWindow() const
+  {
+    return m_window->GetNativeWindow();
+  }
+  
+  Window* Application::GetWindow() const
+  {
+    return m_window.get();
   }
 
   void Application::FlushBeforeGameLoop()
