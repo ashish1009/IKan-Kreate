@@ -87,9 +87,7 @@ namespace IKan
           for (Layer* layer : m_layers)
           {
             layer->OnUpdate(m_timeStep);
-          }
-          
-          Renderer::Clear({0.2, 0.1, 0.3, 1.0});
+          }          
         }
         
         // Cliient virtual override update function

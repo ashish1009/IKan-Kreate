@@ -335,6 +335,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/Kreator",
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
@@ -354,6 +355,7 @@
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "${PROJECT_DIR}/PrefixHeader.pch";
 				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/Kreator",
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",

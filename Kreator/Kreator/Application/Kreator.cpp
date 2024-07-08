@@ -6,6 +6,60 @@
 //
 
 #include "Kreator.hpp"
+#include "Layers/RendererLayer.hpp"
+
+namespace Kreator
+{
+  /// IKan Engine Version
+  static const std::string KreatorVersion = "1.1";
+  
+  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec)
+  : Application(appSpec)
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("KreatorApp", "Creating 'Kreator' Application. Version : {0}", KreatorVersion);
+  }
+  
+  KreatorApp::~KreatorApp()
+  {
+    IK_PROFILE();
+    IK_LOG_WARN("KreatorApp", "Destroying 'Kreator' Application");
+  }
+  
+  void KreatorApp::OnInit()
+  {
+    IK_PROFILE();
+
+    // Creating Renderer layer and push in application stack
+    m_rendererLayer = CreateScope<RendererLayer>();
+    PushLayer(m_rendererLayer.get());
+  }
+  
+  void KreatorApp::OnShutdown()
+  {
+    IK_PROFILE();
+    IK_LOG_WARN("KreatorApp", "Shutting Down the 'Kreator' Application");
+
+    // Removing Renderer layer from application stack and destroying its instance
+    PopLayer(m_rendererLayer.get());
+    m_rendererLayer.reset();
+  }
+  
+  void KreatorApp::OnUpdate(TimeStep ts)
+  {
+    IK_PERFORMANCE("KreatorApp::OnUpdate");
+  }
+  
+  void KreatorApp::OnImGuiRender()
+  {
+    IK_PERFORMANCE("KreatorApp::OnImGuiRender");
+  }
+  
+  const std::string& KreatorApp::GetVersion()
+  {
+    return KreatorVersion;
+  }
+} // namespace Kreator
 
 Scope<Application> CreateApplication(int argc, const char * argv[])
 {
@@ -30,5 +84,5 @@ Scope<Application> CreateApplication(int argc, const char * argv[])
   // Ini file
   applicationSpec.iniFilePath = "../../../Kreator/Kreator.ini";
 
-  return Application::CreateApplication<Application>(applicationSpec);
+  return Application::CreateApplication<Kreator::KreatorApp>(applicationSpec);
 }
