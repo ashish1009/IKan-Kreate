@@ -68,6 +68,8 @@ int main(int argc, const char * argv[])
   {
     std::unique_ptr<Application> application = CreateApplication(argc, argv);
     IK_ASSERT(application, "Application is not created");
+    
+    application->Run();
   }
   
   // Shutdown the Core Engine

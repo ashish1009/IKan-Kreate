@@ -7,7 +7,10 @@
 
 #pragma once
 
-namespace IKan 
+#include "Core/TimeStep.hpp"
+#include "Events/ApplicationEvents.h"
+
+namespace IKan
 {
   /// This structure stores the application specification data
   struct ApplicationSpecification
@@ -34,10 +37,38 @@ namespace IKan
     virtual ~Application();
     
     // Fundamental APIs -----------------------------------------------------------------------------------------------
+    /// This function runs the Game loop of the application. This function is responsible for:
+    ///   - Updating the Application
+    ///   - Updating layers
+    ///   - Updating the window and swap the buffers
+    ///   - Render the GUI 'RenderGui()'
+    void Run();
+    /// This function closes the current applciation (IKan::Applciation) and ends the game loop
+    void Close();
 
     // Virtual APIs ---------------------------------------------------------------------------------------------------
+    /// This function calls before game loop
+    virtual void OnInit() {}
+    /// This function calls after game loop
+    virtual void OnShutdown() {}
+    /// This function calls inside Game Loop Running
+    /// - Parameter ts: Time step for each frame
+    virtual void OnUpdate(TimeStep ts) {}
+    /// This function calls when an event triggers
+    /// - Parameter event: Triggered Events
+    virtual void OnEvent(Event& event) {}
+    /// This function calls inside Game Loop under ImGui Layer
+    virtual void OnImGuiRender() {}
 
     // Getters --------------------------------------------------------------------------------------------------------
+    /// This function returns the specification of application
+    const ApplicationSpecification& GetSpecification() const;
+    /// This function returns if application is running
+    bool IsRunning() const;
+    /// This function returns if application window is minimized
+    bool IsMinimized() const;
+    /// This function returns the time step of frame
+    TimeStep GetTimestep() const;
 
     // Static APIs ----------------------------------------------------------------------------------------------------
     /// This function returns the IKan version
@@ -60,11 +91,18 @@ namespace IKan
 
   private:
     // Member Functions -----------------------------------------------------------------------------------------------
+    /// This function flushes the pending task before game loop starts
+    void FlushBeforeGameLoop();
+    /// This function flushes the pending task after game loop ends
+    void FlushAfterGameLoop();
 
     // Member Variables -----------------------------------------------------------------------------------------------
+    bool m_isRunning {false};
+    bool m_minimized {false};
     ApplicationSpecification m_specification;
+    TimeStep m_timeStep;
 
     // Single Instance
-    inline static Application* s_instance;
+    inline static Application* s_instance {nullptr};
   };
 } // namespace IKan
