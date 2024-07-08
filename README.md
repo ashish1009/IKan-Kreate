@@ -52,7 +52,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
   - ~ Time step 
   - ~ Even Handler
   - ~ Window class
-  - Input Handler
+  - ~ Input Handler
 - GUI Layer 
   - ~ ImGui Layer
 - Renderer
