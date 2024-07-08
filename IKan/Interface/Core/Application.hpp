@@ -12,6 +12,7 @@
 #include "Core/Window.hpp"
 #include "Events/ApplicationEvents.h"
 #include "Renderer/Renderer.hpp"
+#include "UI/ImGuiLayer.hpp"
 
 namespace IKan
 {
@@ -21,6 +22,7 @@ namespace IKan
     std::string name {"IKan"};
     WindowSpecification windowSpecification;
     RendererType rendererType {RendererType::Invalid};
+    std::filesystem::path iniFilePath {};
   };
   
   /// This class is the base Application for IKan Engine.
@@ -87,6 +89,8 @@ namespace IKan
     void* GetNativeWindow() const;
     /// This fuinction returns the iKan Window Instance as reference
     Window* GetWindow() const;
+    /// This fuinction returns the ImGui Layer instance reference
+    UI::ImGuiLayer& GetImGuiLayer() const;
 
     // Static APIs ----------------------------------------------------------------------------------------------------
     /// This function returns the IKan version
@@ -127,6 +131,8 @@ namespace IKan
     /// This function dispatches in event dispatcher and trigger when window is mazimized
     /// - Parameter windowMaximizeEvent: Window maximize event instacnce
     bool WindowMaximize(WindowMaximizeEvent& windowMaximizeEvent);
+    /// This function begin the ImGui Renderer and render ImGui for all the layers and finally ends the imgui rendering
+    void RenderImGui();
 
     // Member Variables -----------------------------------------------------------------------------------------------
     bool m_isRunning {false};
@@ -135,6 +141,7 @@ namespace IKan
     TimeStep m_timeStep;
     LayerStack m_layers;
     Scope<Window> m_window;
+    Ref<UI::ImGuiLayer> m_imguiLayer;
 
     // Single Instance
     inline static Application* s_instance {nullptr};

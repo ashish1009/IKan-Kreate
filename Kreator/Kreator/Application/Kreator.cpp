@@ -26,6 +26,9 @@ Scope<Application> CreateApplication(int argc, const char * argv[])
 #else
   applicationSpec.windowSpecification.isFullScreen = true;
 #endif
+  
+  // Ini file
+  applicationSpec.iniFilePath = "../../../Kreator/Kreator.ini";
 
   return Application::CreateApplication<Application>(applicationSpec);
 }

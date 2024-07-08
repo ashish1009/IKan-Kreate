@@ -36,6 +36,11 @@ namespace IKan
       m_isRunning = true;
     }
     
+    // Initialize the ImGui Layer
+    m_imguiLayer = CreateRef<UI::ImGuiLayer>(m_window.get());
+    m_layers.PushOverlay(m_imguiLayer.get());
+    m_imguiLayer->SetIniFilePath(m_specification.iniFilePath);
+
     // Initialize the Renderer
     Renderer::Initialize();
   }
@@ -47,6 +52,8 @@ namespace IKan
 
     m_window.reset();
     Renderer::Shutdown();
+    m_layers.PopOverlay(m_imguiLayer.get());
+    
     s_instance = nullptr;
   }
   
@@ -79,6 +86,15 @@ namespace IKan
             layer->OnUpdate(m_timeStep);
           }
         }
+        
+        // Cliient virtual override update function
+        {
+          IK_PERFORMANCE("Application::ClientUpdate");
+          OnUpdate(m_timeStep);
+        }
+
+        // Render the Gui on Renderer thread
+        RenderImGui();
         
         // Update the window swap buffers
         m_window->Update();
@@ -150,6 +166,11 @@ namespace IKan
   {
     return m_window.get();
   }
+  UI::ImGuiLayer& Application::GetImGuiLayer() const
+  {
+    IK_ASSERT(m_imguiLayer, "ImGui Layer is not created yet !!");
+    return *m_imguiLayer.get();
+  }
 
   void Application::FlushBeforeGameLoop()
   {
@@ -200,5 +221,22 @@ namespace IKan
   {
     m_minimized = false;
     return false;
+  }
+  
+  void Application::RenderImGui()
+  {
+    IK_ASSERT(m_imguiLayer, "ImGui Layer is not created yet !!");
+    
+    m_imguiLayer->Begin();
+    
+    // Render Imgui for all layers
+    for (Layer* layer : m_layers)
+    {
+      layer->OnImGuiRender();
+    }
+    
+    ImGui::ShowDemoWindow();
+    
+    m_imguiLayer->End();
   }
 } // namespace IKan
