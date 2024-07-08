@@ -15,6 +15,9 @@ namespace IKan
 #define IK_ENABLE_LOG
 #define IK_DEBUG
 #endif
+  
+  // MACRO to execute render commands in a queue
+#define RENDER_COMMAND_QUEUE 1
 
   // This MACRO Shifts the LSB bit of number 1 at position x
 #define BIT(x) (1 << x)

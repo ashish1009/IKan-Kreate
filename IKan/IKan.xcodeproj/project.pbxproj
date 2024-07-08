@@ -39,6 +39,8 @@
 		B2D296782C3C069B0093F4DA /* libUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2951B2C3C00560093F4DA /* libUI.a */; };
 		B2D2967B2C3C0AEA0093F4DA /* Input.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2967A2C3C0AEA0093F4DA /* Input.hpp */; };
 		B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D296792C3C0AEA0093F4DA /* MacInput.cpp */; };
+		B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2968B2C3C15680093F4DA /* RenderCommandQueue.cpp */; };
+		B2D2968E2C3C15680093F4DA /* RenderCommandQueue.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2968C2C3C15680093F4DA /* RenderCommandQueue.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -77,7 +79,7 @@
 		B2D292922C38637E0093F4DA /* FileSystemUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FileSystemUtils.hpp; sourceTree = "<group>"; };
 		B2D292952C3863F30093F4DA /* StringUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = StringUtils.cpp; sourceTree = "<group>"; };
 		B2D292962C3863F30093F4DA /* StringUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = StringUtils.hpp; sourceTree = "<group>"; };
-		B2D2929A2C39144F0093F4DA /* Defines.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Defines.h; sourceTree = "<group>"; };
+		B2D2929A2C39144F0093F4DA /* Configurations.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Configurations.h; sourceTree = "<group>"; };
 		B2D2929B2C3915BF0093F4DA /* LoggerAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LoggerAPIs.h; sourceTree = "<group>"; };
 		B2D292A32C391CE90093F4DA /* AssertAPIs.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AssertAPIs.h; sourceTree = "<group>"; };
 		B2D292A42C391E6E0093F4DA /* Timer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Timer.cpp; sourceTree = "<group>"; };
@@ -115,6 +117,8 @@
 		B2D296752C3C01D40093F4DA /* ImGuiLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiLayer.hpp; sourceTree = "<group>"; };
 		B2D296792C3C0AEA0093F4DA /* MacInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MacInput.cpp; sourceTree = "<group>"; };
 		B2D2967A2C3C0AEA0093F4DA /* Input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
+		B2D2968B2C3C15680093F4DA /* RenderCommandQueue.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = RenderCommandQueue.cpp; sourceTree = "<group>"; };
+		B2D2968C2C3C15680093F4DA /* RenderCommandQueue.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RenderCommandQueue.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,7 +225,7 @@
 		B2D292992C39143C0093F4DA /* Base */ = {
 			isa = PBXGroup;
 			children = (
-				B2D2929A2C39144F0093F4DA /* Defines.h */,
+				B2D2929A2C39144F0093F4DA /* Configurations.h */,
 				B2D292A32C391CE90093F4DA /* AssertAPIs.h */,
 				B2D292C42C3BCB960093F4DA /* DesignHelper.h */,
 			);
@@ -313,6 +317,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D294B52C3BF30B0093F4DA /* Renderer.hpp */,
+				B2D2968C2C3C15680093F4DA /* RenderCommandQueue.hpp */,
 				B2D294B22C3BF2F80093F4DA /* Graphics */,
 			);
 			path = Renderer;
@@ -322,6 +327,7 @@
 			isa = PBXGroup;
 			children = (
 				B2D294B42C3BF30B0093F4DA /* Renderer.cpp */,
+				B2D2968B2C3C15680093F4DA /* RenderCommandQueue.cpp */,
 				B2D294B32C3BF2FF0093F4DA /* Graphics */,
 			);
 			path = Renderer;
@@ -393,6 +399,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D2968E2C3C15680093F4DA /* RenderCommandQueue.hpp in Headers */,
 				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
 				B2D2967B2C3C0AEA0093F4DA /* Input.hpp in Headers */,
 				B2D294F32C3BF7060093F4DA /* Specifications.hpp in Headers */,
@@ -516,6 +523,7 @@
 				B2D294AD2C3BE22C0093F4DA /* MacWindow.cpp in Sources */,
 				B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
+				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
 				B2D296772C3C01D40093F4DA /* ImGuiLayer.cpp in Sources */,
 				B2D292A62C391E6E0093F4DA /* Timer.cpp in Sources */,

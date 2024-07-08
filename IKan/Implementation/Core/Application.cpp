@@ -8,7 +8,7 @@
 #include "Application.hpp"
 
 /// IKan Engine Version
-static const std::string IKanVersion = "1.2";
+static const std::string IKanVersion = "1.3";
 
 namespace IKan
 {
@@ -234,8 +234,6 @@ namespace IKan
     {
       layer->OnImGuiRender();
     }
-    
-    ImGui::ShowDemoWindow();
     
     m_imguiLayer->End();
   }

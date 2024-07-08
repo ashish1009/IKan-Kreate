@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Renderer/RenderCommandQueue.hpp"
+
 namespace IKan
 {
   /// Data type of Renderer IDs

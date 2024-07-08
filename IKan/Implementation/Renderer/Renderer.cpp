@@ -33,11 +33,13 @@ namespace IKan
   struct RendererData
   {
     RendererType rendererType {RendererType::Invalid};
+    Scope<RenderCommandQueue> commandQueue;
 
     /// This function destroys the renderer data
     void Shutdown()
     {
       rendererType = RendererType::Invalid;
+      commandQueue.reset();
     }
   };
   static RendererData s_rendererData;
@@ -56,6 +58,9 @@ namespace IKan
                       "'RendererType should not be RendererType::Invalid'");
       IK_ASSERT(false , "Renderer API type is not set")
     }
+    
+    // Create Render Command Queue before using any Renderer APIs
+    s_rendererData.commandQueue = CreateScope<RenderCommandQueue>();
   }
   void Renderer::Shutdown()
   {
