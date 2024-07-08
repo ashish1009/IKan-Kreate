@@ -32,7 +32,7 @@ Kreator is an editor used to develop games using IKan Library and other submodul
 ## Release
 v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v1.0.1.0 : Application and layer
-- v1.1.1.0 : Window
+- v1.1.1.0 : GLFW Window
 
 ## Road Map
 - Application and Layer
@@ -112,3 +112,6 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 ## TODO
 
 ## Output
+- Kreator
+
+![](/Kreator/Outputs/Kreator.png)
