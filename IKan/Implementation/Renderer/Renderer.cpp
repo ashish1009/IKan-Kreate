@@ -70,6 +70,7 @@ namespace IKan
   // Renderer API ----------------------------------------------------------------------------------------------------
   void Renderer::SetCurrentRendererAPI(RendererType rendererType)
   {
+    IK_PROFILE();
     IK_ASSERT(rendererType != RendererType::Invalid, "Invalid Renderer Type");
     IK_LOG_INFO(LogModule::Renderer, "Renderer Type is set to {0}", RendererUtils::GetRendererTypeString(rendererType));
     s_rendererData.rendererType = rendererType;

@@ -57,4 +57,6 @@
 #include <Core/LayerStack.hpp>
 #include <Core/Window.hpp>
 
+#include <UI/ImGuiLayer.hpp>
+
 #include <Renderer/Renderer.hpp>
