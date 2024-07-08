@@ -31,4 +31,6 @@
 #include <Utils/FileSystemUtils.hpp>
 #include <Utils/StringUtils.hpp>
 
+#include <Events/Events.h>
+
 #include <Core/Application.hpp>

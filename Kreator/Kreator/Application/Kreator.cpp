@@ -9,5 +9,8 @@
 
 std::unique_ptr<Application> CreateApplication(int argc, const char * argv[])
 {
-  return nullptr;
+  // Create application specification ------------------------------
+  ApplicationSpecification applicationSpec;
+
+  return Application::CreateApplication<Application>(applicationSpec);
 }

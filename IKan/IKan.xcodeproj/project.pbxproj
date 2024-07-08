@@ -40,6 +40,7 @@
 		B2D292A52C391E6E0093F4DA /* Timer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Timer.hpp; sourceTree = "<group>"; };
 		B2D292B22C3940320093F4DA /* Application.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Application.cpp; sourceTree = "<group>"; };
 		B2D292B32C3940320093F4DA /* Application.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Application.hpp; sourceTree = "<group>"; };
+		B2D292BB2C3BA9290093F4DA /* Events.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = Events.h; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +79,7 @@
 				B2D292992C39143C0093F4DA /* Base */,
 				B2D292902C3863660093F4DA /* Utils */,
 				B2D292812C381C7C0093F4DA /* Debug */,
+				B2D292BA2C3BA9150093F4DA /* Events */,
 				B2D292B02C3940160093F4DA /* Core */,
 			);
 			path = Interface;
@@ -155,6 +157,14 @@
 				B2D292B22C3940320093F4DA /* Application.cpp */,
 			);
 			path = Core;
+			sourceTree = "<group>";
+		};
+		B2D292BA2C3BA9150093F4DA /* Events */ = {
+			isa = PBXGroup;
+			children = (
+				B2D292BB2C3BA9290093F4DA /* Events.h */,
+			);
+			path = Events;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
