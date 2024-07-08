@@ -32,5 +32,6 @@
 #include <Utils/StringUtils.hpp>
 
 #include <Events/Events.h>
+#include <Events/ApplicationEvents.h>
 
 #include <Core/Application.hpp>

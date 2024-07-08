@@ -9,6 +9,22 @@
 
 namespace IKan
 {
+#define EVENT_CLASS_TYPE(type) \
+static EventType GetStaticType() { \
+return EventType::type; \
+} \
+virtual EventType GetType() const override { \
+return GetStaticType(); \
+} \
+virtual const char* GetName() const override { \
+return #type; \
+}
+  
+#define EVENT_CLASS_CATEGORY(category) \
+virtual int32_t GetCategoryFlags() const override { \
+return category; \
+}
+
   // API to bind class member function to std function pointer
 #define IK_BIND_EVENT_FN(fn) std::bind(&fn, this, std::placeholders::_1)
 
