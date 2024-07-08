@@ -21,7 +21,18 @@
 		B2D292B52C3940320093F4DA /* Application.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292B32C3940320093F4DA /* Application.hpp */; };
 		B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292C12C3BB5A60093F4DA /* TimeStep.cpp */; };
 		B2D292C92C3BCD930093F4DA /* LayerStack.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292C72C3BCD910093F4DA /* LayerStack.cpp */; };
+		B2D294A42C3BD0F90093F4DA /* libGLFW.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2939B2C3BD05D0093F4DA /* libGLFW.a */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		B2D2939A2C3BD05D0093F4DA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2D293962C3BD05C0093F4DA /* GLFW.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B2D293882C3BD05C0093F4DA;
+			remoteInfo = GLFW;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		B2D292702C38180E0093F4DA /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -54,6 +65,7 @@
 		B2D292C62C3BCD0A0093F4DA /* Layer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Layer.hpp; sourceTree = "<group>"; };
 		B2D292C72C3BCD910093F4DA /* LayerStack.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = LayerStack.cpp; sourceTree = "<group>"; };
 		B2D292C82C3BCD910093F4DA /* LayerStack.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LayerStack.hpp; sourceTree = "<group>"; };
+		B2D293962C3BD05C0093F4DA /* GLFW.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = GLFW.xcodeproj; path = GLFW/GLFW.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -61,6 +73,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D294A42C3BD0F90093F4DA /* libGLFW.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -73,7 +86,9 @@
 				B2D2927E2C3818430093F4DA /* PrefixHeader.pch */,
 				B2D2927F2C381C680093F4DA /* Interface */,
 				B2D292802C381C6D0093F4DA /* Implementation */,
+				B2D2937E2C3BD0440093F4DA /* Vendors */,
 				B2D292712C38180E0093F4DA /* Products */,
+				B2D294A32C3BD0F90093F4DA /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -191,6 +206,29 @@
 			path = Events;
 			sourceTree = "<group>";
 		};
+		B2D2937E2C3BD0440093F4DA /* Vendors */ = {
+			isa = PBXGroup;
+			children = (
+				B2D293962C3BD05C0093F4DA /* GLFW.xcodeproj */,
+			);
+			path = Vendors;
+			sourceTree = "<group>";
+		};
+		B2D293972C3BD05C0093F4DA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2939B2C3BD05D0093F4DA /* libGLFW.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B2D294A32C3BD0F90093F4DA /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -252,12 +290,28 @@
 			mainGroup = B2D292672C38180E0093F4DA;
 			productRefGroup = B2D292712C38180E0093F4DA /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = B2D293972C3BD05C0093F4DA /* Products */;
+					ProjectRef = B2D293962C3BD05C0093F4DA /* GLFW.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				B2D2926F2C38180E0093F4DA /* IKan */,
 			);
 		};
 /* End PBXProject section */
+
+/* Begin PBXReferenceProxy section */
+		B2D2939B2C3BD05D0093F4DA /* libGLFW.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libGLFW.a;
+			remoteRef = B2D2939A2C3BD05D0093F4DA /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
+/* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
 		B2D2926D2C38180E0093F4DA /* Sources */ = {
@@ -407,6 +461,7 @@
 				HEADER_SEARCH_PATHS = (
 					"${PROJECT_DIR}/Interface",
 					"${PROJECT_DIR}/Vendors/SpdLog/include",
+					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -427,6 +482,7 @@
 				HEADER_SEARCH_PATHS = (
 					"${PROJECT_DIR}/Interface",
 					"${PROJECT_DIR}/Vendors/SpdLog/include",
+					"${PROJECT_DIR}/Vendors/GLFW/GLFW/include",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
