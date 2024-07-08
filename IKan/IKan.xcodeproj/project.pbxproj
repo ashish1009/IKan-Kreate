@@ -37,6 +37,8 @@
 		B2D296762C3C01D40093F4DA /* ImGuiLayer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D296752C3C01D40093F4DA /* ImGuiLayer.hpp */; };
 		B2D296772C3C01D40093F4DA /* ImGuiLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D296742C3C01D40093F4DA /* ImGuiLayer.cpp */; };
 		B2D296782C3C069B0093F4DA /* libUI.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2951B2C3C00560093F4DA /* libUI.a */; };
+		B2D2967B2C3C0AEA0093F4DA /* Input.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2967A2C3C0AEA0093F4DA /* Input.hpp */; };
+		B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D296792C3C0AEA0093F4DA /* MacInput.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -111,6 +113,8 @@
 		B2D295162C3C00560093F4DA /* UI.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = UI.xcodeproj; path = UI/UI.xcodeproj; sourceTree = "<group>"; };
 		B2D296742C3C01D40093F4DA /* ImGuiLayer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiLayer.cpp; sourceTree = "<group>"; };
 		B2D296752C3C01D40093F4DA /* ImGuiLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiLayer.hpp; sourceTree = "<group>"; };
+		B2D296792C3C0AEA0093F4DA /* MacInput.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MacInput.cpp; sourceTree = "<group>"; };
+		B2D2967A2C3C0AEA0093F4DA /* Input.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Input.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +238,7 @@
 				B2D292C62C3BCD0A0093F4DA /* Layer.hpp */,
 				B2D292C82C3BCD910093F4DA /* LayerStack.hpp */,
 				B2D294A62C3BDE9F0093F4DA /* Window.hpp */,
+				B2D2967A2C3C0AEA0093F4DA /* Input.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -297,6 +302,7 @@
 		B2D294A92C3BE2200093F4DA /* MacOS */ = {
 			isa = PBXGroup;
 			children = (
+				B2D296792C3C0AEA0093F4DA /* MacInput.cpp */,
 				B2D294AA2C3BE22C0093F4DA /* MacWindow.cpp */,
 				B2D294AB2C3BE22C0093F4DA /* MacWindow.hpp */,
 			);
@@ -388,6 +394,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
+				B2D2967B2C3C0AEA0093F4DA /* Input.hpp in Headers */,
 				B2D294F32C3BF7060093F4DA /* Specifications.hpp in Headers */,
 				B2D294B72C3BF30B0093F4DA /* Renderer.hpp in Headers */,
 				B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */,
@@ -507,6 +514,7 @@
 				B2D294B62C3BF30B0093F4DA /* Renderer.cpp in Sources */,
 				B2D294A72C3BDEA40093F4DA /* Window.cpp in Sources */,
 				B2D294AD2C3BE22C0093F4DA /* MacWindow.cpp in Sources */,
+				B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
 				B2D296772C3C01D40093F4DA /* ImGuiLayer.cpp in Sources */,

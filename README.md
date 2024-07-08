@@ -54,7 +54,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
   - ~ Window class
   - Input Handler
 - GUI Layer 
-  - ImGui Layer
+  - ~ ImGui Layer
 - Renderer
   - ~ Renderer Base class
 - Graphic APIs
