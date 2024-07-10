@@ -15,6 +15,9 @@ namespace IKan
   class WindowResizeEvent : public Event
   {
   public:
+    /// Default virtual destructor
+    virtual ~WindowResizeEvent() = default;
+    
     /// This Constructs the event that set the new size of window
     /// - Parameters:
     ///  - width: width of new window:
@@ -59,6 +62,9 @@ namespace IKan
   class WindowCloseEvent : public Event
   {
   public:
+    /// Default virtual destructor
+    virtual ~WindowCloseEvent() = default;
+
     EVENT_CLASS_TYPE(WindowClose);
     EVENT_CLASS_CATEGORY(EventCategoryApplication);
   };

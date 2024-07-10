@@ -17,7 +17,7 @@ namespace IKan
 #ifdef IK_DEBUG
     /// This function returns the Renderer API Type in const char string_view
     /// - Parameter rendererType: renderer API type
-    std::string_view GetRendererTypeString(RendererType rendererType)
+    static std::string_view GetRendererTypeString(RendererType rendererType)
     {
       switch (rendererType)
       {

@@ -69,9 +69,9 @@ namespace IKan
     template<typename FuncT> static void Submit(FuncT&& func)
     {
 #if RENDER_COMMAND_QUEUE_ENABLED
-      auto renderCmd = [](void* ptr) 
+      static RenderCommandQueue::RenderCommandFn renderCmd = [](void* ptr)
       {
-        auto pFunc = (FuncT*)ptr;
+        FuncT* pFunc = (FuncT*)ptr;
         (*pFunc)();
         
         pFunc->~FuncT();

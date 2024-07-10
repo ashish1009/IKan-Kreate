@@ -22,6 +22,11 @@ namespace IKan
   // This MACRO Shifts the LSB bit of number 1 at position x
 #define BIT(x) (1 << x)
   
+  // Define a variable name with line number to avoide shadow variables
+#define CAT_(a, b) a ## b
+#define CAT(a, b) CAT_(a, b)
+#define VAR_NAME(Var) CAT(Var, __LINE__)
+  
   // Enum Creation Macro ---------------------------------------------------------------------------------------------
   /// Helper MACRO for Enum creation
 #define VAL(name) name ,
@@ -38,7 +43,7 @@ namespace IKan
   ///   CreateEnum(Module);
   ///
   ///   To get the string name
-  ///   std::string  name = ModuleString[static_cast<size_t>(Elem1)];
+  ///   std::string_view  name = ModuleString[static_cast<size_t>(Elem1)];
 #define CreateEnum(Name) \
 enum class Name { Name(VAL) }; \
 static const char* Name##String[] = { Name(STRING) }; \

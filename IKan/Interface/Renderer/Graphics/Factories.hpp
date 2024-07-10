@@ -21,12 +21,12 @@ namespace IKan
   /// This is the Renderer Context Factory
   struct RendererContextFactory
   {
-    /// This Function creates the renderer Context based on the renderer API supported by the Engine
+    /// This Function creates the renderer context instance based on the renderer API supported by the Engine
     /// - Parameter windowPtr: GLFW Window pointer
     [[nodiscard]] static Scope<RendererContext> Create(GLFWwindow* windowPtr);
   };
   
-  /// This is the factory class to create Renderer API instance based on the supported API
+  /// This Function creates the renderer API instance based on the renderer API supported by the Engine
   struct RendererAPIFactory
   {
     /// This function creates the Renderer API instance based on the Supported APIs

@@ -44,7 +44,7 @@ namespace IKan
       return;
     }
     
-    auto it = std::find(m_layers.begin(), m_layers.begin() + m_layerInsertIndex, layer);
+    std::vector<Layer*>::iterator it = std::find(m_layers.begin(), m_layers.begin() + m_layerInsertIndex, layer);
     if (it != m_layers.begin() + m_layerInsertIndex)
     {
       layer->OnDetach();
@@ -82,7 +82,7 @@ namespace IKan
     }
     
     // Search the layer from the stack the detach/delete it
-    if (auto it = std::find(m_layers.begin(), m_layers.end(), layer); it != m_layers.end())
+    if (std::vector<Layer*>::iterator it = std::find(m_layers.begin(), m_layers.end(), layer); it != m_layers.end())
     {
       layer->OnDetach();
       m_layers.erase(it);

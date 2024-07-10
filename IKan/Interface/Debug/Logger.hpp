@@ -42,7 +42,7 @@ f(UI) \
   {
     LogType type {LogType::Core};
     LogLevel level {LogLevel::Trace};
-    std::string_view name {"IKAN"};
+    std::string name {"IKAN"};
     std::filesystem::path saveDirectory {""};
     spdlog::sink_ptr overrideSink {nullptr};
     bool showOnConsole {false};

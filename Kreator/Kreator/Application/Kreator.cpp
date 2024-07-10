@@ -45,7 +45,7 @@ namespace Kreator
     m_rendererLayer.reset();
   }
   
-  void KreatorApp::OnUpdate(TimeStep ts)
+  void KreatorApp::OnUpdate([[maybe_unused]] TimeStep ts)
   {
     IK_PERFORMANCE("KreatorApp::OnUpdate");
   }
@@ -61,7 +61,7 @@ namespace Kreator
   }
 } // namespace Kreator
 
-Scope<Application> CreateApplication(int argc, const char * argv[])
+Scope<Application> CreateApplication([[maybe_unused]] int argc, [[maybe_unused]] const char * argv[])
 {
   // Create application specification ------------------------------
   ApplicationSpecification applicationSpec;

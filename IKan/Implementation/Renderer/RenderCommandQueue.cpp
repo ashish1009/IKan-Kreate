@@ -35,7 +35,7 @@ namespace IKan
     
     // Check memory overflow
     {
-      [[maybe_unused]] uint64_t memoryUsed = m_commandBufferPtr - m_commandBuffer;
+      [[maybe_unused]] uint64_t memoryUsed = static_cast<uint64_t>(m_commandBufferPtr - m_commandBuffer);
       [[maybe_unused]] uint64_t memoryFree = m_commandBufferSize - memoryUsed;;
       
       // TODO: IKan: Resize?

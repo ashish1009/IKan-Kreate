@@ -19,7 +19,7 @@ namespace IKan
   {
     /// This funcion converts the IKan logger level to spd logger level
     /// - Parameter level: IKan Logger level enum
-    spdlog::level::level_enum GetSpdLevel(LogLevel level)
+    static spdlog::level::level_enum GetSpdLevel(LogLevel level)
     {
       switch (level)
       {
@@ -36,7 +36,7 @@ namespace IKan
     
     /// This function returns the log type string from LogType enum.
     /// - Parameter type: Log type enum
-    std::string_view GetLogTypeString(LogType level)
+    static std::string_view GetLogTypeString(LogType level)
     {
       switch (level)
       {

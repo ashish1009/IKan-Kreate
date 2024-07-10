@@ -271,7 +271,7 @@ namespace IKan
   }
   void MacWindow::SetPosition(const glm::vec2& pos) const
   {
-    glfwSetWindowPos(m_window, pos.x, pos.y);
+    glfwSetWindowPos(m_window, static_cast<int32_t>(pos.x), static_cast<int32_t>(pos.y));
   }
   
   void MacWindow::SetResizable(bool resizable) const
@@ -287,10 +287,12 @@ namespace IKan
       return;
     }
     
-    m_data.specification.width = width;
-    m_data.specification.height = height;
+    m_data.specification.width = static_cast<uint32_t>(width);
+    m_data.specification.height = static_cast<uint32_t>(height);
     
-    glfwSetWindowSize(m_window, m_data.specification.width, m_data.specification.height);
+    glfwSetWindowSize(m_window, 
+                      static_cast<int32_t>(m_data.specification.width),
+                      static_cast<int32_t>(m_data.specification.height));
     SetAtCenter();
   }
   

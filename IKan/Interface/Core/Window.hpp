@@ -15,7 +15,7 @@ namespace IKan
   /// This structure stores the window specification data
   struct WindowSpecification
   {
-    std::string_view title {"IKan"};
+    std::string title {"IKan"};
     uint32_t width {1600}, height {900};
     bool isFullScreen {false};
     bool hideTitleBar {false};

@@ -61,8 +61,8 @@ namespace IKan
     const std::chrono::time_point<std::chrono::steady_clock> m_startTime;
     const char* m_functionName;
   };
-#define IK_PROFILE() IKan::ScopedTimer _scopedTimer__LINE__(__PRETTY_FUNCTION__);
-#define IK_NAMED_PROFILE(name) IKan::ScopedTimer _scopedTimer__LINE__(name);
+#define IK_PROFILE() IKan::ScopedTimer VAR_NAME(scopedTimer)(__PRETTY_FUNCTION__);
+#define IK_NAMED_PROFILE(name) IKan::ScopedTimer VAR_NAME(scopedTimer)(name);
 
   // Performance Profiler --------------------------------------------------------------------------------------------
   /// This class stores the runtime performance of a scope / function for each frame
@@ -112,6 +112,6 @@ namespace IKan
     Timer m_timer;
   };
   
-#define IK_PERFORMANCE(name) IKan::ScopePerfTimer timer__LINE__(name);
-#define IK_PERFORMANCE_FUNC() IKan::ScopePerfTimer timer__LINE__(__PRETTY_FUNCTION__);
+#define IK_PERFORMANCE(name) IKan::ScopePerfTimer VAR_NAME(timer)(name);
+#define IK_PERFORMANCE_FUNC() IKan::ScopePerfTimer VAR_NAME(timer)(__PRETTY_FUNCTION__);
 } // namespace IKan

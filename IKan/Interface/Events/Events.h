@@ -52,6 +52,9 @@ return category; \
   class Event
   {
   public:
+    /// Default virtual destructor
+    virtual ~Event() = default;
+    
     // Virtual APIs --------------------------------------------------------------------------------------------------
     /// This function returns the type of triggered Event. e.g. EventType::WindowClosed...
     virtual EventType GetType() const = 0;

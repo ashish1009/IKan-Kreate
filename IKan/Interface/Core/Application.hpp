@@ -69,10 +69,10 @@ namespace IKan
     virtual void OnShutdown() {}
     /// This function calls inside Game Loop Running
     /// - Parameter ts: Time step for each frame
-    virtual void OnUpdate(TimeStep ts) {}
+    virtual void OnUpdate([[maybe_unused]] TimeStep ts) {}
     /// This function calls when an event triggers
     /// - Parameter event: Triggered Events
-    virtual void OnEvent(Event& event) {}
+    virtual void OnEvent([[maybe_unused]] Event& event) {}
     /// This function calls inside Game Loop under ImGui Layer
     virtual void OnImGuiRender() {}
 

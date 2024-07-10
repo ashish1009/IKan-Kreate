@@ -45,14 +45,14 @@ namespace Kreator
     IK_LOG_TRACE("RendererLayer", "Detaching '{0} Layer' from application", GetName());
   }
   
-  void RendererLayer::OnUpdate(TimeStep ts)
+  void RendererLayer::OnUpdate([[maybe_unused]] TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
     Renderer::Clear({0.2, 0.1, 0.3, 1.0});
   }
   
-  void RendererLayer::OnEvent(Event& event)
+  void RendererLayer::OnEvent([[maybe_unused]] Event& event)
   {
     
   }

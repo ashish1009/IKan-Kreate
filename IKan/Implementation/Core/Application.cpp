@@ -229,7 +229,7 @@ namespace IKan
     return false;
   }
   
-  bool Application::WindowMaximize(WindowMaximizeEvent &windowResizeEvent)
+  bool Application::WindowMaximize([[maybe_unused]] WindowMaximizeEvent &windowResizeEvent)
   {
     m_minimized = false;
     return false;

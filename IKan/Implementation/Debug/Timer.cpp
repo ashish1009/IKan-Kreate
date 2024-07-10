@@ -83,7 +83,7 @@ namespace IKan
   }
   ScopePerfTimer::~ScopePerfTimer()
   {
-    float time = m_timer.ElapsedMiliSeconds();
+    float time = static_cast<float>(m_timer.ElapsedMiliSeconds());
     PerformanceProfiler::Get().SetPerFrameTiming(m_name, time);
   }
 } // namespace IKan
