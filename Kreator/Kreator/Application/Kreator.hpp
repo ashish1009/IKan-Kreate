@@ -9,6 +9,12 @@
 
 using namespace IKan;
 
+/// Function prototype for creating application
+/// - Parameters:
+///   - argc: Argument count
+///   - argv: Arguments array
+Scope<Application> CreateApplication([[maybe_unused]] int argc, [[maybe_unused]] const char * argv[]);
+
 namespace Kreator
 {
   /// This class stores the Kreator Applicaiton
