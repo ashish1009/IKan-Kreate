@@ -44,6 +44,8 @@
 		B2D296952C3C19900093F4DA /* RendererAPI.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D296932C3C19900093F4DA /* RendererAPI.hpp */; };
 		B2D296982C3C19E20093F4DA /* OpenGLRendererAPI.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D296962C3C19E20093F4DA /* OpenGLRendererAPI.cpp */; };
 		B2D296992C3C19E20093F4DA /* OpenGLRendererAPI.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D296972C3C19E20093F4DA /* OpenGLRendererAPI.hpp */; };
+		B2D296A02C3EE67E0093F4DA /* Renderer2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2969E2C3EE67E0093F4DA /* Renderer2D.cpp */; };
+		B2D296A12C3EE67E0093F4DA /* Renderer2D.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2969F2C3EE67E0093F4DA /* Renderer2D.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +127,8 @@
 		B2D296932C3C19900093F4DA /* RendererAPI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererAPI.hpp; sourceTree = "<group>"; };
 		B2D296962C3C19E20093F4DA /* OpenGLRendererAPI.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLRendererAPI.cpp; sourceTree = "<group>"; };
 		B2D296972C3C19E20093F4DA /* OpenGLRendererAPI.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLRendererAPI.hpp; sourceTree = "<group>"; };
+		B2D2969E2C3EE67E0093F4DA /* Renderer2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Renderer2D.cpp; sourceTree = "<group>"; };
+		B2D2969F2C3EE67E0093F4DA /* Renderer2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Renderer2D.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -324,6 +328,7 @@
 			children = (
 				B2D294B52C3BF30B0093F4DA /* Renderer.hpp */,
 				B2D2968C2C3C15680093F4DA /* RenderCommandQueue.hpp */,
+				B2D2969F2C3EE67E0093F4DA /* Renderer2D.hpp */,
 				B2D294B22C3BF2F80093F4DA /* Graphics */,
 			);
 			path = Renderer;
@@ -334,6 +339,7 @@
 			children = (
 				B2D294B42C3BF30B0093F4DA /* Renderer.cpp */,
 				B2D2968B2C3C15680093F4DA /* RenderCommandQueue.cpp */,
+				B2D2969E2C3EE67E0093F4DA /* Renderer2D.cpp */,
 				B2D294B32C3BF2FF0093F4DA /* Graphics */,
 			);
 			path = Renderer;
@@ -417,6 +423,7 @@
 				B2D296952C3C19900093F4DA /* RendererAPI.hpp in Headers */,
 				B2D296762C3C01D40093F4DA /* ImGuiLayer.hpp in Headers */,
 				B2D294EF2C3BF6FB0093F4DA /* Factories.hpp in Headers */,
+				B2D296A12C3EE67E0093F4DA /* Renderer2D.hpp in Headers */,
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
 				B2D296992C3C19E20093F4DA /* OpenGLRendererAPI.hpp in Headers */,
 				B2D294AC2C3BE22C0093F4DA /* MacWindow.hpp in Headers */,
@@ -537,6 +544,7 @@
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
 				B2D296982C3C19E20093F4DA /* OpenGLRendererAPI.cpp in Sources */,
+				B2D296A02C3EE67E0093F4DA /* Renderer2D.cpp in Sources */,
 				B2D296772C3C01D40093F4DA /* ImGuiLayer.cpp in Sources */,
 				B2D292A62C391E6E0093F4DA /* Timer.cpp in Sources */,
 				B2D292842C381C8B0093F4DA /* Logger.cpp in Sources */,

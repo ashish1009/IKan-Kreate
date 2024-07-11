@@ -7,6 +7,7 @@
 
 #include "Renderer.hpp"
 
+#include "Renderer/Renderer2D.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 
 namespace IKan
@@ -78,11 +79,17 @@ namespace IKan
     
     // Create Renderer API instance
     s_rendererData.rendererAPI = RendererAPIFactory::Create();
+    
+    // Inittialze the Renderers
+    Renderer2D::Initialize();
   }
   void Renderer::Shutdown()
   {
     IK_PROFILE();
     IK_LOG_WARN(LogModule::Renderer, "Shutting down the Renderers");
+    
+    // Shut down the renderers
+    Renderer2D::Shutdown();
     
     // Destroy the Renderer Data
     // Note: To be destroyed in the end 

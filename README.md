@@ -116,7 +116,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - Advance Open GL
   - Advance light
   - Instancing
-- Mutli Threading (IKan)
+- Mutli Threading
 - Scripts
 - Partical system
 
