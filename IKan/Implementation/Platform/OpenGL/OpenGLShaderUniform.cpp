@@ -181,4 +181,70 @@ namespace IKan
   {
     return m_type;
   }
+  
+  // OpenGLShaderUniformBufferDeclaration ----------------------------------------------------------------------------
+  OpenGLShaderUniformBufferDeclaration::OpenGLShaderUniformBufferDeclaration(const std::string& name, ShaderDomain domain)
+  : m_name(name), m_domain(domain), m_size(0), m_register(0)
+  {
+    
+  }
+  
+  OpenGLShaderUniformBufferDeclaration::~OpenGLShaderUniformBufferDeclaration()
+  {
+    for (ShaderUniformDeclaration* uniform : m_uniforms)
+    {
+      delete uniform;
+      uniform = nullptr;
+    }
+    
+    m_uniforms.clear();
+  }
+  
+  void OpenGLShaderUniformBufferDeclaration::PushUniform(OpenGLShaderUniformDeclaration* uniform)
+  {
+    IK_ASSERT(uniform, "Uniform is NULL!");
+    uint32_t offset = 0;
+    if (m_uniforms.size())
+    {
+      OpenGLShaderUniformDeclaration*
+      previous = (OpenGLShaderUniformDeclaration*)m_uniforms.back();
+      offset = previous->m_offset + previous->m_size;
+    }
+    uniform->SetOffset(offset);
+    m_size += uniform->GetSize();
+    m_uniforms.push_back(uniform);
+  }
+  
+  ShaderUniformDeclaration* OpenGLShaderUniformBufferDeclaration::FindUniform(const std::string& name)
+  {
+    for (ShaderUniformDeclaration* uniform : m_uniforms)
+    {
+      if (uniform->GetName() == name)
+      {
+        return uniform;
+      }
+    }
+    return nullptr;
+  }
+  
+  const std::string& OpenGLShaderUniformBufferDeclaration::GetName() const
+  {
+    return m_name;
+  }
+  uint32_t OpenGLShaderUniformBufferDeclaration::GetRegister() const
+  {
+    return m_register;
+  }
+  uint32_t OpenGLShaderUniformBufferDeclaration::GetSize() const
+  {
+    return m_size;
+  }
+  const std::vector<ShaderUniformDeclaration*>& OpenGLShaderUniformBufferDeclaration::GetUniformDeclarations() const
+  {
+    return m_uniforms;
+  }
+  ShaderDomain OpenGLShaderUniformBufferDeclaration::GetDomain() const
+  {
+    return m_domain;
+  }
 } // namespace IKan
