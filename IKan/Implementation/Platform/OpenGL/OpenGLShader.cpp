@@ -24,6 +24,32 @@ namespace IKan
       IK_ASSERT(false, "Unknown shader type!");
       return 0;
     }
+    
+    /// This function returns Open GL shader domain typy from internal type
+    /// - Parameter domain: internal domain type
+    static ShaderDomain GlDomainToShaderDomain(const GLint domain)
+    {
+      if (domain == GL_VERTEX_SHADER)         return ShaderDomain::Vertex;
+      else if (domain == GL_FRAGMENT_SHADER)  return ShaderDomain::Fragment;
+      else if (domain == GL_GEOMETRY_SHADER)  return ShaderDomain::Geometry;
+      else IK_ASSERT(false, "Invalid domain!");
+      return ShaderDomain::None;
+    }
+    /// This function returns the Open GL Shader Name from Shader domain
+    /// - Parameter type: type of shader in GL enum
+    [[maybe_unused]] static const char* ShaderNameFromType(ShaderDomain type)
+    {
+      switch (type)
+      {
+        case ShaderDomain::Vertex: return "Vertex";
+        case ShaderDomain::Geometry: return "Geometry";
+        case ShaderDomain::Fragment: return "Fragment";
+        case ShaderDomain::None:
+        default:
+          IK_ASSERT(false, "Invalid domain!");
+      }
+      return "Invalid";
+    }
   } // namespace ShaderUtils
   
   OpenGLShader::OpenGLShader(const std::filesystem::path& shaderFilePath)
@@ -43,6 +69,9 @@ namespace IKan
       
       // Compile and Link the shader code
       Compile();
+      
+      // Parse shader and Store all the structures and uniforms in Shader class
+      Parse();
     });
   }
   
@@ -174,5 +203,83 @@ namespace IKan
     {
       glDeleteShader(id);
     }
+  }
+  
+  void OpenGLShader::Parse()
+  {
+    IK_PROFILE();
+    // Holds the pointer of tokens either "struct" or "uniform"
+    const char* token;
+
+    for (auto& [domain, shaderCode] : m_shaderSourceCodeMap)
+    {
+      // Parsing the structure
+      const char* str = shaderCode.c_str();
+      while ((token = Utils::String::FindToken(str, "struct")))
+      {
+        GLint glDomain = static_cast<GLint>(domain);
+        ParseUniformStruct(Utils::String::GetBlock(token, &str), ShaderUtils::GlDomainToShaderDomain(glDomain));
+      }
+    }
+  }
+  
+  void OpenGLShader::ParseUniformStruct(const std::string &block, ShaderDomain domain)
+  {
+    IK_PROFILE();
+    
+    // Log the parsing structure only once
+    if (0 == m_structs.size())
+    {
+      SHADER_LOG("  Parsing the '{0}' to extracts all the structures for '{1}' shader", m_name, ShaderUtils::ShaderNameFromType(domain));
+    }
+    
+    // Get each word from the block and store them in vector
+    std::vector<std::string> tokens = Utils::String::Tokenize(block);
+    uint32_t index = 1; // 0 is for keyword "struct"
+
+    // Get the name of structure
+    std::string structName = tokens[index++];
+    ShaderStruct* uniformStruct = new ShaderStruct(structName);
+    index++;  // 2 is for '{'
+
+    SHADER_LOG("    struct {0} ", structName);
+
+    // Parse the strcuture
+    while (index < tokens.size())
+    {
+      // If one block of structure ends
+      if (tokens[index] == "}")
+      {
+        break;
+      }
+      
+      std::string fieldType = tokens[index++]; // Type of element
+      std::string fieldName = tokens[index++]; // Name of element
+
+      // Strip ';' from name if present
+      if (const char* s = strstr(fieldName.c_str(), ";"))
+      {
+        size_t sizeOfFieldName = (size_t)(s - fieldName.c_str());
+        fieldName = std::string(fieldName.c_str(), sizeOfFieldName);
+      }
+
+      // Check is it array if yes the extract count
+      uint32_t count = 1;
+      const char* nameStr = fieldName.c_str();
+      if (const char* countWithBrackets = strstr(nameStr, "["))
+      {
+        std::string nameWithoutCount = std::string(nameStr, (size_t)(countWithBrackets - nameStr));
+        const char* end = strstr(nameStr, "]");
+        std::string countWithLastBracket(countWithBrackets + 1, (size_t)(end - countWithBrackets));
+
+        count = (uint32_t)atoi(countWithLastBracket.c_str());
+        fieldName = countWithLastBracket;
+      } // if (const char* count_with_brackets = strstr(name_str, "["))
+
+      // Stores the content of structure in struct
+      ShaderUniformDeclaration* field = new OpenGLShaderUniformDeclaration(domain, OpenGLShaderUniformDeclaration::StringToType(fieldType), fieldName, count);
+      uniformStruct->AddField(field);
+    }
+    m_structs.emplace_back(uniformStruct);
   }
 } // namespace IKan

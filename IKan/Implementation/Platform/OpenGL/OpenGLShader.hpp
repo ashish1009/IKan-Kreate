@@ -10,6 +10,7 @@
 #include <glad/glad.h>
 
 #include "Renderer/Graphics/Shader.hpp"
+#include "Platform/OpenGL/OpenGLShaderUniform.hpp"
 
 namespace IKan
 {
@@ -32,12 +33,22 @@ namespace IKan
     void PreprocessShader(const std::string& sourceString);
     /// This functions compiles all the shader codes and store their ID in Program ID (renderer_id).
     void Compile();
+    /// This function reads and parse the shader code and extracts the structure and uniforms and store them in data.
+    void Parse();
 
+    /// This function parses the Uniforms that are structure in shader. It will just store the structures only.
+    /// - Parameters:
+    ///   - block: block code of shader
+    ///   - domain: type of shader
+    void ParseUniformStruct(const std::string& block, ShaderDomain domain);
+    
     // Member Variables ----------------------------------------------------------------------------------------------
     RendererID m_rendererID {0};
     std::filesystem::path m_filePath {};
     std::string m_name {};
     
+    std::vector<ShaderStruct*> m_structs; // Stores the structure in the shader
+
     std::unordered_map<GLenum /* GL Shader type */, std::string /* Shader code */> m_shaderSourceCodeMap;
   };
 } // namespace IKan
