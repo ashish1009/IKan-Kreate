@@ -70,6 +70,20 @@ namespace IKan
       if (type == "sampler2DShadow")    return true;
       return false;
     }
+    /// This funciton returns the Open GL Shader Name from Domain
+    /// - Parameter type: domain of shader in GL enum
+    [[maybe_unused]] static const char* ShaderNameFromInternalType(ShaderDomain type)
+    {
+      switch (type)
+      {
+        case ShaderDomain::Vertex: return "Vertex";
+        case ShaderDomain::Geometry: return "Geometry";
+        case ShaderDomain::Fragment: return "Fragment";
+        case ShaderDomain::None:
+        default: IK_ASSERT(false, "Invalid domain!");
+      }
+      return "Invalid";
+    }
   } // namespace ShaderUtils
   
   OpenGLShader::OpenGLShader(const std::filesystem::path& shaderFilePath)
@@ -92,6 +106,9 @@ namespace IKan
       
       // Parse shader and Store all the structures and uniforms in Shader class
       Parse();
+      
+      // Resolve the location of all uniforms
+      ResolveUniforms();
     });
   }
   
@@ -399,6 +416,116 @@ namespace IKan
       }
     }
   }
+ 
+  void OpenGLShader::ResolveUniforms()
+  {
+    IK_PROFILE();
+    SHADER_LOG("  Resolving Uniform locations for '{0}'", m_name);
+    
+    // Uniform samplers for textures, cubemaps etc
+    SHADER_LOG("    Resolving Uniforms for Samplers...");
+    // Setting location of sampler uniform
+    uint32_t sampler = 0;
+    for (size_t i = 0; i < m_resources.size(); i++)
+    {
+      OpenGLShaderResourceDeclaration* resource = (OpenGLShaderResourceDeclaration*)m_resources[i];
+      int32_t location = GetUniformLocation(resource->m_name);
+      
+      // For single samplers
+      if (resource->GetCount() == 1)
+      {
+        resource->m_register = sampler;
+        if (location != -1)
+        {
+          SHADER_LOG("      Location : {0} for {1}[{2}]", sampler, resource->m_name, resource->GetCount());
+          SetUniformInt1(resource->m_name, (int32_t)sampler);
+        }
+        sampler++;
+      }
+      // For arrya of samplers
+      else if (resource->GetCount() > 1)
+      {
+        resource->m_register = 0;
+        
+        uint32_t count = resource->GetCount();
+        int32_t* samplers = new int32_t[count];
+        
+        for (uint32_t s = 0; s < count; s++)
+        {
+          samplers[s] = (int32_t)s;
+        }
+        SHADER_LOG("      Location : {0} to {1} for {2}[{3}]", 0, count, resource->GetName(), resource->GetCount());
+        SetIntArray(resource->GetName(), samplers, count);
+        delete[] samplers;
+      }
+    } // for (size_t i = 0; i < resources_.size(); i++)
+    
+    // Unifrom resources of structors or fundamentals
+    std::shared_ptr<OpenGLShaderUniformBufferDeclaration> decls[3] =
+    {
+      m_vsMaterialUniformBuffer,
+      m_fsMaterialUniformBuffer,
+      m_gsMaterialUniformBuffer
+    };
+    
+    for (uint8_t shaderIdx = 0; shaderIdx < MaxShaderSupported; shaderIdx++)
+    {
+      std::shared_ptr<OpenGLShaderUniformBufferDeclaration> decl = decls[shaderIdx];
+      if (!decl)
+      {
+        continue;
+      }
+      
+      SHADER_LOG("    Resolving Uniforms for Datatypes of '{0}' Shader...", ShaderUtils::ShaderNameFromInternalType((ShaderDomain)(shaderIdx + 1)));
+      
+      const std::vector<ShaderUniformDeclaration*>& uniforms = decl->GetUniformDeclarations();
+      for (size_t j = 0; j < uniforms.size(); j++)
+      {
+        OpenGLShaderUniformDeclaration* uniform = (OpenGLShaderUniformDeclaration*)uniforms[j];
+        
+        // Uniform Structures
+        if (uniform->GetType() == OpenGLShaderUniformDeclaration::Type::Struct)
+        {
+          const ShaderStruct& s = uniform->GetShaderUniformStruct();
+          const std::vector<ShaderUniformDeclaration*>& fields = s.GetFields();
+          
+          // If Array of Structure
+          if (uniform->GetCount() > 1)
+          {
+            for (size_t l = 0; l < uniform->GetCount(); l++)
+            {
+              for (size_t k = 0; k < fields.size(); k++)
+              {
+                OpenGLShaderUniformDeclaration* field = (OpenGLShaderUniformDeclaration*)fields[k];
+                std::string uniformName = uniform->m_name + "[" + std::to_string(l) + "]." + field->m_name;
+                uint32_t location = (uint32_t)GetUniformLocation(uniformName);
+                field->m_locations.emplace_back(location);
+                SHADER_LOG("      Location : {0} for {1}", location, uniformName);
+              } // for (size_t k = 0; k < fields.size(); k++)
+            } // for (size_t l = 0; l < uniform->GetCount(); l++)
+          }
+          else
+          { // if (uniform->GetCount() > 1)
+            // Single struct uniform
+            for (size_t k = 0; k < fields.size(); k++)
+            {
+              OpenGLShaderUniformDeclaration* field = (OpenGLShaderUniformDeclaration*)fields[k];
+              uint32_t location = (uint32_t)GetUniformLocation(uniform->m_name + "." + field->m_name);
+              field->m_locations.emplace_back(location);
+              SHADER_LOG("      Location : {0} for {1}.{2} [{3}]", location, s.GetName(), field->GetName(), field->GetCount());
+            }
+          } // else : if (uniform->GetCount() > 1)
+        }
+        else
+        { // if (uniform->GetType() == OpenGLShaderUniformDeclaration::Type::kStruct)
+          // Fundamental uniforms
+          uint32_t location = (uint32_t)GetUniformLocation(uniform->m_name);
+          uniform->m_locations.emplace_back(location);
+          SHADER_LOG("      Location : {0} for {1}[{2}]", location, uniform->GetName(), uniform->GetCount());
+        }
+      } // for (size_t j = 0; j < uniforms.size(); j++)
+    } // for (uint8_t shaderIdx = 0; shaderIdx < MaxShaderSupported; shaderIdx++)
+  }
   
   ShaderStruct* OpenGLShader::FindStruct(std::string_view name)
   {
@@ -411,5 +538,375 @@ namespace IKan
       }
     }
     return nullptr;
+  }
+  
+  int32_t OpenGLShader::GetUniformLocation(std::string_view name)
+  {
+    if (m_locationMap.find(name) != m_locationMap.end())
+    {
+      return m_locationMap.at(name);
+    }
+    
+    int32_t location = glGetUniformLocation(m_rendererID, name.data());
+    if (-1 == location)
+    {
+      SHADER_LOG("Warning: uniform '{0}' doesnt exist", name);
+    }
+    m_locationMap[name] = location;
+    return location;
+  }
+
+  void OpenGLShader::SetVSMaterialUniformBuffer(const Buffer& buffer)
+  {
+    Renderer::Submit([this, buffer](){
+      glUseProgram(m_rendererID);
+      ResolveAndSetUniforms(m_vsMaterialUniformBuffer, buffer);
+    });
+  }
+  
+  void OpenGLShader::SetFSMaterialUniformBuffer(const Buffer& buffer)
+  {
+    Renderer::Submit([this, buffer](){
+      glUseProgram(m_rendererID);
+      ResolveAndSetUniforms(m_fsMaterialUniformBuffer, buffer);
+    });
+  }
+  
+  void OpenGLShader::SetGSMaterialUniformBuffer(const Buffer& buffer)
+  {
+    Renderer::Submit([this, buffer](){
+      glUseProgram(m_rendererID);
+      ResolveAndSetUniforms(m_gsMaterialUniformBuffer, buffer);
+    });
+  }
+  
+  void OpenGLShader::ResolveAndSetUniforms(const Ref<OpenGLShaderUniformBufferDeclaration>& decl, const Buffer& buffer)
+  {
+    const std::vector<ShaderUniformDeclaration*>& uniforms = decl->GetUniformDeclarations();
+    for (size_t i = 0; i < uniforms.size(); i++)
+    {
+      OpenGLShaderUniformDeclaration* uniform = (OpenGLShaderUniformDeclaration*)uniforms[i];
+      if (uniform->IsArray())
+      {
+        ResolveAndSetUniformArray(uniform, buffer);
+      }
+      else
+      {
+        ResolveAndSetUniform(uniform, buffer);
+      }
+    }
+  }
+  
+  void OpenGLShader::ResolveAndSetUniform(OpenGLShaderUniformDeclaration* uniform, const Buffer& buffer)
+  {
+    // FIXME: (IKan) Add Check of location later
+    uint32_t offset = uniform->GetOffset();
+    switch (uniform->GetType())
+    {
+      case OpenGLShaderUniformDeclaration::Type::Float32:
+        UploadUniformFloat1(uniform->GetLocation(), *(float*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Int32:
+      case OpenGLShaderUniformDeclaration::Type::Bool:
+        UploadUniformInt1(uniform->GetLocation(), *(int32_t*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec2:
+        UploadUniformFloat2(uniform->GetLocation(), *(glm::vec2*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec3:
+        UploadUniformFloat3(uniform->GetLocation(), *(glm::vec3*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec4:
+        UploadUniformFloat4(uniform->GetLocation(), *(glm::vec4*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Mat3:
+        UploadUniformMat3(uniform->GetLocation(), *(glm::mat3*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Mat4:
+        UploadUniformMat4(uniform->GetLocation(), *(glm::mat4*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Struct:
+        UploadUniformStruct(uniform, buffer.data, offset);
+        break;
+      default:
+        IK_ASSERT(false, "Unknown uniform type!");
+    }
+  }
+  
+  void OpenGLShader::ResolveAndSetUniformArray(OpenGLShaderUniformDeclaration* uniform, const Buffer& buffer)
+  {
+    // FIXME: (IKan) Add Check of location later
+    uint32_t offset = uniform->GetOffset();
+    switch (uniform->GetType())
+    {
+      case OpenGLShaderUniformDeclaration::Type::Float32:
+        UploadUniformFloat1(uniform->GetLocation(), *(float*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Int32:
+      case OpenGLShaderUniformDeclaration::Type::Bool:
+        UploadUniformInt1(uniform->GetLocation(), *(int32_t*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec2:
+        UploadUniformFloat2(uniform->GetLocation(), *(glm::vec2*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec3:
+        UploadUniformFloat3(uniform->GetLocation(), *(glm::vec3*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec4:
+        UploadUniformFloat4(uniform->GetLocation(), *(glm::vec4*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Mat3:
+        UploadUniformMat3(uniform->GetLocation(), *(glm::mat3*)&buffer.data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Mat4:
+        UploadUniformMat4Array((uint32_t)uniform->GetLocation(), *(glm::mat4*)&buffer.data[offset], uniform->GetCount());
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Struct:
+        UploadUniformStruct(uniform, buffer.data, offset);
+        break;
+      default:
+        IK_ASSERT(false, "Unknown uniform type!");
+    }
+  }
+  
+  void OpenGLShader::ResolveAndSetUniformField(const OpenGLShaderUniformDeclaration& field, std::byte* data, int32_t offset, uint8_t idx)
+  {
+    int32_t location = field.m_locations[idx];
+    if (location == -1)
+    {
+      return;
+    }
+    
+    switch (field.GetType())
+    {
+      case OpenGLShaderUniformDeclaration::Type::Float32:
+        UploadUniformFloat1(location, *(float*)&data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Int32:
+      case OpenGLShaderUniformDeclaration::Type::Bool:
+        UploadUniformInt1(location, *(int32_t*)&data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec2:
+        UploadUniformFloat2(location, *(glm::vec2*)&data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec3:
+        UploadUniformFloat3(location, *(glm::vec3*)&data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Vec4:
+        UploadUniformFloat4(location, *(glm::vec4*)&data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Mat3:
+        UploadUniformMat3(location, *(glm::mat3*)&data[offset]);
+        break;
+      case OpenGLShaderUniformDeclaration::Type::Mat4:
+        UploadUniformMat4(location, *(glm::mat4*)&data[offset]);
+        break;
+      default:
+        IK_ASSERT(false, "Unknown uniform type!");
+    }
+  }
+  
+  void OpenGLShader::UploadUniformStruct(OpenGLShaderUniformDeclaration* uniform, std::byte* buffer, uint32_t offset)
+  {
+    const ShaderStruct& s = uniform->GetShaderUniformStruct();
+    const std::vector<ShaderUniformDeclaration*>& fields = s.GetFields();
+    
+    for (uint8_t i = 0; i < uniform->GetCount(); i++)
+    {
+      for (size_t k = 0; k < fields.size(); k++)
+      {
+        OpenGLShaderUniformDeclaration* field = (OpenGLShaderUniformDeclaration*)fields[k];
+        ResolveAndSetUniformField(*field, buffer, (int32_t)offset, i);
+        offset += field->m_size;
+      }
+    }
+  }
+  
+  void OpenGLShader::Bind() const
+  {
+    Renderer::Submit([this](){
+      glUseProgram(m_rendererID);
+    });
+  }
+  void OpenGLShader::Unbind() const
+  {
+    Renderer::Submit([](){
+      glUseProgram(0);
+    });
+  };
+  
+  const std::string& OpenGLShader::GetName() const
+  {
+    return m_name;
+  }
+  const std::filesystem::path& OpenGLShader::GetFilePath() const
+  {
+    return m_filePath;
+  }
+  RendererID OpenGLShader::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  bool OpenGLShader::HasVSMaterialUniformBuffer() const
+  {
+    return (bool)m_vsMaterialUniformBuffer;
+  }
+  bool OpenGLShader::HasFSMaterialUniformBuffer() const
+  {
+    return (bool)m_fsMaterialUniformBuffer;
+  }
+  bool OpenGLShader::HasGSMaterialUniformBuffer() const
+  {
+    return (bool)m_gsMaterialUniformBuffer;
+  }
+  
+  const ShaderUniformBufferDeclaration& OpenGLShader::GetVSMaterialUniformBuffer() const
+  {
+    return *m_vsMaterialUniformBuffer;
+  }
+  const ShaderUniformBufferDeclaration& OpenGLShader::GetFSMaterialUniformBuffer() const
+  {
+    return *m_fsMaterialUniformBuffer;
+  }
+  const ShaderUniformBufferDeclaration& OpenGLShader::GetGSMaterialUniformBuffer() const
+  {
+    return *m_gsMaterialUniformBuffer;
+  }
+  
+  const std::vector<ShaderResourceDeclaration*>& OpenGLShader::GetResources() const
+  {
+    return m_resources;
+  }
+  
+  // Uniforms with name ----------------------------------------------------------------------------------------------
+  void OpenGLShader::SetUniformInt1(std::string_view name, int32_t value)
+  {
+    Renderer::Submit([this, name, value](){
+      glUseProgram(m_rendererID);
+      glUniform1i(GetUniformLocation(name), value);
+    });
+  }
+  
+  void OpenGLShader::SetIntArray(std::string_view name, int32_t* values, uint32_t count)
+  {
+    // Note: Do not submite in queue as this is taken care while Resolving uniforms
+#if 0
+    Renderer::Submit([this, name, values, count](){
+#endif
+      glUseProgram(m_rendererID);
+      int32_t* textureArraySlotData = new int32_t[count];
+      memcpy(textureArraySlotData, values, count * sizeof(int32_t));
+      
+      glUniform1iv(GetUniformLocation(name), (GLsizei)count, textureArraySlotData);
+      delete[] textureArraySlotData;
+#if 0
+    });
+#endif
+  }
+  void OpenGLShader::SetUniformMat4Array(std::string_view name, const glm::mat4& values, uint32_t count)
+  {
+    Renderer::Submit([this, name, values, count](){
+      glUniformMatrix4fv(GetUniformLocation(name), (GLsizei)count, GL_FALSE, glm::value_ptr(values));
+    });
+  }
+  
+  void OpenGLShader::SetUniformMat4(std::string_view name, const glm::mat4& value)
+  {
+    Renderer::Submit([this, name, value](){
+      glUniformMatrix4fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(value));
+    });
+  }
+  
+  void OpenGLShader::SetUniformMat3(std::string_view name, const glm::mat3& value)
+  {
+    Renderer::Submit([this, name, value](){
+      glUniformMatrix3fv(GetUniformLocation(name), 1, GL_FALSE, glm::value_ptr(value));
+    });
+  }
+  
+  void OpenGLShader::SetUniformFloat1(std::string_view name, float value)
+  {
+    Renderer::Submit([this, name, value](){
+      glUniform1f(GetUniformLocation(name), value);
+    });
+  }
+  
+  void OpenGLShader::SetUniformFloat2(std::string_view name, const glm::vec2& value)
+  {
+    Renderer::Submit([this, name, value](){
+      glUniform2f(GetUniformLocation(name), value.x, value.y);
+    });
+  }
+  
+  void OpenGLShader::SetUniformFloat3(std::string_view name, const glm::vec3& value)
+  {
+    Renderer::Submit([this, name, value](){
+      glUniform3f(GetUniformLocation(name), value.x, value.y, value.z);
+    });
+  }
+  
+  void OpenGLShader::SetUniformFloat4(std::string_view name, const glm::vec4& value)
+  {
+    Renderer::Submit([this, name, value](){
+      glUniform4f(GetUniformLocation(name), value.x, value.y, value.z, value.w);
+    });
+  }
+  
+  // Uniforms with location -----------------------------------------------------------------------------------------
+  void OpenGLShader::UploadUniformInt1(int32_t location, int32_t value)
+  {
+    Renderer::Submit([this, location, value](){
+      glUniform1i(location, value);
+    });
+  }
+  
+  void OpenGLShader::UploadUniformMat4(int32_t location, const glm::mat4& value)
+  {
+    Renderer::Submit([this, location, value](){
+      glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+    });
+  }
+  
+  void OpenGLShader::UploadUniformMat3(int32_t location, const glm::mat3& value)
+  {
+    Renderer::Submit([this, location, value](){
+      glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
+    });
+  }
+  
+  void OpenGLShader::UploadUniformFloat1(int32_t location, float value)
+  {
+    Renderer::Submit([this, location, value](){
+      glUniform1f(location, value);
+    });
+  }
+  
+  void OpenGLShader::UploadUniformFloat2(int32_t location, const glm::vec2& value)
+  {
+    Renderer::Submit([this, location, value](){
+      glUniform2f(location, value.x, value.y);
+    });
+  }
+  
+  void OpenGLShader::UploadUniformFloat3(int32_t location, const glm::vec3& value)
+  {
+    Renderer::Submit([this, location, value](){
+      glUniform3f(location, value.x, value.y, value.z);
+    });
+  }
+  
+  void OpenGLShader::UploadUniformFloat4(int32_t location, const glm::vec4& value)
+  {
+    Renderer::Submit([this, location, value](){
+      glUniform4f(location, value.x, value.y, value.z, value.w);
+    });
+  }
+  
+  void OpenGLShader::UploadUniformMat4Array(uint32_t location, const glm::mat4& values, uint32_t count)
+  {
+    Renderer::Submit([this, location, values, count](){
+      glUniformMatrix4fv((GLint)location, (GLsizei)count, GL_FALSE, glm::value_ptr(values));
+    });
   }
 } // namespace IKan
