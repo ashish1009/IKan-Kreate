@@ -17,7 +17,7 @@ namespace IKan
 f(None) \
 f(Application) f(Layers) f(Window) \
 f(Renderer) f(Renderer2D) \
-f(Texture) f(VertexBuffer) f(BufferLayout) f(Shader) \
+f(Texture) f(VertexBuffer) f(BufferLayout) f(Shader) f(Pipeline) \
 f(UI) \
 
   /// Generates enum with elements from above MACRO. Also creates an array named "LogModuleString[]" that stores all
