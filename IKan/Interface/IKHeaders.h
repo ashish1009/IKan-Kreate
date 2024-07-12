@@ -35,6 +35,7 @@
 #include <Base/Configurations.h>
 #include <Base/AssertAPIs.h>
 #include <Base/DesignHelper.h>
+#include <Base/Buffer.hpp>
 
 #include <Debug/Logger.hpp>
 #include <Debug/LoggerSpecificationBuilder.hpp>
