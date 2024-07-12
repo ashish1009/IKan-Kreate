@@ -8,6 +8,7 @@
 #include "Renderer2D.hpp"
 
 #include "Renderer/QuadData.hpp"
+#include "Renderer/CircleData.hpp"
 
 namespace IKan
 {
@@ -15,22 +16,25 @@ namespace IKan
   struct Renderer2DData
   {
     QuadBatchData quadData;
+    CircleBatchData circleData;
     
     void Destroy()
     {
       IK_PROFILE();
       
       quadData.Destroy();
+      circleData.Destroy();
     }
   };
   static Renderer2DData s_data;
-
+  
   void Renderer2D::Initialize()
   {
     IK_PROFILE();
     BATCH_INFO("Initialising the Batch Renderer 2D ");
     
     AddQuads(1000);
+    AddCircles(1000);
   }
   void Renderer2D::Shutdown()
   {
@@ -49,5 +53,16 @@ namespace IKan
     }
     
     s_data.quadData.Initialize(quads);
+  }
+  
+  void Renderer2D::AddCircles(uint32_t circles)
+  {
+    IK_PROFILE();
+    if (circles == 0)
+    {
+      return;
+    }
+    
+    s_data.circleData.Initialize(circles);
   }
 } // namespace IKan

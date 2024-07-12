@@ -21,5 +21,8 @@ namespace IKan
     /// This funcition Adds the quad batch limit to prev allocated data
     /// - Parameter quads: quads to be renderered in single batch
     static void AddQuads(uint32_t quads);
+    /// This funcition Adds the circle batch limit to prev allocated data
+    /// - Parameter circles: circles to be renderered in single batch
+    static void AddCircles(uint32_t circles);
   };
 } // namespace IKan
