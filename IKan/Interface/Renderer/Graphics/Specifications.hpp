@@ -7,8 +7,13 @@
 
 #pragma once
 
+#include "Renderer/Graphics/BufferLayout.hpp"
+
 namespace IKan
 {
+  // Forward declaration
+  class Shader;
+
   // Texture Specifications ------------------------------------------------------------------------------------------
   /// This enum stores the attachment type of texture
   enum class TextureAttachment : uint8_t
@@ -76,5 +81,13 @@ namespace IKan
     uint32_t size {0};
     
     bool enableDebugLogs {true};
+  };
+  
+  // Pipeline Specificaions ------------------------------------------------------------------------------------------
+  struct PipelineSpecification
+  {
+    std::string debugName {};
+    BufferLayout vertexLayout;
+    Ref<Shader> shader;
   };
 } // namespace IKan
