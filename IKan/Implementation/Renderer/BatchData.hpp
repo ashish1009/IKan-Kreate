@@ -8,6 +8,9 @@
 #pragma once
 
 #include "Renderer/Graphics/Texture.hpp"
+#include "Renderer/Graphics/RendererBuffer.hpp"
+#include "Renderer/Graphics/Shader.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
 
 namespace IKan
 {
@@ -17,13 +20,26 @@ namespace IKan
 #define BATCH_ERROR(...) IK_LOG_ERROR(LogModule::Renderer2D, __VA_ARGS__)
 #define BATCH_CRITICAL(...) IK_LOG_CRITICAL(LogModule::Renderer2D, __VA_ARGS__)
   
-  /// This structure stores the common data for all batch 2D renderer (Quads, Circles and Lines)
+  /// This structure stores the common data for all batch renderer elements (Quads, Circles and Lines)
   struct CommonBatchData
   {
+    /// This structure stores the vertex data for all batch renderer elements (Quads, Circles and Lines)
+    struct Vertex
+    {
+      glm::vec3 position;
+      glm::vec4 color;
+    };
+    
     // Member Variables ----------------------------------------------------------------------------------------------
     /// Batch limits
     uint32_t maxElementPerBatch {0};
     uint32_t maxVerticesPerBatch {0};
+
+    // Graphics Data
+    Ref<VertexBuffer> vertexBuffer;
+    Ref<Shader> shader;
+    Ref<Pipeline> pipeline;
+    Ref<IndexBuffer> indexBuffer;
 
     // Member Functions ----------------------------------------------------------------------------------------------
     void Destroy()
@@ -32,12 +48,28 @@ namespace IKan
       
       maxElementPerBatch = 0;
       maxVerticesPerBatch = 0;
+      
+      vertexBuffer.reset();
+      shader.reset();
+      pipeline.reset();
+      indexBuffer.reset();
     }
   };
   
   /// This structure stores the common data for 2D shape batch renderer (Quads and Circles)
   struct Shape2DData : CommonBatchData
   {
+    /// This structure stores the vertex data for all 2D shape batch renderer (Quads and Circles)
+    struct Vertex
+    {
+      glm::vec2 textureCoords;
+      
+      float textureIndex {0};
+      float tilingFactor {0};
+      
+      int32_t pixelID {-1};
+    };
+
     // Constants -----------------------------------------------------------------------------------------------------
     static constexpr uint32_t VertexForSingleElement = 4;
     static constexpr uint32_t IndicesForSingleElement = 6;
