@@ -41,17 +41,17 @@ namespace IKan::Utils::String
   /// - Parameters:
   ///   - str: Base string from which token need to be searched:
   ///   - token: Token to be searched:
-  const char* FindToken(const char* str, std::string_view token);
+  const char* FindToken(std::string_view str, std::string_view token);
   /// This function finds a block of string from string and return the char pointer starting the strong 'str'
   /// - Parameters:
   ///   - str: Base string from which Block start pointer is returned:
   ///   - outPosition: Output position pointer of block:
   /// - Important: Returns the pointer at the start of any block. Block start is considered as '{'
-  std::string GetBlock(const char* str, const char** outPosition);
+  std::string GetBlock(std::string_view str, const char** outPosition);
   /// This function extracts the Code statement before ";"
   /// - Parameters:
   ///   - str: token to be extracted from outPosition
   ///   - outPosition: string pointer of the shader code, that will move to some offset offset is the ";" of the strcut
-  std::string GetStatement(const char* str, const char** outPosition);
+  std::string GetStatement(std::string_view str, const char** outPosition);
 
 } // namespace IKan::Utils::String

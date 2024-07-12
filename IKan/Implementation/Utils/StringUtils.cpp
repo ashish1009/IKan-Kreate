@@ -96,10 +96,10 @@ namespace IKan::Utils::String
     return result;
   }
   
-  const char* FindToken(const char* str, std::string_view token)
+  const char* FindToken(std::string_view str, std::string_view token)
   {
     IK_PROFILE();
-    const char* t {str};
+    const char* t {str.data()};
     while ((t = strstr(t, token.data())))
     {
       // Check if left character of token is empty
@@ -120,16 +120,16 @@ namespace IKan::Utils::String
     return nullptr;
   }
   
-  std::string GetBlock(const char* str, const char** outPosition)
+  std::string GetBlock(std::string_view str, const char** outPosition)
   {
     IK_PROFILE();
     // get the end block brace of the string code
-    const char* end {strstr(str, "}")};
+    const char* end {strstr(str.data(), "}")};
     
-    // if not found any end bkock statement "}" then return the same string
+    // if not found any end block statement "}" then return the same string
     if (!end)
     {
-      return str;
+      return str.data();
     }
     
     // Update the out_position pointer after the end block
@@ -139,22 +139,22 @@ namespace IKan::Utils::String
       *outPosition = end;
     }
     
-    uint32_t length = (uint32_t)(end - str + 1);
+    uint32_t length = (uint32_t)(end - str.data() + 1);
     
     // return the substring from start to last "}"
-    return std::string(str, length);
+    return std::string(str.data(), length);
   }
   
-  std::string GetStatement(const char* str, const char** outPosition)
+  std::string GetStatement(std::string_view str, const char** outPosition)
   {
     IK_PROFILE();
     // get the end block brace of the string code
-    const char* end = strstr(str, ";");
+    const char* end = strstr(str.data(), ";");
     
     // if not found any end bkock statement ";" then return the same string
     if (!end)
     {
-      return str;
+      return str.data();
     }
     
     // Update the out_position pointer after the end block
@@ -164,8 +164,8 @@ namespace IKan::Utils::String
       *outPosition = end;
     }
     
-    uint32_t length = (uint32_t)(end - str + 1);
+    uint32_t length = (uint32_t)(end - str.data() + 1);
     // return the substring from start to last ";"
-    return std::string(str, length);
+    return std::string(str.data(), length);
   }
 } // namespace IKan::Utils::String
