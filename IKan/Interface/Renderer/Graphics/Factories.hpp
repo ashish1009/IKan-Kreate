@@ -17,8 +17,9 @@ namespace IKan
   // IKan Forward Declarations
   class RendererContext;
   class RendererAPI;
+  class Texture;
 
-  /// This is the Renderer Context Factory
+  /// This function creates the renderer context instance based on the renderer API supported by the Engine
   struct RendererContextFactory
   {
     /// This Function creates the renderer context instance based on the renderer API supported by the Engine
@@ -26,10 +27,23 @@ namespace IKan
     [[nodiscard]] static Scope<RendererContext> Create(GLFWwindow* windowPtr);
   };
   
-  /// This Function creates the renderer API instance based on the renderer API supported by the Engine
+  /// This function creates the renderer API instance based on the renderer API supported by the Engine
   struct RendererAPIFactory
   {
     /// This function creates the Renderer API instance based on the Supported APIs
     [[nodiscard]] static Scope<RendererAPI> Create();
+  };
+  
+  /// This function creates the texture instance based on the renderer API supported by the Engine
+  struct TextureFactory
+  {
+    /// This static function creates the texture instance with specificaion based on the current Supported API
+    /// - Parameter spec: Texture specificaion
+    [[nodiscard]] static Ref<Texture> Create(const Texture2DSpecification& spec);
+    /// This API creates the Texture instance with data based on the current Supported API
+    /// - Parameter data : White data
+    [[nodiscard]] static Ref<Texture> Create(uint32_t data = 0xffffffff);
+    /// This API creates the Texture instance with white data based on the current Supported API
+    [[nodiscard]] static Ref<Texture> CreateWhiteTexture();
   };
 } // namespace IKan
