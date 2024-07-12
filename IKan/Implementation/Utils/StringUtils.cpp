@@ -95,4 +95,77 @@ namespace IKan::Utils::String
 
     return result;
   }
+  
+  const char* FindToken(const char* str, std::string_view token)
+  {
+    IK_PROFILE();
+    const char* t {str};
+    while ((t = strstr(t, token.data())))
+    {
+      // Check if left character of token is empty
+      // using '/' as indicator of first character of line
+      bool left = str == t or isspace(t[-1]) or t[-1] == '/';
+      
+      // Check if right character of token is empty
+      bool right = !t[token.size()] or isspace(t[token.size()]);
+      
+      // Checking token is whole word
+      if (left and right)
+      {
+        return t;
+      }
+      
+      t += token.size();
+    }
+    return nullptr;
+  }
+  
+  std::string GetBlock(const char* str, const char** outPosition)
+  {
+    IK_PROFILE();
+    // get the end block brace of the string code
+    const char* end {strstr(str, "}")};
+    
+    // if not found any end bkock statement "}" then return the same string
+    if (!end)
+    {
+      return str;
+    }
+    
+    // Update the out_position pointer after the end block
+    // offset the shader string to the end of current strcut
+    if (outPosition)
+    {
+      *outPosition = end;
+    }
+    
+    uint32_t length = (uint32_t)(end - str + 1);
+    
+    // return the substring from start to last "}"
+    return std::string(str, length);
+  }
+  
+  std::string GetStatement(const char* str, const char** outPosition)
+  {
+    IK_PROFILE();
+    // get the end block brace of the string code
+    const char* end = strstr(str, ";");
+    
+    // if not found any end bkock statement ";" then return the same string
+    if (!end)
+    {
+      return str;
+    }
+    
+    // Update the out_position pointer after the end block
+    // offset the shader string to the end of current strcut
+    if (outPosition)
+    {
+      *outPosition = end;
+    }
+    
+    uint32_t length = (uint32_t)(end - str + 1);
+    // return the substring from start to last ";"
+    return std::string(str, length);
+  }
 } // namespace IKan::Utils::String
