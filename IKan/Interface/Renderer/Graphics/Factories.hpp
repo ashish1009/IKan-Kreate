@@ -19,6 +19,7 @@ namespace IKan
   class RendererAPI;
   class Texture;
   class VertexBuffer;
+  class IndexBuffer;
   class Shader;
   class Pipeline;
   
@@ -65,6 +66,22 @@ namespace IKan
     [[nodiscard]] static Ref<VertexBuffer> Create(uint32_t size);
   };
   
+  /// This structure stores the API to create the index buffer instance based on the renderer API supported by the Engine
+  struct IndexBufferFactory
+  {
+    /// This function create the Index Buffer with Indices data and its size based on the renderer API supported by the Engine
+    /// - Parameters:
+    ///   - data: data to be filled in index buffer
+    ///   - size: size of data in index buffer
+    [[nodiscard]] static Ref<IndexBuffer> CreateWithSize(void* data, uint32_t size);
+    /// This function create the Index Buffer with Indices data and number of indices based on the renderer API supported by the Engine
+    /// - Parameters:
+    ///   - data: data to be filled in index buffer
+    ///   - count: number of indices in index buffer
+    /// - Note: Size of single indices is taken as size of uint32_t (4)
+    [[nodiscard]] static Ref<IndexBuffer> CreateWithCount(void* data, uint32_t count);
+  };
+
   /// This structure stores the API to create the shader instance based on the renderer API supported by the Engine
   struct ShaderFactory
   {

@@ -36,4 +36,18 @@ namespace IKan
     Buffer m_localData;
     uint32_t m_size {0};
   };
+  
+  // Index Buffer ---------------------------------------------------------------------------------------------------
+  /// This class implements the APIs for creating and storing index buffer data.
+  class OpenGLIndexBuffer : public IndexBuffer
+  {
+  public:
+    /// This Constructor create the Index Buffer with Indices data and its size.
+    /// - Parameters:
+    ///   - data: data to be filled in index buffer.
+    ///   - size: size of data in index buffer.
+    OpenGLIndexBuffer(void *data, uint32_t size);
+    /// This destructor destroyes the Open GL idnex Buffer.
+    ~OpenGLIndexBuffer();
+  };
 } // namespace IKan

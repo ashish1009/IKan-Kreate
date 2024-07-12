@@ -74,4 +74,15 @@ namespace IKan
       glDeleteBuffers(1, &m_rendererID);
     });
   }
+  
+  // Index Buffer ---------------------------------------------------------------------------------------------------
+  OpenGLIndexBuffer::OpenGLIndexBuffer(void *data, uint32_t size)
+  {
+    
+  }
+  
+  OpenGLIndexBuffer::~OpenGLIndexBuffer()
+  {
+    
+  }
 } // namespace IKan

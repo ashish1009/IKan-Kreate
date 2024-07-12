@@ -111,6 +111,35 @@ namespace IKan
     return nullptr;
   }
   
+  Ref<IndexBuffer> IndexBufferFactory::CreateWithSize(void *data, uint32_t size)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: return CreateRef<OpenGLIndexBuffer>(data, size);
+      case RendererType::Invalid:
+      default:
+        IK_LOG_CRITICAL(LogModule::Renderer, "Renderer API Type is not set or set as invalid."
+                        "Call Renderer::SetCurrentRendererAPI(RendererType) before any Renderer Initialization to set Renderer API type."
+                        "'RendererType should not be RendererType::Invalid'");
+        IK_ASSERT(false , "Renderer API type is not set!")
+    }
+    return nullptr;
+  }
+  
+  Ref<IndexBuffer> IndexBufferFactory::CreateWithCount(void *data, uint32_t count)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: return CreateRef<OpenGLIndexBuffer>(data, count * SizeOfSingleIndices);
+      case RendererType::Invalid:
+      default:
+        IK_LOG_CRITICAL(LogModule::Renderer, "Renderer API Type is not set or set as invalid."
+                        "Call Renderer::SetCurrentRendererAPI(RendererType) before any Renderer Initialization to set Renderer API type."
+                        "'RendererType should not be RendererType::Invalid'");
+        IK_ASSERT(false , "Renderer API type is not set!")
+    }
+    return nullptr;
+  }
   Ref<Shader> ShaderFactory::Create(const std::filesystem::path& shaderFilePath)
   {
     switch (Renderer::GetCurrentRendererAPI())
