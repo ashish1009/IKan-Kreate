@@ -50,6 +50,26 @@ namespace IKan
       }
       return "Invalid";
     }
+    /// This function returns the Open GL Shader Name from Open GL Type
+    /// - Parameter type: type of shader in GL enum
+    [[maybe_unused]] static const char* ShaderNameFromType(const GLenum type)
+    {
+      if (type == GL_VERTEX_SHADER) return "Vertex";
+      if (type == GL_FRAGMENT_SHADER) return "Fragment";
+      if (type == GL_GEOMETRY_SHADER) return "Geomatry";
+      IK_ASSERT(false, "Unknown shader type!");
+      return "Invalid";
+    }
+    /// This function returns true if type is of resource
+    /// - Parameter type: type of field
+    [[maybe_unused]] static bool IsTypeStringResource(const std::string& type)
+    {
+      if (type == "sampler2D")          return true;
+      if (type == "sampler2DMS")        return true;
+      if (type == "samplerCube")        return true;
+      if (type == "sampler2DShadow")    return true;
+      return false;
+    }
   } // namespace ShaderUtils
   
   OpenGLShader::OpenGLShader(const std::filesystem::path& shaderFilePath)
@@ -220,6 +240,15 @@ namespace IKan
         GLint glDomain = static_cast<GLint>(domain);
         ParseUniformStruct(Utils::String::GetBlock(token, &str), ShaderUtils::GlDomainToShaderDomain(glDomain));
       }
+      
+      // Parsing uniforms
+      str = shaderCode.c_str();
+      SHADER_LOG("  Parsing the '{0}' to extracts all the Uniforms for '{1}' Shader", m_name, ShaderUtils::ShaderNameFromType(domain));
+      SHADER_LOG("    Parsing the Uniforms: ");
+      while ((token = Utils::String::FindToken(str, "uniform")))
+      {
+        ParseUniform(Utils::String::GetStatement(token, &str), ShaderUtils::GlDomainToShaderDomain((GLint)domain));
+      }
     }
   }
   
@@ -281,5 +310,106 @@ namespace IKan
       uniformStruct->AddField(field);
     }
     m_structs.emplace_back(uniformStruct);
+  }
+  
+  void OpenGLShader::ParseUniform(const std::string &statement, ShaderDomain domain)
+  {
+    IK_PROFILE();
+    // Store all the statements after keyword uniform
+    std::vector<std::string> tokens = Utils::String::Tokenize(statement);
+    uint32_t index = 1; // 0th is for keyword unifrom
+    
+    std::string fieldType = tokens[index++];
+    std::string fieldName = tokens[index++];
+    
+    // Strip ; from name if present
+    if (const char* s = strstr(fieldName.c_str(), ";"))
+    {
+      fieldName = std::string(fieldName.c_str(), (size_t)(s - fieldName.c_str()));
+    }
+    
+    std::string nameWithSize(fieldName);
+    
+    // Check is it array if yes the extract count
+    uint32_t count = 1;
+    const char* nameStr = nameWithSize.c_str();
+    if (const char* countWithBrackets = strstr(nameStr, "["))
+    {
+      std::string nameWithoutCount = std::string(nameStr, (size_t)(countWithBrackets - nameStr));
+      const char* end = strstr(nameStr, "]");
+      std::string countWithLastBracket(countWithBrackets + 1, (size_t)(end - countWithBrackets));
+      
+      count = (uint32_t)atoi(countWithLastBracket.c_str());
+      fieldName = nameWithoutCount;
+    } // if (const char* count_with_brackets = strstr(name_str, "["))
+    
+    // Store the resources uniform inside shader
+    if (ShaderUtils::IsTypeStringResource(fieldType))
+    {
+      // Resources like Sampler 2D
+      ShaderResourceDeclaration* declaration = new OpenGLShaderResourceDeclaration(OpenGLShaderResourceDeclaration::StringToType(fieldType), fieldName, count);
+      m_resources.push_back(declaration);
+    }
+    else
+    {
+      // if field is not of type resources like sampler
+      // Resources fundamental and structures
+      OpenGLShaderUniformDeclaration::Type type = OpenGLShaderUniformDeclaration::StringToType(fieldType);
+      OpenGLShaderUniformDeclaration* declaration = nullptr;
+      
+      if (OpenGLShaderUniformDeclaration::Type::None == type)
+      {
+        // Find struct
+        // NOTE: in this case field type is the name of struct as we write like
+        // this " uniform < field type     >  < field name   > "
+        //      " uniform < name of struct >  < uniform name > "
+        ShaderStruct* structure = FindStruct(fieldType);
+        IK_ASSERT(structure, "");
+        declaration = new OpenGLShaderUniformDeclaration(domain, structure, fieldName, count);
+      }
+      else
+      {
+        declaration = new OpenGLShaderUniformDeclaration(domain, type, fieldName, count);
+      }
+      
+      // Store all the uniforms in buffers
+      if (ShaderDomain::Vertex == domain)
+      {
+        if (!m_vsMaterialUniformBuffer)
+        {
+          m_vsMaterialUniformBuffer.reset(new OpenGLShaderUniformBufferDeclaration("", domain));
+        }
+        m_vsMaterialUniformBuffer->PushUniform(declaration);
+      }
+      else if (ShaderDomain::Fragment == domain)
+      {
+        if (!m_fsMaterialUniformBuffer)
+        {
+          m_fsMaterialUniformBuffer.reset(new OpenGLShaderUniformBufferDeclaration("", domain));
+        }
+        m_fsMaterialUniformBuffer->PushUniform(declaration);
+      }
+      else if (ShaderDomain::Geometry == domain)
+      {
+        if (!m_gsMaterialUniformBuffer)
+        {
+          m_gsMaterialUniformBuffer.reset(new OpenGLShaderUniformBufferDeclaration("", domain));
+        }
+        m_gsMaterialUniformBuffer->PushUniform(declaration);
+      }
+    }
+  }
+  
+  ShaderStruct* OpenGLShader::FindStruct(std::string_view name)
+  {
+    IK_PROFILE();
+    for (ShaderStruct* s : m_structs)
+    {
+      if (s->GetName() == name)
+      {
+        return s;
+      }
+    }
+    return nullptr;
   }
 } // namespace IKan

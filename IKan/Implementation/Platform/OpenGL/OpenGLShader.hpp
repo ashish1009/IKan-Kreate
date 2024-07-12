@@ -41,14 +41,28 @@ namespace IKan
     ///   - block: block code of shader
     ///   - domain: type of shader
     void ParseUniformStruct(const std::string& block, ShaderDomain domain);
-    
+    /// This function parses the Uniform that are fundamental types (Not struct).
+    /// - Parameters:
+    ///   - statement: block fo code of shader.
+    ///   - domain domain of shader.
+    void ParseUniform(const std::string& statement, ShaderDomain domain);
+
+    /// This function finds the structure stored in shader.
+    /// - Parameter name: Name of structure.
+    ShaderStruct* FindStruct(std::string_view name);
+
     // Member Variables ----------------------------------------------------------------------------------------------
     RendererID m_rendererID {0};
     std::filesystem::path m_filePath {};
     std::string m_name {};
     
     std::vector<ShaderStruct*> m_structs; // Stores the structure in the shader
+    std::vector<ShaderResourceDeclaration*> m_resources; // Stores the resources of shader like sampler 2D
 
     std::unordered_map<GLenum /* GL Shader type */, std::string /* Shader code */> m_shaderSourceCodeMap;
+
+    Ref<OpenGLShaderUniformBufferDeclaration> m_vsMaterialUniformBuffer; // Uniform data buffer of vertex shader
+    Ref<OpenGLShaderUniformBufferDeclaration> m_fsMaterialUniformBuffer; // Uniform data buffer of pixel shader
+    Ref<OpenGLShaderUniformBufferDeclaration> m_gsMaterialUniformBuffer; // Uniform data buffer of geometry shader
   };
 } // namespace IKan
