@@ -23,7 +23,7 @@ namespace Kreator
   public:
     /// Kreator Application constructor
     /// - Parameters:
-    ///   - appSpec: core application specificaions
+    ///   - appSpec: core application specifications
     ///   - kreatorDirectories: kreator direcotries
     KreatorApp(const ApplicationSpecification& appSpec);
     /// Kreator Application Destructor

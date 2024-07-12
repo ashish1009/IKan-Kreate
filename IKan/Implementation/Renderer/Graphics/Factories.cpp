@@ -63,7 +63,7 @@ namespace IKan
     // TODO: IKan: Copy inside Open GL Texture class?
     static uint32_t whiteTextureData = data;
     
-    // Texture specificaion
+    // Texture specification
     Texture2DSpecification textureSpec;
     textureSpec.title = "White texture";
     textureSpec.width = 1;

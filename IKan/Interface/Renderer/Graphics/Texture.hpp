@@ -12,7 +12,7 @@
 
 namespace IKan
 {
-  /// This class is the interface for creating texture with specificaion data
+  /// This class is the interface for creating texture with specification data
   class Texture 
   {
   public:

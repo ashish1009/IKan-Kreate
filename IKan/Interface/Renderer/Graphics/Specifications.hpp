@@ -9,7 +9,7 @@
 
 namespace IKan
 {
-  // Texture Specificaions -------------------------------------------------------------------------------------------
+  // Texture Specifications ------------------------------------------------------------------------------------------
   /// This enum stores the attachment type of texture
   enum class TextureAttachment : uint8_t
   {
@@ -46,7 +46,7 @@ namespace IKan
     Linear, Nearest, LinearMipmapLinear, NearestMipmapNearest, NearestMipmapLinear, LinearMipmapNearest
   };
   
-  /// This structure stores the Texture specificaion data
+  /// This structure stores the Texture specification data
   struct Texture2DSpecification
   {
 #ifdef __APPLE__
@@ -58,8 +58,8 @@ namespace IKan
 
     std::string title {"Empty Texture"};
     
-    int32_t width {1600};
-    int32_t height {900};
+    uint32_t width {1600};
+    uint32_t height {900};
 
     TextureType type {TextureType::Texture2D};
     TextureFormat internalFormat {TextureFormat::RGBA8};

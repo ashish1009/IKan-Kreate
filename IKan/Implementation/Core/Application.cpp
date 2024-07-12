@@ -7,6 +7,8 @@
 
 #include "Application.hpp"
 
+#include "Renderer/RendererStats.hpp"
+
 /// IKan Engine Version
 static const std::string IKanVersion = "1.4";
 
@@ -97,8 +99,10 @@ namespace IKan
         }
 
         // Render the Gui on Renderer thread
-        RenderImGui();
-        
+        Renderer::Submit([this](){ RenderImGui(); });
+        Renderer::Submit([]() { PerformanceProfiler::Get().Clear(); });
+        Renderer::Submit([]() { RendererStatistics::Get().ResetEachFrame(); });
+
         // Update the window swap buffers
         m_window->Update();
         

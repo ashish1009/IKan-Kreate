@@ -37,8 +37,8 @@ namespace IKan
   /// This function creates the texture instance based on the renderer API supported by the Engine
   struct TextureFactory
   {
-    /// This static function creates the texture instance with specificaion based on the current Supported API
-    /// - Parameter spec: Texture specificaion
+    /// This static function creates the texture instance with specification based on the current Supported API
+    /// - Parameter spec: Texture specification
     [[nodiscard]] static Ref<Texture> Create(const Texture2DSpecification& spec);
     /// This API creates the Texture instance with data based on the current Supported API
     /// - Parameter data : White data
