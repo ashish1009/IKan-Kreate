@@ -45,7 +45,7 @@
 #include "Debug/LoggerAPIs.h"
 #include "Debug/Timer.hpp"
 
-#include "Utils/FilesystemUtils.hpp"
+#include "Utils/FileSystemUtils.hpp"
 #include "Utils/StringUtils.hpp"
 
 #include "Core/CoreAssetPath.hpp"
