@@ -83,7 +83,7 @@ namespace IKan
     bool enableDebugLogs {true};
   };
   
-  // Pipeline Specificaions ------------------------------------------------------------------------------------------
+  // Pipeline Specification ------------------------------------------------------------------------------------------
   struct PipelineSpecification
   {
     std::string debugName {};

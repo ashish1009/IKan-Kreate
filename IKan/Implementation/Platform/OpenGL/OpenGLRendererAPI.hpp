@@ -31,5 +31,7 @@ namespace IKan
     void ClearDepthBits() const override;
     /// This function clears the stenscil bits.
     void ClearStencilBits() const override;
+
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLRendererAPI);
   };
 } // namespace IKan

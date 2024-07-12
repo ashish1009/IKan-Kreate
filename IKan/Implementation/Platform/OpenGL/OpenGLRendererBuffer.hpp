@@ -29,6 +29,8 @@ namespace IKan
     /// This destructor destroyes the Open GL Vertex Buffer.
     ~OpenGLVertexBuffer();
     
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLVertexBuffer);
+
   private:
     RendererID m_rendererID {0};
     Buffer m_localData;

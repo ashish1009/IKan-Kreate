@@ -12,6 +12,7 @@
 #include "Platform/OpenGL/OpenGLRendererAPI.hpp"
 #include "Platform/OpenGL/OpenGLTexture.hpp"
 #include "Platform/OpenGL/OpenGLRendererBuffer.hpp"
+#include "Platform/OpenGL/OpenGLShader.hpp"
 
 namespace IKan
 {
@@ -108,5 +109,19 @@ namespace IKan
     }
     return nullptr;
   }
-
+  
+  Ref<Shader> ShaderFactory::Create(const std::filesystem::path& shaderFilePath)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: return CreateRef<OpenGLShader>(shaderFilePath);
+      case RendererType::Invalid:
+      default:
+        IK_LOG_CRITICAL(LogModule::Renderer, "Renderer API Type is not set or set as invalid."
+                        "Call Renderer::SetCurrentRendererAPI(RendererType) before any Renderer Initialization to set Renderer API type."
+                        "'RendererType should not be RendererType::Invalid'");
+        IK_ASSERT(false , "Renderer API type is not set!")
+    }
+    return nullptr;
+  }
 } // namespace IKan

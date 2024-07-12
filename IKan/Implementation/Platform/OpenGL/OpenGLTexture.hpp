@@ -21,6 +21,8 @@ namespace IKan
     /// This destructor destroyes and deletes the Open GL texture.
     ~OpenGLTexture();
     
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLTexture);
+
   private:
     RendererID m_rendererID {0};
     Texture2DSpecification m_specification;

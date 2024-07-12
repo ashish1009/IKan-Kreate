@@ -9,6 +9,7 @@
 
 #include "Renderer/Renderer2D.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
+#include "Renderer/Graphics/Shader.hpp"
 
 namespace IKan
 {
@@ -90,6 +91,7 @@ namespace IKan
     
     // Shut down the renderers
     Renderer2D::Shutdown();
+    ShaderLibrary::Clear();
     
     // Destroy the Renderer Data
     // Note: To be destroyed in the end 

@@ -19,6 +19,7 @@ namespace IKan
   class RendererAPI;
   class Texture;
   class VertexBuffer;
+  class Shader;
 
   /// This structure stores the API to create the renderer context instance based on the renderer API supported by the Engine
   struct RendererContextFactory
@@ -51,15 +52,23 @@ namespace IKan
   /// This structure stores the API to create the vertex buffer instance based on the renderer API supported by the Engine
   struct VertexBufferFactory
   {
-    /// This function creates the vertex buffer. Buffer data is passed and stored as static in GPU
+    /// This function creates the vertex buffer based on the renderer API supported by the Engine. Buffer data is passed
+    /// and stored as static in GPU
     /// - Parameters:
     ///   - data: Data of vertex Buffer
     ///   - size: Size of vertex Buffer
     [[nodiscard]] static Ref<VertexBuffer> Create(void* data, uint32_t size);
-    /// This function creates the vertex buffer. Buffer size is passed to reserve the memory in GPU. Data to passed
-    /// later dynamically
+    /// This function creates the vertex buffer based on the renderer API supported by the Engine. Buffer size is passed
+    /// to reserve the memory in GPU. Data to passed later dynamically
     /// - Parameter size: Size of vertex buffer
     [[nodiscard]] static Ref<VertexBuffer> Create(uint32_t size);
   };
 
+  /// This structure stores the API to create the shader instance based on the renderer API supported by the Engine
+  struct ShaderFactory
+  {
+    /// This function creates the shader instance with file path based on the renderer API supported by the Engine
+    /// - Parameter shaderFilePath: Shader Code file path
+    [[nodiscard]] static Ref<Shader> Create(const std::filesystem::path& shaderFilePath);
+  };
 } // namespace IKan
