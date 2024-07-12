@@ -9,6 +9,7 @@
 
 #include "Renderer/QuadData.hpp"
 #include "Renderer/CircleData.hpp"
+#include "Renderer/LineData.hpp"
 
 namespace IKan
 {
@@ -17,13 +18,15 @@ namespace IKan
   {
     QuadBatchData quadData;
     CircleBatchData circleData;
-    
+    LineBatchData lineData;
+
     void Destroy()
     {
       IK_PROFILE();
       
       quadData.Destroy();
       circleData.Destroy();
+      lineData.Destroy();
     }
   };
   static Renderer2DData s_data;
@@ -35,6 +38,7 @@ namespace IKan
     
     AddQuads(1000);
     AddCircles(1000);
+    AddLines(10000);
   }
   void Renderer2D::Shutdown()
   {
@@ -64,5 +68,16 @@ namespace IKan
     }
     
     s_data.circleData.Initialize(circles);
+  }
+  
+  void Renderer2D::AddLines(uint32_t lines)
+  {
+    IK_PROFILE();
+    if (lines == 0)
+    {
+      return;
+    }
+    
+    s_data.lineData.Initialize(lines);
   }
 } // namespace IKan

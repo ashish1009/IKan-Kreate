@@ -75,6 +75,7 @@
 		B2D297112C412E7E0093F4DA /* OpenGLPipeline.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297102C412E7E0093F4DA /* OpenGLPipeline.hpp */; };
 		B2D297122C412E7E0093F4DA /* OpenGLPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2970F2C412E7E0093F4DA /* OpenGLPipeline.cpp */; };
 		B2D297152C4132510093F4DA /* CircleData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297142C4132510093F4DA /* CircleData.hpp */; };
+		B2D2971D2C4133910093F4DA /* LineData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2971C2C4133910093F4DA /* LineData.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -189,6 +190,8 @@
 		B2D297102C412E7E0093F4DA /* OpenGLPipeline.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLPipeline.hpp; sourceTree = "<group>"; };
 		B2D297142C4132510093F4DA /* CircleData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = CircleData.hpp; sourceTree = "<group>"; };
 		B2D297172C4132B40093F4DA /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
+		B2D2971C2C4133910093F4DA /* LineData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LineData.hpp; sourceTree = "<group>"; };
+		B2D297222C4134030093F4DA /* BatchLineShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchLineShader.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -409,6 +412,7 @@
 				B2D296B02C40E8F20093F4DA /* BatchData.hpp */,
 				B2D296AC2C40E5E80093F4DA /* QuadData.hpp */,
 				B2D297142C4132510093F4DA /* CircleData.hpp */,
+				B2D2971C2C4133910093F4DA /* LineData.hpp */,
 				B2D294B32C3BF2FF0093F4DA /* Graphics */,
 			);
 			path = Renderer;
@@ -518,6 +522,7 @@
 			children = (
 				B2D297012C41107D0093F4DA /* BatchQuadShader.glsl */,
 				B2D297172C4132B40093F4DA /* BatchCircleShader.glsl */,
+				B2D297222C4134030093F4DA /* BatchLineShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -559,6 +564,7 @@
 				B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */,
 				B2D294F82C3BF7BD0093F4DA /* OpenGLRendererContext.hpp in Headers */,
 				B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */,
+				B2D2971D2C4133910093F4DA /* LineData.hpp in Headers */,
 				B2D296D32C40F3230093F4DA /* RendererStats.hpp in Headers */,
 				B2D296DA2C41028F0093F4DA /* RendererBuffer.hpp in Headers */,
 				B2D292B52C3940320093F4DA /* Application.hpp in Headers */,

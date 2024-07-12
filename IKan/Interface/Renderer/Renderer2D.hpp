@@ -24,5 +24,8 @@ namespace IKan
     /// This funcition Adds the circle batch limit to prev allocated data
     /// - Parameter circles: circles to be renderered in single batch
     static void AddCircles(uint32_t circles);
+    /// This funcition Adds the line batch limit to prev allocated data
+    /// - Parameter lines: lines to be renderered in single batch
+    static void AddLines(uint32_t lines);
   };
 } // namespace IKan
