@@ -40,6 +40,9 @@ namespace IKan
       
       // Process the shader codes
       PreprocessShader(shaderString);
+      
+      // Compile and Link the shader code
+      Compile();
     });
   }
   
@@ -88,5 +91,88 @@ namespace IKan
     
     // if Not able to read the file then no shader is loaded in the map
     IK_ASSERT(m_shaderSourceCodeMap.size(), "Shader source empty. No Shader exist");
+  }
+  
+  void OpenGLShader::Compile()
+  {
+    IK_PROFILE();
+    SHADER_LOG("  Compiling {0} ", m_name.c_str());
+    
+    // Check Mendatory Shaders : Vertex and Fragment are present
+    IK_ASSERT(m_shaderSourceCodeMap.find(GL_VERTEX_SHADER) != m_shaderSourceCodeMap.end(), "Vertex Shader not loaded in file");
+    IK_ASSERT(m_shaderSourceCodeMap.find(GL_FRAGMENT_SHADER) != m_shaderSourceCodeMap.end(), "Fragment Shader not loaded in file");
+    
+    // Stores the shader code IDs
+    std::vector<GLuint> shaderIDs;
+    
+    // Shader Compiler
+    for (const auto& [shaderType, shaderSrc] : m_shaderSourceCodeMap)
+    {
+      // Generate the Shader ID
+      GLuint shader = glCreateShader(shaderType);
+      
+      // Attch the shader source and then compile
+      const char* shaderString = shaderSrc.c_str();
+      glShaderSource(shader, 1, &shaderString, nullptr);
+      
+      // Compile the shader
+      glCompileShader(shader);
+      
+      // Shader Error Handling
+      GLint isCompiled = 0;
+      glGetShaderiv(shader, GL_COMPILE_STATUS, &isCompiled);
+      if (GL_FALSE == isCompiled)
+      {
+        GLint maxLength = 0;
+        glGetShaderiv(shader, GL_INFO_LOG_LENGTH, &maxLength);
+        
+        std::vector<GLchar> infoLog(static_cast<size_t>(maxLength));
+        glGetShaderInfoLog(shader, maxLength, &maxLength, &infoLog[0]);
+        
+        // Delete the shader if error pops
+        glDeleteShader(shader);
+        
+        IK_LOG_ERROR(LogModule::Shader, "{0}", infoLog.data());
+        IK_ASSERT(false, "Shader compilation failure!");
+      } // Error Check for shader Compiler
+      
+      // Attach both shader and link them if compiled successfully
+      glAttachShader(m_rendererID, shader);
+      shaderIDs.push_back(shader);
+    }
+    
+    // Shader Linking
+    glLinkProgram(m_rendererID);
+    
+    // Shader Error Handling. Note the different functions here: glGetProgram* instead of glGetShader
+    GLint isLinked = 0;
+    glGetProgramiv(m_rendererID, GL_LINK_STATUS, static_cast<int32_t*>(&isLinked));
+    
+    if (GL_FALSE == isLinked)
+    {
+      GLint maxLength = 0;
+      glGetProgramiv(m_rendererID, GL_INFO_LOG_LENGTH, &maxLength);
+      
+      // The maxLength includes the NULL character
+      std::vector<GLchar> infoLog(static_cast<size_t>(maxLength));
+      glGetProgramInfoLog(m_rendererID, maxLength, &maxLength, &infoLog[0]);
+      
+      // We don't need the program anymore.
+      glDeleteProgram(m_rendererID);
+      
+      for (GLuint id : shaderIDs)
+      {
+        glDeleteShader(id);
+      }
+      
+      IK_LOG_ERROR(LogModule::Shader, "{0}", infoLog.data());
+      IK_ASSERT(false, "Shader link failure!");
+    } // Error check of Shader Linker
+    
+    // Delete all shader as we have already linked them to our shader program
+    for (GLuint id : shaderIDs)
+    {
+      glDeleteShader(id);
+    }
   }
 } // namespace IKan
