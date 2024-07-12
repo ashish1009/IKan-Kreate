@@ -18,7 +18,13 @@ namespace IKan
     m_size = SizeOfUniformType(m_type) * m_count;
     SHADER_LOG("      {0} {1}[{2}] (Size : {3}) ", TypeToString(m_type), m_name, m_count, m_size);
   }
-
+  OpenGLShaderUniformDeclaration::OpenGLShaderUniformDeclaration(ShaderDomain domain, ShaderStruct* uniformStruct, const std::string& name, uint32_t count)
+  : m_struct(uniformStruct), m_type(OpenGLShaderUniformDeclaration::Type::Struct),m_domain(domain), m_name(name), m_count(count)
+  {
+    IK_ASSERT(uniformStruct, "Structure is nullptr!");
+    m_size = m_struct->GetSize() * m_count;
+    SHADER_LOG("      {0} {1}[{2}] (Size : {3}) ", TypeToString(m_type), m_name, m_count, m_size);
+  }
   OpenGLShaderUniformDeclaration::~OpenGLShaderUniformDeclaration()
   {
     SHADER_LOG("      Destroying : {0} {1}[{2}] (Size : {3}) ", TypeToString(m_type), m_name, m_count, m_size);
@@ -128,5 +134,51 @@ namespace IKan
     return "Invalid Type";
   }
   
-
+  // OpenGLShaderResourceDeclaration --------------------------------------------------------------------------------
+  OpenGLShaderResourceDeclaration::Type OpenGLShaderResourceDeclaration::StringToType(const std::string& type)
+  {
+    if (type == "sampler2D")    return Type::Texture2D;
+    if (type == "sampler2DMS")  return Type::Texture2D;
+    if (type == "samplerCube")  return Type::TextureCubeMap;
+    
+    return Type::None;
+  }
+  
+  std::string OpenGLShaderResourceDeclaration::TypeToString(Type type)
+  {
+    switch (type)
+    {
+      case Type::None:           return "None       ";
+      case Type::Texture2D:      return "sampler2D  ";
+      case Type::TextureCubeMap: return "samplerCube";
+    }
+    return "Invalid Type";
+  }
+  
+  OpenGLShaderResourceDeclaration::OpenGLShaderResourceDeclaration(Type type, const std::string& name, uint32_t count)
+  : m_type(type), m_name(name), m_count(count)
+  {
+    SHADER_LOG("      {0} {1}[{2}]", TypeToString(m_type), m_name, m_count);
+  }
+  
+  OpenGLShaderResourceDeclaration::~OpenGLShaderResourceDeclaration() {
+    SHADER_LOG("      Destroying : {0} {1}[{2}]", TypeToString(m_type), m_name, m_count);
+  }
+  
+  const std::string& OpenGLShaderResourceDeclaration::GetName() const
+  {
+    return m_name;
+  }
+  uint32_t OpenGLShaderResourceDeclaration::GetRegister() const
+  {
+    return m_register;
+  }
+  uint32_t OpenGLShaderResourceDeclaration::GetCount() const
+  {
+    return m_count;
+  }
+  OpenGLShaderResourceDeclaration::Type OpenGLShaderResourceDeclaration::GetType() const
+  {
+    return m_type;
+  }
 } // namespace IKan
