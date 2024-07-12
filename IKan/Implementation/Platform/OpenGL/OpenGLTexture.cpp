@@ -100,27 +100,27 @@ namespace IKan
       RendererStatistics::Get().textureBufferSize -= m_specification.size;
     }
     
+    if (m_specification.enableDebugLogs)
+    {
+      IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Texture 2D ");
+      IK_LOG_DEBUG(LogModule::Texture, "  Name              | {0}", m_specification.title);
+      IK_LOG_TRACE(LogModule::Texture, "  Renderer ID       | {0}", m_rendererID);
+      IK_LOG_TRACE(LogModule::Texture, "  Size              | {0} B", m_specification.size);
+      IK_LOG_TRACE(LogModule::Texture, "  Channels          | {0}", m_channel);
+      IK_LOG_TRACE(LogModule::Texture, "  Internal Format   | {0}", TextureUtils::IKanFormatName(m_specification.internalFormat));
+      IK_LOG_TRACE(LogModule::Texture, "  Data Format       | {0}", TextureUtils::IKanFormatName(m_specification.dataFormat));
+      IK_LOG_TRACE(LogModule::Texture, "  Type              | {0}", TextureUtils::IKanTypeName(m_specification.type));
+      IK_LOG_TRACE(LogModule::Texture, "  X Wrap            | {0}", TextureUtils::IKanWrapName(m_specification.Xwrap));
+      IK_LOG_TRACE(LogModule::Texture, "  Y Wrap            | {0}", TextureUtils::IKanWrapName(m_specification.Ywrap));
+      IK_LOG_TRACE(LogModule::Texture, "  Z Wrap            | {0}", TextureUtils::IKanWrapName(m_specification.Zwrap));
+      IK_LOG_TRACE(LogModule::Texture, "  Min Filter        | {0}", TextureUtils::IKanFilterName(m_specification.minFilter));
+      IK_LOG_TRACE(LogModule::Texture, "  mag Filter        | {0}", TextureUtils::IKanFilterName(m_specification.minFilter));
+      IK_LOG_TRACE(LogModule::Texture, "  Total Size in GPU | {0} B ({1} KB, {2} MB)",
+                   RendererStatistics::Get().textureBufferSize,
+                   RendererStatistics::Get().textureBufferSize / 1000,
+                   RendererStatistics::Get().textureBufferSize / 1000000);
+    }
     Renderer::Submit([this] {
-      if (m_specification.enableDebugLogs)
-      {
-        IK_LOG_DEBUG(LogModule::Texture, "Destroying Open GL Texture 2D ");
-        IK_LOG_DEBUG(LogModule::Texture, "  Name              | {0}", m_specification.title);
-        IK_LOG_TRACE(LogModule::Texture, "  Renderer ID       | {0}", m_rendererID);
-        IK_LOG_TRACE(LogModule::Texture, "  Size              | {0} B", m_specification.size);
-        IK_LOG_TRACE(LogModule::Texture, "  Channels          | {0}", m_channel);
-        IK_LOG_TRACE(LogModule::Texture, "  Internal Format   | {0}", TextureUtils::IKanFormatName(m_specification.internalFormat));
-        IK_LOG_TRACE(LogModule::Texture, "  Data Format       | {0}", TextureUtils::IKanFormatName(m_specification.dataFormat));
-        IK_LOG_TRACE(LogModule::Texture, "  Type              | {0}", TextureUtils::IKanTypeName(m_specification.type));
-        IK_LOG_TRACE(LogModule::Texture, "  X Wrap            | {0}", TextureUtils::IKanWrapName(m_specification.Xwrap));
-        IK_LOG_TRACE(LogModule::Texture, "  Y Wrap            | {0}", TextureUtils::IKanWrapName(m_specification.Ywrap));
-        IK_LOG_TRACE(LogModule::Texture, "  Z Wrap            | {0}", TextureUtils::IKanWrapName(m_specification.Zwrap));
-        IK_LOG_TRACE(LogModule::Texture, "  Min Filter        | {0}", TextureUtils::IKanFilterName(m_specification.minFilter));
-        IK_LOG_TRACE(LogModule::Texture, "  mag Filter        | {0}", TextureUtils::IKanFilterName(m_specification.minFilter));
-        IK_LOG_TRACE(LogModule::Texture, "  Total Size in GPU | {0} B ({1} KB, {2} MB)",
-                     RendererStatistics::Get().textureBufferSize,
-                     RendererStatistics::Get().textureBufferSize / 1000,
-                     RendererStatistics::Get().textureBufferSize / 1000000);
-      }
       glDeleteTextures(1, &m_rendererID);
     });
   }
