@@ -20,4 +20,14 @@ namespace IKan
     /// This is the default virtual destuctor for vertex buffer
     virtual ~VertexBuffer() = default;
   };
+  
+  // Index Buffer ---------------------------------------------------------------------------------------------------
+  /// This class is the interface for creating renderer index buffer
+  class IndexBuffer
+  {
+  public:
+    /// This is the default virtual destuctor for index buffer
+    virtual ~IndexBuffer() = default;
+  };
+
 } // namespace IKan
