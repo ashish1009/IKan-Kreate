@@ -21,6 +21,7 @@
 #include <vector>
 #include <unordered_map>
 #include <map>
+#include <fstream>
 
 // glm math library
 #define GLM_ENABLE_EXPERIMENTAL
@@ -43,5 +44,8 @@
 #include "Debug/Logger.hpp"
 #include "Debug/LoggerAPIs.h"
 #include "Debug/Timer.hpp"
+
+#include "Utils/FilesystemUtils.hpp"
+#include "Utils/StringUtils.hpp"
 
 #include "Core/CoreAssetPath.hpp"

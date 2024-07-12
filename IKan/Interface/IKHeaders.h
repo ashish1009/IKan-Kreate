@@ -18,6 +18,7 @@
 #include <vector>
 #include <unordered_map>
 #include <map>
+#include <fstream>
 
 // glm math library
 #define GLM_ENABLE_EXPERIMENTAL

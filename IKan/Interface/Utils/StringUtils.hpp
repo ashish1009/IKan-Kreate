@@ -31,4 +31,9 @@ namespace IKan::Utils::String
   /// - Parameter string: string to be broken
   /// - Returns: Vector of strings after breaking from break point
   std::vector<std::string> GetLines(const std::string& string);
+  
+  /// This function reads the file and extract the file content in string
+  /// - Parameter filePath: file path to be read
+  /// - Returns: File content in string
+  std::string ReadFromFile(const std::filesystem::path& filePath);
 } // namespace IKan::Utils::String

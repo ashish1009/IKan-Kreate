@@ -11,6 +11,7 @@ namespace IKan::Utils::String
 {
   std::vector<std::string> SplitString(const std::string& string, const std::string& delimiters)
   {
+    IK_PROFILE();
     // Return empty vector if no delimiters are given
     if (delimiters.size() == 0)
     {
@@ -59,5 +60,39 @@ namespace IKan::Utils::String
   std::vector<std::string> GetLines(const std::string& string)
   {
     return SplitString(string, "\n");
+  }
+  
+  std::string ReadFromFile(const std::filesystem::path& filepath)
+  {
+    IK_PROFILE();
+    
+    // File content to be stored in this string
+    std::string result {};
+    
+    // Read the file and store the data in string
+    std::ifstream in(filepath.string(), std::ios::in | std::ios::binary);
+    if (in)
+    {
+      in.seekg(0, std::ios::end);
+      size_t size = (size_t)in.tellg();
+      
+      if (-1 != (int32_t)size)
+      {
+        result.resize(size);
+        in.seekg(0, std::ios::beg);
+        in.read(&result[0], (long)size);
+        in.close();
+      }
+      else
+      {
+        assert(false);
+      }
+    }
+    else
+    {
+      assert(false);
+    }
+
+    return result;
   }
 } // namespace IKan::Utils::String
