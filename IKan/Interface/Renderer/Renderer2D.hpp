@@ -17,5 +17,9 @@ namespace IKan
     static void Initialize();
     /// This function shuts down the 2D batch renderer
     static void Shutdown();
+    
+    /// This funcition Adds the quad batch limit to prev allocated data
+    /// - Parameter quads: quads to be renderered in single batch
+    static void AddQuads(uint32_t quads);
   };
 } // namespace IKan

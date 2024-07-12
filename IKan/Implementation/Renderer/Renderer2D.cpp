@@ -7,22 +7,47 @@
 
 #include "Renderer2D.hpp"
 
+#include "Renderer/QuadData.hpp"
+
 namespace IKan
 {
-#define BATCH_INFO(...) IK_LOG_INFO(LogModule::Renderer2D, __VA_ARGS__)
-#define BATCH_TRACE(...) IK_LOG_TRACE(LogModule::Renderer2D, __VA_ARGS__)
-#define BATCH_WARN(...) IK_LOG_WARN(LogModule::Renderer2D, __VA_ARGS__)
-#define BATCH_ERROR(...) IK_LOG_ERROR(LogModule::Renderer2D, __VA_ARGS__)
-#define BATCH_CRITICAL(...) IK_LOG_CRITICAL(LogModule::Renderer2D, __VA_ARGS__)
-  
+  /// This stucture stores the Renderer 2D Data
+  struct Renderer2DData
+  {
+    QuadBatchData quadData;
+    
+    void Destroy()
+    {
+      IK_PROFILE();
+      
+      quadData.Destroy();
+    }
+  };
+  static Renderer2DData s_data;
+
   void Renderer2D::Initialize()
   {
     IK_PROFILE();
     BATCH_INFO("Initialising the Batch Renderer 2D ");
+    
+    AddQuads(1000);
   }
   void Renderer2D::Shutdown()
   {
     IK_PROFILE();
     BATCH_WARN("Shutting Down the Batch Renderer 2D ");
+    
+    s_data.Destroy();
+  }
+  
+  void Renderer2D::AddQuads(uint32_t quads)
+  {
+    IK_PROFILE();
+    if (quads == 0)
+    {
+      return;
+    }
+    
+    s_data.quadData.Initialize(quads);
   }
 } // namespace IKan
