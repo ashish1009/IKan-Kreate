@@ -7,6 +7,9 @@
 
 #pragma once
 
+#include "Renderer/Renderer.hpp"
+#include "Renderer/Graphics/Factories.hpp"
+
 namespace IKan
 {
   /// This class is the interface for creating pipeline for renderer

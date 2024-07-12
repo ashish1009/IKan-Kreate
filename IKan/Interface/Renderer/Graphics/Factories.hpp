@@ -20,7 +20,8 @@ namespace IKan
   class Texture;
   class VertexBuffer;
   class Shader;
-
+  class Pipeline;
+  
   /// This structure stores the API to create the renderer context instance based on the renderer API supported by the Engine
   struct RendererContextFactory
   {
@@ -63,12 +64,20 @@ namespace IKan
     /// - Parameter size: Size of vertex buffer
     [[nodiscard]] static Ref<VertexBuffer> Create(uint32_t size);
   };
-
+  
   /// This structure stores the API to create the shader instance based on the renderer API supported by the Engine
   struct ShaderFactory
   {
     /// This function creates the shader instance with file path based on the renderer API supported by the Engine
     /// - Parameter shaderFilePath: Shader Code file path
     [[nodiscard]] static Ref<Shader> Create(const std::filesystem::path& shaderFilePath);
+  };
+  
+  /// This structure stores the API to create the pipeline instance based on the renderer API supported by the Engine
+  struct PipelineFactory
+  {
+    /// This function creates the shader instance with specification data based on the renderer API supported by the Engine
+    /// - Parameter spec: Pipeline specification data
+    [[nodiscard]] static Ref<Pipeline> Create(const PipelineSpecification& spec);
   };
 } // namespace IKan
