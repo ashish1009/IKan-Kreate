@@ -49,5 +49,12 @@ namespace IKan
     OpenGLIndexBuffer(void *data, uint32_t size);
     /// This destructor destroyes the Open GL idnex Buffer.
     ~OpenGLIndexBuffer();
+
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLIndexBuffer);
+    
+  private:
+    RendererID m_rendererID {0};
+    uint32_t m_size {0};
+    Buffer m_localData;
   };
 } // namespace IKan

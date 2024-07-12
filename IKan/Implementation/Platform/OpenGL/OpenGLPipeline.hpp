@@ -21,6 +21,8 @@ namespace IKan
     /// This destructior destroys the pipeline data.
     ~OpenGLPipeline();
 
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLPipeline);
+
   private:
     RendererID m_rendererID {0};
     PipelineSpecification m_specification;

@@ -22,6 +22,8 @@ namespace IKan
   };
   
   // Index Buffer ---------------------------------------------------------------------------------------------------
+  // Fixed size of single indices
+  static constexpr uint32_t SizeOfSingleIndices = sizeof(uint32_t);
   /// This class is the interface for creating renderer index buffer
   class IndexBuffer
   {
