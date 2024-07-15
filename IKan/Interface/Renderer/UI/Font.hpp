@@ -47,4 +47,20 @@ namespace IKan
 
     inline static Ref<Font> s_defaultFont;
   };
-} // namespace IKan
+  
+  /// This class stores the loaded fonts in a library (map)
+  class FontLibrary
+  {
+  public:
+    /// This function returns the pre loaded font from library
+    /// - Parameter fontFilePath: font file path
+    /// - Note: Creates new if not present in map
+    static Ref<Font> Get(const std::filesystem::path& fontFilePath);
+    /// This function clear the fonts loaded in library
+    static void Clear();
+    
+    DELETE_ALL_CONSTRUCTORS(FontLibrary);
+    
+  private:
+    inline static std::unordered_map<std::filesystem::path, Ref<Font>> s_fonts;
+  };} // namespace IKan

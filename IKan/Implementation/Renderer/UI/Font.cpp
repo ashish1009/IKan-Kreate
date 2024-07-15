@@ -22,9 +22,10 @@ namespace IKan
   void Font::Initialize()
   {
     IK_PROFILE();
+    
     // Default Font
     std::string defaultFontFilePath = CoreAsset("Fonts/HfMonorita/Regular.ttf");
-    s_defaultFont = Font::Create(defaultFontFilePath);
+    s_defaultFont = FontLibrary::Get(defaultFontFilePath);
   }
   
   void Font::Shutdown()
@@ -103,5 +104,26 @@ namespace IKan
   {
     IK_ASSERT(m_charTextureMap.find(charValue) != m_charTextureMap.end());
     return m_charTextureMap.at(charValue);
+  }
+  
+  Ref<Font> FontLibrary::Get(const std::filesystem::path& fontFilePath)
+  {
+    IK_PROFILE();
+    if (s_fonts.find(fontFilePath) == s_fonts.end() or !s_fonts.at(fontFilePath))
+    {
+      s_fonts[fontFilePath] = Font::Create(fontFilePath);
+      IK_LOG_TRACE(LogModule::Font, "Font '{0}' will be added to Font Library. (Total Shaders {1})", fontFilePath.filename().string(), s_fonts.size());
+    }
+    else
+    {
+      IK_LOG_TRACE(LogModule::Font, "Returning Pre loaded Font '{0}' from Font Library", fontFilePath.filename().string());
+    }
+    return s_fonts.at(fontFilePath);
+  }
+  void FontLibrary::Clear()
+  {
+    IK_PROFILE();
+    IK_LOG_TRACE(LogModule::Font, "Removing all fonts from fonts Library");
+    s_fonts.clear();
   }
 } // namespace IKan

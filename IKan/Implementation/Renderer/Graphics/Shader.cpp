@@ -26,7 +26,7 @@ namespace IKan
   void ShaderLibrary::Clear()
   {
     IK_PROFILE();
-    IK_LOG_TRACE(LogModule::Shader, "Removing all shaders from Shdaer Library");
+    IK_LOG_TRACE(LogModule::Shader, "Removing all shaders from Shader Library");
     s_shaders.clear();
   }
 } // namespace IKan

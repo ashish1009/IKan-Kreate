@@ -95,6 +95,7 @@ namespace IKan
     Renderer2D::Shutdown();
     ShaderLibrary::Clear();
     Font::Shutdown();
+    FontLibrary::Clear();
 
     // Destroy the Renderer Data
     // Note: To be destroyed in the end 
