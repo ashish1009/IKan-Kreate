@@ -102,4 +102,17 @@ namespace IKan
     RendererStatistics::Get().drawCalls++;
   }
 
+  void OpenGLRendererAPI::DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount) const {
+    IK_ASSERT(pipeline, "Pipeline is NULL!");
+    
+    pipeline->Bind();
+    
+    Renderer::Submit([vertexCount](){
+      glDrawArrays(GL_LINES, 0, /* Vertex Offset */ (GLsizei)vertexCount);
+      glBindTexture(GL_TEXTURE_2D, 0);
+    });
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
 } // namespace IKan

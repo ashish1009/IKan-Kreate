@@ -43,6 +43,11 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer and index buffer.
     ///   - count: number of Indices (if 0 then use index buffer of Vertex array).
     void DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count) const override;
+    /// This API draws Lines Vertex Array.
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer layout.
+    ///   - vertexCount: number of Vertices.
+    void DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount) const override;
 
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLRendererAPI);
   };
