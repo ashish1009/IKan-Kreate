@@ -70,3 +70,4 @@
 #include <Camera/Camera.hpp>
 #include <Camera/SceneCamera.hpp>
 #include <Camera/EditorCamera.hpp>
+#include <Camera/FixedCamera.hpp>

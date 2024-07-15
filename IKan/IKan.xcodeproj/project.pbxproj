@@ -89,6 +89,8 @@
 		B2D297562C4548BD0093F4DA /* SceneCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297542C4548BD0093F4DA /* SceneCamera.hpp */; };
 		B2D297592C454A170093F4DA /* EditorCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D297572C454A170093F4DA /* EditorCamera.cpp */; };
 		B2D2975A2C454A170093F4DA /* EditorCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297582C454A170093F4DA /* EditorCamera.hpp */; };
+		B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2975E2C454C3E0093F4DA /* FixedCamera.cpp */; };
+		B2D297612C454C3E0093F4DA /* FixedCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2975F2C454C3E0093F4DA /* FixedCamera.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -220,6 +222,8 @@
 		B2D297542C4548BD0093F4DA /* SceneCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneCamera.hpp; sourceTree = "<group>"; };
 		B2D297572C454A170093F4DA /* EditorCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorCamera.cpp; sourceTree = "<group>"; };
 		B2D297582C454A170093F4DA /* EditorCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorCamera.hpp; sourceTree = "<group>"; };
+		B2D2975E2C454C3E0093F4DA /* FixedCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FixedCamera.cpp; sourceTree = "<group>"; };
+		B2D2975F2C454C3E0093F4DA /* FixedCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedCamera.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -590,6 +594,7 @@
 				B2D297502C45480B0093F4DA /* Camera.hpp */,
 				B2D297542C4548BD0093F4DA /* SceneCamera.hpp */,
 				B2D297582C454A170093F4DA /* EditorCamera.hpp */,
+				B2D2975F2C454C3E0093F4DA /* FixedCamera.hpp */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -600,6 +605,7 @@
 				B2D2974F2C45480B0093F4DA /* Camera.cpp */,
 				B2D297532C4548BD0093F4DA /* SceneCamera.cpp */,
 				B2D297572C454A170093F4DA /* EditorCamera.cpp */,
+				B2D2975E2C454C3E0093F4DA /* FixedCamera.cpp */,
 			);
 			path = Camera;
 			sourceTree = "<group>";
@@ -617,6 +623,7 @@
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
 				B2D296EE2C41093F0093F4DA /* Shader.hpp in Headers */,
 				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
+				B2D297612C454C3E0093F4DA /* FixedCamera.hpp in Headers */,
 				B2D2967B2C3C0AEA0093F4DA /* Input.hpp in Headers */,
 				B2D296B82C40EBC00093F4DA /* Texture.hpp in Headers */,
 				B2D296B22C40E8F20093F4DA /* BatchData.hpp in Headers */,
@@ -775,6 +782,7 @@
 				B2D296FB2C410BF40093F4DA /* OpenGLShader.cpp in Sources */,
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
+				B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */,
 				B2D296982C3C19E20093F4DA /* OpenGLRendererAPI.cpp in Sources */,
 				B2D296A02C3EE67E0093F4DA /* Renderer2D.cpp in Sources */,
 				B2D297592C454A170093F4DA /* EditorCamera.cpp in Sources */,
