@@ -62,6 +62,8 @@ namespace IKan
     /// This structure stores the vertex data for all 2D shape batch renderer (Quads and Circles)
     struct Vertex
     {
+      glm::vec3 position;
+      glm::vec4 color;
       glm::vec2 textureCoords;
       
       float textureIndex {0};
