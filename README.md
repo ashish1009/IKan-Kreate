@@ -63,15 +63,13 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 
 ## Road Map
 - Graphic APIs
-    - ~ Texture
-      - Image Loader
+    - Image Loader
     - Framebuffer
 - Viewports and Framebuffers
-- Mesh Materials
 - Project
 - Assets
   - Asset registry
-  - Asset manager
+  - Asset Manager
 - Editor UI
   - Welcome screen
   - Title bar
