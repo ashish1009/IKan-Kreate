@@ -46,7 +46,9 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v1.0.1.0 : Application and layer
 - v1.1.1.0 : GLFW Window
 - v1.2.1.0 : ImGui UI Layer
-- v1.3.1.0 : Renderer Command Queue
+- v1.3.1.1 : Renderer Command Queue
+- v2.0.1.1 : Batch 2D Renderer
+- v2.1.1.1 : Text Renderer
 
 ## Road Map
 - Application and Layer
@@ -72,10 +74,12 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
     - ~ Pipeline
     - ~ Shader
     - ~ Texture
+      - Image Loader
     - Framebuffer
 - ~ Batch 2D Renderer
-- Text Renderer
-  - Freetype linkage
+- ~ Text Renderer
+  - ~ Font Manager
+  - ~ Freetype linkage
 - Cameras
 - Viewports and Framebuffers
 - Mesh Loader
