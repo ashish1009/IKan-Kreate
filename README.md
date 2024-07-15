@@ -60,6 +60,8 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v2.0.1.1 : Batch 2D Renderer
 - v2.1.1.1 : Text Renderer
 - v2.2.1.1 : Camera Rendering
+- v3.0.1.1 : Mesh Rendering
+- v3.1.1.1 : Images and framebuffer
 
 ## Road Map
 - Viewports
