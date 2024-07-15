@@ -52,7 +52,8 @@ namespace Kreator
     Renderer::Clear({0.2, 0.1, 0.3, 1.0});
     
     Renderer2D::BeginBatch(Utils::Math::UnitMat4, Utils::Math::UnitMat4);
-    Renderer2D::SubmitQuad({0, 0, 0});
+    Renderer2D::SubmitQuad({0.5, 0.5, 0}, {0.5, 0.5});
+    Renderer2D::SubmitCircle({-0.5, -0.5, 0}, 0.5);
     Renderer2D::EndBatch();
   }
   

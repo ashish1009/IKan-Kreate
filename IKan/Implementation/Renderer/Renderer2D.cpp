@@ -110,12 +110,12 @@ namespace IKan
   
   void Renderer2D::SubmitQuad(const glm::mat4& transform, const glm::vec4& color, const Ref<Texture>& texture, float tilingFactor, int32_t objectID)
   {
-    IK_PERFORMANCE("Renderer2D::DrawQuad (With Transform)");
-    SubmitQuadImpl(transform, color, texture ? texture : nullptr, tilingFactor, TextureCoords, objectID );
+    IK_PERFORMANCE("Renderer2D::SubmitQuad (With Transform)");
+    SubmitQuadImpl(transform, color, texture, tilingFactor, TextureCoords, objectID );
   }
   void Renderer2D::SubmitQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec3& rotation, const glm::vec4& color, const Ref<Texture>& texture, float tilingFactor, int32_t objectID)
   {
-    IK_PERFORMANCE("Renderer2D::DrawQuad (With PSR)");
+    IK_PERFORMANCE("Renderer2D::SubmitQuad (With PSR)");
     const glm::mat4& transform = Utils::Math::GetTransformMatrix(position, rotation, glm::vec3(scale, 0.0f));
     SubmitQuadImpl(transform, color, texture, tilingFactor, TextureCoords, objectID);
   }
@@ -123,7 +123,7 @@ namespace IKan
   void Renderer2D::SubmitQuadImpl(const glm::mat4& transform, const glm::vec4& color, const Ref<Texture>& texture,
                                   float tilingFactor, const glm::vec2* textureCoords, int32_t objectID)
   {
-    IK_PERFORMANCE("Renderer2D::DrawTextureQuad");
+    IK_PERFORMANCE("Renderer2D::SubmitQuadImpl");
     
     // If number of indices increase in batch then start new batch
     if (s_data.quadData.indexCountInBatch >= s_data.quadData.maxIndicesPerBatch)
@@ -180,5 +180,94 @@ namespace IKan
     RendererStatistics::Get().indexCount += Shape2DData::IndicesForSingleElement;
     RendererStatistics::Get().vertexCount += Shape2DData::VertexForSingleElement;
     RendererStatistics::Get()._2d.quads++;
+  }
+  
+  void Renderer2D::SubmitCircle(const glm::vec3& position, float radius, const glm::vec3& rotation, const glm::vec4& color,
+                                const Ref<Texture>& texture, float tilingFactor, float thickness, float fade, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::SubmitCircle (With PSR)");
+    const glm::mat4& transform = Utils::Math::GetTransformMatrix(position, rotation, {radius, radius, radius});
+    SubmitCircleImpl(transform, texture, tilingFactor, color, thickness, fade, objectID);
+  }
+  
+  void Renderer2D::SubmitCircle(const glm::vec3& position, const glm::vec2& radius, const glm::vec3& rotation, const glm::vec4& color,
+                                const Ref<Texture>& texture, float tilingFactor, float thickness, float fade, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::SubmitCircle (With PSR)");
+    const glm::mat4& transform = Utils::Math::GetTransformMatrix(position, rotation, glm::vec3(radius, 0.0f));
+    SubmitCircleImpl(transform, texture, tilingFactor, color, thickness, fade, objectID);
+  }
+  
+  void Renderer2D::SubmitCircle(const glm::mat4& transform, const glm::vec4& color, const Ref<Texture>& texture, float tilingFactor,
+                                float thickness, float fade, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::SubmitCircle (With Transform)");
+    SubmitCircleImpl(transform, texture, tilingFactor, color, thickness, fade, objectID);
+  }
+  
+  void Renderer2D::SubmitCircleImpl(const glm::mat4& transform, const Ref<Texture>& texture, float tilingFactor,
+                                    const glm::vec4& tintColor, float thickness, float fade, int32_t objectID)
+  {
+    IK_PERFORMANCE("Renderer2D::SubmitCircleImpl");
+    
+    // If number of indices increase in batch then start new batch
+    if (s_data.circleData.indexCountInBatch >= s_data.circleData.maxIndicesPerBatch)
+    {
+      BATCH_INFO("Starts the new batch as number of indices ({0}) increases in the previous batch", s_data.circleData.indexCountInBatch);
+      s_data.circleData.Flush();
+    }
+    
+    float textureIndex = 0.0f;
+    if (texture)
+    {
+      // Find if texture is already loaded in current batch
+      for (size_t i = 1; i < s_data.circleData.textureSlotIndex; i++)
+      {
+        if (s_data.circleData.textureSlots[i].get() == texture.get())
+        {
+          // Found the current textue in the batch
+          textureIndex = (float)i;
+          break;
+        }
+      }
+      
+      // If current texture slot is not pre loaded then load the texture in proper slot
+      if (textureIndex == 0.0f)
+      {
+        // If number of slots increases max then start new batch
+        if (s_data.circleData.textureSlotIndex >= Texture2DSpecification::MaxTextureSlotsInShader)
+        {
+          BATCH_INFO("Starts the new batch as number of texture slot ({0}) increases in the previous batch", s_data.circleData.textureSlotIndex);
+          EndBatch();
+          s_data.circleData.ResetBatch();
+        }
+        
+        // Loading the current texture in the first free slot slot
+        textureIndex = (float)s_data.circleData.textureSlotIndex;
+        s_data.circleData.textureSlots[s_data.circleData.textureSlotIndex] = texture;
+        s_data.circleData.textureSlotIndex++;
+      }
+    }
+    
+    for (size_t i = 0; i < Shape2DData::VertexForSingleElement; i++)
+    {
+      s_data.circleData.vertexBufferPtr->position        = transform * s_data.circleData.vertexBasePosition[i];
+      s_data.circleData.vertexBufferPtr->color           = tintColor;
+      s_data.circleData.vertexBufferPtr->textureCoords   = 2.0f * s_data.circleData.vertexBasePosition[i];
+      s_data.circleData.vertexBufferPtr->textureIndex    = textureIndex;
+      s_data.circleData.vertexBufferPtr->tilingFactor    = tilingFactor;
+      s_data.circleData.vertexBufferPtr->localPosition   = 2.0f * s_data.circleData.vertexBasePosition[i];
+      s_data.circleData.vertexBufferPtr->thickness       = thickness;
+      s_data.circleData.vertexBufferPtr->fade            = fade;
+      s_data.circleData.vertexBufferPtr->pixelID         = objectID;
+      s_data.circleData.vertexBufferPtr++;
+    }
+    
+    s_data.circleData.indexCountInBatch += Shape2DData::IndicesForSingleElement;
+    
+    // Update Stats
+    RendererStatistics::Get().indexCount += Shape2DData::IndicesForSingleElement;
+    RendererStatistics::Get().vertexCount += Shape2DData::VertexForSingleElement;
+    RendererStatistics::Get()._2d.circles++;
   }
 } // namespace IKan

@@ -62,6 +62,50 @@ namespace IKan
                            const glm::vec3& rotation = Utils::Math::ZeroVec3, const glm::vec4& color = Utils::Math::UnitVec4,
                            const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f, int32_t objectID = -1);
     
+    /// This function draws circle with texture
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Circle
+    ///   - color: Color of circle
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void SubmitCircle(const glm::mat4& transform, const glm::vec4& color = Utils::Math::UnitVec4,
+                             const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f,
+                             float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1);
+
+    /// This function draws circle with color
+    /// - Parameters:
+    ///   - position: Center Circle
+    ///   - radius: radius same for all axir
+    ///   - rotation: rotation of circle
+    ///   - color: Color of circle
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void SubmitCircle(const glm::vec3& position, float radius = 1.0f, const glm::vec3& rotation = Utils::Math::ZeroVec3,
+                             const glm::vec4& color = Utils::Math::UnitVec4, const Ref<Texture>& texture = nullptr,
+                             float tilingFactor = 1.0f, float thickness = 1.0f, float fade = (float)0.005f, int32_t objectID = -1);
+      
+    /// This function draws circle with color
+    /// - Parameters:
+    ///   - position: Center Circle
+    ///   - radius: radius
+    ///   - rotation: rotation
+    ///   - color: Color of circle
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - thickness: thickneess of Circle
+    ///   - fade: fade of Circle Edge
+    ///   - objectID: Pixel ID of Circle
+    static void SubmitCircle(const glm::vec3& position, const glm::vec2& radius = Utils::Math::UnitVec2,
+                             const glm::vec3& rotation = Utils::Math::ZeroVec3, const glm::vec4& tintColor = Utils::Math::UnitVec4,
+                             const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f,
+                             float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1);
+    
   private:
     /// This function is the helper function to rendere the quad
     /// - Parameters:
@@ -73,5 +117,18 @@ namespace IKan
     ///   - objectID: Pixel/Entity ID of Quad
     static void SubmitQuadImpl(const glm::mat4& transform, const glm::vec4& color, const Ref<Texture>& texture,
                                float tilingFactor, const glm::vec2* textureCoords, int32_t objectID);
+    
+    /// This function is the helper function to rendere the circle
+    /// - Parameters:
+    ///   - transform: transform matrix of circle
+    ///   - texture: texture to be binded in circle
+    ///   - tilingFactor: tiling factor of texture
+    ///   - color: color of circle
+    ///   - thickness: thickness of circle
+    ///   - fade: cirlce face
+    ///   - objectID: object/pixel id
+    static void SubmitCircleImpl(const glm::mat4& transform, const Ref<Texture>& texture, float tilingFactor,
+                                 const glm::vec4& color, float thickness, float fade, int32_t objectID);
+
   };
 } // namespace IKan
