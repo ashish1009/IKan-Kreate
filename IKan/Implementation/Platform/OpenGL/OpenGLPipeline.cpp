@@ -104,6 +104,7 @@ namespace IKan
       }
     });
   }
+  
   OpenGLPipeline::~OpenGLPipeline()
   {
     Renderer::Submit([this](){
@@ -115,4 +116,28 @@ namespace IKan
     // Reset the shader on destruction
     m_specification.shader.reset();
   }
+  
+  void OpenGLPipeline::Bind() const
+  {
+    Renderer::Submit([this](){
+      glBindVertexArray(m_rendererID);
+    });
+  }
+  
+  void OpenGLPipeline::Unbind() const
+  {
+    Renderer::Submit([](){
+      glBindVertexArray(0);
+    });
+  }
+  
+  RendererID OpenGLPipeline::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  const PipelineSpecification& OpenGLPipeline::GetSpecification() const
+  {
+    return m_specification;
+  };
 } // namespace IKan

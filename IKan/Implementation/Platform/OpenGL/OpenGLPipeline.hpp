@@ -21,6 +21,17 @@ namespace IKan
     /// This destructior destroys the pipeline data.
     ~OpenGLPipeline();
 
+    /// This function binds the current Pipeline to the renderer.
+    void Bind() const override;
+    /// This function unbinds the current Pipeline from the renderer.
+    void Unbind() const override;
+    
+    /// This function returns the renderer ID of Pipeline.
+    RendererID GetRendererID() const override;
+    
+    /// This function returns the const pipeline specificaion.
+    const PipelineSpecification& GetSpecification() const override;
+
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLPipeline);
 
   private:
