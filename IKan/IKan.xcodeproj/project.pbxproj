@@ -91,6 +91,9 @@
 		B2D2975A2C454A170093F4DA /* EditorCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297582C454A170093F4DA /* EditorCamera.hpp */; };
 		B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2975E2C454C3E0093F4DA /* FixedCamera.cpp */; };
 		B2D297612C454C3E0093F4DA /* FixedCamera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2975F2C454C3E0093F4DA /* FixedCamera.hpp */; };
+		B2D2976D2C4551560093F4DA /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2976B2C4551560093F4DA /* Mesh.cpp */; };
+		B2D2976E2C4551560093F4DA /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2976C2C4551560093F4DA /* Mesh.hpp */; };
+		B2D297722C45518E0093F4DA /* AABB.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297702C45518E0093F4DA /* AABB.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -224,6 +227,9 @@
 		B2D297582C454A170093F4DA /* EditorCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorCamera.hpp; sourceTree = "<group>"; };
 		B2D2975E2C454C3E0093F4DA /* FixedCamera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FixedCamera.cpp; sourceTree = "<group>"; };
 		B2D2975F2C454C3E0093F4DA /* FixedCamera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FixedCamera.hpp; sourceTree = "<group>"; };
+		B2D2976B2C4551560093F4DA /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
+		B2D2976C2C4551560093F4DA /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
+		B2D297702C45518E0093F4DA /* AABB.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AABB.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -358,6 +364,7 @@
 				B2D294A62C3BDE9F0093F4DA /* Window.hpp */,
 				B2D2967A2C3C0AEA0093F4DA /* Input.hpp */,
 				B2D296FD2C410D660093F4DA /* CoreAssetPath.hpp */,
+				B2D297702C45518E0093F4DA /* AABB.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -437,6 +444,7 @@
 				B2D2968C2C3C15680093F4DA /* RenderCommandQueue.hpp */,
 				B2D296D22C40F3230093F4DA /* RendererStats.hpp */,
 				B2D2969F2C3EE67E0093F4DA /* Renderer2D.hpp */,
+				B2D2976C2C4551560093F4DA /* Mesh.hpp */,
 				B2D297382C452CBE0093F4DA /* UI */,
 				B2D294B22C3BF2F80093F4DA /* Graphics */,
 			);
@@ -455,6 +463,7 @@
 				B2D297142C4132510093F4DA /* CircleData.hpp */,
 				B2D2971C2C4133910093F4DA /* LineData.hpp */,
 				B2D297422C45416B0093F4DA /* TextData.hpp */,
+				B2D2976B2C4551560093F4DA /* Mesh.cpp */,
 				B2D297332C452CAF0093F4DA /* UI */,
 				B2D294B32C3BF2FF0093F4DA /* Graphics */,
 			);
@@ -621,6 +630,7 @@
 				B2D2968E2C3C15680093F4DA /* RenderCommandQueue.hpp in Headers */,
 				B2D296C32C40EEDA0093F4DA /* OpenGLTexture.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
+				B2D2976E2C4551560093F4DA /* Mesh.hpp in Headers */,
 				B2D296EE2C41093F0093F4DA /* Shader.hpp in Headers */,
 				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
 				B2D297612C454C3E0093F4DA /* FixedCamera.hpp in Headers */,
@@ -652,6 +662,7 @@
 				B2D2970D2C412DAA0093F4DA /* Pipeline.hpp in Headers */,
 				B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */,
 				B2D294F82C3BF7BD0093F4DA /* OpenGLRendererContext.hpp in Headers */,
+				B2D297722C45518E0093F4DA /* AABB.hpp in Headers */,
 				B2D2928D2C38573B0093F4DA /* LoggerSpecificationBuilder.hpp in Headers */,
 				B2D2971D2C4133910093F4DA /* LineData.hpp in Headers */,
 				B2D296D32C40F3230093F4DA /* RendererStats.hpp in Headers */,
@@ -777,6 +788,7 @@
 				B2D296E22C41039A0093F4DA /* OpenGLRendererBuffer.cpp in Sources */,
 				B2D294AD2C3BE22C0093F4DA /* MacWindow.cpp in Sources */,
 				B2D296CD2C40F0B00093F4DA /* OpenGLSpecification.cpp in Sources */,
+				B2D2976D2C4551560093F4DA /* Mesh.cpp in Sources */,
 				B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
 				B2D296FB2C410BF40093F4DA /* OpenGLShader.cpp in Sources */,
@@ -973,6 +985,7 @@
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
+					"${PROJECT_DIR}/Vendors/Assimp/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
@@ -1041,6 +1054,7 @@
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
+					"${PROJECT_DIR}/Vendors/Assimp/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
