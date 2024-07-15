@@ -16,6 +16,9 @@ namespace IKan
   /// This stucture stores the Renderer 2D Data
   struct Renderer2DData
   {
+    glm::mat4 cameraViewProjectionMatrix;
+    glm::mat4 cameraViewMatrix;
+
     QuadBatchData quadData;
     CircleBatchData circleData;
     LineBatchData lineData;
@@ -79,5 +82,21 @@ namespace IKan
     }
     
     s_data.lineData.Initialize(lines);
+  }
+  
+  void Renderer2D::BeginBatch(const glm::mat4 &cameraViewProjectionMatrix, const glm::mat4 &cameraViewMatrix)
+  {
+    IK_PERFORMANCE("Renderer2D::BeginBatch");
+    s_data.cameraViewProjectionMatrix = cameraViewProjectionMatrix;
+    s_data.cameraViewMatrix = cameraViewMatrix;
+    
+    s_data.quadData.StartBatch(s_data.cameraViewProjectionMatrix);
+    s_data.circleData.StartBatch(s_data.cameraViewProjectionMatrix);
+    s_data.lineData.StartBatch(s_data.cameraViewProjectionMatrix);
+  }
+  
+  void Renderer2D::EndBatch()
+  {
+    
   }
 } // namespace IKan

@@ -27,5 +27,13 @@ namespace IKan
     /// This funcition Adds the line batch limit to prev allocated data
     /// - Parameter lines: lines to be renderered in single batch
     static void AddLines(uint32_t lines);
+    
+    /// This function starts the batch rendering for 2D Shapes per frame
+    /// - Parameters:
+    ///   - cameraViewProjectionMatrix: camera view projection matrix
+    ///   - cameraViewMatrix: camera view matrix
+    static void BeginBatch(const glm::mat4& cameraViewProjectionMatrix, const glm::mat4& cameraViewMatrix);
+    /// This function end the batch rendering for 2D Shapes per frame
+    static void EndBatch();
   };
 } // namespace IKan

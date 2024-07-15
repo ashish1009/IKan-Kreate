@@ -47,5 +47,6 @@
 
 #include "Utils/FileSystemUtils.hpp"
 #include "Utils/StringUtils.hpp"
+#include "Utils/MathUtils.hpp"
 
 #include "Core/CoreAssetPath.hpp"

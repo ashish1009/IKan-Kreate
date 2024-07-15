@@ -45,6 +45,7 @@
 
 #include <Utils/FileSystemUtils.hpp>
 #include <Utils/StringUtils.hpp>
+#include <Utils/MathUtils.hpp>
 
 #include <Events/Events.h>
 #include <Events/ApplicationEvents.h>
@@ -63,3 +64,5 @@
 #include <UI/ImGuiLayer.hpp>
 
 #include <Renderer/Renderer.hpp>
+#include <Renderer/RendererStats.hpp>
+#include <Renderer/Renderer2D.hpp>

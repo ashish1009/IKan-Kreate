@@ -122,5 +122,24 @@ namespace IKan
       delete [] vertexBufferBasePtr;
       vertexBufferBasePtr = nullptr;
     }
+    
+    void StartBatch(const glm::mat4& camViewProjMat)
+    {
+      IK_PERFORMANCE("Circle::StartBatch");
+      shader->Bind();
+      shader->SetUniformMat4("u_ViewProjection", camViewProjMat);
+      shader->Unbind();
+      
+      ResetBatch();
+    }
+    
+    void ResetBatch()
+    {
+      IK_PERFORMANCE("Circle::ResetBatch");
+      
+      indexCountInBatch = 0;
+      textureSlotIndex = 1;
+      vertexBufferPtr = vertexBufferBasePtr;
+    }
   };
 } // namespace IKan

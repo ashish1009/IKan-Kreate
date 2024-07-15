@@ -76,6 +76,8 @@
 		B2D297122C412E7E0093F4DA /* OpenGLPipeline.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2970F2C412E7E0093F4DA /* OpenGLPipeline.cpp */; };
 		B2D297152C4132510093F4DA /* CircleData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297142C4132510093F4DA /* CircleData.hpp */; };
 		B2D2971D2C4133910093F4DA /* LineData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2971C2C4133910093F4DA /* LineData.hpp */; };
+		B2D2972B2C44EA250093F4DA /* MathUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2972A2C44EA250093F4DA /* MathUtils.hpp */; };
+		B2D2972C2C44EA250093F4DA /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D297292C44EA250093F4DA /* MathUtils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -192,6 +194,8 @@
 		B2D297172C4132B40093F4DA /* BatchCircleShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchCircleShader.glsl; sourceTree = "<group>"; };
 		B2D2971C2C4133910093F4DA /* LineData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = LineData.hpp; sourceTree = "<group>"; };
 		B2D297222C4134030093F4DA /* BatchLineShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchLineShader.glsl; sourceTree = "<group>"; };
+		B2D297292C44EA250093F4DA /* MathUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtils.cpp; sourceTree = "<group>"; };
+		B2D2972A2C44EA250093F4DA /* MathUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MathUtils.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -284,6 +288,7 @@
 			children = (
 				B2D292912C38637E0093F4DA /* FileSystemUtils.cpp */,
 				B2D292952C3863F30093F4DA /* StringUtils.cpp */,
+				B2D297292C44EA250093F4DA /* MathUtils.cpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -293,6 +298,7 @@
 			children = (
 				B2D292922C38637E0093F4DA /* FileSystemUtils.hpp */,
 				B2D292962C3863F30093F4DA /* StringUtils.hpp */,
+				B2D2972A2C44EA250093F4DA /* MathUtils.hpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -534,6 +540,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D2972B2C44EA250093F4DA /* MathUtils.hpp in Headers */,
 				B2D2968E2C3C15680093F4DA /* RenderCommandQueue.hpp in Headers */,
 				B2D296C32C40EEDA0093F4DA /* OpenGLTexture.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
@@ -672,6 +679,7 @@
 				B2D296D42C40F3230093F4DA /* RendererStats.cpp in Sources */,
 				B2D296EB2C41073E0093F4DA /* BufferLayout.cpp in Sources */,
 				B2D294F92C3BF7BD0093F4DA /* OpenGLRendererContext.cpp in Sources */,
+				B2D2972C2C44EA250093F4DA /* MathUtils.cpp in Sources */,
 				B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */,
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
 				B2D294F02C3BF6FB0093F4DA /* Factories.cpp in Sources */,
