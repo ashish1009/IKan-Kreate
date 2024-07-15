@@ -16,7 +16,7 @@ namespace IKan
 #define LogModule(f) \
 f(None) \
 f(Application) f(Layers) f(Window) \
-f(Renderer) f(Renderer2D) f(TextRenderer) f(Font) \
+f(Renderer) f(Renderer2D) f(TextRenderer) f(Font) f(Mesh) \
 f(Texture) f(VertexBuffer) f(IndexBuffer) f(BufferLayout) f(Shader) f(Pipeline) \
 f(UI) \
 f(SceneCamera) f(EditorCamera) \

@@ -67,7 +67,6 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
       - Image Loader
     - Framebuffer
 - Viewports and Framebuffers
-- Mesh Loader
 - Mesh Materials
 - Project
 - Assets
