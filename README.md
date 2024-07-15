@@ -49,6 +49,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v1.3.1.1 : Renderer Command Queue
 - v2.0.1.1 : Batch 2D Renderer
 - v2.1.1.1 : Text Renderer
+- v2.2.1.1 : Camera Rendering
 
 ## Road Map
 - Application and Layer
@@ -80,7 +81,11 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - ~ Text Renderer
   - ~ Font Manager
   - ~ Freetype linkage
-- Cameras
+- ~ Cameras
+  - ~ Base
+  - ~ Scene camera
+  - ~ Editor camera
+  - ~ Fixed camera
 - Viewports and Framebuffers
 - Mesh Loader
 - Mesh Materials
