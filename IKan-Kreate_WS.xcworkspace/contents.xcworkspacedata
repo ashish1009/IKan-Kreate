@@ -42,6 +42,9 @@
          <FileRef
             location = "group:v2.1.1.1.md">
          </FileRef>
+         <FileRef
+            location = "group:v2.2.1.1.md">
+         </FileRef>
       </Group>
    </Group>
    <FileRef

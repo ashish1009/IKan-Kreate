@@ -66,3 +66,5 @@
 #include <Renderer/Renderer.hpp>
 #include <Renderer/RendererStats.hpp>
 #include <Renderer/Renderer2D.hpp>
+
+#include <Camera/Camera.hpp>

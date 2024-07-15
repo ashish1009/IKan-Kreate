@@ -83,6 +83,8 @@
 		B2D297372C452CB70093F4DA /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D297342C452CB70093F4DA /* Font.cpp */; };
 		B2D297402C4530FA0093F4DA /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2973C2C4530FA0093F4DA /* libpng16.a */; };
 		B2D297432C45416B0093F4DA /* TextData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297422C45416B0093F4DA /* TextData.hpp */; };
+		B2D297512C45480B0093F4DA /* Camera.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2974F2C45480B0093F4DA /* Camera.cpp */; };
+		B2D297522C45480B0093F4DA /* Camera.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297502C45480B0093F4DA /* Camera.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -208,6 +210,8 @@
 		B2D297422C45416B0093F4DA /* TextData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextData.hpp; sourceTree = "<group>"; };
 		B2D297482C4542650093F4DA /* TextShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextShader.glsl; sourceTree = "<group>"; };
 		B2D2974C2C4544EB0093F4DA /* FSQuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FSQuadShader.glsl; sourceTree = "<group>"; };
+		B2D2974F2C45480B0093F4DA /* Camera.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Camera.cpp; sourceTree = "<group>"; };
+		B2D297502C45480B0093F4DA /* Camera.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Camera.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -258,6 +262,7 @@
 				B2D292B02C3940160093F4DA /* Core */,
 				B2D296722C3C01550093F4DA /* UI */,
 				B2D294B02C3BF2D90093F4DA /* Renderer */,
+				B2D2974D2C4547F90093F4DA /* Camera */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -271,6 +276,7 @@
 				B2D292B12C3940200093F4DA /* Core */,
 				B2D296732C3C01620093F4DA /* UI */,
 				B2D294B12C3BF2EB0093F4DA /* Renderer */,
+				B2D2974E2C4548000093F4DA /* Camera */,
 				B2D294A82C3BE21A0093F4DA /* Platform */,
 			);
 			path = Implementation;
@@ -570,6 +576,22 @@
 			path = UI;
 			sourceTree = "<group>";
 		};
+		B2D2974D2C4547F90093F4DA /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B2D297502C45480B0093F4DA /* Camera.hpp */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
+		B2D2974E2C4548000093F4DA /* Camera */ = {
+			isa = PBXGroup;
+			children = (
+				B2D2974F2C45480B0093F4DA /* Camera.cpp */,
+			);
+			path = Camera;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -605,6 +627,7 @@
 				B2D297432C45416B0093F4DA /* TextData.hpp in Headers */,
 				B2D296CC2C40F0B00093F4DA /* OpenGLSpecification.hpp in Headers */,
 				B2D294AC2C3BE22C0093F4DA /* MacWindow.hpp in Headers */,
+				B2D297522C45480B0093F4DA /* Camera.hpp in Headers */,
 				B2D2970D2C412DAA0093F4DA /* Pipeline.hpp in Headers */,
 				B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */,
 				B2D294F82C3BF7BD0093F4DA /* OpenGLRendererContext.hpp in Headers */,
@@ -719,6 +742,7 @@
 				B2D296EB2C41073E0093F4DA /* BufferLayout.cpp in Sources */,
 				B2D294F92C3BF7BD0093F4DA /* OpenGLRendererContext.cpp in Sources */,
 				B2D2972C2C44EA250093F4DA /* MathUtils.cpp in Sources */,
+				B2D297512C45480B0093F4DA /* Camera.cpp in Sources */,
 				B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */,
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
 				B2D294F02C3BF6FB0093F4DA /* Factories.cpp in Sources */,
