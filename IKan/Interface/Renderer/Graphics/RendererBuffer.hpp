@@ -19,6 +19,23 @@ namespace IKan
   public:
     /// This is the default virtual destuctor for vertex buffer
     virtual ~VertexBuffer() = default;
+
+    /// This function updates the date in buffer dynamically
+    /// - Parameters:
+    ///   - data: Data pointer to be stored in GPU
+    ///   - size: size of data
+    ///   - offset: offset of data
+    virtual void SetData(void* data, uint32_t size, uint32_t offset = 0) = 0;
+ 
+    /// This function binds the Vertex Buffer before rendering
+    virtual void Bind() const = 0;
+    /// This function unbinds the Vertex Buffer after rendering
+    virtual void Unbind() const = 0;
+    
+    /// This function returns the size of Vertex Buffer in GPU
+    virtual uint32_t GetSize() const = 0;
+    /// This function returns the renderer ID of Vertex Buffer
+    virtual RendererID GetRendererID() const = 0;
   };
   
   // Index Buffer ---------------------------------------------------------------------------------------------------

@@ -75,6 +75,45 @@ namespace IKan
     });
   }
   
+  void OpenGLVertexBuffer::SetData(void* data, uint32_t size, uint32_t offset)
+  {
+    m_localData = Buffer::Copy(data, size);
+    m_size = size;
+    Renderer::Submit([this, offset]() {
+      if (!m_localData.data or (m_size + offset) > m_size)
+      {
+        return;
+      }
+      
+      glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+      glBufferSubData(GL_ARRAY_BUFFER, offset, m_size, m_localData.data);
+    });
+  }
+  
+  void OpenGLVertexBuffer::Bind() const
+  {
+    Renderer::Submit([this]() {
+      glBindBuffer(GL_ARRAY_BUFFER, m_rendererID);
+    });
+  }
+  
+  void OpenGLVertexBuffer::Unbind() const
+  {
+    Renderer::Submit([]() {
+      glBindBuffer(GL_ARRAY_BUFFER, 0);
+    });
+  }
+  
+  RendererID OpenGLVertexBuffer::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  uint32_t OpenGLVertexBuffer::GetSize() const
+  {
+    return m_size;
+  }
+  
   // Index Buffer ---------------------------------------------------------------------------------------------------
   OpenGLIndexBuffer::OpenGLIndexBuffer(void *data, uint32_t size)
   : m_size(size)

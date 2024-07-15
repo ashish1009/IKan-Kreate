@@ -29,6 +29,22 @@ namespace IKan
     /// This destructor destroyes the Open GL Vertex Buffer.
     ~OpenGLVertexBuffer();
     
+    /// This function updates the date in buffer dynamically.
+    /// - Parameters:
+    ///   - data: Data pointer to be stored in GPU
+    ///   - size: size of data
+    ///   - offset: data offset
+    void SetData(void* data, uint32_t size, uint32_t offset = 0) override;
+    /// This function binds the Vertex Buffer before rendering.
+    void Bind() const override;
+    /// This function unbinds the Vertex Buffer after rendering.
+    void Unbind() const override;
+    
+    /// This function returns the renderer ID of Vertex Buffer.
+    RendererID GetRendererID() const override;
+    /// This function returns the size of Vertex Buffer in GPU.
+    uint32_t GetSize() const override;
+
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLVertexBuffer);
 
   private:
