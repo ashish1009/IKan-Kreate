@@ -79,6 +79,9 @@
 		B2D2972B2C44EA250093F4DA /* MathUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2972A2C44EA250093F4DA /* MathUtils.hpp */; };
 		B2D2972C2C44EA250093F4DA /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D297292C44EA250093F4DA /* MathUtils.cpp */; };
 		B2D2972E2C4529420093F4DA /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2972D2C4529420093F4DA /* libfreetype.a */; };
+		B2D297362C452CB70093F4DA /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297352C452CB70093F4DA /* Font.hpp */; };
+		B2D297372C452CB70093F4DA /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D297342C452CB70093F4DA /* Font.cpp */; };
+		B2D297402C4530FA0093F4DA /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2973C2C4530FA0093F4DA /* libpng16.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -198,6 +201,9 @@
 		B2D297292C44EA250093F4DA /* MathUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtils.cpp; sourceTree = "<group>"; };
 		B2D2972A2C44EA250093F4DA /* MathUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MathUtils.hpp; sourceTree = "<group>"; };
 		B2D2972D2C4529420093F4DA /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = Vendors/Freetype/lib/libfreetype.a; sourceTree = "<group>"; };
+		B2D297342C452CB70093F4DA /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
+		B2D297352C452CB70093F4DA /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
+		B2D2973C2C4530FA0093F4DA /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = Vendors/Freetype/libpng/1.6.39/lib/libpng16.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -205,6 +211,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D297402C4530FA0093F4DA /* libpng16.a in Frameworks */,
 				B2D2972E2C4529420093F4DA /* libfreetype.a in Frameworks */,
 				B2D296782C3C069B0093F4DA /* libUI.a in Frameworks */,
 				B2D294EC2C3BF6C10093F4DA /* libGlad.a in Frameworks */,
@@ -376,6 +383,7 @@
 		B2D294A32C3BD0F90093F4DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2D2973C2C4530FA0093F4DA /* libpng16.a */,
 				B2D2972D2C4529420093F4DA /* libfreetype.a */,
 			);
 			name = Frameworks;
@@ -407,6 +415,7 @@
 				B2D2968C2C3C15680093F4DA /* RenderCommandQueue.hpp */,
 				B2D296D22C40F3230093F4DA /* RendererStats.hpp */,
 				B2D2969F2C3EE67E0093F4DA /* Renderer2D.hpp */,
+				B2D297382C452CBE0093F4DA /* UI */,
 				B2D294B22C3BF2F80093F4DA /* Graphics */,
 			);
 			path = Renderer;
@@ -423,6 +432,7 @@
 				B2D296AC2C40E5E80093F4DA /* QuadData.hpp */,
 				B2D297142C4132510093F4DA /* CircleData.hpp */,
 				B2D2971C2C4133910093F4DA /* LineData.hpp */,
+				B2D297332C452CAF0093F4DA /* UI */,
 				B2D294B32C3BF2FF0093F4DA /* Graphics */,
 			);
 			path = Renderer;
@@ -537,6 +547,22 @@
 			path = Shaders;
 			sourceTree = "<group>";
 		};
+		B2D297332C452CAF0093F4DA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B2D297342C452CB70093F4DA /* Font.cpp */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		B2D297382C452CBE0093F4DA /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B2D297352C452CB70093F4DA /* Font.hpp */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -578,6 +604,7 @@
 				B2D2971D2C4133910093F4DA /* LineData.hpp in Headers */,
 				B2D296D32C40F3230093F4DA /* RendererStats.hpp in Headers */,
 				B2D296DA2C41028F0093F4DA /* RendererBuffer.hpp in Headers */,
+				B2D297362C452CB70093F4DA /* Font.hpp in Headers */,
 				B2D292B52C3940320093F4DA /* Application.hpp in Headers */,
 				B2D296FA2C410BF40093F4DA /* OpenGLShader.hpp in Headers */,
 				B2D297052C4123850093F4DA /* ShaderUniform.hpp in Headers */,
@@ -704,6 +731,7 @@
 				B2D296982C3C19E20093F4DA /* OpenGLRendererAPI.cpp in Sources */,
 				B2D296A02C3EE67E0093F4DA /* Renderer2D.cpp in Sources */,
 				B2D296C22C40EEDA0093F4DA /* OpenGLTexture.cpp in Sources */,
+				B2D297372C452CB70093F4DA /* Font.cpp in Sources */,
 				B2D2970A2C4123AC0093F4DA /* OpenGLShaderUniform.cpp in Sources */,
 				B2D296772C3C01D40093F4DA /* ImGuiLayer.cpp in Sources */,
 				B2D297062C4123850093F4DA /* ShaderUniform.cpp in Sources */,

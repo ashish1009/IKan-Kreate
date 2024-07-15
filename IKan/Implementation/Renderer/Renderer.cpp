@@ -10,6 +10,7 @@
 #include "Renderer/Renderer2D.hpp"
 #include "Renderer/Graphics/RendererAPI.hpp"
 #include "Renderer/Graphics/Shader.hpp"
+#include "Renderer/UI/Font.hpp"
 
 namespace IKan
 {
@@ -83,6 +84,7 @@ namespace IKan
     
     // Inittialze the Renderers
     Renderer2D::Initialize();
+    Font::Initialize();
   }
   void Renderer::Shutdown()
   {
@@ -92,7 +94,8 @@ namespace IKan
     // Shut down the renderers
     Renderer2D::Shutdown();
     ShaderLibrary::Clear();
-    
+    Font::Shutdown();
+
     // Destroy the Renderer Data
     // Note: To be destroyed in the end 
     s_rendererData.Shutdown();
