@@ -141,5 +141,27 @@ namespace IKan
       textureSlotIndex = 1;
       vertexBufferPtr = vertexBufferBasePtr;
     }
+    
+    void Flush()
+    {
+      IK_PERFORMANCE("Circle::Flush");
+      if (indexCountInBatch)
+      {
+        // Set the vertex buffer data
+        uint32_t dataSize = (uint32_t)((uint8_t*)vertexBufferPtr - (uint8_t*)vertexBufferBasePtr);
+        vertexBuffer->SetData(vertexBufferBasePtr, dataSize);
+        
+        // Bind Textures
+        for (uint32_t i = 0; i < textureSlotIndex; i++)
+        {
+          textureSlots[i]->Bind(i);
+        }
+        
+        // Render the Data
+        shader->Bind();
+        Renderer::DrawIndexed(pipeline, indexCountInBatch);
+      }
+      ResetBatch();
+    }
   };
 } // namespace IKan

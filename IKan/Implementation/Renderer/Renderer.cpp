@@ -146,4 +146,16 @@ namespace IKan
     IK_PERFORMANCE("Renderer::ClearDepthBits");
     s_rendererData.rendererAPI->ClearDepthBits();
   }
+  
+  // Draw Calls -----------------------------------------------------------------------------------------------------
+  void Renderer::DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count)
+  {
+    IK_PERFORMANCE("Renderer::DrawIndexed");
+    s_rendererData.rendererAPI->DrawIndexed(pipeline, count);
+  }
+  void Renderer::DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount)
+  {
+    IK_PERFORMANCE("Renderer::DrawLines");
+    s_rendererData.rendererAPI->DrawLines(pipeline, vertexCount);
+  }
 } // namespace IKan

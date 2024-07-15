@@ -14,6 +14,9 @@ namespace IKan
   /// Data type of Renderer IDs
   using RendererID = uint32_t;
   
+  // Forward Declaration
+  class Pipeline;
+
   /// This enum stores the supported renderer APIs by IKan engine
   enum class RendererType : uint8_t
   {
@@ -62,6 +65,18 @@ namespace IKan
     static void ClearStencilBits();
     /// This funciton Clears all the Bits
     static void ClearBits();
+    
+    // Draw Calls ---------------------------------------------------------------------------------------------------
+    /// This API draws a quad with pipeline and indexed count
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices
+    static void DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count);
+    /// This API draws Lines Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer layout
+    ///   - vertexCount: number of vertices
+    static void DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount);
 
     // Render Command Queue -------------------------------------------------------------------------------------------
     /// This function submits the Renderer command in Queue

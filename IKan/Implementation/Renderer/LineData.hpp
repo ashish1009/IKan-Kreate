@@ -106,5 +106,21 @@ namespace IKan
       vertexCount = 0;
       vertexBufferPtr = vertexBufferBasePtr;
     }
+    
+    void Flush()
+    {
+      IK_PERFORMANCE("Line::Flush");
+      if (vertexCount)
+      {
+        // Set the vertex buffer data
+        uint32_t dataSize = (uint32_t)((uint8_t*)vertexBufferPtr - (uint8_t*)vertexBufferBasePtr);
+        vertexBuffer->SetData(vertexBufferBasePtr, dataSize);
+        
+        // Render the Data
+        shader->Bind();
+        Renderer::DrawLines(pipeline, vertexCount);
+      }
+      ResetBatch();
+    }
   };
 } // namespace IKan

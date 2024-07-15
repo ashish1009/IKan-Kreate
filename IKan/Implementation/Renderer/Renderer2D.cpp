@@ -97,6 +97,9 @@ namespace IKan
   
   void Renderer2D::EndBatch()
   {
-    
+    IK_PERFORMANCE("Renderer2D::BeginBatch");
+    s_data.quadData.Flush();
+    s_data.circleData.Flush();
+    s_data.lineData.Flush();
   }
 } // namespace IKan
