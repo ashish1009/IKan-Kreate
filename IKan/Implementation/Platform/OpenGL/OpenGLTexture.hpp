@@ -50,6 +50,54 @@ namespace IKan
     int32_t m_channel {0};
   };
   
+  /// This class implements the APIs to create image for Open GL.
+  class OpenGLImage : public Image
+  {
+  public:
+    /// This constructor creates the Open GL image from specificaion.
+    /// - Parameter spec: Open GL Image Specification
+    OpenGLImage(const ImageSpecificaion& spec);
+    /// This destructor destroyes and deletes the Open GL image.
+    virtual ~OpenGLImage();
+    
+    /// This function binds the image at slot inside shader.
+    /// - Parameter slot: shader slot where this image to be binded.
+    void Bind(uint32_t slot = 0) const override;
+    /// This function unbinds the image.
+    void Unbind() const override;
+    
+    /// This function attach the current Image to Framebuffer.
+    /// - Parameters:
+    ///   - attachmentType: attachment type of image.
+    ///   - colorID : Color Attaachment ID to Framebuffer.
+    ///   - depthID : Depth Attachment ID to Framebuffer.
+    ///   - level : level of framebuffer attachment.
+    void AttachToFramebuffer(TextureAttachment attachmentType, uint32_t colorID = 0, uint32_t depthID = 0, uint32_t level = 0) const override;
+    
+    /// This function returns width of image.
+    uint32_t GetWidth() const override;
+    /// This function returns height of image.
+    uint32_t GetHeight() const override;
+    /// This function returns renderer ID of image.
+    RendererID GetRendererID() const override;
+    
+    /// This function returns file path of image.
+    const std::filesystem::path& GetfilePath() const override;
+    /// This function returns name of image.
+    const std::string& GetName() const override;
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLImage);
+    
+  private:
+    RendererID m_rendererID {0};
+    ImageSpecificaion m_specification;
+    int32_t m_width {1600};
+    int32_t m_height {900};
+    int32_t m_channel {0};
+    uint32_t m_size {0};
+    std::string m_name {};
+  };
+  
   /// This class implements the APIs to create character texture for Open GL.
   class OpenGLCharTexture : public CharTexture
   {

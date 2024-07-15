@@ -95,6 +95,20 @@ namespace IKan
     uint32_t advance;
     char charVal;
   };
+  
+  /// This structure stores the Texture specificaion for images
+  struct ImageSpecificaion
+  {
+    bool invertVertically {true};
+    std::filesystem::path filePath {};
+    
+    TextureWrap Xwrap {TextureWrap::Repeat};
+    TextureWrap Ywrap {TextureWrap::Repeat};
+    TextureWrap Zwrap {TextureWrap::Repeat};
+    
+    TextureFilter minFilter {TextureFilter::Linear};
+    TextureFilter magFilter {TextureFilter::Linear};
+  };
 
   // Pipeline Specification ------------------------------------------------------------------------------------------
   struct PipelineSpecification

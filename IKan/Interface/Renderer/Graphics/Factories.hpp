@@ -18,6 +18,7 @@ namespace IKan
   class RendererContext;
   class RendererAPI;
   class Texture;
+  class Image;
   class VertexBuffer;
   class IndexBuffer;
   class Shader;
@@ -53,6 +54,13 @@ namespace IKan
     /// This function creates Character texture to render text
     /// - Parameter spec: Character Texture specificaion
     [[nodiscard]] static Ref<Texture> Create(const CharTextureSpecification& charTextureSpec);
+    
+    /// This static functions creates the Texture from image file
+    /// - Parameter spec: Texture specificaion
+    [[nodiscard]] static Ref<Image> Create(const ImageSpecificaion& spec);
+    /// This static functions creates the Texture from image file
+    /// - Parameter filePath: path of texture file
+    [[nodiscard]] static Ref<Image> Create(const std::filesystem::path& filePath);
   };
   
   /// This structure stores the API to create the vertex buffer instance based on the renderer API supported by the Engine

@@ -39,6 +39,19 @@ namespace IKan
     virtual uint32_t GetHeight() const = 0;
   };
   
+  /// This class is the interface to create Image
+  class Image : public Texture
+  {
+  public:
+    /// This is default virtual destructor for Texture
+    virtual ~Image() = default;
+    
+    /// This function returns the File Path of Texture NOTE: Return "" for white texture
+    virtual const std::filesystem::path& GetfilePath() const = 0;
+    /// This function returns name of texture
+    virtual const std::string& GetName() const = 0;
+  };
+  
   /// This class is the interface for creating texture for character text
   class CharTexture : public Texture
   {

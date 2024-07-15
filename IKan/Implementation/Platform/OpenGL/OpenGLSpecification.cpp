@@ -160,10 +160,18 @@ namespace IKan
       return "";
     }
     
-    /// This function returns the Attachment ID for Color or Depth
-    /// - Parameters:
-    ///   - attachment: Attachment type
-    ///   - id: ID
+    TextureFormat OpenGLFormatToIKanFormat(const GLint format)
+    {
+      if (format == GL_RGBA8)     return TextureFormat::RGBA8;
+      else if (format == GL_RGBA) return TextureFormat::RGBA;
+      else if (format == GL_RGB8) return TextureFormat::RGB8;
+      else if (format == GL_RGB)  return TextureFormat::RGB;
+      else if (format == GL_RED)  return TextureFormat::RED;
+      
+      IK_ASSERT(false, "Invalid Format!");
+      return TextureFormat::RGBA8;
+    }
+
     GLint IKanAttachmentToOpenGL(TextureAttachment attachment, uint32_t id)
     {
       switch (attachment)

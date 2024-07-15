@@ -53,6 +53,10 @@ namespace IKan
     /// - Parameter filter: filter
     std::string_view IKanFilterName(TextureFilter filter);
     
+    /// This function converts the GL  Format to Ikan Format
+    /// - Parameter format:GL Format
+    TextureFormat OpenGLFormatToIKanFormat(GLint format);
+
     /// This function returns the Attachment ID for Color or Depth
     /// - Parameters:
     ///   - attachment: Attachment type

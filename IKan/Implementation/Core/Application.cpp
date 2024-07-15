@@ -10,7 +10,7 @@
 #include "Renderer/RendererStats.hpp"
 
 /// IKan Engine Version
-static const std::string IKanVersion = "3.0";
+static const std::string IKanVersion = "3.1";
 
 namespace IKan
 {
