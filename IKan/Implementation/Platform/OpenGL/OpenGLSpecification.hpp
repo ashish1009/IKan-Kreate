@@ -52,5 +52,23 @@ namespace IKan
     /// This function returns the texture filter name as const char *
     /// - Parameter filter: filter
     std::string_view IKanFilterName(TextureFilter filter);
+    
+    /// This function returns the Attachment ID for Color or Depth
+    /// - Parameters:
+    ///   - attachment: Attachment type
+    ///   - id: ID
+    GLint IKanAttachmentToOpenGL(TextureAttachment attachment, uint32_t id);
+
+    /// This functionc creates the texture attachment for frame buffer format
+    /// - Parameters:
+    ///   - rendererID: texture renderer ID
+    ///   - type: Texture type
+    ///   - intenalFormat: texture internal format
+    ///   - attachmentType: framebuffer attachment type
+    ///   - colorID: Color ID
+    ///   - depthID: Deptgh ID
+    ///   - level: Level of framebuffer
+    void AttachTexture(RendererID rendererID, TextureType type, TextureFormat intenalFormat, TextureAttachment attachmentType,
+                       uint32_t colorID, uint32_t depthID, uint32_t level);
   } // namespace TextureUtils
 } // namespace IKan

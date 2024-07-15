@@ -159,6 +159,49 @@ namespace IKan
       }
       return "";
     }
+    
+    /// This function returns the Attachment ID for Color or Depth
+    /// - Parameters:
+    ///   - attachment: Attachment type
+    ///   - id: ID
+    GLint IKanAttachmentToOpenGL(TextureAttachment attachment, uint32_t id)
+    {
+      switch (attachment)
+      {
+        case TextureAttachment::Color : return GL_COLOR_ATTACHMENT0 + (GLint)id;
+        case TextureAttachment::Depth : return GL_DEPTH_ATTACHMENT;
+        default:
+          IK_ASSERT(false, "Invalid Attachment!");
+      }
+      return (GLint)GL_INVALID_INDEX;
+    }
 
+    void AttachTexture(RendererID rendererID, TextureType type, TextureFormat intenalFormat, TextureAttachment attachmentType, uint32_t colorID, uint32_t depthID, uint32_t level)
+    {
+      GLint openGLAttachmentType = IKanAttachmentToOpenGL(attachmentType, colorID);
+      // No need to Submit caller need to take care
+#if 0
+      Renderer::Submit([rendererID, type, intenalFormat, attachmentType, colorID, depthID, level, openGLAttachmentType](){
+#endif
+        
+        if (TextureType::TextureCubemap == type)
+        {
+          if (TextureFormat::DEPTH_COMPONENT == intenalFormat)
+          {
+            glFramebufferTexture(GL_FRAMEBUFFER, (GLenum)openGLAttachmentType, rendererID, (GLint)level);
+          }
+          else
+          {
+            glFramebufferTexture2D(GL_FRAMEBUFFER, (GLenum)openGLAttachmentType, GL_TEXTURE_CUBE_MAP_POSITIVE_X + depthID, rendererID, (GLint)level);
+          }
+        }
+        else
+        {
+          glFramebufferTexture2D(GL_FRAMEBUFFER, (GLenum)openGLAttachmentType, GL_TEXTURE_2D, rendererID, (GLint)level);
+        }
+#if 0
+      });
+#endif
+    }
   } // namespace TextureUtils
 } // namespace IKan
