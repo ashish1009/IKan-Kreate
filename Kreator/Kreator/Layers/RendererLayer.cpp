@@ -54,6 +54,7 @@ namespace Kreator
     Renderer2D::BeginBatch(Utils::Math::UnitMat4, Utils::Math::UnitMat4);
     Renderer2D::SubmitQuad({0.5, 0.5, 0}, {0.5, 0.5});
     Renderer2D::SubmitRect({0.0, 0.0, 0}, {0.5, 0.5});
+    Renderer2D::SubmitText("Sample Text", {0, 0, 0}, {0.1, 0.1});
     Renderer2D::SubmitCircle({-0.5, -0.5, 0}, 0.5);
     Renderer2D::EndBatch();
   }

@@ -348,4 +348,90 @@ namespace IKan
     SubmitLine(lineVertices[2], lineVertices[3], color);
     SubmitLine(lineVertices[3], lineVertices[0], color);
   }
+  
+  void Renderer2D::SubmitFixedViewText(const std::string& text, glm::vec3 position, const glm::vec2& scale,
+                                       const glm::vec4& color, Ref<Font> font, int32_t objectID)
+  {
+    SubmitTextImpl(text, font, position, scale, color, objectID);
+  }
+  
+  void Renderer2D::SubmitText(const std::string& text, glm::vec3 position, const glm::vec2& originalScale,
+                              const glm::vec4& color, Ref<Font> font, int32_t objectID)
+  {
+    glm::vec2 scale = { originalScale.x * 0.025, originalScale.y * 0.025 };
+    SubmitTextImpl(text, font, position, scale, color, objectID);
+  }
+  
+  void Renderer2D::SubmitTextImpl(const std::string& text, Ref<Font> font, glm::vec3 position,
+                                const glm::vec2& scale, const glm::vec4& color, int32_t objectID)
+  {
+    IK_PERFORMANCE("TextRenderer::RenderTextImpl");
+    
+    if (!font)
+    {
+      font = Font::GetDefaultFont();
+      IK_LOG_WARN(LogModule::Renderer2D, "Font is null using default font");
+    }
+    
+    float originalPosX = position.x;
+    float slot = 0.0f;
+    for (std::string::const_iterator c = text.begin(); c != text.end(); c++)
+    {
+      if (s_data.textData.numSlotsUsed >= Texture2DSpecification::MaxTextureSlotsInShader)
+      {
+        s_data.textData.Flush();
+      }
+      
+      Ref<CharTexture> ch = font->GetCharTexture(*c);
+      
+      if (*c == '\n')
+      {
+        position.y -= scale.y * 40;
+        position.x = originalPosX;
+        continue;
+      }
+      
+      float xpos = position.x + ch->GetBearing().x * scale.x;
+      float ypos = position.y - (ch->GetSize().y - ch->GetBearing().y) * scale.y;
+      float zpos = position.z;
+      
+      float w = ch->GetSize().x * scale.x;
+      float h = ch->GetSize().y * scale.y;
+      
+      // update VBO for each character
+      glm::vec3 vertexPosition[TextData::VertexForSingleChar] =
+      {
+        { xpos,     ypos + h, zpos },
+        { xpos,     ypos    , zpos },
+        { xpos + w, ypos    , zpos },
+        
+        { xpos,     ypos + h, zpos },
+        { xpos + w, ypos    , zpos },
+        { xpos + w, ypos + h, zpos },
+      };
+      
+      // Each Vertex of Char
+      slot = (float)s_data.textData.numSlotsUsed;
+      for (size_t i = 0; i < TextData::VertexForSingleChar; i++)
+      {
+        s_data.textData.vertexBufferPtr->position      = vertexPosition[i];
+        s_data.textData.vertexBufferPtr->color         = color;
+        s_data.textData.vertexBufferPtr->textureIndex  = slot;
+        s_data.textData.vertexBufferPtr->textureCoord  = s_data.textData.baseTextureCoords[i];
+        s_data.textData.vertexBufferPtr->objectID      = objectID;
+        s_data.textData.vertexBufferPtr++;
+      }
+      
+      // now advance cursors for next glyph (note that advance is number of
+      // 1/64 pixels) bitshift by 6 to get value in pixels (2^6 = 64 (divide
+      // amount of 1/64th pixels by 64 to get amount of pixels))
+      position.x += (ch->GetAdvance() >> 6) * scale.x;
+      
+      // Renderer Vertex count stat
+      RendererStatistics::Get().vertexCount += TextData::VertexForSingleChar;
+      
+      s_data.textData.charTextures[s_data.textData.numSlotsUsed] = ch;
+      s_data.textData.numSlotsUsed++;
+    }
+  }
 } // namespace IKan

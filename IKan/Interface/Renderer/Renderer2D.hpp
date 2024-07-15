@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Renderer/UI/Font.hpp"
+
 namespace IKan
 {
   // Forward declaration
@@ -138,6 +140,29 @@ namespace IKan
     ///   - color: Color of line
     static void SubmitRect(const glm::mat4& transform, const glm::vec4& color);
     
+    /// This functions renders the Text in Window using postition and sclae
+    /// - Parameters:
+    ///   - text: Text to be rendereed
+    ///   - font: Font data
+    ///   - position: Text Poistion
+    ///   - scale: Text Poistion
+    ///   - color: Color of text
+    ///   - objectID: Pixel ID
+    static void SubmitFixedViewText(const std::string &text, glm::vec3 position, const glm::vec2& scale  = Utils::Math::UnitVec2,
+                                    const glm::vec4& color = Utils::Math::UnitVec4, Ref<Font> font = Font::GetDefaultFont(),
+                                    int32_t objectID = -1);
+    /// This functions renders the Text in Window using postition and sclae
+    /// - Parameters:
+    ///   - text: Text to be rendereed
+    ///   - font: Font data
+    ///   - position: Text Poistion
+    ///   - scale: Text Poistion
+    ///   - color: Color of text
+    ///   - objectID: Pixel ID&
+    static void SubmitText(const std::string &text, glm::vec3 position, const glm::vec2& scale = Utils::Math::UnitVec2,
+                           const glm::vec4& color = Utils::Math::UnitVec4, Ref<Font> font = Font::GetDefaultFont(),
+                           int32_t objectID  = -1);
+
   private:
     /// This function is the helper function to rendere the quad
     /// - Parameters:
@@ -161,6 +186,17 @@ namespace IKan
     ///   - objectID: object/pixel id
     static void SubmitCircleImpl(const glm::mat4& transform, const Ref<Texture>& texture, float tilingFactor,
                                  const glm::vec4& color, float thickness, float fade, int32_t objectID);
+
+    /// This functions renders the Text in Window using postition and sclae
+    /// - Parameters:
+    ///   - text: Text to be rendereed
+    ///   - font: Font data
+    ///   - position: Text Poistion
+    ///   - scale: Text Poistion
+    ///   - color: Color of text
+    ///   - objectID: Pixel ID
+    static void SubmitTextImpl(const std::string& text, Ref<Font> font, glm::vec3 position, const glm::vec2& scale,
+                               const glm::vec4& color, int32_t objectID);
 
   };
 } // namespace IKan
