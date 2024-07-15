@@ -204,9 +204,9 @@ namespace IKan
       // Create white texture
       whiteTexture = TextureFactory::Create(0xffffffff);
       
-      IK_LOG_INFO(LogModule::Renderer2D, "Initialized Fullscreen Quad Data ");
-      IK_LOG_INFO(LogModule::Renderer2D, "  Vertex Buffer used              | {0} B", sizeof(vertices));
-      IK_LOG_INFO(LogModule::Renderer2D, "  Shader used                     | {0}", shader->GetName());
+      BATCH_INFO("Initialized Fullscreen Quad Data ");
+      BATCH_INFO("  Vertex Buffer used              | {0} B", sizeof(vertices));
+      BATCH_INFO("  Shader used                     | {0}", shader->GetName());
     }
     
     void Destroy()
@@ -214,9 +214,9 @@ namespace IKan
       if (pipeline and vertexBuffer and whiteTexture)
       {
         IK_PROFILE();
-        IK_LOG_INFO(LogModule::Renderer2D, "Destroying Fullscreen Quad Data ");
-        IK_LOG_INFO(LogModule::Renderer2D, "  Vertex Buffer used              | {0} B", sizeof(vertices));
-        IK_LOG_INFO(LogModule::Renderer2D, "  Shader used                     | {0}", shader->GetName());
+        BATCH_WARN("Destroying Fullscreen Quad Data ");
+        BATCH_WARN("  Vertex Buffer used              | {0} B", sizeof(vertices));
+        BATCH_WARN("  Shader used                     | {0}", shader->GetName());
         
         pipeline.reset();
         vertexBuffer.reset();

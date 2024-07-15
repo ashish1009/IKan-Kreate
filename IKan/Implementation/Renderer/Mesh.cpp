@@ -16,7 +16,8 @@ namespace IKan
 {
 #define MESH_INFO(...) IK_LOG_INFO(LogModule::Mesh, __VA_ARGS__);
 #define MESH_LOG(...) IK_LOG_TRACE(LogModule::Mesh, __VA_ARGS__);
-  
+#define MESH_WARN(...) IK_LOG_WARN(LogModule::Mesh, __VA_ARGS__);
+
   namespace MeshUtils
   {
     /// return glm mat4 from aiMatrix
@@ -82,7 +83,7 @@ namespace IKan
   Mesh::~Mesh()
   {
     IK_PROFILE();
-    MESH_INFO("Destroying mesh from file {0}", m_filePath.c_str());
+    MESH_WARN("Destroying mesh from file {0}", m_filePath.c_str());
   }
   
   void Mesh::StoreVerticesAndIndices()

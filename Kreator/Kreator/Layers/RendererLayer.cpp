@@ -9,6 +9,8 @@
 
 namespace Kreator
 {
+  Ref<Mesh> meshCube;
+  
   RendererLayer* RendererLayer::s_instance = nullptr;
   RendererLayer& RendererLayer::Get()
   {
@@ -37,12 +39,16 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_TRACE("RendererLayer", "Attaching '{0} Layer' to application", GetName());
+    
+    meshCube = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/Kreator/Projects/3D/TestProject/Assets/Meshes/Default/Cube.fbx");
   }
   
   void RendererLayer::OnDetach()
   {
     IK_PROFILE();
     IK_LOG_TRACE("RendererLayer", "Detaching '{0} Layer' from application", GetName());
+    
+    meshCube.reset();
   }
   
   void RendererLayer::OnUpdate([[maybe_unused]] TimeStep ts)

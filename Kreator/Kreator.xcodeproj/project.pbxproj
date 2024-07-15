@@ -16,17 +16,23 @@
 		B2D297682C4550AB0093F4DA /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D297652C4550AB0093F4DA /* libassimp.5.2.4.dylib */; };
 		B2D297692C4550AB0093F4DA /* libpugixml.1.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D297662C4550AB0093F4DA /* libpugixml.1.13.dylib */; };
 		B2D2976A2C4550AB0093F4DA /* libminizip.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D297672C4550AB0093F4DA /* libminizip.1.dylib */; };
+		B2D297792C45534E0093F4DA /* libassimp.5.2.4.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2D297652C4550AB0093F4DA /* libassimp.5.2.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B2D2977A2C45534E0093F4DA /* libminizip.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2D297672C4550AB0093F4DA /* libminizip.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B2D2977B2C45534E0093F4DA /* libpugixml.1.13.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2D297662C4550AB0093F4DA /* libpugixml.1.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
 		B2D292462C37EE5A0093F4DA /* CopyFiles */ = {
 			isa = PBXCopyFilesBuildPhase;
-			buildActionMask = 2147483647;
-			dstPath = /usr/share/man/man1/;
-			dstSubfolderSpec = 0;
+			buildActionMask = 12;
+			dstPath = "";
+			dstSubfolderSpec = 6;
 			files = (
+				B2D297792C45534E0093F4DA /* libassimp.5.2.4.dylib in CopyFiles */,
+				B2D2977A2C45534E0093F4DA /* libminizip.1.dylib in CopyFiles */,
+				B2D2977B2C45534E0093F4DA /* libpugixml.1.13.dylib in CopyFiles */,
 			);
-			runOnlyForDeploymentPostprocessing = 1;
+			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXCopyFilesBuildPhase section */
 
@@ -51,6 +57,7 @@
 		B2D297652C4550AB0093F4DA /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
 		B2D297662C4550AB0093F4DA /* libpugixml.1.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugixml.1.13.dylib; path = ../IKan/Vendors/Assimp/lib/libpugixml.1.13.dylib; sourceTree = "<group>"; };
 		B2D297672C4550AB0093F4DA /* libminizip.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libminizip.1.dylib; path = ../IKan/Vendors/Assimp/lib/libminizip.1.dylib; sourceTree = "<group>"; };
+		B2D2977C2C4553890093F4DA /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +80,7 @@
 		B2D2923F2C37EE5A0093F4DA = {
 			isa = PBXGroup;
 			children = (
+				B2D2977C2C4553890093F4DA /* libassimp.5.2.4.dylib */,
 				B2D292562C37F4D20093F4DA /* PrefixHeader.pch */,
 				B2D292AF2C3921180093F4DA /* Log */,
 				B2D292522C37F4860093F4DA /* Kreator */,
