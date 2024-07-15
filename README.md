@@ -18,11 +18,17 @@ Make sure that you do a `--recursive` clone to fetch all of the submodules!
 IKan Library can be used independently to develop your own Editor/Game
 
 ### How to Use the library
-`{...} directory where IKan Engine is cloned`
   - Link the libikan.a in your project...
-  - Link libz.tbd framwork
-  - Link libbz.2.1.0.8.tbd framwork
   - Include the IKHeaders.h to use all the interface files that are important
+
+  - Link libz.tbd framwork
+  - Link libbz.2.1.0.8.tbd framwork  
+
+  - Include the Assimp libraries
+`{...} directory where IKan Engine is cloned`
+    - {...}/Vendors/Assimp/lib/libassimp.5.2.4.dylib
+    - {...}/Vendors/Assimp/lib/libminizip.1.dylib
+    - {...}/Vendors/Assimp/lib/libpugixml.1.13.dylib    
 
 ### Preprocessors
   - `IK_ENABLE_LOG` : To enable logger in Engine 
@@ -34,6 +40,10 @@ IKan Library can be used independently to develop your own Editor/Game
   - {...}/Vendors/SpdLog/include
   - {...}/Vendors/Glm
   - {...}/Vendors/UI/ImGui
+
+### Library Search Paths
+`{...} directory where IKan Engine is cloned`
+  - {...}/Vendors/Assimp/lib
 
 ### Libraries
   - 

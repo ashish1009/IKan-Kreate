@@ -13,6 +13,9 @@
 		B2D2969D2C3C3D9F0093F4DA /* RendererLayer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2969B2C3C3D9F0093F4DA /* RendererLayer.cpp */; };
 		B2D297302C4529740093F4DA /* libbz2.1.0.8.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2972F2C4529740093F4DA /* libbz2.1.0.8.tbd */; };
 		B2D297322C45297C0093F4DA /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D297312C45297C0093F4DA /* libz.tbd */; };
+		B2D297682C4550AB0093F4DA /* libassimp.5.2.4.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D297652C4550AB0093F4DA /* libassimp.5.2.4.dylib */; };
+		B2D297692C4550AB0093F4DA /* libpugixml.1.13.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D297662C4550AB0093F4DA /* libpugixml.1.13.dylib */; };
+		B2D2976A2C4550AB0093F4DA /* libminizip.1.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D297672C4550AB0093F4DA /* libminizip.1.dylib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -45,6 +48,9 @@
 		B2D2969C2C3C3D9F0093F4DA /* RendererLayer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = RendererLayer.hpp; sourceTree = "<group>"; };
 		B2D2972F2C4529740093F4DA /* libbz2.1.0.8.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libbz2.1.0.8.tbd; path = usr/lib/libbz2.1.0.8.tbd; sourceTree = SDKROOT; };
 		B2D297312C45297C0093F4DA /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		B2D297652C4550AB0093F4DA /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
+		B2D297662C4550AB0093F4DA /* libpugixml.1.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugixml.1.13.dylib; path = ../IKan/Vendors/Assimp/lib/libpugixml.1.13.dylib; sourceTree = "<group>"; };
+		B2D297672C4550AB0093F4DA /* libminizip.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libminizip.1.dylib; path = ../IKan/Vendors/Assimp/lib/libminizip.1.dylib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -52,6 +58,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D297682C4550AB0093F4DA /* libassimp.5.2.4.dylib in Frameworks */,
+				B2D297692C4550AB0093F4DA /* libpugixml.1.13.dylib in Frameworks */,
+				B2D2976A2C4550AB0093F4DA /* libminizip.1.dylib in Frameworks */,
 				B2D297322C45297C0093F4DA /* libz.tbd in Frameworks */,
 				B2D297302C4529740093F4DA /* libbz2.1.0.8.tbd in Frameworks */,
 				B2D292892C381CBA0093F4DA /* libIKan.a in Frameworks */,
@@ -93,6 +102,9 @@
 		B2D292872C381CB90093F4DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2D297652C4550AB0093F4DA /* libassimp.5.2.4.dylib */,
+				B2D297672C4550AB0093F4DA /* libminizip.1.dylib */,
+				B2D297662C4550AB0093F4DA /* libpugixml.1.13.dylib */,
 				B2D297312C45297C0093F4DA /* libz.tbd */,
 				B2D2972F2C4529740093F4DA /* libbz2.1.0.8.tbd */,
 				B2D292882C381CBA0093F4DA /* libIKan.a */,
@@ -380,6 +392,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
 					"${PROJECT_DIR}/../IKan/Vendors/UI/ImGui",
 				);
+				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/../IKan/Vendors/Assimp/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Debug;
@@ -431,6 +444,7 @@
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
 					"${PROJECT_DIR}/../IKan/Vendors/UI/ImGui",
 				);
+				LIBRARY_SEARCH_PATHS = "${PROJECT_DIR}/../IKan/Vendors/Assimp/lib";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
