@@ -20,6 +20,8 @@ IKan Library can be used independently to develop your own Editor/Game
 ### How to Use the library
 `{...} directory where IKan Engine is cloned`
   - Link the libikan.a in your project...
+  - Link libz.tbd framwork
+  - Link libbz.2.1.0.8.tbd framwork
   - Include the IKHeaders.h to use all the interface files that are important
 
 ### Preprocessors
@@ -32,6 +34,9 @@ IKan Library can be used independently to develop your own Editor/Game
   - {...}/Vendors/SpdLog/include
   - {...}/Vendors/Glm
   - {...}/Vendors/UI/ImGui
+
+### Libraries
+  - 
 
 ## Kreator
 Kreator is an editor used to develop games using IKan Library and other submodules

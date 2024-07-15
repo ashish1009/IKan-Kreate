@@ -38,4 +38,19 @@ namespace IKan
     /// This function returns the Height of Texture
     virtual uint32_t GetHeight() const = 0;
   };
+  
+  /// This class is the interface for creating texture for character text
+  class CharTexture : public Texture
+  {
+  public:
+    /// Default virtual destructor
+    virtual ~CharTexture() = default;
+    
+    /// This function returns the Size of Freetpe face
+    virtual glm::ivec2 GetSize() const = 0;
+    /// This function returns the Bearing of Freetpe face
+    virtual glm::ivec2 GetBearing() const = 0;
+    /// This function returns the Advance of Freetpe face
+    virtual uint32_t GetAdvance() const = 0;
+  };
 } //namespace IKan
