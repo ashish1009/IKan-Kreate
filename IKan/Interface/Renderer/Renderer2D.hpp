@@ -82,7 +82,15 @@ namespace IKan
     ///   - tilingCactor: tiling factor of Texture (Scale by which texture to be Multiplied)
     ///   - objectID: Pixel ID of Quad
     static void SubmitFixedViewQuad(const glm::vec3& position, const glm::vec2& scale, const Ref<Texture>& texture,
-                                  const glm::vec4& color = Utils::Math::UnitVec4, float tilingFactor = 1.0f, int32_t objectID = -1);
+                                    const glm::vec4& color = Utils::Math::UnitVec4, float tilingFactor = 1.0f, int32_t objectID = -1);
+    /// This function renders the fullscreen quad
+    /// - Parameters:
+    ///   - texture: Texture to be loaded
+    ///   - slot: Slot to load the texture in shader
+    ///   - overrideShader: Override shader flag. if false then deafult shader is used
+    /// - Note: If true then bind your own shader
+    /// - Note: No need to pass this inside begin and end batch
+    static void DrawFullscreenQuad(const Ref<Texture>& texture = nullptr, uint32_t slot = 0, bool overrideShader = false);
 
     /// This function submits the circle to draw in batch renderer
     /// - Parameters:

@@ -130,4 +130,30 @@ namespace IKan
     pipeline->Unbind();
     RendererStatistics::Get().drawCalls++;
   }
+  
+  void OpenGLRendererAPI::DrawQuad(const Ref<Pipeline>& pipeline) const
+  {
+    IK_ASSERT(pipeline, "Pipeline is NULL!");
+    
+    pipeline->Bind();
+    
+    Renderer::Submit([](){
+      glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
+      glBindTexture(GL_TEXTURE_2D, 0);
+    });
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
+  
+  void OpenGLRendererAPI::DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex) const
+  {
+    Renderer::Submit([indexCount, indicesData, baseVertex](){
+      glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)indexCount, GL_UNSIGNED_INT, indicesData, (GLint)baseVertex);
+      glBindTexture(GL_TEXTURE_2D, 0);
+    });
+    
+    RendererStatistics::Get().drawCalls++;
+  }
+
 } // namespace IKan

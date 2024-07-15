@@ -167,4 +167,14 @@ namespace IKan
     IK_PERFORMANCE("Renderer::DrawArrays");
     s_rendererData.rendererAPI->DrawArrays(pipeline, count);
   }
+  void Renderer::DrawQuad(const Ref<Pipeline>& pipeline)
+  {
+    IK_PERFORMANCE("Renderer::DrawQuad");
+    s_rendererData.rendererAPI->DrawQuad(pipeline);
+  }
+  void Renderer::DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex)
+  {
+    IK_PERFORMANCE("Renderer::DrawIndexedBaseVertex");
+    s_rendererData.rendererAPI->DrawIndexedBaseVertex(indexCount, indicesData, baseVertex);
+  }
 } // namespace IKan

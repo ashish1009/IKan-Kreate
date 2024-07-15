@@ -29,6 +29,7 @@ namespace IKan
     CircleBatchData circleData;
     LineBatchData lineData;
     TextData textData;
+    FullScreenQuad fullScreenQuad;
 
     void Destroy()
     {
@@ -38,6 +39,7 @@ namespace IKan
       circleData.Destroy();
       lineData.Destroy();
       textData.Destroy();
+      fullScreenQuad.Destroy();
     }
   };
   static Renderer2DData s_data;
@@ -52,6 +54,7 @@ namespace IKan
     AddLines(10000);
     
     s_data.textData.Initialize();
+    s_data.fullScreenQuad.Initialize();
   }
   void Renderer2D::Shutdown()
   {
@@ -215,7 +218,31 @@ namespace IKan
     RendererStatistics::Get().vertexCount += Shape2DData::VertexForSingleElement;
     RendererStatistics::Get()._2d.quads++;
   }
-
+  void Renderer2D::DrawFullscreenQuad(const Ref<Texture>& texture, uint32_t slot, bool overrideShader)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawFullscreenQuad");
+    // Bind the default Shader
+    if (!overrideShader)
+    {
+      s_data.fullScreenQuad.shader->Bind();
+    }
+    
+    if (texture)
+    {
+      texture->Bind(slot);
+    }
+    else
+    {
+      s_data.fullScreenQuad.whiteTexture->Bind();
+    }
+    Renderer::DrawQuad(s_data.fullScreenQuad.pipeline);
+    
+    // Unbind the default Shader
+    if (!overrideShader)
+    {
+      s_data.fullScreenQuad.shader->Unbind();
+    }
+  }
   
   void Renderer2D::SubmitQuadImpl(const glm::mat4& transform, const glm::vec4& color, const Ref<Texture>& texture,
                                   float tilingFactor, const glm::vec2* textureCoords, int32_t objectID)

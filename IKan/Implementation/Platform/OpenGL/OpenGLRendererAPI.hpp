@@ -53,6 +53,15 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer attribute.
     ///   - count: number of vertices.
     void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const override;
+    /// This API draws Quad
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer.
+    void DrawQuad(const Ref<Pipeline>& pipeline) const override;
+    /// This function draw the index based vertex.
+    /// - Parameters:
+    ///   - indexCount: index count.
+    ///   - indicesData: indices data.
+    ///   - baseVertex: base vertex.
+    void DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex) const override;
 
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLRendererAPI);
   };

@@ -82,6 +82,15 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer attribute
     ///   - count: number of vertices
     static void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count);
+    /// This function render the fullscreen quad
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer
+    static void DrawQuad(const Ref<Pipeline>& pipeline);
+    /// This function draw the index based vertex
+    /// - Parameters:
+    ///   - indexCount: index count
+    ///   - indicesData: indices data
+    ///   - baseVertex: base vertex
+    static void DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex);
 
     // Render Command Queue -------------------------------------------------------------------------------------------
     /// This function submits the Renderer command in Queue

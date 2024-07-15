@@ -53,5 +53,14 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer attribute
     ///   - count: number of vertices
     virtual void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const = 0;
+    /// This API draws Quad
+    /// - Parameter pipeline: pipeline having vertex buffer and index buffer
+    virtual void DrawQuad(const Ref<Pipeline>& pipeline) const = 0;
+    /// This function draw the index based vertex
+    /// - Parameters:
+    ///   - indexCount: index count
+    ///   - indicesData: indices data
+    ///   - baseVertex: base vertex
+    virtual void DrawIndexedBaseVertex(uint32_t indexCount, void* indicesData, uint32_t baseVertex) const = 0;
   };
 } // namespace IKan
