@@ -61,8 +61,8 @@ namespace IKan
     constexpr glm::vec3 position = { 2.14, 8.15, 0.81 };
     m_distance = glm::distance(position, m_focalPoint);
     
-    m_yaw = 6.38587332;
-    m_pitch = 0.125583902;
+    m_yaw = 6.38587332f;
+    m_pitch = 0.125583902f;
     
     m_position = CalculatePosition();
     const glm::quat orientation = GetOrientation();
@@ -323,8 +323,10 @@ namespace IKan
   void EditorCamera::SetViewportSize(const uint32_t width, const uint32_t height)
   {
     IK_PROFILE()
-    RETURN_IF (0 == width or 0 == height);
-    RETURN_IF(width == m_viewportWidth and height == m_viewportHeight);
+    if (0 == width or 0 == height or (width == m_viewportWidth and height == m_viewportHeight))
+    {
+      return;
+    }
     
     m_viewportWidth = width;
     m_viewportHeight = height;
@@ -349,22 +351,22 @@ namespace IKan
   
   void EditorCamera::SetTop()
   {
-    m_yaw = 6.28073406;
-    m_pitch = 1.57060242;
+    m_yaw = 6.28073406f;
+    m_pitch = 1.57060242f;
     
     m_cameraOrientation = CameraOrientation::Top;
   }
   void EditorCamera::SetFront()
   {
-    m_yaw = 6.28402614;
-    m_pitch = 0.000839832763;
+    m_yaw = 6.28402614f;
+    m_pitch = 0.000839832763f;
     
     m_cameraOrientation = CameraOrientation::Front;
   }
   void EditorCamera::SetRight()
   {
-    m_yaw = 4.71208525;
-    m_pitch = 0.000142695979;
+    m_yaw = 4.71208525f;
+    m_pitch = 0.000142695979f;
     
     m_cameraOrientation = CameraOrientation::Right;
   }

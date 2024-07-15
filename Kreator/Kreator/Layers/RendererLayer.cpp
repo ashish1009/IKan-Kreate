@@ -49,9 +49,12 @@ namespace Kreator
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
+    m_editorCamera.OnUpdate(ts);
+    m_editorCamera.SetActive(true);
+
     Renderer::Clear({0.2, 0.1, 0.3, 1.0});
-    
-    Renderer2D::BeginBatch(Utils::Math::UnitMat4, Utils::Math::UnitMat4);
+        
+    Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
     Renderer2D::SubmitQuad({0.5, 0.5, 0}, {0.5, 0.5});
     Renderer2D::SubmitRect({0.0, 0.0, 0}, {0.5, 0.5});
     Renderer2D::SubmitText("Sample Text", {0, 0, 0}, {0.1, 0.1});
@@ -61,7 +64,7 @@ namespace Kreator
   
   void RendererLayer::OnEvent([[maybe_unused]] Event& event)
   {
-    
+    m_editorCamera.OnEvent(event);
   }
   
   void RendererLayer::OnImGuiRender()

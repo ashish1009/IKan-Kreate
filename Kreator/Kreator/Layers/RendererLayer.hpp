@@ -43,6 +43,10 @@ namespace Kreator
     static RendererLayer& Get();
 
   private:
+    // Memeber variables ----------------------------------------------------------------------------------------------
+    // Editor Data ----------------
+    EditorCamera m_editorCamera;
+    
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
   };

@@ -11,8 +11,8 @@
 
 #include "Camera/Camera.hpp"
 #include "Core/TimeStep.hpp"
-#include "Event/KeyEvent.h"
-#include "Event/MouseEvent.h"
+#include "Events/KeyEvents.h"
+#include "Events/MouseEvents.h"
 
 namespace IKan
 {
@@ -42,7 +42,7 @@ namespace IKan
     ///   - nearP: Camera Near plane
     ///   - farP: Camera Far Plane
     EditorCamera(const float degFov, const float width, const float height,
-                 const float nearP = 0.0001, const float farP = 10000.0f);
+                 const float nearP = 0.0001f, const float farP = 10000.0f);
     
     /// This function initialise the camera
     void Initialize();
