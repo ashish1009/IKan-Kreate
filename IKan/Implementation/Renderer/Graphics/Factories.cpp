@@ -81,6 +81,21 @@ namespace IKan
     return Create(0xffffffff);
   }
   
+  Ref<Texture> TextureFactory::Create(const CharTextureSpecification& spec)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: return CreateRef<OpenGLCharTexture>(spec);
+      case RendererType::Invalid:
+      default:
+        IK_LOG_CRITICAL(LogModule::Renderer, "Renderer API Type is not set or set as invalid."
+                        "Call Renderer::SetCurrentRendererAPI(RendererType) before any Renderer Initialization to set Renderer API type."
+                        "'RendererType should not be RendererType::Invalid'");
+        IK_ASSERT(false , "Renderer API type is not set!")
+    }
+    return nullptr;
+  }
+  
   Ref<VertexBuffer> VertexBufferFactory::Create(void *data, uint32_t size)
   {
     switch (Renderer::GetCurrentRendererAPI())

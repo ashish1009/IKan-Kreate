@@ -9,6 +9,9 @@
 
 #include "Renderer/Graphics/BufferLayout.hpp"
 
+// Freetype forward declaration
+typedef struct FT_FaceRec_*  FT_Face;
+
 namespace IKan
 {
   // Forward declaration
@@ -83,6 +86,16 @@ namespace IKan
     bool enableDebugLogs {true};
   };
   
+  /// This structure stores the Texture specificaion for character rendering
+  struct CharTextureSpecification
+  {
+    FT_Face face;
+    glm::ivec2 size;
+    glm::ivec2 bearing;
+    uint32_t advance;
+    char charVal;
+  };
+
   // Pipeline Specification ------------------------------------------------------------------------------------------
   struct PipelineSpecification
   {

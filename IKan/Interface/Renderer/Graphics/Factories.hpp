@@ -49,6 +49,10 @@ namespace IKan
     [[nodiscard]] static Ref<Texture> Create(uint32_t data = 0xffffffff);
     /// This API creates the Texture instance with white data based on the current Supported API
     [[nodiscard]] static Ref<Texture> CreateWhiteTexture();
+    
+    /// This function creates Character texture to render text
+    /// - Parameter spec: Character Texture specificaion
+    [[nodiscard]] static Ref<Texture> Create(const CharTextureSpecification& charTextureSpec);
   };
   
   /// This structure stores the API to create the vertex buffer instance based on the renderer API supported by the Engine

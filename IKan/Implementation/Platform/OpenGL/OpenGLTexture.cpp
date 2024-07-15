@@ -9,18 +9,24 @@
 
 #include <glad/glad.h>
 
+#include <ft2build.h>
+#include FT_FREETYPE_H
+
 #include "Renderer/RendererStats.hpp"
 #include "Platform/OpenGL/OpenGLSpecification.hpp"
 
 namespace IKan
 {
+#define CHAR_TEXTURE_SUBMIT 0
+#define CHAR_DEBUG_TEXTURE_LOG 0
+  
   // Open GL Texture ------------------------------------------------------------------------------------
   OpenGLTexture::OpenGLTexture(const Texture2DSpecification& spec)
   : m_specification(spec)
   {
     Renderer::Submit([this]() {
       IK_PROFILE();
-
+      
       // Check the channel of Image data if data is non zero.
       if (m_specification.data)
       {
@@ -28,19 +34,19 @@ namespace IKan
         IK_ASSERT((m_specification.size == m_specification.width * m_specification.height * (uint32_t)m_channel),
                   "Data must be entire texture!");
       }
-
+      
       // Get GL Texture Type.
       GLenum textureType = TextureUtils::OpenGLTypeFromIKanType(m_specification.type);
-
+      
       // Create Texture Buffer.
       glGenTextures(1, &m_rendererID);
       glBindTexture(textureType, m_rendererID);
-
+      
       // Create texture in the renderer Buffer.
       GLenum internalFormat = TextureUtils::OpenGLFormatFromIKanFormat(m_specification.internalFormat);
       GLenum dataFormat = TextureUtils::OpenGLFormatFromIKanFormat(m_specification.dataFormat);
       GLenum dataType = TextureUtils::GetTextureDataType(internalFormat);
-
+      
       if (TextureType::TextureCubemap == m_specification.type)
       {
         for (uint32_t i = 0; i < 6; ++i)
@@ -57,7 +63,7 @@ namespace IKan
                      (GLsizei)m_specification.width, (GLsizei)m_specification.height, 0 /* Border */,
                      dataFormat, dataType, m_specification.data);
       }
-
+      
       // Set the Texture filter
       glTexParameteri(textureType, GL_TEXTURE_MIN_FILTER, TextureUtils::OpenGLFilterFromIKanFilter(m_specification.minFilter));
       glTexParameteri(textureType, GL_TEXTURE_MAG_FILTER, TextureUtils::OpenGLFilterFromIKanFilter(m_specification.magFilter));
@@ -159,4 +165,101 @@ namespace IKan
   {
     return m_specification.height;
   }
+  
+  // Open GL Char Texture -------------------------------------------------------------------------------
+  OpenGLCharTexture::OpenGLCharTexture(const CharTextureSpecification& charTextureSpec)
+  : m_specificaion(charTextureSpec)
+  {
+    // Note: Do not submite in queue as this face pointer is local is not copied. This happens once so no runtime issues
+#if CHAR_TEXTURE_SUBMIT
+    Renderer::Submit([this, name, values, count]() {
+#endif
+      IK_PROFILE();
+      glGenTextures(1, &m_rendererID);
+      glBindTexture(GL_TEXTURE_2D, m_rendererID);
+      
+      // Create texture in the renderer Buffer
+      glTexImage2D(GL_TEXTURE_2D, 0, /* Level */ GL_RED, (GLsizei)m_specificaion.face->glyph->bitmap.width, (GLsizei)m_specificaion.face->glyph->bitmap.rows,
+                   0, /* Border */ GL_RED, GL_UNSIGNED_BYTE, m_specificaion.face->glyph->bitmap.buffer );
+      
+      m_width = (uint32_t)m_specificaion.face->glyph->bitmap.width;
+      m_height = (uint32_t)m_specificaion.face->glyph->bitmap.rows;
+      
+      // set texture options
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR);
+      glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+      
+#if CHAR_DEBUG_TEXTURE_LOG
+      IK_LOG_TRACE(LogModule::CharTexture, "Creating Open GL Char Texture to store Char {0} ( Renderer ID {1} )", m_specificaion.charVal, m_rendererID);
+#endif
+      
+      // Increment the size in stats
+      m_dataSize = m_specificaion.face->glyph->bitmap.width * m_specificaion.face->glyph->bitmap.rows;
+      RendererStatistics::Get().textureBufferSize += m_dataSize;
+      
+#if CHAR_TEXTURE_SUBMIT
+    });
+#endif
+  }
+  
+  OpenGLCharTexture::~OpenGLCharTexture()
+  {
+    IK_PROFILE();
+    RendererStatistics::Get().textureBufferSize -= m_dataSize;
+#if CHAR_TEXTURE_SUBMIT
+    Renderer::Submit([this] {
+#endif
+      glDeleteTextures(1, &m_rendererID);
+#if CHAR_TEXTURE_SUBMIT
+    });
+#endif
+  }
+  
+  void OpenGLCharTexture::Bind(uint32_t slot) const
+  {
+    Renderer::Submit([this, slot] {
+      glActiveTexture(GL_TEXTURE0 + slot);
+      glBindTexture(GL_TEXTURE_2D, m_rendererID);
+    });
+  }
+  void OpenGLCharTexture::Unbind() const
+  {
+    Renderer::Submit([] {
+      glBindTexture(GL_TEXTURE_2D, 0);
+    });
+  }
+  
+  void OpenGLCharTexture::AttachToFramebuffer([[maybe_unused]] TextureAttachment attachmentType, [[maybe_unused]] uint32_t colorID,
+                                              [[maybe_unused]] uint32_t depthID, [[maybe_unused]] uint32_t level) const
+  {
+    IK_ASSERT(false);
+  }
+  
+  RendererID OpenGLCharTexture::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  uint32_t OpenGLCharTexture::GetWidth() const
+  {
+    return m_width;
+  }
+  uint32_t OpenGLCharTexture::GetHeight() const
+  {
+    return m_height;
+  }
+  glm::ivec2 OpenGLCharTexture::GetSize() const
+  {
+    return m_specificaion.size;
+  }
+  glm::ivec2 OpenGLCharTexture::GetBearing() const
+  {
+    return m_specificaion.bearing;
+  }
+  uint32_t OpenGLCharTexture::GetAdvance() const
+  {
+    return m_specificaion.advance;
+  }
+  
 } // namespace IKan

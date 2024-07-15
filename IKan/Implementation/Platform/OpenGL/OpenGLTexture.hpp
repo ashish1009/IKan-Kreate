@@ -49,4 +49,50 @@ namespace IKan
     Texture2DSpecification m_specification;
     int32_t m_channel {0};
   };
+  
+  /// This class implements the APIs to create character texture for Open GL.
+  class OpenGLCharTexture : public CharTexture
+  {
+  public:
+    /// This constructor creates the Open GL character texture from specificaion.
+    /// - Parameter charTextureSpec: Character texture specificaion
+    OpenGLCharTexture(const CharTextureSpecification& charTextureSpec);
+    /// This destructor destroyes and deletes the Open GL character texture.
+    virtual ~OpenGLCharTexture();
+    
+    /// This function binds the character texture at slot inside shader.
+    /// - Parameter slot: shader slot where this character texture to be binded.
+    void Bind(uint32_t slot) const override;
+    /// This function unbinds the character texture
+    void Unbind() const  override;
+    
+    /// This function attach the current Image to Framebuffer
+    /// - Parameters:
+    ///   - attachmentType: attachment type of character texture.
+    ///   - colorID : Color Attaachment ID to Framebuffer
+    ///   - depthID : Depth Attachment ID to Framebuffer
+    ///   - level : level of framebuffer attachment.
+    void AttachToFramebuffer(TextureAttachment attachmentType, uint32_t colorID = 0, uint32_t depthID = 0, uint32_t level = 0) const override;
+    
+    /// This function returns the Renderer ID.
+    RendererID GetRendererID() const override;
+    /// This function returns width of texture.
+    uint32_t GetWidth() const override;
+    /// This function returns height of texture.
+    uint32_t GetHeight() const override;
+    /// This function returns the size.
+    glm::ivec2 GetSize() const override;
+    /// This function returns the bearing.
+    glm::ivec2 GetBearing() const override;
+    /// This function returns the advance.
+    uint32_t GetAdvance() const override;
+    
+    DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLCharTexture);
+    
+  private:
+    RendererID m_rendererID {};
+    CharTextureSpecification m_specificaion;
+    uint32_t m_dataSize {0};
+    uint32_t m_width {0}, m_height {0};
+  };
 } // namespace IKan
