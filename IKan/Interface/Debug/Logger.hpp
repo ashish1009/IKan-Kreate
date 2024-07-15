@@ -19,7 +19,7 @@ f(Application) f(Layers) f(Window) \
 f(Renderer) f(Renderer2D) f(TextRenderer) f(Font) \
 f(Texture) f(VertexBuffer) f(IndexBuffer) f(BufferLayout) f(Shader) f(Pipeline) \
 f(UI) \
-f(SceneCamera) \
+f(SceneCamera) f(EditorCamera) \
 
   /// Generates enum with elements from above MACRO. Also creates an array named "LogModuleString[]" that stores all
   /// the element of enum as const char* (string)
