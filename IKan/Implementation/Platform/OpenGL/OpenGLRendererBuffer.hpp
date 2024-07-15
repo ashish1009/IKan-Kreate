@@ -66,6 +66,18 @@ namespace IKan
     /// This destructor destroyes the Open GL idnex Buffer.
     ~OpenGLIndexBuffer();
 
+    /// This function binds the Vertex Buffer before rendering.
+    void Bind() const override;
+    /// This function unbinds the Vertex Buffer after rendering.
+    void Unbind() const override;
+    
+    /// This function returns the Number of Indices used by this Index Buffer.
+    uint32_t GetCount() const override;
+    /// This function returns the size of Index Buffer in GPU.
+    uint32_t GetSize() const override;
+    /// This function returns the renderer ID of Index Buffer.
+    RendererID GetRendererID() const override;
+
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLIndexBuffer);
     
   private:

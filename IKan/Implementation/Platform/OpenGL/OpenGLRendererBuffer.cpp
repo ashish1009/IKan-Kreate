@@ -154,4 +154,33 @@ namespace IKan
       IK_LOG_DEBUG(LogModule::IndexBuffer, "  Total Size Left        | {0} B", RendererStatistics::Get().indexBufferSize);
     });
   }
+  
+  void OpenGLIndexBuffer::Bind() const
+  {
+    Renderer::Submit([this](){
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, m_rendererID);
+    });
+  }
+  
+  void OpenGLIndexBuffer::Unbind() const
+  {
+    Renderer::Submit([](){
+      glBindBuffer(GL_ELEMENT_ARRAY_BUFFER, 0);
+    });
+  }
+  
+  RendererID OpenGLIndexBuffer::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  
+  uint32_t OpenGLIndexBuffer::GetSize() const
+  {
+    return m_size;
+  }
+  
+  uint32_t OpenGLIndexBuffer::GetCount() const
+  {
+    return m_size / SizeOfSingleIndices;
+  }
 } // namespace IKan
