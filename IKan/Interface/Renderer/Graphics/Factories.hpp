@@ -23,7 +23,8 @@ namespace IKan
   class IndexBuffer;
   class Shader;
   class Pipeline;
-  
+  class FrameBuffer;
+
   /// This structure stores the API to create the renderer context instance based on the renderer API supported by the Engine
   struct RendererContextFactory
   {
@@ -105,8 +106,16 @@ namespace IKan
   /// This structure stores the API to create the pipeline instance based on the renderer API supported by the Engine
   struct PipelineFactory
   {
-    /// This function creates the shader instance with specification data based on the renderer API supported by the Engine
+    /// This function creates the pipeline instance with specification data based on the renderer API supported by the Engine
     /// - Parameter spec: Pipeline specification data
     [[nodiscard]] static Ref<Pipeline> Create(const PipelineSpecification& spec);
+  };
+  
+  /// This structure stores the API to create the framebuffer instance based on the renderer API supported by the Engine
+  struct FrameBufferFactory
+  {
+    /// This function creates the framebuffer instance with specification data based on the renderer API supported by the Engine
+    /// - Parameter spec: Frame buffer specification
+    [[nodiscard]] static Ref<FrameBuffer> Create(const FrameBufferSpecification& spec);
   };
 } // namespace IKan

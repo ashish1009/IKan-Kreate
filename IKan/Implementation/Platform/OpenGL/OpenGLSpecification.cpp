@@ -12,6 +12,8 @@
 // Utils ---------------------------------------------------------------------------------------------
 namespace IKan
 {
+#define GET_FORMAT_NAME(name) TextureUtils::IKanFormatName(name)
+
   namespace TextureUtils
   {
     /// This function converts the IKan Texture type with GL Texture type
@@ -212,4 +214,56 @@ namespace IKan
 #endif
     }
   } // namespace TextureUtils
+  
+  namespace FramebufferUtils
+  {
+    bool IsDepthFormat(FrameBufferAttachments::TextureFormat format)
+    {
+      switch (format)
+      {
+        case FrameBufferAttachments::TextureFormat::RGBA8: return false;
+        case FrameBufferAttachments::TextureFormat::Depth24Stencil: return true;
+        case FrameBufferAttachments::TextureFormat::None:
+        default:
+          IK_ASSERT(false, "invalid format!");
+      }
+      return false;
+    }
+    
+    Ref<Texture> CreateAttachment(FrameBufferAttachments::TextureFormat format, Texture2DSpecification& spec)
+    {
+      Ref<Texture> attachment = nullptr;
+      switch (format)
+      {
+          // Color Attachments -------------------------------------------------------------
+        case FrameBufferAttachments::TextureFormat::RGBA8:
+        {
+          // Create the Color Image from the specification
+          spec.internalFormat   = TextureFormat::RGBA8;
+          spec.dataFormat       = TextureFormat::RGBA;
+          attachment = TextureFactory::Create(spec);
+          break;
+        }
+          
+          // Depth Attachments -------------------------------------------------------------
+        case FrameBufferAttachments::TextureFormat::Depth24Stencil:
+        {
+          // Create the Depth Image from the specification
+          spec.internalFormat = TextureFormat::DEPTH_COMPONENT;
+          spec.dataFormat     = TextureFormat::DEPTH_COMPONENT;
+          attachment = TextureFactory::Create(spec);
+          break;
+        }
+          
+          // Invalid Attachments ----------------------------------------------------------
+        case FrameBufferAttachments::TextureFormat::None:
+        default:
+          IK_ASSERT(false, "Invalid Format!");
+      } // swtch(color attachment)
+      
+      IK_LOG_DEBUG(LogModule::FrameBuffer, "  Attachment : {0} | {1}", GET_FORMAT_NAME(spec.internalFormat), GET_FORMAT_NAME(spec.dataFormat));
+      return attachment;
+    }
+  } // namespace FramebufferUtils
+
 } // namespace IKan

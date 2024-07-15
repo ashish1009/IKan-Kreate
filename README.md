@@ -62,10 +62,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v2.2.1.1 : Camera Rendering
 
 ## Road Map
-- Graphic APIs
-    - Image Loader
-    - Framebuffer
-- Viewports and Framebuffers
+- Viewports
 - Project
 - Assets
   - Asset registry

@@ -17,7 +17,7 @@ namespace IKan
 f(None) \
 f(Application) f(Layers) f(Window) \
 f(Renderer) f(Renderer2D) f(TextRenderer) f(Font) f(Mesh) f(Material) \
-f(Texture) f(VertexBuffer) f(IndexBuffer) f(BufferLayout) f(Shader) f(Pipeline) \
+f(Texture) f(VertexBuffer) f(IndexBuffer) f(BufferLayout) f(Shader) f(Pipeline) f(FrameBuffer) \
 f(UI) \
 f(SceneCamera) f(EditorCamera) \
 

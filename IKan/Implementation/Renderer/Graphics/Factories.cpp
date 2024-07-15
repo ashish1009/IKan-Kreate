@@ -14,6 +14,7 @@
 #include "Platform/OpenGL/OpenGLRendererBuffer.hpp"
 #include "Platform/OpenGL/OpenGLShader.hpp"
 #include "Platform/OpenGL/OpenGLPipeline.hpp"
+#include "Platform/OpenGL/OpenGLFrameBuffer.hpp"
 
 namespace IKan
 {
@@ -197,6 +198,21 @@ namespace IKan
     switch (Renderer::GetCurrentRendererAPI())
     {
       case RendererType::OpenGL: return CreateRef<OpenGLPipeline>(spec);
+      case RendererType::Invalid:
+      default:
+        IK_LOG_CRITICAL(LogModule::Renderer, "Renderer API Type is not set or set as invalid."
+                        "Call Renderer::SetCurrentRendererAPI(RendererType) before any Renderer Initialization to set Renderer API type."
+                        "'RendererType should not be RendererType::Invalid'");
+        IK_ASSERT(false , "Renderer API type is not set!")
+    }
+    return nullptr;
+  }
+
+  Ref<FrameBuffer> FrameBufferFactory::Create(const FrameBufferSpecification& spec)
+  {
+    switch (Renderer::GetCurrentRendererAPI())
+    {
+      case RendererType::OpenGL: return CreateRef<OpenGLFrameBuffer>(spec);
       case RendererType::Invalid:
       default:
         IK_LOG_CRITICAL(LogModule::Renderer, "Renderer API Type is not set or set as invalid."

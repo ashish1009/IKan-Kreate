@@ -9,6 +9,7 @@
 
 #include <glad/glad.h>
 
+#include "Renderer/Graphics/Texture.hpp"
 #include "Renderer/Graphics/Specifications.hpp"
 #include "Renderer/Renderer.hpp"
 
@@ -75,4 +76,19 @@ namespace IKan
     void AttachTexture(RendererID rendererID, TextureType type, TextureFormat intenalFormat, TextureAttachment attachmentType,
                        uint32_t colorID, uint32_t depthID, uint32_t level);
   } // namespace TextureUtils
+  
+  // Frame buffer utils ---------------------------------------------------------------
+  namespace FramebufferUtils
+  {
+    /// This function checks is the specification format is depth or not
+    /// - Parameter format: Format type
+    bool IsDepthFormat(FrameBufferAttachments::TextureFormat format);
+    
+    /// This functionc creates the texture attachment for frame buffer format
+    /// - Parameters:
+    ///   - format: framebuffer format
+    ///   - spec: texture specificaion from framebuffer
+    Ref<Texture> CreateAttachment(FrameBufferAttachments::TextureFormat format, Texture2DSpecification& spec);
+  } // namespace FramebufferUtils
+
 } // namespace IKan

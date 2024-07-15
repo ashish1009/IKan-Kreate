@@ -117,4 +117,31 @@ namespace IKan
     BufferLayout vertexLayout;
     Ref<Shader> shader;
   };
+
+  // Framebuffer specificaion ------------------------------------------------------------------------------
+  /// This structure stores the frame buffer attachments
+  struct FrameBufferAttachments
+  {
+    /// This enum stores the texture format type
+    enum class TextureFormat : uint8_t
+    {
+      None = 0,
+      RGBA8,
+      Depth24Stencil,
+    };
+    
+    FrameBufferAttachments() = default;
+    FrameBufferAttachments(std::initializer_list<TextureFormat> attachments)
+    : textureFormats(attachments) {}
+    std::vector<TextureFormat> textureFormats;
+  };
+  
+  /// This structure stores the Framebuffer specification
+  struct FrameBufferSpecification
+  {
+    std::string debugName {};
+    uint32_t width {2100}, height{900};
+    glm::vec4 color { 0.1f, 0.1f, 0.1f, 1.0f };
+    FrameBufferAttachments attachments;
+  };
 } // namespace IKan

@@ -151,6 +151,12 @@ namespace IKan
     s_rendererData.rendererAPI->ClearDepthBits();
   }
   
+  void Renderer::SetViewport(uint32_t width, uint32_t height)
+  {
+    IK_PERFORMANCE("Renderer::SetViewport");
+    s_rendererData.rendererAPI->SetViewport(width, height);
+  }
+
   // Draw Calls -----------------------------------------------------------------------------------------------------
   void Renderer::DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count)
   {

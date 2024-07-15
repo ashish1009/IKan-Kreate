@@ -66,6 +66,12 @@ namespace IKan
     /// This funciton Clears all the Bits
     static void ClearBits();
     
+    /// This function update the renderer viewport size
+    /// - Parameters:
+    ///   - width: new width of renderer viewport
+    ///   - height: new height of renderer viewport
+    static void SetViewport(uint32_t width, uint32_t height);
+
     // Draw Calls ---------------------------------------------------------------------------------------------------
     /// This API draws a quad with pipeline and indexed count
     /// - Parameters:

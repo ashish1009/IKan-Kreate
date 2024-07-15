@@ -290,6 +290,12 @@ namespace IKan
     });
   }
   
+  void OpenGLImage::AttachToFramebuffer([[maybe_unused]] TextureAttachment attachmentType, [[maybe_unused]] uint32_t colorID,
+                                        [[maybe_unused]] uint32_t depthID, [[maybe_unused]] uint32_t level) const
+  {
+    IK_ASSERT(false);
+  }
+
   RendererID OpenGLImage::GetRendererID() const
   {
     return m_rendererID;
