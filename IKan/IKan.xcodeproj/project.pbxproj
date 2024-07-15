@@ -78,6 +78,7 @@
 		B2D2971D2C4133910093F4DA /* LineData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2971C2C4133910093F4DA /* LineData.hpp */; };
 		B2D2972B2C44EA250093F4DA /* MathUtils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2972A2C44EA250093F4DA /* MathUtils.hpp */; };
 		B2D2972C2C44EA250093F4DA /* MathUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D297292C44EA250093F4DA /* MathUtils.cpp */; };
+		B2D2972E2C4529420093F4DA /* libfreetype.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2972D2C4529420093F4DA /* libfreetype.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -196,6 +197,7 @@
 		B2D297222C4134030093F4DA /* BatchLineShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = BatchLineShader.glsl; sourceTree = "<group>"; };
 		B2D297292C44EA250093F4DA /* MathUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = MathUtils.cpp; sourceTree = "<group>"; };
 		B2D2972A2C44EA250093F4DA /* MathUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = MathUtils.hpp; sourceTree = "<group>"; };
+		B2D2972D2C4529420093F4DA /* libfreetype.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libfreetype.a; path = Vendors/Freetype/lib/libfreetype.a; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,6 +205,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2D2972E2C4529420093F4DA /* libfreetype.a in Frameworks */,
 				B2D296782C3C069B0093F4DA /* libUI.a in Frameworks */,
 				B2D294EC2C3BF6C10093F4DA /* libGlad.a in Frameworks */,
 				B2D294A42C3BD0F90093F4DA /* libGLFW.a in Frameworks */,
@@ -373,6 +376,7 @@
 		B2D294A32C3BD0F90093F4DA /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				B2D2972D2C4529420093F4DA /* libfreetype.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -884,6 +888,11 @@
 					"${PROJECT_DIR}/Vendors/Glm",
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
+					"${PROJECT_DIR}/Vendors/Freetype/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Vendors/Freetype/lib",
+					"$(PROJECT_DIR)/Vendors/Freetype/libpng/1.6.39/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
@@ -947,6 +956,11 @@
 					"${PROJECT_DIR}/Vendors/Glm",
 					"${PROJECT_DIR}/Vendors/Glad/include",
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
+					"${PROJECT_DIR}/Vendors/Freetype/include",
+				);
+				LIBRARY_SEARCH_PATHS = (
+					"$(PROJECT_DIR)/Vendors/Freetype/lib",
+					"$(PROJECT_DIR)/Vendors/Freetype/libpng/1.6.39/lib",
 				);
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SKIP_INSTALL = YES;
