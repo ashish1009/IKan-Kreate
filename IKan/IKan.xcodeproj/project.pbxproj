@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
+		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B2D292842C381C8B0093F4DA /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292822C381C8B0093F4DA /* Logger.cpp */; };
 		B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292832C381C8B0093F4DA /* Logger.hpp */; };
 		B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2928A2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp */; };
@@ -121,6 +123,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
+		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B2D292702C38180E0093F4DA /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D2927E2C3818430093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292822C381C8B0093F4DA /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
@@ -445,8 +449,10 @@
 				B2D296D22C40F3230093F4DA /* RendererStats.hpp */,
 				B2D2969F2C3EE67E0093F4DA /* Renderer2D.hpp */,
 				B2D2976C2C4551560093F4DA /* Mesh.hpp */,
+				B24A66D22C45554C00B870DE /* Materials.hpp */,
 				B2D297382C452CBE0093F4DA /* UI */,
 				B2D294B22C3BF2F80093F4DA /* Graphics */,
+				B24A66D12C45554C00B870DE /* Materials.cpp */,
 			);
 			path = Renderer;
 			sourceTree = "<group>";
@@ -668,6 +674,7 @@
 				B2D296D32C40F3230093F4DA /* RendererStats.hpp in Headers */,
 				B2D296DA2C41028F0093F4DA /* RendererBuffer.hpp in Headers */,
 				B2D297362C452CB70093F4DA /* Font.hpp in Headers */,
+				B24A66D42C45554C00B870DE /* Materials.hpp in Headers */,
 				B2D292B52C3940320093F4DA /* Application.hpp in Headers */,
 				B2D296FA2C410BF40093F4DA /* OpenGLShader.hpp in Headers */,
 				B2D297052C4123850093F4DA /* ShaderUniform.hpp in Headers */,
@@ -794,6 +801,7 @@
 				B2D296FB2C410BF40093F4DA /* OpenGLShader.cpp in Sources */,
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
+				B24A66D32C45554C00B870DE /* Materials.cpp in Sources */,
 				B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */,
 				B2D296982C3C19E20093F4DA /* OpenGLRendererAPI.cpp in Sources */,
 				B2D296A02C3EE67E0093F4DA /* Renderer2D.cpp in Sources */,
