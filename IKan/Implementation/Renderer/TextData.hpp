@@ -100,5 +100,42 @@ namespace IKan
       delete [] vertexBufferBasePtr;
       vertexBufferBasePtr = nullptr;
     }
+    
+    void StartBatch(const glm::mat4& camViewProjMat)
+    {
+      IK_PERFORMANCE("Text::StartBatch");
+      
+      shader->Bind();
+      shader->SetUniformMat4("u_ViewProjection", camViewProjMat);
+      shader->Unbind();
+      
+      ResetBatch();
+    }
+    
+    void ResetBatch()
+    {
+      IK_PERFORMANCE("Text::ResetBatch");
+      vertexBufferPtr = vertexBufferBasePtr;
+      numSlotsUsed = 0;
+    }
+    
+    void Flush()
+    {
+      IK_PERFORMANCE("Text::EndBatch");
+      uint32_t dataSize = (uint32_t)((uint8_t*)vertexBufferPtr - (uint8_t*)vertexBufferBasePtr);
+      if (dataSize > 0)
+      {
+        vertexBuffer->SetData(vertexBufferBasePtr, dataSize);
+        
+        // Render the Scene
+        shader->Bind();
+        for (uint32_t j = 0; j < numSlotsUsed; j ++)
+        {
+          charTextures[j]->Bind(j);
+        }
+        Renderer::DrawArrays(pipeline, VertexForSingleChar * numSlotsUsed);
+      }
+      ResetBatch();
+    }
   };
 } // namespace IKan

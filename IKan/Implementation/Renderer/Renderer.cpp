@@ -162,4 +162,9 @@ namespace IKan
     IK_PERFORMANCE("Renderer::DrawLines");
     s_rendererData.rendererAPI->DrawLines(pipeline, vertexCount);
   }
+  void Renderer::DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count)
+  {
+    IK_PERFORMANCE("Renderer::DrawArrays");
+    s_rendererData.rendererAPI->DrawArrays(pipeline, count);
+  }
 } // namespace IKan

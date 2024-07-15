@@ -77,6 +77,11 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer layout
     ///   - vertexCount: number of vertices
     static void DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount);
+    /// This API draws Indexed Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer attribute
+    ///   - count: number of vertices
+    static void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count);
 
     // Render Command Queue -------------------------------------------------------------------------------------------
     /// This function submits the Renderer command in Queue

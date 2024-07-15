@@ -103,6 +103,8 @@ namespace IKan
     s_data.quadData.StartBatch(s_data.cameraViewProjectionMatrix);
     s_data.circleData.StartBatch(s_data.cameraViewProjectionMatrix);
     s_data.lineData.StartBatch(s_data.cameraViewProjectionMatrix);
+
+    s_data.textData.StartBatch(s_data.cameraViewProjectionMatrix);
   }
   
   void Renderer2D::EndBatch()
@@ -111,6 +113,7 @@ namespace IKan
     s_data.quadData.Flush();
     s_data.circleData.Flush();
     s_data.lineData.Flush();
+    s_data.textData.Flush();
   }
   
   void Renderer2D::SubmitQuad(const glm::mat4& transform, const glm::vec4& color, const Ref<Texture>& texture, float tilingFactor, int32_t objectID)

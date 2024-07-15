@@ -115,4 +115,19 @@ namespace IKan
     pipeline->Unbind();
     RendererStatistics::Get().drawCalls++;
   }
+
+  void OpenGLRendererAPI::DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const
+  {
+    IK_ASSERT(pipeline, "Pipeline is NULL!");
+    
+    pipeline->Bind();
+    
+    Renderer::Submit([count](){
+      glDrawArrays(GL_TRIANGLES, 0, (GLsizei)count);
+      glBindTexture(GL_TEXTURE_2D, 0);
+    });
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
 } // namespace IKan

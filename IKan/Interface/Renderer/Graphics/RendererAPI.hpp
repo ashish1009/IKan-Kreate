@@ -48,5 +48,10 @@ namespace IKan
     ///   - pipeline: pipeline having vertex buffer layout
     ///   - vertexCount: number of vertices
     virtual void DrawLines(const Ref<Pipeline>& pipeline, uint32_t vertexCount) const = 0;
+    /// This API draws Indexed Vertex Array
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer attribute
+    ///   - count: number of vertices
+    virtual void DrawArrays(const Ref<Pipeline>& pipeline, uint32_t count) const = 0;
   };
 } // namespace IKan
