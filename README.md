@@ -63,12 +63,12 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - Graphic APIs
     - ~ Renderer Context
     - ~ Renderer API
-    - Rednerer Buffers
-    - Pipeline
-    - Shader
-    - Texture
+    - ~ Rednerer Buffers
+    - ~ Pipeline
+    - ~ Shader
+    - ~ Texture
     - Framebuffer
-- Batch 2D Renderer
+- ~ Batch 2D Renderer
 - Text Renderer
   - Freetype linkage
 - Cameras
