@@ -63,7 +63,27 @@ namespace IKan
     static void SubmitQuad(const glm::vec3& position, const glm::vec2& scale = Utils::Math::UnitVec2,
                            const glm::vec3& rotation = Utils::Math::ZeroVec3, const glm::vec4& color = Utils::Math::UnitVec4,
                            const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f, int32_t objectID = -1);
+    /// This functon draws Quad API with Texture with fixed camera with transform matrix
+    /// - Parameters:
+    ///   - transform: Transformation matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - color: Color of Quad
+    ///   - tilingFactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - objectID: Pixel ID of Quad
+    static void SubmitFixedViewQuad(const glm::mat4& transform, const Ref<Texture>& texture, const glm::vec4& color = Utils::Math::UnitVec4,
+                                    float tilingFactor = 1.0f, int32_t objectID = -1);
     
+    /// This functon draws Quad API with Texture with fixed camera with transform position and scale
+    /// - Parameters:
+    ///   - position: Position matrix of Quad
+    ///   - scale: Size matrix of Quad
+    ///   - texture: Texture to be uploaded in Batch
+    ///   - color: Color of Quad
+    ///   - tilingCactor: tiling factor of Texture (Scale by which texture to be Multiplied)
+    ///   - objectID: Pixel ID of Quad
+    static void SubmitFixedViewQuad(const glm::vec3& position, const glm::vec2& scale, const Ref<Texture>& texture,
+                                  const glm::vec4& color = Utils::Math::UnitVec4, float tilingFactor = 1.0f, int32_t objectID = -1);
+
     /// This function submits the circle to draw in batch renderer
     /// - Parameters:
     ///   - transform: Transformation matrix of Circle
@@ -143,10 +163,10 @@ namespace IKan
     /// This functions renders the Text in Window using postition and sclae
     /// - Parameters:
     ///   - text: Text to be rendereed
-    ///   - font: Font data
     ///   - position: Text Poistion
     ///   - scale: Text Poistion
     ///   - color: Color of text
+    ///   - font: Font data
     ///   - objectID: Pixel ID
     static void SubmitFixedViewText(const std::string &text, glm::vec3 position, const glm::vec2& scale  = Utils::Math::UnitVec2,
                                     const glm::vec4& color = Utils::Math::UnitVec4, Ref<Font> font = Font::GetDefaultFont(),
@@ -154,10 +174,10 @@ namespace IKan
     /// This functions renders the Text in Window using postition and sclae
     /// - Parameters:
     ///   - text: Text to be rendereed
-    ///   - font: Font data
     ///   - position: Text Poistion
     ///   - scale: Text Poistion
     ///   - color: Color of text
+    ///   - font: Font data
     ///   - objectID: Pixel ID&
     static void SubmitText(const std::string &text, glm::vec3 position, const glm::vec2& scale = Utils::Math::UnitVec2,
                            const glm::vec4& color = Utils::Math::UnitVec4, Ref<Font> font = Font::GetDefaultFont(),

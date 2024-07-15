@@ -31,4 +31,14 @@ namespace IKan::Utils::Math
   ///  - Important: Return value should not be discarded.
   ///  - Important: This function cost in CPU cycle
   [[nodiscard]] glm::mat4 GetTransformMatrix(const glm::vec3& position, const glm::vec3& rotation = ZeroVec3, const glm::vec3& scale = UnitVec3);
+  
+  /// This funciton decomposes the Transform matrix as position rotation and scale
+  /// - Parameters:
+  ///   - transform: Transfrom matrix to be decomposed:
+  ///   - outTranslation: Position output
+  ///   - outRotation: Rotation output
+  ///   - outScale: Scale output
+  ///  - Important: This function cost too much in CPU
+  void DecomposeTransform(const glm::mat4& transform, glm::vec3& outTranslation, glm::vec3& outRotation, glm::vec3& outScale);
+
 } // namespace IKan::Utils::Math
