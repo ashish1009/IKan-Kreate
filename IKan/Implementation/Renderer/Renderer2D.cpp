@@ -270,4 +270,73 @@ namespace IKan
     RendererStatistics::Get().vertexCount += Shape2DData::VertexForSingleElement;
     RendererStatistics::Get()._2d.circles++;
   }
+  
+  void Renderer2D::SubmitLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawLine");
+    // If number of indices increase in batch then start new batch
+    if (s_data.lineData.vertexCount >= s_data.lineData.maxVerticesPerBatch)
+    {
+      BATCH_INFO("Starts the new batch as number of vertices ({0}) increases in the previous batch", s_data.lineData.vertexCount);
+      s_data.lineData.Flush();
+    }
+    
+    s_data.lineData.vertexBufferPtr->position = p0;
+    s_data.lineData.vertexBufferPtr->color = color;
+    s_data.lineData.vertexBufferPtr++;
+    
+    s_data.lineData.vertexBufferPtr->position = p1;
+    s_data.lineData.vertexBufferPtr->color = color;
+    s_data.lineData.vertexBufferPtr++;
+    
+    s_data.lineData.vertexCount += LineBatchData::VertexForSingleLine;
+    RendererStatistics::Get().vertexCount += LineBatchData::VertexForSingleLine;
+    RendererStatistics::Get()._2d.lines++;
+  }
+  
+  void Renderer2D::SubmitRect(const glm::vec3& p0, const glm::vec3& p2, const glm::vec4& color)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawRect (With 2 Points)");
+    glm::vec3 p1 = glm::vec3(p2.x, p0.y, p0.z);
+    glm::vec3 p3 = glm::vec3(p0.x, p2.y, p2.z);
+    
+    SubmitRect(p0, p1, p2, p3, color);
+  }
+  
+  void Renderer2D::SubmitRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawRect (With Position)");
+    glm::vec3 p0 = glm::vec3(position.x - size.x * 0.5f, position.y - size.y * 0.5f, position.z);
+    glm::vec3 p1 = glm::vec3(position.x + size.x * 0.5f, position.y - size.y * 0.5f, position.z);
+    glm::vec3 p2 = glm::vec3(position.x + size.x * 0.5f, position.y + size.y * 0.5f, position.z);
+    glm::vec3 p3 = glm::vec3(position.x - size.x * 0.5f, position.y + size.y * 0.5f, position.z);
+    
+    SubmitRect(p0, p1, p2, p3, color);
+  }
+  
+  
+  void Renderer2D::SubmitRect(const glm::vec3& p0, const glm::vec3& p1, const glm::vec3& p2, const glm::vec3& p3,
+                            const glm::vec4& color)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawRect (With 4 Points)");
+    SubmitLine(p0, p1, color);
+    SubmitLine(p1, p2, color);
+    SubmitLine(p2, p3, color);
+    SubmitLine(p3, p0, color);
+  }
+  
+  void Renderer2D::SubmitRect(const glm::mat4& transform, const glm::vec4& color)
+  {
+    IK_PERFORMANCE("Renderer2D::DrawRect (With Transform)");
+    glm::vec3 lineVertices[4];
+    for (size_t i = 0; i < 4; i++)
+    {
+      lineVertices[i] = transform * s_data.quadData.vertexBasePosition[i];
+    }
+    
+    SubmitLine(lineVertices[0], lineVertices[1], color);
+    SubmitLine(lineVertices[1], lineVertices[2], color);
+    SubmitLine(lineVertices[2], lineVertices[3], color);
+    SubmitLine(lineVertices[3], lineVertices[0], color);
+  }
 } // namespace IKan

@@ -62,7 +62,7 @@ namespace IKan
                            const glm::vec3& rotation = Utils::Math::ZeroVec3, const glm::vec4& color = Utils::Math::UnitVec4,
                            const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f, int32_t objectID = -1);
     
-    /// This function draws circle with texture
+    /// This function submits the circle to draw in batch renderer
     /// - Parameters:
     ///   - transform: Transformation matrix of Circle
     ///   - color: Color of circle
@@ -75,7 +75,7 @@ namespace IKan
                              const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f,
                              float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1);
 
-    /// This function draws circle with color
+    /// This function submits the circle to draw in batch renderer
     /// - Parameters:
     ///   - position: Center Circle
     ///   - radius: radius same for all axir
@@ -90,7 +90,7 @@ namespace IKan
                              const glm::vec4& color = Utils::Math::UnitVec4, const Ref<Texture>& texture = nullptr,
                              float tilingFactor = 1.0f, float thickness = 1.0f, float fade = (float)0.005f, int32_t objectID = -1);
       
-    /// This function draws circle with color
+    /// This function submits the circle to draw in batch renderer
     /// - Parameters:
     ///   - position: Center Circle
     ///   - radius: radius
@@ -102,9 +102,41 @@ namespace IKan
     ///   - fade: fade of Circle Edge
     ///   - objectID: Pixel ID of Circle
     static void SubmitCircle(const glm::vec3& position, const glm::vec2& radius = Utils::Math::UnitVec2,
-                             const glm::vec3& rotation = Utils::Math::ZeroVec3, const glm::vec4& tintColor = Utils::Math::UnitVec4,
+                             const glm::vec3& rotation = Utils::Math::ZeroVec3, const glm::vec4& color = Utils::Math::UnitVec4,
                              const Ref<Texture>& texture = nullptr, float tilingFactor = 1.0f,
                              float thickness = 1.0f, float fade = (float)0.005, int32_t objectID = -1);
+    
+    /// This function submits the line to draw in batch renderer
+    /// - Parameters:
+    ///   - p0: fisrt point
+    ///   - p1: second point
+    ///   - color: Color of line
+    static void SubmitLine(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color);
+    /// This function submits the rectangle to draw in batch renderer with top corner point position
+    /// - Parameters:
+    ///   - p0: Top left Point
+    ///   - p1: Bottom Right Point
+    ///   - color: Color of line
+    static void SubmitRect(const glm::vec3& p0, const glm::vec3& p1, const glm::vec4& color);
+    /// This function submits the rectangle to draw in batch renderer with 4 points
+    /// - Parameters:
+    ///   - p0: Top left Point
+    ///   - p1: Bottom Right Point
+    ///   - color: Color of line
+    static void SubmitRect(const glm::vec3& p0, const glm::vec3& p1,
+                         const glm::vec3& p2, const glm::vec3& p3, const glm::vec4& color);
+    
+    /// This function submits the rectangle to draw in batch renderer with position and size
+    /// - Parameters:
+    ///   - position: position of rectangle
+    ///   - size: size of rectangle
+    ///   - color: Color of line
+    static void SubmitRect(const glm::vec3& position, const glm::vec2& size, const glm::vec4& color = Utils::Math::UnitVec4);
+    /// This function submits the rectangle to draw in batch renderer with transform
+    /// - Parameters:
+    ///   - transform: transform
+    ///   - color: Color of line
+    static void SubmitRect(const glm::mat4& transform, const glm::vec4& color);
     
   private:
     /// This function is the helper function to rendere the quad
