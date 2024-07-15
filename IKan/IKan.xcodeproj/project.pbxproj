@@ -12,8 +12,6 @@
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
 		B24A66E32C457E5300B870DE /* OpenGLFrameBuffer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66E12C457E5300B870DE /* OpenGLFrameBuffer.cpp */; };
 		B24A66E42C457E5300B870DE /* OpenGLFrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66E22C457E5300B870DE /* OpenGLFrameBuffer.hpp */; };
-		B24A66E82C457F4100B870DE /* stb_image.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66E52C457F4100B870DE /* stb_image.cpp */; };
-		B24A66E92C457F4100B870DE /* stb_image.h in Headers */ = {isa = PBXBuildFile; fileRef = B24A66E62C457F4100B870DE /* stb_image.h */; };
 		B2D292842C381C8B0093F4DA /* Logger.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292822C381C8B0093F4DA /* Logger.cpp */; };
 		B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D292832C381C8B0093F4DA /* Logger.hpp */; };
 		B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2928A2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp */; };
@@ -101,6 +99,7 @@
 		B2D2976D2C4551560093F4DA /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2976B2C4551560093F4DA /* Mesh.cpp */; };
 		B2D2976E2C4551560093F4DA /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2976C2C4551560093F4DA /* Mesh.hpp */; };
 		B2D297722C45518E0093F4DA /* AABB.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297702C45518E0093F4DA /* AABB.hpp */; };
+		B2FDDA762C4580700062C6E1 /* libStbImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FDDA702C4580420062C6E1 /* libStbImage.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -125,6 +124,13 @@
 			remoteGlobalIDString = B2D295082C3C00560093F4DA;
 			remoteInfo = UI;
 		};
+		B2FDDA6F2C4580420062C6E1 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B2FDDA6B2C4580420062C6E1 /* StbImage.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B24A66F32C45800700B870DE;
+			remoteInfo = StbImage;
+		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
@@ -134,8 +140,6 @@
 		B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FrameBuffer.hpp; sourceTree = "<group>"; };
 		B24A66E12C457E5300B870DE /* OpenGLFrameBuffer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = OpenGLFrameBuffer.cpp; sourceTree = "<group>"; };
 		B24A66E22C457E5300B870DE /* OpenGLFrameBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = OpenGLFrameBuffer.hpp; sourceTree = "<group>"; };
-		B24A66E52C457F4100B870DE /* stb_image.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = stb_image.cpp; sourceTree = "<group>"; };
-		B24A66E62C457F4100B870DE /* stb_image.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = stb_image.h; sourceTree = "<group>"; };
 		B2D292702C38180E0093F4DA /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D2927E2C3818430093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292822C381C8B0093F4DA /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
@@ -245,6 +249,7 @@
 		B2D2976B2C4551560093F4DA /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		B2D2976C2C4551560093F4DA /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		B2D297702C45518E0093F4DA /* AABB.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AABB.hpp; sourceTree = "<group>"; };
+		B2FDDA6B2C4580420062C6E1 /* StbImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StbImage.xcodeproj; path = StbImage/StbImage.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -252,6 +257,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2FDDA762C4580700062C6E1 /* libStbImage.a in Frameworks */,
 				B2D297402C4530FA0093F4DA /* libpng16.a in Frameworks */,
 				B2D2972E2C4529420093F4DA /* libfreetype.a in Frameworks */,
 				B2D296782C3C069B0093F4DA /* libUI.a in Frameworks */,
@@ -263,15 +269,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		B24A66E72C457F4100B870DE /* StbImage */ = {
-			isa = PBXGroup;
-			children = (
-				B24A66E52C457F4100B870DE /* stb_image.cpp */,
-				B24A66E62C457F4100B870DE /* stb_image.h */,
-			);
-			path = StbImage;
-			sourceTree = "<group>";
-		};
 		B2D292672C38180E0093F4DA = {
 			isa = PBXGroup;
 			children = (
@@ -418,7 +415,7 @@
 		B2D2937E2C3BD0440093F4DA /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
-				B24A66E72C457F4100B870DE /* StbImage */,
+				B2FDDA6B2C4580420062C6E1 /* StbImage.xcodeproj */,
 				B2D295162C3C00560093F4DA /* UI.xcodeproj */,
 				B2D294D52C3BF66E0093F4DA /* Glad.xcodeproj */,
 				B2D293962C3BD05C0093F4DA /* GLFW.xcodeproj */,
@@ -650,6 +647,14 @@
 			path = Camera;
 			sourceTree = "<group>";
 		};
+		B2FDDA6C2C4580420062C6E1 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2FDDA702C4580420062C6E1 /* libStbImage.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXHeadersBuildPhase section */
@@ -693,7 +698,6 @@
 				B2D297522C45480B0093F4DA /* Camera.hpp in Headers */,
 				B2D2970D2C412DAA0093F4DA /* Pipeline.hpp in Headers */,
 				B2D292A72C391E6E0093F4DA /* Timer.hpp in Headers */,
-				B24A66E92C457F4100B870DE /* stb_image.h in Headers */,
 				B24A66E42C457E5300B870DE /* OpenGLFrameBuffer.hpp in Headers */,
 				B2D294F82C3BF7BD0093F4DA /* OpenGLRendererContext.hpp in Headers */,
 				B2D297722C45518E0093F4DA /* AABB.hpp in Headers */,
@@ -765,6 +769,10 @@
 					ProjectRef = B2D293962C3BD05C0093F4DA /* GLFW.xcodeproj */;
 				},
 				{
+					ProductGroup = B2FDDA6C2C4580420062C6E1 /* Products */;
+					ProjectRef = B2FDDA6B2C4580420062C6E1 /* StbImage.xcodeproj */;
+				},
+				{
 					ProductGroup = B2D295172C3C00560093F4DA /* Products */;
 					ProjectRef = B2D295162C3C00560093F4DA /* UI.xcodeproj */;
 				},
@@ -798,6 +806,13 @@
 			remoteRef = B2D2951A2C3C00560093F4DA /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		B2FDDA702C4580420062C6E1 /* libStbImage.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libStbImage.a;
+			remoteRef = B2FDDA6F2C4580420062C6E1 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -823,7 +838,6 @@
 				B2D294A72C3BDEA40093F4DA /* Window.cpp in Sources */,
 				B2D296E22C41039A0093F4DA /* OpenGLRendererBuffer.cpp in Sources */,
 				B2D294AD2C3BE22C0093F4DA /* MacWindow.cpp in Sources */,
-				B24A66E82C457F4100B870DE /* stb_image.cpp in Sources */,
 				B2D296CD2C40F0B00093F4DA /* OpenGLSpecification.cpp in Sources */,
 				B2D2976D2C4551560093F4DA /* Mesh.cpp in Sources */,
 				B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */,
@@ -1024,7 +1038,7 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
-					"${PROJECT_DIR}/Vendors/StbImage",
+					"${PROJECT_DIR}/Vendors/StbImage/StbImage",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
@@ -1094,7 +1108,7 @@
 					"${PROJECT_DIR}/Vendors/UI/ImGui",
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
-					"${PROJECT_DIR}/Vendors/StbImage",
+					"${PROJECT_DIR}/Vendors/StbImage/StbImage",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
