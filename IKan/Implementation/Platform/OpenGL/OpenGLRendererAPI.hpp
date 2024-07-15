@@ -32,6 +32,18 @@ namespace IKan
     /// This function clears the stenscil bits.
     void ClearStencilBits() const override;
 
+    /// This function update the renderer viewport size.
+    /// - Parameters:
+    ///   - width: new width of renderer viewport.
+    ///   - height: new height of renderer viewport.
+    void SetViewport(uint32_t width, uint32_t height) const override;
+
+    /// This API draws a quad with pipeline and indexed count.
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer.
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array).
+    void DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count) const override;
+
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLRendererAPI);
   };
 } // namespace IKan

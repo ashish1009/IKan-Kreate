@@ -10,6 +10,8 @@
 #include <glad/glad.h>
 
 #include "Renderer/Renderer.hpp"
+#include "Renderer/Graphics/Pipeline.hpp"
+#include "Renderer/RendererStats.hpp"
 
 namespace IKan
 {
@@ -76,4 +78,28 @@ namespace IKan
       glClear(GL_STENCIL_BUFFER_BIT);
     });
   }
+  
+  
+  void OpenGLRendererAPI::SetViewport(uint32_t width, uint32_t height) const
+  {
+    Renderer::Submit([width, height](){
+      glViewport(0, 0, (GLsizei)width, (GLsizei)height);
+    });
+  }
+  
+  void OpenGLRendererAPI::DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count) const
+  {
+    IK_ASSERT(pipeline, "Pipeline is NULL!");
+    
+    pipeline->Bind();
+    
+    Renderer::Submit([count](){
+      glDrawElements(GL_TRIANGLES, (GLsizei)count, GL_UNSIGNED_INT, nullptr);
+      glBindTexture(GL_TEXTURE_2D, 0);
+    });
+    
+    pipeline->Unbind();
+    RendererStatistics::Get().drawCalls++;
+  }
+
 } // namespace IKan

@@ -31,5 +31,17 @@ namespace IKan
     virtual void ClearDepthBits() const = 0;
     /// This function clears the depth bits
     virtual void ClearStencilBits() const = 0;
+    
+    /// This function update the renderer viewport size
+    /// - Parameters:
+    ///   - width: new width of renderer viewport
+    ///   - height: new height of renderer viewport
+    virtual void SetViewport(uint32_t width, uint32_t height) const = 0;
+    
+    /// This API draws a quad with pipeline and indexed count
+    /// - Parameters:
+    ///   - pipeline: pipeline having vertex buffer and index buffer
+    ///   - count: number of Indices (if 0 then use index buffer of Vertex array)
+    virtual void DrawIndexed(const Ref<Pipeline>& pipeline, uint32_t count) const = 0;
   };
 } // namespace IKan
