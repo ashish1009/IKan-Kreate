@@ -207,6 +207,7 @@
 		B2D2973C2C4530FA0093F4DA /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = Vendors/Freetype/libpng/1.6.39/lib/libpng16.a; sourceTree = "<group>"; };
 		B2D297422C45416B0093F4DA /* TextData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextData.hpp; sourceTree = "<group>"; };
 		B2D297482C4542650093F4DA /* TextShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextShader.glsl; sourceTree = "<group>"; };
+		B2D2974C2C4544EB0093F4DA /* FSQuadShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = FSQuadShader.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -548,6 +549,7 @@
 				B2D297172C4132B40093F4DA /* BatchCircleShader.glsl */,
 				B2D297222C4134030093F4DA /* BatchLineShader.glsl */,
 				B2D297482C4542650093F4DA /* TextShader.glsl */,
+				B2D2974C2C4544EB0093F4DA /* FSQuadShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
