@@ -124,4 +124,39 @@ namespace IKan
       glDeleteTextures(1, &m_rendererID);
     });
   }
+  
+  void OpenGLTexture::Bind(uint32_t slot) const
+  {
+    Renderer::Submit([this, slot]() {
+      glActiveTexture(GL_TEXTURE0 + slot);
+      glBindTexture(TextureUtils::OpenGLTypeFromIKanType(m_specification.type), m_rendererID);
+    });
+  }
+  
+  void OpenGLTexture::Unbind() const
+  {
+    Renderer::Submit([]() {
+      glBindTexture(GL_TEXTURE_2D, 0);
+    });
+  }
+  
+  void OpenGLTexture::AttachToFramebuffer(TextureAttachment attachmentType, uint32_t colorID, uint32_t depthID, uint32_t level) const
+  {
+    Renderer::Submit([this, attachmentType, colorID, depthID, level](){
+      TextureUtils::AttachTexture(m_rendererID, m_specification.type, m_specification.internalFormat, attachmentType, colorID, depthID, level);
+    });
+  }
+  
+  RendererID OpenGLTexture::GetRendererID() const
+  {
+    return m_rendererID;
+  }
+  uint32_t OpenGLTexture::GetWidth() const
+  {
+    return m_specification.width;
+  }
+  uint32_t OpenGLTexture::GetHeight() const
+  {
+    return m_specification.height;
+  }
 } // namespace IKan
