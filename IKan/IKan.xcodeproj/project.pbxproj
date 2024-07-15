@@ -82,6 +82,7 @@
 		B2D297362C452CB70093F4DA /* Font.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297352C452CB70093F4DA /* Font.hpp */; };
 		B2D297372C452CB70093F4DA /* Font.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D297342C452CB70093F4DA /* Font.cpp */; };
 		B2D297402C4530FA0093F4DA /* libpng16.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D2973C2C4530FA0093F4DA /* libpng16.a */; };
+		B2D297432C45416B0093F4DA /* TextData.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297422C45416B0093F4DA /* TextData.hpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -204,6 +205,8 @@
 		B2D297342C452CB70093F4DA /* Font.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Font.cpp; sourceTree = "<group>"; };
 		B2D297352C452CB70093F4DA /* Font.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Font.hpp; sourceTree = "<group>"; };
 		B2D2973C2C4530FA0093F4DA /* libpng16.a */ = {isa = PBXFileReference; lastKnownFileType = archive.ar; name = libpng16.a; path = Vendors/Freetype/libpng/1.6.39/lib/libpng16.a; sourceTree = "<group>"; };
+		B2D297422C45416B0093F4DA /* TextData.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = TextData.hpp; sourceTree = "<group>"; };
+		B2D297482C4542650093F4DA /* TextShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = TextShader.glsl; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -432,6 +435,7 @@
 				B2D296AC2C40E5E80093F4DA /* QuadData.hpp */,
 				B2D297142C4132510093F4DA /* CircleData.hpp */,
 				B2D2971C2C4133910093F4DA /* LineData.hpp */,
+				B2D297422C45416B0093F4DA /* TextData.hpp */,
 				B2D297332C452CAF0093F4DA /* UI */,
 				B2D294B32C3BF2FF0093F4DA /* Graphics */,
 			);
@@ -543,6 +547,7 @@
 				B2D297012C41107D0093F4DA /* BatchQuadShader.glsl */,
 				B2D297172C4132B40093F4DA /* BatchCircleShader.glsl */,
 				B2D297222C4134030093F4DA /* BatchLineShader.glsl */,
+				B2D297482C4542650093F4DA /* TextShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";
@@ -595,6 +600,7 @@
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
 				B2D296992C3C19E20093F4DA /* OpenGLRendererAPI.hpp in Headers */,
 				B2D296E52C4104AC0093F4DA /* Buffer.hpp in Headers */,
+				B2D297432C45416B0093F4DA /* TextData.hpp in Headers */,
 				B2D296CC2C40F0B00093F4DA /* OpenGLSpecification.hpp in Headers */,
 				B2D294AC2C3BE22C0093F4DA /* MacWindow.hpp in Headers */,
 				B2D2970D2C412DAA0093F4DA /* Pipeline.hpp in Headers */,

@@ -10,6 +10,7 @@
 #include "Renderer/QuadData.hpp"
 #include "Renderer/CircleData.hpp"
 #include "Renderer/LineData.hpp"
+#include "Renderer/TextData.hpp"
 
 namespace IKan
 {
@@ -27,6 +28,7 @@ namespace IKan
     QuadBatchData quadData;
     CircleBatchData circleData;
     LineBatchData lineData;
+    TextData textData;
 
     void Destroy()
     {
@@ -35,6 +37,7 @@ namespace IKan
       quadData.Destroy();
       circleData.Destroy();
       lineData.Destroy();
+      textData.Destroy();
     }
   };
   static Renderer2DData s_data;
@@ -47,6 +50,8 @@ namespace IKan
     AddQuads(1000);
     AddCircles(1000);
     AddLines(10000);
+    
+    s_data.textData.Initialize();
   }
   void Renderer2D::Shutdown()
   {
@@ -113,7 +118,8 @@ namespace IKan
     IK_PERFORMANCE("Renderer2D::SubmitQuad (With Transform)");
     SubmitQuadImpl(transform, color, texture, tilingFactor, TextureCoords, objectID );
   }
-  void Renderer2D::SubmitQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec3& rotation, const glm::vec4& color, const Ref<Texture>& texture, float tilingFactor, int32_t objectID)
+  void Renderer2D::SubmitQuad(const glm::vec3& position, const glm::vec2& scale, const glm::vec3& rotation, const glm::vec4& color, 
+                              const Ref<Texture>& texture, float tilingFactor, int32_t objectID)
   {
     IK_PERFORMANCE("Renderer2D::SubmitQuad (With PSR)");
     const glm::mat4& transform = Utils::Math::GetTransformMatrix(position, rotation, glm::vec3(scale, 0.0f));
