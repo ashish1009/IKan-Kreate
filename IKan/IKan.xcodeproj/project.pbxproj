@@ -125,6 +125,7 @@
 /* Begin PBXFileReference section */
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
+		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
 		B2D292702C38180E0093F4DA /* libIKan.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libIKan.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D2927E2C3818430093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292822C381C8B0093F4DA /* Logger.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Logger.cpp; sourceTree = "<group>"; };
@@ -583,6 +584,7 @@
 				B2D297222C4134030093F4DA /* BatchLineShader.glsl */,
 				B2D297482C4542650093F4DA /* TextShader.glsl */,
 				B2D2974C2C4544EB0093F4DA /* FSQuadShader.glsl */,
+				B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */,
 			);
 			path = Shaders;
 			sourceTree = "<group>";

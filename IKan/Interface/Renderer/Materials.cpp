@@ -24,10 +24,13 @@ namespace IKan
   Material::Material(const Ref<Shader>& shader)
   : m_shader(shader)
   {
-    IK_PROFILE();
-    IK_LOG_DEBUG(LogModule::Material, "Creating Material ...");
-    IK_LOG_DEBUG(LogModule::Material, "  Shader                  | {0}", m_shader->GetName());
-    AllocateStorage();
+    Renderer::Submit([this]() {
+      IK_PROFILE();
+      IK_LOG_DEBUG(LogModule::Material, "Creating Material ...");
+      IK_LOG_DEBUG(LogModule::Material, "  Shader                  | {0}", m_shader->GetName());
+      
+      AllocateStorage();
+    });
   }
   
   Material::~Material()
