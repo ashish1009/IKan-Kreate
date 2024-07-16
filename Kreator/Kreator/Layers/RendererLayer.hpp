@@ -44,7 +44,14 @@ namespace Kreator
 
   private:
     // Memeber variables ----------------------------------------------------------------------------------------------
-    // Editor Data ----------------
+    // UI APIs -------------------------------------------
+    /// This function starts main ImGui Window with Docking
+    void UI_StartMainWindowDocking();
+    /// This function ends Main ImGui window with Docking
+    void UI_EndMainWindowDocking();
+
+    // Memeber variables ----------------------------------------------------------------------------------------------
+    // Editor Data ---------------------------------------
     EditorCamera m_editorCamera;
     
     // Single Instance -----------------------------------
