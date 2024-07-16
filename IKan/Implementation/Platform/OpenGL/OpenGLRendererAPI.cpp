@@ -95,7 +95,6 @@ namespace IKan
     
     Renderer::Submit([count](){
       glDrawElements(GL_TRIANGLES, (GLsizei)count, GL_UNSIGNED_INT, nullptr);
-      glBindTexture(GL_TEXTURE_2D, 0);
     });
     
     pipeline->Unbind();
@@ -109,7 +108,6 @@ namespace IKan
     
     Renderer::Submit([vertexCount](){
       glDrawArrays(GL_LINES, 0, /* Vertex Offset */ (GLsizei)vertexCount);
-      glBindTexture(GL_TEXTURE_2D, 0);
     });
     
     pipeline->Unbind();
@@ -124,7 +122,6 @@ namespace IKan
     
     Renderer::Submit([count](){
       glDrawArrays(GL_TRIANGLES, 0, (GLsizei)count);
-      glBindTexture(GL_TEXTURE_2D, 0);
     });
     
     pipeline->Unbind();
@@ -139,7 +136,6 @@ namespace IKan
     
     Renderer::Submit([](){
       glDrawArrays(GL_TRIANGLE_STRIP, 0, 4);
-      glBindTexture(GL_TEXTURE_2D, 0);
     });
     
     pipeline->Unbind();
@@ -150,7 +146,6 @@ namespace IKan
   {
     Renderer::Submit([indexCount, indicesData, baseVertex](){
       glDrawElementsBaseVertex(GL_TRIANGLES, (GLsizei)indexCount, GL_UNSIGNED_INT, indicesData, (GLint)baseVertex);
-      glBindTexture(GL_TEXTURE_2D, 0);
     });
     
     RendererStatistics::Get().drawCalls++;
