@@ -20,7 +20,8 @@ namespace Kreator
   }
 
   RendererLayer::RendererLayer()
-  : Layer("Kreator Renderer")
+  : Layer("Kreator Renderer"), m_viewportRenderer("Primary Viewport"), m_miniViewportRenderer("Mini Viewport"),
+  m_secondaryViewportRenderer("Secondary Viewport")
   {
     IK_PROFILE();
     IK_ASSERT(!s_instance, "RendererLayer instance already created");

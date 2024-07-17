@@ -68,6 +68,7 @@
 #include <Renderer/Renderer2D.hpp>
 #include <Renderer/Mesh.hpp>
 #include <Renderer/Materials.hpp>
+#include <Renderer/SceneRenderer.hpp>
 
 #include <Camera/Camera.hpp>
 #include <Camera/SceneCamera.hpp>

@@ -100,6 +100,8 @@
 		B2D2976E2C4551560093F4DA /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2976C2C4551560093F4DA /* Mesh.hpp */; };
 		B2D297722C45518E0093F4DA /* AABB.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297702C45518E0093F4DA /* AABB.hpp */; };
 		B2FDDA762C4580700062C6E1 /* libStbImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FDDA702C4580420062C6E1 /* libStbImage.a */; };
+		B2FDDA922C47ACDD0062C6E1 /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2FDDA912C47ACDD0062C6E1 /* SceneRenderer.hpp */; };
+		B2FDDA932C47ACDD0062C6E1 /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2FDDA902C47ACDD0062C6E1 /* SceneRenderer.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -250,6 +252,8 @@
 		B2D2976C2C4551560093F4DA /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		B2D297702C45518E0093F4DA /* AABB.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AABB.hpp; sourceTree = "<group>"; };
 		B2FDDA6B2C4580420062C6E1 /* StbImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StbImage.xcodeproj; path = StbImage/StbImage.xcodeproj; sourceTree = "<group>"; };
+		B2FDDA902C47ACDD0062C6E1 /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
+		B2FDDA912C47ACDD0062C6E1 /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -468,6 +472,7 @@
 				B2D2969F2C3EE67E0093F4DA /* Renderer2D.hpp */,
 				B2D2976C2C4551560093F4DA /* Mesh.hpp */,
 				B24A66D22C45554C00B870DE /* Materials.hpp */,
+				B2FDDA912C47ACDD0062C6E1 /* SceneRenderer.hpp */,
 				B2D297382C452CBE0093F4DA /* UI */,
 				B2D294B22C3BF2F80093F4DA /* Graphics */,
 			);
@@ -488,6 +493,7 @@
 				B2D297422C45416B0093F4DA /* TextData.hpp */,
 				B2D2976B2C4551560093F4DA /* Mesh.cpp */,
 				B24A66D12C45554C00B870DE /* Materials.cpp */,
+				B2FDDA902C47ACDD0062C6E1 /* SceneRenderer.cpp */,
 				B2D297332C452CAF0093F4DA /* UI */,
 				B2D294B32C3BF2FF0093F4DA /* Graphics */,
 			);
@@ -664,6 +670,7 @@
 			files = (
 				B2D2972B2C44EA250093F4DA /* MathUtils.hpp in Headers */,
 				B2D2968E2C3C15680093F4DA /* RenderCommandQueue.hpp in Headers */,
+				B2FDDA922C47ACDD0062C6E1 /* SceneRenderer.hpp in Headers */,
 				B2D296C32C40EEDA0093F4DA /* OpenGLTexture.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
 				B2D2976E2C4551560093F4DA /* Mesh.hpp in Headers */,
@@ -841,6 +848,7 @@
 				B2D296CD2C40F0B00093F4DA /* OpenGLSpecification.cpp in Sources */,
 				B2D2976D2C4551560093F4DA /* Mesh.cpp in Sources */,
 				B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */,
+				B2FDDA932C47ACDD0062C6E1 /* SceneRenderer.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
 				B2D296FB2C410BF40093F4DA /* OpenGLShader.cpp in Sources */,
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,

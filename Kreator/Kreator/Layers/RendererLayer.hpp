@@ -59,7 +59,8 @@ namespace Kreator
 
     // Memeber variables ----------------------------------------------------------------------------------------------
     // Viewport Data -------------------------------------
-    Viewport m_primaryViewport;
+    Viewport m_primaryViewport, m_secondaryViewport;
+    SceneRenderer m_viewportRenderer, m_miniViewportRenderer, m_secondaryViewportRenderer;
 
     // Editor Data ---------------------------------------
     EditorCamera m_editorCamera;

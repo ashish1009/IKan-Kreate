@@ -55,6 +55,9 @@
             location = "group:v3.2.2.0.md">
          </FileRef>
       </Group>
+      <FileRef
+         location = "group:ReleaseNotes/v3.2.2.0.md">
+      </FileRef>
    </Group>
    <FileRef
       location = "group:Kreator/Kreator.xcodeproj">
