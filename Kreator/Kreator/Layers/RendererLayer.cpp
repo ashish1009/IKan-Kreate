@@ -93,7 +93,15 @@ namespace Kreator
   {
     // Docked Windows-----------
     UI_StartMainWindowDocking();
+    UI_Viewport();
     UI_EndMainWindowDocking();
+  }
+  
+  void RendererLayer::UpdateViewportSize()
+  {
+    IK_PROFILE()
+    m_editorCamera.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
+    FixedCamera::SetViewport(m_primaryViewport.width, m_primaryViewport.height);
   }
   
   // UI APIs ---------------------------------------------------------------------------------------------------------
@@ -152,6 +160,37 @@ namespace Kreator
   void RendererLayer::UI_EndMainWindowDocking()
   {
     IK_PERFORMANCE("RendererLayer::UI_EndMainWindowDocking");
+    ImGui::End();
+  }
+  
+  void RendererLayer::UI_Viewport()
+  {
+    IK_PERFORMANCE("RendererLayer::UI_Viewport")
+    
+    UI::ScopedStyle windowPadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    ImGui::Begin("Viewport");
+
+    m_primaryViewport.isHovered = ImGui::IsWindowHovered();
+    m_primaryViewport.isFocused = ImGui::IsWindowFocused();
+
+    const ImVec2& offset = ImGui::GetCursorPos();
+    const ImVec2& size = ImGui::GetContentRegionAvail();
+
+    // Updating the View port size and kreator data w.r.t. primary viewport
+    bool zeroSizeViewport = 0 == size.x or 0 == size.y;
+    bool sameSizeViewport = size.x == m_primaryViewport.width and size.x == m_primaryViewport.height;
+    if(!zeroSizeViewport and !sameSizeViewport)
+    {
+      m_primaryViewport.width = static_cast<uint32_t>(size.x);
+      m_primaryViewport.height = static_cast<uint32_t>(size.y);
+      
+      // Set Viewport of Dummy Data
+      UpdateViewportSize();
+    }
+    
+    // Render viewport image
+    UI::Image(texImage, size);
+
     ImGui::End();
   }
 } // namespace Kreator

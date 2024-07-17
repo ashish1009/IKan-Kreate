@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Editor/Viewport.hpp"
+
 using namespace IKan;
 
 namespace Kreator
@@ -43,14 +45,22 @@ namespace Kreator
     static RendererLayer& Get();
 
   private:
-    // Memeber variables ----------------------------------------------------------------------------------------------
+    // Memeber functions ----------------------------------------------------------------------------------------------
+    /// This function updates the viewports of all kreator data
+    void UpdateViewportSize();
+
     // UI APIs -------------------------------------------
     /// This function starts main ImGui Window with Docking
     void UI_StartMainWindowDocking();
     /// This function ends Main ImGui window with Docking
     void UI_EndMainWindowDocking();
+    /// This functions shows primary Viewport
+    void UI_Viewport();
 
     // Memeber variables ----------------------------------------------------------------------------------------------
+    // Viewport Data -------------------------------------
+    Viewport m_primaryViewport;
+
     // Editor Data ---------------------------------------
     EditorCamera m_editorCamera;
     

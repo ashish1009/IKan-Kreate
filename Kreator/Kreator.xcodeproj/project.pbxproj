@@ -19,6 +19,8 @@
 		B2D297792C45534E0093F4DA /* libassimp.5.2.4.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2D297652C4550AB0093F4DA /* libassimp.5.2.4.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B2D2977A2C45534E0093F4DA /* libminizip.1.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2D297672C4550AB0093F4DA /* libminizip.1.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
 		B2D2977B2C45534E0093F4DA /* libpugixml.1.13.dylib in CopyFiles */ = {isa = PBXBuildFile; fileRef = B2D297662C4550AB0093F4DA /* libpugixml.1.13.dylib */; settings = {ATTRIBUTES = (CodeSignOnCopy, ); }; };
+		B2FDDA8C2C4788B90062C6E1 /* Viewport.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2FDDA8A2C4788B90062C6E1 /* Viewport.cpp */; };
+		B2FDDA8F2C478BE50062C6E1 /* ImGuiUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2FDDA8D2C478BE50062C6E1 /* ImGuiUtils.cpp */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -59,6 +61,10 @@
 		B2D297672C4550AB0093F4DA /* libminizip.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libminizip.1.dylib; path = ../IKan/Vendors/Assimp/lib/libminizip.1.dylib; sourceTree = "<group>"; };
 		B2D2977C2C4553890093F4DA /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
 		B2FDDA862C4783BD0062C6E1 /* ImGuiScoped.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiScoped.hpp; sourceTree = "<group>"; };
+		B2FDDA8A2C4788B90062C6E1 /* Viewport.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Viewport.cpp; sourceTree = "<group>"; };
+		B2FDDA8B2C4788B90062C6E1 /* Viewport.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Viewport.hpp; sourceTree = "<group>"; };
+		B2FDDA8D2C478BE50062C6E1 /* ImGuiUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiUtils.cpp; sourceTree = "<group>"; };
+		B2FDDA8E2C478BE50062C6E1 /* ImGuiUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiUtils.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -104,6 +110,7 @@
 				B2D292602C380F250093F4DA /* EntryPoint.cpp */,
 				B2D292B62C3943DD0093F4DA /* Application */,
 				B2D2969A2C3C3D890093F4DA /* Layers */,
+				B2FDDA892C4788B20062C6E1 /* Editor */,
 				B2FDDA842C4783B00062C6E1 /* UI */,
 			);
 			path = Kreator;
@@ -158,8 +165,19 @@
 			isa = PBXGroup;
 			children = (
 				B2FDDA862C4783BD0062C6E1 /* ImGuiScoped.hpp */,
+				B2FDDA8D2C478BE50062C6E1 /* ImGuiUtils.cpp */,
+				B2FDDA8E2C478BE50062C6E1 /* ImGuiUtils.hpp */,
 			);
 			path = UI;
+			sourceTree = "<group>";
+		};
+		B2FDDA892C4788B20062C6E1 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+				B2FDDA8A2C4788B90062C6E1 /* Viewport.cpp */,
+				B2FDDA8B2C4788B90062C6E1 /* Viewport.hpp */,
+			);
+			path = Editor;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -239,7 +257,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B2FDDA8F2C478BE50062C6E1 /* ImGuiUtils.cpp in Sources */,
 				B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */,
+				B2FDDA8C2C4788B90062C6E1 /* Viewport.cpp in Sources */,
 				B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */,
 				B2D2969D2C3C3D9F0093F4DA /* RendererLayer.cpp in Sources */,
 			);
