@@ -7,6 +7,9 @@
    <Group
       location = "group:Resources"
       name = "Resources">
+      <FileRef
+         location = "group:ReleaseNotes/v3.3.2.1.md">
+      </FileRef>
       <Group
          location = "group:Logo"
          name = "Logo">
@@ -54,10 +57,10 @@
          <FileRef
             location = "group:v3.2.2.0.md">
          </FileRef>
+         <FileRef
+            location = "group:v3.3.2.1.md">
+         </FileRef>
       </Group>
-      <FileRef
-         location = "group:ReleaseNotes/v3.2.2.0.md">
-      </FileRef>
    </Group>
    <FileRef
       location = "group:Kreator/Kreator.xcodeproj">

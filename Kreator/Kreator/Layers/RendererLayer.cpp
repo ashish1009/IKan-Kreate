@@ -187,7 +187,6 @@ namespace Kreator
     m_primaryViewport.isHovered = ImGui::IsWindowHovered();
     m_primaryViewport.isFocused = ImGui::IsWindowFocused();
 
-    const ImVec2& offset = ImGui::GetCursorPos();
     const ImVec2& size = ImGui::GetContentRegionAvail();
 
     // Updating the View port size and kreator data w.r.t. primary viewport

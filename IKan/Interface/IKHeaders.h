@@ -60,6 +60,8 @@
 #include <Core/LayerStack.hpp>
 #include <Core/Window.hpp>
 #include <Core/Input.hpp>
+#include <Core/AABB.hpp>
+#include <Core/UUID.hpp>
 
 #include <UI/ImGuiLayer.hpp>
 

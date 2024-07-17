@@ -73,7 +73,6 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
   - ImGui Utils
   - ImGui Property
   - ImGui Input
-- Viewports
 - Project
 - Assets
   - Asset registry
