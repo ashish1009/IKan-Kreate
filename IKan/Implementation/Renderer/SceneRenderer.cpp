@@ -82,6 +82,11 @@ namespace IKan
   void SceneRenderer::EndScene()
   {
     IK_PERFORMANCE("SceneRenderer::EndScene");
+    m_geometryRenderPass->Bind();
+    {
+      Renderer::Clear({0.2f, 0.2f, 0.2f, 1.0f});
+    }
+    m_geometryRenderPass->Unbind();
   }
   
   void SceneRenderer::SetViewportSize(uint32_t width, uint32_t height)
@@ -97,5 +102,10 @@ namespace IKan
     m_viewportHeight = height;
     
     m_geometryRenderPass->Resize(m_viewportWidth, m_viewportHeight);
+  }
+  
+  Ref<Texture> SceneRenderer::GetFinalImage() const
+  {
+    return m_geometryRenderPass->GetColorAttachments().at(0);
   }
 } // namespace IKan

@@ -202,7 +202,7 @@ namespace Kreator
     }
     
     // Render viewport image
-    UI::Image(texImage, size);
+    UI::Image(m_viewportRenderer.GetFinalImage(), size);
 
     ImGui::End();
   }
