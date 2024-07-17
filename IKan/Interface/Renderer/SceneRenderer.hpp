@@ -22,6 +22,11 @@ namespace IKan
     /// This Destrcutro destroys the scene renderer instance
     ~SceneRenderer();
     
+    /// This funciton begins the scene renderering
+    void BeginScene();
+    /// This funciton ends the scene renderering and flush the rendering data for frame
+    void EndScene();
+    
     /// This function updates the viewport size of scene rendere data
     /// - Parameters:
     ///   - width: width of viewport

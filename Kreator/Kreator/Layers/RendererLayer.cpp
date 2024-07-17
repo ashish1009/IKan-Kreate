@@ -65,6 +65,8 @@ namespace Kreator
     m_editorCamera.OnUpdate(ts);
     m_editorCamera.SetActive(true);
 
+    m_viewportRenderer.BeginScene();
+    m_viewportRenderer.EndScene();
     Renderer::Clear({0.2, 0.1, 0.3, 1.0});
         
     Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
@@ -95,6 +97,10 @@ namespace Kreator
     // Docked Windows-----------
     UI_StartMainWindowDocking();
     UI_Viewport();
+        
+    // Should be rendered last inside docker
+    UI_StatisticsPanel();
+
     UI_EndMainWindowDocking();
   }
   
@@ -199,5 +205,20 @@ namespace Kreator
     UI::Image(texImage, size);
 
     ImGui::End();
+  }
+  
+  void RendererLayer::UI_StatisticsPanel()
+  {
+    IK_PERFORMANCE("RendererLayer::UI_StatisticsPanel");
+    if (ImGui::Begin("Statistics"))
+    {
+      const auto& perFrameData = PerformanceProfiler::Get().GetPerFrameData();
+      for (auto&& [name, time] : perFrameData)
+      {
+        ImGui::Text("%s : %f", name, time);
+      }
+
+      ImGui::End();
+    }
   }
 } // namespace Kreator

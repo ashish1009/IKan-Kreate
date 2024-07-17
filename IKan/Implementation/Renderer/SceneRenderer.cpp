@@ -74,6 +74,16 @@ namespace IKan
     }
   }
   
+  void SceneRenderer::BeginScene()
+  {
+    IK_PERFORMANCE("SceneRenderer::BeginScene");
+  }
+  
+  void SceneRenderer::EndScene()
+  {
+    IK_PERFORMANCE("SceneRenderer::EndScene");
+  }
+  
   void SceneRenderer::SetViewportSize(uint32_t width, uint32_t height)
   {
     IK_PROFILE()
