@@ -27,6 +27,9 @@ namespace IKan
 #define CAT(a, b) CAT_(a, b)
 #define VAR_NAME(Var) CAT(Var, __LINE__)
   
+  // This MACRO Cast uint32_t into void pointer
+#define INT2VOIDP(i)    (void*)(uintptr_t)(i)
+
   // Enum Creation Macro ---------------------------------------------------------------------------------------------
   /// Helper MACRO for Enum creation
 #define VAL(name) name ,
