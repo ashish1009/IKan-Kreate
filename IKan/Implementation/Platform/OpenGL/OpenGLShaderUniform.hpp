@@ -71,7 +71,7 @@ namespace IKan
     static Type StringToType(const std::string& type);
     /// This funciton reutrns the type in string from Type.
     /// - Parameter type: Internal Type of field.
-    static std::string TypeToString(Type type);
+    static std::string_view TypeToString(Type type);
     
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLShaderUniformDeclaration);
     
@@ -127,7 +127,7 @@ namespace IKan
     static Type StringToType(const std::string& type);
     /// This static funciton returns the type of uniform resource in string.
     /// - Parameter type: type of uniform resource.
-    static std::string TypeToString(Type type);
+    static std::string_view TypeToString(Type type);
     
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLShaderResourceDeclaration);
     

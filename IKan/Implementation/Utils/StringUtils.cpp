@@ -9,7 +9,7 @@
 
 namespace IKan::Utils::String
 {
-  std::vector<std::string> SplitString(const std::string& string, const std::string& delimiters)
+  std::vector<std::string> SplitString(const std::string& string, std::string_view delimiters)
   {
     IK_PROFILE();
     // Return empty vector if no delimiters are given

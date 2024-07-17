@@ -13,7 +13,7 @@ namespace IKan
   {
     /// This function returns the Projection type in string
     /// - Parameter projType: Projection type
-    [[maybe_unused]] static std::string GetProjectionNameFromType(SceneCamera::ProjectionType projType)
+    [[maybe_unused]] static std::string_view GetProjectionNameFromType(SceneCamera::ProjectionType projType)
     {
       switch (projType)
       {

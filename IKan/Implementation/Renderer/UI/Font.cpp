@@ -24,8 +24,7 @@ namespace IKan
     IK_PROFILE();
     
     // Default Font
-    std::string defaultFontFilePath = CoreAsset("Fonts/HfMonorita/Regular.ttf");
-    s_defaultFont = FontLibrary::Get(defaultFontFilePath);
+    s_defaultFont = FontLibrary::Get(CoreAsset("Fonts/HfMonorita/Regular.ttf"));
   }
   
   void Font::Shutdown()

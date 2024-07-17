@@ -15,7 +15,7 @@ namespace IKan::Utils::String
   ///   - string: string to be broken
   ///   - delimiters: (break point of string). From here string will be split
   /// - Returns: Vector of strings after breaking from break point
-  std::vector<std::string> SplitString(const std::string& string, const std::string& delimiters);
+  std::vector<std::string> SplitString(const std::string& string, std::string_view delimiters);
   /// This function breaks the string. Break points are stored in delimiter, any character in the delimeter will be
   /// cosnider as break points
   /// - Parameters:

@@ -276,7 +276,6 @@ namespace IKan
   
   void MacWindow::SetResizable(bool resizable) const
   {
-    std::string canCannotString = resizable ? "can" : "cannot";
     glfwSetWindowAttrib(m_window, GLFW_RESIZABLE, resizable ? GLFW_TRUE : GLFW_FALSE );
   }
   

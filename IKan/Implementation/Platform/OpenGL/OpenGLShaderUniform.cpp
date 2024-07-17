@@ -116,7 +116,7 @@ namespace IKan
     return Type::None;
   }
   
-  std::string OpenGLShaderUniformDeclaration::TypeToString(Type type)
+  std::string_view OpenGLShaderUniformDeclaration::TypeToString(Type type)
   {
     switch (type)
     {
@@ -144,7 +144,7 @@ namespace IKan
     return Type::None;
   }
   
-  std::string OpenGLShaderResourceDeclaration::TypeToString(Type type)
+  std::string_view OpenGLShaderResourceDeclaration::TypeToString(Type type)
   {
     switch (type)
     {

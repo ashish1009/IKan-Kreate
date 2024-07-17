@@ -17,7 +17,7 @@ namespace IKan
   class Layer
   {
   public:
-    Layer(const std::string& name)
+    Layer(std::string_view name)
     : m_name(name)
     {
       
