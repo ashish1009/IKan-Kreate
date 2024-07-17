@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B22AAF552C480146007453B7 /* AssetType.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AAF542C480146007453B7 /* AssetType.hpp */; };
+		B22AAF562C480146007453B7 /* AssetType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AAF532C480146007453B7 /* AssetType.cpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -140,6 +142,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		B22AAF532C480146007453B7 /* AssetType.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetType.cpp; sourceTree = "<group>"; };
+		B22AAF542C480146007453B7 /* AssetType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetType.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -676,6 +680,7 @@
 		B2FDDA942C47FF4E0062C6E1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B22AAF542C480146007453B7 /* AssetType.hpp */,
 				B2FDDA972C47FF630062C6E1 /* Asset.hpp */,
 			);
 			path = Assets;
@@ -684,6 +689,7 @@
 		B2FDDA952C47FF550062C6E1 /* Assets */ = {
 			isa = PBXGroup;
 			children = (
+				B22AAF532C480146007453B7 /* AssetType.cpp */,
 				B2FDDA962C47FF630062C6E1 /* Asset.cpp */,
 			);
 			path = Assets;
@@ -742,6 +748,7 @@
 				B2D2971D2C4133910093F4DA /* LineData.hpp in Headers */,
 				B2D296D32C40F3230093F4DA /* RendererStats.hpp in Headers */,
 				B2D296DA2C41028F0093F4DA /* RendererBuffer.hpp in Headers */,
+				B22AAF552C480146007453B7 /* AssetType.hpp in Headers */,
 				B2D297362C452CB70093F4DA /* Font.hpp in Headers */,
 				B24A66D42C45554C00B870DE /* Materials.hpp in Headers */,
 				B2D292B52C3940320093F4DA /* Application.hpp in Headers */,
@@ -875,6 +882,7 @@
 				B2D294A72C3BDEA40093F4DA /* Window.cpp in Sources */,
 				B2D296E22C41039A0093F4DA /* OpenGLRendererBuffer.cpp in Sources */,
 				B2D294AD2C3BE22C0093F4DA /* MacWindow.cpp in Sources */,
+				B22AAF562C480146007453B7 /* AssetType.cpp in Sources */,
 				B2D296CD2C40F0B00093F4DA /* OpenGLSpecification.cpp in Sources */,
 				B2D2976D2C4551560093F4DA /* Mesh.cpp in Sources */,
 				B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */,
