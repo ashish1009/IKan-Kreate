@@ -85,6 +85,11 @@ namespace IKan
     m_geometryRenderPass->Bind();
     {
       Renderer::Clear({0.2f, 0.2f, 0.2f, 1.0f});
+      
+      // Debug Renderer callback
+      {
+        m_debugRenderer();
+      }
     }
     m_geometryRenderPass->Unbind();
   }
@@ -104,6 +109,11 @@ namespace IKan
     m_geometryRenderPass->Resize(m_viewportWidth, m_viewportHeight);
   }
   
+  void SceneRenderer::SetDebugRenderer(const std::function<void()>& func)
+  {
+    m_debugRenderer = func;
+  }
+
   Ref<Texture> SceneRenderer::GetFinalImage() const
   {
     return m_geometryRenderPass->GetColorAttachments().at(0);

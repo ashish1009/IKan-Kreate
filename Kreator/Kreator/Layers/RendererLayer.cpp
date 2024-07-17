@@ -46,6 +46,25 @@ namespace Kreator
     meshCube = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/Kreator/Projects/3D/TestProject/Assets/Meshes/Default/Cube.fbx");
     meshMaterial = Material::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
     texImage = TextureFactory::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/Kreator/Outputs/WelcomeScreen.png");
+    
+    m_viewportRenderer.SetDebugRenderer([this](){
+      Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
+      Renderer2D::SubmitQuad({0.5, 0.5, 0}, {0.5, 0.5}, {0, 0, 0}, {1, 1, 1, 1}, texImage);
+      Renderer2D::SubmitRect({0.0, 0.0, 0}, {0.5, 0.5});
+      Renderer2D::SubmitText("Sample Text", {0, 0, 0}, {0.1, 0.1});
+      Renderer2D::SubmitCircle({-0.5, -0.5, 0}, 0.5);
+      Renderer2D::EndBatch();
+      
+      meshCube->GetPipeline()->Bind();
+      static glm::mat4 transform = Utils::Math::UnitMat4;
+      meshMaterial->Set("u_ViewProjection", m_editorCamera.GetUnReversedViewProjection());
+      for (const SubMesh& submesh : meshCube->GetSubMeshes())
+      {
+        meshMaterial->Set("u_Transform", transform * submesh.transform);
+        meshMaterial->Bind();
+        Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+      }
+    });
   }
   
   void RendererLayer::OnDetach()
@@ -67,24 +86,6 @@ namespace Kreator
 
     m_viewportRenderer.BeginScene();
     m_viewportRenderer.EndScene();
-    Renderer::Clear({0.2, 0.1, 0.3, 1.0});
-        
-    Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
-    Renderer2D::SubmitQuad({0.5, 0.5, 0}, {0.5, 0.5}, {0, 0, 0}, {1, 1, 1, 1}, texImage);
-    Renderer2D::SubmitRect({0.0, 0.0, 0}, {0.5, 0.5});
-    Renderer2D::SubmitText("Sample Text", {0, 0, 0}, {0.1, 0.1});
-    Renderer2D::SubmitCircle({-0.5, -0.5, 0}, 0.5);
-    Renderer2D::EndBatch();
-    
-    meshCube->GetPipeline()->Bind();
-    static glm::mat4 transform = Utils::Math::UnitMat4;
-    meshMaterial->Set("u_ViewProjection", m_editorCamera.GetUnReversedViewProjection());
-    for (const SubMesh& submesh : meshCube->GetSubMeshes())
-    {
-      meshMaterial->Set("u_Transform", transform * submesh.transform);
-      meshMaterial->Bind();
-      Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
-    } 
   }
   
   void RendererLayer::OnEvent([[maybe_unused]] Event& event)
