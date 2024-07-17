@@ -58,6 +58,7 @@
 		B2D297662C4550AB0093F4DA /* libpugixml.1.13.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libpugixml.1.13.dylib; path = ../IKan/Vendors/Assimp/lib/libpugixml.1.13.dylib; sourceTree = "<group>"; };
 		B2D297672C4550AB0093F4DA /* libminizip.1.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libminizip.1.dylib; path = ../IKan/Vendors/Assimp/lib/libminizip.1.dylib; sourceTree = "<group>"; };
 		B2D2977C2C4553890093F4DA /* libassimp.5.2.4.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libassimp.5.2.4.dylib; path = ../IKan/Vendors/Assimp/lib/libassimp.5.2.4.dylib; sourceTree = "<group>"; };
+		B2FDDA862C4783BD0062C6E1 /* ImGuiScoped.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiScoped.hpp; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,6 +104,7 @@
 				B2D292602C380F250093F4DA /* EntryPoint.cpp */,
 				B2D292B62C3943DD0093F4DA /* Application */,
 				B2D2969A2C3C3D890093F4DA /* Layers */,
+				B2FDDA842C4783B00062C6E1 /* UI */,
 			);
 			path = Kreator;
 			sourceTree = "<group>";
@@ -150,6 +152,14 @@
 				B2D2969C2C3C3D9F0093F4DA /* RendererLayer.hpp */,
 			);
 			path = Layers;
+			sourceTree = "<group>";
+		};
+		B2FDDA842C4783B00062C6E1 /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				B2FDDA862C4783BD0062C6E1 /* ImGuiScoped.hpp */,
+			);
+			path = UI;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
