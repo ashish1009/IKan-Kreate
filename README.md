@@ -62,6 +62,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v2.2.1.1 : Camera Rendering
 - v3.0.1.1 : Mesh Rendering
 - v3.1.1.1 : Images and framebuffer
+- v3.2.2.1 : Scene Renderer and Viewport
 
 ## Road Map
 - Kreator UI
