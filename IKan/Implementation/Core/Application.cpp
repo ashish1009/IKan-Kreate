@@ -48,6 +48,10 @@ namespace IKan
     
     // Execute all commands from queue
     Renderer::WaitAndRender();
+    
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
+    IK_LOG_INFO("", "                     Initialized Core Application                         ");
+    IK_LOG_INFO("", "--------------------------------------------------------------------------");
   }
   
   Application::~Application()

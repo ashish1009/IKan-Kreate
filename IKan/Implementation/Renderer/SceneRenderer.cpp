@@ -49,6 +49,16 @@ namespace IKan
     
     IK_LOG_INFO(LogModule::SceneRenderer, "Creating Scene renderer for '{0}'", m_debugName);
     IK_LOG_TRACE(LogModule::SceneRenderer, "Total renderers created : {0}", ++SceneRendererData::s_numRenderers);
+    
+    // Geometry pass
+    FrameBufferSpecification fbSpec;
+    fbSpec.debugName = "Geometry Pass";
+    fbSpec.attachments =
+    {
+      FrameBufferAttachments::TextureFormat::RGBA8,
+      FrameBufferAttachments::TextureFormat::Depth24Stencil
+    };
+    m_geometryRenderPass = FrameBufferFactory::Create(fbSpec);
   }
   
   SceneRenderer::~SceneRenderer()
@@ -62,5 +72,20 @@ namespace IKan
     {
       SceneRendererData::Shutdown();
     }
+  }
+  
+  void SceneRenderer::SetViewportSize(uint32_t width, uint32_t height)
+  {
+    IK_PROFILE()
+    IK_PERFORMANCE("SceneRenderer::SetViewportSize");
+    if (0 == width or 0 == height or (m_viewportWidth == width and m_viewportHeight == height))
+    {
+      return;
+    }
+    
+    m_viewportWidth = width;
+    m_viewportHeight = height;
+    
+    m_geometryRenderPass->Resize(m_viewportWidth, m_viewportHeight);
   }
 } // namespace IKan

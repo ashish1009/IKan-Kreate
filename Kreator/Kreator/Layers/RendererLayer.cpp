@@ -101,8 +101,14 @@ namespace Kreator
   void RendererLayer::UpdateViewportSize()
   {
     IK_PROFILE()
-    m_editorCamera.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
+        
     FixedCamera::SetViewport(m_primaryViewport.width, m_primaryViewport.height);
+    
+    m_editorCamera.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
+    
+    m_viewportRenderer.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
+    m_miniViewportRenderer.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
+    m_secondaryViewportRenderer.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
   }
   
   // UI APIs ---------------------------------------------------------------------------------------------------------
