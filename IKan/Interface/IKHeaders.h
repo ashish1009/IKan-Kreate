@@ -77,4 +77,6 @@
 #include <Camera/EditorCamera.hpp>
 #include <Camera/FixedCamera.hpp>
 
+#include <Assets/AssetType.hpp>
 #include <Assets/Asset.hpp>
+#include <Assets/AssetMedata.hpp>
