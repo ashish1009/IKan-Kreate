@@ -52,7 +52,7 @@ namespace IKan
     
     // Geometry pass
     FrameBufferSpecification fbSpec;
-    fbSpec.debugName = "Geometry Pass";
+    fbSpec.debugName = std::string("Geometry Pass : ") + std::string(debugName);
     fbSpec.attachments =
     {
       FrameBufferAttachments::TextureFormat::RGBA8,

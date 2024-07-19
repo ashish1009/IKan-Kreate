@@ -67,9 +67,9 @@ namespace IKan
       RendererStatistics::Get()._2d.maxLines = maxElementPerBatch;
       
       BATCH_INFO("Initializing Batch Renderer for Line Data ");
-      BATCH_INFO("  Max Lines per Batch             | {0}", maxElementPerBatch);
-      BATCH_INFO("  Vertex Buffer used              | {0} B", maxVerticesPerBatch * sizeof(CommonBatchData::Vertex));
-      BATCH_INFO("  Shader Used                     | {0}", shader->GetName());
+      BATCH_INFO("  Max Lines per Batch            | {0}", maxElementPerBatch);
+      BATCH_INFO("  Vertex Buffer used             | {0} B", maxVerticesPerBatch * sizeof(CommonBatchData::Vertex));
+      BATCH_INFO("  Shader Used                    | {0}", shader->GetName());
     }
     void Destroy()
     {
@@ -77,9 +77,9 @@ namespace IKan
       if (maxElementPerBatch > 0)
       {
         BATCH_WARN("Destrying Batch Renderer for Line Data ");
-        BATCH_WARN("  Max Lines per Batch             | {0}", maxElementPerBatch);
-        BATCH_WARN("  Vertex Buffer used              | {0} B", maxVerticesPerBatch * sizeof(CommonBatchData::Vertex));
-        BATCH_WARN("  Shader Used                     | {0}", shader->GetName());
+        BATCH_WARN("  Max Lines per Batch           | {0}", maxElementPerBatch);
+        BATCH_WARN("  Vertex Buffer used            | {0} B", maxVerticesPerBatch * sizeof(CommonBatchData::Vertex));
+        BATCH_WARN("  Shader Used                   | {0}", shader->GetName());
         
         RendererStatistics::Get()._2d.maxLines -= maxElementPerBatch;
       }

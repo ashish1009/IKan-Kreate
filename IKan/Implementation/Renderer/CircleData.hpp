@@ -109,10 +109,10 @@ namespace IKan
       if (maxElementPerBatch > 0)
       {
         BATCH_WARN("Destrying Batch Renderer for Circle Data ");
-        BATCH_WARN("  Max Circles per Batch           | {0}", maxElementPerBatch);
-        BATCH_WARN("  Vertex Buffer used              | {0} B", maxVerticesPerBatch * sizeof(Shape2DData::Vertex));
-        BATCH_WARN("  Index Buffer used               | {0} B", maxIndicesPerBatch * sizeof(uint32_t));
-        BATCH_WARN("  Shader Used                     | {0}", shader->GetName());
+        BATCH_WARN("  Max Circles per Batch         | {0}", maxElementPerBatch);
+        BATCH_WARN("  Vertex Buffer used            | {0} B", maxVerticesPerBatch * sizeof(Shape2DData::Vertex));
+        BATCH_WARN("  Index Buffer used             | {0} B", maxIndicesPerBatch * sizeof(uint32_t));
+        BATCH_WARN("  Shader Used                   | {0}", shader->GetName());
         
         // Decrease the stat
         RendererStatistics::Get()._2d.maxCircles -= maxElementPerBatch;

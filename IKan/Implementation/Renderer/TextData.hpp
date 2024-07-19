@@ -79,9 +79,9 @@ namespace IKan
       baseTextureCoords[5] = { 1.0f, 0.0f };
       
       IK_LOG_INFO(LogModule::TextRenderer, "Initialized the Text Renderer ");
-      IK_LOG_INFO(LogModule::TextRenderer, "  Vertex Buffer Used  | {0} B",
+      IK_LOG_INFO(LogModule::TextRenderer, "  Vertex Buffer Used             | {0} B",
                   TextData::VertexForSingleChar * sizeof(TextData::Vertex) * Texture2DSpecification::MaxTextureSlotsInShader);
-      IK_LOG_INFO(LogModule::TextRenderer, "  Shader used         | {0}", shader->GetName());
+      IK_LOG_INFO(LogModule::TextRenderer, "  Shader used                    | {0}", shader->GetName());
     }
     
     void Destroy()
@@ -89,9 +89,9 @@ namespace IKan
       IK_PROFILE();
       
       IK_LOG_WARN(LogModule::TextRenderer, "Shutting down the Text Renderer ");
-      IK_LOG_WARN(LogModule::TextRenderer, "  Vertex Buffer Used  | {0} B",
+      IK_LOG_WARN(LogModule::TextRenderer, "  Vertex Buffer Used            | {0} B",
                   TextData::VertexForSingleChar * sizeof(TextData::Vertex) * Texture2DSpecification::MaxTextureSlotsInShader);
-      IK_LOG_WARN(LogModule::TextRenderer, "  Shader used         | {0}", shader->GetName());
+      IK_LOG_WARN(LogModule::TextRenderer, "  Shader used                   | {0}", shader->GetName());
       
       vertexBuffer.reset();
       pipeline.reset();

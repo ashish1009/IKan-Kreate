@@ -38,7 +38,7 @@ namespace IKan
     }
     
     // Invalide the framebuffer/
-    Invalidate();
+    Invalidate(false);
   }
   
   OpenGLFrameBuffer::~OpenGLFrameBuffer()
