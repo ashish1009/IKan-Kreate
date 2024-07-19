@@ -9,8 +9,10 @@
 /* Begin PBXBuildFile section */
 		B22AAF552C480146007453B7 /* AssetType.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AAF542C480146007453B7 /* AssetType.hpp */; };
 		B22AAF562C480146007453B7 /* AssetType.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AAF532C480146007453B7 /* AssetType.cpp */; };
-		B22AAF622C4A3EE2007453B7 /* AssetMedata.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AAF612C4A3EE2007453B7 /* AssetMedata.hpp */; };
-		B22AAF632C4A3EE2007453B7 /* AssetMedata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AAF602C4A3EE2007453B7 /* AssetMedata.cpp */; };
+		B22AAF622C4A3EE2007453B7 /* AssetMetadata.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AAF612C4A3EE2007453B7 /* AssetMetadata.hpp */; };
+		B22AAF632C4A3EE2007453B7 /* AssetMetadata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AAF602C4A3EE2007453B7 /* AssetMetadata.cpp */; };
+		B22AAF6A2C4A437A007453B7 /* AssetRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AAF682C4A437A007453B7 /* AssetRegistry.cpp */; };
+		B22AAF6B2C4A437A007453B7 /* AssetRegistry.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AAF692C4A437A007453B7 /* AssetRegistry.hpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -146,8 +148,10 @@
 /* Begin PBXFileReference section */
 		B22AAF532C480146007453B7 /* AssetType.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetType.cpp; sourceTree = "<group>"; };
 		B22AAF542C480146007453B7 /* AssetType.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetType.hpp; sourceTree = "<group>"; };
-		B22AAF602C4A3EE2007453B7 /* AssetMedata.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetMedata.cpp; sourceTree = "<group>"; };
-		B22AAF612C4A3EE2007453B7 /* AssetMedata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMedata.hpp; sourceTree = "<group>"; };
+		B22AAF602C4A3EE2007453B7 /* AssetMetadata.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetMetadata.cpp; sourceTree = "<group>"; };
+		B22AAF612C4A3EE2007453B7 /* AssetMetadata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMetadata.hpp; sourceTree = "<group>"; };
+		B22AAF682C4A437A007453B7 /* AssetRegistry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetRegistry.cpp; sourceTree = "<group>"; };
+		B22AAF692C4A437A007453B7 /* AssetRegistry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetRegistry.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -686,7 +690,8 @@
 			children = (
 				B22AAF542C480146007453B7 /* AssetType.hpp */,
 				B2FDDA972C47FF630062C6E1 /* Asset.hpp */,
-				B22AAF612C4A3EE2007453B7 /* AssetMedata.hpp */,
+				B22AAF612C4A3EE2007453B7 /* AssetMetadata.hpp */,
+				B22AAF692C4A437A007453B7 /* AssetRegistry.hpp */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -696,7 +701,8 @@
 			children = (
 				B22AAF532C480146007453B7 /* AssetType.cpp */,
 				B2FDDA962C47FF630062C6E1 /* Asset.cpp */,
-				B22AAF602C4A3EE2007453B7 /* AssetMedata.cpp */,
+				B22AAF602C4A3EE2007453B7 /* AssetMetadata.cpp */,
+				B22AAF682C4A437A007453B7 /* AssetRegistry.cpp */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -713,8 +719,9 @@
 				B2D2968E2C3C15680093F4DA /* RenderCommandQueue.hpp in Headers */,
 				B2FDDA922C47ACDD0062C6E1 /* SceneRenderer.hpp in Headers */,
 				B2D296C32C40EEDA0093F4DA /* OpenGLTexture.hpp in Headers */,
-				B22AAF622C4A3EE2007453B7 /* AssetMedata.hpp in Headers */,
+				B22AAF622C4A3EE2007453B7 /* AssetMetadata.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
+				B22AAF6B2C4A437A007453B7 /* AssetRegistry.hpp in Headers */,
 				B2D2976E2C4551560093F4DA /* Mesh.hpp in Headers */,
 				B2D296EE2C41093F0093F4DA /* Shader.hpp in Headers */,
 				B2D292942C38637E0093F4DA /* FileSystemUtils.hpp in Headers */,
@@ -876,7 +883,7 @@
 				B2D294F92C3BF7BD0093F4DA /* OpenGLRendererContext.cpp in Sources */,
 				B2D2972C2C44EA250093F4DA /* MathUtils.cpp in Sources */,
 				B2D297512C45480B0093F4DA /* Camera.cpp in Sources */,
-				B22AAF632C4A3EE2007453B7 /* AssetMedata.cpp in Sources */,
+				B22AAF632C4A3EE2007453B7 /* AssetMetadata.cpp in Sources */,
 				B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */,
 				B2D297552C4548BD0093F4DA /* SceneCamera.cpp in Sources */,
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
@@ -898,6 +905,7 @@
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
 				B2D296FB2C410BF40093F4DA /* OpenGLShader.cpp in Sources */,
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
+				B22AAF6A2C4A437A007453B7 /* AssetRegistry.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
 				B24A66D32C45554C00B870DE /* Materials.cpp in Sources */,
 				B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */,

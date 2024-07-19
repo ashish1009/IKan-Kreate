@@ -21,5 +21,9 @@ namespace IKan
   enum class AssetType : uint8_t
   {
     Invalid,
+    Image,
+    Font,
+    Mesh,
+    Material,
   };
 } // namespace IKan

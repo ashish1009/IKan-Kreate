@@ -79,4 +79,5 @@
 
 #include <Assets/AssetType.hpp>
 #include <Assets/Asset.hpp>
-#include <Assets/AssetMedata.hpp>
+#include <Assets/AssetMetadata.hpp>
+#include <Assets/AssetRegistry.hpp>
