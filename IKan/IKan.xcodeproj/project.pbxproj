@@ -14,6 +14,8 @@
 		B22AAF6A2C4A437A007453B7 /* AssetRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AAF682C4A437A007453B7 /* AssetRegistry.cpp */; };
 		B22AAF6B2C4A437A007453B7 /* AssetRegistry.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AAF692C4A437A007453B7 /* AssetRegistry.hpp */; };
 		B22AB24C2C4A5852007453B7 /* libYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B22AAF8C2C4A57E1007453B7 /* libYAML.a */; };
+		B22AB24F2C4A64BB007453B7 /* AssetSertializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB24D2C4A64BB007453B7 /* AssetSertializer.cpp */; };
+		B22AB2502C4A64BB007453B7 /* AssetSertializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB24E2C4A64BB007453B7 /* AssetSertializer.hpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -161,6 +163,8 @@
 		B22AAF682C4A437A007453B7 /* AssetRegistry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetRegistry.cpp; sourceTree = "<group>"; };
 		B22AAF692C4A437A007453B7 /* AssetRegistry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetRegistry.hpp; sourceTree = "<group>"; };
 		B22AAF872C4A57E1007453B7 /* YAML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YAML.xcodeproj; path = YAML/YAML.xcodeproj; sourceTree = "<group>"; };
+		B22AB24D2C4A64BB007453B7 /* AssetSertializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetSertializer.cpp; sourceTree = "<group>"; };
+		B22AB24E2C4A64BB007453B7 /* AssetSertializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetSertializer.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -711,6 +715,7 @@
 				B2FDDA972C47FF630062C6E1 /* Asset.hpp */,
 				B22AAF612C4A3EE2007453B7 /* AssetMetadata.hpp */,
 				B22AAF692C4A437A007453B7 /* AssetRegistry.hpp */,
+				B22AB24E2C4A64BB007453B7 /* AssetSertializer.hpp */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -722,6 +727,7 @@
 				B2FDDA962C47FF630062C6E1 /* Asset.cpp */,
 				B22AAF602C4A3EE2007453B7 /* AssetMetadata.cpp */,
 				B22AAF682C4A437A007453B7 /* AssetRegistry.cpp */,
+				B22AB24D2C4A64BB007453B7 /* AssetSertializer.cpp */,
 			);
 			path = Assets;
 			sourceTree = "<group>";
@@ -757,6 +763,7 @@
 				B2D2975A2C454A170093F4DA /* EditorCamera.hpp in Headers */,
 				B2D297112C412E7E0093F4DA /* OpenGLPipeline.hpp in Headers */,
 				B2D294B72C3BF30B0093F4DA /* Renderer.hpp in Headers */,
+				B22AB2502C4A64BB007453B7 /* AssetSertializer.hpp in Headers */,
 				B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */,
 				B2D296952C3C19900093F4DA /* RendererAPI.hpp in Headers */,
 				B2D296762C3C01D40093F4DA /* ImGuiLayer.hpp in Headers */,
@@ -939,6 +946,7 @@
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
 				B24A66D32C45554C00B870DE /* Materials.cpp in Sources */,
 				B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */,
+				B22AB24F2C4A64BB007453B7 /* AssetSertializer.cpp in Sources */,
 				B2D296982C3C19E20093F4DA /* OpenGLRendererAPI.cpp in Sources */,
 				B2D296A02C3EE67E0093F4DA /* Renderer2D.cpp in Sources */,
 				B2D297592C454A170093F4DA /* EditorCamera.cpp in Sources */,
