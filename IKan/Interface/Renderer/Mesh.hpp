@@ -11,6 +11,7 @@
 #include "Renderer/Graphics/Shader.hpp"
 #include "Renderer/Graphics/Pipeline.hpp"
 #include "Renderer/Graphics/RendererBuffer.hpp"
+#include "Assets/Asset.hpp"
 
 // Assimp forward declaration
 class aiScene;
@@ -57,7 +58,7 @@ namespace IKan
   };
   
   /// This class loads the mesh using assimp
-  class Mesh
+  class Mesh : public Asset
   {
   public:
     /// This Constructor loads the mesh from assimp library and store the data
@@ -83,6 +84,7 @@ namespace IKan
     /// - Parameter filePath: mesh model file path
     [[nodiscard]] static Ref<Mesh> Create(const std::filesystem::path& filePath);
     
+    ASSET_TYPE(Mesh);
     DELETE_COPY_MOVE_CONSTRUCTORS(Mesh);
     
   private:

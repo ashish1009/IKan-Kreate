@@ -7,12 +7,14 @@
 
 #pragma once
 
+#include "Assets/Asset.hpp"
+
 namespace IKan
 {
   class CharTexture;
 
   /// This class stores the font loaded as ttf file to be used to render the text
-  class Font
+  class Font : public Asset
   {
   public:
     /// This constructor creates the font instance with filepath
@@ -40,6 +42,8 @@ namespace IKan
     /// This function creates a font instance
     /// - Parameter filePath: font file path
     static Ref<Font> Create(const std::filesystem::path& filePath);
+
+    ASSET_TYPE(Font);
 
   private:
     std::filesystem::path m_filePath {};
