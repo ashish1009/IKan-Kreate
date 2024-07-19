@@ -13,6 +13,7 @@
 		B22AAF632C4A3EE2007453B7 /* AssetMetadata.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AAF602C4A3EE2007453B7 /* AssetMetadata.cpp */; };
 		B22AAF6A2C4A437A007453B7 /* AssetRegistry.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AAF682C4A437A007453B7 /* AssetRegistry.cpp */; };
 		B22AAF6B2C4A437A007453B7 /* AssetRegistry.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AAF692C4A437A007453B7 /* AssetRegistry.hpp */; };
+		B22AB24C2C4A5852007453B7 /* libYAML.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B22AAF8C2C4A57E1007453B7 /* libYAML.a */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -115,6 +116,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		B22AAF8B2C4A57E1007453B7 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B22AAF872C4A57E1007453B7 /* YAML.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = B22AAF792C4A57E1007453B7;
+			remoteInfo = YAML;
+		};
 		B2D2939A2C3BD05D0093F4DA /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = B2D293962C3BD05C0093F4DA /* GLFW.xcodeproj */;
@@ -152,6 +160,7 @@
 		B22AAF612C4A3EE2007453B7 /* AssetMetadata.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetMetadata.hpp; sourceTree = "<group>"; };
 		B22AAF682C4A437A007453B7 /* AssetRegistry.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetRegistry.cpp; sourceTree = "<group>"; };
 		B22AAF692C4A437A007453B7 /* AssetRegistry.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetRegistry.hpp; sourceTree = "<group>"; };
+		B22AAF872C4A57E1007453B7 /* YAML.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = YAML.xcodeproj; path = YAML/YAML.xcodeproj; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -281,6 +290,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B22AB24C2C4A5852007453B7 /* libYAML.a in Frameworks */,
 				B2FDDA762C4580700062C6E1 /* libStbImage.a in Frameworks */,
 				B2D297402C4530FA0093F4DA /* libpng16.a in Frameworks */,
 				B2D2972E2C4529420093F4DA /* libfreetype.a in Frameworks */,
@@ -293,6 +303,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B22AAF882C4A57E1007453B7 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B22AAF8C2C4A57E1007453B7 /* libYAML.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
 		B2D292672C38180E0093F4DA = {
 			isa = PBXGroup;
 			children = (
@@ -443,6 +461,7 @@
 		B2D2937E2C3BD0440093F4DA /* Vendors */ = {
 			isa = PBXGroup;
 			children = (
+				B22AAF872C4A57E1007453B7 /* YAML.xcodeproj */,
 				B2FDDA6B2C4580420062C6E1 /* StbImage.xcodeproj */,
 				B2D295162C3C00560093F4DA /* UI.xcodeproj */,
 				B2D294D52C3BF66E0093F4DA /* Glad.xcodeproj */,
@@ -834,6 +853,10 @@
 					ProductGroup = B2D295172C3C00560093F4DA /* Products */;
 					ProjectRef = B2D295162C3C00560093F4DA /* UI.xcodeproj */;
 				},
+				{
+					ProductGroup = B22AAF882C4A57E1007453B7 /* Products */;
+					ProjectRef = B22AAF872C4A57E1007453B7 /* YAML.xcodeproj */;
+				},
 			);
 			projectRoot = "";
 			targets = (
@@ -843,6 +866,13 @@
 /* End PBXProject section */
 
 /* Begin PBXReferenceProxy section */
+		B22AAF8C2C4A57E1007453B7 /* libYAML.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libYAML.a;
+			remoteRef = B22AAF8B2C4A57E1007453B7 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 		B2D2939B2C3BD05D0093F4DA /* libGLFW.a */ = {
 			isa = PBXReferenceProxy;
 			fileType = archive.ar;
@@ -1103,6 +1133,7 @@
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
 					"${PROJECT_DIR}/Vendors/StbImage/StbImage",
+					"${PROJECT_DIR}/Vendors/YAML/YAML/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
@@ -1173,6 +1204,7 @@
 					"${PROJECT_DIR}/Vendors/Freetype/include",
 					"${PROJECT_DIR}/Vendors/Assimp/include",
 					"${PROJECT_DIR}/Vendors/StbImage/StbImage",
+					"${PROJECT_DIR}/Vendors/YAML/YAML/include",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
