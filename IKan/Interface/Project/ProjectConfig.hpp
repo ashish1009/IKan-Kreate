@@ -12,6 +12,28 @@ namespace IKan
   /// This structure stores the configuration of project
   struct ProjectConfig
   {
-    std::string name;
+    // General
+    std::string name {"New Project"};
+    
+    // Asset Data
+    std::filesystem::path assetDirectory;
+    std::filesystem::path assetRegistryPath;
+    
+    std::filesystem::path texturePath;
+    std::filesystem::path fontPath;
+    std::filesystem::path scenePath;
+    std::filesystem::path meshPath;
+    std::filesystem::path materialPath;
+    std::filesystem::path physicsPath;
+    std::filesystem::path prefabPath;
+    
+    // Scene Serialize
+    std::filesystem::path startScene{};
+    bool enableAutoSave {false};
+    int32_t autoSaveIntervalSeconds {300};
+    
+    // Not serialized
+    std::string projectFileName;
+    std::filesystem::path projectDirectory;
   };
 } // namespace IKan
