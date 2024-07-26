@@ -39,5 +39,4 @@ namespace IKan
   {
     return s_activeProject;
   }
-
 } // namespace IKan
