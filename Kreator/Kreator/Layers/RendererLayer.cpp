@@ -19,8 +19,8 @@ namespace Kreator
     return *s_instance;
   }
 
-  RendererLayer::RendererLayer()
-  : Layer("Kreator Renderer"), m_viewportRenderer("Primary Viewport"), m_miniViewportRenderer("Mini Viewport"),
+  RendererLayer::RendererLayer(const KreatorDirectories& directories)
+  : Layer("Kreator Renderer"), m_directories(directories), m_viewportRenderer("Primary Viewport"), m_miniViewportRenderer("Mini Viewport"),
   m_secondaryViewportRenderer("Secondary Viewport")
   {
     IK_PROFILE();

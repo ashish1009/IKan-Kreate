@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Config.hpp"
+
 using namespace IKan;
 
 /// Function prototype for creating application
@@ -23,9 +25,9 @@ namespace Kreator
   public:
     /// Kreator Application constructor
     /// - Parameters:
-    ///   - appSpec: core application specifications
+    ///   - appSpec: core application specificaions
     ///   - kreatorDirectories: kreator direcotries
-    KreatorApp(const ApplicationSpecification& appSpec);
+    KreatorApp(const ApplicationSpecification& appSpec, const KreatorDirectories& kreatorDirectories);
     /// Kreator Application Destructor
     ~KreatorApp();
     
@@ -43,5 +45,6 @@ namespace Kreator
 
   private:
     Scope<Layer> m_rendererLayer;
+    KreatorDirectories m_kreatorDirectories;
   };
 } // namespace Kreator

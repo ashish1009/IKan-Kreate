@@ -7,6 +7,7 @@
 
 #pragma once
 
+#include "Config.hpp"
 #include "Editor/Viewport.hpp"
 
 using namespace IKan;
@@ -17,8 +18,10 @@ namespace Kreator
   class RendererLayer : public Layer
   {
   public:
-    /// This Constructor instantiate the Renderer Layer
-    RendererLayer();
+    /// This is Renderer Layer's Default Constructor
+    /// - Parameters:
+    ///   - directories: client directories
+    RendererLayer(const KreatorDirectories& directories);
     /// This Constructor destroys the Renderer Layer
     ~RendererLayer();
     
@@ -60,6 +63,9 @@ namespace Kreator
     void UI_StatisticsPanel();
 
     // Memeber variables ----------------------------------------------------------------------------------------------
+    // Application data ----------------------------------
+    KreatorDirectories m_directories;
+    
     // Viewport Data -------------------------------------
     Viewport m_primaryViewport, m_secondaryViewport;
     SceneRenderer m_viewportRenderer, m_miniViewportRenderer, m_secondaryViewportRenderer;

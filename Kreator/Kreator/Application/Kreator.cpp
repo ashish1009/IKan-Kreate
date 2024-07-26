@@ -13,8 +13,8 @@ namespace Kreator
   /// IKan Engine Version
   static const std::string KreatorVersion = "2.1";
   
-  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec)
-  : Application(appSpec)
+  KreatorApp::KreatorApp(const ApplicationSpecification& appSpec, const KreatorDirectories& kreatorDirectories)
+  : Application(appSpec), m_kreatorDirectories(kreatorDirectories)
   {
     IK_PROFILE();
     IK_LOG_INFO("KreatorApp", "Creating 'Kreator' Application. Version : {0}", KreatorVersion);
@@ -25,13 +25,13 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_WARN("KreatorApp", "Destroying 'Kreator' Application");
   }
-  
+
   void KreatorApp::OnInit()
   {
     IK_PROFILE();
 
     // Creating Renderer layer and push in application stack
-    m_rendererLayer = CreateScope<RendererLayer>();
+    m_rendererLayer = CreateScope<RendererLayer>(m_kreatorDirectories);
     PushLayer(m_rendererLayer.get());
   }
   
@@ -84,5 +84,12 @@ Scope<Application> CreateApplication([[maybe_unused]] int argc, [[maybe_unused]]
   // Ini file
   applicationSpec.iniFilePath = "../../../Kreator/Kreator.ini";
 
-  return Application::CreateApplication<Kreator::KreatorApp>(applicationSpec);
+  // Editor Data --------------------------------------------------------------------------
+  // TODO: Kreator: Extract from arguments
+  Kreator::KreatorDirectories kreatorDirectories;
+  kreatorDirectories.systemUserPath = "/Users/ashish./iKan_storage";
+  kreatorDirectories.kreatorPath = "/Users/ashish./iKan_storage/Github/Product/IKan-Kreate";
+  kreatorDirectories.clientResourcePath = "/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/Kreator/Resources";
+
+  return Application::CreateApplication<Kreator::KreatorApp>(applicationSpec, kreatorDirectories);
 }
