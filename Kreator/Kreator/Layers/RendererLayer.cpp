@@ -19,6 +19,8 @@ if (!Project::GetActive()) return
 
   namespace KreatorUtils
   {
+#define ScopedRounding(value) UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, value);
+    
     /// This function replace the project name
     /// - Parameters:
     ///   - str: Project file content
@@ -358,7 +360,7 @@ if (!Project::GetActive()) return
         
         // Show again check box
         {
-          UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, 5);
+          ScopedRounding(5);
           UI::Separator();
           UI::ShiftCursorY(10);
           if (ImGui::Checkbox("##showAgain", &m_userPreferences->showWelcomeScreen))
