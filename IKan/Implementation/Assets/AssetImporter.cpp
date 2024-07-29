@@ -12,7 +12,7 @@ namespace IKan
   void AssetImporter::Initialize()
   {
     IK_PROFILE();
-    IK_LOG_INFO(LogModule::Asset, "Initializing Asset Importer");
+    IK_LOG_TRACE(LogModule::Asset, "Initializing Asset Importer");
     s_serializers.clear();
     s_serializers[AssetType::Image] = CreateScope<ImageSerializer>();
     s_serializers[AssetType::Font] = CreateScope<FontSerializer>();
@@ -23,7 +23,7 @@ namespace IKan
   void AssetImporter::Shutdown()
   {
     IK_PROFILE();
-    IK_LOG_INFO(LogModule::Asset, "Initializing Asset Importer");
+    IK_LOG_TRACE(LogModule::Asset, "Initializing Asset Importer");
     s_serializers.clear();
   }
 } // namespace IKan

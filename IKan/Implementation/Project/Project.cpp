@@ -6,6 +6,7 @@
 //
 
 #include "Project.hpp"
+#include "Assets/AssetManager.hpp"
 
 namespace IKan
 {
@@ -25,13 +26,30 @@ namespace IKan
     IK_PROFILE();
     IK_ASSERT(project, "Null Project !!!");
 
+    // Shutdown if already a project is set
+    if (s_activeProject)
+    {
+      // Shutdown all asset
+      AssetManager::Shutdown();
+    }
+
+    IK_LOG_INFO(LogModule::Project, "Setting the project '{0}' as active", project->GetConfig().name);
     s_activeProject = project;
-    IK_LOG_INFO(LogModule::Project, "Setting the project '{0}' as active", s_activeProject->GetConfig().name);
+
+    AssetManager::Initialize();
   }
   
   void Project::CloseActive()
   {
     IK_PROFILE();
+    
+    // Shutdown if already a project is set
+    if (s_activeProject)
+    {
+      // Shutdown all asset
+      AssetManager::Shutdown();
+    }
+
     s_activeProject = nullptr;
   }
 
