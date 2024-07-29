@@ -84,4 +84,5 @@
 
 #include <Project/ProjectConfig.hpp>
 #include <Project/Project.hpp>
+#include <Project/ProjectSerializer.hpp>
 

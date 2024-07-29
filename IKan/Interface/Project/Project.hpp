@@ -17,6 +17,9 @@ namespace IKan
   class Project
   {
   public:
+    /// Default constructor
+    Project() = default;
+    
     // Setter APIs ---------------------------------------------------------------------------------------------------
     /// This function update the project config
     /// - Parameter config: project enw config
@@ -44,5 +47,6 @@ namespace IKan
   private:
     inline static Ref<Project> s_activeProject {nullptr};
     ProjectConfig m_config;
+    friend class ProjectSerializer;
   };
 } // namespace IKan
