@@ -84,6 +84,91 @@ namespace Kreator::UI
   /// This function generate Unique id for labeled widget
   /// - Parameter label: Widget lable
   const char* GenerateLabelID(const std::string_view& label);
+  /// This function checkes is imgui item hovered
+  bool IsItemHovered();
+  /// This function checles is imgui item disabled
+  bool IsItemDisabled();
+  
+  /// This function show the tooltip messge
+  /// - Parameter text: message
+  void SetTooltip(const std::string_view& text);
+  
+  // Colors ----------------------------------------------------------------------------------------------------------
+  /// This function add the color to some value
+  /// - Parameters:
+  ///   - color: color
+  ///   - value: value
+  ImU32 ColorWithValue(const ImColor& color, float value);
+  /// This function adds the color with saturation
+  /// - Parameters:
+  ///   - color: color
+  ///   - saturation: saturation
+  ImU32 ColorWithSaturation(const ImColor& color, float saturation);
+  /// This function adds the color with Hue
+  /// - Parameters:
+  ///   - color: color
+  ///   - hue: hue
+  ImU32 ColorWithHue(const ImColor& color, float hue);
+  /// This finction multiply the color with some value
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedValue(const ImColor& color, float multiplier);
+  /// This finction multiply the color with some saturation
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedSaturation(const ImColor& color, float multiplier);
+  /// This finction multiply the color with some hue
+  /// - Parameters:
+  ///   - color: color
+  ///   - multiplier: multiplier
+  ImU32 ColorWithMultipliedHue(const ImColor& color, float multiplier);
+  
+  // Buttons ---------------------------------------------------------------------------------------------------------
+  /// This function draws the image button
+  /// - Parameters:
+  ///   - imageNormal: Normal Image icon
+  ///   - imageHovered: Hovered Image icon
+  ///   - imagePressed: Pressed Image Icon
+  ///   - tintNormal: tint normal color
+  ///   - tintHovered: tint hovered color
+  ///   - tintPressed: tint pressed color
+  ///   - rectMin: min rectangle position
+  ///   - rectMax: max rectangle position
+  /// - Note: Do not draw actual presaable button
+  void DrawButtonImage(const Ref<IKan::Image>& imageNormal, const Ref<IKan::Image>& imageHovered,
+                       const Ref<IKan::Image>& imagePressed, const ImVec2& rectMin, const ImVec2& rectMax,
+                       const ImU32& tintNormal = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 0.8f),
+                       const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.2f),
+                       const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));
+
+  /// This function draws the image button
+  /// - Parameters:
+  ///   - image: Image
+  ///   - tintNormal: tint normal color
+  ///   - tintHovered: tint hovered color
+  ///   - tintPressed: tint pressed color
+  ///   - rectangle: image rectangle
+  /// - Note: Do not draw actual presaable button
+  void DrawButtonImage(const Ref<IKan::Image>& image, const ImRect& rectangle,
+                       const ImU32& tintNormal = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 0.8f),
+                       const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.5f),
+                       const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));
+  /// This function Draws the button with image and title
+  /// - Parameters:
+  ///   - buttonHelper: button helper
+  ///   - icon: Image
+  ///   - iconSize: Button size
+  ///   - offset: offset of button
+  ///   - tintNormal: tint normal
+  ///   - tintHovered: tint hovered
+  ///   - tintPressed: tint pressed
+  bool DrawImageTextButton(const std::string& buttonHelper, Ref<IKan::Image> icon,
+                           const glm::vec2& iconSize, const glm::vec2& offset = {0.0f, 0.0f},
+                           const ImU32& tintNormal = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 0.8f),
+                           const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.5f),
+                           const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));
 
   // Texts -----------------------------------------------------------------------------------------------------------
   /// This function renders the text

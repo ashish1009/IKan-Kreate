@@ -122,4 +122,4 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 ![](/Kreator/Outputs/Kreator.png)
 
 - Welcome Screen
-![](/Kreator/Outputs/KreatoWelcomeScreen.png)
+![](/Kreator/Outputs/WelcomeScreen.png)

@@ -108,7 +108,141 @@ namespace Kreator::UI
     *fmt::format_to_n(s_labeledBufferID, std::size(s_labeledBufferID), "{}##{}", label, s_counter++).out = 0;
     return s_labeledBufferID;
   }
+  
+  bool IsItemHovered()
+  {
+    return ImGui::IsItemHovered();
+  }
+  bool IsItemDisabled()
+  {
+    return ImGui::GetItemFlags() & ImGuiItemFlags_Disabled;
+  }
+  void SetTooltip(const std::string_view& text)
+  {
+    if (IsItemHovered())
+    {
+      UI::ScopedColor textCol(ImGuiCol_Text, UI::Color::TextBrighter);
+      ImGui::SetTooltip(text.data());
+    }
+  }
+  
+  // Colors ----------------------------------------------------------------------------------------------------------
+  ImU32 ColorWithValue(const ImColor& color, float value)
+  {
+    const ImVec4& colRow = color.Value;
+    float hue, sat, val;
+    ImGui::ColorConvertRGBtoHSV(colRow.x, colRow.y, colRow.z, hue, sat, val);
+    return ImColor::HSV(hue, sat, std::min(value, 1.0f));
+  }
+  
+  ImU32 ColorWithSaturation(const ImColor& color, float saturation)
+  {
+    const ImVec4& colRow = color.Value;
+    float hue, sat, val;
+    ImGui::ColorConvertRGBtoHSV(colRow.x, colRow.y, colRow.z, hue, sat, val);
+    return ImColor::HSV(hue, std::min(saturation, 1.0f), val);
+  }
+  
+  ImU32 ColorWithHue(const ImColor& color, float hue)
+  {
+    const ImVec4& colRow = color.Value;
+    float h, s, v;
+    ImGui::ColorConvertRGBtoHSV(colRow.x, colRow.y, colRow.z, h, s, v);
+    return ImColor::HSV(std::min(hue, 1.0f), s, v);
+  }
+  
+  ImU32 ColorWithMultipliedValue(const ImColor& color, float multiplier)
+  {
+    const ImVec4& colRow = color.Value;
+    float hue, sat, val;
+    ImGui::ColorConvertRGBtoHSV(colRow.x, colRow.y, colRow.z, hue, sat, val);
+    return ImColor::HSV(hue, sat, std::min(val * multiplier, 1.0f));
+  }
+  
+  ImU32 ColorWithMultipliedSaturation(const ImColor& color, float multiplier)
+  {
+    const ImVec4& colRow = color.Value;
+    float hue, sat, val;
+    ImGui::ColorConvertRGBtoHSV(colRow.x, colRow.y, colRow.z, hue, sat, val);
+    return ImColor::HSV(hue, std::min(sat * multiplier, 1.0f), val);
+  }
+  
+  ImU32 ColorWithMultipliedHue(const ImColor& color, float multiplier)
+  {
+    const ImVec4& colRow = color.Value;
+    float hue, sat, val;
+    ImGui::ColorConvertRGBtoHSV(colRow.x, colRow.y, colRow.z, hue, sat, val);
+    return ImColor::HSV(std::min(hue * multiplier, 1.0f), sat, val);
+  }
 
+  // Buttons ---------------------------------------------------------------------------------------------------------
+  void DrawButtonImage(const Ref<IKan::Image>& imageNormal, const Ref<IKan::Image>& imageHovered,
+                       const Ref<IKan::Image>& imagePressed, const ImVec2& rectMin, const ImVec2& rectMax,
+                       const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed)
+  {
+    auto* drawList = ImGui::GetWindowDrawList();
+    if (ImGui::IsItemActive())
+    {
+      drawList->AddImage(GetTextureID(imagePressed), rectMin, rectMax, ImVec2(0, 1), ImVec2(1, 0), tintPressed);
+    }
+    else if (ImGui::IsItemHovered())
+    {
+      drawList->AddImage(GetTextureID(imageHovered), rectMin, rectMax, ImVec2(0, 1), ImVec2(1, 0), tintHovered);
+    }
+    else
+    {
+      drawList->AddImage(GetTextureID(imageNormal), rectMin, rectMax, ImVec2(0, 1), ImVec2(1, 0), tintNormal);
+    }
+  }
+
+  void DrawButtonImage(const Ref<IKan::Image>& image, const ImRect& rectangle, const ImU32& tintNormal, const ImU32& tintHovered,
+                       const ImU32& tintPressed)
+  {
+    DrawButtonImage(image, image, image, rectangle.Min, rectangle.Max, tintNormal, tintHovered, tintPressed);
+  }
+
+  bool DrawImageTextButton(const std::string& buttonHelper, Ref<IKan::Image> icon, const glm::vec2& iconSize, const glm::vec2& offset,
+                           const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed)
+  {
+    auto textSize = ImGui::CalcTextSize(buttonHelper.c_str()).x;;
+    const float buttonWidth = textSize + iconSize.x + 80; // Some random number for margin
+    
+    UI::ShiftCursorX(offset.x);
+    UI::ShiftCursorY(offset.y);
+    if (ImGui::InvisibleButton(GenerateLabelID(buttonHelper), ImVec2(buttonWidth, iconSize.y), ImGuiButtonFlags_AllowItemOverlap))
+    {
+      return true;
+    }
+    
+    // Modify the icon size if hovered
+    glm::vec2 iconSizeModified = iconSize;
+    glm::vec2 hoveredLargeIconOffset = {0.0f, 0.0f};
+    if (IsItemHovered())
+    {
+      iconSizeModified.x += 10.0f;
+      iconSizeModified.y += 10.0f;
+      
+      hoveredLargeIconOffset = {5.0f, 5.0f};
+    }
+    
+    const ImVec2 logoRectStart =
+    {
+      ImGui::GetItemRectMin().x - hoveredLargeIconOffset.x,
+      ImGui::GetItemRectMin().y - hoveredLargeIconOffset.y
+    };
+    const ImVec2 logoRectMax =
+    {
+      logoRectStart.x + iconSizeModified.x,
+      logoRectStart.y + iconSizeModified.y
+    };
+    
+    UI::DrawButtonImage(icon, ImRect{logoRectStart, logoRectMax}, tintNormal, tintHovered, tintPressed);
+    
+    ImGui::SameLine(offset.x + iconSizeModified.x + 10);
+    UI::Text(UI::FontType::SemiHeader, buttonHelper, UI::AlignX::Left, {0.0f, iconSize.x / 4}, UI::Color::TextBrighter);
+    return false;
+  };
+  
   // Texts -----------------------------------------------------------------------------------------------------------
   void Text(FontType type, std::string_view string, AlignX xAlign, const glm::vec2& offset, const ImU32& color)
   {

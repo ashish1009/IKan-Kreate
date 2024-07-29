@@ -54,7 +54,11 @@ if (!Project::GetActive()) return
     IK_LOG_INFO("RendererLayer", "Creating '{0} Layer' instance", GetName());
     
     // Load Textures -------------------------------------------------------------------------------------------------
+    m_applicationIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/IKan.png"));
     m_welcomeIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/WelcomeIKan.png"));
+    
+    m_newProjectIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
+    m_folderIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -334,6 +338,20 @@ if (!Project::GetActive()) return
           UI::Text(UI::FontType::Italic, versionText.c_str(), UI::AlignX::Center);
 
           ImGui::Separator();
+        }
+        
+        // Buttons
+        {
+          static const glm::vec2 offset = {50.0f, 0.0f};
+          static const glm::vec2 buttonSize = {40.0f, 40.0f};
+          
+          if (UI::DrawImageTextButton("Create New Kreator Project", m_newProjectIcon, buttonSize, offset))
+          {
+          }
+          
+          if (UI::DrawImageTextButton("Open an exisiting Kreator Project", m_folderIcon, buttonSize, offset))
+          {
+          }
         }
       });
       

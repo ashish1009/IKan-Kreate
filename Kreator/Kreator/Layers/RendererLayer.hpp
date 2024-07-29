@@ -84,6 +84,8 @@ namespace Kreator
 
     // Applicaiton Textures ------------------------------
     Ref<Image> m_welcomeIcon;
+    Ref<Image> m_applicationIcon;
+    Ref<Image> m_newProjectIcon, m_folderIcon;
 
     // Application data ----------------------------------
     KreatorDirectories m_directories;
