@@ -68,11 +68,6 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 ## Road Map
 - Editor UI
   - Title bar
-  - Editor panels
-    - Content browser panel
-    - Asset panel
-    - Settings
-    - Log panel
 - ECS
   - Scene
   - Component
