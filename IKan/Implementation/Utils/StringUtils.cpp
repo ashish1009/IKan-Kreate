@@ -168,4 +168,36 @@ namespace IKan::Utils::String
     // return the substring from start to last ";"
     return std::string(str.data(), length);
   }
+  
+  std::string ToLower(const std::string& string)
+  {
+    std::string result;
+    for (const auto& character : string)
+    {
+      result += std::tolower(character);
+    }
+    return result;
+  }
+  
+  std::string ToLowerCopy(const std::string_view& string)
+  {
+    std::string result(string);
+    return ToLower(result);
+  }
+  
+  std::string ToUpper(const std::string_view& string)
+  {
+    std::string result;
+    for (const auto& character : string)
+    {
+      result += std::toupper(character);
+    }
+    
+    return result;
+  }
+  std::string RemoveExtension(const std::string& filePath)
+  {
+    return filePath.substr(0, filePath.find_last_of('.'));
+  }
+
 } // namespace IKan::Utils::String

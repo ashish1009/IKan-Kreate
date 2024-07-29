@@ -54,4 +54,18 @@ namespace IKan::Utils::String
   ///   - outPosition: string pointer of the shader code, that will move to some offset offset is the ";" of the strcut
   std::string GetStatement(std::string_view str, const char** outPosition);
 
+  /// This function returns the string as lower stirng
+  /// - Parameter string: String to be lower
+  std::string ToLower(const std::string& string);
+  /// This function returns the copy string as lower
+  /// - Parameter string: String to be lower
+  std::string ToLowerCopy(const std::string_view& string);
+  /// This function returns the string as upper stirng
+  /// - Parameter string: String to be upper
+  std::string ToUpper(const std::string_view& string);
+  
+  /// This function Removes the extention from file path
+  /// - Parameter filePath: File path from which extension to be removed
+  std::string RemoveExtension(const std::string& filePath);
+
 } // namespace IKan::Utils::String

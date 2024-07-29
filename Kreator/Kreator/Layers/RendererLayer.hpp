@@ -51,6 +51,16 @@ namespace Kreator
     // Memeber functions ----------------------------------------------------------------------------------------------
     /// This function updates the viewports of all kreator data
     void UpdateViewportSize();
+    
+    // Project APIs --------------------------------------
+    /// This function creates a new project for kreator
+    /// - Parameter newProjectFilePath: New project file path
+    void CreateProject(const std::filesystem::path& newProjectFilePath);
+    /// This function opens the Project from file path
+    /// - Parameter projectFilePath: project file path
+    void OpenProject(const std::filesystem::path& projectFilePath);
+    /// This function closes the current active project
+    void CloseProject();
 
     // UI APIs -------------------------------------------
     /// This function starts main ImGui Window with Docking
