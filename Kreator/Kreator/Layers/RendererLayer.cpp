@@ -60,13 +60,41 @@ if (!Project::GetActive()) return
     IK_PROFILE();
     IK_LOG_TRACE("RendererLayer", "Attaching '{0} Layer' to application", GetName());
     
-    // Create the Editor logger
-    // Profiler logger
+    // Create the Editor logger -------------------------------------------------------------------------------------
     Logger::Create(LoggerSpecification::Create().
                    Type(LogType::Editor).
                    Level(LogLevel::Trace).
                    Name("PROFILER").
                    OverrideSink(CreateRef<EditorConsoleSink>(1)));
+    
+    // Open or Create Project ---------------------------------------------------------------------------------------
+    auto windowResizeToUnit = [this]()
+    {
+      if (!Application::Get().GetWindow()->IsFullscreen())
+      {
+        m_windowOriginalWidth = Application::Get().GetWindow()->GetWidth();
+        m_windowOriginalHeight = Application::Get().GetWindow()->GetHeight();
+        Window* window = Application::Get().GetWindow();
+        window->SetSize(1, 1);
+      }
+    };
+    if (std::filesystem::exists(m_userPreferences->startupProject))
+    {
+      if (m_userPreferences->showWelcomeScreen)
+      {
+        windowResizeToUnit();
+        m_welcomePopup.Set("Welcome Screen", true /* open flag */, 900.0f, 410.0f, true /* center */);
+      }
+      else
+      {
+        IK_ASSERT(false, "Open Project. TODO: Implement Later ...");
+      }
+    }
+    else
+    {
+      windowResizeToUnit();
+      m_welcomePopup.Set("Welcome Screen", true /* open flag */, 900.0f, 410.0f, true /* center */);
+    }
   }
   
   void RendererLayer::OnDetach()
@@ -97,6 +125,8 @@ if (!Project::GetActive()) return
   
   void RendererLayer::OnImGuiRender()
   {
+    UI_WelcomePopup();
+    
     RETRUN_IF_NO_PROJECT();
     
     // Docked Windows-----------

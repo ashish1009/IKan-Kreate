@@ -22,6 +22,29 @@ namespace Kreator::UI
     ///   - center: is popup at center
     Popup(std::string_view title, bool openFlag = false, float width = 900 , float height = 450, bool center = true);
     
+    /// This funciton changes the popup flag
+    /// - Parameter openFlag: popup flag
+    void SetFlag(bool openFlag);
+    
+    /// This function changes the size of popupt
+    /// - Parameters:
+    ///   - width: new width of popup
+    ///   - height: new height of popup
+    void SetSize(float width, float height);
+    
+    /// This function sets the popup at center
+    /// - Parameter center: center flag
+    void SetCenter(bool center);
+    
+    /// This function sets the parameters of popup
+    /// - Parameters:
+    ///   - title: Title of popup
+    ///   - openFlag: open flag
+    ///   - width: new width of popup
+    ///   - height: new height of popup
+    ///   - center: center flag
+    void Set(std::string_view title, bool openFlag, float width, float height, bool center);
+    
     /// This function shows the popup inside imGui loop
     /// - Parameters:
     ///   - popupFlags: popup flags

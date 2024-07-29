@@ -85,6 +85,7 @@ namespace Kreator
     // Application data ----------------------------------
     KreatorDirectories m_directories;
     Ref<UserPreferences> m_userPreferences;
+    float m_windowOriginalWidth {0}, m_windowOriginalHeight {0};
 
     // Viewport Data -------------------------------------
     Viewport m_primaryViewport, m_secondaryViewport;
