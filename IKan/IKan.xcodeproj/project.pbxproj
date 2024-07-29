@@ -1308,6 +1308,7 @@
 					"${PROJECT_DIR}/Vendors/Assimp/include",
 					"${PROJECT_DIR}/Vendors/StbImage/StbImage",
 					"${PROJECT_DIR}/Vendors/YAML/YAML/include",
+					"${PROJECT_DIR}/Vendors/EnTT",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
@@ -1385,6 +1386,7 @@
 					"${PROJECT_DIR}/Vendors/Assimp/include",
 					"${PROJECT_DIR}/Vendors/StbImage/StbImage",
 					"${PROJECT_DIR}/Vendors/YAML/YAML/include",
+					"${PROJECT_DIR}/Vendors/EnTT",
 				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(PROJECT_DIR)/Vendors/Freetype/lib",
