@@ -7,12 +7,14 @@
 
 #pragma once
 
+#include "UI/ImGuiTheme.hpp"
+
 using namespace IKan;
 
 namespace Kreator::UI
 {
   /// This enum stores the ImGui item position in X Axis
-  enum class AllignX : uint8_t
+  enum class AlignX : uint8_t
   {
     Left, Right, Center
   };
@@ -83,6 +85,15 @@ namespace Kreator::UI
   /// - Parameter label: Widget lable
   const char* GenerateLabelID(const std::string_view& label);
 
+  // Texts -----------------------------------------------------------------------------------------------------------
+  /// This function renders the text
+  /// - Parameters:
+  ///   - type: Type of font
+  ///   - string: string to be printed
+  ///   - xAlign: alignment in x axis
+  ///   - offset: offset from current cursor position
+  void Text(FontType type, std::string_view string, AlignX xAlign, const glm::vec2& offset = {0, 0}, const ImU32& color = UI::Color::Text);
+
   // Image/ Texture ---------------------------------------------------------------------------------------------------
   /// This function renders Texture in current ImGui window
   /// - Parameters:
@@ -98,8 +109,8 @@ namespace Kreator::UI
   /// - Parameters:
   ///   - image: Image reference pointer
   ///   - logoSize: logo size
-  ///   - xAllign: poistion of logo based on cursor pointer  in x Axis
+  ///   - xAlign: poistion of logo based on cursor pointer in x Axis
   ///   - offset: offset from current cursor position
   /// - Note: Doesnt move the cursor
-  void Image(Ref<IKan::Image> image, const glm::vec2& logoSize, AllignX xAllign, const glm::vec2& offset = {0, 0});
+  void Image(Ref<IKan::Image> image, const glm::vec2& logoSize, AlignX xAlign, const glm::vec2& offset = {0, 0});
 } // namespace Kreator::UI

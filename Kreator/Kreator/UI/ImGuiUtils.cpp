@@ -109,34 +109,56 @@ namespace Kreator::UI
     return s_labeledBufferID;
   }
 
+  // Texts -----------------------------------------------------------------------------------------------------------
+  void Text(FontType type, std::string_view string, AlignX xAlign, const glm::vec2& offset, const ImU32& color)
+  {
+    UI::ScopedFont header(UI::Font::Get(type));
+    UI::ScopedColor muted(ImGuiCol_Text, color);
+    
+    float xOffset = offset.x;
+    switch (xAlign)
+    {
+      case AlignX::Center:
+        xOffset += ImGui::GetColumnWidth() / 2 - ImGui::CalcTextSize(string.data()).x / 2;
+        break;
+      case AlignX::Right:
+        xOffset += ImGui::GetColumnWidth() - ImGui::CalcTextSize(string.data()).x ;
+        break;
+      case AlignX::Left:
+      default:
+        break;
+    }
+    
+    UI::SetCursor({ImGui::GetCursorPosX() + xOffset, ImGui::GetCursorPosY() + offset.y});
+    ImGui::Text("%s", string.data());
+  }
+
   // Image / Texture --------------------------------------------------------------------------------------------------
   void Image(const Ref<IKan::Texture>& texture, const ImVec2& size, const ImVec4& tintCol, const ImVec4& borderCol, const ImVec2& uv0, const ImVec2& uv1)
   {
     ImGui::Image(INT2VOIDP(texture->GetRendererID()), size, uv0, uv1, tintCol, borderCol);
   }
-  void Image(Ref<IKan::Image> image, const glm::vec2& logoSize, AllignX xAllign, const glm::vec2& offset)
+  void Image(Ref<IKan::Image> image, const glm::vec2& logoSize, AlignX xAlign, const glm::vec2& offset)
   {
     ImVec2 logoRectStart { ImGui::GetItemRectMin().x, ImGui::GetItemRectMin().y };
     
+    // Shift the cursor
+    logoRectStart.x += offset.x;
+    logoRectStart.y += offset.y;
+
     // Update the rectangle start based on the x Position
-    switch (xAllign)
+    switch (xAlign)
     {
-      case AllignX::Center:
-        logoRectStart.x += ((ImGui::GetColumnWidth() / 2 - logoSize.x / 2) + offset.x);
+      case AlignX::Center:
+        logoRectStart.x += (ImGui::GetColumnWidth() / 2 - logoSize.x / 2);
         break;
-      case AllignX::Right:
-        logoRectStart.x += ((ImGui::GetColumnWidth() - logoSize.x) + offset.x);
+      case AlignX::Right:
+        logoRectStart.x += (ImGui::GetColumnWidth() - logoSize.x);
         break;
-      case AllignX::Left:
-        logoRectStart.x += offset.x;
-        break;
+      case AlignX::Left:
       default:
-        IK_ASSERT(false, "Inlvalid allignment");
         break;
     }
-    
-    // Shift y offset
-    logoRectStart.y += offset.y;
     
     const ImVec2 logoRectMax
     {

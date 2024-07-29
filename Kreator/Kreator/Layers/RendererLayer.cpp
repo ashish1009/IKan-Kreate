@@ -7,6 +7,8 @@
 
 #include "RendererLayer.hpp"
 
+#include "Application/Kreator.hpp"
+
 namespace Kreator
 {
 #define RETRUN_IF_NO_PROJECT() \
@@ -74,6 +76,21 @@ if (!Project::GetActive()) return
                    OverrideSink(CreateRef<EditorConsoleSink>(1)));
     
     // Decorate the Application ---------------------------------------------------------------------------------------
+    // Note: This API should be called before any other ImGui Decoration API
+    Kreator::UI::Font::Load({
+      // Normal
+      {UI::FontType::Regular,    {KreatorResourcePath("Fonts/Opensans/Regular.ttf"), 14}},
+      {UI::FontType::Bold,       {KreatorResourcePath("Fonts/Opensans/ExtraBold.ttf"), 14}},
+      {UI::FontType::Italic,     {KreatorResourcePath("Fonts/Opensans/Italic.ttf"), 14}},
+      
+      // Fixed Width
+      {UI::FontType::FixedWidth, {KreatorResourcePath("Fonts/HfMonorita/Regular.ttf"), 10}},
+      
+      // Header
+      {UI::FontType::HugeHeader, {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 40}},
+      {UI::FontType::SemiHeader, {KreatorResourcePath("Fonts/Opensans/Bold.ttf"), 18}}
+    });
+
     // Set the Imgui theme color
     Kreator::UI::Color::SetTheme(m_userPreferences->theme);
 
@@ -307,7 +324,15 @@ if (!Project::GetActive()) return
         {
           // Icon
           static constexpr glm::vec2 logoSize {200, 200};
-          UI::Image(m_welcomeIcon, logoSize, UI::AllignX::Center);
+          UI::Image(m_welcomeIcon, logoSize, UI::AlignX::Center);
+          
+          // Welcome Header
+          UI::Text(UI::FontType::HugeHeader, "Welcome to Kreator", UI::AlignX::Center, {0.0f, logoSize.y});
+
+          // Version
+          static std::string versionText = "Version v" + Application::GetVersion() + "." + KreatorApp::GetVersion();
+          UI::Text(UI::FontType::Italic, versionText.c_str(), UI::AlignX::Center);
+
           ImGui::Separator();
         }
       });

@@ -41,6 +41,21 @@ namespace Kreator::UI
     DELETE_COPY_MOVE_CONSTRUCTORS(ScopedColor);
   };
   
+  /// This class creates scoped Font for ImGui
+  class ScopedFont
+  {
+  public:
+    ScopedFont(ImFont* font)
+    {
+      ImGui::PushFont(font);
+    }
+    ~ScopedFont()
+    {
+      ImGui::PopFont();
+    }
+    DELETE_COPY_MOVE_CONSTRUCTORS(ScopedFont);
+  };
+  
   /// This class creates scoped ID for ImGui
   class ScopedID
   {
