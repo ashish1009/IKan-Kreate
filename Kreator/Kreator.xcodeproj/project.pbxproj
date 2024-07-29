@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		B22AB2B52C5781FC007453B7 /* ImGuiPopup.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2B32C5781FC007453B7 /* ImGuiPopup.cpp */; };
 		B22AB2B82C578649007453B7 /* UserPreference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2B62C578649007453B7 /* UserPreference.cpp */; };
+		B22AB2BB2C579329007453B7 /* ImGuiTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2B92C579329007453B7 /* ImGuiTheme.cpp */; };
 		B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292602C380F250093F4DA /* EntryPoint.cpp */; };
 		B2D292892C381CBA0093F4DA /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D292882C381CBA0093F4DA /* libIKan.a */; };
 		B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292B72C3943F00093F4DA /* Kreator.cpp */; };
@@ -46,6 +47,8 @@
 		B22AB2B42C5781FC007453B7 /* ImGuiPopup.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiPopup.hpp; sourceTree = "<group>"; };
 		B22AB2B62C578649007453B7 /* UserPreference.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = UserPreference.cpp; sourceTree = "<group>"; };
 		B22AB2B72C578649007453B7 /* UserPreference.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = UserPreference.hpp; sourceTree = "<group>"; };
+		B22AB2B92C579329007453B7 /* ImGuiTheme.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiTheme.cpp; sourceTree = "<group>"; };
+		B22AB2BA2C579329007453B7 /* ImGuiTheme.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiTheme.hpp; sourceTree = "<group>"; };
 		B2D292482C37EE5A0093F4DA /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D292562C37F4D20093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292602C380F250093F4DA /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
@@ -177,6 +180,8 @@
 				B2FDDA8E2C478BE50062C6E1 /* ImGuiUtils.hpp */,
 				B22AB2B32C5781FC007453B7 /* ImGuiPopup.cpp */,
 				B22AB2B42C5781FC007453B7 /* ImGuiPopup.hpp */,
+				B22AB2B92C579329007453B7 /* ImGuiTheme.cpp */,
+				B22AB2BA2C579329007453B7 /* ImGuiTheme.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -274,6 +279,7 @@
 				B22AB2B82C578649007453B7 /* UserPreference.cpp in Sources */,
 				B22AB2B52C5781FC007453B7 /* ImGuiPopup.cpp in Sources */,
 				B2FDDA8C2C4788B90062C6E1 /* Viewport.cpp in Sources */,
+				B22AB2BB2C579329007453B7 /* ImGuiTheme.cpp in Sources */,
 				B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */,
 				B2D2969D2C3C3D9F0093F4DA /* RendererLayer.cpp in Sources */,
 			);

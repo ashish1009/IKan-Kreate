@@ -67,6 +67,10 @@ if (!Project::GetActive()) return
                    Name("PROFILER").
                    OverrideSink(CreateRef<EditorConsoleSink>(1)));
     
+    // Decorate the Application ---------------------------------------------------------------------------------------
+    // Set the Imgui theme color
+    Kreator::UI::Color::SetTheme(m_userPreferences->theme);
+
     // Open or Create Project ---------------------------------------------------------------------------------------
     auto windowResizeToUnit = [this]()
     {
