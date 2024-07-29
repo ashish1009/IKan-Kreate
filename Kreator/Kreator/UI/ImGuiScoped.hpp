@@ -41,6 +41,42 @@ namespace Kreator::UI
     DELETE_COPY_MOVE_CONSTRUCTORS(ScopedColor);
   };
   
+  /// This class creates scoped color in stack for ImGui
+  class ScopedColorStack
+  {
+  public:
+    DELETE_COPY_MOVE_CONSTRUCTORS(ScopedColorStack);
+    template <typename ColorType, typename... OtherColors>
+    ScopedColorStack(ImGuiCol first_color_id, ColorType first_color, OtherColors&& ... otherColorPairs)
+    : m_count((sizeof... (otherColorPairs) / 2) + 1)
+    {
+      static_assert ((sizeof... (otherColorPairs) & 1u) == 0,
+                     "ScopedColorStack constructor expects a list of pairs of colour IDs and colours as its arguments");
+      PushColour(first_color_id, first_color, std::forward<OtherColors>(otherColorPairs)...);
+    }
+    ~ScopedColorStack()
+    {
+      ImGui::PopStyleColor(m_count);
+    }
+    
+  private:
+    int32_t m_count;
+    
+    template <typename ColorType, typename... OtherColors>
+    void PushColour(ImGuiCol color_id, ColorType color, OtherColors&& ... other_color_pairs)
+    {
+      if constexpr (sizeof... (other_color_pairs) == 0)
+      {
+        ImGui::PushStyleColor(color_id, color);
+      }
+      else
+      {
+        ImGui::PushStyleColor(color_id, color);
+        PushColour(std::forward<OtherColors>(other_color_pairs)...);
+      }
+    }
+  };
+  
   /// This class creates scoped Font for ImGui
   class ScopedFont
   {

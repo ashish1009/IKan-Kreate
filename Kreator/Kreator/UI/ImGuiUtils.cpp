@@ -14,6 +14,159 @@ namespace Kreator::UI
   static char s_bufferID[16] = "##";
   static char s_labeledBufferID[1024];
 
+  // Begin End Util API ---------------------------------------------------------------------------------------------
+  bool BeginMenuBar(const ImRect& barRectangle)
+  {
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    if (window->SkipItems)
+    {
+      return false;
+    }
+    
+    IM_ASSERT(!window->DC.MenuBarAppending);
+    ImGui::BeginGroup(); // Backup position on layer 0
+    ImGui::PushID("##menubar");
+    
+    const ImVec2 padding = window->WindowPadding;
+    
+    // We don't clip with current window clipping rectangle as it is already set to the area below.
+    // However we clip with window full rect. We remove 1 worth of rounding to Max.x to that text
+    // in long menus and small windows don't tend to display over the lower-right rounded area, which
+    // looks particularly glitchy.
+    ImRect barRect = UI::RectOffset(barRectangle, 0.0f, padding.y);
+    ImRect clipRect(IM_ROUND(ImMax(window->Pos.x, barRect.Min.x + window->WindowBorderSize + window->Pos.x - 10.0f)),
+                    IM_ROUND(barRect.Min.y + window->WindowBorderSize + window->Pos.y),
+                    IM_ROUND(ImMax(barRect.Min.x + window->Pos.x, barRect.Max.x - ImMax(window->WindowRounding, window->WindowBorderSize))),
+                    IM_ROUND(barRect.Max.y + window->Pos.y));
+    
+    clipRect.ClipWith(window->OuterRectClipped);
+    ImGui::PushClipRect(clipRect.Min, clipRect.Max, false);
+    
+    // We overwrite CursorMaxPos because BeginGroup sets it to CursorPos (essentially the Emit Item
+    // hack in EndMenuBar() would need something analogous here, maybe a BeginGroupEx() with flags).
+    window->DC.CursorPos = window->DC.CursorMaxPos = ImVec2(barRect.Min.x + window->Pos.x, barRect.Min.y + window->Pos.y);
+    window->DC.LayoutType = ImGuiLayoutType_Horizontal;
+    window->DC.NavLayerCurrent = ImGuiNavLayer_Menu;
+    window->DC.MenuBarAppending = true;
+    ImGui::AlignTextToFramePadding();
+    
+    return true;
+  }
+  
+  void EndMenuBar()
+  {
+    ImGuiWindow* window = ImGui::GetCurrentWindow();
+    RETURN_IF (window->SkipItems)
+    
+    ImGuiContext& g = *GImGui;
+    
+    // Nav: When a move request within one of our child menu failed, capture the request to
+    // navigate among our siblings.
+    if (ImGui::NavMoveRequestButNoResultYet() and
+        (g.NavMoveDir == ImGuiDir_Left or g.NavMoveDir == ImGuiDir_Right) and
+        (g.NavWindow->Flags & ImGuiWindowFlags_ChildMenu))
+    {
+      // Try to find out if the request is for one of our child menu
+      ImGuiWindow* navEarliestChild = g.NavWindow;
+      while (navEarliestChild->ParentWindow and (navEarliestChild->ParentWindow->Flags & ImGuiWindowFlags_ChildMenu))
+      {
+        navEarliestChild = navEarliestChild->ParentWindow;
+      }
+      
+      if (navEarliestChild->ParentWindow == window and
+          navEarliestChild->DC.ParentLayoutType == ImGuiLayoutType_Horizontal and
+          (g.NavMoveFlags & ImGuiNavMoveFlags_Forwarded) == 0)
+      {
+        // To do so we claim focus back, restore NavId and then process the movement request
+        // for yet another frame. This involve a one-frame delay which isn't very problematic
+        // in this situation. We could remove it by scoring in advance for multiple
+        // window (probably not worth bothering)
+        const ImGuiNavLayer layer = ImGuiNavLayer_Menu;
+        IM_ASSERT(window->DC.NavLayersActiveMaskNext & (1 << layer)); // Sanity check
+        
+        ImGui::FocusWindow(window);
+        ImGui::SetNavID(window->NavLastIds[layer], layer, 0, window->NavRectRel[layer]);
+        
+        g.NavDisableHighlight = true;
+        g.NavDisableMouseHover = g.NavMousePosDirty = true;
+        ImGui::NavMoveRequestForward(g.NavMoveDir, g.NavMoveClipDir, g.NavMoveFlags, g.NavMoveScrollFlags); // Repeat
+      }
+    }
+    
+    // Static Analysis false positive "warning C6011: Dereferencing NULL pointer 'window'"
+    // IM_ASSERT(window->Flags & ImGuiWindowFlags_MenuBar);
+    IM_MSVC_WARNING_SUPPRESS(6011);
+    
+    IM_ASSERT(window->DC.MenuBarAppending);
+    ImGui::PopClipRect();
+    ImGui::PopID();
+    
+    // Save horizontal position so next append can reuse it. This is kinda equivalent to a per-layer CursorPos.
+    window->DC.MenuBarOffset.x = window->DC.CursorPos.x - window->Pos.x;
+    g.GroupStack.back().EmitItem = false;
+    
+    ImGui::EndGroup(); // Restore position on layer 0
+    window->DC.LayoutType = ImGuiLayoutType_Vertical;
+    window->DC.NavLayerCurrent = ImGuiNavLayer_Main;
+    window->DC.MenuBarAppending = false;
+  }
+  void BeginDisabled(bool disabled)
+  {
+    if (disabled)
+      ImGui::BeginDisabled(true);
+  }
+  void EndDisabled()
+  {
+    if (GImGui->DisabledStackSize > 0)
+      ImGui::EndDisabled();
+  }
+  bool BeginPopup(const char* strID, ImGuiWindowFlags flags)
+  {
+    bool opened = false;
+    if (ImGui::BeginPopup(strID, flags))
+    {
+      opened = true;
+      // Fill background wiht nice gradient
+      const float padding = ImGui::GetStyle().WindowBorderSize;
+      const ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), -padding, -padding);
+      ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
+      
+      const ImColor col1 = ImGui::GetStyleColorVec4(ImGuiCol_PopupBg);// Colours::Theme::backgroundPopup;
+      const ImColor col2 = UI::ColorWithMultipliedValue(col1, 0.8f);
+      
+      ImGui::GetWindowDrawList()->AddRectFilledMultiColor(windowRect.Min, windowRect.Max, col1, col1, col2, col2);
+      ImGui::GetWindowDrawList()->AddRect(windowRect.Min, windowRect.Max, UI::ColorWithMultipliedValue(col1, 1.1f));
+      ImGui::PopClipRect();
+      
+      // Popped in EndPopup()
+      ImGui::PushStyleColor(ImGuiCol_HeaderHovered, IM_COL32(0, 0, 0, 80));
+      ImGui::PushStyleVar(ImGuiStyleVar_WindowPadding, ImVec2(1.0f, 1.0f));
+    }
+    
+    return opened;
+  }
+  
+  void EndPopup()
+  {
+    ImGui::PopStyleVar(); // WindowPadding;
+    ImGui::PopStyleColor(); // HeaderHovered;
+    ImGui::EndPopup();
+  }
+  bool BeginTreeNode(const char* name, bool defaultOpen)
+  {
+    ImGuiTreeNodeFlags treeNodeFlags = ImGuiTreeNodeFlags_Framed | ImGuiTreeNodeFlags_SpanAvailWidth | ImGuiTreeNodeFlags_FramePadding;
+    if (defaultOpen)
+    {
+      treeNodeFlags |= ImGuiTreeNodeFlags_DefaultOpen;
+    }
+    return ImGui::TreeNodeEx(name, treeNodeFlags);
+  }
+  
+  void EndTreeNode()
+  {
+    ImGui::TreePop();
+  }
+  
   // Cursor ----------------------------------------------------------------------------------------------------------
   void SetCursor(const ImVec2& pos)
   {

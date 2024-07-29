@@ -24,6 +24,27 @@ namespace Kreator::UI
   {
     Left, Right, Top, Bottom
   };
+  
+  
+  // Begin End -------------------------------------------------------------------------------------------------------
+  /// This function draws MenuBar which allows you to specify its rectangle
+  bool BeginMenuBar(const ImRect& barRectangle);
+  /// This function ends MenuBar
+  void EndMenuBar();
+  /// This function begin disable
+  void BeginDisabled(bool disabled = true);
+  /// This function Ends the disable
+  void EndDisabled();
+  /// This function begins the popup
+  /// - Parameter strID: string ID
+  bool BeginPopup(const char* strID, ImGuiWindowFlags flags = 0);
+  /// This function ends the popup
+  void EndPopup();
+  /// This function begins the tree node
+  /// - Parameter name: ndoe name
+  bool BeginTreeNode(const char* name, bool defaultOpen = true);
+  /// This function ends the tree node
+  void EndTreeNode();
 
   // Cursor ----------------------------------------------------------------------------------------------------------
   /// This function shift the cursor position for x

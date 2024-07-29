@@ -73,6 +73,7 @@ namespace Kreator
     // Initialize the Kreator Modules -------------------------------------------------------------
     // Should get initialized after layer initialize
     FolderExplorer::Initialize();
+    UI::Widgets::Initialize();
   }
   
   void KreatorApp::OnShutdown()
@@ -82,7 +83,8 @@ namespace Kreator
 
     // Shutdown the Kreator Modules -------------------------------------------------------------
     FolderExplorer::Shutdown();
-
+    UI::Widgets::Shutdown();
+    
     // Removing Renderer layer from application stack and destroying its instance
     PopLayer(m_rendererLayer.get());
     m_rendererLayer.reset();

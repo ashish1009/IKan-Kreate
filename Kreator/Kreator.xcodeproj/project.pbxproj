@@ -14,6 +14,7 @@
 		B23F45772C57C603000A0944 /* ContentBrowserItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45752C57C603000A0944 /* ContentBrowserItem.cpp */; };
 		B23F457B2C57C617000A0944 /* ContentBrowserPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45792C57C617000A0944 /* ContentBrowserPanel.cpp */; };
 		B23F457E2C57C6B9000A0944 /* ApplicationSettings.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F457C2C57C6B9000A0944 /* ApplicationSettings.cpp */; };
+		B23F45812C57CAD4000A0944 /* ImGuiWidget.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F457F2C57CAD4000A0944 /* ImGuiWidget.cpp */; };
 		B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292602C380F250093F4DA /* EntryPoint.cpp */; };
 		B2D292892C381CBA0093F4DA /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D292882C381CBA0093F4DA /* libIKan.a */; };
 		B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292B72C3943F00093F4DA /* Kreator.cpp */; };
@@ -62,6 +63,8 @@
 		B23F457A2C57C617000A0944 /* ContentBrowserPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContentBrowserPanel.hpp; sourceTree = "<group>"; };
 		B23F457C2C57C6B9000A0944 /* ApplicationSettings.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ApplicationSettings.cpp; sourceTree = "<group>"; };
 		B23F457D2C57C6B9000A0944 /* ApplicationSettings.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ApplicationSettings.hpp; sourceTree = "<group>"; };
+		B23F457F2C57CAD4000A0944 /* ImGuiWidget.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuiWidget.cpp; sourceTree = "<group>"; };
+		B23F45802C57CAD4000A0944 /* ImGuiWidget.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiWidget.hpp; sourceTree = "<group>"; };
 		B2D292482C37EE5A0093F4DA /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D292562C37F4D20093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292602C380F250093F4DA /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
@@ -206,6 +209,8 @@
 				B22AB2B92C579329007453B7 /* ImGuiTheme.cpp */,
 				B22AB2BA2C579329007453B7 /* ImGuiTheme.hpp */,
 				B23F456E2C57C021000A0944 /* ImGuiInputBuffer.hpp */,
+				B23F457F2C57CAD4000A0944 /* ImGuiWidget.cpp */,
+				B23F45802C57CAD4000A0944 /* ImGuiWidget.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
@@ -304,6 +309,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23F45812C57CAD4000A0944 /* ImGuiWidget.cpp in Sources */,
 				B2FDDA8F2C478BE50062C6E1 /* ImGuiUtils.cpp in Sources */,
 				B23F457E2C57C6B9000A0944 /* ApplicationSettings.cpp in Sources */,
 				B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */,
@@ -479,6 +485,7 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				HEADER_SEARCH_PATHS = (
 					"${PROJECT_DIR}/Kreator",
+					"${PROJECT_DIR}/Vendors/Choc",
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
@@ -532,6 +539,7 @@
 				GCC_WARN_UNUSED_PARAMETER = YES;
 				HEADER_SEARCH_PATHS = (
 					"${PROJECT_DIR}/Kreator",
+					"${PROJECT_DIR}/Vendors/Choc",
 					"${PROJECT_DIR}/../IKan/Interface",
 					"${PROJECT_DIR}/../IKan/Vendors/SpdLog/include",
 					"${PROJECT_DIR}/../IKan/Vendors/Glm",
