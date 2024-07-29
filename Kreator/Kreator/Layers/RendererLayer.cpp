@@ -9,6 +9,9 @@
 
 namespace Kreator
 {
+#define RETRUN_IF_NO_PROJECT() \
+if (!Project::GetActive()) return
+
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -33,9 +36,9 @@ namespace Kreator
     return *s_instance;
   }
   
-  RendererLayer::RendererLayer(const KreatorDirectories& directories)
+  RendererLayer::RendererLayer(const KreatorDirectories& directories, Ref<UserPreferences> userPreferences)
   : Layer("Kreator Renderer"), m_directories(directories), m_viewportRenderer("Primary Viewport"), m_miniViewportRenderer("Mini Viewport"),
-  m_secondaryViewportRenderer("Secondary Viewport")
+  m_secondaryViewportRenderer("Secondary Viewport"), m_userPreferences(userPreferences)
   {
     IK_PROFILE();
     IK_ASSERT(!s_instance, "RendererLayer instance already created");
@@ -75,6 +78,7 @@ namespace Kreator
   void RendererLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
+    RETRUN_IF_NO_PROJECT();
     
     m_editorCamera.OnUpdate(ts);
     m_editorCamera.SetActive(true);
@@ -85,11 +89,14 @@ namespace Kreator
   
   void RendererLayer::OnEvent(Event& event)
   {
+    RETRUN_IF_NO_PROJECT();
     m_editorCamera.OnEvent(event);
   }
   
   void RendererLayer::OnImGuiRender()
   {
+    RETRUN_IF_NO_PROJECT();
+    
     // Docked Windows-----------
     UI_StartMainWindowDocking();
     UI_Viewport();    

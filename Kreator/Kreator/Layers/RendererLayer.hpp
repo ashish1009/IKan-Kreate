@@ -9,6 +9,7 @@
 
 #include "Config.hpp"
 #include "Editor/Viewport.hpp"
+#include "Editor/UserPreference.hpp"
 
 using namespace IKan;
 
@@ -21,7 +22,8 @@ namespace Kreator
     /// This is Renderer Layer's Default Constructor
     /// - Parameters:
     ///   - directories: client directories
-    RendererLayer(const KreatorDirectories& directories);
+    ///   - userPreferences: User preference
+    RendererLayer(const KreatorDirectories& directories, const Ref<UserPreferences> userPreferences);
     /// This Constructor destroys the Renderer Layer
     ~RendererLayer();
     
@@ -73,7 +75,8 @@ namespace Kreator
     // Memeber variables ----------------------------------------------------------------------------------------------
     // Application data ----------------------------------
     KreatorDirectories m_directories;
-    
+    Ref<UserPreferences> m_userPreferences;
+
     // Viewport Data -------------------------------------
     Viewport m_primaryViewport, m_secondaryViewport;
     SceneRenderer m_viewportRenderer, m_miniViewportRenderer, m_secondaryViewportRenderer;
