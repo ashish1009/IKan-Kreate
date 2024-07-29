@@ -116,7 +116,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 ![](/Kreator/Outputs/WelcomeScreen.png)
 
 - Project Selection
-![](/Kreator/Outputs/ProjectSelection.png
+![](/Kreator/Outputs/ProjectSelection.png)
 
 - Folder Explorer
-![](/Kreator/Outputs/FolderExplorer.png
+![](/Kreator/Outputs/FolderExplorer.png)
