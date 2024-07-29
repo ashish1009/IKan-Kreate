@@ -1,0 +1,11 @@
+Project:
+  Name: FirstProject
+  AssetDirectory: Assets
+  AssetRegistry: Assets/AssetRegistry.ikr
+  FontPath: Assets/Fonts
+  MeshPath: Assets/Meshes
+  MaterialPath: Assets/Materials
+  ScenePath: Assets/Scenes
+  TexturePath: Assets/Textures
+  PhysicsPath: Assets/Physics
+  PrefabPath: Assets/Prefabs

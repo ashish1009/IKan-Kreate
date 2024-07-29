@@ -63,6 +63,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v3.0.1.1 : Mesh Rendering
 - v3.1.1.1 : Images and framebuffer
 - v3.2.2.1 : Scene Renderer and Viewport
+- v3.3.2.1 : Projects and assets with out UI
 
 ## Road Map
 - Kreator UI
@@ -73,10 +74,6 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
   - ImGui Utils
   - ImGui Property
   - ImGui Input
-- Project
-- Assets
-  - Asset registry
-  - Asset Manager
 - Editor UI
   - Welcome screen
   - Title bar
