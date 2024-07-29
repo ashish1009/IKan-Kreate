@@ -9,6 +9,10 @@
 
 namespace IKan
 {
+  static const std::string MaterialExtension {".ikmat"};
+  static const std::string PhysicsExtension {".ikphysics"};
+  static const std::string PrefabExtension {".ikprefab"};
+
   /// This enum stores flag for actions in assets
   enum class AssetFlag : uint16_t
   {
@@ -28,6 +32,31 @@ namespace IKan
     Scene,
     Physics,
     Prefab
+  };
+  
+  inline static std::unordered_map<std::string, AssetType> s_assetExtensionMap =
+  {
+    // Image
+    { ".png",  AssetType::Image },
+    { ".jpg",  AssetType::Image },
+    { ".jpeg", AssetType::Image },
+    { ".hdr",  AssetType::Image },
+    
+    // Fonts
+    { ".ttf", AssetType::Font },
+    
+    // Mesh source
+    { ".fbx", AssetType::Mesh },
+    { ".obj", AssetType::Mesh },
+    
+    // Material
+    { MaterialExtension, AssetType::Material },
+
+    // Physics
+    { PhysicsExtension, AssetType::Physics },
+
+    // Prefab
+    { PrefabExtension, AssetType::Prefab },
   };
   
   namespace AssetUtils
