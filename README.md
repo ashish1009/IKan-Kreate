@@ -40,7 +40,7 @@ IKan Library can be used independently to develop your own Editor/Game
   - {...}/Vendors/SpdLog/include
   - {...}/Vendors/Glm
   - {...}/Vendors/UI/ImGui
-
+  - {...}/Vendors/YAML/YAML/include
 ### Library Search Paths
 `{...} directory where IKan Engine is cloned`
   - {...}/Vendors/Assimp/lib

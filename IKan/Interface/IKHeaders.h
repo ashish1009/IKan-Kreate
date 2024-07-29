@@ -32,6 +32,9 @@
 #include <imgui.h>
 #include <imgui_internal.h>
 
+// YAML
+#include <yaml-cpp/yaml.h>
+
 // Engine Files
 #include <Base/Configurations.h>
 #include <Base/AssertAPIs.h>
