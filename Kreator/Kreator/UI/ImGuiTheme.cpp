@@ -29,12 +29,12 @@ namespace Kreator::UI
           // Window
           UI::Color::Window                 = IM_COL32(100, 0, 0, 255);
           UI::Color::Background             = IM_COL32(100, 0, 0, 255);
-          UI::Color::PopupBackground        = IM_COL32(100, 0, 0, 255);
-          UI::Color::Border                 = IM_COL32(100, 0, 0, 255);
+          UI::Color::PopupBackground        = IM_COL32(20, 40, 60, 255);
+          UI::Color::Border                 = PopupBackground;
           UI::Color::BackgroundDark         = IM_COL32(100, 0, 0, 255);
           
           // Models
-          UI::Color::WindowDimBg            = IM_COL32(100, 0, 0, 255);
+          UI::Color::WindowDimBg            = PopupBackground;
           
           // Frame : Checkbox BG, Text BG, Drop Menu
           UI::Color::FrameBg                = IM_COL32(100, 0, 0, 255);
@@ -42,7 +42,7 @@ namespace Kreator::UI
           UI::Color::FrameBgActive          = IM_COL32(100, 0, 0, 255);
           
           // Widget Title BG
-          UI::Color::TitleBar               = IM_COL32(100, 0, 0, 255);
+          UI::Color::TitleBar               = IM_COL32(30, 50, 70, 255);
           UI::Color::TitleBarDark           = IM_COL32(100, 0, 0, 255);
           UI::Color::TitleBgActive          = IM_COL32(100, 0, 0, 255);
           UI::Color::TitleBgCollapsed       = IM_COL32(100, 0, 0, 255);
