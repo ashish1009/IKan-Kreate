@@ -301,6 +301,13 @@ if (!Project::GetActive()) return
 
     // Push the current project in recent list
     PushProjectToRecentProjects(projectFilePath);
+    
+    // Once project is created resize the window to original size
+    if (!Application::Get().GetWindow()->IsFullscreen())
+    {
+      Window* window = Application::Get().GetWindow();
+      window->SetSize(m_windowOriginalWidth, m_windowOriginalHeight);
+    }
   }
   
   void RendererLayer::CloseProject()
@@ -376,6 +383,9 @@ if (!Project::GetActive()) return
           
           if (UI::DrawImageTextButton("Open an exisiting Kreator Project", m_folderIcon, buttonSize, offset))
           {
+            ImGui::CloseCurrentPopup();
+            FolderExplorer::ShowOpenPopup(ProjectExtension, m_directories.kreatorPath / "Kreator/Projects" , &m_welcomePopup);
+            m_folderExplorerAction = FolderExplorerAction::OpenProject;
           }
         }
         

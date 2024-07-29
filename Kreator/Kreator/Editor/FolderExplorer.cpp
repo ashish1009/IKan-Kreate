@@ -136,10 +136,10 @@ namespace Kreator
     }
     
     // Address bar
-    s_data->pathBuffer.TextInput(true, Data::PopupWidth / 2.5);
+    s_data->pathBuffer.TextInput(true, Data::PopupWidth / 3);
     
     // Search bar
-    s_data->searchBuffer.TextInput(false, Data::PopupWidth / 4.5, "Search ...");
+    s_data->searchBuffer.TextInput(false, Data::PopupWidth / 5, "Search ...");
     
     // New folder Icon
     if (UI::DrawButtonImage("##newFolder", s_data->newFolder, {20.0f, 18.0f}))

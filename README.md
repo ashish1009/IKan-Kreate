@@ -66,16 +66,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v3.3.2.1 : Projects and assets with out UI
 
 ## Road Map
-- Kreator UI
-  - ImGui Scoped
-  - ImGui Theme
-  - ImGui Widget
-  - ImGui Buffer
-  - ImGui Utils
-  - ImGui Property
-  - ImGui Input
 - Editor UI
-  - Welcome screen
   - Title bar
   - Editor panels
     - Content browser panel

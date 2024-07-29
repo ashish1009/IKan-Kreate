@@ -11,6 +11,8 @@
 		B22AB2B82C578649007453B7 /* UserPreference.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2B62C578649007453B7 /* UserPreference.cpp */; };
 		B22AB2BB2C579329007453B7 /* ImGuiTheme.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2B92C579329007453B7 /* ImGuiTheme.cpp */; };
 		B23F456C2C57BFF5000A0944 /* FolderExplorer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F456A2C57BFF5000A0944 /* FolderExplorer.cpp */; };
+		B23F45772C57C603000A0944 /* ContentBrowserItem.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45752C57C603000A0944 /* ContentBrowserItem.cpp */; };
+		B23F457B2C57C617000A0944 /* ContentBrowserPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45792C57C617000A0944 /* ContentBrowserPanel.cpp */; };
 		B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292602C380F250093F4DA /* EntryPoint.cpp */; };
 		B2D292892C381CBA0093F4DA /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D292882C381CBA0093F4DA /* libIKan.a */; };
 		B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292B72C3943F00093F4DA /* Kreator.cpp */; };
@@ -53,6 +55,10 @@
 		B23F456A2C57BFF5000A0944 /* FolderExplorer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = FolderExplorer.cpp; sourceTree = "<group>"; };
 		B23F456B2C57BFF5000A0944 /* FolderExplorer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = FolderExplorer.hpp; sourceTree = "<group>"; };
 		B23F456E2C57C021000A0944 /* ImGuiInputBuffer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiInputBuffer.hpp; sourceTree = "<group>"; };
+		B23F45752C57C603000A0944 /* ContentBrowserItem.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContentBrowserItem.cpp; sourceTree = "<group>"; };
+		B23F45762C57C603000A0944 /* ContentBrowserItem.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContentBrowserItem.hpp; sourceTree = "<group>"; };
+		B23F45792C57C617000A0944 /* ContentBrowserPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ContentBrowserPanel.cpp; sourceTree = "<group>"; };
+		B23F457A2C57C617000A0944 /* ContentBrowserPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ContentBrowserPanel.hpp; sourceTree = "<group>"; };
 		B2D292482C37EE5A0093F4DA /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D292562C37F4D20093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292602C380F250093F4DA /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
@@ -98,6 +104,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B23F45782C57C60B000A0944 /* Panels */ = {
+			isa = PBXGroup;
+			children = (
+				B23F45792C57C617000A0944 /* ContentBrowserPanel.cpp */,
+				B23F457A2C57C617000A0944 /* ContentBrowserPanel.hpp */,
+			);
+			path = Panels;
+			sourceTree = "<group>";
+		};
 		B2D2923F2C37EE5A0093F4DA = {
 			isa = PBXGroup;
 			children = (
@@ -126,6 +141,7 @@
 				B2D292B62C3943DD0093F4DA /* Application */,
 				B2D2969A2C3C3D890093F4DA /* Layers */,
 				B2FDDA892C4788B20062C6E1 /* Editor */,
+				B23F45782C57C60B000A0944 /* Panels */,
 				B2FDDA842C4783B00062C6E1 /* UI */,
 			);
 			path = Kreator;
@@ -200,6 +216,8 @@
 				B22AB2B72C578649007453B7 /* UserPreference.hpp */,
 				B23F456A2C57BFF5000A0944 /* FolderExplorer.cpp */,
 				B23F456B2C57BFF5000A0944 /* FolderExplorer.hpp */,
+				B23F45752C57C603000A0944 /* ContentBrowserItem.cpp */,
+				B23F45762C57C603000A0944 /* ContentBrowserItem.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -284,6 +302,8 @@
 				B2FDDA8F2C478BE50062C6E1 /* ImGuiUtils.cpp in Sources */,
 				B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */,
 				B22AB2B82C578649007453B7 /* UserPreference.cpp in Sources */,
+				B23F45772C57C603000A0944 /* ContentBrowserItem.cpp in Sources */,
+				B23F457B2C57C617000A0944 /* ContentBrowserPanel.cpp in Sources */,
 				B22AB2B52C5781FC007453B7 /* ImGuiPopup.cpp in Sources */,
 				B2FDDA8C2C4788B90062C6E1 /* Viewport.cpp in Sources */,
 				B22AB2BB2C579329007453B7 /* ImGuiTheme.cpp in Sources */,
