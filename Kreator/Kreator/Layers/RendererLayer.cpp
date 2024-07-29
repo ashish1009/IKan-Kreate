@@ -59,6 +59,8 @@ if (!Project::GetActive()) return
     
     m_newProjectIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/NewProject.png"));
     m_folderIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
+    
+    m_shadowTexture = TextureFactory::Create(KreatorResourcePath("Textures/Icons/ShadowLineTop.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -353,6 +355,25 @@ if (!Project::GetActive()) return
           {
           }
         }
+        
+        // Show again check box
+        {
+          UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, 5);
+          UI::Separator();
+          UI::ShiftCursorY(10);
+          if (ImGui::Checkbox("##showAgain", &m_userPreferences->showWelcomeScreen))
+          {
+            UserPreferencesSerializer serializer(m_userPreferences);
+            serializer.Serialize(m_userPreferences->filePath);
+          }
+          
+          UI::SameLine();
+          ImGui::TextUnformatted("Show this window again when Kreator Launches");
+        }
+        
+        // Shadow
+        UI::DrawShadowInner(m_shadowTexture);
+
       });
       
       welcomeTable.ShowColumn(1, [this]() {

@@ -37,10 +37,10 @@ namespace Kreator::UI
           UI::Color::WindowDimBg            = PopupBackground;
           
           // Frame : Checkbox BG, Text BG, Drop Menu
-          UI::Color::FrameBg                = IM_COL32(100, 0, 0, 255);
-          UI::Color::FrameBgHovered         = IM_COL32(100, 0, 0, 255);
-          UI::Color::FrameBgActive          = IM_COL32(100, 0, 0, 255);
-          
+          UI::Color::FrameBg                = IM_COL32(15, 25, 35, 255);
+          UI::Color::FrameBgHovered         = IM_COL32(15, 25, 35, 255);
+          UI::Color::FrameBgActive          = IM_COL32(15, 25, 35, 255);
+
           // Widget Title BG
           UI::Color::TitleBar               = IM_COL32(30, 50, 70, 255);
           UI::Color::TitleBarDark           = IM_COL32(100, 0, 0, 255);
@@ -57,8 +57,8 @@ namespace Kreator::UI
           UI::Color::ScrollbarGrabActive    = IM_COL32(100, 0, 0, 255);
           
           // Check Mark
-          UI::Color::CheckMark              = IM_COL32(100, 0, 0, 255);
-          
+          UI::Color::CheckMark              = IM_COL32(210, 210, 210, 255);
+
           // Slider
           UI::Color::SliderGrab             = IM_COL32(100, 0, 0, 255);
           UI::Color::SliderGrabActive       = IM_COL32(100, 0, 0, 255);

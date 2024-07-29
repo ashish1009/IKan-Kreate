@@ -19,6 +19,12 @@ namespace Kreator::UI
     Left, Right, Center
   };
 
+  /// This enum stores the ImGui item position
+  enum class Position : uint8_t
+  {
+    Left, Right, Top, Bottom
+  };
+
   // Cursor ----------------------------------------------------------------------------------------------------------
   /// This function shift the cursor position for x
   /// - Parameter distance: distance x
@@ -58,7 +64,9 @@ namespace Kreator::UI
   void SameLine(float offsetFromStartX = 0.0f, float spacing = -1.0f);
   /// This function create same line
   void NewLine();
-  
+  /// This function create separtor
+  void Separator();
+
   // Wrappers --------------------------------------------------------------------------------------------------------
   /// This function set the next imgui window at center
   void SetNextWindowAtCenter();
@@ -125,6 +133,27 @@ namespace Kreator::UI
   ///   - multiplier: multiplier
   ImU32 ColorWithMultipliedHue(const ImColor& color, float multiplier);
   
+  // Rectangles API -------------------------------------------------------------------------------------------------
+  /// This function returns the ImGui Item Rectangle vertex
+  ImRect GetItemRect();
+  /// This function expand the ImGui Retangle
+  /// - Parameters:
+  ///   - rect: rectangle
+  ///   - x: expand x
+  ///   - y: expand y
+  ImRect RectExpanded(const ImRect& rect, float x, float y);
+  /// This function Offset the rectangle
+  /// - Parameters:
+  ///   - rect: rectangle pos
+  ///   - x: x offset
+  ///   - y: y offset
+  ImRect RectOffset(const ImRect& rect, float x, float y);
+  /// This function Offset the rectangle
+  /// - Parameters:
+  ///   - rect: rectangle pos
+  ///   - xy: offset
+  ImRect RectOffset(const ImRect& rect, const ImVec2& xy);
+
   // Buttons ---------------------------------------------------------------------------------------------------------
   /// This function draws the image button
   /// - Parameters:
@@ -170,6 +199,36 @@ namespace Kreator::UI
                            const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.5f),
                            const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));
 
+  // Shadow ----------------------------------------------------------------------------------------------------------
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - position: position of shadow
+  ///   - radius: radius of shadow
+  ///   - rectMin: rect min
+  ///   - rectMax: rect Max
+  ///   - alpha: Blurr alpha
+  ///   - lengthStretch: length stretched
+  void DrawShadowInnerImpl(const Ref<IKan::Image>& shadowTexture, Position position, int32_t radius, const ImVec2& rectMin, const ImVec2& rectMax, float alpha = 1.0f, float lengthStretch = 10.0f);
+  
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - position: position of shadow
+  ///   - radius: radius of shadow
+  ///   - rectangle: rectangle Data
+  ///   - alpha: Blurr alpha
+  ///   - lengthStretch: length stretched
+  void DrawShadowInner(const Ref<IKan::Image>& shadowTexture, Position position, int32_t radius, const ImRect& rectangle, float alpha = 1.0f, float lengthStretch = 10.0f);
+  /// This function render the Shadow Texture in ImGui
+  /// - Parameters:
+  ///   - shadowTexture: shadow Texture
+  ///   - position: position of shadow
+  ///   - radius: radius of shadow
+  ///   - alpha: Blurr alpha
+  /// - Note: Only Right is tested for now
+  void DrawShadowInner(const Ref<IKan::Image>& shadowTexture, Position position = Position::Right, int32_t radius = 15.0f, float alpha = 1.0f);
+  
   // Texts -----------------------------------------------------------------------------------------------------------
   /// This function renders the text
   /// - Parameters:

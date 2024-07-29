@@ -57,6 +57,10 @@ namespace Kreator::UI
   {
     ImGui::SameLine(offsetFromStartX, spacing);
   }
+  void Separator()
+  {
+    ImGui::Separator();
+  }
   void NewLine()
   {
     ImGui::NewLine();
@@ -175,6 +179,37 @@ namespace Kreator::UI
     return ImColor::HSV(std::min(hue * multiplier, 1.0f), sat, val);
   }
 
+  // Rectangles API -------------------------------------------------------------------------------------------------
+  ImRect GetItemRect()
+  {
+    return ImRect(ImGui::GetItemRectMin(), ImGui::GetItemRectMax());
+  }
+  
+  ImRect RectExpanded(const ImRect& rect, float x, float y)
+  {
+    ImRect result = rect;
+    result.Min.x -= x;
+    result.Min.y -= y;
+    result.Max.x += x;
+    result.Max.y += y;
+    return result;
+  }
+  
+  ImRect RectOffset(const ImRect& rect, const ImVec2& xy)
+  {
+    return RectOffset(rect, xy.x, xy.y);
+  }
+  
+  ImRect RectOffset(const ImRect& rect, float x, float y)
+  {
+    ImRect result = rect;
+    result.Min.x += x;
+    result.Min.y += y;
+    result.Max.x += x;
+    result.Max.y += y;
+    return result;
+  }
+  
   // Buttons ---------------------------------------------------------------------------------------------------------
   void DrawButtonImage(const Ref<IKan::Image>& imageNormal, const Ref<IKan::Image>& imageHovered,
                        const Ref<IKan::Image>& imagePressed, const ImVec2& rectMin, const ImVec2& rectMax,
@@ -242,6 +277,55 @@ namespace Kreator::UI
     UI::Text(UI::FontType::SemiHeader, buttonHelper, UI::AlignX::Left, {0.0f, iconSize.x / 4}, UI::Color::TextBrighter);
     return false;
   };
+  
+  // Shadow ----------------------------------------------------------------------------------------------------------
+  void DrawShadowInnerImpl(const Ref<IKan::Image>& shadowImage, Position position, int radius, const ImVec2& rectMin, const ImVec2& rectMax, float alpha, float lengthStretch)
+  {
+    const float widthOffset = lengthStretch;
+    const float alphaTop = alpha; //std::min(0.25f * alphMultiplier, 1.0f);
+    const float alphaSides = alpha; //std::min(0.30f * alphMultiplier, 1.0f);
+    const float alphaBottom = alpha; //std::min(0.60f * alphMultiplier, 1.0f);
+    const auto p1 = ImVec2(rectMin.x + radius, rectMin.y + radius);
+    const auto p2 = ImVec2(rectMax.x - radius, rectMax.y - radius);
+    auto* drawList = ImGui::GetWindowDrawList();
+    
+    ImTextureID textureID = GetTextureID(shadowImage);
+    
+    switch (position)
+    {
+      case Position::Top:
+        drawList->AddImage(textureID, { p1.x - widthOffset,  p1.y - radius }, { p2.x + widthOffset, p1.y }, ImVec2(0.0f, 1.0f), ImVec2(1.0f, 0.0f), ImColor(0.0f, 0.0f, 0.0f, alphaTop));
+        break;
+      case Position::Bottom:
+        drawList->AddImage(textureID, { p1.x - widthOffset,  p2.y }, { p2.x + widthOffset, p2.y + radius }, ImVec2(0.0f, 0.0f), ImVec2(1.0f, 1.0f), ImColor(0.0f, 0.0f, 0.0f, alphaBottom));
+        break;
+      case Position::Left:
+        drawList->AddImageQuad(textureID, { p1.x - radius, p1.y - widthOffset }, { p1.x, p1.y - widthOffset }, { p1.x, p2.y + widthOffset }, { p1.x - radius, p2.y + widthOffset },
+                               { 0.0f, 1.0f }, { 0.0f, 0.0f }, { 1.0f, 1.0f }, { 1.0f, 0.0f }, ImColor(0.0f, 0.0f, 0.0f, alphaSides));
+        break;
+      case Position::Right:
+        drawList->AddImageQuad(textureID, { p2.x, p1.y - widthOffset }, { p2.x + radius, p1.y - widthOffset },
+                               { p2.x + radius, p2.y + widthOffset }, { p2.x, p2.y + widthOffset },{ 0.0f, 1.0f },
+                               { 0.0f, 0.0f }, { 1.0f, 0.0f }, { 1.0f, 1.0f }, ImColor(0.0f, 0.0f, 0.0f, alphaSides));
+        break;
+      default:
+        break;
+    }
+  }
+  
+  void DrawShadowInner(const Ref<IKan::Image>& shadowImage, Position position, int radius, const ImRect& rectangle, float alpha, float lengthStretch)
+  {
+    DrawShadowInnerImpl(shadowImage, position, radius, rectangle.Min, rectangle.Max, alpha, lengthStretch);
+  }
+  
+  void DrawShadowInner(const Ref<IKan::Image>& shadowTexture, Position position, int32_t radius, float alpha)
+  {
+    // Draw side shadow
+    ImRect windowRect = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, 0.0f);
+    ImGui::PushClipRect(windowRect.Min, windowRect.Max, false);
+    UI::DrawShadowInner(shadowTexture, position, radius, windowRect, alpha, windowRect.GetHeight() / 4.0f);
+    ImGui::PopClipRect();
+  }
   
   // Texts -----------------------------------------------------------------------------------------------------------
   void Text(FontType type, std::string_view string, AlignX xAlign, const glm::vec2& offset, const ImU32& color)

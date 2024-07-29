@@ -1,5 +1,5 @@
 UserPrefs:
-  ShowWelcomeScreen: true
+  ShowWelcomeScreen: false
   Theme: 0
   RecentProjects:
     []
