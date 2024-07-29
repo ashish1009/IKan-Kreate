@@ -168,7 +168,7 @@ namespace IKan
   }
   
   // Open GL Image ------------------------------------------------------------------------------------
-  OpenGLImage::OpenGLImage(const ImageSpecificaion& spec)
+  OpenGLImage::OpenGLImage(const Imagespecification& spec)
   : m_specification(spec)
   {
     IK_PROFILE();
@@ -321,7 +321,7 @@ namespace IKan
   
   // Open GL Char Texture -------------------------------------------------------------------------------
   OpenGLCharTexture::OpenGLCharTexture(const CharTextureSpecification& charTextureSpec)
-  : m_specificaion(charTextureSpec)
+  : m_specification(charTextureSpec)
   {
     // Note: Do not submite in queue as this face pointer is local is not copied. This happens once so no runtime issues
 #if CHAR_TEXTURE_SUBMIT
@@ -332,11 +332,11 @@ namespace IKan
       glBindTexture(GL_TEXTURE_2D, m_rendererID);
       
       // Create texture in the renderer Buffer
-      glTexImage2D(GL_TEXTURE_2D, 0, /* Level */ GL_RED, (GLsizei)m_specificaion.face->glyph->bitmap.width, (GLsizei)m_specificaion.face->glyph->bitmap.rows,
-                   0, /* Border */ GL_RED, GL_UNSIGNED_BYTE, m_specificaion.face->glyph->bitmap.buffer );
+      glTexImage2D(GL_TEXTURE_2D, 0, /* Level */ GL_RED, (GLsizei)m_specification.face->glyph->bitmap.width, (GLsizei)m_specification.face->glyph->bitmap.rows,
+                   0, /* Border */ GL_RED, GL_UNSIGNED_BYTE, m_specification.face->glyph->bitmap.buffer );
       
-      m_width = (uint32_t)m_specificaion.face->glyph->bitmap.width;
-      m_height = (uint32_t)m_specificaion.face->glyph->bitmap.rows;
+      m_width = (uint32_t)m_specification.face->glyph->bitmap.width;
+      m_height = (uint32_t)m_specification.face->glyph->bitmap.rows;
       
       // set texture options
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
@@ -345,11 +345,11 @@ namespace IKan
       glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
       
 #if CHAR_DEBUG_TEXTURE_LOG
-      IK_LOG_TRACE(LogModule::CharTexture, "Creating Open GL Char Texture to store Char {0} ( Renderer ID {1} )", m_specificaion.charVal, m_rendererID);
+      IK_LOG_TRACE(LogModule::CharTexture, "Creating Open GL Char Texture to store Char {0} ( Renderer ID {1} )", m_specification.charVal, m_rendererID);
 #endif
       
       // Increment the size in stats
-      m_dataSize = m_specificaion.face->glyph->bitmap.width * m_specificaion.face->glyph->bitmap.rows;
+      m_dataSize = m_specification.face->glyph->bitmap.width * m_specification.face->glyph->bitmap.rows;
       RendererStatistics::Get().textureBufferSize += m_dataSize;
       
 #if CHAR_TEXTURE_SUBMIT
@@ -404,15 +404,15 @@ namespace IKan
   }
   glm::ivec2 OpenGLCharTexture::GetSize() const
   {
-    return m_specificaion.size;
+    return m_specification.size;
   }
   glm::ivec2 OpenGLCharTexture::GetBearing() const
   {
-    return m_specificaion.bearing;
+    return m_specification.bearing;
   }
   uint32_t OpenGLCharTexture::GetAdvance() const
   {
-    return m_specificaion.advance;
+    return m_specification.advance;
   }
   
 } // namespace IKan

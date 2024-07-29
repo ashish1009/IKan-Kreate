@@ -97,7 +97,7 @@ namespace IKan
     return nullptr;
   }
   
-  Ref<Image> TextureFactory::Create(const ImageSpecificaion& spec)
+  Ref<Image> TextureFactory::Create(const Imagespecification& spec)
   {
     switch (Renderer::GetCurrentRendererAPI())
     {
@@ -114,7 +114,7 @@ namespace IKan
   
   Ref<Image> TextureFactory::Create(const std::filesystem::path& filePath)
   {
-    ImageSpecificaion spec;
+    Imagespecification spec;
     spec.filePath = filePath;
     return Create(spec);
   }

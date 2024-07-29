@@ -53,12 +53,12 @@ namespace IKan
     [[nodiscard]] static Ref<Texture> CreateWhiteTexture();
     
     /// This function creates Character texture to render text
-    /// - Parameter spec: Character Texture specificaion
+    /// - Parameter spec: Character Texture specification
     [[nodiscard]] static Ref<Texture> Create(const CharTextureSpecification& charTextureSpec);
     
     /// This static functions creates the Texture from image file
-    /// - Parameter spec: Texture specificaion
-    [[nodiscard]] static Ref<Image> Create(const ImageSpecificaion& spec);
+    /// - Parameter spec: Texture specification
+    [[nodiscard]] static Ref<Image> Create(const Imagespecification& spec);
     /// This static functions creates the Texture from image file
     /// - Parameter filePath: path of texture file
     [[nodiscard]] static Ref<Image> Create(const std::filesystem::path& filePath);

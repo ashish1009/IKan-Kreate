@@ -87,7 +87,7 @@ namespace IKan
     /// This functionc creates the texture attachment for frame buffer format
     /// - Parameters:
     ///   - format: framebuffer format
-    ///   - spec: texture specificaion from framebuffer
+    ///   - spec: texture specification from framebuffer
     Ref<Texture> CreateAttachment(FrameBufferAttachments::TextureFormat format, Texture2DSpecification& spec);
   } // namespace FramebufferUtils
 

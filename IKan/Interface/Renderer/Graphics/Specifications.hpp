@@ -86,7 +86,7 @@ namespace IKan
     bool enableDebugLogs {true};
   };
   
-  /// This structure stores the Texture specificaion for character rendering
+  /// This structure stores the Texture specification for character rendering
   struct CharTextureSpecification
   {
     FT_Face face;
@@ -96,8 +96,8 @@ namespace IKan
     char charVal;
   };
   
-  /// This structure stores the Texture specificaion for images
-  struct ImageSpecificaion
+  /// This structure stores the Texture specification for images
+  struct Imagespecification
   {
     bool invertVertically {true};
     std::filesystem::path filePath {};
@@ -118,7 +118,7 @@ namespace IKan
     Ref<Shader> shader;
   };
 
-  // Framebuffer specificaion ------------------------------------------------------------------------------
+  // Framebuffer specification ------------------------------------------------------------------------------
   /// This structure stores the frame buffer attachments
   struct FrameBufferAttachments
   {

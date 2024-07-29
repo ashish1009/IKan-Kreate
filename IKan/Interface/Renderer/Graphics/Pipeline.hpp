@@ -27,7 +27,7 @@ namespace IKan
     /// This function returns the renderer ID of Vertex Buffer
     virtual RendererID GetRendererID() const = 0;
     
-    /// This function returns the const specificaion
+    /// This function returns the const specification
     virtual const PipelineSpecification& GetSpecification() const = 0;
   };
 } // namespace IKan

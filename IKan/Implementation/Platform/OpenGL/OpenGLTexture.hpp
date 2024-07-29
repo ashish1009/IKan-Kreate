@@ -54,9 +54,9 @@ namespace IKan
   class OpenGLImage : public Image
   {
   public:
-    /// This constructor creates the Open GL image from specificaion.
+    /// This constructor creates the Open GL image from specification.
     /// - Parameter spec: Open GL Image Specification
-    OpenGLImage(const ImageSpecificaion& spec);
+    OpenGLImage(const Imagespecification& spec);
     /// This destructor destroyes and deletes the Open GL image.
     virtual ~OpenGLImage();
     
@@ -90,7 +90,7 @@ namespace IKan
     
   private:
     RendererID m_rendererID {0};
-    ImageSpecificaion m_specification;
+    Imagespecification m_specification;
     int32_t m_width {1600};
     int32_t m_height {900};
     int32_t m_channel {0};
@@ -102,8 +102,8 @@ namespace IKan
   class OpenGLCharTexture : public CharTexture
   {
   public:
-    /// This constructor creates the Open GL character texture from specificaion.
-    /// - Parameter charTextureSpec: Character texture specificaion
+    /// This constructor creates the Open GL character texture from specification.
+    /// - Parameter charTextureSpec: Character texture specification
     OpenGLCharTexture(const CharTextureSpecification& charTextureSpec);
     /// This destructor destroyes and deletes the Open GL character texture.
     virtual ~OpenGLCharTexture();
@@ -139,7 +139,7 @@ namespace IKan
     
   private:
     RendererID m_rendererID {};
-    CharTextureSpecification m_specificaion;
+    CharTextureSpecification m_specification;
     uint32_t m_dataSize {0};
     uint32_t m_width {0}, m_height {0};
   };

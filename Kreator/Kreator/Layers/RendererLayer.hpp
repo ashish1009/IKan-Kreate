@@ -92,6 +92,16 @@ namespace Kreator
     /// This function shows the Statistics Panel
     void UI_StatisticsPanel();
 
+    /// This function renders our title bar
+    float UI_DrawTitlebar();
+    /// This function handle the drag and Click on title bar
+    /// - Parameter titlebarHeight: Title bar height
+    void UI_TitlebarDragArea(float titlebarHeight);
+    /// This function renders the Menu bar for Title bar
+    void UI_MenuBar();
+    /// This function renders window buttons
+    void UI_WindowButtons();
+
     // Memeber variables ----------------------------------------------------------------------------------------------
     // Popups/Panel --------------------------------------
     UI::Popup m_welcomePopup {"Welcome Screen"};

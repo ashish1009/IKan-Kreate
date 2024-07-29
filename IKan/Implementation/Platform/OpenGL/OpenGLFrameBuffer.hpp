@@ -16,7 +16,7 @@ namespace IKan
   {
   public:
     /// This consturctor creates the frame buffer with the specification.
-    /// - Parameter spec: Framebuffer specificaion.
+    /// - Parameter spec: Framebuffer specification.
     OpenGLFrameBuffer(const FrameBufferSpecification& spec);
     /// This destructor destroyes and deletes the framebuffer.
     ~OpenGLFrameBuffer();

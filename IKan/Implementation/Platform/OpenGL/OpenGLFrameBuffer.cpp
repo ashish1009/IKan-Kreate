@@ -70,7 +70,7 @@ namespace IKan
       glBindFramebuffer(GL_FRAMEBUFFER, m_rendererID);
     });
     
-    // Create texture specificaion for attachments.
+    // Create texture specification for attachments.
     Texture2DSpecification spec;
     spec.title  = m_specification.debugName;
     spec.width  = m_specification.width;

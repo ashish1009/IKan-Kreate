@@ -66,7 +66,7 @@ namespace IKan
         continue;
       }
       
-      // Character Specificaion
+      // Character specification
       CharTextureSpecification spec;
       spec.face = face;
       spec.size = glm::ivec2(face->glyph->bitmap.width, face->glyph->bitmap.rows);

@@ -639,6 +639,16 @@ if (!Project::GetActive()) return
     {
       ImGui::PopStyleVar(2);
     }
+
+    // Title bar
+    {
+      // Render the title if original title bar is hidden
+      if (Application::Get().GetSpecification().windowSpecification.hideTitleBar)
+      {
+        float titlebarHeight = UI_DrawTitlebar();
+        UI::SetCursorPosY(titlebarHeight + ImGui::GetCurrentWindow()->WindowPadding.y);
+      }
+    }
     
     // Dockspace
     float minWinSizeX = style.WindowMinSize.x;
@@ -801,4 +811,6 @@ if (!Project::GetActive()) return
     }
     ImGui::End();
   }
+  
+  
 } // namespace Kreator

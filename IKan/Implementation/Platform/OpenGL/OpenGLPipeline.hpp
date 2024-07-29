@@ -16,7 +16,7 @@ namespace IKan
   {
   public:
     /// This consturctor creates the pipeline with the specification.
-    /// - Parameter spec: Pipeline specificaion.
+    /// - Parameter spec: Pipeline specification.
     OpenGLPipeline(const PipelineSpecification& spec);
     /// This destructior destroys the pipeline data.
     ~OpenGLPipeline();
@@ -29,7 +29,7 @@ namespace IKan
     /// This function returns the renderer ID of Pipeline.
     RendererID GetRendererID() const override;
     
-    /// This function returns the const pipeline specificaion.
+    /// This function returns the const pipeline specification.
     const PipelineSpecification& GetSpecification() const override;
 
     DELETE_COPY_MOVE_CONSTRUCTORS(OpenGLPipeline);
