@@ -85,6 +85,7 @@
 #include <Assets/Asset.hpp>
 #include <Assets/AssetMetadata.hpp>
 #include <Assets/AssetRegistry.hpp>
+#include <Assets/AssetManager.hpp>
 
 #include <Project/ProjectConfig.hpp>
 #include <Project/Project.hpp>

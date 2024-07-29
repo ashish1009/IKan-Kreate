@@ -118,7 +118,12 @@ namespace Kreator::UI
     inline static ImU32 Selection             = IM_COL32(191, 177, 155, 255);
     inline static ImU32 SelectionMuted        = IM_COL32(59, 57, 45, 255);
     inline static ImU32 TextDarker            = IM_COL32(158, 158, 158, 255);
-    
+    inline static ImU32 PropertyField         = IM_COL32(25, 35, 45, 255);
+    inline static ImU32 GroupHeader           = IM_COL32(27, 27, 27, 255);
+    inline static ImU32 GroupHeaderHovered    = IM_COL32(32, 32, 32, 255);
+    inline static ImU32 GroupHeaderActive     = IM_COL32(30, 30, 30, 255);
+    inline static ImU32 Muted                 = IM_COL32(77, 77, 77, 255);
+
     /// This function changes theme color to dark
     /// - Parameter theme: Current selected theme
     static void SetTheme(Kreator::UserPreferences::Theme theme);
