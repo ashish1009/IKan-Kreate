@@ -40,10 +40,10 @@ namespace IKan
       out << YAML::Key << "AssetDirectory" << YAML::Value << m_project->m_config.assetDirectory;
       out << YAML::Key << "AssetRegistry" << YAML::Value << m_project->m_config.assetRegistryPath;
       
-      out << YAML::Key << "MeshDirectory" << YAML::Value << m_project->m_config.meshPath;
-      out << YAML::Key << "FontDirectory" << YAML::Value << m_project->m_config.fontPath;
-      out << YAML::Key << "SceneDirectory" << YAML::Value << m_project->m_config.scenePath;
-      out << YAML::Key << "TextureDirectory" << YAML::Value << m_project->m_config.texturePath;
+      out << YAML::Key << "MeshPath" << YAML::Value << m_project->m_config.meshPath;
+      out << YAML::Key << "FontPath" << YAML::Value << m_project->m_config.fontPath;
+      out << YAML::Key << "ScenePath" << YAML::Value << m_project->m_config.scenePath;
+      out << YAML::Key << "TexturePath" << YAML::Value << m_project->m_config.texturePath;
       out << YAML::Key << "MaterialPath" << YAML::Value << m_project->m_config.materialPath;
       out << YAML::Key << "PhysicsPath" << YAML::Value << m_project->m_config.physicsPath;
       out << YAML::Key << "PrefabPath" << YAML::Value << m_project->m_config.prefabPath;
