@@ -9,6 +9,7 @@
 
 #include "Application/Kreator.hpp"
 #include "Editor/FolderExplorer.hpp"
+#include "Panels/ContentBrowserPanel.hpp"
 
 namespace Kreator
 {
@@ -17,6 +18,9 @@ if (!Project::GetActive()) return
 
   // Kretor Resource Path
 #define KreatorResourcePath(path) std::filesystem::absolute(m_directories.clientResourcePath / path)
+
+  // Panel IDs
+#define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
 
   namespace KreatorUtils
   {
@@ -134,6 +138,9 @@ if (!Project::GetActive()) return
       windowResizeToUnit();
       m_welcomePopup.Set("Welcome Screen", true /* open flag */, 900.0f, 410.0f, true /* center */);
     }
+    
+    // Add Panels -----------------------
+    m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
   }
   
   void RendererLayer::OnDetach()

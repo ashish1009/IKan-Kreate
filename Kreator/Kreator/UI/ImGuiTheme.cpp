@@ -60,8 +60,8 @@ namespace Kreator::UI
           UI::Color::CheckMark              = IM_COL32(210, 210, 210, 255);
           
           // Slider
-          UI::Color::SliderGrab             = IM_COL32(222, 0, 0, 255);
-          UI::Color::SliderGrabActive       = IM_COL32(222, 0, 0, 255);
+          UI::Color::SliderGrab             = IM_COL32(125, 125, 125, 200);
+          UI::Color::SliderGrabActive       = IM_COL32(150, 150, 150, 255);
           
           // Button
           UI::Color::Button                 = IM_COL32(22, 75, 98, 255);
@@ -111,8 +111,8 @@ namespace Kreator::UI
           UI::Color::DragDropTarget         = IM_COL32(222, 0, 0, 255);
           
           // Navigation
-          UI::Color::NavHighlight           = IM_COL32(222, 0, 0, 255);
-          UI::Color::NavWindowingHighlight  = IM_COL32(222, 0, 0, 255);
+          UI::Color::NavHighlight           = IM_COL32(152, 152, 152, 255);
+          UI::Color::NavWindowingHighlight  = IM_COL32(222, 222, 0, 205);
           UI::Color::NavWindowingDimBg      = IM_COL32(222, 0, 0, 255);
           
           break;
