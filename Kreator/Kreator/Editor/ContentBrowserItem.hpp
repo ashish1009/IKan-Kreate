@@ -177,4 +177,28 @@ namespace Kreator
     Ref<DirectoryInfo> m_directoryInfo;
   };
 
+  /// This structure stores the Content browser items (Assets)
+  class ContentBrowserAsset : public ContentBrowserItem
+  {
+  public:
+    ContentBrowserAsset(const AssetMetadata& assetInfo, const Ref<Image>& icon);
+    virtual ~ContentBrowserAsset() = default;
+    
+    const AssetMetadata& GetAssetInfo() const { return m_assetInfo; }
+    
+    /// @see ContentBrowsetItem
+    virtual void Delete() override;
+    /// @see ContentBrowsetItem
+    virtual bool Move(const std::filesystem::path& destination) override;
+    
+  private:
+    /// @see ContentBrowsetItem
+    virtual void Activate(CBItemActionResult& actionResult) override;
+    /// @see ContentBrowsetItem
+    virtual void OnRenamed(const std::string& newName) override;
+    
+  private:
+    AssetMetadata m_assetInfo;
+  };
+
 } // namespace Kreator

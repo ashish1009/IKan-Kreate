@@ -488,4 +488,65 @@ namespace Kreator
     return true;
   }
   
+  ContentBrowserAsset::ContentBrowserAsset(const AssetMetadata& assetInfo, const Ref<Image>& icon)
+  : ContentBrowserItem(ContentBrowserItem::ItemType::Asset, assetInfo.handle, assetInfo.filePath.stem().string(), icon),
+  m_assetInfo(assetInfo)
+  {
+    
+  }
+  
+  void ContentBrowserAsset::Delete()
+  {
+    auto filepath = AssetManager::GetFileSystemPath(m_assetInfo);
+    bool deleted = Utils::FileSystem::Delete(filepath);
+    if (!deleted)
+    {
+      IK_LOG_ERROR("ContentBrowser", "Couldn't delete {0}", m_assetInfo.filePath.string().c_str());
+      return;
+    }
+    
+    Ref<DirectoryInfo> currentDirectory = ContentBrowserPanel::Get().GetDirectory(m_assetInfo.filePath.parent_path());
+    currentDirectory->assets.erase(std::remove(currentDirectory->assets.begin(),
+                                               currentDirectory->assets.end(),
+                                               m_assetInfo.handle),
+                                   currentDirectory->assets.end());
+    
+    AssetManager::OnAssetDeleted(m_assetInfo.handle);  }
+  
+  bool ContentBrowserAsset::Move(const std::filesystem::path& destination)
+  {
+    auto filepath = AssetManager::GetFileSystemPath(m_assetInfo);
+    bool wasMoved = Utils::FileSystem::MoveFile(filepath, Project::GetActive()->GetAssetDirectory() / destination);
+    if (!wasMoved)
+    {
+      IK_LOG_ERROR("ContentBrowser", "Couldn't move {0} to {1}",
+                   m_assetInfo.filePath.string().c_str(), destination.string().c_str());
+      return false;
+    }
+    
+    AssetManager::OnAssetMoved(m_assetInfo.handle, destination);
+    return true;  }
+  
+  void ContentBrowserAsset::Activate([[maybe_unused]] CBItemActionResult& actionResult)
+  {
+    IK_ASSERT(false, "Implement later");
+  }
+  
+  void ContentBrowserAsset::OnRenamed(const std::string& newName)
+  {
+    auto filepath = AssetManager::GetFileSystemPath(m_assetInfo);
+    std::filesystem::path newFilepath = fmt::format("{0}/{1}{2}", filepath.parent_path().string(),
+                                                    newName, filepath.extension().string());
+    
+    if (Utils::FileSystem::Rename(filepath, newFilepath))
+    {
+      // Update AssetManager with new name
+      [[maybe_unused]] auto& metadata = AssetManager::GetMetadata(m_assetInfo.handle);
+      AssetManager::OnAssetRenamed(m_assetInfo.handle, newFilepath);
+    }
+    else
+    {
+      IK_LOG_ERROR("ContentBrowser", "A file with that name already exists!");
+    }
+  }
 } // namespace Kreator
