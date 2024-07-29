@@ -56,7 +56,10 @@ namespace Kreator::UI
   void EndMenuBar()
   {
     ImGuiWindow* window = ImGui::GetCurrentWindow();
-    RETURN_IF (window->SkipItems)
+    if (window->SkipItems)
+    {
+      return;
+    }
     
     ImGuiContext& g = *GImGui;
     
