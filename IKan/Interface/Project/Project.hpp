@@ -25,6 +25,16 @@ namespace IKan
     /// - Parameter config: project enw config
     void SetConfig(const ProjectConfig& config);
     
+    /// This funcion updates auto save scene
+    /// - Parameter flag: auto save flag
+    void UpdateAutoSaveScene(bool flag);
+    /// This funcion updates auto save scene time interval
+    /// - Parameter time: auto save time interval
+    void UpdateAutoSaveSceneTimeInterval(int32_t time);
+    /// This funcion updates auto save scene time interval
+    /// - Parameter path: scene file path
+    void UpdateStartupScene(const std::filesystem::path path);
+
     // Getter APIs ---------------------------------------------------------------------------------------------------
     /// This function returns the project config
     const ProjectConfig& GetConfig() const;

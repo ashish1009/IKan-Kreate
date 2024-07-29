@@ -21,6 +21,19 @@ namespace IKan
     m_config = config;
   }
 
+  void Project::UpdateAutoSaveScene(bool flag)
+  {
+    m_config.enableAutoSave = flag;
+  }
+  void Project::UpdateAutoSaveSceneTimeInterval(int32_t time)
+  {
+    m_config.autoSaveIntervalSeconds = time;
+  }
+  void Project::UpdateStartupScene(const std::filesystem::path path)
+  {
+    m_config.startScene = path;
+  }
+
   void Project::SetActive(Ref<Project> project)
   {
     IK_PROFILE();

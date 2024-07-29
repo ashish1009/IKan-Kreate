@@ -2,10 +2,13 @@ Project:
   Name: FirstProject
   AssetDirectory: Assets
   AssetRegistry: Assets/AssetRegistry.ikr
-  FontPath: Assets/Fonts
-  MeshPath: Assets/Meshes
+  MeshDirectory: Assets/Meshes
+  FontDirectory: Assets/Fonts
+  SceneDirectory: Assets/Scenes
+  TextureDirectory: Assets/Textures
   MaterialPath: Assets/Materials
-  ScenePath: Assets/Scenes
-  TexturePath: Assets/Textures
   PhysicsPath: Assets/Physics
   PrefabPath: Assets/Prefabs
+  StartScene: ""
+  AutoSave: true
+  AutoSaveInterval: 60
