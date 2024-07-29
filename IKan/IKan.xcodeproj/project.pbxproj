@@ -38,6 +38,8 @@
 		B22AB2AA2C576FEB007453B7 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2A82C576FEB007453B7 /* EditorConsoleSink.hpp */; };
 		B22AB2AD2C57701B007453B7 /* EditorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2AB2C57701B007453B7 /* EditorConsolePanel.cpp */; };
 		B22AB2AE2C57701B007453B7 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2AC2C57701B007453B7 /* EditorConsolePanel.hpp */; };
+		B22AB2B12C577226007453B7 /* AssetEdditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2AF2C577226007453B7 /* AssetEdditor.cpp */; };
+		B22AB2B22C577226007453B7 /* AssetEdditor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2B02C577226007453B7 /* AssetEdditor.hpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -209,6 +211,8 @@
 		B22AB2A82C576FEB007453B7 /* EditorConsoleSink.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleSink.hpp; sourceTree = "<group>"; };
 		B22AB2AB2C57701B007453B7 /* EditorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsolePanel.cpp; sourceTree = "<group>"; };
 		B22AB2AC2C57701B007453B7 /* EditorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsolePanel.hpp; sourceTree = "<group>"; };
+		B22AB2AF2C577226007453B7 /* AssetEdditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetEdditor.cpp; sourceTree = "<group>"; };
+		B22AB2B02C577226007453B7 /* AssetEdditor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetEdditor.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -384,6 +388,7 @@
 				B22AB29C2C576F74007453B7 /* Console */,
 				B22AB2902C576DD4007453B7 /* EditorPanel.hpp */,
 				B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */,
+				B22AB2B02C577226007453B7 /* AssetEdditor.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -393,6 +398,7 @@
 			children = (
 				B22AB2A22C576F7B007453B7 /* Console */,
 				B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */,
+				B22AB2AF2C577226007453B7 /* AssetEdditor.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -877,6 +883,7 @@
 				B2FDDA922C47ACDD0062C6E1 /* SceneRenderer.hpp in Headers */,
 				B2D296C32C40EEDA0093F4DA /* OpenGLTexture.hpp in Headers */,
 				B22AB28D2C576CE5007453B7 /* Scene.hpp in Headers */,
+				B22AB2B22C577226007453B7 /* AssetEdditor.hpp in Headers */,
 				B22AAF622C4A3EE2007453B7 /* AssetMetadata.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
 				B22AB2AE2C57701B007453B7 /* EditorConsolePanel.hpp in Headers */,
@@ -1093,6 +1100,7 @@
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
 				B22AAF6A2C4A437A007453B7 /* AssetRegistry.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
+				B22AB2B12C577226007453B7 /* AssetEdditor.cpp in Sources */,
 				B22AB2AD2C57701B007453B7 /* EditorConsolePanel.cpp in Sources */,
 				B24A66D32C45554C00B870DE /* Materials.cpp in Sources */,
 				B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */,

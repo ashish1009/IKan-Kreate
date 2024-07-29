@@ -84,6 +84,111 @@ namespace IKan
     /// This function returns the asset registry
     static const AssetRegistry& GetAssetRegistry();
     
+    // Template APIs ------------------------------------------------------------------------------------------------
+    template<typename T, typename... Args>
+    static Ref<T> CreateNewAsset(const std::string& filename, const std::string& directoryPath, Args&&... args)
+    {
+      IK_PROFILE();
+      static_assert(std::is_base_of<Asset, T>::value, "CreateNewAsset only works for types derived from Asset");
+      
+      AssetMetadata metadata;
+      metadata.handle = AssetHandle();
+      if (directoryPath.empty() or directoryPath == ".")
+      {
+        metadata.filePath = filename;
+      }
+      else
+      {
+        metadata.filePath = AssetManager::GetRelativePath(directoryPath + "/" + filename);
+      }
+      metadata.isDataLoaded = true;
+      metadata.type = T::GetStaticType();
+      
+      if (FileExists(metadata))
+      {
+        bool foundAvailableFileName = false;
+        int current = 1;
+        
+        while (!foundAvailableFileName)
+        {
+          std::string nextFilePath = directoryPath + "/" + metadata.filePath.stem().string();
+          
+          if (current < 10)
+          {
+            nextFilePath += " (0" + std::to_string(current) + ")";
+          }
+          else
+          {
+            nextFilePath += " (" + std::to_string(current) + ")";
+          }
+          nextFilePath += metadata.filePath.extension().string();
+          
+          if (!std::filesystem::exists(nextFilePath))
+          {
+            foundAvailableFileName = true;
+            metadata.filePath = AssetManager::GetRelativePath(nextFilePath);
+            break;
+          }
+          
+          current++;
+        }
+      }
+      
+      s_assetRegistry[metadata.filePath.string()] = metadata;
+      
+      Ref<T> asset = T::Create(std::forward<Args>(args)...);
+      asset->handle = metadata.handle;
+      s_loadedAssets[asset->handle] = asset;
+      AssetImporter::Serialize(metadata, asset);
+      
+      WriteRegistryToFile();
+      
+      return asset;
+    }
+    
+    template<typename T>
+    static Ref<T> GetAsset(AssetHandle assetHandle)
+    {
+      IK_PROFILE();
+      if (IsMemoryAsset(assetHandle))
+      {
+        return std::dynamic_pointer_cast<T>(s_memoryAssets[assetHandle]);
+      }
+      if (IsLoadedAsset(assetHandle))
+      {
+        return std::dynamic_pointer_cast<T>(s_loadedAssets[assetHandle]);
+      }
+      
+      auto& metadata = GetMetadataInternal(assetHandle);
+      if (!metadata.IsValid())
+      {
+        return nullptr;
+      }
+      
+      Ref<Asset> asset = nullptr;
+      if (!metadata.isDataLoaded)
+      {
+        metadata.isDataLoaded = AssetImporter::TryLoadData(metadata, asset);
+        if (!metadata.isDataLoaded)
+        {
+          return nullptr;
+        }
+        
+        s_loadedAssets[assetHandle] = asset;
+      }
+      else
+      {
+        asset = s_loadedAssets[assetHandle];
+      }
+      return std::dynamic_pointer_cast<T>(asset);
+    }
+    
+    template<typename T>
+    static Ref<T> GetAsset(const std::string& filepath)
+    {
+      return GetAsset<T>(GetAssetHandleFromFilePath(filepath));
+    }
+    
     DELETE_ALL_CONSTRUCTORS(AssetManager);
     
   private:
