@@ -206,12 +206,39 @@ if (!Project::GetActive()) return
     ProjectSerializer serializer(project);
     serializer.Deserialize(projectFilePath);
     Project::SetActive(project);
+    
+    // Push the current project in recent list
+    PushProjectToRecentProjects(projectFilePath);
   }
   
   void RendererLayer::CloseProject()
   {
     IK_PROFILE();
     IK_ASSERT(false, "Implement Later");
+  }
+  
+  void RendererLayer::PushProjectToRecentProjects(const std::filesystem::path &projectPath)
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("RendererLayer", "Pushing Project {0} in Recent list", Utils::FileSystem::IKanAbsolute(projectPath).string());
+    
+    RecentProject projectEntry;
+    projectEntry.name = Utils::String::RemoveExtension(projectPath.filename().string());
+    projectEntry.filePath = projectPath;
+    projectEntry.lastOpened = time(NULL);
+    
+    for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+    {
+      if (it->second.name == projectEntry.name)
+      {
+        m_userPreferences->recentProjects.erase(it);
+        break;
+      }
+    }
+    
+    m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+    UserPreferencesSerializer serializer(m_userPreferences);
+    serializer.Serialize(m_userPreferences->filePath);
   }
   
   // UI APIs ---------------------------------------------------------------------------------------------------------

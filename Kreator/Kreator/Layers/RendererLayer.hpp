@@ -63,6 +63,9 @@ namespace Kreator
     void OpenProject(const std::filesystem::path& projectFilePath);
     /// This function closes the current active project
     void CloseProject();
+    /// This funciton push the current project to recent project
+    /// - Parameter projectPath: Project to be pushed
+    void PushProjectToRecentProjects(const std::filesystem::path& projectPath);
 
     // UI APIs -------------------------------------------
     /// This function starts main ImGui Window with Docking
