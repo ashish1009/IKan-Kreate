@@ -25,6 +25,8 @@
 		B22AB2742C576184007453B7 /* AssetManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2712C576184007453B7 /* AssetManager.cpp */; };
 		B22AB2772C5761D3007453B7 /* AssetImporter.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2762C5761D3007453B7 /* AssetImporter.hpp */; };
 		B22AB2782C5761D3007453B7 /* AssetImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2752C5761D3007453B7 /* AssetImporter.cpp */; };
+		B22AB2852C5768A8007453B7 /* HashGenerator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2842C5768A8007453B7 /* HashGenerator.hpp */; };
+		B22AB2862C5768A8007453B7 /* HashGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2832C5768A8007453B7 /* HashGenerator.cpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -183,6 +185,8 @@
 		B22AB2722C576184007453B7 /* AssetManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetManager.hpp; sourceTree = "<group>"; };
 		B22AB2752C5761D3007453B7 /* AssetImporter.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetImporter.cpp; sourceTree = "<group>"; };
 		B22AB2762C5761D3007453B7 /* AssetImporter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetImporter.hpp; sourceTree = "<group>"; };
+		B22AB2832C5768A8007453B7 /* HashGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HashGenerator.cpp; sourceTree = "<group>"; };
+		B22AB2842C5768A8007453B7 /* HashGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashGenerator.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -474,6 +478,7 @@
 				B2D296FD2C410D660093F4DA /* CoreAssetPath.hpp */,
 				B2D297702C45518E0093F4DA /* AABB.hpp */,
 				B2FDDA9B2C47FFCE0062C6E1 /* UUID.hpp */,
+				B22AB2842C5768A8007453B7 /* HashGenerator.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -486,6 +491,7 @@
 				B2D292C72C3BCD910093F4DA /* LayerStack.cpp */,
 				B2D294A52C3BDE9F0093F4DA /* Window.cpp */,
 				B2FDDA9A2C47FFCE0062C6E1 /* UUID.cpp */,
+				B22AB2832C5768A8007453B7 /* HashGenerator.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -806,6 +812,7 @@
 				B2D297092C4123AC0093F4DA /* OpenGLShaderUniform.hpp in Headers */,
 				B2D294F32C3BF7060093F4DA /* Specifications.hpp in Headers */,
 				B2D2975A2C454A170093F4DA /* EditorCamera.hpp in Headers */,
+				B22AB2852C5768A8007453B7 /* HashGenerator.hpp in Headers */,
 				B2D297112C412E7E0093F4DA /* OpenGLPipeline.hpp in Headers */,
 				B2D294B72C3BF30B0093F4DA /* Renderer.hpp in Headers */,
 				B22AB2502C4A64BB007453B7 /* AssetSerializer.hpp in Headers */,
@@ -990,6 +997,7 @@
 				B2D2976D2C4551560093F4DA /* Mesh.cpp in Sources */,
 				B2D2967C2C3C0AEA0093F4DA /* MacInput.cpp in Sources */,
 				B2FDDA932C47ACDD0062C6E1 /* SceneRenderer.cpp in Sources */,
+				B22AB2862C5768A8007453B7 /* HashGenerator.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
 				B2D296FB2C410BF40093F4DA /* OpenGLShader.cpp in Sources */,
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,

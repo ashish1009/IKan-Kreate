@@ -51,3 +51,4 @@
 
 #include "Core/CoreAssetPath.hpp"
 #include "Core/UUID.hpp"
+#include "Core/HashGenerator.hpp"

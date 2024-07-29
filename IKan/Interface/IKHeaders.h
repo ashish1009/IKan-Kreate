@@ -62,6 +62,7 @@
 #include <Core/Input.hpp>
 #include <Core/AABB.hpp>
 #include <Core/UUID.hpp>
+#include <Core/HashGenerator.hpp>
 
 #include <UI/ImGuiLayer.hpp>
 
