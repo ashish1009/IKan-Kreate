@@ -27,3 +27,4 @@
 #include <UI/ImGuiTheme.hpp>
 #include <UI/ImGuiInputBuffer.hpp>
 #include <UI/ImGuiWidget.hpp>
+#include <UI/ImGuiInputs.hpp>

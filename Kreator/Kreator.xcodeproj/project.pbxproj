@@ -68,6 +68,7 @@
 		B23F45802C57CAD4000A0944 /* ImGuiWidget.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiWidget.hpp; sourceTree = "<group>"; };
 		B23F45872C57CE38000A0944 /* KreatorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = KreatorConsolePanel.cpp; sourceTree = "<group>"; };
 		B23F45882C57CE38000A0944 /* KreatorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = KreatorConsolePanel.hpp; sourceTree = "<group>"; };
+		B23F458B2C57EF64000A0944 /* ImGuiInputs.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ImGuiInputs.hpp; sourceTree = "<group>"; };
 		B2D292482C37EE5A0093F4DA /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D292562C37F4D20093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292602C380F250093F4DA /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
@@ -216,6 +217,7 @@
 				B23F456E2C57C021000A0944 /* ImGuiInputBuffer.hpp */,
 				B23F457F2C57CAD4000A0944 /* ImGuiWidget.cpp */,
 				B23F45802C57CAD4000A0944 /* ImGuiWidget.hpp */,
+				B23F458B2C57EF64000A0944 /* ImGuiInputs.hpp */,
 			);
 			path = UI;
 			sourceTree = "<group>";
