@@ -18,12 +18,12 @@
 #define IK_CONSOLE_CRITICAL(tag, ...) ::IKan::Logger::PrintMessage(::IKan::LogType::Editor, ::IKan::LogLevel::Critical, tag, __VA_ARGS__)
 
 // Core Logs API ------------------------------------------------------------------------------------------------------
-#define IK_LOG_TRACE(tag, ...)   ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Trace, tag, __VA_ARGS__);
-#define IK_LOG_DEBUG(tag, ...)   ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Debug, tag, __VA_ARGS__);
-#define IK_LOG_INFO(tag, ...)    ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Info, tag, __VA_ARGS__);
-#define IK_LOG_WARN(tag, ...)    ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Warning, tag, __VA_ARGS__);
-#define IK_LOG_ERROR(tag, ...)   ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Error, tag, __VA_ARGS__);
-#define IK_LOG_CRITICAL(tag, ...)::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Critical, tag, __VA_ARGS__);
+#define IK_LOG_TRACE(tag, ...)   ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Trace, tag, __VA_ARGS__); IK_CONSOLE_TRACE(tag, __VA_ARGS__);
+#define IK_LOG_DEBUG(tag, ...)   ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Debug, tag, __VA_ARGS__); IK_CONSOLE_DEBUG(tag, __VA_ARGS__);
+#define IK_LOG_INFO(tag, ...)    ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Info, tag, __VA_ARGS__); IK_CONSOLE_INFO(tag, __VA_ARGS__);
+#define IK_LOG_WARN(tag, ...)    ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Warning, tag, __VA_ARGS__); IK_CONSOLE_WARN(tag, __VA_ARGS__);
+#define IK_LOG_ERROR(tag, ...)   ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Error, tag, __VA_ARGS__); IK_CONSOLE_ERROR(tag, __VA_ARGS__);
+#define IK_LOG_CRITICAL(tag, ...)::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Critical, tag, __VA_ARGS__); IK_CONSOLE_CRITICAL(tag, __VA_ARGS__);
 
 // Profiler Log API ---------------------------------------------------------------------------------------------------
 #define IK_PROFILE_TRACE(...)    ::IKan::Logger::PrintMessageWithoutTag(::IKan::LogType::Profiler, ::IKan::LogLevel::Trace, __VA_ARGS__)

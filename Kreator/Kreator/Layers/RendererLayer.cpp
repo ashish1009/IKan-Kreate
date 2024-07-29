@@ -10,6 +10,7 @@
 #include "Application/Kreator.hpp"
 #include "Editor/FolderExplorer.hpp"
 #include "Panels/ContentBrowserPanel.hpp"
+#include "Panels/KreatorConsolePanel.hpp"
 
 namespace Kreator
 {
@@ -21,6 +22,7 @@ if (!Project::GetActive()) return
 
   // Panel IDs
 #define CONTENT_BROWSER_PANEL_ID "ContentBrowserPanel"
+#define CONSOLE_PANEL_ID "EditorConsolePanel"
 
   namespace KreatorUtils
   {
@@ -141,6 +143,10 @@ if (!Project::GetActive()) return
     
     // Add Panels -----------------------
     m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
+    
+#ifdef IK_DEBUG
+    m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
+#endif
   }
   
   void RendererLayer::OnDetach()

@@ -432,6 +432,16 @@ namespace Kreator::UI
     }
   }
   // Buttons ---------------------------------------------------------------------------------------------------------
+  bool ImageButton(const Ref<IKan::Image>& texture, const ImVec2& size, const ImVec4& bgCol, const ImVec4& tintCol,
+                   const ImVec2& uv0, const ImVec2& uv1)
+  {
+    if (!texture)
+    {
+      return false;
+    }
+    ImGuiID id = texture->GetRendererID();
+    return ImGui::ImageButtonEx(id, INT2VOIDP(texture->GetRendererID()), size, uv0, uv1, bgCol, tintCol);
+  }
   bool DrawButton(std::string_view title, FontType fontType, const ImU32& textColor, const ImU32& buttonColor,
                   float rounding, const glm::vec2& size)
   {

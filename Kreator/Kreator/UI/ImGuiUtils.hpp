@@ -198,6 +198,13 @@ namespace Kreator::UI
   void DrawItemActivityOutline(float rounding = 0.0f, bool drawWhenInactive = false, const ImColor& colourWhenActive = ImColor(80, 80, 80));
 
   // Buttons ---------------------------------------------------------------------------------------------------------
+  /// This function renders the image button
+  /// - Parameters:
+  ///   - image: Image Texture
+  ///   - size: Button Size
+  bool ImageButton(const Ref<Image>& image, const ImVec2& size, const ImVec4& bgCol = ImVec4(0, 0, 0, 0),
+                   const ImVec4& tintCol = ImVec4(1, 1, 1, 1), const ImVec2& uv0 = ImVec2(0, 1),
+                   const ImVec2& uv1 = ImVec2(1, 0));
   /// This function draws the text button
   /// - Parameters:
   ///   - title: title of button
