@@ -27,6 +27,8 @@
 		B22AB2782C5761D3007453B7 /* AssetImporter.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2752C5761D3007453B7 /* AssetImporter.cpp */; };
 		B22AB2852C5768A8007453B7 /* HashGenerator.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2842C5768A8007453B7 /* HashGenerator.hpp */; };
 		B22AB2862C5768A8007453B7 /* HashGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2832C5768A8007453B7 /* HashGenerator.cpp */; };
+		B22AB28D2C576CE5007453B7 /* Scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB28C2C576CE5007453B7 /* Scene.hpp */; };
+		B22AB28E2C576CE6007453B7 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB28B2C576CE5007453B7 /* Scene.cpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -187,6 +189,8 @@
 		B22AB2762C5761D3007453B7 /* AssetImporter.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetImporter.hpp; sourceTree = "<group>"; };
 		B22AB2832C5768A8007453B7 /* HashGenerator.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = HashGenerator.cpp; sourceTree = "<group>"; };
 		B22AB2842C5768A8007453B7 /* HashGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashGenerator.hpp; sourceTree = "<group>"; };
+		B22AB28B2C576CE5007453B7 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
+		B22AB28C2C576CE5007453B7 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -356,6 +360,36 @@
 			path = Project;
 			sourceTree = "<group>";
 		};
+		B22AB2872C576C41007453B7 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		B22AB2882C576C48007453B7 /* Editor */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Editor;
+			sourceTree = "<group>";
+		};
+		B22AB2892C576CD3007453B7 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				B22AB28C2C576CE5007453B7 /* Scene.hpp */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
+		B22AB28A2C576CDB007453B7 /* Scene */ = {
+			isa = PBXGroup;
+			children = (
+				B22AB28B2C576CE5007453B7 /* Scene.cpp */,
+			);
+			path = Scene;
+			sourceTree = "<group>";
+		};
 		B2D292672C38180E0093F4DA = {
 			isa = PBXGroup;
 			children = (
@@ -391,6 +425,8 @@
 				B2D2974D2C4547F90093F4DA /* Camera */,
 				B2FDDA942C47FF4E0062C6E1 /* Assets */,
 				B22AB2562C4A6767007453B7 /* Project */,
+				B22AB2872C576C41007453B7 /* Editor */,
+				B22AB2892C576CD3007453B7 /* Scene */,
 			);
 			path = Interface;
 			sourceTree = "<group>";
@@ -408,6 +444,8 @@
 				B2FDDA952C47FF550062C6E1 /* Assets */,
 				B22AB2572C4A6771007453B7 /* Project */,
 				B2D294A82C3BE21A0093F4DA /* Platform */,
+				B22AB2882C576C48007453B7 /* Editor */,
+				B22AB28A2C576CDB007453B7 /* Scene */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";
@@ -794,6 +832,7 @@
 				B2D2968E2C3C15680093F4DA /* RenderCommandQueue.hpp in Headers */,
 				B2FDDA922C47ACDD0062C6E1 /* SceneRenderer.hpp in Headers */,
 				B2D296C32C40EEDA0093F4DA /* OpenGLTexture.hpp in Headers */,
+				B22AB28D2C576CE5007453B7 /* Scene.hpp in Headers */,
 				B22AAF622C4A3EE2007453B7 /* AssetMetadata.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
 				B22AAF6B2C4A437A007453B7 /* AssetRegistry.hpp in Headers */,
@@ -973,6 +1012,7 @@
 				B2D296D42C40F3230093F4DA /* RendererStats.cpp in Sources */,
 				B2D296EB2C41073E0093F4DA /* BufferLayout.cpp in Sources */,
 				B2D294F92C3BF7BD0093F4DA /* OpenGLRendererContext.cpp in Sources */,
+				B22AB28E2C576CE6007453B7 /* Scene.cpp in Sources */,
 				B2D2972C2C44EA250093F4DA /* MathUtils.cpp in Sources */,
 				B2D297512C45480B0093F4DA /* Camera.cpp in Sources */,
 				B22AAF632C4A3EE2007453B7 /* AssetMetadata.cpp in Sources */,

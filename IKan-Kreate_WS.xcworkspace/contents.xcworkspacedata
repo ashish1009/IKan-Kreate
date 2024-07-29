@@ -8,7 +8,7 @@
       location = "group:Resources"
       name = "Resources">
       <FileRef
-         location = "group:ReleaseNotes/v3.3.2.1.md">
+         location = "group:ReleaseNotes/v3.4.2.1.md">
       </FileRef>
       <Group
          location = "group:Logo"
@@ -59,6 +59,9 @@
          </FileRef>
          <FileRef
             location = "group:v3.3.2.1.md">
+         </FileRef>
+         <FileRef
+            location = "group:v3.4.2.1.md">
          </FileRef>
       </Group>
    </Group>
