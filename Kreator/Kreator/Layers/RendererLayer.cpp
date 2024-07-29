@@ -90,7 +90,9 @@ if (!Project::GetActive()) return
   void RendererLayer::OnEvent(Event& event)
   {
     RETRUN_IF_NO_PROJECT();
+    
     m_editorCamera.OnEvent(event);
+    m_panels.OnEvent(event);
   }
   
   void RendererLayer::OnImGuiRender()
@@ -99,7 +101,10 @@ if (!Project::GetActive()) return
     
     // Docked Windows-----------
     UI_StartMainWindowDocking();
-    UI_Viewport();    
+
+    UI_Viewport();
+    m_panels.OnImGuiRender();
+
     UI_EndMainWindowDocking();
   }
   
@@ -207,6 +212,9 @@ if (!Project::GetActive()) return
     serializer.Deserialize(projectFilePath);
     Project::SetActive(project);
     
+    // Update all panel project
+    m_panels.OnProjectChanged(project);
+
     // Push the current project in recent list
     PushProjectToRecentProjects(projectFilePath);
   }
@@ -242,6 +250,14 @@ if (!Project::GetActive()) return
   }
   
   // UI APIs ---------------------------------------------------------------------------------------------------------
+  void RendererLayer::UI_WelcomePopup()
+  {
+    m_welcomePopup.Show(ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar, [this]()
+                        {
+      
+    });
+  }
+  
   void RendererLayer::UI_StartMainWindowDocking()
   {
     IK_PERFORMANCE("RendererLayer::UI_StartMainWindowDocking");

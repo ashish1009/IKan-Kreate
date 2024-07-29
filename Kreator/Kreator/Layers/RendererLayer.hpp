@@ -68,6 +68,9 @@ namespace Kreator
     void PushProjectToRecentProjects(const std::filesystem::path& projectPath);
 
     // UI APIs -------------------------------------------
+    /// This function shows the Welcome screen Popup
+    void UI_WelcomePopup();
+
     /// This function starts main ImGui Window with Docking
     void UI_StartMainWindowDocking();
     /// This function ends Main ImGui window with Docking
@@ -76,6 +79,9 @@ namespace Kreator
     void UI_Viewport();
 
     // Memeber variables ----------------------------------------------------------------------------------------------
+    // Popups/Panel --------------------------------------
+    UI::Popup m_welcomePopup {"Welcome Screen"};
+
     // Application data ----------------------------------
     KreatorDirectories m_directories;
     Ref<UserPreferences> m_userPreferences;
@@ -86,7 +92,8 @@ namespace Kreator
 
     // Editor Data ---------------------------------------
     EditorCamera m_editorCamera;
-    
+    PanelManager m_panels;
+
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
   };
