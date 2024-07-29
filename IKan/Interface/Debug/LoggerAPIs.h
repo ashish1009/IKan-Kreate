@@ -9,6 +9,14 @@
 
 #ifdef IK_ENABLE_LOG
 
+// Console Logs API ---------------------------------------------------------------------------------------------------
+#define IK_CONSOLE_TRACE(tag, ...)    ::IKan::Logger::PrintMessage(::IKan::LogType::Editor, ::IKan::LogLevel::Trace, tag, __VA_ARGS__)
+#define IK_CONSOLE_DEBUG(tag, ...)    ::IKan::Logger::PrintMessage(::IKan::LogType::Editor, ::IKan::LogLevel::Debug, tag, __VA_ARGS__)
+#define IK_CONSOLE_INFO(tag, ...)     ::IKan::Logger::PrintMessage(::IKan::LogType::Editor, ::IKan::LogLevel::Info, tag, __VA_ARGS__)
+#define IK_CONSOLE_WARN(tag, ...)     ::IKan::Logger::PrintMessage(::IKan::LogType::Editor, ::IKan::LogLevel::Warning, tag, __VA_ARGS__)
+#define IK_CONSOLE_ERROR(tag, ...)    ::IKan::Logger::PrintMessage(::IKan::LogType::Editor, ::IKan::LogLevel::Error, tag, __VA_ARGS__)
+#define IK_CONSOLE_CRITICAL(tag, ...) ::IKan::Logger::PrintMessage(::IKan::LogType::Editor, ::IKan::LogLevel::Critical, tag, __VA_ARGS__)
+
 // Core Logs API ------------------------------------------------------------------------------------------------------
 #define IK_LOG_TRACE(tag, ...)   ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Trace, tag, __VA_ARGS__);
 #define IK_LOG_DEBUG(tag, ...)   ::IKan::Logger::PrintMessage(::IKan::LogType::Core, ::IKan::LogLevel::Debug, tag, __VA_ARGS__);
@@ -26,6 +34,13 @@
 #define IK_PROFILE_CRITICAL(...) ::IKan::Logger::PrintMessageWithoutTag(::IKan::LogType::Profiler, ::IKan::LogLevel::Critical, __VA_ARGS__)
 
 #else
+
+#define IK_CONSOLE_TRACE(tag, ...)
+#define IK_CONSOLE_DEBUG(tag, ...)
+#define IK_CONSOLE_INFO(tag, ...)
+#define IK_CONSOLE_WARN(tag, ...)
+#define IK_CONSOLE_ERROR(tag, ...)
+#define IK_CONSOLE_CRITICAL(tag, ...)
 
 #define IK_LOG_TRACE(...)
 #define IK_LOG_DEBUG(...)

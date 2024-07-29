@@ -34,7 +34,7 @@ f(PanelManager) f(EditorConsolePanel)\
   /// This enum stores the type of logger
   enum class LogType : uint8_t
   {
-    Core, Profiler
+    Core, Profiler, Editor
   };
   
   enum class LogLevel : uint8_t

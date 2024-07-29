@@ -61,6 +61,14 @@ namespace Kreator
     IK_PROFILE();
     IK_LOG_TRACE("RendererLayer", "Attaching '{0} Layer' to application", GetName());
     
+    // Create the Editor logger
+    // Profiler logger
+    Logger::Create(LoggerSpecification::Create().
+                   Type(LogType::Editor).
+                   Level(LogLevel::Trace).
+                   Name("PROFILER").
+                   OverrideSink(CreateRef<EditorConsoleSink>(1)));
+    
     meshCube = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/Kreator/Projects/3D/TestProject/Assets/Meshes/Default/Cube.fbx");
     meshMaterial = Material::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
     texImage = TextureFactory::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/Kreator/Outputs/WelcomeScreen.png");

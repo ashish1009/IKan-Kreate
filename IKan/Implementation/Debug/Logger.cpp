@@ -42,6 +42,7 @@ namespace IKan
       {
         case LogType::Core:     return "Core";
         case LogType::Profiler: return "Profiler";
+        case LogType::Editor:   return "Editor";
         default:
           assert(false);
       }
