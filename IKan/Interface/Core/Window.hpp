@@ -19,8 +19,6 @@ namespace IKan
     uint32_t width {1600}, height {900};
     bool isFullScreen {false};
     bool hideTitleBar {false};
-    bool startMaximized {false};
-    bool resizable {true};
   };
 
   /// This class is the abstract for GLFW window. Provides the APIs for using GLFW window data
@@ -68,8 +66,6 @@ namespace IKan
     // Getters --------------------------------------------------------------------------------------------------------
     /// This function checks is window maximized.
     virtual bool IsMaximized() const = 0;
-    /// This function checks is window maximized at start.
-    virtual bool IsStartMaximized() const = 0;
     /// This function returns is window active
     virtual bool IsActive() const = 0;
     /// This function returns is window titlebar hidden.

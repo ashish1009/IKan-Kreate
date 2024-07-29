@@ -69,8 +69,6 @@ namespace IKan
     // Getters --------------------------------------------------------------------------------------------------------
     /// This function checks is window maximized.
     bool IsMaximized() const override;
-    /// This function checks is window maximized at start.
-    bool IsStartMaximized() const override;
     /// This function returns is window actived.
     bool IsActive() const override;
     /// This function returns is window titlebar hidden.

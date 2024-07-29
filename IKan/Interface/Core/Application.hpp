@@ -23,6 +23,8 @@ namespace IKan
     WindowSpecification windowSpecification;
     RendererType rendererType {RendererType::Invalid};
     std::filesystem::path iniFilePath {};
+    bool startMaximized {false};
+    bool resizable {true};
   };
   
   /// This class is the base Application for IKan Engine.

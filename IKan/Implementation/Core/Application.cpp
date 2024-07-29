@@ -10,7 +10,7 @@
 #include "Renderer/RendererStats.hpp"
 
 /// IKan Engine Version
-static const std::string IKanVersion = "3.4";
+static const std::string IKanVersion = "3.5";
 
 namespace IKan
 {
@@ -32,6 +32,13 @@ namespace IKan
     // Set the application callback to window
     m_window->SetEventFunction(IK_BIND_EVENT_FN(Application::HandleEvents));
     
+    // Control Window
+    m_window->SetResizable(m_specification.resizable);
+    if (m_specification.startMaximized)
+    {
+      m_window->Maximize();
+    }
+
     // Start game loop if window is created
     if (m_window)
     {

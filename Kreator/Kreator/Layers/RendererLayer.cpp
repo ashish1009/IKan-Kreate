@@ -9,10 +9,6 @@
 
 namespace Kreator
 {
-  Ref<Mesh> meshCube;
-  Ref<Material> meshMaterial;
-  Ref<Image> texImage;
-
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -30,13 +26,13 @@ namespace Kreator
       }
     }
   } // namespace Utils
-
+  
   RendererLayer* RendererLayer::s_instance = nullptr;
   RendererLayer& RendererLayer::Get()
   {
     return *s_instance;
   }
-
+  
   RendererLayer::RendererLayer(const KreatorDirectories& directories)
   : Layer("Kreator Renderer"), m_directories(directories), m_viewportRenderer("Primary Viewport"), m_miniViewportRenderer("Mini Viewport"),
   m_secondaryViewportRenderer("Secondary Viewport")
@@ -68,56 +64,26 @@ namespace Kreator
                    Level(LogLevel::Trace).
                    Name("PROFILER").
                    OverrideSink(CreateRef<EditorConsoleSink>(1)));
-    
-    meshCube = Mesh::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/Kreator/Projects/3D/TestProject/Assets/Meshes/Default/Cube.fbx");
-    meshMaterial = Material::Create("/Users/ashish./iKan_storage/Github/Product/IKan-Kreate/IKan/Assets/Shaders/PBR_StaticShader.glsl");
-    texImage = TextureFactory::Create("/Users/ashish./iKan_storage/Github/Product/Kreator/Kreator/Outputs/WelcomeScreen.png");
-    
-    m_viewportRenderer.SetDebugRenderer([this](){
-      Renderer2D::BeginBatch(m_editorCamera.GetUnReversedViewProjection(), m_editorCamera.GetViewMatrix());
-      Renderer2D::SubmitQuad({0.5, 0.5, 0}, {0.5, 0.5}, {0, 0, 0}, {1, 1, 1, 1}, texImage);
-      Renderer2D::SubmitRect({0.0, 0.0, 0}, {0.5, 0.5});
-      Renderer2D::SubmitText("Sample Text", {0, 0, 0}, {0.1, 0.1});
-      Renderer2D::SubmitCircle({-0.5, -0.5, 0}, 0.5);
-      Renderer2D::EndBatch();
-      
-      meshCube->GetPipeline()->Bind();
-      static glm::mat4 transform = Utils::Math::UnitMat4;
-      meshMaterial->Set("u_ViewProjection", m_editorCamera.GetUnReversedViewProjection());
-      for (const SubMesh& submesh : meshCube->GetSubMeshes())
-      {
-        meshMaterial->Set("u_Transform", transform * submesh.transform);
-        meshMaterial->Bind();
-        Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
-      }
-    });
-    
-    // Create new project
-    CreateProject("../../../Kreator/Projects/FirstProject");
   }
   
   void RendererLayer::OnDetach()
   {
     IK_PROFILE();
     IK_LOG_TRACE("RendererLayer", "Detaching '{0} Layer' from application", GetName());
-    
-    meshCube.reset();
-    meshMaterial.reset();
-    texImage.reset();
   }
   
-  void RendererLayer::OnUpdate([[maybe_unused]] TimeStep ts)
+  void RendererLayer::OnUpdate(TimeStep ts)
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     
     m_editorCamera.OnUpdate(ts);
     m_editorCamera.SetActive(true);
-
+    
     m_viewportRenderer.BeginScene();
     m_viewportRenderer.EndScene();
   }
   
-  void RendererLayer::OnEvent([[maybe_unused]] Event& event)
+  void RendererLayer::OnEvent(Event& event)
   {
     m_editorCamera.OnEvent(event);
   }
@@ -126,18 +92,14 @@ namespace Kreator
   {
     // Docked Windows-----------
     UI_StartMainWindowDocking();
-    UI_Viewport();
-        
-    // Should be rendered last inside docker
-    UI_StatisticsPanel();
-
+    UI_Viewport();    
     UI_EndMainWindowDocking();
   }
   
   void RendererLayer::UpdateViewportSize()
   {
     IK_PROFILE()
-        
+    
     FixedCamera::SetViewport(m_primaryViewport.width, m_primaryViewport.height);
     
     m_editorCamera.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
@@ -161,7 +123,7 @@ namespace Kreator
       {
         CloseProject();
       }
-
+      
       // Create project directory
       // Copy the template files
       std::filesystem::path templateProjectDir = m_directories.clientResourcePath / "TemplateProject";
@@ -231,7 +193,7 @@ namespace Kreator
     {
       CloseProject();
     }
-
+    
     // Create new project fill the config with file data
     Ref<Project> project = CreateRef<Project>();
     ProjectSerializer serializer(project);
@@ -310,12 +272,12 @@ namespace Kreator
     
     UI::ScopedStyle windowPadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::Begin("Viewport");
-
+    
     m_primaryViewport.isHovered = ImGui::IsWindowHovered();
     m_primaryViewport.isFocused = ImGui::IsWindowFocused();
-
+    
     const ImVec2& size = ImGui::GetContentRegionAvail();
-
+    
     // Updating the View port size and kreator data w.r.t. primary viewport
     bool zeroSizeViewport = 0 == size.x or 0 == size.y;
     bool sameSizeViewport = size.x == m_primaryViewport.width and size.x == m_primaryViewport.height;
@@ -330,22 +292,7 @@ namespace Kreator
     
     // Render viewport image
     UI::Image(m_viewportRenderer.GetFinalImage(), size);
-
+    
     ImGui::End();
-  }
-  
-  void RendererLayer::UI_StatisticsPanel()
-  {
-    IK_PERFORMANCE("RendererLayer::UI_StatisticsPanel");
-    if (ImGui::Begin("Statistics"))
-    {
-      const auto& perFrameData = PerformanceProfiler::Get().GetPerFrameData();
-      for (auto&& [name, time] : perFrameData)
-      {
-        ImGui::Text("%s : %f", name, time);
-      }
-
-      ImGui::End();
-    }
   }
 } // namespace Kreator

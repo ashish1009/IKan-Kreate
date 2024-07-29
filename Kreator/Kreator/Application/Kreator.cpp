@@ -11,7 +11,7 @@
 namespace Kreator
 {
   /// IKan Engine Version
-  static const std::string KreatorVersion = "2.1";
+  static const std::string KreatorVersion = "3.0";
   
   KreatorApp::KreatorApp(const ApplicationSpecification& appSpec, const KreatorDirectories& kreatorDirectories)
   : Application(appSpec), m_kreatorDirectories(kreatorDirectories)
@@ -72,15 +72,16 @@ Scope<Application> CreateApplication([[maybe_unused]] int argc, [[maybe_unused]]
   applicationSpec.windowSpecification.title = "Kreator";
   applicationSpec.windowSpecification.width = 1600;
   applicationSpec.windowSpecification.height = 900;
-  applicationSpec.windowSpecification.hideTitleBar = false;
-  applicationSpec.windowSpecification.resizable = true;
-  applicationSpec.windowSpecification.startMaximized = false;
+  applicationSpec.windowSpecification.hideTitleBar = true;
 #ifdef DEBUG
   applicationSpec.windowSpecification.isFullScreen = false;
 #else
   applicationSpec.windowSpecification.isFullScreen = true;
 #endif
-  
+
+  applicationSpec.resizable = true;
+  applicationSpec.startMaximized = true;
+
   // Ini file
   applicationSpec.iniFilePath = "../../../Kreator/Kreator.ini";
 

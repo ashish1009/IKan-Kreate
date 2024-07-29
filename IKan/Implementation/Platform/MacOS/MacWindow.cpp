@@ -70,13 +70,8 @@ namespace IKan
     
     // Set GLFW callbacks.
     SetEventCallbacks();
-    
-    // Window controlls from client.
-    if (m_data.specification.startMaximized)
-    {
-      Maximize();
-    }
-    SetResizable(m_data.specification.resizable);
+
+    // Default window at center
     SetAtCenter();
     
     // Create the renderer context.
@@ -315,11 +310,6 @@ namespace IKan
   bool MacWindow::IsMaximized() const
   {
     return static_cast<bool>(glfwGetWindowAttrib(m_window, GLFW_MAXIMIZED));
-  }
-  
-  bool MacWindow::IsStartMaximized() const
-  {
-    return m_data.specification.startMaximized;
   }
   
   bool MacWindow::IsTitleBarHidden() const
