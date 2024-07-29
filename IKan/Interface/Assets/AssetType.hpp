@@ -12,6 +12,7 @@ namespace IKan
   static const std::string MaterialExtension {".ikmat"};
   static const std::string PhysicsExtension {".ikphysics"};
   static const std::string PrefabExtension {".ikprefab"};
+  static const std::string SceneExtension {".ikscene"};
 
   /// This enum stores flag for actions in assets
   enum class AssetFlag : uint16_t
