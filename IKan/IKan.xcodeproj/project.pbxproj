@@ -34,6 +34,10 @@
 		B22AB2962C576E74007453B7 /* EditorPanelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */; };
 		B22AB2A52C576F86007453B7 /* EditorConsoleMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2A32C576F86007453B7 /* EditorConsoleMessage.cpp */; };
 		B22AB2A62C576F86007453B7 /* EditorConsoleMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2A42C576F86007453B7 /* EditorConsoleMessage.hpp */; };
+		B22AB2A92C576FEB007453B7 /* EditorConsoleSink.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2A72C576FEB007453B7 /* EditorConsoleSink.cpp */; };
+		B22AB2AA2C576FEB007453B7 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2A82C576FEB007453B7 /* EditorConsoleSink.hpp */; };
+		B22AB2AD2C57701B007453B7 /* EditorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2AB2C57701B007453B7 /* EditorConsolePanel.cpp */; };
+		B22AB2AE2C57701B007453B7 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2AC2C57701B007453B7 /* EditorConsolePanel.hpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -201,6 +205,10 @@
 		B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanelManager.hpp; sourceTree = "<group>"; };
 		B22AB2A32C576F86007453B7 /* EditorConsoleMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleMessage.cpp; sourceTree = "<group>"; };
 		B22AB2A42C576F86007453B7 /* EditorConsoleMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleMessage.hpp; sourceTree = "<group>"; };
+		B22AB2A72C576FEB007453B7 /* EditorConsoleSink.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleSink.cpp; sourceTree = "<group>"; };
+		B22AB2A82C576FEB007453B7 /* EditorConsoleSink.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleSink.hpp; sourceTree = "<group>"; };
+		B22AB2AB2C57701B007453B7 /* EditorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsolePanel.cpp; sourceTree = "<group>"; };
+		B22AB2AC2C57701B007453B7 /* EditorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsolePanel.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -409,6 +417,8 @@
 			isa = PBXGroup;
 			children = (
 				B22AB2A42C576F86007453B7 /* EditorConsoleMessage.hpp */,
+				B22AB2A82C576FEB007453B7 /* EditorConsoleSink.hpp */,
+				B22AB2AC2C57701B007453B7 /* EditorConsolePanel.hpp */,
 			);
 			path = Console;
 			sourceTree = "<group>";
@@ -417,6 +427,8 @@
 			isa = PBXGroup;
 			children = (
 				B22AB2A32C576F86007453B7 /* EditorConsoleMessage.cpp */,
+				B22AB2A72C576FEB007453B7 /* EditorConsoleSink.cpp */,
+				B22AB2AB2C57701B007453B7 /* EditorConsolePanel.cpp */,
 			);
 			path = Console;
 			sourceTree = "<group>";
@@ -857,6 +869,7 @@
 			isa = PBXHeadersBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B22AB2AA2C576FEB007453B7 /* EditorConsoleSink.hpp in Headers */,
 				B2D2972B2C44EA250093F4DA /* MathUtils.hpp in Headers */,
 				B22AB2732C576184007453B7 /* AssetManager.hpp in Headers */,
 				B2FDDA9C2C47FFCE0062C6E1 /* UUID.hpp in Headers */,
@@ -866,6 +879,7 @@
 				B22AB28D2C576CE5007453B7 /* Scene.hpp in Headers */,
 				B22AAF622C4A3EE2007453B7 /* AssetMetadata.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
+				B22AB2AE2C57701B007453B7 /* EditorConsolePanel.hpp in Headers */,
 				B22AAF6B2C4A437A007453B7 /* AssetRegistry.hpp in Headers */,
 				B2D2976E2C4551560093F4DA /* Mesh.hpp in Headers */,
 				B2D296EE2C41093F0093F4DA /* Shader.hpp in Headers */,
@@ -1079,6 +1093,7 @@
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
 				B22AAF6A2C4A437A007453B7 /* AssetRegistry.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
+				B22AB2AD2C57701B007453B7 /* EditorConsolePanel.cpp in Sources */,
 				B24A66D32C45554C00B870DE /* Materials.cpp in Sources */,
 				B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */,
 				B22AB24F2C4A64BB007453B7 /* AssetSerializer.cpp in Sources */,
@@ -1092,6 +1107,7 @@
 				B2FDDA992C47FF630062C6E1 /* Asset.cpp in Sources */,
 				B2FDDA9D2C47FFCE0062C6E1 /* UUID.cpp in Sources */,
 				B2D296772C3C01D40093F4DA /* ImGuiLayer.cpp in Sources */,
+				B22AB2A92C576FEB007453B7 /* EditorConsoleSink.cpp in Sources */,
 				B2D297062C4123850093F4DA /* ShaderUniform.cpp in Sources */,
 				B2D292A62C391E6E0093F4DA /* Timer.cpp in Sources */,
 				B2D297122C412E7E0093F4DA /* OpenGLPipeline.cpp in Sources */,

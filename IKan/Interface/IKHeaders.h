@@ -90,3 +90,5 @@
 #include <Editor/EditorPanel.hpp>
 #include <Editor/EditorPanelManager.hpp>
 #include <Editor/Console/EditorConsoleMessage.hpp>
+#include <Editor/Console/EditorConsolePanel.hpp>
+#include <Editor/Console/EditorConsoleSink.hpp>
