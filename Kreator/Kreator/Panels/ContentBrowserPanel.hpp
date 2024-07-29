@@ -42,4 +42,32 @@ namespace Kreator
   private:
     std::vector<AssetHandle> m_selections;
   };
+  
+  /// This structure stores the content browser panel item in list
+  struct ContentBrowserItemList : public VectorIterator<Ref<ContentBrowserItem>>
+  {
+    static constexpr size_t InvalidItem = std::numeric_limits<size_t>::max();
+    std::vector<Ref<ContentBrowserItem>> items;
+    
+    /// Default constructor
+    ContentBrowserItemList();
+    
+    // Operators ----------------------------------------------------------------------------------------------------
+    Ref<ContentBrowserItem>& operator[](size_t index) { return items[index]; }
+    const Ref<ContentBrowserItem>& operator[](size_t index) const { return items[index]; }
+    
+    /// This function clears the items
+    void Clear();
+    /// This function erases the item
+    /// - Parameter handle: Item Handle to be removed
+    void Erase(AssetHandle handle);
+    /// This function searches the item from list
+    /// - Parameter handle: Item Handle
+    size_t FindItem(AssetHandle handle) const;
+    
+    /// Copy operator
+    /// - Parameter other: other
+    ContentBrowserItemList& operator=(const ContentBrowserItemList& other);
+  };
+
 } // namespace Kreator
