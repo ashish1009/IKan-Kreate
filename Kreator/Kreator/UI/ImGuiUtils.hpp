@@ -11,6 +11,24 @@ using namespace IKan;
 
 namespace Kreator::UI
 {
+  // Wrappers --------------------------------------------------------------------------------------------------------
+  /// This function set the next imgui window at center
+  void SetNextWindowAtCenter();
+  /// This function set the next imgui window at center with size
+  /// - Parameter size: size of next window
+  void SetNextWindowAtCenterWithSize(const ImVec2& size);
+  /// This function set the next imgui window position
+  /// - Parameter pos: position of next window
+  void SetNextWindowPos(const ImVec2& pos);
+  /// This function set the next imgui window size
+  /// - Parameter size: size of next window
+  void SetNextWindowSize(const ImVec2& size);
+
+  /// This function push unque id for ImGui
+  void PushID();
+  /// This function pop last used id for ImGui
+  void PopID();
+
   // Image/ Texture ---------------------------------------------------------------------------------------------------
   /// This function renders Texture in current ImGui window
   /// - Parameters:
