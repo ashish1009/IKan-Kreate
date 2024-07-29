@@ -12,6 +12,9 @@ namespace Kreator
 #define RETRUN_IF_NO_PROJECT() \
 if (!Project::GetActive()) return
 
+  // Kretor Resource Path
+#define KreatorResourcePath(path) std::filesystem::absolute(m_directories.clientResourcePath / path)
+
   namespace KreatorUtils
   {
     /// This function replace the project name
@@ -47,6 +50,9 @@ if (!Project::GetActive()) return
     s_instance = this;
     
     IK_LOG_INFO("RendererLayer", "Creating '{0} Layer' instance", GetName());
+    
+    // Load Textures -------------------------------------------------------------------------------------------------
+    m_welcomeIcon = TextureFactory::Create(KreatorResourcePath("Textures/Logo/WelcomeIKan.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -288,7 +294,27 @@ if (!Project::GetActive()) return
   {
     m_welcomePopup.Show(ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar, [this]()
                         {
+      // Create Table in popup
+      UI::ScopedTable welcomeTable({{"##About", 600.0f}, {"##RecentProjects", -1 /* streched to width */}});
+
+      // Background color as popup BG
+      UI::ScopedColor childBG(ImGuiCol_ChildBg, UI::Color::PopupBackground);
       
+      // About/New_Project Column -----------------------------------------------------
+      welcomeTable.ShowColumn(0, [this]()
+                              {
+        // Kreator Logo and title
+        {
+          // Icon
+          static constexpr glm::vec2 logoSize {200, 200};
+          UI::Image(m_welcomeIcon, logoSize, UI::AllignX::Center);
+          ImGui::Separator();
+        }
+      });
+      
+      welcomeTable.ShowColumn(1, [this]() {
+
+      });
     });
   }
   

@@ -82,6 +82,9 @@ namespace Kreator
     // Popups/Panel --------------------------------------
     UI::Popup m_welcomePopup {"Welcome Screen"};
 
+    // Applicaiton Textures ------------------------------
+    Ref<Image> m_welcomeIcon;
+
     // Application data ----------------------------------
     KreatorDirectories m_directories;
     Ref<UserPreferences> m_userPreferences;

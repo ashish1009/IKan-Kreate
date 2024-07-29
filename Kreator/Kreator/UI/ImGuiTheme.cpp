@@ -74,7 +74,7 @@ namespace Kreator::UI
           UI::Color::HeaderActive           = IM_COL32(100, 0, 0, 255);
           
           // Widget and Column Separator
-          UI::Color::Separator              = IM_COL32(100, 0, 0, 255);
+          UI::Color::Separator              = IM_COL32(50, 70, 90, 255);
           UI::Color::SeparatorActive        = IM_COL32(100, 0, 0, 255);
           UI::Color::SeparatorHovered       = IM_COL32(100, 0, 0, 255);
           
@@ -102,7 +102,7 @@ namespace Kreator::UI
           
           // Table
           UI::Color::TableHeaderBg          = IM_COL32(100, 0, 0, 255);
-          UI::Color::TableBorderLight       = IM_COL32(100, 0, 0, 255);
+          UI::Color::TableBorderLight       = UI::Color::Separator;
           UI::Color::TableBorderStrong      = IM_COL32(100, 0, 0, 255);
           UI::Color::TableRowBg             = IM_COL32(100, 0, 0, 255);
           UI::Color::TableRowBgAlt          = IM_COL32(100, 0, 0, 255);
