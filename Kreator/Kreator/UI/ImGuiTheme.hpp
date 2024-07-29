@@ -130,4 +130,23 @@ namespace Kreator::UI
     /// - Parameter color: vec4 coloe
     static ImU32 U32FromVec3(const glm::vec4& color);
   };
+  
+  /// This enum stores the fonts of Kreator
+  enum class FontType : uint8_t
+  {
+    Regular, HugeHeader, SemiHeader, Bold, Italic, FixedWidth,
+    Max // Should be at last for loop in class
+  };
+  
+  /// This class provides the wrapper APIs to load and use the ImGui fonts
+  class Font
+  {
+  public:
+    /// This function changes the imgui font
+    ///  - Parameter otherFonts: other fonts
+    static void Load(const std::unordered_map<FontType, IKan::UI::ImGuiFont>& otherFonts);
+    /// This function returns the font from type enum
+    /// - Parameter type: Font type
+    static ImFont* Get(FontType type);
+  };
 } // namespace Kreator::UI

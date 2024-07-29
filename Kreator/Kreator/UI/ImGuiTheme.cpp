@@ -227,4 +227,28 @@ namespace Kreator::UI
   {
     return ImGui::ColorConvertFloat4ToU32({color.r, color.g, color.b, color.a});
   }
+  
+  void Font::Load(const std::unordered_map<FontType, IKan::UI::ImGuiFont>& otherFonts)
+  {
+    IK_PROFILE();
+    
+    auto& imguiLayer = Application::Get().GetImGuiLayer();
+    imguiLayer.OnDetach();
+    imguiLayer.OnAttach();
+    
+    // Store the fonts in vector in same order which we need to pass to ImGui
+    std::vector <IKan::UI::ImGuiFont> fonts(otherFonts.size());
+    for (uint8_t fontIdx = 0; fontIdx < (uint8_t)FontType::Max; fontIdx++)
+    {
+      fonts[fontIdx] = otherFonts.at((FontType)fontIdx);
+    }
+    
+    imguiLayer.LoadFonts(fonts);
+  }
+  
+  ImFont* Font::Get(FontType type)
+  {
+    auto fonts = ImGui::GetIO().Fonts->Fonts;
+    return fonts.size() > 1 ? fonts[static_cast<int32_t>(type)] : fonts[0];
+  }
 } // namespace Kreator::UI

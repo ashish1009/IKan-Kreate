@@ -7,9 +7,6 @@
    <Group
       location = "group:Resources"
       name = "Resources">
-      <FileRef
-         location = "group:ReleaseNotes/v3.5.3.0.md">
-      </FileRef>
       <Group
          location = "group:Logo"
          name = "Logo">
