@@ -155,6 +155,16 @@ namespace Kreator::UI
   ImRect RectOffset(const ImRect& rect, const ImVec2& xy);
 
   // Buttons ---------------------------------------------------------------------------------------------------------
+  /// This function draws the text button
+  /// - Parameters:
+  ///   - title: title of button
+  ///   - fontType: font of text
+  ///   - textColor: color of text
+  ///   - buttonColor: color of button
+  ///   - rounding: side rounding factor
+  ///   - size: size ofbutton
+  bool DrawButton(std::string_view title, FontType fontType, const ImU32& textColor, const ImU32& buttonColor,
+                  float rounding = 0, const glm::vec2& size = Utils::Math::ZeroVec2);
   /// This function draws the image button
   /// - Parameters:
   ///   - imageNormal: Normal Image icon
@@ -169,7 +179,7 @@ namespace Kreator::UI
   void DrawButtonImage(const Ref<IKan::Image>& imageNormal, const Ref<IKan::Image>& imageHovered,
                        const Ref<IKan::Image>& imagePressed, const ImVec2& rectMin, const ImVec2& rectMax,
                        const ImU32& tintNormal = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 0.8f),
-                       const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.2f),
+                       const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.5f),
                        const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));
 
   /// This function draws the image button
@@ -181,6 +191,20 @@ namespace Kreator::UI
   ///   - rectangle: image rectangle
   /// - Note: Do not draw actual presaable button
   void DrawButtonImage(const Ref<IKan::Image>& image, const ImRect& rectangle,
+                       const ImU32& tintNormal = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 0.8f),
+                       const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.5f),
+                       const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));
+  /// This function Draw the button Texture
+  /// - Parameters:
+  ///   - title: title of button
+  ///   - texture: Button Texture texture
+  ///   - size: size of icon
+  ///   - offset: position of icon
+  ///   - tintNormal: tint normal color
+  ///   - tintHovered: tint hovered color
+  ///   - tintPressed: tint pressed color
+  bool DrawButtonImage(std::string_view title, const Ref<IKan::Image>& texture, const glm::vec2& size, const glm::vec2& offset = {0.0f, 0.0f},
+                       bool highlightHover = false,
                        const ImU32& tintNormal = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 0.8f),
                        const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.5f),
                        const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));

@@ -211,6 +211,29 @@ namespace Kreator::UI
   }
   
   // Buttons ---------------------------------------------------------------------------------------------------------
+  bool DrawButton(std::string_view title, FontType fontType, const ImU32& textColor, const ImU32& buttonColor,
+                  float rounding, const glm::vec2& size)
+  {
+    ImGui::PushID(title.data());
+    
+    UI::ScopedStyle roundingStyle(ImGuiStyleVar_FrameRounding, rounding);
+    UI::ScopedColor textColorStyle(ImGuiCol_Text, textColor);
+    UI::ScopedFont headerStyle(UI::Font::Get(fontType));
+    
+    glm::vec3 color = Color::Vec3FromU32(buttonColor);
+    ImVec4 tintNormal = {color.r, color.g, color.b, 0.8};
+    ImVec4 tintHovered = {color.r, color.g, color.b, 0.9};
+    ImVec4 tintPressed = {color.r, color.g, color.b, 1.0};
+    
+    UI::ScopedColor button(ImGuiCol_Button, tintNormal);
+    UI::ScopedColor buttonhovered(ImGuiCol_ButtonHovered, tintHovered);
+    UI::ScopedColor buttonavtive(ImGuiCol_ButtonActive, tintPressed);
+    
+    bool clicked = ImGui::Button(title.data(), {size.x, size.y});
+    
+    ImGui::PopID();
+    return clicked;
+  }
   void DrawButtonImage(const Ref<IKan::Image>& imageNormal, const Ref<IKan::Image>& imageHovered,
                        const Ref<IKan::Image>& imagePressed, const ImVec2& rectMin, const ImVec2& rectMax,
                        const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed)
@@ -236,6 +259,39 @@ namespace Kreator::UI
     DrawButtonImage(image, image, image, rectangle.Min, rectangle.Max, tintNormal, tintHovered, tintPressed);
   }
 
+  bool DrawButtonImage(std::string_view title, const Ref<IKan::Image>& texture, const glm::vec2& size, const glm::vec2& offset,
+                       bool highlightHover, const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed)
+  {
+    UI::ShiftCursorX(offset.x);
+    UI::ShiftCursorY(offset.y);
+    const bool clicked = ImGui::InvisibleButton(title.data(), ImVec2(size.x, size.y), ImGuiButtonFlags_AllowItemOverlap);
+    
+    // Modify the icon size if hovered
+    glm::vec2 iconSizeModified = size;
+    glm::vec2 hoveredLargeIconOffset = {0.0f, 0.0f};
+    if (IsItemHovered() and highlightHover)
+    {
+      iconSizeModified.x += 20.0f;
+      iconSizeModified.y += 20.0f;
+      
+      hoveredLargeIconOffset = {5.0f, 5.0f};
+    }
+    
+    const ImVec2 logoRectStart =
+    {
+      ImGui::GetItemRectMin().x - hoveredLargeIconOffset.x,
+      ImGui::GetItemRectMin().y - hoveredLargeIconOffset.y
+    };
+    const ImVec2 logoRectMax =
+    {
+      logoRectStart.x + iconSizeModified.x,
+      logoRectStart.y + iconSizeModified.y
+    };
+    
+    DrawButtonImage(texture, ImRect{logoRectStart, logoRectMax}, tintNormal, tintHovered, tintPressed);
+    return clicked;
+  }
+  
   bool DrawImageTextButton(const std::string& buttonHelper, Ref<IKan::Image> icon, const glm::vec2& iconSize, const glm::vec2& offset,
                            const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed)
   {

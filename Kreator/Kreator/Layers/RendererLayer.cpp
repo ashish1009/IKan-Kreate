@@ -63,6 +63,9 @@ if (!Project::GetActive()) return
     m_folderIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Folder.png"));
     
     m_shadowTexture = TextureFactory::Create(KreatorResourcePath("Textures/Icons/ShadowLineTop.png"));
+
+    m_2DIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/2DIcon.png"));
+    m_3DIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/3DIcon.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -161,6 +164,7 @@ if (!Project::GetActive()) return
   void RendererLayer::OnImGuiRender()
   {
     UI_WelcomePopup();
+    UI_NewProjectPopup();
     
     RETRUN_IF_NO_PROJECT();
     
@@ -351,6 +355,8 @@ if (!Project::GetActive()) return
           
           if (UI::DrawImageTextButton("Create New Kreator Project", m_newProjectIcon, buttonSize, offset))
           {
+            ImGui::CloseCurrentPopup();
+            m_createNewProjectPopup.Set("Create New Project", true /* open Flag */, 650, 0, true /* center */);
           }
           
           if (UI::DrawImageTextButton("Open an exisiting Kreator Project", m_folderIcon, buttonSize, offset))
@@ -415,6 +421,95 @@ if (!Project::GetActive()) return
     });
   }
   
+  void RendererLayer::UI_NewProjectPopup()
+  {
+    m_createNewProjectPopup.Show(ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar , [this]()
+                                 {
+      // Title of Popup
+      UI::Text(UI::FontType::Bold, "Choose a template for your project", UI::AlignX::Left, {0.0f, 0.0f}, UI::Color::TextBrighter);
+      ImGui::Separator();
+      
+      // Icons for 2D 3D projects
+      static ImU32 tintColor3DIcon = UI::Color::TextMuted;
+      static ImU32 tintColor2DIcon = UI::Color::TextMuted;
+
+      static ImU32 createButtonTextColor = UI::Color::TextBrighter;
+      static ImU32 createButtonColor = UI::Color::TextMuted;
+      static std::string createButtonTitle = " Create ";
+
+      switch (m_selectedProject)
+      {
+        case SelectedProject::_2D:
+          // Icon Color
+          tintColor2DIcon = UI::Color::NiceBlueHighlight;
+          tintColor3DIcon = UI::Color::TextMuted;
+          
+          // Create button
+          createButtonTextColor = UI::Color::Background;
+          createButtonColor = UI::Color::NiceBlueHighlight;
+          createButtonTitle = " Create 2D ";
+          break;
+          
+        case SelectedProject::_3D:
+          // Icon Color
+          tintColor2DIcon = UI::Color::TextMuted;
+          tintColor3DIcon = UI::Color::NiceBlueHighlight;
+          
+          // Create button
+          createButtonTextColor = UI::Color::Background;
+          createButtonColor = UI::Color::NiceBlueHighlight;
+          createButtonTitle = " Create 3D ";
+          break;
+          
+        case SelectedProject::None:
+        default:
+          // Icon Color
+          tintColor2DIcon = UI::Color::TextMuted;
+          tintColor3DIcon = UI::Color::TextMuted;
+          
+          // Create button
+          createButtonTextColor = UI::Color::TextBrighter;
+          createButtonColor = UI::Color::TextMuted;
+          createButtonTitle = " Create ";
+          break;
+      }
+      
+      // Draw the icons of 2D and 3D
+      static const glm::vec2 size = {150.0f, 150.0f};
+      if (UI::DrawButtonImage("2D", m_2DIcon, size, {100.0f, 20.0f}, true, tintColor2DIcon, UI::Color::TextBrighter, tintColor2DIcon))
+      {
+        m_selectedProject = SelectedProject::_2D;
+      }
+      ImGui::SameLine();
+      if (UI::DrawButtonImage("3D", m_3DIcon, size, {100.0f, 0.0f}, true, tintColor3DIcon, UI::Color::TextBrighter, tintColor3DIcon))
+      {
+        m_selectedProject = SelectedProject::_3D;
+      }
+      
+      UI::ShiftCursorY(20);
+      ImGui::Separator();
+      
+      // Cancel Button
+      if (UI::DrawButton(" Cancel ", UI::FontType::Bold, UI::Color::TextBrighter, UI::Color::TextMuted, 2) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Escape))
+      {
+        if (!Project::GetActive())
+        {
+          m_welcomePopup.SetFlag(true);
+        }
+        m_selectedProject = SelectedProject::None;
+        ImGui::CloseCurrentPopup();
+      }
+      ImGui::SameLine(ImGui::GetWindowWidth() - ImGui::CalcTextSize(createButtonTitle.c_str()).x - 20);
+      
+      // Create Button
+      if (UI::DrawButton(createButtonTitle, UI::FontType::Bold, createButtonTextColor, createButtonColor, 2) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
+      {
+        if (m_selectedProject != SelectedProject::None)
+        {
+        }
+      }
+    });
+  }
   void RendererLayer::UI_StartMainWindowDocking()
   {
     IK_PERFORMANCE("RendererLayer::UI_StartMainWindowDocking");

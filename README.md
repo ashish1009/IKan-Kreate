@@ -123,3 +123,6 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 
 - Welcome Screen
 ![](/Kreator/Outputs/WelcomeScreen.png)
+
+- Project Selection
+![](/Kreator/Outputs/ProjectSelection.png
