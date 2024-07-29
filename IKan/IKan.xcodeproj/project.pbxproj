@@ -30,6 +30,8 @@
 		B22AB28D2C576CE5007453B7 /* Scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB28C2C576CE5007453B7 /* Scene.hpp */; };
 		B22AB28E2C576CE6007453B7 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB28B2C576CE5007453B7 /* Scene.cpp */; };
 		B22AB2912C576DD4007453B7 /* EditorPanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2902C576DD4007453B7 /* EditorPanel.hpp */; };
+		B22AB2952C576E74007453B7 /* EditorPanelManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */; };
+		B22AB2962C576E74007453B7 /* EditorPanelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -193,6 +195,8 @@
 		B22AB28B2C576CE5007453B7 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		B22AB28C2C576CE5007453B7 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
 		B22AB2902C576DD4007453B7 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
+		B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorPanelManager.cpp; sourceTree = "<group>"; };
+		B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanelManager.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -366,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				B22AB2902C576DD4007453B7 /* EditorPanel.hpp */,
+				B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -373,6 +378,7 @@
 		B22AB2882C576C48007453B7 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -873,6 +879,7 @@
 				B2D296E52C4104AC0093F4DA /* Buffer.hpp in Headers */,
 				B2D297432C45416B0093F4DA /* TextData.hpp in Headers */,
 				B2D296CC2C40F0B00093F4DA /* OpenGLSpecification.hpp in Headers */,
+				B22AB2952C576E74007453B7 /* EditorPanelManager.hpp in Headers */,
 				B2D294AC2C3BE22C0093F4DA /* MacWindow.hpp in Headers */,
 				B2D297522C45480B0093F4DA /* Camera.hpp in Headers */,
 				B2D2970D2C412DAA0093F4DA /* Pipeline.hpp in Headers */,
@@ -1030,6 +1037,7 @@
 				B24A66E32C457E5300B870DE /* OpenGLFrameBuffer.cpp in Sources */,
 				B2D296E62C4104AC0093F4DA /* Buffer.cpp in Sources */,
 				B22AB2782C5761D3007453B7 /* AssetImporter.cpp in Sources */,
+				B22AB2962C576E74007453B7 /* EditorPanelManager.cpp in Sources */,
 				B2D292B42C3940320093F4DA /* Application.cpp in Sources */,
 				B2D296F42C410AC30093F4DA /* Shader.cpp in Sources */,
 				B2D294B62C3BF30B0093F4DA /* Renderer.cpp in Sources */,

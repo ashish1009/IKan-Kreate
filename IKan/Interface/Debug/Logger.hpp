@@ -22,6 +22,7 @@ f(UI) \
 f(SceneCamera) f(EditorCamera) \
 f(Asset) \
 f(Project) \
+f(PanelManager) \
 
   /// Generates enum with elements from above MACRO. Also creates an array named "LogModuleString[]" that stores all
   /// the element of enum as const char* (string)

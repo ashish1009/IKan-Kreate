@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Event/Event.h"
+#include "Events/Events.h"
 #include "Project/Project.hpp"
 #include "Scene/Scene.hpp"
 
@@ -23,12 +23,12 @@ namespace IKan
     /// This function renders the Panel as GUI
     virtual void OnImGuiRender(bool& isOpen) = 0;
     /// This function hnadles all the events in panel
-    virtual void OnEvent(Event& e) {}
+    virtual void OnEvent([[maybe_unused]] Event& e) {}
     /// This function handles the project change for editor panel
     /// - Parameter project: Project instance
-    virtual void OnProjectChanged(const Ref<Project>& project) {}
+    virtual void OnProjectChanged([[maybe_unused]] const Ref<Project>& project) {}
     /// This function handles the scene change for editor panel
     /// - Parameter context: scene context
-    virtual void SetSceneContext(const Ref<Scene>& context){}
+    virtual void SetSceneContext([[maybe_unused]] const Ref<Scene>& context){}
   };
 } // namespace IKan
