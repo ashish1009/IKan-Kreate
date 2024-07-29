@@ -218,9 +218,13 @@ namespace Kreator::UI
     colors[ImGuiCol_NavWindowingDimBg]      = ImGui::ColorConvertU32ToFloat4(UI::Color::NavWindowingDimBg);
   }
   
-  glm::vec3 Color::Vec3FromU32(ImU32 color)
+  glm::vec4 Color::Vec3FromU32(const ImU32& color)
   {
     ImVec4 result = ImGui::ColorConvertU32ToFloat4(color);
-    return {result.x, result.y, result.z};
+    return {result.x, result.y, result.z, result.w};
+  }
+  ImU32 Color::U32FromVec3(const glm::vec4& color)
+  {
+    return ImGui::ColorConvertFloat4ToU32({color.r, color.g, color.b, color.a});
   }
 } // namespace Kreator::UI

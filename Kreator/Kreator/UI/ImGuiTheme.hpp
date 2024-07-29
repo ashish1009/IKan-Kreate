@@ -123,8 +123,11 @@ namespace Kreator::UI
     /// - Parameter theme: Current selected theme
     static void SetTheme(Kreator::UserPreferences::Theme theme);
 
-    /// This function converts the ImU32 color to Vec3
+    /// This function converts the ImU32 color to Vec4
     /// - Parameter color: U32 color
-    static glm::vec3 Vec3FromU32(ImU32 color);
+    static glm::vec4 Vec3FromU32(const ImU32& color);
+    /// This function converts the ImU32 color from Vec4
+    /// - Parameter color: vec4 coloe
+    static ImU32 U32FromVec3(const glm::vec4& color);
   };
 } // namespace Kreator::UI

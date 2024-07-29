@@ -28,6 +28,11 @@ namespace Kreator::UI
   void PushID();
   /// This function pop last used id for ImGui
   void PopID();
+  /// This function generate unique ID for ImGui
+  const char* GenerateID();
+  /// This function generate Unique id for labeled widget
+  /// - Parameter label: Widget lable
+  const char* GenerateLabelID(const std::string_view& label);
 
   // Image/ Texture ---------------------------------------------------------------------------------------------------
   /// This function renders Texture in current ImGui window

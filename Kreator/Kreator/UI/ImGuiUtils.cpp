@@ -11,6 +11,8 @@ namespace Kreator::UI
 {
   static int32_t s_UIContextID = 0;
   static uint32_t s_counter = 0;
+  static char s_bufferID[16] = "##";
+  static char s_labeledBufferID[1024];
 
   // Wrappers --------------------------------------------------------------------------------------------------------
   void SetNextWindowAtCenter()
@@ -41,6 +43,18 @@ namespace Kreator::UI
   {
     ImGui::PopID();
     s_UIContextID--;
+  }
+  const char* GenerateID()
+  {
+    std::string result = "##";
+    result += std::to_string(s_counter++);
+    memcpy(s_bufferID, result.c_str(), 16);
+    return s_bufferID;
+  }
+  const char* GenerateLabelID(const std::string_view& label)
+  {
+    *fmt::format_to_n(s_labeledBufferID, std::size(s_labeledBufferID), "{}##{}", label, s_counter++).out = 0;
+    return s_labeledBufferID;
   }
 
   // Image / Texture --------------------------------------------------------------------------------------------------

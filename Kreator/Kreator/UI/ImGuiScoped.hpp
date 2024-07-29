@@ -23,4 +23,19 @@ namespace Kreator::UI
     }
     DELETE_COPY_MOVE_CONSTRUCTORS(ScopedStyle);
   };
+  
+  /// This class creates scoped color for ImGui
+  class ScopedColor
+  {
+  public:
+    template<typename T> ScopedColor(ImGuiCol colourId, T colour)
+    {
+      ImGui::PushStyleColor(colourId, colour);
+    }
+    ~ScopedColor()
+    {
+      ImGui::PopStyleColor();
+    }
+    DELETE_COPY_MOVE_CONSTRUCTORS(ScopedColor);
+  };
 } // namespace Kreator::UI
