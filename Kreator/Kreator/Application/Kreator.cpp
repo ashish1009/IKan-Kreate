@@ -8,6 +8,7 @@
 #include "Kreator.hpp"
 #include "Layers/RendererLayer.hpp"
 #include "Editor/UserPreference.hpp"
+#include "Editor/FolderExplorer.hpp"
 
 namespace Kreator
 {
@@ -68,12 +69,19 @@ namespace Kreator
     // Creating Renderer layer and push in application stack
     m_rendererLayer = CreateScope<RendererLayer>(m_kreatorDirectories, userPreferences);
     PushLayer(m_rendererLayer.get());
+    
+    // Initialize the Kreator Modules -------------------------------------------------------------
+    // Should get initialized after layer initialize
+    FolderExplorer::Initialize();
   }
   
   void KreatorApp::OnShutdown()
   {
     IK_PROFILE();
     IK_LOG_WARN("KreatorApp", "Shutting Down the 'Kreator' Application");
+
+    // Shutdown the Kreator Modules -------------------------------------------------------------
+    FolderExplorer::Shutdown();
 
     // Removing Renderer layer from application stack and destroying its instance
     PopLayer(m_rendererLayer.get());

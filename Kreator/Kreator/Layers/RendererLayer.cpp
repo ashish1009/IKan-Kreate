@@ -8,6 +8,7 @@
 #include "RendererLayer.hpp"
 
 #include "Application/Kreator.hpp"
+#include "Editor/FolderExplorer.hpp"
 
 namespace Kreator
 {
@@ -165,6 +166,7 @@ if (!Project::GetActive()) return
   {
     UI_WelcomePopup();
     UI_NewProjectPopup();
+    UI_FolderExplorer();
     
     RETRUN_IF_NO_PROJECT();
     
@@ -175,6 +177,19 @@ if (!Project::GetActive()) return
     m_panels.OnImGuiRender();
 
     UI_EndMainWindowDocking();
+  }
+  
+  const std::filesystem::path& RendererLayer::GetClientResorucePath() const
+  {
+    return m_directories.clientResourcePath;
+  }
+  const std::filesystem::path& RendererLayer::GetSystemUserPath() const
+  {
+    return m_directories.systemUserPath;
+  }
+  const std::filesystem::path& RendererLayer::GetIKanKreatorPath() const
+  {
+    return m_directories.kreatorPath;
   }
   
   void RendererLayer::UpdateViewportSize()
@@ -506,10 +521,50 @@ if (!Project::GetActive()) return
       {
         if (m_selectedProject != SelectedProject::None)
         {
+          FolderExplorer::ShowCreatePopup(m_directories.kreatorPath / "Kreator", &m_createNewProjectPopup);
+          m_folderExplorerAction = FolderExplorerAction::NewProject;
+          m_selectedProject = SelectedProject::None;
+          ImGui::CloseCurrentPopup();
         }
       }
     });
   }
+  
+  void RendererLayer::UI_FolderExplorer()
+  {
+    std::filesystem::path explorerOutput = FolderExplorer::Explore();
+    if (explorerOutput == "")
+    {
+      return;
+    }
+    
+    IK_PERFORMANCE("RendererLayer::UI_FolderExplorer");
+    switch (m_folderExplorerAction)
+    {
+      case FolderExplorerAction::NewProject:
+      {
+        CreateProject(explorerOutput);
+        break;
+      }
+      case FolderExplorerAction::OpenProject:
+      {
+        if (explorerOutput.extension() == ProjectExtension)
+        {
+          OpenProject(explorerOutput);
+        }
+        else
+        {
+          IK_ASSERT(false, "Should never reach here...");
+        }
+        break;
+      }
+      case FolderExplorerAction::None:
+      default:
+        IK_ASSERT(false);
+        break;
+    }
+  }
+
   void RendererLayer::UI_StartMainWindowDocking()
   {
     IK_PERFORMANCE("RendererLayer::UI_StartMainWindowDocking");

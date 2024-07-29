@@ -210,6 +210,71 @@ namespace Kreator::UI
     return result;
   }
   
+  // Draw APIs -------------------------------------------------------------------------------------------------------
+  void DrawFilledRect(const ImU32& color, float height, float widthFactor, const glm::vec2& offset, float rounding)
+  {
+    // Draw the title Bar rectangle ---------------------------------------------------
+    const ImVec2 titlebarMin =
+    {
+      ImGui::GetCursorScreenPos().x + offset.x,
+      ImGui::GetCursorScreenPos().y + offset.y
+    };
+    const ImVec2 titlebarMax =
+    {
+      ImGui::GetCursorScreenPos().x + offset.x + (ImGui::GetWindowWidth() * widthFactor),
+      ImGui::GetCursorScreenPos().y + offset.y + height
+    };
+    
+    auto* drawList = ImGui::GetWindowDrawList();
+    drawList->AddRectFilled(titlebarMin, titlebarMax, color, rounding);
+  }
+  void DrawUnderline(bool fullWidth, float offsetX, float offsetY)
+  {
+    if (fullWidth)
+    {
+      if (ImGui::GetCurrentWindow()->DC.CurrentColumns != nullptr)
+      {
+        ImGui::PushColumnsBackground();
+      }
+      else if (ImGui::GetCurrentTable() != nullptr)
+      {
+        ImGui::TablePushBackgroundChannel();
+      }
+    }
+    
+    const float width = fullWidth ? ImGui::GetWindowWidth() : ImGui::GetContentRegionAvail().x;
+    const ImVec2 cursor = ImGui::GetCursorScreenPos();
+    ImGui::GetWindowDrawList()->AddLine(ImVec2(cursor.x + offsetX, cursor.y + offsetY), ImVec2(cursor.x + width, cursor.y + offsetY), UI::Color::BackgroundDark, 1.0f);
+    
+    if (fullWidth)
+    {
+      if (ImGui::GetCurrentWindow()->DC.CurrentColumns != nullptr)
+      {
+        ImGui::PopColumnsBackground();
+      }
+      else if (ImGui::GetCurrentTable() != nullptr)
+      {
+        ImGui::TablePopBackgroundChannel();
+      }
+    }
+  }
+  void DrawItemActivityOutline(float rounding, bool drawWhenInactive, const ImColor& colorWhenActive)
+  {
+    auto* drawList = ImGui::GetWindowDrawList();
+    const ImRect rect = RectExpanded(GetItemRect(), 1.0f, 1.0f);
+    if (ImGui::IsItemHovered() and !ImGui::IsItemActive())
+    {
+      drawList->AddRect(rect.Min, rect.Max, ImColor(60, 60, 60), rounding, 0, 1.5f);
+    }
+    if (ImGui::IsItemActive())
+    {
+      drawList->AddRect(rect.Min, rect.Max, colorWhenActive, rounding, 0, 1.0f);
+    }
+    else if (!ImGui::IsItemHovered() and drawWhenInactive)
+    {
+      drawList->AddRect(rect.Min, rect.Max, ImColor(50, 50, 50), rounding, 0, 1.0f);
+    }
+  }
   // Buttons ---------------------------------------------------------------------------------------------------------
   bool DrawButton(std::string_view title, FontType fontType, const ImU32& textColor, const ImU32& buttonColor,
                   float rounding, const glm::vec2& size)

@@ -45,6 +45,14 @@ namespace Kreator
     /// - Note Core Application is taking care to call the EventHandler(event) API for all Layers
     void OnEvent(Event& event) override;
     
+    // Getters -------------------------------------------------------------------------------------------------------
+    /// This function returns the client file path
+    const std::filesystem::path& GetClientResorucePath() const;
+    /// This function returns the system user storage path
+    const std::filesystem::path& GetSystemUserPath() const;
+    /// This function returns the system IKan-Kreator path
+    const std::filesystem::path& GetIKanKreatorPath() const;
+
     // Static APIs ----------------------------------------------------------------------------------------------------
     /// This function returns the single instance of the renderer layer
     static RendererLayer& Get();
@@ -72,6 +80,8 @@ namespace Kreator
     void UI_WelcomePopup();
     /// This function shows new project popup
     void UI_NewProjectPopup();
+    /// This function update the folder explorer output
+    void UI_FolderExplorer();
 
     /// This function starts main ImGui Window with Docking
     void UI_StartMainWindowDocking();
@@ -109,6 +119,11 @@ namespace Kreator
     // Editor Data ---------------------------------------
     EditorCamera m_editorCamera;
     PanelManager m_panels;
+    enum class FolderExplorerAction
+    {
+      None, NewProject, OpenProject
+    };
+    FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

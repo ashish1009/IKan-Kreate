@@ -27,11 +27,11 @@ namespace Kreator::UI
           UI::Color::TextSelectedBg         = IM_COL32(30, 50, 70, 255);
 
           // Window
-          UI::Color::Window                 = IM_COL32(100, 0, 0, 255);
-          UI::Color::Background             = IM_COL32(100, 0, 0, 255);
+          UI::Color::Window                 = IM_COL32(30, 50, 70, 255);
+          UI::Color::Background             = IM_COL32(30, 50, 70, 255);
           UI::Color::PopupBackground        = IM_COL32(20, 40, 60, 255);
           UI::Color::Border                 = PopupBackground;
-          UI::Color::BackgroundDark         = IM_COL32(100, 0, 0, 255);
+          UI::Color::BackgroundDark         = PopupBackground;
           
           // Models
           UI::Color::WindowDimBg            = PopupBackground;
@@ -43,77 +43,77 @@ namespace Kreator::UI
 
           // Widget Title BG
           UI::Color::TitleBar               = IM_COL32(30, 50, 70, 255);
-          UI::Color::TitleBarDark           = IM_COL32(100, 0, 0, 255);
-          UI::Color::TitleBgActive          = IM_COL32(100, 0, 0, 255);
-          UI::Color::TitleBgCollapsed       = IM_COL32(100, 0, 0, 255);
+          UI::Color::TitleBarDark           = IM_COL32(10, 30, 50, 255);
+          UI::Color::TitleBgActive          = IM_COL32(10, 40, 60, 255);
+          UI::Color::TitleBgCollapsed       = IM_COL32(222, 0, 0, 255);
           
           // Title Menu BG
-          UI::Color::MenuBarBg              = IM_COL32(100, 0, 0, 255);
+          UI::Color::MenuBarBg              = IM_COL32(222, 0, 0, 255);
           
           // Scrol Bar
-          UI::Color::ScrollbarBg            = IM_COL32(100, 0, 0, 255);
-          UI::Color::ScrollbarGrab          = IM_COL32(100, 0, 0, 255);
-          UI::Color::ScrollbarGrabHovered   = IM_COL32(100, 0, 0, 255);
-          UI::Color::ScrollbarGrabActive    = IM_COL32(100, 0, 0, 255);
+          UI::Color::ScrollbarBg            = IM_COL32(35, 45, 55, 255);
+          UI::Color::ScrollbarGrab          = IM_COL32(40, 70, 100, 255);
+          UI::Color::ScrollbarGrabHovered   = IM_COL32(60, 90, 120, 255);
+          UI::Color::ScrollbarGrabActive    = IM_COL32(80, 110, 140, 255);
           
           // Check Mark
           UI::Color::CheckMark              = IM_COL32(210, 210, 210, 255);
-
+          
           // Slider
-          UI::Color::SliderGrab             = IM_COL32(100, 0, 0, 255);
-          UI::Color::SliderGrabActive       = IM_COL32(100, 0, 0, 255);
+          UI::Color::SliderGrab             = IM_COL32(222, 0, 0, 255);
+          UI::Color::SliderGrabActive       = IM_COL32(222, 0, 0, 255);
           
           // Button
-          UI::Color::Button                 = IM_COL32(100, 0, 0, 255);
-          UI::Color::ButtonHovered          = IM_COL32(100, 0, 0, 255);
-          UI::Color::ButtonActive           = IM_COL32(100, 0, 0, 255);
+          UI::Color::Button                 = IM_COL32(22, 75, 98, 255);
+          UI::Color::ButtonHovered          = IM_COL32(42, 65, 88, 255);
+          UI::Color::ButtonActive           = IM_COL32(42, 65, 88, 255);
           
           // Tree Node Headers
-          UI::Color::Header                 = IM_COL32(100, 0, 0, 255);
-          UI::Color::HeaderHovered          = IM_COL32(100, 0, 0, 255);
-          UI::Color::HeaderActive           = IM_COL32(100, 0, 0, 255);
+          UI::Color::Header                 = IM_COL32(17, 67, 87, 255);
+          UI::Color::HeaderHovered          = IM_COL32(15, 75, 95, 255);
+          UI::Color::HeaderActive           = IM_COL32(30, 40, 60, 255);
           
           // Widget and Column Separator
           UI::Color::Separator              = IM_COL32(50, 70, 90, 255);
-          UI::Color::SeparatorActive        = IM_COL32(100, 0, 0, 255);
-          UI::Color::SeparatorHovered       = IM_COL32(100, 0, 0, 255);
+          UI::Color::SeparatorActive        = IM_COL32(30, 80, 90, 255);
+          UI::Color::SeparatorHovered       = IM_COL32(30, 80, 90, 255);
           
           // Resize
-          UI::Color::ResizeGrip             = IM_COL32(100, 0, 0, 255);
-          UI::Color::ResizeGripHovered      = IM_COL32(100, 0, 0, 255);
-          UI::Color::ResizeGripActive       = IM_COL32(100, 0, 0, 255);
+          UI::Color::ResizeGrip             = IM_COL32(50, 150, 200, 100);
+          UI::Color::ResizeGripHovered      = IM_COL32(30, 130, 180, 155);
+          UI::Color::ResizeGripActive       = IM_COL32(30, 130, 180, 255);
           
           // Widget Tab Tabs
-          UI::Color::Tab                    = IM_COL32(100, 0, 0, 255);
-          UI::Color::TabHovered             = IM_COL32(100, 0, 0, 255);
-          UI::Color::TabActive              = IM_COL32(100, 0, 0, 255);
-          UI::Color::TabUnfocused           = IM_COL32(100, 0, 0, 255);
-          UI::Color::TabUnfocusedActive     = IM_COL32(100, 0, 0, 255);
+          UI::Color::Tab                    = IM_COL32(21, 51, 85, 255);
+          UI::Color::TabHovered             = IM_COL32(31, 81, 105, 255);
+          UI::Color::TabActive              = IM_COL32(41, 71, 95, 255);
+          UI::Color::TabUnfocused           = IM_COL32(31, 51, 75, 255);
+          UI::Color::TabUnfocusedActive     = IM_COL32(31, 51, 75, 255);
           
           // Docking
-          UI::Color::DockingPreview         = IM_COL32(100, 0, 0, 255);
-          UI::Color::DockingEmptyBg         = IM_COL32(100, 0, 0, 255);
+          UI::Color::DockingPreview         = IM_COL32(35, 55, 95, 255);
+          UI::Color::DockingEmptyBg         = IM_COL32(45, 45, 45, 255);
           
           // Plot
-          UI::Color::PlotLines              = IM_COL32(100, 0, 0, 255);
-          UI::Color::PlotLinesHovered       = IM_COL32(100, 0, 0, 255);
-          UI::Color::PlotHistogram          = IM_COL32(100, 0, 0, 255);
-          UI::Color::PlotHistogramHovered   = IM_COL32(100, 0, 0, 255);
+          UI::Color::PlotLines              = IM_COL32(222, 0, 0, 255);
+          UI::Color::PlotLinesHovered       = IM_COL32(222, 0, 0, 255);
+          UI::Color::PlotHistogram          = IM_COL32(222, 0, 0, 255);
+          UI::Color::PlotHistogramHovered   = IM_COL32(222, 0, 0, 255);
           
           // Table
-          UI::Color::TableHeaderBg          = IM_COL32(100, 0, 0, 255);
+          UI::Color::TableHeaderBg          = IM_COL32(222, 0, 0, 255);
           UI::Color::TableBorderLight       = UI::Color::Separator;
-          UI::Color::TableBorderStrong      = IM_COL32(100, 0, 0, 255);
-          UI::Color::TableRowBg             = IM_COL32(100, 0, 0, 255);
-          UI::Color::TableRowBgAlt          = IM_COL32(100, 0, 0, 255);
+          UI::Color::TableBorderStrong      = IM_COL32(222, 0, 0, 255);
+          UI::Color::TableRowBg             = IM_COL32(222, 0, 0, 255);
+          UI::Color::TableRowBgAlt          = IM_COL32(222, 0, 0, 255);
           
           // Drag Drop
-          UI::Color::DragDropTarget         = IM_COL32(100, 0, 0, 255);
+          UI::Color::DragDropTarget         = IM_COL32(222, 0, 0, 255);
           
           // Navigation
-          UI::Color::NavHighlight           = IM_COL32(100, 0, 0, 255);
-          UI::Color::NavWindowingHighlight  = IM_COL32(100, 0, 0, 255);
-          UI::Color::NavWindowingDimBg      = IM_COL32(100, 0, 0, 255);
+          UI::Color::NavHighlight           = IM_COL32(222, 0, 0, 255);
+          UI::Color::NavWindowingHighlight  = IM_COL32(222, 0, 0, 255);
+          UI::Color::NavWindowingDimBg      = IM_COL32(222, 0, 0, 255);
           
           break;
         }

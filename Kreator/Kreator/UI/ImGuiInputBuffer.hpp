@@ -55,9 +55,9 @@ namespace Kreator::UI
       memset(m_buffer, data, SIZE);
     }
     
-    void MemCpy(const char* data, uint32_t offset, size_t size)
+    void MemCpy(const char* data, int32_t offset, size_t size)
     {
-      memccpy(m_buffer, data, 0, size);
+      memccpy(m_buffer, data, offset, size);
     }
     
     void StrCpy(const std::string& data)

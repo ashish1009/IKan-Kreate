@@ -126,3 +126,6 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 
 - Project Selection
 ![](/Kreator/Outputs/ProjectSelection.png
+
+- Folder Explorer
+![](/Kreator/Outputs/FolderExplorer.png

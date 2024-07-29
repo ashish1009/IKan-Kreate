@@ -154,6 +154,28 @@ namespace Kreator::UI
   ///   - xy: offset
   ImRect RectOffset(const ImRect& rect, const ImVec2& xy);
 
+  // Draw APIs -------------------------------------------------------------------------------------------------------
+  /// This function draw filled rectangle
+  /// - Parameters:
+  ///   - color: color of rectangle
+  ///   - height: height of rectangle
+  ///   - widthFactor: factor of width to window width (0.5 means half width of current cursor till width)
+  ///   - offset: offset position
+  ///   - rounding: rounding factor
+  void DrawFilledRect(const ImU32& color, float height, float widthFactor = 1.0f, const glm::vec2& offset = {0, 0}, float rounding = 0.0f);
+  /// This function renders the line in Ingui
+  /// - Parameters:
+  ///   - fullWidth: color of rectangle
+  ///   - offsetX: X offset
+  ///   - offsetY: X offset
+  void DrawUnderline(bool fullWidth = false, float offsetX = 0.0f, float offsetY = 1.0f);
+  /// This function draw the Activity outline
+  /// - Parameters:
+  ///   - rounding: Outline rounding
+  ///   - drawWhenInactive: Flag to draw when inactive
+  ///   - colourWhenActive: Color when active
+  void DrawItemActivityOutline(float rounding = 0.0f, bool drawWhenInactive = false, const ImColor& colourWhenActive = ImColor(80, 80, 80));
+
   // Buttons ---------------------------------------------------------------------------------------------------------
   /// This function draws the text button
   /// - Parameters:
