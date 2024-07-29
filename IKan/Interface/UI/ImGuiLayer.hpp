@@ -12,6 +12,13 @@
 
 namespace IKan::UI
 {
+  /// This structure stores the ImGui Font data
+  struct ImGuiFont
+  {
+    std::filesystem::path filePath {};
+    uint32_t size {0};
+  };
+
   /// This class stores the ImGui layer for rendering the GUI inside the Engine
   class ImGuiLayer : public Layer
   {
@@ -31,6 +38,9 @@ namespace IKan::UI
     /// - Parameter iniFilepath: file path relative to executable
     /// - Note: Directory must exist.
     void SetIniFilePath(const std::filesystem::path& iniFilepath);
+    /// This function overrides font of imgui with new font path
+    /// - Parameter fonts: fonts
+    void LoadFonts(const std::vector<UI::ImGuiFont>& fonts);
 
     // Virtual overridden --------------------------------------------------------------------------------------------
     /// This funciton initialises the imgui layer. Creates the imgui layer using imgui file library
