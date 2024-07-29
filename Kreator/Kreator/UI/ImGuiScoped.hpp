@@ -164,4 +164,21 @@ namespace Kreator::UI
   private:
     std::vector<TableColumns> m_columns;
   };
+  
+  /// This class creates scoped Disbale for ImGui
+  class ScopedDisable
+  {
+  public:
+    ScopedDisable(const ScopedDisable&) = delete;
+    ScopedDisable& operator=(const ScopedDisable&) = delete;
+    ScopedDisable(bool disabled = true)
+    {
+      Kreator::UI::BeginDisabled(disabled);
+    }
+    ~ScopedDisable()
+    {
+      Kreator::UI::EndDisabled();
+    }
+  };
+
 } // namespace Kreator::UI

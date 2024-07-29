@@ -188,6 +188,9 @@ if (!Project::GetActive()) return
 
     UI_Viewport();
     m_panels.OnImGuiRender();
+    
+    // To be rendered at last
+    UI_StatisticsPanel();
 
     UI_EndMainWindowDocking();
   }
@@ -673,6 +676,121 @@ if (!Project::GetActive()) return
     // Render viewport image
     UI::Image(m_viewportRenderer.GetFinalImage(), size);
     
+    ImGui::End();
+  }
+  
+  void RendererLayer::UI_StatisticsPanel()
+  {
+    IK_PERFORMANCE("KreatorLayer::UI_StatisticsPanel");
+    if (!m_showStatisticsPanel)
+    {
+      return;
+    }
+    
+    if (ImGui::Begin("Statistics", &m_showStatisticsPanel))
+    {
+      UI::ScopedColor header(ImGuiCol_Header, UI::Color::PopupBackground);
+      UI::ScopedStyle frameRound(ImGuiStyleVar_FrameRounding, 5);
+      
+      ImGuiTabBarFlags tabBarFlags = ImGuiTabBarFlags_None;
+      if (ImGui::BeginTabBar("StatisticsTabs", tabBarFlags))
+      {
+        if (ImGui::BeginTabItem("Renderer"))
+        {
+          UI::ScopedDisable disable;
+          auto& caps = RendererCapabilities::Get();
+          UI::BeginPropertyGrid(2, 1, 1);
+          UI::Property("Vendor", caps.vendor.data());
+          UI::Property("Renderer", caps.renderer.data());
+          UI::Property("Version", caps.version.data());
+          UI::EndPropertyGrid();
+          ImGui::EndTabItem();
+        }
+        
+        if (ImGui::BeginTabItem("Performance"))
+        {
+          {
+            ImGui::PushID("FPS");
+            UI::ScopedDisable disable;
+            UI::BeginPropertyGrid(2, 1, 1);
+            UI::Property("FPS", ImGui::GetIO().Framerate);
+            UI::EndPropertyGrid();
+            ImGui::PopID();
+          }
+          
+          // Search Widget
+          static char searchBuffer[256];
+          ImGui::SetNextItemWidth(-1);
+          ImGui::InputTextWithHint("##regsearch", "Search ...", searchBuffer, 256);
+          
+          ImGui::Separator();
+          
+          {
+            ImGui::PushID("Perf Results");
+            UI::BeginPropertyGrid(2, 1, 1);
+            
+            static float timeLimit = 0.0f;
+            UI::Property("Min Time Limit", timeLimit, 0.001f, 0.0f, 1000.0f);
+            
+            UI::ScopedDisable disable;
+            const auto& perFrameData = PerformanceProfiler::Get().GetPerFrameData();
+            for (auto&& [name, time] : perFrameData)
+            {
+              if ((!UI::IsMatchingSearch(name, searchBuffer) and !UI::IsMatchingSearch(std::to_string(time), searchBuffer)) or time < timeLimit)
+              {
+                continue;
+              }
+              UI::Property(name, std::to_string(time));
+              UI::SetTooltip(name);
+            }
+            UI::EndPropertyGrid();
+            ImGui::PopID();
+          }
+          ImGui::EndTabItem();
+        }
+        
+        if (ImGui::BeginTabItem("Renderer Stats"))
+        {
+          const auto& stats = RendererStatistics::Get();
+          
+          if (ImGui::BeginTabBar("Renderer Stats Tabs", tabBarFlags))
+          {
+            if (ImGui::BeginTabItem("General Stats"))
+            {
+              UI::ScopedDisable disable;
+              UI::BeginPropertyGrid(2, 1, 1);
+              UI::Property("Draw Calls", std::to_string(stats.drawCalls));
+              UI::Property("Vertex Count", std::to_string(stats.vertexCount));
+              UI::Property("Vertex Buffer Size", std::to_string((uint32_t)(stats.vertexBufferSize/1000)));
+              UI::Property("Index Count", std::to_string(stats.indexCount));
+              UI::Property("Index Buffer Size", std::to_string((uint32_t)(stats.indexBufferSize / 1000)));
+              UI::Property("Texture Buffer Size", std::to_string((uint32_t)(stats.textureBufferSize / 1000)));
+              UI::EndPropertyGrid();
+              ImGui::EndTabItem();
+            }
+            
+            if (ImGui::BeginTabItem("2D Stats"))
+            {
+              UI::ScopedDisable disable;
+              UI::BeginPropertyGrid(2, 1, 1);
+              UI::Property("Quads in this batch   ", std::to_string(stats._2d.quads));
+              UI::Property("Max Quad Per Batch    ", std::to_string(stats._2d.maxQuads));
+              UI::Property("Circles in this batch ", std::to_string(stats._2d.circles));
+              UI::Property("Max Circles Per Batch ", std::to_string(stats._2d.maxCircles));
+              UI::Property("Lines in this batch   ", std::to_string(stats._2d.lines));
+              UI::Property("Max Lines Per Batch   ", std::to_string(stats._2d.maxLines));
+              UI::Property("Chars in this batch   ", std::to_string(stats._2d.chars));
+              UI::Property("Max Char Per Batch    ", std::to_string(16));
+              UI::EndPropertyGrid();
+              ImGui::EndTabItem();
+            }
+            ImGui::EndTabBar();
+          }
+          ImGui::EndTabItem();
+        }
+        ImGui::EndTabBar();
+      }
+    }
     ImGui::End();
   }
 } // namespace Kreator

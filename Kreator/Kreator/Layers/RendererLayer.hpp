@@ -89,11 +89,15 @@ namespace Kreator
     void UI_EndMainWindowDocking();
     /// This functions shows primary Viewport
     void UI_Viewport();
+    /// This function shows the Statistics Panel
+    void UI_StatisticsPanel();
 
     // Memeber variables ----------------------------------------------------------------------------------------------
     // Popups/Panel --------------------------------------
     UI::Popup m_welcomePopup {"Welcome Screen"};
     UI::Popup m_createNewProjectPopup {"Create New Project"};
+
+    bool m_showStatisticsPanel {true};
 
     // Applicaiton Textures ------------------------------
     Ref<Image> m_welcomeIcon;
