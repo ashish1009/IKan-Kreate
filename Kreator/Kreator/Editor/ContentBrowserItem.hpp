@@ -56,7 +56,7 @@ namespace Kreator
     bool IsSet(ContentBrowserAction flag) const;
   };
 
-  /// This structure stores the Content browser items
+  /// This structure stores the Content browser items base class
   class ContentBrowserItem
   {
   public:
@@ -142,4 +142,39 @@ namespace Kreator
     bool m_isRenaming = false;
     bool m_isDragging = false;
   };
+  
+  /// This structure stores the Content browser items (Directory)
+  class ContentBrowserDirectory : public ContentBrowserItem
+  {
+  public:
+    ContentBrowserDirectory(const Ref<DirectoryInfo>& directoryInfo, const Ref<Image>& icon);
+    virtual ~ContentBrowserDirectory() = default;
+    
+    Ref<DirectoryInfo>& GetDirectoryInfo() { return m_directoryInfo; }
+    
+    /// @see ContentBrowsetItem
+    virtual void Delete() override;
+    /// @see ContentBrowsetItem
+    virtual bool Move(const std::filesystem::path& destination) override;
+    
+  private:
+    /// @see ContentBrowsetItem
+    virtual void Activate(CBItemActionResult& actionResult) override;
+    /// @see ContentBrowsetItem
+    virtual void OnRenamed(const std::string& newName) override;
+    /// @see ContentBrowsetItem
+    virtual void UpdateDrop(CBItemActionResult& actionResult) override;
+    
+    /// This function updates the directory path
+    /// - Parameters:
+    ///   - directoryInfo: Directory Info
+    ///   - newParentPath: New path
+    ///   - newName: New name
+    void UpdateDirectoryPath(Ref<DirectoryInfo> directoryInfo, const std::filesystem::path& newParentPath,
+                             const std::filesystem::path& newName);
+    
+  private:
+    Ref<DirectoryInfo> m_directoryInfo;
+  };
+
 } // namespace Kreator

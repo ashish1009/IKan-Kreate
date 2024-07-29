@@ -8,6 +8,8 @@
 #include "ContentBrowserItem.hpp"
 
 #include "Editor/ApplicationSettings.hpp"
+#include "Panels/ContentBrowserPanel.hpp"
+#include "Layers/RendererLayer.hpp"
 
 namespace Kreator
 {
@@ -421,4 +423,69 @@ namespace Kreator
     
     RenderCustomContextItems();
   }
+  
+  ContentBrowserDirectory::ContentBrowserDirectory(const Ref<DirectoryInfo>& directoryInfo, const Ref<Image>& icon)
+  : ContentBrowserItem(ContentBrowserItem::ItemType::Directory, directoryInfo->handle,
+                       directoryInfo->filePath.filename().string(), icon), m_directoryInfo(directoryInfo)
+  {
+    
+  }
+  
+  void ContentBrowserDirectory::Activate(CBItemActionResult& actionResult)
+  {
+    actionResult.Set(ContentBrowserAction::NavigateToThis, true);
+  }
+  
+  void ContentBrowserDirectory::OnRenamed(const std::string& newName)
+  {
+    if (std::filesystem::exists(Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath.parent_path() / newName))
+    {
+      IK_LOG_ERROR("ContentBrowser", "A directory with that name already exists!");
+      return;
+    }
+    
+    Utils::FileSystem::Rename(Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath,
+                              Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath.parent_path() / newName);
+  }
+  
+  void ContentBrowserDirectory::UpdateDrop([[maybe_unused]]CBItemActionResult& actionResult)
+  {
+    if (IsSelected())
+    {
+      return;
+    }
+    
+    if (ImGui::BeginDragDropTarget())
+    {
+      // TODO: Implement later
+      ImGui::EndDragDropTarget();
+    }
+  }
+  
+  void ContentBrowserDirectory::Delete()
+  {
+    bool deleted = Utils::FileSystem::Delete(Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath);
+    if (!deleted)
+    {
+      IK_LOG_ERROR("ContentBrowser", "Failed to delete folder {0}", m_directoryInfo->filePath.string().c_str());
+      return;
+    }
+    
+    for (auto asset : m_directoryInfo->assets)
+    {
+      AssetManager::OnAssetDeleted(asset);
+    }
+  }
+  
+  bool ContentBrowserDirectory::Move(const std::filesystem::path& destination)
+  {
+    bool wasMoved = Utils::FileSystem::MoveFile(Project::GetActive()->GetAssetDirectory() / m_directoryInfo->filePath,
+                                                Project::GetActive()->GetAssetDirectory() / destination);
+    if (!wasMoved)
+    {
+      return false;
+    }
+    return true;
+  }
+  
 } // namespace Kreator
