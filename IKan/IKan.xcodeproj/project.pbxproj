@@ -29,6 +29,7 @@
 		B22AB2862C5768A8007453B7 /* HashGenerator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2832C5768A8007453B7 /* HashGenerator.cpp */; };
 		B22AB28D2C576CE5007453B7 /* Scene.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB28C2C576CE5007453B7 /* Scene.hpp */; };
 		B22AB28E2C576CE6007453B7 /* Scene.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB28B2C576CE5007453B7 /* Scene.cpp */; };
+		B22AB2912C576DD4007453B7 /* EditorPanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2902C576DD4007453B7 /* EditorPanel.hpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -191,6 +192,7 @@
 		B22AB2842C5768A8007453B7 /* HashGenerator.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = HashGenerator.hpp; sourceTree = "<group>"; };
 		B22AB28B2C576CE5007453B7 /* Scene.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene.cpp; sourceTree = "<group>"; };
 		B22AB28C2C576CE5007453B7 /* Scene.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene.hpp; sourceTree = "<group>"; };
+		B22AB2902C576DD4007453B7 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -363,6 +365,7 @@
 		B22AB2872C576C41007453B7 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B22AB2902C576DD4007453B7 /* EditorPanel.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -854,6 +857,7 @@
 				B22AB2852C5768A8007453B7 /* HashGenerator.hpp in Headers */,
 				B2D297112C412E7E0093F4DA /* OpenGLPipeline.hpp in Headers */,
 				B2D294B72C3BF30B0093F4DA /* Renderer.hpp in Headers */,
+				B22AB2912C576DD4007453B7 /* EditorPanel.hpp in Headers */,
 				B22AB2502C4A64BB007453B7 /* AssetSerializer.hpp in Headers */,
 				B2D292982C3863F30093F4DA /* StringUtils.hpp in Headers */,
 				B2D296952C3C19900093F4DA /* RendererAPI.hpp in Headers */,

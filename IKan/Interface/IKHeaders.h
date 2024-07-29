@@ -87,3 +87,4 @@
 #include <Project/Project.hpp>
 #include <Project/ProjectSerializer.hpp>
 
+#include <Editor/EditorPanel.hpp>
