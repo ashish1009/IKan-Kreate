@@ -379,7 +379,38 @@ if (!Project::GetActive()) return
       });
       
       welcomeTable.ShowColumn(1, [this]() {
-
+        // Title of Popup --------------------------------------------------
+        UI::Text(UI::FontType::SemiHeader, "Recent Projects", UI::AlignX::Center);
+        ImGui::Separator();
+        
+        // Recent Project --------------------------------------------------
+        {
+          UI::ScopedStyle framePadding(ImGuiStyleVar_FramePadding, ImVec2(5.0f, 10.0f));
+          UI::ScopedFont version(UI::Font::Get(UI::FontType::Bold));
+          
+          for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+          {
+            if (!std::filesystem::exists(it->second.filePath))
+            {
+              m_userPreferences->recentProjects.erase(it);
+              break;
+            }
+            
+            ImGuiTreeNodeFlags flags = ImGuiTreeNodeFlags_SpanFullWidth | ImGuiTreeNodeFlags_Bullet | ImGuiTreeNodeFlags_FramePadding;
+            bool open = UI::TreeNode("##Recent_Projects", it->second.name, flags, m_newProjectIcon);
+            if (ImGui::IsItemClicked())
+            {
+              OpenProject(it->second.filePath);
+              ImGui::CloseCurrentPopup();
+              break;
+            }
+            
+            if(open)
+            {
+              ImGui::TreePop();
+            }
+          }
+        }
       });
     });
   }

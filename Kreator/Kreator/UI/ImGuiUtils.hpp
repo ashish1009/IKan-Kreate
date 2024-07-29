@@ -257,4 +257,36 @@ namespace Kreator::UI
   ///   - offset: offset from current cursor position
   /// - Note: Doesnt move the cursor
   void Image(Ref<IKan::Image> image, const glm::vec2& logoSize, AlignX xAlign, const glm::vec2& offset = {0, 0});
+  
+  // Tree Nodes Customs ---------------------------------------------------------------------------------------------------
+  /// This function renders the Tree node
+  /// - Parameters:
+  ///   - id: Item ID
+  ///   - label: Item Lable
+  ///   - flags: Item Flags
+  ///   - icon: Item Icon Texture
+  bool TreeNode(const std::string& id, const std::string& label, ImGuiTreeNodeFlags flags = 0, const Ref<IKan::Image>& icon = nullptr);
+  /// This function render tree node with icon
+  /// - Parameters:
+  ///   - icon: Icon image
+  ///   - id: Node ID
+  ///   - flags: flags
+  ///   - label: lable of node
+  ///   - labeleEnd: lable end
+  ///   - iconTint: color
+  bool TreeNodeWithIcon(Ref<IKan::Image> icon, ImGuiID id, ImGuiTreeNodeFlags flags, const char* label, const char* labeleEnd, const ImColor& iconTint = IM_COL32_WHITE);
+  /// This function render tree node with icon
+  /// - Parameters:
+  ///   - icon: Icon image
+  ///   - ptr_id: Node ID
+  ///   - flags: flags
+  ///   - iconTint: color
+  bool TreeNodeWithIcon(Ref<IKan::Image> icon, const void* ptr_id, ImGuiTreeNodeFlags flags, const ImColor& iconTint, const char* fmt, ...);
+  /// This function render tree node with icon
+  /// - Parameters:
+  ///   - icon: Icon image
+  ///   - flags: flags
+  ///   - iconTint: color
+  bool TreeNodeWithIcon(Ref<IKan::Image> icon, const char* label, ImGuiTreeNodeFlags flags, const ImColor& iconTint = IM_COL32_WHITE);
+
 } // namespace Kreator::UI
