@@ -88,3 +88,5 @@
 #include <Project/ProjectSerializer.hpp>
 
 #include <Editor/EditorPanel.hpp>
+#include <Editor/EditorPanelManager.hpp>
+#include <Editor/Console/EditorConsoleMessage.hpp>

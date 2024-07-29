@@ -32,6 +32,8 @@
 		B22AB2912C576DD4007453B7 /* EditorPanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2902C576DD4007453B7 /* EditorPanel.hpp */; };
 		B22AB2952C576E74007453B7 /* EditorPanelManager.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */; };
 		B22AB2962C576E74007453B7 /* EditorPanelManager.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */; };
+		B22AB2A52C576F86007453B7 /* EditorConsoleMessage.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2A32C576F86007453B7 /* EditorConsoleMessage.cpp */; };
+		B22AB2A62C576F86007453B7 /* EditorConsoleMessage.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2A42C576F86007453B7 /* EditorConsoleMessage.hpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -197,6 +199,8 @@
 		B22AB2902C576DD4007453B7 /* EditorPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanel.hpp; sourceTree = "<group>"; };
 		B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorPanelManager.cpp; sourceTree = "<group>"; };
 		B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorPanelManager.hpp; sourceTree = "<group>"; };
+		B22AB2A32C576F86007453B7 /* EditorConsoleMessage.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsoleMessage.cpp; sourceTree = "<group>"; };
+		B22AB2A42C576F86007453B7 /* EditorConsoleMessage.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleMessage.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -369,6 +373,7 @@
 		B22AB2872C576C41007453B7 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B22AB29C2C576F74007453B7 /* Console */,
 				B22AB2902C576DD4007453B7 /* EditorPanel.hpp */,
 				B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */,
 			);
@@ -378,6 +383,7 @@
 		B22AB2882C576C48007453B7 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B22AB2A22C576F7B007453B7 /* Console */,
 				B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */,
 			);
 			path = Editor;
@@ -397,6 +403,22 @@
 				B22AB28B2C576CE5007453B7 /* Scene.cpp */,
 			);
 			path = Scene;
+			sourceTree = "<group>";
+		};
+		B22AB29C2C576F74007453B7 /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				B22AB2A42C576F86007453B7 /* EditorConsoleMessage.hpp */,
+			);
+			path = Console;
+			sourceTree = "<group>";
+		};
+		B22AB2A22C576F7B007453B7 /* Console */ = {
+			isa = PBXGroup;
+			children = (
+				B22AB2A32C576F86007453B7 /* EditorConsoleMessage.cpp */,
+			);
+			path = Console;
 			sourceTree = "<group>";
 		};
 		B2D292672C38180E0093F4DA = {
@@ -894,6 +916,7 @@
 				B2D296DA2C41028F0093F4DA /* RendererBuffer.hpp in Headers */,
 				B22AAF552C480146007453B7 /* AssetType.hpp in Headers */,
 				B2D297362C452CB70093F4DA /* Font.hpp in Headers */,
+				B22AB2A62C576F86007453B7 /* EditorConsoleMessage.hpp in Headers */,
 				B24A66D42C45554C00B870DE /* Materials.hpp in Headers */,
 				B22AB2772C5761D3007453B7 /* AssetImporter.hpp in Headers */,
 				B2D292B52C3940320093F4DA /* Application.hpp in Headers */,
@@ -1039,6 +1062,7 @@
 				B22AB2782C5761D3007453B7 /* AssetImporter.cpp in Sources */,
 				B22AB2962C576E74007453B7 /* EditorPanelManager.cpp in Sources */,
 				B2D292B42C3940320093F4DA /* Application.cpp in Sources */,
+				B22AB2A52C576F86007453B7 /* EditorConsoleMessage.cpp in Sources */,
 				B2D296F42C410AC30093F4DA /* Shader.cpp in Sources */,
 				B2D294B62C3BF30B0093F4DA /* Renderer.cpp in Sources */,
 				B2D294A72C3BDEA40093F4DA /* Window.cpp in Sources */,
