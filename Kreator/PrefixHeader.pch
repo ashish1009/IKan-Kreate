@@ -28,3 +28,4 @@
 #include <UI/ImGuiInputBuffer.hpp>
 #include <UI/ImGuiWidget.hpp>
 #include <UI/ImGuiInputs.hpp>
+#include <UI/ImGuiProperty.hpp>

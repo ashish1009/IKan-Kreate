@@ -123,6 +123,7 @@ namespace Kreator::UI
     inline static ImU32 GroupHeaderHovered    = IM_COL32(32, 32, 32, 255);
     inline static ImU32 GroupHeaderActive     = IM_COL32(30, 30, 30, 255);
     inline static ImU32 Muted                 = IM_COL32(77, 77, 77, 255);
+    inline static ImU32 TextError             = IM_COL32(230, 51, 51, 255);
 
     /// This function changes theme color to dark
     /// - Parameter theme: Current selected theme
