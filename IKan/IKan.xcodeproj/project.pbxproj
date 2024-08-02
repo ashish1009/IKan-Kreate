@@ -48,6 +48,10 @@
 		B23F45A62C57F603000A0944 /* EntitySerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45A32C57F603000A0944 /* EntitySerializer.cpp */; };
 		B23F45A92C57F60A000A0944 /* SceneSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23F45A82C57F60A000A0944 /* SceneSerializer.hpp */; };
 		B23F45AA2C57F60A000A0944 /* SceneSerializer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45A72C57F60A000A0944 /* SceneSerializer.cpp */; };
+		B23F45D22C5CED68000A0944 /* Scene2D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45D02C5CED68000A0944 /* Scene2D.cpp */; };
+		B23F45D32C5CED68000A0944 /* Scene2D.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23F45D12C5CED68000A0944 /* Scene2D.hpp */; };
+		B23F45DB2C5CED6C000A0944 /* Scene3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45D92C5CED6C000A0944 /* Scene3D.cpp */; };
+		B23F45DC2C5CED6C000A0944 /* Scene3D.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23F45DA2C5CED6C000A0944 /* Scene3D.hpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -229,6 +233,10 @@
 		B23F45A42C57F603000A0944 /* EntitySerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntitySerializer.hpp; sourceTree = "<group>"; };
 		B23F45A72C57F60A000A0944 /* SceneSerializer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneSerializer.cpp; sourceTree = "<group>"; };
 		B23F45A82C57F60A000A0944 /* SceneSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneSerializer.hpp; sourceTree = "<group>"; };
+		B23F45D02C5CED68000A0944 /* Scene2D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene2D.cpp; sourceTree = "<group>"; };
+		B23F45D12C5CED68000A0944 /* Scene2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene2D.hpp; sourceTree = "<group>"; };
+		B23F45D92C5CED6C000A0944 /* Scene3D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene3D.cpp; sourceTree = "<group>"; };
+		B23F45DA2C5CED6C000A0944 /* Scene3D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene3D.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -423,6 +431,8 @@
 			isa = PBXGroup;
 			children = (
 				B22AB28C2C576CE5007453B7 /* Scene.hpp */,
+				B23F45DA2C5CED6C000A0944 /* Scene3D.hpp */,
+				B23F45D12C5CED68000A0944 /* Scene2D.hpp */,
 				B23F459C2C57F5EF000A0944 /* Entity.hpp */,
 				B23F45A02C57F5F3000A0944 /* Component.hpp */,
 				B23F45A82C57F60A000A0944 /* SceneSerializer.hpp */,
@@ -435,6 +445,8 @@
 			isa = PBXGroup;
 			children = (
 				B22AB28B2C576CE5007453B7 /* Scene.cpp */,
+				B23F45D02C5CED68000A0944 /* Scene2D.cpp */,
+				B23F45D92C5CED6C000A0944 /* Scene3D.cpp */,
 				B23F459B2C57F5EF000A0944 /* Entity.cpp */,
 				B23F459F2C57F5F3000A0944 /* Component.cpp */,
 				B23F45A32C57F603000A0944 /* EntitySerializer.cpp */,
@@ -910,6 +922,7 @@
 				B22AB2B22C577226007453B7 /* AssetEdditor.hpp in Headers */,
 				B22AAF622C4A3EE2007453B7 /* AssetMetadata.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
+				B23F45DC2C5CED6C000A0944 /* Scene3D.hpp in Headers */,
 				B22AB2AE2C57701B007453B7 /* EditorConsolePanel.hpp in Headers */,
 				B22AAF6B2C4A437A007453B7 /* AssetRegistry.hpp in Headers */,
 				B23F459D2C57F5EF000A0944 /* Entity.hpp in Headers */,
@@ -944,6 +957,7 @@
 				B2D296AE2C40E5E80093F4DA /* QuadData.hpp in Headers */,
 				B2D296A12C3EE67E0093F4DA /* Renderer2D.hpp in Headers */,
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
+				B23F45D32C5CED68000A0944 /* Scene2D.hpp in Headers */,
 				B2D296992C3C19E20093F4DA /* OpenGLRendererAPI.hpp in Headers */,
 				B2FDDA982C47FF630062C6E1 /* Asset.hpp in Headers */,
 				B2D297562C4548BD0093F4DA /* SceneCamera.hpp in Headers */,
@@ -1094,6 +1108,7 @@
 			files = (
 				B2D296D42C40F3230093F4DA /* RendererStats.cpp in Sources */,
 				B23F45A62C57F603000A0944 /* EntitySerializer.cpp in Sources */,
+				B23F45D22C5CED68000A0944 /* Scene2D.cpp in Sources */,
 				B2D296EB2C41073E0093F4DA /* BufferLayout.cpp in Sources */,
 				B2D294F92C3BF7BD0093F4DA /* OpenGLRendererContext.cpp in Sources */,
 				B22AB28E2C576CE6007453B7 /* Scene.cpp in Sources */,
@@ -1128,6 +1143,7 @@
 				B22AB2862C5768A8007453B7 /* HashGenerator.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
 				B2D296FB2C410BF40093F4DA /* OpenGLShader.cpp in Sources */,
+				B23F45DB2C5CED6C000A0944 /* Scene3D.cpp in Sources */,
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
 				B22AAF6A2C4A437A007453B7 /* AssetRegistry.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,

@@ -8,6 +8,8 @@
 #include "Scene.hpp"
 
 #include "Scene/Component.hpp"
+#include "Scene/Scene2D.hpp"
+#include "Scene/Scene3D.hpp"
 
 namespace IKan
 {
@@ -17,17 +19,42 @@ namespace IKan
   {
     registry.reserve<Component...>(capacity);
   }
-
-  Ref<Scene> Scene::Create(const std::string& name, uint32_t maxEntityCapacity)
+  
+  static std::string_view SceneTypeString(SceneType sceneType)
   {
-    return CreateRef<Scene>(name, maxEntityCapacity);
+    switch (sceneType)
+    {
+      case SceneType::_2D: return "2D";
+      case SceneType::_3D: return "3D";
+      case SceneType::None:
+      default:
+        IK_ASSERT(false, "Invalid Scene");
+        break;
+    }
+    return "";
+  }
+
+  Ref<Scene> Scene::Create(SceneType sceneType, const std::string& name, uint32_t maxEntityCapacity)
+  {
+    switch (sceneType)
+    {
+      case SceneType::_2D: return CreateRef<Scene2D>(name, maxEntityCapacity);
+      case SceneType::_3D: return CreateRef<Scene3D>(name, maxEntityCapacity);
+      case SceneType::None:
+      default:
+        IK_ASSERT(false, "Invalid Scene");
+        break;
+    }
+    return nullptr;
   }
   
-  Scene::Scene(const std::string& name, uint32_t maxEntityCapacity)
-  : m_name(name), m_registryCapacity(maxEntityCapacity)
+  Scene::Scene(SceneType sceneType, const std::string& name, uint32_t maxEntityCapacity)
+  : m_sceneType(sceneType), m_name(name), m_registryCapacity(maxEntityCapacity)
   {
     IK_PROFILE();
-    IK_LOG_TRACE(LogModule::Scene, "Creating {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
+    IK_LOG_TRACE(LogModule::Scene, "Creating {0} Scene", SceneTypeString(m_sceneType));
+    IK_LOG_TRACE(LogModule::Scene, "  Name              : {0}", m_name);
+    IK_LOG_TRACE(LogModule::Scene, "  Registry Capacity : {0}", m_registryCapacity);
 
     ReserveRegistry(AllComponents{}, m_registry, m_registryCapacity);
   }

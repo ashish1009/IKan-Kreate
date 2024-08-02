@@ -297,7 +297,7 @@ if (!Project::GetActive()) return
     CloseCurrentScene();
     
     // Create new scene
-    m_editorScene = Scene::Create(name);
+    m_editorScene = Scene::Create(m_sceneType, name);
     m_sceneFilePath = std::string();
     m_currentScene = m_editorScene;
     
@@ -331,7 +331,12 @@ if (!Project::GetActive()) return
       
       // Create project directory
       // Copy the template files
-      std::filesystem::path templateProjectDir = m_directories.clientResourcePath / "TemplateProject";
+      std::filesystem::path templateProjectDir = m_directories.clientResourcePath / "TemplateProject3D";
+      if (m_sceneType == IKan::SceneType::_2D)
+      {
+        templateProjectDir = m_directories.clientResourcePath / "TemplateProject2D";
+      }
+      
       if (Utils::FileSystem::Copy(templateProjectDir, newProjectFilePath))
       {
         // Open Template Project file
@@ -357,11 +362,14 @@ if (!Project::GetActive()) return
         std::filesystem::create_directory(newProjectFilePath / "Assets/Textures");
         std::filesystem::create_directory(newProjectFilePath / "Assets/Fonts");
         std::filesystem::create_directory(newProjectFilePath / "Assets/Scenes");
-        std::filesystem::create_directory(newProjectFilePath / "Assets/Meshes");
-        std::filesystem::create_directory(newProjectFilePath / "Assets/Materials");
         std::filesystem::create_directory(newProjectFilePath / "Assets/Physics");
         std::filesystem::create_directory(newProjectFilePath / "Assets/Prefabs");
-        
+
+        if (m_sceneType == IKan::SceneType::_3D)
+        {
+          std::filesystem::create_directory(newProjectFilePath / "Assets/Meshes");
+          std::filesystem::create_directory(newProjectFilePath / "Assets/Materials");
+        }
         // Add more based on Project config
       }
       else
@@ -632,9 +640,10 @@ if (!Project::GetActive()) return
       
       // Draw the icons of 2D and 3D
       static const glm::vec2 size = {150.0f, 150.0f};
-      if (UI::DrawButtonImage("2D", m_2DIcon, size, {100.0f, 20.0f}, true, tintColor2DIcon, UI::Color::TextBrighter, tintColor2DIcon))
+      if (UI::DrawButtonImage("2D", m_2DIcon, size, {100.0f, 20.0f}, false, UI::Color::TextMuted, UI::Color::TextMuted, UI::Color::TextMuted))
       {
-        m_sceneType = SceneType::_2D;
+        // TODO: Do later
+        // m_sceneType = SceneType::_2D;
       }
       ImGui::SameLine();
       if (UI::DrawButtonImage("3D", m_3DIcon, size, {100.0f, 0.0f}, true, tintColor3DIcon, UI::Color::TextBrighter, tintColor3DIcon))

@@ -34,11 +34,12 @@ namespace Kreator
 
     // Check Client directories ---------------------------------------------------------------------------------------
     [[maybe_unused]] bool exist {std::filesystem::exists(m_kreatorDirectories.clientResourcePath)};
-    [[maybe_unused]] bool tempalateProj {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "TemplateProject")};
+    [[maybe_unused]] bool tempalateProj2D {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "TemplateProject2D")};
+    [[maybe_unused]] bool tempalateProj3D {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "TemplateProject3D")};
     [[maybe_unused]] bool fonts {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "Fonts")};
     [[maybe_unused]] bool textures {std::filesystem::exists(m_kreatorDirectories.clientResourcePath / "Textures")};
 
-    IK_ASSERT(exist and tempalateProj and fonts and textures, "Invalid Client Directory");
+    IK_ASSERT(exist and tempalateProj2D and tempalateProj3D and fonts and textures, "Invalid Client Directory");
 
     IK_LOG_INFO("KreatorApp", "Initializing the 'Kreator' Application");
     IK_LOG_INFO("Kreator App", "  Systerm User Path       : {0}", IKan::Utils::FileSystem::IKanAbsolute(m_kreatorDirectories.systemUserPath).string());
