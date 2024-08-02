@@ -21,6 +21,9 @@ namespace Kreator
 #define RETRUN_IF_NO_PROJECT() \
 if (!Project::GetActive()) return
 
+#define RETRUN_IF_NO_SCENE() \
+if (!m_currentScene) return
+
   // Kretor Resource Path
 #define KreatorResourcePath(path) std::filesystem::absolute(m_directories.clientResourcePath / path)
 
@@ -219,12 +222,33 @@ if (!Project::GetActive()) return
   {
     IK_PERFORMANCE("RendererLayer::OnUpdate");
     RETRUN_IF_NO_PROJECT();
-    
-    m_editorCamera.OnUpdate(ts);
-    m_editorCamera.SetActive(true);
-    
-    m_viewportRenderer.BeginScene();
-    m_viewportRenderer.EndScene();
+    RETRUN_IF_NO_SCENE();
+
+    switch (m_sceneState)
+    {
+      case SceneState::Edit:
+      {
+        m_editorCamera.SetActive(m_primaryViewport.isHovered or Input::GetCursorMode() == CursorMode::Locked);
+        m_editorCamera.OnUpdate(ts);
+
+        break;
+      }
+      case SceneState::Simulate:
+      {
+        m_editorCamera.SetActive(m_primaryViewport.isHovered or Input::GetCursorMode() == CursorMode::Locked);
+        m_editorCamera.OnUpdate(ts);
+
+        break;
+      }
+      case SceneState::Play:
+      {
+        break;
+      }
+      case SceneState::Pause:
+      {
+        break;
+      }
+    }
   }
   
   void RendererLayer::OnEvent(Event& event)
@@ -254,11 +278,15 @@ if (!Project::GetActive()) return
     UI_StartMainWindowDocking();
 
     UI_Viewport();
-    m_panels.OnImGuiRender();
-    
-    // To be rendered at last
-    UI_StatisticsPanel();
 
+    if (m_sceneState != SceneState::Play)
+    {
+      m_panels.OnImGuiRender();
+      
+      // Should be rendered last inside docker
+      UI_StatisticsPanel();
+    }
+    
     UI_EndMainWindowDocking();
   }
   
@@ -756,6 +784,7 @@ if (!Project::GetActive()) return
     }
 
     // Title bar
+    if (m_sceneState != SceneState::Play)
     {
       // Render the title if original title bar is hidden
       if (Application::Get().GetSpecification().windowSpecification.hideTitleBar)

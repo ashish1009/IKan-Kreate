@@ -153,6 +153,11 @@ namespace Kreator
     std::filesystem::path m_sceneFilePath{};
     Ref<Scene> m_currentScene, m_editorScene, m_runtimeScene, m_simulationScene;
     SceneType m_sceneType {SceneType::None};
+    enum class SceneState
+    {
+      Edit = 0, Play = 1, Pause = 2, Simulate = 3
+    };
+    SceneState m_sceneState {SceneState::Edit};
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
