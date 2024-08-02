@@ -13,6 +13,11 @@
 
 namespace IKan
 {
+  enum class SceneType : uint8_t
+  {
+    None, _2D, _3D
+  };
+
   /// This class stores the scene data (Entity) for renderer
   class Scene : public Asset
   {

@@ -582,9 +582,9 @@ if (!Project::GetActive()) return
       static ImU32 createButtonColor = UI::Color::TextMuted;
       static std::string createButtonTitle = " Create ";
 
-      switch (m_selectedProject)
+      switch (m_sceneType)
       {
-        case SelectedProject::_2D:
+        case SceneType::_2D:
           // Icon Color
           tintColor2DIcon = UI::Color::NiceBlueHighlight;
           tintColor3DIcon = UI::Color::TextMuted;
@@ -595,7 +595,7 @@ if (!Project::GetActive()) return
           createButtonTitle = " Create 2D ";
           break;
           
-        case SelectedProject::_3D:
+        case SceneType::_3D:
           // Icon Color
           tintColor2DIcon = UI::Color::TextMuted;
           tintColor3DIcon = UI::Color::NiceBlueHighlight;
@@ -606,7 +606,7 @@ if (!Project::GetActive()) return
           createButtonTitle = " Create 3D ";
           break;
           
-        case SelectedProject::None:
+        case SceneType::None:
         default:
           // Icon Color
           tintColor2DIcon = UI::Color::TextMuted;
@@ -623,12 +623,12 @@ if (!Project::GetActive()) return
       static const glm::vec2 size = {150.0f, 150.0f};
       if (UI::DrawButtonImage("2D", m_2DIcon, size, {100.0f, 20.0f}, true, tintColor2DIcon, UI::Color::TextBrighter, tintColor2DIcon))
       {
-        m_selectedProject = SelectedProject::_2D;
+        m_sceneType = SceneType::_2D;
       }
       ImGui::SameLine();
       if (UI::DrawButtonImage("3D", m_3DIcon, size, {100.0f, 0.0f}, true, tintColor3DIcon, UI::Color::TextBrighter, tintColor3DIcon))
       {
-        m_selectedProject = SelectedProject::_3D;
+        m_sceneType = SceneType::_3D;
       }
       
       UI::ShiftCursorY(20);
@@ -641,7 +641,7 @@ if (!Project::GetActive()) return
         {
           m_welcomePopup.SetFlag(true);
         }
-        m_selectedProject = SelectedProject::None;
+        m_sceneType = SceneType::None;
         ImGui::CloseCurrentPopup();
       }
       ImGui::SameLine(ImGui::GetWindowWidth() - ImGui::CalcTextSize(createButtonTitle.c_str()).x - 20);
@@ -649,11 +649,11 @@ if (!Project::GetActive()) return
       // Create Button
       if (UI::DrawButton(createButtonTitle, UI::FontType::Bold, createButtonTextColor, createButtonColor, 2) or ImGui::IsKeyDown(ImGuiKey::ImGuiKey_Enter))
       {
-        if (m_selectedProject != SelectedProject::None)
+        if (m_sceneType != SceneType::None)
         {
           FolderExplorer::ShowCreatePopup(m_directories.kreatorPath / "Kreator", &m_createNewProjectPopup);
           m_folderExplorerAction = FolderExplorerAction::NewProject;
-          m_selectedProject = SelectedProject::None;
+          m_sceneType = SceneType::None;
           ImGui::CloseCurrentPopup();
         }
       }

@@ -133,11 +133,6 @@ namespace Kreator
     KreatorDirectories m_directories;
     Ref<UserPreferences> m_userPreferences;
     float m_windowOriginalWidth {0}, m_windowOriginalHeight {0};
-    enum class SelectedProject : uint8_t
-    {
-      None, _2D, _3D
-    };
-    SelectedProject m_selectedProject {SelectedProject::None};
 
     // Viewport Data -------------------------------------
     Viewport m_primaryViewport, m_secondaryViewport;
@@ -155,6 +150,7 @@ namespace Kreator
     // Scene Data ----------------------------------------
     std::filesystem::path m_sceneFilePath{};
     Ref<Scene> m_currentScene, m_editorScene, m_runtimeScene, m_simulationScene;
+    SceneType m_sceneType {SceneType::None};
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
