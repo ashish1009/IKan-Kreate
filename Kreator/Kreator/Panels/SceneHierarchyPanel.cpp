@@ -42,9 +42,10 @@ namespace Kreator
   void SceneHierarchyPanel::SetSceneContext(const Ref<Scene>& scene)
   {
     IK_PROFILE();
+    m_context = scene;
   }
   
-  void SceneHierarchyPanel::OnProjectChanged(const Ref<Project>& project)
+  void SceneHierarchyPanel::OnProjectChanged([[maybe_unused]] const Ref<Project>& project)
   {
     IK_PROFILE();
   }
@@ -52,10 +53,25 @@ namespace Kreator
   void SceneHierarchyPanel::OnImGuiRender(bool& isOpen)
   {
     IK_PERFORMANCE("SceneHierarchyPanel::OnImGuiRender");
-    ImGui::Begin("Scene Hierarchy", &isOpen);
-    ImGui::End();
+    if (m_isWindow)
+    {
+      UI::ScopedStyle padding(ImGuiStyleVar_WindowPadding, ImVec2(0.0f, 0.0f));
+      ImGui::Begin("Scene Hierarchy", &isOpen);
+    }
+
+    // Draw scene hierarchy panel
+    if (m_context)
+    {
+      ImGui::End();
+
+      // Draw property panel
+      ImGui::Begin("Properties");
+
+    }
     
-    ImGui::Begin("Properties");
-    ImGui::End();
+    if (m_isWindow)
+    {
+      ImGui::End();
+    }
   }
 } //  namesapce Kreator

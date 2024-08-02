@@ -21,7 +21,9 @@ namespace Kreator
     /// Default Constructor
     SceneHierarchyPanel() = default;
     /// Constructor with scene instance
-    /// - Parameter scene: Scene context
+    /// - Parameters:
+    ///   - scene: Scene context
+    ///   - isWindow: Is panel primary widget
     SceneHierarchyPanel(const Ref<Scene>& scene, bool isWindow = true);
     
     /// @see Editor Panel

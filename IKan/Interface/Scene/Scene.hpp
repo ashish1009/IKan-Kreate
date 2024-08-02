@@ -62,5 +62,7 @@ namespace IKan
     // EnTT -----------------------------
     entt::registry m_registry;
     uint32_t m_registryCapacity {0};
+    
+    friend class Entity;
   };
 } // namespace IKan
