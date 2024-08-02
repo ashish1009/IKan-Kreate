@@ -516,9 +516,9 @@
 				B2D2974E2C4548000093F4DA /* Camera */,
 				B2FDDA952C47FF550062C6E1 /* Assets */,
 				B22AB2572C4A6771007453B7 /* Project */,
-				B2D294A82C3BE21A0093F4DA /* Platform */,
 				B22AB2882C576C48007453B7 /* Editor */,
 				B22AB28A2C576CDB007453B7 /* Scene */,
+				B2D294A82C3BE21A0093F4DA /* Platform */,
 			);
 			path = Implementation;
 			sourceTree = "<group>";

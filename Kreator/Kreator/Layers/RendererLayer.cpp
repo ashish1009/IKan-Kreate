@@ -913,7 +913,55 @@ if (!Project::GetActive()) return
     UI::SetCursorPos(ImVec2(logoOffsetX, 4.0f));
     
     UI_MenuBar();
+    
+    // Round Bar -------------------------------------------------------------------------
+    UI::DrawRect(UI::Color::Accent, 20, 0.5f, {ImGui::GetWindowWidth() / 4, -12}, 8.0f);
+    float roundBarRight = (3 * ImGui::GetWindowWidth()) / 4;
 
+    // Project name --------------------------------------------------------------------
+    {
+      UI::SetCursorPosX(ImGui::GetWindowWidth() / 4);
+      UI::SetCursorPosY(titleBarHeight / 3);
+
+      UI::ScopedColor textColor(ImGuiCol_Text, UI::Color::TextDarker);
+      UI::ShiftCursorX(10);
+      const std::string title = Project::GetActive()->GetConfig().name;
+      {
+        UI::ScopedFont boldFont(UI::Font::Get(UI::FontType::Bold));
+        ImGui::Text(title.c_str());
+      }
+      UI::SetTooltip("Current project (" + Project::GetActive()->GetConfig().projectFileName + ")");
+    }
+
+    // Current Scene name ---------------------------------------------------------------
+    {
+      UI::ScopedColor textColor(ImGuiCol_Text, UI::Color::Text);
+      UI::SameLine();
+      
+      const std::string sceneName = "Test Scene";
+      UI::SetCursorPosX(roundBarRight - ImGui::CalcTextSize(sceneName.c_str()).x - 20);
+      {
+        if (m_sceneFilePath == "")
+        {
+          ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::Warning);
+        }
+        UI::ScopedFont boldFont(UI::Font::Get(UI::FontType::Bold));
+        ImGui::Text(sceneName.c_str());
+        if (m_sceneFilePath == "")
+        {
+          ImGui::PopStyleColor();
+        }
+      }
+      if (m_sceneFilePath == "")
+      {
+        UI::SetTooltip("Unsaved Scene");
+      }
+      else
+      {
+        UI::SetTooltip("Current scene (" + m_sceneFilePath.string() + ")");
+      }
+    }
+    
     // Render the Window Buttons -------------------------------------------------------
     UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
     UI::SetCursorPosY(10.0f);

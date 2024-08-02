@@ -384,6 +384,23 @@ namespace Kreator::UI
     auto* drawList = ImGui::GetWindowDrawList();
     drawList->AddRectFilled(titlebarMin, titlebarMax, color, rounding);
   }
+  void DrawRect(const ImU32& color, float height, float widthFactor, const glm::vec2& offset, float rounding)
+  {
+    // Draw the title Bar rectangle ---------------------------------------------------
+    const ImVec2 titlebarMin =
+    {
+      ImGui::GetCursorScreenPos().x + offset.x,
+      ImGui::GetCursorScreenPos().y + offset.y
+    };
+    const ImVec2 titlebarMax =
+    {
+      ImGui::GetCursorScreenPos().x + offset.x + (ImGui::GetWindowWidth() * widthFactor),
+      ImGui::GetCursorScreenPos().y + offset.y + height
+    };
+    
+    auto* drawList = ImGui::GetWindowDrawList();
+    drawList->AddRect(titlebarMin, titlebarMax, color, rounding);
+  }
   void DrawUnderline(bool fullWidth, float offsetX, float offsetY)
   {
     if (fullWidth)

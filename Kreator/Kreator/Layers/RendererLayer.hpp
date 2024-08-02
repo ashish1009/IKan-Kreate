@@ -140,6 +140,9 @@ namespace Kreator
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
 
+    // Scene Data ----------------------------------------
+    std::filesystem::path m_sceneFilePath{};
+
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
   };
