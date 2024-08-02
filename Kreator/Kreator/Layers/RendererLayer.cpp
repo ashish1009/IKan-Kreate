@@ -235,6 +235,13 @@ if (!Project::GetActive()) return
     m_panels.OnEvent(event);
   }
   
+  void RendererLayer::OpenScene(const std::filesystem::path &filepath)
+  {
+    IK_ASSERT(false);
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Opening scene: {0}", filepath.string());
+  }
+  
   void RendererLayer::OnImGuiRender()
   {
     UI_WelcomePopup();
@@ -281,6 +288,32 @@ if (!Project::GetActive()) return
     m_secondaryViewportRenderer.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
   }
   
+  void RendererLayer::NewScene(const std::string& name)
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Creating new scene: {0}", name);
+    
+    // Close current scene
+    CloseCurrentScene();
+    
+    // Create new scene
+    m_editorScene = Scene::Create(name);
+    m_sceneFilePath = std::string();
+    m_currentScene = m_editorScene;
+    
+    // Update the scenes in Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void RendererLayer::CloseCurrentScene()
+  {
+    IK_PROFILE();
+    if (m_currentScene)
+    {
+      IK_ASSERT(false);
+    }
+  }
+
   void RendererLayer::CreateProject(const std::filesystem::path &newProjectFilePath)
   {
     IK_PROFILE();
@@ -374,6 +407,16 @@ if (!Project::GetActive()) return
     
     // Update all panel project
     m_panels.OnProjectChanged(project);
+
+    // Create or open Scene
+    if (!project->GetConfig().startScene.empty())
+    {
+      OpenScene((Project::GetAssetDirectory() / project->GetConfig().startScene).string());
+    }
+    else
+    {
+      NewScene(Project::GetActive()->GetConfig().name);
+    }
 
     // Push the current project in recent list
     PushProjectToRecentProjects(projectFilePath);
@@ -938,7 +981,7 @@ if (!Project::GetActive()) return
       UI::ScopedColor textColor(ImGuiCol_Text, UI::Color::Text);
       UI::SameLine();
       
-      const std::string sceneName = "Test Scene";
+      const std::string sceneName = m_currentScene->GetName();
       UI::SetCursorPosX(roundBarRight - ImGui::CalcTextSize(sceneName.c_str()).x - 20);
       {
         if (m_sceneFilePath == "")

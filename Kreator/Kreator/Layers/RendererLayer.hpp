@@ -45,6 +45,11 @@ namespace Kreator
     /// - Note Core Application is taking care to call the EventHandler(event) API for all Layers
     void OnEvent(Event& event) override;
     
+    // Scene APIs ----------------------------------------
+    /// This function opens new scene with file
+    /// - Parameter filepath: Scene filepath
+    void OpenScene(const std::filesystem::path& filepath);
+
     // Getters -------------------------------------------------------------------------------------------------------
     /// This function returns the client file path
     const std::filesystem::path& GetClientResorucePath() const;
@@ -62,6 +67,13 @@ namespace Kreator
     /// This function updates the viewports of all kreator data
     void UpdateViewportSize();
     
+    // Scene APIs ----------------------------------------
+    /// This function creates new scene
+    /// - Parameter name: Scene name
+    void NewScene(const std::string& name = "UntitledScene");
+    /// This function closes the current scene
+    void CloseCurrentScene();
+
     // Project APIs --------------------------------------
     /// This function creates a new project for kreator
     /// - Parameter newProjectFilePath: New project file path
@@ -142,6 +154,7 @@ namespace Kreator
 
     // Scene Data ----------------------------------------
     std::filesystem::path m_sceneFilePath{};
+    Ref<Scene> m_currentScene, m_editorScene, m_runtimeScene, m_simulationScene;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
