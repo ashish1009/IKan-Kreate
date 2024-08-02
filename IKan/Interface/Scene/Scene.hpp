@@ -50,10 +50,25 @@ namespace IKan
     ///   - name: Name of entity
     [[nodiscard]] Entity CreateEntityWithID(UUID uuid, const std::string& name);
 
+    /// This function destriy the entity
+    /// - Parameters:
+    ///  - entity: entity handle
+    ///  - firstCall: remove from parent only for first call
+    void DestroyEntity(Entity entity, bool firstCall = true);
+
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
     /// - Parameter name: scene name
     void SetName(const std::string& name);
+
+    /// This function set the selected Entity
+    void SetSelectedEntity(entt::entity entity);
+    /// This function clears the selected entity
+    void ClearSelectedEntity();
+
+    /// This function set the entity deletion callback
+    /// - Parameter callback: callback funtion
+    void SetEntityDestroyedCallback(const std::function<void(const Entity&)>& callback);
 
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns the scene name
@@ -93,7 +108,11 @@ namespace IKan
     uint32_t m_registryCapacity {0};
     uint32_t m_numEntities = 0;
     int32_t m_maxEntityID = -1;
+    
+    // Entity ---------------------------
     EntityMap m_entityIDMap;
+    std::vector<entt::entity> m_selectedEntities;
+    std::function<void(const Entity&)> m_onEntityDestroyedCallback;
 
     friend class Entity;
   };

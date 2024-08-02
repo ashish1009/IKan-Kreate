@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Editor/SelectionContext.hpp"
+
 namespace Kreator
 {
   /// Scene Hierarchy panel for entities
@@ -33,6 +35,19 @@ namespace Kreator
     /// @see Editor Panel
     virtual void OnImGuiRender(bool& isOpen) override;
     
+    /// This function sets the entity set callback
+    /// - Parameter func: function pointer
+    void SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func);
+    /// This function sets the entity delete callback
+    /// - Parameter func: function pointer
+    void SetEntityDeletedCallback(const std::function<void(SelectionContext)>& func);
+
+    /// This function update the selected entity
+    /// - Parameters:
+    ///   - entity: entity
+    ///   - multipleSelection: multiple Selection falase
+    void SetSelectedEntity(const Entity& entity, bool multipleSelection = false);
+
   private:
     // Member Functions ---------------------------------------------------------------------------------------------
     /// This function render the hierachy of scene
@@ -50,10 +65,21 @@ namespace Kreator
     ///   - maxSearchDepth: max depth
     bool SearchEntityRecursive(Entity entity, const std::string_view& searchFilter, const uint32_t maxSearchDepth, uint32_t currentDepth = 1);
 
+    /// This function is the callback for external entity destroy
+    /// - Parameter entity entity handle
+    void OnExternalEntityDestroyed(const Entity& entity);
+    /// This function is the callback for external entity destroy
+    /// - Parameter entity entity handle
+    void OnEntityDestroyed(Entity entity);
+
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
     bool m_isWindow;
-        
+
+    // Entity Data
+    SelectionContext m_selectionContext;
+    std::function<void(SelectionContext)> m_selectionChangedCallback, m_entityDeletedCallback;
+
     inline static Ref<Texture> s_pencilIcon, s_plusIcon, s_gearIcon, s_reloadIcon, s_closeEyeIcon, s_EyeIcon;
   };
 } // namespace Kreator

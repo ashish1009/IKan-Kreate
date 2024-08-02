@@ -10,6 +10,7 @@
 #include "Config.hpp"
 #include "Editor/Viewport.hpp"
 #include "Editor/UserPreference.hpp"
+#include "Editor/SelectionContext.hpp"
 
 using namespace IKan;
 
@@ -73,6 +74,17 @@ namespace Kreator
     void NewScene(const std::string& name = "UntitledScene");
     /// This function closes the current scene
     void CloseCurrentScene();
+
+    // Scene Panel Manager Callbacks ----------------------
+    /// This function handles the entity selection
+    /// - Parameter entities: entities
+    void OnEntitySelected(const SelectionContext& entities);
+    /// This function handles the entity deletion
+    /// - Parameter entities: entities
+    void OnEntityDeleted(const SelectionContext& entities);
+    /// This function clear the selected Entity
+    /// - Note: To be called inside Render Pass Begin end End
+    void ClearSelectedEntity();
 
     // Project APIs --------------------------------------
     /// This function creates a new project for kreator
@@ -158,6 +170,12 @@ namespace Kreator
       Edit = 0, Play = 1, Pause = 2, Simulate = 3
     };
     SceneState m_sceneState {SceneState::Edit};
+    struct SelectedEntity
+    {
+      Entity entity;
+      float distance = 0.0f;
+    };
+    std::vector<SelectedEntity> m_selectionContext;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

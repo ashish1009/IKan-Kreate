@@ -208,7 +208,10 @@ if (!m_currentScene) return
     m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
     m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Setting", true);
     m_panels.AddPanel<AssetPanel>(ASSET_MANAGER_PANEL_ID, "Assets", true);
-    m_panels.AddPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID, "Scene Hierarchy", true, m_editorScene);
+    
+    Ref<SceneHierarchyPanel> sceneHierarchyPanel = m_panels.AddPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID, "Scene Hierarchy", true, m_editorScene);
+    sceneHierarchyPanel->SetSelectionChangedCallback([this](SelectionContext entities) { OnEntitySelected(entities); });
+    sceneHierarchyPanel->SetEntityDeletedCallback([this](SelectionContext entities) { OnEntityDeleted(entities); });
 
 #ifdef IK_DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
@@ -339,10 +342,54 @@ if (!m_currentScene) return
   void RendererLayer::CloseCurrentScene()
   {
     IK_PROFILE();
+    ClearSelectedEntity();
     if (m_currentScene)
     {
       IK_ASSERT(false);
     }
+  }
+  
+  void RendererLayer::OnEntitySelected(const SelectionContext& entities)
+  {
+    if (entities.Size() == 0)
+    {
+      return;
+    }
+    
+    m_selectionContext.clear();
+    m_currentScene->ClearSelectedEntity();
+    for (const auto& entity : entities)
+    {
+      SelectedEntity selection;
+      selection.entity = entity;
+      
+      m_selectionContext.push_back(selection);
+      if (m_currentScene != m_runtimeScene)
+      {
+        m_currentScene->SetSelectedEntity(entity);
+      }
+    }
+  }
+  void RendererLayer::OnEntityDeleted(const SelectionContext& entities)
+  {
+    IK_PROFILE();
+    if (m_selectionContext.size() == 0 or !entities.Find(m_selectionContext[0].entity))
+    {
+      return;
+    }
+    ClearSelectedEntity();
+  }
+  
+  void RendererLayer::ClearSelectedEntity()
+  {
+    IK_PROFILE();
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity({});
+    
+    if (m_currentScene)
+    {
+      m_currentScene->ClearSelectedEntity();
+    }
+    m_selectionContext.clear();
   }
 
   void RendererLayer::CreateProject(const std::filesystem::path &newProjectFilePath)

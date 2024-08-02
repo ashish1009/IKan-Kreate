@@ -122,9 +122,58 @@ namespace IKan
     return entity;
   }
 
+  void Scene::DestroyEntity(Entity entity, bool firstCall)
+  {
+    IK_PROFILE();
+    IK_LOG_TRACE(LogModule::Scene, "Deleting Entity from Scene");
+    IK_LOG_TRACE(LogModule::Scene, "  Name    {0}", entity.GetComponent<TagComponent>().tag.c_str());
+    IK_LOG_TRACE(LogModule::Scene, "  Handle  {0}", (uint32_t)entity);
+    IK_LOG_TRACE(LogModule::Scene, "  ID      {0}", (uint32_t)entity.GetComponent<IDComponent>().ID);
+    IK_LOG_TRACE(LogModule::Scene, "  Number of entities Added in Scene  {0}", m_numEntities);
+    IK_LOG_TRACE(LogModule::Scene, "  Max ID given to entity             {0}", m_maxEntityID);
+    
+    if (m_onEntityDestroyedCallback)
+    {
+      m_onEntityDestroyedCallback(entity);
+    }
+    
+    // Delete all children
+    for (size_t i = 0; i < entity.Children().size(); i++)
+    {
+      auto childId = entity.Children()[i];
+      Entity child = GetEntityWithUUID(childId);
+      DestroyEntity(child, false);
+    }
+    
+    // Delete This child from its parent if exist
+    if (firstCall)
+    {
+      IK_ASSERT(false, "Implement later");
+    }
+    
+    m_entityIDMap.erase(entity.GetUUID());
+    m_registry.destroy(entity.m_entityHandle);
+    
+    --m_numEntities;
+  }
+  
   void Scene::SetName(const std::string &name)
   {
     m_name = name;
+  }
+  void Scene::SetSelectedEntity(entt::entity entity)
+  {
+    m_selectedEntities.push_back(entity);
+  }
+  
+  void Scene::ClearSelectedEntity()
+  {
+    m_selectedEntities.clear();
+  }
+
+  void Scene::SetEntityDestroyedCallback(const std::function<void(const Entity&)>& callback)
+  {
+    m_onEntityDestroyedCallback = callback;
   }
 
   const std::string& Scene::GetName() const

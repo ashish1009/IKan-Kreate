@@ -47,12 +47,22 @@ namespace Kreator
   {
     IK_PROFILE();
     IK_LOG_INFO("Scene Hierarchy Panel", "Creating Scene Hierarchy Panel instance");
+    
+    if(m_context)
+    {
+      m_context->SetEntityDestroyedCallback([this](const Entity& entity) { OnExternalEntityDestroyed(entity); });
+    }
   }
   
   void SceneHierarchyPanel::SetSceneContext(const Ref<Scene>& scene)
   {
     IK_PROFILE();
     m_context = scene;
+    
+    if(m_context)
+    {
+      m_context->SetEntityDestroyedCallback([this](const Entity& entity) { OnExternalEntityDestroyed(entity); });
+    }
   }
   
   void SceneHierarchyPanel::OnProjectChanged([[maybe_unused]] const Ref<Project>& project)
@@ -83,6 +93,35 @@ namespace Kreator
     if (m_isWindow)
     {
       ImGui::End();
+    }
+  }
+  
+  void SceneHierarchyPanel::SetSelectionChangedCallback(const std::function<void(SelectionContext)>& func)
+  {
+    m_selectionChangedCallback = func;
+  }
+  void SceneHierarchyPanel::SetEntityDeletedCallback(const std::function<void(SelectionContext)>& func)
+  {
+    m_entityDeletedCallback = func;
+  }
+  
+  void SceneHierarchyPanel::SetSelectedEntity(const Entity& entity, bool multipleSelection)
+  {
+    IK_PROFILE();
+    if (!multipleSelection)
+    {
+      m_selectionContext.Clear();
+    }
+    
+    if (!entity)
+    {
+      return;
+    }
+
+    m_selectionContext.PushBack(entity);
+    if (m_selectionChangedCallback)
+    {
+      m_selectionChangedCallback(m_selectionContext);
     }
   }
   
@@ -165,7 +204,11 @@ namespace Kreator
         if (ImGui::BeginPopupContextWindow(nullptr, ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverItems))
         {
           Entity newEntity = ECS_Utils::DrawCreateEntityMenu(m_context, {});
-          
+          if (newEntity)
+          {
+            SetSelectedEntity(newEntity);
+          }
+
           ImGui::EndPopup();
         }
 
@@ -222,5 +265,28 @@ namespace Kreator
       }
     }
     return false;
+  }
+  
+  void SceneHierarchyPanel::OnExternalEntityDestroyed(const Entity& entity)
+  {
+    IK_PROFILE();
+    m_entityDeletedCallback(m_selectionContext);
+
+    if (m_selectionContext.Find(entity))
+    {
+      m_selectionContext.Erase(entity);
+    }
+  }
+  void SceneHierarchyPanel::OnEntityDestroyed(Entity entity)
+  {
+    IK_PROFILE();
+    m_entityDeletedCallback(m_selectionContext);
+    
+    if (m_selectionContext.Find(entity))
+    {
+      m_selectionContext.Erase(entity);
+    }
+    
+    m_context->DestroyEntity(entity);
   }
 } //  namesapce Kreator
