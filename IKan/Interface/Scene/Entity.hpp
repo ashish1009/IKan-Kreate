@@ -27,6 +27,13 @@ namespace IKan
     /// This is the Default Destructor for Entity
     ~Entity() = default;
     
+    /// This function returns the parent of entity
+    Entity GetParent();
+    /// This function returns the parent UUID of entity
+    UUID GetParentUUID() const;
+    /// This function returns the chidlenrs of entity
+    std::vector<UUID>& Children();
+
     /// This function returns transform comp of entity
     TransformComponent& GetTransform();
     /// This function returns transform comp of entity

@@ -61,6 +61,16 @@ namespace IKan
     /// This function returns the reference of registry
     entt::registry& GetRegistry();
 
+    /// This function returns entity with id as specified, or empty entity if cannot be found - caller must check
+    /// - Parameter id: UUID of entity
+    Entity TryGetEntityWithUUID(UUID id) const;
+    /// This function return entity with id as specified. entity is expected to exist (runtime error if it doesn't)
+    /// - Parameter id: UUID for entity
+    Entity GetEntityWithUUID(UUID id) const;
+    /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
+    /// - Parameter entityHandle: handle for entity
+    Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
+
     // Static APIs --------------------------------------------------------------------------------------------------
     /// This function creates the instance of EnTT Scene
     /// - Parameters:

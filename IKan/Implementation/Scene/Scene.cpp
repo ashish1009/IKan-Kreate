@@ -135,4 +135,24 @@ namespace IKan
   {
     return m_registry;
   }
+  
+  Entity Scene::TryGetEntityWithUUID(UUID id) const
+  {
+    IK_PROFILE();
+    if (const auto iter = m_entityIDMap.find(id); iter != m_entityIDMap.end())
+    {
+      return iter->second;
+    }
+    return Entity{};
+  }
+  Entity Scene::GetEntityWithUUID(UUID id) const
+  {
+    IK_ASSERT(m_entityIDMap.find(id) != m_entityIDMap.end(), "Invalid entity ID or entity doesn't exist in scene!");
+    return m_entityIDMap.at(id);
+  }
+  Entity Scene::GetEntityWithEntityHandle(int32_t entityHandle) const
+  {
+    auto& ID = m_registry.get<IDComponent>(static_cast<entt::entity>(entityHandle)).ID;
+    return GetEntityWithUUID(ID);
+  }
 } // namespace IKan

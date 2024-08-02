@@ -151,6 +151,13 @@ namespace Kreator
           
           for (auto entity : m_context->GetRegistry().view<IDComponent, RelationshipComponent>())
           {
+            Entity e(entity, m_context.get());
+            
+            // Render those entity who do not have parent
+            if (e.GetParentUUID() == 0)
+            {
+              DrawEntityNode({ entity, m_context.get() }, searchedString);
+            }
           }
         }
 
@@ -169,5 +176,51 @@ namespace Kreator
   
   void SceneHierarchyPanel::DrawEntityNode(Entity entity, const std::string &searchFilter)
   {
+    static const float edgeOffset = 4.0f;
+    const char* name = entity.GetComponent<TagComponent>().tag.c_str();
+    constexpr uint32_t maxSearchDepth = 20;
+    
+    // Search entity with filter string
+    bool hasChildMatchingSearch = SearchEntityRecursive(entity, searchFilter, maxSearchDepth);
+    if (!Kreator::UI::IsMatchingSearch(name, searchFilter) and !hasChildMatchingSearch)
+    {
+      return;
+    }
+
+  }
+  
+  bool SceneHierarchyPanel::SearchEntityRecursive(Entity entity, const std::string_view &searchFilter, const uint32_t maxSearchDepth, uint32_t currentDepth)
+  {
+    // Return if search string is empty
+    if (searchFilter.empty())
+    {
+      return false;
+    }
+    
+    // Return if reached max depth
+    if (currentDepth > maxSearchDepth)
+    {
+      return false;
+    }
+    
+    // For each child
+    for (const auto& child : entity.Children())
+    {
+      Entity e = m_context->GetEntityWithUUID(child);
+      if (e.HasComponent<TagComponent>())
+      {
+        if (Kreator::UI::IsMatchingSearch(e.GetComponent<TagComponent>().tag, searchFilter))
+        {
+          return true;
+        }
+      }
+
+      bool found = SearchEntityRecursive(e, searchFilter, maxSearchDepth, currentDepth + 1);
+      if (found)
+      {
+        return true;
+      }
+    }
+    return false;
   }
 } //  namesapce Kreator

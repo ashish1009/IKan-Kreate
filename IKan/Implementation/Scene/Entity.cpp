@@ -18,6 +18,19 @@ namespace IKan
     
   }
   
+  Entity Entity::GetParent()
+  {
+    return m_scene->TryGetEntityWithUUID(GetParentUUID());
+  }
+  UUID Entity::GetParentUUID() const
+  {
+    return GetComponent<RelationshipComponent>().parentHandle;
+  }
+  std::vector<UUID>& Entity::Children()
+  {
+    return GetComponent<RelationshipComponent>().children;
+  }
+  
   TransformComponent& Entity::GetTransform()
   {
     return m_scene->m_registry.get<TransformComponent>(m_entityHandle);
