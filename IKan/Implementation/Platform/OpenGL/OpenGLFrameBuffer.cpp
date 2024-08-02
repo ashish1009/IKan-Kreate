@@ -87,7 +87,7 @@ namespace IKan
       // For each color attachment
       for (size_t i = 0; i < m_colorSpecifications.size(); i++)
       {
-        m_colorAttachments[i] = FramebufferUtils::CreateAttachment(m_colorSpecifications[i], spec);
+        m_colorAttachments[i] = FramebufferUtils::CreateAttachment(m_colorSpecifications[i], spec, debugLogs);
         m_colorAttachments[i]->AttachToFramebuffer(TextureAttachment::Color, (uint32_t)i);
       }
     } // Color Attachments
@@ -95,7 +95,7 @@ namespace IKan
     // Depth Attachment -----------
     if (FrameBufferAttachments::TextureFormat::None != m_depthSpecification)
     {
-      m_depthAttachment = FramebufferUtils::CreateAttachment(m_depthSpecification, spec);
+      m_depthAttachment = FramebufferUtils::CreateAttachment(m_depthSpecification, spec, debugLogs);
       m_depthAttachment->AttachToFramebuffer(TextureAttachment::Depth);
     } // Depth Attachment
     
@@ -166,8 +166,10 @@ namespace IKan
     m_specification.width  = width;
     m_specification.height = height;
     
+#if 0
     FB_LOG("Resizing the Framebuffer  : {0}", m_specification.debugName);
     FB_LOG("  Size                    : {0} x {1}", m_specification.width, m_specification.height);
+#endif
     Invalidate(false);
     
     Renderer::SetViewport(m_specification.width, m_specification.height);

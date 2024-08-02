@@ -230,7 +230,7 @@ namespace IKan
       return false;
     }
     
-    Ref<Texture> CreateAttachment(FrameBufferAttachments::TextureFormat format, Texture2DSpecification& spec)
+    Ref<Texture> CreateAttachment(FrameBufferAttachments::TextureFormat format, Texture2DSpecification& spec, bool debugLog)
     {
       Ref<Texture> attachment = nullptr;
       switch (format)
@@ -261,7 +261,10 @@ namespace IKan
           IK_ASSERT(false, "Invalid Format!");
       } // swtch(color attachment)
       
-      IK_LOG_DEBUG(LogModule::FrameBuffer, "  Attachment : {0} | {1}", GET_FORMAT_NAME(spec.internalFormat), GET_FORMAT_NAME(spec.dataFormat));
+      if (debugLog)
+      {
+        IK_LOG_DEBUG(LogModule::FrameBuffer, "  Attachment : {0} | {1}", GET_FORMAT_NAME(spec.internalFormat), GET_FORMAT_NAME(spec.dataFormat));
+      }
       return attachment;
     }
   } // namespace FramebufferUtils
