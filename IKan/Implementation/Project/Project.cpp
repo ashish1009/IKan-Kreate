@@ -29,9 +29,13 @@ namespace IKan
   {
     m_config.autoSaveIntervalSeconds = time;
   }
-  void Project::UpdateStartupScene(const std::filesystem::path path)
+  void Project::UpdateStartupScene(const std::filesystem::path& path)
   {
     m_config.startScene = path;
+  }
+  void Project::UpdateSceneType(SceneType sceneType)
+  {
+    m_config.sceneType = sceneType;
   }
 
   void Project::SetActive(Ref<Project> project)

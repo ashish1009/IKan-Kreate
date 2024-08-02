@@ -33,7 +33,10 @@ namespace IKan
     void UpdateAutoSaveSceneTimeInterval(int32_t time);
     /// This funcion updates auto save scene time interval
     /// - Parameter path: scene file path
-    void UpdateStartupScene(const std::filesystem::path path);
+    void UpdateStartupScene(const std::filesystem::path& path);
+    /// This funcion updates Scene type of project
+    /// - Parameter sceneType: scene sceneType
+    void UpdateSceneType(SceneType sceneType);
 
     // Getter APIs ---------------------------------------------------------------------------------------------------
     /// This function returns the project config

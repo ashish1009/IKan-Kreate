@@ -373,10 +373,10 @@ if (!Project::GetActive()) return
     
     // Open project if directory exists
     std::filesystem::path projectFile = newProjectFilePath / (std::string(newProjectFilePath.filename()) + ProjectExtension);
-    OpenProject(projectFile);
+    OpenProject(projectFile, true);
   }
   
-  void RendererLayer::OpenProject(const std::filesystem::path &projectFilePath)
+  void RendererLayer::OpenProject(const std::filesystem::path &projectFilePath, bool newProject)
   {
     IK_PROFILE();
     IK_LOG_INFO("RendererLayer", "Opening Project {0}", Utils::FileSystem::IKanAbsolute(projectFilePath).string());
@@ -404,6 +404,17 @@ if (!Project::GetActive()) return
     ProjectSerializer serializer(project);
     serializer.Deserialize(projectFilePath);
     Project::SetActive(project);
+    
+    // Change the type of scene in project config
+    if (newProject)
+    {
+      project->UpdateSceneType(m_sceneType);
+      serializer.Serialize(project->GetConfig().projectDirectory / project->GetConfig().projectFileName);
+    }
+    else
+    {
+      m_sceneType = project->GetConfig().sceneType;
+    }
     
     // Update all panel project
     m_panels.OnProjectChanged(project);
@@ -551,7 +562,7 @@ if (!Project::GetActive()) return
             bool open = UI::TreeNode("##Recent_Projects", it->second.name, flags, m_newProjectIcon);
             if (ImGui::IsItemClicked())
             {
-              OpenProject(it->second.filePath);
+              OpenProject(it->second.filePath, false);
               ImGui::CloseCurrentPopup();
               break;
             }
@@ -653,7 +664,6 @@ if (!Project::GetActive()) return
         {
           FolderExplorer::ShowCreatePopup(m_directories.kreatorPath / "Kreator", &m_createNewProjectPopup);
           m_folderExplorerAction = FolderExplorerAction::NewProject;
-          m_sceneType = SceneType::None;
           ImGui::CloseCurrentPopup();
         }
       }
@@ -680,7 +690,7 @@ if (!Project::GetActive()) return
       {
         if (explorerOutput.extension() == ProjectExtension)
         {
-          OpenProject(explorerOutput);
+          OpenProject(explorerOutput, false);
         }
         else
         {
@@ -1140,7 +1150,7 @@ if (!Project::GetActive()) return
                 UserPreferencesSerializer preferencesSerializer(m_userPreferences);
                 preferencesSerializer.Serialize(m_userPreferences->filePath);
                 
-                OpenProject(projectEntry.filePath);
+                OpenProject(projectEntry.filePath, false);
                 break;
               }
               ImGui::PopStyleColor(2);

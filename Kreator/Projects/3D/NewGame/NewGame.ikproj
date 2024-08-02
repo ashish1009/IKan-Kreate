@@ -1,0 +1,15 @@
+Project:
+  Name: NewGame
+  AssetDirectory: Assets
+  AssetRegistry: Assets/AssetRegistry.ikr
+  MeshPath: Assets/Meshes
+  FontPath: Assets/Fonts
+  ScenePath: Assets/Scenes
+  TexturePath: Assets/Textures
+  MaterialPath: Assets/Materials
+  PhysicsPath: Assets/Physics
+  PrefabPath: Assets/Prefabs
+  SceneType: 2
+  StartScene: ""
+  AutoSave: false
+  AutoSaveInterval: 300

@@ -79,8 +79,10 @@ namespace Kreator
     /// - Parameter newProjectFilePath: New project file path
     void CreateProject(const std::filesystem::path& newProjectFilePath);
     /// This function opens the Project from file path
-    /// - Parameter projectFilePath: project file path
-    void OpenProject(const std::filesystem::path& projectFilePath);
+    /// - Parameters:
+    ///   - projectFilePath: project file path
+    ///   - newProject: Is preoject new or exisiting
+    void OpenProject(const std::filesystem::path& projectFilePath, bool newProject);
     /// This function closes the current active project
     void CloseProject();
     /// This funciton push the current project to recent project

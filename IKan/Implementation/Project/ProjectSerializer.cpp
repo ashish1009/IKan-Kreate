@@ -48,6 +48,7 @@ namespace IKan
       out << YAML::Key << "PhysicsPath" << YAML::Value << m_project->m_config.physicsPath;
       out << YAML::Key << "PrefabPath" << YAML::Value << m_project->m_config.prefabPath;
 
+      out << YAML::Key << "SceneType" << YAML::Value << (uint32_t)m_project->m_config.sceneType;
       out << YAML::Key << "StartScene" << YAML::Value << m_project->m_config.startScene;
       out << YAML::Key << "AutoSave" << YAML::Value << m_project->m_config.enableAutoSave;
       out << YAML::Key << "AutoSaveInterval" << YAML::Value << m_project->m_config.autoSaveIntervalSeconds;
@@ -96,6 +97,7 @@ namespace IKan
     config.physicsPath = rootNode["PhysicsPath"].as<std::string>();
     config.prefabPath = rootNode["PrefabPath"].as<std::string>();
     
+    config.sceneType = (SceneType)rootNode["SceneType"].as<uint32_t>(0);
     config.startScene = rootNode["StartScene"].as<std::string>("");
     config.enableAutoSave = rootNode["AutoSave"].as<bool>(false);
     config.autoSaveIntervalSeconds = rootNode["AutoSaveInterval"].as<int>(300);

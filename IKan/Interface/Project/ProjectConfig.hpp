@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include "Scene/Scene.hpp"
+
 namespace IKan
 {
   /// This structure stores the configuration of project
@@ -28,6 +30,7 @@ namespace IKan
     std::filesystem::path prefabPath;
     
     // Scene Serialize
+    SceneType sceneType {SceneType::None};
     std::filesystem::path startScene{};
     bool enableAutoSave {false};
     int32_t autoSaveIntervalSeconds {300};
