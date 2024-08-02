@@ -7,6 +7,8 @@
 
 #pragma once
 
+#include <entt/entt.hpp>
+
 #include "Assets/Asset.hpp"
 
 namespace IKan
@@ -26,6 +28,8 @@ namespace IKan
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns the scene name
     const std::string& GetName() const;
+    /// This function returns the reference of registry
+    entt::registry& GetRegistry();
 
     // Static APIs --------------------------------------------------------------------------------------------------
     /// This function creates the instance of EnTT Scene
@@ -43,6 +47,7 @@ namespace IKan
     uint32_t m_viewportWidth {0}, m_viewportHeight {0};
 
     // EnTT -----------------------------
+    entt::registry m_registry;
     uint32_t m_registryCapacity {0};
   };
 } // namespace IKan
