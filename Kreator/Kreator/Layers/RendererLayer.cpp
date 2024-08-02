@@ -15,6 +15,7 @@
 #include "Panels/KreatorConsolePanel.hpp"
 #include "Panels/ProjectSettingPanel.hpp"
 #include "Panels/AssetPanel.hpp"
+#include "Panels/SceneHierarchyPanel.hpp"
 
 namespace Kreator
 {
@@ -32,6 +33,7 @@ if (!m_currentScene) return
 #define CONSOLE_PANEL_ID "EditorConsolePanel"
 #define PROJECT_SETTING_PANEL_ID "ProjectSetting"
 #define ASSET_MANAGER_PANEL_ID "Assets"
+#define SCENE_HIERARCHY_PANEL_ID "SceneHierarchyPanel"
 
   // Kreator UI utils
   namespace UI_Utils
@@ -206,6 +208,7 @@ if (!m_currentScene) return
     m_panels.AddPanel<ContentBrowserPanel>(CONTENT_BROWSER_PANEL_ID, "Content Browser", true);
     m_panels.AddPanel<ProjectSettingsPanel>(PROJECT_SETTING_PANEL_ID, "Project Setting", true);
     m_panels.AddPanel<AssetPanel>(ASSET_MANAGER_PANEL_ID, "Assets", true);
+    m_panels.AddPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID, "Scene Hierarchy", true, m_editorScene);
 
 #ifdef IK_DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);

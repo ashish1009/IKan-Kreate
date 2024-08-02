@@ -19,6 +19,7 @@
 		B23F458F2C57EF95000A0944 /* ImGuiProperty.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F458D2C57EF95000A0944 /* ImGuiProperty.cpp */; };
 		B23F45922C57F179000A0944 /* ProjectSettingPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45902C57F179000A0944 /* ProjectSettingPanel.cpp */; };
 		B23F45952C57F27D000A0944 /* AssetPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45932C57F27D000A0944 /* AssetPanel.cpp */; };
+		B23F45E92C5CFC9F000A0944 /* SceneHierarchyPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45E72C5CFC9F000A0944 /* SceneHierarchyPanel.cpp */; };
 		B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292602C380F250093F4DA /* EntryPoint.cpp */; };
 		B2D292892C381CBA0093F4DA /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D292882C381CBA0093F4DA /* libIKan.a */; };
 		B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292B72C3943F00093F4DA /* Kreator.cpp */; };
@@ -78,6 +79,8 @@
 		B23F45912C57F179000A0944 /* ProjectSettingPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ProjectSettingPanel.hpp; sourceTree = "<group>"; };
 		B23F45932C57F27D000A0944 /* AssetPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetPanel.cpp; sourceTree = "<group>"; };
 		B23F45942C57F27D000A0944 /* AssetPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetPanel.hpp; sourceTree = "<group>"; };
+		B23F45E72C5CFC9F000A0944 /* SceneHierarchyPanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneHierarchyPanel.cpp; sourceTree = "<group>"; };
+		B23F45E82C5CFC9F000A0944 /* SceneHierarchyPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneHierarchyPanel.hpp; sourceTree = "<group>"; };
 		B2D292482C37EE5A0093F4DA /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D292562C37F4D20093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292602C380F250093F4DA /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
@@ -134,6 +137,8 @@
 				B23F45912C57F179000A0944 /* ProjectSettingPanel.hpp */,
 				B23F45932C57F27D000A0944 /* AssetPanel.cpp */,
 				B23F45942C57F27D000A0944 /* AssetPanel.hpp */,
+				B23F45E72C5CFC9F000A0944 /* SceneHierarchyPanel.cpp */,
+				B23F45E82C5CFC9F000A0944 /* SceneHierarchyPanel.hpp */,
 			);
 			path = Panels;
 			sourceTree = "<group>";
@@ -344,6 +349,7 @@
 				B2FDDA8C2C4788B90062C6E1 /* Viewport.cpp in Sources */,
 				B22AB2BB2C579329007453B7 /* ImGuiTheme.cpp in Sources */,
 				B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */,
+				B23F45E92C5CFC9F000A0944 /* SceneHierarchyPanel.cpp in Sources */,
 				B23F45922C57F179000A0944 /* ProjectSettingPanel.cpp in Sources */,
 				B2D2969D2C3C3D9F0093F4DA /* RendererLayer.cpp in Sources */,
 				B23F45952C57F27D000A0944 /* AssetPanel.cpp in Sources */,
