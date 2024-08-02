@@ -21,6 +21,7 @@
 		B23F45952C57F27D000A0944 /* AssetPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45932C57F27D000A0944 /* AssetPanel.cpp */; };
 		B23F45E92C5CFC9F000A0944 /* SceneHierarchyPanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45E72C5CFC9F000A0944 /* SceneHierarchyPanel.cpp */; };
 		B23F45EC2C5D03FA000A0944 /* EntityUtils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45EA2C5D03FA000A0944 /* EntityUtils.cpp */; };
+		B23F45EF2C5D0959000A0944 /* SelectionContext.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45ED2C5D0959000A0944 /* SelectionContext.cpp */; };
 		B2D292622C380F250093F4DA /* EntryPoint.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292602C380F250093F4DA /* EntryPoint.cpp */; };
 		B2D292892C381CBA0093F4DA /* libIKan.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2D292882C381CBA0093F4DA /* libIKan.a */; };
 		B2D292B92C3943F00093F4DA /* Kreator.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D292B72C3943F00093F4DA /* Kreator.cpp */; };
@@ -84,6 +85,8 @@
 		B23F45E82C5CFC9F000A0944 /* SceneHierarchyPanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneHierarchyPanel.hpp; sourceTree = "<group>"; };
 		B23F45EA2C5D03FA000A0944 /* EntityUtils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntityUtils.cpp; sourceTree = "<group>"; };
 		B23F45EB2C5D03FA000A0944 /* EntityUtils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EntityUtils.hpp; sourceTree = "<group>"; };
+		B23F45ED2C5D0959000A0944 /* SelectionContext.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SelectionContext.cpp; sourceTree = "<group>"; };
+		B23F45EE2C5D0959000A0944 /* SelectionContext.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SelectionContext.hpp; sourceTree = "<group>"; };
 		B2D292482C37EE5A0093F4DA /* Kreator */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = Kreator; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D292562C37F4D20093F4DA /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
 		B2D292602C380F250093F4DA /* EntryPoint.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EntryPoint.cpp; sourceTree = "<group>"; };
@@ -260,6 +263,8 @@
 				B23F457D2C57C6B9000A0944 /* ApplicationSettings.hpp */,
 				B23F45EA2C5D03FA000A0944 /* EntityUtils.cpp */,
 				B23F45EB2C5D03FA000A0944 /* EntityUtils.hpp */,
+				B23F45ED2C5D0959000A0944 /* SelectionContext.cpp */,
+				B23F45EE2C5D0959000A0944 /* SelectionContext.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -341,6 +346,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B23F45EF2C5D0959000A0944 /* SelectionContext.cpp in Sources */,
 				B23F45812C57CAD4000A0944 /* ImGuiWidget.cpp in Sources */,
 				B2FDDA8F2C478BE50062C6E1 /* ImGuiUtils.cpp in Sources */,
 				B23F457E2C57C6B9000A0944 /* ApplicationSettings.cpp in Sources */,
