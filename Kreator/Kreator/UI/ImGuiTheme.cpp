@@ -30,7 +30,7 @@ namespace Kreator::UI
           UI::Color::Window                 = IM_COL32(30, 50, 70, 255);
           UI::Color::Background             = IM_COL32(30, 50, 70, 255);
           UI::Color::PopupBackground        = IM_COL32(20, 40, 60, 255);
-          UI::Color::Border                 = PopupBackground;
+          UI::Color::Border                 = Window;
           UI::Color::BackgroundDark         = PopupBackground;
           
           // Models

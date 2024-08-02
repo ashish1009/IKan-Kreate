@@ -784,7 +784,6 @@ namespace Kreator
       }
       UI::SetTooltip("Content Browser settings");
       
-      
       if (UI::BeginPopup("ContentBrowserSettings"))
       {
         auto& editorSettings = ApplicationSettings::Get();

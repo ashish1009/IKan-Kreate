@@ -118,11 +118,7 @@ Scope<Application> CreateApplication([[maybe_unused]] int argc, [[maybe_unused]]
   applicationSpec.windowSpecification.width = 1600;
   applicationSpec.windowSpecification.height = 900;
   applicationSpec.windowSpecification.hideTitleBar = true;
-#ifdef DEBUG
   applicationSpec.windowSpecification.isFullScreen = false;
-#else
-  applicationSpec.windowSpecification.isFullScreen = true;
-#endif
 
   applicationSpec.resizable = true;
   applicationSpec.startMaximized = true;

@@ -30,6 +30,50 @@ if (!Project::GetActive()) return
 #define PROJECT_SETTING_PANEL_ID "ProjectSetting"
 #define ASSET_MANAGER_PANEL_ID "Assets"
 
+  // Kreator UI utils
+  namespace UI_Utils
+  {
+    // Hovered Item Color
+    static const ImU32 s_hoveredColor = UI::Color::HoveredItem;
+
+    // Function to push Dark color on active
+    static const auto pushDarkTextIfActive = [](const char* menuName)
+    {
+      if (ImGui::IsPopupOpen(menuName))
+      {
+        ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::BackgroundDark);
+        return true;
+      }
+      return false;
+    };
+
+    /// This function Create template for Menu Item in Menu Bar
+    /// - Parameters:
+    ///   - title: Title of Menu
+    ///   - func: function of Menu
+    ///   - pop_func: Pop item highlight
+    template<typename PopFunction, typename UIFunction>
+    void AddMenu(const char* title, PopFunction popItemHighlight, UIFunction menuFunc)
+    {
+      // Change Text colored to dark if item is opened
+      bool pushItemColor = pushDarkTextIfActive(title);
+      
+      if (ImGui::BeginMenu(title))
+      {
+        popItemHighlight();
+        {
+          UI::ScopedColor hovered(ImGuiCol_HeaderHovered, s_hoveredColor);
+          menuFunc();
+        }
+        ImGui::EndMenu();
+      }
+      if (pushItemColor)
+      {
+        ImGui::PopStyleColor();
+      }
+    }
+  } // namespace Utils
+
   namespace KreatorUtils
   {
 #define ScopedRounding(value) UI::ScopedStyle rounding(ImGuiStyleVar_FrameRounding, value);
@@ -331,6 +375,7 @@ if (!Project::GetActive()) return
     {
       Window* window = Application::Get().GetWindow();
       window->SetSize(m_windowOriginalWidth, m_windowOriginalHeight);
+      window->SetAtCenter();
     }
   }
   
@@ -817,11 +862,33 @@ if (!Project::GetActive()) return
     IK_PERFORMANCE("RendererLayer::UI_DrawTitlebar");
     static const float titleBarHeight = 40.0f;
     
+    const ImVec2 windowPadding = ImGui::GetCurrentWindow()->WindowPadding;
+
     // Draw the title Bar rectangle ---------------------------------------------------
     UI::DrawFilledRect(UI::Color::TitleBar, titleBarHeight);
 
     // Drag and Control the window with user title bar ---------------------------------
     UI_TitlebarDragArea(titleBarHeight);
+
+    // Draw Kreator Logo ---------------------------------------------------------------
+    ImGui::SetItemAllowOverlap();
+    UI::SetCursor(windowPadding);
+    static const glm::vec2 size = {titleBarHeight - 10.0f, titleBarHeight - 10.0f};
+    if (UI::DrawButtonImage("MainMenu", m_applicationIcon, size, {10.0f, 5.0f}, false, UI::Color::TextBrighter, UI::Color::TextBrighter, UI::Color::TextBrighter))
+    {
+      ImGui::OpenPopup("MainMenu");
+    }
+    
+    if (UI::BeginPopup("MainMenu"))
+    {
+      UI::EndPopup();
+    }
+    
+    // Draw the Menu Tab in Title bar --------------------------------------------------
+    static const float logoOffsetX = (6.0f * 2.0f) + 41.0f;
+    UI::SetCursorPos(ImVec2(logoOffsetX, 4.0f));
+    
+    UI_MenuBar();
 
     return titleBarHeight;
   }
@@ -879,5 +946,67 @@ if (!Project::GetActive()) return
         window->SetPosition({point.x - moveOffsetX, point.y - moveOffsetY});
       }
     }
+  }
+  
+  void RendererLayer::UI_MenuBar()
+  {
+    // Menu Bar Rectactangle Size
+    const ImRect menuBarRect =
+    {
+      ImGui::GetCursorPos(), // Min Rect Coord
+      {ImGui::GetContentRegionAvail().x, ImGui::GetFrameHeightWithSpacing()} // Max Rect Coord
+    };
+
+    ImGui::BeginGroup();
+    if (UI::BeginMenuBar(menuBarRect))
+    {
+      bool menuOpen = ImGui::IsPopupOpen("##menubar", ImGuiPopupFlags_AnyPopupId);
+      
+      // Push the Colors if Menu is active
+      if (menuOpen)
+      {
+        const ImU32 colActive = UI::ColorWithSaturation(UI::Color::Accent, 0.5f);
+        ImGui::PushStyleColor(ImGuiCol_Header, colActive);
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, colActive);
+      }
+      
+      // Function to Pop the highlight Color
+      static auto popItemHighlight = [&menuOpen]
+      {
+        if (menuOpen)
+        {
+          ImGui::PopStyleColor(2);
+          menuOpen = false;
+        }
+      };
+
+      // Menu Items
+      UI_Utils::AddMenu("File", popItemHighlight, [this]() {
+        
+      });
+      
+      UI_Utils::AddMenu("Edit", popItemHighlight, [this]() {
+        
+      });
+      
+      UI_Utils::AddMenu("View", popItemHighlight, [this]() {
+
+      });
+      
+      UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
+
+      });
+      
+      UI_Utils::AddMenu("Help", popItemHighlight, [this]() {
+        
+      });
+      
+      if (menuOpen)
+      {
+        ImGui::PopStyleColor(2);
+      }
+    }
+    UI::EndMenuBar();
+    ImGui::EndGroup();
   }
 } // namespace Kreator
