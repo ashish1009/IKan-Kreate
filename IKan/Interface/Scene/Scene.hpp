@@ -31,6 +31,11 @@ namespace IKan
     /// This is the default destructor of EnTT Scene
     ~Scene();
 
+    // Setters -----------------------------------------------------------------------------------------------------
+    /// This function sets the scene name
+    /// - Parameter name: scene name
+    void SetName(const std::string& name);
+
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns the scene name
     const std::string& GetName() const;

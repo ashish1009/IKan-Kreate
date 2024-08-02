@@ -64,7 +64,12 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Destroying {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
   }
-  
+
+  void Scene::SetName(const std::string &name)
+  {
+    m_name = name;
+  }
+
   const std::string& Scene::GetName() const
   {
     return m_name;

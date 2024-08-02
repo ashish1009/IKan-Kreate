@@ -431,8 +431,6 @@
 			isa = PBXGroup;
 			children = (
 				B22AB28C2C576CE5007453B7 /* Scene.hpp */,
-				B23F45DA2C5CED6C000A0944 /* Scene3D.hpp */,
-				B23F45D12C5CED68000A0944 /* Scene2D.hpp */,
 				B23F459C2C57F5EF000A0944 /* Entity.hpp */,
 				B23F45A02C57F5F3000A0944 /* Component.hpp */,
 				B23F45A82C57F60A000A0944 /* SceneSerializer.hpp */,
@@ -445,8 +443,10 @@
 			isa = PBXGroup;
 			children = (
 				B22AB28B2C576CE5007453B7 /* Scene.cpp */,
-				B23F45D02C5CED68000A0944 /* Scene2D.cpp */,
+				B23F45DA2C5CED6C000A0944 /* Scene3D.hpp */,
 				B23F45D92C5CED6C000A0944 /* Scene3D.cpp */,
+				B23F45D12C5CED68000A0944 /* Scene2D.hpp */,
+				B23F45D02C5CED68000A0944 /* Scene2D.cpp */,
 				B23F459B2C57F5EF000A0944 /* Entity.cpp */,
 				B23F459F2C57F5F3000A0944 /* Component.cpp */,
 				B23F45A32C57F603000A0944 /* EntitySerializer.cpp */,

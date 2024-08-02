@@ -96,3 +96,9 @@
 #include <Editor/Console/EditorConsoleMessage.hpp>
 #include <Editor/Console/EditorConsolePanel.hpp>
 #include <Editor/Console/EditorConsoleSink.hpp>
+
+#include <Scene/Scene.hpp>
+#include <Scene/Entity.hpp>
+#include <Scene/Component.hpp>
+#include <Scene/SceneSerializer.hpp>
+#include <Scene/EntitySerializer.hpp>
