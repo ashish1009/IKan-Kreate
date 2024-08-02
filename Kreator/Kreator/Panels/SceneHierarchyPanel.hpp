@@ -34,6 +34,15 @@ namespace Kreator
     virtual void OnImGuiRender(bool& isOpen) override;
     
   private:
+    // Member Functions ---------------------------------------------------------------------------------------------
+    /// This function render the hierachy of scene
+    void RenderHierarchy();
+    /// This funciton renders the Entity Hierarchy
+    /// - Parameters:
+    ///   - entity entity handle
+    ///   - searchFilter swearch filter
+    void DrawEntityNode(Entity entity, const std::string& searchFilter);
+
     // Member Variable ---------------------------------------------------------------------------------------------
     Ref<Scene> m_context;
     bool m_isWindow;
