@@ -883,6 +883,12 @@ if (!Project::GetActive()) return
     
     if (UI::BeginPopup("MainMenu"))
     {
+      ImGui::PushStyleColor(ImGuiCol_HeaderHovered, UI_Utils::s_hoveredColor);
+      if (ImGui::MenuItem("Exit", "Cmd + Q"))
+      {
+        Application::Get().Close();
+      }
+      ImGui::PopStyleColor();
       UI::EndPopup();
     }
     
