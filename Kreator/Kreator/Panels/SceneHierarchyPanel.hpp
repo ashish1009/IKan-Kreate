@@ -64,6 +64,9 @@ namespace Kreator
     ///   - searchFilter: search filter
     ///   - maxSearchDepth: max depth
     bool SearchEntityRecursive(Entity entity, const std::string_view& searchFilter, const uint32_t maxSearchDepth, uint32_t currentDepth = 1);
+    /// This funcion recusively checks if any of the child is selected
+    /// - Parameter entity: entity
+    bool IsChildSelected(Entity entity);
 
     /// This function is the callback for external entity destroy
     /// - Parameter entity entity handle

@@ -121,7 +121,9 @@ namespace Kreator::UI
   /// This function show the tooltip messge
   /// - Parameter text: message
   void SetTooltip(const std::string_view& text);
-  
+  /// This function Check if navigated to current item, e.g. with arrow keys
+  bool NavigatedTo();
+
   // Colors ----------------------------------------------------------------------------------------------------------
   /// This function add the color to some value
   /// - Parameters:

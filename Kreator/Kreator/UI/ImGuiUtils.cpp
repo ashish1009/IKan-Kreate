@@ -285,7 +285,12 @@ namespace Kreator::UI
       ImGui::SetTooltip(text.data());
     }
   }
-  
+  bool NavigatedTo()
+  {
+    ImGuiContext& g = *GImGui;
+    return g.NavJustMovedToId == g.LastItemData.ID;
+  }
+
   // Colors ----------------------------------------------------------------------------------------------------------
   ImU32 ColorWithValue(const ImColor& color, float value)
   {

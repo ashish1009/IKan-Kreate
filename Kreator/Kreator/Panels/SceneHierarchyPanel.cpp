@@ -188,7 +188,7 @@ namespace Kreator
           // We draw selection and hover for table rows manually
           UI::ScopedColorStack entitySelection(ImGuiCol_Header, IM_COL32_DISABLE, ImGuiCol_HeaderHovered, IM_COL32_DISABLE, ImGuiCol_HeaderActive, IM_COL32_DISABLE);
           
-          for (auto entity : m_context->GetRegistry().view<IDComponent, RelationshipComponent>())
+          for (const auto& entity : m_context->GetRegistry().view<IDComponent, RelationshipComponent>())
           {
             Entity e(entity, m_context.get());
             
@@ -230,6 +230,162 @@ namespace Kreator
       return;
     }
 
+    const float rowHeight = 21.0f;
+
+    // ImGui item height tweaks
+    auto* window = ImGui::GetCurrentWindow();
+    window->DC.CurrLineSize.y = rowHeight;
+    ImGui::TableNextRow(0, rowHeight);
+    
+    // Label column -------------------------------------------------------------------------------------------------
+    ImGui::TableNextColumn();
+    window->DC.CurrLineTextBaseOffset = 3.0f;
+    
+    const ImVec2 rowAreaMin = ImGui::TableGetCellBgRect(ImGui::GetCurrentTable(), 0).Min;
+    const ImVec2 rowAreaMax =
+    {
+      ImGui::TableGetCellBgRect(ImGui::GetCurrentTable(), ImGui::TableGetColumnCount() - 2).Max.x,
+      rowAreaMin.y + rowHeight
+    };
+    
+    // Setup flags ---------------
+    const bool isSelected = m_selectionContext.Find(entity);
+    ImGuiTreeNodeFlags flags = (isSelected ? ImGuiTreeNodeFlags_Selected : 0) | ImGuiTreeNodeFlags_OpenOnArrow| ImGuiTreeNodeFlags_SpanAvailWidth;
+    if (hasChildMatchingSearch)
+    {
+      flags |= ImGuiTreeNodeFlags_DefaultOpen;
+    }
+    if (entity.Children().empty())
+    {
+      flags |= ImGuiTreeNodeFlags_Leaf;
+    }
+    if (isSelected)
+    {
+      if (entity.Children().size() > 0)
+      {
+        flags |= ImGuiTreeNodeFlags_DefaultOpen;
+      }
+    }
+    if (IsChildSelected(entity))
+    {
+      flags |= ImGuiTreeNodeFlags_DefaultOpen;
+    }
+    
+    const std::string strID = std::string(name) + std::to_string((uint32_t)entity);
+    ImGui::PushClipRect(rowAreaMin, rowAreaMax, false);
+    bool isRowHovered, held;
+    bool isRowClicked = ImGui::ButtonBehavior(ImRect(rowAreaMin, rowAreaMax), ImGui::GetID(strID.c_str()), &isRowHovered, &held, ImGuiButtonFlags_AllowItemOverlap);
+    ImGui::SetItemAllowOverlap();
+    ImGui::PopClipRect();
+
+    const bool isWindowFocused = ImGui::IsWindowFocused(ImGuiFocusedFlags_RootAndChildWindows);
+
+    // Row Coloring ------------------
+    // Fill with light selection Color if any of the child entities selected
+    auto isAnyDescendantSelected = [&](Entity ent, auto isAnyDescendantSelected) -> bool
+    {
+      if (m_selectionContext.Find(ent))
+      {
+        return true;
+      }
+      
+      if (!ent.Children().empty())
+      {
+        for (auto& childEntityID : ent.Children())
+        {
+          Entity childEntity = m_context->GetEntityWithUUID(childEntityID);
+          if (isAnyDescendantSelected(childEntity, isAnyDescendantSelected))
+          {
+            return true;
+          }
+        }
+      }
+      return false;
+    };
+
+    
+    auto fillRowWithColor = [] (const ImColor& Color)
+    {
+      for (int column = 0; column < ImGui::TableGetColumnCount(); column++)
+      {
+        ImGui::TableSetBgColor(ImGuiTableBgTarget_CellBg, Color, column);
+      }
+    };
+    
+    if (isSelected)
+    {
+      if (isWindowFocused or UI::NavigatedTo())
+      {
+        fillRowWithColor(UI::Color::Selection);
+      }
+      else
+      {
+        const ImColor col = UI::ColorWithMultipliedValue(UI::Color::Selection, 0.9f);
+        fillRowWithColor(UI::ColorWithMultipliedSaturation(col, 0.7f));
+      }
+    }
+    else if (isRowHovered)
+    {
+      fillRowWithColor(UI::Color::BackgroundDark);
+    }
+    else if (isAnyDescendantSelected(entity, isAnyDescendantSelected))
+    {
+      fillRowWithColor(UI::Color::SelectionMuted);
+    }
+    
+    // Text Coloring ------------------
+    if (isSelected)
+    {
+      ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::BackgroundDark);
+    }
+
+    // Tree node ----------------------
+    ImGuiContext& g = *GImGui;
+    auto& style = ImGui::GetStyle();
+    
+    const ImVec2 padding = ((flags & ImGuiTreeNodeFlags_FramePadding)) ?
+    style.FramePadding :
+    ImVec2(style.FramePadding.x, ImMin(window->DC.CurrLineTextBaseOffset, style.FramePadding.y));
+    
+    // Collapser arrow width + Spacing
+    const float textOffsetX = g.FontSize + padding.x * 2;
+    
+    // Latch before ItemSize changes it
+    const float textOffsetY = ImMax(padding.y, window->DC.CurrLineTextBaseOffset);
+    
+    ImVec2 textPos(window->DC.CursorPos.x + textOffsetX, window->DC.CursorPos.y + textOffsetY);
+    
+    const float arrowHitX1 = (textPos.x - textOffsetX) - style.TouchExtraPadding.x;
+    const float arrowHitX2 = (textPos.x - textOffsetX) + (g.FontSize + padding.x * 2.0f) + style.TouchExtraPadding.x;
+    const bool isMouseXOverSrrow = (g.IO.MousePos.x >= arrowHitX1 and g.IO.MousePos.x < arrowHitX2);
+    
+    bool previousState = ImGui::TreeNodeBehaviorIsOpen(ImGui::GetID(strID.c_str()));
+    if (isMouseXOverSrrow and isRowClicked)
+    {
+      ImGui::SetNextItemOpen(!previousState);
+    }
+
+    const bool opened = UI::TreeNodeWithIcon(nullptr, ImGui::GetID(strID.c_str()), flags, name, nullptr);
+    bool entityDeleted = false;
+    bool entityDuplicated = false;
+
+    if (isSelected)
+    {
+      ImGui::PopStyleColor();
+    }
+    
+    // Draw children ------------------------
+    if (opened)
+    {
+      for (auto child : entity.Children())
+      {
+        if (Entity e = m_context->TryGetEntityWithUUID(child); e)
+        {
+          DrawEntityNode(e, searchFilter);
+        }
+      }
+      ImGui::TreePop();
+    }
   }
   
   bool SceneHierarchyPanel::SearchEntityRecursive(Entity entity, const std::string_view &searchFilter, const uint32_t maxSearchDepth, uint32_t currentDepth)
@@ -267,6 +423,37 @@ namespace Kreator
     return false;
   }
   
+  bool SceneHierarchyPanel::IsChildSelected(Entity entity)
+  {
+    if (!entity)
+    {
+      return false;
+    }
+    
+    // For each child
+    for (const auto& e : entity.Children())
+    {
+      Entity childEntity = m_context->TryGetEntityWithUUID(e);
+      if (!childEntity)
+      {
+        return false;
+      }
+      
+      // Search child entity in selection context
+      if (m_selectionContext.Find(childEntity))
+      {
+        return true;
+      }
+      
+      // Recursive search
+      if (IsChildSelected(childEntity))
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
   void SceneHierarchyPanel::OnExternalEntityDestroyed(const Entity& entity)
   {
     IK_PROFILE();
