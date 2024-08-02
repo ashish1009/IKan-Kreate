@@ -125,6 +125,12 @@ if (!Project::GetActive()) return
 
     m_2DIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/2DIcon.png"));
     m_3DIcon = TextureFactory::Create(KreatorResourcePath("Textures/Icons/3DIcon.png"));
+    
+    // Window Icons
+    m_iconClose = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Close.png"));
+    m_iconMinimize = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Minimize.png"));
+    m_iconMaximize = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Maximize.png"));
+    m_iconRestore = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Restore.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -884,10 +890,20 @@ if (!Project::GetActive()) return
     if (UI::BeginPopup("MainMenu"))
     {
       ImGui::PushStyleColor(ImGuiCol_HeaderHovered, UI_Utils::s_hoveredColor);
-      if (ImGui::MenuItem("Exit", "Cmd + Q"))
+      static const Window* window = Application::Get().GetWindow();
+      if (ImGui::MenuItem("Minimize"))
+      {
+        window->Iconify();
+      }
+      if (ImGui::MenuItem("Maximize", nullptr, false, !window->IsMaximized()))
+      {
+        window->Iconify();
+      }
+      ImGui::Separator();
+      if (ImGui::MenuItem("Close", "Cmd + Q"))
       {
         Application::Get().Close();
-      }
+      }      
       ImGui::PopStyleColor();
       UI::EndPopup();
     }
@@ -897,6 +913,11 @@ if (!Project::GetActive()) return
     UI::SetCursorPos(ImVec2(logoOffsetX, 4.0f));
     
     UI_MenuBar();
+
+    // Render the Window Buttons -------------------------------------------------------
+    UI::SetCursorPosX(ImGui::GetWindowWidth() - 78);
+    UI::SetCursorPosY(10.0f);
+    UI_WindowButtons();
 
     return titleBarHeight;
   }
@@ -1085,5 +1106,49 @@ if (!Project::GetActive()) return
     }
     UI::EndMenuBar();
     ImGui::EndGroup();
+  }
+  
+  void RendererLayer::UI_WindowButtons()
+  {
+    // Window buttons
+    static const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Color::Text, 0.9f);
+    static const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Color::Text, 1.2f);
+    static const ImU32 buttonColP = UI::Color::TextDarker;
+    static const float buttonWidth = 14.0f;
+    static const float buttonHeight = 14.0f;
+    static const Window* window = Application::Get().GetWindow();
+    
+    // Minimize Button
+    {
+      static const uint32_t iconHeight = m_iconMinimize->GetHeight();
+      const float padY = (buttonHeight - (float)iconHeight) / 2.0f;
+      
+      if (ImGui::InvisibleButton("Minimize", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        window->Iconify();
+      }
+      UI::DrawButtonImage(m_iconMinimize, UI::RectExpanded(UI::GetItemRect(), 0.0f, -padY), buttonColN, buttonColH, buttonColP);
+    }
+    
+    UI::SameLine();
+    // Maximize Button
+    {
+      bool isMaximized = window->IsMaximized();
+      if (ImGui::InvisibleButton("Maximize/Restore", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        (isMaximized) ? window->Restore() : window->Maximize();
+      }
+      UI::DrawButtonImage(isMaximized ? m_iconRestore : m_iconMaximize, buttonColN, buttonColH, buttonColP);
+    }
+    
+    UI::SameLine();
+    // Close Button
+    {
+      if (ImGui::InvisibleButton("Close", ImVec2(buttonWidth, buttonHeight), ImGuiButtonFlags_AllowItemOverlap))
+      {
+        Application::Get().Close();
+      }
+      UI::DrawButtonImage(m_iconClose, UI::Color::Text, UI::ColorWithMultipliedValue(UI::Color::Text, 1.4f), buttonColP);
+    }
   }
 } // namespace Kreator

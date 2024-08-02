@@ -238,6 +238,17 @@ namespace Kreator::UI
   ///   - tintNormal: tint normal color
   ///   - tintHovered: tint hovered color
   ///   - tintPressed: tint pressed color
+  /// - Note: Do not draw actual presaable button
+  void DrawButtonImage(const Ref<IKan::Image>& image,
+                       const ImU32& tintNormal = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 0.8f),
+                       const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.5f),
+                       const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));
+  /// This function draws the image button
+  /// - Parameters:
+  ///   - image: Image
+  ///   - tintNormal: tint normal color
+  ///   - tintHovered: tint hovered color
+  ///   - tintPressed: tint pressed color
   ///   - rectangle: image rectangle
   /// - Note: Do not draw actual presaable button
   void DrawButtonImage(const Ref<IKan::Image>& image, const ImRect& rectangle,

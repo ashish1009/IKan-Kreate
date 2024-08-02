@@ -490,6 +490,11 @@ namespace Kreator::UI
     DrawButtonImage(image, image, image, rectangle.Min, rectangle.Max, tintNormal, tintHovered, tintPressed);
   }
 
+  void DrawButtonImage(const Ref<IKan::Image>& image, const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed)
+  {
+    DrawButtonImage(image, image, image, ImGui::GetItemRectMin(), ImGui::GetItemRectMax(), tintNormal, tintHovered, tintPressed);
+  }
+
   bool DrawButtonImage(std::string_view title, const Ref<IKan::Image>& texture, const glm::vec2& size, const glm::vec2& offset,
                        bool highlightHover, const ImU32& tintNormal, const ImU32& tintHovered, const ImU32& tintPressed)
   {

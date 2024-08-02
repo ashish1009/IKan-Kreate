@@ -115,6 +115,7 @@ namespace Kreator
     Ref<Image> m_newProjectIcon, m_folderIcon;
     Ref<Image> m_shadowTexture;
     Ref<Image> m_2DIcon, m_3DIcon;
+    Ref<Image> m_iconMinimize, m_iconMaximize, m_iconRestore, m_iconClose;
 
     // Application data ----------------------------------
     KreatorDirectories m_directories;
