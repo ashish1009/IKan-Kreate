@@ -8,6 +8,7 @@
 #include "Scene.hpp"
 
 #include "Scene/Component.hpp"
+#include "Scene/Entity.hpp"
 #include "Scene/Scene2D.hpp"
 #include "Scene/Scene3D.hpp"
 
@@ -63,6 +64,62 @@ namespace IKan
   {
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Destroying {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
+  }
+  
+  Entity Scene::CreateEntity(const std::string& name)
+  {
+    IK_PROFILE();
+    return CreateChildEntity({}, name);
+  }
+  
+  Entity Scene::CreateChildEntity(Entity parent, const std::string& name)
+  {
+    IK_PROFILE();
+    Entity entity = CreateEntityWithID({}, name);
+    
+    // Debug Logs
+    IK_LOG_TRACE(LogModule::Scene, "Stored Entity in Scene");
+    IK_LOG_TRACE(LogModule::Scene, "  Name    {0}", entity.GetName());
+    IK_LOG_TRACE(LogModule::Scene, "  Handle  {0}", (uint32_t)entity);
+    IK_LOG_TRACE(LogModule::Scene, "  ID      {0}", (uint32_t)entity.GetUUID());
+    IK_LOG_TRACE(LogModule::Scene, "  Number of entities Added in Scene  {0}", m_numEntities);
+    IK_LOG_TRACE(LogModule::Scene, "  Max ID given to entity             {0}", m_maxEntityID);
+
+    if (parent)
+    {
+      IK_ASSERT(false, "Implement later");
+    }
+
+    return entity;
+  }
+  
+  Entity Scene::CreateEntityWithID(UUID uuid, const std::string& name)
+  {
+    IK_PROFILE();
+    
+    // TODO: Resize regirtry later
+    IK_ASSERT(m_registry.size() < m_registryCapacity, "Entity registry reach max limit !!!")
+    
+    // If same UUID is already present in scene
+    IK_ASSERT(m_entityIDMap.find(uuid) == m_entityIDMap.end(), "Same UUID is already present in Scene");
+    
+    auto entity = Entity { m_registry.create(), this };
+    
+    // Add Mendatory Components
+    entity.AddComponent<IDComponent>(uuid);
+    entity.AddComponent<VisibilityComponent>();
+    entity.AddComponent<TransformComponent>(); // By default Unit transform
+    entity.AddComponent<TagComponent>(name);
+    entity.AddComponent<RelationshipComponent>(); // By default No parent and No child
+    
+    // Store in Entity ID Map
+    m_entityIDMap[uuid] = entity;
+    
+    // Updating the Max entity ID
+    m_maxEntityID = (int32_t)((uint32_t)entity);
+    ++m_numEntities;
+    
+    return entity;
   }
 
   void Scene::SetName(const std::string &name)

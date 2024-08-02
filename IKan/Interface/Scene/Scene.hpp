@@ -13,6 +13,10 @@
 
 namespace IKan
 {
+  class Entity;
+
+  using EntityMap = std::unordered_map<UUID, Entity>;
+
   enum class SceneType : uint8_t
   {
     None, _2D, _3D
@@ -30,6 +34,21 @@ namespace IKan
     Scene(SceneType sceneType, const std::string& name, uint32_t maxEntityCapacity);
     /// This is the default destructor of EnTT Scene
     ~Scene();
+
+    // Entity Manager ------------------------------------------------------------------------------------------------
+    /// This function creates an unique entity with UUID
+    /// - Parameter name: Name of entity
+    [[nodiscard]] Entity CreateEntity(const std::string& name);
+    /// This function creates an unique entity with UUID
+    /// - Parameters:
+    ///   - parent: Parent Entity Handle
+    ///   - name: Name of entity
+    [[nodiscard]] Entity CreateChildEntity(Entity parent, const std::string& name);
+    /// This function creates an unique entity with UUID
+    /// - Parameters:
+    ///   - uuid: Unique ID of entity
+    ///   - name: Name of entity
+    [[nodiscard]] Entity CreateEntityWithID(UUID uuid, const std::string& name);
 
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
@@ -62,7 +81,10 @@ namespace IKan
     // EnTT -----------------------------
     entt::registry m_registry;
     uint32_t m_registryCapacity {0};
-    
+    uint32_t m_numEntities = 0;
+    int32_t m_maxEntityID = -1;
+    EntityMap m_entityIDMap;
+
     friend class Entity;
   };
 } // namespace IKan

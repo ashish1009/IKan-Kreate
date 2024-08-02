@@ -11,6 +11,8 @@
 
 namespace IKan
 {
+  class TransformComponent;
+
   /// This class stores the entity data for scene
   class Entity
   {
@@ -25,6 +27,32 @@ namespace IKan
     /// This is the Default Destructor for Entity
     ~Entity() = default;
     
+    /// This function returns transform comp of entity
+    TransformComponent& GetTransform();
+    /// This function returns transform comp of entity
+    const glm::mat4& GetTransform() const;
+    
+    /// This function returns name of entity
+    std::string& GetName();
+    /// This function returns name of entity
+    const std::string& GetName() const;
+    
+    /// This function returns the UUID of Current entity
+    UUID GetUUID() const;
+
+    /// This function returns the entity handle from this Entity
+    operator uint32_t () const;
+    /// This function returns Entity as entity handle
+    operator entt::entity () const;
+    /// This function returns entity as Boolean Check if entity handle is not null
+    operator bool () const;
+    /// This function returns if this entity is equal to other
+    /// - parameter other: other entity
+    bool operator==(const Entity& other) const;
+    /// This function returns if this entity is not equal to other
+    /// - parameter other: other entity
+    bool operator!=(const Entity& other) const;
+
     // Component Manager --------------------------------------------------------------------------------------------
     /// This function adds component in Current Entity
     /// - Parameter args: Arguments needed to construct the component NOTE : T is type of component

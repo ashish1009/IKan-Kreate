@@ -8,6 +8,7 @@
 #include "SceneHierarchyPanel.hpp"
 
 #include "Layers/RendererLayer.hpp"
+#include "Editor/EntityUtils.hpp"
 
 namespace Kreator
 {
@@ -156,6 +157,8 @@ namespace Kreator
         // Right click option
         if (ImGui::BeginPopupContextWindow(nullptr, ImGuiPopupFlags_MouseButtonRight | ImGuiPopupFlags_NoOpenOverItems))
         {
+          Entity newEntity = ECS_Utils::DrawCreateEntityMenu(m_context, {});
+          
           ImGui::EndPopup();
         }
 
