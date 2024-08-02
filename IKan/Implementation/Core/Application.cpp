@@ -165,6 +165,11 @@ namespace IKan
     return *s_instance;
   }
   
+  const ApplicationSpecification& Application::GetSpecification() const
+  {
+    return m_specification;
+  }
+  
   bool Application::IsRunning() const
   {
     return m_isRunning;
