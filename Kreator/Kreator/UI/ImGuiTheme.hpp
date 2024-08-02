@@ -113,7 +113,7 @@ namespace Kreator::UI
     inline static ImU32 NiceBlueHighlight     = IM_COL32(83, 232, 254, 255);
     inline static ImU32 NiceRedHighlight      = IM_COL32(210, 45, 35, 255);
     inline static ImU32 Accent                = IM_COL32(236, 158, 36, 255);
-    inline static ImU32 HoveredItem           = IM_COL32(0, 0, 0, 80);
+    inline static ImU32 HoveredItem           = IM_COL32(136, 100, 20, 80);
     inline static ImU32 Warning               = IM_COL32(183, 32, 54, 255);
     inline static ImU32 Selection             = IM_COL32(191, 177, 155, 255);
     inline static ImU32 SelectionMuted        = IM_COL32(59, 57, 45, 255);

@@ -35,13 +35,15 @@ if (!Project::GetActive()) return
   {
     // Hovered Item Color
     static const ImU32 s_hoveredColor = UI::Color::HoveredItem;
+    static const ImU32 s_colActive = UI::ColorWithSaturation(UI::Color::Accent, 0.5f);
 
     // Function to push Dark color on active
-    static const auto pushDarkTextIfActive = [](const char* menuName)
+    static const auto PushDarkTextIfActive = [](const char* menuName)
     {
       if (ImGui::IsPopupOpen(menuName))
       {
         ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::BackgroundDark);
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, s_colActive);
         return true;
       }
       return false;
@@ -56,7 +58,7 @@ if (!Project::GetActive()) return
     void AddMenu(const char* title, PopFunction popItemHighlight, UIFunction menuFunc)
     {
       // Change Text colored to dark if item is opened
-      bool pushItemColor = pushDarkTextIfActive(title);
+      bool pushItemColor = PushDarkTextIfActive(title);
       
       if (ImGui::BeginMenu(title))
       {
@@ -69,7 +71,7 @@ if (!Project::GetActive()) return
       }
       if (pushItemColor)
       {
-        ImGui::PopStyleColor();
+        ImGui::PopStyleColor(2);
       }
     }
   } // namespace Utils
@@ -965,9 +967,8 @@ if (!Project::GetActive()) return
       // Push the Colors if Menu is active
       if (menuOpen)
       {
-        const ImU32 colActive = UI::ColorWithSaturation(UI::Color::Accent, 0.5f);
-        ImGui::PushStyleColor(ImGuiCol_Header, colActive);
-        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, colActive);
+        ImGui::PushStyleColor(ImGuiCol_Header, UI_Utils::s_colActive);
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, UI_Utils::s_colActive);
       }
       
       // Function to Pop the highlight Color
@@ -982,15 +983,85 @@ if (!Project::GetActive()) return
 
       // Menu Items
       UI_Utils::AddMenu("File", popItemHighlight, [this]() {
+        ImGui::PushStyleColor(ImGuiCol_HeaderHovered, UI_Utils::s_hoveredColor);
+        if (ImGui::MenuItem("Create Project...", "Cmd + Shift + N"))
+        {
+        }
+        if (ImGui::MenuItem("Open Project...", "Cmd + Shift + O"))
+        {
+        }
         
+        // Change Text colored to dark if item is opened
+        bool pushItemColor = UI_Utils::PushDarkTextIfActive("Open Recent");
+        if (ImGui::BeginMenu("Open Recent"))
+        {
+          size_t i = 0;
+          for (auto it = m_userPreferences->recentProjects.begin(); it != m_userPreferences->recentProjects.end(); it++)
+          {
+            // Show only 10 Items
+            if (i > 10)
+            {
+              break;
+            }
+            
+            if (std::filesystem::exists(it->second.filePath))
+            {
+              ImGui::PushStyleColor(ImGuiCol_HeaderHovered, UI_Utils::s_hoveredColor);
+              ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::Text);
+              if (ImGui::MenuItem(it->second.name.c_str()))
+              {
+                RecentProject projectEntry;
+                projectEntry.name = it->second.name;
+                projectEntry.filePath = it->second.filePath;
+                projectEntry.lastOpened = time(NULL);
+                
+                it = m_userPreferences->recentProjects.erase(it);
+                
+                m_userPreferences->recentProjects[projectEntry.lastOpened] = projectEntry;
+                
+                UserPreferencesSerializer preferencesSerializer(m_userPreferences);
+                preferencesSerializer.Serialize(m_userPreferences->filePath);
+                
+                OpenProject(projectEntry.filePath);
+                break;
+              }
+              ImGui::PopStyleColor(2);
+            }
+            else
+            {
+              m_userPreferences->recentProjects.erase(it);
+              UserPreferencesSerializer serializer(m_userPreferences);
+              serializer.Serialize(m_userPreferences->filePath);
+              break;
+            }
+            
+            i++;
+          }
+          ImGui::EndMenu();
+        }
+        if (pushItemColor)
+        {
+          ImGui::PopStyleColor(2);
+        }
+
+        ImGui::Separator();
+        if (ImGui::MenuItem("Exit", "Cmd + Q"))
+        {
+          Application::Get().Close();
+        }
+        ImGui::PopStyleColor();
       });
       
       UI_Utils::AddMenu("Edit", popItemHighlight, [this]() {
-        
       });
       
       UI_Utils::AddMenu("View", popItemHighlight, [this]() {
-
+        for (auto& [id, panelData] : m_panels.GetPanels())
+        {
+          ImGui::MenuItem(panelData.name, nullptr, &panelData.isOpen);
+        }
+        ImGui::Separator();
+        ImGui::MenuItem("Statistic Panel", nullptr, &m_showStatisticsPanel);
       });
       
       UI_Utils::AddMenu("Debug", popItemHighlight, [this]() {
