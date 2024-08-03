@@ -9,6 +9,7 @@
 #include "Layers/RendererLayer.hpp"
 #include "Editor/UserPreference.hpp"
 #include "Editor/FolderExplorer.hpp"
+#include "Panels/SceneHierarchyPanel.hpp"
 
 namespace Kreator
 {
@@ -75,6 +76,7 @@ namespace Kreator
     // Should get initialized after layer initialize
     FolderExplorer::Initialize();
     UI::Widgets::Initialize();
+    SceneHierarchyPanel::Initialize();
   }
   
   void KreatorApp::OnShutdown()
@@ -85,7 +87,8 @@ namespace Kreator
     // Shutdown the Kreator Modules -------------------------------------------------------------
     FolderExplorer::Shutdown();
     UI::Widgets::Shutdown();
-    
+    SceneHierarchyPanel::Shutdown();
+
     // Removing Renderer layer from application stack and destroying its instance
     PopLayer(m_rendererLayer.get());
     m_rendererLayer.reset();

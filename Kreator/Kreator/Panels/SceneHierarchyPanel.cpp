@@ -39,6 +39,8 @@ namespace Kreator
     s_plusIcon.reset();
     s_gearIcon.reset();
     s_reloadIcon.reset();
+    s_EyeIcon.reset();
+    s_closeEyeIcon.reset();
     IK_LOG_INFO("SceneHierarchyPanel", "Shutting down the Scene Hierarchy Panel");
   }
   
@@ -369,11 +371,54 @@ namespace Kreator
     bool entityDeleted = false;
     bool entityDuplicated = false;
 
+    if (isRowClicked)
+    {
+      bool multipleSelection = Input::IsKeyPressed(IKan::Key::LeftSuper);
+      SetSelectedEntity(entity, multipleSelection);
+      ImGui::FocusWindow(ImGui::GetCurrentWindow());
+    }
+
     if (isSelected)
     {
       ImGui::PopStyleColor();
     }
     
+    // <> column 2 -------------------------------------------------------------------------------------------------
+    ImGui::TableNextColumn();
+
+    // <> column 3 -------------------------------------------------------------------------------------------------
+    ImGui::TableNextColumn();
+    ImGui::PushID(entity);
+    const auto& visibility = entity.GetComponent<VisibilityComponent>().isVisible;
+    
+    static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+    if (ImGui::InvisibleButton("##Visibility", ImVec2{ 1.3f * lineHeight, 1.3f * lineHeight }))
+    {
+      auto changeChildVisibility = [&](Entity e, auto&& changeChildVisibility) -> void {
+        auto& v = e.GetComponent<VisibilityComponent>().isVisible;
+        v = v ? false : true;
+        for (const auto& c : e.Children())
+        {
+          Entity child = m_context->GetEntityWithUUID(c); // Has to be present
+          changeChildVisibility(child, changeChildVisibility);
+        }
+      };
+      
+      changeChildVisibility(entity, changeChildVisibility);
+    }
+    
+    ImU32 normalColor = IM_COL32(160, 160, 160, 200);
+    ImU32 hoveredColor = IM_COL32(160, 160, 160, 255);
+    ImU32 pressedColor = IM_COL32(160, 160, 160, 150);
+    if (isSelected)
+    {
+      normalColor = IM_COL32(10, 10, 10, 200);
+      hoveredColor = IM_COL32(10, 10, 10, 255);
+      pressedColor = IM_COL32(10, 10, 10, 150);
+    }
+    UI::DrawButtonImage(visibility ? s_EyeIcon : s_closeEyeIcon, UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f), normalColor, hoveredColor, pressedColor);
+    
+    ImGui::PopID();
     // Draw children ------------------------
     if (opened)
     {

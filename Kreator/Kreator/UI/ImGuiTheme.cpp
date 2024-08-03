@@ -104,7 +104,7 @@ namespace Kreator::UI
           UI::Color::TableHeaderBg          = IM_COL32(30, 35, 57, 255);
           UI::Color::TableBorderLight       = UI::Color::Separator;
           UI::Color::TableBorderStrong      = IM_COL32(222, 0, 0, 255);
-          UI::Color::TableRowBg             = IM_COL32(222, 0, 0, 255);
+          UI::Color::TableRowBg             = UI::Color::TitleBar;;
           UI::Color::TableRowBgAlt          = IM_COL32(222, 0, 0, 255);
           
           // Drag Drop
