@@ -238,6 +238,34 @@ namespace IKan
     --m_numEntities;
   }
   
+  Entity Scene::DuplicateEntity(Entity entity)
+  {
+    IK_PROFILE();
+    
+    Entity newEntity;
+    if (entity.HasComponent<TagComponent>())
+    {
+      newEntity = CreateEntity(entity.GetComponent<TagComponent>().tag);
+    }
+    else
+    {
+      newEntity = CreateEntity("Empty Entity");
+    }
+    
+    CopyComponentIfExists<VisibilityComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    CopyComponentIfExists<TransformComponent>(newEntity.m_entityHandle, entity.m_entityHandle, m_registry);
+    
+    auto childIds = entity.Children();
+    for (auto childId : childIds)
+    {
+      IK_ASSERT(false ,"Implement later");
+    }
+    
+    // TODO: Parent?
+        
+    return newEntity;
+  }
+  
   void Scene::SetName(const std::string &name)
   {
     m_name = name;

@@ -370,6 +370,48 @@ namespace Kreator
     bool entityDeleted = false;
     bool entityDuplicated = false;
 
+    if (ImGui::BeginPopupContextItem())
+    {
+      {
+        UI::ScopedColor colText(ImGuiCol_Text, UI::Color::Text);
+        UI::ScopedColorStack entitySelection(ImGuiCol_Header, UI::Color::GroupHeader, ImGuiCol_HeaderHovered, UI::Color::GroupHeader, ImGuiCol_HeaderActive, UI::Color::GroupHeader);
+        
+        // Select current entity
+        SetSelectedEntity(entity);
+
+        // Empty Space Right click menu
+        Entity newEntity = ECS_Utils::DrawCreateEntityMenu(m_context, entity);
+        if (newEntity)
+        {
+          SetSelectedEntity(newEntity);
+        }
+
+        // Selected Entity Right click
+        if (m_selectionContext.Size() == 1)
+        {
+          ImGui::Separator();
+          if (m_selectionContext.At(0).GetParent())
+          {
+            if (ImGui::MenuItem("Unparent", nullptr, false, false))
+            {
+              IK_ASSERT(false, "Implement later")
+              ImGui::Separator();
+            }
+          }
+          
+          if (ImGui::MenuItem("Delete"))
+          {
+            entityDeleted = true;
+          }
+          if (ImGui::MenuItem("Duplicate"))
+          {
+            entityDuplicated = true;
+          }
+        }
+      }
+      ImGui::EndPopup();
+    }
+    
     if (isRowClicked)
     {
       bool multipleSelection = Input::IsKeyPressed(IKan::Key::LeftSuper);
@@ -382,6 +424,26 @@ namespace Kreator
       ImGui::PopStyleColor();
     }
     
+    // Drag & Drop -------------------------
+    if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
+    {
+      ImGui::Text(entity.GetComponent<TagComponent>().tag.c_str());
+      ImGui::SetDragDropPayload("scene_entity_hierarchy", &entity, sizeof(Entity));
+      ImGui::EndDragDropSource();
+    }
+
+    if (ImGui::BeginDragDropTarget())
+    {
+      const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("scene_entity_hierarchy", ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
+      
+      if (payload)
+      {
+        IK_ASSERT(false, "Implement later");
+      }
+      
+      ImGui::EndDragDropTarget();
+    }
+
     // <> column 2 -------------------------------------------------------------------------------------------------
     ImGui::TableNextColumn();
 
@@ -418,6 +480,7 @@ namespace Kreator
     UI::DrawButtonImage(visibility ? s_EyeIcon : s_closeEyeIcon, UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f), normalColor, hoveredColor, pressedColor);
     
     ImGui::PopID();
+    
     // Draw children ------------------------
     if (opened)
     {
@@ -429,6 +492,17 @@ namespace Kreator
         }
       }
       ImGui::TreePop();
+    }
+    
+    // Defer deletion until end of node UI
+    if (entityDeleted)
+    {
+      OnEntityDestroyed(entity);
+    }
+    
+    if (entityDuplicated)
+    {
+      SetSelectedEntity(m_context->DuplicateEntity(entity));
     }
   }
   

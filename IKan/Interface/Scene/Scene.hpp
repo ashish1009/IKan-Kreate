@@ -69,7 +69,10 @@ namespace IKan
     ///  - entity: entity handle
     ///  - firstCall: remove from parent only for first call
     void DestroyEntity(Entity entity, bool firstCall = true);
-    
+    /// This function duplicate the entity
+    /// - Parameter entity: entity to be duplicated
+    [[nodiscard]] Entity DuplicateEntity(Entity entity);
+
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
     /// - Parameter name: scene name
