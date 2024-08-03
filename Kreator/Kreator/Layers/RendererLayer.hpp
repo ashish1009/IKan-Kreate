@@ -145,10 +145,14 @@ namespace Kreator
     /// This function renders window buttons
     void UI_WindowButtons();
 
+    /// This function popup new scene widget
+    void UI_NewScenePopup();
+
     // Memeber variables ----------------------------------------------------------------------------------------------
     // Popups/Panel --------------------------------------
     UI::Popup m_welcomePopup {"Welcome Screen"};
     UI::Popup m_createNewProjectPopup {"Create New Project"};
+    UI::Popup m_createNewScenePopup {"Create New Scene"};
 
     bool m_showStatisticsPanel {true};
 
