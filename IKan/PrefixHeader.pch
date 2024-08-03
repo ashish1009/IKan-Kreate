@@ -48,6 +48,7 @@
 #include "Utils/FileSystemUtils.hpp"
 #include "Utils/StringUtils.hpp"
 #include "Utils/MathUtils.hpp"
+#include "Utils/YAMLSerializer.hpp"
 
 #include "Core/CoreAssetPath.hpp"
 #include "Core/UUID.hpp"
