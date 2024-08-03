@@ -58,6 +58,9 @@ namespace IKan
 
     // Prefab
     { PrefabExtension, AssetType::Prefab },
+
+    // Scene
+    { SceneExtension, AssetType::Scene },
   };
   
   namespace AssetUtils
