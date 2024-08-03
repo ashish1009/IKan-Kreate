@@ -264,6 +264,10 @@ if (!m_currentScene) return
   {
     RETRUN_IF_NO_PROJECT();
     
+    EventDispatcher dispatcher(event);
+    dispatcher.Dispatch<KeyPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnKeyPressedEvent));
+    dispatcher.Dispatch<MouseButtonPressedEvent>(IK_BIND_EVENT_FN(RendererLayer::OnMouseButtonPressed));
+
     m_editorCamera.OnEvent(event);
     m_panels.OnEvent(event);
   }
@@ -331,6 +335,66 @@ if (!m_currentScene) return
   const std::filesystem::path& RendererLayer::GetIKanKreatorPath() const
   {
     return m_directories.kreatorPath;
+  }
+  
+  bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
+  {
+    bool leftCtrl = Input::IsKeyPressed(Key::LeftControl);
+    bool rightCtrl = Input::IsKeyPressed(Key::RightControl);
+    bool leftCmd = Input::IsKeyPressed(Key::LeftSuper);
+    bool rightCmd = Input::IsKeyPressed(Key::RightSuper);
+    bool leftShift = Input::IsKeyPressed(Key::LeftShift);
+    bool rightShift = Input::IsKeyPressed(Key::RightShift);
+    
+    if (m_sceneState == SceneState::Edit)
+    {
+      // Scene -----------------------------------------------------------
+      if ((leftCmd or rightCmd) and !Input::IsMouseButtonPressed(MouseButton::Right) and (!leftShift or !rightShift))
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::N:
+//            m_showNewScenePopup = true;
+            break;
+          case Key::O:
+            OpenScene();
+            break;
+          case Key::S:
+            SaveScene();
+            break;
+          default:
+            break;
+        }
+      } // Scenes
+      
+      // Project -----------------------------------------------------------
+      if ((leftCmd or rightCmd) and (leftShift or rightShift))
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::N:
+            m_createNewProjectPopup.Set("Create New Project", true /* open Flag */, 650, 0, true /* center */);
+            break;
+          case Key::O:
+            FolderExplorer::ShowOpenPopup(ProjectExtension, "");
+            m_folderExplorerAction = FolderExplorerAction::OpenProject;
+            break;
+            
+          default:
+            break;
+        }
+      }
+    } // if Edit
+    else
+    {
+      
+    }
+    return false;
+  }
+  
+  bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent &e)
+  {
+    return false;
   }
   
   void RendererLayer::UpdateViewportSize()
@@ -404,6 +468,18 @@ if (!m_currentScene) return
       serializer.Serialize(modFilePath);
       m_timeSinceLastSave = 0.0f;
     }
+  }
+
+  void RendererLayer::OpenScene()
+  {
+    FolderExplorer::ShowOpenPopup(SceneExtension, Project::GetSceneDirectory());
+    m_folderExplorerAction = FolderExplorerAction::OpenScene;
+  }
+  
+  void RendererLayer::OpenScene(const AssetMetadata& assetMetadata)
+  {
+    std::filesystem::path workingDirPath = Project::GetAssetDirectory() / assetMetadata.filePath;
+    OpenScene(workingDirPath.string());
   }
 
   void RendererLayer::OnEntitySelected(const SelectionContext& entities)
@@ -849,6 +925,18 @@ if (!m_currentScene) return
         
         SaveScene();
 
+        break;
+      }
+      case FolderExplorerAction::OpenScene:
+      {
+        if (explorerOutput.extension() == SceneExtension)
+        {
+          OpenScene(explorerOutput);
+        }
+        else
+        {
+          IK_ASSERT(false, "Implement later");
+        }
         break;
       }
 

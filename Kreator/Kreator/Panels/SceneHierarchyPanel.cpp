@@ -221,7 +221,6 @@ namespace Kreator
   
   void SceneHierarchyPanel::DrawEntityNode(Entity entity, const std::string &searchFilter)
   {
-    static const float edgeOffset = 4.0f;
     const char* name = entity.GetComponent<TagComponent>().tag.c_str();
     constexpr uint32_t maxSearchDepth = 20;
     

@@ -65,6 +65,12 @@ namespace Kreator
 
   private:
     // Memeber functions ----------------------------------------------------------------------------------------------
+    /// This function handles the key press event
+    /// - Parameter e: key events
+    bool OnKeyPressedEvent(KeyPressedEvent& e);
+    /// This function handles the mouse events
+    /// - Parameter e: Mouse Event
+    bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
     /// This function updates the viewports of all kreator data
     void UpdateViewportSize();
     
@@ -80,6 +86,11 @@ namespace Kreator
     void SaveScene();
     /// This function saves the scene automatically
     void SaveSceneAuto();
+    /// This function Opens the scene from popup
+    void OpenScene();
+    /// This function Opens the scene from metadata
+    /// - Parameter assetMetadata: metadata
+    void OpenScene(const AssetMetadata& assetMetadata);
 
     // Scene Panel Manager Callbacks ----------------------
     /// This function handles the entity selection
@@ -163,7 +174,7 @@ namespace Kreator
     PanelManager m_panels;
     enum class FolderExplorerAction
     {
-      None, NewProject, OpenProject, SaveScene
+      None, NewProject, OpenProject, SaveScene, OpenScene
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
 
