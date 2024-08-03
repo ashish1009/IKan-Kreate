@@ -189,7 +189,6 @@ namespace Kreator
         {
           // We draw selection and hover for table rows manually
           UI::ScopedColorStack entitySelection(ImGuiCol_Header, IM_COL32_DISABLE, ImGuiCol_HeaderHovered, IM_COL32_DISABLE, ImGuiCol_HeaderActive, IM_COL32_DISABLE);
-          
           for (const auto& entity : m_context->GetRegistry().view<IDComponent, RelationshipComponent>())
           {
             Entity e(entity, m_context.get());

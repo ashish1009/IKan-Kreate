@@ -3847,7 +3847,7 @@ public:
      * @return An iterator to the first entity of the internal packed array.
      */
     iterator begin() const ENTT_NOEXCEPT {
-        const typename traits_type::difference_type pos = packed.size();
+        const typename traits_type::difference_type pos = static_cast<traits_type::difference_type>(packed.size());
         return iterator{packed, pos};
     }
 
