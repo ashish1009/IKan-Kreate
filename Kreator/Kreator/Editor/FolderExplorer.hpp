@@ -24,20 +24,23 @@ namespace Kreator
     
     /// This function set the popup to show Select folder widget
     /// - Parameters:
+    ///   - title: title of popup
     ///   - basePath: Current path for explorer
     ///   - lastPopup: last popup pointer
-    static void ShowCreatePopup(const std::filesystem::path& basePath = "", UI::Popup* lastPopup = nullptr);
+    static void ShowCreatePopup(std::string_view title, const std::filesystem::path& basePath = "", UI::Popup* lastPopup = nullptr);
     /// This function set the popup to show open file widgwet
     /// - Parameters:
+    ///   - title: title of popup
     ///   - extenstion: externsion to be opened
     ///   - basePath: Current path for exploree
     ///   - lastPopup: last popup pointer
-    static void ShowOpenPopup(const std::string& extenstion, const std::filesystem::path& basePath = "", UI::Popup* lastPopup = nullptr);
+    static void ShowOpenPopup(std::string_view title, const std::string& extenstion, const std::filesystem::path& basePath = "", UI::Popup* lastPopup = nullptr);
     /// This function set the popup to show save file widgwet
     /// - Parameters:
+    ///   - title: title of popup
     ///   - basePath: Current path for exploree
     ///   - lastPopup: last popup pointer
-    static void ShowSavePopup(const std::filesystem::path& basePath = "", UI::Popup* lastPopup = nullptr);
+    static void ShowSavePopup(std::string_view title, const std::filesystem::path& basePath = "", UI::Popup* lastPopup = nullptr);
 
   private:
     /// This function renders the top bar of viewer

@@ -339,8 +339,6 @@ if (!m_currentScene) return
   
   bool RendererLayer::OnKeyPressedEvent(KeyPressedEvent& e)
   {
-    bool leftCtrl = Input::IsKeyPressed(Key::LeftControl);
-    bool rightCtrl = Input::IsKeyPressed(Key::RightControl);
     bool leftCmd = Input::IsKeyPressed(Key::LeftSuper);
     bool rightCmd = Input::IsKeyPressed(Key::RightSuper);
     bool leftShift = Input::IsKeyPressed(Key::LeftShift);
@@ -376,7 +374,7 @@ if (!m_currentScene) return
             m_createNewProjectPopup.Set("Create New Project", true /* open Flag */, 650, 0, true /* center */);
             break;
           case Key::O:
-            FolderExplorer::ShowOpenPopup(ProjectExtension, "");
+            FolderExplorer::ShowOpenPopup("Open Project", ProjectExtension, "");
             m_folderExplorerAction = FolderExplorerAction::OpenProject;
             break;
             
@@ -439,7 +437,7 @@ if (!m_currentScene) return
   
   void RendererLayer::SaveSceneAs()
   {
-    FolderExplorer::ShowSavePopup(Project::GetSceneDirectory());
+    FolderExplorer::ShowSavePopup("Save Scene", Project::GetSceneDirectory());
     m_folderExplorerAction = FolderExplorerAction::SaveScene;
   }
   
@@ -472,7 +470,7 @@ if (!m_currentScene) return
 
   void RendererLayer::OpenScene()
   {
-    FolderExplorer::ShowOpenPopup(SceneExtension, Project::GetSceneDirectory());
+    FolderExplorer::ShowOpenPopup("Open Scene", SceneExtension, Project::GetSceneDirectory());
     m_folderExplorerAction = FolderExplorerAction::OpenScene;
   }
   
@@ -734,7 +732,7 @@ if (!m_currentScene) return
           if (UI::DrawImageTextButton("Open an exisiting Kreator Project", m_folderIcon, buttonSize, offset))
           {
             ImGui::CloseCurrentPopup();
-            FolderExplorer::ShowOpenPopup(ProjectExtension, m_directories.kreatorPath / "Kreator/Projects" , &m_welcomePopup);
+            FolderExplorer::ShowOpenPopup("Open Project", ProjectExtension, m_directories.kreatorPath / "Kreator/Projects" , &m_welcomePopup);
             m_folderExplorerAction = FolderExplorerAction::OpenProject;
           }
         }
@@ -882,7 +880,7 @@ if (!m_currentScene) return
       {
         if (m_sceneType != SceneType::None)
         {
-          FolderExplorer::ShowCreatePopup(m_directories.kreatorPath / "Kreator", &m_createNewProjectPopup);
+          FolderExplorer::ShowCreatePopup("Create Project", m_directories.kreatorPath / "Kreator", &m_createNewProjectPopup);
           m_folderExplorerAction = FolderExplorerAction::NewProject;
           ImGui::CloseCurrentPopup();
         }

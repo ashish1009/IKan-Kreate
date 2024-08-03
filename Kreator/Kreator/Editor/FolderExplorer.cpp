@@ -37,6 +37,7 @@ namespace Kreator
   {
     inline static constexpr float PopupWidth = 900.0f;
     
+    std::string title {"Kreator Folder Viewer"};
     PopupType popupType {PopupType::Invalid};
     
     UI::Popup explorerPopup{"Folder Explorer", false};
@@ -99,7 +100,7 @@ namespace Kreator
       
       // Viewer title bar ----------
       UI::DrawFilledRect(UI::Color::PopupBackground, 20.0f);
-      UI::Text(UI::FontType::SemiHeader, "Kreater File Viewer", UI::AlignX::Center);
+      UI::Text(UI::FontType::SemiHeader, s_data->title, UI::AlignX::Center);
       ImGui::Separator();
       
       // Viewer Table ---------------
@@ -433,9 +434,11 @@ namespace Kreator
     s_data->selectedPath = "";
   }
   
-  void FolderExplorer::ShowCreatePopup(const std::filesystem::path& basePath, UI::Popup* lastPopup)
+  void FolderExplorer::ShowCreatePopup(std::string_view title, const std::filesystem::path& basePath, UI::Popup* lastPopup)
   {
     IK_ASSERT(s_data, "Initialize the folder explorer data FolderExplorer::Initialize");
+    
+    s_data->title = title;
     s_data->explorerPopup.Set("Folder Explorer", true, Data::PopupWidth, 600.0f, true);
     s_data->lastPopup = lastPopup;
     
@@ -457,9 +460,11 @@ namespace Kreator
     s_data->extenstionToBeOpened = "";
   }
   
-  void FolderExplorer::ShowOpenPopup(const std::string& extenstionToBeOpened, const std::filesystem::path& basePath, UI::Popup* lastPopup)
+  void FolderExplorer::ShowOpenPopup(std::string_view title, const std::string& extenstionToBeOpened, const std::filesystem::path& basePath, UI::Popup* lastPopup)
   {
     IK_ASSERT(s_data, "Initialize the folder explorer data FolderExplorer::Initialize");
+    
+    s_data->title = title;
     s_data->explorerPopup.Set("Folder Explorer", true, Data::PopupWidth, 600.0f, true);
     s_data->lastPopup = lastPopup;
     
@@ -479,10 +484,11 @@ namespace Kreator
     s_data->popupType = PopupType::Open;
     s_data->extenstionToBeOpened = extenstionToBeOpened;
   }
-  void FolderExplorer::ShowSavePopup(const std::filesystem::path& basePath, UI::Popup* lastPopup)
+  void FolderExplorer::ShowSavePopup(std::string_view title, const std::filesystem::path& basePath, UI::Popup* lastPopup)
   {
     IK_ASSERT(s_data, "Initialize the folder explorer data FolderExplorer::Initialize");
     
+    s_data->title = title;
     s_data->explorerPopup.Set("Folder Explorer", true, Data::PopupWidth, 600.0f, true);
     s_data->lastPopup = lastPopup;
     
