@@ -222,6 +222,9 @@ if (!m_currentScene) return
   {
     IK_PROFILE();
     IK_LOG_TRACE("RendererLayer", "Detaching '{0} Layer' from application", GetName());
+    
+    // Close current Project
+    Project::CloseActive();
   }
   
   void RendererLayer::OnUpdate(TimeStep ts)
@@ -267,9 +270,30 @@ if (!m_currentScene) return
   
   void RendererLayer::OpenScene(const std::filesystem::path &filepath)
   {
-    IK_ASSERT(false);
     IK_PROFILE();
     IK_LOG_INFO("Kreator Layer", "Opening scene: {0}", filepath.string());
+    
+    CloseCurrentScene();
+    
+    if (!std::filesystem::exists(filepath))
+    {
+      IK_LOG_ERROR("RendererLayer" ,"Tried loading a non-existing scene: {0}", filepath.string());
+      NewScene(filepath.filename());
+      m_sceneFilePath = filepath;
+      SaveScene();
+      return;
+    }
+    
+    Ref<Scene> newScene = Scene::Create(Project::GetActive()->GetConfig().sceneType, "New Scene");
+    SceneSerializer serializer(newScene);
+    serializer.Deserialize(filepath);
+    
+    m_editorScene = newScene;
+    m_currentScene = m_editorScene;
+    m_sceneFilePath = filepath;
+    
+    // Update Panel Scene
+    m_panels.SetSceneContext(m_currentScene);
   }
   
   void RendererLayer::OnImGuiRender()

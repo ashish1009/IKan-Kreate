@@ -46,6 +46,8 @@ namespace IKan
       WriteRegistryToFile();
     }
     
+    s_memoryAssets.clear();
+    s_loadedAssets.clear();
     s_assetRegistry.Clear();
   }
   

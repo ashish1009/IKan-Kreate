@@ -35,7 +35,7 @@ namespace IKan
     /// @see: AssetSerializer
     virtual void Serialize([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
     /// @see: AssetSerializer
-    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override{ IK_ASSERT(false); return false; }
+    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override;
   };
   
   class FontSerializer : public AssetSerializer
@@ -53,7 +53,7 @@ namespace IKan
     /// @see: AssetSerializer
     virtual void Serialize([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
     /// @see: AssetSerializer
-    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override{ IK_ASSERT(false); return false; }
+    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override;
   };
   
   class MaterialSerializer : public AssetSerializer
@@ -64,4 +64,32 @@ namespace IKan
     /// @see: AssetSerializer
     virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override{ IK_ASSERT(false); return false; }
   };
+  
+  class SceneAssetSerializer : public AssetSerializer
+  {
+  public:
+    /// @see: AssetSerializer
+    virtual void Serialize([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
+    /// @see: AssetSerializer
+    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override;
+  };
+
+  class PrefabSerializer : public AssetSerializer
+  {
+  public:
+    /// @see: AssetSerializer
+    virtual void Serialize([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] const Ref<Asset>& asset) const override{ IK_ASSERT(false);};
+    /// @see: AssetSerializer
+    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override{ IK_ASSERT(false); return false; }
+  };
+  
+  class PhysicsSerializer : public AssetSerializer
+  {
+  public:
+    /// @see: AssetSerializer
+    virtual void Serialize([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] const Ref<Asset>& asset) const override{ IK_ASSERT(false);};
+    /// @see: AssetSerializer
+    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override{ IK_ASSERT(false); return false; }
+  };
+
 } // namespace IKan

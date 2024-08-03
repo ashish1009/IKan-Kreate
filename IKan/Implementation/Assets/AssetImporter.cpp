@@ -19,6 +19,9 @@ namespace IKan
     s_serializers[AssetType::Font] = CreateScope<FontSerializer>();
     s_serializers[AssetType::Mesh] = CreateScope<MeshSerializer>();
     s_serializers[AssetType::Material] = CreateScope<MaterialSerializer>();
+    s_serializers[AssetType::Scene] = CreateScope<SceneAssetSerializer>();
+    s_serializers[AssetType::Prefab] = CreateScope<PrefabSerializer>();
+    s_serializers[AssetType::Physics] = CreateScope<PhysicsSerializer>();
   }
   
   void AssetImporter::Shutdown()

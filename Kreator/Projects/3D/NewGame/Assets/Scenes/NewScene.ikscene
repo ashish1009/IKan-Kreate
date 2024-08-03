@@ -1,18 +1,6 @@
 Scene: NewScene.ikscene
 Entities:
-  - Entity: 4676481830510122671
-    VisibilityComponent:
-      Visibility: true
-    TagComponent:
-      Tag: Empty Entity
-    Parent: 0
-    Children:
-      []
-    TransformComponent:
-      Position: [0, 0, 0]
-      Rotation: [0, 0, 0]
-      Scale: [1, 1, 1]
-  - Entity: 10335132300075171046
+  - Entity: 2616877886342182920
     VisibilityComponent:
       Visibility: true
     TagComponent:
