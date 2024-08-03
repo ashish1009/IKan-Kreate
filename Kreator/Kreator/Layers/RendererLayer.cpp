@@ -1359,9 +1359,12 @@ if (!m_currentScene) return
         ImGui::PushStyleColor(ImGuiCol_HeaderHovered, UI_Utils::s_hoveredColor);
         if (ImGui::MenuItem("Create Project...", "Cmd + Shift + N"))
         {
+          m_createNewProjectPopup.Set("Create New Project", true /* open Flag */, 650, 0, true /* center */);
         }
         if (ImGui::MenuItem("Open Project...", "Cmd + Shift + O"))
         {
+          FolderExplorer::ShowOpenPopup("Open Project", ProjectExtension, "", nullptr);
+          m_folderExplorerAction = FolderExplorerAction::OpenProject;
         }
         
         // Change Text colored to dark if item is opened
@@ -1418,12 +1421,24 @@ if (!m_currentScene) return
         }
 
         ImGui::Separator();
+        if (ImGui::MenuItem("New Scene", "Cmd+N"))
+        {
+          m_createNewScenePopup.Set("Create New Scene", true, 400, 0, true);
+        }
+        if (ImGui::MenuItem("Open Scene", "Cmd+O"))
+        {
+          OpenScene();
+        }
+        if (ImGui::MenuItem("Save Scene", "Cmd+S"))
+        {
+          SaveScene();
+        }
         if (ImGui::MenuItem("Save Scene As", "Cmd+Shift+S"))
         {
           SaveSceneAs();
         }
-
         ImGui::Separator();
+        
         if (ImGui::MenuItem("Exit", "Cmd + Q"))
         {
           Application::Get().Close();
