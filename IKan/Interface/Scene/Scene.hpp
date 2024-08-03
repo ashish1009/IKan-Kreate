@@ -34,7 +34,7 @@ namespace IKan
     Scene(SceneType sceneType, const std::string& name, uint32_t maxEntityCapacity);
     /// This is the default destructor of EnTT Scene
     ~Scene();
-
+    
     // Entity Manager ------------------------------------------------------------------------------------------------
     /// This function creates an unique entity with UUID
     /// - Parameter name: Name of entity
@@ -49,33 +49,33 @@ namespace IKan
     ///   - uuid: Unique ID of entity
     ///   - name: Name of entity
     [[nodiscard]] Entity CreateEntityWithID(UUID uuid, const std::string& name);
-
+    
     /// This function destriy the entity
     /// - Parameters:
     ///  - entity: entity handle
     ///  - firstCall: remove from parent only for first call
     void DestroyEntity(Entity entity, bool firstCall = true);
-
+    
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
     /// - Parameter name: scene name
     void SetName(const std::string& name);
-
+    
     /// This function set the selected Entity
     void SetSelectedEntity(entt::entity entity);
     /// This function clears the selected entity
     void ClearSelectedEntity();
-
+    
     /// This function set the entity deletion callback
     /// - Parameter callback: callback funtion
     void SetEntityDestroyedCallback(const std::function<void(const Entity&)>& callback);
-
+    
     // Getters ------------------------------------------------------------------------------------------------------
     /// This function returns the scene name
     const std::string& GetName() const;
     /// This function returns the reference of registry
     entt::registry& GetRegistry();
-
+    
     /// This function returns entity with id as specified, or empty entity if cannot be found - caller must check
     /// - Parameter id: UUID of entity
     Entity TryGetEntityWithUUID(UUID id) const;
@@ -85,7 +85,7 @@ namespace IKan
     /// This function return entity with entity handle as specified. entity is expected to exist (runtime error if it doesn't)
     /// - Parameter entityHandle: handle for entity
     Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
-
+    
     // Static APIs --------------------------------------------------------------------------------------------------
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
@@ -93,7 +93,7 @@ namespace IKan
     ///   - name: Name of Scene
     ///   - maxEntityCapacity: Max Entity capacity to reserve
     static Ref<Scene> Create(SceneType sceneType, const std::string& name = "UntitledScene", uint32_t maxEntityCapacity = 200000);
-
+    
     ASSET_TYPE(Scene);
     
   private:
@@ -102,7 +102,7 @@ namespace IKan
     std::string m_name {};
     uint32_t m_viewportWidth {0}, m_viewportHeight {0};
     SceneType m_sceneType {SceneType::None};
-
+    
     // EnTT -----------------------------
     entt::registry m_registry;
     uint32_t m_registryCapacity {0};
@@ -113,7 +113,8 @@ namespace IKan
     EntityMap m_entityIDMap;
     std::vector<entt::entity> m_selectedEntities;
     std::function<void(const Entity&)> m_onEntityDestroyedCallback;
-
+    
     friend class Entity;
+    friend class SceneSerializer;
   };
 } // namespace IKan

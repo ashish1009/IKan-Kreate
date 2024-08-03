@@ -52,6 +52,7 @@
 		B23F45D32C5CED68000A0944 /* Scene2D.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23F45D12C5CED68000A0944 /* Scene2D.hpp */; };
 		B23F45DB2C5CED6C000A0944 /* Scene3D.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F45D92C5CED6C000A0944 /* Scene3D.cpp */; };
 		B23F45DC2C5CED6C000A0944 /* Scene3D.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23F45DA2C5CED6C000A0944 /* Scene3D.hpp */; };
+		B23F45F32C5DEE96000A0944 /* YAMLSerializer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23F45F12C5DEE96000A0944 /* YAMLSerializer.hpp */; };
 		B24A66D32C45554C00B870DE /* Materials.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B24A66D12C45554C00B870DE /* Materials.cpp */; };
 		B24A66D42C45554C00B870DE /* Materials.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66D22C45554C00B870DE /* Materials.hpp */; };
 		B24A66DC2C457D3F00B870DE /* FrameBuffer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B24A66DA2C457D3F00B870DE /* FrameBuffer.hpp */; };
@@ -237,6 +238,7 @@
 		B23F45D12C5CED68000A0944 /* Scene2D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene2D.hpp; sourceTree = "<group>"; };
 		B23F45D92C5CED6C000A0944 /* Scene3D.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Scene3D.cpp; sourceTree = "<group>"; };
 		B23F45DA2C5CED6C000A0944 /* Scene3D.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Scene3D.hpp; sourceTree = "<group>"; };
+		B23F45F12C5DEE96000A0944 /* YAMLSerializer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = YAMLSerializer.hpp; sourceTree = "<group>"; };
 		B24A66D12C45554C00B870DE /* Materials.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Materials.cpp; sourceTree = "<group>"; };
 		B24A66D22C45554C00B870DE /* Materials.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Materials.hpp; sourceTree = "<group>"; };
 		B24A66D82C45566C00B870DE /* PBR_StaticShader.glsl */ = {isa = PBXFileReference; lastKnownFileType = text; path = PBR_StaticShader.glsl; sourceTree = "<group>"; };
@@ -572,6 +574,7 @@
 				B2D292922C38637E0093F4DA /* FileSystemUtils.hpp */,
 				B2D292962C3863F30093F4DA /* StringUtils.hpp */,
 				B2D2972A2C44EA250093F4DA /* MathUtils.hpp */,
+				B23F45F12C5DEE96000A0944 /* YAMLSerializer.hpp */,
 			);
 			path = Utils;
 			sourceTree = "<group>";
@@ -976,6 +979,7 @@
 				B22AB25B2C4AA257007453B7 /* ProjectConfig.hpp in Headers */,
 				B2D2971D2C4133910093F4DA /* LineData.hpp in Headers */,
 				B2D296D32C40F3230093F4DA /* RendererStats.hpp in Headers */,
+				B23F45F32C5DEE96000A0944 /* YAMLSerializer.hpp in Headers */,
 				B2D296DA2C41028F0093F4DA /* RendererBuffer.hpp in Headers */,
 				B22AAF552C480146007453B7 /* AssetType.hpp in Headers */,
 				B2D297362C452CB70093F4DA /* Font.hpp in Headers */,

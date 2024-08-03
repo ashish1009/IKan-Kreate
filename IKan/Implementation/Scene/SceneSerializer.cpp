@@ -9,6 +9,11 @@
 
 #include "SceneSerializer.hpp"
 
+#include "Scene/Component.hpp"
+#include "Scene/Scene.hpp"
+#include "Scene/Entity.hpp"
+#include "Scene/EntitySerializer.hpp"
+
 namespace IKan
 {
   SceneSerializer::SceneSerializer(const Ref<Scene>& scene)
@@ -32,6 +37,26 @@ namespace IKan
     out << YAML::Key << "Scene";
     out << YAML::Value << m_scene->GetName();
     
+    out << YAML::Key << "Entities";
+    out << YAML::Value << YAML::BeginSeq;
+    
+    // Sort entities by UUID (for better serializing)
+    std::map<UUID, entt::entity> sortedEntityMap;
+    auto idComponentView = m_scene->m_registry.view<IDComponent>();
+    
+    for (auto entity : idComponentView)
+    {
+      sortedEntityMap[idComponentView.get<IDComponent>(entity).ID] = entity;
+    }
+    
+    // Serialize sorted entities
+    for (auto [id, entity] : sortedEntityMap)
+    {
+      EntitySerializer::SerializeEntity(out, { entity, m_scene.get() });
+    }
+    
+    out << YAML::EndSeq;
+
     out << YAML::EndMap;
     
     std::ofstream fout(filepath);
@@ -60,7 +85,22 @@ namespace IKan
     }
     
     m_scene->SetName(sceneName);
+   
+    auto entities = data["Entities"];
+    if (entities)
+    {
+      EntitySerializer::DeserializeEntities(m_scene, entities);
+    }
     
+    // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
+    // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
+    m_scene->m_registry.sort<IDComponent>([this](const auto lhs, const auto rhs)
+                                          {
+      auto lhsEntity = m_scene->m_entityIDMap.find(lhs.ID);
+      auto rhsEntity = m_scene->m_entityIDMap.find(rhs.ID);
+      return static_cast<uint32_t>(lhsEntity->second) < static_cast<uint32_t>(rhsEntity->second);
+    });
+
     return true;
   }
 
