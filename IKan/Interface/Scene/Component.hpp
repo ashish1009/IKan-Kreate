@@ -20,7 +20,7 @@ namespace IKan
   //  4) Add in Scene CopyTo Function
   //  5) Update Scene::DuplicateEntity() to deal with the new component in whatever way is appropriate.
   //  6) Update SceneSerializer to (de)serialize the new component.
-  //  7) Update SceneHierarchy Panel
+  //  7) Update SceneHierarchy Panel (Property and Add component)
   //  8) Update Prefab serializer
 
   // Menmdatory components -------------------------------------------------------------------------------------------
