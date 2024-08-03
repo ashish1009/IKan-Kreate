@@ -18,6 +18,60 @@ namespace IKan
     
   }
   
+  void Entity::SetParent(Entity parent)
+  {
+    // Get the current parnet
+    Entity currentParent = GetParent();
+    
+    // Do nothing if same parent
+    if (currentParent == parent)
+    {
+      return;
+    }
+    
+    // If this entity already have a parent then remove this child from existing parent
+    if (currentParent)
+    {
+      currentParent.RemoveChild(*this);
+    }
+    
+    // Updating the Parent UUID as 'parent' entities UUID
+    SetParentUUID(parent.GetUUID());
+    
+    if (parent)
+    {
+      // Add current entity in parent's children
+      auto& parentChildren = parent.Children();
+      UUID uuid = GetUUID();
+      if (std::find(parentChildren.begin(), parentChildren.end(), uuid) == parentChildren.end())
+      {
+        parentChildren.emplace_back(GetUUID());
+      }
+    }
+    else
+    {
+      IK_ASSERT(false, "Implement later");
+    }
+  }
+  
+  bool Entity::RemoveChild(Entity child)
+  {
+    UUID childId = child.GetUUID();
+    std::vector<UUID>& children = Children();
+    auto it = std::find(children.begin(), children.end(), childId);
+    if (it != children.end())
+    {
+      children.erase(it);
+      return true;
+    }
+    return false;
+  }
+  
+  void Entity::SetParentUUID(UUID parent)
+  {
+    GetComponent<RelationshipComponent>().parentHandle = parent;
+  }
+  
   Entity Entity::GetParent()
   {
     return m_scene->TryGetEntityWithUUID(GetParentUUID());

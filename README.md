@@ -66,14 +66,6 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v3.3.2.1 : Projects and assets with out UI
 
 ## Road Map
-- Editor UI
-  - Title bar
-- ECS
-  - Scene
-  - Component
-  - Entity
-  - Serializer
-  - Scene hierarchy panel
 - Scene [3D]
     - Scene Renderer
     - Lights
