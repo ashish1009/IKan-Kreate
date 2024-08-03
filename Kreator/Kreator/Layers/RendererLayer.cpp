@@ -349,6 +349,39 @@ if (!m_currentScene) return
     }
   }
   
+  void RendererLayer::SaveSceneAs()
+  {
+    FolderExplorer::ShowSavePopup(Project::GetSceneDirectory());
+    m_folderExplorerAction = FolderExplorerAction::SaveScene;
+  }
+  
+  void RendererLayer::SaveScene()
+  {
+    IK_PROFILE();
+    if (!m_sceneFilePath.empty())
+    {
+      IK_LOG_INFO("Kreator Layer", "Saving the scene: {0}", m_sceneFilePath.c_str());
+      SceneSerializer serializer(m_editorScene);
+      serializer.Serialize(m_sceneFilePath);
+      m_timeSinceLastSave = 0.0f;
+    }
+    else
+    {
+      SaveSceneAs();
+    }
+  }
+  void RendererLayer::SaveSceneAuto()
+  {
+    IK_PROFILE();
+    if (!m_sceneFilePath.empty())
+    {
+      SceneSerializer serializer(m_editorScene);
+      std::string modFilePath = m_sceneFilePath.string() + ".auto";
+      serializer.Serialize(modFilePath);
+      m_timeSinceLastSave = 0.0f;
+    }
+  }
+
   void RendererLayer::OnEntitySelected(const SelectionContext& entities)
   {
     if (entities.Size() == 0)
@@ -785,6 +818,16 @@ if (!m_currentScene) return
         }
         break;
       }
+      case FolderExplorerAction::SaveScene:
+      {
+        m_sceneFilePath = explorerOutput;
+        m_sceneFilePath += SceneExtension;
+        
+        SaveScene();
+
+        break;
+      }
+
       case FolderExplorerAction::None:
       default:
         IK_ASSERT(false);
@@ -1258,6 +1301,12 @@ if (!m_currentScene) return
         if (pushItemColor)
         {
           ImGui::PopStyleColor(2);
+        }
+
+        ImGui::Separator();
+        if (ImGui::MenuItem("Save Scene As", "Cmd+Shift+S"))
+        {
+          SaveSceneAs();
         }
 
         ImGui::Separator();

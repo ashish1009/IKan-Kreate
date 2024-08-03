@@ -33,7 +33,12 @@ namespace Kreator
     ///   - basePath: Current path for exploree
     ///   - lastPopup: last popup pointer
     static void ShowOpenPopup(const std::string& extenstion, const std::filesystem::path& basePath = "", UI::Popup* lastPopup = nullptr);
-    
+    /// This function set the popup to show save file widgwet
+    /// - Parameters:
+    ///   - basePath: Current path for exploree
+    ///   - lastPopup: last popup pointer
+    static void ShowSavePopup(const std::filesystem::path& basePath = "", UI::Popup* lastPopup = nullptr);
+
   private:
     /// This function renders the top bar of viewer
     /// - Parameter height: Height of top bar

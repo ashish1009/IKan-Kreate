@@ -361,6 +361,15 @@ namespace Kreator
       }
       case PopupType::Save:
       {
+        if (!s_data->fileNameBuffer.Empty())
+        {
+          buttonColor = UI::Color::NiceBlueHighlight;
+          textColor = UI::Color::Background;
+          returnPath = s_data->currentPath / s_data->fileNameBuffer.Data();
+          
+          validButton = true;
+        }
+
         break;
       }
       case PopupType::Invalid:
@@ -470,4 +479,28 @@ namespace Kreator
     s_data->popupType = PopupType::Open;
     s_data->extenstionToBeOpened = extenstionToBeOpened;
   }
+  void FolderExplorer::ShowSavePopup(const std::filesystem::path& basePath, UI::Popup* lastPopup)
+  {
+    IK_ASSERT(s_data, "Initialize the folder explorer data FolderExplorer::Initialize");
+    
+    s_data->explorerPopup.Set("Folder Explorer", true, Data::PopupWidth, 600.0f, true);
+    s_data->lastPopup = lastPopup;
+    
+    if (basePath != "" and std::filesystem::exists(basePath))
+    {
+      s_data->currentPath = basePath;
+    }
+    else
+    {
+      s_data->currentPath = RendererLayer::Get().GetIKanKreatorPath();
+    }
+    s_data->pathBuffer.MemCpy(s_data->currentPath.c_str(), 0, s_data->currentPath.string().size());
+    s_data->selectedPath = "";
+    s_data->returnPath = "";
+    s_data->createNewFolder = false;
+    
+    s_data->popupType = PopupType::Save;
+    s_data->extenstionToBeOpened = "";
+  }
+
 } // namespace Kreator

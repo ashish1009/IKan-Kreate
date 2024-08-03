@@ -74,6 +74,12 @@ namespace Kreator
     void NewScene(const std::string& name = "UntitledScene");
     /// This function closes the current scene
     void CloseCurrentScene();
+    /// This function saves the scene at new location
+    void SaveSceneAs();
+    /// This function saves the scene
+    void SaveScene();
+    /// This function saves the scene automatically
+    void SaveSceneAuto();
 
     // Scene Panel Manager Callbacks ----------------------
     /// This function handles the entity selection
@@ -157,7 +163,7 @@ namespace Kreator
     PanelManager m_panels;
     enum class FolderExplorerAction
     {
-      None, NewProject, OpenProject
+      None, NewProject, OpenProject, SaveScene
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
 
@@ -176,6 +182,7 @@ namespace Kreator
       float distance = 0.0f;
     };
     std::vector<SelectedEntity> m_selectionContext;
+    float m_timeSinceLastSave = 0.0f;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;
