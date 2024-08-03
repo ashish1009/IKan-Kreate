@@ -408,6 +408,8 @@ if (!m_currentScene) return
     m_viewportRenderer.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
     m_miniViewportRenderer.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
     m_secondaryViewportRenderer.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
+    
+    m_currentScene->SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
   }
   
   void RendererLayer::NewScene(const std::string& name)
@@ -433,7 +435,7 @@ if (!m_currentScene) return
     ClearSelectedEntity();
     if (m_currentScene)
     {
-      IK_ASSERT(false);
+      m_currentScene->OnClose();
     }
   }
   

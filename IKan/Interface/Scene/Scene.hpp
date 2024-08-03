@@ -35,6 +35,20 @@ namespace IKan
     /// This is the default destructor of EnTT Scene
     ~Scene();
     
+    // Runtime APIs ------------------------------------------------------------------------------------------------
+    /// This function closes the current scene
+    void OnClose();
+
+    // Fundamentals ------------------------------------------------------------------------------------------------
+    /// this function copy scene to target
+    /// - Parameter target: target scene
+    void CopyTo(Ref<Scene>& target);
+    /// This function updates the viewport of Scene
+    /// - Parameters:
+    ///   - width: width of view port
+    ///   - height: width of view port
+    void SetViewportSize(uint32_t width, uint32_t height);
+
     // Entity Manager ------------------------------------------------------------------------------------------------
     /// This function creates an unique entity with UUID
     /// - Parameter name: Name of entity

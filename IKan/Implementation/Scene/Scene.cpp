@@ -20,7 +20,40 @@ namespace IKan
   {
     registry.reserve<Component...>(capacity);
   }
+
+  template<typename T>
+  static void CopyComponentIfExists(entt::entity dst, entt::entity src, entt::registry& registry)
+  {
+    if (registry.has<T>(src))
+    {
+      auto& srcComponent = registry.get<T>(src);
+      registry.emplace_or_replace<T>(dst, srcComponent);
+    }
+  }
   
+  template<typename T>
+  static void CopyComponentIfExists(entt::entity dst, entt::registry& dstRegistry, entt::entity src, entt::registry& srcRegistry)
+  {
+    if (srcRegistry.has<T>(src))
+    {
+      auto& srcComponent = srcRegistry.get<T>(src);
+      dstRegistry.emplace_or_replace<T>(dst, srcComponent);
+    }
+  }
+  
+  template<typename T>
+  static void CopyComponent(entt::registry& dstRegistry, entt::registry& srcRegistry, const std::unordered_map<UUID, entt::entity>& enttMap)
+  {
+    auto srcEntities = srcRegistry.view<T>();
+    for (auto srcEntity : srcEntities)
+    {
+      entt::entity destEntity = enttMap.at(srcRegistry.get<IDComponent>(srcEntity).ID);
+      
+      auto& srcComponent = srcRegistry.get<T>(srcEntity);
+      [[maybe_unused]] auto& destComponent = dstRegistry.emplace_or_replace<T>(destEntity, srcComponent);
+    }
+  }
+
   static std::string_view SceneTypeString(SceneType sceneType)
   {
     switch (sceneType)
@@ -64,6 +97,54 @@ namespace IKan
   {
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Scene, "Destroying {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
+  }
+  
+  void Scene::OnClose()
+  {
+    IK_PROFILE();
+  }
+  
+  void Scene::CopyTo(Ref<Scene> &target)
+  {
+    IK_PROFILE();
+    std::unordered_map<UUID, entt::entity> enttMap;
+    auto idComponents = m_registry.view<IDComponent>();
+    for (auto entity : idComponents)
+    {
+      auto uuid = m_registry.get<IDComponent>(entity).ID;
+      auto name = m_registry.get<TagComponent>(entity).tag;
+      Entity e = target->CreateEntityWithID(uuid, name);
+      enttMap[uuid] = e.m_entityHandle;
+    }
+    
+    CopyComponent<VisibilityComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<TagComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<RelationshipComponent>(target->m_registry, m_registry, enttMap);
+    CopyComponent<TransformComponent>(target->m_registry, m_registry, enttMap);
+    
+    // Sort IdComponent by by entity handle (which is essentially the order in which they were created)
+    // This ensures a consistent ordering when iterating IdComponent (for example: when rendering scene hierarchy panel)
+    target->m_registry.sort<IDComponent>([&target](const auto lhs, const auto rhs)
+                                         {
+      auto lhsEntity = target->m_entityIDMap.find(lhs.ID);
+      auto rhsEntity = target->m_entityIDMap.find(rhs.ID);
+      return static_cast<uint32_t>(lhsEntity->second) < static_cast<uint32_t>(rhsEntity->second);
+    });
+    
+    target->m_viewportWidth = m_viewportWidth;
+    target->m_viewportHeight = m_viewportHeight;
+    target->m_name = m_name;
+  }
+  
+  void Scene::SetViewportSize(uint32_t width, uint32_t height)
+  {
+    IK_PROFILE();
+    if (m_viewportWidth == width and m_viewportHeight == height)
+    {
+      return;
+    }
+    m_viewportWidth = width;
+    m_viewportHeight = height;
   }
   
   Entity Scene::CreateEntity(const std::string& name)
