@@ -10,6 +10,6 @@ Project:
   PhysicsPath: Assets/Physics
   PrefabPath: Assets/Prefabs
   SceneType: 2
-  StartScene: ""
-  AutoSave: false
-  AutoSaveInterval: 300
+  StartScene: Scenes/NewScene.ikscene
+  AutoSave: true
+  AutoSaveInterval: 60

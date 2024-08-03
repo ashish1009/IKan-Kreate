@@ -24,16 +24,16 @@ namespace IKan
     /// - Parameters:
     ///   - metadata: Asset Metadata
     ///   - asset: Asset Instance
-    static void Serialize([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] const Ref<Asset>& asset) {IK_ASSERT(false);}
+    static void Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset);
     /// This function serialise the asset weth asseet only
     /// - Parameter asset: Asset instance
-    static void Serialize([[maybe_unused]] const Ref<Asset>& asset) {IK_ASSERT(false);}
+    static void Serialize(const Ref<Asset>& asset);
     /// This function try to load the asset
     /// - Parameters:
     ///   - metadata: Asset meta data
     ///   - asset: Asset instance
-    static bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) {IK_ASSERT(false); return false; }
-    
+    static bool TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset);
+
   private:
     inline static std::unordered_map<AssetType, Scope<AssetSerializer>> s_serializers;
   };

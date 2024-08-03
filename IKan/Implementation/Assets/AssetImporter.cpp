@@ -6,6 +6,7 @@
 //
 
 #include "AssetImporter.hpp"
+#include "Assets/AssetManager.hpp"
 
 namespace IKan
 {
@@ -25,5 +26,34 @@ namespace IKan
     IK_PROFILE();
     IK_LOG_TRACE(LogModule::Asset, "Initializing Asset Importer");
     s_serializers.clear();
+  }
+  
+  void AssetImporter::Serialize(const AssetMetadata& metadata, const Ref<Asset>& asset)
+  {
+    IK_PROFILE();
+    if (s_serializers.find(metadata.type) == s_serializers.end())
+    {
+      IK_LOG_WARN(LogModule::Asset, "There's currently no importer for assets of type {0}", metadata.filePath.stem().string());
+      return;
+    }
+    s_serializers[asset->GetAssetType()]->Serialize(metadata, asset);
+  }
+  
+  void AssetImporter::Serialize(const Ref<Asset>& asset)
+  {
+    IK_PROFILE();
+    const AssetMetadata& metadata = AssetManager::GetMetadata(asset->handle);
+    Serialize(metadata, asset);
+  }
+  
+  bool AssetImporter::TryLoadData(const AssetMetadata& metadata, Ref<Asset>& asset)
+  {
+    IK_PROFILE();
+    if (s_serializers.find(metadata.type) == s_serializers.end())
+    {
+      IK_LOG_WARN(LogModule::Asset, "There's currently no importer for assets of type {0}", metadata.filePath.stem().string());
+      return false;
+    }
+    return s_serializers[metadata.type]->TryLoadData(metadata, asset);
   }
 } // namespace IKan

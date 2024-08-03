@@ -8,9 +8,6 @@ Assets:
   - Handle: 1336252552
     FilePath: Meshes/Default/Sphere.fbx
     Type: Mesh
-  - Handle: 2261985645
-    FilePath: Scenes/test.ikscene
-    Type: Scene
   - Handle: 3526219999
     FilePath: Scenes/NewScene.ikscene
     Type: Scene
