@@ -72,6 +72,31 @@ namespace IKan
       out << YAML::EndMap; // TransformComponent
     }
     
+    if (entity.HasComponent<CameraComponent>())
+    {
+      out << YAML::Key << "CameraComponent";
+      out << YAML::BeginMap; // CameraComponent
+      
+      auto& cameraComponent = entity.GetComponent<CameraComponent>();
+      auto& camera = cameraComponent.camera;
+      out << YAML::Key << "Enable" << YAML::Value << cameraComponent.enable;
+      
+      out << YAML::Key << "Camera" << YAML::Value;
+      out << YAML::BeginMap; // Camera
+      out << YAML::Key << "ProjectionType" << YAML::Value << (int)camera.GetProjectionType();
+      out << YAML::Key << "PerspectiveFOV" << YAML::Value << camera.GetDegPerspectiveVerticalFOV();
+      out << YAML::Key << "PerspectiveNear" << YAML::Value << camera.GetPerspectiveNearClip();
+      out << YAML::Key << "PerspectiveFar" << YAML::Value << camera.GetPerspectiveFarClip();
+      out << YAML::Key << "OrthographicSize" << YAML::Value << camera.GetOrthographicSize();
+      out << YAML::Key << "OrthographicNear" << YAML::Value << camera.GetOrthographicNearClip();
+      out << YAML::Key << "OrthographicFar" << YAML::Value << camera.GetOrthographicFarClip();
+      
+      out << YAML::EndMap; // Camera
+      out << YAML::Key << "Primary" << YAML::Value << cameraComponent.primary;
+      
+      out << YAML::EndMap; // CameraComponent
+    }
+    
     out << YAML::EndMap; // Entity
   }
   
@@ -137,6 +162,52 @@ namespace IKan
         }
         transform.UpdateScale(transformComponent["Scale"].as<glm::vec3>());
       }
+      
+      // CameraComponent --------------------------------------------------------------------------------------------
+      auto cameraComponent = entity["CameraComponent"];
+      if (cameraComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<CameraComponent>();
+        component.enable = cameraComponent["Enable"].as<bool>();
+        const auto& cameraNode = cameraComponent["Camera"];
+        
+        component.camera = SceneCamera();
+        auto& camera = component.camera;
+        
+        if (cameraNode.IsMap())
+        {
+          if (cameraNode["ProjectionType"])
+          {
+            camera.SetProjectionType((SceneCamera::ProjectionType)cameraNode["ProjectionType"].as<int>());
+          }
+          if (cameraNode["PerspectiveFOV"])
+          {
+            camera.SetDegPerspectiveVerticalFOV(cameraNode["PerspectiveFOV"].as<float>());
+          }
+          if (cameraNode["PerspectiveNear"])
+          {
+            camera.SetPerspectiveNearClip(cameraNode["PerspectiveNear"].as<float>());
+          }
+          if (cameraNode["PerspectiveFar"])
+          {
+            camera.SetPerspectiveFarClip(cameraNode["PerspectiveFar"].as<float>());
+          }
+          if (cameraNode["OrthographicSize"])
+          {
+            camera.SetOrthographicSize(cameraNode["OrthographicSize"].as<float>());
+          }
+          if (cameraNode["OrthographicNear"])
+          {
+            camera.SetOrthographicNearClip(cameraNode["OrthographicNear"].as<float>());
+          }
+          if (cameraNode["OrthographicFar"])
+          {
+            camera.SetOrthographicFarClip(cameraNode["OrthographicFar"].as<float>());
+          }
+        }
+        component.primary = cameraComponent["Primary"].as<bool>();
+      }
+      
     } // For each entity
   }
 } // namespace IKan
