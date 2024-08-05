@@ -12,11 +12,22 @@ Entities:
       Position: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+    CameraComponent:
+      Enable: true
+      Camera:
+        ProjectionType: 0
+        PerspectiveFOV: 45
+        PerspectiveNear: 0.100000001
+        PerspectiveFar: 1000
+        OrthographicSize: 10
+        OrthographicNear: -1
+        OrthographicFar: 1
+      Primary: true
   - Entity: 14106755893868934003
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Empty Entity
+      Tag: Cube 1
     Parent: 0
     Children:
       []

@@ -9,6 +9,7 @@
 
 #include "Scene/Entity.hpp"
 #include "Scene/Component.hpp"
+#include "Assets/AssetManager.hpp"
 
 namespace IKan
 {
@@ -95,6 +96,32 @@ namespace IKan
       out << YAML::Key << "Primary" << YAML::Value << cameraComponent.primary;
       
       out << YAML::EndMap; // CameraComponent
+    }
+    
+    if (entity.HasComponent<MeshComponent>())
+    {
+      out << YAML::Key << "MeshComponent";
+      out << YAML::BeginMap; // MeshComponent
+      
+      auto& meshComponent = entity.GetComponent<MeshComponent>();
+      
+      out << YAML::Key << "Enable" << YAML::Value << meshComponent.enable;
+      out << YAML::Key << "MeshHandle" << YAML::Value << meshComponent.mesh;
+      out << YAML::Key << "TilingFactor" << YAML::Value << meshComponent.tilingFactor;
+      
+      auto materialTable = meshComponent.materialTable;
+      if (materialTable->GetMaterialCount() > 0)
+      {
+        out << YAML::Key << "MaterialTable" << YAML::Value << YAML::BeginMap; // MaterialTable
+        
+        for (uint32_t i = 0; i < materialTable->GetMaterialCount(); i++)
+        {
+          AssetHandle handle = (materialTable->HasMaterial(i) ? materialTable->GetMaterial(i)->handle : (AssetHandle)0);
+          out << YAML::Key << i << YAML::Value << handle;
+        }
+        out << YAML::EndMap; // MaterialTable
+      }
+      out << YAML::EndMap; // MeshComponent
     }
     
     out << YAML::EndMap; // Entity
@@ -206,6 +233,30 @@ namespace IKan
           }
         }
         component.primary = cameraComponent["Primary"].as<bool>();
+      }
+      
+      // MeshComponent ----------------------------------------------------------------------------------------------
+      auto meshComponent = entity["MeshComponent"];
+      if (meshComponent)
+      {
+        auto& component = deserializedEntity.AddComponent<MeshComponent>();
+        component.enable = meshComponent["Enable"].as<bool>();
+        component.mesh = meshComponent["MeshHandle"].as<AssetHandle>();
+        component.tilingFactor = meshComponent["TilingFactor"].as<float>();
+        
+        if (meshComponent["MaterialTable"])
+        {
+          YAML::Node materialTableNode = meshComponent["MaterialTable"];
+          for (auto materialEntry : materialTableNode)
+          {
+            uint32_t index = materialEntry.first.as<uint32_t>();
+            AssetHandle materialAsset = materialEntry.second.as<AssetHandle>();
+            if (materialAsset && AssetManager::IsAssetHandleValid(materialAsset))
+            {
+              component.materialTable->SetMaterial(index, AssetManager::GetAsset<MaterialAsset>(materialAsset));
+            }
+          }
+        }
       }
       
     } // For each entity
