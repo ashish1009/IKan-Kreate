@@ -104,7 +104,7 @@ namespace Kreator::UI
           UI::Color::TableHeaderBg          = IM_COL32(30, 35, 57, 255);
           UI::Color::TableBorderLight       = UI::Color::Separator;
           UI::Color::TableBorderStrong      = IM_COL32(222, 0, 0, 255);
-          UI::Color::TableRowBg             = UI::Color::TitleBar;;
+          UI::Color::TableRowBg             = IM_COL32(30, 50, 70, 255);
           UI::Color::TableRowBgAlt          = IM_COL32(222, 0, 0, 255);
           
           // Drag Drop
@@ -114,9 +114,7 @@ namespace Kreator::UI
           UI::Color::NavHighlight           = IM_COL32(152, 152, 152, 255);
           UI::Color::NavWindowingHighlight  = IM_COL32(222, 222, 0, 205);
           UI::Color::NavWindowingDimBg      = IM_COL32(222, 0, 0, 255);
-          
-          // Other
-          UI::Color::GroupHeader            = IM_COL32(25, 27, 47, 255);
+
           break;
         }
         default:

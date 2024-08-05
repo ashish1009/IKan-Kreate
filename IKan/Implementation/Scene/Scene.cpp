@@ -260,8 +260,7 @@ namespace IKan
     {
       IK_ASSERT(false ,"Implement later");
     }
-    
-    // TODO: Parent?
+    IK_ASSERT(false ,"Implement later");
         
     return newEntity;
   }

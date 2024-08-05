@@ -83,7 +83,7 @@ namespace Kreator
       
       // Draw background
       drawList->AddRectFilled(topLeft, thumbBottomRight, UI::Color::BackgroundDark);
-      drawList->AddRectFilled(infoTopLeft, bottomRight, UI::Color::GroupHeader, 6.0f, ImDrawFlags_RoundCornersBottom);
+      drawList->AddRectFilled(infoTopLeft, bottomRight, UI::Color::HoveredItem, 6.0f, ImDrawFlags_RoundCornersBottom);
     }
     else if (ImGui::ItemHoverable(ImRect(topLeft, bottomRight), ImGui::GetID(&m_ID)) or m_isSelected)
     {
@@ -91,7 +91,7 @@ namespace Kreator
       // Draw shadow
       drawShadow(topLeft, bottomRight, true);
       auto* drawList = ImGui::GetWindowDrawList();
-      drawList->AddRectFilled(topLeft, bottomRight, UI::Color::GroupHeader, 6.0f);
+      drawList->AddRectFilled(topLeft, bottomRight, UI::Color::HoveredItem, 6.0f);
     }
     
     // Thumbnail

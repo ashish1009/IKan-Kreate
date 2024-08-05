@@ -419,7 +419,7 @@ namespace Kreator
     UI::ScopedStyle cellPadding(ImGuiStyleVar_CellPadding, ImVec2(4.0f, 0.0f));
 
     // Alternate row Color
-    const ImU32 colRowAlt = UI::ColorWithMultipliedValue(UI::Color::BackgroundDark, 1.3f);
+    const ImU32 colRowAlt = UI::ColorWithMultipliedValue(UI::Color::PopupBackground, 1.3f);
     UI::ScopedColor tableBGAlt(ImGuiCol_TableRowBgAlt, colRowAlt);
 
     // Table
@@ -431,7 +431,7 @@ namespace Kreator
       | ImGuiTableFlags_Reorderable
       | ImGuiTableFlags_ScrollY
       | ImGuiTableFlags_RowBg
-      | ImGuiTableFlags_Sortable;
+      /*| ImGuiTableFlags_Sortable*/;
       
       const int numColumns = 3;
       if (ImGui::BeginTable("##SceneHierarchy-Table", numColumns, tableFlags, ImVec2(ImGui::GetContentRegionAvail())))
@@ -439,10 +439,10 @@ namespace Kreator
         ImGui::TableSetupColumn("Label");
         ImGui::TableSetupColumn("Type");
         ImGui::TableSetupColumn("Visibility");
-
+        
         // Headers
         {
-          const ImU32 colActive = UI::ColorWithMultipliedValue(UI::Color::GroupHeader, 1.2f);
+          const ImU32 colActive = UI::ColorWithMultipliedValue(UI::Color::TableHeaderBg, 1.2f);
           UI::ScopedColorStack headerColor(ImGuiCol_HeaderHovered, colActive, ImGuiCol_HeaderActive, colActive);
           
           ImGui::TableSetupScrollFreeze(ImGui::TableGetColumnCount(), 1);
@@ -650,7 +650,7 @@ namespace Kreator
     {
       {
         UI::ScopedColor colText(ImGuiCol_Text, UI::Color::Text);
-        UI::ScopedColorStack entitySelection(ImGuiCol_Header, UI::Color::GroupHeader, ImGuiCol_HeaderHovered, UI::Color::GroupHeader, ImGuiCol_HeaderActive, UI::Color::GroupHeader);
+        UI::ScopedColorStack entitySelection(ImGuiCol_Header, UI::Color::HoveredItem, ImGuiCol_HeaderHovered, UI::Color::HoveredItem, ImGuiCol_HeaderActive, UI::Color::HoveredItem);
         
         // Select current entity
         SetSelectedEntity(entity);
