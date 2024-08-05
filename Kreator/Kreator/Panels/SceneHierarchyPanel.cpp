@@ -889,8 +889,65 @@ namespace Kreator
       
       UI::ShiftCursorY(-8.0f);
       UI::ShiftCursorY(18.0f);
-      
     }, s_gearIcon, searchedString, true, false);
+    
+    DrawComponent<CameraComponent>("Camera", entity, [this](CameraComponent& cc)
+                                   {
+      UI::BeginPropertyGrid();
+      UI::ScopedStyle framePdding(ImGuiStyleVar_FramePadding, ImVec2(4.0f, 2));
+      
+      UI::Property("Main Camera", cc.primary);
+      
+      // Projection Type
+      const char* projTypeStrings[] = { "Perspective", "Orthographic" };
+      int currentProj = (int)cc.camera.GetProjectionType();
+      if (UI::PropertyDropdown("Projection", projTypeStrings, 2, &currentProj))
+      {
+        cc.camera.SetProjectionType((SceneCamera::ProjectionType)currentProj);
+      }
+      ImGui::Separator();
+      
+      // Perspective parameters
+      if (cc.camera.GetProjectionType() == SceneCamera::ProjectionType::Perspective)
+      {
+        float verticalFOV = cc.camera.GetDegPerspectiveVerticalFOV();
+        if (UI::Property("Vertical FOV", verticalFOV))
+        {
+          cc.camera.SetDegPerspectiveVerticalFOV(verticalFOV);
+        }
+        float nearClip = cc.camera.GetPerspectiveNearClip();
+        if (UI::Property("Near Clip", nearClip))
+        {
+          cc.camera.SetPerspectiveNearClip(nearClip);
+        }
+        float farClip = cc.camera.GetPerspectiveFarClip();
+        if (UI::Property("Far Clip", farClip))
+        {
+          cc.camera.SetPerspectiveFarClip(farClip);
+        }
+      }
+      
+      // Orthographic parameters
+      else if (cc.camera.GetProjectionType() == SceneCamera::ProjectionType::Orthographic)
+      {
+        float orthoSize = cc.camera.GetOrthographicSize();
+        if (UI::Property("Size", orthoSize, 1.0f))
+        {
+          cc.camera.SetOrthographicSize(orthoSize);
+        }
+        float nearClip = cc.camera.GetOrthographicNearClip();
+        if (UI::Property("Near Clip", nearClip, 0.1f, -1.0f, 0.0f))
+        {
+          cc.camera.SetOrthographicNearClip(nearClip);
+        }
+        float farClip = cc.camera.GetOrthographicFarClip();
+        if (UI::Property("Far Clip", farClip, 0.1f, 0.0f, 1.0f))
+        {
+          cc.camera.SetOrthographicFarClip(farClip);
+        }
+      }
+      UI::EndPropertyGrid();
+    }, s_gearIcon, searchedString, true);
   }
   
   bool SceneHierarchyPanel::SearchEntityRecursive(Entity entity, const std::string_view &searchFilter, const uint32_t maxSearchDepth, uint32_t currentDepth)
@@ -986,6 +1043,15 @@ namespace Kreator
   {
     if (UI::BeginPopup("AddComponentPanel"))
     { 
+      if (!m_selectionContext.At(0).HasComponent<CameraComponent>())
+      {
+        if (ImGui::MenuItem("Camera"))
+        {
+          [[maybe_unused]] auto& cameraComp = m_selectionContext.At(0).AddComponent<CameraComponent>();
+          ImGui::CloseCurrentPopup();
+        }
+      }
+
       UI::EndPopup();
     }
   }

@@ -24,7 +24,7 @@ namespace Kreator::UI
           // Text
           UI::Color::Text                   = IM_COL32(210, 210, 210, 255);
           UI::Color::TextMuted              = IM_COL32(110, 110, 110, 255);
-          UI::Color::TextSelectedBg         = IM_COL32(30, 50, 70, 255);
+          UI::Color::TextSelectedBg         = HoveredItem;
 
           // Window
           UI::Color::Window                 = IM_COL32(30, 50, 70, 255);

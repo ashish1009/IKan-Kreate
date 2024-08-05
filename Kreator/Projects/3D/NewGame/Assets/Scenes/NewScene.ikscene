@@ -4,7 +4,7 @@ Entities:
     VisibilityComponent:
       Visibility: true
     TagComponent:
-      Tag: Entity 1
+      Tag: Camera
     Parent: 0
     Children:
       []

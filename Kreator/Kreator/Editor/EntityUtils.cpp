@@ -17,6 +17,13 @@ namespace Kreator::ECS_Utils
       newEntity = scene->CreateEntity("Empty Entity");
     }
 
+    if (ImGui::MenuItem("Camera"))
+    {
+      newEntity = scene->CreateEntity("Camera");
+      auto& cc = newEntity.AddComponent<CameraComponent>();
+      cc.camera.SetProjectionType(IKan::SceneCamera::ProjectionType::Perspective);
+    }
+
     if (newEntity and parent)
     {
       IK_ASSERT(false, "Implement later");
