@@ -8,6 +8,7 @@
 #pragma once
 
 #include "Core/UUID.hpp"
+#include "Camera/SceneCamera.hpp"
 
 namespace IKan
 {
@@ -81,6 +82,17 @@ namespace IKan
     glm::vec3 position{0.0f}, rotation{0.0f}, scale{1.0f};
   };
 
+  struct CameraComponent
+  {
+    bool enable = true;
+    bool primary = true;
+
+    SceneCamera camera;
+    
+    operator SceneCamera& ();
+    operator const SceneCamera& () const;
+  };
+
   template<typename... Component>
   struct ComponentGroup
   {
@@ -89,5 +101,5 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, VisibilityComponent, TagComponent, TransformComponent>;
+  ComponentGroup<IDComponent, VisibilityComponent, TagComponent, TransformComponent, CameraComponent>;
 } // namespace IKan

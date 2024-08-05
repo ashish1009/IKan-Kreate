@@ -156,4 +156,15 @@ transform = Utils::Math::GetTransformMatrix(position, rotation, scale);
   {
     ADD_TRANSFORM(scale)
   }
+  
+  // Camera Component -------------------------------------------------------------------------------------
+  CameraComponent::operator SceneCamera& ()
+  {
+    return camera;
+  }
+  CameraComponent::operator const SceneCamera& () const
+  {
+    return camera;
+  }
+
 } // namespace IKan
