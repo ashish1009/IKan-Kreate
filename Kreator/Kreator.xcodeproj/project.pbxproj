@@ -138,6 +138,10 @@
 		B23F45782C57C60B000A0944 /* Panels */ = {
 			isa = PBXGroup;
 			children = (
+				B23F457C2C57C6B9000A0944 /* ApplicationSettings.cpp */,
+				B23F457D2C57C6B9000A0944 /* ApplicationSettings.hpp */,
+				B23F45752C57C603000A0944 /* ContentBrowserItem.cpp */,
+				B23F45762C57C603000A0944 /* ContentBrowserItem.hpp */,
 				B23F45792C57C617000A0944 /* ContentBrowserPanel.cpp */,
 				B23F457A2C57C617000A0944 /* ContentBrowserPanel.hpp */,
 				B23F45872C57CE38000A0944 /* KreatorConsolePanel.cpp */,
@@ -178,7 +182,6 @@
 				B2D292602C380F250093F4DA /* EntryPoint.cpp */,
 				B22AB2662C53AE36007453B7 /* Config.hpp */,
 				B2D292B62C3943DD0093F4DA /* Application */,
-				B2D2969A2C3C3D890093F4DA /* Layers */,
 				B2FDDA892C4788B20062C6E1 /* Editor */,
 				B23F45782C57C60B000A0944 /* Panels */,
 				B2FDDA842C4783B00062C6E1 /* UI */,
@@ -222,15 +225,6 @@
 			path = Application;
 			sourceTree = "<group>";
 		};
-		B2D2969A2C3C3D890093F4DA /* Layers */ = {
-			isa = PBXGroup;
-			children = (
-				B2D2969B2C3C3D9F0093F4DA /* RendererLayer.cpp */,
-				B2D2969C2C3C3D9F0093F4DA /* RendererLayer.hpp */,
-			);
-			path = Layers;
-			sourceTree = "<group>";
-		};
 		B2FDDA842C4783B00062C6E1 /* UI */ = {
 			isa = PBXGroup;
 			children = (
@@ -254,16 +248,14 @@
 		B2FDDA892C4788B20062C6E1 /* Editor */ = {
 			isa = PBXGroup;
 			children = (
+				B2D2969B2C3C3D9F0093F4DA /* RendererLayer.cpp */,
+				B2D2969C2C3C3D9F0093F4DA /* RendererLayer.hpp */,
 				B2FDDA8A2C4788B90062C6E1 /* Viewport.cpp */,
 				B2FDDA8B2C4788B90062C6E1 /* Viewport.hpp */,
 				B22AB2B62C578649007453B7 /* UserPreference.cpp */,
 				B22AB2B72C578649007453B7 /* UserPreference.hpp */,
 				B23F456A2C57BFF5000A0944 /* FolderExplorer.cpp */,
 				B23F456B2C57BFF5000A0944 /* FolderExplorer.hpp */,
-				B23F45752C57C603000A0944 /* ContentBrowserItem.cpp */,
-				B23F45762C57C603000A0944 /* ContentBrowserItem.hpp */,
-				B23F457C2C57C6B9000A0944 /* ApplicationSettings.cpp */,
-				B23F457D2C57C6B9000A0944 /* ApplicationSettings.hpp */,
 				B23F45EA2C5D03FA000A0944 /* EntityUtils.cpp */,
 				B23F45EB2C5D03FA000A0944 /* EntityUtils.hpp */,
 				B23F45ED2C5D0959000A0944 /* SelectionContext.cpp */,

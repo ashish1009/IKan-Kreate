@@ -6,8 +6,8 @@
 //
 
 #include "ContentBrowserPanel.hpp"
-#include "Layers/RendererLayer.hpp"
-#include "Editor/ApplicationSettings.hpp"
+#include "Editor/RendererLayer.hpp"
+#include "Panels/ApplicationSettings.hpp"
 
 namespace Kreator
 {

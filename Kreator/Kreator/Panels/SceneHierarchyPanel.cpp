@@ -7,7 +7,7 @@
 
 #include "SceneHierarchyPanel.hpp"
 
-#include "Layers/RendererLayer.hpp"
+#include "Editor/RendererLayer.hpp"
 #include "Editor/EntityUtils.hpp"
 
 namespace Kreator

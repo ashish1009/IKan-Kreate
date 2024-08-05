@@ -7,9 +7,9 @@
 
 #include "ContentBrowserItem.hpp"
 
-#include "Editor/ApplicationSettings.hpp"
+#include "Panels/ApplicationSettings.hpp"
 #include "Panels/ContentBrowserPanel.hpp"
-#include "Layers/RendererLayer.hpp"
+#include "Editor/RendererLayer.hpp"
 
 namespace Kreator
 {

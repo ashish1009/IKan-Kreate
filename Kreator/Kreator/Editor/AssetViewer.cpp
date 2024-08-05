@@ -6,7 +6,7 @@
 //
 
 #include "AssetViewer.hpp"
-#include "Layers/RendererLayer.hpp"
+#include "Editor/RendererLayer.hpp"
 
 namespace Kreator
 {

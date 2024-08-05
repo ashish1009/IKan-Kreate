@@ -198,7 +198,6 @@ namespace IKan
         component.enable = cameraComponent["Enable"].as<bool>();
         const auto& cameraNode = cameraComponent["Camera"];
         
-        component.camera = SceneCamera();
         auto& camera = component.camera;
         
         if (cameraNode.IsMap())

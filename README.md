@@ -72,19 +72,24 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v4.0.3.2 : ECS / Panel
 
 ## Road Map
-- Load all assets before game loop ( Open Project )
-- Mutli thread
-- Scene [3D]
-    - Lights
-    - Physics
-- Advance Viewports
-  - Mouse and key controlled ECS
-    - Add / Delete / Duplicate / Undo / Red
+- General
+  - Load all assets before game loop ( Open Project )
+  - Mutli thread
+- Editor
+  - Advance Viewports
+    - Mouse and key controlled ECS
+      - Add / Delete / Duplicate / Undo / Red
+  - Prefabs
   - Helper 
     - Mini viewport
     - Secondary viewport
     - Camera Axis helper
-- Camera controller 
+- Runtime
+  - Scene [3D]
+    - Lights
+    - Physics
+  - Camera controller 
+  - Scripts
 - Scene [2D]
   - Renderer
   - Physics 
@@ -93,10 +98,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - Advance Open GL
   - Advance light
   - Instancing
-- Mutli Threading
-- Scripts
-- Prefabs
-- Partical system
+  - Partical system
 
 ## TODO
 
