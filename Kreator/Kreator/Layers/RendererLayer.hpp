@@ -73,6 +73,9 @@ namespace Kreator
     bool OnMouseButtonPressed(MouseButtonPressedEvent& e);
     /// This function updates the viewports of all kreator data
     void UpdateViewportSize();
+    /// This function cast ray from camera
+    /// - Parameter camera: Camera
+    Ray CastRay(const EditorCamera& camera);
     
     // Scene APIs ----------------------------------------
     /// This function creates new scene
@@ -115,6 +118,10 @@ namespace Kreator
     /// This function clear the selected Entity
     /// - Note: To be called inside Render Pass Begin end End
     void ClearSelectedEntity();
+    /// This function set the selected entity
+    /// - Parameter entity: Selected entity
+    /// - Parameter multipleSelection: multiple selection flag
+    void SetSelectedEntity(const Entity& entity, bool multipleSelection = false);
 
     // Project APIs --------------------------------------
     /// This function creates a new project for kreator

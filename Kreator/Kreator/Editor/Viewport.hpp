@@ -20,6 +20,7 @@ namespace Kreator
 
     bool isHovered {false};
     bool isFocused {false};
+    bool hoveredGuizmoToolbar {false};
     
     uint32_t width {0}, height {0};
     

@@ -153,6 +153,12 @@ namespace IKan
     /// - Parameter entity: Selected Entity
     bool IsEntitySelected(entt::entity entity) const;
 
+    /// This funcrion returns all the components of type Components
+    template<typename... Components> auto GetAllEntitiesWith()
+    {
+      return m_registry.view<Components...>();
+    }
+
     // Static APIs --------------------------------------------------------------------------------------------------
     /// This function creates the instance of EnTT Scene
     /// - Parameters:

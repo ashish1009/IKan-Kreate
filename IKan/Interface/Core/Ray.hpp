@@ -7,7 +7,7 @@
 
 #pragma once
 
-#include "Core/AABB.h"
+#include "Core/AABB.hpp"
 
 namespace IKan
 {

@@ -101,6 +101,40 @@ if (!m_currentScene) return
         pos += strlen(projectNameToken);
       }
     }
+    
+    static auto CheckRayPassMesh = [](AssetHandle meshHandle, Entity entity, const glm::vec3& origin, const glm::vec3& direction) -> float {
+      const auto& mesh = AssetManager::GetAsset<Mesh>(meshHandle);
+      if (!mesh or mesh->IsFlagSet(AssetFlag::Missing))
+      {
+        return -1;
+      }
+      
+      const glm::mat4& transform = entity.GetTransform().Transform();
+      auto& submeshes = mesh->GetSubMeshes();
+      for (uint32_t i = 0; i < submeshes.size(); i++)
+      {
+        const auto& submesh = submeshes[i];
+        Ray ray =
+        {
+          glm::inverse(transform * submesh.transform) * glm::vec4(origin, 1.0f),
+          glm::inverse(glm::mat3(transform * submesh.transform)) * direction
+        };
+        
+        float distance;
+        if (ray.IntersectsAABB(submesh.boundingBox, distance))
+        {
+          const auto& triangleCache = mesh->GetTriangleCache(i);
+          for (const auto& triangle : triangleCache)
+          {
+            if (ray.IntersectsTriangle(triangle.V0.position, triangle.V1.position, triangle.V2.position, distance))
+            {
+              return distance;
+            }
+          } // For each triangle cache
+        } // Bounding box intersect
+      } // Each Submesh
+      return -1;
+    };
   } // namespace Utils
   
   RendererLayer* RendererLayer::s_instance = nullptr;
@@ -518,8 +552,61 @@ if (!m_currentScene) return
     return false;
   }
   
-  bool RendererLayer::OnMouseButtonPressed(MouseButtonPressedEvent &e)
+  bool RendererLayer::OnMouseButtonPressed([[maybe_unused]] MouseButtonPressedEvent &event)
   {
+    if (m_sceneState == SceneState::Play)
+    {
+      
+    }
+    else
+    {
+      // Return if Camera is controlled by left ctrl or guizmo is hovered
+      if (Input::IsKeyPressed(IKan::Key::LeftControl) or ImGuizmo::IsOver() or m_primaryViewport.hoveredGuizmoToolbar or !m_primaryViewport.isHovered)
+      {
+        return false;
+      }
+
+      // Return if mouse is outside viewport
+      if (!m_primaryViewport.IsMouseSpaceInViewport())
+      {
+        return false;
+      }
+
+      // Clear all selected entity if Left supper is not pressed
+      if (!Input::IsKeyPressed(IKan::Key::LeftSuper))
+      {
+        ClearSelectedEntity();
+      }
+      else
+      {
+        // Clear only renderer layer entities oif CMD is pressed
+        m_selectionContext.clear();
+      }
+
+      auto [origin, direction] = CastRay(m_editorCamera);
+
+      // for each mesh entity
+      auto meshEntities = m_currentScene->GetAllEntitiesWith<MeshComponent>();
+      for (auto entityHandle : meshEntities)
+      {
+        Entity entity = { entityHandle, m_currentScene.get() };
+        auto& mc = entity.GetComponent<MeshComponent>();
+        auto& vc = entity.GetComponent<VisibilityComponent>();
+        if (float distance = KreatorUtils::CheckRayPassMesh(mc.mesh, entity, origin, direction); distance != -1 and vc.isVisible)
+        {
+          m_selectionContext.push_back({entity, distance});
+        }
+      } // Each Mesh Comp
+
+      std::sort(m_selectionContext.begin(), m_selectionContext.end(), [](auto& a, auto& b) {
+        return a.distance < b.distance;
+      });
+      
+      if (m_selectionContext.size())
+      {
+        SetSelectedEntity(m_selectionContext[0].entity, Input::IsKeyPressed(Key::LeftSuper));
+      }
+    }
     return false;
   }
   
@@ -536,6 +623,21 @@ if (!m_currentScene) return
     m_secondaryViewportRenderer.SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
     
     m_currentScene->SetViewportSize(m_primaryViewport.width, m_primaryViewport.height);
+  }
+  
+  Ray RendererLayer::CastRay(const EditorCamera& camera)
+  {
+    IK_PROFILE()
+    glm::vec4 mouseClipPos = { m_primaryViewport.mouseViewportSpace.spaceMouseX, m_primaryViewport.mouseViewportSpace.spaceMouseY, -1.0f, 1.0f };
+    
+    auto inverseProj = glm::inverse(camera.GetProjectionMatrix());
+    auto inverseView = glm::inverse(glm::mat3(camera.GetViewMatrix()));
+    
+    glm::vec4 ray = inverseProj * mouseClipPos;
+    glm::vec3 rayPos = camera.GetPosition();
+    glm::vec3 rayDir = inverseView * glm::vec3(ray);
+    
+    return { rayPos, rayDir };
   }
   
   void RendererLayer::NewScene(const std::string& name)
@@ -758,6 +860,11 @@ if (!m_currentScene) return
       m_currentScene->ClearSelectedEntity();
     }
     m_selectionContext.clear();
+  }
+  void RendererLayer::SetSelectedEntity(const Entity& entity, bool multipleSelection)
+  {
+    IK_PROFILE();
+    m_panels.GetPanel<SceneHierarchyPanel>(SCENE_HIERARCHY_PANEL_ID)->SetSelectedEntity(entity, multipleSelection);
   }
 
   void RendererLayer::CreateProject(const std::filesystem::path &newProjectFilePath)
@@ -1258,6 +1365,8 @@ if (!m_currentScene) return
     UI::ScopedStyle windowPadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
     ImGui::Begin("Viewport");
     
+    auto viewportOffset = ImGui::GetCursorPos(); // includes tab bar
+
     m_primaryViewport.isHovered = ImGui::IsWindowHovered();
     m_primaryViewport.isFocused = ImGui::IsWindowFocused();
     
@@ -1283,6 +1392,16 @@ if (!m_currentScene) return
       UI_SceneToolbar();
     }
     
+    auto windowSize = ImGui::GetWindowSize();
+    ImVec2 minBound = ImGui::GetWindowPos();
+
+    minBound.x += viewportOffset.x;
+    minBound.y += viewportOffset.y;
+    
+    ImVec2 maxBound = { minBound.x + windowSize.x, minBound.y + windowSize.y };
+    m_primaryViewport.bounds[0] = { minBound.x, minBound.y };
+    m_primaryViewport.bounds[1] = { maxBound.x, maxBound.y };
+
     ImGui::End();
   }
   
