@@ -387,6 +387,8 @@ namespace Kreator
   void SceneHierarchyPanel::SetSelectedEntity(const Entity& entity, bool multipleSelection)
   {
     IK_PROFILE();
+    m_showMaterialEditor = false;
+
     if (!multipleSelection)
     {
       m_selectionContext.Clear();
@@ -991,12 +993,74 @@ namespace Kreator
         
         if (UI::BeginPopup("CreateMaterial"))
         {
+          char buffer[256];
+          memset(buffer, 0, 256);
+          if (ImGui::InputText("##Tag", buffer, 256, ImGuiInputTextFlags_EnterReturnsTrue))
+          {
+            // TODO: Later increase the material for now only 0 is used
+            std::string filename = buffer;
+            filename += MaterialExtension;
+            smc.materialTable->SetMaterial(0, AssetManager::CreateNewAsset<MaterialAsset>(filename, Project::GetActive()->GetMaterialDirectory()));
+            m_showMaterialEditor = true;
+            ImGui::CloseCurrentPopup();
+          }
+
           UI::EndPopup();
         }
         
         if (open)
         {
           UI::BeginPropertyGrid();
+          
+          for (size_t i = 0; i < smc.materialTable->GetMaterialCount(); i++)
+          {
+            bool hasMaterial = smc.materialTable->HasMaterial((uint32_t)i);
+            
+            std::string label = fmt::format("[Material {0}]", i);
+
+            // Note: Fix for weird ImGui ID bug...
+            std::string id = fmt::format("{0}-{1}", label, i);
+            ImGui::PushID(id.c_str());
+
+            UI::PropertyAssetReferenceSettings settings;
+            if (hasMaterial)
+            {
+              m_selectedMeshMaterialAsset = smc.materialTable->GetMaterial((uint32_t)i);
+              AssetHandle materialAssetHandle = m_selectedMeshMaterialAsset->handle;
+              settings.advanceToNextColumn = false;
+              settings.widthOffset = 80;
+              UI::Property("Tiling Factor", smc.tilingFactor, 1.0f, 1.0f, 1000.0f);
+              UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), nullptr, materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
+                smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
+              }, settings);
+              
+              ImGui::SameLine();
+              float prevItemHeight = ImGui::GetItemRectSize().y;
+              if (UI::DrawButton("X", UI::FontType::Regular, UI::Color::Text, UI::Color::Muted, 5.0, {prevItemHeight, prevItemHeight}))
+              {
+                smc.materialTable->ClearMaterial((uint32_t)i);
+              }
+              
+              ImGui::SameLine();
+              static float lineHeight  = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+              if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }))
+              {
+                m_showMaterialEditor = m_showMaterialEditor ? false : true;
+              }
+              UI::DrawButtonImage(m_showMaterialEditor ? s_EyeIcon : s_closeEyeIcon, UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f),
+                                  IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150));
+              
+              ImGui::NextColumn();
+            }
+            else
+            {
+              AssetHandle materialAssetHandle {};
+              UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), "Empty", materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
+                smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
+              }, settings);
+            }
+            ImGui::PopID();
+          }
           
           UI::EndPropertyGrid();
           UI::PropertyGridHeaderEnd();

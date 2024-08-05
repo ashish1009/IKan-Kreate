@@ -89,6 +89,10 @@ namespace Kreator
     SelectionContext m_selectionContext;
     std::function<void(SelectionContext)> m_selectionChangedCallback, m_entityDeletedCallback;
 
+    // Material editor
+    bool m_showMaterialEditor = false;
+    Ref<MaterialAsset> m_selectedMeshMaterialAsset;
+
     inline static Ref<Image> s_pencilIcon, s_plusIcon, s_gearIcon, s_reloadIcon, s_closeEyeIcon, s_EyeIcon;
   };
 } // namespace Kreator
