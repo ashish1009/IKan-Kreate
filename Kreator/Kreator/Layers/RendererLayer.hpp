@@ -92,6 +92,19 @@ namespace Kreator
     /// - Parameter assetMetadata: metadata
     void OpenScene(const AssetMetadata& assetMetadata);
 
+    /// This function handle scene play
+    void OnScenePlay();
+    /// This function handle scene Stop
+    void OnSceneStop();
+    /// This function handle scene Pause
+    void OnScenePause();
+    /// This function handle scene Resume
+    void OnSceneResume();
+    /// This function handle scene simuation start
+    void OnSceneStartSimulation();
+    /// This function handle scene simuation ends
+    void OnSceneStopSimulation();
+    
     // Scene Panel Manager Callbacks ----------------------
     /// This function handles the entity selection
     /// - Parameter entities: entities
@@ -148,6 +161,9 @@ namespace Kreator
     /// This function popup new scene widget
     void UI_NewScenePopup();
 
+    /// This function shows the Applicaton toolbar
+    void UI_SceneToolbar();
+
     // Memeber variables ----------------------------------------------------------------------------------------------
     // Popups/Panel --------------------------------------
     UI::Popup m_welcomePopup {"Welcome Screen"};
@@ -198,6 +214,7 @@ namespace Kreator
     };
     std::vector<SelectedEntity> m_selectionContext;
     float m_timeSinceLastSave = 0.0f;
+    Ref<Image> m_stopButtonTex, m_playButtonTex, m_simulateButtonTex, m_pauseButtonTex;
 
     // Single Instance -----------------------------------
     static RendererLayer* s_instance;

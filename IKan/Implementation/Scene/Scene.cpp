@@ -369,4 +369,20 @@ namespace IKan
     auto& ID = m_registry.get<IDComponent>(static_cast<entt::entity>(entityHandle)).ID;
     return GetEntityWithUUID(ID);
   }
+  
+  Entity Scene::GetMainCameraEntity()
+  {
+    IK_PERFORMANCE("Scene::GetMainCameraEntity");
+    auto view = m_registry.view<CameraComponent>();
+    for (const auto& entity : view)
+    {
+      auto& comp = view.get<CameraComponent>(entity);
+      if (comp.primary)
+      {
+        IK_ASSERT(comp.camera.GetOrthographicSize() or comp.camera.GetDegPerspectiveVerticalFOV(), "Camera is not fully initialized");
+        return { entity, this };
+      }
+    }
+    return {};
+  }
 } // namespace IKan

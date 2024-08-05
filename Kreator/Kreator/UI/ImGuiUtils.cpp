@@ -591,7 +591,13 @@ namespace Kreator::UI
     UI::Text(UI::FontType::SemiHeader, buttonHelper, UI::AlignX::Left, {0.0f, iconSize.x / 4}, UI::Color::TextBrighter);
     return false;
   };
-  
+  bool InvisibleButton(const ImVec2& size)
+  {
+    UI::ScopedColor noTintButton(ImGuiCol_Button, IM_COL32(11, 11, 11, 0));
+    UI::ScopedColor noTintButtonHovered(ImGuiCol_ButtonHovered, IM_COL32(11, 11, 11, 0));
+    UI::ScopedColor noTintButtonActive(ImGuiCol_ButtonActive, IM_COL32(11, 11, 11, 0));
+    return ImGui::Button(GenerateID(), size);
+  }
   // Shadow ----------------------------------------------------------------------------------------------------------
   void DrawShadowInnerImpl(const Ref<IKan::Image>& shadowImage, Position position, int radius, const ImVec2& rectMin, const ImVec2& rectMax, float alpha, float lengthStretch)
   {

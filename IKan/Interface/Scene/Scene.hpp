@@ -146,6 +146,9 @@ namespace IKan
     /// - Parameter entityHandle: handle for entity
     Entity GetEntityWithEntityHandle(int32_t entityHandle) const;
     
+    /// This function finds the main camera entity
+    Entity GetMainCameraEntity();
+
     // Static APIs --------------------------------------------------------------------------------------------------
     /// This function creates the instance of EnTT Scene
     /// - Parameters:

@@ -293,6 +293,9 @@ namespace Kreator::UI
                            const ImU32& tintNormal = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 0.8f),
                            const ImU32& tintHovered = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.5f),
                            const ImU32& tintPressed = UI::ColorWithMultipliedValue(UI::Color::TextBrighter, 1.0f));
+  /// This function Draw invisible button
+  /// - Parameter size: size of button
+  bool InvisibleButton(const ImVec2& size);
 
   // Shadow ----------------------------------------------------------------------------------------------------------
   /// This function render the Shadow Texture in ImGui

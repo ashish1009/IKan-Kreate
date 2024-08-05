@@ -138,6 +138,12 @@ if (!m_currentScene) return
     m_iconMinimize = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Minimize.png"));
     m_iconMaximize = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Maximize.png"));
     m_iconRestore = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Restore.png"));
+    
+    // Scene Button
+    m_playButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Play.png"));
+    m_stopButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Stop.png"));
+    m_simulateButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Simulate.png"));
+    m_pauseButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Pause.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -381,12 +387,29 @@ if (!m_currentScene) return
 
     UI_Viewport();
 
-    if (m_sceneState != SceneState::Play)
+    m_panels.OnImGuiRender();
+    
+    // Should be rendered last inside docker
+    UI_StatisticsPanel();
+    
+    switch (m_sceneState)
     {
-      m_panels.OnImGuiRender();
-      
-      // Should be rendered last inside docker
-      UI_StatisticsPanel();
+      case SceneState::Edit:
+      {
+        break;
+      }
+      case SceneState::Simulate:
+      {
+        break;
+      }
+      case SceneState::Play:
+      {
+        break;
+      }
+      case SceneState::Pause:
+      {
+        break;
+      }
     }
     
     UI_EndMainWindowDocking();
@@ -553,6 +576,113 @@ if (!m_currentScene) return
     OpenScene(workingDirPath.string());
   }
 
+  void RendererLayer::OnScenePlay()
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Scene Set to Play");
+    
+    // 0. Clear all selected Entities
+    ClearSelectedEntity();
+    
+    // 1. Update Scene state
+    m_sceneState = SceneState::Play;
+    
+    // 2. Create Runtime Scene
+    m_runtimeScene = Scene::Create(Project::GetActive()->GetConfig().sceneType);
+    m_editorScene->CopyTo(m_runtimeScene);
+    m_runtimeScene->OnRuntimeStart();
+    
+    // 3. Update current scene reference
+    m_currentScene = m_runtimeScene;
+    
+    // 4. Update Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void RendererLayer::OnSceneStop()
+  {
+    IK_PROFILE();
+    if (!m_runtimeScene)
+    {
+      return;
+    }
+    
+    IK_LOG_INFO("Kreator Layer", "Scene Set to Edit");
+    
+    // 0. Clear all selected Entities
+    ClearSelectedEntity();
+    
+    // 1. Update Scene state
+    m_sceneState = SceneState::Edit;
+    
+    // 2. Stop Runtime Scene
+    m_runtimeScene->OnRuntimeStop();
+    m_runtimeScene.reset();
+    m_runtimeScene = nullptr;
+    
+    // 3. Update current scene reference
+    m_currentScene = m_editorScene;
+    
+    // 4. Update Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void RendererLayer::OnScenePause()
+  {
+    IK_PROFILE();
+  }
+  
+  void RendererLayer::OnSceneResume()
+  {
+    IK_PROFILE();
+  }
+  
+  void RendererLayer::OnSceneStartSimulation()
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Scene Set for Simulation");
+    
+    // 0. Clear all selected Entities
+    ClearSelectedEntity();
+    
+    // 1. Update Scene state
+    m_sceneState = SceneState::Simulate;
+    
+    // 2. Stop Runtime Scene
+    m_simulationScene = Scene::Create(Project::GetActive()->GetConfig().sceneType);
+    m_editorScene->CopyTo(m_simulationScene);
+    m_simulationScene->OnSimulationStart();
+    
+    // 3. Update current scene reference
+    m_currentScene = m_simulationScene;
+    
+    // 4. Update Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
+  void RendererLayer::OnSceneStopSimulation()
+  {
+    IK_PROFILE();
+    IK_LOG_INFO("Kreator Layer", "Scene Simulation stopped");
+    
+    // 0. Clear all selected Entities
+    ClearSelectedEntity();
+    
+    // 1. Update Scene state
+    m_sceneState = SceneState::Edit;
+    
+    // 2. Stop Runtime Scene
+    m_simulationScene->OnRuntimeStop();
+    m_simulationScene.reset();
+    m_simulationScene = nullptr;
+    
+    // 3. Update current scene reference
+    m_currentScene = m_editorScene;
+    
+    // 4. Update Panels
+    m_panels.SetSceneContext(m_currentScene);
+  }
+  
   void RendererLayer::OnEntitySelected(const SelectionContext& entities)
   {
     if (entities.Size() == 0)
@@ -1114,6 +1244,11 @@ if (!m_currentScene) return
     // Render viewport image
     UI::Image(m_viewportRenderer.GetFinalImage(), size);
     
+    if (m_sceneState != SceneState::Play)
+    {
+      UI_SceneToolbar();
+    }
+    
     ImGui::End();
   }
   
@@ -1625,5 +1760,98 @@ if (!m_currentScene) return
       ImGui::EndHorizontal();
       ImGui::EndVertical();
     });
+  }
+  
+  void RendererLayer::UI_SceneToolbar()
+  {
+    UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+    UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
+    UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    UI::ScopedStyle disablePadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    
+    auto viewportStart = ImGui::GetItemRectMin();
+    
+    bool hasCamera = m_currentScene->GetMainCameraEntity();
+    
+    constexpr float buttonSize = 18.0f;
+    constexpr float edgeOffset = 4.0f;
+    constexpr float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
+    
+    const uint32_t numberOfButtons = hasCamera ? 3.0f : 2.0f;
+    const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * numberOfButtons * 2.0f;
+    
+    ImGui::SetNextWindowPos(ImVec2(viewportStart.x + m_primaryViewport.width / 2 - (numberOfButtons * buttonSize), viewportStart.y + edgeOffset));
+    ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
+    ImGui::SetNextWindowBgAlpha(0.0f);
+    ImGui::Begin("##scene_tool", 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking);
+    
+    // A hack to make icon panel appear smaller than minimum allowed by ImGui size
+    // Filling the background for the desired 26px height
+    constexpr float desiredHeight = 30.0f;
+    ImRect background = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, -(windowHeight - desiredHeight) / 2.0f);
+    ImGui::GetWindowDrawList()->AddRectFilled(background.Min, background.Max, IM_COL32(15, 15, 15, 127), 4.0f);
+    
+    ImGui::BeginVertical("##scene_tool_V", ImGui::GetContentRegionAvail());
+    ImGui::Spring();
+    ImGui::BeginHorizontal("##scene_tool_H", { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y });
+    ImGui::Spring();
+    {
+      UI::PushID();
+      auto playbackButton = [](const Ref<Image>& icon, const ImColor& tint)
+      {
+        const float size = std::min((float)icon->GetHeight(), ImGui::GetWindowHeight() - 4.0f);
+        const float iconPadding = 0.0f;
+        const bool clicked = UI::InvisibleButton(ImVec2(size, size));
+        UI::DrawButtonImage(icon,
+                            UI::RectExpanded(UI::GetItemRect(), -iconPadding, -iconPadding),
+                            tint,
+                            UI::ColorWithMultipliedValue(tint, 1.3f),
+                            UI::ColorWithMultipliedValue(tint, 0.8f));
+        return clicked;
+      };
+      
+      // white buttons
+      const ImColor buttonTint = IM_COL32(192, 192, 192, 255);
+      
+      if (hasCamera)
+      {
+        if (playbackButton(m_playButtonTex, buttonTint))
+        {
+          OnScenePlay();
+        }
+      }
+      
+      const ImColor tint = m_sceneState == SceneState::Simulate ? ImColor(1.0f, 0.75f, 0.75f, 1.0f) : buttonTint;
+      if (playbackButton(m_simulateButtonTex, tint))
+      {
+        if (m_sceneState == SceneState::Edit)
+        {
+          OnSceneStartSimulation();
+        }
+        else if (m_sceneState == SceneState::Simulate)
+        {
+          OnSceneStopSimulation();
+        }
+      }
+      
+      if (playbackButton(m_pauseButtonTex, buttonTint))
+      {
+        if (m_sceneState == SceneState::Simulate)
+        {
+          OnScenePause();
+        }
+        else if (m_sceneState == SceneState::Pause)
+        {
+          OnSceneResume();
+        }
+      }
+      UI::PopID();
+    }
+    ImGui::Spring();
+    ImGui::EndHorizontal();
+    ImGui::Spring();
+    ImGui::EndVertical();
+    
+    ImGui::End();
   }
 } // namespace Kreator
