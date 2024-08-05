@@ -9,6 +9,7 @@
 
 #include "Core/UUID.hpp"
 #include "Camera/SceneCamera.hpp"
+#include "Renderer/MaterialAsset.hpp"
 
 namespace IKan
 {
@@ -93,6 +94,17 @@ namespace IKan
     operator const SceneCamera& () const;
   };
 
+  struct MeshComponent
+  {
+    bool enable {true};
+    AssetHandle mesh;
+    
+    float tilingFactor = 1.0f;
+    Ref<MaterialTable> materialTable {CreateRef<MaterialTable>()};
+    
+    MeshComponent(AssetHandle m = AssetHandle()) : mesh(m) {}
+  };
+  
   template<typename... Component>
   struct ComponentGroup
   {
@@ -101,5 +113,6 @@ namespace IKan
   
   // Stores all the components present in Engine
   using AllComponents =
-  ComponentGroup<IDComponent, VisibilityComponent, TagComponent, TransformComponent, CameraComponent>;
+  ComponentGroup<IDComponent, VisibilityComponent, TagComponent, TransformComponent, 
+                 CameraComponent, MeshComponent>;
 } // namespace IKan
