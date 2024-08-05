@@ -529,7 +529,14 @@ namespace Kreator
   
   void ContentBrowserAsset::Activate([[maybe_unused]] CBItemActionResult& actionResult)
   {
-    IK_ASSERT(false, "Implement later");
+    if (m_assetInfo.type == AssetType::Scene)
+    {
+      RendererLayer::Get().OpenScene(Project::GetAssetPath(m_assetInfo.filePath));
+    }
+    else
+    {
+      AssetEditorManager::OpenEditor(AssetManager::GetAsset<Asset>(m_assetInfo.handle));
+    }
   }
   
   void ContentBrowserAsset::OnRenamed(const std::string& newName)

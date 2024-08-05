@@ -1080,7 +1080,7 @@ namespace Kreator
             else
             {
               AssetHandle materialAssetHandle {};
-              UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), "Empty", materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset){
+              UI::PropertyAssetReferenceTarget<MaterialAsset>(label.c_str(), "Empty", materialAssetHandle, [smc, i](Ref<MaterialAsset> materialAsset) {
                 smc.materialTable->SetMaterial((uint32_t)i, materialAsset);
               }, settings);
             }

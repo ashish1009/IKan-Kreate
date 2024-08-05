@@ -52,116 +52,111 @@ out << YAML::Key << uniform << YAML::Value << mapHandle; \
   
   void MaterialSerializer::Serialize(const AssetMetadata &metadata, const Ref<Asset> &asset) const
   {
-    Renderer::Submit([metadata, asset](){
-      Ref<MaterialAsset> material = std::dynamic_pointer_cast<MaterialAsset>(asset);
+    Ref<MaterialAsset> material = std::dynamic_pointer_cast<MaterialAsset>(asset);
+    
+    YAML::Emitter out;
+    out << YAML::BeginMap; // Material
+    out << YAML::Key << "Material" << YAML::Value;
+    {
+      out << YAML::BeginMap;
       
-      YAML::Emitter out;
-      out << YAML::BeginMap; // Material
-      out << YAML::Key << "Material" << YAML::Value;
-      {
-        out << YAML::BeginMap;
-        
-        out << YAML::Key << "AlbedoColor" << YAML::Value <<  material->GetAlbedoColor();
-        out << YAML::Key << "Metallic" << YAML::Value <<  material->GetMetalness();
-        out << YAML::Key << "Emission" << YAML::Value <<  material->GetEmission();
-        out << YAML::Key << "Roughness" << YAML::Value <<  material->GetRoughness();
-        out << YAML::Key << "DepthScale" << YAML::Value <<  material->GetDepthScale();
-        
-        out << YAML::Key << "AlbedoTextureToggle" << YAML::Value <<  material->GetAlbedoMapToggle();
-        out << YAML::Key << "NormalTextureToggle" << YAML::Value <<  material->GetNormalMapToggle();
-        out << YAML::Key << "RoughnessTextureToggle" << YAML::Value <<  material->GetRoughnessMapToggle();
-        out << YAML::Key << "MetallicTextureToggle" << YAML::Value <<  material->GetMetallicMapToggle();
-        out << YAML::Key << "DepthTextureToggle" << YAML::Value <<  material->GetDepthMapToggle();
-        
-        SerializeTextureMap(Albedo, material);
-        SerializeTextureMap(Normal, material);
-        SerializeTextureMap(Metallic, material);
-        SerializeTextureMap(Roughness, material);
-        SerializeTextureMap(Depth, material);
-        out << YAML::EndMap;
-      }
-      out << YAML::EndMap; // Material
+      out << YAML::Key << "AlbedoColor" << YAML::Value <<  material->GetAlbedoColor();
+      out << YAML::Key << "Metallic" << YAML::Value <<  material->GetMetalness();
+      out << YAML::Key << "Emission" << YAML::Value <<  material->GetEmission();
+      out << YAML::Key << "Roughness" << YAML::Value <<  material->GetRoughness();
+      out << YAML::Key << "DepthScale" << YAML::Value <<  material->GetDepthScale();
       
-      std::ofstream fout(AssetManager::GetFileSystemPath(metadata));
-      fout << out.c_str();
-    });
+      out << YAML::Key << "AlbedoTextureToggle" << YAML::Value <<  material->GetAlbedoMapToggle();
+      out << YAML::Key << "NormalTextureToggle" << YAML::Value <<  material->GetNormalMapToggle();
+      out << YAML::Key << "RoughnessTextureToggle" << YAML::Value <<  material->GetRoughnessMapToggle();
+      out << YAML::Key << "MetallicTextureToggle" << YAML::Value <<  material->GetMetallicMapToggle();
+      out << YAML::Key << "DepthTextureToggle" << YAML::Value <<  material->GetDepthMapToggle();
+      
+      SerializeTextureMap(Albedo, material);
+      SerializeTextureMap(Normal, material);
+      SerializeTextureMap(Metallic, material);
+      SerializeTextureMap(Roughness, material);
+      SerializeTextureMap(Depth, material);
+      out << YAML::EndMap;
+    }
+    out << YAML::EndMap; // Material
+    
+    std::ofstream fout(AssetManager::GetFileSystemPath(metadata));
+    fout << out.c_str();
   }
   bool MaterialSerializer::TryLoadData(const AssetMetadata &metadata, Ref<Asset> &asset) const
   {
-    Renderer::Submit([metadata, &asset](){
-      std::ifstream stream(AssetManager::GetFileSystemPath(metadata));
-      if (!stream.is_open())
+    std::ifstream stream(AssetManager::GetFileSystemPath(metadata));
+    if (!stream.is_open())
+    {
+      return false;
+    }
+    
+    std::stringstream strStream;
+    strStream << stream.rdbuf();
+    
+    YAML::Node root = YAML::Load(strStream.str());
+    YAML::Node materialNode = root["Material"];
+    
+    Ref<MaterialAsset> material = MaterialAsset::Create();
+    
+    IK_DESERIALIZE_PROPERTY(AlbedoColor, material->GetAlbedoColor(), materialNode, glm::vec3(0.8f));
+    IK_DESERIALIZE_PROPERTY(Metallic, material->GetMetalness(), materialNode, 0.5f);
+    IK_DESERIALIZE_PROPERTY(Emission, material->GetEmission(), materialNode, 0.0f);
+    IK_DESERIALIZE_PROPERTY(Roughness, material->GetRoughness(), materialNode, 0.5f);
+    IK_DESERIALIZE_PROPERTY(DepthScale, material->GetDepthScale(), materialNode, 0.001f);
+    
+    material->SetAlbedoMapToggle(materialNode["AlbedoTextureToggle"] ? materialNode["AlbedoTextureToggle"].as<float>() : 0.0f);
+    material->SetNormalMapToggle(materialNode["NormalTextureToggle"] ? materialNode["NormalTextureToggle"].as<float>() : 0.0f);
+    material->SetRoughnessMapToggle(materialNode["RoughnessTextureToggle"] ? materialNode["RoughnessTextureToggle"].as<float>() : 0.0f);
+    material->SetMetallicMapToggle(materialNode["MetallicTextureToggle"] ? materialNode["MetallicTextureToggle"].as<float>() : 0.0f);
+    material->SetDepthMapToggle(materialNode["DepthTextureToggle"] ? materialNode["DepthTextureToggle"].as<float>() : 0.0f);
+    
+    AssetHandle albedoMap, normalMap, metalnessMap, roughnessMap, depthMap, aoMap;
+    IK_DESERIALIZE_PROPERTY(AlbedoTexture, albedoMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(NormalTexture, normalMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(MetallicTexture, metalnessMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(RoughnessTexture, roughnessMap, materialNode, (AssetHandle)0);
+    IK_DESERIALIZE_PROPERTY(DepthTexture, depthMap, materialNode, (AssetHandle)0);
+    
+    if (albedoMap)
+    {
+      if (AssetManager::IsAssetHandleValid(albedoMap))
       {
-        return false;
+        material->SetAlbedoMap(AssetManager::GetAsset<Image>(albedoMap));
       }
-      
-      std::stringstream strStream;
-      strStream << stream.rdbuf();
-      
-      YAML::Node root = YAML::Load(strStream.str());
-      YAML::Node materialNode = root["Material"];
-      
-      Ref<MaterialAsset> material = MaterialAsset::Create();
-      
-      IK_DESERIALIZE_PROPERTY(AlbedoColor, material->GetAlbedoColor(), materialNode, glm::vec3(0.8f));
-      IK_DESERIALIZE_PROPERTY(Metallic, material->GetMetalness(), materialNode, 0.5f);
-      IK_DESERIALIZE_PROPERTY(Emission, material->GetEmission(), materialNode, 0.0f);
-      IK_DESERIALIZE_PROPERTY(Roughness, material->GetRoughness(), materialNode, 0.5f);
-      IK_DESERIALIZE_PROPERTY(DepthScale, material->GetDepthScale(), materialNode, 0.001f);
-      
-      material->SetAlbedoMapToggle(materialNode["AlbedoTextureToggle"] ? materialNode["AlbedoTextureToggle"].as<float>() : 0.0f);
-      material->SetNormalMapToggle(materialNode["NormalTextureToggle"] ? materialNode["NormalTextureToggle"].as<float>() : 0.0f);
-      material->SetRoughnessMapToggle(materialNode["RoughnessTextureToggle"] ? materialNode["RoughnessTextureToggle"].as<float>() : 0.0f);
-      material->SetMetallicMapToggle(materialNode["MetallicTextureToggle"] ? materialNode["MetallicTextureToggle"].as<float>() : 0.0f);
-      material->SetDepthMapToggle(materialNode["DepthTextureToggle"] ? materialNode["DepthTextureToggle"].as<float>() : 0.0f);
-      
-      AssetHandle albedoMap, normalMap, metalnessMap, roughnessMap, depthMap, aoMap;
-      IK_DESERIALIZE_PROPERTY(AlbedoTexture, albedoMap, materialNode, (AssetHandle)0);
-      IK_DESERIALIZE_PROPERTY(NormalTexture, normalMap, materialNode, (AssetHandle)0);
-      IK_DESERIALIZE_PROPERTY(MetallicTexture, metalnessMap, materialNode, (AssetHandle)0);
-      IK_DESERIALIZE_PROPERTY(RoughnessTexture, roughnessMap, materialNode, (AssetHandle)0);
-      IK_DESERIALIZE_PROPERTY(DepthTexture, depthMap, materialNode, (AssetHandle)0);
-      
-      if (albedoMap)
+    }
+    if (normalMap)
+    {
+      if (AssetManager::IsAssetHandleValid(normalMap))
       {
-        if (AssetManager::IsAssetHandleValid(albedoMap))
-        {
-          material->SetAlbedoMap(AssetManager::GetAsset<Image>(albedoMap));
-        }
+        material->SetNormalMap(AssetManager::GetAsset<Image>(normalMap));
       }
-      if (normalMap)
+    }
+    if (metalnessMap)
+    {
+      if (AssetManager::IsAssetHandleValid(metalnessMap))
       {
-        if (AssetManager::IsAssetHandleValid(normalMap))
-        {
-          material->SetNormalMap(AssetManager::GetAsset<Image>(normalMap));
-        }
+        material->SetMetallicMap(AssetManager::GetAsset<Image>(metalnessMap));
       }
-      if (metalnessMap)
+    }
+    if (roughnessMap)
+    {
+      if (AssetManager::IsAssetHandleValid(roughnessMap))
       {
-        if (AssetManager::IsAssetHandleValid(metalnessMap))
-        {
-          material->SetMetallicMap(AssetManager::GetAsset<Image>(metalnessMap));
-        }
+        material->SetRoughnessMap(AssetManager::GetAsset<Image>(roughnessMap));
       }
-      if (roughnessMap)
+    }
+    if (depthMap)
+    {
+      if (AssetManager::IsAssetHandleValid(depthMap))
       {
-        if (AssetManager::IsAssetHandleValid(roughnessMap))
-        {
-          material->SetRoughnessMap(AssetManager::GetAsset<Image>(roughnessMap));
-        }
+        material->SetDepthMap(AssetManager::GetAsset<Image>(depthMap));
       }
-      if (depthMap)
-      {
-        if (AssetManager::IsAssetHandleValid(depthMap))
-        {
-          material->SetDepthMap(AssetManager::GetAsset<Image>(depthMap));
-        }
-      }
-      
-      asset = material;
-      asset->handle = metadata.handle;
-      return true;
-    });
+    }
+    
+    asset = material;
+    asset->handle = metadata.handle;
     return true;
   }
 } // namespace IKan

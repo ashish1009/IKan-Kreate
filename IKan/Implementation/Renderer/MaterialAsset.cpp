@@ -26,12 +26,10 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
     m_material = Material::Create(ShaderLibrary::Get(CoreAsset("Shaders/PBR_StaticShader.glsl")));
     IK_LOG_INFO(LogModule::MaterialAsset, "Creating Material Asset");
     
-    Renderer::Submit([this](){
-      SetAlbedoColor({0.8f, 0.8f, 0.8f});
-      SetMetalness(0.5);
-      SetRoughness(0.5);
-      SetDepthScale(0.001);
-    });
+    SetAlbedoColor({0.8f, 0.8f, 0.8f});
+    SetMetalness(0.5);
+    SetRoughness(0.5);
+    SetDepthScale(0.001);
   }
   
   MaterialAsset::MaterialAsset(Ref<Material> material)
