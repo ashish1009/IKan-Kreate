@@ -73,9 +73,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - Load all assets before game loop ( Open Project )
 - Mutli thread
 - Scene [3D]
-    - Scene Renderer
     - Lights
-    - Materials
     - Physics
 - Advance Viewports
   - Guizmo
@@ -97,6 +95,7 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
   - Instancing
 - Mutli Threading
 - Scripts
+- Prefabs
 - Partical system
 
 ## TODO

@@ -84,8 +84,49 @@ namespace IKan
       }
       return "Invalid";
     }
+    
+    // Uniforms with location -----------------------------------------------------------------------------------------
+    static void UploadUniformInt1(int32_t location, int32_t value)
+    {
+      glUniform1i(location, value);
+    }
+    
+    static void UploadUniformMat4(int32_t location, const glm::mat4& value)
+    {
+      glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
+    }
+    
+    static void UploadUniformMat3(int32_t location, const glm::mat3& value)
+    {
+      glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
+    }
+    
+    static void UploadUniformFloat1(int32_t location, float value)
+    {
+      glUniform1f(location, value);
+    }
+    
+    static void UploadUniformFloat2(int32_t location, const glm::vec2& value)
+    {
+      glUniform2f(location, value.x, value.y);
+    }
+    
+    static void UploadUniformFloat3(int32_t location, const glm::vec3& value)
+    {
+      glUniform3f(location, value.x, value.y, value.z);
+    }
+    
+    static void UploadUniformFloat4(int32_t location, const glm::vec4& value)
+    {
+      glUniform4f(location, value.x, value.y, value.z, value.w);
+    }
+    
+    static void UploadUniformMat4Array(uint32_t location, const glm::mat4& values, uint32_t count)
+    {
+      glUniformMatrix4fv((GLint)location, (GLsizei)count, GL_FALSE, glm::value_ptr(values));
+    }
   } // namespace ShaderUtils
-  
+
   OpenGLShader::OpenGLShader(const std::filesystem::path& shaderFilePath)
   : m_rendererID(glCreateProgram()), m_filePath(shaderFilePath), m_name(shaderFilePath.filename())
   {
@@ -602,26 +643,26 @@ namespace IKan
     switch (uniform->GetType())
     {
       case OpenGLShaderUniformDeclaration::Type::Float32:
-        UploadUniformFloat1(uniform->GetLocation(), *(float*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformFloat1(uniform->GetLocation(), *(float*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Int32:
       case OpenGLShaderUniformDeclaration::Type::Bool:
-        UploadUniformInt1(uniform->GetLocation(), *(int32_t*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformInt1(uniform->GetLocation(), *(int32_t*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec2:
-        UploadUniformFloat2(uniform->GetLocation(), *(glm::vec2*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformFloat2(uniform->GetLocation(), *(glm::vec2*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec3:
-        UploadUniformFloat3(uniform->GetLocation(), *(glm::vec3*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformFloat3(uniform->GetLocation(), *(glm::vec3*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec4:
-        UploadUniformFloat4(uniform->GetLocation(), *(glm::vec4*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformFloat4(uniform->GetLocation(), *(glm::vec4*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Mat3:
-        UploadUniformMat3(uniform->GetLocation(), *(glm::mat3*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformMat3(uniform->GetLocation(), *(glm::mat3*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Mat4:
-        UploadUniformMat4(uniform->GetLocation(), *(glm::mat4*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformMat4(uniform->GetLocation(), *(glm::mat4*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Struct:
         UploadUniformStruct(uniform, buffer.data, offset);
@@ -638,26 +679,26 @@ namespace IKan
     switch (uniform->GetType())
     {
       case OpenGLShaderUniformDeclaration::Type::Float32:
-        UploadUniformFloat1(uniform->GetLocation(), *(float*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformFloat1(uniform->GetLocation(), *(float*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Int32:
       case OpenGLShaderUniformDeclaration::Type::Bool:
-        UploadUniformInt1(uniform->GetLocation(), *(int32_t*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformInt1(uniform->GetLocation(), *(int32_t*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec2:
-        UploadUniformFloat2(uniform->GetLocation(), *(glm::vec2*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformFloat2(uniform->GetLocation(), *(glm::vec2*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec3:
-        UploadUniformFloat3(uniform->GetLocation(), *(glm::vec3*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformFloat3(uniform->GetLocation(), *(glm::vec3*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec4:
-        UploadUniformFloat4(uniform->GetLocation(), *(glm::vec4*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformFloat4(uniform->GetLocation(), *(glm::vec4*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Mat3:
-        UploadUniformMat3(uniform->GetLocation(), *(glm::mat3*)&buffer.data[offset]);
+        ShaderUtils::UploadUniformMat3(uniform->GetLocation(), *(glm::mat3*)&buffer.data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Mat4:
-        UploadUniformMat4Array((uint32_t)uniform->GetLocation(), *(glm::mat4*)&buffer.data[offset], uniform->GetCount());
+        ShaderUtils::UploadUniformMat4Array((uint32_t)uniform->GetLocation(), *(glm::mat4*)&buffer.data[offset], uniform->GetCount());
         break;
       case OpenGLShaderUniformDeclaration::Type::Struct:
         UploadUniformStruct(uniform, buffer.data, offset);
@@ -678,26 +719,26 @@ namespace IKan
     switch (field.GetType())
     {
       case OpenGLShaderUniformDeclaration::Type::Float32:
-        UploadUniformFloat1(location, *(float*)&data[offset]);
+        ShaderUtils::UploadUniformFloat1(location, *(float*)&data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Int32:
       case OpenGLShaderUniformDeclaration::Type::Bool:
-        UploadUniformInt1(location, *(int32_t*)&data[offset]);
+        ShaderUtils::UploadUniformInt1(location, *(int32_t*)&data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec2:
-        UploadUniformFloat2(location, *(glm::vec2*)&data[offset]);
+        ShaderUtils::UploadUniformFloat2(location, *(glm::vec2*)&data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec3:
-        UploadUniformFloat3(location, *(glm::vec3*)&data[offset]);
+        ShaderUtils::UploadUniformFloat3(location, *(glm::vec3*)&data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Vec4:
-        UploadUniformFloat4(location, *(glm::vec4*)&data[offset]);
+        ShaderUtils::UploadUniformFloat4(location, *(glm::vec4*)&data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Mat3:
-        UploadUniformMat3(location, *(glm::mat3*)&data[offset]);
+        ShaderUtils::UploadUniformMat3(location, *(glm::mat3*)&data[offset]);
         break;
       case OpenGLShaderUniformDeclaration::Type::Mat4:
-        UploadUniformMat4(location, *(glm::mat4*)&data[offset]);
+        ShaderUtils::UploadUniformMat4(location, *(glm::mat4*)&data[offset]);
         break;
       default:
         IK_ASSERT(false, "Unknown uniform type!");
@@ -780,28 +821,20 @@ namespace IKan
   // Uniforms with name ----------------------------------------------------------------------------------------------
   void OpenGLShader::SetUniformInt1(std::string_view name, int32_t value)
   {
-    Renderer::Submit([this, name, value](){
-      glUseProgram(m_rendererID);
-      glUniform1i(GetUniformLocation(name), value);
-    });
+    glUseProgram(m_rendererID);
+    glUniform1i(GetUniformLocation(name), value);
   }
   
   void OpenGLShader::SetIntArray(std::string_view name, int32_t* values, uint32_t count)
   {
-    // Note: Do not submite in queue as this is taken care while Resolving uniforms
-#if 0
-    Renderer::Submit([this, name, values, count](){
-#endif
-      glUseProgram(m_rendererID);
-      int32_t* textureArraySlotData = new int32_t[count];
-      memcpy(textureArraySlotData, values, count * sizeof(int32_t));
-      
-      glUniform1iv(GetUniformLocation(name), (GLsizei)count, textureArraySlotData);
-      delete[] textureArraySlotData;
-#if 0
-    });
-#endif
+    glUseProgram(m_rendererID);
+    int32_t* textureArraySlotData = new int32_t[count];
+    memcpy(textureArraySlotData, values, count * sizeof(int32_t));
+    
+    glUniform1iv(GetUniformLocation(name), (GLsizei)count, textureArraySlotData);
+    delete[] textureArraySlotData;
   }
+  
   void OpenGLShader::SetUniformMat4Array(std::string_view name, const glm::mat4& values, uint32_t count)
   {
     Renderer::Submit([this, name, values, count](){
@@ -848,63 +881,6 @@ namespace IKan
   {
     Renderer::Submit([this, name, value](){
       glUniform4f(GetUniformLocation(name), value.x, value.y, value.z, value.w);
-    });
-  }
-  
-  // Uniforms with location -----------------------------------------------------------------------------------------
-  void OpenGLShader::UploadUniformInt1(int32_t location, int32_t value)
-  {
-    Renderer::Submit([this, location, value](){
-      glUniform1i(location, value);
-    });
-  }
-  
-  void OpenGLShader::UploadUniformMat4(int32_t location, const glm::mat4& value)
-  {
-    Renderer::Submit([this, location, value](){
-      glUniformMatrix4fv(location, 1, GL_FALSE, glm::value_ptr(value));
-    });
-  }
-  
-  void OpenGLShader::UploadUniformMat3(int32_t location, const glm::mat3& value)
-  {
-    Renderer::Submit([this, location, value](){
-      glUniformMatrix3fv(location, 1, GL_FALSE, glm::value_ptr(value));
-    });
-  }
-  
-  void OpenGLShader::UploadUniformFloat1(int32_t location, float value)
-  {
-    Renderer::Submit([this, location, value](){
-      glUniform1f(location, value);
-    });
-  }
-  
-  void OpenGLShader::UploadUniformFloat2(int32_t location, const glm::vec2& value)
-  {
-    Renderer::Submit([this, location, value](){
-      glUniform2f(location, value.x, value.y);
-    });
-  }
-  
-  void OpenGLShader::UploadUniformFloat3(int32_t location, const glm::vec3& value)
-  {
-    Renderer::Submit([this, location, value](){
-      glUniform3f(location, value.x, value.y, value.z);
-    });
-  }
-  
-  void OpenGLShader::UploadUniformFloat4(int32_t location, const glm::vec4& value)
-  {
-    Renderer::Submit([this, location, value](){
-      glUniform4f(location, value.x, value.y, value.z, value.w);
-    });
-  }
-  
-  void OpenGLShader::UploadUniformMat4Array(uint32_t location, const glm::mat4& values, uint32_t count)
-  {
-    Renderer::Submit([this, location, values, count](){
-      glUniformMatrix4fv((GLint)location, (GLsizei)count, GL_FALSE, glm::value_ptr(values));
     });
   }
 } // namespace IKan

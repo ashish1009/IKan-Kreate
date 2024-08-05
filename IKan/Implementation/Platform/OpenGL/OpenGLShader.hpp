@@ -176,55 +176,13 @@ namespace IKan
     ///   - values: Values of Uniform.
     ///   - count: Size of array.
     void SetIntArray(std::string_view name, int32_t* values, uint32_t count);
-    
-    /// This function upload the uniform of type int.
-    /// - Parameters:
-    ///   - location: location of field.
-    ///   - value: value to be uploaded.
-    void UploadUniformInt1(int32_t location, int32_t value);
-    
-    /// This function upload the uniform of type mat 4.
-    /// - Parameters:
-    ///   - location: location of field.
-    ///   - value: value to be uploaded.
-    void UploadUniformMat4(int32_t location, const glm::mat4& value);
-    /// This function upload the uniform of type mat3.
-    /// - Parameters:
-    ///   - location: location of field.
-    ///   - value: value to be uploaded.
-    void UploadUniformMat3(int32_t location, const glm::mat3& value);
-    
-    /// This function upload the uniform of type flaot.
-    /// - Parameters:
-    ///   - location: location of field.
-    ///   - value: value to be uploaded.
-    void UploadUniformFloat1(int32_t location, float value);
-    /// This function upload the uniform of type vec2.
-    /// - Parameters:
-    ///   - location: location of field.
-    ///   - value: value to be uploaded.
-    void UploadUniformFloat2(int32_t location, const glm::vec2& value);
-    /// This function upload the uniform of type vec3.
-    /// - Parameters:
-    ///   - location: location of field.
-    ///   - value: value to be uploaded.
-    void UploadUniformFloat3(int32_t location, const glm::vec3& value);
-    /// This function upload the uniform of type vec4.
-    /// - Parameters:
-    ///   - location: location of field.
-    ///   - value: value to be uploaded.
-    void UploadUniformFloat4(int32_t location, const glm::vec4& value);
-    
-    /// This function upload the uniform of type mat4 array.
-    /// - Parameters:
-    ///   - location: location of field.
-    ///   - value: value to be uploaded.
-    void UploadUniformMat4Array(uint32_t location, const glm::mat4& values, uint32_t count);
+
     /// This function upload the uniform of type structure.
     /// - Parameters:
     ///   - location: location of field.
     ///   - value: value to be uploaded.
     void UploadUniformStruct(OpenGLShaderUniformDeclaration* uniform, std::byte* buffer, uint32_t offset);
+    
     // Member Variables ----------------------------------------------------------------------------------------------
     RendererID m_rendererID {0};
     std::filesystem::path m_filePath {};
