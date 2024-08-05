@@ -1,5 +1,23 @@
 Scene: NewScene.ikscene
 Entities:
+  - Entity: 925973993462184
+    VisibilityComponent:
+      Visibility: true
+    TagComponent:
+      Tag: Sphere
+    Parent: 0
+    Children:
+      []
+    TransformComponent:
+      Position: [0, 0, 0]
+      Rotation: [0, 0, 0]
+      Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 1336252552
+      TilingFactor: 1
+      MaterialTable:
+        0: 0
   - Entity: 2616877886342182920
     VisibilityComponent:
       Visibility: true
@@ -35,3 +53,9 @@ Entities:
       Position: [-10.8000002, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
+    MeshComponent:
+      Enable: true
+      MeshHandle: 0
+      TilingFactor: 1
+      MaterialTable:
+        0: 0

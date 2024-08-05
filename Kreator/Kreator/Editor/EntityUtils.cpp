@@ -16,6 +16,7 @@ namespace Kreator::ECS_Utils
     {
       newEntity = scene->CreateEntity("Empty Entity");
     }
+    ImGui::Separator();
 
     if (ImGui::MenuItem("Camera"))
     {
@@ -23,6 +24,32 @@ namespace Kreator::ECS_Utils
       auto& cc = newEntity.AddComponent<CameraComponent>();
       cc.camera.SetProjectionType(IKan::SceneCamera::ProjectionType::Perspective);
     }
+    ImGui::Separator();
+
+    if (ImGui::MenuItem("Mesh"))
+    {
+      newEntity = scene->CreateEntity("Mesh");
+      auto& meshComp = newEntity.AddComponent<MeshComponent>();
+      meshComp.mesh = 0;
+    }
+
+    ImGui::Separator();
+    static const std::filesystem::path DefaultMeshFile = "Meshes/Default/";
+    auto menuForDefaultMesh = [scene](Entity& newEntity, const std::string& name) {
+      if (ImGui::MenuItem(name.c_str()))
+      {
+        newEntity = scene->CreateEntity(name);
+        std::filesystem::path filePath = DefaultMeshFile / std::string(name + ".fbx");
+        
+        newEntity.AddComponent<MeshComponent>(AssetManager::GetAsset<Mesh>(filePath)->handle);
+      }
+    };
+    
+    menuForDefaultMesh(newEntity, "Cube");
+    menuForDefaultMesh(newEntity, "Sphere");
+    menuForDefaultMesh(newEntity, "Cylinder");
+    
+    ImGui::Separator();
 
     if (newEntity and parent)
     {

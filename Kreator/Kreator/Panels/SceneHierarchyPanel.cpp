@@ -615,6 +615,13 @@ namespace Kreator
     {
       ImGui::PushStyleColor(ImGuiCol_Text, UI::Color::BackgroundDark);
     }
+    bool missingMesh = entity.HasComponent<MeshComponent>() and (AssetManager::IsAssetHandleValid(entity.GetComponent<MeshComponent>().mesh)
+                                                                 and AssetManager::GetAsset<Mesh>(entity.GetComponent<MeshComponent>().mesh)
+                                                                 and AssetManager::GetAsset<Mesh>(entity.GetComponent<MeshComponent>().mesh)->IsFlagSet(AssetFlag::Missing));
+    if (missingMesh)
+    {
+      ImGui::PushStyleColor(ImGuiCol_Text, ImVec4(0.9f, 0.4f, 0.3f, 1.0f));
+    }
 
     // Tree node ----------------------
     ImGuiContext& g = *GImGui;
@@ -699,7 +706,11 @@ namespace Kreator
     {
       ImGui::PopStyleColor();
     }
-    
+    if (missingMesh)
+    {
+      ImGui::PopStyleColor();
+    }
+
     // Drag & Drop -------------------------
     if (ImGui::BeginDragDropSource(ImGuiDragDropFlags_SourceAllowNullID))
     {
@@ -948,6 +959,50 @@ namespace Kreator
       }
       UI::EndPropertyGrid();
     }, s_gearIcon, searchedString, true);
+    
+    DrawComponent<MeshComponent>("Mesh", entity, [&](MeshComponent& smc)
+                                 {
+      UI::ScopedStyle headerRounding(ImGuiStyleVar_FrameRounding, roundingVal);
+      UI::BeginPropertyGrid();
+      
+      Ref<Mesh> mesh = AssetManager::GetAsset<Mesh>(smc.mesh);
+      AssetHandle currentMeshAsset = smc.mesh;
+      if (UI::PropertyAssetReference<Mesh>("Mesh", currentMeshAsset, nullptr, settings))
+      {
+        const auto& metadata = AssetManager::GetMetadata(currentMeshAsset);
+        smc.mesh = metadata.handle;
+      }
+      UI::EndPropertyGrid();
+      
+      // Materials
+      {
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::PopupBackground);
+        bool open = UI::PropertyGridHeader("Material", true, 3, 5);
+        
+        bool rightClicked = ImGui::IsItemClicked(ImGuiMouseButton_Right);
+        float lineHeight = ImGui::GetItemRectMax().y - ImGui::GetItemRectMin().y;
+        
+        ImGui::SameLine(contentRegionAvailable.x - lineHeight);
+        if (ImGui::InvisibleButton("##CreateMaterial", ImVec2{ lineHeight, lineHeight }) or rightClicked)
+        {
+          ImGui::OpenPopup("CreateMaterial");
+        }
+        UI::DrawButtonImage(s_plusIcon, UI::RectExpanded(UI::GetItemRect(), -6.0f, -6.0f), IM_COL32(160, 160, 160, 200), IM_COL32(160, 160, 160, 255), IM_COL32(160, 160, 160, 150));
+        
+        if (UI::BeginPopup("CreateMaterial"))
+        {
+          UI::EndPopup();
+        }
+        
+        if (open)
+        {
+          UI::BeginPropertyGrid();
+          
+          UI::EndPropertyGrid();
+          UI::PropertyGridHeaderEnd();
+        } // property grid header
+      }
+    }, s_gearIcon, searchedString);
   }
   
   bool SceneHierarchyPanel::SearchEntityRecursive(Entity entity, const std::string_view &searchFilter, const uint32_t maxSearchDepth, uint32_t currentDepth)
@@ -1050,7 +1105,19 @@ namespace Kreator
           [[maybe_unused]] auto& cameraComp = m_selectionContext.At(0).AddComponent<CameraComponent>();
           ImGui::CloseCurrentPopup();
         }
+        ImGui::Separator();
       }
+      
+      if (!m_selectionContext.At(0).HasComponent<MeshComponent>())
+      {
+        if (ImGui::MenuItem("Mesh"))
+        {
+          auto& meshComp = m_selectionContext.At(0).AddComponent<MeshComponent>();
+          meshComp.mesh = 0;
+          ImGui::CloseCurrentPopup();
+        }
+        ImGui::Separator();
+      }      
 
       UI::EndPopup();
     }
