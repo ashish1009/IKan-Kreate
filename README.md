@@ -53,6 +53,14 @@ IKan Library can be used independently to develop your own Editor/Game
 ## Kreator
 Kreator is an editor used to develop games using IKan Library and other submodules
 
+### Modules
+- Popups
+- Panles
+- Toolbars
+- Viewports
+- Scene
+- ECS Manager
+
 ## Release
 v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v1.0.1.0 : Application and layer

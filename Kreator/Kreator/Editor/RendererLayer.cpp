@@ -136,7 +136,7 @@ if (!m_currentScene) return
       } // Each Submesh
       return -1;
     };
-  } // namespace Utils
+  } // namespace KreatorUtils
   
   RendererLayer* RendererLayer::s_instance = nullptr;
   RendererLayer& RendererLayer::Get()

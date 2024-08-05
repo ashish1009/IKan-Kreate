@@ -1013,4 +1013,4 @@ namespace Kreator::UI
     
     return TreeNodeWithIcon(icon, window->GetID(label), flags, label, NULL, iconTint);
   }
-} //namespace Kreator::UI
+} // namespace Kreator::UI

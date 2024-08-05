@@ -69,4 +69,4 @@ namespace IKan
     /// This function returns the Advance of Freetpe face
     virtual uint32_t GetAdvance() const = 0;
   };
-} //namespace IKan
+} // namespace IKan

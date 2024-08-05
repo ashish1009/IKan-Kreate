@@ -965,4 +965,4 @@ namespace Kreator::UI
     
     return receivedValidEntity;
   }
-} // Kreator::UI
+} // namespace Kreator::UI

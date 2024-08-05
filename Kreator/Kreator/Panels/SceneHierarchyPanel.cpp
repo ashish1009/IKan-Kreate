@@ -1295,4 +1295,4 @@ namespace Kreator
       UI::EndPopup();
     }
   }
-} //  namesapce Kreator
+} // namespace Kreator
