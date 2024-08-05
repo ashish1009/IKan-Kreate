@@ -246,6 +246,9 @@ if (!m_currentScene) return
     {
       case SceneState::Edit:
       {
+        // Update Asset Viewer
+        AssetEditorManager::OnUpdate(ts);
+
         m_editorCamera.SetActive(m_primaryViewport.isHovered or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
 
@@ -279,6 +282,27 @@ if (!m_currentScene) return
 
     m_editorCamera.OnEvent(event);
     m_panels.OnEvent(event);
+    
+    if (m_sceneState == SceneState::Play)
+    {
+      
+    }
+    else if (m_sceneState == SceneState::Simulate)
+    {
+      if (m_primaryViewport.isHovered)
+      {
+        m_editorCamera.OnEvent(event);
+      }
+    }
+    else if (m_sceneState == SceneState::Edit)
+    {
+      if (m_primaryViewport.isHovered)
+      {
+        m_editorCamera.OnEvent(event);
+      }
+
+      AssetEditorManager::OnEvent(event);
+    }
   }
   
   void RendererLayer::OpenScene(const std::filesystem::path &filepath)
@@ -333,6 +357,7 @@ if (!m_currentScene) return
     UI_EndMainWindowDocking();
     
     UI_NewScenePopup();
+    AssetEditorManager::OnImGuiRender();
   }
   
   const std::filesystem::path& RendererLayer::GetClientResorucePath() const
