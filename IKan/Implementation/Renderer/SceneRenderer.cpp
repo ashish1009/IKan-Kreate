@@ -20,6 +20,7 @@ namespace IKan
     
     // Member viariabls -------------------------------------------
     inline static uint32_t s_numRenderers {0};
+    inline static SceneRendererCamera s_sceneCamera;
   };
   
   // Scene Renderer Data ---------------------------------------------------------------------------------------------
@@ -74,9 +75,10 @@ namespace IKan
     }
   }
   
-  void SceneRenderer::BeginScene()
+  void SceneRenderer::BeginScene(const SceneRendererCamera& sceneCamera)
   {
     IK_PERFORMANCE("SceneRenderer::BeginScene");
+    SceneRendererData::s_sceneCamera = sceneCamera;
   }
   
   void SceneRenderer::EndScene()

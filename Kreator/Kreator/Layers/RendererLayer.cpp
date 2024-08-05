@@ -298,6 +298,8 @@ if (!m_currentScene) return
       {
         break;
       }
+      default:
+        IK_ASSERT(false, "Invalid State");
     }
   }
   
@@ -343,6 +345,8 @@ if (!m_currentScene) return
       {
         break;
       }
+      default:
+        IK_ASSERT(false, "Invalid State");
     }
   }
   
@@ -410,6 +414,8 @@ if (!m_currentScene) return
       {
         break;
       }
+      default:
+        IK_ASSERT(false, "Invalid State");
     }
     
     UI_EndMainWindowDocking();
@@ -438,48 +444,70 @@ if (!m_currentScene) return
     bool leftShift = Input::IsKeyPressed(Key::LeftShift);
     bool rightShift = Input::IsKeyPressed(Key::RightShift);
     
-    if (m_sceneState == SceneState::Edit)
+    switch (m_sceneState)
     {
-      // Scene -----------------------------------------------------------
-      if ((leftCmd or rightCmd) and !Input::IsMouseButtonPressed(MouseButton::Right) and (!leftShift or !rightShift))
+      case SceneState::Edit:
       {
-        switch (e.GetKeyCode())
+        // Scene -----------------------------------------------------------
+        if ((leftCmd or rightCmd) and !Input::IsMouseButtonPressed(MouseButton::Right) and (!leftShift or !rightShift))
         {
-          case Key::N:
-            m_createNewScenePopup.Set("Create New Scene", true, 400, 0, true);
-            break;
-          case Key::O:
-            OpenScene();
-            break;
-          case Key::S:
-            SaveScene();
-            break;
-          default:
-            break;
-        }
-      } // Scenes
-      
-      // Project -----------------------------------------------------------
-      if ((leftCmd or rightCmd) and (leftShift or rightShift))
-      {
-        switch (e.GetKeyCode())
+          switch (e.GetKeyCode())
+          {
+            case Key::N:
+              m_createNewScenePopup.Set("Create New Scene", true, 400, 0, true);
+              break;
+            case Key::O:
+              OpenScene();
+              break;
+            case Key::S:
+              SaveScene();
+              break;
+            default:
+              break;
+          }
+        } // Scenes
+        
+        // Project -----------------------------------------------------------
+        if ((leftCmd or rightCmd) and (leftShift or rightShift))
         {
-          case Key::N:
-            m_createNewProjectPopup.Set("Create New Project", true /* open Flag */, 650, 0, true /* center */);
-            break;
-          case Key::O:
-            FolderExplorer::ShowOpenPopup("Open Project", ProjectExtension, "");
-            m_folderExplorerAction = FolderExplorerAction::OpenProject;
-            break;
-            
-          default:
-            break;
+          switch (e.GetKeyCode())
+          {
+            case Key::N:
+              m_createNewProjectPopup.Set("Create New Project", true /* open Flag */, 650, 0, true /* center */);
+              break;
+            case Key::O:
+              FolderExplorer::ShowOpenPopup("Open Project", ProjectExtension, "");
+              m_folderExplorerAction = FolderExplorerAction::OpenProject;
+              break;
+              
+            default:
+              break;
+          }
         }
+        break;
       }
-    } // if Edit
-    else
-    {
-      
+      case SceneState::Simulate:
+      {
+        if (Input::IsKeyPressed(Key::Escape))
+        {
+          OnSceneStopSimulation();
+        }
+        break;
+      }
+      case SceneState::Play:
+      {
+        if (Input::IsKeyPressed(Key::Escape))
+        {
+          OnSceneStop();
+        }
+        break;
+      }
+      case SceneState::Pause:
+      {
+        break;
+      }
+      default:
+        IK_ASSERT(false, "Invalid State");
     }
     return false;
   }

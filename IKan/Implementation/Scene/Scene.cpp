@@ -120,17 +120,39 @@ namespace IKan
   void Scene::OnRenderEditor(const EditorCamera &camera, SceneRenderer& renderer)
   {
     IK_PERFORMANCE("Scene::OnRenderEditor");
+    
+    // Render 3D Scene
+    renderer.BeginScene({ camera, camera.GetPosition(), camera.GetViewMatrix(), camera.GetNearClip(), camera.GetFarClip(), camera.GetVerticalFOV()});
+    RenderScene(renderer, true);
+    renderer.EndScene();
   }
-  void Scene::OnRenderRuntime(TimeStep ts, SceneRenderer& renderer)
+  void Scene::OnRenderRuntime([[maybe_unused]] TimeStep ts, SceneRenderer& renderer)
   {
     IK_PERFORMANCE("Scene::OnRenderRuntime");
+    
+    Entity cameraEntity = GetMainCameraEntity();
+    if (!cameraEntity)
+    {
+      return;
+    }
+    
+    const auto& mainCamera = cameraEntity.GetComponent<CameraComponent>().camera;
+    const auto& cameraTransformComp = cameraEntity.GetComponent<TransformComponent>();
+    
+    // Render 3D Scene
+    renderer.BeginScene({ mainCamera, cameraTransformComp.Position(), glm::inverse(cameraTransformComp.Transform()), 0.01f, 10000.0f, mainCamera.GetRadPerspectiveVerticalFOV() });
+    RenderScene(renderer, false);
+    renderer.EndScene();
   }
-  
-  void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& camera, SceneRenderer& renderer)
+  void Scene::OnRenderSimulation([[maybe_unused]] TimeStep ts, const EditorCamera& camera, SceneRenderer& renderer)
   {
     IK_PERFORMANCE("Scene::OnRenderSimulation");
+    
+    // Render 3D Scene
+    renderer.BeginScene({ camera, camera.GetPosition(), camera.GetViewMatrix(), camera.GetNearClip(), camera.GetFarClip(), camera.GetVerticalFOV()});
+    RenderScene(renderer, false);
+    renderer.EndScene();
   }
-  
   void Scene::RenderScene(SceneRenderer& renderer, bool isEditing)
   {
     IK_PERFORMANCE("Scene::RenderScene");

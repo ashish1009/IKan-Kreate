@@ -8,9 +8,20 @@
 #pragma once
 
 #include "Renderer/Graphics/FrameBuffer.hpp"
+#include "Camera/Camera.hpp"
 
 namespace IKan
 {
+  /// Scene renderer Camera Data
+  struct SceneRendererCamera
+  {
+    Camera camera;
+    glm::vec3 position;
+    glm::mat4 viewMatrix;
+    float near, far; //Non-reversed
+    float FOV;
+  };
+
   /// This class stores the API to submit the shapes to render them each frame
   /// - Note: This class renderes each shape inside a framebuffer
   class SceneRenderer
@@ -23,7 +34,9 @@ namespace IKan
     ~SceneRenderer();
     
     /// This funciton begins the scene renderering
-    void BeginScene();
+    /// - Parameters:
+    ///   - sceneCamera: Scene Renderer camera data
+    void BeginScene(const SceneRendererCamera& sceneCamera);
     /// This funciton ends the scene renderering and flush the rendering data for frame
     void EndScene();
     
