@@ -60,9 +60,9 @@ namespace IKan
   {
   public:
     /// @see: AssetSerializer
-    virtual void Serialize([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] const Ref<Asset>& asset) const override{ IK_ASSERT(false);}
+    virtual void Serialize([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] const Ref<Asset>& asset) const override;
     /// @see: AssetSerializer
-    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override{ IK_ASSERT(false); return false; }
+    virtual bool TryLoadData([[maybe_unused]] const AssetMetadata& metadata, [[maybe_unused]] Ref<Asset>& asset) const override;
   };
   
   class SceneAssetSerializer : public AssetSerializer

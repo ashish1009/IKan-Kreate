@@ -68,6 +68,38 @@ in VS_OUT
   mat3 TBN;
 } vs_Input;
 
+struct Material
+{
+  vec3 albedoColor;
+  float emission;
+  float metallic;
+  float roughness;
+  float depthScale;
+};
+uniform Material u_Material;
+uniform float u_TilingFactor;
+
+// Texture Uniforms
+uniform sampler2D u_AlbedoTexture;
+uniform sampler2D u_NormalTexture;
+uniform sampler2D u_RoughnessTexture;
+uniform sampler2D u_MetallicTexture;
+uniform sampler2D u_DepthTexture;
+uniform sampler2D u_AoTexture;
+uniform float u_IBLToggle;
+
+// IBL
+uniform samplerCube u_IrradianceMap;
+uniform samplerCube u_PrefilterMap;
+
+// Texture Toggle
+uniform float u_AlbedoTextureToggle;
+uniform float u_NormalTextureToggle;
+uniform float u_RoughnessTextureToggle;
+uniform float u_MetallicTextureToggle;
+uniform float u_DepthTextureToggle;
+uniform float u_AoTextureToggle;
+
 void main()
 {
   o_Color = vec4(1.0f);

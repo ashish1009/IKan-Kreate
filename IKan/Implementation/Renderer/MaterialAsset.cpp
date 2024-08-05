@@ -26,10 +26,12 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
     m_material = Material::Create(ShaderLibrary::Get(CoreAsset("Shaders/PBR_StaticShader.glsl")));
     IK_LOG_INFO(LogModule::MaterialAsset, "Creating Material Asset");
     
-    SetAlbedoColor({0.8f, 0.8f, 0.8f});
-    SetMetalness(0.5);
-    SetRoughness(0.5);
-    SetDepthScale(0.001);
+    Renderer::Submit([this](){
+      SetAlbedoColor({0.8f, 0.8f, 0.8f});
+      SetMetalness(0.5);
+      SetRoughness(0.5);
+      SetDepthScale(0.001);
+    });
   }
   
   MaterialAsset::MaterialAsset(Ref<Material> material)
@@ -54,7 +56,7 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   {
     auto& mat = m_material->Get<MaterialProperty>("u_Material");
     mat.color = color;
-    return m_material->Set<MaterialProperty>("u_Material", mat);
+    m_material->Set<MaterialProperty>("u_Material", mat);
   }
   
   float& MaterialAsset::GetMetalness()
@@ -66,7 +68,7 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   {
     auto& mat = m_material->Get<MaterialProperty>("u_Material");
     mat.metallic = value;
-    return m_material->Set<MaterialProperty>("u_Material", mat);
+    m_material->Set<MaterialProperty>("u_Material", mat);
   }
   
   float& MaterialAsset::GetEmission()
@@ -78,7 +80,7 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   {
     auto& mat = m_material->Get<MaterialProperty>("u_Material");
     mat.emission = value;
-    return m_material->Set<MaterialProperty>("u_Material", mat);
+    m_material->Set<MaterialProperty>("u_Material", mat);
   }
   
   float& MaterialAsset::GetRoughness()
@@ -90,7 +92,7 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   {
     auto& mat = m_material->Get<MaterialProperty>("u_Material");
     mat.roughness = value;
-    return m_material->Set<MaterialProperty>("u_Material", mat);
+    m_material->Set<MaterialProperty>("u_Material", mat);
   }
   
   float& MaterialAsset::GetDepthScale()
@@ -102,7 +104,7 @@ void MaterialAsset::Set##title##Map(Ref<Image> tex) { std::string uniform = "u_"
   {
     auto& mat = m_material->Get<MaterialProperty>("u_Material");
     mat.depthScale = value;
-    return m_material->Set<MaterialProperty>("u_Material", mat);
+    m_material->Set<MaterialProperty>("u_Material", mat);
   }
   
   DefineTextureMapAPI(Albedo)
