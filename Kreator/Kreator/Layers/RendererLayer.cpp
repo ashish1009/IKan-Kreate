@@ -17,6 +17,8 @@
 #include "Panels/AssetPanel.hpp"
 #include "Panels/SceneHierarchyPanel.hpp"
 
+#include "Editor/AssetViewer.hpp"
+
 namespace Kreator
 {
 #define RETRUN_IF_NO_PROJECT() \
@@ -216,6 +218,10 @@ if (!m_currentScene) return
 #ifdef IK_DEBUG
     m_panels.AddPanel<KreatorConsolePanel>(CONSOLE_PANEL_ID, "Editor Log", true);
 #endif
+    
+    // Register Default Asset Editor
+    AssetEditorManager::RegisterEditor<ImageViewer>(AssetType::Image);
+    AssetEditorManager::RegisterEditor<MaterialEditor>(AssetType::Material);
   }
   
   void RendererLayer::OnDetach()
@@ -225,6 +231,9 @@ if (!m_currentScene) return
     
     // Close current Project
     Project::CloseActive();
+    
+    // Clear the Asset Editor
+    AssetEditorManager::Clear();
   }
   
   void RendererLayer::OnUpdate(TimeStep ts)

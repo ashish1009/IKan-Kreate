@@ -1,11 +1,11 @@
 //
-//  AssetEdditor.cpp
+//  AssetEditor.cpp
 //  IKan
 //
 //  Created by Ashish . on 29/07/24.
 //
 
-#include "AssetEdditor.hpp"
+#include "AssetEditor.hpp"
 
 #include "Assets/AssetManager.hpp"
 

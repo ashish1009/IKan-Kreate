@@ -349,6 +349,31 @@ namespace Kreator
     {
       RenderHierarchy();
 
+      ImRect windowRect = { ImGui::GetWindowContentRegionMin(), ImGui::GetWindowContentRegionMax() };
+      if (ImGui::BeginDragDropTargetCustom(UI::RectOffset(windowRect, ImGui::GetWindowPos()) , ImGui::GetCurrentWindow()->ID))
+      {
+        const ImGuiPayload* payload = ImGui::AcceptDragDropPayload("scene_entity_hierarchy", ImGuiDragDropFlags_AcceptNoDrawDefaultRect);
+        
+        if (payload)
+        {
+          IK_ASSERT(false);
+        }
+        
+        ImGui::EndDragDropTarget();
+      }
+      
+      if (m_selectedMeshMaterialAsset)
+      {
+        if (m_showMaterialEditor)
+        {
+          AssetEditorManager::OpenEditor(m_selectedMeshMaterialAsset);
+        }
+        else
+        {
+          AssetEditorManager::CloseEditor(m_selectedMeshMaterialAsset);
+        }
+      }
+      
       ImGui::End();
 
       {

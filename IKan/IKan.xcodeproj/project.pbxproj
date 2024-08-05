@@ -38,8 +38,8 @@
 		B22AB2AA2C576FEB007453B7 /* EditorConsoleSink.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2A82C576FEB007453B7 /* EditorConsoleSink.hpp */; };
 		B22AB2AD2C57701B007453B7 /* EditorConsolePanel.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2AB2C57701B007453B7 /* EditorConsolePanel.cpp */; };
 		B22AB2AE2C57701B007453B7 /* EditorConsolePanel.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2AC2C57701B007453B7 /* EditorConsolePanel.hpp */; };
-		B22AB2B12C577226007453B7 /* AssetEdditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2AF2C577226007453B7 /* AssetEdditor.cpp */; };
-		B22AB2B22C577226007453B7 /* AssetEdditor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2B02C577226007453B7 /* AssetEdditor.hpp */; };
+		B22AB2B12C577226007453B7 /* AssetEditor.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B22AB2AF2C577226007453B7 /* AssetEditor.cpp */; };
+		B22AB2B22C577226007453B7 /* AssetEditor.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B22AB2B02C577226007453B7 /* AssetEditor.hpp */; };
 		B23F459D2C57F5EF000A0944 /* Entity.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23F459C2C57F5EF000A0944 /* Entity.hpp */; };
 		B23F459E2C57F5EF000A0944 /* Entity.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F459B2C57F5EF000A0944 /* Entity.cpp */; };
 		B23F45A12C57F5F3000A0944 /* Component.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B23F45A02C57F5F3000A0944 /* Component.hpp */; };
@@ -226,8 +226,8 @@
 		B22AB2A82C576FEB007453B7 /* EditorConsoleSink.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsoleSink.hpp; sourceTree = "<group>"; };
 		B22AB2AB2C57701B007453B7 /* EditorConsolePanel.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = EditorConsolePanel.cpp; sourceTree = "<group>"; };
 		B22AB2AC2C57701B007453B7 /* EditorConsolePanel.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = EditorConsolePanel.hpp; sourceTree = "<group>"; };
-		B22AB2AF2C577226007453B7 /* AssetEdditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetEdditor.cpp; sourceTree = "<group>"; };
-		B22AB2B02C577226007453B7 /* AssetEdditor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetEdditor.hpp; sourceTree = "<group>"; };
+		B22AB2AF2C577226007453B7 /* AssetEditor.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = AssetEditor.cpp; sourceTree = "<group>"; };
+		B22AB2B02C577226007453B7 /* AssetEditor.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AssetEditor.hpp; sourceTree = "<group>"; };
 		B23F459B2C57F5EF000A0944 /* Entity.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Entity.cpp; sourceTree = "<group>"; };
 		B23F459C2C57F5EF000A0944 /* Entity.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Entity.hpp; sourceTree = "<group>"; };
 		B23F459F2C57F5F3000A0944 /* Component.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Component.cpp; sourceTree = "<group>"; };
@@ -418,7 +418,7 @@
 				B22AB29C2C576F74007453B7 /* Console */,
 				B22AB2902C576DD4007453B7 /* EditorPanel.hpp */,
 				B22AB2942C576E74007453B7 /* EditorPanelManager.hpp */,
-				B22AB2B02C577226007453B7 /* AssetEdditor.hpp */,
+				B22AB2B02C577226007453B7 /* AssetEditor.hpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -428,7 +428,7 @@
 			children = (
 				B22AB2A22C576F7B007453B7 /* Console */,
 				B22AB2932C576E74007453B7 /* EditorPanelManager.cpp */,
-				B22AB2AF2C577226007453B7 /* AssetEdditor.cpp */,
+				B22AB2AF2C577226007453B7 /* AssetEditor.cpp */,
 			);
 			path = Editor;
 			sourceTree = "<group>";
@@ -928,7 +928,7 @@
 				B2FDDA922C47ACDD0062C6E1 /* SceneRenderer.hpp in Headers */,
 				B2D296C32C40EEDA0093F4DA /* OpenGLTexture.hpp in Headers */,
 				B22AB28D2C576CE5007453B7 /* Scene.hpp in Headers */,
-				B22AB2B22C577226007453B7 /* AssetEdditor.hpp in Headers */,
+				B22AB2B22C577226007453B7 /* AssetEditor.hpp in Headers */,
 				B22AAF622C4A3EE2007453B7 /* AssetMetadata.hpp in Headers */,
 				B2D296EA2C41073E0093F4DA /* BufferLayout.hpp in Headers */,
 				B23F45DC2C5CED6C000A0944 /* Scene3D.hpp in Headers */,
@@ -1158,7 +1158,7 @@
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
 				B22AAF6A2C4A437A007453B7 /* AssetRegistry.cpp in Sources */,
 				B2D2928C2C38573B0093F4DA /* LoggerSpecificationBuilder.cpp in Sources */,
-				B22AB2B12C577226007453B7 /* AssetEdditor.cpp in Sources */,
+				B22AB2B12C577226007453B7 /* AssetEditor.cpp in Sources */,
 				B22AB2AD2C57701B007453B7 /* EditorConsolePanel.cpp in Sources */,
 				B24A66D32C45554C00B870DE /* Materials.cpp in Sources */,
 				B2D297602C454C3E0093F4DA /* FixedCamera.cpp in Sources */,
