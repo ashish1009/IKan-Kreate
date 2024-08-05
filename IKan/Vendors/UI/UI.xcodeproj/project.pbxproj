@@ -7,6 +7,15 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B23F462E2C60F5E4000A0944 /* ImCurveEdit.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F46162C60F5E3000A0944 /* ImCurveEdit.cpp */; };
+		B23F462F2C60F5E4000A0944 /* ImCurveEdit.h in Headers */ = {isa = PBXBuildFile; fileRef = B23F46172C60F5E3000A0944 /* ImCurveEdit.h */; };
+		B23F46302C60F5E4000A0944 /* ImGradient.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F46182C60F5E3000A0944 /* ImGradient.cpp */; };
+		B23F46312C60F5E4000A0944 /* ImGradient.h in Headers */ = {isa = PBXBuildFile; fileRef = B23F46192C60F5E3000A0944 /* ImGradient.h */; };
+		B23F46322C60F5E4000A0944 /* ImGuizmo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F461A2C60F5E3000A0944 /* ImGuizmo.cpp */; };
+		B23F46332C60F5E4000A0944 /* ImGuizmo.h in Headers */ = {isa = PBXBuildFile; fileRef = B23F461B2C60F5E3000A0944 /* ImGuizmo.h */; };
+		B23F46342C60F5E4000A0944 /* ImSequencer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B23F461C2C60F5E3000A0944 /* ImSequencer.cpp */; };
+		B23F46352C60F5E4000A0944 /* ImSequencer.h in Headers */ = {isa = PBXBuildFile; fileRef = B23F461D2C60F5E3000A0944 /* ImSequencer.h */; };
+		B23F46362C60F5E4000A0944 /* ImZoomSlider.h in Headers */ = {isa = PBXBuildFile; fileRef = B23F461E2C60F5E3000A0944 /* ImZoomSlider.h */; };
 		B2D296672C3C00780093F4DA /* imconfig.h in Headers */ = {isa = PBXBuildFile; fileRef = B2D295FB2C3C00780093F4DA /* imconfig.h */; };
 		B2D296682C3C00780093F4DA /* imgui_demo.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D295FC2C3C00780093F4DA /* imgui_demo.cpp */; };
 		B2D296692C3C00780093F4DA /* imgui_draw.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D295FD2C3C00780093F4DA /* imgui_draw.cpp */; };
@@ -21,6 +30,17 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		B23F46162C60F5E3000A0944 /* ImCurveEdit.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImCurveEdit.cpp; sourceTree = "<group>"; };
+		B23F46172C60F5E3000A0944 /* ImCurveEdit.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImCurveEdit.h; sourceTree = "<group>"; };
+		B23F46182C60F5E3000A0944 /* ImGradient.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImGradient.cpp; sourceTree = "<group>"; };
+		B23F46192C60F5E3000A0944 /* ImGradient.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImGradient.h; sourceTree = "<group>"; };
+		B23F461A2C60F5E3000A0944 /* ImGuizmo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImGuizmo.cpp; sourceTree = "<group>"; };
+		B23F461B2C60F5E3000A0944 /* ImGuizmo.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImGuizmo.h; sourceTree = "<group>"; };
+		B23F461C2C60F5E3000A0944 /* ImSequencer.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = ImSequencer.cpp; sourceTree = "<group>"; };
+		B23F461D2C60F5E3000A0944 /* ImSequencer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImSequencer.h; sourceTree = "<group>"; };
+		B23F461E2C60F5E3000A0944 /* ImZoomSlider.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = ImZoomSlider.h; sourceTree = "<group>"; };
+		B23F461F2C60F5E3000A0944 /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		B23F46202C60F5E3000A0944 /* README.md */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		B2D295082C3C00560093F4DA /* libUI.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libUI.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		B2D295FB2C3C00780093F4DA /* imconfig.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = imconfig.h; sourceTree = "<group>"; };
 		B2D295FC2C3C00780093F4DA /* imgui_demo.cpp */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.cpp.cpp; path = imgui_demo.cpp; sourceTree = "<group>"; };
@@ -47,9 +67,29 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		B23F46212C60F5E3000A0944 /* ImGuizmo */ = {
+			isa = PBXGroup;
+			children = (
+				B23F461F2C60F5E3000A0944 /* LICENSE */,
+				B23F46202C60F5E3000A0944 /* README.md */,
+				B23F46162C60F5E3000A0944 /* ImCurveEdit.cpp */,
+				B23F46172C60F5E3000A0944 /* ImCurveEdit.h */,
+				B23F46182C60F5E3000A0944 /* ImGradient.cpp */,
+				B23F46192C60F5E3000A0944 /* ImGradient.h */,
+				B23F461A2C60F5E3000A0944 /* ImGuizmo.cpp */,
+				B23F461B2C60F5E3000A0944 /* ImGuizmo.h */,
+				B23F461C2C60F5E3000A0944 /* ImSequencer.cpp */,
+				B23F461D2C60F5E3000A0944 /* ImSequencer.h */,
+				B23F461E2C60F5E3000A0944 /* ImZoomSlider.h */,
+			);
+			name = ImGuizmo;
+			path = "../../../../IKan-Kreate_old/IKan/Vendors/UI/ImGuizmo";
+			sourceTree = "<group>";
+		};
 		B2D294FF2C3C00560093F4DA = {
 			isa = PBXGroup;
 			children = (
+				B23F46212C60F5E3000A0944 /* ImGuizmo */,
 				B2D296072C3C00780093F4DA /* ImGui */,
 				B2D295092C3C00560093F4DA /* Products */,
 			);
@@ -91,10 +131,15 @@
 			files = (
 				B2D2966E2C3C00780093F4DA /* imgui.h in Headers */,
 				B2D296712C3C00780093F4DA /* imstb_truetype.h in Headers */,
+				B23F46352C60F5E4000A0944 /* ImSequencer.h in Headers */,
 				B2D296702C3C00780093F4DA /* imstb_textedit.h in Headers */,
+				B23F46312C60F5E4000A0944 /* ImGradient.h in Headers */,
+				B23F46332C60F5E4000A0944 /* ImGuizmo.h in Headers */,
 				B2D2966A2C3C00780093F4DA /* imgui_internal.h in Headers */,
+				B23F462F2C60F5E4000A0944 /* ImCurveEdit.h in Headers */,
 				B2D296672C3C00780093F4DA /* imconfig.h in Headers */,
 				B2D2966F2C3C00780093F4DA /* imstb_rectpack.h in Headers */,
+				B23F46362C60F5E4000A0944 /* ImZoomSlider.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -157,9 +202,13 @@
 			files = (
 				B2D296692C3C00780093F4DA /* imgui_draw.cpp in Sources */,
 				B2D2966D2C3C00780093F4DA /* imgui.cpp in Sources */,
+				B23F46322C60F5E4000A0944 /* ImGuizmo.cpp in Sources */,
+				B23F46302C60F5E4000A0944 /* ImGradient.cpp in Sources */,
 				B2D2966C2C3C00780093F4DA /* imgui_widgets.cpp in Sources */,
 				B2D296682C3C00780093F4DA /* imgui_demo.cpp in Sources */,
 				B2D2966B2C3C00780093F4DA /* imgui_tables.cpp in Sources */,
+				B23F46342C60F5E4000A0944 /* ImSequencer.cpp in Sources */,
+				B23F462E2C60F5E4000A0944 /* ImCurveEdit.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -284,12 +333,22 @@
 		B2D295142C3C00560093F4DA /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_DEADCODE_DEADSTORES = NO;
+				CLANG_ANALYZER_OBJC_UNUSED_IVARS = NO;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78KTXZ99TW;
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
-				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/ImGui";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/ImGui",
+					"${PROJECT_DIR}/ImGuizmo",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ImGui/examples/libs/glfw/lib-vc2010-32",
@@ -303,12 +362,22 @@
 		B2D295152C3C00560093F4DA /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
+				CLANG_ANALYZER_DEADCODE_DEADSTORES = NO;
+				CLANG_ANALYZER_OBJC_UNUSED_IVARS = NO;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = NO;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = 78KTXZ99TW;
 				EXECUTABLE_PREFIX = lib;
 				GCC_ENABLE_CPP_EXCEPTIONS = YES;
 				GCC_ENABLE_CPP_RTTI = YES;
-				HEADER_SEARCH_PATHS = "${PROJECT_DIR}/ImGui";
+				GCC_WARN_ABOUT_DEPRECATED_FUNCTIONS = NO;
+				GCC_WARN_UNUSED_FUNCTION = NO;
+				GCC_WARN_UNUSED_VALUE = NO;
+				GCC_WARN_UNUSED_VARIABLE = NO;
+				HEADER_SEARCH_PATHS = (
+					"${PROJECT_DIR}/ImGui",
+					"${PROJECT_DIR}/ImGuizmo",
+				);
 				LIBRARY_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/ImGui/examples/libs/glfw/lib-vc2010-32",
