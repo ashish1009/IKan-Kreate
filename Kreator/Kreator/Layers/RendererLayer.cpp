@@ -18,6 +18,7 @@
 #include "Panels/SceneHierarchyPanel.hpp"
 
 #include "Editor/AssetViewer.hpp"
+#include "Editor/EntityUtils.hpp"
 
 namespace Kreator
 {
@@ -647,6 +648,17 @@ if (!m_currentScene) return
     return { rayPos, rayDir };
   }
   
+  float RendererLayer::GetSnapValue()
+  {
+    switch (m_gizmoType)
+    {
+      case ImGuizmo::OPERATION::TRANSLATE: return 0.5f;
+      case ImGuizmo::OPERATION::ROTATE: return 45.0f;
+      case ImGuizmo::OPERATION::SCALE: return 0.5f;
+    }
+    return 0.0f;
+  }
+
   void RendererLayer::NewScene(const std::string& name)
   {
     IK_PROFILE();
@@ -1401,6 +1413,7 @@ if (!m_currentScene) return
     {
       UI_SceneToolbar();
       UI_GuizmoToolbar();
+      UI_UpdateGuizmo();
     }
     
     auto windowSize = ImGui::GetWindowSize();
@@ -2104,5 +2117,75 @@ if (!m_currentScene) return
     ImGui::EndVertical();
     
     ImGui::End();
+  }
+  
+  void RendererLayer::UI_UpdateGuizmo()
+  {
+    IK_PERFORMANCE("RendererLayer::UI_GuizmoToolbar");
+    if (Input::IsKeyPressed(IKan::Key::LeftControl))
+    {
+      return;
+    }
+    
+    if (m_gizmoType != -1 and m_selectionContext.size() and m_currentScene != m_runtimeScene)
+    {
+      float rw = (float)ImGui::GetWindowWidth();
+      float rh = (float)ImGui::GetWindowHeight();
+      ImGuizmo::SetOrthographic(false);
+      ImGuizmo::SetDrawlist();
+      ImGuizmo::SetRect(ImGui::GetWindowPos().x, ImGui::GetWindowPos().y, rw, rh);
+      
+      bool snap = Input::IsKeyPressed(Key::LeftShift);
+      float snapValue = GetSnapValue();
+      float snapValues[3] = { snapValue, snapValue, snapValue };
+      
+      if (Input::IsKeyPressed(Key::LeftAlt))
+      {
+        m_gizmoMode = 1;
+      }
+      else
+      {
+        m_gizmoMode = 0;
+      }
+      
+      auto& selection = m_selectionContext[0];
+      TransformComponent& entityTransform_1 = selection.entity.GetTransform();
+      
+      glm::mat4 transform = entityTransform_1.Transform();
+      ImGuizmo::Manipulate(glm::value_ptr(m_editorCamera.GetViewMatrix()),
+                           glm::value_ptr(m_editorCamera.GetUnReversedProjectionMatrix()),
+                           (ImGuizmo::OPERATION)m_gizmoType,
+                           (ImGuizmo::MODE)m_gizmoMode,
+                           glm::value_ptr(transform),
+                           nullptr,
+                           snap ? snapValues : nullptr);
+      
+      glm::vec3 translation, rotation, scale;
+      Utils::Math::DecomposeTransform(transform, translation, rotation, scale);
+      
+      glm::vec3 deltaPosition = glm::vec3(0.0f);
+      if (m_gizmoType == ImGuizmo::OPERATION::TRANSLATE)
+      {
+        deltaPosition = translation - entityTransform_1.Position();
+      }
+      glm::vec3 deltaRotation = glm::vec3(0.0f);
+      if (m_gizmoType == ImGuizmo::OPERATION::ROTATE)
+      {
+        deltaRotation = rotation - entityTransform_1.Rotation();
+      }
+      glm::vec3 deltaScale = glm::vec3(0.0f);
+      if (m_gizmoType == ImGuizmo::OPERATION::SCALE)
+      {
+        deltaScale = scale - entityTransform_1.Scale();
+      }
+      
+      for (auto& selection : m_selectionContext)
+      {
+        if (ImGuizmo::IsUsing())
+        {
+          ECS_Utils::UpdateChildrenTransform(m_currentScene, selection.entity, deltaPosition, deltaScale, deltaRotation, selection.entity);
+        } // If Guizmo using
+      } // for each selection context
+    } // if valid selection and guizmo
   }
 } // namespace Kreator

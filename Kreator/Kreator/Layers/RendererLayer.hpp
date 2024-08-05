@@ -77,6 +77,9 @@ namespace Kreator
     /// - Parameter camera: Camera
     Ray CastRay(const EditorCamera& camera);
     
+    /// This function returns the Imguizmo Snap value
+    float GetSnapValue();
+
     // Scene APIs ----------------------------------------
     /// This function creates new scene
     /// - Parameter name: Scene name
@@ -172,6 +175,8 @@ namespace Kreator
     void UI_SceneToolbar();
     /// This function renders the Guizmo toolbar
     void UI_GuizmoToolbar();
+    /// This function Update the Guizmo Renderer
+    void UI_UpdateGuizmo();
 
     // Memeber variables ----------------------------------------------------------------------------------------------
     // Popups/Panel --------------------------------------
