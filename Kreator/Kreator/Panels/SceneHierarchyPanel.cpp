@@ -423,8 +423,16 @@ namespace Kreator
     {
       return;
     }
-
-    m_selectionContext.PushBack(entity);
+    
+    if (m_selectionContext.Find(entity))
+    {
+      m_selectionContext.Erase(entity);
+    }
+    else 
+    {
+      m_selectionContext.PushBack(entity);
+    }
+    
     if (m_selectionChangedCallback)
     {
       m_selectionChangedCallback(m_selectionContext);

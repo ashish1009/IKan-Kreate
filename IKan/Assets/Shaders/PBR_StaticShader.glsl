@@ -102,5 +102,5 @@ uniform float u_AoTextureToggle;
 
 void main()
 {
-  o_Color = vec4(1.0f);
+  o_Color = vec4(u_Material.albedoColor, 1.0f);
 }
