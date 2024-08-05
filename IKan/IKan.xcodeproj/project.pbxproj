@@ -149,6 +149,8 @@
 		B2D297722C45518E0093F4DA /* AABB.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297702C45518E0093F4DA /* AABB.hpp */; };
 		B2F194F72C60F89600596F24 /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2F194F52C60F89600596F24 /* Ray.cpp */; };
 		B2F194F82C60F89600596F24 /* Ray.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2F194F62C60F89600596F24 /* Ray.hpp */; };
+		B2F195022C613C3100596F24 /* ECS_Utils.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2F195002C613C3100596F24 /* ECS_Utils.cpp */; };
+		B2F195032C613C3100596F24 /* ECS_Utils.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2F195012C613C3100596F24 /* ECS_Utils.hpp */; };
 		B2FDDA762C4580700062C6E1 /* libStbImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FDDA702C4580420062C6E1 /* libStbImage.a */; };
 		B2FDDA922C47ACDD0062C6E1 /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2FDDA912C47ACDD0062C6E1 /* SceneRenderer.hpp */; };
 		B2FDDA932C47ACDD0062C6E1 /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2FDDA902C47ACDD0062C6E1 /* SceneRenderer.cpp */; };
@@ -362,6 +364,8 @@
 		B2D297702C45518E0093F4DA /* AABB.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AABB.hpp; sourceTree = "<group>"; };
 		B2F194F52C60F89600596F24 /* Ray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ray.cpp; sourceTree = "<group>"; };
 		B2F194F62C60F89600596F24 /* Ray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ray.hpp; sourceTree = "<group>"; };
+		B2F195002C613C3100596F24 /* ECS_Utils.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = ECS_Utils.cpp; sourceTree = "<group>"; };
+		B2F195012C613C3100596F24 /* ECS_Utils.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = ECS_Utils.hpp; sourceTree = "<group>"; };
 		B2FDDA6B2C4580420062C6E1 /* StbImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StbImage.xcodeproj; path = StbImage/StbImage.xcodeproj; sourceTree = "<group>"; };
 		B2FDDA902C47ACDD0062C6E1 /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
 		B2FDDA912C47ACDD0062C6E1 /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
@@ -445,6 +449,7 @@
 				B23F45A02C57F5F3000A0944 /* Component.hpp */,
 				B23F45A82C57F60A000A0944 /* SceneSerializer.hpp */,
 				B23F45A42C57F603000A0944 /* EntitySerializer.hpp */,
+				B2F195012C613C3100596F24 /* ECS_Utils.hpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -461,6 +466,7 @@
 				B23F459F2C57F5F3000A0944 /* Component.cpp */,
 				B23F45A32C57F603000A0944 /* EntitySerializer.cpp */,
 				B23F45A72C57F60A000A0944 /* SceneSerializer.cpp */,
+				B2F195002C613C3100596F24 /* ECS_Utils.cpp */,
 			);
 			path = Scene;
 			sourceTree = "<group>";
@@ -994,6 +1000,7 @@
 				B2D296D32C40F3230093F4DA /* RendererStats.hpp in Headers */,
 				B23F45F32C5DEE96000A0944 /* YAMLSerializer.hpp in Headers */,
 				B2D296DA2C41028F0093F4DA /* RendererBuffer.hpp in Headers */,
+				B2F195032C613C3100596F24 /* ECS_Utils.hpp in Headers */,
 				B22AAF552C480146007453B7 /* AssetType.hpp in Headers */,
 				B2D297362C452CB70093F4DA /* Font.hpp in Headers */,
 				B22AB2A62C576F86007453B7 /* EditorConsoleMessage.hpp in Headers */,
@@ -1135,6 +1142,7 @@
 				B22AAF632C4A3EE2007453B7 /* AssetMetadata.cpp in Sources */,
 				B2D292972C3863F30093F4DA /* StringUtils.cpp in Sources */,
 				B2D297552C4548BD0093F4DA /* SceneCamera.cpp in Sources */,
+				B2F195022C613C3100596F24 /* ECS_Utils.cpp in Sources */,
 				B2D292932C38637E0093F4DA /* FileSystemUtils.cpp in Sources */,
 				B2D294F02C3BF6FB0093F4DA /* Factories.cpp in Sources */,
 				B2D292C92C3BCD930093F4DA /* LayerStack.cpp in Sources */,

@@ -105,3 +105,4 @@
 #include <Scene/Component.hpp>
 #include <Scene/SceneSerializer.hpp>
 #include <Scene/EntitySerializer.hpp>
+#include <Scene/ECS_Utils.hpp>

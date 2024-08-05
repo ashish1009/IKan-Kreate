@@ -2218,7 +2218,7 @@ if (!m_currentScene) return
       {
         if (ImGuizmo::IsUsing())
         {
-          ECS_Utils::UpdateChildrenTransform(m_currentScene, selection.entity, deltaPosition, deltaScale, deltaRotation, selection.entity);
+          IKan::ECS_Utils::UpdateChildrenTransform(m_currentScene, selection.entity, deltaPosition, deltaScale, deltaRotation, selection.entity);
         } // If Guizmo using
       } // for each selection context
     } // if valid selection and guizmo

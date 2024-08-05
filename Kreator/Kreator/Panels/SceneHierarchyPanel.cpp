@@ -951,14 +951,14 @@ namespace Kreator
       Entity parentEntity = m_context->TryGetEntityWithUUID(curretnParent);
       if (parentEntity)
       {
-        m_context->ParentEntity(entity, parentEntity);
+        IKan::ECS_Utils::ParentEntity(m_context, entity, parentEntity);
       }
       
       ImGui::SameLine();
       float prevItemHeight = ImGui::GetItemRectSize().y;
       if (UI::DrawButton("X", UI::FontType::Regular, UI::Color::Text, UI::Color::Muted, 5.0f, {prevItemHeight, prevItemHeight}))
       {
-        m_context->UnparentEntity(entity);
+        IKan::ECS_Utils::UnparentEntity(m_context, entity);
       }
       ImGui::NextColumn();
       UI::EndPropertyGrid();
