@@ -99,11 +99,64 @@ namespace IKan
     IK_LOG_TRACE(LogModule::Scene, "Destroying {0} Scene. (Registry Capacity {1})", m_name, m_registryCapacity);
   }
   
-  void Scene::OnClose()
+  void Scene::OnUpdateEditor()
+  {
+    IK_PERFORMANCE("Scene::OnUpdateEditor");
+  }
+  void Scene::OnUpdateRuntime(TimeStep ts)
+  {
+    IK_PERFORMANCE("Scene::OnUpdateRuntime");
+  }
+  
+  void Scene::OnRuntimeEventHandler(Event& event)
+  {
+    
+  }
+  void Scene::OnEditorEventHandler(Event& event)
+  {
+
+  }
+  
+  void Scene::OnRenderEditor(const EditorCamera &camera, SceneRenderer& renderer)
+  {
+    IK_PERFORMANCE("Scene::OnRenderEditor");
+  }
+  void Scene::OnRenderRuntime(TimeStep ts, SceneRenderer& renderer)
+  {
+    IK_PERFORMANCE("Scene::OnRenderRuntime");
+  }
+  
+  void Scene::OnRenderSimulation(TimeStep ts, const EditorCamera& camera, SceneRenderer& renderer)
+  {
+    IK_PERFORMANCE("Scene::OnRenderSimulation");
+  }
+  
+  void Scene::RenderScene(SceneRenderer& renderer, bool isEditing)
+  {
+    IK_PERFORMANCE("Scene::RenderScene");
+  }
+  
+  void Scene::OnRuntimeStart()
+  {
+    IK_PROFILE();
+  }
+  void Scene::OnRuntimeStop()
+  {
+    IK_PROFILE();
+  }
+  void Scene::OnSimulationStart()
+  {
+    IK_PROFILE();
+  }
+  void Scene::OnSimulationStop()
   {
     IK_PROFILE();
   }
   
+  void Scene::OnClose()
+  {
+    IK_PROFILE();
+  }
   void Scene::CopyTo(Ref<Scene> &target)
   {
     IK_PROFILE();

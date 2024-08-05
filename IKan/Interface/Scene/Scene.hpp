@@ -9,7 +9,10 @@
 
 #include <entt/entt.hpp>
 
+#include "Core/TimeStep.hpp"
 #include "Assets/Asset.hpp"
+#include "Camera/EditorCamera.hpp"
+#include "Renderer/SceneRenderer.hpp"
 
 namespace IKan
 {
@@ -36,6 +39,46 @@ namespace IKan
     ~Scene();
     
     // Runtime APIs ------------------------------------------------------------------------------------------------
+    /// This functionm updates the scene for editor
+    void OnUpdateEditor();
+    /// This functionm updates the scene for runtime
+    /// - Parameter ts: time step of 2 frames
+    void OnUpdateRuntime(TimeStep ts);
+    
+    /// This dunction handles the events of the scene
+    /// - Parameter event: event triggered
+    void OnRuntimeEventHandler(Event& event);
+    /// This dunction handles the events of the scene
+    /// - Parameter event: event triggered
+    void OnEditorEventHandler(Event& event);
+    
+    /// This function renders the scene for editor
+    /// - Parameters:
+    ///  - editorCamera: Editor Camera
+    ///  - renderer: Scene renderer cintext
+    void OnRenderEditor(const EditorCamera& editorCamera, SceneRenderer& renderer);
+    /// This function renders the scene for runtime
+    /// - Parameters:
+    ///  - ts: time step of 2 frames
+    ///  - renderer: Scene renderer cintext
+    void OnRenderRuntime(TimeStep ts, SceneRenderer& renderer);
+    /// This function renders the scene for simulation
+    /// - Parameters:
+    ///  - ts: time step of 2 frames
+    ///  - editorCamera: Editor Camera
+    ///  - renderer: Scene renderer cintext
+    void OnRenderSimulation(TimeStep ts, const EditorCamera& editorCamera, SceneRenderer& renderer);
+    
+    /// This function handle runtime start
+    void OnRuntimeStart();
+    /// This function handle runtime stop
+    void OnRuntimeStop();
+    
+    /// This function handle simulation start
+    void OnSimulationStart();
+    /// This function handle simulation stop
+    void OnSimulationStop();
+    
     /// This function closes the current scene
     void OnClose();
 
@@ -114,6 +157,13 @@ namespace IKan
     ASSET_TYPE(Scene);
     
   private:
+    // Member Functions ---------------------------------------------------------------------------------------------
+    /// This function renders the scene insice pass
+    /// - Parameters:
+    ///   - renderer: Scene renderer instance
+    ///   - isEditing: flag is editing
+    void RenderScene(SceneRenderer& renderer, bool isEditing);
+
     // Member Variables ---------------------------------------------------------------------------------------------
     // Scene Utils ----------------------
     std::string m_name {};

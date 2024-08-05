@@ -70,6 +70,8 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v4.0.3.2 : ECS / Panel
 
 ## Road Map
+- Load all assets before game loop ( Open Project )
+- Mutli thread
 - Scene [3D]
     - Scene Renderer
     - Lights
