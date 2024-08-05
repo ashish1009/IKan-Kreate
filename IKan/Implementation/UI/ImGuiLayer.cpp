@@ -10,6 +10,8 @@
 #include <backends/imgui_impl_opengl3.cpp>
 #include <backends/imgui_impl_glfw.cpp>
 
+#include <ImGuizmo.h>
+
 #include <GLFW/glfw3.h>
 
 #include "Core/Application.hpp"
@@ -91,6 +93,7 @@ namespace IKan::UI
     ImGui::SaveIniSettingsToDisk(m_initFilePath.string().c_str());
     
     ImGui::NewFrame();
+    ImGuizmo::BeginFrame();
   }
   
   void ImGuiLayer::End()

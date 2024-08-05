@@ -41,6 +41,8 @@ IKan Library can be used independently to develop your own Editor/Game
   - {...}/Vendors/Glm
   - {...}/Vendors/UI/ImGui
   - {...}/Vendors/YAML/YAML/include
+  - {...}/Vendors/UI/ImGuizmo
+  - {...}/Vendors/EnTT
 ### Library Search Paths
 `{...} directory where IKan Engine is cloned`
   - {...}/Vendors/Assimp/lib
