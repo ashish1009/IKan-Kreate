@@ -178,6 +178,13 @@ if (!m_currentScene) return
     m_stopButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Stop.png"));
     m_simulateButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Simulate.png"));
     m_pauseButtonTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Pause.png"));
+    
+    // Guizmo Button
+    m_selectToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Pointer.png"));
+    m_moveToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Move.png"));
+    m_rotateToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Rotate.png"));
+    m_scaleToolTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/Scale.png"));
+    m_gizmoModeTex = TextureFactory::Create(KreatorResourcePath("Textures/Icons/GuizmoMode.png"));
   }
   
   RendererLayer::~RendererLayer()
@@ -1037,6 +1044,8 @@ if (!m_currentScene) return
   {
     m_welcomePopup.Show(ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoScrollbar | ImGuiWindowFlags_NoTitleBar, [this]()
                         {
+      IK_PERFORMANCE("RendererLayer::UI_WelcomePopup")
+      
       // Create Table in popup
       UI::ScopedTable welcomeTable({{"##About", 600.0f}, {"##RecentProjects", -1 /* streched to width */}});
 
@@ -1142,6 +1151,7 @@ if (!m_currentScene) return
   {
     m_createNewProjectPopup.Show(ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar , [this]()
                                  {
+      IK_PERFORMANCE("RendererLayer::UI_NewProjectPopup")
       // Title of Popup
       UI::Text(UI::FontType::Bold, "Choose a template for your project", UI::AlignX::Left, {0.0f, 0.0f}, UI::Color::TextBrighter);
       ImGui::Separator();
@@ -1390,6 +1400,7 @@ if (!m_currentScene) return
     if (m_sceneState != SceneState::Play)
     {
       UI_SceneToolbar();
+      UI_GuizmoToolbar();
     }
     
     auto windowSize = ImGui::GetWindowSize();
@@ -1627,6 +1638,7 @@ if (!m_currentScene) return
   
   void RendererLayer::UI_TitlebarDragArea(float titlebarHeight)
   {
+    IK_PERFORMANCE("RendererLayer::UI_TitlebarDragArea")
     static float moveOffsetX;
     static float moveOffsetY;
     const float titleBarWidth = ImGui::GetContentRegionAvail().x;
@@ -1682,6 +1694,7 @@ if (!m_currentScene) return
   
   void RendererLayer::UI_MenuBar()
   {
+    IK_PERFORMANCE("RendererLayer::UI_MenuBar")
     // Menu Bar Rectactangle Size
     const ImRect menuBarRect =
     {
@@ -1834,6 +1847,7 @@ if (!m_currentScene) return
   
   void RendererLayer::UI_WindowButtons()
   {
+    IK_PERFORMANCE("RendererLayer::UI_WindowButtons")
     // Window buttons
     static const ImU32 buttonColN = UI::ColorWithMultipliedValue(UI::Color::Text, 0.9f);
     static const ImU32 buttonColH = UI::ColorWithMultipliedValue(UI::Color::Text, 1.2f);
@@ -1878,9 +1892,9 @@ if (!m_currentScene) return
   
   void RendererLayer::UI_NewScenePopup()
   {
-    IK_PERFORMANCE("RendererLayer::UI_NewScenePopup");
     m_createNewScenePopup.Show(ImGuiWindowFlags_NoMove | ImGuiWindowFlags_NoTitleBar | ImGuiWindowFlags_NoScrollbar , [this]()
                                  {
+      IK_PERFORMANCE("RendererLayer::UI_NewScenePopup");
       static char s_newSceneName[128];
       ImGui::BeginVertical("NewSceneVertical");
       ImGui::SetNextItemWidth(-1);
@@ -1917,6 +1931,7 @@ if (!m_currentScene) return
   
   void RendererLayer::UI_SceneToolbar()
   {
+    IK_PERFORMANCE("RendererLayer::UI_SceneToolbar");
     UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
     UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
     UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
@@ -2000,6 +2015,89 @@ if (!m_currentScene) return
       }
       UI::PopID();
     }
+    ImGui::Spring();
+    ImGui::EndHorizontal();
+    ImGui::Spring();
+    ImGui::EndVertical();
+    
+    ImGui::End();
+  }
+  
+  void RendererLayer::UI_GuizmoToolbar()
+  {
+    IK_PERFORMANCE("RendererLayer::UI_GuizmoToolbar");
+    UI::ScopedStyle disableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(0, 0));
+    UI::ScopedStyle disableWindowBorder(ImGuiStyleVar_WindowBorderSize, 0.0f);
+    UI::ScopedStyle windowRounding(ImGuiStyleVar_WindowRounding, 4.0f);
+    UI::ScopedStyle disablePadding(ImGuiStyleVar_WindowPadding, ImVec2(0, 0));
+    
+    auto viewportStart = ImGui::GetItemRectMin();
+    
+    constexpr float buttonSize = 18.0f;
+    constexpr float edgeOffset = 4.0f;
+    constexpr float windowHeight = 32.0f; // annoying limitation of ImGui, window can't be smaller than 32 pixels
+    
+    const int32_t numberOfButtons = 4.0f;
+    const float windowWidth = edgeOffset * 6.0f + buttonSize * numberOfButtons + edgeOffset * (numberOfButtons - 1.0f) * 2.0f;
+    
+    ImGui::SetNextWindowPos(ImVec2(viewportStart.x + 14, viewportStart.y + edgeOffset));
+    ImGui::SetNextWindowSize(ImVec2(windowWidth, windowHeight));
+    ImGui::SetNextWindowBgAlpha(0.0f);
+    
+    ImGui::Begin("##viewport_tools", 0, ImGuiWindowFlags_NoDecoration | ImGuiWindowFlags_NoDocking);
+    
+    // A hack to make icon panel appear smaller than minimum allowed by ImGui size
+    // Filling the background for the desired 26px height
+    const float desiredHeight = 26.0f;
+    ImRect background = UI::RectExpanded(ImGui::GetCurrentWindow()->Rect(), 0.0f, -(windowHeight - desiredHeight) / 2.0f);
+    ImGui::GetWindowDrawList()->AddRectFilled(background.Min, background.Max, IM_COL32(15, 15, 15, 127), 4.0f);
+    
+    ImGui::BeginVertical("##gizmosV", ImGui::GetContentRegionAvail());
+    ImGui::Spring();
+    ImGui::BeginHorizontal("##gizmosH", { ImGui::GetContentRegionAvail().x, ImGui::GetContentRegionAvail().y });
+    ImGui::Spring();
+    
+    {
+      UI::ScopedStyle enableSpacing(ImGuiStyleVar_ItemSpacing, ImVec2(edgeOffset * 2.0f, 0));
+      
+      static const ImColor SelectedGizmoButtonColor = UI::Color::Accent;
+      static const ImColor UnselectedGizmoButtonColor = UI::Color::TextBrighter;
+      
+      auto gizmoButton = [buttonSize, this](const Ref<Image>& icon, const ImColor& tint, float paddingY = 0.0f)
+      {
+        const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
+        const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
+        const bool clicked = UI::InvisibleButton(ImVec2(width, height));
+        UI::DrawButtonImage(icon, UI::RectOffset(UI::GetItemRect(), 0.0f, paddingY), tint, tint, tint);
+        m_hoveredGuizmoToolbar = ImGui::IsItemHovered();
+        return clicked;
+      };
+      
+      ImColor buttonTint = m_gizmoType == -1 ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
+      if (gizmoButton(m_selectToolTex, buttonTint, m_gizmoType != -1))
+      {
+        m_gizmoType = -1;
+      }
+      
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::TRANSLATE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
+      if (gizmoButton(m_moveToolTex, buttonTint))
+      {
+        m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+      }
+      
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::ROTATE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
+      if (gizmoButton(m_rotateToolTex, buttonTint))
+      {
+        m_gizmoType = ImGuizmo::OPERATION::ROTATE;
+      }
+      
+      buttonTint = m_gizmoType == ImGuizmo::OPERATION::SCALE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
+      if (gizmoButton(m_scaleToolTex, buttonTint))
+      {
+        m_gizmoType = ImGuizmo::OPERATION::SCALE;
+      }
+    }
+    
     ImGui::Spring();
     ImGui::EndHorizontal();
     ImGui::Spring();

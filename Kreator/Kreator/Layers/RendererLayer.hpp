@@ -170,6 +170,8 @@ namespace Kreator
 
     /// This function shows the Applicaton toolbar
     void UI_SceneToolbar();
+    /// This function renders the Guizmo toolbar
+    void UI_GuizmoToolbar();
 
     // Memeber variables ----------------------------------------------------------------------------------------------
     // Popups/Panel --------------------------------------
@@ -204,6 +206,12 @@ namespace Kreator
       None, NewProject, OpenProject, SaveScene, OpenScene
     };
     FolderExplorerAction m_folderExplorerAction {FolderExplorerAction::None};
+
+    // Guizmo Data ---------------------------------------
+    bool m_hoveredGuizmoToolbar = false;
+    int32_t m_gizmoType = -1; // -1 = no gizmo
+    uint32_t m_gizmoMode = 1; //  0 = local, 1 = World
+    Ref<Image> m_selectToolTex, m_moveToolTex, m_rotateToolTex, m_scaleToolTex, m_gizmoModeTex;
 
     // Scene Data ----------------------------------------
     std::filesystem::path m_sceneFilePath{};
