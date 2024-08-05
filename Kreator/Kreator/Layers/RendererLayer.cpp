@@ -252,6 +252,21 @@ if (!m_currentScene) return
         m_editorCamera.SetActive(m_primaryViewport.isHovered or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
 
+        // Render Main Viewport
+        m_editorScene->OnUpdateEditor();
+        m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
+
+        // Save Scene Auto
+        if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
+        {
+          IK_PERFORMANCE("KreatorLayer::AutoSaveScene");
+          m_timeSinceLastSave += ts;
+          if (m_timeSinceLastSave > project->GetConfig().autoSaveIntervalSeconds)
+          {
+            SaveSceneAuto();
+          }
+        }
+
         break;
       }
       case SceneState::Simulate:
@@ -259,10 +274,18 @@ if (!m_currentScene) return
         m_editorCamera.SetActive(m_primaryViewport.isHovered or Input::GetCursorMode() == CursorMode::Locked);
         m_editorCamera.OnUpdate(ts);
 
+        // Render Main Viewport
+        m_simulationScene->OnUpdateRuntime(ts);
+        m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
+
         break;
       }
       case SceneState::Play:
       {
+        // Render Main Viewport
+        m_runtimeScene->OnUpdateRuntime(ts);
+        m_runtimeScene->OnRenderRuntime(ts, m_viewportRenderer);
+
         break;
       }
       case SceneState::Pause:
@@ -283,25 +306,37 @@ if (!m_currentScene) return
     m_editorCamera.OnEvent(event);
     m_panels.OnEvent(event);
     
-    if (m_sceneState == SceneState::Play)
+    switch (m_sceneState)
     {
-      
-    }
-    else if (m_sceneState == SceneState::Simulate)
-    {
-      if (m_primaryViewport.isHovered)
+      case SceneState::Edit:
       {
-        m_editorCamera.OnEvent(event);
+        if (m_primaryViewport.isHovered)
+        {
+          m_editorCamera.OnEvent(event);
+        }
+        m_currentScene->OnEditorEventHandler(event);
+        
+        AssetEditorManager::OnEvent(event);
+        break;
       }
-    }
-    else if (m_sceneState == SceneState::Edit)
-    {
-      if (m_primaryViewport.isHovered)
+      case SceneState::Simulate:
       {
-        m_editorCamera.OnEvent(event);
+        if (m_primaryViewport.isHovered)
+        {
+          m_editorCamera.OnEvent(event);
+        }
+        m_currentScene->OnRuntimeEventHandler(event);
+        break;
       }
-
-      AssetEditorManager::OnEvent(event);
+      case SceneState::Play:
+      {
+        m_currentScene->OnRuntimeEventHandler(event);
+        break;
+      }
+      case SceneState::Pause:
+      {
+        break;
+      }
     }
   }
   
