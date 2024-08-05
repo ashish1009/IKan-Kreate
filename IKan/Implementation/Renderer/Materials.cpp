@@ -158,16 +158,114 @@ namespace IKan
     {
       m_shader->SetGSMaterialUniformBuffer(m_gsUniformStorageBuffer);
     }
+    BindTextures();
   }
   
   void Material::Unbind()
   {
     IK_PERFORMANCE("ShaderMaterial::Unbind");
     m_shader->Unbind();
+    UnbindTextures();
   }
     
   const Ref<Shader>& Material::GetShader() const
   {
     return m_shader;
+  }
+  
+  void Material::Set(const std::string& name, const Ref<Image>& image)
+  {
+    IK_PERFORMANCE("ShaderMaterial::Set");
+    auto decl = FindResourceDeclaration(name);
+    
+    uint32_t slot = decl->GetRegister();
+    if (m_images.size() <= slot)
+    {
+      m_images.resize((size_t)slot + 1);
+    }
+    m_images[slot] = image;
+  }
+  
+  Ref<Image> Material:: TryGetImage(const std::string& name)
+  {
+    IK_PERFORMANCE("ShaderMaterial::TryGetImage");
+    auto decl = FindResourceDeclaration(name);
+    
+    uint32_t slot = decl->GetRegister();
+    if (slot < m_images.size())
+    {
+      return m_images.at(slot);
+    }
+    return nullptr;
+  }
+  
+  void Material::Set(const std::string& name, const Ref<Texture>& texture)
+  {
+    IK_PERFORMANCE("ShaderMaterial::Set");
+    auto decl = FindResourceDeclaration(name);
+    
+    uint32_t slot = decl->GetRegister();
+    if (m_texture.size() <= slot)
+    {
+      m_texture.resize((size_t)slot + 1);
+    }
+    m_texture[slot] = texture;
+  }
+  
+  Ref<Texture> Material:: TryGetTexture(const std::string& name)
+  {
+    IK_PERFORMANCE("ShaderMaterial::TryGetImage");
+    auto decl = FindResourceDeclaration(name);
+    
+    uint32_t slot = decl->GetRegister();
+    if (slot < m_texture.size())
+    {
+      return m_texture.at(slot);
+    }
+    return nullptr;
+  }
+  
+  void Material::BindTextures()
+  {
+    IK_PERFORMANCE("ShaderMaterial::BindImages");
+    for (size_t i = 0; i < m_images.size(); i++)
+    {
+      auto& image = m_images[i];
+      if (image)
+      {
+        image->Bind((uint32_t)i);
+      }
+    }
+    
+    for (size_t i = 0; i < m_texture.size(); i++)
+    {
+      auto& texture = m_texture[i];
+      if (texture)
+      {
+        texture->Bind((uint32_t)i);
+      }
+    }
+  }
+  
+  void Material::UnbindTextures()
+  {
+    IK_PERFORMANCE("ShaderMaterial::UnbindImages");
+    for (size_t i = 0; i < m_images.size(); i++)
+    {
+      auto& image = m_images[i];
+      if (image)
+      {
+        image->Unbind();
+      }
+    }
+    
+    for (size_t i = 0; i < m_texture.size(); i++)
+    {
+      auto& texture = m_texture[i];
+      if (texture)
+      {
+        texture->Unbind();
+      }
+    }
   }
 } // namespace ikan

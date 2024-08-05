@@ -53,6 +53,26 @@ namespace IKan
       return buffer.Read<T>(decl->GetOffset());
     }
     
+    /// This function uploads the image to material
+    /// - Parameters:
+    ///   - name: name of uniform store in shader
+    ///   - image: image data
+    void Set(const std::string& name, const Ref<Image>& image);
+    /// This function returns the image from material
+    /// - Parameters:
+    ///   - name: name of uniform store in shader
+    Ref<Image> TryGetImage(const std::string& name);
+    
+    /// This function uploads the image to material
+    /// - Parameters:
+    ///   - name: name of uniform store in shader
+    ///   - image: image data
+    void Set(const std::string& name, const Ref<Texture>& texture);
+    /// This function returns the image from material
+    /// - Parameters:
+    ///   - name: name of uniform store in shader
+    Ref<Texture> TryGetTexture(const std::string& name);
+
     /// This function creates instance of Material with Shader instance
     /// - Parameter shader: shader instance
     [[nodiscard]] static Ref<Material> Create(const Ref<Shader>& shader);
@@ -76,10 +96,17 @@ namespace IKan
     
     /// This funtion allocate memory to store shader data in buffer
     void AllocateStorage();
-    
+    /// This function binds all the image to be stored in shader material
+    void BindTextures();
+    /// This function unbinds all the image to be stored in shader material
+    void UnbindTextures();
+
     // Member Functions ----------------------------------------------------------------------------------------------
     Ref<Shader> m_shader;
     
+    std::vector<Ref<Image>> m_images;
+    std::vector<Ref<Texture>> m_texture;
+
     Buffer m_vsUniformStorageBuffer;
     Buffer m_fsUniformStorageBuffer;
     Buffer m_gsUniformStorageBuffer;
