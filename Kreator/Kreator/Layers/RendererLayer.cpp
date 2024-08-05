@@ -491,10 +491,52 @@ if (!m_currentScene) return
     bool rightCmd = Input::IsKeyPressed(Key::RightSuper);
     bool leftShift = Input::IsKeyPressed(Key::LeftShift);
     bool rightShift = Input::IsKeyPressed(Key::RightShift);
-    
-    switch (m_sceneState)
+    bool leftCtrl = Input::IsKeyPressed(Key::LeftControl);
+
+    if (m_sceneState == SceneState::Play)
     {
-      case SceneState::Edit:
+      if (Input::IsKeyPressed(Key::Escape))
+      {
+        OnSceneStop();
+      }
+    }
+    else
+    {
+      // Guizmo -----------------------------------------------------------
+      if (leftCtrl and m_primaryViewport.isHovered and !Input::IsMouseButtonPressed(MouseButton::Right))
+      {
+        switch (e.GetKeyCode())
+        {
+          case Key::Q:
+            m_gizmoType = -1;
+            break;
+          case Key::W:
+            m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
+            break;
+          case Key::E:
+            m_gizmoType = ImGuizmo::OPERATION::ROTATE;
+            break;
+          case Key::R:
+            m_gizmoType = ImGuizmo::OPERATION::SCALE;
+            break;
+          case Key::F:
+          {
+            if (m_selectionContext.size() == 0)
+            {
+              break;
+            }
+            
+            Entity selectedEntity = m_selectionContext[0].entity;
+            m_editorCamera.Focus(selectedEntity.GetTransform().Position());
+            break;
+          }
+            
+          default:
+            break;
+        }
+      }
+      
+      if (m_sceneState == SceneState::Edit)
       {
         // Scene -----------------------------------------------------------
         if ((leftCmd or rightCmd) and !Input::IsMouseButtonPressed(MouseButton::Right) and (!leftShift or !rightShift))
@@ -532,30 +574,22 @@ if (!m_currentScene) return
               break;
           }
         }
-        break;
       }
-      case SceneState::Simulate:
+      else if (m_sceneState == SceneState::Simulate)
       {
         if (Input::IsKeyPressed(Key::Escape))
         {
           OnSceneStopSimulation();
         }
-        break;
       }
-      case SceneState::Play:
+      else if (m_sceneState == SceneState::Pause)
       {
-        if (Input::IsKeyPressed(Key::Escape))
-        {
-          OnSceneStop();
-        }
-        break;
+        
       }
-      case SceneState::Pause:
+      else
       {
-        break;
+        IK_ASSERT(false, "Invalid state");
       }
-      default:
-        IK_ASSERT(false, "Invalid State");
     }
     return false;
   }
@@ -2076,36 +2110,37 @@ if (!m_currentScene) return
       static const ImColor SelectedGizmoButtonColor = UI::Color::Accent;
       static const ImColor UnselectedGizmoButtonColor = UI::Color::TextBrighter;
       
-      auto gizmoButton = [buttonSize, this](const Ref<Image>& icon, const ImColor& tint, float paddingY = 0.0f)
+      auto gizmoButton = [buttonSize, this](const Ref<Image>& icon, const ImColor& tint, std::string_view helper, float paddingY = 0.0f)
       {
         const float height = std::min((float)icon->GetHeight(), buttonSize) - paddingY * 2.0f;
         const float width = (float)icon->GetWidth() / (float)icon->GetHeight() * height;
         const bool clicked = UI::InvisibleButton(ImVec2(width, height));
         UI::DrawButtonImage(icon, UI::RectOffset(UI::GetItemRect(), 0.0f, paddingY), tint, tint, tint);
+        UI::SetTooltip(helper);
         m_hoveredGuizmoToolbar = ImGui::IsItemHovered();
         return clicked;
       };
       
       ImColor buttonTint = m_gizmoType == -1 ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
-      if (gizmoButton(m_selectToolTex, buttonTint, m_gizmoType != -1))
+      if (gizmoButton(m_selectToolTex, buttonTint, "Select : Escape", m_gizmoType != -1))
       {
         m_gizmoType = -1;
       }
       
       buttonTint = m_gizmoType == ImGuizmo::OPERATION::TRANSLATE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
-      if (gizmoButton(m_moveToolTex, buttonTint))
+      if (gizmoButton(m_moveToolTex, buttonTint, "Move : CTRL + W"))
       {
         m_gizmoType = ImGuizmo::OPERATION::TRANSLATE;
       }
       
       buttonTint = m_gizmoType == ImGuizmo::OPERATION::ROTATE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
-      if (gizmoButton(m_rotateToolTex, buttonTint))
+      if (gizmoButton(m_rotateToolTex, buttonTint, "Rotate : CTRL + E"))
       {
         m_gizmoType = ImGuizmo::OPERATION::ROTATE;
       }
       
       buttonTint = m_gizmoType == ImGuizmo::OPERATION::SCALE ? SelectedGizmoButtonColor : UnselectedGizmoButtonColor;
-      if (gizmoButton(m_scaleToolTex, buttonTint))
+      if (gizmoButton(m_scaleToolTex, buttonTint, "Scale : CTRL + R"))
       {
         m_gizmoType = ImGuizmo::OPERATION::SCALE;
       }
