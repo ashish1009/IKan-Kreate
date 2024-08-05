@@ -1091,7 +1091,7 @@ namespace Kreator
           UI::PropertyGridHeaderEnd();
         } // property grid header
       }
-    }, s_gearIcon, searchedString);
+    }, s_gearIcon, searchedString, true);
   }
   
   bool SceneHierarchyPanel::SearchEntityRecursive(Entity entity, const std::string_view &searchFilter, const uint32_t maxSearchDepth, uint32_t currentDepth)

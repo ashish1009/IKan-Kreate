@@ -64,6 +64,10 @@ v {IKanVersion}.{IKanSubVersion}.{KreatorVersion}.{KreatorSubVersion}
 - v3.1.1.1 : Images and framebuffer
 - v3.2.2.1 : Scene Renderer and Viewport
 - v3.3.2.1 : Projects and assets with out UI
+- v3.4.2.1 : Core Editors
+- v3.5.3.0 : Panels
+- v3.5.3.1 : Title Bar
+- v4.0.3.2 : ECS / Panel
 
 ## Road Map
 - Scene [3D]

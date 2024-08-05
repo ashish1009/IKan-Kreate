@@ -14,7 +14,7 @@
 namespace Kreator
 {
   /// IKan Engine Version
-  static const std::string KreatorVersion = "3.1";
+  static const std::string KreatorVersion = "3.2";
   
   KreatorApp::KreatorApp(const ApplicationSpecification& appSpec, const KreatorDirectories& kreatorDirectories)
   : Application(appSpec), m_kreatorDirectories(kreatorDirectories)
