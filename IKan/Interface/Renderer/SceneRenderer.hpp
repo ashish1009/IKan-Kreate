@@ -88,6 +88,7 @@ namespace IKan
 
     Ref<FrameBuffer> m_geometryRenderPass;
     
+    // Renderer 
     struct MeshDrawData
     {
       Ref<Mesh> mesh;

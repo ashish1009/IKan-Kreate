@@ -108,7 +108,7 @@ namespace Kreator::UI
           UI::Color::TableRowBgAlt          = IM_COL32(222, 0, 0, 255);
           
           // Drag Drop
-          UI::Color::DragDropTarget         = IM_COL32(222, 0, 0, 255);
+          UI::Color::DragDropTarget         = UI::Color::Accent;
           
           // Navigation
           UI::Color::NavHighlight           = IM_COL32(152, 152, 152, 255);

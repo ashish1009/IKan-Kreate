@@ -22,6 +22,7 @@ namespace IKan
     // Member viariabls -------------------------------------------
     inline static uint32_t s_numRenderers {0};
     inline static SceneRendererCamera s_sceneCamera;
+    inline static Ref<Material> s_defaultMaterial;
   };
   
   // Scene Renderer Data ---------------------------------------------------------------------------------------------
@@ -29,12 +30,24 @@ namespace IKan
   {
     IK_PROFILE();
     IK_LOG_INFO(LogModule::SceneRenderer, "Initializing Scene renderer common data");
+
+    // Set default material
+    s_defaultMaterial = Material::Create(ShaderLibrary::Get(CoreAsset("Shaders/PBR_StaticShader.glsl")));
+
+    auto& mat = s_defaultMaterial->Get<MaterialProperty>("u_Material");
+    mat.color = {0.8f, 0.8f, 0.8f};
+    mat.metallic = 0.5f;
+    mat.roughness = 0.5f;
+    mat.depthScale = 0.001f;
+    s_defaultMaterial->Set<MaterialProperty>("u_Material", mat);
   }
   
   void SceneRendererData::Shutdown()
   {
     IK_PROFILE();
     IK_LOG_WARN(LogModule::SceneRenderer, "Shutting down Scene renderer common data");
+    
+    s_defaultMaterial.reset();
   }
   
   // Scene Renderer APIs ---------------------------------------------------------------------------------------------
@@ -97,6 +110,10 @@ namespace IKan
           if (meshData.materilTable->HasMaterial(0))
           {
             RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
+          }
+          else
+          {
+            RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, SceneRendererData::s_defaultMaterial);
           }
         }
       }

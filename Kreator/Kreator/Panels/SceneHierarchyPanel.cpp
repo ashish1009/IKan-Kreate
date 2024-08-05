@@ -985,7 +985,7 @@ namespace Kreator
         }
       }
       
-    }, s_gearIcon, searchedString, false, false);
+    }, s_gearIcon, searchedString, true, false);
     
     DrawComponent<CameraComponent>("Camera", entity, [this](CameraComponent& cc)
                                    {
