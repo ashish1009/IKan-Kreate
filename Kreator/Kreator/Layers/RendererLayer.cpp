@@ -262,6 +262,9 @@ if (!m_currentScene) return
         m_editorScene->OnUpdateEditor();
         m_editorScene->OnRenderEditor(m_editorCamera, m_viewportRenderer);
 
+        // Viewport Mouse space
+        m_primaryViewport.GetMouseViewportSpace();
+
         // Save Scene Auto
         if (const auto& project = Project::GetActive(); project and project->GetConfig().enableAutoSave)
         {
@@ -283,6 +286,9 @@ if (!m_currentScene) return
         // Render Main Viewport
         m_simulationScene->OnUpdateRuntime(ts);
         m_simulationScene->OnRenderSimulation(ts, m_editorCamera, m_viewportRenderer);
+
+        // Viewport Mouse space
+        m_primaryViewport.GetMouseViewportSpace();
 
         break;
       }
