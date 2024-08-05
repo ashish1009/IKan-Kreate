@@ -6,6 +6,7 @@
 //
 
 #include "SceneRenderer.hpp"
+#include "Assets/AssetManager.hpp"
 
 namespace IKan
 {
@@ -88,12 +89,58 @@ namespace IKan
     {
       Renderer::Clear({0.2f, 0.2f, 0.2f, 1.0f});
       
+      // Geometry pass
+      {
+        for (const auto& meshData : m_meshDrawList)
+        {
+          // TODO: Get index from somewhere
+          if (meshData.materilTable->HasMaterial(0))
+          {
+            RenderMeshGeometry(meshData.mesh, meshData.transform, meshData.tilingFactor, meshData.materilTable->GetMaterial(0)->GetMaterial());
+          }
+        }
+      }
+
       // Debug Renderer callback
       {
         m_debugRenderer();
       }
     }
     m_geometryRenderPass->Unbind();
+    
+    // Clear draw list
+    {
+      m_meshDrawList.clear();
+    }
+  }
+  
+  void SceneRenderer::RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, float tilingFactor, Ref<Material> material)
+  {
+    IK_PERFORMANCE("SceneRenderer::RenderMeshGeometry");
+    if (!material)
+    {
+      return;
+    }
+        
+    material->Set("u_TilingFactor", tilingFactor);
+    material->Set("u_ViewProjection", SceneRendererData::s_sceneCamera.camera.GetUnReversedProjectionMatrix() * SceneRendererData::s_sceneCamera.viewMatrix);
+    material->Set("u_CameraPosition", SceneRendererData::s_sceneCamera.position);
+    material->Set("u_NormalMatrix", glm::transpose(glm::inverse(glm::mat3(transform))));
+    
+    RenderSubmesh(mesh, transform, material);
+  }
+  void SceneRenderer::RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material)
+  {
+    IK_PERFORMANCE("SceneRenderer::RenderSubmesh");
+    mesh->GetPipeline()->Bind();
+    for (const SubMesh& submesh : mesh->GetSubMeshes())
+    {
+      material->Set("u_Transform", transform * submesh.transform);
+      material->Bind();
+      Renderer::DrawIndexedBaseVertex(submesh.indexCount, (void*)(sizeof(uint32_t) * submesh.baseIndex), submesh.baseVertex);
+    } // for each submeshes
+    material->Unbind();
+    mesh->GetPipeline()->Unbind();
   }
   
   void SceneRenderer::SetViewportSize(uint32_t width, uint32_t height)
@@ -120,4 +167,18 @@ namespace IKan
   {
     return m_geometryRenderPass->GetColorAttachments().at(0);
   }
+  
+  void SceneRenderer::SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable, float tilingFactor)
+  {
+    IK_PERFORMANCE("SceneRenderer::SubmitMesh");
+    
+    const auto& mesh = AssetManager::GetAsset<Mesh>(meshHandle);
+    if (!mesh)
+    {
+      return;
+    }
+    
+    m_meshDrawList.push_back({mesh, materilTable, tilingFactor, transform});
+  }
+
 } // namespace IKan

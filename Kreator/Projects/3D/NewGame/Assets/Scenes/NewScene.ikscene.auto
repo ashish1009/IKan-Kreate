@@ -1,4 +1,4 @@
-Scene: NewScene.ikscene
+Scene: NewScene.ikscene.auto
 Entities:
   - Entity: 925973993462184
     VisibilityComponent:
@@ -50,12 +50,12 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [-10.8000002, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
-      MeshHandle: 560965872
+      MeshHandle: 0
       TilingFactor: 1
       MaterialTable:
         0: 14227659144737500897

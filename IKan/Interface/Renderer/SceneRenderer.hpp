@@ -8,6 +8,8 @@
 #pragma once
 
 #include "Renderer/Graphics/FrameBuffer.hpp"
+#include "Renderer/MaterialAsset.hpp"
+#include "Renderer/Mesh.hpp"
 #include "Camera/Camera.hpp"
 
 namespace IKan
@@ -53,13 +55,46 @@ namespace IKan
     /// This function returns the final render pass image
     Ref<Texture> GetFinalImage() const;
 
+    /// This function submits the mesh in scene
+    /// - Parameters:
+    ///   - meshHandle: mesh handle
+    ///   - transform: mesh transform
+    ///   - materilTable: Material table
+    ///   - tilingFactor: tiling factor
+    void SubmitMesh(AssetHandle meshHandle, const glm::mat4& transform, Ref<MaterialTable> materilTable, float tilingFactor);
+
   private:
-    std::string m_debugName {"IKan Renderer"}; 
+    // Member functions ---------------------------------------------------------------------------------------------
+    /// This function renders the mesh in geometry
+    /// - Parameters:
+    ///   - mesh: Mesh to be render
+    ///   - transform: mesh transform
+    ///   - material: material
+    ///   - tilingFactor: tiling factor
+    void RenderMeshGeometry(Ref<Mesh> mesh, const glm::mat4& transform, float tilingFactor, Ref<Material> material);
+    /// This function renders the submesh
+    /// - Parameters:
+    ///   - mesh: mesh
+    ///   - transform: mesh transform
+    ///   - material: material
+    void RenderSubmesh(Ref<Mesh> mesh, const glm::mat4& transform, Ref<Material> material);
+
+    // Member Variables ---------------------------------------------------------------------------------------------
+    std::string m_debugName {"IKan Renderer"};
     uint32_t m_viewportWidth {0}, m_viewportHeight {0};
 
     // Debug Renderer from client
     std::function<void()> m_debugRenderer = []() {};
 
     Ref<FrameBuffer> m_geometryRenderPass;
+    
+    struct MeshDrawData
+    {
+      Ref<Mesh> mesh;
+      Ref<MaterialTable> materilTable;
+      float tilingFactor;
+      glm::mat4 transform;
+    };
+    std::vector<MeshDrawData> m_meshDrawList;
   };
 } // namespace IKan

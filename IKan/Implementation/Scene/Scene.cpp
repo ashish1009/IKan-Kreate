@@ -156,6 +156,23 @@ namespace IKan
   void Scene::RenderScene(SceneRenderer& renderer, bool isEditing)
   {
     IK_PERFORMANCE("Scene::RenderScene");
+    
+    // Submit the Meshes --------------------------------------------------
+    auto meshView = m_registry.view<TransformComponent, MeshComponent>();
+    for (const auto& entityHandle : meshView)
+    {
+      Entity entity{entityHandle, this};
+      const auto& transformComp = entity.GetComponent<TransformComponent>();
+      const auto& meshComp = entity.GetComponent<MeshComponent>();
+      const auto& visibilityComp = entity.GetComponent<VisibilityComponent>();
+      if (meshComp.mesh != 0 and meshComp.enable and (visibilityComp.isVisible or (!visibilityComp.isVisible and !isEditing)))
+      {
+        // Render Selected Mesh ---------------------------------------------
+        Entity entity = {entityHandle, this};
+        
+        renderer.SubmitMesh(meshComp.mesh, transformComp.Transform(), meshComp.materialTable, meshComp.tilingFactor);
+      }
+    } // For each Mesh Entity
   }
   
   void Scene::OnRuntimeStart()
@@ -407,4 +424,17 @@ namespace IKan
     }
     return {};
   }
+  
+  bool Scene::IsEntitySelected(entt::entity entity) const
+  {
+    for (const auto& selectedEntity : m_selectedEntities)
+    {
+      if (selectedEntity == entity)
+      {
+        return true;
+      }
+    }
+    return false;
+  }
+
 } // namespace IKan

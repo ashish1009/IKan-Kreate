@@ -149,6 +149,10 @@ namespace IKan
     /// This function finds the main camera entity
     Entity GetMainCameraEntity();
 
+    /// This function check entity is selected
+    /// - Parameter entity: Selected Entity
+    bool IsEntitySelected(entt::entity entity) const;
+
     // Static APIs --------------------------------------------------------------------------------------------------
     /// This function creates the instance of EnTT Scene
     /// - Parameters:
