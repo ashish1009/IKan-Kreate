@@ -116,6 +116,15 @@ namespace IKan
     /// - Parameter entity: entity to be duplicated
     [[nodiscard]] Entity DuplicateEntity(Entity entity);
 
+    /// This function parent set the parent of entity
+    /// - Parameters:
+    ///   - entity: Current entity
+    ///   - parent: parent entity
+    void ParentEntity(Entity entity, Entity parent);
+    /// This function removes the parent relation
+    /// - Parameter entity: parent entity
+    void UnparentEntity(Entity entity, bool convertToWorldSpace = true);
+
     // Setters -----------------------------------------------------------------------------------------------------
     /// This function sets the scene name
     /// - Parameter name: scene name

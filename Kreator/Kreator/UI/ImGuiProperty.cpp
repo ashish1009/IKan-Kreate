@@ -912,4 +912,57 @@ namespace Kreator::UI
     
     return modified;
   }
+  bool PropertyEntityReference(const char* label, Entity& entity, const PropertyAssetReferenceSettings& settings)
+  {
+    bool receivedValidEntity = false;
+    
+    ShiftCursor(0.0f, 9.0f);
+    ImGui::Text(label);
+    ImGui::NextColumn();
+    ShiftCursorY(4.0f);
+    ImGui::PushItemWidth(-1);
+    
+    ImVec2 originalButtonTextAlign = ImGui::GetStyle().ButtonTextAlign;
+    {
+      ImGui::GetStyle().ButtonTextAlign = { 0.0f, 0.5f };
+      float width = ImGui::GetContentRegionAvail().x - settings.widthOffset;
+      float itemHeight = 28.0f;
+      
+      std::string buttonText = "Null";
+      
+      if (entity)
+      {
+        buttonText = entity.GetComponent<TagComponent>().tag;
+      }
+      
+      ImGui::Button(GenerateLabelID(buttonText), {width, itemHeight});
+    }
+    ImGui::GetStyle().ButtonTextAlign = originalButtonTextAlign;
+    
+    if (!IsItemDisabled())
+    {
+      if (ImGui::BeginDragDropTarget())
+      {
+        auto data = ImGui::AcceptDragDropPayload("scene_entity_hierarchy");
+        if (data)
+        {
+          entity = *(Entity*)data->Data;
+          receivedValidEntity = true;
+        }
+        
+        ImGui::EndDragDropTarget();
+      }
+    }
+    
+    ImGui::PopItemWidth();
+    
+    if (settings.advanceToNextColumn)
+    {
+      ImGui::NextColumn();
+      UI::ShiftCursorY(4.0f);
+      ImGui::PushItemWidth(-1);
+    }
+    
+    return receivedValidEntity;
+  }
 } // Kreator::UI

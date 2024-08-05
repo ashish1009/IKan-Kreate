@@ -937,6 +937,56 @@ namespace Kreator
       UI::ShiftCursorY(18.0f);
     }, s_gearIcon, searchedString, true, false);
     
+    DrawComponent<RelationshipComponent>("Relation", entity, [&](RelationshipComponent& rc)
+                                         {
+      UI::ScopedStyle headerRounding(ImGuiStyleVar_FrameRounding, roundingVal);
+      UI::BeginPropertyGrid();
+      
+      UI::PropertyAssetReferenceSettings settings;
+      settings.advanceToNextColumn = false;
+      settings.widthOffset = 40;
+      
+      UUID curretnParent = 0;
+      DrawEntitySelector("Parent", rc.parentHandle, curretnParent, settings);
+      Entity parentEntity = m_context->TryGetEntityWithUUID(curretnParent);
+      if (parentEntity)
+      {
+        m_context->ParentEntity(entity, parentEntity);
+      }
+      
+      ImGui::SameLine();
+      float prevItemHeight = ImGui::GetItemRectSize().y;
+      if (UI::DrawButton("X", UI::FontType::Regular, UI::Color::Text, UI::Color::Muted, 5.0f, {prevItemHeight, prevItemHeight}))
+      {
+        m_context->UnparentEntity(entity);
+      }
+      ImGui::NextColumn();
+      UI::EndPropertyGrid();
+      
+      if (rc.children.size())
+      {
+        UI::ScopedColor header(ImGuiCol_Header, UI::Color::PopupBackground);
+        if (UI::PropertyGridHeader("Children", false, 2, roundingVal))
+        {
+          UI::BeginPropertyGrid();
+          {
+            UI::ScopedDisable disable;
+            for (const auto& c : rc.children)
+            {
+              Entity e = m_context->TryGetEntityWithUUID(c);
+              if (e)
+              {
+                UI::Property(e.GetName().c_str(), std::to_string(e.GetUUID()));
+              }
+            }
+          }
+          UI::EndPropertyGrid();
+          UI::PropertyGridHeaderEnd();
+        }
+      }
+      
+    }, s_gearIcon, searchedString, false, false);
+    
     DrawComponent<CameraComponent>("Camera", entity, [this](CameraComponent& cc)
                                    {
       UI::BeginPropertyGrid();
@@ -1189,6 +1239,32 @@ namespace Kreator
     }
     
     m_context->DestroyEntity(entity);
+  }
+  
+  void SceneHierarchyPanel::DrawEntitySelector(const char* title, UUID entityID, UUID& outID, const UI::PropertyAssetReferenceSettings& settings)
+  {
+    Entity targetEntity = m_context->TryGetEntityWithUUID(entityID);
+    if (UI::PropertyEntityReference(title, targetEntity, settings))
+    {
+      outID = targetEntity.GetUUID();
+    }
+    if (ImGui::BeginPopupContextItem())
+    {
+      {
+        UI::ScopedColor colText(ImGuiCol_Text, UI::Color::Text);
+        UI::ScopedColorStack entitySelection(ImGuiCol_Header, UI::Color::HoveredItem, ImGuiCol_HeaderHovered,
+                                             UI::Color::HoveredItem, ImGuiCol_HeaderActive, UI::Color::HoveredItem);
+        
+        if (targetEntity)
+        {
+          if (ImGui::MenuItem("Remove"))
+          {
+            outID = 1; // Valid UUID is always 64 bit so 1 is also invalid
+          }
+        }
+      }
+      ImGui::EndPopup();
+    }
   }
   
   void SceneHierarchyPanel::AddComponentPopup()
