@@ -67,6 +67,7 @@
 #include <Core/AABB.hpp>
 #include <Core/UUID.hpp>
 #include <Core/HashGenerator.hpp>
+#include <Core/Ray.hpp>
 
 #include <UI/ImGuiLayer.hpp>
 

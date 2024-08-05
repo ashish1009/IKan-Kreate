@@ -147,6 +147,8 @@
 		B2D2976D2C4551560093F4DA /* Mesh.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2D2976B2C4551560093F4DA /* Mesh.cpp */; };
 		B2D2976E2C4551560093F4DA /* Mesh.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D2976C2C4551560093F4DA /* Mesh.hpp */; };
 		B2D297722C45518E0093F4DA /* AABB.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2D297702C45518E0093F4DA /* AABB.hpp */; };
+		B2F194F72C60F89600596F24 /* Ray.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2F194F52C60F89600596F24 /* Ray.cpp */; };
+		B2F194F82C60F89600596F24 /* Ray.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2F194F62C60F89600596F24 /* Ray.hpp */; };
 		B2FDDA762C4580700062C6E1 /* libStbImage.a in Frameworks */ = {isa = PBXBuildFile; fileRef = B2FDDA702C4580420062C6E1 /* libStbImage.a */; };
 		B2FDDA922C47ACDD0062C6E1 /* SceneRenderer.hpp in Headers */ = {isa = PBXBuildFile; fileRef = B2FDDA912C47ACDD0062C6E1 /* SceneRenderer.hpp */; };
 		B2FDDA932C47ACDD0062C6E1 /* SceneRenderer.cpp in Sources */ = {isa = PBXBuildFile; fileRef = B2FDDA902C47ACDD0062C6E1 /* SceneRenderer.cpp */; };
@@ -358,6 +360,8 @@
 		B2D2976B2C4551560093F4DA /* Mesh.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Mesh.cpp; sourceTree = "<group>"; };
 		B2D2976C2C4551560093F4DA /* Mesh.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Mesh.hpp; sourceTree = "<group>"; };
 		B2D297702C45518E0093F4DA /* AABB.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = AABB.hpp; sourceTree = "<group>"; };
+		B2F194F52C60F89600596F24 /* Ray.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = Ray.cpp; sourceTree = "<group>"; };
+		B2F194F62C60F89600596F24 /* Ray.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = Ray.hpp; sourceTree = "<group>"; };
 		B2FDDA6B2C4580420062C6E1 /* StbImage.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = StbImage.xcodeproj; path = StbImage/StbImage.xcodeproj; sourceTree = "<group>"; };
 		B2FDDA902C47ACDD0062C6E1 /* SceneRenderer.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = SceneRenderer.cpp; sourceTree = "<group>"; };
 		B2FDDA912C47ACDD0062C6E1 /* SceneRenderer.hpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.h; path = SceneRenderer.hpp; sourceTree = "<group>"; };
@@ -609,6 +613,7 @@
 				B2D297702C45518E0093F4DA /* AABB.hpp */,
 				B2FDDA9B2C47FFCE0062C6E1 /* UUID.hpp */,
 				B22AB2842C5768A8007453B7 /* HashGenerator.hpp */,
+				B2F194F62C60F89600596F24 /* Ray.hpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -622,6 +627,7 @@
 				B2D294A52C3BDE9F0093F4DA /* Window.cpp */,
 				B2FDDA9A2C47FFCE0062C6E1 /* UUID.cpp */,
 				B22AB2832C5768A8007453B7 /* HashGenerator.cpp */,
+				B2F194F52C60F89600596F24 /* Ray.cpp */,
 			);
 			path = Core;
 			sourceTree = "<group>";
@@ -965,6 +971,7 @@
 				B2D294EF2C3BF6FB0093F4DA /* Factories.hpp in Headers */,
 				B2D296AE2C40E5E80093F4DA /* QuadData.hpp in Headers */,
 				B2D296A12C3EE67E0093F4DA /* Renderer2D.hpp in Headers */,
+				B2F194F82C60F89600596F24 /* Ray.hpp in Headers */,
 				B2D292852C381C8B0093F4DA /* Logger.hpp in Headers */,
 				B23F45D32C5CED68000A0944 /* Scene2D.hpp in Headers */,
 				B2D296992C3C19E20093F4DA /* OpenGLRendererAPI.hpp in Headers */,
@@ -1153,6 +1160,7 @@
 				B2FDDA932C47ACDD0062C6E1 /* SceneRenderer.cpp in Sources */,
 				B22AB2862C5768A8007453B7 /* HashGenerator.cpp in Sources */,
 				B2D292C32C3BB5BB0093F4DA /* TimeStep.cpp in Sources */,
+				B2F194F72C60F89600596F24 /* Ray.cpp in Sources */,
 				B2D296FB2C410BF40093F4DA /* OpenGLShader.cpp in Sources */,
 				B23F45DB2C5CED6C000A0944 /* Scene3D.cpp in Sources */,
 				B2D2968D2C3C15680093F4DA /* RenderCommandQueue.cpp in Sources */,
