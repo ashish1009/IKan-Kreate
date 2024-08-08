@@ -9,7 +9,7 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [0, 0, 0]
+      Position: [2.5999999, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
@@ -50,12 +50,12 @@ Entities:
     Children:
       []
     TransformComponent:
-      Position: [-10.8000002, 0, 0]
+      Position: [0, 0, 0]
       Rotation: [0, 0, 0]
       Scale: [1, 1, 1]
     MeshComponent:
       Enable: true
-      MeshHandle: 0
+      MeshHandle: 560965872
       TilingFactor: 1
       MaterialTable:
         0: 14227659144737500897

@@ -356,7 +356,8 @@ namespace Kreator
         
         if (payload)
         {
-          IK_ASSERT(false);
+          Entity& entity = *(Entity*)payload->Data;
+          IKan::ECS_Utils::UnparentEntity(m_context, entity);
         }
         
         ImGui::EndDragDropTarget();
@@ -760,7 +761,8 @@ namespace Kreator
       
       if (payload)
       {
-        IK_ASSERT(false, "Implement later");
+        Entity& droppedEntity = *(Entity*)payload->Data;
+        IKan::ECS_Utils::ParentEntity(m_context, droppedEntity, entity);
       }
       
       ImGui::EndDragDropTarget();
