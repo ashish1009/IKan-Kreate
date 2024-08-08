@@ -7,7 +7,7 @@ Entities:
       Tag: Sphere
     Parent: 0
     Children:
-      []
+      - Handle: 8385735327467546793
     TransformComponent:
       Position: [2.5999999, 0, 0]
       Rotation: [0, 0, 0]
@@ -46,7 +46,7 @@ Entities:
       Visibility: true
     TagComponent:
       Tag: Cylinder
-    Parent: 0
+    Parent: 925973993462184
     Children:
       []
     TransformComponent:
